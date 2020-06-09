@@ -1,72 +1,72 @@
 macro "macro"
 	elem 
-		name = "TAB"
+		name = "Tab"
 		command = "Target-A-Mob"
 	elem 
-		name = "SHIFT+TAB"
+		name = "SHIFT+Tab"
 		command = "Untarget-pplz"
 	elem 
-		name = "CENTER+REP"
+		name = "Center+REP"
 		command = ".center"
 	elem 
-		name = "RETURN"
+		name = "Return"
 		command = "Winsay"
 	elem 
-		name = "SHIFT+RETURN"
+		name = "SHIFT+Return"
 		command = "GM-Chat"
 	elem 
-		name = "ESCAPE"
+		name = "Escape"
 		command = ".options"
 	elem 
-		name = "SPACE"
+		name = "Space"
 		command = "HandSealActivate"
 	elem 
-		name = "NORTHEAST+REP"
+		name = "Northeast+REP"
 		command = ".northeast"
 	elem 
-		name = "SOUTHEAST+REP"
+		name = "Southeast+REP"
 		command = ".southeast"
 	elem 
-		name = "SOUTHWEST+REP"
+		name = "Southwest+REP"
 		command = ".southwest"
 	elem 
-		name = "NORTHWEST+REP"
+		name = "Northwest+REP"
 		command = ".northwest"
 	elem 
-		name = "WEST+REP"
+		name = "West+REP"
 		command = ".west"
 	elem 
-		name = "ALT+WEST+REP"
+		name = "ALT+West+REP"
 		command = "puppet2west"
 	elem 
-		name = "CTRL+WEST+REP"
+		name = "CTRL+West+REP"
 		command = "puppet1west"
 	elem 
-		name = "NORTH+REP"
+		name = "North+REP"
 		command = ".north"
 	elem 
-		name = "ALT+NORTH+REP"
+		name = "ALT+North+REP"
 		command = "puppet2north"
 	elem 
-		name = "CTRL+NORTH+REP"
+		name = "CTRL+North+REP"
 		command = "puppet1north"
 	elem 
-		name = "EAST+REP"
+		name = "East+REP"
 		command = ".east"
 	elem 
-		name = "ALT+EAST+REP"
+		name = "ALT+East+REP"
 		command = "puppet2east"
 	elem 
-		name = "CTRL+EAST+REP"
+		name = "CTRL+East+REP"
 		command = "puppet1east"
 	elem 
-		name = "SOUTH+REP"
+		name = "South+REP"
 		command = ".south"
 	elem 
-		name = "ALT+SOUTH+REP"
+		name = "ALT+South+REP"
 		command = "puppet2south"
 	elem 
-		name = "CTRL+SOUTH+REP"
+		name = "CTRL+South+REP"
 		command = "puppet1south"
 	elem 
 		name = "1"
@@ -505,7 +505,7 @@ window "Inventory2"
 window "JutsuTab"
 	elem "JutsuTab"
 		type = MAIN
-		pos = 372,0
+		pos = 281,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
@@ -542,6 +542,7 @@ window "JutsuTab"
 		background-color = #2e2e2e
 		border = line
 		saved-params = ""
+		highlight-color = #000000
 
 window "Kage"
 	elem "Kage"
@@ -634,7 +635,6 @@ window "MainWindow"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -644,7 +644,6 @@ window "MainWindow"
 		size = 386x394
 		anchor1 = 5,13
 		anchor2 = 33,53
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -667,7 +666,6 @@ window "MainWindow"
 		size = 457x128
 		anchor1 = 0,63
 		anchor2 = 34,76
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -703,7 +701,6 @@ window "MainWindow"
 		size = 386x384
 		anchor1 = 57,9
 		anchor2 = 85,48
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -751,7 +748,6 @@ window "MainWindow"
 		size = 174x304
 		anchor1 = 85,8
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "splitter"
 		left = "Status"
@@ -762,7 +758,6 @@ window "MainWindow"
 		size = 350x395
 		anchor1 = 56,43
 		anchor2 = 82,84
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -774,7 +769,6 @@ window "MainWindow"
 		size = 300x395
 		anchor1 = 34,32
 		anchor2 = 56,73
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -800,7 +794,6 @@ window "MainWindow"
 		size = 677x546
 		anchor1 = 6,16
 		anchor2 = 55,72
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -924,7 +917,7 @@ window "Options"
 		border = line
 		saved-params = "is-checked"
 		text = "What's New?"
-		command = "Updates"
+		command = "Changelog"
 		is-flat = true
 	elem "button19"
 		type = BUTTON
