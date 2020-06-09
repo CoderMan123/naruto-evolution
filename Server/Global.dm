@@ -1,0 +1,1 @@
+var/tmp/list/damage_number_pool=list()
