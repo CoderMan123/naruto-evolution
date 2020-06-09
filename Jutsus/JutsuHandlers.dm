@@ -55,7 +55,7 @@ mob
 			src.UpdateHMB()
 			spawn()
 				var/colour = colour2html(colortype)
-				src.DamageNumber(damage, colour)
+				src.DamageOverlay(damage, colour)
 			spawn()
 				src.Death(Owner)
 
