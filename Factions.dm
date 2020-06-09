@@ -1,4 +1,5 @@
 var/list/Factions = list()
+var/list/AkatInvites = list()
 var/list/Factionnames = list()
 mob/var
 	Faction
@@ -46,7 +47,7 @@ proc
 		return 0
 	getMember(Faction/Faction)
 		var/list/options = list()
-		for(var/mob/player/M in world)
+		for(var/mob/player/M in TotalPlayers)
 			if(M.rname in Faction.members)options["[M.rname]/[M.key]"] = M
 		var/mob/player/target = usr.CustomInput("What member?","Member?",options+"Cancel")
 		if(!target||target=="Cancel") return 0
@@ -77,11 +78,11 @@ Faction
 		SetMOTD(mob/M)
 			if(!M) return
 			var/V=M.skinput2("Please input a new message of the day.","MOTD",FMOTD)
-			if(lentext(V)>=400)
+			if(length(V)>=400)
 				M<<"Please keep MOTD messages below 400 characters."
 				return
 			FMOTD=html_encode(V)
-			for(var/mob/player/Player in world) if(getFaction(Player.Faction) == src) Player<<output("<b>Faction MOTD has been changed.<br><br> <i>[FMOTD]</i></b>","actionoutput")
+			for(var/mob/player/Player in TotalPlayers) if(getFaction(Player.Faction) == src) Player<<output("<b>Faction MOTD has been changed.<br><br> <i>[FMOTD]</i></b>","actionoutput")
 		LevelUp()
 			if(Level==10) return
 			while(Funds>=LevelFundsMax)
@@ -92,8 +93,8 @@ Faction
 				MaxMembers+=2
 				if(Level==4)
 					cverbs += /Faction/Leveled/verb/FactionMOTD
-					for(var/mob/player/Player in world) if(getFaction(Player.Faction) == src) Player<<"<b>[src] has gained the ability to set MOTDs!</b>"
-				for(var/mob/player/Player in world) if(getFaction(Player.Faction) == src) Player<<"<b>[src] has leveled up to level [Level]!</b>"
+					for(var/mob/player/Player in TotalPlayers) if(getFaction(Player.Faction) == src) Player<<"<b>[src] has gained the ability to set MOTDs!</b>"
+				for(var/mob/player/Player in TotalPlayers) if(getFaction(Player.Faction) == src) Player<<"<b>[src] has leveled up to level [Level]!</b>"
 		Funds(mob/M)
 			if(!M) return
 			var/r = M.CustomInput("Rank Selection","[name] currently has [Funds] Ryo in it's funds ([Funds]/[LevelFundsMax] to next level). Deposit, or Withdraw?", list("Deposit","Withdraw","Cancel"))
@@ -130,7 +131,7 @@ Faction
 						M << output("Successfully withdrawed [Num] funds.","actionoutput")
 					return
 		Leave(mob/M)
-			for(var/mob/player/X in world)
+			for(var/mob/player/X in TotalPlayers)
 				if(getFaction(X.Faction)==getFaction(M.Faction)&&!isnull(getFaction(M.Faction)))X<<"[M] has left your Faction."
 			M.verbs -= /Faction/Generic/verb/FactionLeave
 			M.Faction = null
@@ -144,7 +145,7 @@ Faction
 				Factionnames -= name
 				Factions -= src
 				world << output("<font color=[color]><b>[Filter(html_encode(name))] have been disbanded.</font></b>","actionoutput")
-				for(var/mob/player/p in world)
+				for(var/mob/player/p in TotalPlayers)
 					if(p.Faction == name)
 						p.Faction = ""
 						p.verbs -= cverbs
@@ -162,7 +163,7 @@ Faction
 			src.onlinemembers += M
 			M << output("You are now a [membername]","actionoutput")
 			src.onlinemembers << output("<font color=[src.color]>[M.rname] has joined your Faction. </font>","actionoutput")
-			for(var/mob/player/P in world)
+			for(var/mob/player/P in TotalPlayers)
 				if(P.admin)P<<output("<font color=[src.color]>[M.rname]([M.ckey]) is now a member of the [Filter(html_encode(src.name))]</font>","actionoutput")
 			M.Faction("[name]",color)
 			return 1
@@ -178,7 +179,7 @@ Faction
 				Factionnames -= name
 				Factions -= src
 				world << output("<font color=[color]><b>[name] have been disbanded.</font></b>","actionoutput")
-				for(var/mob/player/p in world)
+				for(var/mob/player/p in TotalPlayers)
 					if(p.Faction == name)
 						p.Faction = ""
 						p.verbs -= cverbs
@@ -299,13 +300,7 @@ Faction
 				if(c) M = getMember(c)
 				if(M) c.Fire_Member(M)
 Faction
-	//var/tmp/Waiting = 0
 	Topic(href, list/href_list)
-		//if(Waiting) return
-		//for(var/data in href_list)
-		//	usr << data
-		//	usr << href_list[data]
-	//	var/action = href_list["action"]
 		if(href_list["action"] == "color")
 			var/mob/p = locate(href_list["player"])
 			getColor("color",p)
@@ -369,7 +364,7 @@ Faction
 				Factions-=src
 				del(src)
 				return
-			var/leng = lentext(href_list["name"])
+			var/leng = length(href_list["name"])
 			if(leng>=15)
 				usr.skalert("Your faction name cannot be longer than 15 characters.")
 				winset(usr, null, {"

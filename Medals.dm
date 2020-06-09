@@ -1,4 +1,4 @@
-mob/var/tmp/Multikill=0
+mob/var/tmp/Multikill=0//no medals. so no need.
 mob/proc/
 	MedalCheck()
 		//set background=1

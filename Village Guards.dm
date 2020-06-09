@@ -1,14 +1,5 @@
-turf/Blocker
-	Enter(var/atom/U)
-		if(istype(U,/mob/NPCs/Shinobi)) return 0
-		else return ..()
-//mob/New()
-//	..()
-//	spawn() NewStuff()
-mob/proc/NewStuff()
-	..()
 mob/NPCs/Shinobi
-	icon='MaleBase.dmi'
+	icon='WhiteMBase.dmi'
 	name="Village Shinobi"
 	village="Hidden Leaf"
 	var/target
@@ -20,9 +11,9 @@ mob/NPCs/Shinobi
 	var/AttackAll=0
 	var/list/OriginalOverlays=list()
 	var/GoingtoOriginal=0
-	taijutsu=200
+	strength=200
 	New()
-		if(!TutorialGuy)if(src)del(src)//REMEMBER TO REMOVE THIS LATER AFTER YOU FIX LAG FROM NPCS USING MOVEMENT/JUTSU
+		//if(!TutorialGuy)if(src)del(src)//REMEMBER TO REMOVE THIS LATER AFTER YOU FIX LAG FROM NPCS USING MOVEMENT/JUTSU
 		spawn()NewStuff()
 		..()
 	verb
@@ -33,16 +24,16 @@ mob/NPCs/Shinobi
 			firing=1
 			//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 			flick("jutsuse",src)
-			view(src)<<sound('dash.ogg',0,0)
+			view(src)<<sound('dash.wav',0,0)
 			flick('Shunshin.dmi',src)
 			spawn(1)
 				src.loc = c_target.loc
 				step(src,c_target.dir)
 				src.dir = get_dir(src,c_target)
 				flick("punchl",src)
-				c_target.health-=round(taijutsu/2)
+				c_target.health-=round(strength/2)
 				var/colour = colour2html("white")
-				F_damage(c_target,round(taijutsu/2),colour)
+				F_damage(c_target,round(strength/2),colour)
 				c_target.UpdateHMB()
 			spawn(25)if(src)firing=0
 		SickleWeaselNPC()
@@ -52,7 +43,7 @@ mob/NPCs/Shinobi
 			firing=1
 			//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 			flick("2fist",src)
-			view(src)<<sound('wirlwind.ogg',0,0)
+			view(src)<<sound('wirlwind.wav',0,0)
 			var/num=rand(2,4)
 			if(c_target)
 				while(num)
@@ -68,7 +59,7 @@ mob/NPCs/Shinobi
 					A.Owner=src
 					A.layer=src.layer
 					A.fightlayer=src.fightlayer
-					A.damage=rand(10,25)+round(src.taijutsu/6)
+					A.damage=rand(10,25)+round(src.strength/6)
 					if(c_target) walk_towards(A,c_target.loc,0)
 					spawn(4)if(A)walk(A,A.dir)
 			spawn(25)if(src)firing=0
@@ -105,7 +96,7 @@ mob/NPCs/Shinobi
 			firing=1
 			//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Phoenix Immortal Fire Technique"
 			flick("jutsuse",src)
-			view(src)<<sound('fire.ogg',0,0)
+			view(src)<<sound('fire.wav',0,0)
 			var/I=rand(3,5)
 			while(I)
 				sleep(2)
@@ -121,7 +112,7 @@ mob/NPCs/Shinobi
 					A.Owner=src
 					A.layer=src.layer
 					A.fightlayer=src.fightlayer
-					A.damage=round(taijutsu/5)
+					A.damage=round(strength/5)
 					walk_towards(A,c_target.loc,0)
 					spawn(4)if(A)walk(A,A.dir)
 			src.copy=null
@@ -133,14 +124,14 @@ mob/NPCs/Shinobi
 			src.UpdateHMB()
 			firing=1
 			flick("jutsuse",src)
-			view(src)<<sound('fire.ogg',0,0)
+			view(src)<<sound('fire.wav',0,0)
 			src.dir=get_dir(src,c_target)
 			var/obj/Projectiles/FireBall/A = new/obj/Projectiles/FireBall(src.loc)
 			A.IsJutsuEffect=src
 			A.Owner=src
 			A.layer=src.layer
 			A.fightlayer=src.fightlayer
-			A.damage=rand(20,45)+round(src.taijutsu/3)
+			A.damage=rand(20,45)+round(src.strength/3)
 			walk_towards(A,c_target.loc,0)
 			spawn(4)if(A)walk(A,A.dir)
 			spawn(25)if(src)firing=0
@@ -154,10 +145,10 @@ mob/NPCs/Shinobi
 					usr.firing=1
 					if(prob(50))
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+						view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 					else
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+						view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 					if(c_target)
 						src.dir=get_dir(usr,c_target)
 					//	usr.Target_Atom(c_target)
@@ -171,7 +162,7 @@ mob/NPCs/Shinobi
 						A.Owner=usr
 						A.layer=usr.layer
 						A.fightlayer=usr.fightlayer
-						A.damage=round(usr.taijutsu/3)
+						A.damage=round(usr.strength/3)
 						walk_towards(A,c_target.loc,0)
 						spawn(4)if(A)walk(A,A.dir)
 					else
@@ -183,7 +174,7 @@ mob/NPCs/Shinobi
 						A.Owner=usr
 						A.layer=usr.layer
 						A.fightlayer=usr.fightlayer
-						A.damage=round(usr.taijutsu/3)
+						A.damage=round(usr.strength/3)
 						walk(A,usr.dir)
 					spawn(25)if(usr)usr.firing=0
 			if(usr.equipped=="ExplodeKunais")
@@ -192,10 +183,10 @@ mob/NPCs/Shinobi
 					usr.firing=1
 					if(prob(50))
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+						view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 					else
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+						view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 					if(c_target)
 						src.dir=get_dir(usr,c_target)
 						//usr.Target_Atom(c_target)
@@ -209,7 +200,7 @@ mob/NPCs/Shinobi
 						A.Owner=usr
 						A.layer=usr.layer
 						A.fightlayer=usr.fightlayer
-						A.damage=round(usr.taijutsu/3)
+						A.damage=round(usr.strength/3)
 						walk_towards(A,c_target.loc,0)
 						spawn(4)if(A)walk(A,A.dir)
 					else
@@ -221,7 +212,7 @@ mob/NPCs/Shinobi
 						A.Owner=usr
 						A.layer=usr.layer
 						A.fightlayer=usr.fightlayer
-						A.damage=round(usr.taijutsu/3)
+						A.damage=round(usr.strength/3)
 						walk(A,usr.dir)
 					spawn(25)if(usr)usr.firing=0
 			if(usr.equipped=="Kunais")
@@ -230,10 +221,10 @@ mob/NPCs/Shinobi
 					usr.firing=1
 					if(prob(50))
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+						view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 					else
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+						view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 					if(c_target)
 						src.dir=get_dir(usr,c_target)
 					//	usr.Target_Atom(c_target)
@@ -247,7 +238,7 @@ mob/NPCs/Shinobi
 						A.Owner=usr
 						A.layer=usr.layer
 						A.fightlayer=usr.fightlayer
-						A.damage=round(usr.taijutsu/3)
+						A.damage=round(usr.strength/3)
 						walk_towards(A,c_target.loc,0)
 						spawn(4)if(A)walk(A,A.dir)
 					else
@@ -259,7 +250,7 @@ mob/NPCs/Shinobi
 						A.Owner=usr
 						A.layer=usr.layer
 						A.fightlayer=usr.fightlayer
-						A.damage=round(usr.taijutsu/3)
+						A.damage=round(usr.strength/3)
 						walk(A,usr.dir)
 					spawn(25)if(usr)usr.firing=0
 			if(usr.equipped=="Needles")
@@ -268,10 +259,10 @@ mob/NPCs/Shinobi
 					usr.firing=1
 					if(prob(50))
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+						view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 					else
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+						view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 					if(c_target)
 						src.dir=get_dir(usr,c_target)
 						//usr.Target_Atom(c_target)
@@ -285,7 +276,7 @@ mob/NPCs/Shinobi
 						A.Owner=usr
 						A.layer=usr.layer
 						A.fightlayer=usr.fightlayer
-						A.damage=round(usr.taijutsu/3)
+						A.damage=round(usr.strength/3)
 						walk_towards(A,c_target.loc,0)
 						spawn(4)if(A)walk(A,A.dir)
 					else
@@ -297,7 +288,7 @@ mob/NPCs/Shinobi
 						A.Owner=usr
 						A.layer=usr.layer
 						A.fightlayer=usr.fightlayer
-						A.damage=round(usr.taijutsu/3)
+						A.damage=round(usr.strength/3)
 						walk(A,usr.dir)
 					spawn(25)if(usr)usr.firing=0
 			if(usr.equipped=="ExplosiveTags")
@@ -308,10 +299,10 @@ mob/NPCs/Shinobi
 						usr.explosivetag++
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 						//	usr.Target_Atom(c_target)
@@ -366,7 +357,7 @@ mob/NPCs/Shinobi
 		if(src.village=="Hidden Leaf")src.overlays+='Chunin Vest.dmi'
 		if(src.village=="Hidden Sand")src.overlays+='SandChuninVest.dmi'
 		src.overlays+='Sandals.dmi'
-		src.overlays+='Headband.dmi'
+		src.overlays+='HeadbandLeaf.dmi'
 		src.Original=loc
 		OriginalDir=dir
 		src.name="[village] Shinobi"
@@ -379,7 +370,7 @@ mob/NPCs/Shinobi
 		else
 			src.Ryo=0
 			src.name="Rogue Shinobi"
-			src.taijutsu=7
+			src.strength=7
 			src.maxhealth=rand(10,40)
 			VillageGuard=0
 			src.village=null
@@ -400,9 +391,9 @@ mob/NPCs/Shinobi
 			killer.Attacked=src
 			spawn(200) if(killer) killer.Attacked=null
 		if(src.health<=0&&!dead&&ismob(killer))
-			if(TutorialGuy&&killer.Tutorial==4)
-				killer.Tutorial=5
-				killer<<"Great job! You've taken down a rogue shinobi. Proceed through now, or continue training."
+			if(TutorialGuy&&killer.Tutorial==5)
+				killer.Tutorial=6
+				killer<<"Great job! You've taken down a rogue shinobi. Proceed through now, or continue training if your Tai Nin or Gen are under 5."
 			target=null
 			Target_Remove()
 			src.dead=1
@@ -422,17 +413,55 @@ mob/NPCs/Shinobi
 				src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
 				src.overlays += 'Shade.dmi'
 				src.overlays+='Shirt.dmi'
-				if(src.village=="Hidden Leaf")src.overlays+='Chunin Vest.dmi'
-				if(src.village=="Hidden Sand")src.overlays+='SandChuninVest.dmi'
-				if(src.village=="Hidden Sound")src.overlays+='SoundVest.dmi'
+				if(src.village=="Hidden Leaf")
+					src.overlays+='Chunin Vest.dmi'
+					src.overlays+='HeadbandLeaf.dmi'
+				if(src.village=="Hidden Sand")
+					src.overlays+='SandChuninVest.dmi'
+					src.overlays+='HeadBandSand.dmi'
+				if(src.village=="Hidden Mist")
+					src.overlays+='MistChuunin.dmi'
+					src.overlays+='HeadBandLeaf.dmi'
 				src.overlays+='Sandals.dmi'
-				src.overlays+='Headband.dmi'
 				src.Name(name)
-			if(village==killer.village)
-				killer.exp-=(killer.exp/10)
+			if(village==killer.village)//mess with this later.
+
+
+				if(killer.village == "Missing-Nin" || killer.village == "Seven Swordsmen"||killer.village=="Akatsuki"||killer.village=="Anbu Root") goto MissSkip
+				if(loc in block(locate(71,95,4),locate(200,163,4))) goto chuuninskip
+				killer.exp-=round(killer.exp*0.5)
+				killer.Vkill++
 				if(killer.exp<=0) killer.exp=0
-				killer<<output("You have lost 10% of your EXP for killing a fellow villager.","actionoutput")
+				killer<<output("You have lost 50% of your EXP for killing a fellow villager.","actionoutput")
+				if(!killer.CheckVKill())
+					killer<<output("Careful! Killing your villagers will get you kicked from the village. ([killer.Vkill]/5)","actionoutput")
+				else //if(killer.CheckVkill())
+					world<<output("[killer] has been booted from [killer.village] for village killing!","actionoutput")
+					text2file("[killer] has been booted from [killer.village] for village killing: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+
+					if(killer.village=="Akatsuki")
+						for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in killer)
+							if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
+							del(O)
+						killer.overlays=null
+						killer.ReAddClothing()
+						killer.RestoreOverlays()
+						killer.RemoveAdminVerbs()
+					if(killer.village=="Anbu Root")
+						for(var/obj/Inventory/Clothing/Robes/Anbu_Suit/O in killer)
+							if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
+							del(O)
+						killer.overlays=null
+						killer.ReAddClothing()
+						killer.RestoreOverlays()
+						killer.RemoveAdminVerbs()
+					killer.village="Missing-Nin"
+					killer.rank="Missing-Nin"
+				MissSkip
+				chuuninskip
 				killer.KillCombo=0
+
+
 	proc/GotoOriginal()
 		if(GoingtoOriginal||target||target_mob)return
 		while(get_dist(src,Original)>1&&!target)
@@ -618,4 +647,3 @@ mob/proc/TurnTowards(atom/a)
 	var/location = src.loc
 	step_towards(src,a)
 	src.loc = location
-

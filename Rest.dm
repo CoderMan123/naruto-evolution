@@ -58,7 +58,7 @@ obj
 mob
 	proc
 		Resting()
-			if(src.canattack==0&&src.dead==0&&src.rest==1&&!gates[1])
+			if(src.canattack==0&&src.dead==0&&src.rest==1&& !Gates)
 				if(hit)
 					RestUp()
 					return
@@ -83,7 +83,7 @@ mob
 					else usr.RestUp()
 	proc
 		RestSound()
-			if(src.canattack==0&&src.dead==0&&src.rest==1&&!gates[1])
+			if(src.canattack==0&&src.dead==0&&src.rest==1&& !Gates)
 				if(hit)
 					RestUp()
 					return
@@ -102,8 +102,9 @@ mob
 	verb
 		Rest()
 			set hidden=1
+			src.HengeUndo()
 			if(injutsu) return
-			if(usr.canattack==1&&usr.dead==0&&usr.rest==0&&usr.move&&!gates[1])
+			if(usr.canattack==1&&usr.dead==0&&usr.rest==0&&usr.move&& !Gates)
 				if(hit)
 					RestUp()
 					return
@@ -130,6 +131,8 @@ mob
 						usr.overlays+=/obj/Overlays/Chakramax
 						usr.RestOverlays=1
 						usr.rest=1
+					if(chakra<=0)chakra=0
+					if(health<=0)health=0
 				spawn() usr.RestSound()
 				var/turf/T = usr.loc
 				spawn(2)

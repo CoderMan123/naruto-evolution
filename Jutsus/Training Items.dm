@@ -14,8 +14,8 @@ obj
 			icon_state="logb"
 			iconstateset="logb"
 			name="Log"
-			health=500
-			maxhealth=500
+			health=1000
+			maxhealth=1000
 			density=1
 			New()
 				..()
@@ -37,9 +37,9 @@ obj
 			icon_state="logb"
 			iconstateset="logb"
 			name="Log"
-			health=10
-			maxhealth=10
-			hitsound='crashwood.ogg'
+			health=20
+			maxhealth=20
+			hitsound='crashwood.wav'
 			density=1
 			New()
 				..()

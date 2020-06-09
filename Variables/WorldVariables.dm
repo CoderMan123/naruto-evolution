@@ -7,4 +7,4 @@
 	Weather="None"
 	Timer=0
 	TimeEffect="Dark"
-	//tmp/list=MT1
+	WorldXp=0

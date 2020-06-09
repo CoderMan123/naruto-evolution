@@ -28,9 +28,7 @@ obj
 							view(src)<<sound('Explo_StoneMed2.ogg',0,0)
 							for(var/mob/X in view(src,3))
 								if(X.dead==0)
-									var/colour = colour2html("white")
-									F_damage(X,damage,colour)
-									X.health-=damage
+									X.DealDamage(damage,src.Owner,"TaiOrange")
 									if(istype(X,/mob/NPC))..()
 									else
 										X.icon_state="push"
@@ -41,7 +39,6 @@ obj
 												walk(X,0)
 												X.injutsu=0
 												if(X.dead==0&&!X.swimming)X.icon_state=""
-												X.Death(src)
 							src.damage=null
 							src.icon_state="blank"
 							src.loc=locate(0,0,0)
@@ -52,7 +49,6 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							var/mob/Owner=src.Owner
 							if(M.fightlayer==src.fightlayer)
 								if(M.dodge==0)
 									src.density=0
@@ -68,9 +64,7 @@ obj
 									view(src)<<sound('Explo_StoneMed2.ogg',0,0)
 									for(var/mob/X in view(src,3))
 										if(X.dead==0)
-											var/colour = colour2html("white")
-											F_damage(X,damage,colour)
-											X.health-=damage
+											X.DealDamage(damage,src.Owner,"TaiOrange")
 											if(istype(X,/mob/NPC))
 												..()
 											else
@@ -83,12 +77,10 @@ obj
 														X.injutsu=0
 														if(X.dead==0&&!X.swimming)
 															X.icon_state=""
-														X.Death(src)
 									src.damage=null
 									src.icon_state="blank"
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
-									M.Death(Owner)
 									spawn(1)
 										src.loc=locate(0,0,0)
 										spawn(400) del(src)
@@ -109,9 +101,7 @@ obj
 										view(src)<<sound('Explo_StoneMed2.ogg',0,0)
 										for(var/mob/X in view(src,3))
 											if(X.dead==0)
-												var/colour = colour2html("white")
-												F_damage(X,damage,colour)
-												X.health-=damage
+												X.DealDamage(damage,src.Owner,"TaiOrange")
 												if(istype(X,/mob/NPC))..()
 												else
 													X.icon_state="push"
@@ -122,12 +112,10 @@ obj
 															walk(X,0)
 															X.injutsu=0
 															if(X.dead==0&&!X.swimming)X.icon_state=""
-															X.Death(src)
 										src.damage=null
 										src.icon_state="blank"
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
-										M.Death(Owner)
 										spawn(1)
 											src.loc=locate(0,0,0)
 											spawn(400)if(src)del(src)
@@ -146,9 +134,7 @@ obj
 									view(src)<<sound('Explo_StoneMed2.ogg',0,0)
 									for(var/mob/M in view(src,3))
 										if(M.dead==0)
-											var/colour = colour2html("white")
-											F_damage(M,damage,colour)
-											M.health-=damage
+											M.DealDamage(damage,src.Owner,"TaiOrange")
 											if(istype(M,/mob/NPC))..()
 											else
 												M.icon_state="push"
@@ -159,7 +145,6 @@ obj
 														walk(M,0)
 														M.injutsu=0
 														if(M.dead==0&&!M.swimming)M.icon_state=""
-														M.Death(src)
 									src.damage=null
 									src.icon_state="blank"
 									walk(src,0)
@@ -180,9 +165,7 @@ obj
 									view(src)<<sound('Explo_StoneMed2.ogg',0,0)
 									for(var/mob/M in view(src,3))
 										if(M.dead==0)
-											var/colour = colour2html("white")
-											F_damage(M,damage,colour)
-											M.health-=damage
+											M.DealDamage(damage,src.Owner,"TaiOrange")
 											if(istype(M,/mob/NPC))..()
 											else
 												M.icon_state="push"
@@ -193,7 +176,6 @@ obj
 														walk(M,0)
 														M.injutsu=0
 														if(M.dead==0&&!M.swimming)M.icon_state=""
-														M.Death(src)
 									src.damage=null
 									src.icon_state="blank"
 									walk(src,0)
@@ -201,6 +183,129 @@ obj
 									src.Hit=1
 									src.loc=locate(0,0,0)
 									spawn(90)if(src)del(src)
+			Magma_Needles
+				icon='Magma_Needles.dmi'
+				icon_state=""
+				damage=3
+				pixel_x=-16
+				pixel_y=-16
+				New()
+					spawn(20)
+						if(!src.Hit)
+							walk(src,0)
+							del(src)
+						else
+							spawn(100)
+								if(src)
+									del(src)
+					..()
+				Bump(atom/O)
+					if(!src.Hit)
+						if(istype(O,/mob))
+							var/mob/M=O
+							var/mob/Owner=src.Owner
+							if(M.fightlayer==src.fightlayer)
+								if(M.dodge==0)
+									src.density=0
+									if(prob(50))
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									else
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									src.layer=MOB_LAYER+1
+									walk(src,0)
+									src.loc=O.loc
+									src.Hit=1
+									var/undefendedhit=round(src.damage+M.defence/6)
+									if(undefendedhit<=0) undefendedhit=1
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+									spawn() if(M) M.Bleed()
+									if(Owner)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
+									if(prob(15))
+										M.speeding=0
+									if(istype(O,/mob/NPC))
+										..()
+									if(M.henge==4||M.henge==5)
+										M.HengeUndo()
+									spawn(1)
+										src.loc=locate(0,0,0)
+										spawn(400)
+											if(src)
+												del(src)
+								else
+									flick("dodge",M)
+									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
+									src.loc=M.loc
+
+							else
+								if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
+									if(M.dodge==0)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.layer=MOB_LAYER+1
+										walk(src,0)
+										src.loc=O.loc
+										src.Hit=1
+										var/undefendedhit=round(src.damage+M.defence/6)
+										if(undefendedhit<=0) undefendedhit=1
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+										spawn() if(M) M.Bleed()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
+										if(prob(15))
+											M.speeding=0
+										if(istype(O,/mob/NPC))
+											..()
+										if(M.henge==4||M.henge==5)
+											M.HengeUndo()
+										spawn(1)
+											src.loc=locate(0,0,0)
+											spawn(400) del(src)
+									else
+										flick("dodge",M)
+										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
+										M.Levelup()
+										src.loc=M.loc
+								else
+									src.loc=M.loc
+						else
+							if(istype(O,/obj/Projectiles))
+								var/obj/Projectiles/OBJ=O
+								if(OBJ.Owner)
+									var/mob/OBOwner=OBJ.Owner
+									if(OBOwner==src.Owner)
+										if(istype(OBJ,/obj/Projectiles/Weaponry/ChidoriNeedle)) del(src)
+										src.loc=OBJ.loc
+									else
+										if(istype(OBJ,/obj/Projectiles/Effects/ClayBird))
+											OBJ.Hit=1
+							else
+								if(istype(O,/turf))
+									var/turf/T=O
+									if(T.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(T.x,T.y,T.z)
+									if(src.fightlayer==T.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										del(src)
+								if(istype(O,/obj))
+									var/obj/OB=O
+									if(OB.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(OB.x,OB.y,OB.z)
+									if(src.fightlayer==OB.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										del(src)
 			Shuriken
 				icon_state="shuri"
 				damage=5
@@ -222,20 +327,17 @@ obj
 							if(M.fightlayer==src.fightlayer)
 								if(M.dodge==0)
 									src.density=0
-									if(prob(50))view(src)<<sound('SharpHit_Short2.ogg',0,0)
-									else view(src)<<sound('SharpHit_Short.ogg',0,0)
+									if(prob(50))view(src)<<sound('SharpHit_Short2.wav',0,0)
+									else view(src)<<sound('SharpHit_Short.wav',0,0)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
 									var/undefendedhit=round(src.damage+M.defence/6)
 									if(undefendedhit<=0) undefendedhit=1
-									var/colour = colour2html("white")
-									F_damage(M,undefendedhit,colour)
-									M.health-=undefendedhit
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(2,4))
-									Owner.Levelup()
+									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(45))M.speeding=0
 									if(istype(O,/mob/NPC))
 										..()
@@ -297,21 +399,18 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('SharpHit_Short2.ogg',0,0)
+											view(src)<<sound('SharpHit_Short2.wav',0,0)
 										else
-											view(src)<<sound('SharpHit_Short.ogg',0,0)
+											view(src)<<sound('SharpHit_Short.wav',0,0)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
 										var/undefendedhit=round(src.damage+M.defence/6)
 										if(undefendedhit<=0) undefendedhit=1
-										var/colour = colour2html("white")
-										F_damage(M,undefendedhit,colour)
-										M.health-=undefendedhit
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(2,4))
-										Owner.Levelup()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(45))
 											M.speeding=0
 										if(istype(O,/mob/NPC))
@@ -524,21 +623,18 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('SharpHit_Short2.ogg',0,0)
+										view(src)<<sound('SharpHit_Short2.wav',0,0)
 									else
-										view(src)<<sound('SharpHit_Short.ogg',0,0)
+										view(src)<<sound('SharpHit_Short.wav',0,0)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
 									var/undefendedhit=round(src.damage+M.defence/6)
 									if(undefendedhit<=0) undefendedhit=1
-									var/colour = colour2html("white")
-									F_damage(M,undefendedhit,colour)
-									M.health-=undefendedhit
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(2,4))
-									Owner.Levelup()
+									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(75))
 										M.speeding=0
 									if(istype(O,/mob/NPC))
@@ -602,21 +698,18 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('SharpHit_Short2.ogg',0,0)
+											view(src)<<sound('SharpHit_Short2.wav',0,0)
 										else
-											view(src)<<sound('SharpHit_Short.ogg',0,0)
+											view(src)<<sound('SharpHit_Short.wav',0,0)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
 										var/undefendedhit=round(src.damage+M.defence/6)
 										if(undefendedhit<=0) undefendedhit=1
-										var/colour = colour2html("white")
-										F_damage(M,undefendedhit,colour)
-										M.health-=undefendedhit
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(2,4))
-										Owner.Levelup()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
 											M.speeding=0
 										if(istype(O,/mob/NPC))
@@ -829,21 +922,18 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('SharpHit_Short2.ogg',0,0)
+										view(src)<<sound('SharpHit_Short2.wav',0,0)
 									else
-										view(src)<<sound('SharpHit_Short.ogg',0,0)
+										view(src)<<sound('SharpHit_Short.wav',0,0)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
 									var/undefendedhit=round(src.damage+M.defence/6)
 									if(undefendedhit<=0) undefendedhit=1
-									var/colour = colour2html("white")
-									F_damage(M,undefendedhit,colour)
-									M.health-=undefendedhit
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(2,4))
-									Owner.Levelup()
+									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(30))
 										M.speeding=0
 									if(istype(O,/mob/NPC))
@@ -908,21 +998,18 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('SharpHit_Short2.ogg',0,0)
+											view(src)<<sound('SharpHit_Short2.wav',0,0)
 										else
-											view(src)<<sound('SharpHit_Short.ogg',0,0)
+											view(src)<<sound('SharpHit_Short.wav',0,0)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
 										var/undefendedhit=round(src.damage+M.defence/6)
 										if(undefendedhit<=0) undefendedhit=1
-										var/colour = colour2html("white")
-										F_damage(M,undefendedhit,colour)
-										M.health-=undefendedhit
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(2,4))
-										Owner.Levelup()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
 											M.speeding=0
 										if(istype(O,/mob/NPC))
@@ -1111,6 +1198,129 @@ obj
 									spawn(90)
 										if(src)
 											del(src)
+			Iceball
+				icon='Iceball.dmi'
+				icon_state=""
+				damage=3
+				pixel_x=-16
+				pixel_y=-16
+				New()
+					spawn(20)
+						if(!src.Hit)
+							walk(src,0)
+							del(src)
+						else
+							spawn(100)
+								if(src)
+									del(src)
+					..()
+				Bump(atom/O)
+					if(!src.Hit)
+						if(istype(O,/mob))
+							var/mob/M=O
+							var/mob/Owner=src.Owner
+							if(M.fightlayer==src.fightlayer)
+								if(M.dodge==0)
+									src.density=0
+									if(prob(50))
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									else
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									src.layer=MOB_LAYER+1
+									walk(src,0)
+									src.loc=O.loc
+									src.Hit=1
+									var/undefendedhit=round(src.damage+M.defence/6)
+									if(undefendedhit<=0) undefendedhit=1
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+									spawn() if(M) M.Bleed()
+									if(Owner)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
+									if(prob(15))
+										M.speeding=0
+									if(istype(O,/mob/NPC))
+										..()
+									if(M.henge==4||M.henge==5)
+										M.HengeUndo()
+									spawn(1)
+										src.loc=locate(0,0,0)
+										spawn(400)
+											if(src)
+												del(src)
+								else
+									flick("dodge",M)
+									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
+									M.Levelup()
+									src.loc=M.loc
+
+							else
+								if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
+									if(M.dodge==0)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.layer=MOB_LAYER+1
+										walk(src,0)
+										src.loc=O.loc
+										src.Hit=1
+										var/undefendedhit=round(src.damage+M.defence/6)
+										if(undefendedhit<=0) undefendedhit=1
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+										spawn() if(M) M.Bleed()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
+										if(prob(15))
+											M.speeding=0
+										if(istype(O,/mob/NPC))
+											..()
+										if(M.henge==4||M.henge==5)
+											M.HengeUndo()
+										spawn(1)
+											src.loc=locate(0,0,0)
+											spawn(400) del(src)
+									else
+										flick("dodge",M)
+										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
+										src.loc=M.loc
+								else
+									src.loc=M.loc
+						else
+							if(istype(O,/obj/Projectiles))
+								var/obj/Projectiles/OBJ=O
+								if(OBJ.Owner)
+									var/mob/OBOwner=OBJ.Owner
+									if(OBOwner==src.Owner)
+										if(istype(OBJ,/obj/Projectiles/Weaponry/ChidoriNeedle)) del(src)
+										src.loc=OBJ.loc
+									else
+										if(istype(OBJ,/obj/Projectiles/Effects/ClayBird))
+											OBJ.Hit=1
+							else
+								if(istype(O,/turf))
+									var/turf/T=O
+									if(T.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(T.x,T.y,T.z)
+									if(src.fightlayer==T.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										del(src)
+								if(istype(O,/obj))
+									var/obj/OB=O
+									if(OB.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(OB.x,OB.y,OB.z)
+									if(src.fightlayer==OB.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										del(src)
 
 			ChidoriNeedle
 				icon='Chidori Needles.dmi'
@@ -1146,21 +1356,17 @@ obj
 									src.Hit=1
 									var/undefendedhit=round(src.damage+M.defence/6)
 									if(undefendedhit<=0) undefendedhit=1
-									var/colour = colour2html("white")
-									F_damage(M,undefendedhit,colour)
-									M.health-=undefendedhit
+									M.DealDamage(undefendedhit,src.Owner,"NinBlue")
 									spawn() if(M) M.Bleed()
 									if(Owner)
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",1)
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(1,4))
-										Owner.Levelup()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,4))
 									if(prob(15))
 										M.speeding=0
 									if(istype(O,/mob/NPC))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
-									M.Death(Owner)
 									spawn(1)
 										src.loc=locate(0,0,0)
 										spawn(400)
@@ -1169,7 +1375,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -1186,27 +1391,22 @@ obj
 										src.Hit=1
 										var/undefendedhit=round(src.damage+M.defence/6)
 										if(undefendedhit<=0) undefendedhit=1
-										var/colour = colour2html("white")
-										F_damage(M,undefendedhit,colour)
-										M.health-=undefendedhit
+										M.DealDamage(undefendedhit,src.Owner,"NinBlue")
 										spawn() if(M) M.Bleed()
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",1)
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(1,4))
-										Owner.Levelup()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,4))
 										if(prob(15))
 											M.speeding=0
 										if(istype(O,/mob/NPC))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
-										M.Death(Owner)
 										spawn(1)
 											src.loc=locate(0,0,0)
 											spawn(400) del(src)
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -1276,27 +1476,22 @@ obj
 									src.Hit=1
 									var/undefendedhit=round(src.damage+M.defence/6)
 									if(undefendedhit<=0) undefendedhit=1
-									var/colour = colour2html("white")
-									F_damage(M,undefendedhit,colour)
-									M.health-=undefendedhit
+									M.DealDamage(undefendedhit,src.Owner,"NinBlue")
 									spawn() if(M) M.Bleed()
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",1)
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(1,4))
-									Owner.Levelup()
+									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",1)
+									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,4))
 									if(prob(15))
 										M.speeding=0
 									if(istype(O,/mob/NPC))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
-									M.Death(Owner)
 									spawn(1)
 										src.loc=locate(0,0,0)
 										spawn(400) del(src)
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -1313,20 +1508,16 @@ obj
 										src.Hit=1
 										var/undefendedhit=round(src.damage+M.defence/6)
 										if(undefendedhit<=0) undefendedhit=1
-										var/colour = colour2html("white")
-										F_damage(M,undefendedhit,colour)
-										M.health-=undefendedhit
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",1)
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(1,4))
-										Owner.Levelup()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
 										if(istype(O,/mob/NPC))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
-										M.Death(Owner)
 										spawn(1)
 											src.loc=locate(0,0,0)
 											spawn(400) del(src)
@@ -1335,6 +1526,121 @@ obj
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
 										M.Levelup()
 										src.loc=M.loc
+								else
+									src.loc=M.loc
+						else
+							if(istype(O,/obj/Projectiles))
+								var/obj/Projectiles/OBJ=O
+								if(OBJ.Owner)
+									var/mob/OBOwner=OBJ.Owner
+									if(OBOwner==src.Owner)
+										src.loc=OBJ.loc
+							else
+								if(istype(O,/turf))
+									var/turf/T=O
+									if(T.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(T.x,T.y,T.z)
+									if(src.fightlayer==T.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										walk(src,0)
+										src.loc=locate(T.x,T.y,T.z)
+										src.Hit=1
+										spawn(90)
+											if(src)
+												del(src)
+								if(istype(O,/obj))
+									var/obj/OB=O
+									if(OB.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(OB.x,OB.y,OB.z)
+									if(src.fightlayer==OB.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										walk(src,0)
+										src.loc=locate(OB.x,OB.y,OB.z)
+										src.Hit=1
+										src.loc=locate(0,0,0)
+										spawn(90)
+											if(src)
+												del(src)
+			LightningBalls
+				icon='LightningBall.dmi'
+				icon_state="LightningBall"
+				damage=8
+				New()
+					spawn(20)
+						if(!src.Hit)
+							walk(src,0)
+							del(src)
+						else
+							spawn(100)
+								if(src)
+									del(src)
+					..()
+				Bump(atom/O)
+					if(!src.Hit)
+						if(istype(O,/mob))
+							var/mob/M=O
+							var/mob/Owner=src.Owner
+							if(M.fightlayer==src.fightlayer)
+								if(M.dodge==0)
+									src.density=0
+									if(prob(50))
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									else
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									src.layer=MOB_LAYER+1
+									walk(src,0)
+									src.loc=O.loc
+									src.Hit=1
+									var/undefendedhit=round(src.damage+M.defence/6)
+									if(undefendedhit<=0) undefendedhit=1
+									M.DealDamage(undefendedhit,src.Owner,"NinBlue")
+									spawn() if(M) M.Bleed()
+									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",3)
+									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,6))
+									if(prob(15))
+										M.speeding=0
+									if(istype(O,/mob/NPC))
+										..()
+									if(M.henge==4||M.henge==5)
+										M.HengeUndo()
+									spawn(1)
+										src.loc=locate(0,0,0)
+										spawn(400) del(src)
+							else
+								if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
+									if(M.dodge==0)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.layer=MOB_LAYER+1
+										walk(src,0)
+										src.loc=O.loc
+										src.Hit=1
+										var/undefendedhit=round(src.damage+M.defence/6)
+										if(undefendedhit<=0) undefendedhit=1
+										M.DealDamage(undefendedhit,src.Owner,"NinBlue")
+										spawn() if(M) M.Bleed()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",3)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,6))
+										if(prob(15))
+											M.speeding=0
+										if(istype(O,/mob/NPC))
+											..()
+										if(M.henge==4||M.henge==5)
+											M.HengeUndo()
+										spawn(1)
+											src.loc=locate(0,0,0)
+											spawn(400) del(src)
 								else
 									src.loc=M.loc
 						else
@@ -1412,13 +1718,10 @@ obj
 									src.Hit=1
 									var/undefendedhit=round(src.damage+M.defence/6)
 									if(undefendedhit<=0) undefendedhit=1
-									var/colour = colour2html("white")
-									F_damage(M,undefendedhit,colour)
-									M.health-=undefendedhit
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",1)
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(1,4))
-									Owner.Levelup()
+									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",2)
+									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(2,4))
 									if(prob(15))
 										M.speeding=0
 									if(istype(O,/mob/NPC))
@@ -1478,13 +1781,10 @@ obj
 										src.Hit=1
 										var/undefendedhit=round(src.damage+M.defence/6)
 										if(undefendedhit<=0) undefendedhit=1
-										var/colour = colour2html("white")
-										F_damage(M,undefendedhit,colour)
-										M.health-=undefendedhit
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",1)
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(1,4))
-										Owner.Levelup()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
 										if(istype(O,/mob/NPC))
@@ -1627,6 +1927,256 @@ obj
 										spawn(90)
 											if(src)
 												del(src)
+			SaiRat
+				icon='SaiRat.dmi'
+				icon_state=""
+				damage=3
+				pixel_x=-16
+				pixel_y=-16
+				New()
+					spawn(20)
+						if(!src.Hit)
+							walk(src,0)
+							del(src)
+						else
+							spawn(100)
+								if(src)
+									del(src)
+					..()
+				Bump(atom/O)
+					if(!src.Hit)
+						if(istype(O,/mob))
+							var/mob/M=O
+							var/mob/Owner=src.Owner
+							if(M.fightlayer==src.fightlayer)
+								if(M.dodge==0)
+									src.density=0
+									if(prob(50))
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									else
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									src.layer=MOB_LAYER+1
+									walk(src,0)
+									src.loc=O.loc
+									src.Hit=1
+									var/undefendedhit=round(src.damage+M.defence/6)
+									if(undefendedhit<=0) undefendedhit=1
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+									spawn() if(M) M.Bleed()
+									if(Owner)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,2))
+										Owner.Levelup()
+									if(prob(15))
+										M.speeding=0
+									if(istype(O,/mob/NPC))
+										..()
+									if(M.henge==4||M.henge==5)
+										M.HengeUndo()
+									M.Death(Owner)
+									spawn(1)
+										src.loc=locate(0,0,0)
+										spawn(400)
+											if(src)
+												del(src)
+								else
+									flick("dodge",M)
+									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
+									M.Levelup()
+									src.loc=M.loc
+
+							else
+								if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
+									if(M.dodge==0)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.layer=MOB_LAYER+1
+										walk(src,0)
+										src.loc=O.loc
+										src.Hit=1
+										var/undefendedhit=round(src.damage+M.defence/6)
+										if(undefendedhit<=0) undefendedhit=1
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+										spawn() if(M) M.Bleed()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
+										if(prob(15))
+											M.speeding=0
+										if(istype(O,/mob/NPC))
+											..()
+										if(M.henge==4||M.henge==5)
+											M.HengeUndo()
+										spawn(1)
+											src.loc=locate(0,0,0)
+											spawn(400) del(src)
+									else
+										flick("dodge",M)
+										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
+										M.Levelup()
+										src.loc=M.loc
+								else
+									src.loc=M.loc
+						else
+							if(istype(O,/obj/Projectiles))
+								var/obj/Projectiles/OBJ=O
+								if(OBJ.Owner)
+									var/mob/OBOwner=OBJ.Owner
+									if(OBOwner==src.Owner)
+										if(istype(OBJ,/obj/Projectiles/Weaponry/ChidoriNeedle)) del(src)
+										src.loc=OBJ.loc
+									else
+										if(istype(OBJ,/obj/Projectiles/Effects/ClayBird))
+											OBJ.Hit=1
+							else
+								if(istype(O,/turf))
+									var/turf/T=O
+									if(T.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(T.x,T.y,T.z)
+									if(src.fightlayer==T.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										del(src)
+								if(istype(O,/obj))
+									var/obj/OB=O
+									if(OB.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(OB.x,OB.y,OB.z)
+									if(src.fightlayer==OB.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										del(src)
+			Sai_Snakes
+				icon='Sai Snakes.dmi'
+				icon_state=""
+				damage=3
+				pixel_x=-16
+				pixel_y=-16
+				New()
+					spawn(20)
+						if(!src.Hit)
+							walk(src,0)
+							del(src)
+						else
+							spawn(100)
+								if(src)
+									del(src)
+					..()
+				Bump(atom/O)
+					if(!src.Hit)
+						if(istype(O,/mob))
+							var/mob/M=O
+							var/mob/Owner=src.Owner
+							if(M.fightlayer==src.fightlayer)
+								if(M.dodge==0)
+									src.density=0
+									if(prob(50))
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									else
+										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+									src.layer=MOB_LAYER+1
+									walk(src,0)
+									src.loc=O.loc
+									src.Hit=1
+									var/undefendedhit=round(src.damage+M.defence/6)
+									if(undefendedhit<=0) undefendedhit=1
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+									spawn() if(M) M.Bleed()
+									if(Owner)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,2))
+									if(prob(15))
+										M.speeding=0
+									if(istype(O,/mob/NPC))
+										..()
+									if(M.henge==4||M.henge==5)
+										M.HengeUndo()
+									spawn(1)
+										src.loc=locate(0,0,0)
+										spawn(400)
+											if(src)
+												del(src)
+								else
+									flick("dodge",M)
+									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
+									M.Levelup()
+									src.loc=M.loc
+
+							else
+								if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
+									if(M.dodge==0)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.layer=MOB_LAYER+1
+										walk(src,0)
+										src.loc=O.loc
+										src.Hit=1
+										var/undefendedhit=round(src.damage+M.defence/6)
+										if(undefendedhit<=0) undefendedhit=1
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+										spawn() if(M) M.Bleed()
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
+										if(prob(15))
+											M.speeding=0
+										if(istype(O,/mob/NPC))
+											..()
+										if(M.henge==4||M.henge==5)
+											M.HengeUndo()
+										spawn(1)
+											src.loc=locate(0,0,0)
+											spawn(400) del(src)
+									else
+										flick("dodge",M)
+										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
+										M.Levelup()
+										src.loc=M.loc
+								else
+									src.loc=M.loc
+						else
+							if(istype(O,/obj/Projectiles))
+								var/obj/Projectiles/OBJ=O
+								if(OBJ.Owner)
+									var/mob/OBOwner=OBJ.Owner
+									if(OBOwner==src.Owner)
+										if(istype(OBJ,/obj/Projectiles/Weaponry/ChidoriNeedle)) del(src)
+										src.loc=OBJ.loc
+									else
+										if(istype(OBJ,/obj/Projectiles/Effects/ClayBird))
+											OBJ.Hit=1
+							else
+								if(istype(O,/turf))
+									var/turf/T=O
+									if(T.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(T.x,T.y,T.z)
+									if(src.fightlayer==T.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										del(src)
+								if(istype(O,/obj))
+									var/obj/OB=O
+									if(OB.fightlayer=="HighGround"&&src.fightlayer=="Normal")
+										src.loc=locate(OB.x,OB.y,OB.z)
+									if(src.fightlayer==OB.fightlayer)
+										src.density=0
+										if(prob(50))
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										else
+											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										del(src)
 			ExplosiveTag
 				icon_state="tag"
 				damage=40
@@ -1723,6 +2273,9 @@ mob
 		Throw()
 			set hidden=1
 			set category=null
+			if(src.loc.loc:Safe == 1)
+				src<<output("You're indoors, you shouldn't be doing this.","actionoutput")
+				return 1
 			if(src.dead || src.move ==0 || src.canattack ==0 || src.injutsu || src.firing)
 				return
 			src.HengeUndo()
@@ -1732,7 +2285,7 @@ mob
 				src.icon_state = ""
 				src.overlays += 'Cherry Blossom Impact.dmi'
 				src.icon_state = "punchrS"
-				view(src) << sound('Skill_MashHit.ogg')
+				view(src) << sound('Skill_MashHit.wav')
 				sleep(1)
 				flick("punchr",src)
 				src.icon_state = "punchrS"
@@ -1740,8 +2293,8 @@ mob
 					for(var/i=0,i<5,i++)
 						M.icon_state = "push"
 						step(M,src.dir)
-						M.health -= 10+src.taijutsu/5
-						F_damage(M,10+src.taijutsu/5)
+						M.health -= 10+src.strength/5
+						F_damage(M,10+src.strength/5)
 						sleep(1)
 					if(!M.dead)
 						M.icon_state = ""
@@ -1754,17 +2307,15 @@ mob
 				src.firing=1
 				src.icon_state = "punchrS"
 				src.overlays += 'Raikiri.dmi'
-				view(src) << sound('dash.ogg')
+				view(src) << sound('dash.wav')
 				sleep(2)
 				var/mob/Z
 				flick("punchr",src)
 				for(var/i=0,i<4,i++)
 					var/check=0
 					for(var/mob/M in get_step(src,src.dir))
-						M.health-= round((src.ninjutsu/2))
-						F_damage(M,round((src.ninjutsu/2)))
+						M.DealDamage(src.ninjutsu/2,src,"NinBlue")
 						M.Bleed()
-						M.Death(src)
 						src.loc = M.loc
 						Z = M
 						check=1
@@ -1789,10 +2340,8 @@ mob
 				for(var/i=0,i<5,i++)
 					var/check=0
 					for(var/mob/M in get_step(src,src.dir))
-						M.health-= round((src.ninjutsu/4)+(src.taijutsu/4))
-						F_damage(M,round((src.ninjutsu/4)+(src.taijutsu/4)))
+						M.DealDamage((src.ninjutsu/4)+(src.strength/4),src, "NinBlue")
 						M.Bleed()
-						M.Death(src)
 						src.loc = M.loc
 						Z = M
 						check=1
@@ -1809,37 +2358,13 @@ mob
 					var/mob/HitMe=O.JashinConnected
 					if(!HitMe||!ismob(HitMe)) continue
 					canja=0
-					spawn(15) canja=1
-					HitMe.health-= round(20)
-					F_damage(HitMe,round(20))
+					spawn(60) canja=1
+					HitMe.DealDamage(src.strength*4,src,"TaiOrange")
 					HitMe.Bleed()
 					src.Bleed()
-					HitMe.UpdateHMB()
-					view() << sound('knife_hit1.ogg')
-					//flick("throw",HitMe)
-					src.UpdateHMB()
-					HitMe.Death(src)
+					view() << sound('knife_hit1.wav')
 					src.Death(src,1)
 					return
-		/*	for(var/obj/JashinSymbol/O in src.loc)
-				if(O.Owner == src && src.canja)
-					src.canja=0
-					spawn(15)
-						src.canja=1
-					if(O.Jashiner)
-						var/mob/M = O.Jashiner
-						M.health-= round(src.taijutsu/4)
-						F_damage(M,round(src.taijutsu/4))
-						M.Bleed()
-						M.UpdateHMB()
-						M.Death(src)
-						view() << sound('knife_hit1.ogg')
-						flick("throw",src)
-						src.health-= round(src.taijutsu/4)
-						F_damage(src,round(src.taijutsu/4))
-						src.Bleed()
-						src.UpdateHMB()
-						src.Death(M)*/
 			if(usr.equipped=="Shurikens")
 				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				for(var/obj/Inventory/Weaponry/Shuriken/C in usr.contents)
@@ -1849,10 +2374,10 @@ mob
 						spawn(1)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
@@ -1864,7 +2389,7 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.taijutsu/3)
+							A.damage=C.damage+round(usr.strength/3)
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 						else
@@ -1876,7 +2401,7 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.taijutsu/3)
+							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
 						usr.itemDelete(C)
 			if(usr.equipped=="ExplodeKunais")
@@ -1888,10 +2413,10 @@ mob
 						spawn(1)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
@@ -1903,7 +2428,7 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.taijutsu/3)
+							A.damage=C.damage+round(usr.strength/3)
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 						else
@@ -1915,7 +2440,7 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.taijutsu/3)
+							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
 						usr.itemDelete(C)
 			if(usr.equipped=="Kunais")
@@ -1927,10 +2452,10 @@ mob
 						spawn(1)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
@@ -1942,7 +2467,7 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.taijutsu/3)
+							A.damage=C.damage+round(usr.strength/3)
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 						else
@@ -1954,7 +2479,7 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.taijutsu/3)
+							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
 						usr.itemDelete(C)
 			if(usr.equipped=="Needles")
@@ -1966,10 +2491,10 @@ mob
 						spawn(1)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
@@ -1981,7 +2506,7 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.taijutsu/3)
+							A.damage=C.damage+round(usr.strength/3)
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 						else
@@ -1993,7 +2518,7 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.taijutsu/3)
+							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
 						usr.itemDelete(C)
 			if(usr.equipped=="ExplosiveTags")
@@ -2008,10 +2533,10 @@ mob
 							usr.explosivetag++
 							if(prob(50))
 								flick("throw",usr)
-								view(usr)<<sound('SkillDam_ThrowSuriken2.ogg',0,0)
+								view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 							else
 								flick("throw",usr)
-								view(usr)<<sound('SkillDam_ThrowSuriken3.ogg',0,0)
+								view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
 							if(c_target)
 								src.dir=get_dir(usr,c_target)
 								usr.Target_Atom(c_target)
@@ -2056,7 +2581,7 @@ mob
 								usr.smokebomb=1
 								var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
 								SMOKE.loc=usr.loc
-								view(usr)<<sound('flashbang_explode2.ogg',0,0)
+								view(usr)<<sound('flashbang_explode2.wav',0,0)
 								src.overlays=0
 								src.icon_state="blank"
 								for(var/mob/M in oview(usr))
@@ -2070,4 +2595,115 @@ mob
 									src.icon_state=""
 									src.RestoreOverlays()
 								spawn(60)if(usr)usr.smokebomb=0
-			RefreshInventory()
+			if(usr.equipped=="Kubikiribocho")
+				for(var/obj/Inventory/Weaponry/Zabuza_Sword/C in usr.contents)
+					if(usr.firing==0&&usr.dead==0)
+						usr.firing=1
+						flick("throw",usr)
+						for(var/mob/M in get_step(usr,usr.dir))
+							if(M)
+								M.DealDamage(usr.strength*3,src,"TaiOrange")
+							//	usr.health+=usr.strength
+								M.Bleed()
+						spawn(usr.attkspeed*6)
+							usr.firing=0
+			if(usr.equipped=="Samehada")
+				for(var/obj/Inventory/Weaponry/Samehada/C in usr.contents)
+					if(usr.firing==0&&usr.dead==0)
+						usr.firing=1
+						flick("throw",usr)
+						for(var/mob/M in get_step(usr,usr.dir))
+							if(M)
+								M.DealDamage(usr.strength*3,src,"TaiOrange")
+							//	usr.chakra+=usr.strength*1.5
+								M.Bleed()
+						spawn(usr.attkspeed*6)
+							usr.firing=0
+			if(usr.equipped=="Hiramekarei")
+				for(var/obj/Inventory/Weaponry/Hiramekarei/C in usr.contents)
+					if(usr.firing==0&&usr.dead==0)
+						usr.firing=1
+						flick("throw",usr)
+						for(var/mob/M in get_step(usr,usr.dir))
+							if(M)
+								M.DealDamage(usr.strength*3,src,"TaiOrange")
+							//	usr.chakra+=usr.strength*1.5
+								M.Bleed()
+						spawn(usr.attkspeed*6)
+							usr.firing=0
+			if(usr.equipped=="Kabuto Wari")
+				for(var/obj/Inventory/Weaponry/Kabutowari/C in usr.contents)
+					if(usr.firing==0&&usr.dead==0)
+						usr.firing=1
+						flick("throw",usr)
+						for(var/mob/M in get_step(usr,usr.dir))
+							if(M)
+								M.DealDamage(usr.strength*3,src,"TaiOrange")
+							//	usr.chakra+=usr.strength*1.5
+								M.Bleed()
+						spawn(usr.attkspeed*6)
+							usr.firing=0
+			if(usr.equipped=="Kiba")
+				for(var/obj/Inventory/Weaponry/Kiba/C in usr.contents)
+					if(usr.firing==0&&usr.dead==0)
+						usr.firing=1
+						flick("throw",usr)
+						for(var/mob/M in get_step(usr,usr.dir))
+							if(M)
+								M.DealDamage(usr.strength*3,src,"TaiOrange")
+							//	usr.chakra+=usr.strength*1.5
+								M.Bleed()
+						spawn(usr.attkspeed*6)
+							usr.firing=0
+			if(usr.equipped=="Nuibari")
+				for(var/obj/Inventory/Weaponry/Nuibari/C in usr.contents)
+					if(usr.firing==0&&usr.dead==0)
+						usr.firing=1
+						flick("throw",usr)
+						for(var/mob/M in get_step(usr,usr.dir))
+							if(M)
+								M.DealDamage(usr.strength*3,src,"TaiOrange")
+							//	usr.chakra+=usr.strength*1.5
+								M.Bleed()
+						spawn(usr.attkspeed*6)
+							usr.firing=0
+			if(usr.equipped=="Shibuki")
+				for(var/obj/Inventory/Weaponry/Shibuki/C in usr.contents)
+					if(usr.firing==0&&usr.dead==0)
+						usr.firing=1
+						flick("throw",usr)
+						for(var/mob/M in get_step(usr,usr.dir))
+							if(M)
+								M.DealDamage(usr.strength*3,src,"TaiOrange")
+							//	usr.chakra+=usr.strength*1.5
+								M.Bleed()
+						spawn(usr.attkspeed*6)
+							usr.firing=0
+			if(usr.equipped=="Dark Sword")
+				for(var/obj/Inventory/Weaponry/DarkSword/C in usr.contents)
+					if(usr.firing==0&&usr.dead==0)
+						usr.firing=1
+						flick("throw",usr)
+						for(var/mob/M in get_step(usr,usr.dir))
+							if(M)
+								M.DealDamage(usr.strength,src,"TaiOrange")
+								M.Bleed()
+						spawn(usr.attkspeed*6)
+							usr.firing=0
+			if(usr.equipped=="Weights")
+				for(var/obj/Inventory/Weaponry/Weights/C in usr.contents)
+					if(usr.firing==0 && usr.dead==0)
+						if(usr.agility < 80)
+							usr.firing=1
+							flick("punchr",usr)
+							usr.LevelStat("Agility",rand(4,7))
+							for(var/mob/M in get_step(usr,usr.dir))
+								if(M)
+									M.DealDamage(usr.strength*0.1,src,"TaiOrange")
+							spawn(usr.attkspeed*2)
+								usr.firing=0
+						else
+							usr << output("You're too experienced in agility to gain anymore experience from these.","actionoutput")
+							return
+			//RefreshInventory()
+			return

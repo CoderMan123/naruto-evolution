@@ -139,7 +139,10 @@ proc/HTMLlist()
 	HtmlAssosciate("whitesmoke","f5f5f5")
 	HtmlAssosciate("yellow","ffff00")
 	HtmlAssosciate("yellowgreen","a9cd32")
-//	HtmlAssosciate("white","ff0000")
+	HtmlAssosciate("NinBlue","6495ed")
+	HtmlAssosciate("TaiOrange","ff8c00")
+	HtmlAssosciate("HealGreen","7fff00")
+	HtmlAssosciate("RockOrange","ef7121")
 var/html_colours[0]
 proc/HtmlAssosciate(colour, html)
 	html_colours["[colour]"] = html

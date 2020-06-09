@@ -22,6 +22,12 @@ area
 		Darkest
 			icon='Shade.dmi'
 			icon_state="5"
+	Fog
+		icon='Fog.dmi'
+		icon_state="Fog"
+		iswater=1
+		layer=20
+		mouse_opacity=0
 turf
 	Opacity
 		opacity=1
@@ -55,11 +61,13 @@ turf
 turf
 	BuildingDensity
 		density=1
+		layer=100
 	HighLayerDensity
 		density=1
-		layer=99999
+		layer=999
 	TopLayerDensity
 		density=1
+		layer=100
 		New()
 			src.dir=pick(NORTH,EAST,WEST,SOUTH)
 			for(var/turf/T in view(src,0))
@@ -1066,7 +1074,7 @@ turf
 								M.foot="Right"
 							else
 								if(M.foot=="Right")
-									view(M,6) << sound('Sounds/Walk/man_fs_r_mt_wat.ogg',0,0,0,25)
+									view(M,6) << sound('Sounds/Walk/man_fs_l_mt_wat.ogg',0,0,0,25)
 									M.foot="Left"
 						else
 							M.stepcounter++
@@ -1116,6 +1124,13 @@ turf
 							M.overlays-=/obj/MaleParts/UnderShade
 							M.overlays+=/obj/MiscEffects/WaterRing
 							M.overlays+=/obj/MiscEffects/WaterRing
+
+					if(check)//SWIM
+						if(!M.walkingonwater)
+							M.walkingonwater=1
+							M.overlays+=/obj/MiscEffects/WaterRing
+							M.overlays+=/obj/MiscEffects/WaterRing
+
 		WaterZoneExit
 			icon='Shade.dmi'
 			icon_state="B"
@@ -1148,6 +1163,13 @@ turf
 							M.overlays+=/obj/MaleParts/UnderShade
 							M.overlays-=/obj/MiscEffects/WaterRing
 							M.overlays-=/obj/MiscEffects/WaterRing
+
+					if(check)//SWIM
+						if(M.walkingonwater)
+							M.walkingonwater=0
+							M.overlays-=/obj/MiscEffects/WaterRing
+							M.overlays-=/obj/MiscEffects/WaterRing
+
 		ClimbZoneExit
 			icon='Shade.dmi'
 			icon_state="B"
@@ -1452,3 +1474,14 @@ obj/Ground
 				src.pixel_x-=rand(3,30)
 				src.pixel_y+=rand(1,5)
 				..()
+
+obj
+	AkatsukiArms1
+		//icon='AkatsukiHands.dmi'
+		icon_state="Hand1"
+		density=1
+	AkatsukiArms2
+		//icon='AkatsukiHands.dmi'
+		icon_state="Hand2"
+		density=1
+

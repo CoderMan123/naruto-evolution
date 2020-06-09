@@ -1,105 +1,329 @@
-var/list/Kages=list("Hidden Leaf"=null,"Hidden Sand"=null,"Hidden Mist"=null,"Hidden Sound"=null)
-var/list/MasterKey=list("Lavitiz")
-var/list/Developer=list("Lavitiz")
-var/list/MasterGMs=list()
-var/list/Admins=list()
-var/list/Moderators=list()
-var/list/Enforcers=list()
-var/list/BanList=list()
+var/list/Kages = list("Hidden Leaf"=null,"Hidden Sand"=null,"Hidden Mist"=null,"Hidden Sound"=null,"Hidden Rock"=null)//kensei = bane, punky = taco, qwesti = Rise, raunts = sisa, Flyboyed = Yohan
+var/list/MasterGMs = list("squigs" , "rootabyss")
+var/list/Admins = list("reformist")//,
+var/list/Moderators = list("raunts61")//"kensei_hirako","kenseihirako","FlyBoyEd","qwestizero"
+var/list/PArtists = list("illusiveblair")//,"punkykick"
+var/HostKey = file("HostKey.txt")
 
+mob/var/
+	canteleport = 1
+	jailed=0
 
-proc/MasterKeyCheck(key)
-	if(MasterKey.Find(key)) return 1
-	else return 0
-
+proc/MasterGMCheck(ckey)
+	if(MasterGMs.Find(ckey)) return 1
 
 proc/AdminCheck(ckey)
-	if(Admins.Find(ckey)||MasterGMs.Find(ckey)) return 1
+	if(Admins.Find(ckey)||MasterGMs.Find(ckey)||usr.ckey == file2text(HostKey)) return 1
 	else return 0
-
 
 proc/ModeratorCheck(ckey)
 	if(Moderators.Find(ckey)||MasterGMs.Find(ckey)||Admins.Find(ckey)) return 1
 	else return 0
 
-
-proc/EnforcerCheck(ckey)
-	if(Enforcers.Find(ckey)||Moderators.Find(ckey)||MasterGMs.Find(ckey)||Admins.Find(ckey)) return 1
+proc/ArtistCheck(ckey)
+	if(Moderators.Find(ckey)||MasterGMs.Find(ckey)||Admins.Find(ckey)||PArtists.Find(ckey)) return 1
 	else return 0
 
-
-mob/proc/StaffCheck()
-	if(Kages["[village]"]==src.ckey||rank=="Hokage"||rank=="Kazekage"||rank=="Sound Leader"||rank=="Akatsuki Leader")
+mob/proc/AddAdminVerbs()
+	if(Kages["[village]"]==src.ckey||rank=="Hokage"||rank=="Kazekage"||rank=="Mizukage"||rank=="Otokage"||rank=="Tsuchikage")
 		src.verbs+=typesof(/mob/Kage/verb/)
-		winset(src, null, "Options.ShowKage.is-visible=true")
-
-	if(MasterKeyCheck(src.key))
-		src.verbs+=typesof(/mob/Developer/verb)
+		winset(src.client, null, {"
+						Options.ShowKage.is-visible = "true";
+					"})
+	if(rank=="Akatsuki Leader")
+		src.verbs+=typesof(/mob/AkatsukiLeader/verb/)
+		winset(src.client, null, {"
+						Options.ShowKage.is-visible = "true";
+					"})
+	if(rank=="Anbu Leader")
+		src.verbs+=typesof(/mob/AnbuLeader/verb/)
+		winset(src.client, null, {"
+						Options.ShowKage.is-visible = "true";
+					"})
+	if(rank=="Seven Swordsmen Leader")
+		src.verbs+=typesof(/mob/SevenSwordsmenLeader/verb/)
+		winset(src.client, null, {"
+						Options.ShowKage.is-visible = "true";
+					"})
+	if(MasterGMCheck(ckey))
+		src.verbs+=typesof(/mob/MasterGM/verb/)
 		src.verbs+=typesof(/mob/Admin/verb/)
 		src.verbs+=typesof(/mob/Moderator/verb/)
-		src.verbs+=typesof(/mob/Enforcer/verb/)
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
-		winset(src, null, "Options.ShowKage.is-visible=true")
+		src.admin=1
+		client.control_freak/CONTROL_FREAK_ALL=0
+		winset(src.client, null, {"
+						Options.ShowKage.is-visible = "true";
+					"})
 
-
-	/*if(AdminCheck(src.ckey))
+	if(AdminCheck(src.ckey)||src.ckey == file2text(HostKey))
 		src.verbs+=typesof(/mob/Admin/verb/)
 		src.verbs+=typesof(/mob/Moderator/verb/)
-		src.verbs+=typesof(/mob/Enforcer/verb/)
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
+		src.admin=1
+		winset(src.client, null, {"
+						Options.ShowKage.is-visible = "true";
+					"})
 
 	if(ModeratorCheck(ckey))
 		src.verbs+=typesof(/mob/Moderator/verb/)
-		src.verbs+=typesof(/mob/Enforcer/verb/)
+		src.admin=1
+		winset(src.client, null, {"
+						Options.ShowKage.is-visible = "true";
+					"})
 
-	if(EnforcerCheck(ckey))src.verbs+=typesof(/mob/Enforcer/verb/)*/
-
+	if(ArtistCheck(ckey))
+		src.verbs+=typesof(/mob/PixelArtist/verb/)
+		winset(src.client, null, {"
+						Options.ShowKage.is-visible = "true";
+					"})
 
 mob/proc/RemoveAdminVerbs()
 	src.verbs-=typesof(/mob/Kage/verb/)
-	src.verbs-=typesof(/mob/Enforcer/verb/)
 	src.verbs-=typesof(/mob/Moderator/verb/)
 	src.verbs-=typesof(/mob/Admin/verb/)
 	src.verbs-=typesof(/mob/PixelArtist/verb/)
-	StaffCheck()
-
+	src.verbs-=typesof(/mob/MasterGM/verb/)
+	AddAdminVerbs()
 
 mob/PixelArtist/verb/
 	Add_Overlay(icon1 as icon,overlay1 as text)
 		set category="Staff"
 		src.overlays+=image(icon1,overlay1)
+
 	Remove_Overlay(icon1 as icon,overlay1 as text)
 		set category="Staff"
 		src.overlays-=image(icon1,overlay1)
+
 	Add_Underlay(icon1 as icon,overlay1 as text)
 		set category="Staff"
 		src.underlays+=image(icon1,overlay1)
+
 	Remove_Underlay(icon1 as icon,overlay1 as text)
 		set category="Staff"
 		src.underlays-=image(icon1,overlay1)
+
 	Change_Icon(icon1 as icon,iconstate as text)
 		set category="Staff"
 		icon=icon1
 		icon_state=iconstate
-mob/Enforcer/verb/
+
+mob/Moderator/verb/
+	CheckStats(mob/M in TotalPlayers)
+		set category = "Staff"
+		usr<<"Level:[M.level]"
+		usr<<"Health:[M.maxhealth]"
+		usr<<"Chakra:[M.maxchakra]"
+		usr<<"Ninjutsu:[M.ninjutsu]"
+		usr<<"Genjutsu:[M.genjutsu]"
+		usr<<"Strength:[M.strength]"
+		usr<<"Agility:[M.agility]"
+		usr<<"Defence:[M.defence]"
+
+	World_Chat_Admin()
+		set category = "Staff"
+		set name = "World Chat"
+		var/a = input("What do you wish to say in world chat?") as text
+		if(!a)
+			return
+		else
+			world<<"<font color = white><font size=1.5>[src.name]: [a]"
+
+	Spy(mob/M as mob in TotalPlayers)
+		set category="Staff"
+		usr.client.perspective = EYE_PERSPECTIVE
+		usr.client.eye = M
+
+	Spy_Stop()
+		set category="Staff"
+		usr.client.perspective = EYE_PERSPECTIVE
+		usr.client.eye = usr
+
+	Delete(atom/O in world)
+		set category="Staff"
+		if(!admin) return
+		if(ismob(O))
+			var/mob/M=O
+			if(!M.client) del(M)
+			if(O.name=="area")
+				if(src:key!="Squigs")
+					usr<<"You are not allowed to delete the area anymore!"
+					text2file("[usr] tried to delete [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+
+					return
+			else
+				if(alert("Are you sure you want to delete the Atom [O.name]?","Confirm!","No","Yes")=="Yes")
+					text2file("[usr] deleted [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+					del(O)
+		else del(O)
+	Start_Chuunin_Exam()
+		set category="Staff"
+		//ChuuninExam()
+		if(chuuninlock==1)
+			usr<<"Ninja War is in progress...please wait until it's over..."
+			return
+		ChuuninExam="Starting"
+		world<<output("<b><center>A Chuunin exam will begin in 3 minutes.</b></center>","actionoutput")
+		sleep(600*3)
+		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","actionoutput")
+		ChuuninExam="Written"
+		sleep(600*2)
+		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","actionoutput")
+		ChuuninExam="Forest of Death"
+		var/count=0
+		for(var/mob/player/M in TotalPlayers)
+			if(M.cheww==1)
+				M.cheww=0
+				M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
+				if(count==0)
+					var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
+					O.loc = M
+					count=1
+				else
+					var/obj/O = new/obj/ChuuninExam/Scrolls/HeavenScroll
+					O.loc = M
+					count=0
+		sleep(600*4)
+		world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","actionoutput")
+		ChuuninExam="Tournament"
+		ChuuninExamGo()
+
+	Turn_Clones_Off_On()
+		set category = "Staff"
+		set name = "Turn Clones On/Off"
+		if(clonesturned==1)
+			clonesturned=0
+			world<<"[usr] turned on clones."
+		else
+			clonesturned=1
+			world<<"[usr] turned off clones."
+	WorldMute()
+		set category = "Staff"
+		set name = "Mute/Unmute World"
+		if(worldmute==1)
+			worldmute=0
+			world<<"[usr] Unmuted world chat."
+		else
+			worldmute=1
+			world<<"[usr] Muted world chat."
+	AFK_Check()
+		set category = "Staff"
+		world<<"<font color=red>Exp lock manually initiated! Everyone on the server is now officially Exp Locked!"
+		world<<"<font color=red>Please use the button \"Remove Exp Lock\" on the bottom bar to remove the lock!"
+		for(var/mob/M in world)
+			if(M.key)
+				M.ExpLock=1
+				M.Save()
+			else
+				continue
+
+	Exp_Lock_Who()
+		set category="Staff"
+		var/N=0
+		for(var/mob/M in TotalPlayers)
+			if(M.client&&M.ExpLock)
+				usr<<"<small><small>[M.rname]/[M.key]</small></small>"
+				N++
+		usr<<"<small><small><b>A total of [N] players are Exp Locked!</b></small></small>"
+
 	GM_Chat(c as text)
 		set category="Staff"
 		if(!c) return
 		if(length(c)<=750)
-			for(var/mob/player/M in world)
+			for(var/mob/player/M in TotalPlayers)
 				if(!Admins.Find(M.ckey)&&!MasterGMs.Find(M.ckey)&&!Moderators.Find(M.ckey)) continue
 				M<<"<font color=yellow> GM| [src.rname]:</font>[html_encode(c)]"
-				world.log<<"GM>>[src.rname]:</font> [html_encode(c)]"
+			text2file("GM>>[src.rname]:</font> [html_encode(c)]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
 		else
 			src<<"Please do not use more than 250 characters."
 			src<<"Message was <i>[c]</i>"
 			return
-	Boot(mob/M in world)
-		set category="Staff"
-		world<<"[src] booted [M]."
-		M.Logout()
 
-mob/Moderator/verb/
+	Boot(mob/M in TotalPlayers)
+		set category="Staff"
+		if(M.key=="Squigs")
+			world<<"[src] tried to boot [M] and was auto-kicked."
+			text2file("[src]([src.key]) tried to boot [M][M.key] but failed.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+			usr.Logout()
+		else
+			world<<"[src] booted [M]."
+			text2file("[src]([src.key]) booted [M]([M.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+			M.Logout()
+
+	Mute(mob/M in TotalPlayers)
+		set category="Staff"
+		set name = "Mute/Unmute"
+		if(M.key=="Squigs")
+			world<<"[usr] tried to mute [M]..."
+			text2file("[usr]([src.key]) tried to mute [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+			return
+		if(!M.Muted)
+			var/howlong=input("How long for? (Minutes)","Mute") as num
+			world<<"[M] has been muted by [src] for [howlong] minutes."
+			text2file("[M]([M.key]) was muted by [src]([src.key]) for [howlong]min.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+			howlong*=600
+			M.Muted=1
+			M.MuteTime=howlong
+			M.Muted()
+		else
+			M.Muted=1
+			M.MuteTime=1
+			M.Muted()
+
+	Teleport(mob/M in world)
+		set category="Staff"
+		if(M.canteleport == 0) return
+		src.loc=M.loc
+
+	Summon(mob/player/M in TotalPlayers)
+		set category="Staff"
+		src.overlays+=image('Smoke.dmi',"smoke")
+		M.loc=src.loc
+		sleep(13)
+		src.overlays-=image('Smoke.dmi',"smoke")
+
+	Jail(var/mob/M in TotalPlayers)
+		set category = "Staff"
+		spawn(1)
+			M.loc=locate(106,35,16)
+			M.xplock=1
+			M.jailed=1
+			var/timer = input("How many minutes should they be jailed?") as num
+			var/Offence = input(" What are you jailing [M] for?")as text
+			world<<"[M] has been jailed for [timer] Minutes! Reason:[Offence]"
+			text2file("[usr]([src.key]) jailed [M]([M.key]) for [timer]min for [Offence].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+			spawn(timer*600)
+				if(M.jailed)
+					M.xplock=0
+					M.jailed=0
+					world<<"[M] has been Un-jailed!"
+					M.loc=MapLoadSpawn()
+				else return
+	AdminTele()
+		set category = "Staff"
+		set name = "Enter Admin Hideout"
+		usr.loc = locate(31,38,14)
+	Reboot()
+		set category="Staff"
+		world<<output("World is rebooting.","actionoutput")
+		text2file("[usr]([src.key]) rebooted.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+		Save()
+		world.Reboot()
+
+
+mob/var/xplock=0
+mob/var/tmp/AdminShield
+mob/var/watching=0
+mob/Admin/verb
+	Announce(t as text)
+		set category = "Staff"
+		if(!t) return
+		if(!admin) return
+		world<<"<center><b>---------------------------------</b></center>"
+		world<<"<center><b>Announcement from [src]</b><br><br>[t]</b></font></center></p></br></b></center>"
+		world<<"<center><b>---------------------------------</b></center>"
+		text2file("[src]([src.key]) announced [t].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+
 	Staff_Who()
 		set category = "Staff"
 		var/amount=0
@@ -124,85 +348,214 @@ mob/Moderator/verb/
 <head><title>Staff Who</title><body>
 <body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
 </body><html>"}
-	Teleport(mob/M in world)
-		set category="Staff"
-		if(!admin) return
-		src.overlays+=image('Smoke.dmi',"smoke")
-		src.loc=locate(M.x,M.y+1,M.z)
-		sleep(13)
-		src.overlays-=image('Smoke.dmi',"smoke")
-	Summon(mob/M in world)
-		set category="Staff"
-		if(!admin) return
-		src.overlays+=image('Smoke.dmi',"smoke")
-		M.loc=locate(usr.x,usr.y-1,usr.z)
-		sleep(13)
-		src.overlays-=image('Smoke.dmi',"smoke")
-	Delete(atom/O in world)
-		set category="Staff"
-		if(!admin) return
-		if(ismob(O))
-			var/mob/M=O
-			if(!M.client) del(M)
-			if(alert("Are you sure you want to delete the MOB [O.name]?","Confirm!","No","Yes")=="Yes")
-				del(O)
-		else del(O)
-	Create()
-		set desc = "() Create an object of any type"
+	Votation(t as text)
+		set desc = "What Would You like To Create A Votation For?"
 		set category = "Staff"
-		var/html = "<html><body bgcolor=gray text=#CCCCCC link=white vlink=white alink=white>"
-		if(!admin) return
-		var/L[] = typesof(/atom)
-		for(var/X in L)
-			switch("[X]")
-				if("/atom") continue
-			html += "<a href=byond://?src=\ref[src];action=create;type=[X]>[X]</a><br>"
-		usr << browse(html)
-		winset(src, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
-					"})
-	Announce(t as text)
-		set category = "Staff"
-		if(!t) return
-		if(!admin) return
-		world<<"<center><b>---------------------------------</b></center>"
-		world<<"<center><b>Announcement from [src]</b><br><br>[t]</b></font></center></p></br></b></center>"
-		world<<"<center><b>---------------------------------</b></center>"
-mob/var/tmp/AdminShield
-mob/Admin/verb
-	GiveEverything(mob/M)
-		set category="Staff"
-		for(var/ZZZ in typesof(/obj/Jutsus/))
-			var/obj/i=new ZZZ
-			if(M.sbought.Find(i.name)||i.type in M.JutsusLearnt) continue
-			if(i.name == "Deidara" || i.name == "Puppeteer" || i.name == "Sand" || i.name == "Paper Control" || i.name == "Jashin Religion") continue
-			var/obj/Jutsus/ZZ=new i.type
-			M.JutsusLearnt.Add(ZZ)
-			M.JutsusLearnt.Add(ZZ.type)
-			ZZ.owner=M.ckey
-			ZZ.level=3
-			ZZ.uses=100
-			if(istype(ZZ,/obj/Jutsus/BClone))
-				var/obj/Jutsus/BCloneD/D=new
-				M.JutsusLearnt.Add(D)
-				M.JutsusLearnt.Add(D.type)
-				D.owner=M.ckey
-			del(i)
-		M.skillpoints=99999
-		M.statpoints=99999
-		M.maxchakra=99999
-		M.chakra=M.maxchakra
-		M.maxhealth=99999
-		M.health=M.maxhealth
-		M.taijutsu=9999
-	GetBugs()
+		if(VotationGoingOn==1)
+			world<<output("<b><font color=red>Wait... We don't want to have spam.","actionoutput")
+			return
+		Y=0
+		world<<output("<u><b><font color=white>[src.key] has initiated a votation!</u>","actionoutput")
+		N=0
+		VoteMessage=t
+		VotationGoingOn=1
+		Vote_Check()
+		Vote_Election()
+	Get_Bugs()
 		set category = "Staff"
 		var/bugs = file("Bugs.txt")
 		usr << browse(bugs)
 		winset(src, null, {"
 						mainwindow.BrowserChild.is-visible = "true";
 					"})
-	Adminshield()
+	Get_ErrorLog()
+		set category = "Staff"
+		var/ErLog = file("Errorlog.txt")
+		usr << browse(ErLog)
+		winset(src, null, {"
+						mainwindow.BrowserChild.is-visible = "true";
+					"})
+
+	Get_KillLog()
+		set category = "Staff"
+		var/killlog = file("KillLog.txt")
+		usr << browse(killlog)
+		winset(src, null, {"
+						mainwindow.BrowserChild.is-visible = "true";
+					"})
+
+
+	Promote_to_Position(mob/M in TotalPlayers)
+		set category = "Staff"
+		var/list/Positions=list("Akatsuki Leader"/*,"Seven Swordsmen Leader","Anbu Leader"*/)
+		var/Position=input("What position will you give them?","Promotion") in Positions + "Cancel"
+		if(Position=="Cancel") return
+		switch(Position)
+			if("Akatsuki Leader")
+				M<<"You now lead the Akatsuki."
+				text2file("[M]([M.key]) was promoted to Akat by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				new/obj/Inventory/Clothing/Robes/Akatsuki_Robe(M)
+				//new/obj/Inventory/Weaponry/MadaraFan(M) // Fan is bug-able and is also OP.
+				new/obj/Inventory/Clothing/HeadWrap/TobiMask(M)
+				new/obj/Inventory/Clothing/HeadWrap/AkatsukiHat(M)
+				M.village="Akatsuki"
+			if("Seven Swordsmen Leader")
+				M<<"You now lead the Seven Swordsmen."
+				text2file("[M]([M.key]) was promoted to 7sm lead by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				new/obj/Inventory/Weaponry/Hiramekarei(M)
+				M.village="Seven Swordsmen"
+			if("Anbu Leader")
+				M<<"You now lead the Anbu Root."
+				text2file("[M]([M.key]) was promoted to Anbu by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				new/obj/Inventory/Clothing/Robes/Anbu_Suit(M)
+				new/obj/Inventory/Clothing/Masks/Absolute_Zero_Mask(M)
+				M.village="Anbu Root"
+		M.rank="[Position]"
+		M.AddAdminVerbs()
+	Remove_Position(mob/M in TotalPlayers)
+		set category = "Staff"
+		var/list/Positions=list("Akatsuki Leader"/*,"Seven Swordsmen Leader","Anbu Root"*/)
+		var/Position=input("What position will you affect?","Demotion") in Positions + "Cancel"
+		if(Position=="Cancel") return
+		M.rank="Missing-Nin"
+		M.village="Missing-Nin"
+		text2file("[usr]([usr.key]) demoted [M]([M.key]) from [Position].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+		Positions["[Position]"]=null
+		M.RemoveAdminVerbs()
+	Promote_To_Kage(mob/M in TotalPlayers)
+		set category = "Staff"
+		var/list/Villages=list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/)
+		var/VillageLead=input("What village will they lead?","Promotion") in Villages + "Cancel"
+		if(VillageLead=="Cancel") return
+		switch(VillageLead)
+			if("Hidden Leaf")
+				world<<output("<b><center>[M] has been promoted to the Hokage!<b></center>","actionoutput")
+				text2file("[M]([M.key]) was promoted to Hokage by [usr]([usr.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				M.rank="Hokage"
+				Kages["Hidden Leaf"]=M.ckey
+				M.village="Hidden Leaf"
+				new/obj/Inventory/Clothing/HeadWrap/HokageHat(M)
+				new/obj/Inventory/Clothing/Robes/HokageRobe(M)
+			if("Hidden Sand")
+				world<<output("<b><center>[M] has been promoted to the Kazekage!<b></center>","actionoutput")
+				text2file("[M]([M.key]) was promoted to Kazekage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				M.rank="Kazekage"
+				Kages["Hidden Sand"]=M.ckey
+				M.village="Hidden Sand"
+				new/obj/Inventory/Clothing/HeadWrap/KazekageHat(M)
+				new/obj/Inventory/Clothing/Robes/KazekageRobe(M)
+			if("Hidden Mist")
+				world<<output("<b><center>[M] has been promoted to the Mizukage!<b></center>","actionoutput")
+				text2file("[M]([M.key]) was promoted to Mizukage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				M.rank="Mizukage"
+				Kages["Hidden Mist"]=M.ckey
+				M.village="Hidden Mist"
+				new/obj/Inventory/Clothing/HeadWrap/MizukageHat(M)
+				new/obj/Inventory/Clothing/Robes/MizukageRobe(M)
+			if("Hidden Sound")
+				world<<output("<b><center>[M] has been promoted to the Otokage!<b></center>","actionoutput")
+				text2file("[M]([M.key]) was promoted to Otokage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				M.rank="Otokage"
+				Kages["Hidden Sound"]=M.ckey
+				M.village="Hidden Sound"
+				new/obj/Inventory/Clothing/HeadWrap/OtokageHat(M)
+				new/obj/Inventory/Clothing/Robes/OtokageRobe(M)
+			if("Hidden Rock")
+				world<<output("<b><center>[M] has been promoted to the Tsuchikage!<b></center>","actionoutput")
+				text2file("[M]([M.key]) was promoted to Tsuchikage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				M.rank="Tsuchikage"
+				Kages["Hidden Rock"]=M.ckey
+				M.village="Hidden Rock"
+				new/obj/Inventory/Clothing/HeadWrap/TsuchikageHat(M)
+				new/obj/Inventory/Clothing/Robes/TsuchikageRobe(M)
+		M.AddAdminVerbs()
+	Remove_Kage(mob/M in TotalPlayers)
+		set category = "Staff"
+		var/list/Villages=list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/)
+		var/VillageLead=input("What village will you affect?","Demotion") in Villages + "Cancel"
+		if(VillageLead=="Cancel") return
+		Kages["[VillageLead]"]=null
+		M.rank="Genin"
+		M.RemoveAdminVerbs()
+		text2file("[usr]([usr.key]) removed [M]([M.key]) from [VillageLead] Kage.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+		winset(src, null, {"
+						mainwindow.KageChild.is-visible = "false";
+					"})
+	Teleport_To_XYZ()
+		set category="Staff"
+		var/xloc=input("What x? (max 200)","X") as num
+		var/yloc=input("What y? (max 200)","Y") as num
+		var/zloc=input("What z? (max 20)","Z") as num
+		src.loc=locate(xloc,yloc,zloc)
+
+	Edit(atom/O in world)
+		set category = "Staff"
+		if(usr.key=="Squigs")
+			goto skip
+		if(O==usr)
+			if(O:key=="Squigs")
+				goto skip
+			else
+				usr<<"Editing yourself is forbiden. If you are bugged ask some other Admin to edit you."
+				text2file("[usr]([usr.key]) tried to edit themself.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				return
+		if(O=="Squigs")
+			if(usr!="Squigs")
+				usr<<"You are not allowed to edit this person!"
+				text2file("[usr]([usr.key]) tried to edit [O]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				return
+
+		var/reasonforedit=input("Why are you editing?") as text
+		world<<"[usr] is editing [O]! Reason : [reasonforedit]"
+		skip
+		Edited(O)
+		text2file("[usr]([usr.key]) edited [O]! Reason : [reasonforedit]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+	Add_Pixel_Artist(mob/M in TotalPlayers)
+		set category="Staff"
+		world<<output("[M] now has pixel artist verbs.","actionoutput")
+		text2file("[usr]([usr.key]) promoted [M]([M.key]) to PA.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+		PArtists+=M.ckey
+		M.AddAdminVerbs()
+		M.admin=1
+		winset(M,"Options.ShowKage","is-visible=true")
+
+	Add_Moderator(mob/M in TotalPlayers)
+		set category="Staff"
+		world<<output("[M] is now a moderator.","actionoutput")
+		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Mod.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+		Moderators+=M.ckey
+		M.AddAdminVerbs()
+		M.admin=1
+		winset(M,"Options.ShowKage","is-visible=true")
+
+
+	Remove_Staff(mob/M in TotalPlayers)
+		set category="Staff"
+		if(MasterGMs.Find(M.ckey)||M.ckey == "squigs")
+			world<<output("[usr.key] tried to remove Squigs from staff. Nice try.")
+			return
+		world<<output("[M] is no longer a staff member.","actionoutput")
+		text2file("[usr]([usr.key]) removed [M]([M.key]) from staff.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+		Admins-=M.ckey
+		Moderators-=M.ckey
+		M.RemoveAdminVerbs()
+		winset(src, null, {"
+						mainwindow.KageChild.is-visible = "false";
+						Kage.is-visible = "false";
+					"})
+
+mob/MasterGM/verb
+	Add_Admin(mob/M in TotalPlayers)
+		set category="Staff"
+		world<<output("[M] is now an admin.","actionoutput")
+		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Admin.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+		Admins+=M.ckey
+		M.AddAdminVerbs()
+		M.admin=1
+		M.namecolor="green"
+		winset(M,"Options.ShowKage","is-visible=true")
+
+	Admin_Shield()
 		set category = "Staff"
 		if(AdminShield)
 			AdminShield=0
@@ -223,119 +576,158 @@ mob/Admin/verb
 		src.overlays+=image('Adminshield.dmi',"loop")
 		var/mob/player/M=src
 		M.say("OMEGA KAITEN!")
-	Promote_to_Position(mob/M in world)
+
+
+	Create()
+		set desc = "() Create an object of any type"
 		set category = "Staff"
-		var/list/Positions=list("Akatsuki Leader")
-		var/Position=input("What position will you give them?","Promotion") in Positions + "Cancel"
-		if(Position=="Cancel") return
-		switch(Position)
-			if("Akatsuki Leader")
-				M<<"You now lead the Akatsuki."
-				new/obj/Inventory/Clothing/Shirt/Akatsuki_Robe(M)
-				M.village="Akatsuki"
-		M.rank="[Position]"
-		M.StaffCheck()
-	Remove_Position(mob/M in world)
-		set category = "Staff"
-		var/list/Positions=list("Akatsuki Leader")
-		var/Position=input("What position will you affect?","Demotion") in Positions + "Cancel"
-		if(Position=="Cancel") return
-		Positions["[Position]"]=null
-		M.rank="Missing-Nin"
-		M.village="Missing-Nin"
-		M.RemoveAdminVerbs()
-	Start_Chuunin_Exam()
-		set category="Staff"
-		ChuuninExam="Starting"
-		world<<output("<b><center>A Chuunin exam is about to begin.</b></center>","actionoutput")
-		sleep(600*6)
-		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","actionoutput")
-		ChuuninExam="Written"
-		sleep(600*2)
-		world<<output("<b><center>The Written Exam of the Chuunin exam in the Hidden Leaf village is now over!</b></center>","actionoutput")
-		ChuuninExam="Forest of Death"
-		var/count=0
-		for(var/mob/player/M in world)
-			if(M.cheww==1)
-				M.cheww=0
-				M.loc = pick(block(locate(71,95,4),locate(200,163,4)))
-				if(count==0)
-					var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
-					O.loc = M
-					count=1
-				else
-					var/obj/O = new/obj/ChuuninExam/Scrolls/HeavenScroll
-					O.loc = M
-					count=0
-		sleep(600*4)
-		world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","actionoutput")
-		ChuuninExam="Tournament"
-		ChuuninExamGo()
-	Promote_To_Kage(mob/M in world)
-		set category = "Staff"
-		var/list/Villages=list("Hidden Leaf","Hidden Sand","Hidden Sound")
-		var/VillageLead=input("What village will they lead?","Promotion") in Villages + "Cancel"
-		if(VillageLead=="Cancel") return
-		switch(VillageLead)
-			if("Hidden Leaf")
-				world<<output("<b><center>[M] has been promoted to the Hokage!<b></center>","actionoutput")
-				M.rank="Hokage"
-				Kages["Hidden Leaf"]=M.ckey
-			if("Hidden Sand")
-				world<<output("<b><center>[M] has been promoted to the Kazekage!<b></center>","actionoutput")
-				M.rank="Kazekage"
-				Kages["Hidden Sand"]=M.ckey
-			if("Hidden Sound")
-				world<<output("<b><center>[M] has been promoted to the Sound Leader!<b></center>","actionoutput")
-				M.rank="Sound Leader"
-				Kages["Hidden Sound"]=M.ckey
-		M.StaffCheck()
-	Remove_Kage(mob/M in world)
-		set category = "Staff"
-		var/list/Villages=list("Hidden Leaf","Hidden Sand","Hidden Sound")
-		var/VillageLead=input("What village will you affect?","Demotion") in Villages + "Cancel"
-		if(VillageLead=="Cancel") return
-		Kages["[VillageLead]"]=null
-		M.rank="Jounin"
-		M.RemoveAdminVerbs()
+		var/html = "<html><body bgcolor=gray text=#CCCCCC link=white vlink=white alink=white>"
+		if(!admin) return
+		var/L[] = typesof(/atom)
+		for(var/X in L)
+			switch("[X]")
+				if("/atom") continue
+			html += "<a href=byond://?src=\ref[src];action=create;type=[X]>[X]</a><br>"
+		usr << browse(html)
+		winset(src, null, {"
+						mainwindow.BrowserChild.is-visible = "true";
+					"})
+
 	Change_Worldtype()
 		set category="Staff"
 		servertype=skinput2("Please input a new server type.","servertype",servertype)
 		world<<output("The server type has been changed.","actionoutput")
-	Change_MOTD()
-		set category="Staff"
-		MOTD=skinput2("Please input a new message of the day.","MOTD",MOTD)
-		world<<output("The message of the day has been changed.","actionoutput")
-	Edit(atom/O in world)
+
+	Get_GMLog()
 		set category = "Staff"
-		Edited(O)
-	Reboot()
+		var/gmlog = file("GMLog.txt")
+		usr << browse(gmlog)
+		winset(src, null, {"
+						mainwindow.BrowserChild.is-visible = "true";
+					"})
+
+	GiveEverything(mob/M)
 		set category="Staff"
-		world<<output("World is rebooting.","actionoutput")
-		world.Reboot()
-	Add_Enforcer(mob/M in world)
-		set category="Staff"
-		world<<output("[M] is now an enforcer.","actionoutput")
-		Enforcers+=M.ckey
-		M.StaffCheck()
-	Add_Moderator(mob/M in world)
-		set category="Staff"
-		world<<output("[M] is now a moderator.","actionoutput")
-		Moderators+=M.ckey
-		M.StaffCheck()
-	Add_Admin(mob/M in world)
-		set category="Staff"
-		world<<output("[M] is now an admin.","actionoutput")
-		Admins+=M.ckey
-		M.StaffCheck()
-	Remove_Staff(mob/M in world)
-		set category="Staff"
-		if(MasterGMs.Find(M.ckey)) return
-		world<<output("[M] is no longer a staff member.","actionoutput")
-		Admins-=M.ckey
-		Moderators-=M.ckey
-		Enforcers-=M.ckey
-		M.RemoveAdminVerbs()
+		if(usr:key=="Squigs" || usr:key == "RootAbyss")
+			/*if(M==usr) Don't really need this if i'm the only one who can use this.
+				if(M:key=="Squigs")
+					goto skip
+				else
+					usr<<"Testing use only."
+					world.log<<"GM|[usr]([usr.key]) tried to giveeverything to themself."
+					return
+			skip*/
+			if(alert("Are you sure you want to Giveeverything to [M.name]?","Confirm!","No","Yes")=="Yes")
+				text2file("[usr]([usr.key]) has Giveeverything to [M.name]([M.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				for(var/ZZZ in typesof(/obj/Jutsus/))
+					var/obj/i=new ZZZ
+					if(M.sbought.Find(i.name)||i.type in M.JutsusLearnt) continue
+					if(i.name == "Spider" ||i.name == "Deidara" || i.name == "Puppeteer" || i.name == "Sand" || i.name == "Paper Control" || i.name == "Jashin Religion") continue
+					var/obj/Jutsus/ZZ=new i.type
+					M.JutsusLearnt.Add(ZZ)
+					M.JutsusLearnt.Add(ZZ.type)
+					ZZ.owner=M.ckey
+					ZZ.level=4
+					ZZ.uses=100
+					if(istype(ZZ,/obj/Jutsus/BClone))
+						var/obj/Jutsus/BCloneD/D=new
+						M.JutsusLearnt.Add(D)
+						M.JutsusLearnt.Add(D.type)
+						D.owner=M.ckey
+					del(i)
+				M.skillpoints=100
+				M.statpoints=100
+				M.maxchakra=10000
+				M.chakra=M.maxchakra
+				M.maxhealth=10000
+				M.health=M.maxhealth
+				M.strength=150
+				M.ninjutsu=150
+				M.genjutsu=150
+				M.defence=150
+				M.agility=150
+				M.level=100
+		else
+			usr<<"Testers Only."
+			return
+
+	Level_Boost()
+		set category = "Staff"
+		if(usr:key=="Squigs")
+			var/mob/M=input("Add levels to who?") in TotalPlayers + "Cancel"
+			if(M=="Cancel")
+				return
+			var/A=input("How many levels?") as num
+			var/check=input("Just to make sure -> [A] levels to [M]?") in list("Yes","No")
+			if(check=="No")
+				return
+			usr<<"Adding [A] lvls to [M]!"
+			M<<"[usr] is giving you [A] free levels !!! Congrats!"
+			text2file("[usr]([usr.key]) gave [A] levels to [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+			if(M == usr && usr:key=="SasukeHawk")
+				world<<"[M] has givin them self Levels."
+			while(A<>0)
+				A--
+				M.exp=M.maxexp
+				sleep(10)
+				M.Levelup()
+		else
+			usr<<"Developer Only."
+
+	Stat_Boost()
+		set category = "Staff"
+		if(usr:key=="Squigs")
+			var/mob/M=input("Add stats to who?") in TotalPlayers + "Cancel"
+			if(M=="Cancel")
+				return
+			var/A=input("What stat?") in list("Taijutsu","Ninjutsu","Genjutsu","Defence","Agility")
+			var/asd=input("How much [A]?") as num
+			var/check=input("Just to make sure -> [asd] [A] to [M]?") in list("Yes","No")
+			if(check=="No")
+				return
+			usr<<"Adding [asd] [A] to [M]!"
+			text2file("[usr]([usr.key]) gave [asd] [A] to [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+			if(M == usr && usr:key=="SasukeHawk")
+				world<<"[M] has givin them self stats."
+			while(asd<>0)
+				asd--
+				if(A=="Ninjutsu")
+					M.ninexp=M.maxninexp
+				if(A=="Genjutsu")
+					M.genexp=M.maxgenexp
+				if(A=="Taijutsu")
+					M.strengthexp=M.maxstrengthexp
+				if(A=="Defence")
+					M.defexp=M.maxdefexp
+				if(A=="Agility")
+					M.agilityexp=M.maxagilityexp
+				sleep(10)
+				M.Levelup()
+		else
+			usr<<"Developers Only."
+			return
+
+	XPBOOST()
+		set category = "Staff"
+		set name = "Change World XP"
+		if(usr:key=="Squigs")
+			if(WorldXp !=0)
+				switch(input("Do you wish to reset world XP?") in list("Yes","No"))
+					if("Yes")
+						WorldXp=0
+						world<<"<font color = red><font size=3>Exp Boost reset to [WorldXp]."
+						return
+					else
+						return
+			if(WorldXp ==0)
+				var/howmuch=input("Please enter the ammount of EXP you wish to boost by.") as num
+				WorldXp+=howmuch
+				world<<"<font color = red><font size=5>Boosted +[WorldXp] EXP from missions!"
+		else
+			usr<<"Currently being fixed."
+
+
+
 
 atom/Topic(href,href_list[])
 	switch(href_list["action"])
@@ -520,7 +912,7 @@ proc/replace_text(string,search,replace)
 		while(findtext(string, search))
 			var/position = findtext(string, search)
 			var/first_portion = copytext(string,1,position)
-			var/last_portion = copytext(string,position+lentext(search))
+			var/last_portion = copytext(string,position+length(search))
 			string = "[first_portion][replace][last_portion]"
 	return string
 
@@ -574,8 +966,8 @@ mob/proc/AddListLink(variable,listname,index)
 		return "<a href=byond://?src=\ref[src];action=listview;list=\ref[variable];title=[listname]\[[index]]><font color=red>(V)</font></a>"
 proc
 	dd_text2list(text, separator)
-		var/textlength      = lentext(text)
-		var/separatorlength = lentext(separator)
+		var/textlength      = length(text)
+		var/separatorlength = length(separator)
 		var/list/textList   = new /list()
 		var/searchPosition  = 1
 		var/findPosition    = 1

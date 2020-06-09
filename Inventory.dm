@@ -9,7 +9,7 @@ proc
 mob
 	var
 		items=0
-		maxitems=20
+		maxitems=25
 		equipped
 mob/proc
 	itemDrop(obj/o)
@@ -183,6 +183,7 @@ obj
 		Weaponry
 			canStack=1
 			Shuriken
+				name="Shuriken"
 				icon='Shuriken.dmi'
 				icon_state="shuriS"
 				mouse_drag_pointer = "shuriS"
@@ -194,7 +195,7 @@ obj
 				Click()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="Shurikens"
-					usr<<sound('083.ogg',0,0)
+					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="shuriken"
 						var/icon/I = new(src.icon, src.icon_state)
@@ -207,6 +208,7 @@ obj
 					//for(var/obj/Inventory/Weaponry/Shuriken/C)
 						//C.suffix="Throwing Weapon"
 			Needle
+				name = "Throwing Needle"
 				icon='Shuriken.dmi'
 				icon_state="needleS"
 				mouse_drag_pointer = "needleS"
@@ -218,7 +220,7 @@ obj
 				Click()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="Needles"
-					usr<<sound('083.ogg',0,0)
+					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="needle"
 						var/icon/I = new(src.icon, src.icon_state)
@@ -231,6 +233,7 @@ obj
 					//for(var/obj/Inventory/Weaponry/Needle/C)
 					//	C.suffix="Throwing Weapon"
 			Kunai
+				name = "Kunai"
 				icon='Shuriken.dmi'
 				icon_state="kunaiS"
 				mouse_drag_pointer = "kunaiS"
@@ -242,7 +245,7 @@ obj
 				Click()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="Kunais"
-					usr<<sound('083.ogg',0,0)
+					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="kunai"
 						var/icon/I = new(src.icon, src.icon_state)
@@ -255,6 +258,7 @@ obj
 					//for(var/obj/Inventory/Weaponry/Kunai/C)
 					//	C.suffix="Throwing Weapon"
 			Exploding_Kunai
+				name = "Exploding Kunai"
 				icon='Shuriken.dmi'
 				icon_state="kunaist"
 				mouse_drag_pointer = "kunaist"
@@ -264,7 +268,7 @@ obj
 				Click()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="ExplodeKunais"
-					usr<<sound('083.ogg',0,0)
+					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="expl kunai"
 						var/icon/I = new(src.icon, src.icon_state)
@@ -277,6 +281,7 @@ obj
 					//for(var/obj/Inventory/Weaponry/Exploding_Kunai/C)
 					//	C.suffix="Throwing Weapon"
 			Explosive_Tag
+				name ="Explosive Tag"
 				icon='Shuriken.dmi'
 				icon_state="tag"
 				mouse_drag_pointer = "tag"
@@ -288,7 +293,7 @@ obj
 				Click()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="ExplosiveTags"
-					usr<<sound('083.ogg',0,0)
+					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="tag"
 						var/icon/I = new(src.icon, src.icon_state)
@@ -300,19 +305,34 @@ obj
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Explosive_Tag/C)
 					//	C.suffix="Equipped Weapon"
+			/*
 			Stamina_Pill
 				icon='Shuriken.dmi'
 				icon_state="spill"
 				mouse_drag_pointer = "spill"
 				density=0
 				maxhold="x5"
-				Cost=15
+				Cost=15000
+				var/lol=0
 				Click()
 					if(!usr.contents.Find(src)) return
+					if(lol==1)
+						usr.health-=round(usr.maxhealth/2)
+						usr.equipped=null
+						lol=0
+						del(src)
+						return
 					usr.equipped="StaminaPill"
-					usr<<sound('083.ogg',0,0)
+					usr<<sound('083.wav',0,0)
+					usr.health+=round(usr.maxhealth/6)
+					lol=1
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="Blood Pill"
+					spawn(300)
+						usr.health-=round(usr.maxhealth/4)
+						for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
+							H.icon_state=null
+						del(src)
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Stamina_Pill/C)
@@ -323,29 +343,45 @@ obj
 				mouse_drag_pointer = "cpill"
 				density=0
 				maxhold="x5"
-				Cost=15
+				Cost=15000
+				var/lol=0
 				Click()
 					if(!usr.contents.Find(src)) return
+					if(lol==1)
+						usr.health-=round(usr.maxchakra/2)
+						usr.equipped=null
+						lol=0
+						del(src)
+						return
 					usr.equipped="ChakraPill"
-					usr<<sound('083.ogg',0,0)
+					usr<<sound('083.wav',0,0)
+					usr.chakra+=round(usr.maxchakra/6)
+					lol=1
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="Chakra Pill"
+					spawn(300)
+						usr.health-=round(usr.maxchakra/4)
+						for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
+							H.icon_state=null
+						del(src)
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Stamina_Pill/C)
 					//	C.suffix="Equipped Pill"
+				*/
 			Smoke_Bomb
+				name = "Smoke Bomb"
 				icon='Shuriken.dmi'
 				icon_state="sbomb"
 				mouse_drag_pointer = "sbomb"
 				density=0
 				maxhold="x5"
-				Description="A darkened sphere, containing large condensed amounts of gas. It is wired to a pressure activation system, and could be useful to make a quick escape if thrown. It seems to be worth about 5 Ryou."
+				Description="A darkened sphere, containing large condensed amounts of gas. It is wired to a pressure activation system, and could be useful to make a quick escape if thrown. It seems to be worth about 5 Ryo."
 				Cost=5
 				Click()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="SmokeBombs"
-					usr<<sound('083.ogg',0,0)
+					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="smoke bomb"
 					var/icon/I = new(src.icon, src.icon_state)
 					var/iconfile = fcopy_rsc(I)
@@ -356,3 +392,207 @@ obj
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Stamina_Pill/C)
 					//	C.suffix="Equipped Pill"
+			MadaraFan
+				Description="THIS ITEM WILL BE SOON CHANGED  -Vik"
+				icon='MadaraFan.dmi'
+				Click()
+					if(!usr.contents.Find(src)) return
+					usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>[Description]","ItemInfo")
+					if(usr.usedwepboost==0)
+						usr.equipped="MadaraFan"
+						usr.usedwepboost=1
+						usr.agility+=60
+						usr.strength+=30
+						usr.overlays+='MadaraFan.dmi'
+						if(usr.agility<120)
+							usr.attkspeed--
+						else
+							return
+					else
+						usr.equipped=null
+						usr.usedwepboost=0
+						usr.agility-=60
+						usr.strength-=30
+						usr.overlays-='MadaraFan.dmi'
+						if(usr.agility<120)
+							usr.attkspeed++
+						else
+							return//obj/Inventory/Weaponry/Katana
+
+
+			DarkSword
+				icon='DarkSword.dmi'
+				icon_state="standing"
+				mouse_drag_pointer = "standing"
+				density=0
+				maxhold="x5"
+				Description="Dark Sword. A legendary sword of the Dark Shinobi."
+				Cost=5000
+				Click()
+					if(!usr.contents.Find(src)) return
+					if(usr.usedwep2==0)
+						usr.equipped="Dark Sword"
+						usr.usedwep2=1
+						usr.overlays+='DarkSword.dmi'
+					else
+						usr.equipped=null
+						usr.usedwep2=0
+						usr.overlays-='DarkSword.dmi'
+			Samehada
+				name ="Samehada"
+				icon='7SM Samehada.dmi'
+				icon_state=""
+				mouse_drag_pointer = ""
+				density=0
+				Description="Samehada. A legendary sword of the Seven Swordsmen"
+				Cost=5000
+				Click()
+					if(!usr.contents.Find(src)) return
+					if(usr.usedwep1==0)
+						usr.equipped="Samehada"
+						usr.usedwep1=1
+						usr.overlays+='7SM Samehada.dmi'
+					else
+						usr.equipped=null
+						usr.usedwep1=0
+						usr.overlays-='7SM Samehada.dmi'
+
+			Zabuza_Sword
+				name ="Kubikiribocho"
+				icon='Zabuzas Blade.dmi'
+				icon_state=""
+				mouse_drag_pointer = ""
+				density=0
+				maxhold="x5"
+				Description="Kubukiribocho. A legendary sword of the Seven Swordsmen."
+				Cost=5000
+				Click()
+					if(!usr.contents.Find(src)) return
+					if(usr.usedwep2==0)
+						usr.equipped="Kubikiribocho"
+						usr.usedwep2=1
+						usr.overlays+='Zabuzas Blade.dmi'
+					else
+						usr.equipped=null
+						usr.usedwep2=0
+						usr.overlays-='Zabuzas Blade.dmi'
+			Hiramekarei
+				name ="Hiramekarei"
+				icon='7SM Hiramekarei.dmi'
+				icon_state=""
+				mouse_drag_pointer = ""
+				density=0
+				Description="Hiramekarei. A legendary sword of the Seven Swordsmen"
+				Cost=5000
+				Click()
+					if(!usr.contents.Find(src)) return
+					if(usr.usedwep1==0)
+						usr.equipped="Hiramekarei"
+						usr.usedwep1=1
+						usr.overlays+='7SM Hiramekarei.dmi'
+					else
+						usr.equipped=null
+						usr.usedwep1=0
+						usr.overlays-='7SM Hiramekarei.dmi'
+			Kabutowari
+				name ="Kabuto Wari"
+				icon='7SM Kabutowari.dmi'
+				icon_state=""
+				mouse_drag_pointer = ""
+				density=0
+				maxhold="x5"
+				Description="Kabuto Wari. A legendary sword of the Seven Swordsmen."
+				Cost=5000
+				Click()
+					if(!usr.contents.Find(src)) return
+					if(usr.usedwep2==0)
+						usr.equipped="Kabuto Wari"
+						usr.usedwep2=1
+						usr.overlays+='7SM Kabutowari.dmi'
+					else
+						usr.equipped=null
+						usr.usedwep2=0
+						usr.overlays-='7SM Kabutowari.dmi'
+			Kiba
+				name ="Kiba"
+				icon='7SM Kiba.dmi'
+				icon_state=""
+				mouse_drag_pointer = ""
+				density=0
+				Description="Kiba. A legendary sword of the Seven Swordsmen"
+				Cost=5000
+				Click()
+					if(!usr.contents.Find(src)) return
+					if(usr.usedwep1==0)
+						usr.equipped="Kiba"
+						usr.usedwep1=1
+						usr.overlays+='7SM Kiba.dmi'
+					else
+						usr.equipped=null
+						usr.usedwep1=0
+						usr.overlays-='7SM Kiba.dmi'
+
+			Nuibari
+				name ="Nuibari"
+				icon='7SM Nuibari.dmi'
+				icon_state=""
+				mouse_drag_pointer = ""
+				density=0
+				maxhold="x5"
+				Description="Nuibari. A legendary sword of the Seven Swordsmen."
+				Cost=5000
+				Click()
+					if(!usr.contents.Find(src)) return
+					if(usr.usedwep2==0)
+						usr.equipped="Nuibari"
+						usr.usedwep2=1
+						usr.overlays+='7SM Nuibari.dmi'
+					else
+						usr.equipped=null
+						usr.usedwep2=0
+						usr.overlays-='7SM Nuibari.dmi'
+			Shibuki
+				name ="Shibuki"
+				icon='7SM Shibuki.dmi'
+				icon_state=""
+				mouse_drag_pointer = ""
+				density=0
+				Description="Shibuki. A legendary sword of the Seven Swordsmen"
+				Cost=5000
+				Click()
+					if(!usr.contents.Find(src)) return
+					if(usr.usedwep1==0)
+						usr.equipped="Shibuki"
+						usr.usedwep1=1
+						usr.overlays+='7SM Shibuki.dmi'
+					else
+						usr.equipped=null
+						usr.usedwep1=0
+						usr.overlays-='7SM Shibuki.dmi'
+			Weights
+				name ="Weights"
+				icon='Weights.dmi'
+				icon_state=""
+				mouse_drag_pointer = ""
+				density=0
+				Description="Weights. Training weights used to raise ones own Agi."
+				maxhold="x1"
+				Cost = 1000
+				Click()
+					if(!usr.contents.Find(src)) return
+					if(usr.usedwep1==0)
+						usr.equipped="Weights"
+						usr.usedwep1=1
+						usr.overlays+='Weights.dmi'
+					else
+						usr.equipped=null
+						usr.usedwep1=0
+						usr.overlays-='Weights.dmi'
+
+mob
+	var
+		usedwep1=0
+		usedwep2=0
+		usedwepboost=0
+		equiza=0
+		equisa=0

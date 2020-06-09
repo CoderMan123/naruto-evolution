@@ -56,28 +56,58 @@ proc/f_damage(atom/Target, Value, color)
 
 /*
 
+numWidth is the pixel width of individual digits in your icon file.
+
 */
 #ifndef F_damage_numWidth
 #define F_damage_numWidth 7
 #endif
 
 /*
+
+The icon to get damage digits from. Please follow the structure in
+the provided default.
+
 */
 #ifndef F_damage_icon
 #define F_damage_icon 'F_damageFade.dmi'
 #endif
 
+
+/*
+
+F_damage_no_scientific disables scientific representation.
+
+*/
+#ifdef F_damage_no_scientific
+#define F_Damage_sig_figures 65535
+#else
+#define F_Damage_sig_figures 6
+#endif
+
+/*
+
+Horizontal Alignment values
+
+F_damage offers three modes of horizontal alignment:
+
+F_Damage.LEFT_ALIGN
+F_Damage.CENTER_ALIGN
+F_Damage.RIGHT_ALIGN
+
+The alignment is an optional extra argument to F_damage().
+
+*/
+
+/*
+
+By default, we will log errors and warnings to world.log. This can be
+suppressed using F_damage_suppress_errors and F_damage_suppress_warnings
+respectively.
+
+*/
+#define F_damage_log_errors
 #define F_damage_log_warnings
-
-
-
-
-
-
-
-
-
-
 
 
 

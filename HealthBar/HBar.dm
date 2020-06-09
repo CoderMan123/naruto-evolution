@@ -18,7 +18,7 @@ obj/Screen/Bar
 	name=""
 	icon='Bar.dmi'
 	//icon_state="100"
-	layer=9999
+	layer=999
 	New(var/mob/M)
 		if(!ismob(M)) return
 		screen_loc = "2,[(M.YView-7)]"
@@ -27,8 +27,8 @@ obj/Screen/Bar
 obj/Screen/LeafSymbol
 	name=""
 	icon='Bar.dmi'
-	icon_state="leaf"
-	layer=99999
+	icon_state="Leaf"
+	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
 		screen_loc = "2,[(M.YView-7)]"
@@ -37,8 +37,68 @@ obj/Screen/LeafSymbol
 obj/Screen/SandSymbol
 	name=""
 	icon='Bar.dmi'
-	icon_state="sand"
-	layer=99999
+	icon_state="Sand"
+	layer=9999
+	New(var/mob/M)
+		if(!ismob(M)) return
+		screen_loc = "2,[(M.YView-7)]"
+		M.client.screen+=src
+		src.loc=locate(0,0,0)
+obj/Screen/MistSymbol
+	name=""
+	icon='Bar.dmi'
+	icon_state="Mist"
+	layer=9999
+	New(var/mob/M)
+		if(!ismob(M)) return
+		screen_loc = "2,[(M.YView-7)]"
+		M.client.screen+=src
+		src.loc=locate(0,0,0)
+obj/Screen/SoundSymbol
+	name=""
+	icon='Bar.dmi'
+	icon_state="Sound"
+	layer=9999
+	New(var/mob/M)
+		if(!ismob(M)) return
+		screen_loc = "2,[(M.YView-7)]"
+		M.client.screen+=src
+		src.loc=locate(0,0,0)
+obj/Screen/RockSymbol
+	name=""
+	icon='Bar.dmi'
+	icon_state="Rock"
+	layer=9999
+	New(var/mob/M)
+		if(!ismob(M)) return
+		screen_loc = "2,[(M.YView-7)]"
+		M.client.screen+=src
+		src.loc=locate(0,0,0)
+obj/Screen/AkatsukiSymbol
+	name=""
+	icon='Bar.dmi'
+	icon_state="Akatsuki"
+	layer=9999
+	New(var/mob/M)
+		if(!ismob(M)) return
+		screen_loc = "2,[(M.YView-7)]"
+		M.client.screen+=src
+		src.loc=locate(0,0,0)
+obj/Screen/AnbuSymbol
+	name=""
+	icon='Bar.dmi'
+	icon_state="Anbu Root"
+	layer=9999
+	New(var/mob/M)
+		if(!ismob(M)) return
+		screen_loc = "2,[(M.YView-7)]"
+		M.client.screen+=src
+		src.loc=locate(0,0,0)
+obj/Screen/SsmSymbol
+	name=""
+	icon='Bar.dmi'
+	icon_state="Seven Swordsmen"
+	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
 		screen_loc = "2,[(M.YView-7)]"
@@ -48,7 +108,7 @@ obj/Screen/WeaponSelect
 	name=""
 	icon='Bar.dmi'
 	icon_state="blank"
-	layer=99999
+	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
 		screen_loc = "2,[(M.YView-7)]"
@@ -96,11 +156,11 @@ mob
 						if(src.RestOverlays&&!rest) RestUp()
 						if((src.client.inactivity/10)>=120) continue
 						if(!src.key)del(src)
-						if(gates[1])
+						/*if(Gates) Why is this here?
 							var/colour = colour2html("red")
 							F_damage(src,src.health/20+1,colour)
 							health-=src.health/20+1
-							src.Death(src)
+							src.Death(src)*/
 						for(var/obj/Screen/H in src.client.screen)
 							if(istype(H, /obj/Screen/Health/)) H.icon_state="[round(src.health/src.maxhealth*100,10)]"
 							if(istype(H, /obj/Screen/Chakra/)) H.icon_state="[round(src.chakra/src.maxchakra*100,10)]"
@@ -111,11 +171,13 @@ mob
 				for(var/obj/Screen/O in src.hbar)
 					if(istype(O,/obj/Screen/healthbar))
 						src.overlays-=O
-						if(health>0) O.icon_state="[round(src.health/src.maxhealth*100,10)]"
+						if(health>0)
+							O.icon_state="[round(src.health/src.maxhealth*100,10)]"
 						src.overlays+=O
 					if(istype(O,/obj/Screen/manabar))
 						src.overlays-=O
-						if(chakra>0) O.icon_state="[round(src.chakra/src.maxchakra*100,10)]"
+						if(chakra>0)
+							O.icon_state="[round(src.chakra/src.maxchakra*100,10)]"
 						src.overlays+=O
 
 

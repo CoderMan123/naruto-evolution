@@ -32,26 +32,29 @@ mob/NPC
 			src.Name(name)
 			spawn() Stuff()
 			..()
-		icon='MaleBase.dmi'
+		icon='WhiteMBase.dmi'
 		pixel_x=-15
 		DblClick()
 			if(usr.dead) return
 			if(get_dist(src,usr)>2) return
-			var/obj/Hair=usr.CustomInput("Hair Options","Please choose a hair.",list("Long","Short","Tied Back","Bald","Bowl Cut"))
-			switch(Hair.name)
-				if("Long") usr.HairStyle='Long.dmi'
-				if("Short") usr.HairStyle='Short.dmi'
-				if("Tied Back") usr.HairStyle='Short2.dmi'
-				if("Bald") usr.HairStyle=null
-				if("Bowl Cut") usr.HairStyle='Short3.dmi'
+			usr.HairStyle = usr.CustomInput("Hair Options","Please choose a hair.",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","Mohawk","Neji Hair","Distance")).name
+
+			if(usr.HairStyle != "Bald")
+				var/list/Colors=usr.ColorInput("Please select a hair color.")
+				usr.HairColorRed=text2num(Colors[1])
+				usr.HairColorGreen=text2num(Colors[2])
+				usr.HairColorBlue=text2num(Colors[3])
+
+			/*
 			var/list/Colors=usr.ColorInput("Please select a hair color.")
 			usr.HairColorRed=text2num(Colors[1])
 			usr.HairColorGreen=text2num(Colors[2])
 			usr.HairColorBlue=text2num(Colors[3])
-			HairColorStyle=null
+			*/
+			usr.HairColorStyle=null
 			usr.RestoreOverlays()
 	Clothier
-		icon='MaleBase.dmi'
+		icon='WhiteMBase.dmi'
 		pixel_x=-15
 		density=0
 		NewStuff()
@@ -72,7 +75,7 @@ mob/NPC
 			usr.move=0
 			var/list/Options=list()
 			for(var/obj/Inventory/Clothing/C in world)
-				if(C.loc==locate(200,200,2)) Options["[C.name]-[C.Cost] Ryo"]=C
+				if(C.loc==locate(199,199,12)) Options["[C.name]-[C.Cost] Ryo"]=C
 			var/obj/Choice = usr.CustomInput("Purchase","What would you like to purchase?",Options + "Cancel",0)
 			if(Choice.name=="Cancel")
 				usr.move=1
@@ -85,6 +88,7 @@ mob/NPC
 					var/icon/X=new(I.icon)
 					X.Blend(rgb(text2num(Colors[1]),text2num(Colors[2]),text2num(Colors[3])),ICON_ADD)
 					I.icon=X
+					I.cColor = rgb(text2num(Colors[1]),text2num(Colors[2]),text2num(Colors[3]))
 				usr.itemAdd(I)
 				usr<<output("You bought the [S.name] for [S.Cost] Ryo.","actionoutput")
 				usr.Ryo-=S.Cost
@@ -93,8 +97,9 @@ mob/NPC
 				usr.move=1
 				usr<<output("You need [S.Cost] Ryo to purchase this.","actionoutput")
 				return
+				//obj/Inventory/Clothing/Vests/Robe
 	Weapons_Dealer
-		icon='MaleBase.dmi'
+		icon='WhiteMBase.dmi'
 		pixel_x=-15
 		density=0
 		NewStuff()
@@ -111,7 +116,7 @@ mob/NPC
 			usr.move=0
 			var/list/Options=list()
 			for(var/obj/Inventory/Weaponry/C in world)
-				if(C.loc==locate(199,199,2)) Options["[C.name]-[C.Cost] Ryo"]=C
+				if(C.loc==locate(199,199,12)) Options["[C.name]-[C.Cost] Ryo"]=C
 			var/obj/Choice=usr.CustomInput("Purchase","What would you like to purchase?",Options + "Cancel")
 			if(Choice.name=="Cancel")
 				usr.move=1
@@ -142,7 +147,7 @@ mob/NPC
 				usr.move=1
 				return
 	Banker
-		icon='MaleBase.dmi'
+		icon='WhiteMBase.dmi'
 		pixel_x=-15
 		density=0
 		NewStuff()

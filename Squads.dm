@@ -9,7 +9,7 @@ obj/Squad
 		list/Members =  list() //ckey Oriented
 	proc/Menu()
 		if(usr.ckey != Leader)
-			var/setting = usr.skinput("Select an option","Squad",list("View Squad","Leave Squad", "Cancel"))
+			var/setting = usr.skinput("Select an option","Squad",list("View Squad","Check mission","Leave Squad", "Cancel"))
 			switch(setting)
 				if("Cancel") return
 				if("View Squad")
@@ -27,6 +27,15 @@ obj/Squad
 					winset(usr, null, {"
 						mainwindow.BrowserChild.is-visible = "true";
 					"})
+				if("Check Mission")
+					if(usr.Mission == null)
+						if(usr.LastMissionTime>0)
+							usr << output("You must wait [round(usr.LastMissionTime/600)] minutes before taking another mission.","actionoutput")
+						else
+							usr << output("You can currently pick up a mission.","actionoutput")
+					else
+						usr<<output("Your mission is: [usr.Mission]","actionoutput")
+
 				if("Leave Squad")
 					Members -= usr.ckey
 					usr.Squad = null
@@ -37,7 +46,7 @@ obj/Squad
 					var/mob/L=getOwner(Leader)
 					L<<output("[usr] has left your squad","actionoutput")
 			return
-		var/setting = usr.skinput("Select an option","Squad",list("View Squad","Invite Member", "Remove Member","Leave Squad", "Cancel"))
+		var/setting = usr.skinput("Select an option","Squad",list("View Squad","Invite Member", "Remove Member","Check Mission","Leave Squad", "Cancel"))
 		switch(setting)
 			if("View Squad")
 				var/html={"
@@ -55,17 +64,30 @@ obj/Squad
 						mainwindow.BrowserChild.is-visible = "true";
 					"})
 			if("Invite Member")
+				if(usr.rank=="Genin"||usr.rank=="Academy Student")
+					usr<<output("You must be Chuunin+ to lead a squad with other ninjas in it.","actionoutput")
+					return
 				if(length(Members) >= 4) //Checks to make sure there aren't already 4 memebers
 					usr<<output("You already have a total of 4 members in your squad, including yourself. If you wish to add another, remove one first.","actionoutput")
 				else
 					var/list/Players = list()
 					for(var/mob/player/P in view()) Players += P
 					var/mob/player/M = input("Invite Who?") as mob in Players
+
+					if(M.village != usr.village)
+						usr<<output("You can only squad with fellow villagers.","actionoutput")
+						return
 					if(Members.Find(M.ckey) || M.ckey == Leader)
 						usr<<output("[M] is already in the Squad","actionoutput")
 						return
+					if(M.Squad != null)
+						usr<<output("[M] is already in another squad.","actionoutput")
+						return
 					if(alert(M,"[usr] wants you to join their Squad. Join?","Squad","Yes","No") == "Yes")
-						if(length(Members) >= 5) return
+						if(length(Members) >= 4) return
+						if(Members.Find(M.ckey) || M.ckey == Leader)
+							usr<<output("[M] is already in the Squad","actionoutput")
+							return
 						Members += M.ckey
 						M.Squad = src
 						usr<<output("[M] is now a part of your Squad.","actionoutput")
@@ -88,6 +110,15 @@ obj/Squad
 				else
 					Members -= choice
 				usr<<output("[choice] has been removed","actionoutput")
+			if("Check Mission")
+				if(usr.Mission == null)
+					if(usr.LastMissionTime>0)
+						usr << output("You must wait [round(usr.LastMissionTime/600)] minutes before taking another mission.","actionoutput")
+					else
+						usr << output("You can currently pick up a mission.","actionoutput")
+				else
+					usr<<output("Your mission is: [usr.Mission]","actionoutput")
+
 			if("Leave Squad")
 				if(alert("Are you sure?","Disband Squad","Yes","No") == "Yes")
 					if(usr.ckey != Leader) return
@@ -95,6 +126,7 @@ obj/Squad
 					Members -= Leader // The leader's key isn't stored in the member list.
 					if(!length(Members)) del src // Del the Squad if no one is left to take over.
 					Leader = pick(Members) //It picks a new Leader from the current members
+					Members -= Leader //Remove the leader from the member list once(was duplicating)
 					usr.Channel="Say"
 mob/
 	var/tmp/

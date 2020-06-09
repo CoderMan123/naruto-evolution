@@ -5,16 +5,16 @@ turf
 	geninexamsealstest
 proc/GeninExam()
 	while(world)
-		sleep((600*20)+rand(200,400))
-		for(var/mob/player/M in world)M<<output("<center>A Genin exam is about to begin in all Village Academies.</center>","actionoutput")
+		sleep((600*30)+rand(200,400))
+		for(var/mob/player/M in TotalPlayers)M<<output("<center>A Genin exam is about to begin in all Village Academies.</center>","actionoutput")
 		sleep(600*3)
-		for(var/mob/player/M in world)M<<output("<center>The Genin exam has begun!</center>","actionoutput")
+		for(var/mob/player/M in TotalPlayers)M<<output("<center>The Genin exam has begun!</center>","actionoutput")
 		GeninTest=1
 		sleep(600*2)
-		for(var/mob/player/M in world)M<<output("<center>The written Genin exam is now over! Handseals testing will begin in one minute for all who passed!</center>","actionoutput")
+		for(var/mob/player/M in TotalPlayers)M<<output("<center>The written Genin exam is now over! Handseals testing will begin in one minute for all who passed!</center>","actionoutput")
 		GeninTest=0
 		sleep(100)
-		for(var/mob/M in global.genintesters)M << output("You are to execute 3 of your ninjutsu or genjutsu within thirty seconds.","actionoutput")
+		for(var/mob/M in global.genintesters)M << output("You are to execute 3 of your ninjutsu or genjutsu within thirty seconds ignoring the indoors dialog telling you not to.","actionoutput")
 		sleep(300)
 		for(var/mob/M in global.genintesters)
 			if(M.SealsDoneGenin>=3)
@@ -23,22 +23,33 @@ proc/GeninExam()
 				M.loc=M.MapLoadSpawn()
 			else M.loc=M.MapLoadSpawn()
 		genintesters=list()
-		for(var/mob/player/M in world)M<<output("<center>The practical examination for the Genin Exams are now over. Thank you for those that participated!</center>","actionoutput")
+		for(var/mob/player/M in TotalPlayers)M<<output("<center>The practical examination for the Genin Exams are now over. Thank you for those that participated!</center>","actionoutput")
 mob
 	proc/givegenin()
 		src<<output("You are now a Genin.","actionoutput")
-		new/obj/Inventory/Clothing/HeadWrap/HeadBand(src)
 		src.rank="Genin"
+		if(village=="Hidden Leaf")
+			new/obj/Inventory/Clothing/HeadWrap/LeafHeadBand(src)
+		if(village=="Hidden Sand")
+			new/obj/Inventory/Clothing/HeadWrap/SandHeadBand(src)
+		if(village=="Hidden Mist")
+			new/obj/Inventory/Clothing/HeadWrap/MistHeadBand(src)
+		if(village=="Hidden Sound")
+			new/obj/Inventory/Clothing/HeadWrap/SoundHeadBand(src)
+		if(village=="Hidden Rock")
+			new/obj/Inventory/Clothing/HeadWrap/RockHeadBand(src)
+
 obj/Special/GeninExam
 	icon='building insides.dmi'
 	icon_state="paper"
 	mouse_opacity=2
 	var/village="Hidden Leaf"
-	var/list/Questions=list("Morning Peacock is a strength technique"="True","Eight Trigrams 64 Palms requires no reaction commands"="False",
-"The fastest way for new players to train is by kicking logs"="False","Ash Pile Burning is triggered with the down arrow"="True","Body Flicker Technique requires a target"="False",
-"Rasengan is a thunder element technique"="False","Sensatsu Suishou is an ice element technique"="True",
-"Akatsuki are bounty hunters"="False","Heavenly Spin requires Byakugan"="True","Sickle Weasel Slash is an earth element technique"="False","Gentle Fist can disable chakra points"="True",
-"Bone Sensation only works if there is a Bone Bullet lodged in your enemy"="True","Clone Jutsu clones that attack"="False")
+	var/list/Questions=list("This exam requires you to be level 5 or higher"="True","Pheonix flower technique is a fire element technique"="True",
+"Tsukuyomi is a technique utilized by the hyuga clan"="False","Senju clan majors in the use of puppets"="False","The Hokage's job is to take care of the leaf village"="True",
+"If you are stuck in a location you shouldn't be, you can type in /stuck to teleport out"="True","You move with the arrow keys"="True",
+"You can retake this exam if you fail it"="True","Chidori is a wind element technique"="False",
+"To receive a mission, you talk to the banker of your village"="False","You started this game with Clone jutsu and Transformation jutsu"="True",
+"You recieve a headband from passing this exam"="True","This exam is too easy"="True")
 	Click()
 		if(get_dist(src,usr)>1) return
 		var/QuestionNum

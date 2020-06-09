@@ -1,8 +1,8 @@
 mob/var/tmp/list/Effects=list()
 mob
 	var
-		tmp/cansave=0
-		SkinTone
+		Password
+		ExpLock=0
 		health=100
 		maxhealth=100
 		chakra=300
@@ -16,10 +16,10 @@ mob
 		genjutsu=1
 		genexp=0
 		maxgenexp=10
-		taijutsu=1
-
-		taiexp=0
-		maxtaiexp=10
+		strength=1
+		editing=0
+		strengthexp=0
+		maxstrengthexp=10
 		defence=1
 		defexp=0
 		maxdefexp=10
@@ -35,6 +35,7 @@ mob
 		namecolor="green"
 		chatcolor="white"
 		swimming
+		walkingonwater
 		waterwalk
 		mountainwalk
 		mountainkit=1
@@ -42,8 +43,9 @@ mob
 		weaponattk
 		Element
 		Element2
+		Kekkai
 		Clan=null
-		Specialist="Taijutsu"
+		Specialist="strength"
 		Specialist2
 		Ryo=0
 		RyoBanked=0
@@ -51,7 +53,10 @@ mob
 		ricon
 		rname
 		Muted=0
+		skiptut=0
+		JashinSacrifices=0
 		tmp
+			AFK=0
 			BeingThrown
 			ThrowingMob
 			move=1
@@ -97,6 +102,9 @@ mob
 			canattack=1
 			admin=0
 			firing=0
+var
+	clonesturned=0
+	worldmute=0
 obj
 	var
 		health=100

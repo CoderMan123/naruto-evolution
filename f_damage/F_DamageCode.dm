@@ -32,6 +32,7 @@
 #define LOWER_F  102
 #define OUT_RANGE(VALUE, MIN, MAX) (VALUE < MIN || VALUE > MAX)
 
+// Global icon cache.
 var/__f_damage_Cache/f_damage_cache = new()
 
 // Someone is probably fiddling with this stuff.
@@ -42,11 +43,9 @@ obj/F_damage_num
 	var
 		F_damageValue
 
-proc/F_damage(atom/Target, value, color = "#ff0000")
-	// This should not be our problem, but the API took care of it before ..
-	return
-	/*color="#FFFFFF"
-	value=round(value)
+proc/F_damage(atom/Target, value, color = "#ff0000", F_Damage_Horizontal_Alignment/halign = F_Damage.CENTER_ALIGN)
+	// This should not be our problem, but the API took care of it before ...
+	/*
 	if (istext(color) && text2ascii(color) != F_DAMAGE_POUND)
 		color = "#[color]"
 	if (!F_validColor(color))
@@ -59,7 +58,7 @@ proc/F_damage(atom/Target, value, color = "#ff0000")
 		F_DAMAGE_ERROR("[Target] passed to F_damage is not at least an /atom, context: [Target], [value]")
 		return
 	var/list/numbers 	= new()
-	var/textValue    	= num2text(value)
+	var/textValue    	= num2text(value, F_Damage_sig_figures)
 	var/length		 	= length(textValue)
 	var/icon/targetIcon = icon(Target.icon, Target.icon_state, Target.dir) // Here's to hoping this is cheap.
 	var/width			= targetIcon.Width()
@@ -67,11 +66,11 @@ proc/F_damage(atom/Target, value, color = "#ff0000")
 	var/icon/I = f_damage_cache.get(color)
 	if (I == null)
 		I = new(F_damage_icon)
-		//I.Blend(color, ICON_MULTIPLY)
+		I.Blend(color, ICON_MULTIPLY)
 		f_damage_cache.put(color, I)
 	for (var/i in 1 to length)
 		var/obj/F_damage_num/O = new()
-		O.pixel_x = (round(width / 2) - 3) + ((i - 1 - round(length / 2)) * 6)
+		halign.align(O, width, length, i)
 		O.icon    = I
 		O.pixel_y = Target.pixel_y + (height - 7)
 		O.F_damageValue = copytext(textValue, i, i + 1)
@@ -82,8 +81,8 @@ proc/F_damage(atom/Target, value, color = "#ff0000")
 		O.loc = Target
 		flick(O.F_damageValue, O)
 		spawn(10)
-			del O*/
-
+			del O
+*/
 // Silly API exposed code.
 proc/F_validColor(value)
 	/*

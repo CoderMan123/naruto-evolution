@@ -1,0 +1,13 @@
+backup/
+Ban/
+Players/
+Saves/
+*.dmb
+*.int
+*.lk
+*.rsc
+Errorlog.txt
+GMLog.txt
+HostKey.txt
+KillLog.txt
+World.sav

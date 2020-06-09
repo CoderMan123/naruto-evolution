@@ -10,7 +10,7 @@ area/Dojo
 	invisibility=99
 	icon='Misc Effects.dmi'
 	icon_state="dojo"
-	layer=99
+	layer=5
 	var/DojoX=130
 	var/DojoY=47
 	var/DojoZ=2
@@ -22,4 +22,4 @@ area/Village
 	icon='Misc Effects.dmi'
 	icon_state="Village"
 	invisibility=99
-	layer=99
+	layer=5

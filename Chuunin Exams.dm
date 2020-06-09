@@ -8,15 +8,29 @@ obj/Special/ChuuninExam
 	icon='building insides.dmi'
 	icon_state="paper"
 	mouse_opacity=2
-	var/list/Questions=list("Morning Peacock is a strength technique"="True","Eight Trigrams 64 Palms requires no reaction commands"="False",
-"The fastest way for new players to train is by kicking logs"="False","Ash Pile Burning is triggered with the down arrow"="True","Body Flicker Technique requires a target"="False",
-"Rasengan is a thunder element technique"="False","Sensatsu Suishou is an ice element technique"="True",
-"Akatsuki are bounty hunters"="False","Heavenly Spin requires Byakugan"="True","Sickle Weasel Slash is an earth element technique"="False","Gentle Fist can disable chakra points"="True",
-"Bone Sensation only works if there is a Bone Bullet lodged in your enemy"="True","Clone Jutsu creates clones that attack"="False","Rasengan requires you to press arrow keys in a triangular pattern."="False",
-"The skill tree is divided in non-clan, elemental, and clan jutsus"="True","Tsukiyomi is utilized by the Nara clan"="False","Susano'o is an Uchiha clan technique"="False",
-"Project Evolution was once called Naruto: Evolution"="True","Shark Water Projectile creates three shark like jets of water."="True","Players will lose 10% of the experience points for killing a fellow villager."="True",
-"The level requirement for the Genin Exams is 10."="False","The techniques utilized by \"Deidara\" in the series, are the Earth element in the game."="True",
-"B rank missions are assigned to Chuunin level shinobi."="True","An A rank mission may send you against enemy villagers."="True","The resting graphic will change according to your player's maximum chakra levels."="True")
+	var/list/Questions=list("Morning Peacock is a strength technique"="True",
+	"Eight Trigrams 64 Palms requires no reaction commands."="False",
+"Anbu are the right hand men and women of the akatsuki."="False",
+"Ash Pile Burning is triggered with the down arrow."="True",
+"The Genin exam was too easy."="True",
+"Rasengan is a thunder element technique."="False",
+"Sensatsu Suishou is an ice element technique."="True",
+"Akatsuki are bounty hunters."="True",
+"Heavenly Spin requires Byakugan active."="False",
+"Sickle Weasel Slash is an earth element technique."="False",
+"Gentle Fist can disable chakra points."="True",
+"Bone Sensation only works if there is a Bone Bullet lodged in your enemy."="True",
+"Multiple Shadow Clone Jutsu creates clones that can attack."="True",
+"Chidori Nagashi is an earth element technique."="False",
+"The skill tree is divided in non-clan, elemental, and clan jutsus."="True",
+"Tsukuyomi is utilized by the Nara clan."="False","Susano'o is an Uchiha clan technique."="True",
+"Aburame utilize ink drawings to attack enemies."="False",
+"Jounin is the rank where higher levels are able to begin taking students."="True",
+"Players will lose 50% of the experience points for killing a fellow villager."="True",
+"The level requirement for the Genin Exams is 10."="False",
+"D rank missions are easiest but give you the least ammount of experience."="True",
+"B rank missions are assigned to Chuunin level shinobi."="True","An A rank mission may send you against enemy villagers."="True",
+"The resting graphic will change according to your player's maximum chakra levels."="True")
 	Click()
 		if(get_dist(src,usr)>1) return
 		var/QuestionNum
@@ -30,14 +44,16 @@ obj/Special/ChuuninExam
 		if(ChuuninExam!="Written")
 			usr<<output("The Chuunin examination has not begun, do not start too early.","actionoutput")
 			return
+		if(usr.level<=9)
+			usr<<output("To achive Chuunin rank, you need to be at least level 10.","actionoutput")
+			return
 		if(InUse)
 			usr<<output("Someone is already writing the exam here!","actionoutput")
 			return
 		if(usr.RecentVerbsCheck("Chuunin Test",6000,1)) return
 		usr.RecentVerbs["Chuunin Test"]=world.timeofday
 		InUse=1
-		//usr.cheww=1/////////DELETE THIS ONCE DONE TESTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-		if(usr.level<15)
+		if(usr.level<25)
 			while(QuestionNum<25)
 				sleep(1)
 				if(ChuuninExam!="Written")
@@ -53,7 +69,7 @@ obj/Special/ChuuninExam
 					CorrectAnswer++
 		else
 			usr << output("You don't have to take the written exam at your level.","actionoutput")
-			usr<<output("You have completed the test, please wait for the result.","actionoutput")
+			usr << output("You have completed the test, please wait for the result.","actionoutput")
 			CorrectAnswer=25
 			usr.cheww=1
 		if(CorrectAnswer>=17)
@@ -66,39 +82,43 @@ obj/Special/ChuuninExam
 		QuestionNum=0
 mob/var/cheww=0
 proc/ChuuninExam()
-	sleep(600*60)
-	ChuuninExam="Starting"
-	world<<output("<b><center>A Chuunin exam is about to begin.</b></center>","actionoutput")
-	sleep(600*6)
-	world<<output("<b><center>The written portion of the Chuunin exam has begun!</b></center>","actionoutput")
-	ChuuninExam="Written"
-	sleep(600*5)
-	world<<output("<b><center>The written portion of the Chuunin exam has ended!</b></center>","actionoutput")
-	ChuuninExam="Forest of Death"
-	var/count=0
-	for(var/mob/player/M in world)
-		if(M.cheww==1)
-			M.cheww=0
-			M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
-			if(count==0)
-				var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
-				O.loc = M
-				count=1
-			else
-				var/obj/O = new/obj/ChuuninExam/Scrolls/HeavenScroll
-				O.loc = M
-				count=0
-	sleep(600*6)
-	world<<output("<b><center>The second part of the Chuunin exam is now over!</b></center>","actionoutput")
-	ChuuninExam="Tournament"
-	ChuuninExamGo()
+	while(world)
+		sleep(600*240)
+		if(chuuninlock==1)
+			usr<<"Ninja War is in progress...please wait until it's over..."
+			return
+		ChuuninExam="Starting"
+		world<<output("<b><center>A Chuunin exam will begin in 5 minutes.</b></center>","actionoutput")
+		sleep(600*5)
+		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","actionoutput")
+		ChuuninExam="Written"
+		sleep(600*2)
+		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","actionoutput")
+		ChuuninExam="Forest of Death"
+		var/count=0
+		for(var/mob/player/M in TotalPlayers)
+			if(M.cheww==1)
+				M.cheww=0
+				M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
+				if(count==0)
+					var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
+					O.loc = M
+					count=1
+				else
+					var/obj/O = new/obj/ChuuninExam/Scrolls/HeavenScroll
+					O.loc = M
+					count=0
+		sleep(600*5)
+		world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","actionoutput")
+		ChuuninExam="Tournament"
+		ChuuninExamGo()
 proc/ChuuninExamGo()
 	//Remember to add a check for people here to see if they were in the FoD when it ended. Proper teleportation.
-	for(var/mob/player/M in world)
+	for(var/mob/player/M in TotalPlayers)
 		if(M.loc in block(locate(71,95,4),locate(200,163,4))) // If they are in FoD
 			M.loc=M.MapLoadSpawn() // Remember to change depending on villages!
 			for(var/obj/ChuuninExam/Scrolls/S in M)	del(S)
-	for(var/mob/player/M in world)
+	for(var/mob/player/M in TotalPlayers)
 		if(M.loc in block(locate(113,29,4),locate(146,58,4))) // If they are in tournament zone
 			Chuunins+=M
 			for(var/obj/ChuuninExam/Scrolls/S in M)del(S)
@@ -108,7 +128,9 @@ proc/ChuuninExamGo()
 			world<<output("<i>[M.name] is now a Chuunin.</i>","actionoutput")
 			if(M.village=="Hidden Leaf") new/obj/Inventory/Clothing/Vests/ChuninVest(M)
 			if(M.village=="Hidden Sand") new/obj/Inventory/Clothing/Vests/SandChuninVest(M)
+			if(M.village=="Hidden Mist") new/obj/Inventory/Clothing/Vests/MistVest(M)
 			if(M.village=="Hidden Sound") new/obj/Inventory/Clothing/Vests/SoundVest(M)
+			if(M.village=="Hidden Rock") new/obj/Inventory/Clothing/Vests/RockVest(M)
 			M.loc=M.MapLoadSpawn() // Remember to change depending on villages!
 		world<<output("<b><center>The Chuunin exam is now over!</b></center>","actionoutput")
 		ChuuninExam=0
@@ -126,7 +148,9 @@ proc/ChuuninExamGo()
 				world<<output("<i>[M.name] is now a Chuunin.</i>","actionoutput")
 				if(M.village=="Hidden Leaf") new/obj/Inventory/Clothing/Vests/ChuninVest(M)
 				if(M.village=="Hidden Sand") new/obj/Inventory/Clothing/Vests/SandChuninVest(M)
+				if(M.village=="Hidden Mist") new/obj/Inventory/Clothing/Vests/MistVest(M)
 				if(M.village=="Hidden Sound") new/obj/Inventory/Clothing/Vests/SoundVest(M)
+				if(M.village=="Hidden Rock") new/obj/Inventory/Clothing/Vests/RockVest(M)
 				M.loc=M.MapLoadSpawn()//Teleportation here.
 			world<<output("<b><center>The Chuunin exam is now over!</b></center>","actionoutput")
 			//for(var/mob/Player/M in world)
@@ -159,7 +183,9 @@ proc/ChuuninExamGo()
 		world<<output("<i>[ChuuninDuelWinner.name] is now a Chuunin.</i>","actionoutput")
 		if(ChuuninDuelWinner.village=="Hidden Leaf") new/obj/Inventory/Clothing/Vests/ChuninVest(ChuuninDuelWinner)
 		if(ChuuninDuelWinner.village=="Hidden Sand") new/obj/Inventory/Clothing/Vests/SandChuninVest(ChuuninDuelWinner)
+		if(ChuuninDuelWinner.village=="Hidden Mist") new/obj/Inventory/Clothing/Vests/MistVest(ChuuninDuelWinner)
 		if(ChuuninDuelWinner.village=="Hidden Sound") new/obj/Inventory/Clothing/Vests/SoundVest(ChuuninDuelWinner)
+		if(ChuuninDuelWinner.village=="Hidden Rock") new/obj/Inventory/Clothing/Vests/RockVest(ChuuninDuelWinner)
 		ChuuninDuelWinner.rank="Chuunin"
 		ChuuninDuelWinner.loc=ChuuninDuelWinner.MapLoadSpawn()
 		ChuuninDuelLoser.loc=ChuuninDuelLoser.MapLoadSpawn()

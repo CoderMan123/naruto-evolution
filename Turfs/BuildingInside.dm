@@ -1,11 +1,38 @@
 mob/var/tmp/lastloc
-var/list/maps = list("Hidden Leaf"=list(),"Hidden Sand"=list())
+var/list/maps = list("Hidden Leaf"=list(),"Hidden Sand"=list(),"Hidden Mist"=list(),"Hidden Sound"=list(),"Hidden Rock"=list())
 var/capmaps = list()
 var/warmaps = list()
 var/sandpoints = list("1"=0,"2"=0,"2"=0,"3"=0,"4"=0,"5"=0,"6"=0,"7"=0,"8"=0,"9"=0,"10"=0,"11"=0,"12"=0,"13"=0,"14"=0,"15"=0,"16"=0,"17"=0,"18"=0,"19"=0,"20"=0,"21"=0,"22"=0,"23"=0,"24"=0)
 var/leafpoints = list("1"=0,"2"=0,"2"=0,"3"=0,"4"=0,"5"=0,"6"=0,"7"=0,"8"=0,"9"=0,"10"=0,"11"=0,"12"=0,"13"=0,"14"=0,"15"=0,"16"=0,"17"=0,"18"=0,"19"=0,"20"=0,"21"=0,"22"=0,"23"=0,"24"=0)
+var/mistpoints = list("1"=0,"2"=0,"2"=0,"3"=0,"4"=0,"5"=0,"6"=0,"7"=0,"8"=0,"9"=0,"10"=0,"11"=0,"12"=0,"13"=0,"14"=0,"15"=0,"16"=0,"17"=0,"18"=0,"19"=0,"20"=0,"21"=0,"22"=0,"23"=0,"24"=0)
+var/soundpoints = list("1"=0,"2"=0,"2"=0,"3"=0,"4"=0,"5"=0,"6"=0,"7"=0,"8"=0,"9"=0,"10"=0,"11"=0,"12"=0,"13"=0,"14"=0,"15"=0,"16"=0,"17"=0,"18"=0,"19"=0,"20"=0,"21"=0,"22"=0,"23"=0,"24"=0)
+var/rockpoints = list("1"=0,"2"=0,"2"=0,"3"=0,"4"=0,"5"=0,"6"=0,"7"=0,"8"=0,"9"=0,"10"=0,"11"=0,"12"=0,"13"=0,"14"=0,"15"=0,"16"=0,"17"=0,"18"=0,"19"=0,"20"=0,"21"=0,"22"=0,"23"=0,"24"=0)
+
+var
+	list/SWarps = list()
+	list/RWarps = list()
 
 world
+	proc
+		LinkWarps() // Reformist's warp link optimization
+			Link:
+				for(var/turf/Warpz/Senders/S in SWarps)
+					for(var/turf/Warpz/Receivers/R in RWarps)
+						if(S.name == R.name)
+							S.ToWhere = R
+							R.ToWhere = S
+							//RWarps -= R
+							//SWarps -= S
+							continue Link
+				for(var/turf/Warpz/Receivers/R in RWarps)
+					if(!R.ToWhere)
+						for(var/turf/Warpz/Senders/S in SWarps)
+							if(R.name == S.name)
+								R.ToWhere = S
+								break
+			SWarps = null
+			RWarps = null
+
 	proc/Capdo(LevelTo,villagea)
 		sleep(6000)
 		if(LevelTo in global.capmaps)
@@ -13,7 +40,7 @@ world
 			if(villagea == "Hidden Sand")
 				global.maps["Hidden Sand"]+=LevelTo
 				world << output("<b>The Hidden Sand has captured an area!","actionoutput")
-				for(var/mob/M in world)
+				for(var/mob/M in TotalPlayers)
 					if(M.client && M.village == "Hidden Sand" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","actionoutput")
@@ -25,15 +52,15 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 									M.Levelup()
 								if(2)
-									M.LevelStat("Taijutsu",0.2,1)
+									M.LevelStat("strength",0.2,1)
 									M.Levelup()
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
 									M.Levelup()
-			else
+			if(villagea == "Hidden Leaf")
 				global.maps["Hidden Leaf"]+=LevelTo
 				world << output("<b>The Hidden Leaf has captured an area!","actionoutput")
-				for(var/mob/M in world)
+				for(var/mob/M in TotalPlayers)
 					if(M.client && M.village == "Hidden Leaf" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","actionoutput")
@@ -45,7 +72,67 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 									M.Levelup()
 								if(2)
-									M.LevelStat("Taijutsu",0.2,1)
+									M.LevelStat("strength",0.2,1)
+									M.Levelup()
+								if(3)
+									M.LevelStat("Genjutsu",0.2,1)
+									M.Levelup()
+			if(villagea == "Hidden Mist")
+				global.maps["Hidden Mist"]+=LevelTo
+				world << output("<b>The Hidden Mist has captured an area!","actionoutput")
+				for(var/mob/M in TotalPlayers)
+					if(M.client && M.village == "Hidden Mist" && M.z == LevelTo)
+						M.Ryo += (100 + 1)
+						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","actionoutput")
+						M.exp+=3
+						for(var/i=0,i<3,i++)
+							var/GAIN = rand(1,3)
+							switch(GAIN)
+								if(1)
+									M.LevelStat("Ninjutsu",0.2,1)
+									M.Levelup()
+								if(2)
+									M.LevelStat("strength",0.2,1)
+									M.Levelup()
+								if(3)
+									M.LevelStat("Genjutsu",0.2,1)
+									M.Levelup()
+			if(villagea == "Hidden Sound")
+				global.maps["Hidden Sound"]+=LevelTo
+				world << output("<b>The Hidden Sound has captured an area!","actionoutput")
+				for(var/mob/M in TotalPlayers)
+					if(M.client && M.village == "Hidden Sound" && M.z == LevelTo)
+						M.Ryo += (100 + 1)
+						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","actionoutput")
+						M.exp+=3
+						for(var/i=0,i<3,i++)
+							var/GAIN = rand(1,3)
+							switch(GAIN)
+								if(1)
+									M.LevelStat("Ninjutsu",0.2,1)
+									M.Levelup()
+								if(2)
+									M.LevelStat("strength",0.2,1)
+									M.Levelup()
+								if(3)
+									M.LevelStat("Genjutsu",0.2,1)
+									M.Levelup()
+			if(villagea == "Hidden Rock")
+				global.maps["Hidden Rock"]+=LevelTo
+				world << output("<b>The Hidden Rock has captured an area!","actionoutput")
+				for(var/mob/M in TotalPlayers)
+					if(M.client && M.village == "Hidden Rock" && M.z == LevelTo)
+						M.Ryo += (100 + 1)
+						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","actionoutput")
+						M.exp+=3
+						for(var/i=0,i<3,i++)
+							var/GAIN = rand(1,3)
+							switch(GAIN)
+								if(1)
+									M.LevelStat("Ninjutsu",0.2,1)
+									M.Levelup()
+								if(2)
+									M.LevelStat("strength",0.2,1)
 									M.Levelup()
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
@@ -60,7 +147,7 @@ world
 				world << output("<b>The Hidden Sand has won the battle!","actionoutput")
 				global.sandpoints["[LevelTo]"]=0
 				global.leafpoints["[LevelTo]"]=0
-				for(var/mob/M in world)
+				for(var/mob/M in TotalPlayers)
 					if(M.client && M.village == "Hidden Sand" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 6 EXP from the battle!","actionoutput")
@@ -72,17 +159,17 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 									M.Levelup()
 								if(2)
-									M.LevelStat("Taijutsu",0.2,1)
+									M.LevelStat("strength",0.2,1)
 									M.Levelup()
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
 									M.Levelup()
-			else
+			if(global.leafpoints["[LevelTo]"] >= global.sandpoints["[LevelTo]"])
 				global.maps["Hidden Leaf"]+=LevelTo
 				world << output("<b>The Hidden Leaf has won the battle!","actionoutput")
 				global.sandpoints["[LevelTo]"]=0
 				global.leafpoints["[LevelTo]"]=0
-				for(var/mob/M in world)
+				for(var/mob/M in TotalPlayers)
 					if(M.client && M.village == "Hidden Leaf" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 6 EXP from the battle!","actionoutput")
@@ -94,7 +181,7 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 									M.Levelup()
 								if(2)
-									M.LevelStat("Taijutsu",0.2,1)
+									M.LevelStat("strength",0.2,1)
 									M.Levelup()
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
@@ -120,12 +207,12 @@ turf
 								if(LevelTo in global.warmaps)
 									check=1
 								else
-									for(var/mob/M2 in world)
+									for(var/mob/M2 in TotalPlayers)
 										if(M2.client && M2.village == M.village && M2.z == LevelTo)
 											counts++
 									if(counts >= 5)
 										counts=0
-										for(var/mob/M2 in world)
+										for(var/mob/M2 in TotalPlayers)
 											if(M2.client && M2.village <> M.village && M2.z == LevelTo)
 												counts++
 										if(counts>=5)
@@ -156,10 +243,10 @@ turf
 					else
 						check=1
 				if(check)
-					if(M.x==world.maxx&&dir==SOUTH)
-						M.x=world.maxx
+					/*if(M.x==world.maxx&&dir==SOUTH)
+						M.x=1
 						M.z=LevelTo
-						counts++
+						counts++*/
 					if(M.x==1&&M.dir==WEST)
 						M.x=world.maxx
 						M.z=LevelTo
@@ -168,10 +255,10 @@ turf
 						M.x=1
 						M.z=LevelTo
 						counts++
-					if(M.x==world.maxx&&M.dir==NORTH)
+					/*if(M.x==world.maxx&&M.dir==NORTH)
 						M.x=1
 						M.z=LevelTo
-						counts++
+						counts++*/
 					if(M.y==1&&M.dir==SOUTH)
 						M.y=world.maxy
 						M.z=LevelTo
@@ -203,18 +290,21 @@ turf
 			WarpToMapLoadSpawn
 				Entered(mob/M)
 					if(istype(M,/mob) && M.client)
-						if(M.Tutorial!=5)
-							M<<output("Hey, hold your horses! You haven't finished the tutorial yet. Make sure you speak with all the NPCs, and take down atleast one rogue shinobi.","actionoutput")
+						if(M.Tutorial!=6 || M.strength < 5 || M.ninjutsu < 5 || M.genjutsu < 5)//TUT
+							M<<output("Hey, hold your horses! You haven't finished the tutorial yet. Make sure you speak with all the NPCs, do a weeding mission, level Tai Nin and Gen to atleast 5, and take down atleast one rogue shinobi. ","actionoutput")
 							if(M.lastloc)M.loc=M.lastloc
 							return
-						else M.Tutorial=6
+						else
+							M.Tutorial=7
+							M<<output("Congratulations! You've finished the tutorial!","actionoutput")
 						M.loc=M.MapLoadSpawn()
 		layer=TURF_LAYER+1
 		Senders
 			var/turf/Warpz/Receivers/ToWhere
 			New()
 				..()
-				for(var/turf/Warpz/Receivers/T in world)if(T.name == src.name) ToWhere=T
+				SWarps += src
+				//for(var/turf/Warpz/Receivers/T in world)if(T.name == src.name) ToWhere=T
 		//	icon='uparrow.dmi'
 			Entered(mob/M)
 				if(istype(M,/mob) && M.client && ToWhere)
@@ -222,47 +312,109 @@ turf
 						M<<"You were recently in combat. Please wait to do this."
 						if(M.lastloc) M.loc=M.lastloc
 						return
+					if(M.inboulder)
+						M<<"You can't enter buildings like that. Come back when you're not a boulder."
+						if(M.lastloc) M.loc=M.lastloc
+						return
+					if(M.Intang)
+						M<<"You can't enter buildings while intangible. Come back when you're tangible."
+						if(M.lastloc) M.loc = M.lastloc
+						return
+					if(M.Susanoo)
+						M<<"You can't enter buildings with Susanoo. Come back without Susanoo."
+						if(M.lastloc) M.loc=M.lastloc
+						return
 					usr.loc = ToWhere
 					step(usr,NORTH)
-			T1
-			T2
-			T3
-			T4
-			T5
-			T6
-			T7
-			T8
-			T9
-			T10
-			Forest1
-			T11
-			T12
-			T13
-			T14
-			T15
-			T16
-			T17
-			T18
-			T19
-			T20
-			T21
-			T22
-			T23
-			T24
-			T25
-			T26
-			T27
-			T28
-			T29
-			T30
-			T31
+			//Leaf
+			T1	//KH
+			T2	//Dojo
+			T3	//Hospital
+			T4	//Genin
+			T5	//Chuunin
+			T6	//Barber
+			T7	//Clothes
+			T8	//Weapons
+			T9	//Arena
+			T10	//DojoR1
+			T11	//DojoR2
+			T12	//DojoR3
+			T13	//DojoR4
+			//Sand
+			T14	//KH
+			T15	//Dojo
+			T16	//Hospital
+			T17	//Genin
+			T18	//Chuunin
+			T19	//DojoR1
+			T20	//DojoR2
+			T21	//DojoR3
+			T22	//DojoR4
+			//Mist
+			T23	//KH
+			T24	//Dojo
+			T25	//Hospital
+			T26	//Genin
+			T27	//Chuunin
+			T28	//Barber
+			T29	//Weapons
+			T30	//DojoR1
+			T31	//DojoR2
+			//Misc
+			T32	//Cave(Rock)
+			//Anbu Root
+			T33	//Entrance
+				Entered(mob/M)
+					if(M.village != "Anbu Root")
+						return
+					else
+						..()
+			T34	//Secretary
+			T35	//Spawn
+			T36	//Vends
+			T37	//Dojo1
+			T38	//Dojo2
+			//Seven Swordsmen
+			T39	//Entrance
+				Entered(mob/M)
+					if(M.village !="Seven Swordsmen")
+						return
+					else
+						..()
+			//Sound
+			T40	//Hospital
+			T41 //Dojo
+			T42 //Weapon
+			T43 //Genin
+			T44 //Chuunin
+			T45 //DojoR1
+			T46 //DojoR2
+			//Rock
+			T47 //KH
+			T48 //Genin
+			T49 //Chuunin
+			T50 //All shops
+			T51 //Hospital
+
+			//Tutorial
+			T52 //KH
+
+
+			T100//Akat
+				Entered(mob/M)
+					if(M.village != "Akatsuki")
+						return
+					else
+						..()
+
 		Receivers
 		//	icon = 'downarrow.dmi'
 			var/turf/Warpz/Receivers/ToWhere
 			New()
 				..()
-				for(var/turf/Warpz/Senders/T in world)
-					if(T.name == src.name) ToWhere=T
+				RWarps += src
+				//for(var/turf/Warpz/Senders/T in world)
+				//	if(T.name == src.name) ToWhere=T
 			Entered(mob/M)
 				if(istype(M,/mob) && M.client && ToWhere)
 					if(M.Attacked)
@@ -271,38 +423,70 @@ turf
 						return
 					usr.loc = ToWhere
 					step(usr,SOUTH)
-			T1
-			T2
-			T3
-			T4
-			T5
-			T6
-			T7
-			T8
-			T9
-			T10
-			Forest1
-			T11
-			T12
-			T13
-			T14
-			T15
-			T16
-			T17
-			T18
-			T19
-			T20
-			T21
-			T22
-			T23
-			T24
-			T25
-			T26
-			T27
-			T28
-			T29
-			T30
-			T31
+			//Leaf
+			T1	//KH
+			T2	//Dojo
+			T3	//Hospital
+			T4	//Genin
+			T5	//Chuunin
+			T6	//Barber
+			T7	//Clothes
+			T8	//Weapons
+			T9	//Arena
+			T10	//DojoR1
+			T11	//DojoR2
+			T12	//DojoR3
+			T13	//DojoR4
+			//Sand
+			T14	//KH
+			T15	//Dojo
+			T16	//Hospital
+			T17	//Genin
+			T18	//Chuunin
+			T19	//DojoR1
+			T20	//DojoR2
+			T21	//DojoR3
+			T22	//DojoR4
+			//Mist
+			T23	//KH
+			T24	//Dojo
+			T25	//Hospital
+			T26	//Genin
+			T27	//Chuunin
+			T28	//Barber
+			T29	//Weapons
+			T30	//DojoR1
+			T31	//DojoR2
+			//Misc
+			T32	//Cave(Rock)
+
+			//Anbu Root
+			T33	//Entrance
+			T34	//Secretary
+			T35	//Spawn
+			T36	//Vends
+			T37	//Dojo1
+			T38	//Dojo2
+			//Seven Swordsmen
+			T39	//Entrance
+			//Sound
+			T40	//Hospital
+			T41 //Dojo
+			T42 //Weapon
+			T43 //Genin
+			T44 //Chuunin
+			T45 //DojoR1
+			T46 //DojoR2
+			//Rock
+			T47 //KH
+			T48 //Genin
+			T49 //Chuunin
+			T50 //All shops
+			T51 //Hospital
+			//Tutorial
+			T52 //KH
+
+			T100//Akat
 	Outsides
 		Fence
 			icon='Fence.dmi'
@@ -414,6 +598,16 @@ turf
 				icon_state="desk2"
 			Desk3
 				icon_state="desk3"
+			Ddesk
+				icon_state="Ddesk"
+			Cdesk
+				icon_state="Cdesk"
+			BigBook
+				icon_state="BigBook"
+			Books
+				icon_state="Books"
+			Book
+				icon_state="Book"
 		Doors
 			Doortop
 				icon_state="doortop"

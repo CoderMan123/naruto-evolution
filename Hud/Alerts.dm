@@ -50,9 +50,9 @@ mob/proc/GET_ANSWERCOLOR()
 	if(src) del(prompt)
 	if(src) return X
 mob/proc/GET_ANSWER()
-	while(prompt&&src) sleep(20)
+	while(prompt&&src) sleep(10)
 	prompt = new /Skalert
-	while(!prompt.answer&&src) sleep(20)
+	while(!prompt.answer&&src) sleep(10)
 	var/X = prompt.answer
 	del(prompt)
 	return X
