@@ -1,0 +1,17 @@
+image: tgstation/byond:latest
+
+variables:
+    BYOND_DME: "Project-Evolution.dme"
+
+stages:
+    - build
+
+build:
+    stage: build
+    script:
+        - DreamMaker "$CI_PROJECT_DIR/$BYOND_DME"
+    only:
+        - master
+        - develop
+        - master-v1
+        - develop-v1
