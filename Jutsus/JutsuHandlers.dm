@@ -55,7 +55,7 @@ mob
 			src.UpdateHMB()
 			spawn()
 				var/colour = colour2html(colortype)
-				new /obj/CombatEffects/DamageNums(src.loc, src, damage, "[colour]")
+				src.DamageNumber(damage, colour)
 			spawn()
 				src.Death(Owner)
 
@@ -108,21 +108,6 @@ mob
 			if(src.Clones.len)
 				Clone_Jutsu_Destroy()
 				src.Clones = list()
-
-obj
-	CombatEffects
-		DamageNums
-			New(numloc, mob/M, damage, colortype)
-				maptext = "<font color = [colortype]><b><font align=center valign=bottom>[damage]"
-				layer = EFFECTS_LAYER
-				src.maptext_width = 128
-				src.maptext_height = 128
-				src.pixel_y = 70
-				src.pixel_x = (bound_width - maptext_width) / 2 + bound_x
-				sleep(7)
-				animate(src, alpha = 0, pixel_y = 96, time = 5)
-				spawn(15)
-					del(src)
 
 obj
 	JutsuOverlays
