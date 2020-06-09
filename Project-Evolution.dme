@@ -135,7 +135,6 @@
 #include "Jutsus\Element\WaterJutsus.dm"
 #include "Jutsus\Element\WindJutsus.dm"
 #include "Jutsus\Misc\NonClanJutsus.dm"
-#include "Library\Library.dm"
 #include "Npcs\Monsters.dm"
 #include "Npcs\NPCs.dm"
 #include "Server\Global.dm"
