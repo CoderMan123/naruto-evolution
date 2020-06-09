@@ -6,5 +6,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Fixed
-- Optimized Server Functions [[#1](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/issues/1)]
-- - Reduce massive overhead caused by damage overlays. [[a7ddbf1a](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/b4a308f4d0aff3f3424941a2e6acc5bbe6c2962b)]
+- Optimize Server Functions [[#1](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/issues/1)]
+- - Reduce massive overhead caused by damage overlays. [[d1529b11](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/d1529b114bc8a46316c6b41db2d31d408776744c)]
