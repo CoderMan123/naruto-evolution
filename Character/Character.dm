@@ -8,7 +8,7 @@ mob
 			else
 				O=new(src.loc)
 
-			O.layer = EFFECTS_LAYER + 1
+			O.layer = EFFECTS_LAYER
 			O.maptext_width = 128
 			O.maptext_height = 128
 			O.pixel_y = 70
