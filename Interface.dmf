@@ -273,7 +273,6 @@ window "BrowserWindow"
 		size = 940x600
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -688,7 +687,6 @@ window "MainWindow"
 		size = 1362x25
 		anchor1 = 0,100
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "NavigationPanel"
 		is-vert = false
@@ -719,7 +717,6 @@ window "MainWindow"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -729,7 +726,6 @@ window "MainWindow"
 		size = 386x394
 		anchor1 = 5,13
 		anchor2 = 33,53
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -752,7 +748,6 @@ window "MainWindow"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -790,7 +785,6 @@ window "MainWindow"
 		size = 386x384
 		anchor1 = 57,9
 		anchor2 = 85,48
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -829,7 +823,6 @@ window "MainWindow"
 		size = 174x304
 		anchor1 = 85,8
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "splitter"
 		left = "Status"
@@ -840,7 +833,6 @@ window "MainWindow"
 		size = 350x395
 		anchor1 = 56,43
 		anchor2 = 82,84
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -870,7 +862,6 @@ window "MedalUnlock"
 		size = 498x59
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1012,7 +1003,6 @@ window "NavigationPanel"
 		font-family = "Open Sans"
 		text-color = #c8c8c8
 		background-color = #555555
-		is-disabled = true
 		border = line
 		saved-params = "is-checked"
 		text = "Squad"
@@ -1124,7 +1114,6 @@ window "OutputPanel"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1168,7 +1157,6 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1412,7 +1400,6 @@ window "Status"
 		size = 197x319
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -1429,7 +1416,6 @@ window "Status"
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1440,7 +1426,6 @@ window "Status"
 		size = 101x16
 		anchor1 = 42,86
 		anchor2 = 93,91
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1450,7 +1435,6 @@ window "Status"
 		size = 101x13
 		anchor1 = 42,80
 		anchor2 = 93,84
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1460,7 +1444,6 @@ window "Status"
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1471,7 +1454,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,68
 		anchor2 = 93,72
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1481,7 +1463,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,50
 		anchor2 = 93,55
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1491,7 +1472,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,26
 		anchor2 = 93,30
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1501,7 +1481,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,38
 		anchor2 = 93,42
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1511,7 +1490,6 @@ window "Status"
 		size = 104x13
 		anchor1 = 41,32
 		anchor2 = 93,36
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1523,7 +1501,6 @@ window "Status"
 		anchor2 = 95,78
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
-		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
@@ -1537,7 +1514,6 @@ window "Status"
 		anchor2 = 95,72
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
-		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
@@ -1549,7 +1525,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,21
 		anchor2 = 93,25
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1559,7 +1534,6 @@ window "Status"
 		size = 88x13
 		anchor1 = 45,16
 		anchor2 = 89,20
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1691,7 +1665,6 @@ window "Equip"
 		size = 336x115
 		anchor1 = 4,73
 		anchor2 = 95,97
-		background-color = none
 		border = sunken
 		saved-params = ""
 	elem "ItemPic"
@@ -2051,7 +2024,6 @@ window "yutput"
 		size = 504x454
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		border = sunken
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -2102,7 +2074,6 @@ window "titlescreen"
 		size = 1018x714
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2117,7 +2088,6 @@ window "titlescreen"
 		size = 1018x732
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -2128,7 +2098,6 @@ window "titlescreen"
 		size = 1018x732
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		right = "mapwindow"
 		is-vert = false
@@ -2338,7 +2307,6 @@ window "AlertBox3"
 		size = 300x155
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
