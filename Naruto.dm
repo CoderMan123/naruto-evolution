@@ -363,6 +363,8 @@ mob/Login
 				c.members[M.rname] = list(M.key, M.level, M.Factionrank)
 				if(c.FMOTD) M<<output("Faction MOTD: <br>[c.FMOTD]</br>","ActionPanel.Output")
 				M.verbs += /Faction/Generic/verb/FactionLeave
+				winset(M, "NavigationPanel", "FactionButton.is-disabled = 'false'")
+
 		if(M.Faction&&!getFaction(M.Faction))
 			M<<"Your Faction no longer exists. [M.Faction] has disbanded."
 			M.Faction=null

@@ -174,23 +174,23 @@ mob
 					//src.UpdateInventory()
 					if(getFaction(src.Faction))
 						winset(src, null, {"
-						Options.FactionTab.is-visible = "true";
+						NavigationPanel.FactionButton.is-disabled = "false";
 					"})
 					if(Squad) if(Squad.Leader == ckey) if(Squad.Members.len>=4)
 						winset(src, null, {"
-						Options.FactionTab.is-visible = "true";
+						NavigationPanel.FactionButton.is-disabled = "false";
 					"})
 					winset(src, null, {"
-						MainWindow.OptionsChild.is-visible = "true";
+						SettingsWindow.is-visible = "true";
 					"})
 				else
 					usr.OptionsUp = 0
 					//src.UpdateInventory()
 					winset(src, null, {"
-						MainWindow.OptionsChild.is-visible = "false";
+						SettingsWindow.is-visible = "false";
 					"})
 					winset(src, null, {"
-						Options.FactionTab.is-visible = "false";
+						NavigationPanel.FactionButton.is-disabled = "true";
 					"})
 		KagePanel()
 			set hidden=1

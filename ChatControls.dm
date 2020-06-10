@@ -22,7 +22,7 @@ mob/player
 				return
 			winset(usr, null, {"
 				MainWindow.InputChild.focus      = "true";
-				InputPanel.sayinput.focus = true;
+				InputPanel.ChatInput.focus = true;
 				MainWindow.InputChild.is-visible      = "true";
 			"})
 			SayUp=1

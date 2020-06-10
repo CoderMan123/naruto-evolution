@@ -8,6 +8,7 @@ proc
 		for(var/mob/M in TotalPlayers)
 			if(M.key)
 				M.ExpLock=1
+				winset(M, "NavigationPanel", "ExpLockButton.is-disabled = 'false'")
 				M.Save()
 			else
 				continue

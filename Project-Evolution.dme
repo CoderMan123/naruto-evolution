@@ -2,6 +2,7 @@
 // END_INTERNALS
 // BEGIN_FILE_DIR
 #define FILE_DIR .
+#define FILE_DIR "Client"
 #define FILE_DIR "Clothing"
 #define FILE_DIR "Clothing/7SM"
 #define FILE_DIR "Clothing/Weapons"
@@ -11,6 +12,7 @@
 #define FILE_DIR "HealthBar"
 #define FILE_DIR "Hud"
 #define FILE_DIR "Interface"
+#define FILE_DIR "Interface/Symbols"
 #define FILE_DIR "Jutsus"
 #define FILE_DIR "Jutsus/Clan"
 #define FILE_DIR "Jutsus/Clan/ClanJutIcons"
@@ -38,6 +40,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include <lavenblade\interfaceinput\Interface Input\Interface Input.dme>
 #include ".Preprocessors.dm"
 #include "_Updates.dm"
 #include "Arena.dm"

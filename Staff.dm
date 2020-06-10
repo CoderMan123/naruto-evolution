@@ -27,24 +27,20 @@ proc/ArtistCheck(ckey)
 mob/proc/AddAdminVerbs()
 	if(Kages["[village]"]==src.ckey||rank=="Hokage"||rank=="Kazekage"||rank=="Mizukage"||rank=="Otokage"||rank=="Tsuchikage")
 		src.verbs+=typesof(/mob/Kage/verb/)
-		winset(src.client, null, {"
-						Options.ShowKage.is-visible = "true";
-					"})
+		winset(src, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
+
 	if(rank=="Akatsuki Leader")
 		src.verbs+=typesof(/mob/AkatsukiLeader/verb/)
-		winset(src.client, null, {"
-						Options.ShowKage.is-visible = "true";
-					"})
+		winset(src, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
+
 	if(rank=="Anbu Leader")
 		src.verbs+=typesof(/mob/AnbuLeader/verb/)
-		winset(src.client, null, {"
-						Options.ShowKage.is-visible = "true";
-					"})
+		winset(src, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
+
 	if(rank=="Seven Swordsmen Leader")
 		src.verbs+=typesof(/mob/SevenSwordsmenLeader/verb/)
-		winset(src.client, null, {"
-						Options.ShowKage.is-visible = "true";
-					"})
+		winset(src, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
+
 	if(MasterGMCheck(ckey))
 		src.verbs+=typesof(/mob/MasterGM/verb/)
 		src.verbs+=typesof(/mob/Admin/verb/)
@@ -52,31 +48,23 @@ mob/proc/AddAdminVerbs()
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
 		src.admin=1
 		client.control_freak/CONTROL_FREAK_ALL=0
-		winset(src.client, null, {"
-						Options.ShowKage.is-visible = "true";
-					"})
+		winset(src, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
 
 	if(AdminCheck(src.ckey)||src.ckey == file2text(HostKey))
 		src.verbs+=typesof(/mob/Admin/verb/)
 		src.verbs+=typesof(/mob/Moderator/verb/)
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
 		src.admin=1
-		winset(src.client, null, {"
-						Options.ShowKage.is-visible = "true";
-					"})
+		winset(src, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
 
 	if(ModeratorCheck(ckey))
 		src.verbs+=typesof(/mob/Moderator/verb/)
 		src.admin=1
-		winset(src.client, null, {"
-						Options.ShowKage.is-visible = "true";
-					"})
+		winset(src, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
 
 	if(ArtistCheck(ckey))
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
-		winset(src.client, null, {"
-						Options.ShowKage.is-visible = "true";
-					"})
+		winset(src, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
 
 mob/proc/RemoveAdminVerbs()
 	src.verbs-=typesof(/mob/Kage/verb/)
@@ -213,6 +201,7 @@ mob/Moderator/verb/
 		for(var/mob/M in world)
 			if(M.key)
 				M.ExpLock=1
+				winset(M, "NavigationPanel", "ExpLockButton.is-disabled = 'false'")
 				M.Save()
 			else
 				continue
@@ -478,9 +467,8 @@ mob/Admin/verb
 		M.rank="Genin"
 		M.RemoveAdminVerbs()
 		text2file("[usr]([usr.key]) removed [M]([M.key]) from [VillageLead] Kage.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
-		winset(src, null, {"
-						MainWindow.KageChild.is-visible = "false";
-					"})
+		winset(src, "NavigationPanel", "LeaderButton.is-disabled = 'true'")
+
 	Teleport_To_XYZ()
 		set category="Staff"
 		var/xloc=input("What x? (max 200)","X") as num
@@ -517,7 +505,7 @@ mob/Admin/verb
 		PArtists+=M.ckey
 		M.AddAdminVerbs()
 		M.admin=1
-		winset(M,"Options.ShowKage","is-visible=true")
+		winset(M, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
 
 	Add_Moderator(mob/M in TotalPlayers)
 		set category="Staff"
@@ -526,7 +514,7 @@ mob/Admin/verb
 		Moderators+=M.ckey
 		M.AddAdminVerbs()
 		M.admin=1
-		winset(M,"Options.ShowKage","is-visible=true")
+		winset(M, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
 
 
 	Remove_Staff(mob/M in TotalPlayers)
@@ -539,10 +527,7 @@ mob/Admin/verb
 		Admins-=M.ckey
 		Moderators-=M.ckey
 		M.RemoveAdminVerbs()
-		winset(src, null, {"
-						MainWindow.KageChild.is-visible = "false";
-						Kage.is-visible = "false";
-					"})
+		winset(M, "NavigationPanel", "LeaderButton.is-disabled = 'true'")
 
 mob/MasterGM/verb
 	Add_Admin(mob/M in TotalPlayers)
@@ -553,7 +538,8 @@ mob/MasterGM/verb
 		M.AddAdminVerbs()
 		M.admin=1
 		M.namecolor="green"
-		winset(M,"Options.ShowKage","is-visible=true")
+		winset(M, "NavigationPanel", "LeaderButton.is-disabled = 'false'")
+
 
 	Admin_Shield()
 		set category = "Staff"

@@ -43,8 +43,10 @@ obj/Squad
 					for(var/i in Members)
 						var/mob/M=getOwner(i)
 						M<<output("[usr] has left your squad","ActionPanel.Output")
+						winset(M, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 					var/mob/L=getOwner(Leader)
 					L<<output("[usr] has left your squad","ActionPanel.Output")
+					winset(L, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 			return
 		var/setting = usr.skinput("Select an option","Squad",list("View Squad","Invite Member", "Remove Member","Check Mission","Leave Squad", "Cancel"))
 		switch(setting)
@@ -90,6 +92,7 @@ obj/Squad
 							return
 						Members += M.ckey
 						M.Squad = src
+						winset(M, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 						usr<<output("[M] is now a part of your Squad.","ActionPanel.Output")
 						M<<output("You are now a part of [usr]'s Squad.","ActionPanel.Output")
 			if("Remove Member")
@@ -107,6 +110,7 @@ obj/Squad
 					Members -= M.ckey
 					M.Squad = null
 					M.Channel="Say"
+					winset(M, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 				else
 					Members -= choice
 				usr<<output("[choice] has been removed","ActionPanel.Output")
@@ -128,6 +132,7 @@ obj/Squad
 					Leader = pick(Members) //It picks a new Leader from the current members
 					Members -= Leader //Remove the leader from the member list once(was duplicating)
 					usr.Channel="Say"
+					winset(usr, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 mob/
 	var/tmp/
 		obj/Squad/Squad
@@ -167,4 +172,5 @@ mob/verb/
 		usr.Squad = P
 		P.Leader = usr.ckey
 		P.ID = "[rand(100,999)][rand(100,999)][rand(100,999)]"
+		winset(src, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 

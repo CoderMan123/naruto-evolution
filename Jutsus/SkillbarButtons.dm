@@ -155,6 +155,7 @@ mob/player
 					src<<"Your Exp Lock was removed!"
 					src.ExpLock=0
 					ExpLockDelay=0
+					winset(src, "NavigationPanel", "ExpLockButton.is-disabled = 'true'")
 					return
 				else
 					src<<"You did not enter the right verification code!"
