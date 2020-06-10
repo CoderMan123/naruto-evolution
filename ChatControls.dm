@@ -47,25 +47,40 @@ mob/player
 	verb
 		say(msg as text)
 			set hidden=1
+			var/obj/Symbols/V
+			var/obj/Symbols/R
 			switch(village)
 				if("Hidden Sand")
 					namecolor="#f4a460"
+					V=new/obj/Symbols/Sand()
 				if("Hidden Leaf")
 					namecolor="green"
+					V=new/obj/Symbols/Leaf()
 				if("Hidden Mist")
 					namecolor="cyan"
+					V=new/obj/Symbols/Missing()
 				if("Hidden Sound")
 					namecolor="#7B68EE"
+					V=new/obj/Symbols/Missing()
 				if("Hidden Rock")
 					namecolor="#EF7121"
+					V=new/obj/Symbols/Missing()
 				if("Seven Swordsmen")
 					namecolor="#c0c0c0"
+					V=new/obj/Symbols/Missing()
 				if("Missing-Nin")
 					namecolor="white"
+					V=new/obj/Symbols/Missing()
 				if("Akatsuki")
 					namecolor="#dc143c"
+					V=new/obj/Symbols/Akatsuki()
 				if("Anbu Root")
 					namecolor="#31ff4d"
+					V=new/obj/Symbols/Missing()
+
+			switch(rank)
+				if("Academy Student") R=new/obj/Symbols/Academy()
+
 			var/lengtext = length(msg)
 			SayUp=0
 			winset(src, null, {"
@@ -117,15 +132,15 @@ mob/player
 			if(!usr.likeaclone)
 				if(msg)
 					if(Channel=="Say")
-						if(usr.admin) view(usr)<<"<font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>"
-						else view(usr)<<("<font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>")
+						if(usr.admin) view(usr)<<"\icon[V] <font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>"
+						else view(usr)<<("\icon[V] <font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>")
 					if(Channel=="World")
 						if(worldmute==1)
 							return
 						if(usr.admin)
-							world<<"<font color=red>World-</font><font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>"
+							world<<"<font color=red>\[W] \icon[V] </font><font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>"
 						else
-							world<<ffilter("<font color=red>World-</font><font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>")
+							world<<ffilter("<font color=red>\[W] \icon[V] </font><font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>")
 					if(Channel=="Squad")
 						if(!Squad) return
 						for(var/i in Squad.Members)
@@ -138,8 +153,8 @@ mob/player
 						else Leader<<ffilter("<font color=white>Radio-</font><font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>")
 					if(Channel=="Village")
 						for(var/mob/player/M in world) if(M.village==src.village||M.admin)
-							if(usr.admin) M<<"<font color=yellow>[src.village]-[src.rank]-</font><font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>"
-							else M<<ffilter("<font color=yellow>[src.village]-[src.rank]-</font><font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>")
+							if(usr.admin) M<<"<font color=yellow>\icon[V] \icon[R] </font><font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>"
+							else M<<ffilter("<font color=yellow>\icon[V] \icon[R] </font><font color=[usr.namecolor]>([usr.name]): </Font><font color=[usr.chatcolor]>[html_encode(msg)]</Font>")
 					if(Channel=="Faction")
 						var/Faction/faction=getFaction(src.Faction)
 						if(!faction) return

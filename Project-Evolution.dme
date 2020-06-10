@@ -2,7 +2,6 @@
 // END_INTERNALS
 // BEGIN_FILE_DIR
 #define FILE_DIR .
-#define FILE_DIR "Client"
 #define FILE_DIR "Clothing"
 #define FILE_DIR "Clothing/7SM"
 #define FILE_DIR "Clothing/Weapons"
@@ -94,6 +93,7 @@
 #include "Hud\Alerts.dm"
 #include "Hud\Bingo Book.dm"
 #include "Hud\Text Names.dm"
+#include "Interface\Symbols\Symbols.dm"
 #include "Jutsus\AttackVerb.dm"
 #include "Jutsus\Gates.dm"
 #include "Jutsus\Genjutsu.dm"

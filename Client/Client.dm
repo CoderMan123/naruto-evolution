@@ -35,7 +35,3 @@ client
 					src.Alert("You hit button one. Your input was: [AlertInput[2]]", "Alert")
 				if(2)
 					src.Alert("You hit button two. Your input was: [AlertInput[2]]", "Alert")
-
-obj
-	Test
-		icon='Test.dmi'
