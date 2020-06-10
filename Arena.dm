@@ -51,10 +51,10 @@ turf/Arena
 /*		Click()
 			if(get_dist(usr,src)>1) return
 			if(duel)
-				usr << output("Arena has been disabled until it is fixed or completely removed.","actionoutput")
+				usr << output("Arena has been disabled until it is fixed or completely removed.","ActionPanel.Output")
 				return
 	/*			if(!usr.opponent)
-					usr << output("There is already an arena match in progress.","actionoutput")
+					usr << output("There is already an arena match in progress.","ActionPanel.Output")
 					return
 				else
 					EndMatch(usr,usr.opponent)
@@ -63,18 +63,18 @@ turf/Arena
 				s2 = locate(/turf/Arena/Starting_Circle_2)
 				for(var/mob/M in s2)usr.opponent = M
 				if(!usr.opponent)
-					usr << output("You do not have an opponent.","actionoutput")
+					usr << output("You do not have an opponent.","ActionPanel.Output")
 					return
 				if(usr.skalert("Fight [usr.opponent]?","Duel",list("Yes","No")) == "No")
 					usr.opponent = null
 					return
 				if(usr.opponent) usr.opponent.opponent = usr
 				if(!duel)
-					usr << output("Arena has been disabled until it is either fixed or completely removed.","actionoutput")
+					usr << output("Arena has been disabled until it is either fixed or completely removed.","ActionPanel.Output")
 					return
 		proc
 			End_Match()
-				usr.arena << output("[usr] ends the match.","actionoutput")
+				usr.arena << output("[usr] ends the match.","ActionPanel.Output")
 				EndMatch(usr, usr.opponent)
 	Starting_Circle_2
 		name = "Arena"
@@ -82,5 +82,5 @@ turf/Arena
 		var/turf/Arena/Starting_Circe_2/s1
 		proc
 			End_Match()
-				usr.arena << output("[usr] ends the match.","actionoutput")
+				usr.arena << output("[usr] ends the match.","ActionPanel.Output")
 				EndMatch(usr, usr.opponent)*/

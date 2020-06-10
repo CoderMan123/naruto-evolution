@@ -242,14 +242,14 @@ mob/Login
 						"})
 		winset(src, null, {"
 							Maplink.right=titlescreen;
-							mainwindow.is-maximized=true
-							mainwindow.UnlockChild.is-visible = "false";
-							mainwindow.InvenChild.is-visible = "false";
+							MainWindow.is-maximized=true
+							MainWindow.UnlockChild.is-visible = "false";
+							MainWindow.InvenChild.is-visible = "false";
 							Stats.is-visible      = "false";
-							SkillBar.is-visible      = "false";
-							ChatOut.is-visible      = "false";
+							MainWindow.NavigationChild.is-visible      = "false";
+							MainWindow.OutputChild.is-visible      = "false";
 							target.is-visible = "false";
-							ActionOutputChild.is-visible      = "false";
+							MainWindow.ActionChild.is-visible      = "false";
 						"})
 		winset(src, null, {"
 							TitleChild.right=mapwindow;
@@ -319,12 +319,12 @@ mob/Login
 		M.chatcolor="white"
 		M.RestoreOverlays()
 		world<<"[M.rname] has logged in."
-		M << output("Welcome to the game. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F10: Hotslots<br>R: Recharge chakra<br>I: Inventory<br>O: Statpanel<br>P: Jutsus<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","actionoutput")
+		M << output("Welcome to the game. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F10: Hotslots<br>R: Recharge chakra<br>I: Inventory<br>O: Statpanel<br>P: Jutsus<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","ActionPanel.Output")
 		M << "Welcome [M.rname]. If you're new please read the rules. You can find them in the Options panel. If you need to contact someone, there is a link to our discord on the HUB. Check the Action output to the right for controls."
 		if(!M.key)
 			M.Logout()
 
-		winset(M, "mainwindow", "is-maximized=true")
+		winset(M, "Main", "is-maximized=true")
 		new/obj/Screen/Bar(M)
 		if(M.village == "Hidden Leaf")new/obj/Screen/LeafSymbol(M)
 		if(M.village == "Hidden Sand")new/obj/Screen/SandSymbol(M)
@@ -361,7 +361,7 @@ mob/Login
 				M.verbs += M.Factionverbs
 				c.onlinemembers.Add(M)
 				c.members[M.rname] = list(M.key, M.level, M.Factionrank)
-				if(c.FMOTD) M<<output("Faction MOTD: <br>[c.FMOTD]</br>","actionoutput")
+				if(c.FMOTD) M<<output("Faction MOTD: <br>[c.FMOTD]</br>","ActionPanel.Output")
 				M.verbs += /Faction/Generic/verb/FactionLeave
 		if(M.Faction&&!getFaction(M.Faction))
 			M<<"Your Faction no longer exists. [M.Faction] has disbanded."
@@ -392,9 +392,9 @@ mob/Login
 			del src
 		if(!M.name) M.name=M.key
 		winset(M, null, {"
-							SkillBar.is-visible      = "true";
-							ChatOut.is-visible      = "true";
-							ActionOutputChild.is-visible      = "true";
+							MainWindow.NavigationChild.is-visible      = "true";
+							MainWindow.OutputChild.is-visible      = "true";
+							MainWindow.ActionChild.is-visible      = "true";
 							Maplink.right=mapwindow;
 						"})
 		M<<"Now speaking in: [M.Channel]."
@@ -594,8 +594,8 @@ mob/Login
 				M.loc=locate(39,158,14)//M.MapLoadSpawn()
 				M.client.eye=M
 				M.client:perspective = EYE_PERSPECTIVE
-				M << output("Welcome to the game. Enjoy. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F5: Hotslots<br>R: Recharge chakra<br>Tab: Target<br>Shift+Tab: Untarget<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","actionoutput")
-				winset(M, "mainwindow", "is-maximized=true")
+				M << output("Welcome to the game. Enjoy. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F5: Hotslots<br>R: Recharge chakra<br>Tab: Target<br>Shift+Tab: Untarget<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","ActionPanel.Output")
+				winset(M, "Main", "is-maximized=true")
 				new/obj/Screen/Bar(M)
 				if(M.village == "Hidden Leaf")new/obj/Screen/LeafSymbol(M)
 				if(M.village == "Hidden Sand")new/obj/Screen/SandSymbol(M)
@@ -640,9 +640,9 @@ mob/Login
 				world<<"[M.rname] has logged in for the first time."
 				M.creating=0
 				winset(M, null, {"
-								SkillBar.is-visible      = "true";
-								ChatOut.is-visible      = "true";
-								ActionOutputChild.is-visible      = "true";
+								MainWindow.NavigationChild.is-visible      = "true";
+								MainWindow.OutputChild.is-visible      = "true";
+								MainWindow.ActionChild.is-visible      = "true";
 								Maplink.right=mapwindow;
 							"})
 				M<<"Now speaking in: [M.Channel]."
@@ -933,7 +933,7 @@ mob
 			var/savefile/F = new/savefile("Players/[copytext(Logins,1,2)]/[Logins].sav")
 			F["Password"] = Password
 			F << src
-			//src << output("Game saved successfully.", "actionoutput")
+			//src << output("Game saved successfully.", "ActionPanel.Output")
 
 	Write(var/savefile/F,var/list/neversave=null)
 		. = ..(F,neversave)
@@ -970,16 +970,16 @@ mob
 	verb
 		WorldAddy()
 			set hidden=1
-			usr << output("<FONT FACE= Times New Roman>byond://[world.internet_address]:[world.port]", "actionoutput")
+			usr << output("<FONT FACE= Times New Roman>byond://[world.internet_address]:[world.port]", "ActionPanel.Output")
 	verb
 		CloseBrowser()
 			set hidden=1
 			winset(src, null, {"
-						mainwindow.BrowserChild.is-visible = "false";
+						BrowserWindow.is-visible = "false";
 					"})
 		MiniWindow()
 			set hidden=1
-			winset(usr, "mainwindow", "is-minimized=true")
+			winset(usr, "Main", "is-minimized=true")
 
 /*
 mob

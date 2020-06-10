@@ -38,7 +38,7 @@ mob/proc
 			"}
 		usr << browse(html)
 		winset(src, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
+						BrowserWindow.is-visible = "true";
 					"})
 proc
 	getFaction(text)
@@ -82,7 +82,7 @@ Faction
 				M<<"Please keep MOTD messages below 400 characters."
 				return
 			FMOTD=html_encode(V)
-			for(var/mob/player/Player in TotalPlayers) if(getFaction(Player.Faction) == src) Player<<output("<b>Faction MOTD has been changed.<br><br> <i>[FMOTD]</i></b>","actionoutput")
+			for(var/mob/player/Player in TotalPlayers) if(getFaction(Player.Faction) == src) Player<<output("<b>Faction MOTD has been changed.<br><br> <i>[FMOTD]</i></b>","ActionPanel.Output")
 		LevelUp()
 			if(Level==10) return
 			while(Funds>=LevelFundsMax)
@@ -110,15 +110,15 @@ Faction
 					if(Num>M.Ryo||Num<=0)return
 					Funds+=Num
 					M.Ryo-=Num
-					M << output("Successfully deposited [Num] funds.","actionoutput")
+					M << output("Successfully deposited [Num] funds.","ActionPanel.Output")
 					LevelUp()
 					return
 				if("Withdraw")
 					if(M.ckey!=headkey)
-						M<<output("You must be the Faction leader to preform this action.","actionoutput")
+						M<<output("You must be the Faction leader to preform this action.","ActionPanel.Output")
 						return
 					if(!Funds)
-						M << output("There is no Ryo to withdraw","actionoutput")
+						M << output("There is no Ryo to withdraw","ActionPanel.Output")
 						return
 					else
 						var/Num=M.skinput2("How much would you like to withdraw?","Ryo Withdraw",null,1)
@@ -128,7 +128,7 @@ Faction
 							return
 						M.Ryo+=Num
 						Funds-=Num
-						M << output("Successfully withdrawed [Num] funds.","actionoutput")
+						M << output("Successfully withdrawed [Num] funds.","ActionPanel.Output")
 					return
 		Leave(mob/M)
 			for(var/mob/player/X in TotalPlayers)
@@ -136,7 +136,7 @@ Faction
 			M.verbs -= /Faction/Generic/verb/FactionLeave
 			M.Faction = null
 			src.members -= M.rname
-			M << output("You have left [Filter(html_encode(src.name))].","actionoutput")
+			M << output("You have left [Filter(html_encode(src.name))].","ActionPanel.Output")
 			M.verbs -= cverbs
 			src.onlinemembers -= M
 			M.overlays=null
@@ -144,13 +144,13 @@ Faction
 			if(members.len<=0)
 				Factionnames -= name
 				Factions -= src
-				world << output("<font color=[color]><b>[Filter(html_encode(name))] have been disbanded.</font></b>","actionoutput")
+				world << output("<font color=[color]><b>[Filter(html_encode(name))] have been disbanded.</font></b>","ActionPanel.Output")
 				for(var/mob/player/p in TotalPlayers)
 					if(p.Faction == name)
 						p.Faction = ""
 						p.verbs -= cverbs
 						p.verbs -= /Faction/Generic/verb/FactionLeave
-						p << output("You are no longer a part of [Filter(html_encode(name))], they were disbanded.","actionoutput")
+						p << output("You are no longer a part of [Filter(html_encode(name))], they were disbanded.","ActionPanel.Output")
 		AddMember(mob/player, mob/M)
 			if(members.len>=MaxMembers)
 				player.skalert("Your faction is at it's max member count ([MaxMembers]). Level up to gain more space!","Error")
@@ -161,16 +161,16 @@ Faction
 			M.Faction = src.name
 			src.members[M.rname] = list(M.key, M.level, M.Factionrank)
 			src.onlinemembers += M
-			M << output("You are now a [membername]","actionoutput")
-			src.onlinemembers << output("<font color=[src.color]>[M.rname] has joined your Faction. </font>","actionoutput")
+			M << output("You are now a [membername]","ActionPanel.Output")
+			src.onlinemembers << output("<font color=[src.color]>[M.rname] has joined your Faction. </font>","ActionPanel.Output")
 			for(var/mob/player/P in TotalPlayers)
-				if(P.admin)P<<output("<font color=[src.color]>[M.rname]([M.ckey]) is now a member of the [Filter(html_encode(src.name))]</font>","actionoutput")
+				if(P.admin)P<<output("<font color=[src.color]>[M.rname]([M.ckey]) is now a member of the [Filter(html_encode(src.name))]</font>","ActionPanel.Output")
 			M.Faction("[name]",color)
 			return 1
 		Fire_Member(mob/M)
 			M.Faction = null
 			src.members -= M.rname
-			M << output("You have been fired from [Filter(html_encode(src.name))]","actionoutput")
+			M << output("You have been fired from [Filter(html_encode(src.name))]","ActionPanel.Output")
 			M.verbs -= cverbs
 			src.onlinemembers -= M
 			M.overlays=null
@@ -178,13 +178,13 @@ Faction
 			if(members.len<=0)
 				Factionnames -= name
 				Factions -= src
-				world << output("<font color=[color]><b>[name] have been disbanded.</font></b>","actionoutput")
+				world << output("<font color=[color]><b>[name] have been disbanded.</font></b>","ActionPanel.Output")
 				for(var/mob/player/p in TotalPlayers)
 					if(p.Faction == name)
 						p.Faction = ""
 						p.verbs -= cverbs
 						p.verbs -= /Faction/Generic/verb/FactionLeave
-						p << output("You are no longer a part of [name], they were disbanded.","actionoutput")
+						p << output("You are no longer a part of [name], they were disbanded.","ActionPanel.Output")
 		Rank(mob/leader,mob/member)
 			if(!leader || !member) return
 			var/r = leader.CustomInput("Rank Selection","What rank shall [member] be put at?", ranks)
@@ -237,7 +237,7 @@ Faction
 			"}
 			person << browse(html)
 			winset(person, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
+						BrowserWindow.is-visible = "true";
 					"})
 	Leveled
 		verb
@@ -349,9 +349,9 @@ Faction
 		if(form == "setup")
 			usr << browse(null)
 			if(href_list["stop"])
-				usr << output("You cancel making a Faction.","actionoutput")
+				usr << output("You cancel making a Faction.","ActionPanel.Output")
 				winset(usr, null, {"
-						mainwindow.BrowserChild.is-visible = "false";
+						BrowserWindow.is-visible = "false";
 					"})
 				Factions-=src
 				del(src)
@@ -359,7 +359,7 @@ Faction
 			if(!href_list["name"] || !color)
 				usr.skalert("You did not fill out all of the necessary fields.")
 				winset(usr, null, {"
-						mainwindow.BrowserChild.is-visible = "false";
+						BrowserWindow.is-visible = "false";
 					"})
 				Factions-=src
 				del(src)
@@ -368,7 +368,7 @@ Faction
 			if(leng>=15)
 				usr.skalert("Your faction name cannot be longer than 15 characters.")
 				winset(usr, null, {"
-						mainwindow.BrowserChild.is-visible = "false";
+						BrowserWindow.is-visible = "false";
 					"})
 				Factions-=src
 				del(src)
@@ -377,7 +377,7 @@ Faction
 				if(i==href_list["name"])
 					usr.skalert("Your faction name has already been taken.")
 					winset(usr, null, {"
-							mainwindow.BrowserChild.is-visible = "false";
+							BrowserWindow.is-visible = "false";
 						"})
 					Factions-=src
 					del(src)
@@ -385,7 +385,7 @@ Faction
 			if(usr.Ryo<3000)
 				usr.skalert("You need 3000 Ryo to create a Faction.")
 				winset(usr, null, {"
-						mainwindow.BrowserChild.is-visible = "false";
+						BrowserWindow.is-visible = "false";
 					"})
 				Factions-=src
 				del(src)
@@ -397,14 +397,14 @@ Faction
 			if(href_list["mname"])membername= "[href_list["mname"]]"
 			else membername="member of the [name]"
 			winset(usr, null, {"
-						mainwindow.BrowserChild.is-visible = "false";
+						BrowserWindow.is-visible = "false";
 					"})
 			cverbs += typesof(/Faction/Generic/verb)
 			cverbs -= /Faction/Generic/verb/FactionLeave
 			var/mob/_head = usr
 			head = _head.rname
-			world << output("<b><font color=[color]>The faction: [Filter(html_encode(name))] has been established by [head].</font></b>","actionoutput")
-			_head << output("<font color=[color]>You are now leading [Filter(html_encode(name))].</font>","actionoutput")
+			world << output("<b><font color=[color]>The faction: [Filter(html_encode(name))] has been established by [head].</font></b>","ActionPanel.Output")
+			_head << output("<font color=[color]>You are now leading [Filter(html_encode(name))].</font>","ActionPanel.Output")
 			_head.verbs += cverbs
 			_head.verbs += /Faction/Generic/verb/FactionLeave
 			_head.Faction = name

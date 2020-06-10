@@ -6,7 +6,7 @@ mob
 			if(src.firing==0&&src.canattack==1)
 				for(var/obj/Jutsus/MizuClone/J in src.JutsusLearnt)
 					if(!has_water())
-						src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","actionoutput")
+						src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 						return
 					if(src.PreJutsu(J))
 						src.CloneHandler()
@@ -85,7 +85,7 @@ mob
 		WaterPrison()
 			for(var/obj/Jutsus/WaterPrison/J in src.JutsusLearnt)
 				if(!has_water())
-					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","actionoutput")
+					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
@@ -138,7 +138,7 @@ mob
 		WaterShark()
 			for(var/obj/Jutsus/WaterShark/J in src.JutsusLearnt)
 				if(!has_water())
-					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","actionoutput")
+					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 					return
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -203,7 +203,7 @@ mob
 		Water_Dragon_Projectile()
 			for(var/obj/Jutsus/Water_Dragon_Projectile/J in src.JutsusLearnt)
 				if(!has_water())
-					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","actionoutput")
+					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 					return
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)

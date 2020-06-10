@@ -38,7 +38,7 @@ mob
 			for(var/obj/Jutsus/Kirin/J in src.JutsusLearnt)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src<<output("You must have a target to use this technique.","actionoutput")
+					src<<output("You must have a target to use this technique.","ActionPanel.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))

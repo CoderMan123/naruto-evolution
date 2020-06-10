@@ -31,7 +31,7 @@ mob
 			for(var/obj/Jutsus/JubakuEisou/J in src.JutsusLearnt)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src << output("This jutsu requires a target","actionoutput")
+					src << output("This jutsu requires a target","ActionPanel.Output")
 					return
 				if(src.PreJutsu(J))
 
@@ -70,7 +70,7 @@ mob
 										M.injutsu=0
 										M.canattack=1
 										M.Sleeping=0
-								else src<<output("The jutsu did not connect.","actionoutput")
+								else src<<output("The jutsu did not connect.","ActionPanel.Output")
 					src.firing=0
 					src.canattack=1
 
@@ -101,7 +101,7 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-					view(src) << output("<b><font color = brown>[usr] says: Tree Summoning!","actionoutput")
+					view(src) << output("<b><font color = brown>[usr] says: Tree Summoning!","ActionPanel.Output")
 					flick("jutsuse",src)
 					view(src)<<sound('wind_leaves.ogg',0,0)
 					src.firing=1
@@ -169,7 +169,7 @@ mob
 							if(src)
 								Prisoner=null
 								src.icon_state=""
-					else src<<output("This technique requires a target.","actionoutput")
+					else src<<output("This technique requires a target.","ActionPanel.Output")
 					if(src)
 						src.firing=0
 						src.canattack=1
@@ -211,7 +211,7 @@ mob
 				for(var/obj/Jutsus/Root_Strangle/J in src.JutsusLearnt)
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target)
-						src << output("This jutsu requires a target.","actionoutput")
+						src << output("This jutsu requires a target.","ActionPanel.Output")
 						return
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
@@ -282,7 +282,7 @@ mob
 					if(src.PreJutsu(J))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(!c_target)
-							src << output("You need a target to use this.","actionoutput")
+							src << output("You need a target to use this.","ActionPanel.Output")
 							return
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
 						src.move=0

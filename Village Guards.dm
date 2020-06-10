@@ -432,11 +432,11 @@ mob/NPCs/Shinobi
 				killer.exp-=round(killer.exp*0.5)
 				killer.Vkill++
 				if(killer.exp<=0) killer.exp=0
-				killer<<output("You have lost 50% of your EXP for killing a fellow villager.","actionoutput")
+				killer<<output("You have lost 50% of your EXP for killing a fellow villager.","ActionPanel.Output")
 				if(!killer.CheckVKill())
-					killer<<output("Careful! Killing your villagers will get you kicked from the village. ([killer.Vkill]/5)","actionoutput")
+					killer<<output("Careful! Killing your villagers will get you kicked from the village. ([killer.Vkill]/5)","ActionPanel.Output")
 				else //if(killer.CheckVkill())
-					world<<output("[killer] has been booted from [killer.village] for village killing!","actionoutput")
+					world<<output("[killer] has been booted from [killer.village] for village killing!","ActionPanel.Output")
 					text2file("[killer] has been booted from [killer.village] for village killing: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
 
 					if(killer.village=="Akatsuki")

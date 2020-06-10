@@ -178,7 +178,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(1,2); J.Levelup()
 					if(src.BOW<J.level*2)src.BOW++
-					src<<output("You charge chakra to your fingertips, and now have stocked [src.BOW] Blades of Wind.","actionoutput")
+					src<<output("You charge chakra to your fingertips, and now have stocked [src.BOW] Blades of Wind.","ActionPanel.Output")
 
 		Wind_Tornados()
 			if(src.firing==0 && src.canattack==1 && src.dead==0)

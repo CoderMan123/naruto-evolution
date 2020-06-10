@@ -18,5 +18,5 @@ mob/verb/BingoBook()
 	if(!People) HTML+="<center><font color=white>There is nobody wanted online.</font></center>"
 	src<<browse(HTML)
 	winset(src, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
+						BrowserWindow.is-visible = "true";
 					"})

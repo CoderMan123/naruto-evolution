@@ -34,7 +34,7 @@ mob/NPC
 			density=1
 			DblClick()
 				if(usr.Tutorial!=Tutorial)
-					usr<<output("You're not supposed to talk to this Jounin","actionoutput")
+					usr<<output("You're not supposed to talk to this Jounin","ActionPanel.Output")
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
@@ -64,7 +64,7 @@ Please move on to the next Jounin after you are aquainted with the interface."},
 			DblClick()
 				if(!usr.TutorialStrength) usr.TutorialStrength=usr.strength
 				if(usr.Tutorial!=Tutorial)
-					usr<<output("You're not supposed to talk to this Jounin yet.","actionoutput")
+					usr<<output("You're not supposed to talk to this Jounin yet.","ActionPanel.Output")
 					return
 				if(usr.strength<=usr.TutorialStrength)
 					if(usr) usr.skalert({"[src]: Hey, talk to me again when you've increased your Taijutsu.
@@ -90,7 +90,7 @@ You'll learn more about this as you experience it first hand. Please move on to 
 			density=1
 			DblClick()
 				if(usr.Tutorial!=Tutorial)
-					usr<<output("You're not supposed to talk to this Jounin yet.","actionoutput")
+					usr<<output("You're not supposed to talk to this Jounin yet.","ActionPanel.Output")
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
@@ -123,7 +123,7 @@ Some jutsus increase damage or active time while others will fire more projectil
 					usr<<"Open up your skill tree first, and purchase the Substitution Technique under Non Clan Skills."
 					return
 				if(usr.Tutorial!=Tutorial)
-					usr<<output("You're not supposed to talk to this Jounin yet.","actionoutput")
+					usr<<output("You're not supposed to talk to this Jounin yet.","ActionPanel.Output")
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return

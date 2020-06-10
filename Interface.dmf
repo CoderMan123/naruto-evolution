@@ -1,0 +1,2154 @@
+macro "macro"
+	elem 
+		name = "Tab"
+		command = "Target-A-Mob"
+	elem 
+		name = "SHIFT+Tab"
+		command = "Untarget-pplz"
+	elem 
+		name = "Center+REP"
+		command = ".center"
+	elem 
+		name = "Return"
+		command = "Winsay"
+	elem 
+		name = "SHIFT+Return"
+		command = "GM-Chat"
+	elem 
+		name = "Escape"
+		command = ".options"
+	elem 
+		name = "Space"
+		command = "HandSealActivate"
+	elem 
+		name = "Northeast+REP"
+		command = ".northeast"
+	elem 
+		name = "Southeast+REP"
+		command = ".southeast"
+	elem 
+		name = "Southwest+REP"
+		command = ".southwest"
+	elem 
+		name = "Northwest+REP"
+		command = ".northwest"
+	elem 
+		name = "West+REP"
+		command = ".west"
+	elem 
+		name = "ALT+West+REP"
+		command = "puppet2west"
+	elem 
+		name = "CTRL+West+REP"
+		command = "puppet1west"
+	elem 
+		name = "North+REP"
+		command = ".north"
+	elem 
+		name = "ALT+North+REP"
+		command = "puppet2north"
+	elem 
+		name = "CTRL+North+REP"
+		command = "puppet1north"
+	elem 
+		name = "East+REP"
+		command = ".east"
+	elem 
+		name = "ALT+East+REP"
+		command = "puppet2east"
+	elem 
+		name = "CTRL+East+REP"
+		command = "puppet1east"
+	elem 
+		name = "South+REP"
+		command = ".south"
+	elem 
+		name = "ALT+South+REP"
+		command = "puppet2south"
+	elem 
+		name = "CTRL+South+REP"
+		command = "puppet1south"
+	elem 
+		name = "1"
+		command = "HandSeal rabbit"
+	elem 
+		name = "2"
+		command = "HandSeal snake"
+	elem 
+		name = "3"
+		command = "HandSeal horse"
+	elem 
+		name = "4"
+		command = "HandSeal monkey"
+	elem 
+		name = "5"
+		command = "HandSeal dragon"
+	elem 
+		name = "ALT+A"
+		command = "puppetshoot2"
+	elem 
+		name = "CTRL+A"
+		command = "puppetshoot1"
+	elem 
+		name = "SHIFT+A"
+		command = "kaguyashoot1"
+	elem 
+		name = "A+REP"
+		command = "Attack"
+	elem 
+		name = "ALT+D"
+		command = "puppetdash2"
+	elem 
+		name = "CTRL+D"
+		command = "puppetdash1"
+	elem 
+		name = "D+REP"
+		command = "Dodge"
+	elem 
+		name = "E"
+		command = "HandSeal dog"
+	elem 
+		name = "F"
+		command = "ThrowMob"
+	elem 
+		name = "G"
+		command = "Get"
+	elem 
+		name = "I"
+		command = "Inventory"
+	elem 
+		name = "O"
+		command = "Stats"
+	elem 
+		name = "P"
+		command = "ViewJutsuTab"
+	elem 
+		name = "Q"
+		command = "HandSeal rat"
+	elem 
+		name = "R"
+		command = "Rest"
+	elem 
+		name = "R+UP"
+		command = "RestUp"
+	elem 
+		name = "S"
+		command = "Throw"
+	elem 
+		name = "ALT+S"
+		command = "puppetgrab2"
+	elem 
+		name = "CTRL+S"
+		command = "puppetgrab1"
+	elem 
+		name = "W"
+		command = "HandSeal ox"
+	elem 
+		name = "F1"
+		command = "HotSlot1"
+	elem 
+		name = "F2"
+		command = "HotSlot2"
+	elem 
+		name = "F3"
+		command = "HotSlot3"
+	elem 
+		name = "F4"
+		command = "HotSlot4"
+	elem 
+		name = "F5"
+		command = "HotSlot5"
+	elem 
+		name = "F6"
+		command = "HotSlot6"
+	elem 
+		name = "F7"
+		command = "HotSlot7"
+	elem 
+		name = "F8"
+		command = "HotSlot8"
+	elem 
+		name = "F9"
+		command = "HotSlot9"
+	elem 
+		name = "F10"
+		command = "HotSlot10"
+
+
+menu "menu"
+	elem 
+		name = "&File"
+		command = ""
+		saved-params = "is-checked"
+	elem 
+		name = "&Quit"
+		command = ".quit"
+		category = "&File"
+		saved-params = "is-checked"
+
+
+window "ActionPanel"
+	elem "ActionPanel"
+		type = MAIN
+		pos = 281,0
+		size = 500x200
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		border = line
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "ActionOutputBackground"
+		type = LABEL
+		pos = 0,0
+		size = 500x200
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = ""
+	elem "Output"
+		type = OUTPUT
+		pos = 3,3
+		size = 494x194
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "max-lines"
+		link-color = #ffd900
+		visited-color = #df00ff
+		legacy-size = false
+
+window "Admin"
+	elem "Admin"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		border = line
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "child2"
+		type = CHILD
+		pos = 0,96
+		size = 640x384
+		anchor1 = 0,20
+		anchor2 = 100,100
+		background-color = none
+		saved-params = "splitter"
+		left = "InfoPane"
+		is-vert = false
+	elem "label4"
+		type = LABEL
+		pos = 88,8
+		size = 456x72
+		anchor1 = 14,2
+		anchor2 = 85,17
+		font-family = "@Kozuka Gothic Pro L"
+		font-size = 15
+		text-color = #bbbbbb
+		background-color = #1b1b1b
+		saved-params = ""
+		text = "Admin Panel"
+
+window "BrowserWindow"
+	elem "BrowserWindow"
+		type = MAIN
+		pos = 281,0
+		size = 940x600
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+	elem "Background"
+		type = LABEL
+		pos = 0,21
+		size = 940x579
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = ""
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 940x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Web Browser"
+	elem "Close"
+		type = BUTTON
+		pos = 912,0
+		size = 25x19
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'Interface\\Close.png'
+		command = "CloseBrowser"
+		is-flat = true
+	elem "Output"
+		type = BROWSER
+		pos = 3,24
+		size = 934x573
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #414141
+		is-default = true
+		saved-params = ""
+
+window "ColorWindow"
+	elem "ColorWindow"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		is-visible = false
+		border = line
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+	elem "button9"
+		type = BUTTON
+		pos = 208,424
+		size = 168x40
+		anchor1 = 33,88
+		anchor2 = 59,97
+		font-family = "@Adobe Fangsong Std R"
+		font-size = 15
+		text-color = #ffffff
+		background-color = #232323
+		saved-params = "is-checked"
+		text = "Done"
+		command = ".colorinput"
+	elem "Prompt"
+		type = LABEL
+		pos = 48,16
+		size = 512x40
+		anchor1 = 8,3
+		anchor2 = 88,12
+		font-family = "@Adobe Fangsong Std R"
+		font-size = 16
+		text-color = #bbbbbb
+		background-color = #1b1b1b
+		saved-params = ""
+		text = "Please select a color."
+	elem "label8"
+		type = LABEL
+		pos = 24,64
+		size = 568x344
+		anchor1 = 4,13
+		anchor2 = 93,85
+		background-color = #353339
+		border = sunken
+		saved-params = ""
+		text = ""
+	elem "label7"
+		type = LABEL
+		pos = 64,288
+		size = 144x48
+		anchor1 = 10,60
+		anchor2 = 33,70
+		font-family = "@Adobe Fangsong Std R"
+		font-size = 15
+		text-color = #0000ff
+		background-color = #353339
+		saved-params = ""
+		text = "Blue"
+	elem "BlueBar"
+		type = BAR
+		pos = 48,328
+		size = 520x48
+		anchor1 = 8,25
+		anchor2 = 89,35
+		background-color = #0000ff
+		saved-params = ""
+		bar-color = #232323
+		is-slider = true
+		width = 400
+		dir = east
+		on-change = "OutputColor"
+	elem "label6"
+		type = LABEL
+		pos = 64,184
+		size = 144x48
+		anchor1 = 10,38
+		anchor2 = 33,48
+		font-family = "@Adobe Fangsong Std R"
+		font-size = 15
+		text-color = #00ff00
+		background-color = #353339
+		saved-params = ""
+		text = "Green"
+	elem "Picture"
+		type = LABEL
+		pos = 480,72
+		size = 68x44
+		anchor1 = 75,15
+		anchor2 = 86,24
+		background-color = #000000
+		border = line
+		saved-params = ""
+		text = ""
+		image-mode = stretch
+	elem "GreenBar"
+		type = BAR
+		pos = 48,224
+		size = 520x48
+		anchor1 = 8,25
+		anchor2 = 89,35
+		background-color = #00ff00
+		saved-params = ""
+		bar-color = #232323
+		is-slider = true
+		width = 400
+		dir = east
+		on-change = "OutputColor"
+	elem "label5"
+		type = LABEL
+		pos = 64,80
+		size = 144x48
+		anchor1 = 10,17
+		anchor2 = 33,27
+		font-family = "@Adobe Fangsong Std R"
+		font-size = 15
+		text-color = #ff0000
+		background-color = #353339
+		saved-params = ""
+		text = "Red"
+	elem "RedBar"
+		type = BAR
+		pos = 48,120
+		size = 520x48
+		anchor1 = 8,25
+		anchor2 = 89,35
+		background-color = #ff0000
+		saved-params = ""
+		bar-color = #232323
+		is-slider = true
+		width = 400
+		dir = east
+		on-change = "OutputColor"
+
+window "InfoPane"
+	elem "InfoPane"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "info"
+		type = INFO
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = ""
+		tab-text-color = #c4c4c4
+		tab-background-color = #1b1b1b
+
+window "InputPanel"
+	elem "InputPanel"
+		type = MAIN
+		pos = 281,0
+		size = 500x28
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "ChatBackground"
+		type = LABEL
+		pos = 0,0
+		size = 500x28
+		anchor1 = none
+		anchor2 = none
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = ""
+	elem "sayinput"
+		type = INPUT
+		pos = 104,3
+		size = 393x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #e2e2e2
+		background-color = #232323
+		is-default = true
+		border = line
+		saved-params = ""
+		command = "Say"
+	elem "input1"
+		type = INPUT
+		pos = 3,3
+		size = 100x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #e2e2e2
+		background-color = #414141
+		border = line
+		saved-params = ""
+		no-command = true
+
+window "Inventory2"
+	elem "Inventory2"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "InvenInfo"
+		type = TAB
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		text-color = #bbbbbb
+		background-color = #2e2e2e
+		border = line
+		saved-params = ""
+		tabs = "Equip"
+		current-tab = "Equip"
+
+window "JutsuTab"
+	elem "JutsuTab"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "button7"
+		type = BUTTON
+		pos = 544,32
+		size = 80x44
+		anchor1 = 85,7
+		anchor2 = 98,16
+		font-family = "@Kozuka Gothic Pro L"
+		font-size = 15
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Close"
+		command = "ViewJutsuTab"
+		is-flat = true
+	elem "Grid"
+		type = GRID
+		pos = 8,8
+		size = 536x464
+		anchor1 = 0,0
+		anchor2 = 85,100
+		text-color = #bbbbbb
+		background-color = #2e2e2e
+		border = line
+		saved-params = ""
+		highlight-color = #000000
+
+window "Kage"
+	elem "Kage"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		border = line
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "child2"
+		type = CHILD
+		pos = 0,96
+		size = 640x384
+		anchor1 = 0,20
+		anchor2 = 100,100
+		saved-params = "splitter"
+		left = "InfoPane"
+		is-vert = false
+	elem "label4"
+		type = LABEL
+		pos = 88,8
+		size = 456x72
+		anchor1 = 14,2
+		anchor2 = 85,17
+		font-family = "@Kozuka Gothic Pro L"
+		font-size = 15
+		text-color = #bbbbbb
+		background-color = #1b1b1b
+		saved-params = ""
+		text = "Options Panel"
+
+window "MainWindow"
+	elem "MainWindow"
+		type = MAIN
+		pos = 281,0
+		size = 1362x960
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		is-default = true
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-resize = false
+		icon = 'Hud\\evo.dmi'
+		macro = "macro"
+	elem "Maplink"
+		type = CHILD
+		pos = 0,0
+		size = 1362x960
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #a6d799
+		saved-params = "splitter"
+		is-vert = false
+	elem "NavigationChild"
+		type = CHILD
+		pos = 0,935
+		size = 1362x25
+		anchor1 = 0,100
+		anchor2 = 100,100
+		background-color = none
+		saved-params = "splitter"
+		left = "NavigationPanel"
+		is-vert = false
+	elem "ActionChild"
+		type = CHILD
+		pos = 862,736
+		size = 500x200
+		anchor1 = 100,100
+		anchor2 = none
+		background-color = #232323
+		is-visible = false
+		saved-params = "splitter"
+		left = "ActionPanel"
+		is-vert = false
+	elem "OutputChild"
+		type = CHILD
+		pos = 0,736
+		size = 500x200
+		anchor1 = 0,100
+		anchor2 = none
+		background-color = #525252
+		saved-params = "splitter"
+		left = "OutputPanel"
+		is-vert = false
+	elem "label"
+		type = LABEL
+		pos = 1385,983
+		size = 1x1
+		anchor1 = 100,100
+		anchor2 = 100,100
+		background-color = none
+		is-visible = false
+		saved-params = ""
+		text = ""
+	elem "AdminChild"
+		type = CHILD
+		pos = 66,128
+		size = 386x394
+		anchor1 = 5,13
+		anchor2 = 33,53
+		background-color = none
+		is-visible = false
+		border = line
+		saved-params = "splitter"
+		left = "Admin"
+		is-vert = false
+	elem "UnlockChild"
+		type = CHILD
+		pos = 444,503
+		size = 540x107
+		anchor1 = 36,68
+		anchor2 = 75,79
+		background-color = #808080
+		border = line
+		saved-params = "splitter"
+		left = "MedalUnlock"
+		is-vert = false
+	elem "InputChild"
+		type = CHILD
+		pos = 0,709
+		size = 500x28
+		anchor1 = 0,100
+		anchor2 = none
+		background-color = none
+		is-visible = false
+		saved-params = "splitter"
+		left = "InputPanel"
+		is-vert = false
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 1362x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Project Evolution"
+	elem "MuteTime"
+		type = LABEL
+		pos = 1117,21
+		size = 267x21
+		anchor1 = 81,2
+		anchor2 = 100,4
+		font-family = "Adobe Fangsong Std R"
+		font-size = 10
+		text-color = #ffffff
+		background-color = #000000
+		is-visible = false
+		saved-params = ""
+		text = "4:30"
+	elem "JutsuTabChild"
+		type = CHILD
+		pos = 777,86
+		size = 386x384
+		anchor1 = 57,9
+		anchor2 = 85,48
+		background-color = none
+		is-visible = false
+		border = line
+		saved-params = "splitter"
+		left = "JutsuTab"
+		is-vert = false
+	elem "InvenChild"
+		type = CHILD
+		pos = 916,218
+		size = 425x497
+		anchor1 = 60,7
+		anchor2 = 97,73
+		background-color = #353339
+		border = line
+		saved-params = "splitter"
+		left = "Equip"
+		is-vert = false
+	elem "Minimize"
+		type = BUTTON
+		pos = 1308,0
+		size = 25x19
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'Interface\\Minimize.png'
+		command = "MiniWindow"
+		is-flat = true
+	elem "Stats"
+		type = CHILD
+		pos = 1162,72
+		size = 174x304
+		anchor1 = 85,8
+		anchor2 = none
+		background-color = none
+		border = line
+		saved-params = "splitter"
+		left = "Status"
+		is-vert = false
+	elem "KageChild"
+		type = CHILD
+		pos = 766,416
+		size = 350x395
+		anchor1 = 56,43
+		anchor2 = 82,84
+		background-color = none
+		is-visible = false
+		border = line
+		saved-params = "splitter"
+		left = "Kage"
+		is-vert = false
+	elem "OptionsChild"
+		type = CHILD
+		pos = 468,309
+		size = 300x395
+		anchor1 = 34,32
+		anchor2 = 56,73
+		background-color = none
+		is-visible = false
+		border = line
+		saved-params = "splitter"
+		left = "Options"
+		is-vert = false
+	elem "Close"
+		type = BUTTON
+		pos = 1334,0
+		size = 25x19
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'Interface\\Close.png'
+		command = ".quit"
+		is-flat = true
+
+window "MedalUnlock"
+	elem "MedalUnlock"
+		type = MAIN
+		pos = 372,0
+		size = 498x59
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "Medal"
+		type = LABEL
+		pos = 245,0
+		size = 253x78
+		anchor1 = 49,0
+		anchor2 = 100,100
+		font-family = "@Adobe Ming Std L"
+		font-size = 20
+		text-color = #ffffff
+		background-color = #232323
+		is-visible = false
+		saved-params = ""
+		text = ""
+	elem "label3"
+		type = LABEL
+		pos = 0,0
+		size = 253x78
+		anchor1 = 0,0
+		anchor2 = 51,100
+		font-family = "@Adobe Ming Std L"
+		font-size = 20
+		text-color = #ffffff
+		background-color = #232323
+		saved-params = ""
+		text = "Medal Unlocked:"
+
+window "NavigationPanel"
+	elem "NavigationPanel"
+		type = MAIN
+		pos = 281,0
+		size = 1362x25
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "Navigation"
+		type = LABEL
+		pos = 0,0
+		size = 1362x25
+		anchor1 = 0,100
+		anchor2 = 100,100
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = ""
+	elem "Options"
+		type = BUTTON
+		pos = 247,3
+		size = 60x22
+		anchor1 = 0,100
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Options"
+		command = "OptionsPanel"
+		is-flat = true
+	elem "SkillTree"
+		type = BUTTON
+		pos = 186,3
+		size = 60x22
+		anchor1 = 0,100
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Skill Tree"
+		command = "viewskilltree"
+		is-flat = true
+	elem "Jutsus"
+		type = BUTTON
+		pos = 125,3
+		size = 60x22
+		anchor1 = 0,0
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Jutsus"
+		command = "JutsuReference"
+		is-flat = true
+	elem "Chat"
+		type = BUTTON
+		pos = 3,3
+		size = 60x22
+		anchor1 = 0,100
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Chat"
+		command = "ChatBox"
+		is-flat = true
+	elem "Channel"
+		type = BUTTON
+		pos = 64,3
+		size = 60x22
+		anchor1 = 0,100
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Channel"
+		command = "ChangeChannel"
+		is-flat = true
+
+window "Options"
+	elem "Options"
+		type = MAIN
+		pos = 281,0
+		size = 370x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		border = line
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Item Collection"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "button17"
+		type = BUTTON
+		pos = 296,400
+		size = 64x31
+		anchor1 = 80,83
+		anchor2 = 97,90
+		text-color = #ff0000
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Rules"
+		command = "Rules"
+		is-flat = true
+	elem "button16"
+		type = BUTTON
+		pos = 296,400
+		size = 64x31
+		anchor1 = 80,83
+		anchor2 = 97,90
+		text-color = #ff0000
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Rules"
+		command = "Rules"
+		is-flat = true
+	elem "label9"
+		type = LABEL
+		pos = 20,32
+		size = 272x400
+		anchor1 = 4,7
+		anchor2 = 78,90
+		background-color = #7c7c7c
+		saved-params = ""
+		text = ""
+	elem "button3"
+		type = BUTTON
+		pos = 89,41
+		size = 143x31
+		anchor1 = 24,9
+		anchor2 = 63,15
+		text-color = #c0c0c0
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Reconnect"
+		command = ".reconnect"
+		is-flat = true
+	elem "button20"
+		type = BUTTON
+		pos = 88,360
+		size = 144x32
+		anchor1 = 24,75
+		anchor2 = 63,82
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "What's New?"
+		command = "Changelog"
+		is-flat = true
+	elem "button19"
+		type = BUTTON
+		pos = 88,320
+		size = 144x32
+		anchor1 = 24,67
+		anchor2 = 63,73
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Join War Event"
+		command = "JoinWar"
+		is-flat = true
+	elem "button18"
+		type = BUTTON
+		pos = 88,280
+		size = 144x32
+		anchor1 = 24,58
+		anchor2 = 63,65
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Arena Challenge"
+		command = "Challenge"
+		is-flat = true
+	elem "button14"
+		type = BUTTON
+		pos = 88,240
+		size = 144x32
+		anchor1 = 24,50
+		anchor2 = 63,57
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Who's Online?"
+		command = "Who"
+		is-flat = true
+	elem "button8"
+		type = BUTTON
+		pos = 297,20
+		size = 67x52
+		anchor1 = 82,4
+		anchor2 = 98,15
+		font-family = "@Kozuka Gothic Pr6N L"
+		font-size = 15
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Close"
+		command = "OptionsPanel"
+		is-flat = true
+	elem "FactionTab"
+		type = BUTTON
+		pos = 88,160
+		size = 144x32
+		anchor1 = 24,33
+		anchor2 = 63,40
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		is-visible = false
+		border = line
+		saved-params = "is-checked"
+		text = "Faction"
+		command = "FactionMenu"
+		is-flat = true
+	elem "button12"
+		type = BUTTON
+		pos = 88,120
+		size = 144x32
+		anchor1 = 24,25
+		anchor2 = 63,32
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Squad"
+		command = "SquadMenu"
+		is-flat = true
+	elem "ShowKage"
+		type = BUTTON
+		pos = 88,200
+		size = 144x32
+		anchor1 = 24,42
+		anchor2 = 63,48
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		is-visible = false
+		border = line
+		saved-params = "is-checked"
+		text = "Show Leader Panel"
+		command = "KagePanel"
+		is-flat = true
+	elem "button11"
+		type = BUTTON
+		pos = 88,80
+		size = 144x32
+		anchor1 = 24,17
+		anchor2 = 63,23
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Bingo Book"
+		command = "BingoBook"
+		is-flat = true
+	elem "button13"
+		type = BUTTON
+		pos = 88,400
+		size = 144x24
+		anchor1 = 24,83
+		anchor2 = 63,88
+		text-color = #ff0000
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Leave Village"
+		command = "LeaveVillage"
+		is-flat = true
+
+window "OutputPanel"
+	elem "OutputPanel"
+		type = MAIN
+		pos = 281,0
+		size = 500x200
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "OutputBackground"
+		type = LABEL
+		pos = 0,0
+		size = 500x200
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = ""
+	elem "Output"
+		type = OUTPUT
+		pos = 3,3
+		size = 494x194
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		is-default = true
+		border = line
+		saved-params = "max-lines"
+		link-color = #ffd900
+		visited-color = #df00ff
+		legacy-size = false
+
+window "SkillBottom"
+	elem "SkillBottom"
+		type = MAIN
+		pos = 281,0
+		size = 1352x57
+		anchor1 = none
+		anchor2 = none
+		background-color = #232323
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		image = 'Hud\\Bar2.png'
+	elem "button5"
+		type = BUTTON
+		pos = 1104,8
+		size = 88x48
+		anchor1 = 82,14
+		anchor2 = 88,98
+		font-family = "Adobe Caslon Pro"
+		font-size = 12
+		text-color = #c0c0c0
+		background-color = #2e2e2e
+		saved-params = "is-checked"
+		text = "Remove Exp Lock"
+		command = "ExpLock"
+		is-flat = true
+	elem "button26"
+		type = BUTTON
+		pos = 619,7
+		size = 125x50
+		anchor1 = 45,14
+		anchor2 = 55,100
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		text-color = #ffffff
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Automatic Countdown"
+		command = "Countdown"
+		is-flat = true
+	elem "button25"
+		type = BUTTON
+		pos = 371,7
+		size = 125x50
+		anchor1 = 27,14
+		anchor2 = 36,100
+		font-family = "Adobe Caslon Pro"
+		font-size = 12
+		text-color = #ffffff
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Skill Tree"
+		command = "viewskilltree"
+		is-flat = true
+	elem "button15"
+		type = BUTTON
+		pos = 496,7
+		size = 125x50
+		anchor1 = 36,14
+		anchor2 = 46,100
+		font-family = "Adobe Caslon Pro"
+		font-size = 12
+		text-color = #ffffff
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Options"
+		command = "OptionsPanel"
+		is-flat = true
+	elem "button2"
+		type = BUTTON
+		pos = 123,7
+		size = 125x50
+		anchor1 = 9,14
+		anchor2 = 18,100
+		font-family = "Adobe Caslon Pro"
+		font-size = 12
+		text-color = #ffffff
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Channel"
+		command = "ChangeChannel"
+		is-flat = true
+	elem "button1"
+		type = BUTTON
+		pos = 1192,8
+		size = 173x50
+		anchor1 = 91,14
+		anchor2 = 100,100
+		font-family = "Adobe Caslon Pro"
+		font-size = 12
+		text-color = #ffffff
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Bug Report"
+		command = "BugReport"
+		is-flat = true
+	elem "Jutsus"
+		type = BUTTON
+		pos = 248,7
+		size = 125x50
+		anchor1 = 18,14
+		anchor2 = 27,100
+		font-family = "Adobe Caslon Pro"
+		font-size = 12
+		text-color = #ffffff
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Jutsus"
+		command = "JutsuReference"
+		is-flat = true
+	elem "Chat"
+		type = BUTTON
+		pos = 0,7
+		size = 125x50
+		anchor1 = 0,14
+		anchor2 = 9,100
+		font-family = "Adobe Caslon Pro"
+		font-size = 12
+		text-color = #ffffff
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "Chat"
+		command = "ChatBox"
+		is-flat = true
+
+window "Status"
+	elem "Status"
+		type = MAIN
+		pos = 281,0
+		size = 197x319
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		border = line
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		image = 'Hud\\Stats.png'
+	elem "skillpoints"
+		type = LABEL
+		pos = 104,304
+		size = 32x9
+		anchor1 = 46,95
+		anchor2 = 68,98
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+		align = right
+	elem "Chakra"
+		type = LABEL
+		pos = 83,274
+		size = 101x16
+		anchor1 = 42,86
+		anchor2 = 93,91
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+	elem "Health"
+		type = LABEL
+		pos = 83,255
+		size = 101x13
+		anchor1 = 42,80
+		anchor2 = 93,84
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+	elem "statpoints"
+		type = LABEL
+		pos = 80,304
+		size = 32x9
+		anchor1 = 46,95
+		anchor2 = 68,98
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+		align = right
+	elem "Agi"
+		type = LABEL
+		pos = 80,216
+		size = 104x14
+		anchor1 = 41,68
+		anchor2 = 93,72
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+	elem "Def"
+		type = LABEL
+		pos = 80,160
+		size = 104x14
+		anchor1 = 41,50
+		anchor2 = 93,55
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+	elem "Str"
+		type = LABEL
+		pos = 80,83
+		size = 104x14
+		anchor1 = 41,26
+		anchor2 = 93,30
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+	elem "Gen"
+		type = LABEL
+		pos = 80,121
+		size = 104x14
+		anchor1 = 41,38
+		anchor2 = 93,42
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+	elem "Nin"
+		type = LABEL
+		pos = 80,102
+		size = 104x13
+		anchor1 = 41,32
+		anchor2 = 93,36
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+	elem "CUp"
+		type = BUTTON
+		pos = 176,277
+		size = 13x11
+		anchor1 = 89,74
+		anchor2 = 95,78
+		font-family = "Adobe Caslon Pro"
+		font-size = 12
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'Hud\\statup.png'
+		command = "ChakraUp"
+	elem "HUp"
+		type = BUTTON
+		pos = 176,256
+		size = 13x12
+		anchor1 = 89,68
+		anchor2 = 95,72
+		font-family = "Adobe Caslon Pro"
+		font-size = 12
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'Hud\\statup.png'
+		command = "HealthUp"
+	elem "EXP"
+		type = LABEL
+		pos = 80,67
+		size = 104x14
+		anchor1 = 41,21
+		anchor2 = 93,25
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+	elem "Level"
+		type = LABEL
+		pos = 88,50
+		size = 88x13
+		anchor1 = 45,16
+		anchor2 = 89,20
+		is-transparent = true
+		saved-params = ""
+		text = "1"
+	elem "Name"
+		type = LABEL
+		pos = 46,34
+		size = 105x14
+		anchor1 = 23,11
+		anchor2 = 77,15
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #dddfdd
+		is-transparent = true
+		saved-params = ""
+		text = "Name"
+
+window "mapwindow"
+	elem "mapwindow"
+		type = MAIN
+		pos = 281,0
+		size = 1010x675
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		macro = "macro"
+		menu = "menu"
+	elem "map"
+		type = MAP
+		pos = 0,0
+		size = 1010x675
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Open Sans"
+		text-color = #000000
+		is-default = true
+		border = line
+		saved-params = "icon-size"
+		icon-size = 32
+		zoom = 1
+
+window "Equip"
+	elem "Equip"
+		type = MAIN
+		pos = 281,0
+		size = 370x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		border = line
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Item Collection"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "button4"
+		type = BUTTON
+		pos = 200,288
+		size = 16x20
+		anchor1 = 54,60
+		anchor2 = 58,64
+		font-family = "@Kozuka Gothic Pr6N L"
+		font-size = 8
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "V"
+		command = "DropRyo"
+	elem "Items"
+		type = LABEL
+		pos = 16,288
+		size = 84x20
+		anchor1 = 4,60
+		anchor2 = 27,64
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = ""
+		text = ""
+	elem "Ryo"
+		type = LABEL
+		pos = 220,288
+		size = 84x20
+		anchor1 = 59,60
+		anchor2 = 82,64
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = ""
+		text = ""
+	elem "button8"
+		type = BUTTON
+		pos = 304,20
+		size = 60x52
+		anchor1 = 82,4
+		anchor2 = 98,12
+		font-family = "@Kozuka Gothic Pr6N L"
+		font-size = 15
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Close"
+		command = "Inventory"
+		is-flat = true
+	elem "GridEquip"
+		type = GRID
+		pos = 16,8
+		size = 288x272
+		anchor1 = 4,2
+		anchor2 = 82,58
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = ""
+		highlight-color = #000000
+	elem "ItemInfo"
+		type = BROWSER
+		pos = 16,352
+		size = 336x115
+		anchor1 = 4,73
+		anchor2 = 95,97
+		border = sunken
+		saved-params = ""
+	elem "ItemPic"
+		type = LABEL
+		pos = 316,316
+		size = 36x28
+		anchor1 = 85,66
+		anchor2 = 95,72
+		background-color = #2e2e2e
+		border = sunken
+		saved-params = ""
+		text = ""
+	elem "ItemName"
+		type = LABEL
+		pos = 16,316
+		size = 288x28
+		anchor1 = 4,66
+		anchor2 = 82,72
+		text-color = #ffffff
+		background-color = #2e2e2e
+		border = sunken
+		saved-params = ""
+		text = ""
+
+window "skalert"
+	elem "skalert"
+		type = MAIN
+		pos = 372,0
+		size = 502x316
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+	elem "label1"
+		type = LABEL
+		pos = 0,0
+		size = 502x316
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #232323
+		border = line
+		saved-params = ""
+		text = ""
+	elem "skalert3"
+		type = BUTTON
+		pos = 358,236
+		size = 119x68
+		anchor1 = 71,75
+		anchor2 = 95,96
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		saved-params = "is-checked"
+		text = ""
+		command = ".skalert 3"
+	elem "skalert1"
+		type = BUTTON
+		pos = 183,236
+		size = 119x68
+		anchor1 = 36,75
+		anchor2 = 60,96
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		saved-params = "is-checked"
+		text = ""
+		command = ".skalert 1"
+	elem "skalert2"
+		type = BUTTON
+		pos = 24,236
+		size = 119x68
+		anchor1 = 5,75
+		anchor2 = 29,96
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		saved-params = "is-checked"
+		text = ""
+		command = ".skalert 2"
+	elem "skalert_out"
+		type = OUTPUT
+		pos = 24,25
+		size = 453x199
+		anchor1 = 5,8
+		anchor2 = 95,71
+		font-family = "Tahoma"
+		font-size = 10
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = sunken
+		saved-params = "max-lines"
+
+window "skinput"
+	elem "skinput"
+		type = MAIN
+		pos = 372,0
+		size = 383x364
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+	elem "skinput12"
+		type = BUTTON
+		pos = 17,311
+		size = 345x15
+		anchor1 = 4,85
+		anchor2 = 95,90
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 12"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput11"
+		type = BUTTON
+		pos = 17,294
+		size = 345x17
+		anchor1 = 4,81
+		anchor2 = 95,85
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 11"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput10"
+		type = BUTTON
+		pos = 17,279
+		size = 345x15
+		anchor1 = 4,76
+		anchor2 = 95,81
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 10"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput9"
+		type = BUTTON
+		pos = 17,263
+		size = 345x16
+		anchor1 = 4,72
+		anchor2 = 95,76
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 9"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput8"
+		type = BUTTON
+		pos = 17,246
+		size = 345x17
+		anchor1 = 4,68
+		anchor2 = 95,72
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 8"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput7"
+		type = BUTTON
+		pos = 17,231
+		size = 345x15
+		anchor1 = 4,63
+		anchor2 = 95,68
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 7"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput6"
+		type = BUTTON
+		pos = 17,213
+		size = 345x18
+		anchor1 = 4,59
+		anchor2 = 95,63
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 6"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput5"
+		type = BUTTON
+		pos = 17,198
+		size = 345x15
+		anchor1 = 4,54
+		anchor2 = 95,59
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 5"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput4"
+		type = BUTTON
+		pos = 17,182
+		size = 345x16
+		anchor1 = 4,50
+		anchor2 = 95,54
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 4"
+		is-flat = true
+	elem "skinput3"
+		type = BUTTON
+		pos = 17,166
+		size = 345x16
+		anchor1 = 4,45
+		anchor2 = 95,50
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 3"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput2"
+		type = BUTTON
+		pos = 17,150
+		size = 345x16
+		anchor1 = 4,41
+		anchor2 = 95,45
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 2"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput1"
+		type = BUTTON
+		pos = 17,132
+		size = 345x18
+		anchor1 = 4,37
+		anchor2 = 95,41
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		background-color = #4a4a4a
+		saved-params = "is-checked"
+		text = ""
+		command = ".skinput 1"
+		is-flat = true
+		button-type = pushbox
+	elem "skinput_out"
+		type = OUTPUT
+		pos = 18,17
+		size = 346x101
+		anchor1 = 5,5
+		anchor2 = 95,32
+		font-family = "Tahoma"
+		font-size = 10
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = sunken
+		saved-params = "max-lines"
+
+window "skinput22"
+	elem "skinput22"
+		type = MAIN
+		pos = 372,0
+		size = 535x203
+		anchor1 = none
+		anchor2 = none
+		background-color = #1b1b1b
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+	elem "skinputbar"
+		type = INPUT
+		pos = 34,98
+		size = 449x32
+		anchor1 = 6,48
+		anchor2 = 90,64
+		font-family = "Fixedsys"
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = sunken
+		saved-params = ""
+		command = ".skinputbar 1"
+		no-command = true
+	elem "skinputbar1"
+		type = BUTTON
+		pos = 195,143
+		size = 127x37
+		anchor1 = 36,70
+		anchor2 = 60,89
+		font-family = "Adobe Caslon Pro"
+		font-size = 10
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "is-checked"
+		text = "Ok"
+		command = ".skinputbar 1"
+		is-flat = true
+	elem "skinput2_out"
+		type = OUTPUT
+		pos = 34,19
+		size = 449x75
+		anchor1 = 6,9
+		anchor2 = 90,46
+		font-family = "Fixedsys,Tahoma"
+		font-size = 10
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		border = line
+		saved-params = "max-lines"
+
+window "yutput"
+	elem "yutput"
+		type = MAIN
+		pos = 281,0
+		size = 504x454
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		border = sunken
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+	elem "message"
+		type = OUTPUT
+		pos = 0,45
+		size = 504x131
+		anchor1 = 0,10
+		anchor2 = 100,39
+		font-family = "Fixedsys"
+		text-color = #c4c4c4
+		background-color = #2e2e2e
+		saved-params = "max-lines"
+	elem "grid"
+		type = GRID
+		pos = 0,176
+		size = 504x278
+		anchor1 = 0,39
+		anchor2 = 100,100
+		font-family = "Fixedsys"
+		text-color = #ffffff
+		background-color = #1a1a1a
+		saved-params = ""
+		show-lines = horizontal
+		highlight-color = #000000
+	elem "title"
+		type = LABEL
+		pos = 0,0
+		size = 504x45
+		anchor1 = 0,0
+		anchor2 = 100,10
+		font-family = "Fixedsys"
+		text-color = #ffffff
+		background-color = #333333
+		border = sunken
+		saved-params = ""
+		text = "Title here"
+
+window "titlescreen"
+	elem "titlescreen"
+		type = MAIN
+		pos = 281,0
+		size = 1018x714
+		anchor1 = none
+		anchor2 = none
+		border = line
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "Shikamaru"
+		type = LABEL
+		pos = 0,0
+		size = 1018x732
+		anchor1 = 0,0
+		anchor2 = 100,100
+		is-visible = false
+		saved-params = ""
+		text = ""
+		image-mode = stretch
+	elem "TitleChild"
+		type = CHILD
+		pos = 0,0
+		size = 1018x732
+		anchor1 = 0,0
+		anchor2 = 100,100
+		saved-params = "splitter"
+		right = "mapwindow"
+		is-vert = false
+	elem "Username"
+		type = INPUT
+		pos = 288,440
+		size = 456x32
+		anchor1 = 28,60
+		anchor2 = 73,64
+		background-color = #808000
+		border = line
+		saved-params = ""
+	elem "Login"
+		type = BUTTON
+		pos = 352,552
+		size = 104x28
+		anchor1 = 45,75
+		anchor2 = 55,79
+		font-family = "@Adobe Fangsong Std R"
+		font-size = 15
+		background-color = #808000
+		border = line
+		saved-params = "is-checked"
+		text = "Login"
+		command = "Logins"
+		is-flat = true
+	elem "Create"
+		type = BUTTON
+		pos = 560,552
+		size = 104x28
+		anchor1 = 55,75
+		anchor2 = 65,79
+		font-family = "@Adobe Fangsong Std R"
+		font-size = 15
+		background-color = #808000
+		border = line
+		saved-params = "is-checked"
+		text = "Create"
+		command = "CreateCharacter"
+		is-flat = true
+	elem "Password"
+		type = INPUT
+		pos = 288,496
+		size = 456x32
+		anchor1 = 28,68
+		anchor2 = 73,72
+		background-color = #808000
+		border = line
+		saved-params = ""
+		is-password = true
+

@@ -38,11 +38,11 @@ mob
 		viewskilltree()
 			set hidden=1
 			if(Tutorial<3)
-				src<<output("You cannot do this right now.","actionoutput")
+				src<<output("You cannot do this right now.","ActionPanel.Output")
 				return
 			if(!tutorialskilltree) tutorialskilltree=1
 			if(icon_state!="" && icon_state <> "run" && icon_state <> "dead")
-				src<<output("You cannot do this right now.","actionoutput")
+				src<<output("You cannot do this right now.","ActionPanel.Output")
 				return
 			if(client.eye==locate(143,38,14)) return
 			if(client.eye==locate(10,10,4)||client.eye==locate(60,10,4)||client.eye==locate(9,124,4)||client.eye==locate(12,43,4)||client.eye==locate(55,43,4)||usr.client.eye==locate(10,75,4)||usr.client.eye==locate(37,75,4))

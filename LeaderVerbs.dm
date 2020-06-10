@@ -12,10 +12,10 @@ mob/Kage/verb
 		if(M==src) return
 		//if(Kages["[Village]"]!=src.ckey) return
 		if(M.village!=src.village)
-			src<<output("They're not from your village.","actionoutput")
+			src<<output("They're not from your village.","ActionPanel.Output")
 			return
 		if(skalert("Are you sure you want to boot [M] from the [village] village?","Confirm",list("No","Yes"))=="No") return
-		world<<output("[M] has been booted from the [village] village.","actionoutput")
+		world<<output("[M] has been booted from the [village] village.","ActionPanel.Output")
 		M.village="Missing-Nin"
 		M.rank="Missing-Nin"
 	Invite_to_Village()
@@ -29,7 +29,7 @@ mob/Kage/verb
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
 		if(M.skalert("[src] invites you to join the [village] village, accept?","Confirm",list("No","Yes"))=="No") return
-		world<<output("[M] has joined the [village] village.","actionoutput")
+		world<<output("[M] has joined the [village] village.","ActionPanel.Output")
 		M.village="[village]"
 		M.rank="Genin"
 	Make_ANBU()
@@ -42,7 +42,7 @@ mob/Kage/verb
 		var/mob/P=CustomInput("Who do you want to promote to ANBU?","Promote",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
-		M<<output("You have been promoted to the ANBU Ops.","actionoutput")
+		M<<output("You have been promoted to the ANBU Ops.","ActionPanel.Output")
 		M.rank="ANBU"
 		if(M.village=="Hidden Leaf")//"Hidden Sand"||"Hidden Mist"||
 			new/obj/Inventory/Clothing/Masks/Anbu(M)
@@ -65,7 +65,7 @@ mob/Kage/verb
 		var/mob/P=CustomInput("Who do you want to demote from ANBU?","Demotion",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
-		M<<output("You have been booted from the ANBU Ops, and are now a Jounin.","actionoutput")
+		M<<output("You have been booted from the ANBU Ops, and are now a Jounin.","ActionPanel.Output")
 		M.rank="Jounin"
 		for(var/obj/Inventory/Clothing/Masks/Anbu/O in M)
 			if(ClothingOverlays[O.section]==O.icon)
@@ -88,7 +88,7 @@ mob/Kage/verb
 		var/mob/P=CustomInput("Who do you want to promote to Jounin?","Promote",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
-		M<<output("You have been promoted to Jounin.","actionoutput")
+		M<<output("You have been promoted to Jounin.","ActionPanel.Output")
 		M.rank="Jounin"
 	Demote_Jounin()
 		set category="Kage"
@@ -100,7 +100,7 @@ mob/Kage/verb
 		var/mob/P=CustomInput("Who do you want to demote from Jounin?","Demotion",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
-		M<<output("You have been demoted from Jounin, and are now a Chuunin.","actionoutput")
+		M<<output("You have been demoted from Jounin, and are now a Chuunin.","ActionPanel.Output")
 		M.rank="Chuunin"
 		for(var/obj/Inventory/Clothing/Masks/Anbu/O in M)
 			if(ClothingOverlays[O.section]==O.icon)
@@ -141,7 +141,7 @@ mob/Kage/verb
 		RemoveAdminVerbs()
 		switch(village)
 			if("Hidden Leaf")
-				world<<output("<b><center>[src] has retired as Hokage, and [M] has been promoted as their successor!<b></center>","actionoutput")
+				world<<output("<b><center>[src] has retired as Hokage, and [M] has been promoted as their successor!<b></center>","ActionPanel.Output")
 				text2file("[src] has retired as Hokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
 
 				M.rank="Hokage"
@@ -154,7 +154,7 @@ mob/Kage/verb
 				new/obj/Inventory/Clothing/HeadWrap/HokageHat(M)
 				new/obj/Inventory/Clothing/Robes/HokageRobe(M)
 			if("Hidden Sand")
-				world<<output("<b><center>[src] has retired as Kazekage, and [M] has been promoted as their successor!<b></center>","actionoutput")
+				world<<output("<b><center>[src] has retired as Kazekage, and [M] has been promoted as their successor!<b></center>","ActionPanel.Output")
 				text2file("[src] has retired as Kazekage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
 
 				M.rank="Kazekage"
@@ -167,7 +167,7 @@ mob/Kage/verb
 				new/obj/Inventory/Clothing/HeadWrap/KazekageHat(M)
 				new/obj/Inventory/Clothing/Robes/KazekageRobe(M)
 			if("Hidden Mist")
-				world<<output("<b><center>[src] has retired as Mizukage, and [M] has been promoted as their succesor!<b></center>","actionoutput")
+				world<<output("<b><center>[src] has retired as Mizukage, and [M] has been promoted as their succesor!<b></center>","ActionPanel.Output")
 				text2file("[src] has retired as Mizukage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
 
 				M.rank="Mizukage"
@@ -180,7 +180,7 @@ mob/Kage/verb
 				new/obj/Inventory/Clothing/HeadWrap/MizukageHat(M)
 				new/obj/Inventory/Clothing/Robes/MizukageRobe(M)
 			if("Hidden Sound")
-				world<<output("<b><center>[src] has retired as Otokage, and [M] has been promoted as their successor!<b></center>","actionoutput")
+				world<<output("<b><center>[src] has retired as Otokage, and [M] has been promoted as their successor!<b></center>","ActionPanel.Output")
 				text2file("[src] has retired as Otokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
 
 				M.rank="Otokage"
@@ -193,7 +193,7 @@ mob/Kage/verb
 				new/obj/Inventory/Clothing/HeadWrap/OtokageHat(M)
 				new/obj/Inventory/Clothing/Robes/OtokageRobe(M)
 			if("Hidden Rock")
-				world<<output("<b><center>[src] has retired as Tsuchikage, and [M] has been promoted as their successor!<b></center>","actionoutput")
+				world<<output("<b><center>[src] has retired as Tsuchikage, and [M] has been promoted as their successor!<b></center>","ActionPanel.Output")
 				text2file("[src] has retired as Tsuchikage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
 
 				M.rank="Tsuchikage"

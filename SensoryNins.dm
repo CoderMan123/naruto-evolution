@@ -31,7 +31,7 @@ mob/NPC/SensoryNin//sensory
 		if(!usr) return
 		switch(telewhere.name)
 		/*	if(telewhere=src.village)
-				usr<<output("You're already in this village.","actionoutput") // Couldn't get this to fucking work
+				usr<<output("You're already in this village.","ActionPanel.Output") // Couldn't get this to fucking work
 				return */
 			if("Hidden Leaf")
 				usr.loc=locate(188,86,2)

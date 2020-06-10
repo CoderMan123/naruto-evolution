@@ -16,7 +16,7 @@ var/CHANGELOG = {"
 
 		<style>
 			body {
-				background-color: #474747;
+				background-color: #414141;
 				color: white;
 				font-family: 'Open Sans', sans-serif;
 			}

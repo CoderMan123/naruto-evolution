@@ -71,7 +71,7 @@ obj/RyoBag
 		if(!src) return
 		var/mob/player/M=usr
 		if(M.dead) return
-		hearers()<<output("[M] picks up [Worth] [src].","actionoutput")
+		hearers()<<output("[M] picks up [Worth] [src].","ActionPanel.Output")
 		M.Ryo+=Worth
 		del(src)
 mob
@@ -80,7 +80,7 @@ mob
 			DropRyo()
 				set hidden=1
 				if(!usr.Ryo)
-					usr << output("You don't have any Ryo to drop.","actionoutput")
+					usr << output("You don't have any Ryo to drop.","ActionPanel.Output")
 					return
 				var/Num=usr.skinput2("How much Ryo would you like to drop?","Drop Ryo",null,1)
 				if(!isnum(Num))return
@@ -88,7 +88,7 @@ mob
 				usr.Ryo-=Num
 				var/obj/RyoBag/O=new(src.loc)
 				O.Worth=Num
-				src << output("You drop [Num] Ryo.","actionoutput")
+				src << output("You drop [Num] Ryo.","ActionPanel.Output")
 			Get()
 				set hidden=1
 				for(var/obj/Inventory/O in view(usr,1))
@@ -107,7 +107,7 @@ mob
 								usr << sound('Sounds/cant.ogg',0,0,7,100)
 								var/random=rand(1,3)
 								if(random==1)
-									usr << output("<font face=Arial><i>Your inventory is maxed already.","actionoutput")
+									usr << output("<font face=Arial><i>Your inventory is maxed already.","ActionPanel.Output")
 					else
 						if(O in view(usr,1))
 							if(O.loc<>usr&&usr.dead==0)
@@ -122,7 +122,7 @@ mob
 								else
 									usr << sound('Sounds/cant.ogg',0,0,7,100)
 									var/random=rand(1,3)
-									if(random==1)usr << output("<font face=Arial><i>Your inventory is maxed already.","actionoutput")
+									if(random==1)usr << output("<font face=Arial><i>Your inventory is maxed already.","ActionPanel.Output")
 obj
 	var
 		canStack=0

@@ -18,18 +18,18 @@ mob/proc/Vote_Check()
 			var/mob/X = input(M, "[VoteMessage]","Voting System") in list("No", "Yes")
 			if(X=="Yes")
 				if(VoteMessage=="")
-					M<<output("<b><font color=red><center>* You were too late! *","actionoutput")
+					M<<output("<b><font color=red><center>* You were too late! *","ActionPanel.Output")
 					return
 				Y+=1
 				for(var/mob/C in TotalPlayers)
-					C<<output("<b><font color=red>* [M.key] voted yes.","actionoutput")
+					C<<output("<b><font color=red>* [M.key] voted yes.","ActionPanel.Output")
 			if(X=="No")
 				if(VoteMessage=="")
-					M<<output("<b><font color=red><center>* You were too late! *","actionoutput")
+					M<<output("<b><font color=red><center>* You were too late! *","ActionPanel.Output")
 					return
 				N+=1
 				for(var/mob/C in TotalPlayers)
-					C<<output("<b><font color=red>* [M.key] voted no.","actionoutput")
+					C<<output("<b><font color=red>* [M.key] voted no.","ActionPanel.Output")
 proc/Vote_Election()
 	spawn(150)
 		if(VoteMessage == null)
@@ -38,13 +38,13 @@ proc/Vote_Election()
 			VoteMessage=""
 			spawn(300)VotationGoingOn=0
 			return
-		world<<output("<b><font color=yellow><center><font size=2>! VOTATION !","actionoutput")
-		world<<output("<b><font color=white><center> [VoteMessage] ","actionoutput")
-		world<<output("<b><font color=blue><center>- [Y] Players Voted Yes.","actionoutput")
-		world<<output("<b><font color=blue><center>- [N] Players Voted No.","actionoutput")
-		if(Y>N)world<<output("<b><font size=2><font color=yellow><center>It's Been Approved!","actionoutput")
-		if(N>Y)world<<output("<b><font size=2><font color=yellow><center>It's Been Denied!","actionoutput")
-		if(N==Y)world<<output("<b><font color=yellow><font size=2><center>There Was Tie!","actionoutput")
+		world<<output("<b><font color=yellow><center><font size=2>! VOTATION !","ActionPanel.Output")
+		world<<output("<b><font color=white><center> [VoteMessage] ","ActionPanel.Output")
+		world<<output("<b><font color=blue><center>- [Y] Players Voted Yes.","ActionPanel.Output")
+		world<<output("<b><font color=blue><center>- [N] Players Voted No.","ActionPanel.Output")
+		if(Y>N)world<<output("<b><font size=2><font color=yellow><center>It's Been Approved!","ActionPanel.Output")
+		if(N>Y)world<<output("<b><font size=2><font color=yellow><center>It's Been Denied!","ActionPanel.Output")
+		if(N==Y)world<<output("<b><font color=yellow><font size=2><center>There Was Tie!","ActionPanel.Output")
 		Y=0
 		N=0
 		VoteMessage=""
@@ -58,7 +58,7 @@ mob/verb/
 	Vote_Mute()
 		set hidden =1
 		if(src.RecentVerbsCheck("VoteCoolDown",12000,0))
-			src<<output("You can only do a mute vote once every 20 minutes.","actionoutput")
+			src<<output("You can only do a mute vote once every 20 minutes.","ActionPanel.Output")
 			return
 		var/list/X = list()
 		for(var/mob/player/e in TotalPlayers) if(e.ckey) X["[e.name] ([e.key])"]=e
@@ -79,7 +79,7 @@ mob/verb/
 				src<<"There is already a vote going on for [VoteM]. Vote: <a href=?src=\ref[src];action=VoteYes>Yes</a>, or <a href=?src=\ref[src];action=VoteNo>No</a>.</font>"
 				for(var/mob/player/M in TotalPlayers)if(M.ckey)NonVoters++
 				NonVoters=(NonVoters/2)
-			if(src.RecentVerbsCheck("VoteCoolDown",12000,1))src<<output("You can only do a mute vote once every 20 minutes.","actionoutput")
+			if(src.RecentVerbsCheck("VoteCoolDown",12000,1))src<<output("You can only do a mute vote once every 20 minutes.","ActionPanel.Output")
 proc/Vote(mob/Who)
 	var/TimeLeft=1200
 	while(TimeLeft&&!Who.MuteTime)
@@ -173,7 +173,7 @@ mob/verb/
 	Vote_Boot()
 		set hidden =1
 		if(src.RecentVerbsCheck("VoteCoolDownBoot",12000,0))
-			src<<output("You can only do a boot vote once every 20 minutes.","actionoutput")
+			src<<output("You can only do a boot vote once every 20 minutes.","ActionPanel.Output")
 			return
 		var/list/X = list()
 		for(var/mob/player/e in world)
@@ -183,7 +183,7 @@ mob/verb/
 		if(P=="Cancel") return
 		var/mob/p = X["[P]"]
 		if(p.admin)
-			src<<output("You cannot call a vote against this person.","actionoutput")
+			src<<output("You cannot call a vote against this person.","ActionPanel.Output")
 			return
 		Boot_Elects+=p
 		var/count=0
@@ -199,7 +199,7 @@ mob/verb/
 				src<<"There is already a vote going on for [VoteB]. Vote: <a href=?src=\ref[src];action=VoteYesBoot>Yes</a>, or <a href=?src=\ref[src];action=VoteNoBoot>No</a>.</font>"
 				for(var/mob/player/M in world)if(M.ckey)NonVotersB++
 				NonVotersB=(NonVotersB/2)
-			if(src.RecentVerbsCheck("VoteCoolDownBoot",12000,1))src<<output("You can only do a boot vote once every 20 minutes.","actionoutput")
+			if(src.RecentVerbsCheck("VoteCoolDownBoot",12000,1))src<<output("You can only do a boot vote once every 20 minutes.","ActionPanel.Output")
 
 proc/VoteB(mob/Who)
 	var/TimeLeft=1200

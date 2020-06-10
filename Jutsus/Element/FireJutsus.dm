@@ -42,7 +42,7 @@ mob
 			for(var/obj/Jutsus/Magma_Crush/J in src.JutsusLearnt)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||!istype(c_target))
-					src<<output("You must have a target to use this technique.","actionoutput")
+					src<<output("You must have a target to use this technique.","ActionPanel.Output")
 					return
 
 				if(src.PreJutsu(J))
@@ -446,7 +446,7 @@ mob
 					src.ArrowTasked = A
 					spawn(150)
 						if(ArrowTasked==A) ArrowTasked=null; src.copy=null; del(A)
-					src << output("<Font color=[colour2html("orange")]>Press down to ignite the ashes.</Font>","actionoutput")
+					src << output("<Font color=[colour2html("orange")]>Press down to ignite the ashes.</Font>","ActionPanel.Output")
 					for(var/obj/As in get_step(src,src.dir))
 						As.layer=OBJ_LAYER
 					while(src.copy == "Ashes")
