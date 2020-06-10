@@ -47,6 +47,11 @@ var/CHANGELOG = {"
 		<br />
 
 		<h2>\[Unreleased]</h2>
+		<h3>Added</h3>
+		<ul>
+			<li>New user interface.</li>
+		</ul>
+
 		<h3>Changed</h3>
 		<ul>
 			<li>Update changelog format.</li>
