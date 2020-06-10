@@ -4,7 +4,7 @@ mob
 			for(var/obj/Jutsus/Snake_Rustle_Jutsu/J in src.JutsusLearnt)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src << output("This jutsu requires a target","actionoutput")
+					src << output("This jutsu requires a target","ActionPanel.Output")
 					return
 				if(src.PreJutsu(J))
 
@@ -39,7 +39,7 @@ mob
 										M.injutsu=0
 										M.canattack=1
 										M.Sleeping=0
-								else src<<output("The jutsu did not connect.","actionoutput")
+								else src<<output("The jutsu did not connect.","ActionPanel.Output")
 					src.firing=0
 					src.canattack=1
 		SaiRat()

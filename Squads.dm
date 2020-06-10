@@ -25,16 +25,16 @@ obj/Squad
 						html+="[p.name]  -  Health: [p.health]/[p.maxhealth] - Chakra: [p.chakra]/[p.maxchakra] - Level: [p.level] ([round((p.exp/p.maxexp)*100)]%)<br><br>"
 					usr << browse(html)
 					winset(usr, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
+						BrowserWindow.is-visible = "true";
 					"})
 				if("Check Mission")
 					if(usr.Mission == null)
 						if(usr.LastMissionTime>0)
-							usr << output("You must wait [round(usr.LastMissionTime/600)] minutes before taking another mission.","actionoutput")
+							usr << output("You must wait [round(usr.LastMissionTime/600)] minutes before taking another mission.","ActionPanel.Output")
 						else
-							usr << output("You can currently pick up a mission.","actionoutput")
+							usr << output("You can currently pick up a mission.","ActionPanel.Output")
 					else
-						usr<<output("Your mission is: [usr.Mission]","actionoutput")
+						usr<<output("Your mission is: [usr.Mission]","ActionPanel.Output")
 
 				if("Leave Squad")
 					Members -= usr.ckey
@@ -42,9 +42,11 @@ obj/Squad
 					usr.Channel="Say"
 					for(var/i in Members)
 						var/mob/M=getOwner(i)
-						M<<output("[usr] has left your squad","actionoutput")
+						M<<output("[usr] has left your squad","ActionPanel.Output")
+						winset(M, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 					var/mob/L=getOwner(Leader)
-					L<<output("[usr] has left your squad","actionoutput")
+					L<<output("[usr] has left your squad","ActionPanel.Output")
+					winset(L, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 			return
 		var/setting = usr.skinput("Select an option","Squad",list("View Squad","Invite Member", "Remove Member","Check Mission","Leave Squad", "Cancel"))
 		switch(setting)
@@ -61,37 +63,38 @@ obj/Squad
 					html+="[p.name]  -  Health: [p.health]/[p.maxhealth] - Chakra: [p.chakra]/[p.maxchakra] - Level: [p.level] ([(p.exp/p.maxexp)*100])<br><br>"
 				usr << browse(html)
 				winset(usr, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
+						BrowserWindow.is-visible = "true";
 					"})
 			if("Invite Member")
 				if(usr.rank=="Genin"||usr.rank=="Academy Student")
-					usr<<output("You must be Chuunin+ to lead a squad with other ninjas in it.","actionoutput")
+					usr<<output("You must be Chuunin+ to lead a squad with other ninjas in it.","ActionPanel.Output")
 					return
 				if(length(Members) >= 4) //Checks to make sure there aren't already 4 memebers
-					usr<<output("You already have a total of 4 members in your squad, including yourself. If you wish to add another, remove one first.","actionoutput")
+					usr<<output("You already have a total of 4 members in your squad, including yourself. If you wish to add another, remove one first.","ActionPanel.Output")
 				else
 					var/list/Players = list()
 					for(var/mob/player/P in view()) Players += P
 					var/mob/player/M = input("Invite Who?") as mob in Players
 
 					if(M.village != usr.village)
-						usr<<output("You can only squad with fellow villagers.","actionoutput")
+						usr<<output("You can only squad with fellow villagers.","ActionPanel.Output")
 						return
 					if(Members.Find(M.ckey) || M.ckey == Leader)
-						usr<<output("[M] is already in the Squad","actionoutput")
+						usr<<output("[M] is already in the Squad","ActionPanel.Output")
 						return
 					if(M.Squad != null)
-						usr<<output("[M] is already in another squad.","actionoutput")
+						usr<<output("[M] is already in another squad.","ActionPanel.Output")
 						return
 					if(alert(M,"[usr] wants you to join their Squad. Join?","Squad","Yes","No") == "Yes")
 						if(length(Members) >= 4) return
 						if(Members.Find(M.ckey) || M.ckey == Leader)
-							usr<<output("[M] is already in the Squad","actionoutput")
+							usr<<output("[M] is already in the Squad","ActionPanel.Output")
 							return
 						Members += M.ckey
 						M.Squad = src
-						usr<<output("[M] is now a part of your Squad.","actionoutput")
-						M<<output("You are now a part of [usr]'s Squad.","actionoutput")
+						winset(M, "NavigationPanel", "SquadButton.is-disabled = 'false'")
+						usr<<output("[M] is now a part of your Squad.","ActionPanel.Output")
+						M<<output("You are now a part of [usr]'s Squad.","ActionPanel.Output")
 			if("Remove Member")
 				var/list/Players = list()
 				for(var/i in Members)
@@ -107,17 +110,18 @@ obj/Squad
 					Members -= M.ckey
 					M.Squad = null
 					M.Channel="Say"
+					winset(M, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 				else
 					Members -= choice
-				usr<<output("[choice] has been removed","actionoutput")
+				usr<<output("[choice] has been removed","ActionPanel.Output")
 			if("Check Mission")
 				if(usr.Mission == null)
 					if(usr.LastMissionTime>0)
-						usr << output("You must wait [round(usr.LastMissionTime/600)] minutes before taking another mission.","actionoutput")
+						usr << output("You must wait [round(usr.LastMissionTime/600)] minutes before taking another mission.","ActionPanel.Output")
 					else
-						usr << output("You can currently pick up a mission.","actionoutput")
+						usr << output("You can currently pick up a mission.","ActionPanel.Output")
 				else
-					usr<<output("Your mission is: [usr.Mission]","actionoutput")
+					usr<<output("Your mission is: [usr.Mission]","ActionPanel.Output")
 
 			if("Leave Squad")
 				if(alert("Are you sure?","Disband Squad","Yes","No") == "Yes")
@@ -128,6 +132,7 @@ obj/Squad
 					Leader = pick(Members) //It picks a new Leader from the current members
 					Members -= Leader //Remove the leader from the member list once(was duplicating)
 					usr.Channel="Say"
+					winset(usr, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 mob/
 	var/tmp/
 		obj/Squad/Squad
@@ -152,13 +157,13 @@ mob/verb/
 			usr.KageUp = 1
 			//src.UpdateInventory()
 			winset(src, null, {"
-				mainwindow.KageChild.is-visible = "true";
+				MainWindow.KageChild.is-visible = "true";
 			"})
 		else
 			usr.KageUp = 0
 			//src.UpdateInventory()
 			winset(src, null, {"
-				mainwindow.KageChild.is-visible = "false";
+				MainWindow.KageChild.is-visible = "false";
 					"})
 	Create_Squad()
 		set hidden=1
@@ -167,4 +172,5 @@ mob/verb/
 		usr.Squad = P
 		P.Leader = usr.ckey
 		P.ID = "[rand(100,999)][rand(100,999)][rand(100,999)]"
+		winset(src, "NavigationPanel", "SquadButton.is-disabled = 'false'")
 

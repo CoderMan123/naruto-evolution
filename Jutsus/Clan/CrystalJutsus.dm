@@ -150,7 +150,7 @@ mob
 							c_target.injutsu=0
 							c_target.canattack=1
 							c_target.firing=0
-					else src << output("<Font color=Aqua>You need a target to use this.</Font>","actionoutput")
+					else src << output("<Font color=Aqua>You need a target to use this.</Font>","ActionPanel.Output")
 
 		Crystal_Pillar()
 			for(var/obj/Jutsus/Crystal_Pillar/J in src.JutsusLearnt)
@@ -224,7 +224,7 @@ mob
 							if(src)
 								Prisoner=null
 								src.icon_state=""
-					else src<<output("This technique requires a target.","actionoutput")
+					else src<<output("This technique requires a target.","ActionPanel.Output")
 					if(src)
 						src.firing=0
 						src.canattack=1
@@ -326,7 +326,7 @@ mob
 					if(src.PreJutsu(J))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(!c_target)
-							src << output("You need a target to use this.","actionoutput")
+							src << output("You need a target to use this.","ActionPanel.Output")
 							return
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,20))
 						src.move=0

@@ -16,7 +16,7 @@ var/CHANGELOG = {"
 
 		<style>
 			body {
-				background-color: #474747;
+				background-color: #414141;
 				color: white;
 				font-family: 'Open Sans', sans-serif;
 			}
@@ -47,6 +47,11 @@ var/CHANGELOG = {"
 		<br />
 
 		<h2>\[Unreleased]</h2>
+		<h3>Added</h3>
+		<ul>
+			<li>New user interface.</li>
+		</ul>
+
 		<h3>Changed</h3>
 		<ul>
 			<li>Update changelog format.</li>

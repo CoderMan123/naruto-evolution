@@ -6,13 +6,13 @@ mob
 			for(var/obj/Jutsus/Shishi/J in src.JutsusLearnt)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(!c_target){src<<output("<font color=yellow>You need to have a Target to perform ShiShi Rendan","actionoutput");return}
+					if(!c_target){src<<output("<font color=yellow>You need to have a Target to perform ShiShi Rendan","ActionPanel.Output");return}
 					if(loc.loc:Safe!=1) src.LevelStat("Taijutsu",rand(4,8))
 					if(J.level<4)
 						if(loc.loc:Safe!=1) J.exp+=rand(2,5)
 						J.Levelup()
 					if(get_dist(src,c_target)>4){src<<"[c_target] need to be closer to you for that move to work!";src.move=1;return}
-					view(src) << output("<b><font color = #C0C0C0>[usr] says: Shishi Rendan!!!","actionoutput")
+					view(src) << output("<b><font color = #C0C0C0>[usr] says: Shishi Rendan!!!","ActionPanel.Output")
 					src.move=0
 					src.injutsu=1
 					src.canattack=0

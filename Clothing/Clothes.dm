@@ -51,15 +51,15 @@ var/const
 
 obj/proc/take(mob/M)
 	if(M.dead)
-		M<<output("You're dead.","actionoutput")
+		M<<output("You're dead.","ActionPanel.Output")
 		return
-	hearers()<<output("[M] picks up [src].","actionoutput")
+	hearers()<<output("[M] picks up [src].","ActionPanel.Output")
 	M.itemAdd(src)
 	M.RefreshInventory()
 obj/proc/drop(mob/M)
 	if(usr.dead) return
 	M.itemDrop(src)
-	hearers()<<output("[M] drops [src].","actionoutput")
+	hearers()<<output("[M] drops [src].","ActionPanel.Output")
 mob
 	var
 		Mask

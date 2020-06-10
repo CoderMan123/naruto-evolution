@@ -14,7 +14,7 @@ mob
 		spawn(1)
 			usr<< browse("[Display]")
 			winset(src, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
+						BrowserWindow.is-visible = "true";
 					"})
 		//#CC9933
 
@@ -75,7 +75,7 @@ Please enter any bugs you have found.<br />
 </body>
 </html>"})
 		winset(usr, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
+						BrowserWindow.is-visible = "true";
 					"})
 atom/Topic(href, href_list[])
 	..()
@@ -126,16 +126,16 @@ The game creators will work on it as soon as possible.
 			var/msg = html_encode(href_list["report"])
 			var/who = html_encode(href_list["name"])
 			if(usr.Bugreported)
-				usr<<output("You recently submitted a bug report. Please do not overuse the verb.","actionoutput")
+				usr<<output("You recently submitted a bug report. Please do not overuse the verb.","ActionPanel.Output")
 				return
 			if(!msg)return
 			var/bug = "| [who] [msg] |"//had a line break \n here but that didn't change anything in game.
 			src << browse(html)
 			winset(src, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
+						BrowserWindow.is-visible = "true";
 					"})
 			text2file(bug,bugs)
-			usr<<output("Bug succesfully reported.","actionoutput")
+			usr<<output("Bug succesfully reported.","ActionPanel.Output")
 			usr.Bugreported=1
 			spawn(200)if(usr)usr.Bugreported=0
 
@@ -155,6 +155,7 @@ mob/player
 					src<<"Your Exp Lock was removed!"
 					src.ExpLock=0
 					ExpLockDelay=0
+					winset(src, "NavigationPanel", "ExpLockButton.is-disabled = 'true'")
 					return
 				else
 					src<<"You did not enter the right verification code!"

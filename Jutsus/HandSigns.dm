@@ -94,31 +94,31 @@ obj
 					usr.doslot(src.name)
 				else
 					if(!IsGate)
-						usr << output("<Font color=red>You need to use [src.name] [80-src.uses] more times([src.uses]).</Font>","actionoutput")
+						usr << output("<Font color=red>You need to use [src.name] [80-src.uses] more times([src.uses]).</Font>","ActionPanel.Output")
 					else
-						usr << output("You may not put this technique on a hotslot.","actionoutput")
+						usr << output("You may not put this technique on a hotslot.","ActionPanel.Output")
 			else
 				if(src.name in usr.sbought)return
 				if(src.name=="Sage Mode"&&"Curse Seal" in usr.sbought)
-					usr<<output("You already have Curse Seal!","actionoutput")
+					usr<<output("You already have Curse Seal!","ActionPanel.Output")
 					return
 				if(src.name=="Sage Mode"&& "Rinnegan" in usr.sbought)
-					usr<<output("The Rinnegan prohibits you from tainting your body.","actionoutput")
+					usr<<output("The Rinnegan prohibits you from tainting your body.","ActionPanel.Output")
 					return
 				if(src.name=="Curse Seal"&& "Sage Mode"in usr.sbought)
-					usr<<output("You already have Curse Mark!","actionoutput")
+					usr<<output("You already have Curse Mark!","ActionPanel.Output")
 					return
 				if(src.name=="Curse Seal"&&"Rinnegan" in usr.sbought)
-					usr<<output("The Rinnegan prohibits you from tainting your body.","actionoutput")
+					usr<<output("The Rinnegan prohibits you from tainting your body.","ActionPanel.Output")
 					return
 				if(src.name=="Rinnegan"&& "Curse Seal"in usr.sbought)
-					usr<<output("The Rinnegan rejects your Curse Seal.","actionoutput")
+					usr<<output("The Rinnegan rejects your Curse Seal.","ActionPanel.Output")
 					return
 				if(src.name=="Rinnegan"&& "Sage Mode"in usr.sbought)
-					usr<<output("The Rinnegan rejects your Sage Mode.","actionoutput")
+					usr<<output("The Rinnegan rejects your Sage Mode.","ActionPanel.Output")
 					return
 				if((src.name=="Sage Mode" || src.name=="Curse Seal")&&usr.Clan == "Gates")
-					usr<<output("Gates require a pure body to work!","actionoutput")
+					usr<<output("Gates require a pure body to work!","ActionPanel.Output")
 					return
 
 			/*	if(usr.UchihaJ>=3)
@@ -137,23 +137,23 @@ obj
 				else has_reqs=0
 				if(Clan)
 					if(Clan!=usr.Clan)
-						usr<<output("You are not the appropriate clan to learn this technique. ([Clan]).","actionoutput")
+						usr<<output("You are not the appropriate clan to learn this technique. ([Clan]).","ActionPanel.Output")
 						return
 				if(src.Element)if(src.Element!=usr.Element&&src.Element!=usr.Element2)Element1=1
 				if(src.Element2)if(src.Element2!=usr.Element&&src.Element2!=usr.Element2)Element2z=1
 				if(src.Kekkai)if(src.Kekkai!=usr.Kekkai)KekkaiC=1
 				if(src.Specialist)if(src.Specialist!=usr.Specialist)SpecialistZ=1
 				if(Element1)
-					usr<<output("You do not have the appropriate element affinity to learn this technique. ([Element][Element2 ? " and [Element2]" : ""]).","actionoutput")
+					usr<<output("You do not have the appropriate element affinity to learn this technique. ([Element][Element2 ? " and [Element2]" : ""]).","ActionPanel.Output")
 					return
 				if(Element2z)
-					usr<<output("You do not have the appropriate element affinity to learn this technique. ([Element][Element2 ? " and [Element2]" : ""]).","actionoutput")
+					usr<<output("You do not have the appropriate element affinity to learn this technique. ([Element][Element2 ? " and [Element2]" : ""]).","ActionPanel.Output")
 					return
 				if(KekkaiC)
-					usr<<output("You do not have the appropriate Kekkai Genkai to learn this technique..","actionoutput")
+					usr<<output("You do not have the appropriate Kekkai Genkai to learn this technique..","ActionPanel.Output")
 					return
 				if(SpecialistZ)
-					usr<<output("You are not the appropriate speciality to learn this technique. ([Specialist]).","actionoutput")
+					usr<<output("You are not the appropriate speciality to learn this technique. ([Specialist]).","ActionPanel.Output")
 					return
 				if(has_reqs==1)
 					var/I=usr.CustomInput("Skill Tree","[Description]<br><br>Buy this jutsu for [src.Sprice] skill points?",list("Yes","No"))
@@ -161,7 +161,7 @@ obj
 					switch(I:name)
 						if("Yes")
 							if(usr.skillpoints<src.Sprice)
-								usr<<output("Not enough skill points to purchase [src.name]. You need [src.Sprice].","actionoutput")
+								usr<<output("Not enough skill points to purchase [src.name]. You need [src.Sprice].","ActionPanel.Output")
 								return
 							usr.skillpoints -= src.Sprice
 							if(src.IsGate)
@@ -309,16 +309,16 @@ obj
 										usr.JutsusLearnt.Add(D.type)
 										D.owner=usr.ckey
 							if(src.name <> "Dust Particle"&&src.name <> "Kakuzu"&&src.name <> "Ice" &&src.name <> "Spider" && src.name <> "Deidara" && src.name <> "Puppeteer" && src.name <> "Sand" && src.name <> "Paper Control")
-								usr<<output("Successfully learned [src.name]. Check your Jutsus list for information on the seals.","actionoutput")
+								usr<<output("Successfully learned [src.name]. Check your Jutsus list for information on the seals.","ActionPanel.Output")
 							usr.updateskills()
 
 				else
-					usr<<output("You do not meet the requirements for this technique.","actionoutput")
+					usr<<output("You do not meet the requirements for this technique.","ActionPanel.Output")
 		MouseDrop(var/H)
 			if(!src in usr.JutsusLearnt)
 				return
 			if(src.IsGate)
-				usr << output("You may not put this technique on a hotslot.","actionoutput")
+				usr << output("You may not put this technique on a hotslot.","ActionPanel.Output")
 				return
 			if(src.uses>=80)
 				if(istype(H,/obj/HotSlots/HotSlot1))
@@ -392,7 +392,7 @@ obj
 					usr.hotslot10=src.name
 					h.HotSlotNumber("F10")
 			else
-				usr<<output("<Font color=red>You need to use [src.name] [80-src.uses] more times([src.uses]).</Font>","actionoutput")
+				usr<<output("<Font color=red>You need to use [src.name] [80-src.uses] more times([src.uses]).</Font>","ActionPanel.Output")
 
 
 

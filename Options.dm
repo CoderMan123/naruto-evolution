@@ -110,7 +110,7 @@ mob
 				usr<<"You can't leave your village while you're in the tutorial!"
 				return
 			if(skalert("Are you sure you want to leave your village?","Confirmation",list("Yes","No"))=="Yes")
-				world<<output("[src.name] has defected from the [src.village] village.","actionoutput")
+				world<<output("[src.name] has defected from the [src.village] village.","ActionPanel.Output")
 				if(village=="Akatsuki")
 					for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
@@ -174,23 +174,23 @@ mob
 					//src.UpdateInventory()
 					if(getFaction(src.Faction))
 						winset(src, null, {"
-						Options.FactionTab.is-visible = "true";
+						NavigationPanel.FactionButton.is-disabled = "false";
 					"})
 					if(Squad) if(Squad.Leader == ckey) if(Squad.Members.len>=4)
 						winset(src, null, {"
-						Options.FactionTab.is-visible = "true";
+						NavigationPanel.FactionButton.is-disabled = "false";
 					"})
 					winset(src, null, {"
-						mainwindow.OptionsChild.is-visible = "true";
+						SettingsWindow.is-visible = "true";
 					"})
 				else
 					usr.OptionsUp = 0
 					//src.UpdateInventory()
 					winset(src, null, {"
-						mainwindow.OptionsChild.is-visible = "false";
+						SettingsWindow.is-visible = "false";
 					"})
 					winset(src, null, {"
-						Options.FactionTab.is-visible = "false";
+						NavigationPanel.FactionButton.is-disabled = "true";
 					"})
 		KagePanel()
 			set hidden=1
@@ -199,13 +199,13 @@ mob
 					usr.KageUp = 1
 					//src.UpdateInventory()
 					winset(src, null, {"
-						mainwindow.KageChild.is-visible = "true";
+						MainWindow.KageChild.is-visible = "true";
 					"})
 				else
 					usr.KageUp = 0
 					//src.UpdateInventory()
 					winset(src, null, {"
-						mainwindow.KageChild.is-visible = "false";
+						MainWindow.KageChild.is-visible = "false";
 					"})
 	//	AdminUp()
 	//		set hidden=1
@@ -214,13 +214,13 @@ mob
 	//				usr.AdminUp = 1
 	//				//src.UpdateInventory()
 	//				winset(src, null, {"
-	//					mainwindow.AdminChild.is-visible = "true";
+	//					MainWindow.AdminChild.is-visible = "true";
 	//				"})
 	///			else
 	//				usr.AdminUp = 0
 	//				//src.UpdateInventory()
 	//				winset(src, null, {"
-	//					mainwindow.AdminChild.is-visible = "false";
+	//					MainWindow.AdminChild.is-visible = "false";
 	//				"})
 		RefreshInventory()
 			set hidden=1
@@ -245,7 +245,7 @@ mob
 					usr.InventoryUp = 1
 					//src.UpdateInventory()
 					winset(src, null, {"
-						mainwindow.InvenChild.is-visible = "true";
+						MainWindow.InvenChild.is-visible = "true";
 					"})
 					winset(usr, "ItemName", "text=\"\"")
 					winset(usr, "ItemPic", "image=\"\"")
@@ -257,7 +257,7 @@ mob
 						winset(usr, "ItemPic", "image=\"\"")
 						usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>","ItemInfo")
 						winset(src, null, {"
-							mainwindow.InvenChild.is-visible = "false";
+							MainWindow.InvenChild.is-visible = "false";
 						"})
 						usr.InventoryUp = 0
 mob
@@ -339,18 +339,18 @@ mob
 		HealthUp()
 			set hidden=1
 			if(statpoints<1)
-				src<<output("<font color=red>Insufficent statpoints.</Font>","actionoutput")
+				src<<output("<font color=red>Insufficent statpoints.</Font>","ActionPanel.Output")
 				return
 			statpoints--
 			maxhealth+=30
-			src<<output("<font color=yellow>You leveled up Health!</Font>","actionoutput")
+			src<<output("<font color=yellow>You leveled up Health!</Font>","ActionPanel.Output")
 			RefreshStats()
 		ChakraUp()
 			set hidden=1
 			if(statpoints<1)
-				src<<output("<font color=red>Insufficent statpoints.</Font>","actionoutput")
+				src<<output("<font color=red>Insufficent statpoints.</Font>","ActionPanel.Output")
 				return
 			statpoints--
 			maxchakra+=25
-			src<<output("<font color=yellow>You leveled up Chakra!</Font>","actionoutput")
+			src<<output("<font color=yellow>You leveled up Chakra!</Font>","ActionPanel.Output")
 			RefreshStats()

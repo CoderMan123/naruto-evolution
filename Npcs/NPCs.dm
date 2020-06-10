@@ -70,7 +70,7 @@ mob/NPC
 			if(get_dist(src,usr)>2) return
 			var/newitems=usr.items+1
 			if(newitems>usr.maxitems)
-				usr<<output("This would exceed your amount of avaliable items.","actionoutput")
+				usr<<output("This would exceed your amount of avaliable items.","ActionPanel.Output")
 				return
 			usr.move=0
 			var/list/Options=list()
@@ -90,12 +90,12 @@ mob/NPC
 					I.icon=X
 					I.cColor = rgb(text2num(Colors[1]),text2num(Colors[2]),text2num(Colors[3]))
 				usr.itemAdd(I)
-				usr<<output("You bought the [S.name] for [S.Cost] Ryo.","actionoutput")
+				usr<<output("You bought the [S.name] for [S.Cost] Ryo.","ActionPanel.Output")
 				usr.Ryo-=S.Cost
 				usr.move=1
 			else
 				usr.move=1
-				usr<<output("You need [S.Cost] Ryo to purchase this.","actionoutput")
+				usr<<output("You need [S.Cost] Ryo to purchase this.","ActionPanel.Output")
 				return
 				//obj/Inventory/Clothing/Vests/Robe
 	Weapons_Dealer
@@ -129,7 +129,7 @@ mob/NPC
 			var/RealPrice=S.Cost*Num
 			var/newitems=usr.items+Num
 			if(newitems>usr.maxitems)
-				usr<<output("This would exceed your amount of avaliable items.","actionoutput")
+				usr<<output("This would exceed your amount of avaliable items.","ActionPanel.Output")
 				usr.move=1
 				return
 			if(Num<=0)
@@ -139,11 +139,11 @@ mob/NPC
 				for(var/i=Num,i>0,i--)
 					var/obj/I=new S.type()
 					usr.itemAdd(I)
-				usr<<output("You bought [Num] [S.name](s) for [RealPrice] Ryo.","actionoutput")
+				usr<<output("You bought [Num] [S.name](s) for [RealPrice] Ryo.","ActionPanel.Output")
 				usr.Ryo-=RealPrice
 				usr.move=1
 			else
-				usr<<output("You need [RealPrice] Ryo to purchase this.","actionoutput")
+				usr<<output("You need [RealPrice] Ryo to purchase this.","ActionPanel.Output")
 				usr.move=1
 				return
 	Banker
@@ -169,7 +169,7 @@ mob/NPC
 					return
 				if("Withdraw")
 					if(!usr.RyoBanked)
-						usr << output("[src] says, You do not have any Ryo to withdraw","actionoutput")
+						usr << output("[src] says, You do not have any Ryo to withdraw","ActionPanel.Output")
 					else
 						var/Num=usr.skinput2("How much would you like to withdraw?","Ryo Withdraw",null,1)
 						if(!isnum(Num))
@@ -180,12 +180,12 @@ mob/NPC
 							return
 						usr.Ryo+=Num
 						usr.RyoBanked-=Num
-						usr << output("[src] says, Thanks, here's your Ryo.","actionoutput")
+						usr << output("[src] says, Thanks, here's your Ryo.","ActionPanel.Output")
 					usr.move=1
 					return
 				if("Deposit")
 					if(!usr.Ryo)
-						usr << output("[src] says, You don't have any Ryo to deposit","actionoutput")
+						usr << output("[src] says, You don't have any Ryo to deposit","ActionPanel.Output")
 					else
 						var/Num=usr.skinput2("How much would you like to deposit?","Ryo Deposit",null,1)
 						if(!isnum(Num))
@@ -196,6 +196,6 @@ mob/NPC
 							return
 						usr.RyoBanked+=Num
 						usr.Ryo-=Num
-						usr << output("[src] says,  Thank you for your deposit.","actionoutput")
+						usr << output("[src] says,  Thank you for your deposit.","ActionPanel.Output")
 					usr.move=1
 					return

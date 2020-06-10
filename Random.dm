@@ -129,7 +129,7 @@ obj/Inventory/JutsuMastScroll
 		if(usr.dead) return
 		if(get_dist(src,usr)>1) return
 		if(!usr.contents.Find(src))
-			hearers()<<output("[usr] picks up [src].","actionoutput")
+			hearers()<<output("[usr] picks up [src].","ActionPanel.Output")
 			take(usr)
 			return
 		if(src in usr)
@@ -180,11 +180,11 @@ mob
 		Get_HostKey()
 			usr << browse(HostKey)
 			winset(src, null, {"
-						mainwindow.BrowserChild.is-visible = "true";
+						BrowserWindow.is-visible = "true";
 					"})
 		Add_VKill(mob/M in world)
 			M.Vkill++
-			src<<output("[M]: [M.Vkill] Vkills.","actionoutput")
+			src<<output("[M]: [M.Vkill] Vkills.","ActionPanel.Output")
 			CheckVKill()
 		RemoveAllClothingV(mob/M in world)
 			RemoveAllClothing()

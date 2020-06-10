@@ -129,7 +129,7 @@ mob
 							if(loc.loc:Safe != 1)
 								J.exp += rand(5, 15)
 								J.Levelup()
-						src << output("<b>Now to detonate use the defend verb (D).", "actionoutput")
+						src << output("<b>Now to detonate use the defend verb (D).", "ActionPanel.Output")
 						var/obj/O = new/obj/C3bomb(src)//	var/obj/C3bomb/O = new(src)
 						O.level = J.level
 						O.Owner=src
@@ -149,7 +149,7 @@ mob
 						if(J.level==3) J.damage=600
 						if(J.level==4) J.damage=700
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
-						src << output("<b>Now to detonate use the defend verb","actionoutput")
+						src << output("<b>Now to detonate use the defend verb","ActionPanel.Output")
 						var/obj/O = new/obj/C3bomb(src)
 						src.C3bombz=O
 						src.copy=null

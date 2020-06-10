@@ -45,14 +45,14 @@ mob
 				if(src.Rinnegan)
 					for(var/image/i in client.images)if(i.name=="RinneganCircle")del(i)
 					src.Rinnegan=0
-					world<<output("<font color=#C0C0C0><b>[src] deactivated Rinnegan","actionoutput")
-					src << output("<font color=#C0C0C0><b>You deactivate Rinnegan","actionoutput")
+					world<<output("<font color=#C0C0C0><b>[src] deactivated Rinnegan","ActionPanel.Output")
+					src << output("<font color=#C0C0C0><b>You deactivate Rinnegan","ActionPanel.Output")
 					return
 				if(!src.Rinnegan)
 					if(src.PreJutsu(J))
 						//if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
-						src << output("<font color=#C0C0C0><b>You activate your Rinnegan.","actionoutput")
-						world<<output("<font color=#C0C0C0><b>[src] activated their Rinnegan!","actionoutput")
+						src << output("<font color=#C0C0C0><b>You activate your Rinnegan.","ActionPanel.Output")
+						world<<output("<font color=#C0C0C0><b>[src] activated their Rinnegan!","ActionPanel.Output")
 						src.Rinnegan=1
 						/*if(J.level<4)
 							if(loc.loc:Safe!=1) J.exp+=rand(5,15)
@@ -73,7 +73,7 @@ mob
 								if(src.chakra<=0)
 									src.chakra=0
 									src.Rinnegan=0
-									src << output("<font color=[colour2html("red")]><b>Your Rinnegan has been deactivated.","actionoutput")
+									src << output("<font color=[colour2html("red")]><b>Your Rinnegan has been deactivated.","ActionPanel.Output")
 */
 		Induction()
 			for(var/obj/Jutsus/Induction/J in src.JutsusLearnt)

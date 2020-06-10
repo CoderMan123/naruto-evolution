@@ -13,16 +13,17 @@ mob/player
 			if(SayUp)
 				SayUp=0
 				winset(usr, null, {"
-				SayBoxChild.focus      = "false";
-				SayBoxChild.is-visible      = "false";
+				MainWindow.InputChild.focus      = "false";
+				MainWindow.InputChild.is-visible      = "false";
 				"})
 				winset(src, null, {"
 				MainWindow.Maplink.focus      = "true";
 				"})
 				return
 			winset(usr, null, {"
-				SayBoxChild.focus      = "true";
-				SayBoxChild.is-visible      = "true";
+				MainWindow.InputChild.focus      = "true";
+				InputPanel.ChatInput.focus = true;
+				MainWindow.InputChild.is-visible      = "true";
 			"})
 			SayUp=1
 	verb
@@ -31,15 +32,15 @@ mob/player
 			if(src.chatbox)
 				src.chatbox=0
 				winset(usr, null, {"
-					ChatOut.focus      = "false";
-					ChatOut.is-visible      = "false";
+					MainWindow.OutputChild.focus      = "false";
+					MainWindow.OutputChild.is-visible      = "false";
 				"})
 			else
 				if(!src.chatbox)
 					src.chatbox=1
 					winset(usr, null, {"
-						ChatOut.focus      = "true";
-						ChatOut.is-visible      = "true";
+						MainWindow.OutputChild.focus      = "true";
+						MainWindow.OutputChild.is-visible      = "true";
 					"})
 
 mob/player
@@ -68,8 +69,8 @@ mob/player
 			var/lengtext = length(msg)
 			SayUp=0
 			winset(src, null, {"
-				SayBoxChild.focus      = "false";
-				SayBoxChild.is-visible      = "false";
+				MainWindow.InputChild.focus      = "false";
+				MainWindow.InputChild.is-visible      = "false";
 			"})
 			winset(src, null, {"
 				MainWindow.Maplink.focus      = "true";
