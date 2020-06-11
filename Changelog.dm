@@ -49,14 +49,26 @@ var/CHANGELOG = {"
 		<h2>\[Unreleased]</h2>
 		<h3>Added</h3>
 		<ul>
-			<li>New user interface.</li>
+			<li>New user interface. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/ca0d908632670f9104fe3bb2c840aebeeaaeb1ca">ca0d9086</a>]</li>
 		</ul>
 
 		<h3>Changed</h3>
 		<ul>
-			<li>Update changelog format.</li>
-			<li>Tweak damage overlay animation.</li>
-			<li>Damage overlays now have an outline.</li>
+			<li>Updated the changelog format.</li>
+			<li>Reworked the social experience. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/e5bcbeb819ace6d3569f5f16f222c43b3035efdf">e5bcbeb8</a>]
+				<ul>
+					<li>Code optimizations to the social experience.</li>
+					<li>Chat messages are no longer discarded when greater than 300 characters in length.</li>
+					<li>Chat messages longer than 600 characters in length will be trimmed and sent back to you instead of losing everything to the abyss.</li>
+					<li>Chat messages containing too many capital letters no longer results in your entire message being made lowercase.</li>
+					<li>Chat messages now have icons to display village and rank.</li>
+					<li>Chat colors have been modified.</li>
+					<li>The Say channel is now known as local.</li>
+					<li>The World channel is now known as Global.</li>
+				</ul>
+			</li>
+			<li>Tweaked damage overlay animations.</li>
+			<li>Damage overlays now have an outline. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/a7ddbf1ab50fc06fd37d2f453f58adf1abfd0b27">a7ddbf1a</a>]</li>
 		</ul>
 
 		<h3>Fixed</h3>

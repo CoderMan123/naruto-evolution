@@ -6,13 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased
 ### Added
-- New user interface
+- New user interface. [[ca0d9086](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/ca0d908632670f9104fe3bb2c840aebeeaaeb1ca)]
 
 ### Changed
-- Update changelog format.
-- Tweak damage overlay animation.
-- Damage overlays now have an outline.
+- Updated the changelog format.
+- Reworked the social experience. [[e5bcbeb8](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/e5bcbeb819ace6d3569f5f16f222c43b3035efdf)]
+- - Code optimizations to the social experience.
+- - Chat messages are no longer discarded when greater than 300 characters in length.
+- - Chat messages longer than 600 characters in length will be trimmed and sent back to you instead of losing everything to the abyss.
+- - Chat messages containing too many capital letters no longer results in your entire message being made lowercase.
+- - Chat messages now have icons to display village and rank.
+- - Chat colors have been modified.
+- - The Say channel is now known as local.
+- - The World channel is now known as Global.
+- Tweaked damage overlay animations.
+- Damage overlays now have an outline. [[a7ddbf1a](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/a7ddbf1ab50fc06fd37d2f453f58adf1abfd0b27)]
 
 ### Fixed
-- Optimize Server Functions [[#1](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/issues/1)]
-- - Reduce massive overhead caused by damage overlays. [[d1529b11](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/d1529b114bc8a46316c6b41db2d31d408776744c)]
+- Optimized Server Functions [[#1](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/issues/1)]
+- - Reduced massive overhead caused by damage overlays. [[d1529b11](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/d1529b114bc8a46316c6b41db2d31d408776744c)]
