@@ -39,7 +39,7 @@ obj/Squad
 				if("Leave Squad")
 					Members -= usr.ckey
 					usr.Squad = null
-					usr.Channel="Say"
+					usr.client.channel ="Local"
 					for(var/i in Members)
 						var/mob/M=getOwner(i)
 						M<<output("[usr] has left your squad","ActionPanel.Output")
@@ -109,7 +109,7 @@ obj/Squad
 					var/mob/player/M = Players[choice]
 					Members -= M.ckey
 					M.Squad = null
-					M.Channel="Say"
+					M.client.channel ="Local"
 					winset(M, "NavigationPanel.SquadButton", "is-disabled = 'false'")
 				else
 					Members -= choice
@@ -131,7 +131,7 @@ obj/Squad
 					if(!length(Members)) del src // Del the Squad if no one is left to take over.
 					Leader = pick(Members) //It picks a new Leader from the current members
 					Members -= Leader //Remove the leader from the member list once(was duplicating)
-					usr.Channel="Say"
+					usr.client.channel ="Local"
 					winset(usr, "NavigationPanel.SquadButton", "is-disabled = 'false'")
 mob/
 	var/tmp/

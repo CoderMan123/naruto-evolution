@@ -561,7 +561,7 @@ mob/MasterGM/verb
 		del(O)
 		src.overlays+=image('Adminshield.dmi',"loop")
 		var/mob/player/M=src
-		M.say("OMEGA KAITEN!")
+		M.Say("OMEGA KAITEN!")
 
 
 	Create()

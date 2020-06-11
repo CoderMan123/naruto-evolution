@@ -10,7 +10,7 @@ macro "Macro"
 		command = ".center"
 	elem 
 		name = "Return"
-		command = "Winsay"
+		command = "ShowInputChild"
 	elem 
 		name = "SHIFT+Return"
 		command = "GM-Chat"
@@ -502,6 +502,7 @@ window "InputPanel"
 		size = 500x28
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -672,7 +673,7 @@ window "MainWindow"
 		can-resize = false
 		icon = 'Hud\\evo.dmi'
 		macro = "Macro"
-	elem "Maplink"
+	elem "MapChild"
 		type = CHILD
 		pos = 0,0
 		size = 1362x960
@@ -687,6 +688,7 @@ window "MainWindow"
 		size = 1362x25
 		anchor1 = 0,100
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		left = "NavigationPanel"
 		is-vert = false
@@ -717,6 +719,7 @@ window "MainWindow"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
+		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -726,6 +729,7 @@ window "MainWindow"
 		size = 386x394
 		anchor1 = 5,13
 		anchor2 = 33,53
+		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -748,6 +752,7 @@ window "MainWindow"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -785,6 +790,7 @@ window "MainWindow"
 		size = 386x384
 		anchor1 = 57,9
 		anchor2 = 85,48
+		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -823,6 +829,7 @@ window "MainWindow"
 		size = 174x304
 		anchor1 = 85,8
 		anchor2 = none
+		background-color = none
 		border = line
 		saved-params = "splitter"
 		left = "Status"
@@ -833,6 +840,7 @@ window "MainWindow"
 		size = 350x395
 		anchor1 = 56,43
 		anchor2 = 82,84
+		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -903,7 +911,6 @@ window "NavigationPanel"
 		size = 1362x25
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false

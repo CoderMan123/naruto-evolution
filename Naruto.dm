@@ -241,7 +241,7 @@ mob/Login
 					titlescreen.Shikamaru.is-visible="false"
 						"})
 		winset(src, null, {"
-							Maplink.right=titlescreen;
+							MapChild.right=titlescreen;
 							MainWindow.is-maximized=true
 							MainWindow.UnlockChild.is-visible = "false";
 							MainWindow.InvenChild.is-visible = "false";
@@ -274,7 +274,7 @@ mob/Login
 		ASSERT(hasSavefile(LoginID) && src.client)
 		src.loc=locate(1,200,19)
 		winset(src, null, {"
-							Maplink.right=mapwindow;
+							MapChild.right=mapwindow;
 						"})
 		for(var/obj/Titlescreen/Logo/L in src.client.screen)del(L)
 		LoginID=lowertext(LoginID)
@@ -397,9 +397,9 @@ mob/Login
 							MainWindow.NavigationChild.is-visible      = "true";
 							MainWindow.OutputChild.is-visible      = "true";
 							MainWindow.ActionChild.is-visible      = "true";
-							Maplink.right=mapwindow;
+							MapChild.right=mapwindow;
 						"})
-		M<<"Now speaking in: [M.Channel]."
+		M<<"Now speaking in: [M.client.channel]."
 		spawn(30)if(M)M.ASave()
 	verb/CreateCharacter()
 		set hidden=1
@@ -645,9 +645,9 @@ mob/Login
 								MainWindow.NavigationChild.is-visible      = "true";
 								MainWindow.OutputChild.is-visible      = "true";
 								MainWindow.ActionChild.is-visible      = "true";
-								Maplink.right=mapwindow;
+								MapChild.right=mapwindow;
 							"})
-				M<<"Now speaking in: [M.Channel]."
+				M<<"Now speaking in: [M.client.channel]."
 				spawn(30)if(M)M.ASave()
 
 				TotalPlayers.Add(M)
@@ -967,12 +967,6 @@ mob
 		Logout()
 		..()*/
 mob
-	var/tmp
-		Channel="Say"
-	verb
-		WorldAddy()
-			set hidden=1
-			usr << output("<FONT FACE= Times New Roman>byond://[world.internet_address]:[world.port]", "ActionPanel.Output")
 	verb
 		CloseBrowser()
 			set hidden=1
