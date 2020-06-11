@@ -16,4 +16,9 @@ obj/Symbols
 		New(mob/M)
 			switch(M.rank)
 				if("Academy Student") src.icon = 'Academy-Student.png'
+				if("Genin") src.icon = 'Genin.png'
+				if("Chuunin") src.icon = 'Chuunin.png'
+				if("Jonin") src.icon = 'Jonin.png'
+				if("Anbu") src.icon = 'Anbu.png'
+				if("Kage") src.icon = 'Kage.png'
 			..()
