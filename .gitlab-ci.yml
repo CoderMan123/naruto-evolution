@@ -2,6 +2,7 @@ image: tgstation/byond:latest
 
 variables:
     BYOND_DME: "Project-Evolution.dme"
+    GIT_SUBMODULE_STRATEGY: recursive
 
 stages:
     - build
