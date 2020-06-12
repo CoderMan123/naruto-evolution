@@ -55,6 +55,7 @@ var/CHANGELOG = {"
 		<h3>Changed</h3>
 		<ul>
 			<li>Updated the changelog format.</li>
+			<li>Updated the world fps to 20.</li>
 			<li>Reworked the social experience. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/e5bcbeb819ace6d3569f5f16f222c43b3035efdf">e5bcbeb8</a>]
 				<ul>
 					<li>Code optimizations to the social experience.</li>

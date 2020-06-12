@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Updated the changelog format.
+- Updated the world fps to 20.
 - Reworked the social experience. [[e5bcbeb8](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/e5bcbeb819ace6d3569f5f16f222c43b3035efdf)]
 - - Code optimizations to the social experience.
 - - Chat messages are no longer discarded when greater than 300 characters in length.
