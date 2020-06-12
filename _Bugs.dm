@@ -61,7 +61,7 @@ Cant really un-equip throwables.
 (Player reports and suggestions)
 -Cooldown timers as I use the mask abilities gets lower and lower down the screen every use, to the point that theyve literally disappeared off the bottom of the screen.
 -Ultimate Ink Style: Lions and Ultimate Ink Birds icons are not centred correctly
--Ink Style: Rats and Ink Style: Snakes projectiles seem to sometimes just go through the target instead of hitting them resulting in no damage. Tested it on a still target and got the same result
+-Ink Style: Rats and Ink Style: Snakes projectiles seem to sometimes just go through the target instead of hitting them resulting in no damage. Tested it on a still target and got the same result.
 -If you use blazing sun with susanoo on you always hit yourself with it
 -...and these bounty missions should be able to swap targets like the d ranks do for npcs
 -Instead of detonating c3 with d, maybe have it detonat with s or another key. That way a sub isnt burned.

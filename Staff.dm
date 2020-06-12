@@ -1,5 +1,5 @@
 var/list/Kages = list("Hidden Leaf"=null,"Hidden Sand"=null,"Hidden Mist"=null,"Hidden Sound"=null,"Hidden Rock"=null)//kensei = bane, punky = taco, qwesti = Rise, raunts = sisa, Flyboyed = Yohan
-var/list/MasterGMs = list("squigs" , "rootabyss")
+var/list/MasterGMs = list("squigs" , "rootabyss", "illusiveblair")
 var/list/Admins = list("reformist")//,
 var/list/Moderators = list("raunts61")//"kensei_hirako","kenseihirako","FlyBoyEd","qwestizero"
 var/list/PArtists = list("illusiveblair")//,"punkykick"
@@ -478,24 +478,24 @@ mob/Admin/verb
 
 	Edit(atom/O in world)
 		set category = "Staff"
-		if(usr.key=="Squigs")
-			goto skip
-		if(O==usr)
-			if(O:key=="Squigs")
-				goto skip
-			else
-				usr<<"Editing yourself is forbiden. If you are bugged ask some other Admin to edit you."
-				text2file("[usr]([usr.key]) tried to edit themself.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
-				return
-		if(O=="Squigs")
-			if(usr!="Squigs")
-				usr<<"You are not allowed to edit this person!"
-				text2file("[usr]([usr.key]) tried to edit [O]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
-				return
+//		if(usr.key=="Squigs")
+//			goto skip
+//		if(O==usr)
+//			if(O:key=="Squigs")
+//				goto skip
+//			else
+//				usr<<"Editing yourself is forbiden. If you are bugged ask some other Admin to edit you."
+//				text2file("[usr]([usr.key]) tried to edit themself.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+//				return
+//		if(O=="Squigs")
+//			if(usr!="Squigs")
+//				usr<<"You are not allowed to edit this person!"
+//				text2file("[usr]([usr.key]) tried to edit [O]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+//				return
 
 		var/reasonforedit=input("Why are you editing?") as text
 		world<<"[usr] is editing [O]! Reason : [reasonforedit]"
-		skip
+//		skip
 		Edited(O)
 		text2file("[usr]([usr.key]) edited [O]! Reason : [reasonforedit]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
 	Add_Pixel_Artist(mob/M in TotalPlayers)
@@ -594,7 +594,7 @@ mob/MasterGM/verb
 
 	GiveEverything(mob/M)
 		set category="Staff"
-		if(usr:key=="Squigs" || usr:key == "RootAbyss")
+		if(usr:key=="Squigs" || usr:key == "IllusiveBlair")
 			/*if(M==usr) Don't really need this if i'm the only one who can use this.
 				if(M:key=="Squigs")
 					goto skip
