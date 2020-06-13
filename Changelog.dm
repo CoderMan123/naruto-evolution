@@ -70,6 +70,7 @@ var/CHANGELOG = {"
 			</li>
 			<li>Tweaked damage overlay animations.</li>
 			<li>Damage overlays now have an outline. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/a7ddbf1ab50fc06fd37d2f453f58adf1abfd0b27">a7ddbf1a</a>]</li>
+			<li>Bubble Spreader now spreads in a more combat-viable manner.</li>
 		</ul>
 
 		<h3>Fixed</h3>

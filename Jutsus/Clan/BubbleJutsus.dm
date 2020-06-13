@@ -145,7 +145,7 @@ mob
 							A.fightlayer=src.fightlayer
 							A.damage=J.damage+round((src.ninjutsu/1.5)+(src.strength/4))
 							walk_away(A,src)
-							spawn(4)if(A)walk(A,A.dir,5)
+							spawn(1)if(A)walk(A,A.dir,5)
 					spawn(5)
 						src.firing=0
 						src.canattack=1

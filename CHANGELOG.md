@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - - The World channel is now known as Global.
 - Tweaked damage overlay animations.
 - Damage overlays now have an outline. [[a7ddbf1a](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/a7ddbf1ab50fc06fd37d2f453f58adf1abfd0b27)]
+- Bubble Spreader now spreads in a more combat-viable manner.
 
 ### Fixed
 - Optimized Server Functions [[#1](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/issues/1)]
