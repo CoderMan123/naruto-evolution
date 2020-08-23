@@ -3,7 +3,7 @@
 # Setup Development Environment
 1) Clone the repository:
 ```sh
-git clone https://github.com/Lavenblade/Project-Evolution.git
+git clone https://git.douglas-parker.com/lavenblade/project-evolution.git
 ```
 
 2) Switch to preferred branch:
