@@ -932,7 +932,7 @@ proc/DetermineVarValue(variable)
 		return return_val
 	if(isnull(variable)) return "null"
 	return "- [variable] -"
-proc/islist(var/list/s)   return istype(s)
+
 mob/proc/list_view(aList,title)
 	if(!aList || !islist(aList)) CRASH("List null or incorrect type")
 	var/html = {"<html><body bgcolor=gray text=#CCCCCC link=white vlink=white alink=white>
