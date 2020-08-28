@@ -65,7 +65,7 @@ turf/Arena
 				if(!usr.opponent)
 					usr << output("You do not have an opponent.","ActionPanel.Output")
 					return
-				if(usr.skalert("Fight [usr.opponent]?","Duel",list("Yes","No")) == "No")
+				if(usr.client.Alert("Fight [usr.opponent]?","Duel",list("Yes","No")) == 2)
 					usr.opponent = null
 					return
 				if(usr.opponent) usr.opponent.opponent = usr

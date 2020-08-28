@@ -8,29 +8,30 @@ obj/Special/ChuuninExam
 	icon='building insides.dmi'
 	icon_state="paper"
 	mouse_opacity=2
-	var/list/Questions=list("Morning Peacock is a strength technique"="True",
-	"Eight Trigrams 64 Palms requires no reaction commands."="False",
-"Anbu are the right hand men and women of the akatsuki."="False",
-"Ash Pile Burning is triggered with the down arrow."="True",
-"The Genin exam was too easy."="True",
-"Rasengan is a thunder element technique."="False",
-"Sensatsu Suishou is an ice element technique."="True",
-"Akatsuki are bounty hunters."="True",
-"Heavenly Spin requires Byakugan active."="False",
-"Sickle Weasel Slash is an earth element technique."="False",
-"Gentle Fist can disable chakra points."="True",
-"Bone Sensation only works if there is a Bone Bullet lodged in your enemy."="True",
-"Multiple Shadow Clone Jutsu creates clones that can attack."="True",
-"Chidori Nagashi is an earth element technique."="False",
-"The skill tree is divided in non-clan, elemental, and clan jutsus."="True",
-"Tsukuyomi is utilized by the Nara clan."="False","Susano'o is an Uchiha clan technique."="True",
-"Aburame utilize ink drawings to attack enemies."="False",
-"Jounin is the rank where higher levels are able to begin taking students."="True",
-"Players will lose 50% of the experience points for killing a fellow villager."="True",
-"The level requirement for the Genin Exams is 10."="False",
-"D rank missions are easiest but give you the least ammount of experience."="True",
-"B rank missions are assigned to Chuunin level shinobi."="True","An A rank mission may send you against enemy villagers."="True",
-"The resting graphic will change according to your player's maximum chakra levels."="True")
+	var/list/Questions=list("Morning Peacock is a strength technique"=1,
+	"Eight Trigrams 64 Palms requires no reaction commands."=2,
+"Anbu are the right hand men and women of the akatsuki."=2,
+"Ash Pile Burning is triggered with the down arrow."=1,
+"The Genin exam was too easy."=1,
+"Rasengan is a thunder element technique."=2,
+"Sensatsu Suishou is an ice element technique."=1,
+"Akatsuki are bounty hunters."=1,
+"Heavenly Spin requires Byakugan active."=2,
+"Sickle Weasel Slash is an earth element technique."=2,
+"Gentle Fist can disable chakra points."=1,
+"Bone Sensation only works if there is a Bone Bullet lodged in your enemy."=1,
+"Multiple Shadow Clone Jutsu creates clones that can attack."=1,
+"Chidori Nagashi is an earth element technique."=2,
+"The skill tree is divided in non-clan, elemental, and clan jutsus."=1,
+"Tsukuyomi is utilized by the Nara clan."=2,
+"Susano'o is an Uchiha clan technique."=1,
+"Aburame utilize ink drawings to attack enemies."=2,
+"Jounin is the rank where higher levels are able to begin taking students."=1,
+"Players will lose 50% of the experience points for killing a fellow villager."=1,
+"The level requirement for the Genin Exams is 10."=2,
+"D rank missions are easiest but give you the least ammount of experience."=1,
+"B rank missions are assigned to Chuunin level shinobi."="True","An A rank mission may send you against enemy villagers."=1,
+"The resting graphic will change according to your player's maximum chakra levels."=1)
 	Click()
 		if(get_dist(src,usr)>1) return
 		var/QuestionNum
@@ -65,7 +66,7 @@ obj/Special/ChuuninExam
 				var/Question=pick(NewQuestions)
 				NewQuestions-=Question
 				QuestionNum++
-				if(usr.skalert("Question #[QuestionNum]: [Question]","Question [QuestionNum]",list("True","False"))=="[Questions[Question]]")
+				if(usr.client.Alert("Question #[QuestionNum]: [Question]","Question [QuestionNum]",list("True","False"))=="[Questions[Question]]")
 					CorrectAnswer++
 		else
 			usr << output("You don't have to take the written exam at your level.","ActionPanel.Output")

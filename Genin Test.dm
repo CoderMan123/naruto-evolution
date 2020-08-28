@@ -44,12 +44,19 @@ obj/Special/GeninExam
 	icon_state="paper"
 	mouse_opacity=2
 	var/village="Hidden Leaf"
-	var/list/Questions=list("This exam requires you to be level 5 or higher"="True","Pheonix flower technique is a fire element technique"="True",
-"Tsukuyomi is a technique utilized by the hyuga clan"="False","Senju clan majors in the use of puppets"="False","The Hokage's job is to take care of the leaf village"="True",
-"If you are stuck in a location you shouldn't be, you can type in /stuck to teleport out"="True","You move with the arrow keys"="True",
-"You can retake this exam if you fail it"="True","Chidori is a wind element technique"="False",
-"To receive a mission, you talk to the banker of your village"="False","You started this game with Clone jutsu and Transformation jutsu"="True",
-"You recieve a headband from passing this exam"="True","This exam is too easy"="True")
+	var/list/Questions=list("This exam requires you to be level 5 or higher"=1,
+		"Pheonix flower technique is a fire element technique"=1,
+		"Tsukuyomi is a technique utilized by the hyuga clan"=2,
+		"Senju clan majors in the use of puppets"=2,
+		"The Hokage's job is to take care of the leaf village"=1,
+		"If you are stuck in a location you shouldn't be, you can type in /stuck to teleport out"=1,
+		"You move with the arrow keys"=1,
+		"You can retake this exam if you fail it"=1,
+		"Chidori is a wind element technique"=2,
+		"To receive a mission, you talk to the banker of your village"=2,
+		"You started this game with Clone jutsu and Transformation jutsu"=1,
+		"You recieve a headband from passing this exam"=1,
+		"This exam is too easy"=1)
 	Click()
 		if(get_dist(src,usr)>1) return
 		var/QuestionNum
@@ -84,7 +91,7 @@ obj/Special/GeninExam
 			var/Question=pick(NewQuestions)
 			NewQuestions-=Question
 			QuestionNum++
-			if(usr.skalert("Question #[QuestionNum]: [Question]","Question [QuestionNum]",list("True","False"))=="[Questions[Question]]")
+			if(usr.client.Alert("Question #[QuestionNum]: [Question]","Question [QuestionNum]",list("True","False"))=="[Questions[Question]]")
 				CorrectAnswer++
 		usr<<output("You have completed the test, please wait for the result.","ActionPanel.Output")
 		while(GeninTest)

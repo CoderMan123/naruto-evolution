@@ -195,7 +195,7 @@ mob/Login
 			client.Command(".reconnect")
 		for(var/mob/M in TotalPlayers)
 			if(lowertext(M.name) == lowertext(LoginID))
-				skalert("The account \"[LoginID]\" is already logged in.", "Login Error")
+				client.Alert("The account \"[LoginID]\" is already logged in.", "Login Error")
 				return
 		if(hasSavefile(LoginID))
 			var/savefile/F = new("Players/[lowertext(letter)]/[lowertext(LoginID)].sav")
@@ -207,11 +207,11 @@ mob/Login
 					reason = "The password you have entered is incorrect."
 			if(reason)
 				del F
-				skalert("[reason]", "Login Error")
+				client.Alert("[reason]", "Login Error")
 				return
 			LoadCharacter(LoginID, F)
 		else
-			src.skalert("The account \"[LoginID]\" does not exist.","Login Error")
+			src.client.Alert("The account \"[LoginID]\" does not exist.","Login Error")
 			return
 
 	Login()
@@ -222,7 +222,7 @@ mob/Login
 		EYEBALL.name="EYE"
 		EYEBALL.loc=locate(101,100,7)
 		EYEBALL.density=0
-		//src.skalert("When you create your account, you won't be automatically teleported to the spawn. Please relog and log in to be teleported to the tutorial. This is to prevent spam.")
+		//src.client.Alert("When you create your account, you won't be automatically teleported to the spawn. Please relog and log in to be teleported to the tutorial. This is to prevent spam.")
 		EYEBALL.invisibility=1
 		EYEBALL.byakuview = 0
 		EYEBALL.canteleport = 0
@@ -416,29 +416,26 @@ mob/Login
 			M.name = null
 			M.creating=1
 			GetScreenResolution(M)
-			var/ck = uppercase(M.ckey, 1)
 			while(M.name==null)
-			//skinput2(prompt,title,initial,Number
 				if(M)
-					var/ZZ
-					ZZ=M.skinput2("Type in a name. Names from the anime are looked down on.","Name",ck,0)
+					var/list/AlertInput=M.client.AlertInput("Type in a name. Names from the anime are looked down on.","Name")
 					if(M)
-						M.name = ZZ
+						M.name = AlertInput[2]
 						var/leng = length(M.name)
 						if(hasSavefile(M.name))
-							M.skalert("The name you entered already exists.")
+							M.client.Alert("The name you entered already exists.")
 							M.name = null
 							continue
 						if((leng>20) || (leng<3))
-							M.skalert("The name must be between 3 and 20 characters.")
+							M.client.Alert("The name must be between 3 and 20 characters.")
 							M.name = null
 							continue
 						if(uppertext(M.name) == M.name)
-							M.skalert("Your name may not consist entirely of capital letters.")
+							M.client.Alert("Your name may not consist entirely of capital letters.")
 							M.name = null
 							continue
 						if(ffilter_characters(M.name)!=M.name)
-							M.skalert("\"[M.name]\" contains an invalid character.  Allowed characters are:\n[allowed_characters_name]")
+							M.client.Alert("\"[M.name]\" contains an invalid character.  Allowed characters are:\n[allowed_characters_name]")
 							M.name = null
 							continue
 					else return
@@ -448,10 +445,11 @@ mob/Login
 			while(!M.Password)
 			//skinput2(prompt,title,initial,Number
 				if(M)
-					M.Password = M.skinput2("Please select a password for this account. Passwords are now hashed and unreadable by admins or the host.","Password",0)
+					var/list/AlertInput = M.client.AlertInput("Please select a password for this account. Passwords are now hashed and unreadable by admins or the host.","Password", mask=1)
+					M.Password = AlertInput[2]
 					if(M)
 						if(length(M.Password)<3)
-							M.skalert("Password must have atleast 3 characters.")
+							M.client.Alert("Password must have atleast 3 characters.")
 							M.Password = null
 							continue
 					else return
@@ -468,21 +466,20 @@ mob/Login
 				M.overlays=0
 				//M.HairStyle='Long.dmi'
 				var/obj/SkinTone
-				SkinTone = M.CustomInput("Skin Color Options","Please choose a Skin Tone.",list("White","Dark","Blue","Pale"))
+				SkinTone = M.client.AlertList("Skin Color Options","Please choose a Skin Tone.",list("White","Dark","Blue","Pale"))
 				if(M)
 					if(SkinTone)
-						switch(SkinTone.name)
-							if("White")
+						switch(SkinTone)
+							if(1)
 								M.SkinTone="White"
-							if("Dark")
+							if(2)
 								M.SkinTone="Dark"
-							if("Blue")
+							if(3)
 								M.SkinTone="Blue"
-							if("Pale")
+							if(4)
 								M.SkinTone="Pale"
 
 				M.ResetBase()
-
 				M.HairStyle = M.CustomInput("Hair Options","Please choose a hair.",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","Mohawk","Neji Hair","Distance")).name
 
 				/*if(M)
@@ -657,7 +654,7 @@ mob/Login
 						src.Logout()
 
 
-				if(M.skalert("Do you wish to skip the tutorial? Only do this if you are familiar with the game. If you skip this you can't come back without making a new account.","Skip Tutorial?",list("No","Yes"))=="No")
+				if(M.client.Alert("Do you wish to skip the tutorial? Only do this if you are familiar with the game. If you skip this you can't come back without making a new account.","Skip Tutorial?",list("No","Yes"))==1)
 					return
 				M.Tutorial=7
 				if(M.village=="Hidden Leaf")

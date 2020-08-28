@@ -581,7 +581,7 @@ mob/MasterGM/verb
 
 	Change_Worldtype()
 		set category="Staff"
-		servertype=skinput2("Please input a new server type.","servertype",servertype)
+		servertype=src.client.AlertInput("Please input a new server type.","servertype")
 		world<<output("The server type has been changed.","ActionPanel.Output")
 
 	Get_GMLog()

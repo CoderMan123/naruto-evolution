@@ -82,13 +82,13 @@ mob
 				if(!usr.Ryo)
 					usr << output("You don't have any Ryo to drop.","ActionPanel.Output")
 					return
-				var/Num=usr.skinput2("How much Ryo would you like to drop?","Drop Ryo",null,1)
-				if(!isnum(Num))return
-				if(usr.Ryo<Num||Num<=0)return
-				usr.Ryo-=Num
+				var/list/AlertInput=usr.client.AlertInput("How much Ryo would you like to drop?","Drop Ryo")
+				if(!isnum(AlertInput[2]))return
+				if(usr.Ryo<AlertInput[2]||AlertInput[2]<=0)return
+				usr.Ryo-=AlertInput[2]
 				var/obj/RyoBag/O=new(src.loc)
-				O.Worth=Num
-				src << output("You drop [Num] Ryo.","ActionPanel.Output")
+				O.Worth=AlertInput[2]
+				src << output("You drop [AlertInput[2]] Ryo.","ActionPanel.Output")
 			Get()
 				set hidden=1
 				for(var/obj/Inventory/O in view(usr,1))

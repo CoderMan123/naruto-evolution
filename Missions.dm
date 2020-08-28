@@ -52,7 +52,7 @@ mob/NPC
 		if(get_dist(src,usr)>2) return
 		if(usr.Mission=="Talk with [src.name]")
 			usr.Mission=null
-			usr.skalert("[src] says, Oh hello [usr.name].<br>You and [src] have a long talk, after it is over they hand you your reward. You have completed your mission!","[src]")
+			usr.client.Alert("[src] says, Oh hello [usr.name].<br>You and [src] have a long talk, after it is over they hand you your reward. You have completed your mission!","[src]")
 			var/MissionRyo=150
 			var/MissionExp=6+WorldXp
 			if(usr.Squad)
@@ -383,7 +383,7 @@ mob/NPC/Mission_Lady//mission
 								MissionGuys=M
 						choice="Talk with [MissionGuys]"
 						text="to talk with [MissionGuys], he has some information that could benefit the village.He should be around the village somewhere. Do you accept this mission?"
-				if(usr.skalert("Great! Your mission is [text]","Mission",list("Accept","Decline"))=="Decline")
+				if(usr.client.Alert("Great! Your mission is [text]","Mission",list("Accept","Decline"))==2)
 					usr.MissionUp = 0
 					return
 				if(!usr)
@@ -408,13 +408,13 @@ mob/NPC/Mission_Lady//mission
 			if("C")
 				usr.MissionUp = 1
 				if(usr.rank=="Academy Student" || usr.level<13)
-					usr.skalert("Sorry, you're too young to do this mission. Come back when you're a Genin and at least level 13.","Mission")
+					usr.client.Alert("Sorry, you're too young to do this mission. Come back when you're a Genin and at least level 13.","Mission")
 					usr.MissionUp = 0
 					return
 				var/list/choices=list(/obj/MissionObj/VesaiRoot/,/obj/MissionObj/Opal/*,"K.O a bandit"*/)
 				var/choice=pick(choices)
 				/*if(choice=="K.O a bandit")
-					if(usr.skalert("Your mission is to knock out a troublesome bandit and teach him a lesson not to mess with local folks! Do you accept this mission?","Mission",list("Accept","Decline"))=="Decline")
+					if(usr.client.Alert("Your mission is to knock out a troublesome bandit and teach him a lesson not to mess with local folks! Do you accept this mission?","Mission",list("Accept","Decline"))==2)
 						usr.MissionUp = 0
 						return
 					if(!usr) return
@@ -423,7 +423,7 @@ mob/NPC/Mission_Lady//mission
 				var/obj/I=new choice
 				usr << browse_rsc(icon(I.icon,I.icon_state), "[I].png")
 				var/amount=rand(5,10)
-				if(usr.skalert("Your mission is to collect [amount] [I](s) for our research. You can find them throughout the world. Do you accept this mission?","Mission",list("Accept","Decline"))=="Decline")
+				if(usr.client.Alert("Your mission is to collect [amount] [I](s) for our research. You can find them throughout the world. Do you accept this mission?","Mission",list("Accept","Decline"))==2)
 					usr.MissionUp = 0
 					return
 				if(!usr)
@@ -449,7 +449,7 @@ mob/NPC/Mission_Lady//mission
 				usr.MissionUp = 1
 				var/mob/choice
 				if(usr.rank=="Genin"||usr.rank=="Academy Student")
-					usr.skalert("Sorry, you're too young to do this mission. Come back when you're a Chuunin.","Mission")
+					usr.client.Alert("Sorry, you're too young to do this mission. Come back when you're a Chuunin.","Mission")
 					if(!usr)
 						usr.MissionUp = 0
 						return
@@ -460,13 +460,13 @@ mob/NPC/Mission_Lady//mission
 						choice=M
 						break
 				if(!choice)
-					usr.skalert("Sorry, we don't have a mission for you yet.","Mission")
+					usr.client.Alert("Sorry, we don't have a mission for you yet.","Mission")
 					if(!usr)
 						usr.MissionUp = 0
 						return
 					usr.MissionUp = 0
 					return
-				if(usr.skalert("Your mission is a special one, you are to hunt down and kill the Missing-Nin, [choice]. His last known location was at [choice.x],[choice.y],[choice.z]. Do you accept?","Mission",list("Accept","Decline"))=="Decline")
+				if(usr.client.Alert("Your mission is a special one, you are to hunt down and kill the Missing-Nin, [choice]. His last known location was at [choice.x],[choice.y],[choice.z]. Do you accept?","Mission",list("Accept","Decline"))==2)
 					usr.MissionUp = 0
 					return
 				if(!usr)
@@ -483,7 +483,7 @@ mob/NPC/Mission_Lady//mission
 				usr.MissionUp = 1
 				var/mob/choice
 				if(usr.rank=="Genin"||usr.rank=="Academy Student"||usr.rank=="Chuunin")
-					usr.skalert("Sorry, you're too young to do this mission. Come back when you're a Jounin.","Mission")
+					usr.client.Alert("Sorry, you're too young to do this mission. Come back when you're a Jounin.","Mission")
 					if(!usr)
 						usr.MissionUp = 0
 						return
@@ -503,13 +503,13 @@ mob/NPC/Mission_Lady//mission
 						choice=M
 						break
 				if(!choice)
-					usr.skalert("Sorry, we don't have a mission for you yet.","Mission")
+					usr.client.Alert("Sorry, we don't have a mission for you yet.","Mission")
 					if(!usr)
 						usr.MissionUp = 0
 						return
 					usr.MissionUp = 0
 					return
-				if(usr.skalert("Greetings [usr.name]. Your mission today is that you are to hunt down and kill the [choice.rank] Ninja ([choice.village ? "[choice.village]" : ""]), [choice]. His last known location was at [choice.x],[choice.y],[choice.z]. Do you accept?","Mission",list("Accept","Decline"))=="Decline")
+				if(usr.client.Alert("Greetings [usr.name]. Your mission today is that you are to hunt down and kill the [choice.rank] Ninja ([choice.village ? "[choice.village]" : ""]), [choice]. His last known location was at [choice.x],[choice.y],[choice.z]. Do you accept?","Mission",list("Accept","Decline"))==2)
 					usr.MissionUp = 0
 					return
 				if(!usr)
@@ -526,14 +526,14 @@ mob/NPC/Mission_Lady//mission
 				usr.MissionUp = 1
 				var/mob/choice
 				if(usr.rank=="Genin"||usr.rank=="Academy Student"||usr.rank=="Chuunin" || usr.rank=="Jounin")
-					usr.skalert("Sorry, this mission is only for Anbu.","Mission")
+					usr.client.Alert("Sorry, this mission is only for Anbu.","Mission")
 					if(!usr)
 						usr.MissionUp = 0
 						return
 					usr.MissionUp = 0
 					return
 				if(usr.village == "Akatsuki"|| usr.village == "Seven Swordsmen")
-					usr.skalert("Why would you want to hunt your fellow members?!")
+					usr.client.Alert("Why would you want to hunt your fellow members?!")
 					if(!usr)
 						usr.MissionUp = 0
 						return
@@ -547,13 +547,13 @@ mob/NPC/Mission_Lady//mission
 						choice=M
 						break
 				if(!choice)
-					usr.skalert("Sorry, we don't have a mission for you yet.","Mission")
+					usr.client.Alert("Sorry, we don't have a mission for you yet.","Mission")
 					if(!usr)
 						usr.MissionUp = 0
 						return
 					usr.MissionUp = 0
 					return
-				if(usr.skalert("Greetings [usr.name]. Your mission today is that you are to hunt down and kill the [choice.rank] Ninja ([choice.village ? "[choice.village]" : ""]), [choice]. His last known location was at [choice.x],[choice.y],[choice.z]. Do you accept?","Mission",list("Accept","Decline"))=="Decline")
+				if(usr.client.Alert("Greetings [usr.name]. Your mission today is that you are to hunt down and kill the [choice.rank] Ninja ([choice.village ? "[choice.village]" : ""]), [choice]. His last known location was at [choice.x],[choice.y],[choice.z]. Do you accept?","Mission",list("Accept","Decline"))==2)
 					usr.MissionUp = 0
 					return
 				if(!usr)

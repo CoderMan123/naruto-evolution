@@ -122,24 +122,24 @@ mob/NPC
 				usr.move=1
 				return
 			var/obj/S = Options["[Choice]"]
-			var/Num=usr.skinput2("How many would you like to buy?","Purchase",null,1)
-			if(!isnum(Num))
+			var/list/AlertInput=usr.client.AlertInput("How many would you like to buy?","Purchase")
+			if(!isnum(AlertInput[2]))
 				usr.move=1
 				return
-			var/RealPrice=S.Cost*Num
-			var/newitems=usr.items+Num
+			var/RealPrice=S.Cost*AlertInput[2]
+			var/newitems=usr.items+AlertInput[2]
 			if(newitems>usr.maxitems)
 				usr<<output("This would exceed your amount of avaliable items.","ActionPanel.Output")
 				usr.move=1
 				return
-			if(Num<=0)
+			if(AlertInput[2]<=0)
 				usr.move=1
 				return
 			if(usr.Ryo>=RealPrice)
-				for(var/i=Num,i>0,i--)
+				for(var/i=AlertInput[2],i>0,i--)
 					var/obj/I=new S.type()
 					usr.itemAdd(I)
-				usr<<output("You bought [Num] [S.name](s) for [RealPrice] Ryo.","ActionPanel.Output")
+				usr<<output("You bought [AlertInput[2]] [S.name](s) for [RealPrice] Ryo.","ActionPanel.Output")
 				usr.Ryo-=RealPrice
 				usr.move=1
 			else
@@ -163,39 +163,42 @@ mob/NPC
 			if(get_dist(src,usr)>2) return
 			if(!usr.move) return
 			usr.move=0
-			switch(usr.skalert("You have [usr.Ryo] Ryo on you and [usr.RyoBanked] banked here.","Bank",list("Deposit","Withdraw","Cancel")))
-				if("Cancel")
-					usr.move=1
-					return
-				if("Withdraw")
-					if(!usr.RyoBanked)
-						usr << output("[src] says, You do not have any Ryo to withdraw","ActionPanel.Output")
-					else
-						var/Num=usr.skinput2("How much would you like to withdraw?","Ryo Withdraw",null,1)
-						if(!isnum(Num))
-							usr.move=1
-							return
-						if(usr.RyoBanked<Num||Num<=0)
-							usr.move=1
-							return
-						usr.Ryo+=Num
-						usr.RyoBanked-=Num
-						usr << output("[src] says, Thanks, here's your Ryo.","ActionPanel.Output")
-					usr.move=1
-					return
-				if("Deposit")
+			switch(usr.client.Alert("You have [usr.Ryo] Ryo on you and [usr.RyoBanked] banked here.","Bank",list("Deposit","Withdraw","Cancel")))
+				if(1)
 					if(!usr.Ryo)
 						usr << output("[src] says, You don't have any Ryo to deposit","ActionPanel.Output")
 					else
-						var/Num=usr.skinput2("How much would you like to deposit?","Ryo Deposit",null,1)
-						if(!isnum(Num))
+						var/list/AlertInput=usr.client.AlertInput("How much would you like to deposit?","Ryo Deposit")
+						if(!isnum(AlertInput[2]))
 							usr.move=1
 							return
-						if(usr.Ryo<Num||Num<=0)
+						if(usr.Ryo<AlertInput[2]||AlertInput[2]<=0)
 							usr.move=1
 							return
-						usr.RyoBanked+=Num
-						usr.Ryo-=Num
+						usr.RyoBanked+=AlertInput[2]
+						usr.Ryo-=AlertInput[2]
 						usr << output("[src] says,  Thank you for your deposit.","ActionPanel.Output")
 					usr.move=1
 					return
+
+				if(2)
+					if(!usr.RyoBanked)
+						usr << output("[src] says, You do not have any Ryo to withdraw","ActionPanel.Output")
+					else
+						var/list/AlertInput=usr.client.AlertInput("How much would you like to withdraw?","Ryo Withdraw")
+						if(!isnum(AlertInput[2]))
+							usr.move=1
+							return
+						if(usr.RyoBanked<AlertInput[2]||AlertInput[2]<=0)
+							usr.move=1
+							return
+						usr.Ryo+=AlertInput[2]
+						usr.RyoBanked-=AlertInput[2]
+						usr << output("[src] says, Thanks, here's your Ryo.","ActionPanel.Output")
+					usr.move=1
+					return
+
+				if(3)
+					usr.move=1
+					return
+

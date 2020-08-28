@@ -105,12 +105,12 @@ Faction
 					if(!M.Ryo)
 						M<<"You have no Ryo to deposit."
 						return
-					var/Num=M.skinput2("How much would you like to deposit into clan funds?","Ryo Withdraw",null,1)
-					if(!isnum(Num))return
-					if(Num>M.Ryo||Num<=0)return
-					Funds+=Num
-					M.Ryo-=Num
-					M << output("Successfully deposited [Num] funds.","ActionPanel.Output")
+					var/list/AlertInput=M.client.AlertInput("How much would you like to deposit into clan funds?","Ryo Withdraw")
+					if(!isnum(AlertInput[2]))return
+					if(AlertInput[2]>M.Ryo||AlertInput[2]<=0)return
+					Funds+=AlertInput[2]
+					M.Ryo-=AlertInput[2]
+					M << output("Successfully deposited [AlertInput[2]] funds.","ActionPanel.Output")
 					LevelUp()
 					return
 				if("Withdraw")
@@ -121,14 +121,14 @@ Faction
 						M << output("There is no Ryo to withdraw","ActionPanel.Output")
 						return
 					else
-						var/Num=M.skinput2("How much would you like to withdraw?","Ryo Withdraw",null,1)
-						if(!isnum(Num))
+						var/list/AlertInput=M.client.AlertInput("How much would you like to withdraw?","Ryo Withdraw")
+						if(!isnum(AlertInput[2]))
 							return
-						if(M.Ryo<Num||Num<=0)
+						if(M.Ryo<AlertInput[2]||AlertInput[2]<=0)
 							return
-						M.Ryo+=Num
-						Funds-=Num
-						M << output("Successfully withdrawed [Num] funds.","ActionPanel.Output")
+						M.Ryo+=AlertInput[2]
+						Funds-=AlertInput[2]
+						M << output("Successfully withdrawed [AlertInput[2]] funds.","ActionPanel.Output")
 					return
 		Leave(mob/M)
 			for(var/mob/player/X in TotalPlayers)
@@ -153,10 +153,10 @@ Faction
 						p << output("You are no longer a part of [Filter(html_encode(name))], they were disbanded.","ActionPanel.Output")
 		AddMember(mob/player, mob/M)
 			if(members.len>=MaxMembers)
-				player.skalert("Your faction is at it's max member count ([MaxMembers]). Level up to gain more space!","Error")
+				player.client.Alert("Your faction is at it's max member count ([MaxMembers]). Level up to gain more space!","Error")
 				return 0
 			if(M.Faction)
-				player.skalert("[M] already has a Faction.","Error")
+				player.client.Alert("[M] already has a Faction.","Error")
 				return 0
 			M.Faction = src.name
 			src.members[M.rname] = list(M.key, M.level, M.Factionrank)
@@ -270,7 +270,7 @@ Faction
 				var/mob/M = Players["[P]"]
 				var/Faction/c = getFaction(usr.Faction)
 				if(c && M)
-					if(M.skalert("You've been invited to join [Filter(html_encode(c.name))]. Accept or Decline?","Creation",list("Accept","Decline"))=="Accept")
+					if(M.client.Alert("You've been invited to join [Filter(html_encode(c.name))]. Accept or Decline?","Creation",list("Accept","Decline"))==1)
 						if(c.AddMember(usr,M))c.Rank(usr,M)
 			FactionRanks()
 				set name = "Ranks"
@@ -290,7 +290,7 @@ Faction
 				set name = "Leave"
 				var/Faction/c = getFaction(usr.Faction)
 				if(!c) return
-				if(usr.skalert("Are you sure you want to leave [Filter(html_encode(c.name))]?","Confirm!",list("No","Yes"))=="Yes")
+				if(usr.client.Alert("Are you sure you want to leave [Filter(html_encode(c.name))]?","Confirm!",list("No","Yes"))==2)
 					c.Leave(usr)
 			FactionFire()
 				set category = "Faction"
@@ -357,7 +357,7 @@ Faction
 				del(src)
 				return
 			if(!href_list["name"] || !color)
-				usr.skalert("You did not fill out all of the necessary fields.")
+				usr.client.Alert("You did not fill out all of the necessary fields.")
 				winset(usr, null, {"
 						BrowserWindow.is-visible = "false";
 					"})
@@ -366,7 +366,7 @@ Faction
 				return
 			var/leng = length(href_list["name"])
 			if(leng>=15)
-				usr.skalert("Your faction name cannot be longer than 15 characters.")
+				usr.client.Alert("Your faction name cannot be longer than 15 characters.")
 				winset(usr, null, {"
 						BrowserWindow.is-visible = "false";
 					"})
@@ -375,7 +375,7 @@ Faction
 				return
 			for(var/i in Factionnames)
 				if(i==href_list["name"])
-					usr.skalert("Your faction name has already been taken.")
+					usr.client.Alert("Your faction name has already been taken.")
 					winset(usr, null, {"
 							BrowserWindow.is-visible = "false";
 						"})
@@ -383,7 +383,7 @@ Faction
 					del(src)
 					return
 			if(usr.Ryo<3000)
-				usr.skalert("You need 3000 Ryo to create a Faction.")
+				usr.client.Alert("You need 3000 Ryo to create a Faction.")
 				winset(usr, null, {"
 						BrowserWindow.is-visible = "false";
 					"})

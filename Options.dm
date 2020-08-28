@@ -57,7 +57,7 @@ mob
 mob
 	proc
 		Accept(mob/M)
-			if(M.skalert("Fight [src]?","Duel",list("Yes","No")) == "Yes")
+			if(M.client.Alert("Fight [src]?","Duel",list("Yes","No")) == 1)
 				src.opponent=M
 				M.opponent=src
 				M.loc=locate(116,99,3)
@@ -109,7 +109,7 @@ mob
 			if(Tutorial<7)
 				usr<<"You can't leave your village while you're in the tutorial!"
 				return
-			if(skalert("Are you sure you want to leave your village?","Confirmation",list("Yes","No"))=="Yes")
+			if(client.Alert("Are you sure you want to leave your village?","Confirmation",list("Yes","No"))==1)
 				world<<output("[src.name] has defected from the [src.village] village.","ActionPanel.Output")
 				if(village=="Akatsuki")
 					for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in src)
