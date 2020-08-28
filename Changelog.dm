@@ -49,14 +49,14 @@ var/CHANGELOG = {"
 		<h2>\[Unreleased]</h2>
 		<h3>Added</h3>
 		<ul>
-			<li>New user interface. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/ca0d908632670f9104fe3bb2c840aebeeaaeb1ca">ca0d9086</a>]</li>
+			<li>New user interface. \[<a href="https://git.douglas-parker.com/lavenblade/project-evolution/-/commit/ca0d908632670f9104fe3bb2c840aebeeaaeb1ca">ca0d9086</a>]</li>
 		</ul>
 
 		<h3>Changed</h3>
 		<ul>
 			<li>Updated the changelog format.</li>
 			<li>Updated the world fps to 20.</li>
-			<li>Reworked the social experience. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/e5bcbeb819ace6d3569f5f16f222c43b3035efdf">e5bcbeb8</a>]
+			<li>Reworked the social experience. \[<a href="https://git.douglas-parker.com/lavenblade/project-evolution/-/commit/e5bcbeb819ace6d3569f5f16f222c43b3035efdf">e5bcbeb8</a>]
 				<ul>
 					<li>Code optimizations to the social experience.</li>
 					<li>Chat messages are no longer discarded when greater than 300 characters in length.</li>
@@ -69,7 +69,7 @@ var/CHANGELOG = {"
 				</ul>
 			</li>
 			<li>Tweaked damage overlay animations.</li>
-			<li>Damage overlays now have an outline. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/a7ddbf1ab50fc06fd37d2f453f58adf1abfd0b27">a7ddbf1a</a>]</li>
+			<li>Damage overlays now have an outline. \[<a href="https://git.douglas-parker.com/lavenblade/project-evolution/-/commit/a7ddbf1ab50fc06fd37d2f453f58adf1abfd0b27">a7ddbf1a</a>]</li>
 			<li>Bubble Spreader now spreads in a more combat-viable manner.</li>
 		</ul>
 
@@ -77,9 +77,9 @@ var/CHANGELOG = {"
 
 		<ul>
 			<li>
-				Optimize Server Functions. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/issues/1">#1</a>]
+				Optimize Server Functions. \[<a href="https://git.douglas-parker.com/lavenblade/project-evolution/-/issues/1">#1</a>]
 				<ul>
-					<li>Damage overlays now have an outline. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/d1529b114bc8a46316c6b41db2d31d408776744c">d1529b11</a>]</li>
+					<li>Damage overlays now have an outline. \[<a href="https://git.douglas-parker.com/lavenblade/project-evolution/-/commit/d1529b114bc8a46316c6b41db2d31d408776744c">d1529b11</a>]</li>
 				</ul>
 			</li>
 		</ul>
