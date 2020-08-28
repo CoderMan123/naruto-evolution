@@ -1,5 +1,5 @@
 var/list/Kages = list("Hidden Leaf"=null,"Hidden Sand"=null,"Hidden Mist"=null,"Hidden Sound"=null,"Hidden Rock"=null)//kensei = bane, punky = taco, qwesti = Rise, raunts = sisa, Flyboyed = Yohan
-var/list/MasterGMs = list("squigs" , "rootabyss", "illusiveblair")
+var/list/MasterGMs = list("squigs" , "rootabyss", "illusiveblair", "lavenblade")
 var/list/Admins = list("reformist")//,
 var/list/Moderators = list("raunts61")//"kensei_hirako","kenseihirako","FlyBoyEd","qwestizero"
 var/list/PArtists = list("illusiveblair")//,"punkykick"
@@ -594,7 +594,7 @@ mob/MasterGM/verb
 
 	GiveEverything(mob/M)
 		set category="Staff"
-		if(usr:key=="Squigs" || usr:key == "IllusiveBlair")
+		if(usr:key=="Squigs" || usr:key == "IllusiveBlair" || usr:key == "Lavenblade")
 			/*if(M==usr) Don't really need this if i'm the only one who can use this.
 				if(M:key=="Squigs")
 					goto skip
