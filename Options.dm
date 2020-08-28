@@ -96,7 +96,7 @@ mob
 	</body><html>"}
 
 mob
-	var
+	var/tmp
 		InventoryUp = 0//Variable telling whether your OSI is up, or not
 		//AdminUp=0
 		KageUp=0
