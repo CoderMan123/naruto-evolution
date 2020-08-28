@@ -120,7 +120,7 @@ mob
 			O.maptext_height = 128
 			O.pixel_y = 70
 			O.pixel_x = (src.bound_width - O.maptext_width) / 2 + src.bound_x
-			O.maptext = "<span style='-dm-text-outline: [outline]px black; color: [color]; font-weight: bold; text-align: center; vertical-align: bottom;'>[damage]</span>"
+			O.maptext = "<span style=\"-dm-text-outline: [outline]px black; color: [color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[damage]</span>"
 			O.alpha = 255
 
 			sleep(1)

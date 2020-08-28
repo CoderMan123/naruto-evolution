@@ -1,0 +1,1 @@
+var/list/font_resources = list('Fonts/Open Sans/OpenSans-Regular.ttf')
