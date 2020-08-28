@@ -10,13 +10,13 @@ macro "Macro"
 		command = ".center"
 	elem 
 		name = "Return"
-		command = "ShowInputChild"
+		command = "ToggleChatInputPanel"
 	elem 
 		name = "SHIFT+Return"
 		command = "GM-Chat"
 	elem 
 		name = "Escape"
-		command = ".options"
+		command = "ToggleSettingsPanel"
 	elem 
 		name = "Space"
 		command = "HandSealActivate"
@@ -115,7 +115,7 @@ macro "Macro"
 		command = "Get"
 	elem 
 		name = "I"
-		command = "Inventory"
+		command = "ToggleInventoryPanel"
 	elem 
 		name = "O"
 		command = "Stats"
@@ -510,6 +510,8 @@ window "InputPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 514x42
+		inner-size = 500x28
 	elem "ChatBackground"
 		type = LABEL
 		pos = 0,0
@@ -555,6 +557,7 @@ window "Inventory2"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -563,6 +566,7 @@ window "Inventory2"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 654x494
 	elem "InvenInfo"
 		type = TAB
 		pos = 0,0
@@ -673,6 +677,8 @@ window "MainWindow"
 		can-resize = false
 		icon = 'Hud\\evo.dmi'
 		macro = "Macro"
+		outer-size = 1376x974
+		inner-size = 1362x960
 	elem "MapChild"
 		type = CHILD
 		pos = 0,0
@@ -911,6 +917,7 @@ window "NavigationPanel"
 		size = 1362x25
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -918,6 +925,8 @@ window "NavigationPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 1376x39
+		inner-size = 1362x25
 	elem "Navigation"
 		type = LABEL
 		pos = 0,0
@@ -970,7 +979,7 @@ window "NavigationPanel"
 		border = line
 		saved-params = "is-checked"
 		text = "Leader"
-		command = "KagePanel"
+		command = "ToggleKagePanel"
 		is-flat = true
 	elem "BingoBookButton"
 		type = BUTTON
@@ -1055,7 +1064,7 @@ window "NavigationPanel"
 		border = line
 		saved-params = "is-checked"
 		text = "Settings"
-		command = "OptionsPanel"
+		command = "ToggleSettingsPanel"
 		is-flat = true
 	elem "SkillTreeButton"
 		type = BUTTON
@@ -1097,7 +1106,7 @@ window "NavigationPanel"
 		border = line
 		saved-params = "is-checked"
 		text = "Chat"
-		command = "ChatBox"
+		command = "ToggleChatOutputPanel"
 		is-flat = true
 	elem "ChannelButton"
 		type = BUTTON
@@ -1164,6 +1173,7 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1171,6 +1181,9 @@ window "SettingsWindow"
 		can-close = false
 		can-minimize = false
 		can-resize = false
+		macro = "Macro"
+		outer-size = 514x414
+		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1261,7 +1274,7 @@ window "SettingsWindow"
 		saved-params = "is-checked"
 		text = ""
 		image = 'Interface\\Close.png'
-		command = "OptionsPanel"
+		command = "ToggleSettingsPanel"
 		is-flat = true
 
 window "SkillBottom"
@@ -1604,6 +1617,8 @@ window "Equip"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 384x494
+		inner-size = 370x480
 	elem "button4"
 		type = BUTTON
 		pos = 200,288
@@ -1672,6 +1687,7 @@ window "Equip"
 		size = 336x115
 		anchor1 = 4,73
 		anchor2 = 95,97
+		background-color = none
 		border = sunken
 		saved-params = ""
 	elem "ItemPic"

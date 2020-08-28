@@ -98,9 +98,6 @@ mob
 mob
 	var/tmp
 		InventoryUp = 0//Variable telling whether your OSI is up, or not
-		//AdminUp=0
-		KageUp=0
-		OptionsUp=0
 	verb
 		LeaveVillage()
 			set hidden=1
@@ -166,47 +163,7 @@ mob
 
 				village="Missing-Nin"
 				rank="Missing-Nin"
-		OptionsPanel()
-			set hidden=1
-			if(usr.dead==0)
-				if(usr.OptionsUp == 0)
-					usr.OptionsUp = 1
-					//src.UpdateInventory()
-					if(getFaction(src.Faction))
-						winset(src, null, {"
-						NavigationPanel.FactionButton.is-disabled = "false";
-					"})
-					if(Squad) if(Squad.Leader == ckey) if(Squad.Members.len>=4)
-						winset(src, null, {"
-						NavigationPanel.FactionButton.is-disabled = "false";
-					"})
-					winset(src, null, {"
-						SettingsWindow.is-visible = "true";
-					"})
-				else
-					usr.OptionsUp = 0
-					//src.UpdateInventory()
-					winset(src, null, {"
-						SettingsWindow.is-visible = "false";
-					"})
-					winset(src, null, {"
-						NavigationPanel.FactionButton.is-disabled = "true";
-					"})
-		KagePanel()
-			set hidden=1
-			if(usr.dead==0)
-				if(usr.KageUp == 0)
-					usr.KageUp = 1
-					//src.UpdateInventory()
-					winset(src, null, {"
-						MainWindow.KageChild.is-visible = "true";
-					"})
-				else
-					usr.KageUp = 0
-					//src.UpdateInventory()
-					winset(src, null, {"
-						MainWindow.KageChild.is-visible = "false";
-					"})
+
 	//	AdminUp()
 	//		set hidden=1
 	//		if(usr.dead==0)
@@ -238,28 +195,7 @@ mob
 				src << output(O,"Equip.GridEquip:1,[Row]")
 				src << output("[O.suffix]","Equip.GridEquip:2,[Row]")
 			sleep(40)
-		Inventory()
-			set hidden=1
-			if(usr.dead==0)
-				if(usr.InventoryUp == 0)
-					usr.InventoryUp = 1
-					//src.UpdateInventory()
-					winset(src, null, {"
-						MainWindow.InvenChild.is-visible = "true";
-					"})
-					winset(usr, "ItemName", "text=\"\"")
-					winset(usr, "ItemPic", "image=\"\"")
-					usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>","ItemInfo")
-					RefreshInventory()
-				else
-					if(usr.InventoryUp)
-						winset(usr, "ItemName", "text=\"\"")
-						winset(usr, "ItemPic", "image=\"\"")
-						usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>","ItemInfo")
-						winset(src, null, {"
-							MainWindow.InvenChild.is-visible = "false";
-						"})
-						usr.InventoryUp = 0
+
 mob
 	var
 		tmp

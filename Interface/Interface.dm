@@ -1,5 +1,4 @@
 client
-	var/tmp/input_child = 0
 	verb
 		ChangeChannel()
 			set hidden=1
@@ -26,17 +25,70 @@ client
 					src.channel = "Local"
 			src<<"Now speaking in: [src.channel]"
 
-		ShowInputChild()
+		ToggleChatInputPanel()
 			set hidden=1
-			if(src.input_child)
+			if(src.mob.Muted)
+				src.Alert("You can't chat while muted.")
+				return
+
+			else if(winget(src, "MainWindow.InputChild", "is-visible") == "false")
 				winset(src, null, {"
-					MainWindow.MapChild.focus = true;
-					MainWindow.InputChild.is-visible = false;
+					InputPanel.ChatInput.focus = "true";
+					MainWindow.InputChild.is-visible = "true";
 				"})
-				src.input_child = 0
 			else
 				winset(src, null, {"
-					InputPanel.ChatInput.focus = true;
-					MainWindow.InputChild.is-visible = true;
+					MainWindow.InputChild.is-visible = "false";
+					MainWindow.MapChild.focus = "true";
 				"})
-				src.input_child = 1
+
+		ToggleChatOutputPanel()
+			set hidden=1
+			if(winget(src, "MainWindow.OutputChild", "is-visible") == "false")
+				winset(src, null, {"
+					MainWindow.OutputChild.focus = "true";
+					MainWindow.OutputChild.is-visible = "true";
+				"})
+			else
+				winset(src, null, {"
+					MainWindow.OutputChild.focus = "false";
+					MainWindow.OutputChild.is-visible = "false";
+				"})
+
+		ToggleInventoryPanel()
+			set hidden=1
+			if(winget(src, "MainWindow.InvenChild", "is-visible") == "false")
+				winset(src, null, {"
+					MainWindow.InvenChild.is-visible = "true";
+				"})
+				src.mob.RefreshInventory()
+
+			else
+				winset(src, null, {"
+					MainWindow.InvenChild.is-visible = "false";
+					Equip.ItemName.text="";
+					Equip.ItemPic.image="";
+				"})
+				usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>","ItemInfo")
+
+		ToggleSettingsPanel()
+			set hidden=1
+			if(winget(src, "SettingsWindow", "is-visible") == "false")
+				winset(src, null, {"
+					SettingsWindow.is-visible = "true";
+				"})
+			else
+				winset(src, null, {"
+					SettingsWindow.is-visible = "false";
+				"})
+
+		ToggleKagePanel()
+			set hidden=1
+			if(winget(src, "MainWindow.KageChild", "is-visible") == "false")
+				winset(src, null, {"
+					MainWindow.KageChild.is-visible = "true";
+				"})
+			else
+				winset(src, null, {"
+					MainWindow.KageChild.is-visible = "false";
+				"})

@@ -90,7 +90,6 @@ mob
 			turf/mark
 			turf/mark2
 			kawarmi=0
-			chatbox=1
 			dashable=0
 			Hand="Left"
 			foot="Left"

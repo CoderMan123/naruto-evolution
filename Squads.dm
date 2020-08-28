@@ -144,6 +144,7 @@ mob/verb/
 				Create_Squad()
 			return
 		usr.Squad.Menu()
+
 	FactionMenu()
 		set hidden=1
 		if(!getFaction(src.Faction)&&Squad&&!Faction)
@@ -153,18 +154,16 @@ mob/verb/
 			else
 				src<<"You need five members in your party, including yourself, and be the leader of your party to form a faction."
 			return
-		if(!usr.KageUp)
-			usr.KageUp = 1
-			//src.UpdateInventory()
+
+		if(winget(src, "MainWindow.KageChild", "is-visible") == "false")
 			winset(src, null, {"
 				MainWindow.KageChild.is-visible = "true";
 			"})
 		else
-			usr.KageUp = 0
-			//src.UpdateInventory()
 			winset(src, null, {"
 				MainWindow.KageChild.is-visible = "false";
-					"})
+			"})
+
 	Create_Squad()
 		set hidden=1
 		set category = "Commands"

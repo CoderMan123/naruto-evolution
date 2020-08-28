@@ -3,7 +3,7 @@ mob
 		Say(msg as text)
 			set hidden=1
 			winset(src, null, {"
-				InputPanel.MapChild.focus = true;
+				MainWindow.MapChild.focus = "true";
 				MainWindow.InputChild.is-visible = false;
 			"})
 

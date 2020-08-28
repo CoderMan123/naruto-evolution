@@ -1,47 +1,22 @@
 mob/player
-	var/SayUp
 	see_in_dark=3
 	New()
 		..()
 		if(!src.client)src.beAI()
 	verb
-		Winsay()
-			set hidden=1
-			if(Muted)
-				src<<"You're muted!"
-				return
-			if(SayUp)
-				SayUp=0
-				winset(usr, null, {"
-				MainWindow.InputChild.focus      = "false";
-				MainWindow.InputChild.is-visible      = "false";
-				"})
-				winset(src, null, {"
-				MainWindow.MapChild.focus      = "true";
-				"})
-				return
-			winset(usr, null, {"
-				MainWindow.InputChild.focus      = "true";
-				InputPanel.ChatInput.focus = true;
-				MainWindow.InputChild.is-visible      = "true";
-			"})
-			SayUp=1
-	verb
 		ChatBox()
 			set hidden=1
-			if(src.chatbox)
-				src.chatbox=0
-				winset(usr, null, {"
-					MainWindow.OutputChild.focus      = "false";
-					MainWindow.OutputChild.is-visible      = "false";
+			if(winget(src, "MainWindow.OutputChild", "is-visible") == "false")
+				winset(src, null, {"
+					MainWindow.OutputChild.focus = "true";
+					MainWindow.OutputChild.is-visible = "true";
 				"})
 			else
-				if(!src.chatbox)
-					src.chatbox=1
-					winset(usr, null, {"
-						MainWindow.OutputChild.focus      = "true";
-						MainWindow.OutputChild.is-visible      = "true";
-					"})
+				winset(src, null, {"
+					MainWindow.OutputChild.focus = "false";
+					MainWindow.OutputChild.is-visible = "false";
+				"})
+
 
 mob/var/tmp/checkcuss
 proc
