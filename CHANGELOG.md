@@ -25,5 +25,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bubble Spreader now spreads in a more combat-viable manner.
 
 ### Fixed
-- Optimized Server Functions [[#1](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/issues/1)]
+- Server optimization.
 - - Reduced massive overhead caused by damage overlays. [[d1529b11](https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/d1529b114bc8a46316c6b41db2d31d408776744c)]
