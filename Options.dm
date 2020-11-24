@@ -231,15 +231,15 @@ mob
 			if(usr.statbox==1)
 				usr.statbox=0
 				winset(usr, null, {"
-					Stats.focus      = "false";
-					Stats.is-visible      = "false";
+					MainWindow.Stats.focus      = "false";
+					MainWindow.Stats.is-visible      = "false";
 				"})
 			else
 				if(usr.statbox==0)
 					usr.statbox=1
 					winset(usr, null, {"
-						Stats.focus      = "true";
-						Stats.is-visible      = "true";
+						MainWindow.Stats.focus      = "true";
+						MainWindow.Stats.is-visible      = "true";
 						Status.Name.text      = "[usr.name]";
 						Status.Level.text      = "[usr.level]";
 						Status.EXP.text      = "[usr.exp]/[usr.maxexp]";
@@ -256,8 +256,8 @@ mob
 		RefreshStats()
 			set hidden=1
 			winset(usr, null, {"
-						Stats.focus      = "true";
-						Stats.is-visible      = "true";
+						MainWindow.Stats.focus      = "true";
+						MainWindow.Stats.is-visible      = "true";
 						Status.Name.text      = "[usr.name]";
 						Status.Level.text      = "[usr.level]";
 						Status.EXP.text      = "[usr.exp]/[usr.maxexp]";

@@ -245,7 +245,7 @@ mob/Login
 							MainWindow.is-maximized=true
 							MainWindow.UnlockChild.is-visible = "false";
 							MainWindow.InvenChild.is-visible = "false";
-							Stats.is-visible      = "false";
+							MainWindow.Stats.is-visible      = "false";
 							MainWindow.NavigationChild.is-visible      = "false";
 							MainWindow.OutputChild.is-visible      = "false";
 							target.is-visible = "false";

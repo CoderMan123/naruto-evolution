@@ -82,13 +82,13 @@ client
 					SettingsWindow.is-visible = "false";
 				"})
 
-		ToggleKagePanel()
+		ToggleLeaderPanel()
 			set hidden=1
-			if(winget(src, "MainWindow.KageChild", "is-visible") == "false")
+			if(winget(src, "LeaderWindow", "is-visible") == "false")
 				winset(src, null, {"
-					MainWindow.KageChild.is-visible = "true";
+					LeaderWindow.is-visible = "true";
 				"})
 			else
 				winset(src, null, {"
-					MainWindow.KageChild.is-visible = "false";
+					LeaderWindow.is-visible = "false";
 				"})
