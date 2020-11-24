@@ -1,5 +1,7 @@
 # Project Evolution
 
+![https://git.douglas-parker.com/lavenblade/project-evolution/-/commits/master-v1](https://git.douglas-parker.com/lavenblade/project-evolution/badges/master-v1/pipeline.svg)
+
 # Setup Development Environment
 1) Clone the repository:
 ```sh
