@@ -1,4 +1,4 @@
-![https://git.douglas-parker.com/lavenblade/project-evolution/-/commits/master-v1](https://git.douglas-parker.com/lavenblade/project-evolution/badges/master-v1/pipeline.svg)
+![Pipeline Status](https://git.douglas-parker.com/lavenblade/project-evolution/badges/master-v1/pipeline.svg)
 
 # Project Evolution
 
