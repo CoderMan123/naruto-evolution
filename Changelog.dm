@@ -79,7 +79,7 @@ var/CHANGELOG = {"
 			<li>
 				Server optimization.
 				<ul>
-					<li>Reduced massive overhead caused by damage overlays. [<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/d1529b114bc8a46316c6b41db2d31d408776744c">d1529b11</a>]</li>
+					<li>Reduced massive overhead caused by damage overlays. \[<a href="https://git.douglas-parker.com/Lavenblade/Project-Evolution/-/commit/d1529b114bc8a46316c6b41db2d31d408776744c">d1529b11</a>]</li>
 				</ul>
 			</li>
 		</ul>
