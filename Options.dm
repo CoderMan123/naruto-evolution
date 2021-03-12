@@ -171,13 +171,13 @@ mob
 	//				usr.AdminUp = 1
 	//				//src.UpdateInventory()
 	//				winset(src, null, {"
-	//					MainWindow.AdminChild.is-visible = "true";
+	//					Main.AdminChild.is-visible = "true";
 	//				"})
 	///			else
 	//				usr.AdminUp = 0
 	//				//src.UpdateInventory()
 	//				winset(src, null, {"
-	//					MainWindow.AdminChild.is-visible = "false";
+	//					Main.AdminChild.is-visible = "false";
 	//				"})
 
 mob

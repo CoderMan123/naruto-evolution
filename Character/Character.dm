@@ -3,8 +3,8 @@ mob
 		Say(msg as text)
 			set hidden=1
 			winset(src, null, {"
-				MainWindow.MapChild.focus = "true";
-				MainWindow.InputChild.is-visible = false;
+				Main.MapChild.focus = "true";
+				Main.InputChild.is-visible = false;
 			"})
 
 			var/message_trim

@@ -6,15 +6,15 @@ mob/player
 	verb
 		ChatBox()
 			set hidden=1
-			if(winget(src, "MainWindow.OutputChild", "is-visible") == "false")
+			if(winget(src, "Main.OutputChild", "is-visible") == "false")
 				winset(src, null, {"
-					MainWindow.OutputChild.focus = "true";
-					MainWindow.OutputChild.is-visible = "true";
+					Main.OutputChild.focus = "true";
+					Main.OutputChild.is-visible = "true";
 				"})
 			else
 				winset(src, null, {"
-					MainWindow.OutputChild.focus = "false";
-					MainWindow.OutputChild.is-visible = "false";
+					Main.OutputChild.focus = "false";
+					Main.OutputChild.is-visible = "false";
 				"})
 
 

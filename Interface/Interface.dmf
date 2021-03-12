@@ -299,7 +299,6 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -308,8 +307,6 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x603
-		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1180,7 +1177,6 @@ window "InventoryWindow"
 		size = 300x500
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1189,8 +1185,6 @@ window "InventoryWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x514
-		inner-size = 300x500
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1450,11 +1444,11 @@ window "LeaderWindow"
 		tab-font-family = "Open Sans"
 		tab-font-size = 8
 
-window "MainWindow"
-	elem "MainWindow"
+window "Main"
+	elem "Main"
 		type = MAIN
 		pos = 281,0
-		size = 1362x960
+		size = 1280x720
 		anchor1 = none
 		anchor2 = none
 		background-color = #1b1b1b
@@ -1465,30 +1459,30 @@ window "MainWindow"
 		can-resize = false
 		icon = 'Hud\\evo.dmi'
 		macro = "Macro"
-		outer-size = 1376x974
-		inner-size = 1362x960
-	elem "MapChild"
-		type = CHILD
-		pos = 0,0
-		size = 1362x960
-		anchor1 = 0,0
-		anchor2 = 100,100
-		background-color = #a6d799
-		saved-params = "splitter"
-		is-vert = false
+		outer-size = 1294x734
+		inner-size = 1280x720
 	elem "NavigationChild"
 		type = CHILD
-		pos = 0,935
-		size = 1362x25
+		pos = 0,695
+		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
 		background-color = none
 		saved-params = "splitter"
 		left = "NavigationPanel"
 		is-vert = false
+	elem "Child"
+		type = CHILD
+		pos = 0,0
+		size = 1280x720
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #a6d799
+		saved-params = "splitter"
+		is-vert = false
 	elem "ActionChild"
 		type = CHILD
-		pos = 862,736
+		pos = 780,520
 		size = 500x200
 		anchor1 = 100,100
 		anchor2 = none
@@ -1499,7 +1493,7 @@ window "MainWindow"
 		is-vert = false
 	elem "OutputChild"
 		type = CHILD
-		pos = 0,736
+		pos = 0,520
 		size = 500x200
 		anchor1 = 0,100
 		anchor2 = none
@@ -1509,7 +1503,7 @@ window "MainWindow"
 		is-vert = false
 	elem "label"
 		type = LABEL
-		pos = 1385,983
+		pos = 1303,743
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
@@ -1517,20 +1511,9 @@ window "MainWindow"
 		is-visible = false
 		saved-params = ""
 		text = ""
-	elem "UnlockChild"
-		type = CHILD
-		pos = 444,504
-		size = 540x107
-		anchor1 = 36,68
-		anchor2 = 75,79
-		background-color = #808080
-		border = line
-		saved-params = "splitter"
-		left = "MedalUnlock"
-		is-vert = false
 	elem "InputChild"
 		type = CHILD
-		pos = 0,709
+		pos = 0,493
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
@@ -1539,10 +1522,21 @@ window "MainWindow"
 		saved-params = "splitter"
 		left = "InputPanel"
 		is-vert = false
+	elem "UnlockChild"
+		type = CHILD
+		pos = 370,307
+		size = 540x107
+		anchor1 = none
+		anchor2 = none
+		background-color = #808080
+		border = line
+		saved-params = "splitter"
+		left = "MedalUnlock"
+		is-vert = false
 	elem "Titlebar"
 		type = LABEL
 		pos = 0,0
-		size = 1362x22
+		size = 1280x22
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
@@ -1555,8 +1549,8 @@ window "MainWindow"
 		text = "Project Evolution"
 	elem "MuteTime"
 		type = LABEL
-		pos = 1117,21
-		size = 267x21
+		pos = 1026,24
+		size = 252x16
 		anchor1 = 81,2
 		anchor2 = 100,4
 		font-family = "Adobe Fangsong Std R"
@@ -1568,8 +1562,8 @@ window "MainWindow"
 		text = "4:30"
 	elem "JutsuTabChild"
 		type = CHILD
-		pos = 782,72
-		size = 386x384
+		pos = 914,42
+		size = 364x291
 		anchor1 = 57,9
 		anchor2 = 85,48
 		background-color = none
@@ -1580,7 +1574,7 @@ window "MainWindow"
 		is-vert = false
 	elem "Minimize"
 		type = BUTTON
-		pos = 1308,0
+		pos = 1226,0
 		size = 25x19
 		anchor1 = 100,0
 		anchor2 = none
@@ -1596,7 +1590,7 @@ window "MainWindow"
 		is-flat = true
 	elem "Close"
 		type = BUTTON
-		pos = 1334,0
+		pos = 1252,0
 		size = 25x19
 		anchor1 = 100,0
 		anchor2 = none
@@ -1912,7 +1906,6 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1921,8 +1914,6 @@ window "SettingsWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2023,7 +2014,6 @@ window "Status"
 		size = 197x319
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -2034,15 +2024,12 @@ window "Status"
 		can-resize = false
 		is-pane = true
 		image = 'Hud\\Stats.png'
-		outer-size = 211x333
-		inner-size = 197x319
 	elem "skillpoints"
 		type = LABEL
 		pos = 104,304
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2053,7 +2040,6 @@ window "Status"
 		size = 101x16
 		anchor1 = 42,86
 		anchor2 = 93,91
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2063,7 +2049,6 @@ window "Status"
 		size = 101x13
 		anchor1 = 42,80
 		anchor2 = 93,84
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2073,7 +2058,6 @@ window "Status"
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2084,7 +2068,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,68
 		anchor2 = 93,72
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2094,7 +2077,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,50
 		anchor2 = 93,55
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2104,7 +2086,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,26
 		anchor2 = 93,30
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2114,7 +2095,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,38
 		anchor2 = 93,42
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2124,7 +2104,6 @@ window "Status"
 		size = 104x13
 		anchor1 = 41,32
 		anchor2 = 93,36
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2136,7 +2115,6 @@ window "Status"
 		anchor2 = 95,78
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
-		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
@@ -2150,7 +2128,6 @@ window "Status"
 		anchor2 = 95,72
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
-		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
@@ -2162,7 +2139,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,21
 		anchor2 = 93,25
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2172,7 +2148,6 @@ window "Status"
 		size = 88x13
 		anchor1 = 45,16
 		anchor2 = 89,20
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2189,6 +2164,133 @@ window "Status"
 		saved-params = ""
 		text = "Name"
 
+window "Titlescreen"
+	elem "Titlescreen"
+		type = MAIN
+		pos = 281,0
+		size = 1280x720
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		border = line
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		outer-size = 1294x734
+		inner-size = 1280x720
+	elem "Background"
+		type = LABEL
+		pos = 0,0
+		size = 1280x720
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'Interface\\Title\\Background.png'
+		image-mode = stretch
+	elem "label16"
+		type = LABEL
+		pos = 984,2
+		size = 294x22
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Character Login"
+	elem "Create"
+		type = BUTTON
+		pos = 1132,122
+		size = 146x22
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Create"
+		command = "CreateCharacter"
+		is-flat = true
+	elem "Login"
+		type = BUTTON
+		pos = 984,122
+		size = 146x22
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Login"
+		command = "Logins"
+		is-flat = true
+	elem "label14"
+		type = LABEL
+		pos = 984,74
+		size = 294x22
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Password"
+	elem "Password"
+		type = INPUT
+		pos = 984,98
+		size = 294x22
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = ""
+		is-password = true
+		no-command = true
+	elem "Username"
+		type = INPUT
+		pos = 984,50
+		size = 294x22
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = ""
+		no-command = true
+	elem "label2"
+		type = LABEL
+		pos = 984,26
+		size = 294x22
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Username"
+
 window "mapwindow"
 	elem "mapwindow"
 		type = MAIN
@@ -2196,7 +2298,6 @@ window "mapwindow"
 		size = 1010x675
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -2206,8 +2307,6 @@ window "mapwindow"
 		is-pane = true
 		macro = "macro"
 		menu = "menu"
-		outer-size = 1024x689
-		inner-size = 1010x675
 	elem "map"
 		type = MAP
 		pos = 0,0
@@ -2217,7 +2316,6 @@ window "mapwindow"
 		font-family = "Open Sans"
 		text-color = #000000
 		is-default = true
-		border = line
 		saved-params = "icon-size"
 		zoom = 1
 
@@ -2598,88 +2696,6 @@ window "yutput"
 		border = sunken
 		saved-params = ""
 		text = "Title here"
-
-window "titlescreen"
-	elem "titlescreen"
-		type = MAIN
-		pos = 281,0
-		size = 1018x714
-		anchor1 = none
-		anchor2 = none
-		border = line
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		is-pane = true
-	elem "Shikamaru"
-		type = LABEL
-		pos = 0,0
-		size = 1018x732
-		anchor1 = 0,0
-		anchor2 = 100,100
-		is-visible = false
-		saved-params = ""
-		text = ""
-		image-mode = stretch
-	elem "TitleChild"
-		type = CHILD
-		pos = 0,0
-		size = 1018x732
-		anchor1 = 0,0
-		anchor2 = 100,100
-		saved-params = "splitter"
-		right = "mapwindow"
-		is-vert = false
-	elem "Username"
-		type = INPUT
-		pos = 288,440
-		size = 456x32
-		anchor1 = 28,60
-		anchor2 = 73,64
-		background-color = #808000
-		border = line
-		saved-params = ""
-	elem "Login"
-		type = BUTTON
-		pos = 352,552
-		size = 104x28
-		anchor1 = 45,75
-		anchor2 = 55,79
-		font-family = "@Adobe Fangsong Std R"
-		font-size = 15
-		background-color = #808000
-		border = line
-		saved-params = "is-checked"
-		text = "Login"
-		command = "Logins"
-		is-flat = true
-	elem "Create"
-		type = BUTTON
-		pos = 560,552
-		size = 104x28
-		anchor1 = 55,75
-		anchor2 = 65,79
-		font-family = "@Adobe Fangsong Std R"
-		font-size = 15
-		background-color = #808000
-		border = line
-		saved-params = "is-checked"
-		text = "Create"
-		command = "CreateCharacter"
-		is-flat = true
-	elem "Password"
-		type = INPUT
-		pos = 288,496
-		size = 456x32
-		anchor1 = 28,68
-		anchor2 = 73,72
-		background-color = #808000
-		border = line
-		saved-params = ""
-		is-password = true
 
 window "AlertBox1"
 	elem "AlertBox1"

@@ -12,6 +12,7 @@
 #define FILE_DIR "Hud"
 #define FILE_DIR "Interface"
 #define FILE_DIR "Interface/Symbols"
+#define FILE_DIR "Interface/Title"
 #define FILE_DIR "Jutsus"
 #define FILE_DIR "Jutsus/Clan"
 #define FILE_DIR "Jutsus/Clan/ClanJutIcons"

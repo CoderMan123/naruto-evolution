@@ -187,8 +187,8 @@ mob/Login
 			if(src.client.computer_id == A.computer_id)
 				src<<"Multi keying is fixed."
 				src.Logout()
-		var/LoginID=winget(src,"titlescreen.Username","text")
-		var/LoginPW=winget(src,"titlescreen.Password","text")
+		var/LoginID=winget(src,"Titlescreen.Username","text")
+		var/LoginPW=winget(src,"Titlescreen.Password","text")
 		LoginID=lowertext(LoginID)
 		var/letter = copytext(LoginID,1,2)
 		if(!key)
@@ -238,20 +238,17 @@ mob/Login
 	//	src<<sound('preview.ogg')
 		if(prob(50))
 			winset(src, null, {"
-					titlescreen.Shikamaru.is-visible="false"
+					Titlescreen.Shikamaru.is-visible="false"
 						"})
 		winset(src, null, {"
-							MapChild.right=titlescreen;
-							MainWindow.is-maximized=true
-							MainWindow.UnlockChild.is-visible = "false";
+							Main.Child.right=Titlescreen;
+							Main.is-maximized=true
+							Main.UnlockChild.is-visible = "false";
 							Character.is-visible      = "false";
-							MainWindow.NavigationChild.is-visible      = "false";
-							MainWindow.OutputChild.is-visible      = "false";
+							Main.NavigationChild.is-visible      = "false";
+							Main.OutputChild.is-visible      = "false";
 							target.is-visible = "false";
-							MainWindow.ActionChild.is-visible      = "false";
-						"})
-		winset(src, null, {"
-							TitleChild.right=mapwindow;
+							Main.ActionChild.is-visible      = "false";
 						"})
 		src.AddAdminVerbs()
 		var/Ticked=0
@@ -273,7 +270,7 @@ mob/Login
 		ASSERT(hasSavefile(LoginID) && src.client)
 		src.loc=locate(1,200,19)
 		winset(src, null, {"
-							MapChild.right=mapwindow;
+							Main.Child.right=mapwindow;
 						"})
 		for(var/obj/Titlescreen/Logo/L in src.client.screen)del(L)
 		LoginID=lowertext(LoginID)
@@ -393,10 +390,10 @@ mob/Login
 			del src
 		if(!M.name) M.name=M.key
 		winset(M, null, {"
-			MainWindow.NavigationChild.is-visible      = "true";
-			MainWindow.OutputChild.is-visible      = "true";
-			MainWindow.ActionChild.is-visible      = "true";
-			MapChild.right=mapwindow;
+			Main.NavigationChild.is-visible      = "true";
+			Main.OutputChild.is-visible      = "true";
+			Main.ActionChild.is-visible      = "true";
+			Main.Child.right=mapwindow;
 			NavigationPanel.ExpLockButton.is-disabled = false
 		"})
 		M<<"Now speaking in: [M.client.channel]."
@@ -639,10 +636,10 @@ mob/Login
 				world<<"[M.rname] has logged in for the first time."
 				M.creating=0
 				winset(M, null, {"
-								MainWindow.NavigationChild.is-visible      = "true";
-								MainWindow.OutputChild.is-visible      = "true";
-								MainWindow.ActionChild.is-visible      = "true";
-								MapChild.right=mapwindow;
+								Main.NavigationChild.is-visible      = "true";
+								Main.OutputChild.is-visible      = "true";
+								Main.ActionChild.is-visible      = "true";
+								Main.Child.right=mapwindow;
 							"})
 				M<<"Now speaking in: [M.client.channel]."
 				spawn(30)if(M)M.ASave()

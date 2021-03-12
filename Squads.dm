@@ -155,13 +155,13 @@ mob/verb/
 				src<<"You need five members in your party, including yourself, and be the leader of your party to form a faction."
 			return
 
-		if(winget(src, "MainWindow.KageChild", "is-visible") == "false")
+		if(winget(src, "Main.KageChild", "is-visible") == "false")
 			winset(src, null, {"
-				MainWindow.KageChild.is-visible = "true";
+				Main.KageChild.is-visible = "true";
 			"})
 		else
 			winset(src, null, {"
-				MainWindow.KageChild.is-visible = "false";
+				Main.KageChild.is-visible = "false";
 			"})
 
 	Create_Squad()

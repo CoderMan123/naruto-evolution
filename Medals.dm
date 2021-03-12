@@ -5,7 +5,7 @@ mob/proc/
 		var/Medal=null
 		winset(src, null, {"
 
-							MainWindow.UnlockChild.is-visible = "false";
+							Main.UnlockChild.is-visible = "false";
 							MedalUnlock.is-visible      = "false";
 							Medal.text=''")
 						"})
@@ -21,14 +21,14 @@ mob/proc/
 		if(gotmedal) return
 		src<<output("You've unlocked the [Medal] medal.","ActionPanel.Output")
 		winset(src, null, {"
-						MainWindow.UnlockChild.is-visible = "true";
+						Main.UnlockChild.is-visible = "true";
 						MedalUnlock.is-visible      = "true";
 						Medal.text='[Medal]'")
 					"})
 		spawn(50)
 			winset(src, null, {"
 
-						MainWindow.UnlockChild.is-visible = "false";
+						Main.UnlockChild.is-visible = "false";
 						MedalUnlock.is-visible      = "false";
 						Medal.text=''")
 					"})

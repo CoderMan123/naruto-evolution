@@ -31,28 +31,28 @@ client
 				src.Alert("You can't chat while muted.")
 				return
 
-			else if(winget(src, "MainWindow.InputChild", "is-visible") == "false")
+			else if(winget(src, "Main.InputChild", "is-visible") == "false")
 				winset(src, null, {"
 					InputPanel.ChatInput.focus = "true";
-					MainWindow.InputChild.is-visible = "true";
+					Main.InputChild.is-visible = "true";
 				"})
 			else
 				winset(src, null, {"
-					MainWindow.InputChild.is-visible = "false";
-					MainWindow.MapChild.focus = "true";
+					Main.InputChild.is-visible = "false";
+					Main.MapChild.focus = "true";
 				"})
 
 		ToggleChatOutputPanel()
 			set hidden=1
-			if(winget(src, "MainWindow.OutputChild", "is-visible") == "false")
+			if(winget(src, "Main.OutputChild", "is-visible") == "false")
 				winset(src, null, {"
-					MainWindow.OutputChild.focus = "true";
-					MainWindow.OutputChild.is-visible = "true";
+					Main.OutputChild.focus = "true";
+					Main.OutputChild.is-visible = "true";
 				"})
 			else
 				winset(src, null, {"
-					MainWindow.OutputChild.focus = "false";
-					MainWindow.OutputChild.is-visible = "false";
+					Main.OutputChild.focus = "false";
+					Main.OutputChild.is-visible = "false";
 				"})
 
 		ToggleCharacterPanel()
