@@ -1461,16 +1461,6 @@ window "Main"
 		macro = "Macro"
 		outer-size = 1294x734
 		inner-size = 1280x720
-	elem "NavigationChild"
-		type = CHILD
-		pos = 0,695
-		size = 1280x25
-		anchor1 = 0,100
-		anchor2 = 100,100
-		background-color = none
-		saved-params = "splitter"
-		left = "NavigationPanel"
-		is-vert = false
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1482,7 +1472,7 @@ window "Main"
 		is-vert = false
 	elem "ActionChild"
 		type = CHILD
-		pos = 780,520
+		pos = 780,496
 		size = 500x200
 		anchor1 = 100,100
 		anchor2 = none
@@ -1493,13 +1483,23 @@ window "Main"
 		is-vert = false
 	elem "OutputChild"
 		type = CHILD
-		pos = 0,520
+		pos = 0,496
 		size = 500x200
 		anchor1 = 0,100
 		anchor2 = none
 		background-color = #525252
 		saved-params = "splitter"
 		left = "OutputPanel"
+		is-vert = false
+	elem "NavigationChild"
+		type = CHILD
+		pos = 0,695
+		size = 1280x25
+		anchor1 = 0,100
+		anchor2 = 100,100
+		background-color = none
+		saved-params = "splitter"
+		left = "NavigationPanel"
 		is-vert = false
 	elem "label"
 		type = LABEL
@@ -1513,7 +1513,7 @@ window "Main"
 		text = ""
 	elem "InputChild"
 		type = CHILD
-		pos = 0,493
+		pos = 0,469
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
