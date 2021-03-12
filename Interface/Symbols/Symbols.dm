@@ -1,6 +1,7 @@
 obj/Symbols
 	Village
 		New(mob/M)
+			src.loc=null
 			switch(M.village)
 				if("Hidden Sand") src.icon = 'Sand.png'
 				if("Hidden Leaf") src.icon = 'Leaf.png'
@@ -14,6 +15,7 @@ obj/Symbols
 			..()
 	Rank
 		New(mob/M)
+			src.loc=null
 			switch(M.rank)
 				if("Academy Student") src.icon = 'Academy-Student.png'
 				if("Genin") src.icon = 'Genin.png'
