@@ -17,6 +17,9 @@ client
 
 		Changelog()
 			set hidden=1
-			src << output(null, "BrowserWindow.Output")
-			src << browse("[CHANGELOG]")
-			winset(src, "BrowserWindow", "is-visible = 'true'")
+			if(winget(src, "BrowserWindow", "is-visible") == "false")
+				src << output(null, "BrowserWindow.Output")
+				src << browse("[CHANGELOG]")
+				winset(src, "BrowserWindow", "is-visible = true")
+			else
+				winset(src, "BrowserWindow", "is-visible = false")
