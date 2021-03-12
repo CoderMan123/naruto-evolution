@@ -1,6 +1,0 @@
-[submodule "Library/Lavenblade/Interface-Input"]
-	path = Library/Lavenblade/Interface-Input
-	url = https://git.douglas-parker.com/lavenblade/interface-input.git
-[submodule "Library/Lavenblade/Interface-Query"]
-	path = Library/Lavenblade/Interface-Query
-	url = https://git.douglas-parker.com/lavenblade/interface-query.git
