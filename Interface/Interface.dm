@@ -57,19 +57,17 @@ client
 
 		ToggleInventoryPanel()
 			set hidden=1
-			if(winget(src, "MainWindow.InvenChild", "is-visible") == "false")
-				winset(src, null, {"
-					MainWindow.InvenChild.is-visible = "true";
-				"})
+			if(winget(src, "InventoryWindow", "is-visible") == "false")
+				winset(src, "InventoryWindow", "is-visible=true")
 				src.mob.RefreshInventory()
 
 			else
 				winset(src, null, {"
-					MainWindow.InvenChild.is-visible = "false";
-					Equip.ItemName.text="";
-					Equip.ItemPic.image="";
+					InventoryWindow.EquippedName.text=""
+					InventoryWindow.EquippedImage.image=""
+					InventoryWindow.is-visible=false
 				"})
-				usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>","ItemInfo")
+				usr<<output("<center>","InventoryWindow.EquippedItemInfo")
 
 		ToggleSettingsPanel()
 			set hidden=1

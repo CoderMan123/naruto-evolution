@@ -200,9 +200,9 @@ obj
 						H.icon_state="shuriken"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "ItemName", "text='[src.name]'")
-						winset(usr, "ItemPic", "image=\ref[iconfile]")
-						usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>[Description]","ItemInfo")
+						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
+						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 						//X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Shuriken/C)
@@ -225,9 +225,9 @@ obj
 						H.icon_state="needle"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "ItemName", "text='[src.name]'")
-						winset(usr, "ItemPic", "image=\ref[iconfile]")
-						usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>[Description]","ItemInfo")
+						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
+						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Needle/C)
@@ -250,9 +250,9 @@ obj
 						H.icon_state="kunai"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "ItemName", "text='[src.name]'")
-						winset(usr, "ItemPic", "image=\ref[iconfile]")
-						usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>[Description]","ItemInfo")
+						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
+						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Kunai/C)
@@ -273,9 +273,9 @@ obj
 						H.icon_state="expl kunai"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "ItemName", "text='[src.name]'")
-						winset(usr, "ItemPic", "image=\ref[iconfile]")
-						usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>[Description]","ItemInfo")
+						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
+						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Exploding_Kunai/C)
@@ -298,9 +298,9 @@ obj
 						H.icon_state="tag"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "ItemName", "text='[src.name]'")
-						winset(usr, "ItemPic", "image=\ref[iconfile]")
-						usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>[Description]","ItemInfo")
+						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
+						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Explosive_Tag/C)
@@ -385,9 +385,9 @@ obj
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="smoke bomb"
 					var/icon/I = new(src.icon, src.icon_state)
 					var/iconfile = fcopy_rsc(I)
-					winset(usr, "ItemName", "text='[src.name]'")
-					winset(usr, "ItemPic", "image=\ref[iconfile]")
-					usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>[Description]","ItemInfo")
+					winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
+					winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
+					usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Stamina_Pill/C)
@@ -397,7 +397,7 @@ obj
 				icon='MadaraFan.dmi'
 				Click()
 					if(!usr.contents.Find(src)) return
-					usr<<output("<center><font size = 2><font color=white><Body BGCOLOR = #2E2E2E>[Description]","ItemInfo")
+					usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
 					if(usr.usedwepboost==0)
 						usr.equipped="MadaraFan"
 						usr.usedwepboost=1

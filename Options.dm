@@ -182,18 +182,18 @@ mob
 		RefreshInventory()
 			set hidden=1
 			if(!client) return
-			winset(src,"Equip.Ryo","text=\"Ryo: [Ryo]\"")
-			winset(src,"Equip.Items","text=\"Items: [items]/[maxitems]\"")
-			winset(src,"Equip.GridEquip","cells=0x0")
+			winset(src,"InventoryWindow.Ryo","text=\"両 [Ryo]\"")
+			winset(src,"InventoryWindow.Titlebar","text=\"Inventory - [items]/[maxitems]\"")
+			winset(src,"InventoryWindow.Grid","cells=0x0")
 			var/Row = 1
 		//	src<<output("Ryo:","Equip.GridEquip:1,1")
 		//	src<<output("Items:","Equip.GridEquip:1,2")
 		//	src<<output("[src.items]/[src.maxitems]","Equip.GridEquip:2,2")
-			src<<output(" ","Equip.GridEquip:1,1")
+			src<<output(" ","InventoryWindow.Grid:1,1")
 			for(var/obj/O in src.contents)
 				Row++
-				src << output(O,"Equip.GridEquip:1,[Row]")
-				src << output("[O.suffix]","Equip.GridEquip:2,[Row]")
+				src << output(O,"InventoryWindow.Grid:1,[Row]")
+				src << output("<span style='text-align: right;'>[O.suffix]</span>","InventoryWindow.Grid:2,[Row]")
 			sleep(40)
 
 mob

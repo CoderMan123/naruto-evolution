@@ -194,7 +194,6 @@ window "ActionPanel"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -203,8 +202,6 @@ window "ActionPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 514x214
-		inner-size = 500x200
 	elem "ActionOutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -238,6 +235,7 @@ window "BrowserWindow"
 		size = 940x600
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -245,6 +243,8 @@ window "BrowserWindow"
 		can-close = false
 		can-minimize = false
 		can-resize = false
+		outer-size = 954x614
+		inner-size = 940x600
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -440,6 +440,7 @@ window "InputPanel"
 		size = 500x28
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -447,6 +448,8 @@ window "InputPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 514x42
+		inner-size = 500x28
 	elem "ChatBackground"
 		type = LABEL
 		pos = 0,0
@@ -492,6 +495,7 @@ window "Inventory2"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -500,6 +504,7 @@ window "Inventory2"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 654x494
 	elem "InvenInfo"
 		type = TAB
 		pos = 0,0
@@ -514,6 +519,158 @@ window "Inventory2"
 		saved-params = ""
 		tabs = "Equip"
 		current-tab = "Equip"
+
+window "InventoryWindow"
+	elem "InventoryWindow"
+		type = MAIN
+		pos = 281,0
+		size = 300x500
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		macro = "Macro"
+		outer-size = 314x514
+		inner-size = 300x500
+	elem "Background"
+		type = LABEL
+		pos = 0,21
+		size = 300x479
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = ""
+	elem "EquippedName"
+		type = LABEL
+		pos = 37,416
+		size = 260x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "Kunai"
+	elem "Currency"
+		type = LABEL
+		pos = 3,368
+		size = 32x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "両"
+	elem "EquippedItemInfo"
+		type = OUTPUT
+		pos = 37,440
+		size = 260x57
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "max-lines"
+	elem "label4"
+		type = LABEL
+		pos = 3,392
+		size = 294x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Ninja Tool"
+	elem "EquippedImage"
+		type = LABEL
+		pos = 3,416
+		size = 32x81
+		anchor1 = none
+		anchor2 = none
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = ""
+	elem "Ryo"
+		type = LABEL
+		pos = 37,368
+		size = 260x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "0"
+	elem "Grid"
+		type = GRID
+		pos = 3,24
+		size = 294x342
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		cells = 1x1
+		current-cell = 1,1
+		show-lines = horizontal
+		line-color = #646464
+		highlight-color = #ffffff
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 300x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Inventory - 0/25"
+	elem "Close"
+		type = BUTTON
+		pos = 272,0
+		size = 25x19
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'Interface\\Close.png'
+		command = "ToggleInventoryPanel"
+		is-flat = true
 
 window "JutsuTab"
 	elem "JutsuTab"
@@ -564,7 +721,6 @@ window "LeaderWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -573,8 +729,6 @@ window "LeaderWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -658,8 +812,6 @@ window "MainWindow"
 		can-resize = false
 		icon = 'Hud\\evo.dmi'
 		macro = "Macro"
-		outer-size = 1376x974
-		inner-size = 1362x960
 	elem "MapChild"
 		type = CHILD
 		pos = 0,0
@@ -675,7 +827,6 @@ window "MainWindow"
 		size = 1362x25
 		anchor1 = 0,100
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "NavigationPanel"
 		is-vert = false
@@ -706,7 +857,6 @@ window "MainWindow"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -727,7 +877,6 @@ window "MainWindow"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -765,7 +914,6 @@ window "MainWindow"
 		size = 386x384
 		anchor1 = 57,9
 		anchor2 = 85,48
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -804,7 +952,6 @@ window "MainWindow"
 		size = 174x304
 		anchor1 = 85,8
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "splitter"
 		left = "Status"
@@ -874,7 +1021,6 @@ window "NavigationPanel"
 		size = 1362x25
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -882,8 +1028,6 @@ window "NavigationPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 1376x39
-		inner-size = 1362x25
 	elem "Navigation"
 		type = LABEL
 		pos = 0,0
@@ -1130,7 +1274,6 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1139,8 +1282,6 @@ window "SettingsWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1241,7 +1382,6 @@ window "Status"
 		size = 197x319
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -1252,15 +1392,12 @@ window "Status"
 		can-resize = false
 		is-pane = true
 		image = 'Hud\\Stats.png'
-		outer-size = 211x333
-		inner-size = 197x319
 	elem "skillpoints"
 		type = LABEL
 		pos = 104,304
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1271,7 +1408,6 @@ window "Status"
 		size = 101x16
 		anchor1 = 42,86
 		anchor2 = 93,91
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1281,7 +1417,6 @@ window "Status"
 		size = 101x13
 		anchor1 = 42,80
 		anchor2 = 93,84
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1291,7 +1426,6 @@ window "Status"
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1302,7 +1436,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,68
 		anchor2 = 93,72
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1312,7 +1445,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,50
 		anchor2 = 93,55
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1322,7 +1454,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,26
 		anchor2 = 93,30
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1332,7 +1463,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,38
 		anchor2 = 93,42
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1342,7 +1472,6 @@ window "Status"
 		size = 104x13
 		anchor1 = 41,32
 		anchor2 = 93,36
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1354,7 +1483,6 @@ window "Status"
 		anchor2 = 95,78
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
-		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
@@ -1368,7 +1496,6 @@ window "Status"
 		anchor2 = 95,72
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
-		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
@@ -1380,7 +1507,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,21
 		anchor2 = 93,25
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1390,7 +1516,6 @@ window "Status"
 		size = 88x13
 		anchor1 = 45,16
 		anchor2 = 89,20
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -1883,7 +2008,6 @@ window "yutput"
 		size = 504x454
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		border = sunken
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -1892,8 +2016,6 @@ window "yutput"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		outer-size = 518x468
-		inner-size = 504x454
 	elem "message"
 		type = OUTPUT
 		pos = 0,45
@@ -1936,7 +2058,6 @@ window "titlescreen"
 		size = 1018x714
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1945,15 +2066,12 @@ window "titlescreen"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 1032x728
-		inner-size = 1018x714
 	elem "Shikamaru"
 		type = LABEL
 		pos = 0,0
 		size = 1018x732
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -1964,7 +2082,6 @@ window "titlescreen"
 		size = 1018x732
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		right = "mapwindow"
 		is-vert = false
