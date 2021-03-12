@@ -23,7 +23,7 @@ mob/proc
 			src.items-=1
 			if(items<=0) items=0
 			o.suffix=""
-		RefreshInventory()
+		src.client.UpdateInventoryPanel()
 	itemDelete(obj/o)
 		if(o.canStack && o.contents.len)
 			var/obj/theItem=pick(o.contents)
@@ -34,7 +34,7 @@ mob/proc
 			src.items-=1
 			if(items<=0) items=0
 			del(o)
-		RefreshInventory()
+		src.client.UpdateInventoryPanel()
 	itemAdd(obj/o)
 		var/list/items=list()
 		for(var/obj/i in src.contents)items+=i.type
@@ -60,7 +60,7 @@ mob/proc
 			src.contents+=o
 			src.items+=1
 			o.suffix="[o.canStack ? "x1" : "[o.suffix]"]"
-		RefreshInventory()
+		src.client.UpdateInventoryPanel()
 obj/RyoBag
 	icon='Ryo bills.dmi'
 	icon_state="owned"

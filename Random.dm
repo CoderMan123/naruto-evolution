@@ -134,7 +134,7 @@ obj/Inventory/JutsuMastScroll
 			return
 		if(src in usr)
 			MasterJutsu()
-			usr.RefreshInventory()
+			usr.client.UpdateInventoryPanel()
 
 	proc
 		MasterJutsu()

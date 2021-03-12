@@ -166,7 +166,7 @@ mob
 							if(istype(H, /obj/Screen/Chakra/)) H.icon_state="[round(src.chakra/src.maxchakra*100,10)]"
 							if(istype(H, /obj/Screen/EXP/)) H.icon_state="[round(src.exp/src.maxexp*100,10)]"
 		UpdateHMB()
-			spawn(rand(1,10)) src.MenuUpdate()
+			spawn(rand(1,10)) src.client.UpdateCharacterPanel()
 			if(!src.henge)
 				for(var/obj/Screen/O in src.hbar)
 					if(istype(O,/obj/Screen/healthbar))

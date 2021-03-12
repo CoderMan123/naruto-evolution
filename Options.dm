@@ -179,28 +179,10 @@ mob
 	//				winset(src, null, {"
 	//					MainWindow.AdminChild.is-visible = "false";
 	//				"})
-		RefreshInventory()
-			set hidden=1
-			if(!client) return
-			winset(src,"InventoryWindow.Ryo","text=\"両 [Ryo]\"")
-			winset(src,"InventoryWindow.Titlebar","text=\"Inventory - [items]/[maxitems]\"")
-			winset(src,"InventoryWindow.Grid","cells=0x0")
-			var/Row = 1
-		//	src<<output("Ryo:","Equip.GridEquip:1,1")
-		//	src<<output("Items:","Equip.GridEquip:1,2")
-		//	src<<output("[src.items]/[src.maxitems]","Equip.GridEquip:2,2")
-			src<<output(" ","InventoryWindow.Grid:1,1")
-			for(var/obj/O in src.contents)
-				Row++
-				src << output(O,"InventoryWindow.Grid:1,[Row]")
-				src << output("<span style='text-align: right;'>[O.suffix]</span>","InventoryWindow.Grid:2,[Row]")
-			sleep(40)
 
 mob
 	var
-		tmp
-			statbox=0
-			jutsutab=0
+		jutsutab=0
 	verb
 		ViewJutsuTab()
 			set hidden=1
@@ -226,38 +208,12 @@ mob
 			for(var/obj/Jutsus/O in src.JutsusLearnt)
 				Row++
 				src << output(O,"Grid:1,[Row]")
-		Stats()
-			set hidden=1
-			if(usr.statbox==1)
-				usr.statbox=0
-				winset(usr, null, {"
-					MainWindow.Stats.focus      = "false";
-					MainWindow.Stats.is-visible      = "false";
-				"})
-			else
-				if(usr.statbox==0)
-					usr.statbox=1
-					winset(usr, null, {"
-						MainWindow.Stats.focus      = "true";
-						MainWindow.Stats.is-visible      = "true";
-						Status.Name.text      = "[usr.name]";
-						Status.Level.text      = "[usr.level]";
-						Status.EXP.text      = "[usr.exp]/[usr.maxexp]";
-						Status.Nin.text      = "[usr.ninjutsu]([usr.ninexp]/[usr.maxninexp])";
-						Status.Gen.text      = "[usr.genjutsu]([usr.genexp]/[usr.maxgenexp])";
-						Status.Str.text      = "[usr.strength]([usr.strengthexp]/[usr.maxstrengthexp])";
-						Status.Def.text      = "[usr.defence]([usr.defexp]/[usr.maxdefexp])";
-						Status.Agi.text      = "[usr.agility]([usr.agilityexp]/[usr.maxagilityexp])";
-						Status.Health.text      = "([usr.health]/[usr.maxhealth])";
-						Status.Chakra.text      = "([usr.chakra]/[usr.maxchakra])";
-						Status.statpoints.text      = "[usr.statpoints] -";
-						Status.skillpoints.text     = "- [src.skillpoints]"
-					"})
+
 		RefreshStats()
 			set hidden=1
 			winset(usr, null, {"
-						MainWindow.Stats.focus      = "true";
-						MainWindow.Stats.is-visible      = "true";
+						CharacterWindow      = "true";
+						CharacterWindow.is-visible      = "true";
 						Status.Name.text      = "[usr.name]";
 						Status.Level.text      = "[usr.level]";
 						Status.EXP.text      = "[usr.exp]/[usr.maxexp]";

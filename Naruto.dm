@@ -244,8 +244,7 @@ mob/Login
 							MapChild.right=titlescreen;
 							MainWindow.is-maximized=true
 							MainWindow.UnlockChild.is-visible = "false";
-							MainWindow.InvenChild.is-visible = "false";
-							MainWindow.Stats.is-visible      = "false";
+							Character.is-visible      = "false";
 							MainWindow.NavigationChild.is-visible      = "false";
 							MainWindow.OutputChild.is-visible      = "false";
 							target.is-visible = "false";
@@ -394,11 +393,12 @@ mob/Login
 			del src
 		if(!M.name) M.name=M.key
 		winset(M, null, {"
-							MainWindow.NavigationChild.is-visible      = "true";
-							MainWindow.OutputChild.is-visible      = "true";
-							MainWindow.ActionChild.is-visible      = "true";
-							MapChild.right=mapwindow;
-						"})
+			MainWindow.NavigationChild.is-visible      = "true";
+			MainWindow.OutputChild.is-visible      = "true";
+			MainWindow.ActionChild.is-visible      = "true";
+			MapChild.right=mapwindow;
+			NavigationPanel.ExpLockButton.is-disabled = false
+		"})
 		M<<"Now speaking in: [M.client.channel]."
 		spawn(30)if(M)M.ASave()
 	verb/CreateCharacter()

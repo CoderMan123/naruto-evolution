@@ -55,7 +55,7 @@ obj/proc/take(mob/M)
 		return
 	hearers()<<output("[M] picks up [src].","ActionPanel.Output")
 	M.itemAdd(src)
-	M.RefreshInventory()
+	M.client.UpdateInventoryPanel()
 obj/proc/drop(mob/M)
 	if(usr.dead) return
 	M.itemDrop(src)
@@ -122,7 +122,7 @@ obj
 						Wear()
 					else
 						Remove()
-				usr.RefreshInventory()
+				usr.client.UpdateInventoryPanel()
 			DblClick()
 			proc/Wear()
 				if(usr.ClothingOverlays[section]) return

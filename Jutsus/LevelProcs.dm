@@ -48,24 +48,7 @@ obj
 				if(src.name=="Transformation Jutsu")
 					if(src.level==2)Owner<<output("<font color= #bc8f8f>[src.name] can now be used to transform into objects</Font>!","ActionPanel.Output")
 					if(src.level==3)Owner<<output("<font color= #bc8f8f>[src.name] can now be used to transform into almost anything</Font>!","ActionPanel.Output")
-mob
-	proc
-		MenuUpdate()
-			if(src.statbox==1)
-				winset(src, null, {"
-					Status.Name.text      = "[src.name]";
-					Status.Level.text      = "[src.level]";
-					Status.EXP.text      = "[src.exp]/[src.maxexp]";
-					Status.Nin.text      = "[src.ninjutsu]([src.ninexp]/[src.maxninexp])";
-					Status.Gen.text      = "[src.genjutsu]([src.genexp]/[src.maxgenexp])";
-					Status.Str.text      = "[src.strength]([src.strengthexp]/[src.maxstrengthexp])";
-					Status.Def.text      = "[src.defence]([src.defexp]/[src.maxdefexp])";
-					Status.Agi.text      = "[src.agility]([src.agilityexp]/[src.maxagilityexp])";
-					Status.Health.text      = "([src.health]/[src.maxhealth])";
-					Status.Chakra.text      = "([src.chakra]/[src.maxchakra])";
-					Status.statpoints.text      = "[src.statpoints]";
-					Status.skillpoints.text     = "[src.skillpoints]";
-				"})
+
 mob
 	proc
 		LevelStat(stat,howmuch,mission)
@@ -182,7 +165,7 @@ mob
 				next
 			if(!src.client)src.UpdateHMB()
 			else if(!src.likeaclone)src.UpdateHMB()
-			if(src.client)src.MenuUpdate()
+			if(src.client) src.client.UpdateCharacterPanel()
 			if(level>=25&&!Element2)
 				var/Elements=list("Fire","Water","Earth","Lightning","Wind")
 				src.Element2=src.CustomInput("Element Options","What secondary element would you like?.",Elements-src.Element)

@@ -2705,5 +2705,5 @@ mob
 						else
 							usr << output("You're too experienced in agility to gain anymore experience from these.","ActionPanel.Output")
 							return
-			//RefreshInventory()
+			//UpdateInventoryPanel()
 			return
