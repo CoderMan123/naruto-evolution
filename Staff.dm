@@ -202,6 +202,7 @@ mob/Moderator/verb/
 			if(M.key)
 				M.exp_locked=1
 				winset(M, "NavigationPanel.ExpLockButton", "is-disabled = 'false'")
+				spawn() M.client.FlashExperienceLock()
 				M.Save()
 			else
 				continue
@@ -498,6 +499,7 @@ mob/Admin/verb
 //		skip
 		Edited(O)
 		text2file("[usr]([usr.key]) edited [O]! Reason : [reasonforedit]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+
 	Add_Pixel_Artist(mob/M in TotalPlayers)
 		set category="Staff"
 		world<<output("[M] now has pixel artist verbs.","ActionPanel.Output")
@@ -757,6 +759,12 @@ atom/Topic(href,href_list[])
 				if("verb")src.vars[variable] = text2path(input("Type in the verb's path:","Verb",src.vars[variable]) as text)
 				if("true")src.vars[variable] = 1
 				if("false")src.vars[variable] = null
+
+			if(ismob(src))
+				var/mob/M = src
+				if(M.client)
+					M.client.UpdateCharacterPanel()
+					M.UpdateBars()
 			Edited(src)
 	. = ..()
 mob/Topic(href,href_list[])

@@ -438,6 +438,14 @@ client
 				winset(src, "BrowserWindow", "is-visible = false")
 
 	proc
+		FlashExperienceLock()
+			while(src && src.mob.exp_locked)
+				if(src) winset(src, "NavigationPanel.ExpLockButton", "text-color=#C80000")
+				sleep(10)
+				if(src) winset(src, "NavigationPanel.ExpLockButton", "text-color=#C8C8C8")
+				sleep(10)
+			if(src) winset(src, "NavigationPanel.ExpLockButton", "text-color=#C8C8C8")
+
 		UpdateCharacterPanel()
 			winset(src, null, {"
 				Character.Avatar.image     = "\icon[src.mob.icon]"

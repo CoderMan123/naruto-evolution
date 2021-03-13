@@ -183,25 +183,6 @@ mob
 				Row++
 				src << output(O,"Grid:1,[Row]")
 
-		RefreshStats()
-			set hidden=1
-			winset(usr, null, {"
-						CharacterWindow      = "true";
-						CharacterWindow.is-visible      = "true";
-						Status.Name.text      = "[usr.name]";
-						Status.Level.text      = "[usr.level]";
-						Status.EXP.text      = "[usr.exp]/[usr.maxexp]";
-						Status.Nin.text      = "[usr.ninjutsu]([usr.ninexp]/[usr.maxninexp])";
-						Status.Gen.text      = "[usr.genjutsu]([usr.genexp]/[usr.maxgenexp])";
-						Status.Str.text      = "[usr.strength]([usr.strengthexp]/[usr.maxstrengthexp])";
-						Status.Def.text      = "[usr.defence]([usr.defexp]/[usr.maxdefexp])";
-						Status.Agi.text      = "[usr.agility]([usr.agilityexp]/[usr.maxagilityexp])";
-						Status.Health.text      = "([usr.health]/[usr.maxhealth])";
-						Status.Chakra.text      = "([usr.chakra]/[usr.maxchakra])";
-						Status.statpoints.text      = "[usr.statpoints] -";
-						Status.skillpoints.text     = "- [src.skillpoints]"
-					"})
-
 		HealthUp()
 			set hidden=1
 			if(statpoints<1)
@@ -210,7 +191,8 @@ mob
 			statpoints--
 			maxhealth+=30
 			src<<output("<font color=yellow>You leveled up Health!</Font>","ActionPanel.Output")
-			RefreshStats()
+			src.client.UpdateCharacterPanel()
+
 		ChakraUp()
 			set hidden=1
 			if(statpoints<1)
@@ -219,4 +201,4 @@ mob
 			statpoints--
 			maxchakra+=25
 			src<<output("<font color=yellow>You leveled up Chakra!</Font>","ActionPanel.Output")
-			RefreshStats()
+			src.client.UpdateCharacterPanel()

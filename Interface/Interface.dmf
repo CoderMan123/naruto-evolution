@@ -1459,6 +1459,8 @@ window "Main"
 		can-resize = false
 		icon = 'Hud\\evo.dmi'
 		macro = "Macro"
+		outer-size = 1294x734
+		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1495,6 +1497,7 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		left = "NavigationPanel"
 		is-vert = false
@@ -1504,6 +1507,7 @@ window "Main"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
+		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -1513,6 +1517,7 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -1561,6 +1566,7 @@ window "Main"
 		size = 364x291
 		anchor1 = 57,9
 		anchor2 = 85,48
+		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -1903,7 +1909,6 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1912,8 +1917,6 @@ window "SettingsWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2171,6 +2174,7 @@ window "Titlescreen"
 		size = 1280x720
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2179,6 +2183,8 @@ window "Titlescreen"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 1294x734
+		inner-size = 1280x720
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -2190,11 +2196,21 @@ window "Titlescreen"
 		text = ""
 		image = 'Interface\\Title\\Background.png'
 		image-mode = stretch
+	elem "BackgroundMap"
+		type = CHILD
+		pos = 0,0
+		size = 1280x720
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = none
+		saved-params = "splitter"
+		left = "mapwindow"
+		is-vert = false
 	elem "label16"
 		type = LABEL
-		pos = 984,2
+		pos = 2,576
 		size = 294x22
-		anchor1 = 100,0
+		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		font-size = 10
@@ -2206,9 +2222,9 @@ window "Titlescreen"
 		text = "Character Login"
 	elem "Create"
 		type = BUTTON
-		pos = 1132,122
+		pos = 150,696
 		size = 146x22
-		anchor1 = 100,0
+		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
@@ -2220,9 +2236,9 @@ window "Titlescreen"
 		is-flat = true
 	elem "Login"
 		type = BUTTON
-		pos = 984,122
+		pos = 2,696
 		size = 146x22
-		anchor1 = 100,0
+		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
@@ -2234,9 +2250,9 @@ window "Titlescreen"
 		is-flat = true
 	elem "label14"
 		type = LABEL
-		pos = 984,74
+		pos = 2,648
 		size = 294x22
-		anchor1 = 100,0
+		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		font-size = 10
@@ -2248,9 +2264,9 @@ window "Titlescreen"
 		text = "Password"
 	elem "Password"
 		type = INPUT
-		pos = 984,98
+		pos = 2,672
 		size = 294x22
-		anchor1 = 100,0
+		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		font-size = 8
@@ -2262,9 +2278,9 @@ window "Titlescreen"
 		no-command = true
 	elem "Username"
 		type = INPUT
-		pos = 984,50
+		pos = 2,624
 		size = 294x22
-		anchor1 = 100,0
+		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		font-size = 8
@@ -2275,9 +2291,9 @@ window "Titlescreen"
 		no-command = true
 	elem "label2"
 		type = LABEL
-		pos = 984,26
+		pos = 2,600
 		size = 294x22
-		anchor1 = 100,0
+		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		font-size = 10
@@ -2295,6 +2311,7 @@ window "mapwindow"
 		size = 1010x675
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -2304,6 +2321,8 @@ window "mapwindow"
 		is-pane = true
 		macro = "macro"
 		menu = "menu"
+		outer-size = 1024x689
+		inner-size = 1010x675
 	elem "map"
 		type = MAP
 		pos = 0,0

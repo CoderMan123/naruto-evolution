@@ -386,8 +386,9 @@ mob/Login
 		//M.px = 32 * M.x
 		//M.py = 32 * M.y
 		//spawn() M.MedalCheck()
-		spawn()
-			del src
+		spawn() M.client.FlashExperienceLock()
+		//spawn()
+			//del src
 		if(!M.name) M.name=M.key
 		winset(M, null, {"
 			Main.NavigationChild.is-visible      = "true";

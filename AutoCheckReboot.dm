@@ -9,6 +9,7 @@ proc
 			if(M.key)
 				M.exp_locked=1
 				winset(M, "NavigationPanel.ExpLockButton", "is-disabled = 'false'")
+				spawn() M.client.FlashExperienceLock()
 				M.Save()
 			else
 				continue
