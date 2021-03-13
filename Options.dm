@@ -70,32 +70,6 @@ mob
 				world<<"[M] declines the challenge from [src]..."
 
 mob
-	verb
-		Who()
-			set hidden = 1
-			var/amount=0
-			var/Who={"<html><center>
-	<head><title>Who's Online</title><body>
-	<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
-	</body><html>"}
-			for(var/mob/player/M) if(M.client) amount+=1
-			for(var/mob/player/M) if(M.client) Who+={"<html><center>
-	<head><title>Staff Who</title><body>
-	<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
-	<br><font color=white>[M.name] ([M.key])
-	</body><html>"}
-			Who+={"<html>
-	<head><title></head></title><body>
-	<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color=blue><b>
-	<br><u>[amount] player(s) online</u>
-	</body><html>"}
-			src<<browse(Who,"window=Who;size=400x400")
-			Who={"<html><center>
-	<head><title>Staff Who</title><body>
-	<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
-	</body><html>"}
-
-mob
 	var/tmp
 		InventoryUp = 0//Variable telling whether your OSI is up, or not
 	verb
