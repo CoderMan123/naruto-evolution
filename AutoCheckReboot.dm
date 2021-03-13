@@ -7,7 +7,7 @@ proc
 		world<<"<font color=red>Exp lock was auto initiated! Please use the command \"Remove Exp Lock\" on the bottom bar to remove the lock!"
 		for(var/mob/M in TotalPlayers)
 			if(M.key)
-				M.ExpLock=1
+				M.exp_locked=1
 				winset(M, "NavigationPanel.ExpLockButton", "is-disabled = 'false'")
 				M.Save()
 			else

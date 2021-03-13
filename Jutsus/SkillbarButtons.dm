@@ -140,26 +140,3 @@ The game creators will work on it as soon as possible.
 			spawn(200)if(usr)usr.Bugreported=0
 
 
-mob/player
-	var/tmp/ExpLockDelay=0
-	verb
-		ExpLock()
-			set hidden=1
-			if(ExpLockDelay)return
-			if(src.ExpLock)
-				src.ExpLockDelay=1
-				var/Num=rand(1000,9999)
-				src<<"<u>Verification Number:</u> [Num]."
-				var/LOCK=input("Enter the correct number shown to unlock your EXP Gain.","Unlock EXP Gain")as num
-				if(Num==LOCK)
-					src<<"Your Exp Lock was removed!"
-					src.ExpLock=0
-					ExpLockDelay=0
-					winset(src, "NavigationPanel.ExpLockButton", "is-disabled = 'true'")
-					return
-				else
-					src<<"You did not enter the right verification code!"
-					ExpLockDelay=0
-			else
-				src<<"You are not EXP Locked!"
-				return

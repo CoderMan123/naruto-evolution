@@ -1,4 +1,5 @@
 client
+	var/tmp/exp_lock_verify=0
 	verb
 		ChangeChannel()
 			set hidden=1
@@ -100,6 +101,26 @@ client
 				winset(src, null, {"
 					LeaderWindow.is-visible = "false";
 				"})
+
+		UnlockExperience()
+			set hidden=1
+			if(src.exp_lock_verify) return
+			if(src.mob.exp_locked)
+				src.exp_lock_verify=1
+				var/verification_code = rand(1000,9999)
+				var/verification_response = src.AlertInput("Please enter the following verification code to resume gaining experience: [verification_code]", "Experience Lock", list("Submit", "Cancel"))
+				if(verification_response[1] == 1 && text2num(verification_response[2]) == verification_code)
+					src << output("You will now resume gaining experience normally.", "ActionPanel.Output")
+					winset(src, "NavigationPanel.ExpLockButton", "is-disabled = 'true'")
+					src.mob.exp_locked=0
+					src.exp_lock_verify=0
+				else if(verification_response[1] == 1)
+					src.Alert("You did not enter the correct verification code.", "Experience Lock")
+					src.exp_lock_verify=0
+				else
+					src.exp_lock_verify=0
+			else
+				src.Alert("You are not currently experience locked.", "Experience Lock")
 
 	proc
 		UpdateCharacterPanel()

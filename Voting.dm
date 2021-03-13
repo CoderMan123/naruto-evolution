@@ -177,7 +177,7 @@ mob/verb/
 			return
 		var/list/X = list()
 		for(var/mob/player/e in world)
-			if(e.ckey&&e.ExpLock)
+			if(e.ckey&&e.exp_locked)
 				X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to call a Boot Vote against?","Boot",X+"Cancel")
 		if(P=="Cancel") return

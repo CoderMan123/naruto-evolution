@@ -1459,8 +1459,6 @@ window "Main"
 		can-resize = false
 		icon = 'Hud\\evo.dmi'
 		macro = "Macro"
-		outer-size = 1294x734
-		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1497,7 +1495,6 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "NavigationPanel"
 		is-vert = false
@@ -1507,7 +1504,6 @@ window "Main"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -1517,7 +1513,6 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -1566,7 +1561,6 @@ window "Main"
 		size = 364x291
 		anchor1 = 57,9
 		anchor2 = 85,48
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -1686,7 +1680,7 @@ window "NavigationPanel"
 		border = line
 		saved-params = "is-checked"
 		text = "Experience Lock"
-		command = "ExpLock"
+		command = "UnlockExperience"
 		is-flat = true
 	elem "ArenaButton"
 		type = BUTTON
@@ -2174,7 +2168,6 @@ window "Titlescreen"
 		size = 1280x720
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2183,8 +2176,6 @@ window "Titlescreen"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 1294x734
-		inner-size = 1280x720
 	elem "Background"
 		type = LABEL
 		pos = 0,0

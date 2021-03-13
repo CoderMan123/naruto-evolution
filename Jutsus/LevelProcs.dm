@@ -55,7 +55,7 @@ mob
 			var/area/A=loc.loc
 			if(!A) return
 			if(A.Safe&&!mission) return
-			if(src.ExpLock)
+			if(src.exp_locked)
 				src<<output("<font color=red><small><small>You're currently exp locked! Use the Remove Exp Lock button under the options pane!</small></Font>","ActionPanel.Output")
 				return
 			switch(stat)

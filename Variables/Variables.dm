@@ -2,7 +2,7 @@ mob/var/tmp/list/Effects=list()
 mob
 	var
 		Password
-		ExpLock=0
+		exp_locked=0
 		health=100
 		maxhealth=100
 		chakra=300

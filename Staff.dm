@@ -200,7 +200,7 @@ mob/Moderator/verb/
 		world<<"<font color=red>Please use the button \"Remove Exp Lock\" on the bottom bar to remove the lock!"
 		for(var/mob/M in world)
 			if(M.key)
-				M.ExpLock=1
+				M.exp_locked=1
 				winset(M, "NavigationPanel.ExpLockButton", "is-disabled = 'false'")
 				M.Save()
 			else
@@ -210,7 +210,7 @@ mob/Moderator/verb/
 		set category="Staff"
 		var/N=0
 		for(var/mob/M in TotalPlayers)
-			if(M.client&&M.ExpLock)
+			if(M.client&&M.exp_locked)
 				usr<<"<small><small>[M.rname]/[M.key]</small></small>"
 				N++
 		usr<<"<small><small><b>A total of [N] players are Exp Locked!</b></small></small>"
