@@ -1903,6 +1903,7 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1911,6 +1912,8 @@ window "SettingsWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 514x414
+		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1945,7 +1948,7 @@ window "SettingsWindow"
 		text = "Leave Village"
 		command = "LeaveVillage"
 		is-flat = true
-	elem "RulesButton"
+	elem "CommunityGuidelinesButton"
 		type = BUTTON
 		pos = 251,27
 		size = 243x22
@@ -1956,8 +1959,8 @@ window "SettingsWindow"
 		background-color = #555555
 		border = line
 		saved-params = "is-checked"
-		text = "Rules"
-		command = "Rules"
+		text = "Community Guidelines"
+		command = "CommunityGuidelines"
 		is-flat = true
 	elem "LogoutButton"
 		type = BUTTON

@@ -122,6 +122,94 @@ client
 			else
 				src.Alert("You are not currently experience locked.", "Experience Lock")
 
+		CommunityGuidelines()
+			set hidden = 1
+			if(winget(src, "BrowserWindow", "is-visible") == "false")
+				var/html = {"
+					<!doctype html>
+					<html lang="en">
+					<head>
+						<title>Characters Online</title>
+
+						<!-- Required meta tags -->
+						<meta charset="utf-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+						<!-- Bootstrap CSS -->
+						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+						<!-- Google Fonts -->
+						<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+						<style>
+							body {
+								padding-top: 19px;
+								padding-left: 10px;
+								background-color: #414141;
+								color: #C8C8C8;
+								font-family: 'Open Sans', sans-serif;
+							}
+
+							a {
+								color: #007bff;
+								text-decoration: none;
+							}
+
+							a:hover {
+								color: #0056b3;
+								text-decoration: underline;
+							}
+
+							a:visited {
+								color: #007bff;
+								text-decoration: none;
+							}
+							table {
+								border-color: #dee2e6 !important;
+							}
+							th {
+								color: #C8C8C8;
+								border-width: 1px !important;
+								border-color: #646464 !important;
+							}
+							td {
+								color: #C8C8C8;
+								border-color: #646464 !important;
+							}
+						</style>
+					</head>
+
+					<body>
+						<h1>Community Guidelines</h1>
+
+						<p style="font-style: italic;">Your community guidelines go here.</p>
+
+						<h2>Social Etiquette</h2>
+						<ul>
+							<li>We have a zero tolerance policy for harassment, discrimination, racial slurs, your Mum, and more.</li>
+
+							<li>
+								test
+								<li>test</li>
+							</li>
+
+						</ul>
+
+						<!-- Optional JavaScript -->
+						<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+						<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+					</body>
+					</html>
+				"}
+
+				src << output(null, "BrowserWindow.Output")
+				src << browse("[html]")
+				winset(src, "BrowserWindow", "is-visible = true")
+			else
+				winset(src, "BrowserWindow", "is-visible = false")
+
 	proc
 		UpdateCharacterPanel()
 			winset(src, null, {"
