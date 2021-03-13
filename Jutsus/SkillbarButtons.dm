@@ -1,25 +1,4 @@
 mob
-	verb/JutsuReference()//Jutsus button.
-		set hidden=1
-		//set category = "Browser"
-		var/Display = {"
-		<STYLE>BODY {background: black; color: white}</STYLE><table border = "3" cellspacing = "1" cellpadding = "1">
-		<Caption><B>Jutsus learnt</B></font></Caption>"}
-		for(var/obj/Jutsus/I in usr.JutsusLearnt)
-			Display += {"
-			<tr><td align = "center"><font color=yellow><b>[I.name]</Font><font color=#C0C0C0>([I.level]))[I.exp]/[I.maxexp])</Font></td>
-			<td align = "center"><b><font color=#C0C0C0>Hand Signs: -</Font>[I.signs]</td>
-			<td align = "center"><b><font color=red>Jutsu Rank=[I.rank]</td>
-			</tr>"}
-		spawn(1)
-			usr<< browse("[Display]")
-			winset(src, null, {"
-						BrowserWindow.is-visible = "true";
-					"})
-		//#CC9933
-
-
-
 	verb/BugReport()
 		set hidden=1
 		winset(usr,"default.tab2","current-tab=browserpane")
