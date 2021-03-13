@@ -114,5 +114,3 @@ mob/verb
 		</html>
   	  "}
 		src << browse(text, "window=Updates;size=500x400")
-
-

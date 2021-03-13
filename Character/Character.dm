@@ -43,11 +43,8 @@ mob
 				var/obj/Symbols/Village/V = new(src)
 				var/obj/Symbols/Rank/R = new(src)
 				var/obj/Symbols/Role/role
-				if(src.client.ckey in administrators)
-					role=new(ADMINISTRATOR)
-
-				else if(src.client.ckey in moderators)
-					role=new(MODERATOR)
+				if(src.client.ckey in administrators) role=new(ADMINISTRATOR)
+				else if(src.client.ckey in moderators) role=new(MODERATOR)
 
 				var/whisper = winget(src, "InputPanel.WhisperInput", "text")
 				if(whisper)

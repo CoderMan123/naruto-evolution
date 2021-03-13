@@ -218,7 +218,7 @@ client
 				for(var/obj/Jutsus/I in src.mob.JutsusLearnt)
 					html_jutsus += {"
 						<tr>
-							<td>[I.name]</td>
+							<td>\icon[I] [I.name]</td>
 							<td>[I.level]</td>
 							<td>[I.exp]/[I.maxexp]</td>
 							<td>[I.rank]</td>

@@ -90,6 +90,7 @@ mob/NPC
 					I.icon=X
 					I.cColor = rgb(text2num(Colors[1]),text2num(Colors[2]),text2num(Colors[3]))
 				usr.itemAdd(I)
+				usr.client.UpdateInventoryPanel()
 				usr<<output("You bought the [S.name] for [S.Cost] Ryo.","ActionPanel.Output")
 				usr.Ryo-=S.Cost
 				usr.move=1
@@ -123,22 +124,23 @@ mob/NPC
 				return
 			var/obj/S = Options["[Choice]"]
 			var/list/AlertInput=usr.client.AlertInput("How many would you like to buy?","Purchase")
-			if(!isnum(AlertInput[2]))
+			if(!isnum(text2num(AlertInput[2])))
 				usr.move=1
 				return
-			var/RealPrice=S.Cost*AlertInput[2]
-			var/newitems=usr.items+AlertInput[2]
+			var/RealPrice=S.Cost*text2num(AlertInput[2])
+			var/newitems=usr.items+text2num(AlertInput[2])
 			if(newitems>usr.maxitems)
 				usr<<output("This would exceed your amount of avaliable items.","ActionPanel.Output")
 				usr.move=1
 				return
-			if(AlertInput[2]<=0)
+			if(text2num(AlertInput[2])<=0)
 				usr.move=1
 				return
 			if(usr.Ryo>=RealPrice)
-				for(var/i=AlertInput[2],i>0,i--)
+				for(var/i=text2num(AlertInput[2]),i>0,i--)
 					var/obj/I=new S.type()
 					usr.itemAdd(I)
+				usr.client.UpdateInventoryPanel()
 				usr<<output("You bought [AlertInput[2]] [S.name](s) for [RealPrice] Ryo.","ActionPanel.Output")
 				usr.Ryo-=RealPrice
 				usr.move=1

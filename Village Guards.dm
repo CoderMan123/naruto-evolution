@@ -341,15 +341,19 @@ mob/NPCs/Shinobi
 			for(var/i,i<600,i++)
 				var/obj/Inventory/Weaponry/Shuriken/S=new()
 				itemAdd(S)
+				src.client.UpdateInventoryPanel()
 			for(var/i,i<600,i++)
 				var/obj/Inventory/Weaponry/Exploding_Kunai/D=new()
 				itemAdd(D)
+				src.client.UpdateInventoryPanel()
 			for(var/i,i<600,i++)
 				var/obj/Inventory/Weaponry/Kunai/F=new()
 				itemAdd(F)
+				src.client.UpdateInventoryPanel()
 			for(var/i,i<600,i++)
 				var/obj/Inventory/Weaponry/Needle/G=new()
-				itemAdd(G)*/
+				itemAdd(G)
+				src.client.UpdateInventoryPanel()*/
 		Element=pick("Fire","Earth","Wind")
 		src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
 		src.overlays += 'Shade.dmi'

@@ -60,7 +60,7 @@ mob/proc
 			src.contents+=o
 			src.items+=1
 			o.suffix="[o.canStack ? "x1" : "[o.suffix]"]"
-		src.client.UpdateInventoryPanel()
+		//src.client.UpdateInventoryPanel()
 obj/RyoBag
 	icon='Ryo bills.dmi'
 	icon_state="owned"
@@ -88,6 +88,7 @@ mob
 				usr.Ryo-=AlertInput[2]
 				var/obj/RyoBag/O=new(src.loc)
 				O.Worth=AlertInput[2]
+				src.client.UpdateInventoryPanel()
 				src << output("You drop [AlertInput[2]] Ryo.","ActionPanel.Output")
 			Get()
 				set hidden=1
@@ -102,6 +103,7 @@ mob
 								//	O.loc=0
 								//else
 								itemAdd(O)
+								src.client.UpdateInventoryPanel()
 								break
 							else
 								usr << sound('Sounds/cant.ogg',0,0,7,100)
@@ -118,6 +120,7 @@ mob
 									//	usr.Clothes.Add(O.type)
 									//else
 									itemAdd(O)
+									src.client.UpdateInventoryPanel()
 									break
 								else
 									usr << sound('Sounds/cant.ogg',0,0,7,100)
@@ -141,6 +144,7 @@ obj
 		//			//	usr.Clothes.Add(src.type)
 		//			//else
 		//			usr.itemAdd(src)
+		//			src.client.UpdateInventoryPanel()
 		//	Drop()
 		//		set src in usr.contents
 		//		set category=null
@@ -178,6 +182,7 @@ obj
 					//	usr.Clothes.Add(src.type)
 					//else
 				usr.itemAdd(src)
+				usr.client.UpdateInventoryPanel()
 				return
 			..()
 		Weaponry
