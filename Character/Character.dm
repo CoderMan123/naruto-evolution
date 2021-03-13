@@ -42,6 +42,12 @@ mob
 			else
 				var/obj/Symbols/Village/V = new(src)
 				var/obj/Symbols/Rank/R = new(src)
+				var/obj/Symbols/Role/role
+				if(src.client.ckey in administrators)
+					role=new(ADMINISTRATOR)
+
+				else if(src.client.ckey in moderators)
+					role=new(MODERATOR)
 
 				var/whisper = winget(src, "InputPanel.WhisperInput", "text")
 				if(whisper)
@@ -70,7 +76,7 @@ mob
 				else
 					switch(src.client.channel)
 						if("Local")
-							view() << ffilter("\icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
+							view() << ffilter("\icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 						if("Village")
 							for(var/mob/M in TotalPlayers)

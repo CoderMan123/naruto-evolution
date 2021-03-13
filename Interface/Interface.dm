@@ -478,7 +478,7 @@ client
 
 		UpdateInventoryPanel()
 			set hidden=1
-			winset(src,"InventoryWindow.Ryo","text=\"両 [src.mob.Ryo]\"")
+			winset(src,"InventoryWindow.Ryo","text=\"[src.mob.Ryo]\"")
 			winset(src,"InventoryWindow.Titlebar","text=\"Inventory - [src.mob.items]/[src.mob.maxitems]\"")
 			winset(src,"InventoryWindow.Grid","cells=0x0")
 			var/Row = 1

@@ -299,6 +299,7 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -307,6 +308,8 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x603
+		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1177,6 +1180,7 @@ window "InventoryWindow"
 		size = 300x500
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1185,6 +1189,8 @@ window "InventoryWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x514
+		inner-size = 300x500
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1221,7 +1227,8 @@ window "InventoryWindow"
 		is-disabled = true
 		border = line
 		saved-params = ""
-		text = "両"
+		text = ""
+		image = 'Interface\\Symbols\\Ryo.png'
 	elem "EquippedItemInfo"
 		type = OUTPUT
 		pos = 37,440

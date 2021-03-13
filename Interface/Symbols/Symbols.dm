@@ -24,3 +24,15 @@ obj/Symbols
 				if("Anbu") src.icon = 'Anbu.png'
 				if("Kage") src.icon = 'Kage.png'
 			..()
+
+	Role
+		New(var/role)
+			switch(role)
+				if("Trainee") src.icon = null
+				if(MODERATOR) src.icon = 'Moderator.png'
+				if(ADMINISTRATOR) src.icon = 'Administrator.png'
+				if("Community Manager") src.icon = null
+				if("Event Manager") src.icon = null
+				if("Pixel Artist") src.icon = null
+				if("Programmer") src.icon = null
+			..()

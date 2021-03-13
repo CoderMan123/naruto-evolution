@@ -1,5 +1,8 @@
 client
 	var/tmp/channel = "Local"
+	New()
+		..()
+
 	Topic(href, href_list)
 		if(href_list["changelog"] && href_list["changelog"] == "current")
 			src << browse("[CHANGELOG]")
