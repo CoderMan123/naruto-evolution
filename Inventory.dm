@@ -193,7 +193,7 @@ obj
 				icon_state="shuriS"
 				mouse_drag_pointer = "shuriS"
 				density=0
-				maxhold="x15"
+				maxhold="x10000"
 				Description="It's a sharp pointed throwing star made of a hard steel. It could be deadly if thrown. It looks as though it's worth about 5 Ryo if you were to sell it to a common merchant."
 				damage=5
 				Cost=5
@@ -218,7 +218,7 @@ obj
 				icon_state="needleS"
 				mouse_drag_pointer = "needleS"
 				density=0
-				maxhold="x20"
+				maxhold="x10000"
 				Description="A sharp medical precise needle. The tip appears to be extremely sharp, and could cause severe damage to precise points on the human body if thrown, or even applied. It looks as though it's only worth 3 Ryo."
 				damage=3
 				Cost=3
@@ -243,7 +243,7 @@ obj
 				icon_state="kunaiS"
 				mouse_drag_pointer = "kunaiS"
 				density=0
-				maxhold="x10"
+				maxhold="x10000"
 				Description="A hard steel field knife. The tip is sharp enough to peirce flesh, as well as many other practical uses in the field. There is a loop at the end for auxillary use, or as a finger grip. It looks to be worth about 7 Ryo."
 				damage=10
 				Cost=7
@@ -268,7 +268,7 @@ obj
 				icon_state="kunaist"
 				mouse_drag_pointer = "kunaist"
 				density=0
-				maxhold="x5"
+				maxhold="x10000"
 				Cost=10
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -291,7 +291,7 @@ obj
 				icon_state="tag"
 				mouse_drag_pointer = "tag"
 				density=0
-				maxhold="x5"
+				maxhold="x10000"
 				Description="A hard paper-like material embued with kanji markings on the front. It is made with explosive paper, and if one were to embue their chakra into it, they could detonate it at will. It seems to be worth about 5 Ryo."
 				damage=40
 				Cost=5
@@ -380,7 +380,7 @@ obj
 				icon_state="sbomb"
 				mouse_drag_pointer = "sbomb"
 				density=0
-				maxhold="x5"
+				maxhold="x10000"
 				Description="A darkened sphere, containing large condensed amounts of gas. It is wired to a pressure activation system, and could be useful to make a quick escape if thrown. It seems to be worth about 5 Ryo."
 				Cost=5
 				Click()
@@ -400,6 +400,7 @@ obj
 			MadaraFan
 				Description="THIS ITEM WILL BE SOON CHANGED  -Vik"
 				icon='MadaraFan.dmi'
+				maxhold="x1"
 				Click()
 					if(!usr.contents.Find(src)) return
 					usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
@@ -430,8 +431,8 @@ obj
 				icon_state="standing"
 				mouse_drag_pointer = "standing"
 				density=0
-				maxhold="x5"
 				Description="Dark Sword. A legendary sword of the Dark Shinobi."
+				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -450,6 +451,7 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Samehada. A legendary sword of the Seven Swordsmen"
+				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -468,8 +470,8 @@ obj
 				icon_state=""
 				mouse_drag_pointer = ""
 				density=0
-				maxhold="x5"
 				Description="Kubukiribocho. A legendary sword of the Seven Swordsmen."
+				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -488,6 +490,7 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Hiramekarei. A legendary sword of the Seven Swordsmen"
+				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -505,8 +508,8 @@ obj
 				icon_state=""
 				mouse_drag_pointer = ""
 				density=0
-				maxhold="x5"
 				Description="Kabuto Wari. A legendary sword of the Seven Swordsmen."
+				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -525,6 +528,7 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Kiba. A legendary sword of the Seven Swordsmen"
+				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -543,8 +547,8 @@ obj
 				icon_state=""
 				mouse_drag_pointer = ""
 				density=0
-				maxhold="x5"
 				Description="Nuibari. A legendary sword of the Seven Swordsmen."
+				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -563,6 +567,7 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Shibuki. A legendary sword of the Seven Swordsmen"
+				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return

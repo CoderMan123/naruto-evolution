@@ -492,4 +492,4 @@ client
 					Row++
 					src << output(O,"InventoryWindow.Grid:1,[Row]")
 					src << output("<span style='text-align: right;'>[O.suffix]</span>","InventoryWindow.Grid:2,[Row]")
-					sleep(1)
+					//sleep(1)

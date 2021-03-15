@@ -299,7 +299,6 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -308,8 +307,6 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x603
-		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1180,7 +1177,6 @@ window "InventoryWindow"
 		size = 300x500
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1189,8 +1185,6 @@ window "InventoryWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x514
-		inner-size = 300x500
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1466,8 +1460,6 @@ window "Main"
 		can-resize = false
 		icon = 'Hud\\evo.dmi'
 		macro = "Macro"
-		outer-size = 1294x734
-		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1504,7 +1496,6 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "NavigationPanel"
 		is-vert = false
@@ -1514,7 +1505,6 @@ window "Main"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -1524,7 +1514,6 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -1573,7 +1562,6 @@ window "Main"
 		size = 364x291
 		anchor1 = 57,9
 		anchor2 = 85,48
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -1660,7 +1648,6 @@ window "NavigationPanel"
 		size = 1362x25
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1668,8 +1655,6 @@ window "NavigationPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 1376x39
-		inner-size = 1362x25
 	elem "Navigation"
 		type = LABEL
 		pos = 0,0
@@ -1873,6 +1858,7 @@ window "OutputPanel"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1881,6 +1867,8 @@ window "OutputPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 514x214
+		inner-size = 500x200
 	elem "OutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -1916,6 +1904,7 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1924,6 +1913,8 @@ window "SettingsWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 514x414
+		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1944,6 +1935,20 @@ window "SettingsWindow"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "button3"
+		type = BUTTON
+		pos = 251,51
+		size = 243x22
+		anchor1 = 0,100
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Macros"
+		command = ".options"
+		is-flat = true
 	elem "LeaveVillageButton"
 		type = BUTTON
 		pos = 6,373
@@ -2181,7 +2186,6 @@ window "Titlescreen"
 		size = 1280x720
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2190,8 +2194,6 @@ window "Titlescreen"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 1294x734
-		inner-size = 1280x720
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -2209,7 +2211,6 @@ window "Titlescreen"
 		size = 1280x720
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "mapwindow"
 		is-vert = false
@@ -2318,7 +2319,6 @@ window "mapwindow"
 		size = 1010x675
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -2328,8 +2328,6 @@ window "mapwindow"
 		is-pane = true
 		macro = "macro"
 		menu = "menu"
-		outer-size = 1024x689
-		inner-size = 1010x675
 	elem "map"
 		type = MAP
 		pos = 0,0
