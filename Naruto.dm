@@ -46,10 +46,10 @@ client//the client
 var/full=0
 var/servertype = "Version 1.3.9"
 world
-	name = "Naruto Evolution: The New Era"
+	name = "Project Evolution"
 	hub= "Squigs.NETheNewEra"
 	hub_password = "Ue7DTLSxJx1vnALy"
-	status="<font face= Times New Roman>Loading Configuration..."
+	status="Project Evolution v[global.servertype] | Ninjas Online (Connecting...)"
 
 	mob = /mob/Login
 	view = 16
@@ -63,7 +63,7 @@ world
 			Players=number
 			if(Players>=MaxPlayers)full=1
 			else full=0
-			status="<font face= Times New Roman>NE: The New Era ([Players]/[MaxPlayers]) Server: [global.servertype]"
+			status="Project Evolution v[global.servertype] | Ninjas Online ([Players]/[MaxPlayers])"
 
 proc/RepopWorld()
 	set background=1
