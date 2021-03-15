@@ -2404,6 +2404,8 @@ mob
 							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
 						usr.itemDelete(C)
+						break
+
 			if(usr.equipped=="ExplodeKunais")
 				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				for(var/obj/Inventory/Weaponry/Exploding_Kunai/C in usr.contents)
@@ -2443,6 +2445,8 @@ mob
 							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
 						usr.itemDelete(C)
+						break
+
 			if(usr.equipped=="Kunais")
 				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				for(var/obj/Inventory/Weaponry/Kunai/C in usr.contents)
@@ -2482,6 +2486,8 @@ mob
 							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
 						usr.itemDelete(C)
+						break
+
 			if(usr.equipped=="Needles")
 				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				for(var/obj/Inventory/Weaponry/Needle/C in usr.contents)
@@ -2521,6 +2527,8 @@ mob
 							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
 						usr.itemDelete(C)
+						break
+
 			if(usr.equipped=="ExplosiveTags")
 				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				if(usr.explosivetag<6)
@@ -2570,6 +2578,8 @@ mob
 									A.layer=MOB_LAYER+1
 								step(A,usr.dir)
 							usr.itemDelete(C)
+							break
+
 			if(usr.equipped=="SmokeBombs")
 				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				if(!usr.smokebomb)
@@ -2595,6 +2605,8 @@ mob
 									src.icon_state=""
 									src.RestoreOverlays()
 								spawn(60)if(usr)usr.smokebomb=0
+								break
+
 			if(usr.equipped=="Kubikiribocho")
 				for(var/obj/Inventory/Weaponry/Zabuza_Sword/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
@@ -2607,6 +2619,8 @@ mob
 								M.Bleed()
 						spawn(usr.attkspeed*6)
 							usr.firing=0
+						break
+
 			if(usr.equipped=="Samehada")
 				for(var/obj/Inventory/Weaponry/Samehada/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
@@ -2619,6 +2633,8 @@ mob
 								M.Bleed()
 						spawn(usr.attkspeed*6)
 							usr.firing=0
+						break
+
 			if(usr.equipped=="Hiramekarei")
 				for(var/obj/Inventory/Weaponry/Hiramekarei/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
@@ -2631,6 +2647,8 @@ mob
 								M.Bleed()
 						spawn(usr.attkspeed*6)
 							usr.firing=0
+						break
+
 			if(usr.equipped=="Kabuto Wari")
 				for(var/obj/Inventory/Weaponry/Kabutowari/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
@@ -2643,6 +2661,8 @@ mob
 								M.Bleed()
 						spawn(usr.attkspeed*6)
 							usr.firing=0
+						break
+
 			if(usr.equipped=="Kiba")
 				for(var/obj/Inventory/Weaponry/Kiba/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
@@ -2655,6 +2675,8 @@ mob
 								M.Bleed()
 						spawn(usr.attkspeed*6)
 							usr.firing=0
+						break
+
 			if(usr.equipped=="Nuibari")
 				for(var/obj/Inventory/Weaponry/Nuibari/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
@@ -2667,6 +2689,8 @@ mob
 								M.Bleed()
 						spawn(usr.attkspeed*6)
 							usr.firing=0
+						break
+
 			if(usr.equipped=="Shibuki")
 				for(var/obj/Inventory/Weaponry/Shibuki/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
@@ -2679,6 +2703,8 @@ mob
 								M.Bleed()
 						spawn(usr.attkspeed*6)
 							usr.firing=0
+						break
+
 			if(usr.equipped=="Dark Sword")
 				for(var/obj/Inventory/Weaponry/DarkSword/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
@@ -2690,6 +2716,8 @@ mob
 								M.Bleed()
 						spawn(usr.attkspeed*6)
 							usr.firing=0
+						break
+
 			if(usr.equipped=="Weights")
 				for(var/obj/Inventory/Weaponry/Weights/C in usr.contents)
 					if(usr.firing==0 && usr.dead==0)

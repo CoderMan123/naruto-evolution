@@ -49,7 +49,7 @@ world
 	name = "Project Evolution"
 	hub= "Squigs.NETheNewEra"
 	hub_password = "Ue7DTLSxJx1vnALy"
-	status="Project Evolution v[global.servertype] | Ninjas Online (Connecting...)"
+	status="Project Evolution (Connecting...) | Ninjas Online (Connecting...)"
 
 	mob = /mob/Login
 	view = 16
