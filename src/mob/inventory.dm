@@ -25,7 +25,7 @@ obj
 
 						else if(src.stacks > result[2])
 							src.stacks -= result[2]
-							src.suffix = "x[src.stacks]"
+							if(src.max_stacks > 1) src.suffix = "x[src.stacks]"
 							var/obj/Inventory/O = new src.type(usr.loc)
 							O.stacks = result[2]
 
@@ -58,9 +58,9 @@ mob
 						if(I)
 							while(O.stacks && I.stacks < I.max_stacks)
 								I.stacks++
-								I.suffix = "x[I.stacks]"
+								if(I.max_stacks > 1) I.suffix = "x[I.stacks]"
 								O.stacks--
-								O.suffix = "x[O.stacks]"
+								if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
 								if(O.stacks <= 0) O.loc=null
 
 							if(O.stacks)
@@ -68,10 +68,9 @@ mob
 
 						else
 							src.contents += O
-							O.suffix = "x[O.stacks]"
+							if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
 					else
 						src.contents += O
-						O.suffix = "x[O.stacks]"
 
 					src.client.UpdateInventoryPanel()
 					break
@@ -90,17 +89,16 @@ mob
 				if(I)
 					O.stacks -= I.max_stacks - I.stacks
 					I.stacks = I.max_stacks
-					I.suffix = "x[I.stacks]"
-					O.suffix = "x[O.stacks]"
+					if(I.max_stacks > 1) I.suffix = "x[I.stacks]"
+					if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
 					if(O.stacks <= 0) O.loc=null
 					else src.RecieveItem(O)
 
 				else
 					src.contents += O
-					O.suffix = "x[O.stacks]"
+					if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
 			else
 				src.contents += O
-				O.suffix = "x[O.stacks]"
 
 			src.client.UpdateInventoryPanel()
 
