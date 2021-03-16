@@ -9,9 +9,9 @@ on:
 
 jobs:
   build:
-    - name: Build
       runs-on: ubuntu-latest
       container: tgstation/byond:latest
       steps:
-      - run: |
-        DreamMaker "$GITHUB_WORKSPACE/project-evolution.dme"
+        - name: Build
+          run: |
+            DreamMaker "$GITHUB_WORKSPACE/project-evolution.dme"
