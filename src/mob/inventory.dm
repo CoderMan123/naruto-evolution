@@ -63,14 +63,14 @@ mob
 							var/convert = min(O.stacks, I.max_stacks - I.stacks)
 							O.stacks -= convert
 							I.stacks += convert
-							if(I.max_stacks > 1) I.suffix = "x[I.stacks]"
+							I.suffix = "x[I.stacks]"
 							if(O.stacks <= 0) O.loc=null
 							else src.Pickup()
 
 						else
 							src.contents += new O.type
 							O.stacks--
-							if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
+							O.suffix = "x[O.stacks]"
 							src.Pickup()
 					else
 						src.contents += O
@@ -93,14 +93,14 @@ mob
 					var/convert = min(O.stacks, I.max_stacks - I.stacks)
 					O.stacks -= convert
 					I.stacks += convert
-					if(I.max_stacks > 1) I.suffix = "x[I.stacks]"
+					I.suffix = "x[I.stacks]"
 					if(O.stacks <= 0) O.loc=null
 					else src.RecieveItem(O)
 
 				else
 					src.contents += new O.type
 					O.stacks--
-					if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
+					O.suffix = "x[O.stacks]"
 					src.RecieveItem(O)
 			else
 				src.contents += O
@@ -110,3 +110,25 @@ mob
 		DropItem(obj/Inventory/O, var/quantity=1)
 
 		DestroyItem(obj/Inventory/O, var/quantity=1)
+			if(O.max_stacks > 1)
+				var/obj/Inventory/I
+				for(I in src.contents)
+					if(I.type == O.type)
+						if(I.stacks >= I.max_stacks) continue
+						else break
+				if(I)
+					if(quantity > I.max_stacks - I.stacks)
+						quantity -= I.max_stacks - I.stacks
+						I.loc=null
+						src.DestroyItem(O, quantity)
+					else
+						I.stacks -= quantity
+						I.suffix = "x[I.stacks]"
+						if(I.stacks <= 0)
+							I.loc=null
+				else
+					O.loc=null
+			else
+				O.loc=null
+
+			src.client.UpdateInventoryPanel()
