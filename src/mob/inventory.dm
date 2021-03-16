@@ -4,6 +4,10 @@ obj
 		var/stacks=1
 		var/tmp/max_stacks=1
 		var/equip=0
+		New()
+			..()
+			if(src.max_stacks > 1) src.suffix = "x[src.stacks]"
+
 		verb
 			Drop()
 				set category = null
@@ -56,19 +60,18 @@ mob
 								if(I.stacks >= I.max_stacks) continue
 								else break
 						if(I)
-							while(O.stacks && I.stacks < I.max_stacks)
-								I.stacks++
-								if(I.max_stacks > 1) I.suffix = "x[I.stacks]"
-								O.stacks--
-								if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
-								if(O.stacks <= 0) O.loc=null
-
-							if(O.stacks)
-								src.Pickup(O)
+							var/convert = min(O.stacks, I.max_stacks - I.stacks)
+							O.stacks -= convert
+							I.stacks += convert
+							if(I.max_stacks > 1) I.suffix = "x[I.stacks]"
+							if(O.stacks <= 0) O.loc=null
+							else src.Pickup()
 
 						else
-							src.contents += O
+							src.contents += new O.type
+							O.stacks--
 							if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
+							src.Pickup()
 					else
 						src.contents += O
 
@@ -79,7 +82,7 @@ mob
 				src << output("Your satchel is too full to carry anymore.","ActionPanel.Output")
 
 	proc
-		RecieveItem(obj/Inventory/O)
+		RecieveItem(var/obj/Inventory/O)
 			if(O.max_stacks > 1)
 				var/obj/Inventory/I
 				for(I in src.contents)
@@ -87,16 +90,18 @@ mob
 						if(I.stacks >= I.max_stacks) continue
 						else break
 				if(I)
-					O.stacks -= I.max_stacks - I.stacks
-					I.stacks = I.max_stacks
+					var/convert = min(O.stacks, I.max_stacks - I.stacks)
+					O.stacks -= convert
+					I.stacks += convert
 					if(I.max_stacks > 1) I.suffix = "x[I.stacks]"
-					if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
 					if(O.stacks <= 0) O.loc=null
 					else src.RecieveItem(O)
 
 				else
-					src.contents += O
+					src.contents += new O.type
+					O.stacks--
 					if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
+					src.RecieveItem(O)
 			else
 				src.contents += O
 
