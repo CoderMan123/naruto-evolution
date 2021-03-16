@@ -395,7 +395,7 @@ mob/Login
 			NavigationPanel.ExpLockButton.is-disabled = false
 		"})
 		M<<"Now speaking in: [M.client.channel]."
-		spawn(30)if(M)M.ASave()
+
 	verb/CreateCharacter()
 		set hidden=1
 		if(src.client)
@@ -640,7 +640,6 @@ mob/Login
 								Main.Child.right=mapwindow;
 							"})
 				M<<"Now speaking in: [M.client.channel]."
-				spawn(30)if(M)M.ASave()
 
 				TotalPlayers.Add(M)
 				for(var/client/A in world)
@@ -916,10 +915,6 @@ mob/player
 			return
 		del(src)
 		..()
-mob/proc/ASave()
-	while(src)
-		Save()
-		sleep(600*3)//Three minutes to save periodically!
 
 mob
 	proc
@@ -954,10 +949,10 @@ mob
 		F >> dir
 		F.cd = ocd
 		return .
-/*mob/player
+mob/player
 	Del()
-		Logout()
-		..()*/
+		src.Save()
+		..()
 mob
 	verb
 		CloseBrowser()
