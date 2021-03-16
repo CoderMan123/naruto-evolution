@@ -1,0 +1,17 @@
+name: Build
+
+on:
+  push:
+    branches: [ master, develop, master-v1, develop-v1 ]
+  pull_request:
+    branches: [ master, develop, master-v1, develop-v1 ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    - name: Build
+      runs-on: ubuntu-latest
+      container: tgstation/byond:latest
+      steps:
+      - run: |
+        DreamMaker "$GITHUB_WORKSPACE/project-evolution.dme"

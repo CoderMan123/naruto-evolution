@@ -1,4 +1,5 @@
-![Pipeline Status](https://git.douglas-parker.com/lavenblade/project-evolution/badges/master-v1/pipeline.svg)
+![Build](https://github.com/lavenblade/project-evolution/actions/workflows/build.yml/badge.svg)
+![Deploy](https://github.com/lavenblade/project-evolution/actions/workflows/deploy.yml/badge.svg)
 
 # Project Evolution
 
