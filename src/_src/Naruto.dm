@@ -1,4 +1,4 @@
-#define WORLD_SAVE "World.sav"
+#define WORLD_SAVE "saves/world/world.sav"
 
 var/list/Badwords = list("byond://","www.","http://","\n")
 var/const/allowed_characters_name = "abcdefghijklmnopqrstuvwxyz' "// removed >> and . from name creation because it can fuck our verbs. specifically edit, checkstats, boot, ban, etc.
@@ -17,7 +17,7 @@ proc/ffilter_characters(var/string, var/allowed = allowed_characters_name)
 proc/hasSavefile(var/ckey)
 	ckey=lowertext(ckey)
 	var/letter = copytext(ckey,1,2)
-	return fexists("Players/[letter]/[ckey].sav")
+	return fexists("saves/characters/[letter]/[ckey].sav")
 proc/uppercase(var/string, var/pos=1)
 	if(!string || !pos) return
 	return uppertext(copytext(string, pos, pos+1))+copytext(string, pos+1)
@@ -92,7 +92,7 @@ mob
 //	return pick(MapLoadSpawn)
 world
 	New()
-		log = file("Errorlog.txt")
+		log = file("logs/error.txt")
 //		spawn(10) RepopWorld()
 		spawn(10) GeninExam()
 		spawn(10) ChuuninExam()
@@ -198,7 +198,7 @@ mob/Login
 				client.Alert("The account \"[LoginID]\" is already logged in.", "Login Error")
 				return
 		if(hasSavefile(LoginID))
-			var/savefile/F = new("Players/[lowertext(letter)]/[lowertext(LoginID)].sav")
+			var/savefile/F = new("saves/characters/[lowertext(letter)]/[lowertext(LoginID)].sav")
 			var/reason
 			if(!LoginID || !LoginPW)
 				reason = "Please enter both an account ID and password."
@@ -262,7 +262,7 @@ mob/Login
 				if(M.client.address==src.client.address&&src.client.computer_id==M.client.computer_id)Ticked=1
 			if(Ticked)
 				world<<"[t1] and [t2] are the same person. We do not allow multikeys."
-				text2file("usr: [usr], ckey: [ckey], t1.name: [t1.name], t2.ckey: [t2.ckey] Tried to multikey.(I don't know which of these might work: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+				text2file("usr: [usr], ckey: [ckey], t1.name: [t1.name], t2.ckey: [t2.ckey] Tried to multikey.(I don't know which of these might work: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
 				sleep(10)
 				del(src)
 
@@ -456,7 +456,7 @@ mob/Login
 			if(!istext(M.Password))
 				M.Password="[M.Password]"
 			M.Password = md5("[M.Password][M.Password][M.Password][M.Password][M.Password]")
-			//var/savefile/F = new("Players/[lowertext(copytext(M.name,1,2))]/[lowertext(M.name)].sav")
+			//var/savefile/F = new("saves/characters/[lowertext(copytext(M.name,1,2))]/[lowertext(M.name)].sav")
 			//F["Password"] = Password
 			if(M)
 				M.name = uppercase(M.name, 1)
@@ -927,7 +927,7 @@ mob/proc/ASave()
 mob
 	proc
 		Save()
-			var/savefile/F = new/savefile("Players/[copytext(Logins,1,2)]/[Logins].sav")
+			var/savefile/F = new/savefile("saves/characters/[copytext(Logins,1,2)]/[Logins].sav")
 			F["Password"] = Password
 			F << src
 			//src << output("Game saved successfully.", "ActionPanel.Output")

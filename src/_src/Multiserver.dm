@@ -15,7 +15,7 @@ world/Topic(T,Addr)
 		if("savefile")
 			var/savefile/F = topic["savefile"]
 			var/LoginID=topic["LoginID"]
-			fcopy(F,"Players/[copytext(LoginID,1,2)]/[LoginID].sav")
+			fcopy(F,"saves/characters/[copytext(LoginID,1,2)]/[LoginID].sav")
 
 proc/SendServerTopic(dowhat, params)
 	params["dowhat"] = dowhat

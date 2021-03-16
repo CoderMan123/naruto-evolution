@@ -1,13 +1,7 @@
 backup/
-Ban/
-Players/
-Saves/
+logs/
+saves/
 *.dmb
 *.int
 *.lk
 *.rsc
-Errorlog.txt
-GMLog.txt
-HostKey.txt
-KillLog.txt
-World.sav

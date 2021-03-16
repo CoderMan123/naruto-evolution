@@ -23,5 +23,5 @@ proc
 
 	CheckHost()
 		set background=1
-		if(!fexists("HostKey.txt"))
-			text2file("This text file is to give the host admin verbs. Remove ALL text from this file and put your byond Key in lowercase letters.","HostKey.txt")
+		if(!fexists("saves/host/host.txt"))
+			text2file("This text file is to give the host admin verbs. Remove ALL text from this file and put your byond Key in lowercase letters.","saves/host/host.txt")

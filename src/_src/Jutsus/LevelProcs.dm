@@ -371,7 +371,7 @@ mob
 							X.KillCombo++
 						if(X.village==src.village&&X.village!="Missing-Nin"&&src.village!="Missing-Nin")
 							world<<output("[src] was knocked out by [X], and they were both from the [src.village]!","ActionPanel.Output")
-							//text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","KillLog.txt")
+							//text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/kills.txt")
 							if(X.village == "Missing-Nin"|| X.village == "Seven Swordsmen"||X.village=="Akatsuki"||X.village=="Anbu Root") goto MissSkip
 							if(loc in block(locate(71,95,4),locate(200,163,4))) goto chuuninskip
 							X.exp-=round(X.exp*0.5)
@@ -383,7 +383,7 @@ mob
 								X<<output("Careful! Killing your villagers will get you kicked from the village. ([X.Vkill]/5)","ActionPanel.Output")
 							else //if(X.CheckVkill())
 								world<<output("[X] has been booted from [X.village] for village killing!","ActionPanel.Output")
-								text2file("[X] has been booted from [X.village] for village killing: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","GMLog.txt")
+								text2file("[X] has been booted from [X.village] for village killing: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
 
 								X.village="Missing-Nin"
 								X.rank="Missing-Nin"
@@ -393,7 +393,7 @@ mob
 							X.KillCombo=0
 
 						else world<<output("[src] was knocked out by [X]!","ActionPanel.Output")
-						text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","KillLog.txt")//Kill Log test
+						text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/kills.txt")//Kill Log test
 						src<<output("You were knocked out by [X].","ActionPanel.Output")
 						X.levelrate+=2
 						X.exp+=rand(3,(X.levelrate))
