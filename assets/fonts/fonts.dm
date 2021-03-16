@@ -1,1 +1,1 @@
-var/list/font_resources = list('Fonts/Open Sans/OpenSans-Regular.ttf')
+var/list/font_resources = list('assets/fonts/open-sans/OpenSans-Regular.ttf')
