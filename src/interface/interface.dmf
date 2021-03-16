@@ -299,6 +299,7 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -307,6 +308,8 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x603
+		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -883,7 +886,6 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = ""
-		image = 'Interface\\Symbols\\Academy-Student.png'
 	elem "label11"
 		type = LABEL
 		pos = 75,72
@@ -898,7 +900,6 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = ""
-		image = 'Interface\\Symbols\\Leaf.png'
 	elem "label10"
 		type = LABEL
 		pos = 143,72
@@ -962,7 +963,6 @@ window "Character"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
 		command = "ToggleCharacterPanel"
 		is-flat = true
 	elem "label2"
@@ -1648,6 +1648,7 @@ window "NavigationPanel"
 		size = 1362x25
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1655,6 +1656,8 @@ window "NavigationPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 1376x39
+		inner-size = 1362x25
 	elem "Navigation"
 		type = LABEL
 		pos = 0,0
@@ -1667,13 +1670,13 @@ window "NavigationPanel"
 		text = ""
 	elem "ExpLockButton"
 		type = BUTTON
-		pos = 951,3
-		size = 100x22
+		pos = 966,0
+		size = 100x25
 		anchor1 = 100,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		is-disabled = true
 		border = line
 		saved-params = "is-checked"
@@ -1682,13 +1685,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "ArenaButton"
 		type = BUTTON
-		pos = 1053,3
-		size = 100x22
+		pos = 1065,0
+		size = 100x25
 		anchor1 = 100,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Arena Challenge"
@@ -1696,13 +1699,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "LeaderButton"
 		type = BUTTON
-		pos = 889,3
-		size = 60x22
+		pos = 907,0
+		size = 60x25
 		anchor1 = 100,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		is-disabled = true
 		border = line
 		saved-params = "is-checked"
@@ -1711,13 +1714,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "BingoBookButton"
 		type = BUTTON
-		pos = 1155,3
-		size = 70x22
+		pos = 1164,0
+		size = 70x25
 		anchor1 = 100,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Bingo Book"
@@ -1725,13 +1728,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "FactionButton"
 		type = BUTTON
-		pos = 375,3
-		size = 60x22
+		pos = 354,0
+		size = 60x25
 		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		is-disabled = true
 		border = line
 		saved-params = "is-checked"
@@ -1740,13 +1743,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "SquadButton"
 		type = BUTTON
-		pos = 313,3
-		size = 60x22
+		pos = 295,0
+		size = 60x25
 		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Squad"
@@ -1754,13 +1757,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "ChangelogButton"
 		type = BUTTON
-		pos = 1227,3
-		size = 70x22
+		pos = 1233,0
+		size = 70x25
 		anchor1 = 100,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Changelog"
@@ -1768,13 +1771,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "WhoButton"
 		type = BUTTON
-		pos = 127,3
-		size = 60x22
+		pos = 118,0
+		size = 60x25
 		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Who"
@@ -1782,13 +1785,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "SettingsButton"
 		type = BUTTON
-		pos = 1299,3
-		size = 60x22
+		pos = 1302,0
+		size = 60x25
 		anchor1 = 100,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Settings"
@@ -1796,13 +1799,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "SkillTreeButton"
 		type = BUTTON
-		pos = 251,3
-		size = 60x22
+		pos = 236,0
+		size = 60x25
 		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Skill Tree"
@@ -1810,13 +1813,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "JutsusButton"
 		type = BUTTON
-		pos = 189,3
-		size = 60x22
+		pos = 177,0
+		size = 60x25
 		anchor1 = 0,0
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Jutsus"
@@ -1824,13 +1827,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "ChatButton"
 		type = BUTTON
-		pos = 3,3
-		size = 60x22
+		pos = 0,0
+		size = 60x25
 		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Chat"
@@ -1838,13 +1841,13 @@ window "NavigationPanel"
 		is-flat = true
 	elem "ChannelButton"
 		type = BUTTON
-		pos = 65,3
-		size = 60x22
+		pos = 59,0
+		size = 60x25
 		anchor1 = 0,100
 		anchor2 = none
 		font-family = "Open Sans"
 		text-color = #c8c8c8
-		background-color = #555555
+		background-color = #414141
 		border = line
 		saved-params = "is-checked"
 		text = "Channel"

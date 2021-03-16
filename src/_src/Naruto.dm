@@ -149,7 +149,7 @@ obj
 			pixel_x=15
 			layer=TURF_LAYER+1
 client
-	mouse_pointer_icon='mousepointer.dmi'
+	mouse_pointer_icon='VillageSymbols.dmi'
 	//lazy_eye = 5
 	//mouse_over_pointer='pointero.dmi'
 //	Stat()
