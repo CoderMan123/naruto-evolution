@@ -18,5 +18,4 @@ git checkout <branch>
 3) Initialize and checkout submodules:
 ```sh
 git submodule init
-git submodule update --recursive
 ```
