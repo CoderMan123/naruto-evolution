@@ -1,0 +1,6 @@
+[submodule "lib/lavenblade/interface-input"]
+	path = lib/lavenblade/interface-input
+	url = https://github.com/lavenblade/interface-input.git
+[submodule "lib/lavenblade/interface-query"]
+	path = lib/lavenblade/interface-query
+	url = https://github.com/lavenblade/interface-input.git
