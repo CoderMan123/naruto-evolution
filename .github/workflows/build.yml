@@ -12,6 +12,7 @@ jobs:
       runs-on: ubuntu-latest
       container: tgstation/byond:latest
       steps:
+        - uses: actions/checkout@v2
         - name: Build
           run: |
             DreamMaker "$GITHUB_WORKSPACE/project-evolution.dme"
