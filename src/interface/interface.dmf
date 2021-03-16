@@ -112,7 +112,7 @@ macro "Macro"
 		command = "ThrowMob"
 	elem 
 		name = "G"
-		command = "Get"
+		command = "Pickup"
 	elem 
 		name = "I"
 		command = "ToggleInventoryPanel"
@@ -1858,7 +1858,6 @@ window "OutputPanel"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1867,8 +1866,6 @@ window "OutputPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 514x214
-		inner-size = 500x200
 	elem "OutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -1904,7 +1901,6 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1913,8 +1909,6 @@ window "SettingsWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21

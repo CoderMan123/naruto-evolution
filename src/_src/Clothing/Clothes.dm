@@ -54,12 +54,9 @@ obj/proc/take(mob/M)
 		M<<output("You're dead.","ActionPanel.Output")
 		return
 	hearers()<<output("[M] picks up [src].","ActionPanel.Output")
-	M.itemAdd(src)
+	M.RecieveItem(src)
 	M.client.UpdateInventoryPanel()
-obj/proc/drop(mob/M)
-	if(usr.dead) return
-	M.itemDrop(src)
-	hearers()<<output("[M] drops [src].","ActionPanel.Output")
+
 mob
 	var
 		Mask
@@ -110,7 +107,7 @@ obj
 				if(get_dist(usr,src)<=1)
 					//if(over_control == "mapwindow.map"&&src_control=="Inventory.InvenInfo")
 					if(usr.contents.Find(src))
-						drop(usr)
+						src.Drop(usr)
 						return
 			Click()
 				if(get_dist(src,usr)>1) return

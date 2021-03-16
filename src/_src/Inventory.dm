@@ -6,61 +6,7 @@ proc
 			l = copytext(msg,i,i+1)
 			if(l != "_" && l != " ")Nmsg += l
 		return Nmsg
-mob
-	var
-		items=0
-		maxitems=25
-		equipped
-mob/proc
-	itemDrop(obj/o)
-		if(o.canStack && o.contents.len)
-			var/obj/theItem=pick(o.contents)
-			theItem.loc=src.loc
-			if(o.contents.len)o.suffix="x[o.contents.len+1]"
-			else o.suffix="x1"
-		else
-			o.loc=src.loc
-			src.items-=1
-			if(items<=0) items=0
-			o.suffix=""
-		src.client.UpdateInventoryPanel()
-	itemDelete(obj/o)
-		if(o.canStack && o.contents.len)
-			var/obj/theItem=pick(o.contents)
-			del(theItem)
-			if(o.contents.len)o.suffix="x[o.contents.len+1]"
-			else o.suffix="x1"
-		else
-			src.items-=1
-			if(items<=0) items=0
-			del(o)
-		src.client.UpdateInventoryPanel()
-	itemAdd(obj/o)
-		var/list/items=list()
-		for(var/obj/i in src.contents)items+=i.type
-		if(o.type in items) //if a similar item is found in the contents
-			if(o.canStack)
-				var/obj/theItem
-				for(var/obj/i in src.contents) if(i.type == o.type) theItem=i
-				if(theItem)
-					if(theItem.suffix<>"[o.maxhold]")
-						theItem.contents+=o
-						theItem.suffix="x[theItem.contents.len+1]"
-					else
-						src.contents+=o
-						o.suffix="x1"
-						src.items+=1
-				else
-					src.contents+=o
-					o.suffix="x1"
-			else
-				src.contents+=o
-				src.items+=1
-		else
-			src.contents+=o
-			src.items+=1
-			o.suffix="[o.canStack ? "x1" : "[o.suffix]"]"
-		//src.client.UpdateInventoryPanel()
+
 obj/RyoBag
 	icon='Ryo bills.dmi'
 	icon_state="owned"
@@ -90,48 +36,8 @@ mob
 				O.Worth=AlertInput[2]
 				src.client.UpdateInventoryPanel()
 				src << output("You drop [AlertInput[2]] Ryo.","ActionPanel.Output")
-			Get()
-				set hidden=1
-				for(var/obj/Inventory/O in view(usr,1))
-					if(O in get_step(usr,usr.dir))
-						if(O.loc<>usr&&usr.dead==0)
-							if(usr.items<usr.maxitems)
-								//usr << sound('GunMisc/AmmoPUMG.ogg',0,0,7,100)
-								//if(istype(O,/obj/Inventory/Clothing))
-								//	usr.Clothes+=O
-								//	usr.Clothes+=O.type
-								//	O.loc=0
-								//else
-								itemAdd(O)
-								src.client.UpdateInventoryPanel()
-								break
-							else
-								usr << sound('cant.ogg',0,0,7,100)
-								var/random=rand(1,3)
-								if(random==1)
-									usr << output("<font face=Arial><i>Your inventory is maxed already.","ActionPanel.Output")
-					else
-						if(O in view(usr,1))
-							if(O.loc<>usr&&usr.dead==0)
-								if(usr.items<usr.maxitems)
-									//usr << sound('GunMisc/AmmoPUMG.ogg',0,0,7,100)
-									//if(istype(O,/obj/Inventory/Clothing))
-									//	usr.Clothes.Add(O)
-									//	usr.Clothes.Add(O.type)
-									//else
-									itemAdd(O)
-									src.client.UpdateInventoryPanel()
-									break
-								else
-									usr << sound('cant.ogg',0,0,7,100)
-									var/random=rand(1,3)
-									if(random==1)usr << output("<font face=Arial><i>Your inventory is maxed already.","ActionPanel.Output")
+
 obj
-	var
-		canStack=0
-		equip=0
-		maxhold=1
-		Description="No description provided."
 	Inventory
 		mouse_opacity=2
 		//verb
@@ -143,7 +49,7 @@ obj
 		//			//	usr.Clothes.Add(src)
 		//			//	usr.Clothes.Add(src.type)
 		//			//else
-		//			usr.itemAdd(src)
+		//			usr.RecieveItem(src)
 		//			src.client.UpdateInventoryPanel()
 		//	Drop()
 		//		set src in usr.contents
@@ -162,7 +68,7 @@ obj
 			if(get_dist(usr,src)<=1)
 				//if(over_control == "mapwindow.map"&&src_control=="Inventory.InvenInfo")
 				if(usr.contents.Find(src)&&!src.equip)
-					drop(usr)
+					src.Drop(usr)
 					return
 //			if(usr.contents.Find(src))
 //				if(!src.equip)
@@ -181,19 +87,18 @@ obj
 					//	usr.Clothes.Add(src)
 					//	usr.Clothes.Add(src.type)
 					//else
-				usr.itemAdd(src)
+				usr.RecieveItem(src)
 				usr.client.UpdateInventoryPanel()
 				return
 			..()
 		Weaponry
-			canStack=1
 			Shuriken
 				name="Shuriken"
 				icon='Shuriken.dmi'
 				icon_state="shuriS"
 				mouse_drag_pointer = "shuriS"
 				density=0
-				maxhold="x10000"
+				max_stacks=10000
 				Description="It's a sharp pointed throwing star made of a hard steel. It could be deadly if thrown. It looks as though it's worth about 5 Ryo if you were to sell it to a common merchant."
 				damage=5
 				Cost=5
@@ -218,7 +123,7 @@ obj
 				icon_state="needleS"
 				mouse_drag_pointer = "needleS"
 				density=0
-				maxhold="x10000"
+				max_stacks=10000
 				Description="A sharp medical precise needle. The tip appears to be extremely sharp, and could cause severe damage to precise points on the human body if thrown, or even applied. It looks as though it's only worth 3 Ryo."
 				damage=3
 				Cost=3
@@ -243,7 +148,7 @@ obj
 				icon_state="kunaiS"
 				mouse_drag_pointer = "kunaiS"
 				density=0
-				maxhold="x10000"
+				max_stacks=10000
 				Description="A hard steel field knife. The tip is sharp enough to peirce flesh, as well as many other practical uses in the field. There is a loop at the end for auxillary use, or as a finger grip. It looks to be worth about 7 Ryo."
 				damage=10
 				Cost=7
@@ -268,7 +173,7 @@ obj
 				icon_state="kunaist"
 				mouse_drag_pointer = "kunaist"
 				density=0
-				maxhold="x10000"
+				max_stacks=10000
 				Cost=10
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -291,7 +196,7 @@ obj
 				icon_state="tag"
 				mouse_drag_pointer = "tag"
 				density=0
-				maxhold="x10000"
+				max_stacks=10000
 				Description="A hard paper-like material embued with kanji markings on the front. It is made with explosive paper, and if one were to embue their chakra into it, they could detonate it at will. It seems to be worth about 5 Ryo."
 				damage=40
 				Cost=5
@@ -316,7 +221,7 @@ obj
 				icon_state="spill"
 				mouse_drag_pointer = "spill"
 				density=0
-				maxhold="x5"
+				max_stacks=100
 				Cost=15000
 				var/lol=0
 				Click()
@@ -347,7 +252,7 @@ obj
 				icon_state="cpill"
 				mouse_drag_pointer = "cpill"
 				density=0
-				maxhold="x5"
+				max_stacks=100
 				Cost=15000
 				var/lol=0
 				Click()
@@ -380,7 +285,7 @@ obj
 				icon_state="sbomb"
 				mouse_drag_pointer = "sbomb"
 				density=0
-				maxhold="x10000"
+				max_stacks=10000
 				Description="A darkened sphere, containing large condensed amounts of gas. It is wired to a pressure activation system, and could be useful to make a quick escape if thrown. It seems to be worth about 5 Ryo."
 				Cost=5
 				Click()
@@ -400,7 +305,6 @@ obj
 			MadaraFan
 				Description="THIS ITEM WILL BE SOON CHANGED  -Vik"
 				icon='MadaraFan.dmi'
-				maxhold="x1"
 				Click()
 					if(!usr.contents.Find(src)) return
 					usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
@@ -432,7 +336,6 @@ obj
 				mouse_drag_pointer = "standing"
 				density=0
 				Description="Dark Sword. A legendary sword of the Dark Shinobi."
-				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -451,7 +354,6 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Samehada. A legendary sword of the Seven Swordsmen"
-				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -471,7 +373,6 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Kubukiribocho. A legendary sword of the Seven Swordsmen."
-				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -490,7 +391,6 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Hiramekarei. A legendary sword of the Seven Swordsmen"
-				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -509,7 +409,6 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Kabuto Wari. A legendary sword of the Seven Swordsmen."
-				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -528,7 +427,6 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Kiba. A legendary sword of the Seven Swordsmen"
-				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -548,7 +446,6 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Nuibari. A legendary sword of the Seven Swordsmen."
-				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -567,7 +464,6 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Shibuki. A legendary sword of the Seven Swordsmen"
-				maxhold="x1"
 				Cost=5000
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -586,7 +482,6 @@ obj
 				mouse_drag_pointer = ""
 				density=0
 				Description="Weights. Training weights used to raise ones own Agi."
-				maxhold="x1"
 				Cost = 1000
 				Click()
 					if(!usr.contents.Find(src)) return

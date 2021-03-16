@@ -121,7 +121,7 @@ obj/Inventory/JutsuMastScroll
 			//if(over_control == "mapwindow.map"&&src_control=="Inventory.InvenInfo")
 			if(inuse)return
 			if(usr.contents.Find(src))
-				drop(usr)
+				src.Drop(usr)
 				return
 
 
@@ -151,7 +151,7 @@ obj/Inventory/JutsuMastScroll
 				J.Levelup()
 				J.exp = J.maxexp
 				J.Levelup()
-				usr.itemDelete(src)
+				usr.DestroyItem(src)
 				inuse=0
 
 			else

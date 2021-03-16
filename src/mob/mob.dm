@@ -1,4 +1,8 @@
 mob
+	var
+		items=0
+		maxitems=25
+		equipped
 	verb
 		Say(msg as text)
 			set hidden=1

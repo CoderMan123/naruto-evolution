@@ -2403,7 +2403,7 @@ mob
 							A.fightlayer=usr.fightlayer
 							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
-						usr.itemDelete(C)
+						usr.DestroyItem(C)
 						break
 
 			if(usr.equipped=="ExplodeKunais")
@@ -2444,7 +2444,7 @@ mob
 							A.fightlayer=usr.fightlayer
 							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
-						usr.itemDelete(C)
+						usr.DestroyItem(C)
 						break
 
 			if(usr.equipped=="Kunais")
@@ -2485,7 +2485,7 @@ mob
 							A.fightlayer=usr.fightlayer
 							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
-						usr.itemDelete(C)
+						usr.DestroyItem(C)
 						break
 
 			if(usr.equipped=="Needles")
@@ -2526,7 +2526,7 @@ mob
 							A.fightlayer=usr.fightlayer
 							A.damage=C.damage+round(usr.strength/3)
 							walk(A,usr.dir)
-						usr.itemDelete(C)
+						usr.DestroyItem(C)
 						break
 
 			if(usr.equipped=="ExplosiveTags")
@@ -2577,7 +2577,7 @@ mob
 									A.pixel_y+=rand(8,10)
 									A.layer=MOB_LAYER+1
 								step(A,usr.dir)
-							usr.itemDelete(C)
+							usr.DestroyItem(C)
 							break
 
 			if(usr.equipped=="SmokeBombs")
@@ -2597,7 +2597,7 @@ mob
 								for(var/mob/M in oview(usr))
 									M.Target_Remove()
 								usr.Step_Back()
-								usr.itemDelete(C)
+								usr.DestroyItem(C)
 								spawn(5)if(usr)usr.firing=0
 								spawn(40)if(src)
 									src.UpdateHMB()

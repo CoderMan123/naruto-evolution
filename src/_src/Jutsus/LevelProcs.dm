@@ -496,7 +496,7 @@ mob
 													M.Levelup()
 										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
 										//M.Mission=null
-										for(var/obj/MissionObj/O in M)M.itemDelete(O)
+										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","ActionPanel.Output")
 								X.Ryo+=MissionRyo
@@ -570,7 +570,7 @@ mob
 													M.Levelup()
 										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
 										//M.Mission=null
-										for(var/obj/MissionObj/O in M)M.itemDelete(O)
+										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","ActionPanel.Output")
 								X.Ryo+=MissionRyo
@@ -629,7 +629,7 @@ mob
 													M.Levelup()
 										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
 										//M.Mission=null
-										for(var/obj/MissionObj/O in M)M.itemDelete(O)
+										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","ActionPanel.Output")
 								X.Ryo+=MissionRyo
