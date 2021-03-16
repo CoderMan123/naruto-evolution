@@ -3,7 +3,7 @@ var/list/MasterGMs = list("squigs" , "rootabyss", "illusiveblair", "lavenblade")
 var/list/Admins = list("reformist")//,
 var/list/Moderators = list("raunts61")//"kensei_hirako","kenseihirako","FlyBoyEd","qwestizero"
 var/list/PArtists = list("illusiveblair")//,"punkykick"
-var/HostKey = file("saves/host/host.txt")
+var/HostKey = file(CFG_HOST)
 
 mob/var/
 	canteleport = 1
@@ -136,12 +136,12 @@ mob/Moderator/verb/
 			if(O.name=="area")
 				if(src:key!="Squigs")
 					usr<<"You are not allowed to delete the area anymore!"
-					text2file("[usr] tried to delete [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+					text2file("[usr] tried to delete [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 					return
 			else
 				if(alert("Are you sure you want to delete the Atom [O.name]?","Confirm!","No","Yes")=="Yes")
-					text2file("[usr] deleted [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+					text2file("[usr] deleted [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 					del(O)
 		else del(O)
 	Start_Chuunin_Exam()
@@ -223,7 +223,7 @@ mob/Moderator/verb/
 			for(var/mob/player/M in TotalPlayers)
 				if(!Admins.Find(M.ckey)&&!MasterGMs.Find(M.ckey)&&!Moderators.Find(M.ckey)) continue
 				M<<"<font color=yellow> GM| [src.rname]:</font>[html_encode(c)]"
-			text2file("GM>>[src.rname]:</font> [html_encode(c)]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+			text2file("GM>>[src.rname]:</font> [html_encode(c)]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		else
 			src<<"Please do not use more than 250 characters."
 			src<<"Message was <i>[c]</i>"
@@ -233,11 +233,11 @@ mob/Moderator/verb/
 		set category="Staff"
 		if(M.key=="Squigs")
 			world<<"[src] tried to boot [M] and was auto-kicked."
-			text2file("[src]([src.key]) tried to boot [M][M.key] but failed.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+			text2file("[src]([src.key]) tried to boot [M][M.key] but failed.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 			usr.Logout()
 		else
 			world<<"[src] booted [M]."
-			text2file("[src]([src.key]) booted [M]([M.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+			text2file("[src]([src.key]) booted [M]([M.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 			M.Logout()
 
 	Mute(mob/M in TotalPlayers)
@@ -245,12 +245,12 @@ mob/Moderator/verb/
 		set name = "Mute/Unmute"
 		if(M.key=="Squigs")
 			world<<"[usr] tried to mute [M]..."
-			text2file("[usr]([src.key]) tried to mute [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+			text2file("[usr]([src.key]) tried to mute [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 			return
 		if(!M.Muted)
 			var/howlong=input("How long for? (Minutes)","Mute") as num
 			world<<"[M] has been muted by [src] for [howlong] minutes."
-			text2file("[M]([M.key]) was muted by [src]([src.key]) for [howlong]min.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+			text2file("[M]([M.key]) was muted by [src]([src.key]) for [howlong]min.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 			howlong*=600
 			M.Muted=1
 			M.MuteTime=howlong
@@ -281,7 +281,7 @@ mob/Moderator/verb/
 			var/timer = input("How many minutes should they be jailed?") as num
 			var/Offence = input(" What are you jailing [M] for?")as text
 			world<<"[M] has been jailed for [timer] Minutes! Reason:[Offence]"
-			text2file("[usr]([src.key]) jailed [M]([M.key]) for [timer]min for [Offence].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+			text2file("[usr]([src.key]) jailed [M]([M.key]) for [timer]min for [Offence].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 			spawn(timer*600)
 				if(M.jailed)
 					M.xplock=0
@@ -296,7 +296,7 @@ mob/Moderator/verb/
 	Reboot()
 		set category="Staff"
 		world<<output("World is rebooting.","ActionPanel.Output")
-		text2file("[usr]([src.key]) rebooted.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[usr]([src.key]) rebooted.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Save()
 		world.Reboot()
 
@@ -312,7 +312,7 @@ mob/Admin/verb
 		world<<"<center><b>---------------------------------</b></center>"
 		world<<"<center><b>Announcement from [src]</b><br><br>[t]</b></font></center></p></br></b></center>"
 		world<<"<center><b>---------------------------------</b></center>"
-		text2file("[src]([src.key]) announced [t].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[src]([src.key]) announced [t].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 	Staff_Who()
 		set category = "Staff"
@@ -360,7 +360,7 @@ mob/Admin/verb
 					"})
 	Get_ErrorLog()
 		set category = "Staff"
-		var/ErLog = file("logs/error.txt")
+		var/ErLog = file(LOG_ERROR)
 		usr << browse(ErLog)
 		winset(src, null, {"
 						BrowserWindow.is-visible = "true";
@@ -368,7 +368,7 @@ mob/Admin/verb
 
 	Get_KillLog()
 		set category = "Staff"
-		var/killlog = file("logs/kills.txt")
+		var/killlog = file(LOG_KILLS)
 		usr << browse(killlog)
 		winset(src, null, {"
 						BrowserWindow.is-visible = "true";
@@ -383,7 +383,7 @@ mob/Admin/verb
 		switch(Position)
 			if("Akatsuki Leader")
 				M<<"You now lead the Akatsuki."
-				text2file("[M]([M.key]) was promoted to Akat by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[M]([M.key]) was promoted to Akat by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				new/obj/Inventory/Clothing/Robes/Akatsuki_Robe(M)
 				//new/obj/Inventory/Weaponry/MadaraFan(M) // Fan is bug-able and is also OP.
 				new/obj/Inventory/Clothing/HeadWrap/TobiMask(M)
@@ -391,12 +391,12 @@ mob/Admin/verb
 				M.village="Akatsuki"
 			if("Seven Swordsmen Leader")
 				M<<"You now lead the Seven Swordsmen."
-				text2file("[M]([M.key]) was promoted to 7sm lead by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[M]([M.key]) was promoted to 7sm lead by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				new/obj/Inventory/Weaponry/Hiramekarei(M)
 				M.village="Seven Swordsmen"
 			if("Anbu Leader")
 				M<<"You now lead the Anbu Root."
-				text2file("[M]([M.key]) was promoted to Anbu by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[M]([M.key]) was promoted to Anbu by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				new/obj/Inventory/Clothing/Robes/Anbu_Suit(M)
 				new/obj/Inventory/Clothing/Masks/Absolute_Zero_Mask(M)
 				M.village="Anbu Root"
@@ -409,7 +409,7 @@ mob/Admin/verb
 		if(Position=="Cancel") return
 		M.rank="Missing-Nin"
 		M.village="Missing-Nin"
-		text2file("[usr]([usr.key]) demoted [M]([M.key]) from [Position].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[usr]([usr.key]) demoted [M]([M.key]) from [Position].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Positions["[Position]"]=null
 		M.RemoveAdminVerbs()
 	Promote_To_Kage(mob/M in TotalPlayers)
@@ -420,7 +420,7 @@ mob/Admin/verb
 		switch(VillageLead)
 			if("Hidden Leaf")
 				world<<output("<b><center>[M] has been promoted to the Hokage!<b></center>","ActionPanel.Output")
-				text2file("[M]([M.key]) was promoted to Hokage by [usr]([usr.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[M]([M.key]) was promoted to Hokage by [usr]([usr.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Hokage"
 				Kages["Hidden Leaf"]=M.ckey
 				M.village="Hidden Leaf"
@@ -428,7 +428,7 @@ mob/Admin/verb
 				new/obj/Inventory/Clothing/Robes/HokageRobe(M)
 			if("Hidden Sand")
 				world<<output("<b><center>[M] has been promoted to the Kazekage!<b></center>","ActionPanel.Output")
-				text2file("[M]([M.key]) was promoted to Kazekage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[M]([M.key]) was promoted to Kazekage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Kazekage"
 				Kages["Hidden Sand"]=M.ckey
 				M.village="Hidden Sand"
@@ -436,7 +436,7 @@ mob/Admin/verb
 				new/obj/Inventory/Clothing/Robes/KazekageRobe(M)
 			if("Hidden Mist")
 				world<<output("<b><center>[M] has been promoted to the Mizukage!<b></center>","ActionPanel.Output")
-				text2file("[M]([M.key]) was promoted to Mizukage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[M]([M.key]) was promoted to Mizukage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Mizukage"
 				Kages["Hidden Mist"]=M.ckey
 				M.village="Hidden Mist"
@@ -444,7 +444,7 @@ mob/Admin/verb
 				new/obj/Inventory/Clothing/Robes/MizukageRobe(M)
 			if("Hidden Sound")
 				world<<output("<b><center>[M] has been promoted to the Otokage!<b></center>","ActionPanel.Output")
-				text2file("[M]([M.key]) was promoted to Otokage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[M]([M.key]) was promoted to Otokage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Otokage"
 				Kages["Hidden Sound"]=M.ckey
 				M.village="Hidden Sound"
@@ -452,7 +452,7 @@ mob/Admin/verb
 				new/obj/Inventory/Clothing/Robes/OtokageRobe(M)
 			if("Hidden Rock")
 				world<<output("<b><center>[M] has been promoted to the Tsuchikage!<b></center>","ActionPanel.Output")
-				text2file("[M]([M.key]) was promoted to Tsuchikage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[M]([M.key]) was promoted to Tsuchikage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Tsuchikage"
 				Kages["Hidden Rock"]=M.ckey
 				M.village="Hidden Rock"
@@ -467,7 +467,7 @@ mob/Admin/verb
 		Kages["[VillageLead]"]=null
 		M.rank="Genin"
 		M.RemoveAdminVerbs()
-		text2file("[usr]([usr.key]) removed [M]([M.key]) from [VillageLead] Kage.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[usr]([usr.key]) removed [M]([M.key]) from [VillageLead] Kage.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'true'")
 
 	Teleport_To_XYZ()
@@ -486,24 +486,24 @@ mob/Admin/verb
 //				goto skip
 //			else
 //				usr<<"Editing yourself is forbiden. If you are bugged ask some other Admin to edit you."
-//				text2file("[usr]([usr.key]) tried to edit themself.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+//				text2file("[usr]([usr.key]) tried to edit themself.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 //				return
 //		if(O=="Squigs")
 //			if(usr!="Squigs")
 //				usr<<"You are not allowed to edit this person!"
-//				text2file("[usr]([usr.key]) tried to edit [O]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+//				text2file("[usr]([usr.key]) tried to edit [O]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 //				return
 
 		var/reasonforedit=input("Why are you editing?") as text
 		world<<"[usr] is editing [O]! Reason : [reasonforedit]"
 //		skip
 		Edited(O)
-		text2file("[usr]([usr.key]) edited [O]! Reason : [reasonforedit]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[usr]([usr.key]) edited [O]! Reason : [reasonforedit]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 	Add_Pixel_Artist(mob/M in TotalPlayers)
 		set category="Staff"
 		world<<output("[M] now has pixel artist verbs.","ActionPanel.Output")
-		text2file("[usr]([usr.key]) promoted [M]([M.key]) to PA.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[usr]([usr.key]) promoted [M]([M.key]) to PA.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		PArtists+=M.ckey
 		M.AddAdminVerbs()
 		M.admin=1
@@ -512,7 +512,7 @@ mob/Admin/verb
 	Add_Moderator(mob/M in TotalPlayers)
 		set category="Staff"
 		world<<output("[M] is now a moderator.","ActionPanel.Output")
-		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Mod.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Mod.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Moderators+=M.ckey
 		M.AddAdminVerbs()
 		M.admin=1
@@ -525,7 +525,7 @@ mob/Admin/verb
 			world<<output("[usr.key] tried to remove Squigs from staff. Nice try.")
 			return
 		world<<output("[M] is no longer a staff member.","ActionPanel.Output")
-		text2file("[usr]([usr.key]) removed [M]([M.key]) from staff.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[usr]([usr.key]) removed [M]([M.key]) from staff.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Admins-=M.ckey
 		Moderators-=M.ckey
 		M.RemoveAdminVerbs()
@@ -535,7 +535,7 @@ mob/MasterGM/verb
 	Add_Admin(mob/M in TotalPlayers)
 		set category="Staff"
 		world<<output("[M] is now an admin.","ActionPanel.Output")
-		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Admin.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Admin.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Admins+=M.ckey
 		M.AddAdminVerbs()
 		M.admin=1
@@ -588,7 +588,7 @@ mob/MasterGM/verb
 
 	Get_GMLog()
 		set category = "Staff"
-		var/gmlog = file("logs/staff.txt")
+		var/gmlog = file(LOG_STAFF)
 		usr << browse(gmlog)
 		winset(src, null, {"
 						BrowserWindow.is-visible = "true";
@@ -606,7 +606,7 @@ mob/MasterGM/verb
 					return
 			skip*/
 			if(alert("Are you sure you want to Giveeverything to [M.name]?","Confirm!","No","Yes")=="Yes")
-				text2file("[usr]([usr.key]) has Giveeverything to [M.name]([M.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[usr]([usr.key]) has Giveeverything to [M.name]([M.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				for(var/ZZZ in typesof(/obj/Jutsus/))
 					var/obj/i=new ZZZ
 					if(M.sbought.Find(i.name)||i.type in M.JutsusLearnt) continue
@@ -651,7 +651,7 @@ mob/MasterGM/verb
 				return
 			usr<<"Adding [A] lvls to [M]!"
 			M<<"[usr] is giving you [A] free levels !!! Congrats!"
-			text2file("[usr]([usr.key]) gave [A] levels to [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+			text2file("[usr]([usr.key]) gave [A] levels to [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 			if(M == usr && usr:key=="SasukeHawk")
 				world<<"[M] has givin them self Levels."
 			while(A<>0)
@@ -674,7 +674,7 @@ mob/MasterGM/verb
 			if(check=="No")
 				return
 			usr<<"Adding [asd] [A] to [M]!"
-			text2file("[usr]([usr.key]) gave [asd] [A] to [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+			text2file("[usr]([usr.key]) gave [asd] [A] to [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 			if(M == usr && usr:key=="SasukeHawk")
 				world<<"[M] has givin them self stats."
 			while(asd<>0)

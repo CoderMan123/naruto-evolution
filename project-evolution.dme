@@ -51,6 +51,7 @@
 #include "lib\lavenblade\interface-input\Code\Client.dm"
 #include "lib\lavenblade\interface-input\Code\Input.dm"
 #include "lib\lavenblade\interface-query\Code\InterfaceQuery.dm"
+#include "src\_preprocessor.dm"
 #include "src\_src\_Preprocessor.dm"
 #include "src\_src\_Updates.dm"
 #include "src\_src\Arena.dm"

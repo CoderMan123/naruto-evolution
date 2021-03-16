@@ -1,5 +1,3 @@
-#define WORLD_SAVE "saves/world/world.sav"
-
 var/list/Badwords = list("byond://","www.","http://","\n")
 var/const/allowed_characters_name = "abcdefghijklmnopqrstuvwxyz' "// removed >> and . from name creation because it can fuck our verbs. specifically edit, checkstats, boot, ban, etc.
 var/list/TotalPlayers = list()
@@ -92,7 +90,7 @@ mob
 //	return pick(MapLoadSpawn)
 world
 	New()
-		log = file("logs/error.txt")
+		log = file(LOG_ERROR)
 //		spawn(10) RepopWorld()
 		spawn(10) GeninExam()
 		spawn(10) ChuuninExam()
@@ -103,9 +101,8 @@ world
 		//spawn() AutoReboot()
 		spawn(5)  PlayerCount()
 		spawn(5)  HTMLlist()
-		spawn(5) CheckHost()
-		if(!fexists(WORLD_SAVE)) return
-		var/savefile/F = new(WORLD_SAVE)
+		if(!fexists(SAVE_WORLD)) return
+		var/savefile/F = new(SAVE_WORLD)
 		if(!isnull(F["Factions"])) F["Factions"] >> Factionnames
 		if(!isnull(F["Maps"])) F["Maps"] >> maps
 		if(!isnull(F["Admins"])) F["Admins"] >> Admins
@@ -125,7 +122,7 @@ world
 			Factions += Faction
 		..()
 	Del()
-		var/savefile/F = new(WORLD_SAVE)
+		var/savefile/F = new(SAVE_WORLD)
 		Factionnames = new/list()
 		for(var/Faction/c in Factions)
 			if(!c.name) continue
@@ -262,7 +259,7 @@ mob/Login
 				if(M.client.address==src.client.address&&src.client.computer_id==M.client.computer_id)Ticked=1
 			if(Ticked)
 				world<<"[t1] and [t2] are the same person. We do not allow multikeys."
-				text2file("usr: [usr], ckey: [ckey], t1.name: [t1.name], t2.ckey: [t2.ckey] Tried to multikey.(I don't know which of these might work: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("usr: [usr], ckey: [ckey], t1.name: [t1.name], t2.ckey: [t2.ckey] Tried to multikey.(I don't know which of these might work: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				sleep(10)
 				del(src)
 

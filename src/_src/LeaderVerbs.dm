@@ -142,7 +142,7 @@ mob/Kage/verb
 		switch(village)
 			if("Hidden Leaf")
 				world<<output("<b><center>[src] has retired as Hokage, and [M] has been promoted as their successor!<b></center>","ActionPanel.Output")
-				text2file("[src] has retired as Hokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[src] has retired as Hokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 				M.rank="Hokage"
 				Kages["Hidden Leaf"]=M.ckey
@@ -155,7 +155,7 @@ mob/Kage/verb
 				new/obj/Inventory/Clothing/Robes/HokageRobe(M)
 			if("Hidden Sand")
 				world<<output("<b><center>[src] has retired as Kazekage, and [M] has been promoted as their successor!<b></center>","ActionPanel.Output")
-				text2file("[src] has retired as Kazekage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[src] has retired as Kazekage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 				M.rank="Kazekage"
 				Kages["Hidden Sand"]=M.ckey
@@ -168,7 +168,7 @@ mob/Kage/verb
 				new/obj/Inventory/Clothing/Robes/KazekageRobe(M)
 			if("Hidden Mist")
 				world<<output("<b><center>[src] has retired as Mizukage, and [M] has been promoted as their succesor!<b></center>","ActionPanel.Output")
-				text2file("[src] has retired as Mizukage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[src] has retired as Mizukage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 				M.rank="Mizukage"
 				Kages["Hidden Mist"]=M.ckey
@@ -181,7 +181,7 @@ mob/Kage/verb
 				new/obj/Inventory/Clothing/Robes/MizukageRobe(M)
 			if("Hidden Sound")
 				world<<output("<b><center>[src] has retired as Otokage, and [M] has been promoted as their successor!<b></center>","ActionPanel.Output")
-				text2file("[src] has retired as Otokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[src] has retired as Otokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 				M.rank="Otokage"
 				Kages["Hidden Sound"]=M.ckey
@@ -194,7 +194,7 @@ mob/Kage/verb
 				new/obj/Inventory/Clothing/Robes/OtokageRobe(M)
 			if("Hidden Rock")
 				world<<output("<b><center>[src] has retired as Tsuchikage, and [M] has been promoted as their successor!<b></center>","ActionPanel.Output")
-				text2file("[src] has retired as Tsuchikage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+				text2file("[src] has retired as Tsuchikage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 				M.rank="Tsuchikage"
 				Kages["Hidden Rock"]=M.ckey
@@ -261,7 +261,7 @@ mob/AnbuLeader/verb/
 		rank="Sibling"
 		village="Anbu Root"
 		M.rank="Anbu Leader"
-		text2file("[src] has retired as Anbu Leader, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[src] has retired as Anbu Leader, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 		M.AddAdminVerbs()
 mob/AkatsukiLeader/verb/
@@ -321,7 +321,7 @@ mob/AkatsukiLeader/verb/
 		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
-		text2file("[src] has retired as Akatsuki, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[src] has retired as Akatsuki, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 		rank="Akatsuki"
 		village="Akatsuki"
@@ -414,7 +414,7 @@ mob/SevenSwordsmenLeader/verb/
 		var/mob/M = X["[P]"]
 		rank="Missing-Nin"
 		village="Missing-Nin"
-		text2file("[src] has retired as Seven Swordsmen, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>","logs/staff.txt")
+		text2file("[src] has retired as Seven Swordsmen, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 		for(var/obj/Inventory/Weaponry/Hiramekarei/O in src)
 			if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)

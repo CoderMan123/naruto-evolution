@@ -256,12 +256,12 @@ mob/Admin/verb
 
 
 proc/saveBans()//Saves the ban data.
-	if(fexists("saves/bans/bans.sav")) fdel("saves/bans/bans.sav")
-	var/savefile/F=new("saves/bans/bans.sav")
+	if(fexists(SAVE_BANS)) fdel(SAVE_BANS)
+	var/savefile/F=new(SAVE_BANS)
 	F["ServerBanList"]<<ServerBanList
 
 proc/loadBans()//Loads the ban data.
-	var/savefile/F=new("saves/bans/bans.sav")
+	var/savefile/F=new(SAVE_BANS)
 	F["ServerBanList"]>>ServerBanList
 	if(!length(ServerBanList)) ServerBanList = list()
 
