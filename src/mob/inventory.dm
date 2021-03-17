@@ -109,25 +109,21 @@ mob
 
 		DropItem(obj/Inventory/O, var/quantity=1)
 
-		DestroyItem(obj/Inventory/O, var/quantity=1)
+		DestroyItem(obj/Inventory/O, var/destroy_quantity=1)
 			if(O.max_stacks > 1)
 				var/obj/Inventory/I
 				for(I in src.contents)
 					if(I.type == O.type)
-						if(I.stacks >= I.max_stacks) continue
-						else break
-				if(I)
-					if(quantity > I.max_stacks - I.stacks)
-						quantity -= I.max_stacks - I.stacks
-						I.loc=null
-						src.DestroyItem(O, quantity)
-					else
-						I.stacks -= quantity
-						I.suffix = "x[I.stacks]"
-						if(I.stacks <= 0)
-							I.loc=null
-				else
-					O.loc=null
+						if(I.stacks >= destroy_quantity)
+							I.stacks -= destroy_quantity
+							if(I.stacks <= 0) I.loc=null
+							else I.suffix = "x[I.stacks]"
+
+						else
+							destroy_quantity -= I.stacks
+							I.loc = null
+							src.DestroyItem(O, destroy_quantity)
+						break
 			else
 				O.loc=null
 
