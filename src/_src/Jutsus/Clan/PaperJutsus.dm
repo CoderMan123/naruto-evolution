@@ -7,37 +7,33 @@ mob
 					src<<output("You must have a target to use this technique.","ActionPanel.Output")
 					return
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10)) //determines amount of ninjutsu exp gained on use
 					flick("jutsuse",src)
 					view(src)<<sound('wirlwind.wav',0,0)
-					src.move=0
-					src.canattack=0
-					src.injutsu=1
-					src.firing=1
 					src.Prisoner=c_target
-					if(J.level==1) J.damage=src.ninjutsu*0.1
+					if(J.level==1) J.damage=src.ninjutsu*0.1 //determines damage scaling
 					if(J.level==2) J.damage=src.ninjutsu*0.2
 					if(J.level==3) J.damage=src.ninjutsu*0.3
 					if(J.level==4) J.damage=src.ninjutsu*0.5
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					var/Timer = J.level * 1.5
+					var/Timer = J.level * 1.5 //determines how many ticks of damage as well as scaled bind duration
 					if(src.inAngel==1) Timer *= 1.5
 					Timer = ceil(Timer)
+
+					var/list/skill_states =icon_states('Shikigami Dance.dmi')
+					for(var/icon_states in skill_states)
+						c_target.overlays+=image('Shikigami Dance.dmi', icon_state="[icon_states]")
+						sleep(2)
+						if(icon_states != "[skill_states[skill_states.len]]")c_target.overlays-=image('Shikigami Dance.dmi', icon_state="[icon_states]")
 					c_target.move=0
 					c_target.canattack=0
 					c_target.injutsu=1
-					c_target.overlays+='Shikigami Dance.dmi'
-
-					sleep(10)
-					src.move=1
-					src.canattack=1
-					src.injutsu=0
-					src.firing=0
-
 					while(Timer&&c_target&&src)
 						sleep(5)
 						Timer--
 						c_target.DealDamage(J.damage,src,"NinBlue")
+					sleep(15) //determines base duration of bind before scaled duration is applied
+					c_target.overlays-=image('Shikigami Dance.dmi', icon_state="[skill_states.len]")
 					if(c_target)
 						c_target.move=1
 						c_target.canattack=1
