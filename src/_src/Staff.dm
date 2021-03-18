@@ -98,59 +98,22 @@ mob/PixelArtist/verb/
 
 	Test_Base_States()
 		set category="Staff"
-		var/list/states = icon_states(src.icon)
-		if(length(states)) src.icon_state="[states[1]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[2]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[3]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[4]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[5]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[6]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[7]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[8]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[9]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[10]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[11]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[12]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[13]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[14]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[15]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[16]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[17]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[18]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[19]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[20]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[21]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[22]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[23]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[24]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[25]]"
-		sleep(10)
-		if(length(states)) src.icon_state="[states[26]]"
-		sleep(10)
+		var/list/states =icon_states(src.icon)
+		for(var/dir in list(NORTH,EAST,SOUTH,WEST))
+			src.dir=dir
+			for(var/icon_state in states)
+				src.icon_state=icon_state
+				sleep(10)
+	Get_Test_Base_States()
+		set name="Test Base States Get"
+		set category="Staff"
+		var/dir
+		switch(src.dir)
+			if(1) dir="NORTH"
+			if(2) dir="SOUTH"
+			if(3) dir="WEST"
+			if(4) dir="EAST"
+		src<<"[dir] : [src.icon_state]"
 
 mob/Moderator/verb/
 	CheckStats(mob/M in TotalPlayers)
