@@ -676,7 +676,7 @@ mob
 											Ex.loc = M.loc
 											spawn(20)if(Ex)del(Ex)
 											M.DealDamage((250*J.level)+(src.strength*3)+(src.ninjutsu*3),src,"NinBlue")
-							sleep(1)
+							sleep(0.5)
 						if(I)del(I)
 					move=1
 					Effects["Rasengan"]=null
@@ -1298,7 +1298,7 @@ mob
 									walk_to(I,0)
 									walk_to(I,I.loc)
 									M.DealDamage((2*J.level)*(src.ninjutsu/2),src,"NinBlue")
-							sleep(1)
+							sleep(0.5)
 						del(I)
 					move=1
 					Effects["Rasengan"]=null
