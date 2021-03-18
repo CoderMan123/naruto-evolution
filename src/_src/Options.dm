@@ -178,10 +178,10 @@ mob
 			winset(src,"JutsuTab.Grid","cells=0x0")
 			var/Row = 1
 		//	var/a=1
-			src<<output("","Grid:1,1")
+			src<<output("","JutsuTab.Grid:1,1")
 			for(var/obj/Jutsus/O in src.JutsusLearnt)
 				Row++
-				src << output(O,"Grid:1,[Row]")
+				src << output(O,"JutsuTab.Grid:1,[Row]")
 
 		HealthUp()
 			set hidden=1
