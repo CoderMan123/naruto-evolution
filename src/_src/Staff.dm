@@ -114,7 +114,10 @@ mob/PixelArtist/verb/
 			if(3) dir="WEST"
 			if(4) dir="EAST"
 		src<<"[dir] : [src.icon_state]"
-
+	Single_Test_Base_State(state1 as text)
+		set name="Change State"
+		set category="Staff"
+		src.icon_state=state1
 mob/Moderator/verb/
 	CheckStats(mob/M in TotalPlayers)
 		set category = "Staff"
