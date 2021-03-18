@@ -103,7 +103,7 @@ mob/PixelArtist/verb/
 			src.dir=dir
 			for(var/icon_state in states)
 				src.icon_state=icon_state
-				sleep(10)
+				sleep(20)
 	Get_Test_Base_States()
 		set name="Test Base States Get"
 		set category="Staff"
