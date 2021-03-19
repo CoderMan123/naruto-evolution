@@ -111,6 +111,39 @@ world
 		if(!isnull(F["PArtists"])) F["PArtists"] >> PArtists
 		if(!isnull(F["AkatInvites"])) F["AkatInvites"] >> AkatInvites
 		if(!isnull(F["WorldXp"])) F["WorldXp"] >> WorldXp
+
+		for(var/ckey in initial(Admins))
+			if(!ckey in Admins)
+				Admins += ckey
+
+		for(var/ckey in initial(MasterGMs))
+			if(!ckey in MasterGMs)
+				MasterGMs += ckey
+
+		for(var/ckey in initial(Moderators))
+			if(!ckey in Moderators)
+				Moderators += ckey
+
+		for(var/ckey in initial(PArtists))
+			if(!ckey in PArtists)
+				PArtists += ckey
+
+		for(var/ckey in initial(administrators))
+			if(!ckey in administrators)
+				administrators += ckey
+
+		for(var/ckey in initial(moderators))
+			if(!ckey in moderators)
+				moderators += ckey
+
+		for(var/ckey in initial(programmers))
+			if(!ckey in programmers)
+				programmers += ckey
+
+		for(var/ckey in initial(pixel_artists))
+			if(!ckey in pixel_artists)
+				pixel_artists += ckey
+
 		for(var/c in Factionnames)
 			var/path = "Factions/[c].sav"
 			var/savefile/G = new(path)
