@@ -395,6 +395,9 @@ mob
 						else world<<output("[src] was knocked out by [X]!","ActionPanel.Output")
 						text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)//Kill Log test
 						src<<output("You were knocked out by [X].","ActionPanel.Output")
+						var/exp_loss = 2
+						src.exp -= exp_loss
+						src << output("You lose [exp_loss] experience points.","ActionPanel.Output")
 						X.levelrate+=2
 						X.exp+=rand(3,(X.levelrate))
 						if(X.levelrate>=5) X.levelrate=5
