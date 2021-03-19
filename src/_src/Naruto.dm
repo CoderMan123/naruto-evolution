@@ -103,6 +103,10 @@ world
 		spawn(5)  HTMLlist()
 		if(!fexists(SAVE_WORLD)) return
 		var/savefile/F = new(SAVE_WORLD)
+		if(!isnull(F["administrators"])) F["administrators"] >> administrators
+		if(!isnull(F["moderators"])) F["moderators"] >> moderators
+		if(!isnull(F["programmers"])) F["programmers"] >> programmers
+		if(!isnull(F["pixel_artists"])) F["pixel_artists"] >> pixel_artists
 		if(!isnull(F["Factions"])) F["Factions"] >> Factionnames
 		if(!isnull(F["Maps"])) F["Maps"] >> maps
 		if(!isnull(F["Admins"])) F["Admins"] >> Admins
@@ -156,6 +160,10 @@ world
 		..()
 	Del()
 		var/savefile/F = new(SAVE_WORLD)
+		F["administrators"] << administrators
+		F["moderators"] << moderators
+		F["programmers"] << programmers
+		F["pixel_artists"] << pixel_artists
 		Factionnames = new/list()
 		for(var/Faction/c in Factions)
 			if(!c.name) continue
