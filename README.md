@@ -3,28 +3,28 @@
 
 # Project Evolution
 
-# Setup Development Environment
-## Prerequisites
+## Setup Development Environment
+### Prerequisites
 Before you can setup a development environment, you need to make sure that you have the following dependancies installed.
 - [Git](https://git-scm.com/)
 - [Git LFS](https://git-lfs.github.com/)
 
-### Windows Installation
+#### Windows Installation
 Use the download links listed above.
 
-### Linux Installation
+#### Linux Installation
 Use your distrobutions package manager.
 
-#### Debian / Ubuntu
+##### Debian / Ubuntu
 `sudo apt install git git-lfs`
 
-#### CentOS / Fedora
+##### CentOS / Fedora
 `yum install git git-lfs`
 
-#### Arch / Manjaro
+##### Arch / Manjaro
 `pacman -Syu git git-lfs`
 
-## Setup
+### Setup
 
 1) Clone the repository:
 ```sh
