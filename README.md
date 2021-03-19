@@ -5,15 +5,15 @@
 
 ## Setup Development Environment
 ### Prerequisites
-Before you can setup a development environment, you need to make sure that you have the following dependancies installed.
+Before you can setup a development environment, you need to make sure that you have the following dependencies installed.
 - [Git](https://git-scm.com/)
 - [Git LFS](https://git-lfs.github.com/)
 
 #### Windows Installation
-Use the download links listed above.
+Visit the official websites and download the Windows installer.
 
 #### Linux Installation
-Use your distrobutions package manager.
+Install the dependencies using your distributions package manager.
 
 ##### Debian / Ubuntu
 `sudo apt install git git-lfs`
