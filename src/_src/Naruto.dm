@@ -117,36 +117,28 @@ world
 		if(!isnull(F["WorldXp"])) F["WorldXp"] >> WorldXp
 
 		for(var/ckey in initial(Admins))
-			if(!ckey in Admins)
-				Admins += ckey
+			if(!ckey in Admins) Admins += ckey
 
 		for(var/ckey in initial(MasterGMs))
-			if(!ckey in MasterGMs)
-				MasterGMs += ckey
+			if(!ckey in MasterGMs) MasterGMs += ckey
 
 		for(var/ckey in initial(Moderators))
-			if(!ckey in Moderators)
-				Moderators += ckey
+			if(!ckey in Moderators) Moderators += ckey
 
 		for(var/ckey in initial(PArtists))
-			if(!ckey in PArtists)
-				PArtists += ckey
+			if(!ckey in PArtists) PArtists += ckey
 
 		for(var/ckey in initial(administrators))
-			if(!ckey in administrators)
-				administrators += ckey
+			if(!ckey in administrators) administrators += ckey
 
 		for(var/ckey in initial(moderators))
-			if(!ckey in moderators)
-				moderators += ckey
+			if(!ckey in moderators) moderators += ckey
 
 		for(var/ckey in initial(programmers))
-			if(!ckey in programmers)
-				programmers += ckey
+			if(!ckey in programmers) programmers += ckey
 
 		for(var/ckey in initial(pixel_artists))
-			if(!ckey in pixel_artists)
-				pixel_artists += ckey
+			if(!ckey in pixel_artists) pixel_artists += ckey
 
 		for(var/c in Factionnames)
 			var/path = "Factions/[c].sav"
