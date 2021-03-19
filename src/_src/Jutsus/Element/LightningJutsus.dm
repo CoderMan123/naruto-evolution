@@ -448,7 +448,7 @@ mob
 										if(M)
 											M.DealDamage((10*J.level)+(src.agility*4),src,"NinBlue")
 											if(M)M.Bleed()
-								sleep(1)
+								sleep(0.5)
 							if(src)
 								Effects["Chidori"]=null
 								src.overlays-=image('Chidori.dmi',"hold")
@@ -541,7 +541,7 @@ mob
 										if(M)
 											M.DealDamage((J.level+1)*(src.agility*2),src,"NinBlue")
 											if(M)M.Bleed()
-								sleep(1)
+								sleep(0.5)
 							if(src)
 								Effects["Chidori"]=null
 								src.overlays-=image('Chidori.dmi',"hold")

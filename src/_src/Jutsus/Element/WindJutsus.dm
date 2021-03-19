@@ -410,7 +410,7 @@ mob
 											Ex.loc = M.loc
 											spawn(20)if(Ex)del(Ex)
 											M.DealDamage((J.level+2)*(src.ninjutsu+src.strength),src,"TaiOrange")
-							sleep(1)
+							sleep(0.5)
 						if(I)del(I)
 					move=1
 					Effects["Rasengan"]=null
