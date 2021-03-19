@@ -379,15 +379,6 @@ mob
 							if(X.exp<=0) X.exp=0
 							X<<output("You have lost 50% of your EXP for killing a fellow villager.","ActionPanel.Output")
 
-							if(!X.CheckVKill())
-								X<<output("Careful! Killing your villagers will get you kicked from the village. ([X.Vkill]/5)","ActionPanel.Output")
-							else //if(X.CheckVkill())
-								world<<output("[X] has been booted from [X.village] for village killing!","ActionPanel.Output")
-								text2file("[X] has been booted from [X.village] for village killing: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-
-								X.village="Missing-Nin"
-								X.rank="Missing-Nin"
-
 							MissSkip
 							chuuninskip
 							X.KillCombo=0
