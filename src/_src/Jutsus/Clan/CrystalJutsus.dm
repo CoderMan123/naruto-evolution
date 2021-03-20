@@ -366,9 +366,10 @@ mob
 						src.canattack=0
 						src.icon_state="groundjutsuse"
 						var/obj/crystal/explosion/A=new/obj/crystal/explosion(src.loc)
+						A.icon_state = "blank"
+						A.dir = src.dir
 						A.Owner = src
 						A.damage=src.ninjutsu*7+J.level*100
-						walk(A,src.dir)
 						spawn(25)
 							src.icon_state=""
 							src.copy=null
@@ -376,3 +377,5 @@ mob
 							src.firing=0
 							src.canattack=1
 							src.injutsu=0
+						walk(A,src.dir,2)
+					break

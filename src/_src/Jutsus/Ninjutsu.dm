@@ -2550,6 +2550,7 @@ obj
 			density=1
 			layer=MOB_LAYER+2
 			New()
+				..()
 				spawn(30)
 					if(src) del(src)
 		explosion
@@ -2559,12 +2560,14 @@ obj
 			layer=MOB_LAYER+2
 			New()
 				..()
-				spawn(60)
+				world<<src
+				spawn(60)//60
 					if(src) del(src)
+
 			Move()
-				new/obj/crystal/explosion(src.loc)
-				sleep(1)
 				..()
+				new/obj/crystal/explosion(src.loc)
+
 			Bump(atom/O)
 				if(!src.Hit)
 					if(istype(O,/mob))
