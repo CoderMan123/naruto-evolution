@@ -3,10 +3,10 @@ mob
 	var
 		Password
 		exp_locked=0
-		health=100
-		maxhealth=100
-		chakra=300
-		maxchakra=300
+		health=1000
+		maxhealth=1000
+		chakra=800
+		maxchakra=800
 		level=1
 		exp=0
 		maxexp=10
