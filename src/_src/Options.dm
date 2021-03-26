@@ -173,6 +173,7 @@ mob
 				JutsuTabChild.is-visible      = "true";
 			"})
 			jutsutab=1
+
 		RefreshJutsus()
 			set hidden=1
 			winset(src,"JutsuTab.Grid","cells=0x0")

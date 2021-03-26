@@ -409,6 +409,8 @@ mob/Login
 				M.ClothingOverlays["[C.section]"] = C.icon
 		M.RestoreOverlays()
 		M.AddAdminVerbs()
+		clients_connected -= M.client
+		clients_online += M.client
 		TotalPlayers.Add(M)
 		M.UpdateSlots()
 		spawn() M.WeaponryDelete()
@@ -606,13 +608,14 @@ mob/Login
 						M.maxstrengthexp+=2
 						M.maxninexp+=2
 						M.maxgenexp+=2
-				for(var/SJ in typesof(/obj/Jutsus))
-					var/obj/SJT = new SJ
-					if(SJT.starterjutsu==1)
-						M.JutsusLearnt.Add(SJT)
-						M.JutsusLearnt.Add(SJT.type)
-						M.sbought+=SJT.name
-						SJT.owner=M.ckey
+				for(var/J in typesof(/obj/Jutsus))
+					var/obj/Jutsus/jutsu = new J
+					if(jutsu.starterjutsu)
+						jutsu.owner = M.ckey
+						M.JutsusLearnt += jutsu
+						M.JutsusLearnt += jutsu.type
+						M.sbought += jutsu.name
+
 				M.skillpoints=1
 				M.RestoreOverlays()
 				for(var/obj/Titlescreen/Logo/L in M.client.screen)del(L)
@@ -674,6 +677,8 @@ mob/Login
 							"})
 				M<<"Now speaking in: [M.client.channel]."
 
+				clients_connected -= M.client
+				clients_online += M.client
 				TotalPlayers.Add(M)
 				for(var/client/A in world)
 					if(src.client.computer_id == A.computer_id)

@@ -616,50 +616,39 @@ mob/MasterGM/verb
 						BrowserWindow.is-visible = "true";
 					"})
 
-	GiveEverything(mob/M)
+	GiveEverything()
+		set name = "Give Everything"
 		set category="Staff"
-		if(usr:key=="Squigs" || usr:key == "IllusiveBlair" || usr:key == "Lavenblade")
-			/*if(M==usr) Don't really need this if i'm the only one who can use this.
-				if(M:key=="Squigs")
-					goto skip
-				else
-					usr<<"Testing use only."
-					world.log<<"GM|[usr]([usr.key]) tried to giveeverything to themself."
-					return
-			skip*/
-			if(alert("Are you sure you want to Giveeverything to [M.name]?","Confirm!","No","Yes")=="Yes")
-				text2file("[usr]([usr.key]) has Giveeverything to [M.name]([M.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-				for(var/ZZZ in typesof(/obj/Jutsus/))
-					var/obj/i=new ZZZ
-					if(M.sbought.Find(i.name)||i.type in M.JutsusLearnt) continue
-					if(i.name == "Spider" ||i.name == "Deidara" || i.name == "Puppeteer" || i.name == "Sand" || i.name == "Paper Control" || i.name == "Jashin Religion") continue
-					var/obj/Jutsus/ZZ=new i.type
-					M.JutsusLearnt.Add(ZZ)
-					M.JutsusLearnt.Add(ZZ.type)
-					ZZ.owner=M.ckey
-					ZZ.level=4
-					ZZ.uses=100
-					if(istype(ZZ,/obj/Jutsus/BClone))
-						var/obj/Jutsus/BCloneD/D=new
-						M.JutsusLearnt.Add(D)
-						M.JutsusLearnt.Add(D.type)
-						D.owner=M.ckey
-					del(i)
-				M.skillpoints=100
-				M.statpoints=100
-				M.maxchakra=10000
-				M.chakra=M.maxchakra
-				M.maxhealth=10000
-				M.health=M.maxhealth
-				M.strength=150
-				M.ninjutsu=150
-				M.genjutsu=150
-				M.defence=150
-				M.agility=150
-				M.level=100
-		else
-			usr<<"Testers Only."
-			return
+		var/client/C = input("Who would you like to give everything?", "Give Everything") as null | anything in clients_online
+		if(C == "Cancel") return
+		if(src.ckey in administrators)
+			switch(src.client.Alert("Are you sure you want to give everything to [C.mob.name]?", "Give Everything", list("Yes", "No")))
+				if(1)
+					text2file("[src]([src.key]) has used give everything on [C.mob.name]([C.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
+					for(var/J in typesof(/obj/Jutsus) - list(/obj/Jutsus, /obj/Jutsus/Effects))
+						var/obj/Jutsus/jutsu = new J
+						if(jutsu.type in C.mob.JutsusLearnt) continue
+
+						C.mob.JutsusLearnt += jutsu
+						C.mob.JutsusLearnt += jutsu.type
+						jutsu.owner = C.ckey
+						jutsu.level = 4
+						jutsu.uses = 100
+
+						C.mob.skillpoints = 100
+						C.mob.statpoints = 100
+						C.mob.maxchakra = 10000
+						C.mob.chakra = C.mob.maxchakra
+						C.mob.maxhealth = 10000
+						C.mob.health = C.mob.maxhealth
+						C.mob.strength = 150
+						C.mob.ninjutsu = 150
+						C.mob.genjutsu = 150
+						C.mob.defence = 150
+						C.mob.agility = 150
+						C.mob.level = 100
+
+					C.mob.RefreshJutsus()
 
 	Level_Boost()
 		set category = "Staff"

@@ -2,6 +2,12 @@ client
 	var/tmp/channel = "Local"
 	New()
 		..()
+		clients_connected += src
+
+	Del()
+		..()
+		clients_connected -= src
+		clients_online -= src
 
 	Topic(href, href_list)
 		if(href_list["changelog"] && href_list["changelog"] == "current")

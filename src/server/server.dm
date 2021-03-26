@@ -3,6 +3,9 @@ var/list/moderators = list()
 var/list/programmers = list("lavenblade")
 var/list/pixel_artists = list("illusiveblair")
 
+var/list/clients_connected = list()
+var/list/clients_online = list()
+
 world
 	fps = 20
 	New()
