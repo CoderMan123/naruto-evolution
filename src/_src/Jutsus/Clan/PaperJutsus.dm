@@ -1,7 +1,7 @@
 mob
 	proc
 		Shikigami_Dance()
-			for(var/obj/Jutsus/Shikigami_Dance/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Shikigami_Dance/J in src.jutsus)
 				var/mob/player/c_target=usr.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src<<output("You must have a target to use this technique.","ActionPanel.Output")
@@ -42,7 +42,7 @@ mob
 						c_target.overlays-='Shikigami Dance.dmi'
 
 		Paper_Chakram()
-			for(var/obj/Jutsus/Paper_Chakram/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Paper_Chakram/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",2,5)
@@ -81,7 +81,7 @@ mob
 						src.canattack=1
 
 		Shikigami_Spear()
-			for(var/obj/Jutsus/Shikigami_Spear/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Shikigami_Spear/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
@@ -126,7 +126,7 @@ mob
 		Angel_Wings()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Angel_Wings/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Angel_Wings/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 						J.Excluded=1

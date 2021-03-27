@@ -1,7 +1,7 @@
 mob
 	proc
 		Crystal_Arrow()
-			for(var/obj/Jutsus/Crystal_Arrow/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Crystal_Arrow/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -40,7 +40,7 @@ mob
 						src.canattack=1
 
 		Crystal_Mirrors()
-			for(var/obj/Jutsus/Crystal_Mirrors/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Crystal_Mirrors/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(c_target)
@@ -153,7 +153,7 @@ mob
 					else src << output("<Font color=Aqua>You need a target to use this.</Font>","ActionPanel.Output")
 
 		Crystal_Pillar()
-			for(var/obj/Jutsus/Crystal_Pillar/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Crystal_Pillar/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
@@ -233,7 +233,7 @@ mob
 		Crystal_Shards()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Crystal_Shards/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Crystal_Shards/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,12))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -269,7 +269,7 @@ mob
 		Crystal_Needles()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Crystal_Needles/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Crystal_Needles/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,12))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -322,7 +322,7 @@ mob
 		Crystal_Spikes()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Crystal_Spikes/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Crystal_Spikes/J in src.jutsus)
 					if(src.PreJutsu(J))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(!c_target)
@@ -356,7 +356,7 @@ mob
 		Crystal_Explosion()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Crystal_Explosion/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Crystal_Explosion/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(15,20))
 						src.move=0

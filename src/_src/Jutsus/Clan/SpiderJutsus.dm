@@ -1,7 +1,7 @@
 mob
 	proc
 		WebShoot()
-			for(var/obj/Jutsus/WebShoot/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/WebShoot/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
@@ -28,7 +28,7 @@ mob
 					src.firing=0
 
 		ArrowShoot()
-			for(var/obj/Jutsus/ArrowShoot/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/ArrowShoot/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
@@ -56,7 +56,7 @@ mob
 
 		Summon_Spider()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Summon_Spider/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Summon_Spider/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 						var/mob/jutsus/Summon_Spider/A=new/mob/jutsus/Summon_Spider(src.loc)

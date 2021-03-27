@@ -1,7 +1,7 @@
 mob
 	proc
 		Demon_Wind_Shuriken()
-			for(var/obj/Jutsus/Demon_Wind_Shuriken/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Demon_Wind_Shuriken/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -54,7 +54,7 @@ mob
 					src.canattack=1
 
 		Multiple_Chakra_Kunai()
-			for(var/obj/Jutsus/Multiple_Chakra_Kunai/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Multiple_Chakra_Kunai/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -106,7 +106,7 @@ mob
 					src.firing=0
 					src.canattack=1
 		Blade_Manipulation_Jutsu()
-			for(var/obj/Jutsus/Blade_Manipulation_Jutsu/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Blade_Manipulation_Jutsu/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,4))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -158,7 +158,7 @@ mob
 					src.firing=0
 					src.canattack=1
 		Rising_Twin_Dragons()
-			for(var/obj/Jutsus/Rising_Twin_Dragon/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Rising_Twin_Dragon/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -223,7 +223,7 @@ mob
 		Weapon_Manipulation_Jutsu()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Weapon_Manipulation_Jutsu/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Weapon_Manipulation_Jutsu/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,4))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -308,7 +308,7 @@ mob
 		TwinDragons()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/TwinDragons/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/TwinDragons/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)

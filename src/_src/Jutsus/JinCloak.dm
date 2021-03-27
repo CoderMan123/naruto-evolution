@@ -13,7 +13,7 @@ mob
 	proc
 		Jin_Cloak1()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Jin_Cloak1/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Jin_Cloak1/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -32,7 +32,7 @@ mob
 							src<<"Your Chakra Cloak wears off."
 		Jin_Cloak2()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Jin_Cloak2/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Jin_Cloak2/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -51,7 +51,7 @@ mob
 							src<<"Your Chakra Cloak wears off."
 		Jin_Cloak3()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Jin_Cloak3/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Jin_Cloak3/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -68,7 +68,7 @@ mob
 							src<<"Your Chakra Cloak wears off."
 		Jin_Cloak4()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Jin_Cloak4/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Jin_Cloak4/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -85,7 +85,7 @@ mob
 							src<<"Your Chakra Cloak wears off."
 		Jin_Cloak5()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Jin_Cloak5/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Jin_Cloak5/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -104,7 +104,7 @@ mob
 							src<<"Your Chakra Cloak wears off."
 		Jin_Cloak6()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Jin_Cloak6/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Jin_Cloak6/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -121,7 +121,7 @@ mob
 							src<<"Your Chakra Cloak wears off."
 		Jin_Cloak7()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Jin_Cloak7/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Jin_Cloak7/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -140,7 +140,7 @@ mob
 							src<<"Your Chakra Cloak wears off."
 		Jin_Cloak8()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Jin_Cloak8/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Jin_Cloak8/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -157,7 +157,7 @@ mob
 							src<<"Your Chakra Cloak wears off."
 		Jin_Cloak9()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Jin_Cloak9/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Jin_Cloak9/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						view(src)<<sound('Skill_MashHit.wav',0,0)

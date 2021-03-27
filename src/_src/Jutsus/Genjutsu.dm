@@ -254,7 +254,7 @@ mob
 				spawn(1)BAi()
 				spawn() Imprison()
 				var/obj/Jutsus/WaterPrison/J=new
-				JutsusLearnt+=J
+				jutsus+=J
 				J.level=2
 				ResetBase()
 				//icon = 'WhiteMBase.dmi'

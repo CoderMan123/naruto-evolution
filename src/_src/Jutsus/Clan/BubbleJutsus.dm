@@ -1,7 +1,7 @@
 mob
 	proc
 		BubbleBarrage()
-			for(var/obj/Jutsus/Bubble_Barrage/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Bubble_Barrage/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -55,7 +55,7 @@ mob
 						src.canattack=1
 
 		Bubble_Trouble()
-			for(var/obj/Jutsus/Bubble_Trouble/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Bubble_Trouble/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -94,7 +94,7 @@ mob
 						src.canattack=1
 
 		BubbleSpreader()
-			for(var/obj/Jutsus/Bubble_Spreader/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Bubble_Spreader/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))

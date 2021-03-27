@@ -627,10 +627,10 @@ mob/MasterGM/verb
 					text2file("[src]([src.key]) has used give everything on [C.mob.name]([C.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
 					for(var/J in typesof(/obj/Jutsus) - list(/obj/Jutsus, /obj/Jutsus/Effects))
 						var/obj/Jutsus/jutsu = new J
-						if(jutsu.type in C.mob.JutsusLearnt) continue
+						if(jutsu.type in C.mob.jutsus) continue
 
-						C.mob.JutsusLearnt += jutsu
-						C.mob.JutsusLearnt += jutsu.type
+						C.mob.jutsus += jutsu
+						C.mob.jutsus_learned += jutsu.type
 						jutsu.owner = C.ckey
 						jutsu.level = 4
 						jutsu.uses = 100

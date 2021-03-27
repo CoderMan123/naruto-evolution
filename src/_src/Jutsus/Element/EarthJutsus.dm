@@ -1,7 +1,7 @@
 mob
 	proc
 		Earth_Disruption()
-			for(var/obj/Jutsus/Earth_Disruption/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Earth_Disruption/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(10,13))//XPGAIN
 					flick("groundjutsuse",src)
@@ -31,7 +31,7 @@ mob
 					src.canattack=1
 
 		Earth_Release_Mud_River()
-			for(var/obj/Jutsus/Earth_Release_Mud_River/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Earth_Release_Mud_River/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src << output("This jutsu requires a target","ActionPanel.Output")
@@ -76,7 +76,7 @@ mob
 					src.firing=0
 					src.canattack=1
 		Dango()
-			for(var/obj/Jutsus/Dango/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Dango/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Taijutsu",0.2)
 					flick("groundjutsu",src)
@@ -100,7 +100,7 @@ mob
 					src.canattack=1
 
 		Doryuusou()
-			for(var/obj/Jutsus/Doryuusou/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Doryuusou/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src << output("This jutsu requires a target","ActionPanel.Output")
@@ -134,7 +134,7 @@ mob
 						src.firing=0
 						src.canattack=1
 		Mud_Dragon_Projectile()
-			for(var/obj/Jutsus/Mud_Dragon_Projectile/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Mud_Dragon_Projectile/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
@@ -172,7 +172,7 @@ mob
 						src.canattack=1
 
 		Earth_Style_Dark_Swamp()
-			for(var/obj/Jutsus/Earth_Style_Dark_Swamp/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Earth_Style_Dark_Swamp/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -197,7 +197,7 @@ mob
 						src.firing=0
 
 		Earth_Release_Earth_Cage()
-			for(var/obj/Jutsus/Earth_Release_Earth_Cage/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Earth_Release_Earth_Cage/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||!istype(c_target))
 					src<<output("You must have a target to use this technique.","ActionPanel.Output")
@@ -287,7 +287,7 @@ mob
 		MudWall()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/MudWall/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/MudWall/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(11,13))
 						var/obj/Projectiles/Effects/mudwall/A=new/obj/Projectiles/Effects/mudwall(src.loc)
@@ -299,7 +299,7 @@ mob
 
 		EarthBoulder()
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/EarthBoulder/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/EarthBoulder/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 						src.move=0

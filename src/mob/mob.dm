@@ -3,6 +3,8 @@ mob
 		items=0
 		maxitems=25
 		equipped
+		jutsus[0]
+		jutsus_learned[0]
 	verb
 		Say(msg as text)
 			set hidden=1

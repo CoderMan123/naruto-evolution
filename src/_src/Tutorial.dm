@@ -131,7 +131,7 @@ Some jutsus increase damage or active time while others will fire more projectil
 				if(!usr.tutorialskilltree)
 					usr<<"Open up your skill tree first, and purchase the Substitution Technique under Non Clan Skills."
 					return
-				if(!usr.JutsusLearnt.Find(/obj/Jutsus/BodyReplace))
+				if(!typesof(/obj/Jutsus/BodyReplace) in usr.jutsus_learned)
 					usr<<"Open up your skill tree first, and purchase the Substitution Technique under Non Clan Skills."
 					return
 				if(usr.Tutorial!=Tutorial)

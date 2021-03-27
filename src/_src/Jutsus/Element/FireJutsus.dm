@@ -1,7 +1,7 @@
 mob
 	proc
 		Fire_Ball()
-			for(var/obj/Jutsus/FireBall/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/FireBall/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(10,12))//XPGAIN
@@ -39,7 +39,7 @@ mob
 						src.canattack=1
 
 		Magma_Crush()
-			for(var/obj/Jutsus/Magma_Crush/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Magma_Crush/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||!istype(c_target))
 					src<<output("You must have a target to use this technique.","ActionPanel.Output")
@@ -123,7 +123,7 @@ mob
 						src.injutsu=0
 
 		Magma_Needles()
-			for(var/obj/Jutsus/Magma_Needles/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Magma_Needles/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -307,7 +307,7 @@ mob
 					src.canattack=1
 
 		Phoenix_Immortal_Fire_Technique()
-			for(var/obj/Jutsus/PheonixFire/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/PheonixFire/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(firing)return
 					src.firing=1
@@ -363,7 +363,7 @@ mob
 						src.canattack=1
 
 		AFire_Ball()
-			for(var/obj/Jutsus/AFireBall/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/AFireBall/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
@@ -401,7 +401,7 @@ mob
 						src.canattack=1
 
 		Fire_Release_Ash_Pile_Burning()
-			for(var/obj/Jutsus/Fire_Release_Ash_Pile_Burning/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Fire_Release_Ash_Pile_Burning/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 					flick("jutsuse",src)
@@ -461,7 +461,7 @@ mob
 
 
 		Fire_Dragon_Projectile()
-			for(var/obj/Jutsus/Fire_Dragon_Projectile/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Fire_Dragon_Projectile/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,5))

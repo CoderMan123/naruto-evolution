@@ -180,7 +180,7 @@ mob
 			var/Row = 1
 		//	var/a=1
 			src<<output("","JutsuTab.Grid:1,1")
-			for(var/obj/Jutsus/O in src.JutsusLearnt)
+			for(var/obj/Jutsus/O in src.jutsus)
 				Row++
 				src << output(O,"JutsuTab.Grid:1,[Row]")
 

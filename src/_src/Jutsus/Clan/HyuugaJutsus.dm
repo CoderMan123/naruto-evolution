@@ -1,7 +1,7 @@
 mob
 	proc
 		Eight_Gates_Assault()
-			for(var/obj/Jutsus/Eight_Gates_Assault/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Eight_Gates_Assault/J in src.jutsus)
 				if(src.byakugan==0)
 					src << output("Byakugan must be active.","ActionPanel.Output")
 					return
@@ -70,7 +70,7 @@ mob
 					src.firing=0
 					src.canattack=1
 		Eight_Trigrams_Mountain_Crusher()
-			for(var/obj/Jutsus/Eight_Trigrams_Mountain_Crusher/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Eight_Trigrams_Mountain_Crusher/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
@@ -110,7 +110,7 @@ mob
 			if(src.byakugan==0)
 				src<<output("<font color=#C0C0C0>You must have Byakugan activated.</font>","ActionPanel.Output")
 				return
-			for(var/obj/Jutsus/Eight_Trigrams_64_Palms/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Eight_Trigrams_64_Palms/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,7))
@@ -243,7 +243,7 @@ mob
 							src.injutsu=0
 							src.canattack=1
 		Kaiten()
-			for(var/obj/Jutsus/Eight_Trigrams_Palm_Heavenly_Spin/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Eight_Trigrams_Palm_Heavenly_Spin/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
 					flick("jutsuse",src)
@@ -321,7 +321,7 @@ mob
 						src.copy=null
 						src.canattack=1
 		Byakugan()
-			for(var/obj/Jutsus/Byakugan/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Byakugan/J in src.jutsus)
 				if(src.byakugan)
 					for(var/image/i in client.images)if(i.name=="ByakuganCircle")del(i)
 					src.byakugan=0
@@ -364,7 +364,7 @@ mob
 
 		Eight_Trigrams_Empty_Palm()
 			if(src.firing==0&&!src.likeaclone)
-				for(var/obj/Jutsus/Eight_Trigrams_Empty_Palm/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Eight_Trigrams_Empty_Palm/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("strength",rand(2,5))
 						var/damage

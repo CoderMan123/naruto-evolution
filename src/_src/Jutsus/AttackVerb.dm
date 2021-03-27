@@ -202,7 +202,7 @@ mob/player
 								GF.layer=200
 								GF.dir = src.dir
 								GF.icon = 'PressurePoint.dmi'
-								for(var/obj/Jutsus/Byakugan/J in src.JutsusLearnt)
+								for(var/obj/Jutsus/Byakugan/J in src.jutsus)
 									if(J.level == 4)flick('GentleFist.dmi',GF)
 									else flick("[J.level]",GF)
 								switch(src.dir)
@@ -313,7 +313,7 @@ mob/player
 												spawn(1)
 													if(!c_target) return
 													if(c_target.chakra<>0 && src.byakugan==1)
-														for(var/obj/Jutsus/Byakugan/J in src.JutsusLearnt)
+														for(var/obj/Jutsus/Byakugan/J in src.jutsus)
 															c_target.chakra-=J.level*5+round(src.ninjutsu/2)
 															var/colourz = colour2html("aliceblue")
 															F_damage(c_target,J.level*5+round(src.ninjutsu/2),colourz)

@@ -141,7 +141,7 @@ obj/Inventory/JutsuMastScroll
 			set name = "Master a Jutsu"
 			set hidden = 1
 			inuse=1
-			var/obj/Jutsus/J=input("Which Jutsu would you like to master?") as obj in usr.JutsusLearnt
+			var/obj/Jutsus/J=input("Which Jutsu would you like to master?") as obj in usr.jutsus
 			if(alert("Are you sure you want to master  [J.name]?","Confirm!","No","Yes")=="Yes")
 				J.exp = J.maxexp
 				J.Levelup()

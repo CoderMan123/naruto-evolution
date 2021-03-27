@@ -1,7 +1,7 @@
 mob
 	proc
 		JukaiKoutan()
-			for(var/obj/Jutsus/JukaiKoutan/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/JukaiKoutan/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",0.2)
 					flick("groundjutsu",src)
@@ -28,7 +28,7 @@ mob
 									spawn() if(M) M.Bleed()
 
 		JubakuEisou()
-			for(var/obj/Jutsus/JubakuEisou/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/JubakuEisou/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src << output("This jutsu requires a target","ActionPanel.Output")
@@ -75,7 +75,7 @@ mob
 					src.canattack=1
 
 		Daijurin()
-			for(var/obj/Jutsus/Daijurin/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Daijurin/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",0.2)
 					flick("jutsuse",src)
@@ -97,7 +97,7 @@ mob
 						src.canattack=1
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(3,7); J.Levelup()
 		Tree_Summoning()
-			for(var/obj/Jutsus/Tree_Summoning/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Tree_Summoning/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
@@ -178,7 +178,7 @@ mob
 		WoodStyleFortress()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/WoodStyleFortress/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/WoodStyleFortress/J in src.jutsus)
 					if(src.PreJutsu(J))
 						flick("groundjutsu",src)
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
@@ -208,7 +208,7 @@ mob
 		Root_Strangle()
 			if(src.firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Root_Strangle/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Root_Strangle/J in src.jutsus)
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target)
 						src << output("This jutsu requires a target.","ActionPanel.Output")
@@ -254,7 +254,7 @@ mob
 		Wood_Balvan()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Wood_Balvan/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Wood_Balvan/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
 						src.injutsu=1
@@ -278,7 +278,7 @@ mob
 		Root_Stab()
 			if(src.firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Root_Stab/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Root_Stab/J in src.jutsus)
 					if(src.PreJutsu(J))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(!c_target)

@@ -1,7 +1,7 @@
 mob
 	proc
 		Shadow_Stab()
-			for(var/obj/Jutsus/Shadow_Stab/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Shadow_Stab/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
 					if(J.level==1) J.damage=35
@@ -24,7 +24,7 @@ mob
 					spawn(5)if(O)del(O)
 
 		Shadow_Choke()
-			for(var/obj/Jutsus/Shadow_Choke/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Shadow_Choke/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
 					if(J.level==1) J.damage=10
@@ -51,7 +51,7 @@ mob
 					del(O)
 
 		Shadow_Extension()
-			for(var/obj/Jutsus/Shadow_Extension/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
@@ -71,7 +71,7 @@ mob
 							dir = get_dir(src,c_target)
 							CreateTrailNara(c_target,J.level*4)
 		Shadow_Explosion()
-			for(var/obj/Jutsus/Shadow_Explosion/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Shadow_Explosion/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level==1) J.damage=5
@@ -99,7 +99,7 @@ mob
 					del(O)
 
 		Shadow_Punch()
-			for(var/obj/Jutsus/Shadow_Punch/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Shadow_Punch/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))

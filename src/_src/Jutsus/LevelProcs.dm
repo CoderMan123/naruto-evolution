@@ -38,12 +38,12 @@ obj
 					if(src.level==4)
 						var/obj/Jutsus/AdvancedBodyReplace/J=new/obj/Jutsus/AdvancedBodyReplace
 						if(!J) return
-						if(J.type in Owner.JutsusLearnt)del(J)
+						if(J.type in Owner.jutsus_learned)del(J)
 						else
 							if(!J) return
 							Owner<<output("<font color= #bc8f8f>You learned [J.name]</Font>.","ActionPanel.Output")
-							Owner.JutsusLearnt.Add(J)
-							Owner.JutsusLearnt.Add(J.type)
+							Owner.jutsus.Add(J)
+							Owner.jutsus_learned.Add(J.type)
 							J.Owner=Owner
 				if(src.name=="Transformation Jutsu")
 					if(src.level==2)Owner<<output("<font color= #bc8f8f>[src.name] can now be used to transform into objects</Font>!","ActionPanel.Output")

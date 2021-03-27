@@ -2,7 +2,7 @@ mob
 	proc
 
 		Desert_Coffin()
-			for(var/obj/Jutsus/Desert_Coffin/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Desert_Coffin/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src << output("This jutsu requires a target","ActionPanel.Output")
@@ -50,7 +50,7 @@ mob
 					src.injutsu=0
 					src.move=1
 		Sand_Funeral()
-			for(var/obj/Jutsus/Sand_Funeral/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sand_Funeral/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src << output("This jutsu requires a target.","ActionPanel.Output")
@@ -72,7 +72,7 @@ mob
 							c_target.DealDamage((J.level*50)+src.ninjutsu*5,src,"NinBlue")
 
 		Sand_Shield()
-			for(var/obj/Jutsus/Sand_Shield/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sand_Shield/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
 					if(J.level<4)
@@ -109,7 +109,7 @@ mob
 					else if(O)del(O)
 
 		Sand_Shuriken()
-			for(var/obj/Jutsus/Sand_Shuriken/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sand_Shuriken/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(!canattack)return
 					canattack=0
@@ -293,7 +293,7 @@ mob
 					src.canattack=1
 
 		Shukakku_Spear()
-			for(var/obj/Jutsus/Shukakku_Spear/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Shukakku_Spear/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))

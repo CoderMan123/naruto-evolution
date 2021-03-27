@@ -1,7 +1,7 @@
 mob
 	proc
 		Sharingan_Copy()
-			for(var/obj/Jutsus/Sharingan_Copy/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sharingan_Copy/J in src.jutsus)
 				/*if(Sharingan<=2)
 					src<<output("You need to have a stronger Sharingan to activate this.","ActionPanel.Output")
 					return*/
@@ -16,12 +16,12 @@ mob
 				//		else
 						if(isobj(src.jutsucopy))
 							var/obj/O = src.jutsucopy
-							src.JutsusLearnt+=O
+							src.jutsus+=O
 							src.doslot(O.name)
-							spawn(1)src.JutsusLearnt-=O
+							spawn(1)src.jutsus-=O
 
 		Kamui()
-			for(var/obj/Jutsus/Kamui/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Kamui/J in src.jutsus)
 				/*if(Sharingan<=3)
 					src<<output("You need to have Mangekyou Sharingan or higher activated to use this.","ActionPanel.Output")
 					return*/
@@ -52,7 +52,7 @@ mob
 							if(O)del(O)
 						else if(O)del(O)
 		WarpDim()
-			for(var/obj/Jutsus/WarpDim/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/WarpDim/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(c_target.jailed == 1)
 					src<<output("Your target is jailed.","ActionPanel.Output")
@@ -117,7 +117,7 @@ mob
 
 
 		Intangible_Jutsu()
-			for(var/obj/Jutsus/Intangible_Jutsu/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Intangible_Jutsu/J in src.jutsus)
 				if(Intang)
 					src << output("You're no longer intangible.","ActionPanel.Output")
 					src.Intang=0

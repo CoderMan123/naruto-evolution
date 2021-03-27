@@ -64,7 +64,7 @@ obj
 							M.injutsu=1
 							spawn(3)if(M)M.injutsu=0
 						if(M)
-							for(var/obj/Jutsus/Fire_Release_Ash_Pile_Burning/J in src.owner.JutsusLearnt)
+							for(var/obj/Jutsus/Fire_Release_Ash_Pile_Burning/J in src.owner.jutsus)
 								M.burn=(J.level*3)+(src.owner.ninjutsu/10)//burn
 								M.BurnEffect(src.owner)
 				src.pixel_x=-21
@@ -666,7 +666,7 @@ mob
 			//stat("Items: ","[src.items]/[src.maxitems]")
 			//stat(src.Clothes)
 		//	statpanel("Jutsus")
-		//	stat(src.JutsusLearnt)
+		//	stat(src.jutsus)
 			//statpanel("Clothing Collection", src.storage)
 			//statpanel("Quest Items", src.QuestItems)
 		pixel_x=-15

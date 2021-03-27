@@ -1,7 +1,7 @@
 mob
 	proc
 		LimbParalyzeSeal()
-			for(var/obj/Jutsus/LimbParalyzeSeal/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/LimbParalyzeSeal/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src << output("This jutsu requires a target","ActionPanel.Output")
@@ -43,7 +43,7 @@ mob
 					src.canattack=1
 
 		Seal_of_Terror()
-			for(var/obj/Jutsus/Seal_of_Terror/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Seal_of_Terror/J in src.jutsus)
 				if(injutsu) return
 				if(copy=="Climb") return
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -81,7 +81,7 @@ mob
 						c_target.DealDamage(J.damage,src,"NinBlue",0,1)
 
 		Soul_Devastator_Seal()
-			for(var/obj/Jutsus/Soul_Devastator_Seal/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Soul_Devastator_Seal/J in src.jutsus)
 				if(!move) return
 				if(injutsu) return
 				if(copy=="Climb") return
@@ -122,7 +122,7 @@ mob
 						c_target.DealDamage(J.damage + src.strength*2 + src.ninjutsu*2 + src.genjutsu*2,src,"NinBlue",0,1)
 
 		Reaper_Death_Seal()
-			for(var/obj/Jutsus/Reaper_Death_Seal/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Reaper_Death_Seal/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src<<"You need a target for this jutsu."

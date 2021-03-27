@@ -4,7 +4,7 @@ mob
 			if(clonesturned==1)
 				return
 			if(src.firing==0&&src.canattack==1)
-				for(var/obj/Jutsus/MizuClone/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/MizuClone/J in src.jutsus)
 					if(!has_water())
 						src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 						return
@@ -41,7 +41,7 @@ mob
 						A.UpdateHMB()
 
 		Teppoudama()
-			for(var/obj/Jutsus/Teppoudama/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Teppoudama/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(10,15))//XPGAIN
 					flick("jutsuse",src)
@@ -64,7 +64,7 @@ mob
 						src.firing=0
 						src.canattack=1
 		Suijinheki()
-			for(var/obj/Jutsus/Suijinheki/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Suijinheki/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",0.2)
 					flick("groundjutsu",src)
@@ -83,7 +83,7 @@ mob
 						src.firing=0
 						src.canattack=1
 		WaterPrison()
-			for(var/obj/Jutsus/WaterPrison/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/WaterPrison/J in src.jutsus)
 				if(!has_water())
 					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 					return
@@ -136,7 +136,7 @@ mob
 					Prisoner=null
 
 		WaterShark()
-			for(var/obj/Jutsus/WaterShark/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/WaterShark/J in src.jutsus)
 				if(!has_water())
 					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 					return
@@ -201,7 +201,7 @@ mob
 					src.canattack=1
 
 		Water_Dragon_Projectile()
-			for(var/obj/Jutsus/Water_Dragon_Projectile/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Water_Dragon_Projectile/J in src.jutsus)
 				if(!has_water())
 					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 					return
@@ -243,7 +243,7 @@ mob
 						src.canattack=1
 
 		Water_Release_Exploding_Water_Colliding_Wave()
-			for(var/obj/Jutsus/Water_Release_Exploding_Water_Colliding_Wave/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Water_Release_Exploding_Water_Colliding_Wave/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 					flick("jutsuse",src)

@@ -12,7 +12,7 @@ mob
 				src.GateTime = 0
 			ResetBase()
 			//src.icon ='WhiteMBase.dmi'
-			for(var/obj/Jutsus/EightGates/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/EightGates/J in src.jutsus)
 				while(J.Excluded)
 					sleep(1)
 				J.Excluded = 1
@@ -33,7 +33,7 @@ mob
 
 		// Check if gates can be used and pass the jutsu's level.
 		Gates()
-			for(var/obj/Jutsus/EightGates/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/EightGates/J in src.jutsus)
 				if(src.PreJutsu(J))
 					src.GatesIncrease(J.level)
 

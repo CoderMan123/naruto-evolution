@@ -1,7 +1,7 @@
 mob
 	proc
 		Snake_Rustle_Jutsu()
-			for(var/obj/Jutsus/Snake_Rustle_Jutsu/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Snake_Rustle_Jutsu/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src << output("This jutsu requires a target","ActionPanel.Output")
@@ -43,7 +43,7 @@ mob
 					src.firing=0
 					src.canattack=1
 		SaiRat()
-			for(var/obj/Jutsus/Sai_Rat/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sai_Rat/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -227,7 +227,7 @@ mob
 					src.canattack=1
 
 		Sai_Snakes()
-			for(var/obj/Jutsus/Sai_Snakes/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sai_Snakes/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -411,7 +411,7 @@ mob
 					src.canattack=1
 
 		InkLions()
-			for(var/obj/Jutsus/Ink_Lions/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Ink_Lions/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -447,7 +447,7 @@ mob
 						src.canattack=1
 
 		Ultimate_Ink_Bird()
-			for(var/obj/Jutsus/Ultimate_Ink_Bird/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Ultimate_Ink_Bird/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))

@@ -1,7 +1,7 @@
 mob
 	proc
 		Camellia_Dance()
-			for(var/obj/Jutsus/Camellia_Dance/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Camellia_Dance/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
 					if(J.level<4)
@@ -36,7 +36,7 @@ mob
 						src.overlays-=image('CamR.dmi',pixel_x=32)
 						src.overlays-=image('CamT.dmi',pixel_y=32)
 		Bone_Drill()
-			for(var/obj/Jutsus/Bone_Drill/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Bone_Drill/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(4,6); J.Levelup()
@@ -85,7 +85,7 @@ mob
 		Bone_Pulse()
 			if(src.firing==0)
 				if(src.canattack==1)
-					for(var/obj/Jutsus/Bone_Pulse/J in src.JutsusLearnt)
+					for(var/obj/Jutsus/Bone_Pulse/J in src.jutsus)
 						var/mob/player/c_target=src.Target_Get(TARGET_MOB)
 						/*if(!c_target||!istype(c_target))
 							src<<output("You require a targeted player to use this technique.","ActionPanel.Output")
@@ -284,7 +284,7 @@ mob
 		Bone_Tip()
 			if(src.firing==0)
 				if(src.canattack==1)
-					for(var/obj/Jutsus/Bone_Tip/J in src.JutsusLearnt)
+					for(var/obj/Jutsus/Bone_Tip/J in src.jutsus)
 						if(src.PreJutsu(J))
 							var/mob/c_target=src.Target_Get(TARGET_MOB)
 							if(loc.loc:Safe!=1)
@@ -362,7 +362,7 @@ mob
 		Bone_Sensation()
 			if(src.firing==0)
 				if(src.canattack==1)
-					for(var/obj/Jutsus/Bone_Sensation/J in src.JutsusLearnt)
+					for(var/obj/Jutsus/Bone_Sensation/J in src.jutsus)
 						if(src.PreJutsu(J))
 							if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
 							flick("jutsuse",src)
@@ -449,7 +449,7 @@ mob
 		Young_Bracken_Dance()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Young_Bracken_Dance/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Young_Bracken_Dance/J in src.jutsus)
 					if(src.PreJutsu(J))
 						flick("groundjutsu",src)
 						src.icon_state = "groundjutsuse"
@@ -501,7 +501,7 @@ mob
 						src.injutsu=0
 
 		Dance_Of_The_Kaguya()
-			for(var/obj/Jutsus/Dance_Of_The_Kaguya/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Dance_Of_The_Kaguya/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()

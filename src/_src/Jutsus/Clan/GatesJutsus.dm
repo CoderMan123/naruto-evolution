@@ -3,7 +3,7 @@ mob
 
 
 		ShishiRendan()
-			for(var/obj/Jutsus/Shishi/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Shishi/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target){src<<output("<font color=yellow>You need to have a Target to perform ShiShi Rendan","ActionPanel.Output");return}
@@ -48,7 +48,7 @@ mob
 
 		Gomu_Gomu_No_Red_Hawk()
 			if(src.firing==0&&!src.likeaclone)
-				for(var/obj/Jutsus/Gomu_Gomu_No_Red_Hawk/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Gomu_Gomu_No_Red_Hawk/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("strength",rand(3,8))
 						var/damage
@@ -136,7 +136,7 @@ mob
 
 		Meteor_Punch()
 			if(src.firing==0&&!src.likeaclone)
-				for(var/obj/Jutsus/Meteor_Punch/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Meteor_Punch/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("strength",rand(2,5))
 						var/damage
@@ -226,7 +226,7 @@ mob
 
 		Leaf_Whirlwind()
 			if(src.firing==0&&!src.likeaclone)
-				for(var/obj/Jutsus/Leaf_Whirlwind/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Leaf_Whirlwind/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1)src.LevelStat("strength",rand(2,5))
 						var/damage
@@ -304,7 +304,7 @@ mob
 
 		Morning_Peacock()
 			if(src.firing==0&&!src.likeaclone)
-				for(var/obj/Jutsus/Morning_Peacock/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Morning_Peacock/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1)src.LevelStat("strength",rand(2,5))
 						var/damage

@@ -1,7 +1,7 @@
 mob
 	proc
 		Chidori_Jinrai()
-			for(var/obj/Jutsus/Jinrai/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Jinrai/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,3))
@@ -35,7 +35,7 @@ mob
 						src.canattack=1
 
 		Kirin()
-			for(var/obj/Jutsus/Kirin/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Kirin/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src<<output("You must have a target to use this technique.","ActionPanel.Output")
@@ -91,7 +91,7 @@ mob
 						src.canattack=1
 
 		Chidori_Needles()
-			for(var/obj/Jutsus/Chidori_Needles/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Chidori_Needles/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(8,13))//XPGAIN
@@ -274,7 +274,7 @@ mob
 					src.firing=0
 					src.canattack=1
 		Chidori_Nagashi()
-			for(var/obj/Jutsus/Chidori_Nagashi/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Chidori_Nagashi/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					flick("jutsuse",src)
@@ -308,7 +308,7 @@ mob
 
 
 		LightningBalls()
-			for(var/obj/Jutsus/Lightning_Balls/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Lightning_Balls/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(firing)return
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -362,7 +362,7 @@ mob
 						src.firing=0
 						src.canattack=1
 		Chidori()
-			for(var/obj/Jutsus/Chidori/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Chidori/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(Effects["Chidori"])
 						Effects["Chidori"]=null
@@ -456,7 +456,7 @@ mob
 								src.icon_state = ""
 
 		Raikiri()
-			for(var/obj/Jutsus/Raikiri/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Raikiri/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(Effects["Chidori"])
 						Effects["Chidori"]=null

@@ -2362,7 +2362,7 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 			icon_state=""
 			firing=0
 			NaraTarget=null
-			/*for(var/obj/Jutsus/Shadow_Extension/J in src.JutsusLearnt)
+			/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
 				src.JutsuCoolSlot(J)
 				J.cooltimer=J.maxcooltime
 				J.JutsuCoolDown(src)*/
@@ -2413,7 +2413,7 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 					src.injutsu=0
 					src.canattack=1
 					src.NaraTarget=null
-					/*for(var/obj/Jutsus/Shadow_Extension/J in src.JutsusLearnt)
+					/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
 						src.JutsuCoolSlot(J)
 						J.cooltimer=J.maxcooltime
 						J.JutsuCoolDown(src)*/
@@ -2427,7 +2427,7 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 			NaraTarget=null
 			icon_state=""
 			firing=0
-			/*for(var/obj/Jutsus/Shadow_Extension/J in src.JutsusLearnt)
+			/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
 				src.JutsuCoolSlot(J)
 				J.cooltimer=J.maxcooltime
 				J.JutsuCoolDown(src)*/

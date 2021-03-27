@@ -1,7 +1,7 @@
 mob
 	proc
 		Gedo_Revival()
-			for(var/obj/Jutsus/Gedo_Revival/J in src.JutsusLearnt) if(J.Excluded==0)
+			for(var/obj/Jutsus/Gedo_Revival/J in src.jutsus) if(J.Excluded==0)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					src.move=0
@@ -41,7 +41,7 @@ mob
 						src.injutsu=0
 						src.firing=0
 		Rinnegan()
-			for(var/obj/Jutsus/Rinnegan/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Rinnegan/J in src.jutsus)
 				if(src.Rinnegan)
 					for(var/image/i in client.images)if(i.name=="RinneganCircle")del(i)
 					src.Rinnegan=0
@@ -76,7 +76,7 @@ mob
 									src << output("<font color=[colour2html("red")]><b>Your Rinnegan has been deactivated.","ActionPanel.Output")
 */
 		Induction()
-			for(var/obj/Jutsus/Induction/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Induction/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,7))
@@ -114,7 +114,7 @@ mob
 						src.canattack=1
 
 		Repulsion()
-			for(var/obj/Jutsus/Repulsion/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Repulsion/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,7))
@@ -153,7 +153,7 @@ mob
 		Summoning_Snake()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Snake_Summoning/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Snake_Summoning/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(9,11))
 						var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
@@ -169,7 +169,7 @@ mob
 							del(B)
 
 		AlmightyPush()
-			for(var/obj/Jutsus/Almighty_Push/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Almighty_Push/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(src.firing==1) return
 					src.copy=null
@@ -222,7 +222,7 @@ mob
 						src.firing=0
 
 		Chakra_Leech()
-			for(var/obj/Jutsus/Chakra_Leech/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Chakra_Leech/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,10))//Might be too high.
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()

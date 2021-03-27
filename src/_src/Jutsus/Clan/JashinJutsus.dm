@@ -1,7 +1,7 @@
 mob
 	proc
 		Death_Ruling_Possesion_Blood()
-			for(var/obj/Jutsus/Death_Ruling_Possesion_Blood/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Death_Ruling_Possesion_Blood/J in src.jutsus)
 
 				var/checks=0
 				for(var/obj/O in src.loc)
@@ -18,7 +18,7 @@ mob
 					O.JashinConnected=checks:Owner
 
 		Immortality()
-			for(var/obj/Jutsus/Immortality/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Immortality/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(src.needkill) return
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,9))
@@ -37,7 +37,7 @@ mob
 							src.needkill=0
 
 		Immortal()
-			for(var/obj/Jutsus/Immortal/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Immortal/J in src.jutsus)
 
 				if(src.needkill)
 					src << output("You are using Immortality already. This jutsu will only be available once Immortality wears off.","ActionPanel.Output")

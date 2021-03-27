@@ -380,7 +380,7 @@ mob/Login
 		M.hbar.Add(Mana)
 		for(var/obj/Screen/healthbar/HB in M.hbar)M.overlays+=HB
 		for(var/obj/Screen/manabar/HB in M.hbar)M.overlays+=HB
-		for(var/i in M.JutsusLearnt)if(isnull(i))del(i)
+		for(var/i in M.jutsus)if(isnull(i))del(i)
 		var/Faction/c = getFaction(M.Faction)
 		if(c)
 			if(M.Faction == c.name)
@@ -612,8 +612,8 @@ mob/Login
 					var/obj/Jutsus/jutsu = new J
 					if(jutsu.starterjutsu)
 						jutsu.owner = M.ckey
-						M.JutsusLearnt += jutsu
-						M.JutsusLearnt += jutsu.type
+						M.jutsus += jutsu
+						M.jutsus_learned += jutsu.type
 						M.sbought += jutsu.name
 
 				M.skillpoints=1
@@ -735,7 +735,7 @@ mob/player
 			arenaprogress=0
 			world<<"[src] has logged out during an Arena challenge. Match has become Null."
 		if(src.incalorie==1)
-			for(var/obj/Jutsus/CalorieControl/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/CalorieControl/J in src.jutsus)
 				src.incalorie=0
 				src.strength-=J.damage
 				src.overlays=0

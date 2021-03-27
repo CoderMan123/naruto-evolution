@@ -3,7 +3,7 @@ mob
 		GreenPill()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/GreenPill/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/GreenPill/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.ingpill==1) return
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
@@ -18,7 +18,7 @@ mob
 		YellowPill()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/YellowPill/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/YellowPill/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.inypill==1) return
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
@@ -33,7 +33,7 @@ mob
 		RedPill()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/RedPill/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/RedPill/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.inrpill==1) return
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
@@ -49,7 +49,7 @@ mob
 		HumanBulletTank()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/HumanBulletTank/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/HumanBulletTank/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.inboulder==1) return
 						if(loc.loc:Safe!=1) src.LevelStat("strength",rand(9,11))
@@ -71,7 +71,7 @@ mob
 		CalorieControl()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/CalorieControl/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/CalorieControl/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.incalorie==1) return
 						if(loc.loc:Safe!=1) src.LevelStat("strength",rand(15,30))

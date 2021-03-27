@@ -1,7 +1,7 @@
 mob
 	proc
 		Tsukuyomi()
-			for(var/obj/Jutsus/Tsukuyomi/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Tsukuyomi/J in src.jutsus)
 				if(Sharingan<=3) // things like this come first
 					src<<output("You must have Mangekyou Sharingan or higher activated in order to use this.","ActionPanel.Output")
 					return
@@ -56,7 +56,7 @@ mob
 					canattack=1
 					injutsu=0
 		Amaterasu()
-			for(var/obj/Jutsus/Amaterasu/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Amaterasu/J in src.jutsus)
 				if(Sharingan<=3)
 					src<<output("You need to have Mangekyou Sharingan or higher activated to use this.","ActionPanel.Output")
 					return
@@ -87,7 +87,7 @@ mob
 						else if(O)del(O)
 
 		Susanoo()
-			for(var/obj/Jutsus/Susanoo/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Susanoo/J in src.jutsus)
 				/*if(src.Susanoo)
 					src<<output("You deactivate your Susanoo","ActionPanel.Output")
 					src.Susanoo = 0
@@ -119,7 +119,7 @@ mob
 
 
 		Sharingan()
-			for(var/obj/Jutsus/Sharingan/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sharingan/J in src.jutsus)
 				if(src.Sharingan)
 					src.Sharingan=0
 					if(src.jutsucopy)src.jutsucopy=0

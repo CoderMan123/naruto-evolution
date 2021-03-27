@@ -1,7 +1,7 @@
 mob
 	proc
 		Demonic_Ice_Mirrors()
-			for(var/obj/Jutsus/Demonic_Ice_Mirrors/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Demonic_Ice_Mirrors/J in src.jutsus)
 				if(!has_water())
 					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 					return
@@ -118,7 +118,7 @@ mob
 							//J.JutsuCoolDown(src)
 					else src << output("<Font color=Aqua>You need a target to use this.</Font>","ActionPanel.Output")
 		Sensatsu_Suisho()
-			for(var/obj/Jutsus/Sensatsu_Suishou/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sensatsu_Suishou/J in src.jutsus)
 				if(!has_water())
 					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
 					return
@@ -245,7 +245,7 @@ mob
 					c_target.canattack=1
 					c_target.move=1
 		Iceball()
-			for(var/obj/Jutsus/Iceball/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Iceball/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -304,7 +304,7 @@ mob
 						src.canattack=1
 
 		Omega_Ice_Ball()
-			for(var/obj/Jutsus/Omega_Ice_Ball/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Omega_Ice_Ball/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))

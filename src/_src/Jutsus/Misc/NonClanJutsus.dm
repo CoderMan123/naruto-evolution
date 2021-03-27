@@ -1,7 +1,7 @@
 mob
 	proc
 		Chakra_Release()
-			for(var/obj/Jutsus/ChakraRelease/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/ChakraRelease/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(src.firing==0&&src.canattack==1)
 						view(src)<<sound('046.wav',0,0)
@@ -61,7 +61,7 @@ mob
 			if(clonesturned==1)
 				return
 			if(src.firing==0&&src.canattack==1&&!Prisoned&&move)
-				for(var/obj/Jutsus/Crow_Clone/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Crow_Clone/J in src.jutsus)
 					if(src.PreJutsu(J))
 						src.CloneHandler()
 						if(src.loc.loc:Safe!=1) src.LevelStat("Genjutsu",rand(13,20))
@@ -123,7 +123,7 @@ mob
 				return
 			/*if(multishadow==1)
 				return*/
-			for(var/obj/Jutsus/BClone/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/BClone/J in src.jutsus)
 				if(src.PreJutsu(J))
 					src.CloneHandler()
 					if(src.bunshin<maxbunshin)
@@ -151,7 +151,7 @@ mob
 			if(clonesturned==1)
 				return
 			if(src.firing==0&&src.canattack==1)
-				for(var/obj/Jutsus/MSClone/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/MSClone/J in src.jutsus)
 					if(src.PreJutsu(J))
 						src.CloneHandler()
 						view(src)<<sound('flashbang_explode1.wav',0,0)
@@ -187,7 +187,7 @@ mob
 			if(clonesturned==1)
 				return
 			if(src.firing==0&&src.canattack==1)
-				for(var/obj/Jutsus/SClone/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/SClone/J in src.jutsus)
 					if(src.PreJutsu(J))
 						src.CloneHandler()
 						if(!src.sbunshin)
@@ -223,7 +223,7 @@ mob
 								J.Levelup()
 
 		Clone_Jutsu_Destroy()
-			for(var/obj/Jutsus/BCloneD/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/BCloneD/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(src.Clones.len)
 						flick("jutsu",src)
@@ -242,7 +242,7 @@ mob
 		Transformation_Jutsu()
 			if(src.firing==0)
 				if(src.canattack==1)
-					for(var/obj/Jutsus/Transformation/J in src.JutsusLearnt)
+					for(var/obj/Jutsus/Transformation/J in src.jutsus)
 						if(src.PreJutsu(J))
 							if(src.henge==0)
 								if(src.loc.loc:Safe!=1) src.LevelStat("Genjutsu",rand(8,14))
@@ -255,7 +255,7 @@ mob
 								spawn()
 									src<<output("<Font color=white>Now click the object you wish to transform into.</Font>","ActionPanel.Output")
 		TreeBinding()
-			for(var/obj/Jutsus/TreeBinding/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/TreeBinding/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=usr.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",rand(15,30))
@@ -285,7 +285,7 @@ mob
 					else src<<"Your target is not by a tree, and the technique fails!"
 
 		Bringer_of_Darkness_Technique()
-			for(var/obj/Jutsus/Bringer_of_Darkness_Technique/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Bringer_of_Darkness_Technique/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src << output("This jutsu requires a target","ActionPanel.Output")
@@ -312,7 +312,7 @@ mob
 					src.canattack=1
 
 		Temple_Of_Nirvana()//Should scale with Genjutsu!
-			for(var/obj/Jutsus/Temple_Of_Nirvana/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Temple_Of_Nirvana/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",rand(9,13))
 					flick("jutsuse",src)
@@ -353,7 +353,7 @@ mob
 					src.firing=0
 					src.canattack=1
 		Getsuga_Tenshou()
-			for(var/obj/Jutsus/Getsuga_Tenshou/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Getsuga_Tenshou/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",0.2)
 					flick("jutsuse",src)
@@ -377,7 +377,7 @@ mob
 						src.firing=0
 						src.canattack=1
 		Flying_Thunder_God()
-			for(var/obj/Jutsus/Flying_Thunder_God/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Flying_Thunder_God/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(!move) return
 					if(injutsu) return
@@ -410,7 +410,7 @@ mob
 						src.canattack=1
 
 		Warp_Rasengan()
-			for(var/obj/Jutsus/Warp_Rasengan/J in src.JutsusLearnt) if(J.Excluded==0)
+			for(var/obj/Jutsus/Warp_Rasengan/J in src.jutsus) if(J.Excluded==0)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
@@ -448,7 +448,7 @@ mob
 
 		Sage_Bind()//HERE This just isn't fucking working.
 			return//temp
-		//	for(var/obj/Jutsus/Snake_Release_Jutsu/J in src.JutsusLearnt)
+		//	for(var/obj/Jutsus/Snake_Release_Jutsu/J in src.jutsus)
 
 				/*if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -509,7 +509,7 @@ mob
 
 
 		Snake_Release_Jutsu()
-			for(var/obj/Jutsus/Snake_Release_Jutsu/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Snake_Release_Jutsu/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -547,7 +547,7 @@ mob
 						src.canattack=1
 
 		Snake_Skin_Replacement_Jutsu()
-			for(var/obj/Jutsus/Snake_Skin_Replacement_Jutsu/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Snake_Skin_Replacement_Jutsu/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					var/turf/T=src.loc
@@ -569,7 +569,7 @@ mob
 					src.loc = T
 
 		Sage_Style_Giant_Rasengan()
-			for(var/obj/Jutsus/Sage_Style_Giant_Rasengan/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sage_Style_Giant_Rasengan/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(Effects["Rasengan"])
 						Effects["Rasengan"]=null
@@ -682,7 +682,7 @@ mob
 					Effects["Rasengan"]=null
 
 		Mystical_Palms()
-			for(var/obj/Jutsus/Mystical_Palms/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Mystical_Palms/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(mystical_palms)
 						src<<output("You deactivate your mystical palms.","ActionPanel.Output")
@@ -701,7 +701,7 @@ mob
 
 
 		One_Thousand_Years_of_Death()
-			for(var/obj/Jutsus/One_Thousand_Years_of_Death/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/One_Thousand_Years_of_Death/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
@@ -737,7 +737,7 @@ mob
 					src.firing=0
 					src.canattack=1
 		Chakra_Control()
-			for(var/obj/Jutsus/Chakra_Control/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Chakra_Control/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(src.waterwalk)
@@ -748,7 +748,7 @@ mob
 					src<<output("You start converting chakra to your feet.","ActionPanel.Output")
 
 		Cherry_Blossom_Impact()
-			for(var/obj/Jutsus/Cherry_Blossom_Impact/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Cherry_Blossom_Impact/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(1,2); J.Levelup()
@@ -756,7 +756,7 @@ mob
 					src<<output("You precisely charge chakra to your hands, and now have stocked [src.COW] punches.","ActionPanel.Output")
 
 		Body_Replacement_Technique()
-			for(var/obj/Jutsus/BodyReplace/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/BodyReplace/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,5))
 					view(src)<<sound('flashbang_explode1.wav',0,0)
@@ -812,7 +812,7 @@ mob
 
 
 		Advanced_Body_Replacement_Technique()
-			for(var/obj/Jutsus/AdvancedBodyReplace/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/AdvancedBodyReplace/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					src.kawarmi=1
@@ -821,7 +821,7 @@ mob
 
 
 		Ones_Own_Life_Reincarnation()
-			for(var/obj/Jutsus/Ones_Own_Life_Reincarnation/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Ones_Own_Life_Reincarnation/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					src.move=0
@@ -863,7 +863,7 @@ mob
 						src.injutsu=0
 						src.firing=0
 		Shunshin()
-			for(var/obj/Jutsus/Body_Flicker/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Body_Flicker/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(!move) return
 					if(injutsu) return
@@ -896,7 +896,7 @@ mob
 						src.canattack=1
 
 		Poison_Mist()
-			for(var/obj/Jutsus/Poison_Mist/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Poison_Mist/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,10))
 					src.icon_state = "jutsuse"
@@ -906,7 +906,7 @@ mob
 					spawn(1)src.icon_state = ""
 
 		Body_Pathway_Derangement()
-			for(var/obj/Jutsus/Body_Pathway_Derangement/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Body_Pathway_Derangement/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,10))
 					if(J.level==1) J.damage=5
@@ -936,7 +936,7 @@ mob
 							Z.firing=0
 
 		Heal()
-			for(var/obj/Jutsus/Heal/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Heal/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,10))
 					if(J.level==1) J.damage=10
@@ -960,7 +960,7 @@ mob
 
 
 		Curse_Dragon()
-			for(var/obj/Jutsus/Curse_Dragon/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Curse_Dragon/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,9))
@@ -1001,7 +1001,7 @@ mob
 		SageMode()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/SageMode/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/SageMode/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -1020,7 +1020,7 @@ mob
 		CurseSeal()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/CurseSeal/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/CurseSeal/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
@@ -1038,7 +1038,7 @@ mob
 
 
 		Crow_Substitution()
-			for(var/obj/Jutsus/Crow_Substitution/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Crow_Substitution/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					var/turf/T=src.loc
@@ -1061,7 +1061,7 @@ mob
 		HiddenSnakeStab()	//needs fixing. look into Bone drill. Fuinjutsu
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/HiddenSnakeStab/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/HiddenSnakeStab/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,13))
 						src.move=0
@@ -1086,7 +1086,7 @@ mob
 
 
 		Dust_Particle_Prison()
-			for(var/obj/Jutsus/Dust_Particle_Prison/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Dust_Particle_Prison/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target)
@@ -1130,7 +1130,7 @@ mob
 									del(a)
 
 		Dust_Particle_Prison_Beam()
-			for(var/obj/Jutsus/Dust_Particle_Prison_Beam/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Dust_Particle_Prison_Beam/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target)
@@ -1170,7 +1170,7 @@ mob
 					src.canattack=1
 
 		Kamehameha()
-			for(var/obj/Jutsus/Kamehameha/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Kamehameha/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,9))
@@ -1209,7 +1209,7 @@ mob
 						src.canattack=1
 
 		Rasengan()
-			for(var/obj/Jutsus/Rasengan/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Rasengan/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(Effects["Rasengan"])
 						Effects["Rasengan"]=null

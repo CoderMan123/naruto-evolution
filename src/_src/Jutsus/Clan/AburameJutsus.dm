@@ -4,7 +4,7 @@ mob
 			if(clonesturned==1)
 				return
 			if(src.firing==0&&src.canattack==1)
-				for(var/obj/Jutsus/Insect_Clone/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Insect_Clone/J in src.jutsus)
 					if(src.PreJutsu(J))
 						src.CloneHandler()
 						view(src)<<sound('bugs.wav',0,0)
@@ -36,7 +36,7 @@ mob
 						for(var/obj/Screen/manabar/HB in A.hbar)A.overlays+=HB
 						A.UpdateHMB()
 		Bug_Neurotoxin()
-			for(var/obj/Jutsus/Bug_Neurotoxin/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Bug_Neurotoxin/J in src.jutsus)
 				if(src.firing)return
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target || c_target.sbugged==0)
@@ -69,7 +69,7 @@ mob
 									c_target.canattack=1
 								if(O)del(O)
 		Insect_Cocoon()
-			for(var/obj/Jutsus/Insect_Cocoon/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Insect_Cocoon/J in src.jutsus)
 				if(bugpass)
 					src<<output("You shut down your insect Cocoon.","ActionPanel.Output")
 					src.bugpass=0
@@ -85,7 +85,7 @@ mob
 					src.bugpass=0
 
 		Stealth_Bug()
-			for(var/obj/Jutsus/Stealth_Bug/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Stealth_Bug/J in src.jutsus)
 				var/mob/player/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src<<output("You require a targeted player to use this technique.","ActionPanel.Output")
@@ -113,7 +113,7 @@ mob
 					if(c_target)c_target.sbugged=0
 
 		Hunter_Scarabs()
-			for(var/obj/Jutsus/Hunter_Scarabs/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Hunter_Scarabs/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
@@ -169,7 +169,7 @@ mob
 						src.canattack=1
 
 		Destruction_Bug_Swarm()
-			for(var/obj/Jutsus/Destruction_Bug_Swarm/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Destruction_Bug_Swarm/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
@@ -206,7 +206,7 @@ mob
 						src.firing=0
 						src.canattack=1
 		BugTornado()
-			for(var/obj/Jutsus/BugTornado/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/BugTornado/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))

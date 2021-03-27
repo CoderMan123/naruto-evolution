@@ -1,7 +1,7 @@
 mob
 	proc
 		Puppet_Dash()
-			for(var/obj/Jutsus/Puppet_Dash/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Puppet_Dash/J in src.jutsus)
 				if(pdash)
 					src<<output("You deactivate your puppet dashing.","ActionPanel.Output")
 					src.pdash=0
@@ -17,7 +17,7 @@ mob
 					src.pdash=0
 
 		Puppet_Shoot()
-			for(var/obj/Jutsus/Puppet_Shoot/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Puppet_Shoot/J in src.jutsus)
 				if(pshoot)
 					src<<output("You unload your puppet's knife.","ActionPanel.Output")
 					src.pshoot=0
@@ -28,7 +28,7 @@ mob
 					src<<output("Your puppet loads a knife into it's arms. Press CTRL+A or ALT+A to fire it.","ActionPanel.Output")
 
 		Puppet_Grab()
-			for(var/obj/Jutsus/Puppet_Grab/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Puppet_Grab/J in src.jutsus)
 				if(pgrab)
 					src<<output("Your puppet's arms are unflexed.","ActionPanel.Output")
 					src.pgrab=0
@@ -39,7 +39,7 @@ mob
 					src<<output("Your puppet loosens it's joints, ready to grab a nearby foe. Press CTRL+S or ALT+S to grab a player.","ActionPanel.Output")
 
 		Puppet_Transform()
-			for(var/obj/Jutsus/Puppet_Transform/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Puppet_Transform/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
 					var/mob/K = src.puppets[1]
@@ -69,7 +69,7 @@ mob
 					src << output("Your puppets transform into you! Their joints are loose and ready for grabbing.","ActionPanel.Output")
 					src.pgrab=1
 		First_Puppet_Summoning()
-			for(var/obj/Jutsus/First_Puppet_Summoning/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/First_Puppet_Summoning/J in src.jutsus)
 				if(src.puppets[1])
 					var/mob/K = src.puppets[1]
 					src.puppets[1]=null
@@ -100,7 +100,7 @@ mob
 					src.puppets[1] = M
 
 		Second_Puppet_Summoning()
-			for(var/obj/Jutsus/Second_Puppet_Summoning/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Second_Puppet_Summoning/J in src.jutsus)
 				if(src.puppets[2])
 					var/mob/K = src.puppets[2]
 					src.puppets[2]=null
@@ -132,7 +132,7 @@ mob
 		Summon_Kazekage_Puppet()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Summon_Kazekage_Puppet/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Summon_Kazekage_Puppet/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(9,15))
 						var/mob/jutsus/KazekagePuppet/A=new/mob/jutsus/KazekagePuppet(src.loc)

@@ -215,7 +215,7 @@ client
 			if(winget(src, "BrowserWindow", "is-visible") == "false")
 				var/html_jutsus = ""
 
-				for(var/obj/Jutsus/I in src.mob.JutsusLearnt)
+				for(var/obj/Jutsus/I in src.mob.jutsus)
 					html_jutsus += {"
 						<tr>
 							<td>[I.name]</td>

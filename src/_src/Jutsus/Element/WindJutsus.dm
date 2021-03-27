@@ -1,7 +1,7 @@
 mob
 	proc
 		FuutonDaitoppa()
-			for(var/obj/Jutsus/Daitoppa/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Daitoppa/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 					flick("jutsuse",src)
@@ -59,7 +59,7 @@ mob
 							src.copy=null
 							src.canattack=1
 		Zankuuha()
-			for(var/obj/Jutsus/Zankuuha/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Zankuuha/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",0.2)
 					flick("jutsuse",src)
@@ -83,7 +83,7 @@ mob
 						src.canattack=1
 
 		Wind_Shield()
-			for(var/obj/Jutsus/Wind_Shield/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Wind_Shield/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level==1) J.damage=5
@@ -127,7 +127,7 @@ mob
 						src.canattack=1
 						src.move=1
 		Sickle_Weasel_Technique()
-			for(var/obj/Jutsus/Sickle_Weasel_Technique/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Sickle_Weasel_Technique/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(firing)return
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -173,7 +173,7 @@ mob
 							src.canattack=1
 
 		Blade_of_Wind()
-			for(var/obj/Jutsus/Blade_of_Wind/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Blade_of_Wind/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(1,2); J.Levelup()
@@ -182,7 +182,7 @@ mob
 
 		Wind_Tornados()
 			if(src.firing==0 && src.canattack==1 && src.dead==0)
-				for(var/obj/Jutsus/Wind_Tornados/J in src.JutsusLearnt)
+				for(var/obj/Jutsus/Wind_Tornados/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(11,15))
 						src.move=0
@@ -207,7 +207,7 @@ mob
 
 
 		Wind_Dragon_Projectile()
-			for(var/obj/Jutsus/Wind_Dragon_Projectile/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Wind_Dragon_Projectile/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -248,7 +248,7 @@ mob
 
 
 		Wind_Cutter()
-			for(var/obj/Jutsus/Wind_Cutter/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Wind_Cutter/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 					flick("jutsuse",src)
@@ -304,7 +304,7 @@ mob
 							src.copy=null
 							src.canattack=1
 		Rasenshuriken()
-			for(var/obj/Jutsus/Rasenshuriken/J in src.JutsusLearnt)
+			for(var/obj/Jutsus/Rasenshuriken/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(Effects["Rasengan"])
 						Effects["Rasengan"]=null
