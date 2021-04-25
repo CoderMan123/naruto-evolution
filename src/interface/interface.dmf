@@ -194,7 +194,6 @@ window "ActionPanel"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -203,8 +202,6 @@ window "ActionPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 514x214
-		inner-size = 500x200
 	elem "ActionOutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -1021,7 +1018,6 @@ window "ColorWindow"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		outer-size = 654x494
 	elem "button9"
 		type = BUTTON
 		pos = 208,424
@@ -1203,7 +1199,6 @@ window "InventoryWindow"
 		size = 300x500
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1212,8 +1207,6 @@ window "InventoryWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x514
-		inner-size = 300x500
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1407,7 +1400,6 @@ window "LeaderWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1416,8 +1408,6 @@ window "LeaderWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1597,7 +1587,7 @@ window "Main"
 		is-disabled = true
 		border = line
 		saved-params = ""
-		text = "Project Evolution"
+		text = "Naruto Evolution"
 	elem "label18"
 		type = LABEL
 		pos = 2,3
@@ -1712,7 +1702,6 @@ window "NavigationPanel"
 		size = 1362x25
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1720,8 +1709,6 @@ window "NavigationPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 1376x39
-		inner-size = 1362x25
 	elem "Navigation"
 		type = LABEL
 		pos = 0,0
@@ -1925,7 +1912,6 @@ window "OutputPanel"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1934,8 +1920,6 @@ window "OutputPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 514x214
-		inner-size = 500x200
 	elem "OutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -1971,7 +1955,6 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1980,8 +1963,6 @@ window "SettingsWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2105,7 +2086,6 @@ window "Status"
 		size = 197x319
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -2115,15 +2095,12 @@ window "Status"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 211x333
-		inner-size = 197x319
 	elem "skillpoints"
 		type = LABEL
 		pos = 104,304
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2134,7 +2111,6 @@ window "Status"
 		size = 101x16
 		anchor1 = 42,86
 		anchor2 = 93,91
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2144,7 +2120,6 @@ window "Status"
 		size = 101x13
 		anchor1 = 42,80
 		anchor2 = 93,84
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2154,7 +2129,6 @@ window "Status"
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2165,7 +2139,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,68
 		anchor2 = 93,72
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2175,7 +2148,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,50
 		anchor2 = 93,55
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2185,7 +2157,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,26
 		anchor2 = 93,30
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2195,7 +2166,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,38
 		anchor2 = 93,42
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2205,7 +2175,6 @@ window "Status"
 		size = 104x13
 		anchor1 = 41,32
 		anchor2 = 93,36
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2217,7 +2186,6 @@ window "Status"
 		anchor2 = 95,78
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
-		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
@@ -2230,7 +2198,6 @@ window "Status"
 		anchor2 = 95,72
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
-		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
@@ -2241,7 +2208,6 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,21
 		anchor2 = 93,25
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2251,7 +2217,6 @@ window "Status"
 		size = 88x13
 		anchor1 = 45,16
 		anchor2 = 89,20
-		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2826,8 +2791,6 @@ window "AlertBox1"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x169
-		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -2898,7 +2861,6 @@ window "AlertBox2"
 		size = 300x155
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2907,8 +2869,6 @@ window "AlertBox2"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x169
-		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -2993,7 +2953,6 @@ window "AlertBox3"
 		size = 300x155
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3002,8 +2961,6 @@ window "AlertBox3"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x169
-		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3102,7 +3059,6 @@ window "AlertBox_Input1"
 		size = 300x179
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3111,8 +3067,6 @@ window "AlertBox_Input1"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x193
-		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3196,7 +3150,6 @@ window "AlertBox_Input2"
 		size = 300x179
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3205,8 +3158,6 @@ window "AlertBox_Input2"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x193
-		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3304,7 +3255,6 @@ window "AlertBox_Input3"
 		size = 300x183
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3313,8 +3263,6 @@ window "AlertBox_Input3"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x197
-		inner-size = 300x183
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3426,7 +3374,6 @@ window "AlertBox_List1"
 		size = 300x155
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3435,8 +3382,6 @@ window "AlertBox_List1"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x169
-		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3507,7 +3452,6 @@ window "AlertBox_List2"
 		size = 300x179
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3516,8 +3460,6 @@ window "AlertBox_List2"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x193
-		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3602,7 +3544,6 @@ window "AlertBox_List3"
 		size = 300x203
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3611,8 +3552,6 @@ window "AlertBox_List3"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x217
-		inner-size = 300x203
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3711,7 +3650,6 @@ window "AlertBox_List4"
 		size = 300x227
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3720,8 +3658,6 @@ window "AlertBox_List4"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x241
-		inner-size = 300x227
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3834,7 +3770,6 @@ window "AlertBox_List5"
 		size = 300x251
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3843,8 +3778,6 @@ window "AlertBox_List5"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x265
-		inner-size = 300x251
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3971,7 +3904,6 @@ window "AlertBox_List6"
 		size = 300x275
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3980,8 +3912,6 @@ window "AlertBox_List6"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x289
-		inner-size = 300x275
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4122,7 +4052,6 @@ window "AlertBox_List7"
 		size = 300x299
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4131,8 +4060,6 @@ window "AlertBox_List7"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x313
-		inner-size = 300x299
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4287,7 +4214,6 @@ window "AlertBox_List8"
 		size = 300x323
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4296,8 +4222,6 @@ window "AlertBox_List8"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
-		outer-size = 314x337
-		inner-size = 300x323
 	elem "Background"
 		type = LABEL
 		pos = 0,0
