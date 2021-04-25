@@ -22,7 +22,7 @@ jobs:
 
       - name: Build project
         run: |
-          DreamMaker "$GITHUB_WORKSPACE/project-evolution.dme"
+          DreamMaker "$GITHUB_WORKSPACE/naruto-evolution.dme"
       
       - name: Deploy project
         env:
