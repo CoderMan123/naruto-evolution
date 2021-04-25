@@ -290,7 +290,7 @@ window "Browser"
 		is-flat = true
 	elem "label18"
 		type = LABEL
-		pos = 2,3
+		pos = 3,3
 		size = 16x16
 		anchor1 = 0,0
 		anchor2 = none
@@ -998,7 +998,7 @@ window "Character"
 		text = "Name"
 	elem "label18"
 		type = LABEL
-		pos = 2,3
+		pos = 3,3
 		size = 16x16
 		anchor1 = 0,0
 		anchor2 = none
@@ -1152,7 +1152,6 @@ window "InputPanel"
 		size = 500x28
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1160,8 +1159,6 @@ window "InputPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 514x42
-		inner-size = 500x28
 	elem "ChatBackground"
 		type = LABEL
 		pos = 0,0
@@ -1337,7 +1334,7 @@ window "Inventory"
 		text = "Inventory - 0/25"
 	elem "label18"
 		type = LABEL
-		pos = 2,3
+		pos = 3,3
 		size = 16x16
 		anchor1 = 0,0
 		anchor2 = none
@@ -1377,7 +1374,6 @@ window "JutsuTab"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 654x494
 	elem "button7"
 		type = BUTTON
 		pos = 544,32
@@ -1459,7 +1455,7 @@ window "Leader"
 		text = "Leader"
 	elem "label18"
 		type = LABEL
-		pos = 2,3
+		pos = 3,3
 		size = 16x16
 		anchor1 = 0,0
 		anchor2 = none
@@ -1606,7 +1602,7 @@ window "Main"
 		text = "Naruto Evolution"
 	elem "label18"
 		type = LABEL
-		pos = 2,3
+		pos = 3,3
 		size = 16x16
 		anchor1 = 0,0
 		anchor2 = none
@@ -2171,7 +2167,7 @@ window "Settings"
 		is-flat = true
 	elem "label18"
 		type = LABEL
-		pos = 2,3
+		pos = 3,3
 		size = 16x16
 		anchor1 = 0,0
 		anchor2 = none
@@ -2641,7 +2637,6 @@ window "yutput"
 		size = 504x454
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		border = sunken
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -2650,8 +2645,6 @@ window "yutput"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		outer-size = 518x468
-		inner-size = 504x454
 	elem "message"
 		type = OUTPUT
 		pos = 0,45
