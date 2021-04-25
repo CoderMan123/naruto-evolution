@@ -51,9 +51,9 @@ var/const
 
 obj/proc/take(mob/M)
 	if(M.dead)
-		M<<output("You're dead.","ActionPanel.Output")
+		M<<output("You're dead.","Action.Output")
 		return
-	hearers()<<output("[M] picks up [src].","ActionPanel.Output")
+	hearers()<<output("[M] picks up [src].","Action.Output")
 	M.RecieveItem(src)
 	M.client.UpdateInventoryPanel()
 
@@ -105,7 +105,7 @@ obj
 			//Get
 				if(usr.ClothingOverlays[section]==src.icon) return
 				if(get_dist(usr,src)<=1)
-					//if(over_control == "mapwindow.map"&&src_control=="Inventory.InvenInfo")
+					//if(over_control == "Map.map"&&src_control=="Inventory.InvenInfo")
 					if(usr.contents.Find(src))
 						src.Drop(usr)
 						return

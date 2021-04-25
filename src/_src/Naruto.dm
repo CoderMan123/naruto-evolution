@@ -265,20 +265,6 @@ mob/Login
 			del(EYEBALL)
 			del(L)
 	//	src<<sound('preview.ogg')
-		if(prob(50))
-			winset(src, null, {"
-					Titlescreen.Shikamaru.is-visible="false"
-						"})
-		winset(src, null, {"
-							Main.Child.right=Titlescreen;
-							Main.is-maximized=true
-							Main.UnlockChild.is-visible = "false";
-							Character.is-visible      = "false";
-							Main.NavigationChild.is-visible      = "false";
-							Main.OutputChild.is-visible      = "false";
-							target.is-visible = "false";
-							Main.ActionChild.is-visible      = "false";
-						"})
 		src.AddAdminVerbs()
 		var/Ticked=0
 		var/mob/t1
@@ -299,7 +285,7 @@ mob/Login
 		ASSERT(hasSavefile(LoginID) && src.client)
 		src.loc=locate(1,200,19)
 		winset(src, null, {"
-							Main.Child.right=mapwindow;
+							Main.Child.right=Map;
 						"})
 		for(var/obj/Titlescreen/Logo/L in src.client.screen)del(L)
 		LoginID=lowertext(LoginID)
@@ -344,7 +330,7 @@ mob/Login
 		M.chatcolor="white"
 		M.RestoreOverlays()
 		world<<"[M.rname] has logged in."
-		M << output("Welcome to the game. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F10: Hotslots<br>R: Recharge chakra<br>I: Inventory<br>O: Statpanel<br>P: Jutsus<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","ActionPanel.Output")
+		M << output("Welcome to the game. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F10: Hotslots<br>R: Recharge chakra<br>I: Inventory<br>O: Statpanel<br>P: Jutsus<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","Action.Output")
 		M << "Welcome [M.rname]. If you're new please read the rules. You can find them in the Options panel. If you need to contact someone, there is a link to our discord on the HUB. Check the Action output to the right for controls."
 		if(!M.key)
 			M.Logout()
@@ -386,9 +372,9 @@ mob/Login
 				M.verbs += M.Factionverbs
 				c.onlinemembers.Add(M)
 				c.members[M.rname] = list(M.key, M.level, M.Factionrank)
-				if(c.FMOTD) M<<output("Faction MOTD: <br>[c.FMOTD]</br>","ActionPanel.Output")
+				if(c.FMOTD) M<<output("Faction MOTD: <br>[c.FMOTD]</br>","Action.Output")
 				M.verbs += /Faction/Generic/verb/FactionLeave
-				winset(M, "NavigationPanel.FactionButton", "is-disabled = 'false'")
+				winset(M, "Navigation.FactionButton", "is-disabled = 'false'")
 
 		if(M.Faction&&!getFaction(M.Faction))
 			M<<"Your Faction no longer exists. [M.Faction] has disbanded."
@@ -425,8 +411,8 @@ mob/Login
 			Main.NavigationChild.is-visible      = "true";
 			Main.OutputChild.is-visible      = "true";
 			Main.ActionChild.is-visible      = "true";
-			Main.Child.right=mapwindow;
-			NavigationPanel.ExpLockButton.is-disabled = false
+			Main.Child.right=Map;
+			Navigation.ExpLockButton.is-disabled = false
 		"})
 		M<<"Now speaking in: [M.client.channel]."
 
@@ -623,7 +609,7 @@ mob/Login
 				M.loc=locate(39,158,14)//M.MapLoadSpawn()
 				M.client.eye=M
 				M.client:perspective = EYE_PERSPECTIVE
-				M << output("Welcome to the game. Enjoy. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F5: Hotslots<br>R: Recharge chakra<br>Tab: Target<br>Shift+Tab: Untarget<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","ActionPanel.Output")
+				M << output("Welcome to the game. Enjoy. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F5: Hotslots<br>R: Recharge chakra<br>Tab: Target<br>Shift+Tab: Untarget<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","Action.Output")
 				winset(M, "Main", "is-maximized=true")
 				new/obj/Screen/Bar(M)
 				if(M.village == "Hidden Leaf")new/obj/Screen/LeafSymbol(M)
@@ -672,7 +658,7 @@ mob/Login
 								Main.NavigationChild.is-visible      = "true";
 								Main.OutputChild.is-visible      = "true";
 								Main.ActionChild.is-visible      = "true";
-								Main.Child.right=mapwindow;
+								Main.Child.right=Map;
 							"})
 				M<<"Now speaking in: [M.client.channel]."
 
@@ -958,7 +944,7 @@ mob
 			var/savefile/F = new/savefile("saves/characters/[copytext(Logins,1,2)]/[Logins].sav")
 			F["Password"] = Password
 			F << src
-			//src << output("Game saved successfully.", "ActionPanel.Output")
+			//src << output("Game saved successfully.", "Action.Output")
 
 	Write(var/savefile/F,var/list/neversave=null)
 		. = ..(F,neversave)
@@ -994,7 +980,7 @@ mob
 		CloseBrowser()
 			set hidden=1
 			winset(src, null, {"
-						BrowserWindow.is-visible = "false";
+						Browser.is-visible = "false";
 					"})
 		MiniWindow()
 			set hidden=1

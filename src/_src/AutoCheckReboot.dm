@@ -8,7 +8,7 @@ proc
 		for(var/mob/M in mobs_online)
 			if(M.key)
 				M.exp_locked=1
-				winset(M, "NavigationPanel.ExpLockButton", "is-disabled = 'false'")
+				winset(M, "Navigation.ExpLockButton", "is-disabled = 'false'")
 				spawn() M.client.FlashExperienceLock()
 				M.Save()
 			else

@@ -10,7 +10,7 @@ obj
 
 				var/mob/Owner=getOwner(src.owner)
 				Owner<<sound('level.wav',0,0)
-				Owner<<output("<font color= #dda0dd>Your [src] skill has advanced a level</Font>.","ActionPanel.Output")
+				Owner<<output("<font color= #dda0dd>Your [src] skill has advanced a level</Font>.","Action.Output")
 				src.level++
 				src.exp-=src.maxexp
 				src.maxexp+=30
@@ -18,21 +18,21 @@ obj
 					if(src.level==2)Owner.maxbunshin=1
 					if(src.level==3)Owner.maxbunshin=1
 					if(src.level==4)Owner.maxbunshin=1
-					Owner<<output("<font color= #bc8f8f>Your [src]'s clones now have more strength</Font>.","ActionPanel.Output")
+					Owner<<output("<font color= #bc8f8f>Your [src]'s clones now have more strength</Font>.","Action.Output")
 				if(src.name=="Fire Release: Fire Ball")
-					Owner<<output("<font color= #bc8f8f>Your [src] skill's base damage has increased</Font>.","ActionPanel.Output")
+					Owner<<output("<font color= #bc8f8f>Your [src] skill's base damage has increased</Font>.","Action.Output")
 				if(src.name=="Meteor Punch")
-					Owner<<output("<font color= #bc8f8f>Your [src] skill's base damage and knockback power has increased</Font>.","ActionPanel.Output")
+					Owner<<output("<font color= #bc8f8f>Your [src] skill's base damage and knockback power has increased</Font>.","Action.Output")
 				if(src.name=="Fire Release: Phoenix Immortal Fire Technique")
 					if(src.level==2)
-						Owner<<output("<font color= #bc8f8f>Your [src] skill is now able to fire 3 projectiles</Font>.","ActionPanel.Output")
+						Owner<<output("<font color= #bc8f8f>Your [src] skill is now able to fire 3 projectiles</Font>.","Action.Output")
 						Owner.katon=3
 					if(src.level==3)
-						Owner<<output("<font color= #bc8f8f>Your [src] skill's base damage has increased</Font>.","ActionPanel.Output")
-						Owner<<output("<font color= #bc8f8f>Your [src] skill is now able to fire 4 projectiles</Font>.","ActionPanel.Output")
+						Owner<<output("<font color= #bc8f8f>Your [src] skill's base damage has increased</Font>.","Action.Output")
+						Owner<<output("<font color= #bc8f8f>Your [src] skill is now able to fire 4 projectiles</Font>.","Action.Output")
 						Owner.katon=4
 					if(src.level==4)
-						Owner<<output("<font color= #bc8f8f>Your [src] skill is now able to fire 5 projectiles</Font>.","ActionPanel.Output")
+						Owner<<output("<font color= #bc8f8f>Your [src] skill is now able to fire 5 projectiles</Font>.","Action.Output")
 						Owner.katon=5
 				if(src.name=="Body Replacement Jutsu")
 					if(src.level==4)
@@ -41,13 +41,13 @@ obj
 						if(J.type in Owner.jutsus_learned)del(J)
 						else
 							if(!J) return
-							Owner<<output("<font color= #bc8f8f>You learned [J.name]</Font>.","ActionPanel.Output")
+							Owner<<output("<font color= #bc8f8f>You learned [J.name]</Font>.","Action.Output")
 							Owner.jutsus.Add(J)
 							Owner.jutsus_learned.Add(J.type)
 							J.Owner=Owner
 				if(src.name=="Transformation Jutsu")
-					if(src.level==2)Owner<<output("<font color= #bc8f8f>[src.name] can now be used to transform into objects</Font>!","ActionPanel.Output")
-					if(src.level==3)Owner<<output("<font color= #bc8f8f>[src.name] can now be used to transform into almost anything</Font>!","ActionPanel.Output")
+					if(src.level==2)Owner<<output("<font color= #bc8f8f>[src.name] can now be used to transform into objects</Font>!","Action.Output")
+					if(src.level==3)Owner<<output("<font color= #bc8f8f>[src.name] can now be used to transform into almost anything</Font>!","Action.Output")
 
 mob
 	proc
@@ -56,7 +56,7 @@ mob
 			if(!A) return
 			if(A.Safe&&!mission) return
 			if(src.exp_locked)
-				src<<output("<font color=red><small><small>You're currently exp locked! Use the Remove Exp Lock button under the options pane!</small></Font>","ActionPanel.Output")
+				src<<output("<font color=red><small><small>You're currently exp locked! Use the Remove Exp Lock button under the options pane!</small></Font>","Action.Output")
 				return
 			switch(stat)
 				if("Defence")defexp+=howmuch
@@ -67,7 +67,7 @@ mob
 			Levelup()
 		Levelup()
 			if(src.xplock==1)
-				src<<output("You have an Experience lock on you. This measure is used against the abusers / AFK trainers. Admin decides when this is removed.","ActionPanel.Output")
+				src<<output("You have an Experience lock on you. This measure is used against the abusers / AFK trainers. Admin decides when this is removed.","Action.Output")
 				return
 			if(src.exp>=src.maxexp)
 				if(src.level>=100)
@@ -78,7 +78,7 @@ mob
 				O.layer=200
 				src.overlays+=O
 				src<<sound('levelup.wav',0,0)
-				src<<output("<font color= #bc8f8f>You leveled up!</Font>.","ActionPanel.Output")
+				src<<output("<font color= #bc8f8f>You leveled up!</Font>.","Action.Output")
 				src.level+=1
 				src.exp-=src.maxexp
 				src.statpoints+=3
@@ -104,7 +104,7 @@ mob
 				if(src.strength>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=yellow>You leveled up Strength</Font>.","ActionPanel.Output")
+				src<<output("<font color=yellow>You leveled up Strength</Font>.","Action.Output")
 				src.exp+=1
 				src.strength+=1
 				src.strengthexp-=src.maxstrengthexp
@@ -116,7 +116,7 @@ mob
 				if(src.ninjutsu>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=green>You leveled up Ninjutsu</Font>.","ActionPanel.Output")
+				src<<output("<font color=green>You leveled up Ninjutsu</Font>.","Action.Output")
 				src.exp+=1
 				src.ninjutsu+=1
 				src.ninexp-=src.maxninexp
@@ -127,7 +127,7 @@ mob
 				if(src.genjutsu>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=#C0C0C0>You leveled up Genjutsu</Font>.","ActionPanel.Output")
+				src<<output("<font color=#C0C0C0>You leveled up Genjutsu</Font>.","Action.Output")
 				src.exp+=1
 				src.genjutsu+=1
 				src.genexp-=src.maxgenexp
@@ -138,7 +138,7 @@ mob
 				if(src.defence>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=maroon>You leveled up Defence</Font>.","ActionPanel.Output")
+				src<<output("<font color=maroon>You leveled up Defence</Font>.","Action.Output")
 				src.exp+=1
 				src.defence++
 				src.defexp-=src.maxdefexp
@@ -149,7 +149,7 @@ mob
 				if(src.agility>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=blue>You leveled up Agility</Font>.","ActionPanel.Output")
+				src<<output("<font color=blue>You leveled up Agility</Font>.","Action.Output")
 				src.exp+=1
 				src.agility++
 				src.agilityexp-=src.maxagilityexp
@@ -295,7 +295,7 @@ mob
 					if(istype(A,/area/Dojo))
 						if(ismob(X))
 							if(src==X)
-								src<<output("You've just self-killed.'No exp from that...","ActionPanel.Output")
+								src<<output("You've just self-killed.'No exp from that...","Action.Output")
 								goto skip
 							X.levelrate+=1
 							if(X.levelrate>=1) X.levelrate=1
@@ -311,7 +311,7 @@ mob
 						src.rest=0
 						src.dodge=0
 						src.move=1
-						view(src)<<output("[src] has been KO'd and removed from the Dojo.","ActionPanel.Output")
+						view(src)<<output("[src] has been KO'd and removed from the Dojo.","Action.Output")
 						if(istype(locate(D.DojoX,D.DojoY,D.DojoZ),/turf/))src.loc=locate(D.DojoX,D.DojoY,D.DojoZ)
 						else src.loc=MapLoadSpawn()
 						UpdateHMB()
@@ -321,7 +321,7 @@ mob
 							X.KillCombo++
 						return
 					if(dueling)
-						world << output("[opponent] has defeated [src] in an arena battle.","ActionPanel.Output")
+						world << output("[opponent] has defeated [src] in an arena battle.","Action.Output")
 						src.loc=locate(110,90,3)
 						src.health=src.maxhealth
 						src.kawarmi=0
@@ -374,30 +374,30 @@ mob
 						if(X&&ismob(X)&&X.KillCombo<5+round(X.agility/5))
 							X.KillCombo++
 						if(X.village==src.village&&X.village!="Missing-Nin"&&src.village!="Missing-Nin")
-							world<<output("[src] was knocked out by [X], and they were both from the [src.village]!","ActionPanel.Output")
+							world<<output("[src] was knocked out by [X], and they were both from the [src.village]!","Action.Output")
 							//text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)
 							if(X.village == "Missing-Nin"|| X.village == "Seven Swordsmen"||X.village=="Akatsuki"||X.village=="Anbu Root") goto MissSkip
 							if(loc in block(locate(71,95,4),locate(200,163,4))) goto chuuninskip
 							X.exp-=round(X.exp*0.5)
 							X.Vkill++
 							if(X.exp<=0) X.exp=0
-							X<<output("You have lost 50% of your EXP for killing a fellow villager.","ActionPanel.Output")
+							X<<output("You have lost 50% of your EXP for killing a fellow villager.","Action.Output")
 
 							MissSkip
 							chuuninskip
 							X.KillCombo=0
 
-						else world<<output("[src] was knocked out by [X]!","ActionPanel.Output")
+						else world<<output("[src] was knocked out by [X]!","Action.Output")
 						text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)//Kill Log test
-						src<<output("You were knocked out by [X].","ActionPanel.Output")
+						src<<output("You were knocked out by [X].","Action.Output")
 						var/exp_loss = 2
 						src.exp -= exp_loss
-						src << output("You lose [exp_loss] experience points.","ActionPanel.Output")
+						src << output("You lose [exp_loss] experience points.","Action.Output")
 						X.levelrate+=2
 						X.exp+=rand(3,(X.levelrate))
 						if(X.levelrate>=5) X.levelrate=5
 						X.Ryo+=src.Ryo
-						X<<output("You have looted [src.Ryo] Ryo from [src].","ActionPanel.Output")
+						X<<output("You have looted [src.Ryo] Ryo from [src].","Action.Output")
 						X.kills++
 						//X.Multikill++
 						if(X.joinedwar==1)
@@ -442,25 +442,25 @@ mob
 						//spawn(70) X.Multikill=0
 
 						if(VillageAttackers.Find(src.village)&&VillageDefenders.Find(X.village))
-							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","ActionPanel.Output")
+							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","Action.Output")
 							X.Ryo+=10
 						if(VillageDefenders.Find(src.village)&&VillageAttackers.Find(X.village))
-							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","ActionPanel.Output")
+							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","Action.Output")
 							X.Ryo+=10
 						if(src.Bounty)
-							X<<output("You have claimed the $[src.Bounty] bounty on [src.name]'s head.","ActionPanel.Output")
+							X<<output("You have claimed the $[src.Bounty] bounty on [src.name]'s head.","Action.Output")
 							X.Ryo+=src.Bounty
 							src.Bounty=0
 						else X.Bounty+=rand(5,10)
 						if(X.Mission=="Kill [src] ([src.ckey])")
 							X.Mission=null
-							X<<output("You have successfully completed your mission.","ActionPanel.Output")
+							X<<output("You have successfully completed your mission.","Action.Output")
 							var/MissionRyo=300
 							var/MissionExp=10 + WorldXp
 							if(X.Squad)
 								var/mob/player/M = getOwner(X.Squad.Leader)
 								M.Ryo += (MissionRyo + 1)
-								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","ActionPanel.Output")
+								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
@@ -492,11 +492,11 @@ mob
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
 													M.Levelup()
-										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 										//M.Mission=null
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
-								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","ActionPanel.Output")
+								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
 								X.Ryo+=MissionRyo
 								var/mob/player/M2 = X
 								for(var/i=0,i<MissionExp,i++)
@@ -528,13 +528,13 @@ mob
 
 						if(X.Mission=="Jounin Kill [src] ([src.ckey])")
 							X.Mission=null
-							X<<output("You have successfully completed your mission.","ActionPanel.Output")
+							X<<output("You have successfully completed your mission.","Action.Output")
 							var/MissionRyo=600
 							var/MissionExp=15 + WorldXp
 							if(X.Squad)
 								var/mob/player/M = getOwner(X.Squad.Leader)
 								M.Ryo += (MissionRyo + 1)
-								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","ActionPanel.Output")
+								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
@@ -566,11 +566,11 @@ mob
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
 													M.Levelup()
-										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 										//M.Mission=null
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
-								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","ActionPanel.Output")
+								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
 								X.Ryo+=MissionRyo
 								var/mob/player/M2 = X
 								for(var/i=0,i<MissionExp,i++)
@@ -587,13 +587,13 @@ mob
 											M2.Levelup()
 						if(X.Mission=="Elite Kill [src] ([src.ckey])")
 							X.Mission=null
-							X<<output("You have successfully completed your mission.","ActionPanel.Output")
+							X<<output("You have successfully completed your mission.","Action.Output")
 							var/MissionRyo=600
 							var/MissionExp=25 + WorldXp
 							if(X.Squad)
 								var/mob/player/M = getOwner(X.Squad.Leader)
 								M.Ryo += (MissionRyo + 1)
-								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","ActionPanel.Output")
+								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
@@ -625,11 +625,11 @@ mob
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
 													M.Levelup()
-										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 										//M.Mission=null
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
-								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","ActionPanel.Output")
+								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
 								X.Ryo+=MissionRyo
 								var/mob/player/M2 = X
 								for(var/i=0,i<MissionExp,i++)
@@ -720,7 +720,7 @@ mob
 					spawn(3)del(src)
 				/*if(istype(src,/mob/Missions/Bandit))
 					if(findtext(X.Mission,"K.O a bandit"))
-						X<<output("\yellow You've finished your mission. Congratulations, the bandit is down!.","ActionPanel.Output")
+						X<<output("\yellow You've finished your mission. Congratulations, the bandit is down!.","Action.Output")
 						X.Mission=null
 						var/MissionRyo=100
 						var/MissionExp=12+WorldXp
@@ -729,7 +729,7 @@ mob
 							var/mob/M
 							M = getOwner(usr.Squad.Leader)
 							M.Ryo += (MissionRyo + 1)
-							M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","ActionPanel.Output")
+							M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 							M.exp+=MissionExp
 							for(var/i in usr.Squad.Members)
 								if(getOwner(i))
@@ -737,13 +737,13 @@ mob
 									if((M.client.inactivity/10)>=120) continue
 									M.Ryo += MissionRyo + 1
 									M.exp+=MissionExp
-									M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+									M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 									if(M.Mission=="K.O a bandit")
 										M.Mission=null
 									M.Levelup()
 									Del(src)
 						else
-							usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+							usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 							usr.Ryo+=MissionRyo
 							usr.exp+=MissionExp
 							usr.Levelup()

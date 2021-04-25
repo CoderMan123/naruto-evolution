@@ -3,7 +3,7 @@ mob
 		Demonic_Ice_Mirrors()
 			for(var/obj/Jutsus/Demonic_Ice_Mirrors/J in src.jutsus)
 				if(!has_water())
-					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
+					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
 					return
 
 				if(src.PreJutsu(J))
@@ -116,15 +116,15 @@ mob
 							c_target.canattack=1
 							c_target.firing=0
 							//J.JutsuCoolDown(src)
-					else src << output("<Font color=Aqua>You need a target to use this.</Font>","ActionPanel.Output")
+					else src << output("<Font color=Aqua>You need a target to use this.</Font>","Action.Output")
 		Sensatsu_Suisho()
 			for(var/obj/Jutsus/Sensatsu_Suishou/J in src.jutsus)
 				if(!has_water())
-					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
+					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
 					return
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src << output("<Font color=Aqua>You need a target to use this.</Font>","ActionPanel.Output")
+					src << output("<Font color=Aqua>You need a target to use this.</Font>","Action.Output")
 					return
 
 				if(src.PreJutsu(J))
@@ -217,7 +217,7 @@ mob
 						else
 
 
-							src << output("<Font color=Aqua>You need a target to use this.</Font>","ActionPanel.Output")
+							src << output("<Font color=Aqua>You need a target to use this.</Font>","Action.Output")
 							src.firing=0
 							src.injutsu=0
 							src.copy=null
@@ -225,7 +225,7 @@ mob
 							src.move=1
 							return
 					else
-						src << output("<Font color=Aqua>You need a target to use this.</Font>","ActionPanel.Output")
+						src << output("<Font color=Aqua>You need a target to use this.</Font>","Action.Output")
 						src.firing=0
 						src.injutsu=0
 						src.copy=null

@@ -118,7 +118,7 @@ obj/Inventory/JutsuMastScroll
 	layer = MOB_LAYER+1
 	MouseDrop(over_object=src,src_location,over_location, src_control,over_control,params)
 		if(get_dist(usr,src)<=1)
-			//if(over_control == "mapwindow.map"&&src_control=="Inventory.InvenInfo")
+			//if(over_control == "Map.map"&&src_control=="Inventory.InvenInfo")
 			if(inuse)return
 			if(usr.contents.Find(src))
 				src.Drop(usr)
@@ -129,7 +129,7 @@ obj/Inventory/JutsuMastScroll
 		if(usr.dead) return
 		if(get_dist(src,usr)>1) return
 		if(!usr.contents.Find(src))
-			hearers()<<output("[usr] picks up [src].","ActionPanel.Output")
+			hearers()<<output("[usr] picks up [src].","Action.Output")
 			take(usr)
 			return
 		if(src in usr)
@@ -180,11 +180,11 @@ mob
 		Get_HostKey()
 			usr << browse(HostKey)
 			winset(src, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 		Add_VKill(mob/M in world)
 			M.Vkill++
-			src<<output("[M]: [M.Vkill] Vkills.","ActionPanel.Output")
+			src<<output("[M]: [M.Vkill] Vkills.","Action.Output")
 			CheckVKill()
 		RemoveAllClothingV(mob/M in world)
 			RemoveAllClothing()

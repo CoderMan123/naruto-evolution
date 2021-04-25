@@ -58,7 +58,7 @@ client
 mob
 	verb/Squad()
 		set hidden = 1
-		if(winget(src, "BrowserWindow", "is-visible") == "false")
+		if(winget(src, "Browser", "is-visible") == "false")
 			var/squad/squad = src.GetSquad()
 			if(!squad)
 				var/html = {"
@@ -131,10 +131,10 @@ mob
 					</html>
 				"}
 
-				src << output(null, "BrowserWindow.Output")
+				src << output(null, "Browser.Output")
 				src << browse("[html]")
 				src.client.browser=BROWSER_SQUAD
-				winset(src, "BrowserWindow", "is-visible = true")
+				winset(src, "Browser", "is-visible = true")
 			else
 				var/squad_members
 				var/squad_management
@@ -307,13 +307,13 @@ mob
 					</html>
 				"}
 
-				src << output(null, "BrowserWindow.Output")
+				src << output(null, "Browser.Output")
 				src << browse("[html]")
 				src.client.browser=BROWSER_SQUAD
-				winset(src, "BrowserWindow", "is-visible = true")
+				winset(src, "Browser", "is-visible = true")
 		else
 			src.client.browser=BROWSER_NONE
-			winset(src, "BrowserWindow", "is-visible = false")
+			winset(src, "Browser", "is-visible = false")
 
 	verb/CreateSquad()
 		set hidden = 1
@@ -382,7 +382,7 @@ squad
 				for(var/mob/m in mobs_online)
 					if(m.client.ckey == ckey)
 						m.client.browser=BROWSER_NONE
-						winset(m.client, "BrowserWindow", "is-visible = false")
+						winset(m.client, "Browser", "is-visible = false")
 						break
 
 			src.leader = new()
@@ -401,7 +401,7 @@ squad
 
 	proc/Refresh()
 		for(var/client/c in clients_online)
-			if(src && c && src.members[c.ckey] && c.browser == BROWSER_SQUAD && winget(c, "BrowserWindow", "is-visible") == "true" )
+			if(src && c && src.members[c.ckey] && c.browser == BROWSER_SQUAD && winget(c, "Browser", "is-visible") == "true" )
 				src.members[c.ckey] = c.mob.name
 				src.levels[c.ckey] = c.mob.level
 				src.villages[c.ckey] = c.mob.village
@@ -450,7 +450,7 @@ squad
 					if(c.ckey in src.members)
 						c << "[src.members[ckey]] was kicked from the Squad."
 						c.browser=BROWSER_SQUAD
-						winset(c, "BrowserWindow", "is-visible = true")
+						winset(c, "Browser", "is-visible = true")
 
 				if(ckey in src.members)
 					src.members -= ckey

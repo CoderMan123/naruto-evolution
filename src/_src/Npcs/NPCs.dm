@@ -70,7 +70,7 @@ mob/NPC
 			if(get_dist(src,usr)>2) return
 			var/newitems=usr.items+1
 			if(newitems>usr.maxitems)
-				usr<<output("This would exceed your amount of avaliable items.","ActionPanel.Output")
+				usr<<output("This would exceed your amount of avaliable items.","Action.Output")
 				return
 			usr.move=0
 			var/list/Options=list()
@@ -91,12 +91,12 @@ mob/NPC
 					I.cColor = rgb(text2num(Colors[1]),text2num(Colors[2]),text2num(Colors[3]))
 				usr.RecieveItem(I)
 				usr.client.UpdateInventoryPanel()
-				usr<<output("You bought the [S.name] for [S.Cost] Ryo.","ActionPanel.Output")
+				usr<<output("You bought the [S.name] for [S.Cost] Ryo.","Action.Output")
 				usr.Ryo-=S.Cost
 				usr.move=1
 			else
 				usr.move=1
-				usr<<output("You need [S.Cost] Ryo to purchase this.","ActionPanel.Output")
+				usr<<output("You need [S.Cost] Ryo to purchase this.","Action.Output")
 				return
 				//obj/Inventory/Clothing/Vests/Robe
 	Weapons_Dealer
@@ -130,7 +130,7 @@ mob/NPC
 			var/RealPrice=S.Cost*AlertInput[2]
 			var/newitems=usr.items+AlertInput[2]
 			if(newitems>usr.maxitems)
-				usr<<output("This would exceed your amount of avaliable items.","ActionPanel.Output")
+				usr<<output("This would exceed your amount of avaliable items.","Action.Output")
 				usr.move=1
 				return
 			if(AlertInput[2]<=0)
@@ -141,11 +141,11 @@ mob/NPC
 				I.stacks = AlertInput[2]
 				usr.RecieveItem(I)
 				usr.client.UpdateInventoryPanel()
-				usr<<output("You bought [AlertInput[2]] [S.name](s) for [RealPrice] Ryo.","ActionPanel.Output")
+				usr<<output("You bought [AlertInput[2]] [S.name](s) for [RealPrice] Ryo.","Action.Output")
 				usr.Ryo-=RealPrice
 				usr.move=1
 			else
-				usr<<output("You need [RealPrice] Ryo to purchase this.","ActionPanel.Output")
+				usr<<output("You need [RealPrice] Ryo to purchase this.","Action.Output")
 				usr.move=1
 				return
 	Banker
@@ -168,7 +168,7 @@ mob/NPC
 			switch(usr.client.Alert("You have [usr.Ryo] Ryo on you and [usr.RyoBanked] banked here.","Bank",list("Deposit","Withdraw","Cancel")))
 				if(1)
 					if(!usr.Ryo)
-						usr << output("[src] says, You don't have any Ryo to deposit","ActionPanel.Output")
+						usr << output("[src] says, You don't have any Ryo to deposit","Action.Output")
 					else
 						var/list/AlertInput=usr.client.AlertInput("How much would you like to deposit?","Ryo Deposit")
 						if(!isnum(AlertInput[2]))
@@ -179,13 +179,13 @@ mob/NPC
 							return
 						usr.RyoBanked+=AlertInput[2]
 						usr.Ryo-=AlertInput[2]
-						usr << output("[src] says,  Thank you for your deposit.","ActionPanel.Output")
+						usr << output("[src] says,  Thank you for your deposit.","Action.Output")
 					usr.move=1
 					return
 
 				if(2)
 					if(!usr.RyoBanked)
-						usr << output("[src] says, You do not have any Ryo to withdraw","ActionPanel.Output")
+						usr << output("[src] says, You do not have any Ryo to withdraw","Action.Output")
 					else
 						var/list/AlertInput=usr.client.AlertInput("How much would you like to withdraw?","Ryo Withdraw")
 						if(!isnum(AlertInput[2]))
@@ -196,7 +196,7 @@ mob/NPC
 							return
 						usr.Ryo+=AlertInput[2]
 						usr.RyoBanked-=AlertInput[2]
-						usr << output("[src] says, Thanks, here's your Ryo.","ActionPanel.Output")
+						usr << output("[src] says, Thanks, here's your Ryo.","Action.Output")
 					usr.move=1
 					return
 

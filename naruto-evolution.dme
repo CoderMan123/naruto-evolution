@@ -10,6 +10,7 @@
 #define FILE_DIR "assets/audio/Skills"
 #define FILE_DIR "assets/audio/Walk"
 #define FILE_DIR "assets/interface"
+#define FILE_DIR "assets/interface/buttons"
 #define FILE_DIR "assets/interface/symbols"
 #define FILE_DIR "assets/interface/title"
 #define FILE_DIR "lib"

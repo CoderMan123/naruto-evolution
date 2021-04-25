@@ -2274,7 +2274,7 @@ mob
 			set hidden=1
 			set category=null
 			if(src.loc.loc:Safe == 1)
-				src<<output("You're indoors, you shouldn't be doing this.","ActionPanel.Output")
+				src<<output("You're indoors, you shouldn't be doing this.","Action.Output")
 				return 1
 			if(src.dead || src.move ==0 || src.canattack ==0 || src.injutsu || src.firing)
 				return
@@ -2731,7 +2731,7 @@ mob
 							spawn(usr.attkspeed*2)
 								usr.firing=0
 						else
-							usr << output("You're too experienced in agility to gain anymore experience from these.","ActionPanel.Output")
+							usr << output("You're too experienced in agility to gain anymore experience from these.","Action.Output")
 							return
 			//UpdateInventoryPanel()
 			return

@@ -4,7 +4,7 @@ mob
 			for(var/obj/Jutsus/Shikigami_Dance/J in src.jutsus)
 				var/mob/player/c_target=usr.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src<<output("You must have a target to use this technique.","ActionPanel.Output")
+					src<<output("You must have a target to use this technique.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10)) //determines amount of ninjutsu exp gained on use

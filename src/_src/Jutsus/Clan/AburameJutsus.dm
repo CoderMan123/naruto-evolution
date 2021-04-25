@@ -40,7 +40,7 @@ mob
 				if(src.firing)return
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target || c_target.sbugged==0)
-					src << output("This jutsu requires a target that is under the effect of stealth bug.","ActionPanel.Output")
+					src << output("This jutsu requires a target that is under the effect of stealth bug.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
@@ -71,24 +71,24 @@ mob
 		Insect_Cocoon()
 			for(var/obj/Jutsus/Insect_Cocoon/J in src.jutsus)
 				if(bugpass)
-					src<<output("You shut down your insect Cocoon.","ActionPanel.Output")
+					src<<output("You shut down your insect Cocoon.","Action.Output")
 					src.bugpass=0
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
 					src.bugpass=1
-					src<<output("You turn on your insect Cocoon.","ActionPanel.Output")
+					src<<output("You turn on your insect Cocoon.","Action.Output")
 					while(bugpass&&chakra>0)
 						DealDamage(10,src,"aliceblue",0,1)
 						sleep(10)
-					src<<output("You shut down your insect Cocoon.","ActionPanel.Output")
+					src<<output("You shut down your insect Cocoon.","Action.Output")
 					src.bugpass=0
 
 		Stealth_Bug()
 			for(var/obj/Jutsus/Stealth_Bug/J in src.jutsus)
 				var/mob/player/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src<<output("You require a targeted player to use this technique.","ActionPanel.Output")
+					src<<output("You require a targeted player to use this technique.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))

@@ -41,7 +41,7 @@ mob
 				return
 
 			else if(findtext(msg, "/world"))
-				src << output("World Address: byond://[world.internet_address]:[world.port]", "ActionPanel.Output")
+				src << output("World Address: byond://[world.internet_address]:[world.port]", "Action.Output")
 				return
 
 			else if(findtext(msg, "/help"))

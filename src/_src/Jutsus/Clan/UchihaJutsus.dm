@@ -3,11 +3,11 @@ mob
 		Tsukuyomi()
 			for(var/obj/Jutsus/Tsukuyomi/J in src.jutsus)
 				if(Sharingan<=3) // things like this come first
-					src<<output("You must have Mangekyou Sharingan or higher activated in order to use this.","ActionPanel.Output")
+					src<<output("You must have Mangekyou Sharingan or higher activated in order to use this.","Action.Output")
 					return
 				var/mob/player/c_target=usr.Target_Get(TARGET_MOB)
 				if(!c_target||!istype(c_target))
-					src<<output("You must have a target to use this technique.","ActionPanel.Output")
+					src<<output("You must have a target to use this technique.","Action.Output")
 					return
 				if(src.PreJutsu(J)) // call this at the beginning of the jutsu.
 					if(loc.loc:Safe != 1)
@@ -58,11 +58,11 @@ mob
 		Amaterasu()
 			for(var/obj/Jutsus/Amaterasu/J in src.jutsus)
 				if(Sharingan<=3)
-					src<<output("You need to have Mangekyou Sharingan or higher activated to use this.","ActionPanel.Output")
+					src<<output("You need to have Mangekyou Sharingan or higher activated to use this.","Action.Output")
 					return
 				var/mob/player/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||!istype(c_target))
-					src<<output("You require a targeted player to use this technique.","ActionPanel.Output")
+					src<<output("You require a targeted player to use this technique.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(12,15))
@@ -89,12 +89,12 @@ mob
 		Susanoo()
 			for(var/obj/Jutsus/Susanoo/J in src.jutsus)
 				/*if(src.Susanoo)
-					src<<output("You deactivate your Susanoo","ActionPanel.Output")
+					src<<output("You deactivate your Susanoo","Action.Output")
 					src.Susanoo = 0
 					del(Susanoo)
 					return */
 				if(src.Sharingan<=3)
-					src<<output("You need to have Mangekyou Sharingan or higher activated to use this.","ActionPanel.Output")
+					src<<output("You need to have Mangekyou Sharingan or higher activated to use this.","Action.Output")
 					return
 		//		if(!src.Susanoo)
 				if(src.PreJutsu(J))
@@ -111,7 +111,7 @@ mob
 						src.DealDamage(100,src,"aliceblue",0,1)
 						if(src.chakra<=0)
 							src.chakra=0
-							src<<output("Your Susanoo has deactivated","ActionPanel.Output")
+							src<<output("Your Susanoo has deactivated","Action.Output")
 							src.Susanoo = 0
 							del(M)
 							return */
@@ -123,7 +123,7 @@ mob
 				if(src.Sharingan)
 					src.Sharingan=0
 					if(src.jutsucopy)src.jutsucopy=0
-					src << output("<font color=[colour2html("red")]><b>You deactivate your Sharingan.","ActionPanel.Output")
+					src << output("<font color=[colour2html("red")]><b>You deactivate your Sharingan.","Action.Output")
 					return
 				if(!src.Sharingan)
 					if(src.PreJutsu(J))
@@ -150,8 +150,8 @@ mob
 							J.name="Eternal Mangekyou Sharingan"
 							J.icon_state="Eternal Mangekyou"
 						//if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,12))
-						view(src)<<output("<font color=[colour2html("red")]><b>[src] says: Sharingan!","ActionPanel.Output")
-						view(src)<<output("<font color=[colour2html("red")]><b>[src]'s eyes swirl to form [Text] Sharingan.","ActionPanel.Output")
+						view(src)<<output("<font color=[colour2html("red")]><b>[src] says: Sharingan!","Action.Output")
+						view(src)<<output("<font color=[colour2html("red")]><b>[src]'s eyes swirl to form [Text] Sharingan.","Action.Output")
 						src.firing=1
 						src.canattack=0
 						src.Sharingan=J.level
@@ -166,5 +166,5 @@ mob
 							if(src.chakra<=0)
 								src.chakra=0
 								src.Sharingan=0
-								src << output("<font color=[colour2html("red")]><b>Your sharingan has been deactivated.","ActionPanel.Output")
+								src << output("<font color=[colour2html("red")]><b>Your sharingan has been deactivated.","Action.Output")
 								//if(src.jutsucopy)src.jutsucopy=0

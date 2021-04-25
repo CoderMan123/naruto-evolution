@@ -88,9 +88,9 @@ mob
 				sleep(10)
 				if(src.Gates && src.GateTime && !GateStopped)
 					src.GateTime --
-			//src << output("gatestop check","ActionPanel.Output")
+			//src << output("gatestop check","Action.Output")
 			if(!GateStopped)
-				//src << output("gatestop looped","ActionPanel.Output")
+				//src << output("gatestop looped","Action.Output")
 				src.gatestop()
 
 		// Define what each gate does here.

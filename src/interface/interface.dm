@@ -69,38 +69,38 @@ client
 
 		ToggleInventoryPanel()
 			set hidden=1
-			if(winget(src, "InventoryWindow", "is-visible") == "false")
-				winset(src, "InventoryWindow", "is-visible=true")
+			if(winget(src, "Inventory", "is-visible") == "false")
+				winset(src, "Inventory", "is-visible=true")
 				src.UpdateInventoryPanel()
 
 			else
 				winset(src, null, {"
-					InventoryWindow.EquippedName.text=""
-					InventoryWindow.EquippedImage.image=""
-					InventoryWindow.is-visible=false
+					Inventory.EquippedName.text=""
+					Inventory.EquippedImage.image=""
+					Inventory.is-visible=false
 				"})
-				usr<<output("<center>","InventoryWindow.EquippedItemInfo")
+				usr<<output("<center>","Inventory.EquippedItemInfo")
 
 		ToggleSettingsPanel()
 			set hidden=1
-			if(winget(src, "SettingsWindow", "is-visible") == "false")
+			if(winget(src, "Settings", "is-visible") == "false")
 				winset(src, null, {"
-					SettingsWindow.is-visible = "true";
+					Settings.is-visible = "true";
 				"})
 			else
 				winset(src, null, {"
-					SettingsWindow.is-visible = "false";
+					Settings.is-visible = "false";
 				"})
 
 		ToggleLeaderPanel()
 			set hidden=1
-			if(winget(src, "LeaderWindow", "is-visible") == "false")
+			if(winget(src, "Leader", "is-visible") == "false")
 				winset(src, null, {"
-					LeaderWindow.is-visible = "true";
+					Leader.is-visible = "true";
 				"})
 			else
 				winset(src, null, {"
-					LeaderWindow.is-visible = "false";
+					Leader.is-visible = "false";
 				"})
 
 		UnlockExperience()
@@ -111,8 +111,8 @@ client
 				var/verification_code = rand(1000,9999)
 				var/verification_response = src.AlertInput("Please enter the following verification code to resume gaining experience: [verification_code]", "Experience Lock", list("Submit", "Cancel"))
 				if(verification_response[1] == 1 && text2num(verification_response[2]) == verification_code)
-					src << output("You will now resume gaining experience normally.", "ActionPanel.Output")
-					winset(src, "NavigationPanel.ExpLockButton", "is-disabled = 'true'")
+					src << output("You will now resume gaining experience normally.", "Action.Output")
+					winset(src, "Navigation.ExpLockButton", "is-disabled = 'true'")
 					src.mob.exp_locked=0
 					src.exp_lock_verify=0
 				else if(verification_response[1] == 1)
@@ -125,7 +125,7 @@ client
 
 		CommunityGuidelines()
 			set hidden = 1
-			if(winget(src, "BrowserWindow", "is-visible") == "false")
+			if(winget(src, "Browser", "is-visible") == "false")
 				var/html = {"
 					<!doctype html>
 					<html lang="en">
@@ -205,15 +205,15 @@ client
 					</html>
 				"}
 
-				src << output(null, "BrowserWindow.Output")
+				src << output(null, "Browser.Output")
 				src << browse("[html]")
-				winset(src, "BrowserWindow", "is-visible = true")
+				winset(src, "Browser", "is-visible = true")
 			else
-				winset(src, "BrowserWindow", "is-visible = false")
+				winset(src, "Browser", "is-visible = false")
 
 		JutsuReference()
 			set hidden=1
-			if(winget(src, "BrowserWindow", "is-visible") == "false")
+			if(winget(src, "Browser", "is-visible") == "false")
 				var/html_jutsus = ""
 
 				for(var/obj/Jutsus/I in src.mob.jutsus)
@@ -308,24 +308,24 @@ client
 					</html>
 				"}
 
-				src << output(null, "BrowserWindow.Output")
+				src << output(null, "Browser.Output")
 				src << browse("[html]")
-				winset(src, "BrowserWindow", "is-visible = true")
+				winset(src, "Browser", "is-visible = true")
 			else
-				winset(src, "BrowserWindow", "is-visible = false")
+				winset(src, "Browser", "is-visible = false")
 
 		Changelog()
 			set hidden=1
-			if(winget(src, "BrowserWindow", "is-visible") == "false")
-				src << output(null, "BrowserWindow.Output")
+			if(winget(src, "Browser", "is-visible") == "false")
+				src << output(null, "Browser.Output")
 				src << browse("[CHANGELOG]")
-				winset(src, "BrowserWindow", "is-visible = true")
+				winset(src, "Browser", "is-visible = true")
 			else
-				winset(src, "BrowserWindow", "is-visible = false")
+				winset(src, "Browser", "is-visible = false")
 
 		Who()
 			set hidden = 1
-			if(winget(src, "BrowserWindow", "is-visible") == "false")
+			if(winget(src, "Browser", "is-visible") == "false")
 				var/online = 0
 				var/players = ""
 				for(var/client/C)
@@ -432,20 +432,20 @@ client
 					</html>
 				"}
 
-				src << output(null, "BrowserWindow.Output")
+				src << output(null, "Browser.Output")
 				src << browse("[html]")
-				winset(src, "BrowserWindow", "is-visible = true")
+				winset(src, "Browser", "is-visible = true")
 			else
-				winset(src, "BrowserWindow", "is-visible = false")
+				winset(src, "Browser", "is-visible = false")
 
 	proc
 		FlashExperienceLock()
 			while(src && src.mob.exp_locked)
-				if(src) winset(src, "NavigationPanel.ExpLockButton", "text-color=#C80000")
+				if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C80000")
 				sleep(10)
-				if(src) winset(src, "NavigationPanel.ExpLockButton", "text-color=#C8C8C8")
+				if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 				sleep(10)
-			if(src) winset(src, "NavigationPanel.ExpLockButton", "text-color=#C8C8C8")
+			if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 
 		UpdateCharacterPanel()
 			if(winget(src, "Character", "is-visible") == "true")
@@ -480,17 +480,17 @@ client
 
 		UpdateInventoryPanel()
 			set hidden=1
-			if(winget(src, "InventoryWindow", "is-visible") == "true")
-				winset(src,"InventoryWindow.Ryo","text=\"[src.mob.Ryo]\"")
-				winset(src,"InventoryWindow.Titlebar","text=\"Inventory - [src.mob.items]/[src.mob.maxitems]\"")
-				winset(src,"InventoryWindow.Grid","cells=0x0")
+			if(winget(src, "Inventory", "is-visible") == "true")
+				winset(src,"Inventory.Ryo","text=\"[src.mob.Ryo]\"")
+				winset(src,"Inventory.Titlebar","text=\"Inventory - [src.mob.items]/[src.mob.maxitems]\"")
+				winset(src,"Inventory.Grid","cells=0x0")
 				var/Row = 1
 			//	src<<output("Ryo:","Equip.GridEquip:1,1")
 			//	src<<output("Items:","Equip.GridEquip:1,2")
 			//	src<<output("[src.items]/[src.maxitems]","Equip.GridEquip:2,2")
-				src<<output(" ","InventoryWindow.Grid:1,1")
+				src<<output(" ","Inventory.Grid:1,1")
 				for(var/obj/O in src.mob.contents)
 					Row++
-					src << output(O,"InventoryWindow.Grid:1,[Row]")
-					src << output("<span style='text-align: right;'>[O.suffix]</span>","InventoryWindow.Grid:2,[Row]")
+					src << output(O,"Inventory.Grid:1,[Row]")
+					src << output("<span style='text-align: right;'>[O.suffix]</span>","Inventory.Grid:2,[Row]")
 					//sleep(1)

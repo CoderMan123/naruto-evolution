@@ -4,7 +4,7 @@ mob
 			for(var/obj/Jutsus/LimbParalyzeSeal/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src << output("This jutsu requires a target","ActionPanel.Output")
+					src << output("This jutsu requires a target","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
@@ -38,7 +38,7 @@ mob
 										M.injutsu=0
 										M.canattack=1
 										M.Sleeping=0
-								else src<<output("The jutsu did not connect.","ActionPanel.Output")
+								else src<<output("The jutsu did not connect.","Action.Output")
 					src.firing=0
 					src.canattack=1
 

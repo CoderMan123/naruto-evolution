@@ -5,7 +5,7 @@ mob
 			for(var/obj/Jutsus/Desert_Coffin/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src << output("This jutsu requires a target","ActionPanel.Output")
+					src << output("This jutsu requires a target","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					J.density = 1
@@ -44,7 +44,7 @@ mob
 										M.injutsu=0
 										M.canattack=1
 										if(O)del(O)
-								else src<<output("The jutsu did not connect.","ActionPanel.Output")
+								else src<<output("The jutsu did not connect.","Action.Output")
 					src.firing=0
 					src.canattack=1
 					src.injutsu=0
@@ -53,7 +53,7 @@ mob
 			for(var/obj/Jutsus/Sand_Funeral/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src << output("This jutsu requires a target.","ActionPanel.Output")
+					src << output("This jutsu requires a target.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 
