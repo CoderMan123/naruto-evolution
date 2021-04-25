@@ -11,7 +11,7 @@ mob/var/Accept_Votes=1
 mob/var/CreatedAVotation=0
 mob/proc/Vote_Check()
 	..()
-	for(var/mob/M in TotalPlayers)
+	for(var/mob/M in mobs_online)
 		spawn()if(M.client&&M.Accept_Votes==0)
 			N+=1
 		spawn()if(M.client&&M.Accept_Votes==1)
@@ -21,14 +21,14 @@ mob/proc/Vote_Check()
 					M<<output("<b><font color=red><center>* You were too late! *","ActionPanel.Output")
 					return
 				Y+=1
-				for(var/mob/C in TotalPlayers)
+				for(var/mob/C in mobs_online)
 					C<<output("<b><font color=red>* [M.key] voted yes.","ActionPanel.Output")
 			if(X=="No")
 				if(VoteMessage=="")
 					M<<output("<b><font color=red><center>* You were too late! *","ActionPanel.Output")
 					return
 				N+=1
-				for(var/mob/C in TotalPlayers)
+				for(var/mob/C in mobs_online)
 					C<<output("<b><font color=red>* [M.key] voted no.","ActionPanel.Output")
 proc/Vote_Election()
 	spawn(150)
@@ -61,7 +61,7 @@ mob/verb/
 			src<<output("You can only do a mute vote once every 20 minutes.","ActionPanel.Output")
 			return
 		var/list/X = list()
-		for(var/mob/player/e in TotalPlayers) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/player/e in mobs_online) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to call a Mute Vote against?","Mute",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/p = X["[P]"]
@@ -71,13 +71,13 @@ mob/verb/
 		if(count>=1 && !VoteM) // This way there needs to be two votes to mute initially.
 			src.RecentVerbs["VoteCoolDown"]=world.timeofday
 			VoteM=p.name
-			for(var/mob/player/M in TotalPlayers)if(M.ckey)NonVoters++
+			for(var/mob/player/M in mobs_online)if(M.ckey)NonVoters++
 			world<<"[src] has elected to Mute [p]. Vote: <a href=?src=\ref[src];action=VoteYes>Yes</a>, or <a href=?src=\ref[src];action=VoteNo>No</a>."
 			spawn()Vote(p)
 		else
 			if(VoteM)
 				src<<"There is already a vote going on for [VoteM]. Vote: <a href=?src=\ref[src];action=VoteYes>Yes</a>, or <a href=?src=\ref[src];action=VoteNo>No</a>.</font>"
-				for(var/mob/player/M in TotalPlayers)if(M.ckey)NonVoters++
+				for(var/mob/player/M in mobs_online)if(M.ckey)NonVoters++
 				NonVoters=(NonVoters/2)
 			if(src.RecentVerbsCheck("VoteCoolDown",12000,1))src<<output("You can only do a mute vote once every 20 minutes.","ActionPanel.Output")
 proc/Vote(mob/Who)

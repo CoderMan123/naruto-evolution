@@ -750,9 +750,9 @@ client
 				if(mob.dashable<>2)
 					if(mob.move==1)
 						if(mob.ThrowingMob)
-							for(var/mob/player/M in TotalPlayers)if(M==mob.ThrowingMob)step_to(M,mob,0)
+							for(var/mob/player/M in mobs_online)if(M==mob.ThrowingMob)step_to(M,mob,0)
 						if(mob.BeingThrown)
-							for(var/mob/player/M in TotalPlayers)if(M.ThrowingMob==mob) M.ThrowingMob=null; mob.BeingThrown=0
+							for(var/mob/player/M in mobs_online)if(M.ThrowingMob==mob) M.ThrowingMob=null; mob.BeingThrown=0
 						if(mob.bunshin)
 							for(var/mob/Clones/C2 in mob.Clones)
 								if(C2.Owner==mob&&!C2.target_mob)
@@ -802,8 +802,8 @@ client
 			else return
 		else
 			var/mob/Clones/SC=src.mob.likeaclone
-			if(SC.ThrowingMob)for(var/mob/player/M in TotalPlayers) if(M==SC.ThrowingMob)step_to(M,SC,0)
-			if(SC.BeingThrown)for(var/mob/player/M in TotalPlayers)if(M.ThrowingMob==SC) M.ThrowingMob=null; SC.BeingThrown=0
+			if(SC.ThrowingMob)for(var/mob/player/M in mobs_online) if(M==SC.ThrowingMob)step_to(M,SC,0)
+			if(SC.BeingThrown)for(var/mob/player/M in mobs_online)if(M.ThrowingMob==SC) M.ThrowingMob=null; SC.BeingThrown=0
 			var/Dir = get_dir(mob,Loc)
 			if(!SC.dashable)SC.dashable=1
 			step(SC,Dir)

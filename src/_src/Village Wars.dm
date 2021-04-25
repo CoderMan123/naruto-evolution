@@ -19,7 +19,7 @@ mob
 				if(input1=="Cancel") {usr.choosing=0;return}
 				if((VillageDefenders.Find(input1)) && (VillageAttackers.Find(usr.village))||(VillageAttackers.Find(input1)) && (VillageDefenders.Find(usr.village)))
 					var/found=0
-					for(var/mob/M in TotalPlayers)
+					for(var/mob/M in mobs_online)
 						if(M.client && findtext("[M.rank]","kage",1) && M.village=="[input1]")
 							found=1
 							var/Villagetochange=usr.village

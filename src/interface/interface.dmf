@@ -194,6 +194,7 @@ window "ActionPanel"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -202,6 +203,8 @@ window "ActionPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 514x214
+		inner-size = 500x200
 	elem "ActionOutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -235,6 +238,7 @@ window "BrowserWindow"
 		size = 940x600
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -242,6 +246,8 @@ window "BrowserWindow"
 		can-close = false
 		can-minimize = false
 		can-resize = false
+		outer-size = 954x614
+		inner-size = 940x600
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -279,9 +285,18 @@ window "BrowserWindow"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
 		command = "CloseBrowser"
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Output"
 		type = BROWSER
 		pos = 3,24
@@ -979,6 +994,16 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "Name"
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "ColorWindow"
 	elem "ColorWindow"
@@ -996,6 +1021,7 @@ window "ColorWindow"
 		can-close = false
 		can-minimize = false
 		can-resize = false
+		outer-size = 654x494
 	elem "button9"
 		type = BUTTON
 		pos = 208,424
@@ -1177,6 +1203,7 @@ window "InventoryWindow"
 		size = 300x500
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1185,6 +1212,8 @@ window "InventoryWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x514
+		inner-size = 300x500
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1222,7 +1251,6 @@ window "InventoryWindow"
 		border = line
 		saved-params = ""
 		text = ""
-		image = 'Interface\\Symbols\\Ryo.png'
 	elem "EquippedItemInfo"
 		type = OUTPUT
 		pos = 37,440
@@ -1303,6 +1331,16 @@ window "InventoryWindow"
 		border = line
 		saved-params = ""
 		text = "Inventory - 0/25"
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Close"
 		type = BUTTON
 		pos = 272,0
@@ -1316,7 +1354,6 @@ window "InventoryWindow"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
 		command = "ToggleInventoryPanel"
 		is-flat = true
 
@@ -1335,6 +1372,7 @@ window "JutsuTab"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 654x494
 	elem "button7"
 		type = BUTTON
 		pos = 544,32
@@ -1369,6 +1407,7 @@ window "LeaderWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1377,6 +1416,8 @@ window "LeaderWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 514x414
+		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1411,6 +1452,16 @@ window "LeaderWindow"
 		border = line
 		saved-params = ""
 		text = "Leader"
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Close"
 		type = BUTTON
 		pos = 472,0
@@ -1424,7 +1475,6 @@ window "LeaderWindow"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
 		command = "ToggleLeaderPanel"
 		is-flat = true
 	elem "Stats"
@@ -1458,8 +1508,10 @@ window "Main"
 		titlebar = false
 		statusbar = false
 		can-resize = false
-		icon = 'Hud\\evo.dmi'
+		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
+		outer-size = 1294x734
+		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1496,6 +1548,7 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		left = "NavigationPanel"
 		is-vert = false
@@ -1505,6 +1558,7 @@ window "Main"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
+		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -1514,6 +1568,7 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -1543,6 +1598,16 @@ window "Main"
 		border = line
 		saved-params = ""
 		text = "Project Evolution"
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "MuteTime"
 		type = LABEL
 		pos = 1026,24
@@ -1562,6 +1627,7 @@ window "Main"
 		size = 364x291
 		anchor1 = 57,9
 		anchor2 = 85,48
+		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -1580,7 +1646,6 @@ window "Main"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Minimize.png'
 		command = "MiniWindow"
 		is-flat = true
 	elem "Close"
@@ -1596,7 +1661,6 @@ window "Main"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
 		command = ".quit"
 		is-flat = true
 
@@ -1753,7 +1817,7 @@ window "NavigationPanel"
 		border = line
 		saved-params = "is-checked"
 		text = "Squad"
-		command = "SquadMenu"
+		command = "Squad"
 		is-flat = true
 	elem "ChangelogButton"
 		type = BUTTON
@@ -1861,6 +1925,7 @@ window "OutputPanel"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1869,6 +1934,8 @@ window "OutputPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 514x214
+		inner-size = 500x200
 	elem "OutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -1904,6 +1971,7 @@ window "SettingsWindow"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1912,6 +1980,8 @@ window "SettingsWindow"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 514x414
+		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2015,9 +2085,18 @@ window "SettingsWindow"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
 		command = "ToggleSettingsPanel"
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "Status"
 	elem "Status"
@@ -2026,6 +2105,7 @@ window "Status"
 		size = 197x319
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -2035,13 +2115,15 @@ window "Status"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		image = 'Hud\\Stats.png'
+		outer-size = 211x333
+		inner-size = 197x319
 	elem "skillpoints"
 		type = LABEL
 		pos = 104,304
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2052,6 +2134,7 @@ window "Status"
 		size = 101x16
 		anchor1 = 42,86
 		anchor2 = 93,91
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2061,6 +2144,7 @@ window "Status"
 		size = 101x13
 		anchor1 = 42,80
 		anchor2 = 93,84
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2070,6 +2154,7 @@ window "Status"
 		size = 32x9
 		anchor1 = 46,95
 		anchor2 = 68,98
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2080,6 +2165,7 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,68
 		anchor2 = 93,72
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2089,6 +2175,7 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,50
 		anchor2 = 93,55
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2098,6 +2185,7 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,26
 		anchor2 = 93,30
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2107,6 +2195,7 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,38
 		anchor2 = 93,42
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2116,6 +2205,7 @@ window "Status"
 		size = 104x13
 		anchor1 = 41,32
 		anchor2 = 93,36
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2127,10 +2217,10 @@ window "Status"
 		anchor2 = 95,78
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
+		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Hud\\statup.png'
 		command = "ChakraUp"
 	elem "HUp"
 		type = BUTTON
@@ -2140,10 +2230,10 @@ window "Status"
 		anchor2 = 95,72
 		font-family = "Adobe Caslon Pro"
 		font-size = 12
+		background-color = none
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Hud\\statup.png'
 		command = "HealthUp"
 	elem "EXP"
 		type = LABEL
@@ -2151,6 +2241,7 @@ window "Status"
 		size = 104x14
 		anchor1 = 41,21
 		anchor2 = 93,25
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2160,6 +2251,7 @@ window "Status"
 		size = 88x13
 		anchor1 = 45,16
 		anchor2 = 89,20
+		background-color = none
 		is-transparent = true
 		saved-params = ""
 		text = "1"
@@ -2183,6 +2275,7 @@ window "Titlescreen"
 		size = 1280x720
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2191,6 +2284,8 @@ window "Titlescreen"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 1294x734
+		inner-size = 1280x720
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -2200,7 +2295,6 @@ window "Titlescreen"
 		background-color = #191919
 		saved-params = ""
 		text = ""
-		image = 'Interface\\Title\\Background.png'
 		image-mode = stretch
 	elem "BackgroundMap"
 		type = CHILD
@@ -2208,6 +2302,7 @@ window "Titlescreen"
 		size = 1280x720
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		left = "mapwindow"
 		is-vert = false
@@ -2731,6 +2826,8 @@ window "AlertBox1"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x169
+		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -2783,6 +2880,16 @@ window "AlertBox1"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox2"
 	elem "AlertBox2"
@@ -2791,6 +2898,7 @@ window "AlertBox2"
 		size = 300x155
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2799,6 +2907,8 @@ window "AlertBox2"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x169
+		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -2838,6 +2948,16 @@ window "AlertBox2"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Button1"
 		type = BUTTON
 		pos = 3,130
@@ -2873,6 +2993,7 @@ window "AlertBox3"
 		size = 300x155
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2881,6 +3002,8 @@ window "AlertBox3"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x169
+		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -2961,6 +3084,16 @@ window "AlertBox3"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_Input1"
 	elem "AlertBox_Input1"
@@ -2969,6 +3102,7 @@ window "AlertBox_Input1"
 		size = 300x179
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2977,6 +3111,8 @@ window "AlertBox_Input1"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x193
+		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3016,6 +3152,16 @@ window "AlertBox_Input1"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
 		pos = 3,24
@@ -3050,6 +3196,7 @@ window "AlertBox_Input2"
 		size = 300x179
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3058,6 +3205,8 @@ window "AlertBox_Input2"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x193
+		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3111,6 +3260,16 @@ window "AlertBox_Input2"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
 		pos = 3,24
@@ -3145,6 +3304,7 @@ window "AlertBox_Input3"
 		size = 300x183
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3153,6 +3313,8 @@ window "AlertBox_Input3"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x197
+		inner-size = 300x183
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3220,6 +3382,16 @@ window "AlertBox_Input3"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
 		pos = 3,24
@@ -3254,6 +3426,7 @@ window "AlertBox_List1"
 		size = 300x155
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3262,6 +3435,8 @@ window "AlertBox_List1"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x169
+		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3314,6 +3489,16 @@ window "AlertBox_List1"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_List2"
 	elem "AlertBox_List2"
@@ -3322,6 +3507,7 @@ window "AlertBox_List2"
 		size = 300x179
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3330,6 +3516,8 @@ window "AlertBox_List2"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x193
+		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3396,6 +3584,16 @@ window "AlertBox_List2"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_List3"
 	elem "AlertBox_List3"
@@ -3404,6 +3602,7 @@ window "AlertBox_List3"
 		size = 300x203
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3412,6 +3611,8 @@ window "AlertBox_List3"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x217
+		inner-size = 300x203
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3465,6 +3666,16 @@ window "AlertBox_List3"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "List1"
 		type = BUTTON
 		pos = 3,130
@@ -3500,6 +3711,7 @@ window "AlertBox_List4"
 		size = 300x227
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3508,6 +3720,8 @@ window "AlertBox_List4"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x241
+		inner-size = 300x227
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3588,6 +3802,16 @@ window "AlertBox_List4"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "List1"
 		type = BUTTON
 		pos = 3,130
@@ -3610,6 +3834,7 @@ window "AlertBox_List5"
 		size = 300x251
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3618,6 +3843,8 @@ window "AlertBox_List5"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x265
+		inner-size = 300x251
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3712,6 +3939,16 @@ window "AlertBox_List5"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "List2"
 		type = BUTTON
 		pos = 3,154
@@ -3734,6 +3971,7 @@ window "AlertBox_List6"
 		size = 300x275
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3742,6 +3980,8 @@ window "AlertBox_List6"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x289
+		inner-size = 300x275
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3864,6 +4104,16 @@ window "AlertBox_List6"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_List7"
 	elem "AlertBox_List7"
@@ -3872,6 +4122,7 @@ window "AlertBox_List7"
 		size = 300x299
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3880,6 +4131,8 @@ window "AlertBox_List7"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x313
+		inner-size = 300x299
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4016,6 +4269,16 @@ window "AlertBox_List7"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_List8"
 	elem "AlertBox_List8"
@@ -4024,6 +4287,7 @@ window "AlertBox_List8"
 		size = 300x323
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4032,6 +4296,8 @@ window "AlertBox_List8"
 		can-minimize = false
 		can-resize = false
 		macro = "Main"
+		outer-size = 314x337
+		inner-size = 300x323
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4182,4 +4448,14 @@ window "AlertBox_List8"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 

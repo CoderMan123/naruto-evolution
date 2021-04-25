@@ -455,7 +455,7 @@ mob/NPC/Mission_Lady//mission
 						return
 					usr.MissionUp = 0
 					return
-				for(var/mob/player/M in TotalPlayers)
+				for(var/mob/player/M in mobs_online)
 					if(M.village=="Missing-Nin"&&usr!=M)
 						choice=M
 						break
@@ -489,7 +489,7 @@ mob/NPC/Mission_Lady//mission
 						return
 					usr.MissionUp = 0
 					return
-				for(var/mob/player/M in TotalPlayers)
+				for(var/mob/player/M in mobs_online)
 					if(M.village=="Missing-Nin"&&usr!=M)
 						choice=M
 						break
@@ -539,7 +539,7 @@ mob/NPC/Mission_Lady//mission
 						return
 					usr.MissionUp = 0
 					return
-				for(var/mob/player/M in TotalPlayers)
+				for(var/mob/player/M in mobs_online)
 					if(M.village=="Akatsuki"&&usr!=M)
 						choice=M
 						break

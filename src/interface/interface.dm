@@ -1,5 +1,6 @@
 client
 	var/tmp/exp_lock_verify=0
+	var/tmp/browser = BROWSER_NONE
 	verb
 		ChangeChannel()
 			set hidden=1

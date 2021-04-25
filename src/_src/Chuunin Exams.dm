@@ -97,7 +97,7 @@ proc/ChuuninExam()
 		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","ActionPanel.Output")
 		ChuuninExam="Forest of Death"
 		var/count=0
-		for(var/mob/player/M in TotalPlayers)
+		for(var/mob/player/M in mobs_online)
 			if(M.cheww==1)
 				M.cheww=0
 				M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
@@ -115,17 +115,21 @@ proc/ChuuninExam()
 		ChuuninExamGo()
 proc/ChuuninExamGo()
 	//Remember to add a check for people here to see if they were in the FoD when it ended. Proper teleportation.
-	for(var/mob/player/M in TotalPlayers)
+	for(var/mob/player/M in mobs_online)
 		if(M.loc in block(locate(71,95,4),locate(200,163,4))) // If they are in FoD
 			M.loc=M.MapLoadSpawn() // Remember to change depending on villages!
 			for(var/obj/ChuuninExam/Scrolls/S in M)	del(S)
-	for(var/mob/player/M in TotalPlayers)
+	for(var/mob/player/M in mobs_online)
 		if(M.loc in block(locate(113,29,4),locate(146,58,4))) // If they are in tournament zone
 			Chuunins+=M
 			for(var/obj/ChuuninExam/Scrolls/S in M)del(S)
 	if(Chuunins.len<2)
 		for(var/mob/player/M in Chuunins)
 			M.rank="Chuunin"
+			var/squad/squad = M.GetSquad()
+			if(squad)
+				squad.Refresh()
+
 			world<<output("<i>[M.name] is now a Chuunin.</i>","ActionPanel.Output")
 			if(M.village=="Hidden Leaf") new/obj/Inventory/Clothing/Vests/ChuninVest(M)
 			if(M.village=="Hidden Sand") new/obj/Inventory/Clothing/Vests/SandChuninVest(M)
@@ -146,6 +150,10 @@ proc/ChuuninExamGo()
 		if(Chuunins.len<2)
 			for(var/mob/player/M in Chuunins)
 				M.rank="Chuunin"
+				var/squad/squad = M.GetSquad()
+				if(squad)
+					squad.Refresh()
+
 				world<<output("<i>[M.name] is now a Chuunin.</i>","ActionPanel.Output")
 				if(M.village=="Hidden Leaf") new/obj/Inventory/Clothing/Vests/ChuninVest(M)
 				if(M.village=="Hidden Sand") new/obj/Inventory/Clothing/Vests/SandChuninVest(M)
@@ -188,6 +196,9 @@ proc/ChuuninExamGo()
 		if(ChuuninDuelWinner.village=="Hidden Sound") new/obj/Inventory/Clothing/Vests/SoundVest(ChuuninDuelWinner)
 		if(ChuuninDuelWinner.village=="Hidden Rock") new/obj/Inventory/Clothing/Vests/RockVest(ChuuninDuelWinner)
 		ChuuninDuelWinner.rank="Chuunin"
+		var/squad/squad = ChuuninDuelWinner.GetSquad()
+		if(squad)
+			squad.Refresh()
 		ChuuninDuelWinner.loc=ChuuninDuelWinner.MapLoadSpawn()
 		ChuuninDuelLoser.loc=ChuuninDuelLoser.MapLoadSpawn()
 		Chuunins-=ChuuninDuelWinner

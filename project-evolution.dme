@@ -162,6 +162,7 @@
 #include "src\interface\interface.dmf"
 #include "src\mob\inventory.dm"
 #include "src\mob\mob.dm"
+#include "src\mob\squad.dm"
 #include "src\server\global.dm"
 #include "src\server\server.dm"
 // END_INCLUDE

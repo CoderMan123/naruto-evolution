@@ -11,7 +11,7 @@ mob/verb/BingoBook()
 	set category="Commands"
 	var/People=0
 	var/HTML="<body bgcolor=black><font color=white><center><b>Bingo Book</i><br><i>(Currently Wanted Online Shinobi)</i></center><br><hr><br>"
-	for(var/mob/player/M in TotalPlayers)
+	for(var/mob/player/M in mobs_online)
 		if(M.key&&M.client&&M.Bounty)
 			People=1
 			HTML+="<center><font color=white>[M.name] ([M.key]) : [BountyText(M.kills)] ($[M.Bounty])</font></center>"

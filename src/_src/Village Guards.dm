@@ -461,6 +461,9 @@ mob/NPCs/Shinobi
 						killer.RemoveAdminVerbs()
 					killer.village="Missing-Nin"
 					killer.rank="Missing-Nin"
+					var/squad/squad = killer.GetSquad()
+					if(squad)
+						squad.Refresh()
 				MissSkip
 				chuuninskip
 				killer.KillCombo=0

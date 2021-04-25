@@ -40,7 +40,7 @@ world
 			if(villagea == "Hidden Sand")
 				global.maps["Hidden Sand"]+=LevelTo
 				world << output("<b>The Hidden Sand has captured an area!","ActionPanel.Output")
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Sand" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","ActionPanel.Output")
@@ -60,7 +60,7 @@ world
 			if(villagea == "Hidden Leaf")
 				global.maps["Hidden Leaf"]+=LevelTo
 				world << output("<b>The Hidden Leaf has captured an area!","ActionPanel.Output")
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Leaf" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","ActionPanel.Output")
@@ -80,7 +80,7 @@ world
 			if(villagea == "Hidden Mist")
 				global.maps["Hidden Mist"]+=LevelTo
 				world << output("<b>The Hidden Mist has captured an area!","ActionPanel.Output")
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Mist" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","ActionPanel.Output")
@@ -100,7 +100,7 @@ world
 			if(villagea == "Hidden Sound")
 				global.maps["Hidden Sound"]+=LevelTo
 				world << output("<b>The Hidden Sound has captured an area!","ActionPanel.Output")
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Sound" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","ActionPanel.Output")
@@ -120,7 +120,7 @@ world
 			if(villagea == "Hidden Rock")
 				global.maps["Hidden Rock"]+=LevelTo
 				world << output("<b>The Hidden Rock has captured an area!","ActionPanel.Output")
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Rock" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 3 EXP from the capture!","ActionPanel.Output")
@@ -147,7 +147,7 @@ world
 				world << output("<b>The Hidden Sand has won the battle!","ActionPanel.Output")
 				global.sandpoints["[LevelTo]"]=0
 				global.leafpoints["[LevelTo]"]=0
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Sand" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 6 EXP from the battle!","ActionPanel.Output")
@@ -169,7 +169,7 @@ world
 				world << output("<b>The Hidden Leaf has won the battle!","ActionPanel.Output")
 				global.sandpoints["[LevelTo]"]=0
 				global.leafpoints["[LevelTo]"]=0
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Leaf" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 6 EXP from the battle!","ActionPanel.Output")
@@ -207,12 +207,12 @@ turf
 								if(LevelTo in global.warmaps)
 									check=1
 								else
-									for(var/mob/M2 in TotalPlayers)
+									for(var/mob/M2 in mobs_online)
 										if(M2.client && M2.village == M.village && M2.z == LevelTo)
 											counts++
 									if(counts >= 5)
 										counts=0
-										for(var/mob/M2 in TotalPlayers)
+										for(var/mob/M2 in mobs_online)
 											if(M2.client && M2.village <> M.village && M2.z == LevelTo)
 												counts++
 										if(counts>=5)

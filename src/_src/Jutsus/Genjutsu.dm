@@ -113,7 +113,7 @@ mob
 				icon_state = ""
 			Del()
 				if(Prisoner)
-					for(var/mob/player/M in TotalPlayers) if(Prisoner==M)
+					for(var/mob/player/M in mobs_online) if(Prisoner==M)
 						M.move=1
 						M.canattack=1
 						M.firing=0
@@ -261,7 +261,7 @@ mob
 				icon_state = ""
 			Del()
 				if(Prisoner)
-					for(var/mob/player/M in TotalPlayers) if(Prisoner==M)
+					for(var/mob/player/M in mobs_online) if(Prisoner==M)
 						M.move=1
 						M.canattack=1
 						M.firing=0

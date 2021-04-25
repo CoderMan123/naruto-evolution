@@ -1,6 +1,5 @@
 var/list/Badwords = list("byond://","www.","http://","\n")
 var/const/allowed_characters_name = "abcdefghijklmnopqrstuvwxyz' "// removed >> and . from name creation because it can fuck our verbs. specifically edit, checkstats, boot, ban, etc.
-var/list/TotalPlayers = list()
 mob/var/Logins
 proc/ffilter_characters(var/string, var/allowed = allowed_characters_name)
 	set background = 1
@@ -57,7 +56,7 @@ world
 		while(world)
 			sleep(600)//One minute each to check! Not .2 seconds=EPIC LAG!
 			var/number=0
-			for(var/mob/player/M in TotalPlayers)if(M.key)number++
+			for(var/mob/player/M in mobs_online)if(M.key)number++
 			Players=number
 			if(Players>=MaxPlayers)full=1
 			else full=0
@@ -223,7 +222,7 @@ mob/Login
 		var/letter = copytext(LoginID,1,2)
 		if(!key)
 			client.Command(".reconnect")
-		for(var/mob/M in TotalPlayers)
+		for(var/mob/M in mobs_online)
 			if(lowertext(M.name) == lowertext(LoginID))
 				client.Alert("The account \"[LoginID]\" is already logged in.", "Login Error")
 				return
@@ -411,7 +410,7 @@ mob/Login
 		M.AddAdminVerbs()
 		clients_connected -= M.client
 		clients_online += M.client
-		TotalPlayers.Add(M)
+		mobs_online += M
 		M.UpdateSlots()
 		spawn() M.WeaponryDelete()
 		if(M.MuteTime) spawn() M.Muted()
@@ -679,7 +678,7 @@ mob/Login
 
 				clients_connected -= M.client
 				clients_online += M.client
-				TotalPlayers.Add(M)
+				mobs_online += M
 				for(var/client/A in world)
 					if(src.client.computer_id == A.computer_id)
 						src<<"Multi keying is fixed."
@@ -700,7 +699,7 @@ mob/Login
 				if(M.village=="Hidden Rock")
 					M.loc = locate(21,13,16)
 
-			/*	TotalPlayers.Add(M)
+			/*	mobs_online.Add(M)
 				for(var/client/A in world)
 					if(src.client.computer_id == A.computer_id)
 						src<<"Multi keying is fixed."
@@ -912,7 +911,6 @@ mob/player
 			M.canattack=1
 			M.injutsu=0
 			Prisoner=null
-		TotalPlayers.Remove(src)
 		Save()
 		if(src.key&&src.name)world<<"[src.name] has logged out!"
 		if(Squad)

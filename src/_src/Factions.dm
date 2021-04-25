@@ -47,7 +47,7 @@ proc
 		return 0
 	getMember(Faction/Faction)
 		var/list/options = list()
-		for(var/mob/player/M in TotalPlayers)
+		for(var/mob/player/M in mobs_online)
 			if(M.rname in Faction.members)options["[M.rname]/[M.key]"] = M
 		var/mob/player/target = usr.CustomInput("What member?","Member?",options+"Cancel")
 		if(!target||target=="Cancel") return 0
@@ -82,7 +82,8 @@ Faction
 				M<<"Please keep MOTD messages below 400 characters."
 				return
 			FMOTD=html_encode(V)
-			for(var/mob/player/Player in TotalPlayers) if(getFaction(Player.Faction) == src) Player<<output("<b>Faction MOTD has been changed.<br><br> <i>[FMOTD]</i></b>","ActionPanel.Output")
+			for(var/mob/player/Player in mobs_online) if(getFaction(Player.Faction) == src) Player<<output("<b>Faction MOTD has been changed.<br><br> <i>[FMOTD]</i></b>","ActionPanel.Output")
+
 		LevelUp()
 			if(Level==10) return
 			while(Funds>=LevelFundsMax)
@@ -93,8 +94,9 @@ Faction
 				MaxMembers+=2
 				if(Level==4)
 					cverbs += /Faction/Leveled/verb/FactionMOTD
-					for(var/mob/player/Player in TotalPlayers) if(getFaction(Player.Faction) == src) Player<<"<b>[src] has gained the ability to set MOTDs!</b>"
-				for(var/mob/player/Player in TotalPlayers) if(getFaction(Player.Faction) == src) Player<<"<b>[src] has leveled up to level [Level]!</b>"
+					for(var/mob/player/Player in mobs_online) if(getFaction(Player.Faction) == src) Player<<"<b>[src] has gained the ability to set MOTDs!</b>"
+				for(var/mob/player/Player in mobs_online) if(getFaction(Player.Faction) == src) Player<<"<b>[src] has leveled up to level [Level]!</b>"
+
 		Funds(mob/M)
 			if(!M) return
 			var/r = M.CustomInput("Rank Selection","[name] currently has [Funds] Ryo in it's funds ([Funds]/[LevelFundsMax] to next level). Deposit, or Withdraw?", list("Deposit","Withdraw","Cancel"))
@@ -131,7 +133,7 @@ Faction
 						M << output("Successfully withdrawed [AlertInput[2]] funds.","ActionPanel.Output")
 					return
 		Leave(mob/M)
-			for(var/mob/player/X in TotalPlayers)
+			for(var/mob/player/X in mobs_online)
 				if(getFaction(X.Faction)==getFaction(M.Faction)&&!isnull(getFaction(M.Faction)))X<<"[M] has left your Faction."
 			M.verbs -= /Faction/Generic/verb/FactionLeave
 			M.Faction = null
@@ -145,7 +147,7 @@ Faction
 				Factionnames -= name
 				Factions -= src
 				world << output("<font color=[color]><b>[Filter(html_encode(name))] have been disbanded.</font></b>","ActionPanel.Output")
-				for(var/mob/player/p in TotalPlayers)
+				for(var/mob/player/p in mobs_online)
 					if(p.Faction == name)
 						p.Faction = ""
 						p.verbs -= cverbs
@@ -163,7 +165,7 @@ Faction
 			src.onlinemembers += M
 			M << output("You are now a [membername]","ActionPanel.Output")
 			src.onlinemembers << output("<font color=[src.color]>[M.rname] has joined your Faction. </font>","ActionPanel.Output")
-			for(var/mob/player/P in TotalPlayers)
+			for(var/mob/player/P in mobs_online)
 				if(P.admin)P<<output("<font color=[src.color]>[M.rname]([M.ckey]) is now a member of the [Filter(html_encode(src.name))]</font>","ActionPanel.Output")
 			M.Faction("[name]",color)
 			return 1
@@ -179,7 +181,7 @@ Faction
 				Factionnames -= name
 				Factions -= src
 				world << output("<font color=[color]><b>[name] have been disbanded.</font></b>","ActionPanel.Output")
-				for(var/mob/player/p in TotalPlayers)
+				for(var/mob/player/p in mobs_online)
 					if(p.Faction == name)
 						p.Faction = ""
 						p.verbs -= cverbs

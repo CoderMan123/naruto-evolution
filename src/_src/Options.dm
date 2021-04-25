@@ -41,7 +41,7 @@ mob
 			if(arenaprogress==1)
 				usr<<"Arena fight is already in progress!"
 				return
-			var/mob/player/M=input("Pick your opponent") as mob in TotalPlayers
+			var/mob/player/M=input("Pick your opponent") as mob in mobs_online
 			if(M.key==usr.key)
 				usr<<"You can't challenge yourself."
 				return
@@ -137,6 +137,9 @@ mob
 
 				village="Missing-Nin"
 				rank="Missing-Nin"
+				var/squad/squad = src.GetSquad()
+				if(squad)
+					squad.Refresh()
 
 	//	AdminUp()
 	//		set hidden=1

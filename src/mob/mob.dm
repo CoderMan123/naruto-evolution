@@ -1,4 +1,7 @@
 mob
+	Del()
+		..()
+		if(src.client) mobs_online -= src
 	var
 		items=0
 		maxitems=25
@@ -59,7 +62,7 @@ mob
 						return
 
 					var/whisper_target_online = 0
-					for(var/mob/M in TotalPlayers)
+					for(var/mob/M in mobs_online)
 						if(whisper == M.name)
 							src << "\[W] \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
 							M << "\[W] \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
@@ -82,13 +85,13 @@ mob
 							view() << ffilter("\icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 						if("Village")
-							for(var/mob/M in TotalPlayers)
+							for(var/mob/M in mobs_online)
 								if(src.village == M.village || M.admin)
 									M << ffilter("<font color='yellow'>\[V]</font> \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 						if("Squad")
 							if(src.Squad)
-								for(var/mob/M in TotalPlayers)
+								for(var/mob/M in mobs_online)
 									if(M.ckey == src.Squad.Leader || src.Squad.Members.Find(M.ckey))
 										M << ffilter("<font color='white'>\[S]</font> \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 							else
@@ -97,7 +100,7 @@ mob
 						if("Faction")
 							if(src.Faction)
 								var/Faction/F = src.Faction
-								for(var/mob/M in TotalPlayers)
+								for(var/mob/M in mobs_online)
 									if(src.Faction == M.Faction || M.admin)
 										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'> [html_encode(msg)]</font>")
 
