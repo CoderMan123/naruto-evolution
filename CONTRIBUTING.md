@@ -2,7 +2,7 @@
 
 ## Setup Development Environment
 
-Setup instructions can be found [here](https://github.com/lavenblade/naruto-evolution/tree/develop#setup-development-environment).
+Setup instructions can be found [here](README.md#setup-development-environment).
 
 ## Conventional Commits
 
@@ -13,7 +13,7 @@ For more information on the convention, visit the [official website](https://www
 ### Usage
 
 ```
-<type>([optional scope]): <description>
+<type>([optional scope]): <keyword> <description>
 
 [optional body]
 
@@ -34,6 +34,10 @@ For more information on the convention, visit the [official website](https://www
 
 `text`
 `ui`
+
+### Keywords
+
+### Description
 
 ### Breaking Changes
 
