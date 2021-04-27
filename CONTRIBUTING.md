@@ -10,36 +10,57 @@ The Conventional Commits specification is a lightweight convention on top of com
 
 For more information on the convention, visit the [official website](https://www.conventionalcommits.org/en/v1.0.0/).
 
-### Usage
+### Commit Structure
 
+There are 3 parts to drafting a commit.
+
+1) Subject
+2) Body
+3) Footer
+
+Each of these parts should be separated by an empty line.
+
+**Commit Structure Example**:
 ```
-<type>([optional scope]): <keyword> <description>
+<type>(<scope>): <keyword> <description>
 
-[optional body]
+<body>
 
-[optional footer(s)]
+<footer>
 ```
 
-### Types
+#### Title
 
-* `release`: 
-* `fix`: a commit of the type fix patches a bug in your codebase (this correlates with [PATCH](http://semver.org/#summary) in Semantic Versioning).
-* `feat`: a commit of the type feat introduces a new feature to the codebase (this correlates with [MINOR](http://semver.org/#summary) in Semantic Versioning).
-* `docs`:
-* `ci`: 
-* `refactor`:
-* `perf`:
+##### Types
 
-### Scopes
+- `release`: 
+- `feat`: a commit of the type feat introduces a new feature to the codebase (this correlates with [MINOR](http://semver.org/#summary) in Semantic Versioning).
+- `fix`: a commit of the type fix patches a bug in your codebase (this correlates with [PATCH](http://semver.org/#summary) in Semantic Versioning).
+- `perf`:
+- `docs`:
+- `ci`: 
+- `refactor`:
+- `revert`: 
 
-`text`
-`ui`
+##### Scopes
 
-### Keywords
+- `text`:
+- `ui`:
+- `balance`:
 
-### Description
+##### Keywords
+- `add`: 
+- `update`: 
+- `change`: 
+- `remove`: 
 
-### Breaking Changes
+##### Description
+
+##### Breaking Changes
+
+#### Body
+
+#### Footer
 
 ### Examples
 
