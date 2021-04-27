@@ -21,6 +21,7 @@ mob
 		src.client.eye = login_eye
 		src.client.perspective = EYE_PERSPECTIVE
 		spawn() GetScreenResolution(src)
+		src.client.screen += new/obj/Logos/Naruto_Evolution
 		spawn()
 			while(!mobs_online.Find(src))
 				step_rand(login_eye)
@@ -156,6 +157,8 @@ mob
 			spawn() src.Run()
 			spawn() src.WeaponryDelete()
 			spawn() src.AddAdminVerbs()
+
+			for(var/obj/Logos/Naruto_Evolution/L in src.client.screen) src.client.screen -= L
 
 			winset(src, null, {"
 				Main.NavigationChild.is-visible      = "true";

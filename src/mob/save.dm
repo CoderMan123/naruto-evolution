@@ -99,6 +99,8 @@ mob
 		spawn() src.AddAdminVerbs()
 		if(src.MuteTime) spawn() src.Muted()
 
+		for(var/obj/Logos/Naruto_Evolution/L in src.client.screen) src.client.screen -= L
+
 		winset(src.client, null, {"
 			Main.NavigationChild.is-visible      = "true";
 			Main.OutputChild.is-visible      = "true";
