@@ -356,7 +356,7 @@ mob
 
 	proc/GetSquad()
 		for(var/squad/squad in squads)
-			if(squad.leader[src.ckey] || squad.members[src.ckey]) return squad
+			if(squad.leader[src.ckey] && squad.leader[src.ckey] == src.character || squad.members[src.ckey] && squad.members[src.ckey] == src.character) return squad
 			else continue
 
 squad
@@ -368,8 +368,8 @@ squad
 	var/factions[0]
 
 	proc/Create(mob/M)
-		src.leader[M.ckey] = M.name
-		src.members[M.ckey] = M.name
+		src.leader[M.ckey] = M.character
+		src.members[M.ckey] = M.character
 		src.levels[M.ckey] = M.level
 		src.villages[M.ckey] = M.village
 		src.ranks[M.ckey] = M.rank
@@ -394,7 +394,7 @@ squad
 
 	proc/RefreshMember(mob/M)
 		if(src && M && src.members[M.client.ckey])
-			src.members[M.ckey] = M.name
+			src.members[M.ckey] = M.character
 			src.levels[M.ckey] = M.level
 			src.villages[M.ckey] = M.village
 			src.ranks[M.ckey] = M.rank
@@ -402,7 +402,7 @@ squad
 	proc/Refresh()
 		for(var/client/c in clients_online)
 			if(src && c && src.members[c.ckey] && c.browser == BROWSER_SQUAD && winget(c, "Browser", "is-visible") == "true" )
-				src.members[c.ckey] = c.mob.name
+				src.members[c.ckey] = c.mob.character
 				src.levels[c.ckey] = c.mob.level
 				src.villages[c.ckey] = c.mob.village
 				src.ranks[c.ckey] = c.mob.rank
@@ -416,7 +416,7 @@ squad
 				if(Leader.GetSquad() == src)
 					var/squad/squad = Leader.GetSquad()
 					if(squad)
-						squad.members[Invitee.ckey] = Invitee.name
+						squad.members[Invitee.ckey] = Invitee.character
 						squad.levels[Invitee.ckey] = Invitee.level
 						squad.villages[Invitee.ckey] = Invitee.village
 						squad.ranks[Invitee.ckey] = Invitee.rank

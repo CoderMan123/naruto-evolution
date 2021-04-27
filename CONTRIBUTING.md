@@ -57,6 +57,7 @@ Scopes are optional and are used to provide additional contextual information.
 - `add`: 
 - `update`: 
 - `change`: 
+- `fix`:
 - `remove`: 
 
 ##### Description
