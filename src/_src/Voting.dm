@@ -61,7 +61,7 @@ mob/verb/
 			src<<output("You can only do a mute vote once every 20 minutes.","Action.Output")
 			return
 		var/list/X = list()
-		for(var/mob/player/e in mobs_online) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in mobs_online) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to call a Mute Vote against?","Mute",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/p = X["[P]"]
@@ -71,13 +71,13 @@ mob/verb/
 		if(count>=1 && !VoteM) // This way there needs to be two votes to mute initially.
 			src.RecentVerbs["VoteCoolDown"]=world.timeofday
 			VoteM=p.name
-			for(var/mob/player/M in mobs_online)if(M.ckey)NonVoters++
+			for(var/mob/M in mobs_online)if(M.ckey)NonVoters++
 			world<<"[src] has elected to Mute [p]. Vote: <a href=?src=\ref[src];action=VoteYes>Yes</a>, or <a href=?src=\ref[src];action=VoteNo>No</a>."
 			spawn()Vote(p)
 		else
 			if(VoteM)
 				src<<"There is already a vote going on for [VoteM]. Vote: <a href=?src=\ref[src];action=VoteYes>Yes</a>, or <a href=?src=\ref[src];action=VoteNo>No</a>.</font>"
-				for(var/mob/player/M in mobs_online)if(M.ckey)NonVoters++
+				for(var/mob/M in mobs_online)if(M.ckey)NonVoters++
 				NonVoters=(NonVoters/2)
 			if(src.RecentVerbsCheck("VoteCoolDown",12000,1))src<<output("You can only do a mute vote once every 20 minutes.","Action.Output")
 proc/Vote(mob/Who)
@@ -176,7 +176,7 @@ mob/verb/
 			src<<output("You can only do a boot vote once every 20 minutes.","Action.Output")
 			return
 		var/list/X = list()
-		for(var/mob/player/e in world)
+		for(var/mob/e in world)
 			if(e.ckey&&e.exp_locked)
 				X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to call a Boot Vote against?","Boot",X+"Cancel")
@@ -191,13 +191,13 @@ mob/verb/
 		if(count>=1 && !VoteB) // This way there needs to be two votes to mute initially.
 			src.RecentVerbs["VoteCoolDownBoot"]=world.timeofday
 			VoteB=p.name
-			for(var/mob/player/M in world)if(M.ckey)NonVotersB++
+			for(var/mob/M in world)if(M.ckey)NonVotersB++
 			world<<"[src] has elected to boot [p]. Vote: <a href=?src=\ref[src];action=VoteYesBoot>Yes</a>, or <a href=?src=\ref[src];action=VoteNoBoot>No</a>."
 			spawn()VoteB(p)
 		else
 			if(VoteB)
 				src<<"There is already a vote going on for [VoteB]. Vote: <a href=?src=\ref[src];action=VoteYesBoot>Yes</a>, or <a href=?src=\ref[src];action=VoteNoBoot>No</a>.</font>"
-				for(var/mob/player/M in world)if(M.ckey)NonVotersB++
+				for(var/mob/M in world)if(M.ckey)NonVotersB++
 				NonVotersB=(NonVotersB/2)
 			if(src.RecentVerbsCheck("VoteCoolDownBoot",12000,1))src<<output("You can only do a boot vote once every 20 minutes.","Action.Output")
 

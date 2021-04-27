@@ -1319,7 +1319,7 @@ turf
 				if(src.icon_state=="rock3")
 					src.density=1
 				..()
-			Entered(var/mob/player/M)
+			Entered(var/mob/M)
 				if(istype(M,/mob))
 					if(src.icon_state=="rock1")
 						if(M.dashable<>2)
@@ -1424,8 +1424,8 @@ obj/Ground
 		icon='Flowers.dmi'
 		layer=TURF_LAYER+3
 		Hengable=1
-		Entered(var/mob/player/M)
-			if(istype(M,/mob/player))
+		Entered(var/mob/M)
+			if(istype(M,/mob))
 				if(M.foot=="Left")
 					view(M,13) << sound('Walk/man_fs_l_mt_drt.ogg',0,0,0,25)
 					M.foot="Right"

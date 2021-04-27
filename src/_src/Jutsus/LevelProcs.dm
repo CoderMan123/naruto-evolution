@@ -262,7 +262,7 @@ mob
 						src.UpdateHMB()
 						return
 			if(src.health<=0&&src.dead==0)
-				if(istype(src,/mob/player))
+				if(istype(src,/mob))
 					if(ismob(X))
 						if(X.needkill==1)X.needkill=2
 					src.KillCombo=0
@@ -458,7 +458,7 @@ mob
 							var/MissionRyo=300
 							var/MissionExp=10 + WorldXp
 							if(X.Squad)
-								var/mob/player/M = getOwner(X.Squad.Leader)
+								var/mob/M = getOwner(X.Squad.Leader)
 								M.Ryo += (MissionRyo + 1)
 								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
@@ -498,7 +498,7 @@ mob
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
 								X.Ryo+=MissionRyo
-								var/mob/player/M2 = X
+								var/mob/M2 = X
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
 									switch(GAIN)
@@ -532,7 +532,7 @@ mob
 							var/MissionRyo=600
 							var/MissionExp=15 + WorldXp
 							if(X.Squad)
-								var/mob/player/M = getOwner(X.Squad.Leader)
+								var/mob/M = getOwner(X.Squad.Leader)
 								M.Ryo += (MissionRyo + 1)
 								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
@@ -572,7 +572,7 @@ mob
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
 								X.Ryo+=MissionRyo
-								var/mob/player/M2 = X
+								var/mob/M2 = X
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
 									switch(GAIN)
@@ -591,7 +591,7 @@ mob
 							var/MissionRyo=600
 							var/MissionExp=25 + WorldXp
 							if(X.Squad)
-								var/mob/player/M = getOwner(X.Squad.Leader)
+								var/mob/M = getOwner(X.Squad.Leader)
 								M.Ryo += (MissionRyo + 1)
 								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
@@ -631,7 +631,7 @@ mob
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
 								X.Ryo+=MissionRyo
-								var/mob/player/M2 = X
+								var/mob/M2 = X
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
 									switch(GAIN)

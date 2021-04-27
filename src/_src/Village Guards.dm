@@ -501,18 +501,18 @@ mob/NPCs/Shinobi
 							src:target_mob = M
 							target=M
 				if(Aggressive&&!target&&!AttackAll)
-					for(var/mob/player/M in oview(src))
+					for(var/mob/M in oview(src))
 						if(!M.dead)
 							src:target_mob = M
 							target=M
 					dostuff=1
 				if(VillageGuard&&!target&&!AttackAll)
-					for(var/mob/player/M in oview(src))
+					for(var/mob/M in oview(src))
 						var/mob/X=M.Attacked
 						if(X&&ismob(X)) if(!M.dead&&X.village==src.village)
 							src:target_mob = M
 							target=M
-					for(var/mob/player/M in oview(src))
+					for(var/mob/M in oview(src))
 						if(!M.dead&&M.village!=village)
 							if(VillageAttackers.Find(M.village)&&VillageDefenders.Find(village))
 								src:target_mob = M

@@ -18,10 +18,14 @@ client
 			Main.UnlockChild.is-visible = "false";
 		"})
 
+		spawn() src.mob.Playtime()
+
 	Del()
-		..()
-		clients_connected -= src
+		src.mob.Save()
+		mobs_online -= src.mob
 		clients_online -= src
+		clients_connected -= src
+		..()
 
 	Topic(href, href_list)
 		if(href_list["changelog"] && href_list["changelog"] == "current")

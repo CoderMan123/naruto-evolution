@@ -181,7 +181,7 @@ mob/Moderator/verb/
 		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","Action.Output")
 		ChuuninExam="Forest of Death"
 		var/count=0
-		for(var/mob/player/M in mobs_online)
+		for(var/mob/M in mobs_online)
 			if(M.cheww==1)
 				M.cheww=0
 				M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
@@ -225,7 +225,6 @@ mob/Moderator/verb/
 				M.exp_locked=1
 				winset(M, "Navigation.ExpLockButton", "is-disabled = 'false'")
 				spawn() M.client.FlashExperienceLock()
-				M.Save()
 			else
 				continue
 
@@ -242,7 +241,7 @@ mob/Moderator/verb/
 		set category="Staff"
 		if(!c) return
 		if(length(c)<=750)
-			for(var/mob/player/M in mobs_online)
+			for(var/mob/M in mobs_online)
 				if(!Admins.Find(M.ckey)&&!MasterGMs.Find(M.ckey)&&!Moderators.Find(M.ckey)) continue
 				M<<"<font color=yellow> GM| [src.rname]:</font>[html_encode(c)]"
 			text2file("GM>>[src.rname]:</font> [html_encode(c)]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
@@ -287,7 +286,7 @@ mob/Moderator/verb/
 		if(M.canteleport == 0) return
 		src.loc=M.loc
 
-	Summon(mob/player/M in mobs_online)
+	Summon(mob/M in mobs_online)
 		set category="Staff"
 		src.overlays+=image('Smoke.dmi',"smoke")
 		M.loc=src.loc
@@ -319,7 +318,6 @@ mob/Moderator/verb/
 		set category="Staff"
 		world<<output("World is rebooting.","Action.Output")
 		text2file("[usr]([src.key]) rebooted.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-		Save()
 		world.Reboot()
 
 
@@ -344,8 +342,8 @@ mob/Admin/verb
 <head><title>Who's Online</title><body>
 <body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
 </body><html>"}
-		for(var/mob/player/M) if(M.client) amount+=1
-		for(var/mob/player/M) if(M.client) Who+={"<html><center>
+		for(var/mob/M) if(M.client) amount+=1
+		for(var/mob/M) if(M.client) Who+={"<html><center>
 <head><title>Staff Who</title><body>
 <body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
 <br><font color=white>[M.name] ([M.key]) - (Level: [M.level])
@@ -626,7 +624,7 @@ mob/MasterGM/verb
 		flick("start",O)
 		del(O)
 		src.overlays+=image('Adminshield.dmi',"loop")
-		var/mob/player/M=src
+		var/mob/M=src
 		M.Say("OMEGA KAITEN!")
 
 

@@ -94,7 +94,7 @@ macro "Macro"
 		command = "kaguyashoot1"
 	elem 
 		name = "A+REP"
-		command = "Attack"
+		command = "Basic-Attack"
 	elem 
 		name = "ALT+D"
 		command = "puppetdash2"
@@ -194,7 +194,6 @@ window "Action"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -203,8 +202,6 @@ window "Action"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 514x214
-		inner-size = 500x200
 	elem "ActionOutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -238,7 +235,6 @@ window "Browser"
 		size = 940x600
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -246,8 +242,6 @@ window "Browser"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		outer-size = 954x614
-		inner-size = 940x600
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -315,7 +309,6 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -324,8 +317,6 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x603
-		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1204,7 +1195,6 @@ window "Inventory"
 		size = 300x500
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1213,8 +1203,6 @@ window "Inventory"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x514
-		inner-size = 300x500
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1408,7 +1396,6 @@ window "Leader"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1417,8 +1404,6 @@ window "Leader"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1512,8 +1497,6 @@ window "Main"
 		can-resize = false
 		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
-		outer-size = 1294x734
-		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1550,7 +1533,6 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "Navigation"
 		is-vert = false
@@ -1560,7 +1542,6 @@ window "Main"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -1570,7 +1551,6 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -1629,7 +1609,6 @@ window "Main"
 		size = 364x291
 		anchor1 = 57,9
 		anchor2 = 85,48
-		background-color = none
 		is-visible = false
 		border = line
 		saved-params = "splitter"
@@ -1675,7 +1654,6 @@ window "Map"
 		size = 1010x675
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1685,8 +1663,6 @@ window "Map"
 		is-pane = true
 		macro = "macro"
 		menu = "menu"
-		outer-size = 1024x689
-		inner-size = 1010x675
 	elem "map"
 		type = MAP
 		pos = 0,0
@@ -1747,7 +1723,6 @@ window "Navigation"
 		size = 1362x25
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1755,8 +1730,6 @@ window "Navigation"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 1376x39
-		inner-size = 1362x25
 	elem "Navigation"
 		type = LABEL
 		pos = 0,0
@@ -1960,7 +1933,6 @@ window "Output"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1969,8 +1941,6 @@ window "Output"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 514x214
-		inner-size = 500x200
 	elem "OutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -2006,7 +1976,6 @@ window "Settings"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2015,8 +1984,6 @@ window "Settings"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2183,7 +2150,6 @@ window "Titlescreen"
 		size = 1280x720
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2192,32 +2158,15 @@ window "Titlescreen"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 1294x734
-		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
 		size = 1280x720
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "mapwindow"
 		is-vert = false
-	elem "label16"
-		type = LABEL
-		pos = 2,576
-		size = 294x22
-		anchor1 = 0,100
-		anchor2 = none
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = "Character Login"
 	elem "Create"
 		type = BUTTON
 		pos = 150,696
@@ -2244,7 +2193,7 @@ window "Titlescreen"
 		border = line
 		saved-params = "is-checked"
 		text = "Login"
-		command = "Logins"
+		command = "LoginCharacter"
 		is-flat = true
 	elem "label14"
 		type = LABEL
@@ -2300,7 +2249,7 @@ window "Titlescreen"
 		is-disabled = true
 		border = line
 		saved-params = ""
-		text = "Username"
+		text = "Character Login"
 
 window "skalert"
 	elem "skalert"

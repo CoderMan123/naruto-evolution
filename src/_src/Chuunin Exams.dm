@@ -97,7 +97,7 @@ proc/ChuuninExam()
 		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","Action.Output")
 		ChuuninExam="Forest of Death"
 		var/count=0
-		for(var/mob/player/M in mobs_online)
+		for(var/mob/M in mobs_online)
 			if(M.cheww==1)
 				M.cheww=0
 				M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
@@ -115,16 +115,16 @@ proc/ChuuninExam()
 		ChuuninExamGo()
 proc/ChuuninExamGo()
 	//Remember to add a check for people here to see if they were in the FoD when it ended. Proper teleportation.
-	for(var/mob/player/M in mobs_online)
+	for(var/mob/M in mobs_online)
 		if(M.loc in block(locate(71,95,4),locate(200,163,4))) // If they are in FoD
 			M.loc=M.MapLoadSpawn() // Remember to change depending on villages!
 			for(var/obj/ChuuninExam/Scrolls/S in M)	del(S)
-	for(var/mob/player/M in mobs_online)
+	for(var/mob/M in mobs_online)
 		if(M.loc in block(locate(113,29,4),locate(146,58,4))) // If they are in tournament zone
 			Chuunins+=M
 			for(var/obj/ChuuninExam/Scrolls/S in M)del(S)
 	if(Chuunins.len<2)
-		for(var/mob/player/M in Chuunins)
+		for(var/mob/M in Chuunins)
 			M.rank="Chuunin"
 			var/squad/squad = M.GetSquad()
 			if(squad)
@@ -148,7 +148,7 @@ proc/ChuuninExamGo()
 	world<<output("<b><center>The tournament portion of the Chuunin exam has begun!</b></center>","Action.Output")
 	while(Chuunins.len)
 		if(Chuunins.len<2)
-			for(var/mob/player/M in Chuunins)
+			for(var/mob/M in Chuunins)
 				M.rank="Chuunin"
 				var/squad/squad = M.GetSquad()
 				if(squad)
@@ -162,7 +162,7 @@ proc/ChuuninExamGo()
 				if(M.village=="Hidden Rock") new/obj/Inventory/Clothing/Vests/RockVest(M)
 				M.loc=M.MapLoadSpawn()//Teleportation here.
 			world<<output("<b><center>The Chuunin exam is now over!</b></center>","Action.Output")
-			//for(var/mob/Player/M in world)
+			//for(var/mob/M in world)
 				//Teleportation redundancy check here!
 			ChuuninExam=0
 			ChuuninDuelWinner=null
@@ -179,12 +179,12 @@ proc/ChuuninExamGo()
 		for(var/obj/ChuuninExam/Barrier/O in world)O.invisibility=0 // Barriers up!
 		var/timer=5
 		while(timer)
-			for(var/mob/player/M in Chuunins)M<<output("[timer]","Action.Output")
+			for(var/mob/M in Chuunins)M<<output("[timer]","Action.Output")
 			ChuuninOpponentOne.move=0
 			ChuuninOpponentTwo.move=0
 			timer--
 			sleep(10)
-		for(var/mob/player/M in Chuunins)M<<output("GO!","Action.Output")
+		for(var/mob/M in Chuunins)M<<output("GO!","Action.Output")
 		ChuuninOpponentOne.move=1
 		ChuuninOpponentTwo.move=1
 		while(!ChuuninDuelWinner&&ChuuninOpponentOne&&ChuuninOpponentTwo)sleep(10)
@@ -209,7 +209,7 @@ proc/ChuuninExamGo()
 		ChuuninOpponentTwo=null
 		for(var/obj/ChuuninExam/Barrier/O in world)O.invisibility=99 // Barriers down!
 		continue
-	//for(var/mob/Player/M in world)
+	//for(var/mob/M in world)
 		//Redundancy check here (teleportation).
 	world<<output("<b><center>The Chuunin exam is now over!</b></center>","Action.Output")
 	ChuuninExam=0

@@ -13,7 +13,7 @@ mob
 			if(src.hited==1) return
 			if(istype(M,/mob/White_Zettsu/))
 				return
-			if(istype(M,/mob/player/))
+			if(istype(M,/mob/))
 				if(ppunch=="left")
 					ppunch="right"
 					flick("punchl",src)

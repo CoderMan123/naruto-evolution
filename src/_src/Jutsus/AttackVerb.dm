@@ -1,6 +1,6 @@
-mob/player
+mob
 	verb
-		Attack()
+		Basic_Attack()
 			set hidden=1
 			if(src.shielded==1)
 				if(src.Clan == "Sand"&&canattack)

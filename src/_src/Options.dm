@@ -41,7 +41,7 @@ mob
 			if(arenaprogress==1)
 				usr<<"Arena fight is already in progress!"
 				return
-			var/mob/player/M=input("Pick your opponent") as mob in mobs_online
+			var/mob/M=input("Pick your opponent") as mob in mobs_online
 			if(M.key==usr.key)
 				usr<<"You can't challenge yourself."
 				return

@@ -329,7 +329,7 @@ mob
 					if(J.level==4) TimeAsleep=60+(src.genjutsu*0.1)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
 					new/obj/Jutsus/Effects/TempleNirvana(src.loc)
-					for(var/mob/player/M in oview(J.level))
+					for(var/mob/M in oview(J.level))
 						if(Squad)
 							if(Squad.Members.Find(M.ckey)||getOwner(Squad.Leader)==M.ckey) continue
 						new/obj/Jutsus/Effects/TempleNirvana(M.loc)
@@ -1071,7 +1071,7 @@ mob
 						src.overlays+='Snake Jutsu.dmi'
 						src.icon_state = "punchrS"
 						flick("punchr",src)
-						for(var/mob/player/M in get_dir(src,src.dir))
+						for(var/mob/M in get_dir(src,src.dir))
 							M.DealDamage(J.level*src.strength/2+src.genjutsu*2,src,"NinBlue")
 							M.Bleed()
 							view(M)<<sound('knife_hit1.wav',0,0,volume=50)

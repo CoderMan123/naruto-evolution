@@ -120,8 +120,8 @@ obj/MissionObj
 	byakuview=1
 	icon='Flowers.dmi'
 	layer=TURF_LAYER+3
-	Entered(var/mob/player/M)
-		if(istype(M,/mob/player))
+	Entered(var/mob/M)
+		if(istype(M,/mob))
 			if(M.foot=="Left")
 				view(M,13) << sound('Walk/man_fs_l_mt_drt.ogg',0,0,0,25)
 				M.foot="Right"
@@ -455,7 +455,7 @@ mob/NPC/Mission_Lady//mission
 						return
 					usr.MissionUp = 0
 					return
-				for(var/mob/player/M in mobs_online)
+				for(var/mob/M in mobs_online)
 					if(M.village=="Missing-Nin"&&usr!=M)
 						choice=M
 						break
@@ -489,7 +489,7 @@ mob/NPC/Mission_Lady//mission
 						return
 					usr.MissionUp = 0
 					return
-				for(var/mob/player/M in mobs_online)
+				for(var/mob/M in mobs_online)
 					if(M.village=="Missing-Nin"&&usr!=M)
 						choice=M
 						break
@@ -539,7 +539,7 @@ mob/NPC/Mission_Lady//mission
 						return
 					usr.MissionUp = 0
 					return
-				for(var/mob/player/M in mobs_online)
+				for(var/mob/M in mobs_online)
 					if(M.village=="Akatsuki"&&usr!=M)
 						choice=M
 						break

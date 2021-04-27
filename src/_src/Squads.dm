@@ -1,6 +1,6 @@
 proc/getOwner(ckey)
 	if(!ckey) return
-	for(var/mob/player/p in world)if(p.ckey == ckey)return p
+	for(var/mob/p in world)if(p.ckey == ckey)return p
 obj/Squad
 	name = "(Click for Settings)"
 	var/tmp/
@@ -18,10 +18,10 @@ obj/Squad
 <title>[getOwner(Leader)]'s Squad</title>
 <FONT SIZE="7"><b><u>[getOwner(Leader)]'s Squad</u></b></FONT>
 <BODY BGCOLOR="#996633"><hr><br>"}
-					var/mob/player/leader=getOwner(Leader)
+					var/mob/leader=getOwner(Leader)
 					html+="[leader.name]  -  Health: [leader.health]/[leader.maxhealth] - Chakra: [leader.chakra]/[leader.maxchakra] - Level: [leader.level] ([(leader.exp/leader.maxexp)*100])<br><br>"
 					for(var/ckey in Members)
-						var/mob/player/p=getOwner(ckey)
+						var/mob/p=getOwner(ckey)
 						html+="[p.name]  -  Health: [p.health]/[p.maxhealth] - Chakra: [p.chakra]/[p.maxchakra] - Level: [p.level] ([round((p.exp/p.maxexp)*100)]%)<br><br>"
 					usr << browse(html)
 					winset(usr, null, {"
@@ -56,10 +56,10 @@ obj/Squad
 <title>[getOwner(Leader)]'s Squad</title>
 <FONT SIZE="7"><b><u>[getOwner(Leader)]'s Squad</u></b></FONT>
 <BODY BGCOLOR="#996633"><hr><br>"}
-				var/mob/player/leader=getOwner(Leader)
+				var/mob/leader=getOwner(Leader)
 				html+="[leader.name]  -  Health: [leader.health]/[leader.maxhealth] - Chakra: [leader.chakra]/[leader.maxchakra] - Level: [leader.level] ([(leader.exp/leader.maxexp)*100])<br><br>"
 				for(var/ckey in Members)
-					var/mob/player/p=getOwner(ckey)
+					var/mob/p=getOwner(ckey)
 					html+="[p.name]  -  Health: [p.health]/[p.maxhealth] - Chakra: [p.chakra]/[p.maxchakra] - Level: [p.level] ([(p.exp/p.maxexp)*100])<br><br>"
 				usr << browse(html)
 				winset(usr, null, {"
@@ -73,8 +73,8 @@ obj/Squad
 					usr<<output("You already have a total of 4 members in your squad, including yourself. If you wish to add another, remove one first.","Action.Output")
 				else
 					var/list/Players = list()
-					for(var/mob/player/P in view()) Players += P
-					var/mob/player/M = input("Invite Who?") as mob in Players
+					for(var/mob/P in view()) Players += P
+					var/mob/M = input("Invite Who?") as mob in Players
 
 					if(M.village != usr.village)
 						usr<<output("You can only squad with fellow villagers.","Action.Output")
@@ -99,14 +99,14 @@ obj/Squad
 				var/list/Players = list()
 				for(var/i in Members)
 					if(getOwner(i))
-						var/mob/player/M = getOwner(i)
+						var/mob/M = getOwner(i)
 						Players["[M.name]/[M.ckey]"] = M
 					else Players += i
 				Players += "Cancel"
 				var/choice = input("Remove who?") in Players
 				if(choice == "Cancel") return
 				if(Players[choice])
-					var/mob/player/M = Players[choice]
+					var/mob/M = Players[choice]
 					Members -= M.ckey
 					M.Squad = null
 					M.client.channel ="Local"

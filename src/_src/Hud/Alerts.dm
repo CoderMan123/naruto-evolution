@@ -56,9 +56,6 @@ mob/proc/GET_ANSWER()
 	var/X = prompt.answer
 	del(prompt)
 	return X
-mob/Del()
-	if(prompt) del(prompt)
-	..()
 mob/proc/skalert(prompt,title,answers[3])
 	if(!client) return
 	if(!answers) answers = new/list

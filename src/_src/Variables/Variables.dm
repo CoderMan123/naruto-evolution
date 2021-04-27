@@ -1,7 +1,6 @@
 mob/var/tmp/list/Effects=list()
 mob
 	var
-		Password
 		exp_locked=0
 		health=1000
 		maxhealth=1000
@@ -27,7 +26,7 @@ mob
 		agilityexp=0
 		maxagilityexp=10
 		statpoints=0
-		skillpoints=0
+		skillpoints=1
 		kills=0
 		village="Leaf"
 		rank="Academy Student"

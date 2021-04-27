@@ -14,7 +14,7 @@ mob
 					if(J.level==3) TimeAsleep=15
 					if(J.level==4) TimeAsleep=20
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					for(var/mob/player/M in oview(J.level))
+					for(var/mob/M in oview(J.level))
 						if(!istype(M,M)||!M) continue
 						M.icon_state="dead"
 						M.move=0

@@ -78,7 +78,7 @@ mob
 					//if(M.health >= 0) M.Death()
 					//M.Death(src)
 
-				if(istype(M,/mob/player/))
+				if(istype(M,/mob/))
 					flick("punch",src)
 					M.DealDamage(OWNER.strength+OWNER.ninjutsu*0.8,src.OWNER,"TaiOrange")
 					//if(M.health >= 0) M.Death()
@@ -113,7 +113,7 @@ mob
 				if(istype(M,/mob/White_Zettsu/))
 					M.DealDamage(OWNER.strength*1.2,src.OWNER,"TaiOrange")
 
-				if(istype(M,/mob/player/))
+				if(istype(M,/mob/))
 					//flick("punch",src)
 					M.DealDamage(OWNER.strength+OWNER.ninjutsu*0.6,src.OWNER,"TaiOrange")
 					src.hited=1

@@ -2,10 +2,10 @@ mob/Kage/verb
 	Boot_From_Village()
 		set category="Kage"
 		var/list/X = list()
-		for(var/mob/player/M in world)
+		for(var/mob/M in world)
 			if(M==src||!M.client||!M.key||M.village!=src.village) continue
 			X+=M
-		for(var/mob/player/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to use this on?","Invite",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
@@ -25,10 +25,10 @@ mob/Kage/verb
 	Invite_to_Village()
 		set category="Kage"
 		var/list/X = list()
-		for(var/mob/player/M in world)
+		for(var/mob/M in world)
 			if(M==src||!M.client||!M.key||M.rank != "Missing-Nin") continue
 			X+=M
-		for(var/mob/player/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to use this on?","Invite",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
@@ -43,10 +43,10 @@ mob/Kage/verb
 	Make_ANBU()
 		set category="Kage"
 		var/list/X = list()
-		for(var/mob/player/M in world)
+		for(var/mob/M in world)
 			if(M==src||!M.client||!M.key||M.village!=src.village||M.rank != "Jounin") continue
 			X+=M
-		for(var/mob/player/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to promote to ANBU?","Promote",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
@@ -71,10 +71,10 @@ mob/Kage/verb
 	Demote_ANBU()
 		set category="Kage"
 		var/list/X = list()
-		for(var/mob/player/M in world)
+		for(var/mob/M in world)
 			if(M==src||!M.client||!M.key||M.village!=src.village||M.rank != "ANBU") continue
 			X+=M
-		for(var/mob/player/e in X) if(e.ckey&&e.rank=="ANBU") X["[e.name] ([e.key])"]=e
+		for(var/mob/e in X) if(e.ckey&&e.rank=="ANBU") X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to demote from ANBU?","Demotion",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
@@ -98,10 +98,10 @@ mob/Kage/verb
 	Make_Jounin()
 		set category="Kage"
 		var/list/X = list()
-		for(var/mob/player/M in world)
+		for(var/mob/M in world)
 			if(M==src||!M.client||!M.key||M.village!=src.village||M.rank != "Chuunin") continue
 			X+=M
-		for(var/mob/player/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to promote to Jounin?","Promote",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
@@ -114,10 +114,10 @@ mob/Kage/verb
 	Demote_Jounin()
 		set category="Kage"
 		var/list/X = list()
-		for(var/mob/player/M in world)
+		for(var/mob/M in world)
 			if(M==src||!M.client||!M.key||M.village!=src.village||M.rank != "Jounin") continue
 			X+=M
-		for(var/mob/player/e in X) if(e.ckey&&e.rank=="Jounin") X["[e.name] ([e.key])"]=e
+		for(var/mob/e in X) if(e.ckey&&e.rank=="Jounin") X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to demote from Jounin?","Demotion",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
@@ -149,10 +149,10 @@ mob/Kage/verb
 		set category="Kage"
 		var/list/X=list()
 		if(client.Alert("Are you sure you would like to retire as kage?","Confirmation",list("No","Yes"))==1) return
-		for(var/mob/player/M in world)
+		for(var/mob/M in world)
 			if(M==src||!M.client||!M.key||M.village!=src.village) continue
 			X+=M
-		for(var/mob/player/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
 		if(P=="Cancel") return
 		if(P==src)
@@ -267,7 +267,7 @@ mob/AnbuLeader/verb/
 	Make_Anbu_Root()
 		set category="Anbu Root"
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to invite to the Anbu Root?","Invite",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -292,7 +292,7 @@ mob/AnbuLeader/verb/
 	Remove_Anbu_Root()
 		set category="Anbu Root"
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to remove from the Anbu Root?","Invite",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -319,7 +319,7 @@ mob/AnbuLeader/verb/
 		set category="Anbu Root"
 		var/list/X=list()
 		if(client.Alert("Are you sure you would like to retire as Anbu Root Leader?","Confirmation",list("No","Yes"))==1) return
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -341,7 +341,7 @@ mob/AkatsukiLeader/verb/
 	Make_Akatsuki()
 		set category="Akatsuki"
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to invite to the Akatsuki?","Invite",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -371,7 +371,7 @@ mob/AkatsukiLeader/verb/
 	Remove_Akatsuki()
 		set category="Akatsuki"
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to remove from the Akatsuki?","Invite",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -400,7 +400,7 @@ mob/AkatsukiLeader/verb/
 		set category="Akatsuki"
 		var/list/X=list()
 		if(client.Alert("Are you sure you would like to retire as Akatsuki Leader?","Confirmation",list("No","Yes"))==1) return
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -429,7 +429,7 @@ mob/SevenSwordsmenLeader/verb/
 	Make_SevenSwordsmen()
 		set category="Seven Swordsmen"
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to invite to the Organization?","Invite",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -453,7 +453,7 @@ mob/SevenSwordsmenLeader/verb/
 	Remove_SevenSwordsmen()
 		set category="Seven Swordsmen"
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to remove from the Organization?","Invite",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -510,7 +510,7 @@ mob/SevenSwordsmenLeader/verb/
 		set category="Seven Swordsmen"
 		var/list/X=list()
 		if(client.Alert("Are you sure you would like to retire as Seven Swordsmen Leader?","Confirmation",list("No","Yes"))==1) return
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -541,7 +541,7 @@ mob/SevenSwordsmenLeader/verb/
 			usr<<"You can not give this Sword twice!"
 			return
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to give the Kubikiribocho to?","Give",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -567,7 +567,7 @@ mob/SevenSwordsmenLeader/verb/
 			usr<<"You can not give this Sword twice!"
 			return
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to give the Samehada to?","Give",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -593,7 +593,7 @@ mob/SevenSwordsmenLeader/verb/
 			usr<<"You can not give this Sword twice!"
 			return
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to give the Nuibari to?","Give",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -619,7 +619,7 @@ mob/SevenSwordsmenLeader/verb/
 			usr<<"You can not give this Sword twice!"
 			return
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to give the Shibuki to?","Give",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -645,7 +645,7 @@ mob/SevenSwordsmenLeader/verb/
 			usr<<"You can not give this Sword twice!"
 			return
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to give the Kabuto Wari to?","Give",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
@@ -671,7 +671,7 @@ mob/SevenSwordsmenLeader/verb/
 			usr<<"You can not give this Sword twice!"
 			return
 		var/list/X=list()
-		for(var/mob/player/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
+		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to give the Kiba to?","Give",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]

@@ -48,7 +48,6 @@ world
 	hub_password = "Ue7DTLSxJx1vnALy"
 	status="Naruto Evolution (Connecting...) | Ninjas Online (Connecting...)"
 
-	mob = /mob/Login
 	view = 16
 	loop_checks=1
 	proc/PlayerCount()
@@ -56,7 +55,7 @@ world
 		while(world)
 			sleep(600)//One minute each to check! Not .2 seconds=EPIC LAG!
 			var/number=0
-			for(var/mob/player/M in mobs_online)if(M.key)number++
+			for(var/mob/M in mobs_online)if(M.key)number++
 			Players=number
 			if(Players>=MaxPlayers)full=1
 			else full=0
@@ -100,8 +99,7 @@ world
 		//spawn() AutoReboot()
 		spawn(5)  PlayerCount()
 		spawn(5)  HTMLlist()
-		if(!fexists(SAVE_WORLD)) return
-		var/savefile/F = new(SAVE_WORLD)
+		var/savefile/F = new(SAVEFILE_WORLD)
 		if(!isnull(F["administrators"])) F["administrators"] >> administrators
 		if(!isnull(F["moderators"])) F["moderators"] >> moderators
 		if(!isnull(F["programmers"])) F["programmers"] >> programmers
@@ -150,7 +148,7 @@ world
 			Factions += Faction
 		..()
 	Del()
-		var/savefile/F = new(SAVE_WORLD)
+		var/savefile/F = new(SAVEFILE_WORLD)
 		F["administrators"] << administrators
 		F["moderators"] << moderators
 		F["programmers"] << programmers
@@ -209,497 +207,16 @@ obj/FadingHUD
 		C.screen += src
 		spawn(10) del(src)
 
-mob/Login
-	verb/Logins()
-		set hidden=1
-		for(var/client/A in world)
-			if(src.client.computer_id == A.computer_id)
-				src<<"Multi keying is fixed."
-				src.Logout()
-		var/LoginID=winget(src,"Titlescreen.Username","text")
-		var/LoginPW=winget(src,"Titlescreen.Password","text")
-		LoginID=lowertext(LoginID)
-		var/letter = copytext(LoginID,1,2)
-		if(!key)
-			client.Command(".reconnect")
-		for(var/mob/M in mobs_online)
-			if(lowertext(M.name) == lowertext(LoginID))
-				client.Alert("The account \"[LoginID]\" is already logged in.", "Login Error")
-				return
-		if(hasSavefile(LoginID))
-			var/savefile/F = new("saves/characters/[lowertext(letter)]/[lowertext(LoginID)].sav")
-			var/reason
-			if(!LoginID || !LoginPW)
-				reason = "Please enter both an account ID and password."
-			else
-				if(md5("[LoginPW][LoginPW][LoginPW][LoginPW][LoginPW]") != F["Password"])
-					reason = "The password you have entered is incorrect."
-			if(reason)
-				del F
-				client.Alert("[reason]", "Login Error")
-				return
-			LoadCharacter(LoginID, F)
-		else
-			src.client.Alert("The account \"[LoginID]\" does not exist.","Login Error")
-			return
-
-	Login()
-		..()
-		spawn()
-			GetScreenResolution(src)
-		var/mob/EYEBALL=new()
-		EYEBALL.name="EYE"
-		EYEBALL.loc=locate(101,100,7)
-		EYEBALL.density=0
-		//src.client.Alert("When you create your account, you won't be automatically teleported to the spawn. Please relog and log in to be teleported to the tutorial. This is to prevent spam.")
-		EYEBALL.invisibility=1
-		EYEBALL.byakuview = 0
-		EYEBALL.canteleport = 0
-		src.client.eye=EYEBALL
-		src.client:perspective = EYE_PERSPECTIVE
-		spawn()
-			var/obj/Titlescreen/Logo/L=new(src)
-			while(istype(src,/mob/Login))
-				step_rand(EYEBALL)
-				sleep(10)
-			del(EYEBALL)
-			del(L)
-	//	src<<sound('preview.ogg')
-		src.AddAdminVerbs()
-		var/Ticked=0
-		var/mob/t1
-		var/mob/t2
-		spawn()
-			for(var/mob/player/M in world)
-				if(!M.client) continue
-				if(!src.client) continue
-				if(M==src||M.client==client) continue
-				if(M.client.address==src.client.address&&src.client.computer_id==M.client.computer_id)Ticked=1
-			if(Ticked)
-				world<<"[t1] and [t2] are the same person. We do not allow multikeys."
-				text2file("usr: [usr], ckey: [ckey], t1.name: [t1.name], t2.ckey: [t2.ckey] Tried to multikey.(I don't know which of these might work: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-				sleep(10)
-				del(src)
+mob
 
 	proc/LoadCharacter(var/LoginID,var/savefile/F)
-		ASSERT(hasSavefile(LoginID) && src.client)
-		src.loc=locate(1,200,19)
-		winset(src, null, {"
-							Main.Child.right=Map;
-						"})
-		for(var/obj/Titlescreen/Logo/L in src.client.screen)del(L)
-		LoginID=lowertext(LoginID)
-
-		var/mob/player/M = new
-		F >> M
-
-		//spawn()
-		M.client = src.client
-		GetScreenResolution(M)
-		M.verbs.Add(typesof(/mob/verb))
-		M.name = M.rname
-		M.icon = M.ricon
-		M.icon_state = M.riconstate
-		M.ResetBase()//HERE what's ricon and rname
-		M.density=1
-		M.sight=0
-		M.invisibility=0
-		M.Move(locate(F["x"], F["y"], F["z"]))
-		if(!M.loc)
-			if(M.Tutorial==7) M.loc=M.MapLoadSpawn()
-			else M.loc=locate(39,158,14)
-		if(M.dead)
-			M.density=1
-			M.health=M.maxhealth
-			M.chakra=M.maxchakra
-			M.injutsu=0
-			M.dead=0
-			M.canattack=1
-			M.firing=0
-			M.icon_state=""
-			M.wait=0
-			M.rest=0
-			M.dodge=0
-			M.move=1
-			M.swimming=0
-			M.walkingonwater=0
-			M.overlays=0
-		M.client.eye=M
-		M.client:perspective = EYE_PERSPECTIVE
-		M.namecolor="green"
-		M.chatcolor="white"
-		M.RestoreOverlays()
-		world<<"[M.rname] has logged in."
-		M << output("Welcome to the game. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F10: Hotslots<br>R: Recharge chakra<br>I: Inventory<br>O: Statpanel<br>P: Jutsus<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","Action.Output")
-		M << "Welcome [M.rname]. If you're new please read the rules. You can find them in the Options panel. If you need to contact someone, there is a link to our discord on the HUB. Check the Action output to the right for controls."
-		if(!M.key)
-			M.Logout()
-
-		winset(M, "Main", "is-maximized=true")
-		new/obj/Screen/Bar(M)
-		if(M.village == "Hidden Leaf")new/obj/Screen/LeafSymbol(M)
-		if(M.village == "Hidden Sand")new/obj/Screen/SandSymbol(M)
-		if(M.village == "Hidden Mist")new/obj/Screen/MistSymbol(M)
-		if(M.village == "Hidden Sound")new/obj/Screen/SoundSymbol(M)
-		if(M.village == "Hidden Rock")new/obj/Screen/RockSymbol(M)
-		if(M.village == "Akatsuki")new/obj/Screen/AkatsukiSymbol(M)
-		if(M.village == "Seven Swordsmen")new/obj/Screen/SsmSymbol(M)
-		if(M.village == "Anbu Root")new/obj/Screen/AnbuSymbol(M)
-		new/obj/Screen/WeaponSelect(M)
-		new/obj/Screen/Health(M)
-		new/obj/Screen/Chakra(M)
-		new/obj/Screen/EXP(M)
-		new/obj/HotSlots/HotSlot1(M)
-		new/obj/HotSlots/HotSlot2(M)
-		new/obj/HotSlots/HotSlot3(M)
-		new/obj/HotSlots/HotSlot4(M)
-		new/obj/HotSlots/HotSlot5(M)
-		new/obj/HotSlots/HotSlot6(M)
-		new/obj/HotSlots/HotSlot7(M)
-		new/obj/HotSlots/HotSlot8(M)
-		new/obj/HotSlots/HotSlot9(M)
-		new/obj/HotSlots/HotSlot10(M)
-		var/obj/O=new /obj/Screen/healthbar/
-		var/obj/Mana=new /obj/Screen/manabar/
-		M.hbar.Add(O)
-		M.hbar.Add(Mana)
-		for(var/obj/Screen/healthbar/HB in M.hbar)M.overlays+=HB
-		for(var/obj/Screen/manabar/HB in M.hbar)M.overlays+=HB
-		for(var/i in M.jutsus)if(isnull(i))del(i)
-		var/Faction/c = getFaction(M.Faction)
-		if(c)
-			if(M.Faction == c.name)
-				M.verbs += M.Factionverbs
-				c.onlinemembers.Add(M)
-				c.members[M.rname] = list(M.key, M.level, M.Factionrank)
-				if(c.FMOTD) M<<output("Faction MOTD: <br>[c.FMOTD]</br>","Action.Output")
-				M.verbs += /Faction/Generic/verb/FactionLeave
-				winset(M, "Navigation.FactionButton", "is-disabled = 'false'")
-
-		if(M.Faction&&!getFaction(M.Faction))
-			M<<"Your Faction no longer exists. [M.Faction] has disbanded."
-			M.Faction=null
-			M.Factionrank=null
-			M.verbs-=M.Factionverbs
-			M.Factionverbs=list()
-		M.UpdateBars()
-		spawn(1)M.Run()
-		//spawn(1)M.lifecycle()
-		spawn()
-			M.UpdateHMB()
-		M.pixel_x=-16
-		M.Name(M.name)
-		for(var/obj/Inventory/Clothing/C in M.contents)
-			if(C.suffix == "(Equipped)")
-				M.ClothingOverlays["[C.section]"] = C.icon
-		M.RestoreOverlays()
-		M.AddAdminVerbs()
-		clients_connected -= M.client
-		clients_online += M.client
-		mobs_online += M
-		M.UpdateSlots()
-		spawn() M.WeaponryDelete()
-		if(M.MuteTime) spawn() M.Muted()
-		//M.px = 32 * M.x
-		//M.py = 32 * M.y
-		//spawn() M.MedalCheck()
-		spawn() M.client.FlashExperienceLock()
-		//spawn()
-			//del src
-		if(!M.name) M.name=M.key
-		winset(M, null, {"
-			Main.NavigationChild.is-visible      = "true";
-			Main.OutputChild.is-visible      = "true";
-			Main.ActionChild.is-visible      = "true";
-			Main.Child.right=Map;
-			Navigation.ExpLockButton.is-disabled = false
-		"})
-		M<<"Now speaking in: [M.client.channel]."
-
-	verb/CreateCharacter()
-		set hidden=1
-		if(src.client)
-			var/mob/player/M = new//had to put this here because it kept freezing for the new mob ///// This screwed up A LOT of stuff, please do not do that
-			M.loc=locate(1,200,19)
-			src.loc=locate(1,200,19)
-			M.gender = src.gender // We need to create a new player mob, otherwise the player is just a /mob, not /mob/player
-			//M.icon = 'WhiteMBase.dmi'
-			M.verbs.Add(typesof(/mob/verb))
-			M.client=src.client
-			M.riconstate = M.icon_state
-			M.Ryo=25
-			M.name = null
-			M.creating=1
-			GetScreenResolution(M)
-			while(M.name==null)
-				if(M)
-					var/list/AlertInput=M.client.AlertInput("Type in a name. Names from the anime are looked down on.","Name")
-					if(M)
-						M.name = AlertInput[2]
-						var/leng = length(M.name)
-						if(hasSavefile(M.name))
-							M.client.Alert("The name you entered already exists.")
-							M.name = null
-							continue
-						if((leng>20) || (leng<3))
-							M.client.Alert("The name must be between 3 and 20 characters.")
-							M.name = null
-							continue
-						if(uppertext(M.name) == M.name)
-							M.client.Alert("Your name may not consist entirely of capital letters.")
-							M.name = null
-							continue
-						if(ffilter_characters(M.name)!=M.name)
-							M.client.Alert("\"[M.name]\" contains an invalid character.  Allowed characters are:\n[allowed_characters_name]")
-							M.name = null
-							continue
-					else return
-				else return
-				sleep(1)
-			M.Logins=lowertext(M.name)
-			while(!M.Password)
-			//skinput2(prompt,title,initial,Number
-				if(M)
-					var/list/AlertInput = M.client.AlertInput("Please select a password for this account. Passwords are now hashed and unreadable by admins or the host.","Password", mask=1)
-					M.Password = AlertInput[2]
-					if(M)
-						if(length(M.Password)<3)
-							M.client.Alert("Password must have atleast 3 characters.")
-							M.Password = null
-							continue
-					else return
-				else return
-				sleep(1)
-			if(!istext(M.Password))
-				M.Password="[M.Password]"
-			M.Password = md5("[M.Password][M.Password][M.Password][M.Password][M.Password]")
-			//var/savefile/F = new("saves/characters/[lowertext(copytext(M.name,1,2))]/[lowertext(M.name)].sav")
-			//F["Password"] = Password
-			if(M)
-				M.name = uppercase(M.name, 1)
-				M.rname = M.name
-				M.overlays=0
-				//M.HairStyle='Long.dmi'
-				var/obj/SkinTone
-				SkinTone = M.client.AlertList("Skin Color Options","Please choose a Skin Tone.",list("White","Dark","Blue","Pale"))
-				if(M)
-					if(SkinTone)
-						switch(SkinTone)
-							if(1)
-								M.SkinTone="White"
-							if(2)
-								M.SkinTone="Dark"
-							if(3)
-								M.SkinTone="Blue"
-							if(4)
-								M.SkinTone="Pale"
-
-				M.ResetBase()
-				M.HairStyle = M.CustomInput("Hair Options","Please choose a hair.",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","Mohawk","Neji Hair","Distance")).name
-
-				/*if(M)
-					if(Hair)
-						switch(Hair)
-							if("Long") M.HairStyle='Long.dmi'
-							if("Short") M.HairStyle='Short.dmi'
-							if("Tied Back") M.HairStyle='Short2.dmi'
-							if("Bald")
-								M.HairStyle=null
-								goto baldSkip
-							if("Bowl Cut") M.HairStyle='Short3.dmi'
-							if("Deidara") M.HairStyle= 'Deidara.dmi'
-							if("Spikey") M.HairStyle='Spikey.dmi'
-							if("Mohawk") M.HairStyle='Mohawk.dmi'
-							if("Neji Hair") M.HairStyle='Neji Hair.dmi'
-							if("Distance") M.HairStyle='Distance.dmi'*/
-			if(M && M.HairStyle != "Bald")
-				var/list/Colors=M.ColorInput("Please select a hair color.")
-				if(M)
-					M.HairColorRed=text2num(Colors[1])
-					M.HairColorGreen=text2num(Colors[2])
-					M.HairColorBlue=text2num(Colors[3])
-/*			if(src)
-				var/obj/Gender
-				Gender = src.CustomInput("Gender Options","Please choose a Gender.",list("Male","Female"))
-				if(src)
-					if(Gender)
-						switch(Gender.name)
-							if("Male")
-								src.icon='[SkinTone]MBase.dmi'
-							if("Female")
-								src.icon='[SkinTone]FBase.dmi'
-			if(src)
-				var/obj/skintone
-				skintone = src.CustomInput("skintone Options","Please choose a Skin tone (Dark female skin tone is still not added)",list("Light Male","Light Female","Dark Male"))
-				if(src)
-					if(skintone)
-						switch(skintone.name)
-							if("Light Male")
-								src.icon='WhiteMBase.dmi'
-							if("Light Female")
-								src.icon='WhiteFBase.dmi'
-							if("Dark Male")
-								src.icon='DarkMBase.dmi'*/
-			if(M)
-				if(M) M.Element=M.CustomInput("Element Options","Please choose your primary elemental affinity.",list("Fire","Water","Wind","Earth","Lightning"))
-				if(M&&M.Element)M.Element=M.Element:name
-			if(M)
-				M.Specialist=M.CustomInput("Specialist Options","What area of skills would you like to specialize in? Some nonclans and nonclan jutsus require a specific speciality. \n Rinnegan requires Balanced. \n Gates requires strength. \n Each speciality also has it's own nonclan tree.",list("strength","Ninjutsu","Genjutsu","Balanced"))
-				if(M&&M.Specialist)M.Specialist=M.Specialist:name
-			if(M)
-				if(M) M.Clan=M.CustomInput("Clan Options","What clan would you like to be born in?. \n Nonclan has many options that are similar to clans.",list("Senjuu","Crystal","Akimichi","Weaponist","Aburame","Hyuuga","Nara","Kaguya","Uchiha","Ink","Bubble","Uzumaki","No Clan"))
-				if(M&&M.Clan)
-					M.Clan=M.Clan:name
-					/*if(M.Clan=="No Clan")
-						if(M)
-							var/list/Specialties=list("strength","Ninjutsu","Genjutsu","Balanced")
-							var/obj/K=M.CustomInput("Specialist Options","Since you are a non-clan, you get to pick a second specialty. Please choose another.",Specialties-M.Specialist)
-							if(M)if(K)M.Specialist2=K.name*/
-					if(M)
-						var/obj/K=M.CustomInput("Village Options","What village would you like to be born in?.",list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/))
-						if(M)if(K)M.village=K.name
-			if(M)
-				/*switch(M.Specialist2)
-					if("strength")
-						M.strength+=6
-						M.maxstrengthexp+=5
-					if("Ninjutsu")
-						M.ninjutsu+=6
-						M.maxninexp+=5
-					if("Genjutsu")
-						M.genjutsu+=6
-						M.maxgenexp+=5
-					if("Balanced")
-						M.strength+=2
-						M.genjutsu+=2
-						M.ninjutsu+=2
-						M.maxstrengthexp+=2
-						M.maxninexp+=2
-						M.maxgenexp+=2*/
-				switch(M.Specialist)
-					if("strength")
-						M.strength+=6
-						M.maxstrengthexp+=6
-					if("Ninjutsu")
-						M.ninjutsu+=6
-						M.maxninexp+=6
-					if("Genjutsu")
-						M.genjutsu+=6
-						M.maxgenexp+=6
-					if("Balanced")
-						M.strength+=2
-						M.genjutsu+=2
-						M.ninjutsu+=2
-						M.maxstrengthexp+=2
-						M.maxninexp+=2
-						M.maxgenexp+=2
-				for(var/J in typesof(/obj/Jutsus))
-					var/obj/Jutsus/jutsu = new J
-					if(jutsu.starterjutsu)
-						jutsu.owner = M.ckey
-						M.jutsus += jutsu
-						M.jutsus_learned += jutsu.type
-						M.sbought += jutsu.name
-
-				M.skillpoints=1
-				M.RestoreOverlays()
-				for(var/obj/Titlescreen/Logo/L in M.client.screen)del(L)
-				if(!M)return
-			//	M.client.eye=locate(41,148,14)
-				M.loc=locate(39,158,14)//M.MapLoadSpawn()
-				M.client.eye=M
-				M.client:perspective = EYE_PERSPECTIVE
-				M << output("Welcome to the game. Enjoy. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F5: Hotslots<br>R: Recharge chakra<br>Tab: Target<br>Shift+Tab: Untarget<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","Action.Output")
-				winset(M, "Main", "is-maximized=true")
-				new/obj/Screen/Bar(M)
-				if(M.village == "Hidden Leaf")new/obj/Screen/LeafSymbol(M)
-				if(M.village == "Hidden Sand")new/obj/Screen/SandSymbol(M)
-				if(M.village == "Hidden Mist")new/obj/Screen/MistSymbol(M)
-				if(M.village == "Hidden Sound")new/obj/Screen/SoundSymbol(M)
-				if(M.village == "Hidden Rock")new/obj/Screen/RockSymbol(M)
-				if(M.village == "Akatsuki")new/obj/Screen/AkatsukiSymbol(M)
-				if(M.village == "Seven Swordsmen")new/obj/Screen/SsmSymbol(M)
-				if(M.village == "Anbu Root")new/obj/Screen/AnbuSymbol(M)
-				new/obj/Screen/WeaponSelect(M)
-				new/obj/Screen/Health(M)
-				new/obj/Screen/Chakra(M)
-				new/obj/Screen/EXP(M)
-				new/obj/HotSlots/HotSlot1(M)
-				new/obj/HotSlots/HotSlot2(M)
-				new/obj/HotSlots/HotSlot3(M)
-				new/obj/HotSlots/HotSlot4(M)
-				new/obj/HotSlots/HotSlot5(M)
-				new/obj/HotSlots/HotSlot6(M)
-				new/obj/HotSlots/HotSlot7(M)
-				new/obj/HotSlots/HotSlot8(M)
-				new/obj/HotSlots/HotSlot9(M)
-				new/obj/HotSlots/HotSlot10(M)
-				var/obj/O=new /obj/Screen/healthbar/
-				var/obj/Mana=new /obj/Screen/manabar/
-				M.hbar.Add(O)
-				M.hbar.Add(Mana)
-				for(var/obj/Screen/healthbar/HB in M.hbar)M.overlays+=HB
-				for(var/obj/Screen/manabar/HB in M.hbar)M.overlays+=HB
-				M.UpdateBars()
-				spawn(1)if(M)M.Run()
-				//spawn(1)M.lifecycle()
-				if(M)
-					spawn()
-						M.UpdateHMB()
-					M.Name(M.name)
-					M.pixel_x=-16
-					M.RestoreOverlays()
-				spawn()if(M)M.WeaponryDelete()
-				if(M)M.AddAdminVerbs()
-				//spawn()if(M)M.MedalCheck()
-				world<<"[M.rname] has logged in for the first time."
-				M.creating=0
-				winset(M, null, {"
-								Main.NavigationChild.is-visible      = "true";
-								Main.OutputChild.is-visible      = "true";
-								Main.ActionChild.is-visible      = "true";
-								Main.Child.right=Map;
-							"})
-				M<<"Now speaking in: [M.client.channel]."
-
-				clients_connected -= M.client
-				clients_online += M.client
-				mobs_online += M
-				for(var/client/A in world)
-					if(src.client.computer_id == A.computer_id)
-						src<<"Multi keying is fixed."
-						src.Logout()
 
 
-				if(M.client.Alert("Do you wish to skip the tutorial? Only do this if you are familiar with the game. If you skip this you can't come back without making a new account.","Skip Tutorial?",list("No","Yes"))==1)
-					return
-				M.Tutorial=7
-				if(M.village=="Hidden Leaf")
-					M.loc = locate(116,127,18)
-				if(M.village=="Hidden Sand")
-					M.loc = locate(91,132,10)
-				if(M.village=="Hidden Mist")
-					M.loc = locate(75,54,8)
-				if(M.village=="Hidden Sound")
-					M.loc = locate(140,28,6)
-				if(M.village=="Hidden Rock")
-					M.loc = locate(21,13,16)
-
-			/*	mobs_online.Add(M)
-				for(var/client/A in world)
-					if(src.client.computer_id == A.computer_id)
-						src<<"Multi keying is fixed."
-						src.Logout()*/
-
-				spawn()
-					del src
 
 
 mob/var/tmp/Prisoner
-mob/var/tmp/creating
-mob/player
+mob
 	Logout()
-		if(creating) del(src)
 		for(var/obj/O in world)if(O.IsJutsuEffect==src) del(O)
 		for(var/mob/M in src.puppets)del(M)
 		if(src.MissionUp) src.MissionUp=0
@@ -897,15 +414,15 @@ mob/player
 			M.canattack=1
 			M.injutsu=0
 			Prisoner=null
-		Save()
+
 		if(src.key&&src.name)world<<"[src.name] has logged out!"
 		if(Squad)
 			if(Squad.Leader == ckey)del Squad
 			else if(Squad.Members.Find(ckey))
 				for(var/i in Squad.Members)
-					var/mob/player/P = getOwner(i)
+					var/mob/P = getOwner(i)
 					P.Squad.Members -= ckey
-				var/mob/player/P = getOwner(Squad.Leader)
+				var/mob/P = getOwner(Squad.Leader)
 				P.Squad.Members -= ckey
 		for(var/mob/Clones/C in src.Clones)
 			del(C)
@@ -938,43 +455,6 @@ mob/player
 		del(src)
 		..()
 
-mob
-	proc
-		Save()
-			var/savefile/F = new/savefile("saves/characters/[copytext(Logins,1,2)]/[Logins].sav")
-			F["Password"] = Password
-			F << src
-			//src << output("Game saved successfully.", "Action.Output")
-
-	Write(var/savefile/F,var/list/neversave=null)
-		. = ..(F,neversave)
-		var/ocd = F.cd
-		F.cd = "location"
-		F << x
-		F << y
-		F << z
-		F << step_x
-		F << step_y
-		F << dir
-		F.cd = ocd
-		return .
-
-	Read(var/savefile/F,var/list/neversave=null)
-		. = ..(F,neversave)
-		var/ocd = F.cd
-		F.cd = "location"
-		F >> x
-		F >> y
-		F >> z
-		F >> step_x
-		F >> step_y
-		F >> dir
-		F.cd = ocd
-		return .
-mob/player
-	Del()
-		src.Save()
-		..()
 mob
 	verb
 		CloseBrowser()

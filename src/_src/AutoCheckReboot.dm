@@ -10,7 +10,6 @@ proc
 				M.exp_locked=1
 				winset(M, "Navigation.ExpLockButton", "is-disabled = 'false'")
 				spawn() M.client.FlashExperienceLock()
-				M.Save()
 			else
 				continue
 		AutoCheck()

@@ -5,7 +5,7 @@ mob
 				if(Sharingan<=3) // things like this come first
 					src<<output("You must have Mangekyou Sharingan or higher activated in order to use this.","Action.Output")
 					return
-				var/mob/player/c_target=usr.Target_Get(TARGET_MOB)
+				var/mob/c_target=usr.Target_Get(TARGET_MOB)
 				if(!c_target||!istype(c_target))
 					src<<output("You must have a target to use this technique.","Action.Output")
 					return
@@ -60,7 +60,7 @@ mob
 				if(Sharingan<=3)
 					src<<output("You need to have Mangekyou Sharingan or higher activated to use this.","Action.Output")
 					return
-				var/mob/player/c_target=src.Target_Get(TARGET_MOB)
+				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||!istype(c_target))
 					src<<output("You require a targeted player to use this technique.","Action.Output")
 					return

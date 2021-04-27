@@ -655,94 +655,93 @@ mob
 //				if(O.strength>=1&&O.strength<25)
 //					step(src,src.dir)
 //					src.stepped=1
-	player
-		M.ResetBase()
-		//icon='WhiteMBase.dmi'
-		//	statpanel("Inventory")
-		//	stat("Ryo: ","[src.Ryo]")
-		//	stat("Items: ","[src.items]/[src.maxitems]")
-		//	stat(src.contents)
-			//statpanel("Clothing")
-			//stat("Items: ","[src.items]/[src.maxitems]")
-			//stat(src.Clothes)
-		//	statpanel("Jutsus")
-		//	stat(src.jutsus)
-			//statpanel("Clothing Collection", src.storage)
-			//statpanel("Quest Items", src.QuestItems)
-		pixel_x=-15
-		New()
-			..()
-			src.overlays+=/obj/MaleParts/UnderShade
-		Bump(atom/O)
-			..()
-			if(istype(O,/mob))
-				var/mob/M=O
-				if(M.fightlayer==src.fightlayer)
-					if(src.henge==4||src.henge==5)src.HengeUndo()
-					if(M.henge==4||M.henge==5)M.HengeUndo()
-				else src.loc=M.loc
-				if(Effects["Rasengan"])
-					var/damage=Effects["Rasengan"]
-					Effects["Rasengan"]=null
-					flick("punchr",src)
-					overlays-=image('Rasengan.dmi',"spin")
-					overlays+=image('Rasengan.dmi',"explode")
-					spawn(3) overlays-=image('Rasengan.dmi',"explode")
-					M.health-=damage
-					var/colour = colour2html("white")
-					F_damage(M,damage,colour)
-					if(M.client)spawn() M.ScreenShake(5)
-					M.UpdateHMB()
-					M.Death(src)
-				if(Effects["Chidori"])
-					var/damage=Effects["Chidori"]
-					Effects["Chidori"]=null
-					flick("punchr",src)
-					overlays-=image('Chidori.dmi',"charge")
-					overlays+=image('Chidori.dmi',"explode")
-					spawn(3) overlays-=image('Chidori.dmi',"explode")
-					M.health-=damage
-					var/colour = colour2html("white")
-					F_damage(M,damage,colour)
-					if(M.client)spawn() M.ScreenShake(5)
-					M.UpdateHMB()
-					M.Death(src)
-			if(istype(O,/obj))
-				//var/obj/Obj=O
+	M.ResetBase()
+	//icon='WhiteMBase.dmi'
+	//	statpanel("Inventory")
+	//	stat("Ryo: ","[src.Ryo]")
+	//	stat("Items: ","[src.items]/[src.maxitems]")
+	//	stat(src.contents)
+		//statpanel("Clothing")
+		//stat("Items: ","[src.items]/[src.maxitems]")
+		//stat(src.Clothes)
+	//	statpanel("Jutsus")
+	//	stat(src.jutsus)
+		//statpanel("Clothing Collection", src.storage)
+		//statpanel("Quest Items", src.QuestItems)
+	pixel_x=-15
+	New()
+		..()
+		src.overlays+=/obj/MaleParts/UnderShade
+	Bump(atom/O)
+		..()
+		if(istype(O,/mob))
+			var/mob/M=O
+			if(M.fightlayer==src.fightlayer)
 				if(src.henge==4||src.henge==5)src.HengeUndo()
-			if(istype(O,/turf))
-				var/turf/T=O
-				src.HengeUndo()
-				if(O.density&&src.icon_state=="push")
-				//	O.overlays+=image('Misc Effects.dmi',O,"crack[number]")
-					var/damage=rand(10,15)
-					src.health-=damage
-					var/colour = colour2html("white")
-					F_damage(src,damage,colour)
-					if(src.client)spawn() src.ScreenShake(5)
-					UpdateHMB()
-					Death(src)
-					src.icon_state=""
-				if(istype(O,/turf/Ground/Cliff/Edges/Bottom)||istype(O,/turf/Ground/Cliff))
-					if(!src.copy&&O:Climbable)
-						if(src.dashable==2)
-							if(src.mountainkit)
-								src.loc=locate(T.x,T.y,T.z)
-								src.canattack=0
-								src.firing=1
-								src.icon_state="climbS"
-								src.copy="Climb"
-								src.arrow="L"
-								var/obj/WArrow = image('Misc Effects.dmi',src,icon_state="arrow",layer=99)
-								WArrow.pixel_x=-64
-								WArrow.dir=WEST
-								src.ArrowTasked=WArrow
-								src<<WArrow
-							else
-								if(mountainwalk)src.loc=locate(T.x,T.y,T.z)
-								else ..()
-					else if(src.copy=="Climb")src.loc=locate(T.x,T.y,T.z)
-				else ..()
+				if(M.henge==4||M.henge==5)M.HengeUndo()
+			else src.loc=M.loc
+			if(Effects["Rasengan"])
+				var/damage=Effects["Rasengan"]
+				Effects["Rasengan"]=null
+				flick("punchr",src)
+				overlays-=image('Rasengan.dmi',"spin")
+				overlays+=image('Rasengan.dmi',"explode")
+				spawn(3) overlays-=image('Rasengan.dmi',"explode")
+				M.health-=damage
+				var/colour = colour2html("white")
+				F_damage(M,damage,colour)
+				if(M.client)spawn() M.ScreenShake(5)
+				M.UpdateHMB()
+				M.Death(src)
+			if(Effects["Chidori"])
+				var/damage=Effects["Chidori"]
+				Effects["Chidori"]=null
+				flick("punchr",src)
+				overlays-=image('Chidori.dmi',"charge")
+				overlays+=image('Chidori.dmi',"explode")
+				spawn(3) overlays-=image('Chidori.dmi',"explode")
+				M.health-=damage
+				var/colour = colour2html("white")
+				F_damage(M,damage,colour)
+				if(M.client)spawn() M.ScreenShake(5)
+				M.UpdateHMB()
+				M.Death(src)
+		if(istype(O,/obj))
+			//var/obj/Obj=O
+			if(src.henge==4||src.henge==5)src.HengeUndo()
+		if(istype(O,/turf))
+			var/turf/T=O
+			src.HengeUndo()
+			if(O.density&&src.icon_state=="push")
+			//	O.overlays+=image('Misc Effects.dmi',O,"crack[number]")
+				var/damage=rand(10,15)
+				src.health-=damage
+				var/colour = colour2html("white")
+				F_damage(src,damage,colour)
+				if(src.client)spawn() src.ScreenShake(5)
+				UpdateHMB()
+				Death(src)
+				src.icon_state=""
+			if(istype(O,/turf/Ground/Cliff/Edges/Bottom)||istype(O,/turf/Ground/Cliff))
+				if(!src.copy&&O:Climbable)
+					if(src.dashable==2)
+						if(src.mountainkit)
+							src.loc=locate(T.x,T.y,T.z)
+							src.canattack=0
+							src.firing=1
+							src.icon_state="climbS"
+							src.copy="Climb"
+							src.arrow="L"
+							var/obj/WArrow = image('Misc Effects.dmi',src,icon_state="arrow",layer=99)
+							WArrow.pixel_x=-64
+							WArrow.dir=WEST
+							src.ArrowTasked=WArrow
+							src<<WArrow
+						else
+							if(mountainwalk)src.loc=locate(T.x,T.y,T.z)
+							else ..()
+				else if(src.copy=="Climb")src.loc=locate(T.x,T.y,T.z)
+			else ..()
 client
 	Move(Loc)
 		if(!mob.likeaclone)
@@ -750,9 +749,9 @@ client
 				if(mob.dashable<>2)
 					if(mob.move==1)
 						if(mob.ThrowingMob)
-							for(var/mob/player/M in mobs_online)if(M==mob.ThrowingMob)step_to(M,mob,0)
+							for(var/mob/M in mobs_online)if(M==mob.ThrowingMob)step_to(M,mob,0)
 						if(mob.BeingThrown)
-							for(var/mob/player/M in mobs_online)if(M.ThrowingMob==mob) M.ThrowingMob=null; mob.BeingThrown=0
+							for(var/mob/M in mobs_online)if(M.ThrowingMob==mob) M.ThrowingMob=null; mob.BeingThrown=0
 						if(mob.bunshin)
 							for(var/mob/Clones/C2 in mob.Clones)
 								if(C2.Owner==mob&&!C2.target_mob)
@@ -802,8 +801,8 @@ client
 			else return
 		else
 			var/mob/Clones/SC=src.mob.likeaclone
-			if(SC.ThrowingMob)for(var/mob/player/M in mobs_online) if(M==SC.ThrowingMob)step_to(M,SC,0)
-			if(SC.BeingThrown)for(var/mob/player/M in mobs_online)if(M.ThrowingMob==SC) M.ThrowingMob=null; SC.BeingThrown=0
+			if(SC.ThrowingMob)for(var/mob/M in mobs_online) if(M==SC.ThrowingMob)step_to(M,SC,0)
+			if(SC.BeingThrown)for(var/mob/M in mobs_online)if(M.ThrowingMob==SC) M.ThrowingMob=null; SC.BeingThrown=0
 			var/Dir = get_dir(mob,Loc)
 			if(!SC.dashable)SC.dashable=1
 			step(SC,Dir)

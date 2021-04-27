@@ -42,7 +42,7 @@ atom
 				O.icon_state=X
 				O.pixel_x=CX
 				O.pixel_y=-25
-				O.icon=O.icon-src.colorz
+				//O.icon=O.icon-src.colorz
 				if(colors)
 					var/icon/I = new(O.icon)
 					I.Blend(colors, ICON_MULTIPLY)
