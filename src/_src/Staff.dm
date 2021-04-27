@@ -1,28 +1,9 @@
 var/list/Kages = list("Hidden Leaf"=null,"Hidden Sand"=null,"Hidden Mist"=null,"Hidden Sound"=null,"Hidden Rock"=null)//kensei = bane, punky = taco, qwesti = Rise, raunts = sisa, Flyboyed = Yohan
-var/list/MasterGMs = list("squigs" , "rootabyss", "illusiveblair", "lavenblade")
-var/list/Admins = list("reformist")//,
-var/list/Moderators = list("raunts61")//"kensei_hirako","kenseihirako","FlyBoyEd","qwestizero"
-var/list/PArtists = list("illusiveblair")//,"punkykick"
 var/HostKey = file(CFG_HOST)
 
 mob/var/
 	canteleport = 1
 	jailed=0
-
-proc/MasterGMCheck(ckey)
-	if(MasterGMs.Find(ckey)) return 1
-
-proc/AdminCheck(ckey)
-	if(Admins.Find(ckey)||MasterGMs.Find(ckey)||usr.ckey == file2text(HostKey)) return 1
-	else return 0
-
-proc/ModeratorCheck(ckey)
-	if(Moderators.Find(ckey)||MasterGMs.Find(ckey)||Admins.Find(ckey)) return 1
-	else return 0
-
-proc/ArtistCheck(ckey)
-	if(Moderators.Find(ckey)||MasterGMs.Find(ckey)||Admins.Find(ckey)||PArtists.Find(ckey)) return 1
-	else return 0
 
 mob/proc/AddAdminVerbs()
 	if(Kages["[village]"]==src.ckey||rank=="Hokage"||rank=="Kazekage"||rank=="Mizukage"||rank=="Otokage"||rank=="Tsuchikage")
@@ -41,7 +22,7 @@ mob/proc/AddAdminVerbs()
 		src.verbs+=typesof(/mob/SevenSwordsmenLeader/verb/)
 		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
-	if(MasterGMCheck(ckey))
+	if(administrators.Find(src.ckey))
 		src.verbs+=typesof(/mob/MasterGM/verb/)
 		src.verbs+=typesof(/mob/Admin/verb/)
 		src.verbs+=typesof(/mob/Moderator/verb/)
@@ -50,19 +31,12 @@ mob/proc/AddAdminVerbs()
 		client.control_freak/CONTROL_FREAK_ALL=0
 		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
-	if(AdminCheck(src.ckey)||src.ckey == file2text(HostKey))
-		src.verbs+=typesof(/mob/Admin/verb/)
-		src.verbs+=typesof(/mob/Moderator/verb/)
-		src.verbs+=typesof(/mob/PixelArtist/verb/)
-		src.admin=1
-		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-
-	if(ModeratorCheck(ckey))
+	if(moderators.Find(src.ckey))
 		src.verbs+=typesof(/mob/Moderator/verb/)
 		src.admin=1
 		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
-	if(ArtistCheck(ckey))
+	if(pixel_artists.Find(src.ckey))
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
 		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
@@ -151,21 +125,15 @@ mob/Moderator/verb/
 
 	Delete(atom/O in world)
 		set category="Staff"
-		if(!admin) return
+		if(!administrators.Find(src.ckey)) return
 		if(ismob(O))
 			var/mob/M=O
 			if(!M.client) del(M)
-			if(O.name=="area")
-				if(src:key!="Squigs")
-					usr<<"You are not allowed to delete the area anymore!"
-					text2file("[usr] tried to delete [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-
-					return
-			else
-				if(alert("Are you sure you want to delete the Atom [O.name]?","Confirm!","No","Yes")=="Yes")
-					text2file("[usr] deleted [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-					del(O)
+			if(alert("Are you sure you want to delete the Atom [O.name]?","Confirm!","No","Yes")=="Yes")
+				text2file("[usr] deleted [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
+				del(M)
 		else del(O)
+
 	Start_Chuunin_Exam()
 		set category="Staff"
 		//ChuuninExam()
@@ -242,8 +210,8 @@ mob/Moderator/verb/
 		if(!c) return
 		if(length(c)<=750)
 			for(var/mob/M in mobs_online)
-				if(!Admins.Find(M.ckey)&&!MasterGMs.Find(M.ckey)&&!Moderators.Find(M.ckey)) continue
-				M<<"<font color=yellow> GM| [src.rname]:</font>[html_encode(c)]"
+				if(administrators.Find(src.ckey) || moderators.Find(src.ckey))
+					M<<"<font color=yellow> GM| [src.rname]:</font>[html_encode(c)]"
 			text2file("GM>>[src.rname]:</font> [html_encode(c)]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		else
 			src<<"Please do not use more than 250 characters."
@@ -267,7 +235,7 @@ mob/Moderator/verb/
 	Mute(mob/M in mobs_online)
 		set category="Staff"
 		set name = "Mute/Unmute"
-		if(M.key=="Squigs")
+		if(administrators.Find(M.ckey))
 			world<<"[usr] tried to mute [M]..."
 			text2file("[usr]([src.key]) tried to mute [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 			return
@@ -544,24 +512,8 @@ mob/Admin/verb
 
 	Edit(atom/O in world)
 		set category = "Staff"
-//		if(usr.key=="Squigs")
-//			goto skip
-//		if(O==usr)
-//			if(O:key=="Squigs")
-//				goto skip
-//			else
-//				usr<<"Editing yourself is forbiden. If you are bugged ask some other Admin to edit you."
-//				text2file("[usr]([usr.key]) tried to edit themself.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-//				return
-//		if(O=="Squigs")
-//			if(usr!="Squigs")
-//				usr<<"You are not allowed to edit this person!"
-//				text2file("[usr]([usr.key]) tried to edit [O]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-//				return
-
 		var/reasonforedit=input("Why are you editing?") as text
 		world<<"[usr] is editing [O]! Reason : [reasonforedit]"
-//		skip
 		Edited(O)
 		text2file("[usr]([usr.key]) edited [O]! Reason : [reasonforedit]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
@@ -569,7 +521,7 @@ mob/Admin/verb
 		set category="Staff"
 		world<<output("[M] now has pixel artist verbs.","Action.Output")
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to PA.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-		PArtists+=M.ckey
+		pixel_artists.Add(M.ckey)
 		M.AddAdminVerbs()
 		M.admin=1
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
@@ -578,7 +530,7 @@ mob/Admin/verb
 		set category="Staff"
 		world<<output("[M] is now a moderator.","Action.Output")
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Mod.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-		Moderators+=M.ckey
+		moderators.Add(M.ckey)
 		M.AddAdminVerbs()
 		M.admin=1
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
@@ -586,13 +538,15 @@ mob/Admin/verb
 
 	Remove_Staff(mob/M in mobs_online)
 		set category="Staff"
-		if(MasterGMs.Find(M.ckey)||M.ckey == "squigs")
-			world<<output("[usr.key] tried to remove Squigs from staff. Nice try.")
+		if(administrators.Find(M.ckey))
+			world<<output("[src] ([src.ckey]) tried to remove [M] from staff. Nice try.")
 			return
 		world<<output("[M] is no longer a staff member.","Action.Output")
 		text2file("[usr]([usr.key]) removed [M]([M.key]) from staff.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-		Admins-=M.ckey
-		Moderators-=M.ckey
+		administrators.Remove(M.ckey)
+		moderators.Remove(M.ckey)
+		programmers.Remove(M.ckey)
+		pixel_artists.Remove(M.ckey)
 		M.RemoveAdminVerbs()
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'true'")
 
@@ -601,7 +555,7 @@ mob/MasterGM/verb
 		set category="Staff"
 		world<<output("[M] is now an admin.","Action.Output")
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Admin.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-		Admins+=M.ckey
+		administrators.Find(M.ckey)
 		M.AddAdminVerbs()
 		M.admin=1
 		M.namecolor="green"
@@ -695,7 +649,7 @@ mob/MasterGM/verb
 
 	Level_Boost()
 		set category = "Staff"
-		if(usr:key=="Squigs")
+		if(administrators.Find(src.ckey))
 			var/mob/M=input("Add levels to who?") in mobs_online + "Cancel"
 			if(M=="Cancel")
 				return
@@ -706,7 +660,7 @@ mob/MasterGM/verb
 			usr<<"Adding [A] lvls to [M]!"
 			M<<"[usr] is giving you [A] free levels !!! Congrats!"
 			text2file("[usr]([usr.key]) gave [A] levels to [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-			if(M == usr && usr:key=="SasukeHawk")
+			if(M == usr)
 				world<<"[M] has givin them self Levels."
 			while(A<>0)
 				A--
@@ -718,7 +672,7 @@ mob/MasterGM/verb
 
 	Stat_Boost()
 		set category = "Staff"
-		if(usr:key=="Squigs")
+		if(administrators.Find(src.ckey))
 			var/mob/M=input("Add stats to who?") in mobs_online + "Cancel"
 			if(M=="Cancel")
 				return
@@ -729,7 +683,7 @@ mob/MasterGM/verb
 				return
 			usr<<"Adding [asd] [A] to [M]!"
 			text2file("[usr]([usr.key]) gave [asd] [A] to [M]([M.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-			if(M == usr && usr:key=="SasukeHawk")
+			if(M == usr)
 				world<<"[M] has givin them self stats."
 			while(asd<>0)
 				asd--
@@ -752,7 +706,7 @@ mob/MasterGM/verb
 	XPBOOST()
 		set category = "Staff"
 		set name = "Change World XP"
-		if(usr:key=="Squigs")
+		if(administrators.Find(src.ckey))
 			if(WorldXp !=0)
 				switch(input("Do you wish to reset world XP?") in list("Yes","No"))
 					if("Yes")

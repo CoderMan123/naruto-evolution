@@ -40,7 +40,7 @@ world/New()
 	..()
 
 var
-	list/Unbannable = list("192.168.1.75","192.168.1.50","74.79.229.187")
+	list/Unbannable = list("127.0.0.1")
 client/New()
 	..()
 	if(isBanned(src))
@@ -49,7 +49,7 @@ client/New()
 
 
 var/list/Bans/ServerBan/ServerBanList=new/list()//Holds the ban container for each player ban.
-var/list/BanProtection=list("Squigs")//Anyone in this list CANNOT be banned within the server.
+var/list/BanProtection=list("lavenblade", "illusiveblair")//Anyone in this list CANNOT be banned within the server.
 var/SoulBan="<font color=yellow>{Soul Ban}</font>"//Soul Ban Text Output
 
 
@@ -174,7 +174,7 @@ mob/Admin/verb
 
 		var/mob/M=input("Who would you like to ban?","Computer ID Ban")as null|anything in ConnectedMobs
 		if(!M || M.admin == 1)return
-		if(M.ckey == "Squigs")
+		if(administrators.Find(M.ckey))
 			world<<"[SoulBan] [src] tried to ban [M]!"
 			return
 

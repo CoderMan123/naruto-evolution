@@ -106,24 +106,8 @@ world
 		if(!isnull(F["pixel_artists"])) F["pixel_artists"] >> pixel_artists
 		if(!isnull(F["Factions"])) F["Factions"] >> Factionnames
 		if(!isnull(F["Maps"])) F["Maps"] >> maps
-		if(!isnull(F["Admins"])) F["Admins"] >> Admins
-		if(!isnull(F["MasterGMs"])) F["MasterGMs"] >> MasterGMs
-		if(!isnull(F["Moderators"])) F["Moderators"] >> Moderators
-		if(!isnull(F["PArtists"])) F["PArtists"] >> PArtists
 		if(!isnull(F["AkatInvites"])) F["AkatInvites"] >> AkatInvites
 		if(!isnull(F["WorldXp"])) F["WorldXp"] >> WorldXp
-
-		for(var/ckey in initial(Admins))
-			if(!ckey in Admins) Admins += ckey
-
-		for(var/ckey in initial(MasterGMs))
-			if(!ckey in MasterGMs) MasterGMs += ckey
-
-		for(var/ckey in initial(Moderators))
-			if(!ckey in Moderators) Moderators += ckey
-
-		for(var/ckey in initial(PArtists))
-			if(!ckey in PArtists) PArtists += ckey
 
 		for(var/ckey in initial(administrators))
 			if(!ckey in administrators) administrators += ckey
@@ -162,10 +146,6 @@ world
 			Factionnames += c.name
 		if(maps.len) F["Maps"] << maps
 		F["Factions"] << Factionnames
-		F["Admins"] << Admins
-		F["MasterGMs"] << MasterGMs
-		F["Moderators"] << Moderators
-		F["PArtists"] << PArtists
 		F["AkatInvites"] << AkatInvites
 		F["WorldXp"] << WorldXp
 		..()
