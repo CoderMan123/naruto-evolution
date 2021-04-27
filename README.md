@@ -1,9 +1,11 @@
-![Build](https://github.com/lavenblade/project-evolution/actions/workflows/build.yml/badge.svg)
-![Deploy](https://github.com/lavenblade/project-evolution/actions/workflows/deploy.yml/badge.svg)
+![Build](https://github.com/lavenblade/naruto-evolution/actions/workflows/build.yml/badge.svg)
+![Deploy](https://github.com/lavenblade/naruto-evolution/actions/workflows/deploy.yml/badge.svg)
 
-# Project Evolution
+# Naruto Evolution
+A fan inspired online game based on the Naruto Universe.
 
 ## Setup Development Environment
+
 ### Prerequisites
 Before you can setup a development environment, you need to make sure that you have the following dependencies installed.
 - [Git](https://git-scm.com/)
@@ -24,16 +26,16 @@ Install the dependencies using your distributions package manager.
 ##### Arch / Manjaro
 `pacman -Syu git git-lfs`
 
-### Setup
-
+### Instructions
 1) Clone the repository:
 ```sh
-git clone https://github.com/lavenblade/project-evolution.git
+git clone https://github.com/lavenblade/naruto-evolution.git
 ```
 
 2) Switch to preferred branch:
-   * v2: `master` / `develop`
-   * v1: `master-v1` / `develop-v1`
+   * `master`: This is the current release branch and automatically deploys to the public environment.
+   * `develop`: This is the current development branch and automatically deploys to the testing environment.
+
 ```sh
 git checkout <branch>
 ```
