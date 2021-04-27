@@ -1,4 +1,4 @@
-mob/player
+mob
 	see_in_dark=3
 	New()
 		..()

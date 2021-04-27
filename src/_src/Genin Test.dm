@@ -6,15 +6,15 @@ turf
 proc/GeninExam()
 	while(world)
 		sleep((600*30)+rand(200,400))
-		for(var/mob/player/M in TotalPlayers)M<<output("<center>A Genin exam is about to begin in all Village Academies.</center>","ActionPanel.Output")
+		for(var/mob/M in mobs_online)M<<output("<center>A Genin exam is about to begin in all Village Academies.</center>","Action.Output")
 		sleep(600*3)
-		for(var/mob/player/M in TotalPlayers)M<<output("<center>The Genin exam has begun!</center>","ActionPanel.Output")
+		for(var/mob/M in mobs_online)M<<output("<center>The Genin exam has begun!</center>","Action.Output")
 		GeninTest=1
 		sleep(600*2)
-		for(var/mob/player/M in TotalPlayers)M<<output("<center>The written Genin exam is now over! Handseals testing will begin in one minute for all who passed!</center>","ActionPanel.Output")
+		for(var/mob/M in mobs_online)M<<output("<center>The written Genin exam is now over! Handseals testing will begin in one minute for all who passed!</center>","Action.Output")
 		GeninTest=0
 		sleep(100)
-		for(var/mob/M in global.genintesters)M << output("You are to execute 3 of your ninjutsu or genjutsu within thirty seconds ignoring the indoors dialog telling you not to.","ActionPanel.Output")
+		for(var/mob/M in global.genintesters)M << output("You are to execute 3 of your ninjutsu or genjutsu within thirty seconds ignoring the indoors dialog telling you not to.","Action.Output")
 		sleep(300)
 		for(var/mob/M in global.genintesters)
 			if(M.SealsDoneGenin>=3)
@@ -23,11 +23,14 @@ proc/GeninExam()
 				M.loc=M.MapLoadSpawn()
 			else M.loc=M.MapLoadSpawn()
 		genintesters=list()
-		for(var/mob/player/M in TotalPlayers)M<<output("<center>The practical examination for the Genin Exams are now over. Thank you for those that participated!</center>","ActionPanel.Output")
+		for(var/mob/M in mobs_online)M<<output("<center>The practical examination for the Genin Exams are now over. Thank you for those that participated!</center>","Action.Output")
 mob
 	proc/givegenin()
-		src<<output("You are now a Genin.","ActionPanel.Output")
+		src<<output("You are now a Genin.","Action.Output")
 		src.rank="Genin"
+		var/squad/squad = src.GetSquad()
+		if(squad)
+			squad.Refresh()
 		if(village=="Hidden Leaf")
 			new/obj/Inventory/Clothing/HeadWrap/LeafHeadBand(src)
 		if(village=="Hidden Sand")
@@ -64,19 +67,19 @@ obj/Special/GeninExam
 		var/InUse
 		var/list/NewQuestions=Questions.Copy()
 		if(usr.village!=village)
-			usr<<output("You are not apart of this village.","ActionPanel.Output")
+			usr<<output("You are not apart of this village.","Action.Output")
 			return
 		if(usr.rank!="Academy Student")
-			usr<<output("You are not an Academy Student.","ActionPanel.Output")
+			usr<<output("You are not an Academy Student.","Action.Output")
 			return
 		if(!GeninTest)
-			usr<<output("The Genin Exam has not begun, do not start too early.","ActionPanel.Output")
+			usr<<output("The Genin Exam has not begun, do not start too early.","Action.Output")
 			return
 		if(usr.level<5)
-			usr<<output("You must be level 5 more higher to write the Genin exam.","ActionPanel.Output")
+			usr<<output("You must be level 5 more higher to write the Genin exam.","Action.Output")
 			return
 		if(InUse)
-			usr<<output("Someone is already writing the exam here!","ActionPanel.Output")
+			usr<<output("Someone is already writing the exam here!","Action.Output")
 			return
 		if(usr.RecentVerbsCheck("Genin Test",6000,1)) return
 		usr.RecentVerbs["Genin Test"]=world.timeofday
@@ -84,7 +87,7 @@ obj/Special/GeninExam
 		while(QuestionNum<10)
 			sleep(1)
 			if(!GeninTest)
-				usr<<output("You have ran out of time!","ActionPanel.Output")
+				usr<<output("You have ran out of time!","Action.Output")
 				QuestionNum=0
 				CorrectAnswer=0
 				return
@@ -93,14 +96,14 @@ obj/Special/GeninExam
 			QuestionNum++
 			if(usr.client.Alert("Question #[QuestionNum]: [Question]","Question [QuestionNum]",list("True","False"))=="[Questions[Question]]")
 				CorrectAnswer++
-		usr<<output("You have completed the test, please wait for the result.","ActionPanel.Output")
+		usr<<output("You have completed the test, please wait for the result.","Action.Output")
 		while(GeninTest)
 			sleep(10)
 		if(CorrectAnswer>=7)
-			usr<<output("You passed the test with [CorrectAnswer]/10 questions correct! You will now be taken to the handseals testing.","ActionPanel.Output")
+			usr<<output("You passed the test with [CorrectAnswer]/10 questions correct! You will now be taken to the handseals testing.","Action.Output")
 			usr.loc = locate(/turf/geninexamsealstest)
 			global.genintesters+=usr
-		else usr<<output("You failed the test with [CorrectAnswer]/10 questions correct.","ActionPanel.Output")
+		else usr<<output("You failed the test with [CorrectAnswer]/10 questions correct.","Action.Output")
 		InUse=0
 		QuestionNum=0
 		CorrectAnswer=0

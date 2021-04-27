@@ -1,10 +1,10 @@
 area/var/Safe=0
 area
 	Entered()
-		if(Safe) usr<<output("You are now entering a safe zone.","ActionPanel.Output")
+		if(Safe) usr<<output("You are now entering a safe zone.","Action.Output")
 		..()
 	Exited()
-		if(Safe) usr<<output("You are now leaving a safe zone.","ActionPanel.Output")
+		if(Safe) usr<<output("You are now leaving a safe zone.","Action.Output")
 		..()
 area/Dojo
 	invisibility=99
@@ -15,7 +15,7 @@ area/Dojo
 	var/DojoY=47
 	var/DojoZ=2
 	Entered()
-		usr<<output("You have entered the dojo.","ActionPanel.Output")
+		usr<<output("You have entered the dojo.","Action.Output")
 		..()
 area/Village
 	Safe=1

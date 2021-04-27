@@ -94,7 +94,7 @@ macro "Macro"
 		command = "kaguyashoot1"
 	elem 
 		name = "A+REP"
-		command = "Attack"
+		command = "Basic-Attack"
 	elem 
 		name = "ALT+D"
 		command = "puppetdash2"
@@ -187,8 +187,8 @@ menu "menu"
 		saved-params = "is-checked"
 
 
-window "ActionPanel"
-	elem "ActionPanel"
+window "Action"
+	elem "Action"
 		type = MAIN
 		pos = 281,0
 		size = 500x200
@@ -228,8 +228,8 @@ window "ActionPanel"
 		visited-color = #df00ff
 		legacy-size = false
 
-window "BrowserWindow"
-	elem "BrowserWindow"
+window "Browser"
+	elem "Browser"
 		type = MAIN
 		pos = 281,0
 		size = 940x600
@@ -279,9 +279,19 @@ window "BrowserWindow"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
+		image = 'assets\\interface\\buttons\\Close.png'
 		command = "CloseBrowser"
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Output"
 		type = BROWSER
 		pos = 3,24
@@ -299,7 +309,6 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -308,8 +317,6 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x603
-		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -963,6 +970,7 @@ window "Character"
 		border = line
 		saved-params = "is-checked"
 		text = ""
+		image = 'assets\\interface\\buttons\\Close.png'
 		command = "ToggleCharacterPanel"
 		is-flat = true
 	elem "label2"
@@ -979,6 +987,16 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "Name"
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "ColorWindow"
 	elem "ColorWindow"
@@ -1170,8 +1188,8 @@ window "InputPanel"
 		saved-params = ""
 		no-command = true
 
-window "InventoryWindow"
-	elem "InventoryWindow"
+window "Inventory"
+	elem "Inventory"
 		type = MAIN
 		pos = 281,0
 		size = 300x500
@@ -1222,7 +1240,6 @@ window "InventoryWindow"
 		border = line
 		saved-params = ""
 		text = ""
-		image = 'Interface\\Symbols\\Ryo.png'
 	elem "EquippedItemInfo"
 		type = OUTPUT
 		pos = 37,440
@@ -1303,6 +1320,16 @@ window "InventoryWindow"
 		border = line
 		saved-params = ""
 		text = "Inventory - 0/25"
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Close"
 		type = BUTTON
 		pos = 272,0
@@ -1316,7 +1343,7 @@ window "InventoryWindow"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
+		image = 'assets\\interface\\buttons\\Close.png'
 		command = "ToggleInventoryPanel"
 		is-flat = true
 
@@ -1362,8 +1389,8 @@ window "JutsuTab"
 		saved-params = ""
 		highlight-color = #000000
 
-window "LeaderWindow"
-	elem "LeaderWindow"
+window "Leader"
+	elem "Leader"
 		type = MAIN
 		pos = 281,0
 		size = 500x400
@@ -1411,6 +1438,16 @@ window "LeaderWindow"
 		border = line
 		saved-params = ""
 		text = "Leader"
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Close"
 		type = BUTTON
 		pos = 472,0
@@ -1424,7 +1461,7 @@ window "LeaderWindow"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
+		image = 'assets\\interface\\buttons\\Close.png'
 		command = "ToggleLeaderPanel"
 		is-flat = true
 	elem "Stats"
@@ -1458,7 +1495,7 @@ window "Main"
 		titlebar = false
 		statusbar = false
 		can-resize = false
-		icon = 'Hud\\evo.dmi'
+		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
 	elem "Child"
 		type = CHILD
@@ -1478,7 +1515,7 @@ window "Main"
 		background-color = #232323
 		is-visible = false
 		saved-params = "splitter"
-		left = "ActionPanel"
+		left = "Action"
 		is-vert = false
 	elem "OutputChild"
 		type = CHILD
@@ -1488,7 +1525,7 @@ window "Main"
 		anchor2 = none
 		background-color = #525252
 		saved-params = "splitter"
-		left = "OutputPanel"
+		left = "Output"
 		is-vert = false
 	elem "NavigationChild"
 		type = CHILD
@@ -1497,7 +1534,7 @@ window "Main"
 		anchor1 = 0,100
 		anchor2 = 100,100
 		saved-params = "splitter"
-		left = "NavigationPanel"
+		left = "Navigation"
 		is-vert = false
 	elem "label"
 		type = LABEL
@@ -1542,7 +1579,17 @@ window "Main"
 		is-disabled = true
 		border = line
 		saved-params = ""
-		text = "Project Evolution"
+		text = "Naruto Evolution"
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "MuteTime"
 		type = LABEL
 		pos = 1026,24
@@ -1580,7 +1627,7 @@ window "Main"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Minimize.png'
+		image = 'assets\\interface\\buttons\\Minimize.png'
 		command = "MiniWindow"
 		is-flat = true
 	elem "Close"
@@ -1596,9 +1643,37 @@ window "Main"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
+		image = 'assets\\interface\\buttons\\Close.png'
 		command = ".quit"
 		is-flat = true
+
+window "Map"
+	elem "Map"
+		type = MAIN
+		pos = 281,0
+		size = 1010x675
+		anchor1 = none
+		anchor2 = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		macro = "macro"
+		menu = "menu"
+	elem "map"
+		type = MAP
+		pos = 0,0
+		size = 1010x675
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Open Sans"
+		text-color = #000000
+		is-default = true
+		saved-params = "icon-size"
+		zoom = 1
 
 window "MedalUnlock"
 	elem "MedalUnlock"
@@ -1641,14 +1716,13 @@ window "MedalUnlock"
 		saved-params = ""
 		text = "Medal Unlocked:"
 
-window "NavigationPanel"
-	elem "NavigationPanel"
+window "Navigation"
+	elem "Navigation"
 		type = MAIN
 		pos = 281,0
 		size = 1362x25
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1656,8 +1730,6 @@ window "NavigationPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 1376x39
-		inner-size = 1362x25
 	elem "Navigation"
 		type = LABEL
 		pos = 0,0
@@ -1753,7 +1825,7 @@ window "NavigationPanel"
 		border = line
 		saved-params = "is-checked"
 		text = "Squad"
-		command = "SquadMenu"
+		command = "Squad"
 		is-flat = true
 	elem "ChangelogButton"
 		type = BUTTON
@@ -1854,8 +1926,8 @@ window "NavigationPanel"
 		command = "ChangeChannel"
 		is-flat = true
 
-window "OutputPanel"
-	elem "OutputPanel"
+window "Output"
+	elem "Output"
 		type = MAIN
 		pos = 281,0
 		size = 500x200
@@ -1897,8 +1969,8 @@ window "OutputPanel"
 		style = "img.icon { width: 10px; height: 10px; }"
 		legacy-size = false
 
-window "SettingsWindow"
-	elem "SettingsWindow"
+window "Settings"
+	elem "Settings"
 		type = MAIN
 		pos = 281,0
 		size = 500x400
@@ -1932,6 +2004,48 @@ window "SettingsWindow"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "button5"
+		type = BUTTON
+		pos = 6,75
+		size = 243x22
+		anchor1 = 0,100
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Video"
+		command = ""
+		is-flat = true
+	elem "button4"
+		type = BUTTON
+		pos = 251,75
+		size = 243x22
+		anchor1 = 0,100
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Audio"
+		command = ""
+		is-flat = true
+	elem "button8"
+		type = BUTTON
+		pos = 251,27
+		size = 243x22
+		anchor1 = 0,100
+		anchor2 = none
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Ninja Handbook"
+		command = ""
+		is-flat = true
 	elem "button3"
 		type = BUTTON
 		pos = 251,51
@@ -1962,7 +2076,7 @@ window "SettingsWindow"
 		is-flat = true
 	elem "CommunityGuidelinesButton"
 		type = BUTTON
-		pos = 251,27
+		pos = 6,27
 		size = 243x22
 		anchor1 = 0,100
 		anchor2 = none
@@ -1976,7 +2090,7 @@ window "SettingsWindow"
 		is-flat = true
 	elem "LogoutButton"
 		type = BUTTON
-		pos = 6,27
+		pos = 6,349
 		size = 243x22
 		anchor1 = 0,100
 		anchor2 = none
@@ -2015,166 +2129,19 @@ window "SettingsWindow"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'Interface\\Close.png'
+		image = 'assets\\interface\\buttons\\Close.png'
 		command = "ToggleSettingsPanel"
 		is-flat = true
-
-window "Status"
-	elem "Status"
-		type = MAIN
-		pos = 281,0
-		size = 197x319
-		anchor1 = none
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
 		anchor2 = none
-		is-visible = false
-		border = line
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		is-pane = true
-		image = 'Hud\\Stats.png'
-	elem "skillpoints"
-		type = LABEL
-		pos = 104,304
-		size = 32x9
-		anchor1 = 46,95
-		anchor2 = 68,98
-		is-transparent = true
+		background-color = #191919
 		saved-params = ""
-		text = "1"
-		align = right
-	elem "Chakra"
-		type = LABEL
-		pos = 83,274
-		size = 101x16
-		anchor1 = 42,86
-		anchor2 = 93,91
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-	elem "Health"
-		type = LABEL
-		pos = 83,255
-		size = 101x13
-		anchor1 = 42,80
-		anchor2 = 93,84
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-	elem "statpoints"
-		type = LABEL
-		pos = 80,304
-		size = 32x9
-		anchor1 = 46,95
-		anchor2 = 68,98
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-		align = right
-	elem "Agi"
-		type = LABEL
-		pos = 80,216
-		size = 104x14
-		anchor1 = 41,68
-		anchor2 = 93,72
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-	elem "Def"
-		type = LABEL
-		pos = 80,160
-		size = 104x14
-		anchor1 = 41,50
-		anchor2 = 93,55
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-	elem "Str"
-		type = LABEL
-		pos = 80,83
-		size = 104x14
-		anchor1 = 41,26
-		anchor2 = 93,30
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-	elem "Gen"
-		type = LABEL
-		pos = 80,121
-		size = 104x14
-		anchor1 = 41,38
-		anchor2 = 93,42
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-	elem "Nin"
-		type = LABEL
-		pos = 80,102
-		size = 104x13
-		anchor1 = 41,32
-		anchor2 = 93,36
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-	elem "CUp"
-		type = BUTTON
-		pos = 176,277
-		size = 13x11
-		anchor1 = 89,74
-		anchor2 = 95,78
-		font-family = "Adobe Caslon Pro"
-		font-size = 12
-		border = line
-		saved-params = "is-checked"
 		text = ""
-		image = 'Hud\\statup.png'
-		command = "ChakraUp"
-	elem "HUp"
-		type = BUTTON
-		pos = 176,256
-		size = 13x12
-		anchor1 = 89,68
-		anchor2 = 95,72
-		font-family = "Adobe Caslon Pro"
-		font-size = 12
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		image = 'Hud\\statup.png'
-		command = "HealthUp"
-	elem "EXP"
-		type = LABEL
-		pos = 80,67
-		size = 104x14
-		anchor1 = 41,21
-		anchor2 = 93,25
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-	elem "Level"
-		type = LABEL
-		pos = 88,50
-		size = 88x13
-		anchor1 = 45,16
-		anchor2 = 89,20
-		is-transparent = true
-		saved-params = ""
-		text = "1"
-	elem "Name"
-		type = LABEL
-		pos = 46,34
-		size = 105x14
-		anchor1 = 23,11
-		anchor2 = 77,15
-		font-family = "Adobe Caslon Pro"
-		font-size = 10
-		background-color = #dddfdd
-		is-transparent = true
-		saved-params = ""
-		text = "Name"
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "Titlescreen"
 	elem "Titlescreen"
@@ -2191,18 +2158,7 @@ window "Titlescreen"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-	elem "Background"
-		type = LABEL
-		pos = 0,0
-		size = 1280x720
-		anchor1 = 0,0
-		anchor2 = 100,100
-		background-color = #191919
-		saved-params = ""
-		text = ""
-		image = 'Interface\\Title\\Background.png'
-		image-mode = stretch
-	elem "BackgroundMap"
+	elem "Child"
 		type = CHILD
 		pos = 0,0
 		size = 1280x720
@@ -2211,20 +2167,6 @@ window "Titlescreen"
 		saved-params = "splitter"
 		left = "mapwindow"
 		is-vert = false
-	elem "label16"
-		type = LABEL
-		pos = 2,576
-		size = 294x22
-		anchor1 = 0,100
-		anchor2 = none
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = "Character Login"
 	elem "Create"
 		type = BUTTON
 		pos = 150,696
@@ -2251,7 +2193,7 @@ window "Titlescreen"
 		border = line
 		saved-params = "is-checked"
 		text = "Login"
-		command = "Logins"
+		command = "LoginCharacter"
 		is-flat = true
 	elem "label14"
 		type = LABEL
@@ -2307,35 +2249,7 @@ window "Titlescreen"
 		is-disabled = true
 		border = line
 		saved-params = ""
-		text = "Username"
-
-window "mapwindow"
-	elem "mapwindow"
-		type = MAIN
-		pos = 281,0
-		size = 1010x675
-		anchor1 = none
-		anchor2 = none
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		is-pane = true
-		macro = "macro"
-		menu = "menu"
-	elem "map"
-		type = MAP
-		pos = 0,0
-		size = 1010x675
-		anchor1 = 0,0
-		anchor2 = 100,100
-		font-family = "Open Sans"
-		text-color = #000000
-		is-default = true
-		saved-params = "icon-size"
-		zoom = 1
+		text = "Character Login"
 
 window "skalert"
 	elem "skalert"
@@ -2783,6 +2697,16 @@ window "AlertBox1"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox2"
 	elem "AlertBox2"
@@ -2838,6 +2762,16 @@ window "AlertBox2"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Button1"
 		type = BUTTON
 		pos = 3,130
@@ -2961,6 +2895,16 @@ window "AlertBox3"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_Input1"
 	elem "AlertBox_Input1"
@@ -3016,6 +2960,16 @@ window "AlertBox_Input1"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
 		pos = 3,24
@@ -3111,6 +3065,16 @@ window "AlertBox_Input2"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
 		pos = 3,24
@@ -3220,6 +3184,16 @@ window "AlertBox_Input3"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
 		pos = 3,24
@@ -3314,6 +3288,16 @@ window "AlertBox_List1"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_List2"
 	elem "AlertBox_List2"
@@ -3396,6 +3380,16 @@ window "AlertBox_List2"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_List3"
 	elem "AlertBox_List3"
@@ -3465,6 +3459,16 @@ window "AlertBox_List3"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "List1"
 		type = BUTTON
 		pos = 3,130
@@ -3588,6 +3592,16 @@ window "AlertBox_List4"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "List1"
 		type = BUTTON
 		pos = 3,130
@@ -3712,6 +3726,16 @@ window "AlertBox_List5"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "List2"
 		type = BUTTON
 		pos = 3,154
@@ -3864,6 +3888,16 @@ window "AlertBox_List6"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_List7"
 	elem "AlertBox_List7"
@@ -4016,6 +4050,16 @@ window "AlertBox_List7"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 
 window "AlertBox_List8"
 	elem "AlertBox_List8"
@@ -4182,4 +4226,14 @@ window "AlertBox_List8"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 2,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 

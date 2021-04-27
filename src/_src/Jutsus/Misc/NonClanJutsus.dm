@@ -253,7 +253,7 @@ mob
 									J.exp+=rand(5,15)
 									J.Levelup()
 								spawn()
-									src<<output("<Font color=white>Now click the object you wish to transform into.</Font>","ActionPanel.Output")
+									src<<output("<Font color=white>Now click the object you wish to transform into.</Font>","Action.Output")
 		TreeBinding()
 			for(var/obj/Jutsus/TreeBinding/J in src.jutsus)
 				if(src.PreJutsu(J))
@@ -288,7 +288,7 @@ mob
 			for(var/obj/Jutsus/Bringer_of_Darkness_Technique/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src << output("This jutsu requires a target","ActionPanel.Output")
+					src << output("This jutsu requires a target","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",rand(15,22))
@@ -329,7 +329,7 @@ mob
 					if(J.level==4) TimeAsleep=60+(src.genjutsu*0.1)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
 					new/obj/Jutsus/Effects/TempleNirvana(src.loc)
-					for(var/mob/player/M in oview(J.level))
+					for(var/mob/M in oview(J.level))
 						if(Squad)
 							if(Squad.Members.Find(M.ckey)||getOwner(Squad.Leader)==M.ckey) continue
 						new/obj/Jutsus/Effects/TempleNirvana(M.loc)
@@ -551,7 +551,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					var/turf/T=src.loc
-					src<<output("You will be sent to this location the next time your character accumulates damage.","ActionPanel.Output")
+					src<<output("You will be sent to this location the next time your character accumulates damage.","Action.Output")
 					var/X = src.health
 					while(src.health == X)sleep(1)
 					if(get_dist(usr,T)>30||usr.z != T.z)
@@ -585,7 +585,7 @@ mob
 					src.canattack=0
 					src.firing=1
 					src.icon_state="jutsuse"
-					view(src) << output("<b><font color = gold>[usr]says: Sage Style...GIANT RASENGAN!","ActionPanel.Output")
+					view(src) << output("<b><font color = gold>[usr]says: Sage Style...GIANT RASENGAN!","Action.Output")
 					var/obj/I = new/obj
 					I.IsJutsuEffect=src
 					if(dir!=SOUTH) I.layer=MOB_LAYER-1
@@ -685,16 +685,16 @@ mob
 			for(var/obj/Jutsus/Mystical_Palms/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(mystical_palms)
-						src<<output("You deactivate your mystical palms.","ActionPanel.Output")
+						src<<output("You deactivate your mystical palms.","Action.Output")
 						src.mystical_palms=0
 						return
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
 					src.mystical_palms=1
-					src<<output("You activate mystical palms.","ActionPanel.Output")
+					src<<output("You activate mystical palms.","Action.Output")
 					while(mystical_palms&&chakra>0)
 						DealDamage(5,src,"aliceblue",0,1)
 						sleep(10)
-					src<<output("You deactivate your mystical palms.","ActionPanel.Output")
+					src<<output("You deactivate your mystical palms.","Action.Output")
 					src.mystical_palms=0
 
 
@@ -742,10 +742,10 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(src.waterwalk)
 						waterwalk=0
-						src<<output("You stop converting chakra to your feet.","ActionPanel.Output")
+						src<<output("You stop converting chakra to your feet.","Action.Output")
 						return
 					waterwalk=1
-					src<<output("You start converting chakra to your feet.","ActionPanel.Output")
+					src<<output("You start converting chakra to your feet.","Action.Output")
 
 		Cherry_Blossom_Impact()
 			for(var/obj/Jutsus/Cherry_Blossom_Impact/J in src.jutsus)
@@ -753,7 +753,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(1,2); J.Levelup()
 					if(src.COW<J.level*3)src.COW++
-					src<<output("You precisely charge chakra to your hands, and now have stocked [src.COW] punches.","ActionPanel.Output")
+					src<<output("You precisely charge chakra to your hands, and now have stocked [src.COW] punches.","Action.Output")
 
 		Body_Replacement_Technique()
 			for(var/obj/Jutsus/BodyReplace/J in src.jutsus)
@@ -817,7 +817,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					src.kawarmi=1
 					src.mark=src.loc
-					src<<output("Now to activate use the defend verb.","ActionPanel.Output")
+					src<<output("Now to activate use the defend verb.","Action.Output")
 
 
 		Ones_Own_Life_Reincarnation()
@@ -1042,7 +1042,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					var/turf/T=src.loc
-					src<<output("You will be sent to this location the next time your character accumulates damage.","ActionPanel.Output")
+					src<<output("You will be sent to this location the next time your character accumulates damage.","Action.Output")
 					var/X = src.health
 					while(src.health == X)sleep(1)
 					if(get_dist(usr,T)>30||usr.z != T.z)
@@ -1071,7 +1071,7 @@ mob
 						src.overlays+='Snake Jutsu.dmi'
 						src.icon_state = "punchrS"
 						flick("punchr",src)
-						for(var/mob/player/M in get_dir(src,src.dir))
+						for(var/mob/M in get_dir(src,src.dir))
 							M.DealDamage(J.level*src.strength/2+src.genjutsu*2,src,"NinBlue")
 							M.Bleed()
 							view(M)<<sound('knife_hit1.wav',0,0,volume=50)
@@ -1090,7 +1090,7 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target)
-						src << output("<Font color=White>You need a target to use this.</Font>","ActionPanel.Output")
+						src << output("<Font color=White>You need a target to use this.</Font>","Action.Output")
 						return
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					src.canattack=0
@@ -1134,10 +1134,10 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target)
-						src << output("<Font color=White>You need a target to use this.</Font>","ActionPanel.Output")
+						src << output("<Font color=White>You need a target to use this.</Font>","Action.Output")
 						return
 					if(c_target.industprison!=1)
-						src << output("<Font color=White>Your target needs to be in Dust Particle Prison in order for jutsu to work..</Font>","ActionPanel.Output")
+						src << output("<Font color=White>Your target needs to be in Dust Particle Prison in order for jutsu to work..</Font>","Action.Output")
 						return
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					src.injutsu=1

@@ -361,7 +361,7 @@ mob/Karasu
 						X.Target_Atom(M)
 			if(src)del(src)
 	Del()
-		for(var/mob/player/M in world)
+		for(var/mob/M in world)
 			if(!M.client) continue
 			if(M.client.eye==src) M.client.eye=M
 		..()
@@ -599,7 +599,7 @@ obj
 						src.pixel_y=-16
 						flick("blow",src)
 						src.Hit=1
-						for(var/mob/player/M in oview(2,src))
+						for(var/mob/M in oview(2,src))
 							if(M.dead||!M) continue
 							M.DealDamage(src.damage,src.Owner,"NinBlue")
 							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(4,6))
@@ -680,7 +680,7 @@ obj
 						src.pixel_y=-16
 						flick("blow",src)
 						src.Hit=1
-						for(var/mob/player/M in oview(2,src))
+						for(var/mob/M in oview(2,src))
 							if(M.dead||!M) continue
 							M.DealDamage(src.damage+(Owner.ninjutsu),src.Owner,"NinBlue")
 							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,2))
@@ -945,7 +945,7 @@ obj
 						src.icon = 'SmallExplode.dmi'
 						flick("blow",src)
 						src.Hit=1
-						for(var/mob/player/M in oview(2,src))
+						for(var/mob/M in oview(2,src))
 							if(M.dead||!M) continue
 							M.DealDamage(src.damage+Owner.ninjutsu*2,src.Owner,"NinBlue")
 							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(8,10))
@@ -1314,7 +1314,7 @@ obj
 						src.pixel_y=-16
 						flick("blow",src)
 						src.Hit=1
-						for(var/mob/player/M in oview(2,src))
+						for(var/mob/M in oview(2,src))
 							if(M.dead||!M) continue
 							M.DealDamage(src.damage+(Owner.ninjutsu/1),src.Owner,"NinBlue")
 							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(6,8))

@@ -436,11 +436,11 @@ mob/NPCs/Shinobi
 				killer.exp-=round(killer.exp*0.5)
 				killer.Vkill++
 				if(killer.exp<=0) killer.exp=0
-				killer<<output("You have lost 50% of your EXP for killing a fellow villager.","ActionPanel.Output")
+				killer<<output("You have lost 50% of your EXP for killing a fellow villager.","Action.Output")
 				if(!killer.CheckVKill())
-					killer<<output("Careful! Killing your villagers will get you kicked from the village. ([killer.Vkill]/5)","ActionPanel.Output")
+					killer<<output("Careful! Killing your villagers will get you kicked from the village. ([killer.Vkill]/5)","Action.Output")
 				else //if(killer.CheckVkill())
-					world<<output("[killer] has been booted from [killer.village] for village killing!","ActionPanel.Output")
+					world<<output("[killer] has been booted from [killer.village] for village killing!","Action.Output")
 					text2file("[killer] has been booted from [killer.village] for village killing: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 					if(killer.village=="Akatsuki")
@@ -461,6 +461,9 @@ mob/NPCs/Shinobi
 						killer.RemoveAdminVerbs()
 					killer.village="Missing-Nin"
 					killer.rank="Missing-Nin"
+					var/squad/squad = killer.GetSquad()
+					if(squad)
+						squad.Refresh()
 				MissSkip
 				chuuninskip
 				killer.KillCombo=0
@@ -498,18 +501,18 @@ mob/NPCs/Shinobi
 							src:target_mob = M
 							target=M
 				if(Aggressive&&!target&&!AttackAll)
-					for(var/mob/player/M in oview(src))
+					for(var/mob/M in oview(src))
 						if(!M.dead)
 							src:target_mob = M
 							target=M
 					dostuff=1
 				if(VillageGuard&&!target&&!AttackAll)
-					for(var/mob/player/M in oview(src))
+					for(var/mob/M in oview(src))
 						var/mob/X=M.Attacked
 						if(X&&ismob(X)) if(!M.dead&&X.village==src.village)
 							src:target_mob = M
 							target=M
-					for(var/mob/player/M in oview(src))
+					for(var/mob/M in oview(src))
 						if(!M.dead&&M.village!=village)
 							if(VillageAttackers.Find(M.village)&&VillageDefenders.Find(village))
 								src:target_mob = M

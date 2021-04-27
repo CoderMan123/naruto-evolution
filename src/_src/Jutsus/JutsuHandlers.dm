@@ -8,10 +8,10 @@ mob
 	proc
 		PreJutsu(var/obj/Jutsus/J)
 			if(J.Excluded)
-			//	src << output("returning 0 Ex","ActionPanel.Output")
+			//	src << output("returning 0 Ex","Action.Output")
 				return 0
 			if(ChakraCheck(J.ChakraCost))
-			//	src << output("returning 0 CC","ActionPanel.Output")
+			//	src << output("returning 0 CC","Action.Output")
 				return 0
 			J.Excluded = 1
 			J.uses ++
@@ -20,8 +20,8 @@ mob
 			spawn()
 				J.cooltimer = J.maxcooltime
 				J.JutsuCoolDown(src)
-			//	src << output("Cooldown","ActionPanel.Output")
-			//src << output("returning 1","ActionPanel.Output")
+			//	src << output("Cooldown","Action.Output")
+			//src << output("returning 1","Action.Output")
 			return 1
 
 		DealDamage(amount = 0, Owner, colortype, heal = 0, chakra = 0, punch = 0)
@@ -80,16 +80,16 @@ mob
 				return 1
 			if(T)
 				if(T.Safe)
-					src<<output("You're indoors, you shouldn't be doing this.","ActionPanel.Output")
+					src<<output("You're indoors, you shouldn't be doing this.","Action.Output")
 					return 1
 			if(Disabled)
-				src<<output("Your jutsus have been disabled right now.","ActionPanel.Output")
+				src<<output("Your jutsus have been disabled right now.","Action.Output")
 				return 1
 			if(istype(loc,/turf/Arena)&&!opponent)
-				src<<output("You can't attack people who aren't your opponent!","ActionPanel.Output")//These don't actually output anywhere.
+				src<<output("You can't attack people who aren't your opponent!","Action.Output")//These don't actually output anywhere.
 				return 1
 			if(Chuunins.Find(src)&&ChuuninOpponentOne!=src&&ChuuninOpponentTwo!=src)
-				src<<output("Your jutsus have been disabled right now.","ActionPanel.Output")
+				src<<output("Your jutsus have been disabled right now.","Action.Output")
 				return
 			if(!NaraTarget)
 				if(src.firing == 1)
@@ -99,7 +99,7 @@ mob
 			if(dead)
 				return 1
 			if(CHAKRA > src.chakra)
-				src << output("<Font color=Aqua>You Need More Chakra([CHAKRA]).</Font>","ActionPanel.Output")
+				src << output("<Font color=Aqua>You Need More Chakra([CHAKRA]).</Font>","Action.Output")
 				return 1
 			src.chakra -= CHAKRA
 
@@ -144,7 +144,7 @@ mob
 						var/obj/Z = new X
 						Z.invisibility = 1
 						M.jutsucopy = Z
-						M << output("Your sharingan copies [src]'s [O]","ActionPanel.Output")
+						M << output("Your sharingan copies [src]'s [O]","Action.Output")
 obj
 	proc
 		JutsuCoolDown(mob/O)

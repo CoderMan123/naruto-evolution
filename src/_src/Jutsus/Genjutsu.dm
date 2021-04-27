@@ -10,7 +10,7 @@ mob
 	Hengable=1
 proc/GetListeners(atom/what)
 	var/list/ReturnValue=list()
-	for(var/mob/player/M in hearers(what))
+	for(var/mob/M in hearers(what))
 		if(M.ckey&&M.key&&M.client&&istype(M))
 			ReturnValue+=M
 	return ReturnValue
@@ -113,7 +113,7 @@ mob
 				icon_state = ""
 			Del()
 				if(Prisoner)
-					for(var/mob/player/M in TotalPlayers) if(Prisoner==M)
+					for(var/mob/M in mobs_online) if(Prisoner==M)
 						M.move=1
 						M.canattack=1
 						M.firing=0
@@ -150,7 +150,7 @@ mob
 								if(X)
 									if(src)
 										dir=get_dir(src,X)
-										for(var/mob/player/M in get_step(src,src.dir))
+										for(var/mob/M in get_step(src,src.dir))
 											if(M <> Owner)
 												if(src)
 													src.Attack()
@@ -261,7 +261,7 @@ mob
 				icon_state = ""
 			Del()
 				if(Prisoner)
-					for(var/mob/player/M in TotalPlayers) if(Prisoner==M)
+					for(var/mob/M in mobs_online) if(Prisoner==M)
 						M.move=1
 						M.canattack=1
 						M.firing=0
@@ -304,14 +304,14 @@ mob
 					if(TrapTimes<=0)
 						src.health=0
 						Death(src)
-					for(var/mob/player/X in oview(src))
+					for(var/mob/X in oview(src))
 						if(X <> Owner)
 							if(X&&istype(X)&&!X.dead&&X.move)
 								while(get_dist(X,src)>1)
 									sleep(2)
 									step_towards(src,X)
 								dir=get_dir(src,X)
-								for(var/mob/player/M in get_step(src,src.dir))
+								for(var/mob/M in get_step(src,src.dir))
 									var/Timer=25
 									if(istype(M)&&!M.dead)
 										M.move=0

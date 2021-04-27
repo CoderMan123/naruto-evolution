@@ -8,12 +8,12 @@ mob/var/MissionUp = 0
 mob/proc/RecentVerbsCheck(var/verbs, var/timer, var/spam = 0)
 	if(src.RecentVerbs[verbs])
 		if(world.timeofday-RecentVerbs["[verbs]"] < timer)
-			if(spam) src << output("You must wait before using this again.","ActionPanel.Output")
+			if(spam) src << output("You must wait before using this again.","Action.Output")
 			return 1
 	return 0
 mob/proc/MissionCheck()
 	if(src.LastMissionTime>0)
-		src << output("You must wait [round(LastMissionTime/600)] minutes before taking another mission.","ActionPanel.Output")
+		src << output("You must wait [round(LastMissionTime/600)] minutes before taking another mission.","Action.Output")
 		return 1
 	return 0
 mob/NPC
@@ -59,7 +59,7 @@ mob/NPC
 				var/mob/M
 				M = getOwner(usr.Squad.Leader)
 				M.Ryo += (MissionRyo + 1)
-				M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","ActionPanel.Output")
+				M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 				M.exp+=MissionExp
 				for(var/i=0,i<MissionExp,i++)
 					var/GAIN = rand(1,3)
@@ -91,11 +91,11 @@ mob/NPC
 								if(3)
 									M.LevelStat("Genjutsu",rand(20,35),1)
 									M.Levelup()
-						M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+						M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 						//M.Mission=null
 						M.Levelup()
 			else
-				usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+				usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 				usr.Ryo+=MissionRyo
 				usr.exp+=MissionExp
 				var/mob/M = usr
@@ -120,8 +120,8 @@ obj/MissionObj
 	byakuview=1
 	icon='Flowers.dmi'
 	layer=TURF_LAYER+3
-	Entered(var/mob/player/M)
-		if(istype(M,/mob/player))
+	Entered(var/mob/M)
+		if(istype(M,/mob))
 			if(M.foot=="Left")
 				view(M,13) << sound('Walk/man_fs_l_mt_drt.ogg',0,0,0,25)
 				M.foot="Right"
@@ -145,7 +145,7 @@ obj/MissionObj
 		DblClick()
 			if(get_dist(src,usr)>1) return
 			if(findtext(usr.Mission,"Weeds"))
-				usr<<output("You pick the weed, and crumple it up in your hand.","ActionPanel.Output")
+				usr<<output("You pick the weed, and crumple it up in your hand.","Action.Output")
 				usr.Killed["Weeds"]++
 				if(usr.Killed["Weeds"]==6)
 					usr.Killed["Weeds"]=null
@@ -156,7 +156,7 @@ obj/MissionObj
 						var/mob/M
 						M = getOwner(usr.Squad.Leader)
 						M.Ryo += (MissionRyo + 1)
-						M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","ActionPanel.Output")
+						M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 						M.exp+=MissionExp
 						for(var/i=0,i<MissionExp,i++)
 							var/GAIN = rand(1,3)
@@ -188,11 +188,11 @@ obj/MissionObj
 										if(3)
 											M.LevelStat("Genjutsu",rand(25,45),1)
 											M.Levelup()
-								M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+								M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 								//M.Mission=null
 								M.Levelup()
 					else
-						usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+						usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 						usr.Ryo+=MissionRyo
 						usr.exp+=MissionExp
 						var/mob/M = usr
@@ -225,10 +225,10 @@ obj/MissionObj
 	DblClick()
 		if(get_dist(src,usr)>1) return
 		if(!findtext(usr.Mission,"[src.name]"))
-			usr<<output("You shouldn't pick this up.","ActionPanel.Output")
+			usr<<output("You shouldn't pick this up.","Action.Output")
 			return
 		if(findtext(usr.Mission,"[src.name]"))
-			usr<<output("You pick up the [src.name].","ActionPanel.Output")
+			usr<<output("You pick up the [src.name].","Action.Output")
 			usr.Killed["[src.name]"]++
 			if(usr.Mission=="Collect [usr.Killed["[src.name]"]] [src.name]")
 				usr.Killed["[src.name]"]=null
@@ -241,7 +241,7 @@ obj/MissionObj
 					var/mob/M
 					M = getOwner(usr.Squad.Leader)
 					M.Ryo += (MissionRyo + 1)
-					M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","ActionPanel.Output")
+					M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 					M.exp+=MissionExp
 					for(var/i=0,i<MissionExp,i++)
 						var/GAIN = rand(1,3)
@@ -273,11 +273,11 @@ obj/MissionObj
 									if(3)
 										M.LevelStat("Genjutsu",rand(25,45),1)
 										M.Levelup()
-							M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+							M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 							//M.Mission=null
 							M.Levelup()
 				else
-					usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","ActionPanel.Output")
+					usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 					usr.Ryo+=MissionRyo
 					usr.exp+=MissionExp
 					var/mob/M = usr
@@ -397,7 +397,7 @@ mob/NPC/Mission_Lady//mission
 <BODY BGCOLOR="#000000"><hr><br>
 <font color=white>You are looking for this plant:<br><img src="Weed.png">"})
 					winset(usr, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 				usr.LastMissionTime=(600*7)
 				usr.MissionUp = 0
@@ -436,7 +436,7 @@ mob/NPC/Mission_Lady//mission
 <BODY BGCOLOR="#000000"><hr><br>
 <font color=white>You are looking for this object:<br><img src=[I].png>"})
 				winset(usr, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 				//skip
 				usr.LastMissionTime=(600*7)
@@ -455,7 +455,7 @@ mob/NPC/Mission_Lady//mission
 						return
 					usr.MissionUp = 0
 					return
-				for(var/mob/player/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.village=="Missing-Nin"&&usr!=M)
 						choice=M
 						break
@@ -489,7 +489,7 @@ mob/NPC/Mission_Lady//mission
 						return
 					usr.MissionUp = 0
 					return
-				for(var/mob/player/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.village=="Missing-Nin"&&usr!=M)
 						choice=M
 						break
@@ -539,7 +539,7 @@ mob/NPC/Mission_Lady//mission
 						return
 					usr.MissionUp = 0
 					return
-				for(var/mob/player/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.village=="Akatsuki"&&usr!=M)
 						choice=M
 						break

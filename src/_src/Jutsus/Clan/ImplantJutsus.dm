@@ -3,14 +3,14 @@ mob
 		Sharingan_Copy()
 			for(var/obj/Jutsus/Sharingan_Copy/J in src.jutsus)
 				/*if(Sharingan<=2)
-					src<<output("You need to have a stronger Sharingan to activate this.","ActionPanel.Output")
+					src<<output("You need to have a stronger Sharingan to activate this.","Action.Output")
 					return*/
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,3))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
 					if(src.jutsucopy==0)
 						src.jutsucopy=1
-						src << output("You will soon copy the next jutsu used by another Shinobi.","ActionPanel.Output")
+						src << output("You will soon copy the next jutsu used by another Shinobi.","Action.Output")
 					else
 						if(src.jutsucopy==1)src.jutsucopy=0
 				//		else
@@ -23,11 +23,11 @@ mob
 		Kamui()
 			for(var/obj/Jutsus/Kamui/J in src.jutsus)
 				/*if(Sharingan<=3)
-					src<<output("You need to have Mangekyou Sharingan or higher activated to use this.","ActionPanel.Output")
+					src<<output("You need to have Mangekyou Sharingan or higher activated to use this.","Action.Output")
 					return*/
-				var/mob/player/c_target=src.Target_Get(TARGET_MOB)
+				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||!istype(c_target))
-					src<<output("You require a targeted player to use this technique.","ActionPanel.Output")
+					src<<output("You require a targeted player to use this technique.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(12,15))
@@ -55,16 +55,16 @@ mob
 			for(var/obj/Jutsus/WarpDim/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(c_target.jailed == 1)
-					src<<output("Your target is jailed.","ActionPanel.Output")
+					src<<output("Your target is jailed.","Action.Output")
 					return
 				if(src.loc.z == 4)
-					src<<output("You can't use this in the chuunin exam!","ActionPanel.Output")
+					src<<output("You can't use this in the chuunin exam!","Action.Output")
 					return
 				if(src.dueling == 1)
-					src<<output("You cant use this during a duel!","ActionPanel.Output")
+					src<<output("You cant use this during a duel!","Action.Output")
 					return
 				if(src.jailed == 1)
-					src<<output("You are jailed.","ActionPanel.Output")
+					src<<output("You are jailed.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",rand(3,8))
@@ -119,7 +119,7 @@ mob
 		Intangible_Jutsu()
 			for(var/obj/Jutsus/Intangible_Jutsu/J in src.jutsus)
 				if(Intang)
-					src << output("You're no longer intangible.","ActionPanel.Output")
+					src << output("You're no longer intangible.","Action.Output")
 					src.Intang=0
 					src.density=1
 					spawn(5)
@@ -129,15 +129,15 @@ mob
 					return
 				else
 					if(jailed==1)
-						src<<output("You're not allowed to use intangibility to break out of jail!","ActionPanel.Output")
+						src<<output("You're not allowed to use intangibility to break out of jail!","Action.Output")
 						return
 					if(src.loc.z == 3)
-						src<<output("You can't use this in the dimension or an arena battle!","ActionPanel.Output")
+						src<<output("You can't use this in the dimension or an arena battle!","Action.Output")
 						return
 
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",rand(5,10))
-						src << output("You become intangible.","ActionPanel.Output")
+						src << output("You become intangible.","Action.Output")
 						src.Intang=1
 						src.canattack=0
 						src.injutsu=0
@@ -153,7 +153,7 @@ mob
 							sleep(10)
 							if(src.chakra<=0)
 								src.chakra=0
-								src << output("You're no longer intangible.","ActionPanel.Output")
+								src << output("You're no longer intangible.","Action.Output")
 								src.Intang=0
 								src.density=1
 								spawn(5)

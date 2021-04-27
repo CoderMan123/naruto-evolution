@@ -14,7 +14,7 @@ mob
 					if(J.level==3) TimeAsleep=15
 					if(J.level==4) TimeAsleep=20
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					for(var/mob/player/M in oview(J.level))
+					for(var/mob/M in oview(J.level))
 						if(!istype(M,M)||!M) continue
 						M.icon_state="dead"
 						M.move=0
@@ -34,7 +34,7 @@ mob
 			for(var/obj/Jutsus/Earth_Release_Mud_River/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src << output("This jutsu requires a target","ActionPanel.Output")
+					src << output("This jutsu requires a target","Action.Output")
 					return
 				if(src.PreJutsu(J))
 
@@ -72,7 +72,7 @@ mob
 										M.injutsu=0
 										M.canattack=1
 										M.Sleeping=0
-								else src<<output("The jutsu did not connect.","ActionPanel.Output")
+								else src<<output("The jutsu did not connect.","Action.Output")
 					src.firing=0
 					src.canattack=1
 		Dango()
@@ -103,7 +103,7 @@ mob
 			for(var/obj/Jutsus/Doryuusou/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
-					src << output("This jutsu requires a target","ActionPanel.Output")
+					src << output("This jutsu requires a target","Action.Output")
 					return
 				if(src.PreJutsu(J))
 
@@ -129,7 +129,7 @@ mob
 											del(Y)
 									M.DealDamage((12+J.damage+usr.ninjutsu)*3,src,"NinBlue")
 									spawn() if(M) M.Bleed()
-								else src<<output("The jutsu did not connect.","ActionPanel.Output")
+								else src<<output("The jutsu did not connect.","Action.Output")
 					spawn(1)
 						src.firing=0
 						src.canattack=1
@@ -200,7 +200,7 @@ mob
 			for(var/obj/Jutsus/Earth_Release_Earth_Cage/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||!istype(c_target))
-					src<<output("You must have a target to use this technique.","ActionPanel.Output")
+					src<<output("You must have a target to use this technique.","Action.Output")
 					return
 
 				if(src.PreJutsu(J))

@@ -15,27 +15,26 @@ obj/RyoBag
 	DblClick()
 		if(get_dist(src,usr)>1) return
 		if(!src) return
-		var/mob/player/M=usr
+		var/mob/M=usr
 		if(M.dead) return
-		hearers()<<output("[M] picks up [Worth] [src].","ActionPanel.Output")
+		hearers()<<output("[M] picks up [Worth] [src].","Action.Output")
 		M.Ryo+=Worth
 		del(src)
 mob
-	player
-		verb
-			DropRyo()
-				set hidden=1
-				if(!usr.Ryo)
-					usr << output("You don't have any Ryo to drop.","ActionPanel.Output")
-					return
-				var/list/AlertInput=usr.client.AlertInput("How much Ryo would you like to drop?","Drop Ryo")
-				if(!isnum(AlertInput[2]))return
-				if(usr.Ryo<AlertInput[2]||AlertInput[2]<=0)return
-				usr.Ryo-=AlertInput[2]
-				var/obj/RyoBag/O=new(src.loc)
-				O.Worth=AlertInput[2]
-				src.client.UpdateInventoryPanel()
-				src << output("You drop [AlertInput[2]] Ryo.","ActionPanel.Output")
+	verb
+		DropRyo()
+			set hidden=1
+			if(!usr.Ryo)
+				usr << output("You don't have any Ryo to drop.","Action.Output")
+				return
+			var/list/AlertInput=usr.client.AlertInput("How much Ryo would you like to drop?","Drop Ryo")
+			if(!isnum(AlertInput[2]))return
+			if(usr.Ryo<AlertInput[2]||AlertInput[2]<=0)return
+			usr.Ryo-=AlertInput[2]
+			var/obj/RyoBag/O=new(src.loc)
+			O.Worth=AlertInput[2]
+			src.client.UpdateInventoryPanel()
+			src << output("You drop [AlertInput[2]] Ryo.","Action.Output")
 
 obj
 	Inventory
@@ -66,7 +65,7 @@ obj
 		DblClick()
 			//Get
 			if(get_dist(usr,src)<=1)
-				//if(over_control == "mapwindow.map"&&src_control=="Inventory.InvenInfo")
+				//if(over_control == "Map.map"&&src_control=="Inventory.InvenInfo")
 				if(usr.contents.Find(src)&&!src.equip)
 					src.Drop(usr)
 					return
@@ -110,9 +109,9 @@ obj
 						H.icon_state="shuriken"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
-						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
+						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 						//X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Shuriken/C)
@@ -135,9 +134,9 @@ obj
 						H.icon_state="needle"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
-						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
+						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Needle/C)
@@ -160,9 +159,9 @@ obj
 						H.icon_state="kunai"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
-						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
+						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Kunai/C)
@@ -183,9 +182,9 @@ obj
 						H.icon_state="expl kunai"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
-						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
+						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Exploding_Kunai/C)
@@ -208,9 +207,9 @@ obj
 						H.icon_state="tag"
 						var/icon/I = new(src.icon, src.icon_state)
 						var/iconfile = fcopy_rsc(I)
-						winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
-						winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
+						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Explosive_Tag/C)
@@ -295,9 +294,9 @@ obj
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="smoke bomb"
 					var/icon/I = new(src.icon, src.icon_state)
 					var/iconfile = fcopy_rsc(I)
-					winset(usr, "InventoryWindow.EquippedName", "text='[src.name]'")
-					winset(usr, "InventoryWindow.EquippedImage", "image=\ref[iconfile]")
-					usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
+					winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+					winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+					usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Stamina_Pill/C)
@@ -307,7 +306,7 @@ obj
 				icon='MadaraFan.dmi'
 				Click()
 					if(!usr.contents.Find(src)) return
-					usr<<output("<center>[Description]","InventoryWindow.EquippedItemInfo")
+					usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
 					if(usr.usedwepboost==0)
 						usr.equipped="MadaraFan"
 						usr.usedwepboost=1

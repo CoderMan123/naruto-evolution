@@ -13,7 +13,7 @@ obj
 				set category = null
 				set src in usr.contents
 				if(usr.dead)
-					hearers() << output("You can't drop items while dead.","ActionPanel.Output")
+					hearers() << output("You can't drop items while dead.","Action.Output")
 					return
 
 				if(src.stacks > 1)
@@ -33,14 +33,14 @@ obj
 							var/obj/Inventory/O = new src.type(usr.loc)
 							O.stacks = result[2]
 
-						hearers() << output("[usr] drops [src].","ActionPanel.Output")
+						hearers() << output("[usr] drops [src].","Action.Output")
 						usr.client.UpdateInventoryPanel()
 					else
 						usr.client.Alert("That is not a number!", "Satchel")
 
 				else
 					src.loc=usr.loc
-					hearers() << output("[usr] drops [src].","ActionPanel.Output")
+					hearers() << output("[usr] drops [src].","Action.Output")
 					usr.client.UpdateInventoryPanel()
 
 mob
@@ -48,7 +48,7 @@ mob
 		Pickup()
 			set hidden=1
 			if(usr.dead)
-				hearers() << output("You can't pickup items while dead.","ActionPanel.Output")
+				hearers() << output("You can't pickup items while dead.","Action.Output")
 				return
 
 			if(src.contents.len < src.maxitems)
@@ -79,7 +79,7 @@ mob
 					break
 			else
 				src << sound('cant.ogg',0,0,7,100)
-				src << output("Your satchel is too full to carry anymore.","ActionPanel.Output")
+				src << output("Your satchel is too full to carry anymore.","Action.Output")
 
 	proc
 		RecieveItem(var/obj/Inventory/O)

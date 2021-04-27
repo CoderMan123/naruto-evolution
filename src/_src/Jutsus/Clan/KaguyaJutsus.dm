@@ -86,9 +86,9 @@ mob
 			if(src.firing==0)
 				if(src.canattack==1)
 					for(var/obj/Jutsus/Bone_Pulse/J in src.jutsus)
-						var/mob/player/c_target=src.Target_Get(TARGET_MOB)
+						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						/*if(!c_target||!istype(c_target))
-							src<<output("You require a targeted player to use this technique.","ActionPanel.Output")
+							src<<output("You require a targeted player to use this technique.","Action.Output")
 							return*/
 						if(src.PreJutsu(J))
 							if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))

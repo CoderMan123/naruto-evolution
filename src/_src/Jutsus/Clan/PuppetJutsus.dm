@@ -3,40 +3,40 @@ mob
 		Puppet_Dash()
 			for(var/obj/Jutsus/Puppet_Dash/J in src.jutsus)
 				if(pdash)
-					src<<output("You deactivate your puppet dashing.","ActionPanel.Output")
+					src<<output("You deactivate your puppet dashing.","Action.Output")
 					src.pdash=0
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
 					src.pdash=1
-					src<<output("You activate puppet dashing. Press CTRL+D or ALT+D to dash.","ActionPanel.Output")
+					src<<output("You activate puppet dashing. Press CTRL+D or ALT+D to dash.","Action.Output")
 					while(pdash&&chakra>0)
 						DealDamage(4,src,"aliceblue",0,1)
 						sleep(10)
-					src<<output("You deactivate your puppet dashing.","ActionPanel.Output")
+					src<<output("You deactivate your puppet dashing.","Action.Output")
 					src.pdash=0
 
 		Puppet_Shoot()
 			for(var/obj/Jutsus/Puppet_Shoot/J in src.jutsus)
 				if(pshoot)
-					src<<output("You unload your puppet's knife.","ActionPanel.Output")
+					src<<output("You unload your puppet's knife.","Action.Output")
 					src.pshoot=0
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
 					src.pshoot=1
-					src<<output("Your puppet loads a knife into it's arms. Press CTRL+A or ALT+A to fire it.","ActionPanel.Output")
+					src<<output("Your puppet loads a knife into it's arms. Press CTRL+A or ALT+A to fire it.","Action.Output")
 
 		Puppet_Grab()
 			for(var/obj/Jutsus/Puppet_Grab/J in src.jutsus)
 				if(pgrab)
-					src<<output("Your puppet's arms are unflexed.","ActionPanel.Output")
+					src<<output("Your puppet's arms are unflexed.","Action.Output")
 					src.pgrab=0
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=2) src.LevelStat("Ninjutsu",rand(3,5))
 					src.pgrab=1
-					src<<output("Your puppet loosens it's joints, ready to grab a nearby foe. Press CTRL+S or ALT+S to grab a player.","ActionPanel.Output")
+					src<<output("Your puppet loosens it's joints, ready to grab a nearby foe. Press CTRL+S or ALT+S to grab a player.","Action.Output")
 
 		Puppet_Transform()
 			for(var/obj/Jutsus/Puppet_Transform/J in src.jutsus)
@@ -66,7 +66,7 @@ mob
 						K2.henged=1
 						K2.overlays = src.overlays
 						K2.icon_state = ""
-					src << output("Your puppets transform into you! Their joints are loose and ready for grabbing.","ActionPanel.Output")
+					src << output("Your puppets transform into you! Their joints are loose and ready for grabbing.","Action.Output")
 					src.pgrab=1
 		First_Puppet_Summoning()
 			for(var/obj/Jutsus/First_Puppet_Summoning/J in src.jutsus)
@@ -80,7 +80,7 @@ mob
 					flick("smoke",O)
 					spawn(7) del(O)
 					del(K)
-					src << output("You un-summon your first puppet.","ActionPanel.Output")
+					src << output("You un-summon your first puppet.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
@@ -111,7 +111,7 @@ mob
 					flick("smoke",O)
 					spawn(7) del(O)
 					del(K)
-					src << output("You un-summon your second puppet.","ActionPanel.Output")
+					src << output("You un-summon your second puppet.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 

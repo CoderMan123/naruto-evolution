@@ -1,4 +1,4 @@
-mob/player
+mob
 	verb
 		ThrowMob()
 			set hidden=1

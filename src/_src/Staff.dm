@@ -27,19 +27,19 @@ proc/ArtistCheck(ckey)
 mob/proc/AddAdminVerbs()
 	if(Kages["[village]"]==src.ckey||rank=="Hokage"||rank=="Kazekage"||rank=="Mizukage"||rank=="Otokage"||rank=="Tsuchikage")
 		src.verbs+=typesof(/mob/Kage/verb/)
-		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 	if(rank=="Akatsuki Leader")
 		src.verbs+=typesof(/mob/AkatsukiLeader/verb/)
-		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 	if(rank=="Anbu Leader")
 		src.verbs+=typesof(/mob/AnbuLeader/verb/)
-		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 	if(rank=="Seven Swordsmen Leader")
 		src.verbs+=typesof(/mob/SevenSwordsmenLeader/verb/)
-		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 	if(MasterGMCheck(ckey))
 		src.verbs+=typesof(/mob/MasterGM/verb/)
@@ -48,23 +48,23 @@ mob/proc/AddAdminVerbs()
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
 		src.admin=1
 		client.control_freak/CONTROL_FREAK_ALL=0
-		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 	if(AdminCheck(src.ckey)||src.ckey == file2text(HostKey))
 		src.verbs+=typesof(/mob/Admin/verb/)
 		src.verbs+=typesof(/mob/Moderator/verb/)
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
 		src.admin=1
-		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 	if(ModeratorCheck(ckey))
 		src.verbs+=typesof(/mob/Moderator/verb/)
 		src.admin=1
-		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 	if(ArtistCheck(ckey))
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
-		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 mob/proc/RemoveAdminVerbs()
 	src.verbs-=typesof(/mob/Kage/verb/)
@@ -119,7 +119,7 @@ mob/PixelArtist/verb/
 		set category="Staff"
 		src.icon_state=state1
 mob/Moderator/verb/
-	CheckStats(mob/M in TotalPlayers)
+	CheckStats(mob/M in mobs_online)
 		set category = "Staff"
 		usr<<"Level:[M.level]"
 		usr<<"Health:[M.maxhealth]"
@@ -139,7 +139,7 @@ mob/Moderator/verb/
 		else
 			world<<"<font color = white><font size=1.5>[src.name]: [a]"
 
-	Spy(mob/M as mob in TotalPlayers)
+	Spy(mob/M as mob in mobs_online)
 		set category="Staff"
 		usr.client.perspective = EYE_PERSPECTIVE
 		usr.client.eye = M
@@ -173,15 +173,15 @@ mob/Moderator/verb/
 			usr<<"Ninja War is in progress...please wait until it's over..."
 			return
 		ChuuninExam="Starting"
-		world<<output("<b><center>A Chuunin exam will begin in 3 minutes.</b></center>","ActionPanel.Output")
+		world<<output("<b><center>A Chuunin exam will begin in 3 minutes.</b></center>","Action.Output")
 		sleep(600*3)
-		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","ActionPanel.Output")
+		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","Action.Output")
 		ChuuninExam="Written"
 		sleep(600*2)
-		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","ActionPanel.Output")
+		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","Action.Output")
 		ChuuninExam="Forest of Death"
 		var/count=0
-		for(var/mob/player/M in TotalPlayers)
+		for(var/mob/M in mobs_online)
 			if(M.cheww==1)
 				M.cheww=0
 				M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
@@ -194,7 +194,7 @@ mob/Moderator/verb/
 					O.loc = M
 					count=0
 		sleep(600*4)
-		world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","ActionPanel.Output")
+		world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","Action.Output")
 		ChuuninExam="Tournament"
 		ChuuninExamGo()
 
@@ -223,16 +223,15 @@ mob/Moderator/verb/
 		for(var/mob/M in world)
 			if(M.key)
 				M.exp_locked=1
-				winset(M, "NavigationPanel.ExpLockButton", "is-disabled = 'false'")
+				winset(M, "Navigation.ExpLockButton", "is-disabled = 'false'")
 				spawn() M.client.FlashExperienceLock()
-				M.Save()
 			else
 				continue
 
 	Exp_Lock_Who()
 		set category="Staff"
 		var/N=0
-		for(var/mob/M in TotalPlayers)
+		for(var/mob/M in mobs_online)
 			if(M.client&&M.exp_locked)
 				usr<<"<small><small>[M.rname]/[M.key]</small></small>"
 				N++
@@ -242,7 +241,7 @@ mob/Moderator/verb/
 		set category="Staff"
 		if(!c) return
 		if(length(c)<=750)
-			for(var/mob/player/M in TotalPlayers)
+			for(var/mob/M in mobs_online)
 				if(!Admins.Find(M.ckey)&&!MasterGMs.Find(M.ckey)&&!Moderators.Find(M.ckey)) continue
 				M<<"<font color=yellow> GM| [src.rname]:</font>[html_encode(c)]"
 			text2file("GM>>[src.rname]:</font> [html_encode(c)]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
@@ -251,7 +250,7 @@ mob/Moderator/verb/
 			src<<"Message was <i>[c]</i>"
 			return
 
-	Boot(mob/M in TotalPlayers)
+	Boot(mob/M in mobs_online)
 		set category="Staff"
 		if(M.key=="Squigs")
 			world<<"[src] tried to boot [M] and was auto-kicked."
@@ -262,7 +261,7 @@ mob/Moderator/verb/
 			text2file("[src]([src.key]) booted [M]([M.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 			M.Logout()
 
-	Mute(mob/M in TotalPlayers)
+	Mute(mob/M in mobs_online)
 		set category="Staff"
 		set name = "Mute/Unmute"
 		if(M.key=="Squigs")
@@ -287,14 +286,14 @@ mob/Moderator/verb/
 		if(M.canteleport == 0) return
 		src.loc=M.loc
 
-	Summon(mob/player/M in TotalPlayers)
+	Summon(mob/M in mobs_online)
 		set category="Staff"
 		src.overlays+=image('Smoke.dmi',"smoke")
 		M.loc=src.loc
 		sleep(13)
 		src.overlays-=image('Smoke.dmi',"smoke")
 
-	Jail(var/mob/M in TotalPlayers)
+	Jail(var/mob/M in mobs_online)
 		set category = "Staff"
 		spawn(1)
 			M.loc=locate(106,35,16)
@@ -317,9 +316,8 @@ mob/Moderator/verb/
 		usr.loc = locate(31,38,14)
 	Reboot()
 		set category="Staff"
-		world<<output("World is rebooting.","ActionPanel.Output")
+		world<<output("World is rebooting.","Action.Output")
 		text2file("[usr]([src.key]) rebooted.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-		Save()
 		world.Reboot()
 
 
@@ -344,8 +342,8 @@ mob/Admin/verb
 <head><title>Who's Online</title><body>
 <body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
 </body><html>"}
-		for(var/mob/player/M) if(M.client) amount+=1
-		for(var/mob/player/M) if(M.client) Who+={"<html><center>
+		for(var/mob/M) if(M.client) amount+=1
+		for(var/mob/M) if(M.client) Who+={"<html><center>
 <head><title>Staff Who</title><body>
 <body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
 <br><font color=white>[M.name] ([M.key]) - (Level: [M.level])
@@ -364,10 +362,10 @@ mob/Admin/verb
 		set desc = "What Would You like To Create A Votation For?"
 		set category = "Staff"
 		if(VotationGoingOn==1)
-			world<<output("<b><font color=red>Wait... We don't want to have spam.","ActionPanel.Output")
+			world<<output("<b><font color=red>Wait... We don't want to have spam.","Action.Output")
 			return
 		Y=0
-		world<<output("<u><b><font color=white>[src.key] has initiated a votation!</u>","ActionPanel.Output")
+		world<<output("<u><b><font color=white>[src.key] has initiated a votation!</u>","Action.Output")
 		N=0
 		VoteMessage=t
 		VotationGoingOn=1
@@ -378,14 +376,14 @@ mob/Admin/verb
 		var/bugs = file("Bugs.txt")
 		usr << browse(bugs)
 		winset(src, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 	Get_ErrorLog()
 		set category = "Staff"
 		var/ErLog = file(LOG_ERROR)
 		usr << browse(ErLog)
 		winset(src, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 
 	Get_KillLog()
@@ -393,11 +391,11 @@ mob/Admin/verb
 		var/killlog = file(LOG_KILLS)
 		usr << browse(killlog)
 		winset(src, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 
 
-	Promote_to_Position(mob/M in TotalPlayers)
+	Promote_to_Position(mob/M in mobs_online)
 		set category = "Staff"
 		var/list/Positions=list("Akatsuki Leader"/*,"Seven Swordsmen Leader","Anbu Leader"*/)
 		var/Position=input("What position will you give them?","Promotion") in Positions + "Cancel"
@@ -411,86 +409,128 @@ mob/Admin/verb
 				new/obj/Inventory/Clothing/HeadWrap/TobiMask(M)
 				new/obj/Inventory/Clothing/HeadWrap/AkatsukiHat(M)
 				M.village="Akatsuki"
+
 			if("Seven Swordsmen Leader")
 				M<<"You now lead the Seven Swordsmen."
 				text2file("[M]([M.key]) was promoted to 7sm lead by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				new/obj/Inventory/Weaponry/Hiramekarei(M)
 				M.village="Seven Swordsmen"
+
 			if("Anbu Leader")
 				M<<"You now lead the Anbu Root."
 				text2file("[M]([M.key]) was promoted to Anbu by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				new/obj/Inventory/Clothing/Robes/Anbu_Suit(M)
 				new/obj/Inventory/Clothing/Masks/Absolute_Zero_Mask(M)
 				M.village="Anbu Root"
+
 		M.rank="[Position]"
+		var/squad/squad = M.GetSquad()
+		if(squad)
+			squad.Refresh()
+
 		M.AddAdminVerbs()
-	Remove_Position(mob/M in TotalPlayers)
+
+	Remove_Position(mob/M in mobs_online)
 		set category = "Staff"
 		var/list/Positions=list("Akatsuki Leader"/*,"Seven Swordsmen Leader","Anbu Root"*/)
 		var/Position=input("What position will you affect?","Demotion") in Positions + "Cancel"
 		if(Position=="Cancel") return
 		M.rank="Missing-Nin"
 		M.village="Missing-Nin"
+		var/squad/squad = M.GetSquad()
+		if(squad)
+			squad.Refresh()
+
 		text2file("[usr]([usr.key]) demoted [M]([M.key]) from [Position].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Positions["[Position]"]=null
 		M.RemoveAdminVerbs()
-	Promote_To_Kage(mob/M in TotalPlayers)
+
+	Promote_To_Kage(mob/M in mobs_online)
 		set category = "Staff"
 		var/list/Villages=list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/)
 		var/VillageLead=input("What village will they lead?","Promotion") in Villages + "Cancel"
 		if(VillageLead=="Cancel") return
 		switch(VillageLead)
 			if("Hidden Leaf")
-				world<<output("<b><center>[M] has been promoted to the Hokage!<b></center>","ActionPanel.Output")
+				world<<output("<b><center>[M] has been promoted to the Hokage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Hokage by [usr]([usr.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Hokage"
 				Kages["Hidden Leaf"]=M.ckey
 				M.village="Hidden Leaf"
+				var/squad/squad = M.GetSquad()
+				if(squad)
+					squad.Refresh()
+
 				new/obj/Inventory/Clothing/HeadWrap/HokageHat(M)
 				new/obj/Inventory/Clothing/Robes/HokageRobe(M)
+
 			if("Hidden Sand")
-				world<<output("<b><center>[M] has been promoted to the Kazekage!<b></center>","ActionPanel.Output")
+				world<<output("<b><center>[M] has been promoted to the Kazekage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Kazekage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Kazekage"
 				Kages["Hidden Sand"]=M.ckey
 				M.village="Hidden Sand"
+				var/squad/squad = M.GetSquad()
+				if(squad)
+					squad.Refresh()
+
 				new/obj/Inventory/Clothing/HeadWrap/KazekageHat(M)
 				new/obj/Inventory/Clothing/Robes/KazekageRobe(M)
+
 			if("Hidden Mist")
-				world<<output("<b><center>[M] has been promoted to the Mizukage!<b></center>","ActionPanel.Output")
+				world<<output("<b><center>[M] has been promoted to the Mizukage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Mizukage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Mizukage"
 				Kages["Hidden Mist"]=M.ckey
 				M.village="Hidden Mist"
+				var/squad/squad = M.GetSquad()
+				if(squad)
+					squad.Refresh()
+
 				new/obj/Inventory/Clothing/HeadWrap/MizukageHat(M)
 				new/obj/Inventory/Clothing/Robes/MizukageRobe(M)
+
 			if("Hidden Sound")
-				world<<output("<b><center>[M] has been promoted to the Otokage!<b></center>","ActionPanel.Output")
+				world<<output("<b><center>[M] has been promoted to the Otokage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Otokage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Otokage"
 				Kages["Hidden Sound"]=M.ckey
 				M.village="Hidden Sound"
+				var/squad/squad = M.GetSquad()
+				if(squad)
+					squad.Refresh()
+
 				new/obj/Inventory/Clothing/HeadWrap/OtokageHat(M)
 				new/obj/Inventory/Clothing/Robes/OtokageRobe(M)
+
 			if("Hidden Rock")
-				world<<output("<b><center>[M] has been promoted to the Tsuchikage!<b></center>","ActionPanel.Output")
+				world<<output("<b><center>[M] has been promoted to the Tsuchikage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Tsuchikage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank="Tsuchikage"
 				Kages["Hidden Rock"]=M.ckey
 				M.village="Hidden Rock"
+				var/squad/squad = M.GetSquad()
+				if(squad)
+					squad.Refresh()
+
 				new/obj/Inventory/Clothing/HeadWrap/TsuchikageHat(M)
 				new/obj/Inventory/Clothing/Robes/TsuchikageRobe(M)
 		M.AddAdminVerbs()
-	Remove_Kage(mob/M in TotalPlayers)
+
+	Remove_Kage(mob/M in mobs_online)
 		set category = "Staff"
 		var/list/Villages=list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/)
 		var/VillageLead=input("What village will you affect?","Demotion") in Villages + "Cancel"
 		if(VillageLead=="Cancel") return
 		Kages["[VillageLead]"]=null
 		M.rank="Genin"
+		var/squad/squad = M.GetSquad()
+		if(squad)
+			squad.Refresh()
+
 		M.RemoveAdminVerbs()
 		text2file("[usr]([usr.key]) removed [M]([M.key]) from [VillageLead] Kage.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-		winset(src, "NavigationPanel.LeaderButton", "is-disabled = 'true'")
+		winset(src, "Navigation.LeaderButton", "is-disabled = 'true'")
 
 	Teleport_To_XYZ()
 		set category="Staff"
@@ -522,47 +562,47 @@ mob/Admin/verb
 		Edited(O)
 		text2file("[usr]([usr.key]) edited [O]! Reason : [reasonforedit]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-	Add_Pixel_Artist(mob/M in TotalPlayers)
+	Add_Pixel_Artist(mob/M in mobs_online)
 		set category="Staff"
-		world<<output("[M] now has pixel artist verbs.","ActionPanel.Output")
+		world<<output("[M] now has pixel artist verbs.","Action.Output")
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to PA.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		PArtists+=M.ckey
 		M.AddAdminVerbs()
 		M.admin=1
-		winset(M, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
 
-	Add_Moderator(mob/M in TotalPlayers)
+	Add_Moderator(mob/M in mobs_online)
 		set category="Staff"
-		world<<output("[M] is now a moderator.","ActionPanel.Output")
+		world<<output("[M] is now a moderator.","Action.Output")
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Mod.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Moderators+=M.ckey
 		M.AddAdminVerbs()
 		M.admin=1
-		winset(M, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 
-	Remove_Staff(mob/M in TotalPlayers)
+	Remove_Staff(mob/M in mobs_online)
 		set category="Staff"
 		if(MasterGMs.Find(M.ckey)||M.ckey == "squigs")
 			world<<output("[usr.key] tried to remove Squigs from staff. Nice try.")
 			return
-		world<<output("[M] is no longer a staff member.","ActionPanel.Output")
+		world<<output("[M] is no longer a staff member.","Action.Output")
 		text2file("[usr]([usr.key]) removed [M]([M.key]) from staff.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Admins-=M.ckey
 		Moderators-=M.ckey
 		M.RemoveAdminVerbs()
-		winset(M, "NavigationPanel.LeaderButton", "is-disabled = 'true'")
+		winset(M, "Navigation.LeaderButton", "is-disabled = 'true'")
 
 mob/MasterGM/verb
-	Add_Admin(mob/M in TotalPlayers)
+	Add_Admin(mob/M in mobs_online)
 		set category="Staff"
-		world<<output("[M] is now an admin.","ActionPanel.Output")
+		world<<output("[M] is now an admin.","Action.Output")
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Admin.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Admins+=M.ckey
 		M.AddAdminVerbs()
 		M.admin=1
 		M.namecolor="green"
-		winset(M, "NavigationPanel.LeaderButton", "is-disabled = 'false'")
+		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 
 	Admin_Shield()
@@ -584,7 +624,7 @@ mob/MasterGM/verb
 		flick("start",O)
 		del(O)
 		src.overlays+=image('Adminshield.dmi',"loop")
-		var/mob/player/M=src
+		var/mob/M=src
 		M.Say("OMEGA KAITEN!")
 
 
@@ -600,20 +640,20 @@ mob/MasterGM/verb
 			html += "<a href=byond://?src=\ref[src];action=create;type=[X]>[X]</a><br>"
 		usr << browse(html)
 		winset(src, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 
 	Change_Worldtype()
 		set category="Staff"
 		servertype=src.client.AlertInput("Please input a new server type.","servertype")
-		world<<output("The server type has been changed.","ActionPanel.Output")
+		world<<output("The server type has been changed.","Action.Output")
 
 	Get_GMLog()
 		set category = "Staff"
 		var/gmlog = file(LOG_STAFF)
 		usr << browse(gmlog)
 		winset(src, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 
 	GiveEverything()
@@ -653,7 +693,7 @@ mob/MasterGM/verb
 	Level_Boost()
 		set category = "Staff"
 		if(usr:key=="Squigs")
-			var/mob/M=input("Add levels to who?") in TotalPlayers + "Cancel"
+			var/mob/M=input("Add levels to who?") in mobs_online + "Cancel"
 			if(M=="Cancel")
 				return
 			var/A=input("How many levels?") as num
@@ -676,7 +716,7 @@ mob/MasterGM/verb
 	Stat_Boost()
 		set category = "Staff"
 		if(usr:key=="Squigs")
-			var/mob/M=input("Add stats to who?") in TotalPlayers + "Cancel"
+			var/mob/M=input("Add stats to who?") in mobs_online + "Cancel"
 			if(M=="Cancel")
 				return
 			var/A=input("What stat?") in list("Taijutsu","Ninjutsu","Genjutsu","Defence","Agility")
@@ -909,7 +949,7 @@ proc/Edited(atom/O)
 			mayhem results!</body></html>"
 	usr << browse(html)
 	winset(usr, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 
 proc/replace_text(string,search,replace)

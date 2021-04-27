@@ -41,7 +41,7 @@ mob
 			if(arenaprogress==1)
 				usr<<"Arena fight is already in progress!"
 				return
-			var/mob/player/M=input("Pick your opponent") as mob in TotalPlayers
+			var/mob/M=input("Pick your opponent") as mob in mobs_online
 			if(M.key==usr.key)
 				usr<<"You can't challenge yourself."
 				return
@@ -81,7 +81,7 @@ mob
 				usr<<"You can't leave your village while you're in the tutorial!"
 				return
 			if(client.Alert("Are you sure you want to leave your village?","Confirmation",list("Yes","No"))==1)
-				world<<output("[src.name] has defected from the [src.village] village.","ActionPanel.Output")
+				world<<output("[src.name] has defected from the [src.village] village.","Action.Output")
 				if(village=="Akatsuki")
 					for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
@@ -137,6 +137,9 @@ mob
 
 				village="Missing-Nin"
 				rank="Missing-Nin"
+				var/squad/squad = src.GetSquad()
+				if(squad)
+					squad.Refresh()
 
 	//	AdminUp()
 	//		set hidden=1
@@ -187,19 +190,19 @@ mob
 		HealthUp()
 			set hidden=1
 			if(statpoints<1)
-				src<<output("<font color=red>Insufficent statpoints.</Font>","ActionPanel.Output")
+				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
 				return
 			statpoints--
 			maxhealth+=30
-			src<<output("<font color=yellow>You leveled up Health!</Font>","ActionPanel.Output")
+			src<<output("<font color=yellow>You leveled up Health!</Font>","Action.Output")
 			src.client.UpdateCharacterPanel()
 
 		ChakraUp()
 			set hidden=1
 			if(statpoints<1)
-				src<<output("<font color=red>Insufficent statpoints.</Font>","ActionPanel.Output")
+				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
 				return
 			statpoints--
 			maxchakra+=25
-			src<<output("<font color=yellow>You leveled up Chakra!</Font>","ActionPanel.Output")
+			src<<output("<font color=yellow>You leveled up Chakra!</Font>","Action.Output")
 			src.client.UpdateCharacterPanel()

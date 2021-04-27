@@ -34,7 +34,7 @@ mob/NPC
 			density=1
 			DblClick()
 				if(usr.Tutorial!=Tutorial)
-					usr<<output("You're not supposed to talk to this Jounin","ActionPanel.Output")
+					usr<<output("You're not supposed to talk to this Jounin","Action.Output")
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
@@ -74,7 +74,7 @@ mob/NPC
 			DblClick()
 				if(!usr.TutorialStrength) usr.TutorialStrength=usr.strength
 				if(usr.Tutorial!=Tutorial)
-					usr<<output("You're not supposed to talk to this Jounin yet.","ActionPanel.Output")
+					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
 					return
 				if(usr.strength<=usr.TutorialStrength)
 					if(usr) usr.client.Alert(
@@ -102,7 +102,7 @@ You'll learn more about this as you experience it first hand. Please move on to 
 			density=1
 			DblClick()
 				if(usr.Tutorial!=Tutorial)
-					usr<<output("You're not supposed to talk to this Jounin yet.","ActionPanel.Output")
+					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
@@ -135,7 +135,7 @@ Some jutsus increase damage or active time while others will fire more projectil
 					usr<<"Open up your skill tree first, and purchase the Substitution Technique under Non Clan Skills."
 					return
 				if(usr.Tutorial!=Tutorial)
-					usr<<output("You're not supposed to talk to this Jounin yet.","ActionPanel.Output")
+					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return

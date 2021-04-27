@@ -16,10 +16,10 @@ mob/proc/
 		if(!Medal)return
 		var/gotmedal = world.GetMedal(Medal, key)
 		if(isnull(gotmedal))
-			src<<output("The HUB could not be contacted, and your medal was not saved. We apologize for the inconvience.","ActionPanel.Output")
+			src<<output("The HUB could not be contacted, and your medal was not saved. We apologize for the inconvience.","Action.Output")
 			return
 		if(gotmedal) return
-		src<<output("You've unlocked the [Medal] medal.","ActionPanel.Output")
+		src<<output("You've unlocked the [Medal] medal.","Action.Output")
 		winset(src, null, {"
 						Main.UnlockChild.is-visible = "true";
 						MedalUnlock.is-visible      = "true";
@@ -33,4 +33,4 @@ mob/proc/
 						Medal.text=''")
 					"})
 		world.SetMedal(Medal,key)
-		src<<output("Medals have been saved successfully.","ActionPanel.Output")
+		src<<output("Medals have been saved successfully.","Action.Output")

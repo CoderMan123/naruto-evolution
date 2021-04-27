@@ -3,7 +3,7 @@ mob
 		Eight_Gates_Assault()
 			for(var/obj/Jutsus/Eight_Gates_Assault/J in src.jutsus)
 				if(src.byakugan==0)
-					src << output("Byakugan must be active.","ActionPanel.Output")
+					src << output("Byakugan must be active.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
@@ -108,7 +108,7 @@ mob
 
 		Eight_Trigrams_64_Palms()
 			if(src.byakugan==0)
-				src<<output("<font color=#C0C0C0>You must have Byakugan activated.</font>","ActionPanel.Output")
+				src<<output("<font color=#C0C0C0>You must have Byakugan activated.</font>","Action.Output")
 				return
 			for(var/obj/Jutsus/Eight_Trigrams_64_Palms/J in src.jutsus)
 				if(src.PreJutsu(J))
@@ -152,7 +152,7 @@ mob
 					while(check<>1)
 						sleep(1)
 						src.copy = "Hakke"
-						view() << output("<font color=#C0C0C0><b>[src] Says: 8 palms!","ActionPanel.Output")
+						view() << output("<font color=#C0C0C0><b>[src] Says: 8 palms!","Action.Output")
 						var/obj/A = new/obj
 						A.IsJutsuEffect=src
 						A.loc = src.loc
@@ -171,7 +171,7 @@ mob
 							del(A)
 						if(src.copy <> "Hakke" && J.level>1)
 							src.copy = "Hakke2"
-							view() << output("<font color=#C0C0C0><b>[src] Says: 16 palms!","ActionPanel.Output")
+							view() << output("<font color=#C0C0C0><b>[src] Says: 16 palms!","Action.Output")
 							var/obj/A2 = new/obj
 							A2.IsJutsuEffect=src
 							A2.loc = src.loc
@@ -190,7 +190,7 @@ mob
 								del(A2)
 							if(src.copy <> "Hakke2" && J.level>2)
 								src.copy = "Hakke3"
-								view() << output("<font color=#C0C0C0><b>[src] Says: 32 palms!","ActionPanel.Output")
+								view() << output("<font color=#C0C0C0><b>[src] Says: 32 palms!","Action.Output")
 								var/obj/A3 = new/obj
 								A3.IsJutsuEffect=src
 								A3.loc = src.loc
@@ -209,7 +209,7 @@ mob
 									del(A3)
 								if(src.copy <> "Hakke3" && J.level>3)
 									src.copy = "Hakke4"
-									view() << output("<font color=#C0C0C0><b>[src] Says: 64 PALMS!","ActionPanel.Output")
+									view() << output("<font color=#C0C0C0><b>[src] Says: 64 PALMS!","Action.Output")
 									check=1
 									var/obj/A4 = new/obj
 									A4.IsJutsuEffect=src
@@ -281,7 +281,7 @@ mob
 								for(var/i=0,i<ki,i++) spawn() step_away(M,src); sleep(1.5)
 					for(var/i=0,i<J.level*12,i++)
 						if(O.loc != src.loc)
-							src << output("You left your rotation.","ActionPanel.Output")
+							src << output("You left your rotation.","Action.Output")
 							goto skiploop
 						for(var/obj/Projectiles/Weaponry/Ok in orange(J.level))
 							walk_to(Ok,0)
@@ -325,7 +325,7 @@ mob
 				if(src.byakugan)
 					for(var/image/i in client.images)if(i.name=="ByakuganCircle")del(i)
 					src.byakugan=0
-					src << output("<font color=#C0C0C0><b>You deactivate your Byakugan","ActionPanel.Output")
+					src << output("<font color=#C0C0C0><b>You deactivate your Byakugan","Action.Output")
 					src.client.eye=src
 					src.client:perspective = EDGE_PERSPECTIVE
 					return
@@ -333,7 +333,7 @@ mob
 					if(src.PreJutsu(J))
 						//if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 						flick("jutsuse",src)
-						view(src)<<output("<font color=#C0C0C0><b>[src] Says: Byakugan!","ActionPanel.Output")
+						view(src)<<output("<font color=#C0C0C0><b>[src] Says: Byakugan!","Action.Output")
 						src.firing=1
 						src.canattack=0
 						src.byakugan=1
@@ -360,7 +360,7 @@ mob
 							if(src.chakra<=0)
 								src.chakra=0
 								src.byakugan=0
-								src << output("<font color=[colour2html("red")]><b>Your byakugan has been deactivated.","ActionPanel.Output")
+								src << output("<font color=[colour2html("red")]><b>Your byakugan has been deactivated.","Action.Output")
 
 		Eight_Trigrams_Empty_Palm()
 			if(src.firing==0&&!src.likeaclone)

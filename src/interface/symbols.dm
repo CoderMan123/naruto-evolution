@@ -1,4 +1,8 @@
 obj/Symbols
+	Squad
+		New(mob/M, var/ckey)
+			var/squad/squad = M.GetSquad()
+			if(squad && squad.leader[ckey]) src.icon = 'Squad-Leader.png'
 	Village
 		New(mob/M)
 			src.loc=null
@@ -24,6 +28,12 @@ obj/Symbols
 				if("Anbu") src.icon = 'Anbu.png'
 				if("Kage") src.icon = 'Kage.png'
 			..()
+
+	Squad
+		New()
+			..()
+			src.loc=null
+			src.icon = 'Squad-Leader.png'
 
 	Role
 		New(var/role)

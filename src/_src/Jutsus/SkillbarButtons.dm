@@ -54,7 +54,7 @@ Please enter any bugs you have found.<br />
 </body>
 </html>"})
 		winset(usr, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 atom/Topic(href, href_list[])
 	..()
@@ -105,16 +105,16 @@ The game creators will work on it as soon as possible.
 			var/msg = html_encode(href_list["report"])
 			var/who = html_encode(href_list["name"])
 			if(usr.Bugreported)
-				usr<<output("You recently submitted a bug report. Please do not overuse the verb.","ActionPanel.Output")
+				usr<<output("You recently submitted a bug report. Please do not overuse the verb.","Action.Output")
 				return
 			if(!msg)return
 			var/bug = "| [who] [msg] |"//had a line break \n here but that didn't change anything in game.
 			src << browse(html)
 			winset(src, null, {"
-						BrowserWindow.is-visible = "true";
+						Browser.is-visible = "true";
 					"})
 			text2file(bug,bugs)
-			usr<<output("Bug succesfully reported.","ActionPanel.Output")
+			usr<<output("Bug succesfully reported.","Action.Output")
 			usr.Bugreported=1
 			spawn(200)if(usr)usr.Bugreported=0
 

@@ -13,7 +13,7 @@ mob
 			if(src.hited==1) return
 			if(istype(M,/mob/White_Zettsu/))
 				return
-			if(istype(M,/mob/player/))
+			if(istype(M,/mob/))
 				if(ppunch=="left")
 					ppunch="right"
 					flick("punchl",src)
@@ -107,7 +107,7 @@ mob
 				if(chuuninlock==1)
 					return
 				world<<"<font size = 2><font color=red>Akatsuki and Allied Shinobi Forces have as of now started a war! All persons above level 30 will enter the war regardless of their will!"
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.village=="Akatsuki"||M.village=="Seven Swordsmen")
 						M.joinedakatshinobiw=1
 						world<<"[M] joined to fight for Akatsuki against Allied Shinobi Force!"
@@ -117,7 +117,7 @@ mob
 							M.joinedakatshinobiw=1
 							world<<"[M] joined to fight for Allied Shinobi Force against Akatsuki!"
 							M.loc=locate(41,81,19)//allied shinobi side
-				for(var/obj/zettsuspawn/A in TotalPlayers)
+				for(var/obj/zettsuspawn/A in mobs_online)
 					if(A:filled==0)
 						var/mob/White_Zettsu/B=new/mob/White_Zettsu
 						B.loc=A:loc
@@ -136,7 +136,7 @@ mob
 				world<<"[src] closes down Great Ninja War event, all of those who joined it will be teleported back to their own villages."
 				world<<"Last results are : Sand Village:[sandwarpoints],Mist Village:[mistwarpoints],Sound Village:[soundwarpoints],Leaf Village:[leafwarpoints],Rock Village:[rockwarpoints],Anbu Root:[rootwarpoints],Seven Swordsmen:[ssmwarpoints],Missing Ninjas:[missingwarpoints],Akatsuki:[akatwarpoints]!."
 				CheckWarWinner()
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.village=="Hidden Leaf"&&M.joinedwar==1)
 						M.loc = locate(116,127,18)
 					if(M.village=="Hidden Sand"&&M.joinedwar==1)
@@ -170,7 +170,7 @@ mob
 				set category = "StaffEvent"
 				chuuninlock=0
 				wartype=null
-				for(var/mob/M in TotalPlayers)
+				for(var/mob/M in mobs_online)
 					if(M.joinedakatshinobiw==1)
 						M.joinedakatshinobiw=0
 						if(M.village=="Akatsuki")
