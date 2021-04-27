@@ -63,6 +63,7 @@ mob
 			if(!mobs_online.Find(src))
 				if(character)
 					if(fexists("[F]"))
+						src.last_online = world.realtime
 						for(var/v in src.vars)
 							if(issaved(src.vars[v]))
 								if(!isnull(F[v]))
