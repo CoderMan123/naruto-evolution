@@ -85,70 +85,6 @@ mob/proc/RespawnSpawn()
 	return Respawns
 mob
 	var/SkinTone
-//	return pick(MapLoadSpawn)
-world
-	New()
-		log = file(LOG_ERROR)
-//		spawn(10) RepopWorld()
-		spawn(10) GeninExam()
-		spawn(10) ChuuninExam()
-		spawn(10) Advert()
-		spawn(10) RepopWorld()
-		spawn(10) AutoCheck()
-		spawn(5) LinkWarps()
-		//spawn() AutoReboot()
-		spawn(5)  PlayerCount()
-		spawn(5)  HTMLlist()
-		var/savefile/F = new(SAVEFILE_WORLD)
-		if(!isnull(F["administrators"])) F["administrators"] >> administrators
-		if(!isnull(F["moderators"])) F["moderators"] >> moderators
-		if(!isnull(F["programmers"])) F["programmers"] >> programmers
-		if(!isnull(F["pixel_artists"])) F["pixel_artists"] >> pixel_artists
-		if(!isnull(F["Factions"])) F["Factions"] >> Factionnames
-		if(!isnull(F["Maps"])) F["Maps"] >> maps
-		if(!isnull(F["AkatInvites"])) F["AkatInvites"] >> AkatInvites
-		if(!isnull(F["WorldXp"])) F["WorldXp"] >> WorldXp
-
-		for(var/ckey in initial(administrators))
-			if(!ckey in administrators) administrators += ckey
-
-		for(var/ckey in initial(moderators))
-			if(!ckey in moderators) moderators += ckey
-
-		for(var/ckey in initial(programmers))
-			if(!ckey in programmers) programmers += ckey
-
-		for(var/ckey in initial(pixel_artists))
-			if(!ckey in pixel_artists) pixel_artists += ckey
-
-		for(var/c in Factionnames)
-			var/path = "Factions/[c].sav"
-			var/savefile/G = new(path)
-			if(!fexists(path))
-				Factionnames -= c
-				continue
-			var/Faction/Faction
-			G >> Faction
-			Factions += Faction
-		..()
-	Del()
-		var/savefile/F = new(SAVEFILE_WORLD)
-		F["administrators"] << administrators
-		F["moderators"] << moderators
-		F["programmers"] << programmers
-		F["pixel_artists"] << pixel_artists
-		Factionnames = new/list()
-		for(var/Faction/c in Factions)
-			if(!c.name) continue
-			var/path = "Factions/[c.name].sav"
-			var/savefile/G = new(path)
-			G << c
-			Factionnames += c.name
-		if(maps.len) F["Maps"] << maps
-		F["Factions"] << Factionnames
-		F["AkatInvites"] << AkatInvites
-		F["WorldXp"] << WorldXp
-		..()
 
 obj
 	MaleParts
@@ -186,13 +122,6 @@ obj/FadingHUD
 		..()
 		C.screen += src
 		spawn(10) del(src)
-
-mob
-
-	proc/LoadCharacter(var/LoginID,var/savefile/F)
-
-
-
 
 mob/var/tmp/Prisoner
 mob
