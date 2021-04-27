@@ -252,14 +252,17 @@ mob/Moderator/verb/
 
 	Boot(mob/M in mobs_online)
 		set category="Staff"
-		if(M.key=="Squigs")
-			world<<"[src] tried to boot [M] and was auto-kicked."
-			text2file("[src]([src.key]) tried to boot [M][M.key] but failed.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-			usr.Logout()
+		if(administrators.Find(M.ckey))
+			for(var/mob/m in mobs_online)
+				if(administrators.Find(m.client.ckey))
+					m << "[src] ([src.ckey]) tried to boot an administrator [M] ([M.ckey])."
+
+			text2file("[src] ([src.ckey]) tried to boot an administrator [M] ([M.ckey]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
 		else
-			world<<"[src] booted [M]."
-			text2file("[src]([src.key]) booted [M]([M.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-			M.Logout()
+			M.Save()
+			del(M.client)
+			world<<"[src] has booted [M] from the game."
+			text2file("[src] ([src.ckey]) booted [M] ([M.ckey]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 	Mute(mob/M in mobs_online)
 		set category="Staff"

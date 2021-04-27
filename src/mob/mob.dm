@@ -5,6 +5,7 @@ mob
 		password_salt
 		creation_date
 		playtime = 0
+		last_online
 
 		items=0
 		maxitems=25
