@@ -1,3 +1,574 @@
+obj
+	Ground
+		Trees
+			MTree1
+				icon='NTree1.dmi'
+				B1
+					icon_state="1,0"
+					density=1
+					layer=TURF_LAYER+2
+					pixel_x=-32
+				B2
+					icon_state="2,0"
+					density=1
+					layer=TURF_LAYER+2
+					New()
+						..()
+						src.dir=pick(NORTH,EAST,WEST,SOUTH)
+						if(src.dir==NORTH||src.dir==SOUTH)
+							src.overlays+=/obj/Ground/Trees/MTree1/B1
+							src.overlays+=/obj/Ground/Trees/MTree1/B3
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Left2/B02
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Left2/B03
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Left2/B05
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Left/B11
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Left/B12
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Left/B13
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Left/B14
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Left/B15
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Left/B16
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Middle/B21
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Middle/B22
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Middle/B23
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Middle/B24
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Middle/B25
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Middle/B26
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Right/B31
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Right/B32
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Right/B33
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Right/B34
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Right/B35
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Right/B36
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Right2/B43
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Right2/B44
+							src.overlays+=/obj/Ground/Trees/MTree1/Overlays/Right2/B45
+						else
+							if(src.dir==WEST)
+								src.icon='NTree2.dmi'
+								src.overlays+=/obj/Ground/Trees/MTree2/B1
+								src.overlays+=/obj/Ground/Trees/MTree2/B3
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left2/B02
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left2/B03
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left2/B05
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B11
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B12
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B13
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B14
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B15
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B16
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B21
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B22
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B23
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B24
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B25
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B26
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B31
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B32
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B33
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B34
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B35
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B36
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right2/B43
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right2/B44
+								src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right2/B45
+							else
+								if(src.dir==EAST)
+									src.icon='NTree3.dmi'
+									src.overlays+=/obj/Ground/Trees/MTree3/B1
+									src.overlays+=/obj/Ground/Trees/MTree3/B3
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left2/B03
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B11
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B12
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B13
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B14
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B15
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B21
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B22
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B23
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B24
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B25
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B26
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Right/B32
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Right/B33
+									src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Right/B34
+				B3
+					icon_state="3,0"
+					density=1
+					layer=TURF_LAYER+2
+					pixel_x=32
+				Overlays
+					layer=MOB_LAYER+6
+					Left2
+						B02
+							icon_state = "0,2"
+							pixel_x=-64
+							pixel_y=64
+						B03
+							icon_state = "0,3"
+							pixel_x=-64
+							pixel_y=96
+						B05
+							icon_state = "0,5"
+							pixel_x=-64
+							pixel_y=160
+					Left
+						B11
+							icon_state = "1,1"
+							pixel_x=-32
+							pixel_y=32
+						B12
+							icon_state = "1,2"
+							pixel_x=-32
+							pixel_y=64
+						B13
+							icon_state = "1,3"
+							pixel_x=-32
+							pixel_y=96
+						B14
+							icon_state = "1,4"
+							pixel_x=-32
+							pixel_y=128
+						B15
+							icon_state = "1,5"
+							pixel_x=-32
+							pixel_y=160
+						B16
+							icon_state = "1,6"
+							pixel_x=-32
+							pixel_y=192
+					Middle
+						B21
+							icon_state = "2,1"
+							pixel_y=32
+						B22
+							icon_state = "2,2"
+							pixel_y=64
+						B23
+							icon_state = "2,3"
+							pixel_y=96
+						B24
+							icon_state = "2,4"
+							pixel_y=128
+						B25
+							icon_state = "2,5"
+							pixel_y=160
+						B26
+							icon_state = "2,6"
+							pixel_y=192
+					Right
+						B31
+							icon_state = "3,1"
+							pixel_x=32
+							pixel_y=32
+						B32
+							icon_state = "3,2"
+							pixel_x=32
+							pixel_y=64
+						B33
+							icon_state = "3,3"
+							pixel_x=32
+							pixel_y=96
+						B34
+							icon_state = "3,4"
+							pixel_x=32
+							pixel_y=128
+						B35
+							icon_state = "3,5"
+							pixel_x=32
+							pixel_y=160
+						B36
+							icon_state = "3,6"
+							pixel_x=32
+							pixel_y=192
+					Right2
+						B43
+							icon_state = "4,3"
+							pixel_x=64
+							pixel_y=96
+						B44
+							icon_state = "4,4"
+							pixel_x=64
+							pixel_y=128
+						B45
+							icon_state = "4,5"
+							pixel_x=64
+							pixel_y=160
+			MTree2
+				icon='NTree2.dmi'
+				B1
+					icon_state="1,0"
+					density=1
+					layer=TURF_LAYER+2
+					pixel_x=-32
+				B2
+					icon_state="2,0"
+					density=1
+					layer=TURF_LAYER+2
+					New()
+						..()
+						//var/obj/TL=new /obj/Ground/Trees/MTree1/B1(src.loc)
+						//TL.loc=locate(src.x-1,src.y,src.z)
+						//var/obj/TR=new /obj/Ground/Trees/MTree1/B3(src.loc)
+						//TR.loc=locate(src.x+1,src.y,src.z)
+						//for(var/obj/Ground/Trees/MTree1/Overlays/TO in world.MT1)
+						src.overlays+=/obj/Ground/Trees/MTree2/B1
+						src.overlays+=/obj/Ground/Trees/MTree2/B3
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left2/B02
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left2/B03
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left2/B05
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B11
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B12
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B13
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B14
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B15
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Left/B16
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B21
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B22
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B23
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B24
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B25
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Middle/B26
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B31
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B32
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B33
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B34
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B35
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right/B36
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right2/B43
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right2/B44
+						src.overlays+=/obj/Ground/Trees/MTree2/Overlays/Right2/B45
+				B3
+					icon_state="3,0"
+					density=1
+					layer=TURF_LAYER+2
+					pixel_x=32
+				Overlays
+					layer=MOB_LAYER+6
+					Left2
+						B02
+							icon_state = "0,2"
+							pixel_x=-64
+							pixel_y=64
+						B03
+							icon_state = "0,3"
+							pixel_x=-64
+							pixel_y=96
+						B05
+							icon_state = "0,5"
+							pixel_x=-64
+							pixel_y=160
+					Left
+						B11
+							icon_state = "1,1"
+							pixel_x=-32
+							pixel_y=32
+						B12
+							icon_state = "1,2"
+							pixel_x=-32
+							pixel_y=64
+						B13
+							icon_state = "1,3"
+							pixel_x=-32
+							pixel_y=96
+						B14
+							icon_state = "1,4"
+							pixel_x=-32
+							pixel_y=128
+						B15
+							icon_state = "1,5"
+							pixel_x=-32
+							pixel_y=160
+						B16
+							icon_state = "1,6"
+							pixel_x=-32
+							pixel_y=192
+					Middle
+						B21
+							icon_state = "2,1"
+							pixel_y=32
+						B22
+							icon_state = "2,2"
+							pixel_y=64
+						B23
+							icon_state = "2,3"
+							pixel_y=96
+						B24
+							icon_state = "2,4"
+							pixel_y=128
+						B25
+							icon_state = "2,5"
+							pixel_y=160
+						B26
+							icon_state = "2,6"
+							pixel_y=192
+					Right
+						B31
+							icon_state = "3,1"
+							pixel_x=32
+							pixel_y=32
+						B32
+							icon_state = "3,2"
+							pixel_x=32
+							pixel_y=64
+						B33
+							icon_state = "3,3"
+							pixel_x=32
+							pixel_y=96
+						B34
+							icon_state = "3,4"
+							pixel_x=32
+							pixel_y=128
+						B35
+							icon_state = "3,5"
+							pixel_x=32
+							pixel_y=160
+						B36
+							icon_state = "3,6"
+							pixel_x=32
+							pixel_y=192
+					Right2
+						B43
+							icon_state = "4,3"
+							pixel_x=64
+							pixel_y=96
+						B44
+							icon_state = "4,4"
+							pixel_x=64
+							pixel_y=128
+						B45
+							icon_state = "4,5"
+							pixel_x=64
+							pixel_y=160
+			MTree3
+				icon = 'NTree3.dmi'
+				icon_state = ""
+				B1
+					icon_state = "1,0"
+					pixel_x=-32
+					layer=TURF_LAYER+2
+				B2
+					icon_state = "2,0"
+					density=1
+					layer=TURF_LAYER+2
+					New()
+						..()
+						src.overlays+=/obj/Ground/Trees/MTree3/B1
+						src.overlays+=/obj/Ground/Trees/MTree3/B3
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left2/B03
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B11
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B12
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B13
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B14
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B15
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B21
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B22
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B23
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B24
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B25
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B26
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Right/B32
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Right/B33
+						src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Right/B34
+				B3
+					icon_state = "3,0"
+					layer=TURF_LAYER+2
+					pixel_x=32
+				Overlays
+					layer=MOB_LAYER+6
+					Left2
+						B03
+							icon_state = "0,3"
+							pixel_x=-64
+							pixel_y=96
+					Left
+						B11
+							icon_state = "1,1"
+							pixel_x=-32
+							pixel_y=32
+						B12
+							icon_state = "1,2"
+							pixel_x=-32
+							pixel_y=64
+						B13
+							icon_state = "1,3"
+							pixel_x=-32
+							pixel_y=96
+						B14
+							icon_state = "1,4"
+							pixel_x=-32
+							pixel_y=128
+						B15
+							icon_state = "1,5"
+							pixel_x=-32
+							pixel_y=160
+					Middle
+						B21
+							icon_state = "2,1"
+							pixel_y=32
+						B22
+							icon_state = "2,2"
+							pixel_y=64
+						B23
+							icon_state = "2,3"
+							pixel_y=96
+						B24
+							icon_state = "2,4"
+							pixel_y=128
+						B25
+							icon_state = "2,5"
+							pixel_y=160
+						B26
+							icon_state = "2,6"
+							pixel_y=192
+					Right
+						B32
+							icon_state = "3,2"
+							pixel_x=32
+							pixel_y=64
+						B33
+							icon_state = "3,3"
+							pixel_x=32
+							pixel_y=96
+						B34
+							icon_state = "3,4"
+							pixel_x=32
+							pixel_y=128
+			NPTree
+				icon = 'NPTree.dmi'
+				icon_state = ""
+				B1
+					icon_state = "1,0"
+					layer=TURF_LAYER+2
+					pixel_x=-32
+				B2
+					icon_state = "2,0"
+					layer=TURF_LAYER+2
+					density=1
+					New()
+						..()
+						src.overlays+=/obj/Ground/Trees/NPTree/B1
+						src.overlays+=/obj/Ground/Trees/NPTree/B3
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Left2/B02
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Left2/B03
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Left2/B04
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Left/B11
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Left/B12
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Left/B13
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Left/B14
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Left/B15
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Left/B16
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Middle/B21
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Middle/B22
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Middle/B23
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Middle/B24
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Middle/B25
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Middle/B26
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Right/B31
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Right/B32
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Right/B33
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Right/B34
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Right/B35
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Right2/B42
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Right2/B43
+						src.overlays+=/obj/Ground/Trees/NPTree/Overlays/Right2/B44
+				B3
+					icon_state = "3,0"
+					layer=TURF_LAYER+2
+					pixel_x=32
+				Overlays
+					layer=MOB_LAYER+6
+					Left2
+						B02
+							icon_state = "0,2"
+							pixel_x=-64
+							pixel_y=64
+						B03
+							icon_state = "0,3"
+							pixel_x=-64
+							pixel_y=96
+						B04
+							icon_state = "0,4"
+							pixel_x=-64
+							pixel_y=128
+					Left
+						B11
+							icon_state = "1,1"
+							pixel_x=-32
+							pixel_y=32
+						B12
+							icon_state = "1,2"
+							pixel_x=-32
+							pixel_y=64
+						B13
+							icon_state = "1,3"
+							pixel_x=-32
+							pixel_y=96
+						B14
+							icon_state = "1,4"
+							pixel_x=-32
+							pixel_y=128
+						B15
+							icon_state = "1,5"
+							pixel_x=-32
+							pixel_y=160
+						B16
+							icon_state = "1,6"
+							pixel_x=-32
+							pixel_y=192
+					Middle
+						B21
+							icon_state = "2,1"
+							pixel_y=32
+						B22
+							icon_state = "2,2"
+							pixel_y=64
+						B23
+							icon_state = "2,3"
+							pixel_y=96
+						B24
+							icon_state = "2,4"
+							pixel_y=128
+						B25
+							icon_state = "2,5"
+							pixel_y=160
+						B26
+							icon_state = "2,6"
+							pixel_y=192
+					Right
+						B31
+							icon_state = "3,1"
+							pixel_x=32
+							pixel_y=32
+						B32
+							icon_state = "3,2"
+							pixel_x=32
+							pixel_y=64
+						B33
+							icon_state = "3,3"
+							pixel_x=32
+							pixel_y=96
+						B34
+							icon_state = "3,4"
+							pixel_x=32
+							pixel_y=128
+						B35
+							icon_state = "3,5"
+							pixel_x=32
+							pixel_y=160
+					Right2
+						B42
+							icon_state = "4,2"
+							pixel_x=64
+							pixel_y=64
+						B43
+							icon_state = "4,3"
+							pixel_x=64
+							pixel_y=96
+						B44
+							icon_state = "4,4"
+							pixel_x=64
+							pixel_y=128
+
 area
 	Shades
 		icon='Shade.dmi'
@@ -328,574 +899,6 @@ turf
 			icon_state="start"
 	Ground
 		icon='GRND.dmi'
-		Trees
-			MTree1
-				icon='NTree1.dmi'
-				B1
-					icon_state="1,0"
-					density=1
-					layer=TURF_LAYER+2
-					pixel_x=-32
-				B2
-					icon_state="2,0"
-					density=1
-					layer=TURF_LAYER+2
-					New()
-						..()
-						src.dir=pick(NORTH,EAST,WEST,SOUTH)
-						if(src.dir==NORTH||src.dir==SOUTH)
-							src.overlays+=/turf/Ground/Trees/MTree1/B1
-							src.overlays+=/turf/Ground/Trees/MTree1/B3
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Left2/B02
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Left2/B03
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Left2/B05
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Left/B11
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Left/B12
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Left/B13
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Left/B14
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Left/B15
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Left/B16
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Middle/B21
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Middle/B22
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Middle/B23
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Middle/B24
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Middle/B25
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Middle/B26
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Right/B31
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Right/B32
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Right/B33
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Right/B34
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Right/B35
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Right/B36
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Right2/B43
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Right2/B44
-							src.overlays+=/turf/Ground/Trees/MTree1/Overlays/Right2/B45
-						else
-							if(src.dir==WEST)
-								src.icon='NTree2.dmi'
-								src.overlays+=/turf/Ground/Trees/MTree2/B1
-								src.overlays+=/turf/Ground/Trees/MTree2/B3
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left2/B02
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left2/B03
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left2/B05
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B11
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B12
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B13
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B14
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B15
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B16
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B21
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B22
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B23
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B24
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B25
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B26
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B31
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B32
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B33
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B34
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B35
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B36
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right2/B43
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right2/B44
-								src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right2/B45
-							else
-								if(src.dir==EAST)
-									src.icon='NTree3.dmi'
-									src.overlays+=/turf/Ground/Trees/MTree3/B1
-									src.overlays+=/turf/Ground/Trees/MTree3/B3
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left2/B03
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B11
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B12
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B13
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B14
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B15
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B21
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B22
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B23
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B24
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B25
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B26
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Right/B32
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Right/B33
-									src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Right/B34
-				B3
-					icon_state="3,0"
-					density=1
-					layer=TURF_LAYER+2
-					pixel_x=32
-				Overlays
-					layer=MOB_LAYER+6
-					Left2
-						B02
-							icon_state = "0,2"
-							pixel_x=-64
-							pixel_y=64
-						B03
-							icon_state = "0,3"
-							pixel_x=-64
-							pixel_y=96
-						B05
-							icon_state = "0,5"
-							pixel_x=-64
-							pixel_y=160
-					Left
-						B11
-							icon_state = "1,1"
-							pixel_x=-32
-							pixel_y=32
-						B12
-							icon_state = "1,2"
-							pixel_x=-32
-							pixel_y=64
-						B13
-							icon_state = "1,3"
-							pixel_x=-32
-							pixel_y=96
-						B14
-							icon_state = "1,4"
-							pixel_x=-32
-							pixel_y=128
-						B15
-							icon_state = "1,5"
-							pixel_x=-32
-							pixel_y=160
-						B16
-							icon_state = "1,6"
-							pixel_x=-32
-							pixel_y=192
-					Middle
-						B21
-							icon_state = "2,1"
-							pixel_y=32
-						B22
-							icon_state = "2,2"
-							pixel_y=64
-						B23
-							icon_state = "2,3"
-							pixel_y=96
-						B24
-							icon_state = "2,4"
-							pixel_y=128
-						B25
-							icon_state = "2,5"
-							pixel_y=160
-						B26
-							icon_state = "2,6"
-							pixel_y=192
-					Right
-						B31
-							icon_state = "3,1"
-							pixel_x=32
-							pixel_y=32
-						B32
-							icon_state = "3,2"
-							pixel_x=32
-							pixel_y=64
-						B33
-							icon_state = "3,3"
-							pixel_x=32
-							pixel_y=96
-						B34
-							icon_state = "3,4"
-							pixel_x=32
-							pixel_y=128
-						B35
-							icon_state = "3,5"
-							pixel_x=32
-							pixel_y=160
-						B36
-							icon_state = "3,6"
-							pixel_x=32
-							pixel_y=192
-					Right2
-						B43
-							icon_state = "4,3"
-							pixel_x=64
-							pixel_y=96
-						B44
-							icon_state = "4,4"
-							pixel_x=64
-							pixel_y=128
-						B45
-							icon_state = "4,5"
-							pixel_x=64
-							pixel_y=160
-			MTree2
-				icon='NTree2.dmi'
-				B1
-					icon_state="1,0"
-					density=1
-					layer=TURF_LAYER+2
-					pixel_x=-32
-				B2
-					icon_state="2,0"
-					density=1
-					layer=TURF_LAYER+2
-					New()
-						..()
-						//var/obj/TL=new /turf/Ground/Trees/MTree1/B1(src.loc)
-						//TL.loc=locate(src.x-1,src.y,src.z)
-						//var/obj/TR=new /turf/Ground/Trees/MTree1/B3(src.loc)
-						//TR.loc=locate(src.x+1,src.y,src.z)
-						//for(var/turf/Ground/Trees/MTree1/Overlays/TO in world.MT1)
-						src.overlays+=/turf/Ground/Trees/MTree2/B1
-						src.overlays+=/turf/Ground/Trees/MTree2/B3
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left2/B02
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left2/B03
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left2/B05
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B11
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B12
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B13
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B14
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B15
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Left/B16
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B21
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B22
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B23
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B24
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B25
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Middle/B26
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B31
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B32
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B33
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B34
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B35
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right/B36
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right2/B43
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right2/B44
-						src.overlays+=/turf/Ground/Trees/MTree2/Overlays/Right2/B45
-				B3
-					icon_state="3,0"
-					density=1
-					layer=TURF_LAYER+2
-					pixel_x=32
-				Overlays
-					layer=MOB_LAYER+6
-					Left2
-						B02
-							icon_state = "0,2"
-							pixel_x=-64
-							pixel_y=64
-						B03
-							icon_state = "0,3"
-							pixel_x=-64
-							pixel_y=96
-						B05
-							icon_state = "0,5"
-							pixel_x=-64
-							pixel_y=160
-					Left
-						B11
-							icon_state = "1,1"
-							pixel_x=-32
-							pixel_y=32
-						B12
-							icon_state = "1,2"
-							pixel_x=-32
-							pixel_y=64
-						B13
-							icon_state = "1,3"
-							pixel_x=-32
-							pixel_y=96
-						B14
-							icon_state = "1,4"
-							pixel_x=-32
-							pixel_y=128
-						B15
-							icon_state = "1,5"
-							pixel_x=-32
-							pixel_y=160
-						B16
-							icon_state = "1,6"
-							pixel_x=-32
-							pixel_y=192
-					Middle
-						B21
-							icon_state = "2,1"
-							pixel_y=32
-						B22
-							icon_state = "2,2"
-							pixel_y=64
-						B23
-							icon_state = "2,3"
-							pixel_y=96
-						B24
-							icon_state = "2,4"
-							pixel_y=128
-						B25
-							icon_state = "2,5"
-							pixel_y=160
-						B26
-							icon_state = "2,6"
-							pixel_y=192
-					Right
-						B31
-							icon_state = "3,1"
-							pixel_x=32
-							pixel_y=32
-						B32
-							icon_state = "3,2"
-							pixel_x=32
-							pixel_y=64
-						B33
-							icon_state = "3,3"
-							pixel_x=32
-							pixel_y=96
-						B34
-							icon_state = "3,4"
-							pixel_x=32
-							pixel_y=128
-						B35
-							icon_state = "3,5"
-							pixel_x=32
-							pixel_y=160
-						B36
-							icon_state = "3,6"
-							pixel_x=32
-							pixel_y=192
-					Right2
-						B43
-							icon_state = "4,3"
-							pixel_x=64
-							pixel_y=96
-						B44
-							icon_state = "4,4"
-							pixel_x=64
-							pixel_y=128
-						B45
-							icon_state = "4,5"
-							pixel_x=64
-							pixel_y=160
-			MTree3
-				icon = 'NTree3.dmi'
-				icon_state = ""
-				B1
-					icon_state = "1,0"
-					pixel_x=-32
-					layer=TURF_LAYER+2
-				B2
-					icon_state = "2,0"
-					density=1
-					layer=TURF_LAYER+2
-					New()
-						..()
-						src.overlays+=/turf/Ground/Trees/MTree3/B1
-						src.overlays+=/turf/Ground/Trees/MTree3/B3
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left2/B03
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B11
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B12
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B13
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B14
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Left/B15
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B21
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B22
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B23
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B24
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B25
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Middle/B26
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Right/B32
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Right/B33
-						src.overlays+=/turf/Ground/Trees/MTree3/Overlays/Right/B34
-				B3
-					icon_state = "3,0"
-					layer=TURF_LAYER+2
-					pixel_x=32
-				Overlays
-					layer=MOB_LAYER+6
-					Left2
-						B03
-							icon_state = "0,3"
-							pixel_x=-64
-							pixel_y=96
-					Left
-						B11
-							icon_state = "1,1"
-							pixel_x=-32
-							pixel_y=32
-						B12
-							icon_state = "1,2"
-							pixel_x=-32
-							pixel_y=64
-						B13
-							icon_state = "1,3"
-							pixel_x=-32
-							pixel_y=96
-						B14
-							icon_state = "1,4"
-							pixel_x=-32
-							pixel_y=128
-						B15
-							icon_state = "1,5"
-							pixel_x=-32
-							pixel_y=160
-					Middle
-						B21
-							icon_state = "2,1"
-							pixel_y=32
-						B22
-							icon_state = "2,2"
-							pixel_y=64
-						B23
-							icon_state = "2,3"
-							pixel_y=96
-						B24
-							icon_state = "2,4"
-							pixel_y=128
-						B25
-							icon_state = "2,5"
-							pixel_y=160
-						B26
-							icon_state = "2,6"
-							pixel_y=192
-					Right
-						B32
-							icon_state = "3,2"
-							pixel_x=32
-							pixel_y=64
-						B33
-							icon_state = "3,3"
-							pixel_x=32
-							pixel_y=96
-						B34
-							icon_state = "3,4"
-							pixel_x=32
-							pixel_y=128
-			NPTree
-				icon = 'NPTree.dmi'
-				icon_state = ""
-				B1
-					icon_state = "1,0"
-					layer=TURF_LAYER+2
-					pixel_x=-32
-				B2
-					icon_state = "2,0"
-					layer=TURF_LAYER+2
-					density=1
-					New()
-						..()
-						src.overlays+=/turf/Ground/Trees/NPTree/B1
-						src.overlays+=/turf/Ground/Trees/NPTree/B3
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Left2/B02
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Left2/B03
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Left2/B04
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Left/B11
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Left/B12
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Left/B13
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Left/B14
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Left/B15
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Left/B16
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Middle/B21
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Middle/B22
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Middle/B23
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Middle/B24
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Middle/B25
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Middle/B26
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Right/B31
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Right/B32
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Right/B33
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Right/B34
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Right/B35
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Right2/B42
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Right2/B43
-						src.overlays+=/turf/Ground/Trees/NPTree/Overlays/Right2/B44
-				B3
-					icon_state = "3,0"
-					layer=TURF_LAYER+2
-					pixel_x=32
-				Overlays
-					layer=MOB_LAYER+6
-					Left2
-						B02
-							icon_state = "0,2"
-							pixel_x=-64
-							pixel_y=64
-						B03
-							icon_state = "0,3"
-							pixel_x=-64
-							pixel_y=96
-						B04
-							icon_state = "0,4"
-							pixel_x=-64
-							pixel_y=128
-					Left
-						B11
-							icon_state = "1,1"
-							pixel_x=-32
-							pixel_y=32
-						B12
-							icon_state = "1,2"
-							pixel_x=-32
-							pixel_y=64
-						B13
-							icon_state = "1,3"
-							pixel_x=-32
-							pixel_y=96
-						B14
-							icon_state = "1,4"
-							pixel_x=-32
-							pixel_y=128
-						B15
-							icon_state = "1,5"
-							pixel_x=-32
-							pixel_y=160
-						B16
-							icon_state = "1,6"
-							pixel_x=-32
-							pixel_y=192
-					Middle
-						B21
-							icon_state = "2,1"
-							pixel_y=32
-						B22
-							icon_state = "2,2"
-							pixel_y=64
-						B23
-							icon_state = "2,3"
-							pixel_y=96
-						B24
-							icon_state = "2,4"
-							pixel_y=128
-						B25
-							icon_state = "2,5"
-							pixel_y=160
-						B26
-							icon_state = "2,6"
-							pixel_y=192
-					Right
-						B31
-							icon_state = "3,1"
-							pixel_x=32
-							pixel_y=32
-						B32
-							icon_state = "3,2"
-							pixel_x=32
-							pixel_y=64
-						B33
-							icon_state = "3,3"
-							pixel_x=32
-							pixel_y=96
-						B34
-							icon_state = "3,4"
-							pixel_x=32
-							pixel_y=128
-						B35
-							icon_state = "3,5"
-							pixel_x=32
-							pixel_y=160
-					Right2
-						B42
-							icon_state = "4,2"
-							pixel_x=64
-							pixel_y=64
-						B43
-							icon_state = "4,3"
-							pixel_x=64
-							pixel_y=96
-						B44
-							icon_state = "4,4"
-							pixel_x=64
-							pixel_y=128
 		Bush
 			icon='Flowers.dmi'
 			layer=TURF_LAYER+1

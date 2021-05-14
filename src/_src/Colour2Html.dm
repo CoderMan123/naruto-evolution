@@ -154,3 +154,15 @@ proc/colour2html(colour)
 		world.log << "Warning!  Could not find matching colour entry for '[colour]'."
 		return "#ff0000"
 	return ("#" + uppertext(html_colours["[colour]"]) )
+
+
+
+
+/*COLOUR KEY
+
+NIN = NinBlue
+TAI = TaiOrange
+GEN = blueviolet
+AGI = cornsilk
+DEF = maroon
+PRC = azure */

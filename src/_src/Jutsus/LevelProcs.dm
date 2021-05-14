@@ -64,6 +64,7 @@ mob
 				if("Ninjutsu")ninexp+=howmuch
 				if("Genjutsu")genexp+=howmuch
 				if("Agility")agilityexp+=howmuch
+				if("Precision")precisionexp+=howmuch
 			Levelup()
 		Levelup()
 			if(src.xplock==1)
@@ -85,16 +86,16 @@ mob
 				src.skillpoints++
 				src.maxchakra+=10
 				src.maxhealth+=15
-				if(src.level<=10)
+				if(src.level<=20)
 					src.maxexp+=1
-				if(src.level>10&&src.level<=35)
+				if(src.level>20&&src.level<=40)
 					src.maxexp+=2
-				if(src.level>35&&src.level<=65)
-					src.maxexp+=3
-				if(src.level>65&&src.level<=90)
-					src.maxexp+=4
-				if(src.level>90&&src.level<=100)
+				if(src.level>40&&src.level<=60)
 					src.maxexp+=5
+				if(src.level>60&&src.level<=80)
+					src.maxexp+=8
+				if(src.level>80&&src.level<=100)
+					src.maxexp+=11
 				src.Levelup()
 				spawn(15)
 					src.overlays-=O
@@ -104,11 +105,20 @@ mob
 				if(src.strength>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=yellow>You leveled up Strength</Font>.","Action.Output")
+				src<<output("<font color=TaiOrange>You leveled up Strength</Font>.","ActionPanel.Output")
 				src.exp+=1
 				src.strength+=1
 				src.strengthexp-=src.maxstrengthexp
-				src.maxstrengthexp+=10+round(src.strength/2)
+				if(src.strength<=30)
+					src.maxstrengthexp+=10+round(src.strength/2)
+				if(src.strength>30&&src.strength<=60)
+					src.maxstrengthexp+=30+round(src.strength/2)
+				if(src.strength>60&&src.strength<=90)
+					src.maxstrengthexp+=60+round(src.strength/2)
+				if(src.strength>90&&src.strength<=120)
+					src.maxstrengthexp+=100+round(src.strength/2)
+				if(src.strength>120&&src.strength<=150)
+					src.maxstrengthexp+=150+round(src.strength/2)
 				src.Levelup()
 				next
 
@@ -116,22 +126,40 @@ mob
 				if(src.ninjutsu>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=green>You leveled up Ninjutsu</Font>.","Action.Output")
+				src<<output("<font color=NinBlue>You leveled up Ninjutsu</Font>.","ActionPanel.Output")
 				src.exp+=1
 				src.ninjutsu+=1
 				src.ninexp-=src.maxninexp
-				src.maxninexp+=10+round(src.ninjutsu/2)
+				if(src.ninjutsu<=30)
+					src.maxninexp+=10+round(src.ninjutsu/1.5)
+				if(src.ninjutsu>30&&src.ninjutsu<=60)
+					src.maxninexp+=30+round(src.ninjutsu/1.5)
+				if(src.ninjutsu>60&&src.ninjutsu<=90)
+					src.maxninexp+=60+round(src.ninjutsu/1.5)
+				if(src.ninjutsu>90&&src.ninjutsu<=120)
+					src.maxninexp+=100+round(src.ninjutsu/1.5)
+				if(src.ninjutsu>120&&src.ninjutsu<=150)
+					src.maxninexp+=150+round(src.ninjutsu/1.5)
 				src.Levelup()
 				next
 			if(src.genexp>=src.maxgenexp)
 				if(src.genjutsu>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=#C0C0C0>You leveled up Genjutsu</Font>.","Action.Output")
+				src<<output("<font color=blueviolet>You leveled up Genjutsu</Font>.","ActionPanel.Output")
 				src.exp+=1
 				src.genjutsu+=1
 				src.genexp-=src.maxgenexp
-				src.maxgenexp+=10+round(src.genjutsu/2)
+				if(src.genjutsu<=30)
+					src.maxgenexp+=10+round(src.genjutsu/3)
+				if(src.genjutsu>30&&src.genjutsu<=60)
+					src.maxgenexp+=30+round(src.genjutsu/3)
+				if(src.genjutsu>60&&src.genjutsu<=90)
+					src.maxgenexp+=60+round(src.genjutsu/3)
+				if(src.genjutsu>90&&src.genjutsu<=120)
+					src.maxgenexp+=100+round(src.genjutsu/3)
+				if(src.genjutsu>120&&src.genjutsu<=150)
+					src.maxgenexp+=150+round(src.genjutsu/3)
 				src.Levelup()
 				next
 			if(src.defexp>=src.maxdefexp)
@@ -142,26 +170,66 @@ mob
 				src.exp+=1
 				src.defence++
 				src.defexp-=src.maxdefexp
-				src.maxdefexp+=10+round(src.defence/2)
+				if(src.defence<=30)
+					src.maxdefexp+=10+round(src.defence/2)
+				if(src.defence>30&&src.defence<=60)
+					src.maxdefexp+=30+round(src.defence/2)
+				if(src.defence>60&&src.defence<=90)
+					src.maxdefexp+=60+round(src.defence/2)
+				if(src.defence>90&&src.defence<=120)
+					src.maxdefexp+=100+round(src.defence/2)
+				if(src.defence>120&&src.defence<=150)
+					src.maxdefexp+=150+round(src.defence/2)
 				src.Levelup()
 				next
 			if(src.agilityexp>=src.maxagilityexp)
 				if(src.agility>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=blue>You leveled up Agility</Font>.","Action.Output")
+				src<<output("<font color=cornsilk>You leveled up Agility</Font>.","ActionPanel.Output")
 				src.exp+=1
 				src.agility++
 				src.agilityexp-=src.maxagilityexp
-				src.maxagilityexp+=10+round(src.agility/2)
+				if(src.agility<=30)
+					src.maxagilityexp+=10+round(src.agility/2)
+				if(src.agility>30&&src.agility<=60)
+					src.maxagilityexp+=30+round(src.agility/2)
+				if(src.agility>60&&src.agility<=90)
+					src.maxagilityexp+=60+round(src.agility/2)
+				if(src.agility>90&&src.agility<=120)
+					src.maxagilityexp+=100+round(src.agility/2)
+				if(src.agility>120&&src.agility<=150)
+					src.maxagilityexp+=150+round(src.agility/2)
 				src.Levelup()
-				if(src.agility==10)src.attkspeed=7
-				if(src.agility==20)src.attkspeed=6
-				if(src.agility==30)src.attkspeed=5
-				if(src.agility==50)src.attkspeed=4
-				if(src.agility==70)src.attkspeed=3
-				if(src.agility==90)src.attkspeed=2
-				if(src.agility==120)src.attkspeed=1
+				src.attkspeed=(8-(0.04*src.agility))
+				src.move_delay = min(0.5, 0.8-((src.agility/150)*0.3))
+//				if(src.agility==10)src.attkspeed=7
+//				if(src.agility==20)src.attkspeed=6
+//				if(src.agility==30)src.attkspeed=5
+//				if(src.agility==50)src.attkspeed=4
+//				if(src.agility==70)src.attkspeed=3
+//				if(src.agility==90)src.attkspeed=2
+//				if(src.agility==120)src.attkspeed=1
+				next
+			if(src.precisionexp>=src.maxprecisionexp)
+				if(src.precision>=150)
+					goto next
+				src<<sound('level.wav',0,0)
+				src<<output("<font color=azure>You leveled up Precision</Font>.","ActionPanel.Output")
+				src.exp+=1
+				src.precision++
+				src.precisionexp-=src.maxprecisionexp
+				if(src.precision<=30)
+					src.maxprecisionexp+=10+round(src.precision/1.5)
+				if(src.precision>30&&src.precision<=60)
+					src.maxprecisionexp+=30+round(src.precision/1.5)
+				if(src.precision>60&&src.precision<=90)
+					src.maxprecisionexp+=60+round(src.precision/1.5)
+				if(src.precision>90&&src.precision<=120)
+					src.maxprecisionexp+=100+round(src.precision/1.5)
+				if(src.precision>120&&src.precision<=150)
+					src.maxprecisionexp+=150+round(src.precision/1.5)
+				src.Levelup()
 				next
 			if(!src.client)src.UpdateHMB()
 			else if(!src.likeaclone)src.UpdateHMB()
@@ -236,15 +304,17 @@ mob
 				sleep(1)
 				if(O&&O.Owner==src&&O.JashinConnected)
 					var/mob/HitMe=O.JashinConnected
-					if(!HitMe||!ismob(HitMe)) continue
-					HitMe.health-= src.strength*2
-					F_damage(HitMe,src.strength*2)
-					HitMe.Bleed()
-					src.Bleed()
-					HitMe.UpdateHMB()
-					view() << sound('knife_hit1.wav')
-					src.UpdateHMB()
-					HitMe.Death(src)
+					if(!HitMe.dead)
+						if(!HitMe||!ismob(HitMe)) continue
+						var/jashpercent = (jutsudamage / 100)/15
+						HitMe.DealDamage(src.maxhealth*(jashpercent/10),src,"maroon")
+						HitMe.Bleed()
+						src.health-=src.maxhealth*(jashpercent/20)
+						src.Bleed()
+						HitMe.UpdateHMB()
+						view() << sound('knife_hit1.wav')
+						src.UpdateHMB()
+						HitMe.Death(src)
 			if(ismob(X))
 				if(istype(X,/mob/Karasu))X=X.Owner
 				if(icon_state=="push"&&X==src)

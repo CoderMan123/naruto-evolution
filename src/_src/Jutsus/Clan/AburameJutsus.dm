@@ -8,28 +8,37 @@ mob
 					if(src.PreJutsu(J))
 						src.CloneHandler()
 						view(src)<<sound('bugs.wav',0,0)
-						if(src.loc.loc:Safe!=1) src.LevelStat("Genjutsu",rand(7,10))
+						if(src.loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
+						if(src.loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/20)*jutsustatexp))
+						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
+						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
+						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+						if(J.level<4)
+							if(loc.loc:Safe!=1)
+								J.exp+=(jutsumastery/50)*(J.maxcooltime/20)
+								J.Levelup()
 						for(var/mob/M in oview(src,13))M.Target_Remove()
 						src.mizubunshin++
 						var/bun=src.mizubunshin+3
-						src.DealDamage((src.health/bun),src,"white")
+						src.DealDamage((src.health/10),src,"white")
 						src.chakra-=round(src.chakra/bun)
 						flick("jutsu",src)
 						var/mob/Clones/BugBunshin/A = new/mob/Clones/BugBunshin(src.loc)
 						A.loc=src.loc
 						A.Owner=src
-						A.icon=src.icon
-						A.overlays=src.overlays
-						A.strength=round(src.strength/bun)
+						A.icon='Insect clone.dmi'
+						A.ninjutsu=round((src.ninjutsu / 300)*2*J.damage)
+						A.genjutsu=round((src.genjutsu / 300)*2*J.damage)
 						A.defence=round(src.defence/bun)
-						A.health=round(src.health/bun)
-						A.maxhealth=round(src.health/bun)
+						A.health=round(src.health/10)
+						A.maxhealth=round(src.maxhealth/10)
 						A.agility=round(src.agility/bun)
 						var/obj/O=new /obj/Screen/healthbar/
 						var/obj/M=new /obj/Screen/manabar/
 						A.hbar.Add(O)
 						A.hbar.Add(M)
-						spawn(3)if(src)if(A)A.icon = src.icon
+						spawn(3)if(src)if(A)A.icon ='Insect clone.dmi'
 						A.overlays-=/obj/Screen/healthbar
 						A.overlays-=/obj/Screen/manabar
 						for(var/obj/Screen/healthbar/HB in A.hbar)A.overlays+=HB
@@ -43,10 +52,10 @@ mob
 					src << output("This jutsu requires a target that is under the effect of stealth bug.","Action.Output")
 					return
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4)
 						if(loc.loc:Safe!=1)
-							J.exp+=rand(2,5)
+							J.exp+=(jutsumastery/50)*(J.maxcooltime/20)
 							J.Levelup()
 					flick("groundjutsu",src)
 					if(c_target)
@@ -62,7 +71,7 @@ mob
 							c_target.move=0
 							c_target.injutsu=1
 							c_target.canattack=0
-							spawn(25+(J.level*3))
+							spawn(15+(J.level*2))
 								if(c_target)
 									c_target.move=1
 									c_target.injutsu=0
@@ -75,11 +84,10 @@ mob
 					src.bugpass=0
 					return
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)/2*jutsustatexp))
 					src.bugpass=1
 					src<<output("You turn on your insect Cocoon.","Action.Output")
 					while(bugpass&&chakra>0)
-						DealDamage(10,src,"aliceblue",0,1)
 						sleep(10)
 					src<<output("You shut down your insect Cocoon.","Action.Output")
 					src.bugpass=0
@@ -91,8 +99,12 @@ mob
 					src<<output("You require a targeted player to use this technique.","Action.Output")
 					return
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level==1) J.damage=0.02*((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=0.02*((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=0.02*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=0.02*(jutsudamage*J.Sprice)
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					view()<<sound('bugs.wav')
 					var/obj/O = new(c_target.loc)
 					O.IsJutsuEffect=src
@@ -107,7 +119,7 @@ mob
 						var/area/A=c_target.loc.loc
 						if(A.Safe) break
 						c_target.sbugged=1
-						c_target.DealDamage(round(src.ninjutsu/13),src,"NinBlue")
+						c_target.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 						sleep(2)
 					del(O)
 					if(c_target)c_target.sbugged=0
@@ -116,17 +128,17 @@ mob
 			for(var/obj/Jutsus/Hunter_Scarabs/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level==1) J.damage=0.1*((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=0.1*((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=0.1*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=0.1*(jutsudamage*J.Sprice)
 					flick("throw",src)
 					view(src)<<sound('dash.wav',0,0)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=5
-					if(J.level==2) J.damage=8
-					if(J.level==3) J.damage=14
-					if(J.level==4) J.damage=20
-					if(J.level<6) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					var/num=J.level*2+(round(src.strength/23)+round(src.ninjutsu/23))
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					var/num=J.level*2+round(src.ninjutsu/30)
 					if(c_target)
 						while(num)
 							sleep(1)
@@ -142,7 +154,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/10+src.strength/5)
+							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							A.dir = get_dir(A,c_target)
 							walk_towards(A,c_target.loc,5)
 							spawn(25)if(A)walk(A,A.dir,5)
@@ -161,7 +173,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/10+src.strength/5)
+							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							A.dir = src.dir
 							if(A)walk(A,A.dir,5)
 					spawn(5)
@@ -172,16 +184,16 @@ mob
 			for(var/obj/Jutsus/Destruction_Bug_Swarm/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
 					view(src)<<sound('bugs.wav',0,0)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=4
-					if(J.level==2) J.damage=8
-					if(J.level==3) J.damage=12
-					if(J.level==4) J.damage=16
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
+					if(J.level==1) J.damage=0.05*((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=0.05*((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=0.05*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=0.05*(jutsudamage*J.Sprice)
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(c_target)
 						src.dir=get_dir(src,c_target)
 						var/obj/Projectiles/Effects/Bug_Swarm/A = new/obj/Projectiles/Effects/Bug_Swarm(src.loc)
@@ -189,7 +201,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(src.ninjutsu/10)
+						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.level=J.level
 						walk_towards(A,c_target.loc,0)
 						spawn(4)if(A)walk(A,A.dir)
@@ -199,7 +211,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(src.ninjutsu/20)
+						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)
 					spawn(20)if(src)
@@ -209,16 +221,16 @@ mob
 			for(var/obj/Jutsus/BugTornado/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("throw",src)
 					view(src)<<sound('dash.wav',0,0)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=40
-					if(J.level==2) J.damage=60
-					if(J.level==3) J.damage=80
-					if(J.level==4) J.damage=100
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					if(J.level==1) J.damage=0.15*((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=0.15*((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=0.15*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=0.15*(jutsudamage*J.Sprice)
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(c_target)
 						src.dir=get_dir(src,c_target)
 						var/obj/Projectiles/Effects/BugTornado/A = new/obj/Projectiles/Effects/BugTornado(src.loc)
@@ -227,9 +239,9 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(src.ninjutsu*1.3+src.strength*1.3)
+						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.dir = get_dir(A,c_target)
-						walk_towards(A,c_target.loc,5)
+						walk_towards(A,c_target.loc,2)
 						spawn(20)if(A)walk(A,A.dir,5)
 					else
 						var/obj/Projectiles/Effects/BugTornado/A = new/obj/Projectiles/Effects/BugTornado(src.loc)
@@ -239,7 +251,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(src.ninjutsu*1.3+src.strength*1.3)
+						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.dir = src.dir
 						spawn(20)if(A)walk(A,A.dir,5)
 					spawn(5)

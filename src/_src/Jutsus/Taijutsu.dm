@@ -61,11 +61,12 @@ mob
 		PunchFlick(var/PTimes,var/obj/Jutsu)
 			if(src.client)
 				while(src)
-					sleep(1)
+					sleep(3.5-((src.agility/150)*3))
 					if(PTimes)
 						var/obj/A = new/obj/MiscEffects/Morning_Peacock(src.loc)
+						src.DealDamage((src.maxhealth * 0.001) * src.Gates, src, "maroon")
 						A.Owner=src
-						A.damage=Jutsu.damage
+						A.damage=((Jutsu.damage+round(((src.strength / 300)+(src.agility / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
 						A.dir=src.dir
 						if(prob(50))
 							if(src.dir==NORTH)
@@ -101,10 +102,11 @@ mob
 							else ..()
 						flick("punchl",src)
 						view(src) << sound('Skill_BigRoketFire.wav',0,0,0,50)
-						sleep(2)
+						sleep(3.5-((src.agility/150)*3))
 						var/obj/B = new/obj/MiscEffects/Morning_Peacock(src.loc)
+						src.DealDamage((src.maxhealth * 0.001) * src.Gates, src, "maroon")
 						B.Owner=src
-						B.damage=Jutsu.damage
+						B.damage=((Jutsu.damage+round(((src.strength / 300)+(src.agility / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
 						B.dir=src.dir
 						if(prob(50))
 							if(src.dir==NORTH)
@@ -141,7 +143,7 @@ mob
 						flick("punchr",src)
 						view(src) << sound('Skill_BigRoketFire.wav',0,0,0,50)
 						PTimes--
-						sleep(2)
+						sleep(3.5-((src.agility/150)*3))
 						continue
 					else break
 obj
@@ -255,8 +257,7 @@ obj
 				flick("[src.icon_state]",src)
 				spawn(1)AI()
 				spawn(7)
-					if(!src.Hit)if(src)del(src)
-					else src.loc=null
+					src.loc=null
 				..()
 			proc/AI()
 				var/mob/Owner=src.Owner
@@ -278,7 +279,7 @@ obj
 										//		spawn(50)
 										//			if(c_target)
 										//				c_target.BurnEffect(Owner)
-										var/undefendedhit=round(((src.damage+Owner.strength+Owner.strength)/3.5)-(c_target.defence/10))
+										var/undefendedhit=round(src.damage-(c_target.defence/10))
 										if(undefendedhit<0)undefendedhit=1
 										c_target.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										c_target.injutsu=1
@@ -286,14 +287,16 @@ obj
 										c_target.firing=1
 										if(c_target.client)spawn(1)c_target.ScreenShake(1)
 										if(c_target.health<=0)
-											if(src)del(src)
+											if(src)
+												src.loc=null
 										else
 											spawn(11)
 												if(c_target)
 													c_target.injutsu=0
 													c_target.canattack=1
 													c_target.firing=0
-												if(src)del(src)
+												if(src)
+													src.loc=null
 										break
 /*						for(var/obj/Training/T in range(src,1))
 							if(T.health>=1)

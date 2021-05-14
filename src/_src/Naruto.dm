@@ -354,6 +354,9 @@ mob
 		for(var/mob/jutsus/KazekagePuppet/C in world)
 			if(C.OWNER==src)
 				del(C)
+		for(var/mob/summonings/DogSummoning/D in world)
+			if(D.lowner==src)
+				del(D)
 		//var/list/possible_entries = typesof(/mob/Jutsus/verb)
 		//var/list/current_verbs = src.verbs.Copy()
 		//for(var/R in current_verbs) if(!(R in possible_entries)) current_verbs -= R

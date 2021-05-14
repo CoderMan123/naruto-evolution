@@ -102,6 +102,7 @@ mob
 					usr.Sleeping=0
 					usr.firing=0
 					usr.kawarmi=0
+					usr.inshadowfield=0
 					var/obj/A = new/obj/MiscEffects/Smoke(usr.loc)
 					A.loc=usr.mark2
 
@@ -168,7 +169,7 @@ mob
 						if(SC.dead==0)
 							if(SC.icon_state<>"blank")SC.icon_state=""
 							SC.dodge=0
-			if(src.canattack==1&&src.firing==0&&!src.likeaclone&&!Effects["Rasengan"]&&!Effects["Chidori"])
+			if(src.canattack==1&&src.firing==0&&!Effects["Rasengan"]&&!Effects["Chidori"])
 				if(src.explosivetag)
 					src.explosivetag=0
 					for(var/obj/Projectiles/Weaponry/ExplosiveTag/ET in view(src,50))
@@ -181,7 +182,7 @@ mob
 							view(ET)<<sound('Explo_StoneMed2.ogg',0,0)
 							for(var/mob/M in view(ET,3))
 								if(M.dead==0)
-									M.DealDamage(damage,src,"TaiOrange")//HERE
+									M.DealDamage(damage-(M.defence/5),src,"TaiOrange")//HERE
 									if(istype(M,/mob/NPC))..()
 									else
 										M.icon_state="push"
@@ -198,7 +199,7 @@ mob
 							ET.icon_state="blank"
 							spawn(50)if(ET)del(ET)
 				if(src.kawarmi==0 && src.C3bombz==0)
-					if(src.dead==0&&src.dodge==0&&src.canattack==1&&src.dashable==1&&src.health>src.maxhealth/3)
+/*					if(src.dead==0&&src.dodge==0&&src.canattack==1&&src.dashable==1&&src.health>src.maxhealth/3)
 						view(src) << sound('dash.wav',0,0,0,100)
 						if(src.icon_state<>"blank")flick("dash",src)
 						src.dashable=2
@@ -206,23 +207,25 @@ mob
 						spawn(1)if(src)step(src,usr.dir)
 						spawn(2)
 							if(src)step(usr,usr.dir)
-							if(usr)usr.dashable=0
+							if(usr)usr.dashable=0*/
 						//return
 					if(usr.dodge==0&&usr.dashable==0)
 						var/mob/c_target=usr.Target_Get(TARGET_MOB)
 						if(c_target)
 							usr.dir = get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
+						usr.dashable=1
+						usr.dodge=1
 						view(usr) << sound('Swing4.ogg',0,0,0,50)
 						if(usr.icon_state<>"blank")
 							usr.icon_state="defend"
-						usr.dodge=1
 						for(var/mob/Clones/C in world)if(C.Owner==src)C.icon_state="defend"
 						sleep(5)
 						for(var/mob/Clones/C in world)if(C.Owner==src)C.icon_state=""
 						if(usr.dead==0)
 							if(usr.icon_state<>"blank")usr.icon_state=""
 							usr.dodge=0
+							usr.dashable=0
 				else
 					if(src.C3bombz)
 						var/obj/O = src.C3bombz

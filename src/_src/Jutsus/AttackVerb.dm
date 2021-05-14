@@ -1,7 +1,10 @@
 mob
 	verb
 		Basic_Attack()
+			var/mob/c_target=src.Target_Get(TARGET_MOB)
 			set hidden=1
+			if(src.multisized==1)//multisizestuff
+				return
 			if(src.shielded==1)
 				if(src.Clan == "Sand"&&canattack)
 					canattack=0
@@ -29,6 +32,16 @@ mob
 			if(src.incalorie==1&&usr.Clan=="Akimichi")
 				src.Meteor_Punch()
 			if(ChakraCheck(0)) return
+			if(c_target&&!src.likeaclone)
+				if(src.lungecounter==0)
+					step(src, get_dir(src, c_target))
+					src.lungecounter=1
+					if(src.equipped=="Weights")
+						spawn(40/((src.agility/150)*3))lungecounter=0
+						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(8,20)*trainingexp))
+					else
+						spawn(20/((src.agility/150)*3))lungecounter=0
+						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(4,11)*trainingexp))
 			if(src.likeaclone)
 				var/mob/Clones/SC=src.likeaclone
 				if(SC.canattack==1)
@@ -50,17 +63,19 @@ mob
 					spawn(2)
 						for(var/mob/C in orange(SC,1))
 							SC.dir = get_dir(SC,C)
-							for(var/mob/c_target in get_step(SC,SC.dir))
+							for(c_target in get_step(SC,SC.dir))
 								if(c_target in get_step(SC,SC.dir))
 									if(c_target.dead==0&&!istype(c_target,/mob/NPC/)&&c_target!=SC.Owner)
 										if(c_target.fightlayer==SC.fightlayer)
 											if(c_target.client)spawn()c_target.ScreenShake(1)
 											if(c_target.dodge==0)
-												var/undefendedhit=round((2.5+(SC.strength/10))-(c_target.defence/10)+(rand(10)/10))
+												var/undefendedhit=(60-round(1*((150-src.strength)/3)))-(c_target.defence/4)+rand(0,10)
 												if(undefendedhit<0)undefendedhit=1
-												c_target.DealDamage(undefendedhit+ (((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-												if(SC.loc.loc:Safe!=1) LevelStat("Strength",rand(1,3))
-												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
+												c_target.DealDamage(undefendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+												if(src.Gates>0) src.DealDamage(((src.strength / 150)*10) * src.Gates, src, "maroon")
+												if(SC.loc.loc:Safe!=1) LevelStat("Strength",10*punchstatexp)
+												if(c_target)
+													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 												if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
 												if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 											else
@@ -69,14 +84,16 @@ mob
 													if(defendedhit<0)defendedhit=1
 
 													src.Levelup()
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
+													if(c_target)
+														if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 													if(defence<SC.strength/3)
 														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 														Drag.dir=c_target.dir
 														step(c_target,SC.dir)
 														c_target.dir = get_dir(c_target,SC)
 														step_to(SC,c_target,1)
-													c_target.DealDamage(defendedhit+ (((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+													c_target.DealDamage(defendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+													if(src.Gates>0) src.DealDamage(((src.strength / 150)*10) * src.Gates, src, "maroon")
 													flick("defendhit",c_target)
 													view(SC,10) << sound('Counter_Success.ogg',0,0,0,100)
 												else
@@ -87,8 +104,8 @@ mob
 							if(T.health>=1)
 								var/undefendedhit=round(SC.strength)//-T.defence/4)
 								T.health-=undefendedhit
-								if(T) if(T.Good) LevelStat("Strength",rand(2,4))
-								else LevelStat("Strength",rand(0.4,1))
+								if(T) if(T.Good) LevelStat("Strength",10*punchstatexp)
+								else LevelStat("Strength",10*punchstatexp)
 								src.Levelup()
 								if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
 								if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
@@ -139,6 +156,7 @@ mob
 						if(src.Clan <> "Sand")
 							flick("punchl",src)
 							if(src.bugpass)
+								src.DealDamage(50,src,"aliceblue",0,1)
 								var/obj/O = new/obj
 								O.loc = src.loc
 								O.icon = 'Insect Cocoon.dmi'
@@ -227,7 +245,7 @@ mob
 				view(src,10) << sound('Swing5.ogg',0,0,0,100)
 				if(src.agility<50)
 					spawn(2)
-						for(var/mob/c_target in get_step(src,src.dir))
+						for(c_target in get_step(src,src.dir))
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
 							if(c_target in get_step(src,src.dir))
@@ -294,7 +312,7 @@ mob
 											if(Sharingan)bonus+=Sharingan
 											if(src.mystical_palms)bonus+=5
 											bonus+=src.bonesword
-											var/undefendedhit=(2.5+(src.strength/10))-(c_target.defence/10)
+											var/undefendedhit=(60-round(1*((150-src.strength)/3)))-(c_target.defence/4)+rand(0,10)//finditlel
 											if(undefendedhit<0)undefendedhit=1
 											if(c_target.Sharingan)
 												if(prob((c_target.agility*2)-(undefendedhit)+(c_target.Sharingan*5)))
@@ -304,19 +322,17 @@ mob
 													undefendedhit-=(c_target.Sharingan+c_target.agility)
 													if(undefendedhit<0) undefendedhit=1
 													flick("defend",c_target)
-											c_target.DealDamage(undefendedhit+ (((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-											if(src.loc.loc:Safe!=1) LevelStat("Strength",rand(1,3))
-											if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
+											c_target.DealDamage(undefendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+											if(src.Gates>0) src.DealDamage(((src.strength / 150)*10) * src.Gates, src, "maroon")
+											if(src.byakugan==1)
+												for(var/obj/Jutsus/Byakugan/J in src.jutsus)
+													c_target.DealDamage(undefendedhit/3, src, "aliceblue", 0, 1)
+											if(src.loc.loc:Safe!=1) LevelStat("Strength",10*punchstatexp)
+											if(c_target)
+												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 											if(src.Hand=="Right")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
 											if(src.Hand=="Kick")
 												bonus+=2
-												spawn(1)
-													if(!c_target) return
-													if(c_target.chakra<>0 && src.byakugan==1)
-														for(var/obj/Jutsus/Byakugan/J in src.jutsus)
-															c_target.chakra-=J.level*5+round(src.ninjutsu/2)
-															var/colourz = colour2html("aliceblue")
-															F_damage(c_target,J.level*5+round(src.ninjutsu/2),colourz)
 												view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 											if(src.Hand=="Left")view(src,10) << sound('KickHit.ogg',0,0,0,100)
 											if(src.Gates >= 5&&move&&!injutsu)
@@ -344,18 +360,23 @@ mob
 												if(src.mystical_palms)bonus+=5
 												if(bugpass)bonus+=3
 												bonus+=src.bonesword
-												var/defendedhit=(1+(src.strength/10))-(c_target.defence/10)
+												var/defendedhit=(60-round(1*((150-src.strength)/3)))-(c_target.defence/2)+rand(0,10)
 												if(defendedhit<0)defendedhit=1
 												// WHY WHY WHY ? if(src.loc.loc:Safe!=1) src.strength++
 												src.Levelup()
-												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
+												if(c_target)
+													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 												if(defence<src.strength/3)
 													var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 													Drag.dir=c_target.dir
 													step(c_target,src.dir)
 													c_target.dir = get_dir(c_target,src)
 													step_to(src,c_target,1)
-												c_target.DealDamage(defendedhit+ (((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+												c_target.DealDamage(defendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+												if(src.Gates>0) src.DealDamage(((src.strength / 150)*10) * src.Gates, src, "maroon")
+												if(src.byakugan==1)
+													for(var/obj/Jutsus/Byakugan/J in src.jutsus)
+														c_target.DealDamage(defendedhit/3, src, "aliceblue", 0, 1)
 												if(bonesword)
 													if(c_target.icon_state == "")
 														c_target.move=0
@@ -370,15 +391,15 @@ mob
 							if(T.health > 0)//also logs
 								var/undefendedhit=round(src.strength)//-T.defence/4)
 								T.health-=undefendedhit
-								if(T) if(T.Good) LevelStat("Strength",rand(1,2))
-								else LevelStat("Strength",rand(0.2,1))
+								if(T) if(T.Good) LevelStat("Strength",10*punchstatexp)
+								else LevelStat("Strength",10*punchstatexp)
 								if(src.Hand=="Right")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
 								if(src.Hand=="Kick")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 								if(src.Hand=="Left")view(src,10) << sound('KickHit.ogg',0,0,0,100)
 								T.Break(src)
 				else
 					if(src.agility>=50)
-						for(var/mob/c_target in get_step(src,src.dir))
+						for(c_target in get_step(src,src.dir))
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
 							if(c_target in get_step(src,src.dir))
@@ -446,7 +467,7 @@ mob
 											if(Sharingan)bonus+=Sharingan
 											if(src.mystical_palms)bonus+=5
 											if(src.Hand=="Kick")bonus+=2
-											var/undefendedhit=(2.5+(src.strength/10))-(c_target.defence/10)
+											var/undefendedhit=(60-round(1*((150-src.strength)/3)))-(c_target.defence/4)+rand(0,10)
 											if(undefendedhit<0)undefendedhit=1
 											if(c_target.Sharingan)
 												if(prob((c_target.agility)-(undefendedhit)+(c_target.Sharingan*5)))
@@ -456,9 +477,15 @@ mob
 													undefendedhit-=(c_target.Sharingan+round(c_target.agility/2))
 													if(undefendedhit<0) undefendedhit=1
 													flick("defend",c_target)
-											c_target.DealDamage(undefendedhit+ (((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-											if(src.loc.loc:Safe!=1) LevelStat("Strength",rand(2,3))
-											if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
+											if(c_target.Owner!=src)
+												c_target.DealDamage(undefendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+												if(src.Gates>0) src.DealDamage(((src.strength / 150)*10) * src.Gates, src, "maroon")
+												if(src.byakugan==1)
+													for(var/obj/Jutsus/Byakugan/J in src.jutsus)
+														c_target.DealDamage(undefendedhit/3, src, "aliceblue", 0, 1)
+												if(src.loc.loc:Safe!=1) LevelStat("Strength",10*punchstatexp)
+											if(c_target)
+												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 											if(src.Hand=="Right")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
 											if(src.Hand=="Kick")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 											if(src.Hand=="Left")view(src,10) << sound('KickHit.ogg',0,0,0,100)
@@ -487,18 +514,23 @@ mob
 												if(src.mystical_palms)bonus+=5
 												if(bugpass)bonus+=3
 												bonus+=src.bonesword
-												var/defendedhit=(1+(src.strength/10))-(c_target.defence/10)+(rand(10)/10)+bonus
+												var/defendedhit=(60-round(1*((150-src.strength)/3)))-(c_target.defence/2)+rand(0,10)
 												if(defendedhit<0)defendedhit=1
 												//if(src.loc.loc:Safe!=1) src.strength++
 												src.Levelup()
-												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
+												if(c_target)
+													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 												if(defence<src.strength/3)
 													var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 													Drag.dir=c_target.dir
 													step(c_target,src.dir)
 													c_target.dir = get_dir(c_target,src)
 													step_to(src,c_target,1)
-												c_target.DealDamage(defendedhit+ (((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+												c_target.DealDamage(defendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+												if(src.Gates>0) src.DealDamage(((src.strength / 150)*10) * src.Gates, src, "maroon")
+												if(src.byakugan==1)
+													for(var/obj/Jutsus/Byakugan/J in src.jutsus)
+														c_target.DealDamage(defendedhit/3, src, "aliceblue", 0, 1)
 												flick("defendhit",c_target)
 												view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
 												if(bonesword)
@@ -512,8 +544,8 @@ mob
 							if(T.health>0)
 								var/undefendedhit=round(src.strength)//-T.defence/4)
 								T.health-=undefendedhit//,src,"TaiOrange")
-								if(T) if(T.Good) LevelStat("Strength",rand(1,2))
-								else LevelStat("Strength",rand(0.2,1))
+								if(T) if(T.Good) LevelStat("Strength",10*punchstatexp)
+								else LevelStat("Strength",10*punchstatexp)
 								if(src.Hand=="Right")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
 								if(src.Hand=="Kick")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 								if(src.Hand=="Left")view(src,10) << sound('KickHit.ogg',0,0,0,100)
@@ -523,7 +555,7 @@ mob
 						src.combo=0
 						spawn(src.attkspeed)if(src)src.canattack=1
 					else
-						var/wait=src.attkspeed-5
-						if(wait<=0)wait=2
+						var/wait=src.attkspeed-(src.agility/50)
+						if(wait<=0)wait=1.75
 						spawn(wait)if(src)src.canattack=1
 				else spawn(src.attkspeed)if(src)src.canattack=1

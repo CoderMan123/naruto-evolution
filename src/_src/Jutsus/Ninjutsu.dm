@@ -50,7 +50,7 @@ obj
 			if(candoit)
 				for(var/mob/M in orange(1,src))
 					if(Ownzorz)
-						if(M) M.DealDamage(Ownzorz.ninjutsu/4,src.Owner,"NinBlue")
+						if(M) M.DealDamage(Ownzorz.ninjutsu/2,src.Owner,"NinBlue")
 						if(M) M.pois=5
 						if(M) M.poisoned(Ownzorz)
 	ESDS
@@ -98,7 +98,7 @@ obj
 		for(var/mob/M2 in orange(5,src))
 		//	if(M2 == M)
 		//		continue
-			M2.DealDamage((src.level) * (M.ninjutsu*2),src.Owner,"NinBlue")//src or src.owner?
+			M2.DealDamage(src.damage,src.Owner,"NinBlue")//src or src.owner?
 
 		spawn(10)
 			if(src)
@@ -161,7 +161,7 @@ mob/verb
 					K.move=0
 					K.canattack=0
 					K.firing=1
-					var/counter=50+round(src.ninjutsu*0.5)
+					var/counter=10+round(src.ninjutsu/3)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
@@ -194,7 +194,7 @@ mob/verb
 					src.pgrab=0
 					K.canattack=0
 					K.firing=1
-					var/counter=50+round(src.ninjutsu*0.5)
+					var/counter=10+round(src.ninjutsu/3)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
@@ -335,10 +335,12 @@ mob/Karasu
 					if(!src.henged) flick("arm shooters",src)
 					if(src.henged) flick("punchr",src)
 					if(c_target.client)spawn()c_target.ScreenShake(1)
-					var/undefendedhit=round((5+(strength*1.6))-(c_target.defence/10)+(rand(10)/10))
+					var/undefendedhit=(180-round(1*((300-(src.ninjutsu+src.precision))/3)))-(c_target.defence/4)+rand(0,10)
 					if(undefendedhit<0)
 						undefendedhit=1
 					c_target.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+					spawn(2) c_target.move=1
+					c_target.move=0
 			spawn(src.attkspeed)if(src)src.canattack=1
 	Click()
 		if(usr.puppets[1]==src||usr.puppets[2]==src)
@@ -386,7 +388,7 @@ mob/Untargettable
 				src.bec2()
 		/*	if(!Ownzeez.Susanoo)
 				spawn(2)if(src)del(src) */
-			spawn(200)spawn(3)if(src)del(src)//If you change this change it in the uchihajutsus.dm too
+			spawn(100)spawn(3)if(src)del(src)//If you change this change it in uchihajutsus.dm line 117
 
 		proc/tailswing()
 			src.icon_state = "Idle"
@@ -397,9 +399,8 @@ mob/Untargettable
 				M.injutsu=1
 
 				view(src)<<sound('Skill_BigRoketFire.wav',0,0,volume=100)
-				M.DealDamage(src.level*25+(Ownzeez.strength*2)+(Ownzeez.ninjutsu*0.5),src.Ownzeez,"TaiOrange")
+				M.DealDamage(src.strength,src.Ownzeez,"TaiOrange")
 				M.Bleed(M)
-				if(loc.loc:Safe!=1) Ownzeez.LevelStat("Ninjutsu",rand(10,15))
 				if(M.henge==4||M.henge==5)M.HengeUndo()
 				M.icon_state="push"
 				M.injutsu=1
@@ -457,7 +458,7 @@ mob/Untargettable
 				if(random==2)view(src)<<sound('KickHit.ogg',0,0,volume=100)
 				if(random==3)view(src)<<sound('KickHit.ogg',0,0,volume=100)
 				if(random==4)view(src)<<sound('KickHit.ogg',0,0,volume=100)
-				M.DealDamage(10+src.Ownzeez.strength,src.Ownzeez,"TaiOrange")
+				M.DealDamage(jutsudamage+round((src.Ownzeez.ninjutsu / 150)*2*jutsudamage)*2,src.Ownzeez,"TaiOrange")
 				if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(10,15))
 				if(M.henge==4||M.henge==5)M.HengeUndo()
 				M.icon_state="push"
@@ -529,7 +530,7 @@ obj
 		if(M && src)
 			M.LinkFollowers+=src
 			src.loc = M.loc
-			spawn(1) src.linkfollow(M)
+			spawn(0.2) src.linkfollow(M)
 		else if(src)del(src)
 	var
 		tmp
@@ -628,18 +629,82 @@ obj
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 						else src.invisibility=1
 						spawn(5)if(src)src.loc=locate(0,0,0)
+			FTGkunai
+				name="FTGkunai"
+				icon='YellowFlashKunai.dmi'
+				icon_state="thrown"
+				density=1
+				var/mob/P
+				var/obj/ftgkunai
+				New()
+					..()
+					P=src.Owner
+					ftgkunai=P.ftgkunai
+					pixel_y+=32
+					layer = MOB_LAYER+1
+					spawn(50)
+						if(src)
+							src.density=0
+							walk(src,0)
+							src.icon_state="ground"
+							src.pixel_y=0
+							spawn(80)
+								if(src)
+									ftgkunai.loc=null
+									P.ftgkunai=null
+				Bump(atom/O)
+					if(!src.Hit)
+						if(istype(O,/mob))
+							var/mob/M=O
+							if(M)
+								if(M <> src.Owner)
+									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.fightlayer==src.fightlayer)
+										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										M.DealDamage(src.damage,src.Owner,"NinBlue")
+										M.Bleed()
+										if(M.henge==4||M.henge==5)M.HengeUndo()
+										if(M&&!M.dead)
+											M.ftgmarked=1
+											src.density=0
+											src.icon_state="marked"
+											src.linkfollow(M)
+											src.pixel_y=88
+											spawn(80)
+												if(src)
+													ftgkunai.loc=null
+													P.ftgkunai=null
+										else
+											if(src)
+												src.density=0
+												walk(src,0)
+												src.icon_state="ground"
+												src.pixel_y=0
+												spawn(80)
+													if(src)
+														ftgkunai.loc=null
+														P.ftgkunai=null
+						else
+							if(src)
+								src.density=0
+								walk(src,0)
+								src.icon_state="ground"
+								src.pixel_y=0
+								spawn(80)
+									if(src)
+										ftgkunai.loc=null
+										P.ftgkunai=null
+
 			RTD
 				name="RTD"
 				icon='Shuriken.dmi'
 				icon_state="RTD"
 				density=1
+				var/has_damaged[0]
 				New()
 					..()
 					pixel_y+=32
 					layer = MOB_LAYER+1
-					src.damage = 1
-				//	var/obj/O = new/obj
-				//	O.loc = src.loc
 					spawn(50)if(src)del(src)
 				Bump(atom/O)
 					if(!src.Hit)
@@ -647,19 +712,53 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									var/mob/Owner=src.Owner
+									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.fightlayer==src.fightlayer)
+										src.loc = M.loc
+										if(M in has_damaged) return
+										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										src.layer=MOB_LAYER+1
+										M.DealDamage(src.damage,src.Owner,"NinBlue")
+										M.Bleed()
+										has_damaged += M
+										if(M.henge==4||M.henge==5)M.HengeUndo()
+						else if(src)del(src)
+			DWS
+				name="DWS"
+				icon = 'risingdragonprojectiles.dmi'
+				icon_state="3"
+				density=1
+				New()
+					..()
+					pixel_y+=32
+					layer = MOB_LAYER+1
+					spawn(50)if(src)del(src)
+
+//				var/traveltime=src.level*(30/4)
+				var/hits=0
+				var/mob/target
+				Bump(atom/O)
+					if(!src.Hit)
+						if(istype(O,/mob))
+							var/mob/M=O
+
+							if(M)
+								if(M <> src.Owner)
 									if(M.dead || M.swimming || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
 										src.layer=MOB_LAYER+1
-										if(M)
-											src.loc = M.loc
-											M.DealDamage(src.damage,src,"NinBlue")
-											spawn()if(M)M.Bleed()
-											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
-											Owner.Levelup()
-											if(M.henge==4||M.henge==5)M.HengeUndo()
-											M.Death(Owner)
+										src.loc = M.loc
+										M.DealDamage(src.damage,src.Owner,"NinBlue")
+										M.Bleed()
+										if(M.henge==4||M.henge==5)M.HengeUndo()
+										if(src.target==M) hits++
+								else if(src) del(src)
+						else
+							hits++
+							hits++
+
+
 			BubbleBarrage
 				name="Bubble Barrage"
 				icon='Bubble Barrage.dmi'
@@ -680,10 +779,9 @@ obj
 						src.pixel_y=-16
 						flick("blow",src)
 						src.Hit=1
-						for(var/mob/M in oview(2,src))
-							if(M.dead||!M) continue
-							M.DealDamage(src.damage+(Owner.ninjutsu),src.Owner,"NinBlue")
-							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,2))
+						for(var/mob/M in orange(3,src))
+							if(M.dead || M==Owner) continue
+							M.DealDamage(src.damage,src.Owner,"NinBlue")
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 						spawn(5)if(src)src.loc=locate(0,0,0)
 						spawn(100)if(src)del(src)
@@ -691,7 +789,6 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							var/mob/Owner=src.Owner
 							if(M.dead || M.swimming || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
@@ -704,9 +801,9 @@ obj
 								src.pixel_y=-16
 								flick("blow",src)
 								src.Hit=1
-								M.DealDamage(src.damage/1.3,src.Owner,"NinBlue")
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
-								if(M.henge==4||M.henge==5)M.HengeUndo()
+								for(M in orange(3,src))
+									M.DealDamage(src.damage,src.Owner,"NinBlue")
+									if(M.henge==4||M.henge==5)M.HengeUndo()
 						else src.invisibility=1
 						spawn(5)if(src)src.loc=locate(0,0,0)
 			Puppetknife
@@ -735,9 +832,8 @@ obj
 								src.loc=O.loc
 								src.icon_state = "NUUUUU"
 								src.Hit=1
-								M.DealDamage(50+Owner.ninjutsu*5,src.Owner,"NinBlue")
+								M.DealDamage((jutsudamage+round(((Owner.ninjutsu / 300)+(Owner.precision / 300))*2*jutsudamage))*2,src.Owner,"NinBlue")
 								spawn() M.Bleed()
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(7,10))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 						else src.invisibility=1
 						spawn(5) src.loc=locate(0,0,0)
@@ -749,10 +845,8 @@ obj
 				New()
 					..()
 					layer = MOB_LAYER+1
-					src.damage = 20
 					spawn(50)if(src)del(src)
 				Bump(atom/O)
-					src.damage = 20
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
@@ -765,9 +859,8 @@ obj
 								walk(src,0)
 								src.loc=O.loc
 								src.Hit=1
-								M.DealDamage((150+Owner.ninjutsu)*2.3,src.Owner,"NinBlue")
+								M.DealDamage(src.damage,Owner,"NinBlue")
 								spawn() M.Bleed()
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 						else src.invisibility=1
 						spawn(5) src.loc=locate(0,0,0)
@@ -861,9 +954,8 @@ obj
 									src.layer=MOB_LAYER+1
 									if(M)
 										src.loc = M.loc
-										M.DealDamage(50+src.damage+Owner.ninjutsu*6,src.Owner,"NinBlue")
+										M.DealDamage(src.damage,Owner,"NinBlue")
 										spawn() if(M) M.Bleed()
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
 			Sand_Shuriken
@@ -893,9 +985,8 @@ obj
 									if(M)
 										src.loc = M.loc
 										if(!Owner) return
-										M.DealDamage(2+src.damage+Owner.ninjutsu*0.8,src.Owner,"NinBlue")
+										M.DealDamage(src.damage,src.Owner,"NinBlue")
 										spawn() if(M) M.Bleed()
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(7,9))
 										if(M.henge==4||M.henge==5)M.HengeUndo()
 			Maniper
 				name="Kunai"
@@ -937,7 +1028,6 @@ obj
 					pixel_y=32
 					layer = MOB_LAYER+1
 					spawn(20)
-						var/mob/Owner=src.Owner
 						src.density=0
 						view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
 						src.layer=MOB_LAYER+1
@@ -947,8 +1037,7 @@ obj
 						src.Hit=1
 						for(var/mob/M in oview(2,src))
 							if(M.dead||!M) continue
-							M.DealDamage(src.damage+Owner.ninjutsu*2,src.Owner,"NinBlue")
-							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(8,10))
+							M.DealDamage(src.damage,src.Owner,"NinBlue")
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 						spawn(5)if(src)src.loc=locate(0,0,0)
 						spawn(100)if(src)del(src)
@@ -956,7 +1045,6 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							var/mob/Owner=src.Owner
 							if(M.dead || M.swimming || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
@@ -969,8 +1057,7 @@ obj
 								src.pixel_y=-16
 								flick("blow",src)
 								src.Hit=1
-								M.DealDamage(src.damage+Owner.ninjutsu*2,src.Owner,"NinBlue")
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 						else src.invisibility=1
 						spawn(5)if(src)src.loc=locate(0,0,0)
@@ -983,7 +1070,6 @@ obj
 				New()
 					..()
 					layer = MOB_LAYER+1
-					src.damage = 1
 					spawn(50)if(src)del(src)
 				Bump(atom/O)
 					if(!src.Hit)
@@ -998,10 +1084,12 @@ obj
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
-											M.DealDamage(src.damage,src.Owner,"NinBlue")
+											M.DealDamage(src.damage,Owner,"NinBlue")
 											spawn()if(M)M.Bleed()
-											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(6,10))
 											if(M.henge==4||M.henge==5)M.HengeUndo()
+											walk(src,src.dir,1)
+											spawn(1) src.density=1
+											src.density=0
 			CrystalNeedles
 				name="Crystal Needles"
 				icon='CrystalIcons.dmi'
@@ -1011,7 +1099,6 @@ obj
 				New()
 					..()
 					layer = MOB_LAYER+1
-					src.damage = 1
 					spawn(50)if(src)del(src)
 				Bump(atom/O)
 					if(!src.Hit)
@@ -1026,10 +1113,12 @@ obj
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
-											M.DealDamage(src.damage,src.Owner,"NinBlue")
+											M.DealDamage(src.damage,Owner,"NinBlue")
 											spawn()if(M)M.Bleed()
-											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
 											if(M.henge==4||M.henge==5)M.HengeUndo()
+											walk(src,src.dir,1)
+											spawn(1) src.density=1
+											src.density=0
 			lightningmask
 				icon='KakuzuPuppets.dmi'
 				icon_state="Lightning"
@@ -1080,22 +1169,23 @@ obj
 				//	var/obj/O = new/obj
 				//	O.loc = src.loc
 					spawn(50)if(src)del(src)
+				var/has_damaged[0]
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									var/mob/Owner=src.Owner
 									if(M.dead || M.swimming || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
+											if(M in has_damaged) return
+											view(src)<<sound('knife_hit1.wav',0,0,volume=50)
 											M.DealDamage(src.damage,src.Owner,"NinBlue")
-											spawn()if(M)M.Bleed()
-											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(2,4))
+											has_damaged += M
+											M.Bleed()
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 			Maniper3
 				name="Needle "
@@ -1110,22 +1200,23 @@ obj
 				//	var/obj/O = new/obj
 				//	O.loc = src.loc
 					spawn(50)if(src)del(src)
+				var/has_damaged[0]
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									var/mob/Owner=src.Owner
 									if(M.dead || M.swimming || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
+											if(M in has_damaged)return
+											view(src)<<sound('knife_hit1.wav',0,0,volume=50)
 											M.DealDamage(src.damage,src.Owner,"NinBlue")
-											spawn()if(M)M.Bleed()
-											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,4))
+											has_damaged += M
+											M.Bleed()
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 			Paper_Chakram
 				name="Paper Chakram"
@@ -1155,9 +1246,9 @@ obj
 								src.layer=MOB_LAYER+1
 								src.loc = M.loc
 								if(Owner.inAngel==1)
-									M.DealDamage(src.damage*(Owner.ninjutsu*0.7),src.Owner,"NinBlue")
+									M.DealDamage(src.damage,src.Owner,"NinBlue")
 								else
-									M.DealDamage(src.damage*(Owner.ninjutsu*0.4),src.Owner,"NinBlue")
+									M.DealDamage(src.damage,src.Owner,"NinBlue")
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",0.2)
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 			Bug_Swarm
@@ -1182,7 +1273,7 @@ obj
 								view(src)<<sound('LPunchHIt.ogg',0,0,volume=50)
 								src.layer=MOB_LAYER+1
 								src.loc = M.loc
-								M.DealDamage(2+src.damage+round(Owner.ninjutsu*1),src.Owner,"NinBlue")
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								step(M,src.dir)
 								M.dir = get_dir(M,src)
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
@@ -1209,7 +1300,8 @@ obj
 								view(src)<<sound('LPunchHIt.ogg',0,0,volume=50)
 								src.layer=MOB_LAYER+1
 								src.loc = M.loc
-								M.DealDamage(2+src.damage+(Owner.ninjutsu/10),src.Owner,"NinBlue")
+								if(M!=src.Owner)
+									M.DealDamage(2+src.damage+(Owner.ninjutsu/10),src.Owner,"NinBlue")
 								step(M,src.dir)
 								M.dir = get_dir(M,src)
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
@@ -1248,10 +1340,8 @@ obj
 					..()
 					pixel_y=32
 					layer = MOB_LAYER+1
-					src.damage = src.level*5
 					spawn(50)if(src)del(src)
 				Bump(atom/O)
-					src.damage = src.level*5
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
@@ -1265,7 +1355,6 @@ obj
 								src.loc=O.loc
 								src.Hit=1
 								M.DealDamage(src.damage+(Owner.strength*0.9)+(Owner.ninjutsu*2.5),src.Owner,"NinBlue")
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="push"
 								M.injutsu=1
@@ -1314,10 +1403,9 @@ obj
 						src.pixel_y=-16
 						flick("blow",src)
 						src.Hit=1
-						for(var/mob/M in oview(2,src))
-							if(M.dead||!M) continue
-							M.DealDamage(src.damage+(Owner.ninjutsu/1),src.Owner,"NinBlue")
-							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(6,8))
+						for(var/mob/M in orange(3,src))
+							if(!M||M.dead||M==Owner) continue
+							M.DealDamage(src.damage,src.Owner,"NinBlue")
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 						spawn(5)if(src)src.loc=locate(0,0,0)
 						spawn(100)if(src)del(src)
@@ -1326,7 +1414,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.swimming || M.key == src.name || M==Owner) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
@@ -1338,12 +1426,78 @@ obj
 								src.pixel_y=-16
 								flick("blow",src)
 								src.Hit=1
-								M.DealDamage(src.damage/1.3,src.Owner,"NinBlue")
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 						else src.invisibility=1
 						spawn(5)if(src)src.loc=locate(0,0,0)
 
+			SenjuJinraiHead
+				name="Jinrai"
+				icon='flashy beamy.dmi'
+				icon_state="heady"
+				density=1
+				var/tracker=2
+				var/obj/Projectiles/Effects/JinraiCore/link
+				New()
+					..()
+					spawn()if(icon == 'flashy beamy.dmi')pixel_y=32
+					layer = MOB_LAYER+2
+					spawn(60)
+						for(var/obj/Projectiles/Effects/JinraiCore/K in world)if(K.link == src)del K
+						if(src)del(src)
+				Move()
+					var/K = new/obj/Projectiles/Effects/JinraiCore(src.loc)
+					if(tracker==0)
+						tracker=1
+						K:icon_state = "beamy2"
+					if(tracker==2)
+						K:icon_state= "flashy"
+						tracker=0
+					else tracker=0
+					K:icon = src.icon
+					K:link = src
+					K:dir = src.dir
+					K:pixel_x = src.pixel_x
+					K:pixel_y = src.pixel_y
+					..()
+				Bump(atom/O)
+					if(!src.Hit)
+						spawn(100) for(var/obj/Projectiles/Effects/JinraiCore/K in world) if(K.link == src) K.loc=locate(0,0,0)
+						spawn(100) for(var/obj/Projectiles/Effects/JinraiBack/K in world) if(K.link == src.link) K.loc=locate(0,0,0)
+						spawn(100) for(var/obj/Projectiles/Effects/JinraiCore/K in world) if(K.link == src) del K
+						if(istype(O,/mob))
+							var/mob/M=O
+							var/mob/Owner=src.Owner
+							if(M.dead || M.swimming) return
+							if(M.fightlayer==src.fightlayer)
+								src.icon_state="heady2"
+								src.pixel_x = -16
+								src.pixel_y = 0
+								src.density=0
+								view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+								src.layer=MOB_LAYER+1
+								walk(src,0)
+								src.loc=O.loc
+								flick("[src.hitstate]",src)
+								src.Hit=1
+								M.move=0
+								M.injutsu=1
+								M.firing=1
+								M.canattack=0
+								for(var/i=0, i<(src.level*2), i++)
+									sleep(5)
+									M.DealDamage(src.damage/8,Owner,"NinBlue")
+								if(M.henge==4||M.henge==5)M.HengeUndo()
+								M.move=1
+								M.injutsu=0
+								M.firing=0
+								M.canattack=1
+						src.loc=locate(0,0,0)
+			SenjuJinraiCore
+				name="Jinrai"
+				icon='flashy beamy.dmi'
+				icon_state="beamy"
+				density=1
 			JinraiHead
 				name="Jinrai"
 				icon='flashy beamy.dmi'
@@ -1374,8 +1528,7 @@ obj
 								src.loc=O.loc
 								flick("[src.hitstate]",src)
 								src.Hit=1
-								M.DealDamage(src.damage+(Owner.ninjutsu*1.5),src.Owner,"NinBlue")
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
+								M.DealDamage(src.damage,Owner,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 						src.loc=locate(0,0,0)
 				Move()
@@ -1668,8 +1821,7 @@ obj
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									flick("hit",src)
-									M.DealDamage(src.damage+(Owner.ninjutsu),src.Owner,"NinBlue")
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(7,9))
+									M.DealDamage(src.damage,src.Owner,"NinBlue")
 									if(M.henge==4||M.henge==5)M.HengeUndo()
 									var/obj/Projectiles/Effects/MasterFire/F1 = new(src.loc)
 									F1.loc=src.loc
@@ -1707,7 +1859,6 @@ obj
 							flick("[src.hitstate]",src)
 							src.Hit=1
 							M.DealDamage(src.damage,src.Owner,"NinBlue")
-							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(7,9))
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							var/obj/Projectiles/Effects/MasterFire/F1 = new(src.loc)
 							F1.loc=src.loc
@@ -1735,7 +1886,6 @@ obj
 								flick("[src.hitstate]",src)
 								src.Hit=1
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(7,9))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								var/obj/Projectiles/Effects/MasterFire/F1 = new(src.loc)
 								F1.loc=src.loc
@@ -1917,8 +2067,7 @@ obj
 							src.loc=O.loc
 							flick("[src.hitstate]",src)
 							src.Hit=1
-							M.DealDamage(src.damage+(Owner.ninjutsu*0.3),src.Owner,"NinBlue")
-							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(14,18))
+							M.DealDamage(src.damage,src.Owner,"NinBlue")
 							if(prob(50))
 								M.Linkage=src
 								M.overlays+=/obj/Projectiles/Effects/OnFire
@@ -1945,8 +2094,7 @@ obj
 								src.loc=O.loc
 								flick("fireballhit",src)
 								src.Hit=1
-								M.DealDamage(src.damage+(Owner.ninjutsu*0.3),src.Owner,"NinBlue")
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(7,9))
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								if(prob(50))
 									M.Linkage=src
 									M.overlays+=/obj/Projectiles/Effects/OnFire
@@ -2055,7 +2203,6 @@ obj
 							walk(src,0)
 							src.loc=locate(0,0,0)
 							src.Hit=1
-							if(Owner.loc.loc:Safe!=1)Owner.LevelStat("Ninjutsu",rand(5,7))
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="pull"
@@ -2066,7 +2213,8 @@ obj
 							walk_towards(M,Owner)
 							lol
 							src.loc=locate(0,0,0)
-							spawn(src.damage)
+							M.DealDamage(src.damage,src,"NinBlue")
+							spawn(10+Owner.ninjutsu/8)
 								if(M)
 									if(M.dead==0)
 										M.icon_state=""
@@ -2082,14 +2230,14 @@ obj
 								walk(src,0)
 								src.loc=locate(0,0,0)
 								src.Hit=1
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
 								Owner.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="pull"
 								M.injutsu=1
 								walk_towards(M,Owner)
 								src.loc=locate(0,0,0)
-								spawn(src.damage)
+								M.DealDamage(src.damage,src,"NinBlue")
+								spawn(10+Owner.ninjutsu/8)
 									if(M)
 										if(M.dead==0)
 											M.icon_state=""
@@ -2138,7 +2286,6 @@ obj
 							walk(src,0)
 							src.loc=locate(0,0,0)
 							src.Hit=1
-							if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="push"
@@ -2149,7 +2296,8 @@ obj
 							walk(M,Owner.dir)
 							lol
 							src.loc=locate(0,0,0)
-							spawn(src.damage)
+							M.DealDamage(src.damage,src,"NinBlue")
+							spawn(10+Owner.ninjutsu/8)
 								if(M)
 									if(M.dead==0&&!M.swimming)M.icon_state=""
 									if(M.dead==0)M.injutsu=0
@@ -2169,14 +2317,14 @@ obj
 								walk(src,0)
 								src.loc=locate(0,0,0)
 								src.Hit=1
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
 								Owner.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="push"
 								M.injutsu=1
 								walk(M,Owner.dir)
 								src.loc=locate(0,0,0)
-								spawn(src.damage)
+								M.DealDamage(src.damage,src,"NinBlue")
+								spawn(10+Owner.ninjutsu/8)
 									if(M)
 										if(M.dead==0&&!M.swimming)M.icon_state=""
 										if(M.dead==0)M.injutsu=0
@@ -2394,9 +2542,11 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 			Who.injutsu=1
 			Who.canattack=0
 			NaraTarget=Who
-			while(Timer && Who && src)
+			while(Timer && Who && src && NaraTarget==Who)
 				Timer--
 				NaraTarget=Who
+				if(Who.loc!=E.loc)
+					NaraTarget=null
 				sleep(1)
 			if(E)del(E)
 			if(B)del(B)
@@ -2476,7 +2626,7 @@ obj
 			density=1
 			//var/mob/ownerrr=null
 			New()
-				spawn(40)
+				spawn(80)
 					del(src)
 				..()
 
@@ -2527,7 +2677,7 @@ obj
 		Fortres
 			icon='WoodStyleFortress.dmi'
 			density=1
-			layer=MOB_LAYER+1
+			layer=MOB_LAYER
 			New()
 				spawn(100)
 				del(src)
@@ -2560,13 +2710,13 @@ obj
 			layer=MOB_LAYER+2
 			New()
 				..()
-				world<<src
 				spawn(60)//60
 					if(src) del(src)
 
 			Move()
 				..()
-				new/obj/crystal/explosion(src.loc)
+				var/obj/crystal/explosion/E= new/obj/crystal/explosion(src.loc)
+				E.dir=get_dir(src.Owner,E)
 
 			Bump(atom/O)
 				if(!src.Hit)
@@ -2625,17 +2775,15 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									var/mob/Owner=src.Owner
 									if(M.dead || M.swimming || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 									//	view(src)<<sound('knife_hit1.wav',0,0,volume=60)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
+											src.density=0
 											M.move=0
 											M.injutsu=1
-											M.DealDamage(src.damage*2,src.Owner,"NinBlue")
-											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 											spawn(src.damage)//well
 												M.move=1
@@ -2687,13 +2835,13 @@ mob
 		ringed=0
 mob
 	Bump(M)
-		if(src.inboulder==1)
+		if(src.inboulder==1)//boulderstuff
 			if(istype(M,/mob/))
 				src.density=0
 				step(src,src.dir)
 				step(src,src.dir)
 				src.density=1
-				M:DealDamage(src.strength*0.5,src,"TaiOrange")
+				M:DealDamage(round((src.ninjutsu / 300)+(src.strength / 300)*2*300)/6,src,"TaiOrange")
 		else
 			..()
 

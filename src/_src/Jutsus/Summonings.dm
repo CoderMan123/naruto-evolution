@@ -29,7 +29,7 @@ mob
 							sleep(4)
 						sleep(1)
 				Strike(mob/A)
-					A.DealDamage((lowner.strength+lowner.ninjutsu+lowner.genjutsu)/5,src.lowner,"cyan")
+					A.DealDamage((jutsudamage+round((lowner.ninjutsu / 150)*2*jutsudamage))/4,src.lowner,"cyan")
 					if(A) A.UpdateHMB()
 		DogSummoning
 			icon='Pein Summoning.dmi'
@@ -74,13 +74,13 @@ mob
 			Bump(mob/M)
 				if(src.hited==1) return
 				if(istype(M,/mob/White_Zettsu/))
-					M.DealDamage(OWNER.strength+OWNER.ninjutsu*1.6,src.OWNER,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu / 300)+(OWNER.precision / 300))*2*jutsudamage))/3,src.OWNER,"NinBlue")
 					//if(M.health >= 0) M.Death()
 					//M.Death(src)
 
 				if(istype(M,/mob/))
 					flick("punch",src)
-					M.DealDamage(OWNER.strength+OWNER.ninjutsu*0.8,src.OWNER,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu / 300)+(OWNER.precision / 300))*2*jutsudamage))/3,src.OWNER,"NinBlue")
 					//if(M.health >= 0) M.Death()
 					//M.Death(src)
 
@@ -104,6 +104,7 @@ mob
 			Names="Huge Spider"
 			health=1200
 			maxhealth=1200
+			strength=0
 			var/hited=0
 			pixel_y=-40
 			pixel_x=-40
@@ -111,11 +112,11 @@ mob
 			Bump(mob/M)
 				if(src.hited==1) return
 				if(istype(M,/mob/White_Zettsu/))
-					M.DealDamage(OWNER.strength*1.2,src.OWNER,"TaiOrange")
+					M.DealDamage(src.strength,src.OWNER,"TaiOrange")
 
 				if(istype(M,/mob/))
 					//flick("punch",src)
-					M.DealDamage(OWNER.strength+OWNER.ninjutsu*0.6,src.OWNER,"TaiOrange")
+					M.DealDamage(src.strength,src.OWNER,"TaiOrange")
 					src.hited=1
 					sleep(7)
 					src.hited=0

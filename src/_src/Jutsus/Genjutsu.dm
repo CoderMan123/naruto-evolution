@@ -106,6 +106,7 @@ mob
 			var/TrapTimes=2
 			icon='Insect clone.dmi'
 			New()
+				flick("form",src)
 				..()
 				spawn(1)
 					BAi()
@@ -130,10 +131,7 @@ mob
 							step(src,pick(NORTH,SOUTH,WEST,EAST,NORTHWEST,NORTHEAST,SOUTHWEST,SOUTHEAST))
 							if(prob(50))
 								step_rand(src)
-							var/k = src.overlays
-							src.overlays=null
-							flick("form",src)
-							spawn(3) src.overlays = k
+
 			proc/Imprison()
 				while(src)
 					sleep(4)
@@ -154,6 +152,7 @@ mob
 											if(M <> Owner)
 												if(src)
 													src.Attack()
+													sleep(2)
 			proc/Attack()
 				if(src.canattack==1)
 					var/mob/Owner=src.Owner
@@ -177,7 +176,7 @@ mob
 									if(c_target.dead==0&&c_target!=Owner)
 										if(c_target.fightlayer==src.fightlayer)
 											if(c_target.dodge==0)
-												var/undefendedhit=round(src.strength-c_target.defence/4)
+												var/undefendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/4)+rand(0,10)
 												if(undefendedhit<0)
 													undefendedhit=0
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
@@ -188,7 +187,7 @@ mob
 													view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 											else
 												if(src.agility>=c_target.agility)
-													var/defendedhit=src.strength-c_target.defence
+													var/defendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/2)+rand(0,10)
 													if(defendedhit<0)
 														defendedhit=0
 												//	if(Owner.loc.loc:Safe!=1) Owner.strength++
@@ -214,7 +213,7 @@ mob
 									if(c_target.dead==0&&c_target!=Owner)
 										if(c_target.fightlayer==src.fightlayer)
 											if(c_target.dodge==0)
-												var/undefendedhit=round(src.strength-c_target.defence/4)
+												var/undefendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/4)+rand(0,10)
 												if(undefendedhit<0)undefendedhit=0
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
 											//	if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
@@ -223,7 +222,7 @@ mob
 												if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 											else
 												if(src.agility>=c_target.agility)
-													var/defendedhit=src.strength-c_target.defence
+													var/defendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/2)+rand(0,10)
 													if(defendedhit<0)
 														defendedhit=0
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,5))
@@ -774,7 +773,7 @@ obj
 							if(M)
 								src.loc = M.loc
 								if(!Owner) return
-								M.DealDamage(12+src.damage+Owner.ninjutsu*6.5,src.Owner,"NinBlue")
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								spawn() if(M) M.Bleed()
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
 								if(M.henge==4||M.henge==5)M.HengeUndo()

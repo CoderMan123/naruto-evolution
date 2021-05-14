@@ -4,6 +4,11 @@ mob
 			for(var/obj/Jutsus/C2/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
+					if(J.level==1) J.damage=5
+					if(J.level==2) J.damage=8
+					if(J.level==3) J.damage=14
+					if(J.level==4) J.damage=20
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
 					var/mob/M = new/mob/Untargettable/C2(src)
 					M.loc = get_step(src,NORTH)
 					M.name = src.key
@@ -12,16 +17,16 @@ mob
 			for(var/obj/Jutsus/C1_Spiders/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
 					view(src)<<sound('dash.wav',0,0)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=5
-					if(J.level==2) J.damage=8
-					if(J.level==3) J.damage=14
-					if(J.level==4) J.damage=20
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/num=J.level+(round(src.ninjutsu/20))
 					if(c_target)
 						while(num)
@@ -39,7 +44,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/1.2+src.strength/4)
+							A.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))/8
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir,5)
 					else
@@ -58,9 +63,9 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/1.2+src.strength/4)
-							walk_away(A,src)
-							spawn(4)if(A)walk(A,A.dir,5)
+							A.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))/2
+							sleep(1)
+							walk_rand(A,2)
 					spawn(5)
 						src.firing=0
 						src.canattack=1
@@ -69,16 +74,16 @@ mob
 			for(var/obj/Jutsus/C1_Birds/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
 					view(src)<<sound('dash.wav',0,0)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=2
-					if(J.level==2) J.damage=4
-					if(J.level==3) J.damage=6
-					if(J.level==4) J.damage=8
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/num=J.level+(round(src.ninjutsu/13))
 					if(c_target)
 						while(num)
@@ -95,7 +100,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu*0.8+src.strength/4)
+							A.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))/10
 							if(c_target) walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 					else
@@ -113,7 +118,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu*0.9+src.strength/4)
+							A.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))/8
 							walk(A,src.dir)
 					spawn(5)
 						src.firing=0
@@ -123,17 +128,22 @@ mob
 				if(!src.C3bombz)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe != 1)
-							src.LevelStat("Ninjutsu", rand(7, 11))
+							src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
+						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
+						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 						view(src) << sound('Skill_MashHit.wav', 0, 0)
 						if(J.level < 4)
 							if(loc.loc:Safe != 1)
-								J.exp += rand(5, 15)
+								J.exp+=(jutsumastery/50)*(J.maxcooltime/20)
 								J.Levelup()
 						src << output("<b>Now to detonate use the defend verb (D).", "Action.Output")
 						var/obj/O = new/obj/C3bomb(src)//	var/obj/C3bomb/O = new(src)
 						O.level = J.level
 						O.Owner=src
 						src.C3bombz = O
+						O.damage =(J.damage+round((src.ninjutsu / 150)*2*J.damage))*0.8
 /*
 		C3()
 			if(src.firing==0 && src.canattack==1)
@@ -163,21 +173,21 @@ mob
 			if(src.firing==0 && src.canattack==1)
 				for(var/obj/Jutsus/C1Snake/J in src.jutsus)
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						src.firing=1
 						src.canattack=0
-						if(J.level==1) J.damage=40
-						if(J.level==2) J.damage=80
-						if(J.level==3) J.damage=120
-						if(J.level==4) J.damage=130
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
+						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
+						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
+						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsuse",src)
 						if(c_target)
 							var/obj/Projectiles/Effects/SnakeC1/A = new/obj/Projectiles/Effects/SnakeC1(src.loc)
 							A.Owner=src
 							A.dir=src.dir
-							A.damage=J.damage+round(src.ninjutsu*1.5)
+							A.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))*0.9
 							A.layer=src.layer
 							walk_towards(A,c_target.loc)
 							spawn(50)
@@ -187,7 +197,7 @@ mob
 							A.Owner=src
 							A.dir=src.dir
 							A.layer=src.layer
-							A.damage=J.damage+round(src.ninjutsu*6)
+							A.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))*0.9
 							walk(A,A.dir)
 							spawn(50)
 								del(A)

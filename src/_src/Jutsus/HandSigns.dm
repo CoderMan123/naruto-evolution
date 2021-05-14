@@ -68,7 +68,7 @@ obj
 	var/starterjutsu=0
 	var/sharin=0
 	Jutsus
-		var/ChakraCost
+		var/tmp/ChakraCost
 		var/Clan
 		var/Element
 		var/Element2
@@ -90,7 +90,7 @@ obj
 					usr.doslot(src.name)
 				else
 					if(!IsGate)
-						usr << output("<Font color=red>You need to use [src.name] [80-src.uses] more times([src.uses]).</Font>","Action.Output")
+						usr << output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","ActionPanel.Output")
 					else
 						usr << output("You may not put this technique on a hotslot.","Action.Output")
 			else
@@ -161,14 +161,14 @@ obj
 								return
 							usr.skillpoints -= src.Sprice
 							if(src.IsGate)
-								if(!typesof(/obj/Jutsus/EightGates) in usr.jutsus_learned)
-									var/obj/Jutsus/jutsu = new /obj/Jutsus/EightGates()
-									usr.jutsus += jutsu
-									usr.jutsus_learned += jutsu.type
-									usr.sbought += jutsu.name
-								for(var/obj/Jutsus/EightGates/jutsu in usr.jutsus)
-									jutsu.level ++
-							if(src.name == "Dust Particle" ||src.name == "Spider" || src.name == "Deidara" || src.name == "Puppeteer" || src.name == "Sand" || src.name == "Paper Control" || src.name == "Jashin Religion" || src.name == "Kakuzu"||src.name == "Ice"||src.name=="Opening Gate"||src.name=="Rinnegan"||src.name=="Sharingan Copy")
+								if(!usr.jutsus.Find(/obj/Jutsus/EightGates))
+									var/obj/J = new /obj/Jutsus/EightGates(null)
+									usr.jutsus.Add(J)
+									usr.jutsus_learned.Add(J.type)
+									usr.sbought.Add(J.name)
+								for(var/obj/Jutsus/EightGates/J in usr.jutsus)
+									J.level ++
+							if(src.name == "Dust Particle" ||src.name == "Spider" || src.name == "Deidara" || src.name == "Puppeteer" || src.name == "Sand" || src.name == "Paper Control" || src.name == "Jashin Religion" || src.name == "Kakuzu"||src.name == "Ice"||src.name=="Opening Gate"||src.name=="Rinnegan"||src.name=="Sharingan Copy" ||src.name == "Sage Mode"||src.name == "Flying Thunder God: Kunai")
 								usr.sbought+=src.name
 								if(src.name == "Sand")usr.Clan = "Sand"
 								if(src.name == "Deidara")usr.Clan = "Deidara"
@@ -194,6 +194,18 @@ obj
 									jutsu.owner=usr.ckey
 								if(src.name == "Sharingan Copy")
 									usr.Clan = "Implanted"
+									var/obj/Jutsus/jutsu=new src.type
+									usr.jutsus += jutsu
+									usr.jutsus_learned += jutsu.type
+									jutsu.owner=usr.ckey
+								if(src.name == "Sage Mode")
+									usr.Clan = "SnakeSage"
+									var/obj/Jutsus/jutsu=new src.type
+									usr.jutsus += jutsu
+									usr.jutsus_learned += jutsu.type
+									jutsu.owner=usr.ckey
+								if(src.name == "Flying Thunder God: Kunai")
+									usr.Clan = "Yellow Flash"
 									var/obj/Jutsus/jutsu=new src.type
 									usr.jutsus += jutsu
 									usr.jutsus_learned += jutsu.type
@@ -315,7 +327,7 @@ obj
 			if(src.IsGate)
 				usr << output("You may not put this technique on a hotslot.","Action.Output")
 				return
-			if(src.uses>=80)
+			if(src.uses>=((80-round(src.maxcooltime/15))*jutsumastery))
 				if(istype(H,/obj/HotSlots/HotSlot1))
 					var/obj/h=H
 					h.overlays=0
@@ -387,7 +399,7 @@ obj
 					usr.hotslot10=src.name
 					h.HotSlotNumber("F10")
 			else
-				usr<<output("<Font color=red>You need to use [src.name] [80-src.uses] more times([src.uses]).</Font>","Action.Output")
+				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","ActionPanel.Output")
 
 
 
@@ -841,6 +853,11 @@ mob
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Bone_Tip()
+				if(usr.first=="rat"&&usr.second=="dog"&&usr.third=="ox"&&usr.fourth=="ox"&&usr.rat==1&&usr.dog==1&&usr.ox==2&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
+					var/obj/Jutsus/Young_Bracken_Dance/J=new/obj/Jutsus/Young_Bracken_Dance
+					if(J.type in usr.jutsus)
+						if(genintesters.Find(src)) SealsDoneGenin++
+						usr.Young_Bracken_Dance()
 				if(usr.first=="ox"&&usr.second=="ox"&&usr.third=="rat"&&usr.rat==1&&usr.dog==0&&usr.ox==2&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/Bone_Tip/J=new/obj/Jutsus/Bone_Sensation
 					if(J.type in usr.jutsus_learned)
@@ -861,6 +878,16 @@ mob
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Flying_Thunder_God()
+				if(usr.first=="dog"&&usr.second=="rat"&&usr.third=="rabbit"&&usr.rat==1&&usr.dog==1&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==1)
+					var/obj/Jutsus/Flying_Thunder_God_Kunai/J=new/obj/Jutsus/Flying_Thunder_God_Kunai
+					if(J.type in usr.jutsus)
+						if(genintesters.Find(src)) SealsDoneGenin++
+						usr.Flying_Thunder_God_Kunai()
+				if(usr.first=="rabbit"&&usr.second=="dog"&&usr.third=="dog"&&usr.rat==0&&usr.dog==2&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==1)
+					var/obj/Jutsus/Flying_Thunder_God_Great_Escape/J=new/obj/Jutsus/Flying_Thunder_God_Great_Escape
+					if(J.type in usr.jutsus)
+						if(genintesters.Find(src)) SealsDoneGenin++
+						usr.Flying_Thunder_God_Great_Escape()
 				if(usr.first=="rabbit"&&usr.second=="rabbit"&&usr.third=="monkey"&&usr.fourth=="monkey"&&usr.rat==0&&usr.dog==0&&usr.ox==0&&usr.dragon==0&&usr.monkey==2&&usr.snake==0&&usr.horse==0&&usr.rabbit==2)
 					var/obj/Jutsus/LimbParalyzeSeal/J=new/obj/Jutsus/LimbParalyzeSeal
 					if(J.type in usr.jutsus_learned)
@@ -896,11 +923,11 @@ mob
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Demon_Wind_Shuriken()
-				if(usr.first=="dragon"&&usr.second=="horse"&&usr.third=="dragon"&&usr.fourth=="horse"&&usr.rat==0&&usr.dog==0&&usr.ox==0&&usr.dragon==2&&usr.monkey==0&&usr.snake==0&&usr.horse==2&&usr.rabbit==0)
-					var/obj/Jutsus/Multiple_Chakra_Kunai/J=new/obj/Jutsus/Multiple_Chakra_Kunai
+				if(usr.first=="dragon"&&usr.second=="horse"&&usr.third=="dragon"&&usr.fourth=="horse"&&usr.fifth=="rabbit"&&usr.rat==0&&usr.dog==0&&usr.ox==0&&usr.dragon==2&&usr.monkey==0&&usr.snake==0&&usr.horse==2&&usr.rabbit==1)
+					var/obj/Jutsus/Blade_Hurricane/J=new/obj/Jutsus/Blade_Hurricane
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
-						usr.Multiple_Chakra_Kunai()
+						usr.Blade_Hurricane()
 				if(usr.first=="rabbit"&&usr.second=="horse"&&usr.third=="monkey"&&usr.fourth=="dragon"&&usr.rat==0&&usr.dog==0&&usr.ox==0&&usr.dragon==1&&usr.monkey==1&&usr.snake==0&&usr.horse==1&&usr.rabbit==1)
 					var/obj/Jutsus/Snake_Rustle_Jutsu/J=new/obj/Jutsus/Snake_Rustle_Jutsu
 					if(J.type in usr.jutsus_learned)
@@ -927,10 +954,10 @@ mob
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Wind_Dragon_Projectile()
 				if(usr.first=="monkey"&&usr.second=="snake"&&usr.third=="ox"&&usr.fourth=="monkey"&&usr.rat==0&&usr.dog==0&&usr.ox==1&&usr.dragon==0&&usr.monkey==2&&usr.snake==1&&usr.horse==0&&usr.rabbit==0)
-					var/obj/Jutsus/Shadow_Punch/J=new/obj/Jutsus/Shadow_Punch
+					var/obj/Jutsus/Shadow_Field/J=new/obj/Jutsus/Shadow_Field
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
-						usr.Shadow_Punch()
+						usr.Shadow_Field()
 				if(usr.first=="ox"&&usr.second=="rat"&&usr.third=="rat"&&usr.rat==2&&usr.dog==0&&usr.ox==1&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/Crow_Substitution/J=new/obj/Jutsus/Crow_Substitution
 					if(J.type in usr.jutsus_learned)
@@ -951,6 +978,11 @@ mob
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.BubbleSpreader()
+				if(usr.first=="dog"&&usr.second=="dog"&&usr.third=="dog"&&usr.fourth=="dog"&&usr.rat==0&&usr.dog==4&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
+					var/obj/Jutsus/Bubble_Shield/J=new/obj/Jutsus/Bubble_Spreader
+					if(J.type in usr.jutsus)
+						if(genintesters.Find(src)) SealsDoneGenin++
+						usr.Bubble_Shield()
 				if(usr.first=="rabbit"&&usr.second=="dragon"&&usr.third=="dog"&&usr.fourth=="rabbit"&&usr.fifth=="dragon"&&usr.sixth=="dog"&&usr.rat==0&&usr.dog==2&&usr.ox==0&&usr.dragon==2&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==2)
 					var/obj/Jutsus/Ink_Lions/J=new/obj/Jutsus/Ink_Lions
 					if(J.type in usr.jutsus_learned)
@@ -967,7 +999,7 @@ mob
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.MudWall()
 				if(usr.first=="dragon"&&usr.second=="horse"&&usr.third=="dragon"&&usr.fourth=="horse"&&usr.rat==0&&usr.dog==0&&usr.ox==0&&usr.dragon==2&&usr.monkey==0&&usr.snake==0&&usr.horse==2&&usr.rabbit==0)
-					var/obj/Jutsus/Weapon_Manipulation_Jutsu/J=new/obj/Jutsus/Blade_Manipulation_Jutsu
+					var/obj/Jutsus/Weapon_Manipulation_Jutsu/J=new/obj/Jutsus/Weapon_Manipulation_Jutsu
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Weapon_Manipulation_Jutsu()
@@ -1026,11 +1058,11 @@ mob
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Chidori_Nagashi()
-				if(usr.first=="rat"&&usr.second=="rat"&&usr.third=="rat"&&usr.rat==3&&usr.dog==0&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
-					var/obj/Jutsus/Rising_Twin_Dragon/J=new/obj/Jutsus/Rising_Twin_Dragon
+				if(usr.first=="dragon"&&usr.second=="horse"&&usr.third=="dragon"&&usr.fourth=="horse"&&usr.fifth=="snake"&&usr.rat==0&&usr.dog==0&&usr.ox==0&&usr.dragon==2&&usr.monkey==0&&usr.snake==1&&usr.horse==2&&usr.rabbit==0)
+					var/obj/Jutsus/Rising_Dragon/J=new/obj/Jutsus/Rising_Dragon
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
-						usr.Rising_Twin_Dragons()
+						usr.Rising_Dragon()
 				if(usr.first=="dog"&&usr.second=="dog"&&usr.third=="ox"&&usr.fourth=="rabbit"&&usr.rat==0&&usr.dog==2&&usr.ox==1&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==1)
 					var/obj/Jutsus/Dango/J=new/obj/Jutsus/Dango
 					if(J.type in usr.jutsus_learned)
@@ -1055,10 +1087,6 @@ mob
 					var/obj/Jutsus/Doryuusou/J=new/obj/Jutsus/Doryuusou
 					if(J.type in usr.jutsus_learned)
 						usr.Doryuusou()
-				if(usr.first=="snake"&&usr.second=="snake"&&usr.third=="rabbit"&&usr.fourth=="rat"&&usr.fifth=="rabbit"&&usr.rat==1&&usr.dog==0&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==2&&usr.horse==0&&usr.rabbit==2)
-					var/obj/Jutsus/JukaiKoutan/J=new/obj/Jutsus/JukaiKoutan
-					if(J.type in usr.jutsus_learned)
-						usr.JukaiKoutan()
 				if(usr.first=="rat"&&usr.second=="rat"&&usr.third=="snake"&&usr.fourth=="rabbit"&&usr.rat==2&&usr.dog==0&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==1&&usr.horse==0&&usr.rabbit==1)
 					var/obj/Jutsus/JubakuEisou/J=new/obj/Jutsus/JubakuEisou
 					if(J.type in usr.jutsus_learned)
@@ -1077,6 +1105,11 @@ mob
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Iceball()
+				if(usr.first=="dog"&&usr.second=="dog"&&usr.third=="rabbit"&&usr.rat==0&&usr.dog==2&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==1)
+					var/obj/Jutsus/Ice_Explosion/J=new/obj/Jutsus/Ice_Explosion
+					if(J.type in usr.jutsus)
+						if(genintesters.Find(src)) SealsDoneGenin++
+						usr.Ice_Explosion()
 				if(usr.first=="dog"&&usr.second=="dog"&&usr.third=="dog"&&usr.fourth=="ox"&&usr.rat==0&&usr.dog==3&&usr.ox==1&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/WoodStyleFortress/J=new/obj/Jutsus/WoodStyleFortress
 					if(J.type in usr.jutsus_learned)
@@ -1194,6 +1227,12 @@ mob
 					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Summoning_Snake()
+						//dogsum
+				if(usr.first=="rat"&&usr.second=="horse"&&usr.third=="rat"&&usr.fourth=="dog"&&usr.fifth=="dog"&&usr.rat==2&&usr.dog==2&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==1&&usr.rabbit==0)
+					var/obj/Jutsus/Dog_Summoning/J=new/obj/Jutsus/Dog_Summoning
+					if(J.type in usr.jutsus)
+						if(genintesters.Find(src)) SealsDoneGenin++
+						usr.Summoning_Dog()
 						//angelwing
 				if(usr.first=="rat"&&usr.second=="ox"&&usr.third=="ox"&&usr.fourth=="rat"&&usr.rat==2&&usr.dog==0&&usr.ox==2&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/Angel_Wings/J=new/obj/Jutsus/Angel_Wings

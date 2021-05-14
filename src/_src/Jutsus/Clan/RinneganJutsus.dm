@@ -3,7 +3,7 @@ mob
 		Gedo_Revival()
 			for(var/obj/Jutsus/Gedo_Revival/J in src.jutsus) if(J.Excluded==0)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					src.move=0
 					src.canattack=0
 					src.injutsu=1
@@ -50,7 +50,7 @@ mob
 					return
 				if(!src.Rinnegan)
 					if(src.PreJutsu(J))
-						//if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						src << output("<font color=#C0C0C0><b>You activate your Rinnegan.","Action.Output")
 						world<<output("<font color=#C0C0C0><b>[src] activated their Rinnegan!","Action.Output")
 						src.Rinnegan=1
@@ -79,23 +79,23 @@ mob
 			for(var/obj/Jutsus/Induction/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,7))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
 					view(src)<<sound('wind_leaves.ogg',0,0)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=5
-					if(J.level==2) J.damage=10
-					if(J.level==3) J.damage=15
-					if(J.level==4) J.damage=15
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(7,9); J.Levelup()
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/4
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/4
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(c_target)
 						src.dir=get_dir(src,c_target)
 						var/obj/Projectiles/Pull/A = new/obj/Projectiles/Pull(src.loc)
 						A.IsJutsuEffect=src
 						A.Owner=src
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage
+						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.level=J.level
 						walk_towards(A,c_target.loc,0)
 						A.pixel_y+=rand(10,15)
@@ -105,7 +105,7 @@ mob
 						A.IsJutsuEffect=src
 						A.Owner=src
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage
+						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)
 						A.pixel_y+=rand(10,15)
@@ -117,23 +117,23 @@ mob
 			for(var/obj/Jutsus/Repulsion/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,7))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
 					view(src)<<sound('wind_leaves.ogg',0,0)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=5
-					if(J.level==2) J.damage=10
-					if(J.level==3) J.damage=15
-					if(J.level==4) J.damage=15
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(7,9); J.Levelup()
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/4
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/4
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(c_target)
 						src.dir=get_dir(src,c_target)
 						var/obj/Projectiles/Push/A = new/obj/Projectiles/Push(src.loc)
 						A.IsJutsuEffect=src
 						A.Owner=src
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage
+						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.level=J.level
 						walk_towards(A,c_target.loc,0)
 						A.pixel_y+=rand(10,15)
@@ -143,30 +143,30 @@ mob
 						A.IsJutsuEffect=src
 						A.Owner=src
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage
+						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)
 						A.pixel_y+=rand(10,15)
 					spawn(5)if(src)
 						src.firing=0
 						src.canattack=1
-		Summoning_Snake()
+		Summoning_Dog()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Snake_Summoning/J in src.jutsus)
+				for(var/obj/Jutsus/Dog_Summoning/J in src.jutsus)
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(9,11))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
 						SMOKE.loc=usr.loc
 						view(usr)<<sound('flashbang_explode2.wav',0,0)
-						var/mob/summonings/SnakeSummoning/B = new/mob/summonings/SnakeSummoning(usr.loc)
-						B.loc=usr.loc
-						B.lowner=src
+						var/mob/summonings/DogSummoning/D = new/mob/summonings/DogSummoning(usr.loc)
+						D.loc=usr.loc
+						D.lowner=src
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(c_target)
-							walk_to(B,c_target)
+							walk_to(D,c_target)
 						spawn(100)
-							del(B)
+							del(D)
 
 		AlmightyPush()
 			for(var/obj/Jutsus/Almighty_Push/J in src.jutsus)
@@ -184,12 +184,13 @@ mob
 					A.Owner=src
 					A.layer=src.layer
 					sleep(1)
-					if(A.level==1) A.damage=100
-					if(A.level==2) A.damage=200
-					if(A.level==3) A.damage=300
-					if(A.level==4) A.damage=500
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(20,30); J.Levelup()
-					var/Jdamage=A.damage+round(src.ninjutsu*10)
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level==1) A.damage=((jutsudamage*J.Sprice)/2.5)/2
+					if(J.level==2) A.damage=((jutsudamage*J.Sprice)/2)/2
+					if(J.level==3) A.damage=((jutsudamage*J.Sprice)/1.5)/2
+					if(J.level==4) A.damage=(jutsudamage*J.Sprice)/2
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					var/Jdamage=A.damage+round((src.ninjutsu / 150)*2*A.damage)
 					for(var/atom/S in orange(src,A.level+4))
 						if(istype(S,/mob/))
 							var/mob/M=S
@@ -224,8 +225,8 @@ mob
 		Chakra_Leech()
 			for(var/obj/Jutsus/Chakra_Leech/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,10))//Might be too high.
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					src.icon_state = "punchrS"
 					src.move=0
 					src.injutsu=1

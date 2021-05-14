@@ -1,31 +1,7 @@
 mob
 	proc
-		JukaiKoutan()
-			for(var/obj/Jutsus/JukaiKoutan/J in src.jutsus)
-				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",0.2)
-					flick("groundjutsu",src)
-					src.firing=1
-					src.canattack=0
-					spawn(1)
-						src.firing=0
-						src.canattack=1
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(4,6); J.Levelup()
-					for(var/turf/T in view(src,5))
-						if(T)
-							var/obj/A = new/obj/Jukai
-							A.IsJutsuEffect=src
-							A.Owner=src
-							A.layer=src.layer
-							A.fightlayer=src.fightlayer
-							A.damage=J.damage
-							A.level=J.level
-							A.loc=T
-							flick("create",A)
-							for(var/mob/M in T)
-								if(M!=src)
-									M.DealDamage(12+J.damage+ninjutsu/15,src,"NinBlue")
-									spawn() if(M) M.Bleed()
+//		JukaiKoutan()
+//			for(var/obj/Jutsus/JukaiKoutan/J in src.jutsus)//leaving this here incase I want to use it later
 
 		JubakuEisou()
 			for(var/obj/Jutsus/JubakuEisou/J in src.jutsus)
@@ -98,99 +74,57 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(3,7); J.Levelup()
 		Tree_Summoning()
 			for(var/obj/Jutsus/Tree_Summoning/J in src.jutsus)
+				var/mob/c_target=src.Target_Get(TARGET_MOB)
+				if(!c_target)
+					src << output("This jutsu requires a target","Action.Output")
+					return
 				if(src.PreJutsu(J))
-					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-					view(src) << output("<b><font color = brown>[usr] says: Tree Summoning!","Action.Output")
-					flick("jutsuse",src)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					flick("groundjutsu",src)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1)J.damage=3
-					if(J.level==2)J.damage=6
-					if(J.level==3)J.damage=9
-					if(J.level==4)J.damage=12
-					if(J.level<4)if(loc.loc:Safe!=1)J.exp+=rand(3,6); J.Levelup()
-					if(c_target)
-						flick("groundjutsu",src)
-						sleep(4)
-						src.icon_state="groundjutsuse"
-						src.move=0
-						spawn(3)if(src)
-							src.firing=0
-							src.canattack=1
-							src.move=1
-						if(c_target)
-							src.dir=get_dir(src,c_target)
-							var/obj/A = new(c_target.loc)
-							A.IsJutsuEffect=src
-							A.Owner=src
-							A.density=1
-							A.layer=MOB_LAYER+1
-							var/I=J.damage*7
-							A.icon='Treee Summoning.dmi'
-							A.icon_state="stay"
-							A.pixel_x=-48
-							A.pixel_y=-16
-							flick("create",A)
-							I = I+round(src.ninjutsu/16)
-							var/oldhealth=c_target.health
-							var/I2=1
-							while(I)
-								I--
-								I2+=1
-								sleep(1)
-								for(var/mob/F in A.loc)
-									F.health=oldhealth
-									F.move=0
-									F.injutsu=1
-									F.canattack=0
-									if(src)Prisoner=F
-									spawn(2)
-										if(F)
-											F.move=1
-											F.injutsu=0
-											F.canattack=1
-									if(I2==8)
-										I2=0
-										if(F)
-											F.DealDamage(J.damage,src,"NinBlue")
-											oldhealth=(oldhealth-J.damage)
-											F.health=oldhealth
-								sleep(1)
-							if(src)
-								flick("delete",A)
-								sleep(4)
-								del(A)
-							if(c_target)
-								c_target.move=1
-								c_target.injutsu=0
-								c_target.canattack=1
-							if(src)
-								Prisoner=null
-								src.icon_state=""
-					else src<<output("This technique requires a target.","Action.Output")
-					if(src)
+					spawn(1)
 						src.firing=0
 						src.canattack=1
-						src.move=1
-						src.injutsu=0
+					if(J.level==1) J.damage=0.5*((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=0.5*((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=0.5*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=0.5*(jutsudamage*J.Sprice)
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					for(var/turf/T in view(c_target,5))
+						if(T)
+							if(prob(15))
+								var/obj/Ground/Trees/MTree1/B2/A=new(c_target.loc)
+								spawn(100) del A
+								A.layer=MOB_LAYER
+								A.IsJutsuEffect=src
+								A.Owner=src
+								A.layer=src.layer
+								A.fightlayer=src.fightlayer
+								A.damage=J.damage
+								A.level=J.level
+								A.loc=T
+								flick("create",A)
+								for(var/mob/M in T)
+									if(M!=src)
+										M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
+										spawn() if(M) M.Bleed()
 		WoodStyleFortress()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
 				for(var/obj/Jutsus/WoodStyleFortress/J in src.jutsus)
 					if(src.PreJutsu(J))
 						flick("groundjutsu",src)
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						view(src)<<sound('Skill_MashHit.wav',0,0)
 						src.move=0
 						src.firing=1
 						src.canattack=0
-						if(J.level==1) J.damage=4
-						if(J.level==2) J.damage=8
-						if(J.level==3) J.damage=12
-						if(J.level==4) J.damage=16
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
+						if(J.level==1) J.damage=2
+						if(J.level==2) J.damage=4
+						if(J.level==3) J.damage=6
+						if(J.level==4) J.damage=8
+						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						new/obj/WoodStyle/Fortres(locate(src.x-1,src.y-1,src.z))
 						new/obj/WoodStyle/Fortres(locate(src.x,src.y-1,src.z))
 						new/obj/WoodStyle/Fortres(locate(src.x+1,src.y-1,src.z))
@@ -210,62 +144,61 @@ mob
 			if(src.firing==0 && src.canattack==1)
 				for(var/obj/Jutsus/Root_Strangle/J in src.jutsus)
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(!c_target)
-						src << output("This jutsu requires a target.","Action.Output")
-						return
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
-						src.move=0
-						src.injutsu=1
-						src.firing=1
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+						if(J.level==1) J.damage=0.8*((jutsudamage*J.Sprice)/2.5)
+						if(J.level==2) J.damage=0.8*((jutsudamage*J.Sprice)/2)
+						if(J.level==3) J.damage=0.8*((jutsudamage*J.Sprice)/1.5)
+						if(J.level==4) J.damage=0.8*(jutsudamage*J.Sprice)
+						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+						flick("jutsuse",src)
 						src.canattack=0
-						flick("groundjutsu",src)
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
-						var/obj/senjuu/Strangle1/s=new/obj/senjuu/Strangle1(c_target.loc)
-						var/turf/lol=c_target.loc
-						spawn(3)
-						src.copy=null
-						src.move=1
+						src.move=0
+						src.firing=1
+						flick("punchr",src)
+						sleep(3)
+						src.icon_state="punchrS"
+						view()<<sound('fire.wav')
+						if(c_target)src.dir=get_dir(src,c_target)
+						var/obj/Projectiles/Effects/SenjuJinraiHead/A=new(get_step(src,src.dir))
+						A.icon = 'WoodDril.dmi'
+						A.dir = src.dir
+						A.Owner=src
+						A.pixel_y=-2
+						A.pixel_x=-24
+						A.layer=src.layer+2
+						A.fightlayer=src.fightlayer
+						A.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))
+						A.level=J.level
+						walk(A,dir,0)
 						src.firing=0
-						src.copy=null
 						src.canattack=1
-						src.injutsu=0
-						if(c_target.loc==lol)
-							c_target.move=0
-							c_target.injutsu=1
-							c_target.firing=1
-							c_target.canattack=0
-							c_target.DealDamage(src.ninjutsu*J.level,src,"NinBlue")
-
-							spawn(J.level*10)
-								c_target.move=1
-								c_target.injutsu=0
-								c_target.firing=0
-								c_target.canattack=1
-								c_target.overlays=0
-								del(s)
-								c_target.RestoreOverlays()
-						else
-							c_target.overlays=0
-							c_target.RestoreOverlays()
-							spawn(2)
-								del(s)
+						src.move=1
+						spawn(15)
+							src.firing=0
+							src.canattack=1
 
 		Wood_Balvan()
 			if(firing)return
 			if(src.firing==0 && src.canattack==1)
 				for(var/obj/Jutsus/Wood_Balvan/J in src.jutsus)
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
+						if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
+						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/2
+						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/2
+						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/2
+						if(J.level==4) J.damage=(jutsudamage*J.Sprice)/2
+						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						src.injutsu=1
 						flick("jutsuse",src)
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
 						var/obj/O = new/obj/Projectiles/Effects/Balvan
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						O.IsJutsuEffect=src
 						O.loc = src.loc
 						O.dir = src.dir
 						O.Owner = src
+						O.damage = (J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage))
 						if(c_target)
 							walk_towards(O,c_target)
 							spawn(5)if(src)

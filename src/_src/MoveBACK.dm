@@ -2,17 +2,18 @@ mob
 	var/tmp/Sleeping=0
 	var/tmp/JashinConnector
 	proc/Bleed()
-		var/obj/O = new/obj/bloodeffectz
-		O.Owner=src
-		O.loc = src.loc
-		O.pixel_x=-16
-		O.icon =  'blood effects.dmi'
-		var/bl = rand(1,7)
-		O.icon_state = "l[bl]"
-		var/bf = rand(1,7)
-		flick("fl[bf]",O)
-		walk_to(O,src)
-		spawn(3)walk_to(O,0)
+		if(!src.dead)
+			var/obj/O = new/obj/bloodeffectz
+			O.Owner=src
+			O.loc = src.loc
+			O.pixel_x=-16
+			O.icon =  'blood effects.dmi'
+			var/bl = rand(1,7)
+			O.icon_state = "l[bl]"
+			var/bf = rand(1,7)
+			flick("fl[bf]",O)
+			walk_to(O,src)
+			spawn(3)walk_to(O,0)
 obj
 	bloodeffectz
 		New()
@@ -65,7 +66,7 @@ obj
 							spawn(3)if(M)M.injutsu=0
 						if(M)
 							for(var/obj/Jutsus/Fire_Release_Ash_Pile_Burning/J in src.owner.jutsus)
-								M.burn=(J.level*3)+(src.owner.ninjutsu/10)//burn
+								M.burn=(1.3*(J.damage+round((src.owner.ninjutsu / 150)*2*J.damage))/35)//burn
 								M.BurnEffect(src.owner)
 				src.pixel_x=-21
 				src.objburn()
@@ -88,8 +89,8 @@ mob
 					M.move=0
 					M.injutsu=1
 					view(src)<<sound('SkillDam_ThrowSuriken3.wav',0,0,volume=100)
-					M.DealDamage(src.ninjutsu * 0.3,src,"cyan",0,1)
-					M.DealDamage(2+(src.strength/20),src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1)src.LevelStat("Ninjutsu",rand(6,10))
 					src.Levelup()
 					if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -112,8 +113,8 @@ mob
 					M.move=0
 					M.injutsu=1
 					view(src)<<sound('SkillDam_ThrowSuriken3.wav',0,0,volume=100)
-					M.DealDamage(src.ninjutsu * 0.5,src,"cyan",0,1)
-					M.DealDamage(3+(src.strength/20),src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					src.Levelup()
 					if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -136,8 +137,8 @@ mob
 					M.move=0
 					M.injutsu=1
 					view(src)<<sound('SkillDam_ThrowSuriken3.wav',0,0,volume=100)
-					M.DealDamage(src.ninjutsu * 0.7,src,"cyan",0,1)
-					M.DealDamage(4+(src.strength/20),src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					src.Levelup()
 					if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -160,8 +161,8 @@ mob
 					M.injutsu=1
 					M.move=0
 					view(src)<<sound('SkillDam_ThrowSuriken3.wav',0,0,volume=100)
-					M.DealDamage(src.ninjutsu,src,"cyan",0,1)
-					M.DealDamage(5+(src.strength/20),src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					src.Levelup()
 					if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -210,8 +211,7 @@ mob
 							if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
 							if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
 							if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
-							M.DealDamage(src.ninjutsu*0.1,src,"NinBlue")
-							if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
+							M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
 							src.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							spawn(2) M.injutsu=0
@@ -225,8 +225,7 @@ mob
 								if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
 								if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
 								if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
-								M.DealDamage(src.ninjutsu*0.1,src,"NinBlue")
-								if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
+								M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
 								src.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								spawn(2) M.injutsu=0
@@ -240,8 +239,7 @@ mob
 									if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
 									if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
 									if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
-									M.DealDamage(src.ninjutsu*0.1,src,"NinBlue")
-									if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
+									M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
 									src.Levelup()
 									if(M.henge==4||M.henge==5)M.HengeUndo()
 									spawn(2) M.injutsu=0
@@ -260,6 +258,26 @@ client
 			//arrow
 			//ArrowTasked
 	North()
+		if(src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
+			src.mob.dashcd=1
+			view(src.mob) << sound('dash.wav',0,0,0,100)
+			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
+			src.mob.dashable=2
+			step(src.mob,NORTH)
+			spawn(0.5)if(src.mob)step(src.mob,NORTH)
+			spawn(1)if(src.mob)step(src.mob,NORTH)
+			spawn(1.5)
+				if(src.mob)step(src.mob,NORTH)
+				if(src.mob)src.mob.dashable=0
+			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
+		if(src.mob.inshadowfield==1)
+			if(src.mob.move==1)
+				for(var/mob/M in orange(3,src))
+					step(M,NORTH)
+		if(src.mob.inboulder==1&&src.mob.dir!=SOUTH)//boulderstuff
+			src.mob.dir=NORTH
+		if(src.mob.infusing==1)//chakrainfusionstuff
+			src.mob.dir=NORTH
 		if(src.mob.copy)
 			if(src.mob.copy=="Climb")
 				if(src.mob.arrow=="U")
@@ -278,6 +296,7 @@ client
 						..()
 						//step(src,NORTH)
 						//return
+
 			if(findtext(src.mob.copy,"Chidori") && src.mob.ArrowTasked && src.mob.ArrowTasked.dir == NORTH)
 				var/k = src.mob.ArrowTasked
 				del(k)
@@ -365,6 +384,26 @@ client
 					return
 		else return ..()
 	South()
+		if(src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
+			src.mob.dashcd=1
+			view(src.mob) << sound('dash.wav',0,0,0,100)
+			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
+			src.mob.dashable=2
+			step(src.mob,SOUTH)
+			spawn(0.5)if(src.mob)step(src.mob,SOUTH)
+			spawn(1)if(src.mob)step(src.mob,SOUTH)
+			spawn(1.5)
+				if(src.mob)step(src.mob,SOUTH)
+				if(src.mob)src.mob.dashable=0
+			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
+		if(src.mob.inshadowfield==1)
+			if(src.mob.move==1)
+				for(var/mob/M in orange(3,src))
+					step(M,SOUTH)
+		if(src.mob.inboulder==1&&src.mob.dir!=NORTH)
+			src.mob.dir=SOUTH
+		if(src.mob.infusing==1)//chakrainfusionstuff
+			src.mob.dir=SOUTH
 		if(src.mob.copy)
 			if(src.mob.copy=="Climb")
 				flick("climb",src.mob)
@@ -435,6 +474,26 @@ client
 		else
 			return ..()
 	West()
+		if(src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
+			src.mob.dashcd=1
+			view(src.mob) << sound('dash.wav',0,0,0,100)
+			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
+			src.mob.dashable=2
+			step(src.mob,WEST)
+			spawn(0.5)if(src.mob)step(src.mob,WEST)
+			spawn(1)if(src.mob)step(src.mob,WEST)
+			spawn(1.5)
+				if(src.mob)step(src.mob,WEST)
+				if(src.mob)src.mob.dashable=0
+			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
+		if(src.mob.inshadowfield==1)
+			if(src.mob.move==1)
+				for(var/mob/M in orange(3,src))
+					step(M,WEST)
+		if(src.mob.inboulder==1&&src.mob.dir!=EAST)
+			src.mob.dir=WEST
+		if(src.mob.infusing==1)//chakrainfusionstuff
+			src.mob.dir=WEST
 		if(src.mob.copy)
 			if(src.mob.copy=="Climb")
 				if(src.mob.arrow=="U")
@@ -521,6 +580,26 @@ client
 		else
 			return ..()
 	East()
+		if(src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
+			src.mob.dashcd=1
+			view(src.mob) << sound('dash.wav',0,0,0,100)
+			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
+			src.mob.dashable=2
+			step(src.mob,EAST)
+			spawn(0.5)if(src.mob)step(src.mob,EAST)
+			spawn(1)if(src.mob)step(src.mob,EAST)
+			spawn(1.5)
+				if(src.mob)step(src.mob,EAST)
+				if(src.mob)src.mob.dashable=0
+			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
+		if(src.mob.inshadowfield==1)
+			if(src.mob.move==1)
+				for(var/mob/M in orange(3,src))
+					step(M,EAST)
+		if(src.mob.inboulder==1&&src.mob.dir!=WEST)
+			src.mob.dir=EAST
+		if(src.mob.infusing==1)//chakrainfusionstuff
+			src.mob.dir=EAST
 		if(src.mob.copy)
 			if(src.mob.copy=="Climb")
 				if(src.mob.arrow=="U")
@@ -678,72 +757,51 @@ mob
 			var/mob/M=O
 			if(M.fightlayer==src.fightlayer)
 				if(src.henge==4||src.henge==5)src.HengeUndo()
-				if(M.henge==4||M.henge==5)M.HengeUndo()
-			else src.loc=M.loc
-			if(Effects["Rasengan"])
-				var/damage=Effects["Rasengan"]
-				Effects["Rasengan"]=null
-				flick("punchr",src)
-				overlays-=image('Rasengan.dmi',"spin")
-				overlays+=image('Rasengan.dmi',"explode")
-				spawn(3) overlays-=image('Rasengan.dmi',"explode")
-				M.health-=damage
-				var/colour = colour2html("white")
-				F_damage(M,damage,colour)
-				if(M.client)spawn() M.ScreenShake(5)
-				M.UpdateHMB()
-				M.Death(src)
-			if(Effects["Chidori"])
-				var/damage=Effects["Chidori"]
-				Effects["Chidori"]=null
-				flick("punchr",src)
-				overlays-=image('Chidori.dmi',"charge")
-				overlays+=image('Chidori.dmi',"explode")
-				spawn(3) overlays-=image('Chidori.dmi',"explode")
-				M.health-=damage
-				var/colour = colour2html("white")
-				F_damage(M,damage,colour)
-				if(M.client)spawn() M.ScreenShake(5)
-				M.UpdateHMB()
-				M.Death(src)
-		if(istype(O,/obj))
-			//var/obj/Obj=O
-			if(src.henge==4||src.henge==5)src.HengeUndo()
-		if(istype(O,/turf))
-			var/turf/T=O
-			src.HengeUndo()
-			if(O.density&&src.icon_state=="push")
-			//	O.overlays+=image('Misc Effects.dmi',O,"crack[number]")
-				var/damage=rand(10,15)
-				src.health-=damage
-				var/colour = colour2html("white")
-				F_damage(src,damage,colour)
-				if(src.client)spawn() src.ScreenShake(5)
-				UpdateHMB()
-				Death(src)
-				src.icon_state=""
-			if(istype(O,/turf/Ground/Cliff/Edges/Bottom)||istype(O,/turf/Ground/Cliff))
-				if(!src.copy&&O:Climbable)
-					if(src.dashable==2)
-						if(src.mountainkit)
-							src.loc=locate(T.x,T.y,T.z)
-							src.canattack=0
-							src.firing=1
-							src.icon_state="climbS"
-							src.copy="Climb"
-							src.arrow="L"
-							var/obj/WArrow = image('Misc Effects.dmi',src,icon_state="arrow",layer=99)
-							WArrow.pixel_x=-64
-							WArrow.dir=WEST
-							src.ArrowTasked=WArrow
-							src<<WArrow
-						else
-							if(mountainwalk)src.loc=locate(T.x,T.y,T.z)
-							else ..()
-				else if(src.copy=="Climb")src.loc=locate(T.x,T.y,T.z)
-			else ..()
+			if(istype(O,/turf))
+				var/turf/T=O
+				src.HengeUndo()
+				if(O.density&&src.icon_state=="push")
+				//	O.overlays+=image('Misc Effects.dmi',O,"crack[number]")
+					var/damage=rand(10,15)
+					src.health-=damage
+					var/colour = colour2html("white")
+					F_damage(src,damage,colour)
+					if(src.client)spawn() src.ScreenShake(5)
+					UpdateHMB()
+					Death(src)
+					src.icon_state=""
+				if(istype(O,/turf/Ground/Cliff/Edges/Bottom)||istype(O,/turf/Ground/Cliff))
+					if(!src.copy&&O:Climbable)
+						if(src.dashable==2)
+							if(src.mountainkit)
+								src.loc=locate(T.x,T.y,T.z)
+								src.canattack=0
+								src.firing=1
+								src.icon_state="climbS"
+								src.copy="Climb"
+								src.arrow="L"
+								var/obj/WArrow = image('Misc Effects.dmi',src,icon_state="arrow",layer=99)
+								WArrow.pixel_x=-64
+								WArrow.dir=WEST
+								src.ArrowTasked=WArrow
+								src<<WArrow
+							else
+								if(mountainwalk)src.loc=locate(T.x,T.y,T.z)
+								else ..()
+					else if(src.copy=="Climb")src.loc=locate(T.x,T.y,T.z)
+				else ..()
+
+mob
+	New()
+		..()
+		src.move_delay = min(0.5, 0.8-((src.agility/150)*0.3))
+
+	var/tmp/move_delay=0.8
+	var/tmp/moving=0
+
 client
 	Move(Loc)
+		if(mob.moving) return
 		if(!mob.likeaclone)
 			if(!mob.injutsu&&!mob.rest&&!mob.dead&&!mob.shielded&&!mob.Sleeping)
 				if(mob.dashable<>2)
@@ -758,6 +816,7 @@ client
 									step(C2,mob.dir)
 									if(C2)	C2.icon_state="[mob.icon_state]"
 						if(!mob.dashable)mob.dashable=1
+						mob.moving=1
 						mob.speeding += 1
 
 						if(istype(mob.loc,/turf/Ground/Water))
@@ -784,7 +843,17 @@ client
 										mob.icon_state = ""
 						mob.lastloc=mob.loc
 						..()
-						spawn(2)if(mob.dashable<>2)mob.dashable=0
+						if(src.mob.equipped=="Weights")
+							if(prob(50))
+								spawn() src.mob.LevelStat("Agility",round(rand(2,8)*trainingexp))
+						else
+							if(prob(40))
+								spawn() src.mob.LevelStat("Agility",rand(0,1))
+
+						sleep(mob.move_delay)
+						mob.moving=0
+
+						spawn(2) if(mob.dashable<>2)mob.dashable=0
 						/*sleep(mob.speeddelay)
 						if(!mob.move)mob.move=1
 						switch(mob.dir)

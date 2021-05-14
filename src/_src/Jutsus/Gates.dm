@@ -10,6 +10,7 @@ mob
 				src.GateStopped = 1
 				src.Gates = null
 				src.GateTime = 0
+				src.healthregenmod=1
 			ResetBase()
 			//src.icon ='WhiteMBase.dmi'
 			for(var/obj/Jutsus/EightGates/J in src.jutsus)
@@ -19,6 +20,7 @@ mob
 				spawn(250)
 					J.Excluded = 0
 					src.GateStopped = 0
+				view(src)<<output("<font color=[colour2html("red")]><b>[src] looks exhausted! They can't use gates for 25 seconds!","ActionPanel.Output")
 			for(var/obj/O in LinkFollowers)
 				if(O)
 					del(O)
@@ -84,7 +86,8 @@ mob
 
 		GateLoop()
 			while(src.Gates && src.GateTime && !GateStopped)
-				src.DealDamage((src.maxhealth * 0.004) * src.Gates, src, "black")
+//				src.DealDamage((src.maxhealth * 0.004) * src.Gates, src, "black")
+				src.healthregenmod=0
 				sleep(10)
 				if(src.Gates && src.GateTime && !GateStopped)
 					src.GateTime --
@@ -167,7 +170,7 @@ mob
 				//if(7)
 				//if(8)
 			src.Gates = GateNum
-			src.DealDamage((src.maxhealth * 0.012) * src.Gates, src, "black")
+			src.DealDamage((src.maxhealth * 0.02) * src.Gates, src, "maroon")
 
 // I commented out the old gate procs instead of deleting them, just in case you want them for something.
 /*		Gate_1()

@@ -2,6 +2,7 @@ backup/
 cfg/
 logs/
 saves/
+desktop.ini
 *.dmb
 *.int
 *.lk

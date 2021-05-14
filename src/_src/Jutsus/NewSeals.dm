@@ -37,7 +37,7 @@ mob
 
 		SealHandler(sign)
 			set hidden = 1
-			if(src.canattack && !src.firing && !src.dead)
+			if(src.canattack && !src.firing && !src.dead && !src.multisized)
 				if(src.SealCount < 12)
 					src.SealCount ++
 					switch(src.SealCount)

@@ -3,7 +3,7 @@ mob
 		Earth_Disruption()
 			for(var/obj/Jutsus/Earth_Disruption/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(10,13))//XPGAIN
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))//XPGAIN
 					flick("groundjutsuse",src)
 					view(src)<<sound('Skill_BigRoketFire.wav',0,0)
 					src.firing=1
@@ -13,14 +13,18 @@ mob
 					if(J.level==2) TimeAsleep=10
 					if(J.level==3) TimeAsleep=15
 					if(J.level==4) TimeAsleep=20
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					if(J.level==1) J.damage=0.4*((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=0.4*((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=0.4*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=0.4*(jutsudamage*J.Sprice)
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					for(var/mob/M in oview(J.level))
 						if(!istype(M,M)||!M) continue
 						M.icon_state="dead"
 						M.move=0
 						M.injutsu=1
 						M.canattack=0
-						M.DealDamage(J.level*5+src.strength/2+src.strength/3,src, "TaiOrange")
+						M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 						spawn(TimeAsleep)
 							if(!M||M.dead)continue
 							M.icon_state=""
@@ -41,44 +45,42 @@ mob
 				/*	if(c_target.caged==1)
 						src<<"You cannot use that jutsu while the target is Caged."
 						return */
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(3,5))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
 					view(src)<<sound('man_fs_l_mt_wat.ogg',0,0)
 					src.firing=1
 					src.canattack=0
 					var/TimeAsleep
-					if(J.level==1) TimeAsleep=20
-					if(J.level==2) TimeAsleep=40
-					if(J.level==3) TimeAsleep=60
-					if(J.level==4) TimeAsleep=80
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,3); J.Levelup()
+					if(J.level==1) TimeAsleep=10
+					if(J.level==2) TimeAsleep=20
+					if(J.level==3) TimeAsleep=30
+					if(J.level==4) TimeAsleep=40
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					new/obj/Jutsus/Effects/mudslide(src.loc)
 					var/mob/M = c_target
-					if(M)
-						var/turf/T=M.loc
-						spawn(10)
-							if(M&&T)
-								if(T==M.loc)
-									new/obj/Jutsus/Effects/mudslide(M.loc)
-									M.icon_state="dead"
-									M.move=0
-									M.injutsu=1
-									M.canattack=0
-									M.Sleeping=1
-									spawn(TimeAsleep)
-										if(!M||M.dead)continue
-										M.icon_state=""
-										M.move=1
-										M.injutsu=0
-										M.canattack=1
-										M.Sleeping=0
-								else src<<output("The jutsu did not connect.","Action.Output")
+					spawn(10)
+						M=src.Target_Get(TARGET_MOB)
+						if(M)
+							new/obj/Jutsus/Effects/mudslide(M.loc)
+							M.icon_state="dead"
+							M.move=0
+							M.injutsu=1
+							M.canattack=0
+							M.Sleeping=1
+							spawn(TimeAsleep)
+								if(!M||M.dead)continue
+								M.icon_state=""
+								M.move=1
+								M.injutsu=0
+								M.canattack=1
+								M.Sleeping=0
+						else src<<output("The jutsu did not connect.","ActionPanel.Output")
 					src.firing=0
 					src.canattack=1
 		Dango()
 			for(var/obj/Jutsus/Dango/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Taijutsu",0.2)
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("groundjutsu",src)
 					src.firing=1
 					src.canattack=0
@@ -86,7 +88,7 @@ mob
 					if(J.level==2) J.damage=4
 					if(J.level==3) J.damage=7
 					if(J.level==4) J.damage=10
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(3,6); J.Levelup()
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/obj/Dango/p1/A = new/obj/Dango/p1(src.loc)
 					A.IsJutsuEffect=src
 					A.Owner=src
@@ -106,30 +108,34 @@ mob
 					src << output("This jutsu requires a target","Action.Output")
 					return
 				if(src.PreJutsu(J))
-
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",0.2)
+					if(J.level==1) J.damage=0.6*((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=0.6*((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=0.6*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=0.6*(jutsudamage*J.Sprice)
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("groundjutsu",src)
 					src.firing=1
 					src.canattack=0
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(4,6); J.Levelup()
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/mob/M = c_target
-					if(M)
-						var/turf/T=M.loc
-						spawn(10)
-							if(M&&T)
-								if(T==M.loc)
-									var/obj/Y = new/obj
-									Y.icon='newdoton.dmi'
-									Y.icon_state=""
-									Y.pixel_x=-55
-									Y.loc=M.loc
-									flick("dead",M)
-									spawn(25)
-										if(Y)
-											del(Y)
-									M.DealDamage((12+J.damage+usr.ninjutsu)*3,src,"NinBlue")
-									spawn() if(M) M.Bleed()
-								else src<<output("The jutsu did not connect.","Action.Output")
+					view()<<sound('rumble_rocks.wav')
+					spawn(20)
+						M=src.Target_Get(TARGET_MOB)
+						if(M)
+							var/obj/Y = new/obj
+							Y.icon='newdoton.dmi'
+							Y.icon_state=""
+							Y.pixel_x=-55
+							Y.loc=M.loc
+							Y.layer=MOB_LAYER+1
+							flick("dead",M)
+							view()<<sound('rock_blast.wav')
+							spawn(25)
+								if(Y)
+									del(Y)
+							M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
+							spawn() if(M) M.Bleed()
+						else src<<output("The jutsu did not connect.","ActionPanel.Output")
 					spawn(1)
 						src.firing=0
 						src.canattack=1
@@ -137,12 +143,19 @@ mob
 			for(var/obj/Jutsus/Mud_Dragon_Projectile/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					view()<<sound('man_fs_r_mt_wat.ogg')
-					src.firing=1
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					flick("jutsuse",src)
 					src.canattack=0
 					src.move=0
+					src.firing=1
+					sleep(10)
+					flick("2fist",src)
+					view()<<sound('man_fs_r_mt_wat.ogg')
 					if(c_target)src.dir=get_dir(src,c_target)
 					var/obj/Projectiles/Effects/JinraiBack/Aa=new(get_step(src,src.dir))
 					Aa.icon = 'Mud Dragon Projectile.dmi'
@@ -159,7 +172,7 @@ mob
 					A.fightlayer=src.fightlayer
 					A.pixel_y=16
 					A.pixel_x=-16
-					A.damage=(J.level*50)+round(src.agility*2)+round(src.ninjutsu*5)
+					A.damage=0.9*(J.damage+round((src.ninjutsu / 150)*2*J.damage))
 					A.level=J.level
 					walk(A,dir,0)
 					src.firing=0
@@ -174,7 +187,7 @@ mob
 		Earth_Style_Dark_Swamp()
 			for(var/obj/Jutsus/Earth_Style_Dark_Swamp/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					src.move=0
 					src.canattack=0
@@ -205,7 +218,7 @@ mob
 
 				if(src.PreJutsu(J))
 					J.density = 1
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
 					view(src)<<sound('wind_leaves.ogg',0,0)
 					src.firing=1
@@ -214,7 +227,7 @@ mob
 					if(J.level==2)J.damage=4
 					if(J.level==3)J.damage=5
 					if(J.level==4)J.damage=6
-					if(J.level<4)if(loc.loc:Safe!=1)J.exp+=rand(3,6); J.Levelup()
+					if(J.level<4)if(loc.loc:Safe!=1)J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(c_target)
 						flick("groundjutsu",src)
 						sleep(4)
@@ -233,7 +246,7 @@ mob
 							A.Owner=src
 							A.density=1
 							A.layer=MOB_LAYER+1
-							var/I=J.damage*5
+							var/I=J.damage*4
 							A.icon='doton cage.dmi'
 							A.icon_state="stay"
 							A.pixel_x=-48
@@ -289,7 +302,7 @@ mob
 			if(src.firing==0 && src.canattack==1)
 				for(var/obj/Jutsus/MudWall/J in src.jutsus)
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(11,13))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						var/obj/Projectiles/Effects/mudwall/A=new/obj/Projectiles/Effects/mudwall(src.loc)
 						A.Owner=src
 						var/mob/forjutsu/mudwallmob/B=new/mob/forjutsu/mudwallmob(src.loc)
@@ -301,10 +314,10 @@ mob
 			if(src.firing==0 && src.canattack==1)
 				for(var/obj/Jutsus/EarthBoulder/J in src.jutsus)
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						src.move=0
 						src.injutsu=1
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(8,10); J.Levelup()
+						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						src.firing=1
 						src.canattack=0
 						flick("2fist",src)

@@ -235,13 +235,13 @@ mob
 			if(src.firing==0 && src.canattack==1)
 				for(var/obj/Jutsus/Crystal_Shards/J in src.jutsus)
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,12))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
-						if(J.level==1) J.damage=40
-						if(J.level==2) J.damage=80
-						if(J.level==3) J.damage=120
-						if(J.level==4) J.damage=160
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
+						if(J.level==1) J.damage=1*((jutsudamage*J.Sprice)/2.5)
+						if(J.level==2) J.damage=1*((jutsudamage*J.Sprice)/2)
+						if(J.level==3) J.damage=1*((jutsudamage*J.Sprice)/1.5)
+						if(J.level==4) J.damage=1*(jutsudamage*J.Sprice)
+						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						src.firing=1
 						src.canattack=0
 						flick("jutsuse",src)
@@ -249,7 +249,7 @@ mob
 							var/obj/Projectiles/Effects/CrystalShards/A = new/obj/Projectiles/Effects/CrystalShards(src.loc)
 							A.Owner=src
 							A.dir=src.dir
-							A.damage=J.damage+round(src.ninjutsu*2+src.strength*2)
+							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							A.layer=src.layer
 							walk_towards(A,c_target.loc)
 							spawn(50)
@@ -259,7 +259,7 @@ mob
 							A.Owner=src
 							A.dir=src.dir
 							A.layer=src.layer
-							A.damage=J.damage+round(src.ninjutsu*2+src.strength*2)
+							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							walk(A,A.dir)
 							spawn(50)
 								del(A)
@@ -271,13 +271,13 @@ mob
 			if(src.firing==0 && src.canattack==1)
 				for(var/obj/Jutsus/Crystal_Needles/J in src.jutsus)
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,12))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
-						if(J.level==1) J.damage=40
-						if(J.level==2) J.damage=80
-						if(J.level==3) J.damage=120
-						if(J.level==4) J.damage=160
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
+						if(J.level==1) J.damage=0.5*((jutsudamage*J.Sprice)/2.5)
+						if(J.level==2) J.damage=0.5*((jutsudamage*J.Sprice)/2)
+						if(J.level==3) J.damage=0.5*((jutsudamage*J.Sprice)/1.5)
+						if(J.level==4) J.damage=0.5*(jutsudamage*J.Sprice)
+						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						src.firing=1
 						src.canattack=0
 						flick("jutsuse",src)
@@ -285,14 +285,14 @@ mob
 							var/obj/Projectiles/Effects/CrystalNeedles/A = new/obj/Projectiles/Effects/CrystalNeedles(src.loc)
 							A.Owner=src
 							A.dir=src.dir
-							A.damage=J.damage+round(src.ninjutsu+src.strength*2)
+							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							A.layer=src.layer
 							walk_towards(A,c_target.loc)
 							sleep(1)
 							var/obj/Projectiles/Effects/CrystalNeedles/B = new/obj/Projectiles/Effects/CrystalNeedles(src.loc)
 							B.Owner=src
 							B.dir=src.dir
-							B.damage=J.damage+round(src.ninjutsu+src.strength*2)
+							B.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							B.layer=src.layer
 							walk_towards(B,c_target.loc)
 							spawn(50)
@@ -303,14 +303,14 @@ mob
 							A.Owner=src
 							A.dir=src.dir
 							A.layer=src.layer
-							A.damage=J.damage+round(src.ninjutsu+src.strength)
+							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							walk(A,A.dir)
 							sleep(1)
 							var/obj/Projectiles/Effects/CrystalNeedles/B = new/obj/Projectiles/Effects/CrystalNeedles(src.loc)
 							B.Owner=src
 							B.dir=src.dir
 							B.layer=src.layer
-							B.damage=J.damage+round(src.ninjutsu+src.strength)
+							B.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							walk(B,B.dir)
 							spawn(50)
 								del(A)
@@ -328,10 +328,14 @@ mob
 						if(!c_target)
 							src << output("You need a target to use this.","Action.Output")
 							return
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,20))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						src.move=0
 						src.injutsu=1
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
+						if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2.5)
+						if(J.level==2) J.damage=0.7*((jutsudamage*J.Sprice)/2)
+						if(J.level==3) J.damage=0.7*((jutsudamage*J.Sprice)/1.5)
+						if(J.level==4) J.damage=0.7*(jutsudamage*J.Sprice)
+						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						src.firing=1
 						src.canattack=0
 						flick("groundjutsu",src)
@@ -339,7 +343,7 @@ mob
 						spawn(1)
 							if(c_target.loc==s.loc)
 								c_target.move=0
-								c_target.DealDamage(src.ninjutsu*J.level,src,"NinBlue")
+								c_target.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 								c_target.Bleed()
 								view(c_target)<<sound('knife_hit1.wav',0,0,volume=50)
 								spawn(3)
@@ -358,10 +362,14 @@ mob
 			if(src.firing==0 && src.canattack==1)
 				for(var/obj/Jutsus/Crystal_Explosion/J in src.jutsus)
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(15,20))
+						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						src.move=0
 						src.injutsu=1
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
+						if(J.level==1) J.damage=0.8*((jutsudamage*J.Sprice)/2.5)
+						if(J.level==2) J.damage=0.8*((jutsudamage*J.Sprice)/2)
+						if(J.level==3) J.damage=0.8*((jutsudamage*J.Sprice)/1.5)
+						if(J.level==4) J.damage=0.8*(jutsudamage*J.Sprice)
+						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						src.firing=1
 						src.canattack=0
 						src.icon_state="groundjutsuse"
@@ -369,7 +377,7 @@ mob
 						A.icon_state = "blank"
 						A.dir = src.dir
 						A.Owner = src
-						A.damage=src.ninjutsu*7+J.level*100
+						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						spawn(25)
 							src.icon_state=""
 							src.copy=null

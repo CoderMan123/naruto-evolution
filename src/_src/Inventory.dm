@@ -99,7 +99,7 @@ obj
 				density=0
 				max_stacks=10000
 				Description="It's a sharp pointed throwing star made of a hard steel. It could be deadly if thrown. It looks as though it's worth about 5 Ryo if you were to sell it to a common merchant."
-				damage=5
+				damage=0
 				Cost=5
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -124,7 +124,7 @@ obj
 				density=0
 				max_stacks=10000
 				Description="A sharp medical precise needle. The tip appears to be extremely sharp, and could cause severe damage to precise points on the human body if thrown, or even applied. It looks as though it's only worth 3 Ryo."
-				damage=3
+				damage=0
 				Cost=3
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -149,7 +149,7 @@ obj
 				density=0
 				max_stacks=10000
 				Description="A hard steel field knife. The tip is sharp enough to peirce flesh, as well as many other practical uses in the field. There is a loop at the end for auxillary use, or as a finger grip. It looks to be worth about 7 Ryo."
-				damage=10
+				damage=0
 				Cost=7
 				Click()
 					if(!usr.contents.Find(src)) return
@@ -171,7 +171,7 @@ obj
 				icon='Shuriken.dmi'
 				icon_state="kunaist"
 				mouse_drag_pointer = "kunaist"
-				density=0
+				density=1
 				max_stacks=10000
 				Cost=10
 				Click()
@@ -196,9 +196,9 @@ obj
 				mouse_drag_pointer = "tag"
 				density=0
 				max_stacks=10000
-				Description="A hard paper-like material embued with kanji markings on the front. It is made with explosive paper, and if one were to embue their chakra into it, they could detonate it at will. It seems to be worth about 5 Ryo."
-				damage=40
-				Cost=5
+				Description="A paper-like material embued with kanji markings on the front. It is made with explosive paper, and if one were to embue their chakra into it, they could detonate it at will. It seems to be worth about 5 Ryo."
+				damage=0
+				Cost=8
 				Click()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="ExplosiveTags"
@@ -214,38 +214,27 @@ obj
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Explosive_Tag/C)
 					//	C.suffix="Equipped Weapon"
-			/*
-			Stamina_Pill
+
+			Food_Pill
 				icon='Shuriken.dmi'
 				icon_state="spill"
 				mouse_drag_pointer = "spill"
 				density=0
-				max_stacks=100
-				Cost=15000
-				var/lol=0
+				max_stacks=10000
+				Cost=500
+				Description="A small pill that tastes pretty gross. When consumed it energizes your body increasing your health regeneration for 20 seconds."
 				Click()
 					if(!usr.contents.Find(src)) return
-					if(lol==1)
-						usr.health-=round(usr.maxhealth/2)
-						usr.equipped=null
-						lol=0
-						del(src)
-						return
-					usr.equipped="StaminaPill"
+					usr.equipped="FoodPill"
 					usr<<sound('083.wav',0,0)
-					usr.health+=round(usr.maxhealth/6)
-					lol=1
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="Blood Pill"
-					spawn(300)
-						usr.health-=round(usr.maxhealth/4)
-						for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
-							H.icon_state=null
-						del(src)
-					//for(var/obj/Inventory/Weaponry/X)
-					//	X.suffix=""
-					//for(var/obj/Inventory/Weaponry/Stamina_Pill/C)
-					//	C.suffix="Equipped Pill"
+						var/icon/I = new(src.icon, src.icon_state)
+						var/iconfile = fcopy_rsc(I)
+						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
+/*
 			Chakra_Pill
 				icon='Shuriken.dmi'
 				icon_state="cpill"
@@ -291,12 +280,13 @@ obj
 					if(!usr.contents.Find(src)) return
 					usr.equipped="SmokeBombs"
 					usr<<sound('083.wav',0,0)
-					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="smoke bomb"
-					var/icon/I = new(src.icon, src.icon_state)
-					var/iconfile = fcopy_rsc(I)
-					winset(usr, "Inventory.EquippedName", "text='[src.name]'")
-					winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
-					usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
+					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
+						H.icon_state="SmokeBombs"
+						var/icon/I = new(src.icon, src.icon_state)
+						var/iconfile = fcopy_rsc(I)
+						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
 					//for(var/obj/Inventory/Weaponry/X)
 					//	X.suffix=""
 					//for(var/obj/Inventory/Weaponry/Stamina_Pill/C)
@@ -488,10 +478,12 @@ obj
 						usr.equipped="Weights"
 						usr.usedwep1=1
 						usr.overlays+='Weights.dmi'
+						usr.move_delay = 1
 					else
 						usr.equipped=null
 						usr.usedwep1=0
 						usr.overlays-='Weights.dmi'
+						usr.move_delay = min(0.5, 0.8-((usr.agility/150)*0.3))
 
 mob
 	var

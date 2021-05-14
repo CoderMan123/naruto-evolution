@@ -28,7 +28,7 @@ obj
 							view(src)<<sound('Explo_StoneMed2.ogg',0,0)
 							for(var/mob/X in view(src,3))
 								if(X.dead==0)
-									X.DealDamage(damage,src.Owner,"TaiOrange")
+									X.DealDamage(damage-(X.defence/5),src.Owner,"TaiOrange")
 									if(istype(X,/mob/NPC))..()
 									else
 										X.icon_state="push"
@@ -333,9 +333,9 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
-									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+									M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(45))M.speeding=0
@@ -406,9 +406,9 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
-										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+										M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(45))
@@ -630,9 +630,9 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
-									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+									M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(75))
@@ -705,9 +705,9 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
-										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+										M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
@@ -929,9 +929,9 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
-									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+									M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(30))
@@ -1005,9 +1005,9 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
-										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
+										M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
@@ -1720,8 +1720,6 @@ obj
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",2)
-									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(2,4))
 									if(prob(15))
 										M.speeding=0
 									if(istype(O,/mob/NPC))
@@ -1783,8 +1781,6 @@ obj
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
-										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
 										if(istype(O,/mob/NPC))
@@ -2255,7 +2251,7 @@ obj
 		//		src.Jashiner = c_target
 		//	else
 		//		del(src)
-			spawn(250+M.ninjutsu)
+			spawn(320)
 				if(src)
 					del(src)
 
@@ -2279,9 +2275,30 @@ mob
 			if(src.dead || src.move ==0 || src.canattack ==0 || src.injutsu || src.firing)
 				return
 			src.HengeUndo()
+			if(multisized==1 && multisizestomp==0)//multisizestuff
+				spawn(10) multisizestomp=0
+				src.multisizestomp=1
+				spawn(4) src.overlays-=/obj/Overlays/Dustmax
+				src.overlays+=/obj/Overlays/Dustmax
+				flick("groundjutsu",src)
+				for(var/mob/M in orange(7))
+					if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/NPC)) continue
+					M.DealDamage(jutsudamage+round((src.strength / 150)*2*jutsudamage*0.6),src,"TaiOrange")
+					if(M.henge==4||M.henge==5)M.HengeUndo()
+					M.icon_state="dead"
+					M.move=0
+					M.injutsu=1
+					M.canattack=0
+					spawn(5)
+						if(!M||M.dead)continue
+						M.icon_state=""
+						M.move=1
+						M.injutsu=0
+						M.canattack=1
+					return
+
 			if(src.COW)
 				src.COW--
-				src.firing=1
 				src.icon_state = ""
 				src.overlays += 'Cherry Blossom Impact.dmi'
 				src.icon_state = "punchrS"
@@ -2289,18 +2306,25 @@ mob
 				sleep(1)
 				flick("punchr",src)
 				src.icon_state = "punchrS"
+				var/mob/c_target=src.Target_Get(TARGET_MOB)
+				if(c_target)
+					src.dir = get_dir(src,c_target)
 				for(var/mob/M in get_step(src,src.dir))
-					for(var/i=0,i<5,i++)
+					M.DealDamage((src.ninjutsu*1.5),src,"NinBlue")
+					M.move=0
+					M.canattack=0
+					for(var/i=0,i<2,i++)
 						M.icon_state = "push"
 						step(M,src.dir)
-						M.health -= 10+src.strength/5
-						F_damage(M,10+src.strength/5)
 						sleep(1)
+					M.icon_state="dead"
+					sleep(2)
+					M.move=1
+					M.canattack=1
 					if(!M.dead)
 						M.icon_state = ""
 				src.overlays -= 'Cherry Blossom Impact.dmi'
 				src.icon_state = ""
-				src.firing=0
 				return
 			if(src.LOW)
 				src.LOW--
@@ -2328,50 +2352,29 @@ mob
 				src.icon_state = ""
 				src.firing=0
 				return
-			if(src.BOW)
-				src.BOW--
-				src.firing=1
-				src.overlays += 'Blade of Wind.dmi'
-				src.icon_state = "punchrS"
-				view(src) << sound('wind_leaves.ogg')
-				sleep(1)
-				var/mob/Z
-				flick("punchr",src)
-				for(var/i=0,i<5,i++)
-					var/check=0
-					for(var/mob/M in get_step(src,src.dir))
-						M.DealDamage((src.ninjutsu/4)+(src.strength/4),src, "NinBlue")
-						M.Bleed()
-						src.loc = M.loc
-						Z = M
-						check=1
-					if(check==0)step(src,src.dir)
-					sleep(1)
-				if(Z)src.dir = get_dir(src,Z)
-				src.overlays -= 'Blade of Wind.dmi'
-				src.icon_state = ""
-				src.firing=0
-				return
 			for(var/obj/JashinSymbol/O in src.loc)
 				sleep(1)
 				if(O&&O.Owner==src&&O.JashinConnected&&src.canja)
 					var/mob/HitMe=O.JashinConnected
-					if(!HitMe||!ismob(HitMe)) continue
-					canja=0
-					spawn(60) canja=1
-					HitMe.DealDamage(src.strength*4,src,"TaiOrange")
-					HitMe.Bleed()
-					src.Bleed()
-					view() << sound('knife_hit1.wav')
-					src.Death(src,1)
-					return
+					if(!HitMe.dead)
+						if(!HitMe||!ismob(HitMe)) continue
+						canja=0
+						spawn(60) canja=1
+						var/jashpercent = (jutsudamage / 100)/15
+						if(src.health>0)
+							HitMe.DealDamage(src.maxhealth*jashpercent,src,"maroon")
+							HitMe.Bleed()
+							src.DealDamage(src.maxhealth*jashpercent,src,"maroon")
+							src.Bleed()
+							view() << sound('knife_hit1.wav')
+							src.Death(src,1)
+						return
 			if(usr.equipped=="Shurikens")
-				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				for(var/obj/Inventory/Weaponry/Shuriken/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
 						var/mob/c_target=usr.Target_Get(TARGET_MOB)
 						usr.firing=1
-						spawn(1)usr.firing=0
+						spawn(usr.attkspeed*3)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
 							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
@@ -2382,6 +2385,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(5, 10))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2389,11 +2393,12 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.strength/3)
+							A.damage=(C.damage+(100-round(1*((150-((usr.precision)/1))/3)))+rand(0,10)*weapondamage)*0.6
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
-						else
+						else if(!c_target)
 							var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(5, 10))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2401,18 +2406,17 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.strength/3)
+							A.damage=(C.damage+(100-round(1*((150-((usr.precision)/1))/3)))+rand(0,10)*weapondamage)*0.6
 							walk(A,usr.dir)
 						usr.DestroyItem(C)
 						break
 
 			if(usr.equipped=="ExplodeKunais")
-				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				for(var/obj/Inventory/Weaponry/Exploding_Kunai/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
 						var/mob/c_target=usr.Target_Get(TARGET_MOB)
 						usr.firing=1
-						spawn(1)usr.firing=0
+						spawn(usr.attkspeed*5)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
 							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
@@ -2423,6 +2427,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(10, 15))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2430,11 +2435,12 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.strength/3)
+							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.ninjutsu+usr.strength)/3))/3)))+rand(0,10)*weapondamage)*1
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(10, 15))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2442,18 +2448,17 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.strength/3)
+							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.ninjutsu+usr.strength)/3))/3)))+rand(0,10)*weapondamage)*1
 							walk(A,usr.dir)
 						usr.DestroyItem(C)
 						break
 
 			if(usr.equipped=="Kunais")
-				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				for(var/obj/Inventory/Weaponry/Kunai/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
 						var/mob/c_target=usr.Target_Get(TARGET_MOB)
 						usr.firing=1
-						spawn(1)usr.firing=0
+						spawn(usr.attkspeed*4)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
 							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
@@ -2464,6 +2469,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(8, 13))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2471,11 +2477,12 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.strength/3)
+							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.strength)/2))/3)))+rand(0,10)*weapondamage)*0.9
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(8, 13))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2483,18 +2490,17 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.strength/3)
+							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.strength)/2))/3)))+rand(0,10)*weapondamage)*0.9
 							walk(A,usr.dir)
 						usr.DestroyItem(C)
 						break
 
 			if(usr.equipped=="Needles")
-				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				for(var/obj/Inventory/Weaponry/Needle/C in usr.contents)
 					if(usr.firing==0&&usr.dead==0)
 						var/mob/c_target=usr.Target_Get(TARGET_MOB)
 						usr.firing=1
-						spawn(1)usr.firing=0
+						spawn(usr.attkspeed*2)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
 							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
@@ -2505,6 +2511,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(3, 8))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2512,11 +2519,12 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.strength/3)
+							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.agility)/2))/3)))+rand(0,10)*weapondamage)*0.3
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(3, 8))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2524,21 +2532,20 @@ mob
 							A.Owner=usr
 							A.layer=usr.layer
 							A.fightlayer=usr.fightlayer
-							A.damage=C.damage+round(usr.strength/3)
+							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.agility)/2))/3)))+rand(0,10)*weapondamage)*0.3
 							walk(A,usr.dir)
 						usr.DestroyItem(C)
 						break
 
 			if(usr.equipped=="ExplosiveTags")
-				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				if(usr.explosivetag<6)
 					for(var/obj/Inventory/Weaponry/Explosive_Tag/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)
 							var/mob/c_target=usr.Target_Get(TARGET_MOB)
 							usr.firing=1
-							spawn(3)
-								usr.firing=0
 							usr.explosivetag++
+							spawn(usr.attkspeed*6)
+								usr.firing=0
 							if(prob(50))
 								flick("throw",usr)
 								view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
@@ -2549,6 +2556,7 @@ mob
 								src.dir=get_dir(usr,c_target)
 								usr.Target_Atom(c_target)
 								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 17))
 								if(prob(50))A.pixel_y+=rand(5,10)
 								else A.pixel_y-=rand(5,10)
 								if(prob(50))A.pixel_x+=rand(1,8)
@@ -2556,7 +2564,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=C.damage+round(usr.ninjutsu/5)
+								A.damage=(C.damage+(100-round(1*((150-((usr.ninjutsu)/1))/3)))+rand(0,10)*weapondamage)*1.2
 								if(c_target in get_step(usr,usr.dir))
 									A.Linkage=c_target
 									A.pixel_y+=rand(8,10)
@@ -2564,6 +2572,7 @@ mob
 								step(A,usr.dir)
 							else
 								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 17))
 								if(prob(50))A.pixel_y+=rand(1,8)
 								else A.pixel_y-=rand(1,8)
 								if(prob(50))A.pixel_x+=rand(1,8)
@@ -2571,7 +2580,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=C.damage+round(usr.ninjutsu/5)
+								A.damage=(C.damage+(100-round(1*((150-((usr.ninjutsu)/1))/3)))+rand(0,10)*weapondamage)*1.2
 								for(var/mob/M in get_step(usr,usr.dir))
 									A.Linkage=M
 									A.pixel_y+=rand(8,10)
@@ -2581,7 +2590,6 @@ mob
 							break
 
 			if(usr.equipped=="SmokeBombs")
-				for(var/obj/Screen/WeaponSelect/H in usr.client.screen)H.icon_state="blank"
 				if(!usr.smokebomb)
 					for(var/obj/Inventory/Weaponry/Smoke_Bomb/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)
@@ -2590,6 +2598,7 @@ mob
 							spawn(3)
 								usr.smokebomb=1
 								var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(30, 40))
 								SMOKE.loc=usr.loc
 								view(usr)<<sound('flashbang_explode2.wav',0,0)
 								src.overlays=0
@@ -2604,8 +2613,18 @@ mob
 									src.Name(src.name)
 									src.icon_state=""
 									src.RestoreOverlays()
-								spawn(60)if(usr)usr.smokebomb=0
+								spawn(600)if(usr)usr.smokebomb=0
 								break
+
+			if(usr.equipped=="FoodPills")
+				if(usr.foodpillcd==0)
+					for(var/obj/Inventory/Weaponry/Food_Pill/C in usr.contents)
+						src.foodpillcd=1
+						src.healthregenmod++
+						spawn(200)
+							src.foodpillcd=0
+							src.healthregenmod++
+
 
 			if(usr.equipped=="Kubikiribocho")
 				for(var/obj/Inventory/Weaponry/Zabuza_Sword/C in usr.contents)
@@ -2718,7 +2737,7 @@ mob
 							usr.firing=0
 						break
 
-			if(usr.equipped=="Weights")
+/*			if(usr.equipped=="Weights")
 				for(var/obj/Inventory/Weaponry/Weights/C in usr.contents)
 					if(usr.firing==0 && usr.dead==0)
 						if(usr.agility < 80)
@@ -2731,7 +2750,7 @@ mob
 							spawn(usr.attkspeed*2)
 								usr.firing=0
 						else
-							usr << output("You're too experienced in agility to gain anymore experience from these.","Action.Output")
-							return
+							usr << output("You're too experienced in agility to gain anymore experience from these.","ActionPanel.Output")
+							return*/
 			//UpdateInventoryPanel()
 			return

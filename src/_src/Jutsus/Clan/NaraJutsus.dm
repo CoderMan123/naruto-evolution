@@ -3,12 +3,12 @@ mob
 		Shadow_Stab()
 			for(var/obj/Jutsus/Shadow_Stab/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
-					if(J.level==1) J.damage=35
-					if(J.level==2) J.damage=45
-					if(J.level==3) J.damage=55
-					if(J.level==4) J.damage=65
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
 					view(src)<<sound('dash.wav',0,0)
 					var/mob/M=NaraTarget
@@ -18,7 +18,7 @@ mob
 					O.loc=M.loc
 					O.layer=MOB_LAYER+1
 					O.pixel_x=-16
-					M.DealDamage(J.damage+round(src.ninjutsu*4),src,"NinBlue")
+					M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 					flick("stab",O)
 					if(!M) M.Bleed()
 					spawn(5)if(O)del(O)
@@ -26,12 +26,12 @@ mob
 		Shadow_Choke()
 			for(var/obj/Jutsus/Shadow_Choke/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
-					if(J.level==1) J.damage=10
-					if(J.level==2) J.damage=15
-					if(J.level==3) J.damage=20
-					if(J.level==4) J.damage=25
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/Timer=J.level
 					flick("jutsuse",src)
 					view(src)<<sound('dash.wav',0,0)
@@ -43,7 +43,7 @@ mob
 					O.pixel_x=-16
 					O.layer=MOB_LAYER+1
 					flick("grab",O)
-					M.DealDamage(J.damage+src.ninjutsu*3.5,src,"NinBlue")
+					M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 					while(Timer&&NaraTarget&&M)
 						Timer--
 						sleep(4)
@@ -54,11 +54,8 @@ mob
 			for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
-					if(J.level<4)
-						if(loc.loc:Safe!=1)
-							J.exp+=rand(2,5)
-							J.Levelup()
+					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
 					view(src)<<sound('dash.wav',0,0)
 					if(c_target)
@@ -73,12 +70,12 @@ mob
 		Shadow_Explosion()
 			for(var/obj/Jutsus/Shadow_Explosion/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
-					if(J.level==1) J.damage=5
-					if(J.level==2) J.damage=10
-					if(J.level==3) J.damage=15
-					if(J.level==4) J.damage=30
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/4
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/4
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/Timer=J.level
 					flick("jutsuse",src)
 					view(src)<<sound('dash.wav',0,0)
@@ -90,49 +87,44 @@ mob
 					O.pixel_x=-16
 					O.layer=MOB_LAYER+1
 					flick("grab",O)
-					J.damage = J.damage+src.ninjutsu*1.5
 					while(Timer&&NaraTarget&&M)
 						Timer--
 						sleep(4)
 						O.icon_state = "explode"
-						M.DealDamage(J.damage,src,"NinBlue")
+						M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 					del(O)
 
-		Shadow_Punch()
-			for(var/obj/Jutsus/Shadow_Punch/J in src.jutsus)
+		Shadow_Field()
+			for(var/obj/Jutsus/Shadow_Field/J in src.jutsus)
 				if(src.PreJutsu(J))
-					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					view()<<sound('man_fs_r_mt_wat.ogg')
-					src.firing=1
+					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					src.inshadowfield=1
 					src.canattack=0
-					src.move=0
-					J.damage=J.level*30
-					if(c_target)src.dir=get_dir(src,c_target)
-					var/obj/Projectiles/Effects/JinraiBack/Aa=new(get_step(src,src.dir))
-					Aa.icon = 'Shadow Punch.dmi'
-					Aa.IsJutsuEffect=src
-					Aa.dir = src.dir
-					Aa.layer = src.layer+1
-					Aa.pixel_y=16
-					Aa.pixel_x=-16
-					var/obj/Projectiles/Effects/JinraiHead/A=new(get_step(src,src.dir))
-					A.icon = 'Shadow Punch.dmi'
-					A.dir = src.dir
-					A.Owner=src
-					A.layer=src.layer
-					A.fightlayer=src.fightlayer
-					A.pixel_y=16
-					A.pixel_x=-16
-					A.damage=J.damage+round(src.ninjutsu*4)
-					A.level=J.level
-					walk(A,dir,0)
-					src.firing=0
+					var/obj/A = new/obj(usr.loc)
+					A.icon='shadowfield.dmi'
+					A.icon_state="field"
+					A.layer=MOB_LAYER-1
+					var/matrix/m = matrix()
+					m.Translate(-96,-96)
+					A.transform = m
+					A.linkfollow(src)
+					flick("grow", A)
+					sleep(5)
+					spawn((5*J.level)+(src.genjutsu/3)) del A
+					var/list/caught = new()
+					var/mob/M
+					while(A)
+						sleep(1)
+						if(src.inshadowfield==0)
+							del A
+						for(M in orange(3,src))
+							caught+= M
+							if(!M.likeaclone)
+								M.move=0
+								M.canattack=0
+					for(M in caught)
+						M.move=1
+						M.canattack=1
+					src.inshadowfield=0
 					src.canattack=1
-					src.move=1
-					icon_state=""
-					Aa.dir = src.dir
-					spawn(15)
-						src.firing=0
-						src.canattack=1

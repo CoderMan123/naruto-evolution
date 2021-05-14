@@ -1,3 +1,12 @@
+var/jutsudamage=150 //A global variable to serve as the baseline for all jutsu damage forumla.(WIP)Changing this value will change the damage of all jutsu relative to it's value.
+var/jutsustatexp=0.6 //A global vairable to act as a multiplier for the amount of stat exp gained when using jutsu
+var/jutsumastery=1 //A global variable to act as a multiplier for the amount of uses a jutsu needs before it is hotkeyable
+var/jutsuchakra=50  //A global variable to act as the baseline for the amount of chakra jutsu cost to use
+var/jutsucooldown=1  //A global variable to act as the baseline for the amount of chakra jutsu cost to use
+var/punchstatexp=1.5 //A global vairable to act as a multiplier for the amount of stat exp gained when punching
+var/trainingexp=0.6 //A global variable to act as a multiplier for the amount of exp gained when using training methods
+var/weapondamage=1 //A global variable to act as a multiplier for the amount of damage all weaponry deal (including swords)
+
 mob
 	var
 		tmp
@@ -7,6 +16,8 @@ mob
 mob
 	proc
 		PreJutsu(var/obj/Jutsus/J)
+			if(src.multisized==1)//multisizestuff
+				return
 			if(J.Excluded)
 			//	src << output("returning 0 Ex","Action.Output")
 				return 0
@@ -26,38 +37,42 @@ mob
 
 		DealDamage(amount = 0, Owner, colortype, heal = 0, chakra = 0, punch = 0)
 		//	world << output("[amount], [Owner], [colortype], [heal], [chakra], [punch]")//DEBUG INFO
-			if(src.dead)
-				return
-			var/damage = round(amount) + round(rand(amount/15, amount/5))
-			/*if(punch && bonesword)
-				damage += round(src.strength * 0.1) // adds 10 dmg at 100 str and bonesword on
-			if(punch && src.Gates>0)
-				damage += round((src.strength * 0.1) * src.Gates)*/ // adds 50 damage at 100 str and gates 5
-			if(heal)
-				if(src.Intang)
+			if(src.bubbled==0)//bubbleshieldstuff
+				if(src.dead)
 					return
+				var/damage = round(amount) + round(rand(amount/15, amount/5))
+				/*if(punch && bonesword)
+					damage += round(src.strength * 0.1) // adds 10 dmg at 100 str and bonesword on
+				if(punch && src.Gates>0)
+					damage += round((src.strength * 0.1) * src.Gates)*/ // adds 50 damage at 100 str and gates 5
+				if(heal)
+					if(src.Intang)
+						return
+					src.health += damage
+					if(src.health > src.maxhealth)
+						src.health = src.maxhealth
+				if(chakra)
+					src.chakra -= damage
+					if(src.chakra > src.maxchakra)
+						src.chakra = src.maxchakra
+					if(src.chakra < 0)
+						src.chakra = 0
+				if(!heal && !chakra)
+					if(src.Intang)
+						return
+					src.health -= damage
+					if(src.health < 0)
+						src.health = 0
+					src.sleephits++
+				src.UpdateHMB()
+				spawn()
+					var/colour = colour2html(colortype)
+					DamageOverlay(src, damage, colour)
+				spawn()
+					src.Death(Owner)
+			if(src.bubbled==1&&!heal&&!chakra)//bubbleshieldstuff
+				src.bubbled=0
 
-				src.health += damage
-				if(src.health > src.maxhealth)
-					src.health = src.maxhealth
-			if(chakra)
-				src.chakra -= damage
-				if(src.chakra > src.maxchakra)
-					src.chakra = src.maxchakra
-				if(src.chakra < 0)
-					src.chakra = 0
-			if(!heal && !chakra)//should fix heal.
-				if(src.Intang)
-					return
-				src.health -= damage
-				if(src.health < 0)
-					src.health = 0
-			src.UpdateHMB()
-			spawn()
-				var/colour = colour2html(colortype)
-				src.DamageOverlay(damage, colour)
-			spawn()
-				src.Death(Owner)
 
 		BindStuck(time)
 			src.Stuck ++

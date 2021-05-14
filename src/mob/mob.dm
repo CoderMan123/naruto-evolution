@@ -213,7 +213,13 @@ mob
 			spawn() src.UpdateHMB()
 
 			if(src.client.Alert("Do you wish to skip the tutorial? Only do this if you are familiar with the game. If you skip this you can't come back without making a new account.", "Skip Tutorial?", list("Yes", "No")) == 1)
-				src.Tutorial=7
+				src.Tutorial = 7
+				var/obj/Jutsus/jutsu = new/obj/Jutsus/BodyReplace
+				src.sbought += jutsu.name
+				src.jutsus.Add(jutsu)
+				src.jutsus_learned.Add(jutsu.type)
+				jutsu.owner = src.ckey
+				src.skillpoints--
 				switch(src.village)
 					if("Hidden Leaf")
 						src.loc = locate(116,127,18)
@@ -341,26 +347,26 @@ mob
 					src << "The following text was trimmed:"
 					src << message_trim
 
-	proc
-		DamageOverlay(damage, color, outline=1)
-			var/obj/O = locate() in damage_number_pool
-			if(O)
-				damage_number_pool-=O
-				O.loc=src.loc
-			else
-				O=new(src.loc)
+proc
+	DamageOverlay(mob/M, damage, color, outline=1)
+		var/obj/O = locate() in damage_number_pool
+		if(O)
+			damage_number_pool-=O
+			O.loc=M.loc
+		else
+			O=new(M.loc)
 
-			O.layer = EFFECTS_LAYER
-			O.maptext_width = 128
-			O.maptext_height = 128
-			O.pixel_y = 70
-			O.pixel_x = (src.bound_width - O.maptext_width) / 2 + src.bound_x
-			O.maptext = "<span style=\"-dm-text-outline: [outline]px black; color: [color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[damage]</span>"
-			O.alpha = 255
+		O.layer = EFFECTS_LAYER
+		O.maptext_width = 128
+		O.maptext_height = 128
+		O.pixel_y = 70
+		O.pixel_x = (M.bound_width - O.maptext_width) / 2 + M.bound_x
+		O.maptext = "<span style=\"-dm-text-outline: [outline]px black; color: [color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[damage]</span>"
+		O.alpha = 255
 
-			sleep(1)
-			animate(O, alpha = 0, pixel_y = 102, time = 5)
+		sleep(1)
+		animate(O, alpha = 0, pixel_y = 102, time = 5)
 
-			spawn(15)
-				O.loc=null
-				damage_number_pool += O
+		spawn(15)
+			O.loc=null
+			damage_number_pool += O
