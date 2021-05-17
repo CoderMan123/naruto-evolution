@@ -105,7 +105,7 @@ mob
 				if(src.strength>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=TaiOrange>You leveled up Strength</Font>.","ActionPanel.Output")
+				src<<output("<font color=TaiOrange>You leveled up Strength</Font>.","Action.Output")
 				src.exp+=1
 				src.strength+=1
 				src.strengthexp-=src.maxstrengthexp
@@ -126,7 +126,7 @@ mob
 				if(src.ninjutsu>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=NinBlue>You leveled up Ninjutsu</Font>.","ActionPanel.Output")
+				src<<output("<font color=NinBlue>You leveled up Ninjutsu</Font>.","Action.Output")
 				src.exp+=1
 				src.ninjutsu+=1
 				src.ninexp-=src.maxninexp
@@ -146,7 +146,7 @@ mob
 				if(src.genjutsu>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=blueviolet>You leveled up Genjutsu</Font>.","ActionPanel.Output")
+				src<<output("<font color=blueviolet>You leveled up Genjutsu</Font>.","Action.Output")
 				src.exp+=1
 				src.genjutsu+=1
 				src.genexp-=src.maxgenexp
@@ -186,7 +186,7 @@ mob
 				if(src.agility>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=cornsilk>You leveled up Agility</Font>.","ActionPanel.Output")
+				src<<output("<font color=cornsilk>You leveled up Agility</Font>.","Action.Output")
 				src.exp+=1
 				src.agility++
 				src.agilityexp-=src.maxagilityexp
@@ -215,7 +215,7 @@ mob
 				if(src.precision>=150)
 					goto next
 				src<<sound('level.wav',0,0)
-				src<<output("<font color=azure>You leveled up Precision</Font>.","ActionPanel.Output")
+				src<<output("<font color=azure>You leveled up Precision</Font>.","Action.Output")
 				src.exp+=1
 				src.precision++
 				src.precisionexp-=src.maxprecisionexp
