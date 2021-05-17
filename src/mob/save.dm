@@ -96,6 +96,7 @@ mob
 
 		spawn() src.RestoreOverlays()
 		spawn() src.Run()
+		spawn() src.HealthRegeneration()
 		spawn() src.WeaponryDelete()
 		spawn() src.AddAdminVerbs()
 		if(src.MuteTime) spawn() src.Muted()

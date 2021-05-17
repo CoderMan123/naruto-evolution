@@ -69,10 +69,6 @@ mob
 						src.chakra+=src.maxchakra/20
 						if(src.chakra>src.maxchakra)src.chakra=src.maxchakra
 						src.UpdateHMB()
-					else if(healthregenmod==1&&src.Gates==null)
-						src.healthregenmod=2
-					else if(healthregenmod==2&&src.Gates==null)
-						src.healthregenmod=3
 /*						if(src.health<>src.maxhealth)
 							src.health+=src.maxchakra/20
 							if(src.health>src.maxhealth)src.health=src.maxhealth
@@ -111,6 +107,8 @@ mob
 				if(hit)
 					RestUp()
 					return
+/*				if(src.Gates==null)
+					usr.healthregenmod+=*/
 				usr.wait=0
 				usr.canattack=0
 				if(usr.rest==0)
@@ -145,11 +143,8 @@ mob
 			set hidden=1
 			if(usr.rest)
 				view(usr,3) << sound('Skills/Blank.ogg',0,0,7,100)
-				if(src.Gates==null)
-					if(healthregenmod==2)
-						src.healthregenmod=1
-					else if(healthregenmod==3)
-						src.healthregenmod=2
+/*				if(src.Gates==null)
+					usr.healthregenmod-=2*/
 				usr.overlays-=/obj/Overlays/Dust
 				usr.overlays-=/obj/Overlays/Dust2
 				usr.overlays-=/obj/Overlays/Dust3

@@ -156,6 +156,7 @@ mob
 
 			spawn() src.RestoreOverlays()
 			spawn() src.Run()
+			spawn() src.HealthRegeneration()
 			spawn() src.WeaponryDelete()
 			spawn() src.AddAdminVerbs()
 
@@ -346,6 +347,20 @@ mob
 					src << "Your message was longer than 1000 characters and has been trimmed."
 					src << "The following text was trimmed:"
 					src << message_trim
+
+mob
+	proc
+		HealthRegeneration()
+			while(src)
+				if(src.Gates == null && src.healthregenmod < 1) src.healthregenmod = 1
+				if(src.rest) src.healthregenmod += 2
+				src << "Regen mod = [src.healthregenmod]"
+				src.health += round((src.maxhealth/100) * src.healthregenmod)
+				src.health = min(src.health, src.maxhealth)
+				if(src.rest) src.healthregenmod -= 2
+				spawn() src.UpdateBars()
+				spawn() src.UpdateHMB()
+				sleep(10)
 
 proc
 	DamageOverlay(mob/M, damage, color, outline=1)
