@@ -354,7 +354,6 @@ mob
 			while(src)
 				if(src.Gates == null && src.healthregenmod < 1) src.healthregenmod = 1
 				if(src.rest) src.healthregenmod += 2
-				src << "Regen mod = [src.healthregenmod]"
 				src.health += round((src.maxhealth/100) * src.healthregenmod)
 				src.health = min(src.health, src.maxhealth)
 				if(src.rest) src.healthregenmod -= 2
