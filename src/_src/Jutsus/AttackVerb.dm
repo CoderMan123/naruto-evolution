@@ -3,6 +3,8 @@ mob
 		Basic_Attack()
 			var/mob/c_target=src.Target_Get(TARGET_MOB)
 			set hidden=1
+			if(src.canattack==0)
+				return
 			if(src.multisized==1)//multisizestuff
 				return
 			if(src.shielded==1)

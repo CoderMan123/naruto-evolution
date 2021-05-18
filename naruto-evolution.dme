@@ -83,6 +83,7 @@
 #include "src\_src\Squads.dm"
 #include "src\_src\Staff.dm"
 #include "src\_src\Target System.dm"
+#include "src\_src\TrainingMobs.dm"
 #include "src\_src\Tutorial.dm"
 #include "src\_src\Village Guards.dm"
 #include "src\_src\Village Wars.dm"
