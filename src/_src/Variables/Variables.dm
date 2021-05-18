@@ -115,6 +115,7 @@ mob
 			healthregenmod=1
 			dashcd=0
 			foodpillcd=0
+			dummylocation=0
 var
 	clonesturned=0
 	worldmute=0

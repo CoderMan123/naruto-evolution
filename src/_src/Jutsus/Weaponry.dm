@@ -2616,14 +2616,16 @@ mob
 								spawn(600)if(usr)usr.smokebomb=0
 								break
 
-			if(usr.equipped=="FoodPills")
-				if(usr.foodpillcd==0)
+			if(usr.equipped=="FoodPill")
+				if(!usr.foodpillcd)
 					for(var/obj/Inventory/Weaponry/Food_Pill/C in usr.contents)
 						src.foodpillcd=1
 						src.healthregenmod++
+						src.DestroyItem(C)
 						spawn(200)
 							src.foodpillcd=0
-							src.healthregenmod++
+							src.healthregenmod--
+						break
 
 
 			if(usr.equipped=="Kubikiribocho")
