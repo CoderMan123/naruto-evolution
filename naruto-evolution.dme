@@ -51,6 +51,7 @@
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "assets\fonts\fonts.dm"
+#include "assets\maps\map.dmm"
 #include "lib\lavenblade\interface-input\Code\Client.dm"
 #include "lib\lavenblade\interface-input\Code\Input.dm"
 #include "lib\lavenblade\interface-query\Code\InterfaceQuery.dm"
@@ -88,7 +89,6 @@
 #include "src\_src\Village Guards.dm"
 #include "src\_src\Village Wars.dm"
 #include "src\_src\Voting.dm"
-#include "src\_src\Map.dmm"
 #include "src\_src\Clothing\Clothes.dm"
 #include "src\_src\Deadspace\Marker.dm"
 #include "src\_src\dmifonts\_AdobeSongStdLBold24pt_AA16.dm"
