@@ -332,7 +332,7 @@ mob
 						src.UpdateHMB()
 						return
 			if(src.health<=0&&src.dead==0)
-				if(istype(src,/mob))
+				if(istype(src,/mob) && !istype(src, /mob/Clones))
 					if(ismob(X))
 						if(X.needkill==1)X.needkill=2
 					src.KillCombo=0
