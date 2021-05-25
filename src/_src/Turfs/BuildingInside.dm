@@ -421,6 +421,18 @@ turf
 						M<<"You were recently in combat. Please wait to do this."
 						if(M.lastloc) M.loc=M.lastloc
 						return
+					if(M.inboulder)
+						M<<"You can't enter here like that. Come back when you're not a boulder."
+						if(M.lastloc) M.loc=M.lastloc
+						return
+					if(M.Intang)
+						M<<"You can't enter here while intangible. Come back when you're tangible."
+						if(M.lastloc) M.loc = M.lastloc
+						return
+					if(M.Susanoo)
+						M<<"You can't enter here with Susanoo. Come back without Susanoo."
+						if(M.lastloc) M.loc=M.lastloc
+						return
 					usr.loc = ToWhere
 					step(usr,SOUTH)
 			//Leaf
