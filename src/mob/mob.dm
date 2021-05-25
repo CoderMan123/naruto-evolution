@@ -140,12 +140,14 @@ mob
 					src.maxninexp+=2
 					src.maxgenexp+=2
 
-			for(var/obj/Jutsus/jutsu in typesof(/obj/Jutsus))
-				if(src && jutsu.starterjutsu)
-					jutsu.owner = src.ckey
-					src.jutsus += jutsu
-					src.jutsus_learned += jutsu.type
-					src.sbought += jutsu.name
+			for(var/jutsu in typesof(/obj/Jutsus))
+				var/obj/Jutsus/j = new jutsu
+				if(src && j.starterjutsu)
+					world << "starter found [j]"
+					j.owner = src.ckey
+					src.jutsus += j
+					src.jutsus_learned += j.type
+					src.sbought += j.name
 
 			src.creation_date = world.realtime
 			src.name = src.character
