@@ -4,7 +4,7 @@ mob
 			for(var/obj/Jutsus/Bubble_Shield/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(src.bubbled==1)
-						src<<output("<font color= #94FFFF>You are already inside a bubble shield.<font>","ActionPanel.Output")
+						src<<output("<font color= #94FFFF>You are already inside a bubble shield.<font>","Action.Output")
 					else
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						src.bubbled=1

@@ -364,7 +364,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 						if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 						flick("jutsuse",src)
-						view(src)<<output("<font color=#C0C0C0><b>[src] Says: Byakugan!","ActionPanel.Output")
+						view(src)<<output("<font color=#C0C0C0><b>[src] Says: Byakugan!","Action.Output")
 						var/obj/A = new/obj(usr.loc)
 						A.icon='ClanEyes.dmi'
 						A.icon_state="Byakugan"

@@ -3,7 +3,7 @@ mob
 		Ice_Explosion()
 			for(var/obj/Jutsus/Ice_Explosion/J in src.jutsus)
 				if(!has_water())
-					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","ActionPanel.Output")
+					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))

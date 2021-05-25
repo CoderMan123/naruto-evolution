@@ -66,7 +66,7 @@ mob
 								sleep(2)
 							if(O)del(O)
 						else
-							src<<output("The jutsu did not connect.","ActionPanel.Output")
+							src<<output("The jutsu did not connect.","Action.Output")
 
 		WarpDim()
 			for(var/obj/Jutsus/WarpDim/J in src.jutsus)
@@ -111,7 +111,7 @@ mob
 								c_target.move=1
 								del O
 							else
-								src<<output("You failed to pull them in with you!","ActionPanel.Output")
+								src<<output("You failed to pull them in with you!","Action.Output")
 								src.loc=locate(90,166,3)
 								move=1
 								canattack=1

@@ -43,7 +43,7 @@ world
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Sand" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
-						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","ActionPanel.Output")
+						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
 							var/GAIN = rand(1,3)
@@ -63,7 +63,7 @@ world
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Leaf" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
-						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","ActionPanel.Output")
+						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
 							var/GAIN = rand(1,3)
@@ -83,7 +83,7 @@ world
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Mist" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
-						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","ActionPanel.Output")
+						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
 							var/GAIN = rand(1,3)
@@ -103,7 +103,7 @@ world
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Sound" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
-						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","ActionPanel.Output")
+						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
 							var/GAIN = rand(1,3)
@@ -123,7 +123,7 @@ world
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Rock" && M.z == LevelTo)
 						M.Ryo += (100 + 1)
-						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","ActionPanel.Output")
+						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
 							var/GAIN = rand(1,3)

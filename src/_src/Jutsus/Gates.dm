@@ -20,7 +20,7 @@ mob
 				spawn(250)
 					J.Excluded = 0
 					src.GateStopped = 0
-				view(src)<<output("<font color=[colour2html("red")]><b>[src] looks exhausted! They can't use gates for 25 seconds!","ActionPanel.Output")
+				view(src)<<output("<font color=[colour2html("red")]><b>[src] looks exhausted! They can't use gates for 25 seconds!","Action.Output")
 			for(var/obj/O in LinkFollowers)
 				if(O)
 					del(O)

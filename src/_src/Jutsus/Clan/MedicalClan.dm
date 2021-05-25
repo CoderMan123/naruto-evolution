@@ -3,18 +3,18 @@ mob
 		Mystical_Palms()
 			for(var/obj/Jutsus/Mystical_Palms/J in src.jutsus)
 				if(mystical_palms)
-					src<<output("You deactivate your mystical palms.","ActionPanel.Output")
+					src<<output("You deactivate your mystical palms.","Action.Output")
 					src.mystical_palms=0
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					src.mystical_palms=1
-					src<<output("You activate mystical palms.","ActionPanel.Output")
+					src<<output("You activate mystical palms.","Action.Output")
 					while(mystical_palms&&chakra>0)
 						DealDamage(5,src,"aliceblue",0,1)
 						sleep(10)
-					src<<output("You deactivate your mystical palms.","ActionPanel.Output")
+					src<<output("You deactivate your mystical palms.","Action.Output")
 					src.mystical_palms=0
 
 		Ones_Own_Life_Reincarnation()
@@ -122,4 +122,4 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(src.COW<J.level*3)src.COW++
-					src<<output("You precisely charge chakra to your hands, and now have stocked [src.COW] punches.","ActionPanel.Output")
+					src<<output("You precisely charge chakra to your hands, and now have stocked [src.COW] punches.","Action.Output")

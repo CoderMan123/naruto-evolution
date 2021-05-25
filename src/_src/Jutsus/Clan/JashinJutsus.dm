@@ -40,7 +40,7 @@ mob
 									src.immortal=0
 									src.needkill=0
 							if(sactimer==0)
-								src << output("<b>You couldn't make a sacrifice in time..","ActionPanel.Output")
+								src << output("<b>You couldn't make a sacrifice in time..","Action.Output")
 								src.needkill=0
 
 		Immortal()

@@ -98,7 +98,7 @@ mob
 							canattack=1
 							firing=0
 						else
-							src<<output("The jutsu did not connect.","ActionPanel.Output")
+							src<<output("The jutsu did not connect.","Action.Output")
 							move=1
 							canattack=1
 							firing=0

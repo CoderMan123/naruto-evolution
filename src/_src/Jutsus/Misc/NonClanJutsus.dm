@@ -4,7 +4,7 @@ mob
 			for(var/obj/Jutsus/Chakra_Infusion_Training/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(src.chakra<src.maxchakra)
-						src<<output("Your chakra needs to be full for this kind of training.","ActionPanel.Output")
+						src<<output("Your chakra needs to be full for this kind of training.","Action.Output")
 					if(src.chakra==src.maxchakra)
 						src.move=0
 						src.canattack=0
@@ -99,7 +99,7 @@ mob
 								if(combobuilt==0)
 									infusing=0
 									DealDamage(src.chakra,src,"aliceblue",0,1)
-									src<<output("<font color= #94FFFF>You feel your chakra points burn as you lose control.<font>","ActionPanel.Output")
+									src<<output("<font color= #94FFFF>You feel your chakra points burn as you lose control.<font>","Action.Output")
 								del(A)
 								del(C1)
 								del(C2)
@@ -811,7 +811,7 @@ mob
 			for(var/obj/Jutsus/Shishi/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(!c_target){src<<output("<font color=yellow>You need to have a Target to perform ShiShi Rendan","ActionPanel.Output");return}
+					if(!c_target){src<<output("<font color=yellow>You need to have a Target to perform ShiShi Rendan","Action.Output");return}
 					if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2.5)
@@ -820,7 +820,7 @@ mob
 					if(J.level==4) J.damage=0.7*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(get_dist(src,c_target)>4){src<<"[c_target] need to be closer to you for that move to work!";src.move=1;return}
-					view(src) << output("<b><font color = #C0C0C0>[usr] says: Shishi Rendan!!!","ActionPanel.Output")
+					view(src) << output("<b><font color = #C0C0C0>[usr] says: Shishi Rendan!!!","Action.Output")
 					src.move=0
 					src.injutsu=1
 					src.canattack=0

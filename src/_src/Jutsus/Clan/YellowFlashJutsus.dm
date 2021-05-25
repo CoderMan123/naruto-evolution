@@ -42,7 +42,7 @@ mob
 			for(var/obj/Jutsus/Warp_Rasengan/J in src.jutsus) if(J.Excluded==0)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||c_target.ftgmarked==0)
-					src<<output("You can only use this on targets you've marked with your kunai!","ActionPanel.Output")
+					src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
@@ -87,7 +87,7 @@ mob
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				var/obj/ftgkunai= src.ftgkunai
 				if(!ftgkunai)
-					src<<output("You can only teleport to your kunai!","ActionPanel.Output")
+					src<<output("You can only teleport to your kunai!","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
@@ -132,7 +132,7 @@ mob
 					spawn(200)T.loc = null
 					T.icon='YellowFlashKunai.dmi'
 					T.icon_state="ground"
-					src<<output("You will be sent to this location the next time your character accumulates damage in the next 20 seconds!.","ActionPanel.Output")
+					src<<output("You will be sent to this location the next time your character accumulates damage in the next 20 seconds!.","Action.Output")
 					var/X = src.health
 					while(src.health == X)sleep(1)
 					if(get_dist(usr,T)>50||usr.z != T.z)

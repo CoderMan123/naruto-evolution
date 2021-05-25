@@ -2752,7 +2752,7 @@ mob
 							spawn(usr.attkspeed*2)
 								usr.firing=0
 						else
-							usr << output("You're too experienced in agility to gain anymore experience from these.","ActionPanel.Output")
+							usr << output("You're too experienced in agility to gain anymore experience from these.","Action.Output")
 							return*/
 			//UpdateInventoryPanel()
 			return

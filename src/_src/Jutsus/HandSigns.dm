@@ -90,7 +90,7 @@ obj
 					usr.doslot(src.name)
 				else
 					if(!IsGate)
-						usr << output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","ActionPanel.Output")
+						usr << output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
 					else
 						usr << output("You may not put this technique on a hotslot.","Action.Output")
 			else
@@ -399,7 +399,7 @@ obj
 					usr.hotslot10=src.name
 					h.HotSlotNumber("F10")
 			else
-				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","ActionPanel.Output")
+				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
 
 
 

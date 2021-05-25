@@ -47,7 +47,7 @@ mob
 								c_target.firing=0
 							del A
 						else
-							src<<output("The jutsu did not connect.","ActionPanel.Output")
+							src<<output("The jutsu did not connect.","Action.Output")
 							del A
 
 

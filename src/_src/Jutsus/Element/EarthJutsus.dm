@@ -74,7 +74,7 @@ mob
 								M.injutsu=0
 								M.canattack=1
 								M.Sleeping=0
-						else src<<output("The jutsu did not connect.","ActionPanel.Output")
+						else src<<output("The jutsu did not connect.","Action.Output")
 					src.firing=0
 					src.canattack=1
 		Dango()
@@ -135,7 +135,7 @@ mob
 									del(Y)
 							M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 							spawn() if(M) M.Bleed()
-						else src<<output("The jutsu did not connect.","ActionPanel.Output")
+						else src<<output("The jutsu did not connect.","Action.Output")
 					spawn(1)
 						src.firing=0
 						src.canattack=1

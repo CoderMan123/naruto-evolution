@@ -42,7 +42,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/turf/T=src.loc
-					src<<output("You will be sent to this location the next time your character accumulates damage.","ActionPanel.Output")
+					src<<output("You will be sent to this location the next time your character accumulates damage.","Action.Output")
 					var/X = src.health
 					while(src.health == X)sleep(1)
 					if(get_dist(usr,T)>30||usr.z != T.z)
@@ -122,7 +122,7 @@ mob
 		Sage_Style_Giant_Rasengan()
 			for(var/obj/Jutsus/Sage_Style_Giant_Rasengan/J in src.jutsus)
 				if(!insage) // things like this come first
-					src<<output("You must be in Sage Mode in order to use this.","ActionPanel.Output")
+					src<<output("You must be in Sage Mode in order to use this.","Action.Output")
 					return
 				if(src.PreJutsu(J))
 					if(Effects["Rasengan"])
@@ -142,7 +142,7 @@ mob
 					src.canattack=0
 					src.firing=1
 					src.icon_state="jutsuse"
-					view(src) << output("<b><font color = gold>[usr]says: Sage Style...GIANT RASENGAN!","ActionPanel.Output")
+					view(src) << output("<b><font color = gold>[usr]says: Sage Style...GIANT RASENGAN!","Action.Output")
 					var/obj/I = new/obj
 					I.IsJutsuEffect=src
 					if(dir!=SOUTH) I.layer=MOB_LAYER-1

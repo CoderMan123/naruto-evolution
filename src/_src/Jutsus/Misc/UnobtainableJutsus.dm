@@ -44,10 +44,10 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target)
-						src << output("<Font color=White>You need a target to use this.</Font>","ActionPanel.Output")
+						src << output("<Font color=White>You need a target to use this.</Font>","Action.Output")
 						return
 					if(c_target.industprison!=1)
-						src << output("<Font color=White>Your target needs to be in Dust Particle Prison in order for jutsu to work..</Font>","ActionPanel.Output")
+						src << output("<Font color=White>Your target needs to be in Dust Particle Prison in order for jutsu to work..</Font>","Action.Output")
 						return
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					src.injutsu=1
@@ -84,7 +84,7 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target)
-						src << output("<Font color=White>You need a target to use this.</Font>","ActionPanel.Output")
+						src << output("<Font color=White>You need a target to use this.</Font>","Action.Output")
 						return
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(4,8))
 					src.canattack=0

@@ -89,7 +89,7 @@ mob
 								sleep(5)
 							if(O)del(O)
 						else
-							src<<output("The jutsu did not connect.","ActionPanel.Output")
+							src<<output("The jutsu did not connect.","Action.Output")
 
 		Susanoo()
 			for(var/obj/Jutsus/Susanoo/J in src.jutsus)
