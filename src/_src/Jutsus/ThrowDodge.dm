@@ -2,6 +2,8 @@ mob
 	verb
 		ThrowMob()
 			set hidden=1
+			for(var/mob/M in get_step(src,src.dir))
+				if(istype(M, /mob/Clones)) return
 			if(ChakraCheck(0)) return
 			src.HengeUndo()
 			if(src.likeaclone) return
