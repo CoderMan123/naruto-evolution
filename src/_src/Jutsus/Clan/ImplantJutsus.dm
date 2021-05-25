@@ -1,4 +1,18 @@
 mob
+	Void
+		name = "The Void"
+turf
+	IntangBlocker //A turf which does not allow a player using intangibility to pass through
+		icon = 'Misc Effects.dmi'
+		icon_state = "IntangBlocker"
+		New()
+			..()
+			src.icon_state = "Blank"
+		Entered(mob/M)
+			M.DealDamage(100000, /mob/Void)
+			M<<"I ventured too far into the void!"
+
+mob
 	proc
 		Sharingan_Copy()
 			for(var/obj/Jutsus/Sharingan_Copy/J in src.jutsus)
