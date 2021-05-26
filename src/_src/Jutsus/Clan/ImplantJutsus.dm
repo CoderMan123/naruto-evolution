@@ -5,6 +5,7 @@ turf
 	IntangBlocker //A turf which does not allow a player using intangibility to pass through
 		icon = 'Misc Effects.dmi'
 		icon_state = "IntangBlocker"
+		density = 1
 		New()
 			..()
 			src.icon_state = "Blank"
