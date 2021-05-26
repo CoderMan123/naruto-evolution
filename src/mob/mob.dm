@@ -143,7 +143,6 @@ mob
 			for(var/jutsu in typesof(/obj/Jutsus))
 				var/obj/Jutsus/j = new jutsu
 				if(src && j.starterjutsu)
-					world << "starter found [j]"
 					j.owner = src.ckey
 					src.jutsus += j
 					src.jutsus_learned += j.type
