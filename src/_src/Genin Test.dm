@@ -94,7 +94,8 @@ obj/Special/GeninExam
 			var/Question=pick(NewQuestions)
 			NewQuestions-=Question
 			QuestionNum++
-			if(usr.client.Alert("Question #[QuestionNum]: [Question]","Question [QuestionNum]",list("True","False"))=="[Questions[Question]]")
+			if(usr.client.Alert("Question #[QuestionNum]: [Question]","Question [QuestionNum]",list("True","False")) == Questions[Question])
+				world << Questions[Question]
 				CorrectAnswer++
 		usr<<output("You have completed the test, please wait for the result.","Action.Output")
 		while(GeninTest)
