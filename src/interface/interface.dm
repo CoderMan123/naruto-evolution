@@ -448,6 +448,7 @@ client
 			if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 
 		UpdateCharacterPanel()
+			if(!src) return
 			if(winget(src, "Character", "is-visible") == "true")
 				winset(src, null, {"
 					Character.Avatar.image     = "\icon[src.mob.icon]"
@@ -480,6 +481,7 @@ client
 
 		UpdateInventoryPanel()
 			set hidden=1
+			if(!src) return
 			if(winget(src, "Inventory", "is-visible") == "true")
 				winset(src,"Inventory.Ryo","text=\"[src.mob.Ryo]\"")
 				winset(src,"Inventory.Titlebar","text=\"Inventory - [src.mob.items]/[src.mob.maxitems]\"")

@@ -147,6 +147,7 @@ obj/Screen/EXP
 mob
 	proc
 		UpdateBars()
+			if(!src.client) return
 			spawn()
 				while(src)
 					var/timeoff=rand(10,16)
@@ -166,6 +167,7 @@ mob
 							if(istype(H, /obj/Screen/Chakra/)) H.icon_state="[round(src.chakra/src.maxchakra*100,10)]"
 							if(istype(H, /obj/Screen/EXP/)) H.icon_state="[round(src.exp/src.maxexp*100,10)]"
 		UpdateHMB()
+			if(!src.client) return
 			spawn() src.client.UpdateCharacterPanel()
 			if(!src.henge)
 				for(var/obj/Screen/O in src.hbar)
