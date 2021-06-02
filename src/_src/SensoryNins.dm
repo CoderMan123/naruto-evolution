@@ -1,4 +1,4 @@
-mob/NPC/SensoryNin//sensory
+mob/npc/SensoryNin//sensory
 	name = "Sensory ninja"
 	icon='WhiteMBase.dmi'
 	pixel_x=-15

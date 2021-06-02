@@ -22,7 +22,7 @@ Each of these parts should be separated by an empty line.
 
 **Example**:
 ```
-<type>(<scope>): <keyword> <description>
+<type>(<scope>): <description>
 
 <body>
 
@@ -52,17 +52,35 @@ Scopes are optional and are used to provide additional contextual information.
 - `build`: 
 - `text`: 
 
-
-##### Keywords
-- `add`: 
-- `update`: 
-- `change`: 
-- `fix`:
-- `remove`: 
-
 ##### Description
 
+Descriptions are used to describe what a commit does, and should be written in [imperative mood](https://www.grammar-monster.com/glossary/imperative_mood.htm).
+
 ##### Breaking Changes
+
+A breaking change is any commit that introduces a non-backwards compatible API change (correlating with [MAJOR](http://semver.org/#summary) in Semantic Versioning).
+
+Breaking changes __must__ append a `!` after `type(scope)` or `BREAKING CHANGE:` in the footer.
+
+**Example**:
+
+- Subject only:
+
+```
+feat(savefiles)!: add new savefile manager
+```
+
+or
+
+- Subject, body, and footer:
+
+```
+feat(savefiles): add new savefile manager
+
+commit body
+
+BREAKING CHANGE: this is not backwards compatible with the old savefile manager. implement savefile migration tool: issue #0
+```
 
 #### Body (Optional)
 

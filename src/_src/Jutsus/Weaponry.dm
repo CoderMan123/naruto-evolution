@@ -29,7 +29,7 @@ obj
 							for(var/mob/X in view(src,3))
 								if(X.dead==0)
 									X.DealDamage(damage-(X.defence/5),src.Owner,"TaiOrange")
-									if(istype(X,/mob/NPC))..()
+									if(istype(X,/mob/npc))..()
 									else
 										X.icon_state="push"
 										X.injutsu=1
@@ -65,7 +65,7 @@ obj
 									for(var/mob/X in view(src,3))
 										if(X.dead==0)
 											X.DealDamage(damage,src.Owner,"TaiOrange")
-											if(istype(X,/mob/NPC))
+											if(istype(X,/mob/npc))
 												..()
 											else
 												X.icon_state="push"
@@ -102,7 +102,7 @@ obj
 										for(var/mob/X in view(src,3))
 											if(X.dead==0)
 												X.DealDamage(damage,src.Owner,"TaiOrange")
-												if(istype(X,/mob/NPC))..()
+												if(istype(X,/mob/npc))..()
 												else
 													X.icon_state="push"
 													X.injutsu=1
@@ -135,7 +135,7 @@ obj
 									for(var/mob/M in view(src,3))
 										if(M.dead==0)
 											M.DealDamage(damage,src.Owner,"TaiOrange")
-											if(istype(M,/mob/NPC))..()
+											if(istype(M,/mob/npc))..()
 											else
 												M.icon_state="push"
 												M.injutsu=1
@@ -166,7 +166,7 @@ obj
 									for(var/mob/M in view(src,3))
 										if(M.dead==0)
 											M.DealDamage(damage,src.Owner,"TaiOrange")
-											if(istype(M,/mob/NPC))..()
+											if(istype(M,/mob/npc))..()
 											else
 												M.icon_state="push"
 												M.injutsu=1
@@ -224,7 +224,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -258,7 +258,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -339,7 +339,7 @@ obj
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(45))M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									else
 										if(M.amounthits<6)
@@ -413,7 +413,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(45))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										else
 											if(M.amounthits<6)
@@ -637,7 +637,7 @@ obj
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(75))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									else
 										if(M.amounthits<6)
@@ -712,7 +712,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										else
 											if(M.amounthits<6)
@@ -936,7 +936,7 @@ obj
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(30))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									else
 										if(M.amounthits<6)
@@ -1012,7 +1012,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										else
 											if(M.amounthits<6)
@@ -1239,7 +1239,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -1274,7 +1274,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -1363,7 +1363,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,4))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -1397,7 +1397,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -1482,7 +1482,7 @@ obj
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,4))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -1514,7 +1514,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -1607,7 +1607,7 @@ obj
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,6))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -1634,7 +1634,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,6))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -1722,7 +1722,7 @@ obj
 									spawn() if(M) M.Bleed()
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									else
 										if(M.amounthits<6)
@@ -1783,7 +1783,7 @@ obj
 										spawn() if(M) M.Bleed()
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										else
 											if(M.amounthits<6)
@@ -1965,7 +1965,7 @@ obj
 										Owner.Levelup()
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -2001,7 +2001,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -2090,7 +2090,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,2))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/NPC))
+									if(istype(O,/mob/npc))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -2125,7 +2125,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/NPC))
+										if(istype(O,/mob/npc))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -2282,7 +2282,7 @@ mob
 				src.overlays+=/obj/Overlays/Dustmax
 				flick("groundjutsu",src)
 				for(var/mob/M in orange(7))
-					if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/NPC)) continue
+					if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/npc)) continue
 					M.DealDamage(jutsudamage+round((src.strength / 150)*2*jutsudamage*0.6),src,"TaiOrange")
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					M.icon_state="dead"

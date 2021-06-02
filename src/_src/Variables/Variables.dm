@@ -32,7 +32,7 @@ mob
 		skillpoints=1
 		kills=0
 		village="Leaf"
-		rank="Academy Student"
+		rank = RANK_ACADEMY_STUDENT
 		dead=0
 		namecolor="green"
 		chatcolor="white"

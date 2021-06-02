@@ -14,7 +14,7 @@ obj/Tutorial
 		icon_state="ClickMe"
 		density=0
 		layer=999
-mob/NPC
+mob/npc
 	Tutorial
 		name="Jounin"
 		density=1

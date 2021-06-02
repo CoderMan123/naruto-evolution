@@ -2,7 +2,7 @@ mob
 	see_in_dark=3
 	New()
 		..()
-		if(!src.client)src.beAI()
+
 	verb
 		ChatBox()
 			set hidden=1

@@ -425,7 +425,7 @@ mob/Admin/verb
 			if("Hidden Leaf")
 				world<<output("<b><center>[M] has been promoted to the Hokage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Hokage by [usr]([usr.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-				M.rank="Hokage"
+				M.rank = RANK_HOKAGE
 				Kages["Hidden Leaf"]=M.ckey
 				M.village="Hidden Leaf"
 				var/squad/squad = M.GetSquad()
@@ -438,7 +438,7 @@ mob/Admin/verb
 			if("Hidden Sand")
 				world<<output("<b><center>[M] has been promoted to the Kazekage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Kazekage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-				M.rank="Kazekage"
+				M.rank = RANK_KAZEKAGE
 				Kages["Hidden Sand"]=M.ckey
 				M.village="Hidden Sand"
 				var/squad/squad = M.GetSquad()
@@ -451,7 +451,7 @@ mob/Admin/verb
 			if("Hidden Mist")
 				world<<output("<b><center>[M] has been promoted to the Mizukage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Mizukage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-				M.rank="Mizukage"
+				M.rank = RANK_MIZUKAGE
 				Kages["Hidden Mist"]=M.ckey
 				M.village="Hidden Mist"
 				var/squad/squad = M.GetSquad()
@@ -464,7 +464,7 @@ mob/Admin/verb
 			if("Hidden Sound")
 				world<<output("<b><center>[M] has been promoted to the Otokage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Otokage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-				M.rank="Otokage"
+				M.rank = RANK_OTOKAGE
 				Kages["Hidden Sound"]=M.ckey
 				M.village="Hidden Sound"
 				var/squad/squad = M.GetSquad()
@@ -477,7 +477,7 @@ mob/Admin/verb
 			if("Hidden Rock")
 				world<<output("<b><center>[M] has been promoted to the Tsuchikage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Tsuchikage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-				M.rank="Tsuchikage"
+				M.rank = RANK_TSUCHIKAGE
 				Kages["Hidden Rock"]=M.ckey
 				M.village="Hidden Rock"
 				var/squad/squad = M.GetSquad()
@@ -494,7 +494,7 @@ mob/Admin/verb
 		var/VillageLead=input("What village will you affect?","Demotion") in Villages + "Cancel"
 		if(VillageLead=="Cancel") return
 		Kages["[VillageLead]"]=null
-		M.rank="Genin"
+		M.rank = RANK_GENIN
 		var/squad/squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()

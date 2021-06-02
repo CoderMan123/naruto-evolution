@@ -1,5 +1,10 @@
 client
-	var/tmp/channel = "Local"
+	mouse_pointer_icon='cursors.dmi'
+	var/tmp
+		channel = "Local"
+	var
+		last_mission
+
 	New()
 		..()
 		clients_connected += src
@@ -18,10 +23,13 @@ client
 			Main.UnlockChild.is-visible = "false";
 		"})
 
+		src.Load()
+
 		spawn() src.mob.Playtime()
 
 	Del()
 		src.mob.Save()
+		src.Save()
 		mobs_online -= src.mob
 		clients_online -= src
 		clients_connected -= src

@@ -27,7 +27,7 @@ proc/GeninExam()
 mob
 	proc/givegenin()
 		src<<output("You are now a Genin.","Action.Output")
-		src.rank="Genin"
+		src.rank = RANK_GENIN
 		var/squad/squad = src.GetSquad()
 		if(squad)
 			squad.Refresh()

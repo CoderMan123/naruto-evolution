@@ -1,5 +1,5 @@
 obj/var/Colorable=1
-mob/NPC
+mob/npc
 	New()
 		NewStuff()
 		..()

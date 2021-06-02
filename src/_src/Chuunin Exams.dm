@@ -125,7 +125,7 @@ proc/ChuuninExamGo()
 			for(var/obj/ChuuninExam/Scrolls/S in M)del(S)
 	if(Chuunins.len<2)
 		for(var/mob/M in Chuunins)
-			M.rank="Chuunin"
+			M.rank = RANK_CHUUNIN
 			var/squad/squad = M.GetSquad()
 			if(squad)
 				squad.Refresh()
@@ -149,7 +149,7 @@ proc/ChuuninExamGo()
 	while(Chuunins.len)
 		if(Chuunins.len<2)
 			for(var/mob/M in Chuunins)
-				M.rank="Chuunin"
+				M.rank = RANK_CHUUNIN
 				var/squad/squad = M.GetSquad()
 				if(squad)
 					squad.Refresh()
@@ -195,7 +195,7 @@ proc/ChuuninExamGo()
 		if(ChuuninDuelWinner.village=="Hidden Mist") new/obj/Inventory/Clothing/Vests/MistVest(ChuuninDuelWinner)
 		if(ChuuninDuelWinner.village=="Hidden Sound") new/obj/Inventory/Clothing/Vests/SoundVest(ChuuninDuelWinner)
 		if(ChuuninDuelWinner.village=="Hidden Rock") new/obj/Inventory/Clothing/Vests/RockVest(ChuuninDuelWinner)
-		ChuuninDuelWinner.rank="Chuunin"
+		ChuuninDuelWinner.rank = RANK_CHUUNIN
 		var/squad/squad = ChuuninDuelWinner.GetSquad()
 		if(squad)
 			squad.Refresh()

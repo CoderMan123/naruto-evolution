@@ -94,13 +94,7 @@ obj
 			pixel_y=-2
 			pixel_x=15
 			layer=TURF_LAYER+1
-client
-	mouse_pointer_icon='VillageSymbols.dmi'
-	//lazy_eye = 5
-	//mouse_over_pointer='pointero.dmi'
-//	Stat()
-//		.=..()
-		//src.overlays=0//Clears the player's overlays so the letters won't build up on top of each other.
+
 obj/CinematicFollower
 	//icon='checkbox.dmi'
 	//icon_state="unchecked"

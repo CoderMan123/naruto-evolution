@@ -1,6 +1,7 @@
 obj
 	var/tmp/Description="No description provided."
 	Inventory
+		mouse_over_pointer = /obj/cursors/pickup
 		var/stacks=1
 		var/tmp/max_stacks=1
 		var/equip=0
@@ -51,8 +52,25 @@ mob
 				hearers() << output("You can't pickup items while dead.","Action.Output")
 				return
 
+
+
 			if(src.contents.len < src.maxitems)
 				for(var/obj/Inventory/O in oview(1))
+
+					if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
+						var/obj/Inventory/mission/deliver_intel/leaf_intel/o = O
+
+						var/squad/squad = src.GetSquad()
+						// The intel scroll can only be picked up by the originating squad or by another village.
+						if(squad && o.squad && squad != o.squad || src.village == "Hidden Leaf") continue
+
+					else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
+						var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
+
+						var/squad/squad = src.GetSquad()
+						// The intel scroll can only be picked up by the originating squad or by another village.
+						if(squad && o.squad && squad != o.squad || src.village == "Hidden Sand") continue
+
 					if(O.max_stacks > 1)
 						var/obj/Inventory/I
 						for(I in src.contents)
@@ -83,6 +101,20 @@ mob
 
 	proc
 		RecieveItem(var/obj/Inventory/O)
+			if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
+				var/obj/Inventory/mission/deliver_intel/leaf_intel/o = O
+
+				var/squad/squad = src.GetSquad()
+				// The intel scroll can only be picked up by the originating squad or by another village.
+				if(squad && o.squad && squad != o.squad || src.village == "Hidden Leaf") return
+
+			else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
+				var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
+
+				var/squad/squad = src.GetSquad()
+				// The intel scroll can only be picked up by the originating squad or by another village.
+				if(squad && o.squad && squad != o.squad || src.village == "Hidden Sand") return
+
 			if(O.max_stacks > 1)
 				var/obj/Inventory/I
 				for(I in src.contents)
@@ -108,6 +140,32 @@ mob
 			src.client.UpdateInventoryPanel()
 
 		DropItem(obj/Inventory/O, var/quantity=1)
+			//TODO: make dropping more than 1 quantity work with non stackables
+			//TODO: quantity = -1 means drop maximum, stacking and non stacking included.
+			if(O.stacks > 1)
+				if(!quantity) return
+				//if(quantity == -1)
+				if(quantity)
+					if(O.stacks < quantity)
+						src.client.Alert("You don't have [quantity] [O]'s to drop.")
+						return
+
+					else if(O.stacks == quantity)
+						O.loc=src.loc
+
+					else if(O.stacks > quantity)
+						O.stacks -= quantity
+						if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
+						var/obj/Inventory/o = new O.type(src.loc)
+						o.stacks = quantity
+
+					hearers() << output("[src] drops [O].","Action.Output")
+					src.client.UpdateInventoryPanel()
+
+			else
+				O.loc=src.loc
+				hearers() << output("[src] drops [O].","Action.Output")
+				src.client.UpdateInventoryPanel()
 
 		DestroyItem(obj/Inventory/O, var/destroy_quantity=1)
 			if(O.max_stacks > 1)

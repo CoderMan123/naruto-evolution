@@ -67,7 +67,7 @@ mob
 							SC.dir = get_dir(SC,C)
 							for(c_target in get_step(SC,SC.dir))
 								if(c_target in get_step(SC,SC.dir))
-									if(c_target.dead==0&&!istype(c_target,/mob/NPC/)&&c_target!=SC.Owner)
+									if(c_target.dead==0&&!istype(c_target,/mob/npc/)&&c_target!=SC.Owner)
 										if(c_target.fightlayer==SC.fightlayer)
 											if(c_target.client)spawn()c_target.ScreenShake(1)
 											if(c_target.dodge==0)
@@ -251,7 +251,7 @@ mob
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
 							if(c_target in get_step(src,src.dir))
-								if(c_target.dead==0&&!istype(c_target,/mob/NPC/))
+								if(c_target.dead==0&&!istype(c_target,/mob/npc/))
 									var/canhityou=1
 									if(c_target.Clan == "Sand")
 										var/blockchance = rand(1,2)
@@ -405,7 +405,7 @@ mob
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
 							if(c_target in get_step(src,src.dir))
-								if(c_target.dead==0&&!istype(c_target,/mob/NPC/))
+								if(c_target.dead==0&&!istype(c_target,/mob/npc/))
 									var/canhityou=1
 									if(c_target.Clan == "Sand")
 										var/blockchance = rand(1,3)

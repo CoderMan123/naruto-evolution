@@ -35,7 +35,7 @@ mob/Kage/verb
 		if(M.client.Alert("[src] invites you to join the [village] village, accept?","Confirm",list("No","Yes"))==1) return
 		world<<output("[M] has joined the [village] village.","Action.Output")
 		M.village="[village]"
-		M.rank="Genin"
+		M.rank = RANK_GENIN
 		var/squad/squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
@@ -51,7 +51,7 @@ mob/Kage/verb
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
 		M<<output("You have been promoted to the ANBU Ops.","Action.Output")
-		M.rank="ANBU"
+		M.rank = RANK_ANBU
 		var/squad/squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
@@ -79,7 +79,7 @@ mob/Kage/verb
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
 		M<<output("You have been booted from the ANBU Ops, and are now a Jounin.","Action.Output")
-		M.rank="Jounin"
+		M.rank = RANK_JOUNIN
 		var/squad/squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
@@ -106,7 +106,7 @@ mob/Kage/verb
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
 		M<<output("You have been promoted to Jounin.","Action.Output")
-		M.rank="Jounin"
+		M.rank = RANK_JOUNIN
 		var/squad/squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
@@ -122,7 +122,7 @@ mob/Kage/verb
 		if(P=="Cancel") return
 		var/mob/M = X["[P]"]
 		M<<output("You have been demoted from Jounin, and are now a Chuunin.","Action.Output")
-		M.rank="Chuunin"
+		M.rank = RANK_CHUUNIN
 		var/squad/squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
@@ -174,7 +174,7 @@ mob/Kage/verb
 				world<<output("<b><center>[src] has retired as Hokage, and [M] has been promoted as their successor!<b></center>","Action.Output")
 				text2file("[src] has retired as Hokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-				M.rank="Hokage"
+				M.rank = RANK_HOKAGE
 				Kages["Hidden Leaf"]=M.ckey
 				M.village="Hidden Leaf"
 				squad = M.GetSquad()
@@ -191,7 +191,7 @@ mob/Kage/verb
 				world<<output("<b><center>[src] has retired as Kazekage, and [M] has been promoted as their successor!<b></center>","Action.Output")
 				text2file("[src] has retired as Kazekage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-				M.rank="Kazekage"
+				M.rank = RANK_KAZEKAGE
 				Kages["Hidden Sand"]=M.ckey
 				M.village="Hidden Sand"
 				squad = M.GetSquad()
@@ -209,7 +209,7 @@ mob/Kage/verb
 				world<<output("<b><center>[src] has retired as Mizukage, and [M] has been promoted as their succesor!<b></center>","Action.Output")
 				text2file("[src] has retired as Mizukage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-				M.rank="Mizukage"
+				M.rank = RANK_MIZUKAGE
 				Kages["Hidden Mist"]=M.ckey
 				M.village="Hidden Mist"
 				squad = M.GetSquad()
@@ -227,7 +227,7 @@ mob/Kage/verb
 				world<<output("<b><center>[src] has retired as Otokage, and [M] has been promoted as their successor!<b></center>","Action.Output")
 				text2file("[src] has retired as Otokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-				M.rank="Otokage"
+				M.rank = RANK_OTOKAGE
 				Kages["Hidden Sound"]=M.ckey
 				M.village="Hidden Sound"
 				squad = M.GetSquad()
@@ -245,7 +245,7 @@ mob/Kage/verb
 				world<<output("<b><center>[src] has retired as Tsuchikage, and [M] has been promoted as their successor!<b></center>","Action.Output")
 				text2file("[src] has retired as Tsuchikage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-				M.rank="Tsuchikage"
+				M.rank = RANK_TSUCHIKAGE
 				Kages["Hidden Rock"]=M.ckey
 				M.village="Hidden Rock"
 				squad = M.GetSquad()
@@ -329,7 +329,7 @@ mob/AnbuLeader/verb/
 		if(squad)
 			squad.Refresh()
 
-		M.rank="Anbu Leader"
+		M.rank = RANK_ANBU_LEADER
 		squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
@@ -358,7 +358,7 @@ mob/AkatsukiLeader/verb/
 		if(M.client.Alert("You have been invited to join the Akatsuki. Accept, decline?","Confirm",list("Accept","Decline"))==2) return
 		for(var/mob/Z in world) if(Z.village=="Akatsuki") Z<<"[M] has joined your ranks."
 		M.village="Akatsuki"
-		M.rank="Akatsuki"
+		M.rank = RANK_AKATSUKI
 		var/squad/squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
@@ -406,7 +406,7 @@ mob/AkatsukiLeader/verb/
 		var/mob/M = X["[P]"]
 		text2file("[src] has retired as Akatsuki, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-		rank="Akatsuki"
+		rank = RANK_AKATSUKI
 		village="Akatsuki"
 		var/squad/squad = src.GetSquad()
 		if(squad)
@@ -418,7 +418,7 @@ mob/AkatsukiLeader/verb/
 		overlays=null
 		RestoreOverlays()
 		RemoveAdminVerbs()
-		M.rank="Akatsuki Leader"
+		M.rank = RANK_AKATSUKI_LEADER
 		squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
@@ -528,7 +528,7 @@ mob/SevenSwordsmenLeader/verb/
 		overlays=null
 		RestoreOverlays()
 		RemoveAdminVerbs()
-		M.rank="Seven Swordsmen Leader"
+		M.rank = RANK_SEVEN_SWORDSMEN_LEADER
 		squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()

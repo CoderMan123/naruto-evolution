@@ -270,7 +270,7 @@ obj
 									if(c_target.fightlayer==src.fightlayer)
 										src.Hit=1
 										//if(prob(35))
-										//	if(istype(c_target,/mob/NPC))
+										//	if(istype(c_target,/mob/npc))
 										//		..()
 										//	else
 										//		c_target.Linkage=src

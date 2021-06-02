@@ -9,11 +9,8 @@ client
 						c = client
 						break
 
-				if(!c.mob.GetSquad())
-					var/squad/squad = new()
-					squad.Create(c.mob)
-				else
-					c.Alert("Please leave or disband the Squad you are already in before you try and create a new one.", "Squad")
+				var/squad/squad = new()
+				squad.Create(c.mob)
 
 			if("squad-invite")
 				var/client/c = locate(href_list["src"])
@@ -23,8 +20,7 @@ client
 						break
 
 				var/squad/squad = c.mob.GetSquad()
-				if(squad)
-					c.mob.InviteSquad()
+				if(squad) squad.Invite(c.mob)
 
 			if("squad-promote")
 				var/squad/squad = src.mob.GetSquad()
@@ -38,8 +34,7 @@ client
 						break
 
 				var/squad/squad = c.mob.GetSquad()
-				if(squad)
-					squad.Kick(c.mob, href_list["ckey"])
+				if(squad) squad.Kick(c.mob, href_list["ckey"])
 
 			if("squad-leave")
 				var/squad/squad = src.mob.GetSquad()
@@ -53,9 +48,173 @@ client
 						break
 
 				var/squad/squad = c.mob.GetSquad()
-				if(squad)
-					c.mob.DisbandSquad()
+				if(squad) squad.Disband(c.mob)
+
+squad
+	var/leader[0]
+	var/members[0]
+	var/levels[0]
+	var/villages[0]
+	var/ranks[0]
+	var/factions[0]
+	var/mission/mission
+
+	proc/Create(mob/M)
+		if(!M.GetSquad())
+			if(M.client.Alert("Would you like to create a Squad?", "Squad", list("Yes", "No")) == 1)
+				src.leader[M.ckey] = M.character
+				src.members[M.ckey] = M.character
+				src.levels[M.ckey] = M.level
+				src.villages[M.ckey] = M.village
+				src.ranks[M.ckey] = M.rank
+				squads += src
+				src.Refresh()
+		else
+			M.client.Alert("Please leave or disband the Squad you are already in before you try and create a new one.", "Squad")
+
+	proc/Disband(mob/M)
+		if(src.leader[M.ckey])
+			if(src.mission)
+				M.client.Alert("You can't disband your squad while on a mission.")
+			else
+				for(var/ckey in src.members)
+					for(var/mob/m in mobs_online)
+						if(m.client.ckey == ckey)
+							m.client.browser=BROWSER_NONE
+							winset(m.client, "Browser", "is-visible = false")
+							break
+
+				src.leader = new()
+				src.members = new()
+				src.Refresh()
+				squads -= src
+		else
+			M.client.Alert("Only the Squad Leader can disband the Squad.", "Squad")
+
+	proc/Invite(mob/M)
+		if(src.leader[M.ckey])
+			if(src.mission)
+				M.client.Alert("You can't invite anyone to your squad while on a mission.")
+
+			else if(src.members.len > 4)
+				M.client.Alert("Your squad is already at max capacity.", "Invite to Squad")
+			else
+				var/mob/m = input("Who would you like to invite into your squad?", "Invite to Squad") as null|anything in mobs_online
+				if(src && src.leader[M.client.ckey] && m)
+					if(!m.GetSquad())
+						if(m.client.Alert("Would you like to join [M]'s squad?", "Join Squad", list("Yes", "No")) == 1)
+							if(!m.GetSquad())
+								if(M.GetSquad() == src)
+									var/squad/squad = M.GetSquad()
+									if(squad)
+										squad.members[m.ckey] = m.character
+										squad.levels[m.ckey] = m.level
+										squad.villages[m.ckey] = m.village
+										squad.ranks[m.ckey] = m.rank
+										src.Refresh()
+									else m.client.Alert("You cannot join [M]'s squad because the squad no longer exists.")
+								else
+									m.client.Alert("You cannot join [M]'s squad because they are no longer the squad leader.", "Join Squad")
+							else
+								m.client.Alert("You cannot join [M]'s squad because you've already joined another squad.")
+					else
+						M.client.Alert("[m] is already in a squad.", "Invite to Squad")
+		else
+			M.client.Alert("Only the Squad Leader can invite someone to the Squad.", "Squad")
+
+	proc/Leave(mob/M)
+		if(src.mission)
+			M.client.Alert("You can't leave your squad while on a mission.")
+		else
+			switch(M.client.Alert("Are you sure you want to leave your squad?", "Leave Squad", list("Yes", "No")))
+				if(1)
+					if(src.leader[M.ckey])
+						for(var/client/C in clients_online) if(C.ckey in src.members - M.ckey)
+							spawn() C.Alert("[M] has disbanded the squad.", "Disband Squad")
+
+						src.Disband(M)
+						M.client.Alert("You have disbanded the squad.", "Disband Squad")
+					else
+						src.members -= M.ckey
+						src.Refresh()
+						M.client.Alert("You have left the squad.", "Leave Squad")
+
+	proc/Kick(mob/M, var/ckey)
+		if(src.leader[M.ckey])
+			if(src.mission)
+				M.client.Alert("You can't kick someone from your squad while on a mission.")
+
+			else
+				if(ckey in src.members)
+					for(var/client/c in clients_online)
+						if(c.ckey in src.members)
+							c << "[src.members[ckey]] was kicked from the Squad."
+							c.browser=BROWSER_SQUAD
+							winset(c, "Browser", "is-visible = true")
+
+					if(ckey in src.members)
+						src.members -= ckey
+						src.levels -= ckey
+						src.villages -= ckey
+						src.ranks -= ckey
+
+					src.Refresh()
+
+		else
+			M.client.Alert("Only the Squad Leader can kick someone from the Squad.", "Squad")
+
+	proc/ChangeLeader(mob/M)
+		if(src.leader[M.ckey])
+			var/member = input("Who would you like to make the Squad Leader?", "Squad") as null|anything in src.members
+			if(member)
+				if(member in src.members)
+					if(M.ckey == member)
+						M.client.Alert("You are already the Squad Leader.", "Squad")
+					else
+						switch(M.client.Alert("Are you sure you want to promote [src.members[member]] to Squad Leader?", "Leave Squad", list("Yes", "No")))
+							if(1)
+								if(src.leader[M.ckey])
+									if(member in src.members)
+										if(M.ckey != member)
+											src.leader = new()
+											src.leader[member] = src.members[member]
+											src.Refresh()
+										else
+											M.client.Alert("You are already the Squad Leader.", "Squad")
+									else
+										M.client.Alert("[member] is no longer in the Squad.", "Squad")
+								else
+									M.client.Alert("Only the Squad Leader can promote someone to the Squad Leader.", "Squad")
+				else
+					src.Refresh()
+					M.client.Alert("[member] is no longer in the Squad.", "Squad")
+		else
+			M.client.Alert("Only the Squad Leader can promote someone to the Squad Leader.", "Squad")
+
+	proc/RefreshMember(mob/M)
+		if(src && M && src.members[M.client.ckey] && src.members[M.ckey] == M.character && M.client.browser == BROWSER_SQUAD && winget(M.client, "Browser", "is-visible") == "true")
+			src.levels[M.ckey] = M.level
+			src.villages[M.ckey] = M.village
+			src.ranks[M.ckey] = M.rank
+			M.Squad()
+			M.Squad()
+
+	proc/Refresh()
+		for(var/client/c in clients_online)
+			if(src && c && src.members[c.ckey] && src.members[c.ckey] == c.mob.character && c.browser == BROWSER_SQUAD && winget(c, "Browser", "is-visible") == "true")
+				src.levels[c.ckey] = c.mob.level
+				src.villages[c.ckey] = c.mob.village
+				src.ranks[c.ckey] = c.mob.rank
+
+				c.mob.Squad()
+				c.mob.Squad()
+
 mob
+	proc/GetSquad()
+		for(var/squad/squad in squads)
+			if(squad.leader[src.ckey] && squad.leader[src.ckey] == src.character || squad.members[src.ckey] && squad.members[src.ckey] == src.character) return squad
+			else continue
+
 	verb/Squad()
 		set hidden = 1
 		if(winget(src, "Browser", "is-visible") == "false")
@@ -65,7 +224,7 @@ mob
 					<!doctype html>
 					<html lang="en">
 					<head>
-						<title>Squad Management</title>
+						<title>Squad</title>
 
 						<!-- Required meta tags -->
 						<meta charset="utf-8">
@@ -79,11 +238,18 @@ mob
 
 						<style>
 							body {
-								padding-top: 19px;
-								padding-left: 10px;
+								padding: 10px;
 								background-color: #414141;
 								color: #C8C8C8;
 								font-family: 'Open Sans', sans-serif;
+							}
+
+							h1 {
+								margin: 0px;
+							}
+
+							h2 {
+								margin-top: 16px;
 							}
 
 							a {
@@ -100,23 +266,27 @@ mob
 								color: #007bff;
 								text-decoration: none;
 							}
+
 							table {
 								border-color: #dee2e6 !important;
 							}
+
 							th {
 								color: #C8C8C8;
 								border-width: 1px !important;
 								border-color: #646464 !important;
 							}
+
 							td {
 								color: #C8C8C8;
 								border-color: #646464 !important;
 							}
+
 						</style>
 					</head>
 
 					<body>
-						<h1>Squad Management</h1>
+						<h1>Squad</h1>
 
 						<h2>Create Squad</h1>
 
@@ -138,13 +308,61 @@ mob
 			else
 				var/squad_members
 				var/squad_management
+				var/mission
+				var/mission_management
 
 				if(squad.leader[src.ckey])
 					squad_management = {"
-						<h2>Squad Management</h1>
+						<h2 class="spacer">Squad Management</h1>
 
 						<span>\[<a href='?src=\ref[src];action=squad-invite;ckey=[ckey]'>Invite</a>]</span>
 						<span>\[<a href='?src=\ref[src];action=squad-disband;ckey=[ckey]'>Disband</a>]</span>
+					"}
+
+				if(squad.leader[src.ckey] && squad.mission && !squad.mission.complete)
+					mission_management = {"
+						<span>\[<a href='?src=\ref[src];action=mission-abandon;ckey=[ckey]'>Abandon</a>]</span>
+					"}
+
+				if(squad.mission)
+					var/start
+					var/complete
+					var/timer
+					var/score
+					if(squad.mission.start) start = time2text(squad.mission.start, "MM/DD/YYYY hh:mm:ss")
+					if(squad.mission.complete) complete = time2text(squad.mission.complete, "MM/DD/YYYY hh:mm:ss")
+					timer = squad.mission.GetTimer()
+					if(timer <= squad.mission.limit && squad.mission.complete)
+						score = "Pass"
+					else if(timer > squad.mission.limit)
+						score = "Fail"
+					else
+						score = "TBD"
+					mission = {"
+						<h2>Mission</h2>
+
+						<table class="table table-sm table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Mission</th>
+									<th scope="col">Start</th>
+									<th scope="col">Complete</th>
+									<th scope="col">Timer</th>
+									<th scope="col">Limit</th>
+									<th scope="col">Score</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>[squad.mission] <span>\[<a href='?src=\ref[src];action=mission-view;ckey=[ckey]'>View</a>]</span> [mission_management]</td>
+									<td>[start]</td>
+									<td>[complete]</td>
+									<td>[round(timer, 0.01)] m</td>
+									<td>[squad.mission.limit] m</td>
+									<td>[score]</td>
+								</tr>
+							</tbody>
+						</table>
 					"}
 
 				for(var/ckey in squad.members)
@@ -216,7 +434,7 @@ mob
 					<!doctype html>
 					<html lang="en">
 					<head>
-						<title>Squad Management</title>
+						<title>Squad</title>
 
 						<!-- Required meta tags -->
 						<meta charset="utf-8">
@@ -230,11 +448,18 @@ mob
 
 						<style>
 							body {
-								padding-top: 19px;
-								padding-left: 10px;
+								padding: 10px;
 								background-color: #414141;
 								color: #C8C8C8;
 								font-family: 'Open Sans', sans-serif;
+							}
+
+							h1 {
+								margin: 0px;
+							}
+
+							h2 {
+								margin-top: 16px;
 							}
 
 							a {
@@ -263,11 +488,15 @@ mob
 								color: #C8C8C8;
 								border-color: #646464 !important;
 							}
+
+							spacer {
+								padding-top: 32px;
+							}
 						</style>
 					</head>
 
 					<body>
-						<h1>Squad Management</h1>
+						<h1>Squad</h1>
 
 						[squad_management]
 
@@ -288,7 +517,7 @@ mob
 								[squad_members]
 
 								<tr>
-									<td scope="col"><span style="font-weight: bold;">Total Squad Members:</span> [squad.members.len]/4</td>
+									<td><span style="font-weight: bold;">Total Squad Members:</span> [squad.members.len]/4</td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -297,6 +526,8 @@ mob
 								</tr>
 							</tbody>
 						</table>
+
+						[mission]
 
 						<!-- Optional JavaScript -->
 						<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -314,174 +545,3 @@ mob
 		else
 			src.client.browser=BROWSER_NONE
 			winset(src, "Browser", "is-visible = false")
-
-	verb/CreateSquad()
-		set hidden = 1
-		if(!src.GetSquad())
-			if(src.client.Alert("Would you like to create a Squad?", "Squad", list("Yes", "No")) == 1)
-				var/squad/squad = new()
-				squad.Create(src)
-		else
-			src.client.Alert("Please leave or disband the Squad you are already in before you try and create a new one.", "Squad")
-
-	verb/InviteSquad()
-		set hidden = 1
-		var/squad/squad = src.GetSquad()
-		if(squad && squad.leader[src.ckey])
-			if(squad.members.len > 4)
-				src.client.Alert("Your squad is already at max capacity.", "Invite to Squad")
-			else
-				var/mob/m = input("Who would you like to invite into your squad?", "Invite to Squad") as null|anything in mobs_online
-				if(squad && squad.leader[src.client.ckey] && m)
-					if(!m.GetSquad())
-						squad.Invite(src, m)
-					else
-						src.client.Alert("[m] is already in a squad.", "Invite to Squad")
-
-
-	verb/TransferSquad()
-		set hidden = 1
-		var/squad/squad = src.GetSquad()
-		if(squad)
-			var/member = input("Who would you like to make the Squad Leader?", "Squad") as null|anything in squad.members
-			if(member)
-				squad.ChangeLeader(src, member)
-
-
-	verb/DisbandSquad()
-		set hidden = 1
-		var/squad/squad = src.GetSquad()
-		if(squad)
-			squad.Disband(src)
-
-	proc/GetSquad()
-		for(var/squad/squad in squads)
-			if(squad.leader[src.ckey] && squad.leader[src.ckey] == src.character || squad.members[src.ckey] && squad.members[src.ckey] == src.character) return squad
-			else continue
-
-squad
-	var/leader[0]
-	var/members[0]
-	var/levels[0]
-	var/villages[0]
-	var/ranks[0]
-	var/factions[0]
-
-	proc/Create(mob/M)
-		src.leader[M.ckey] = M.character
-		src.members[M.ckey] = M.character
-		src.levels[M.ckey] = M.level
-		src.villages[M.ckey] = M.village
-		src.ranks[M.ckey] = M.rank
-		squads += src
-		src.Refresh()
-
-	proc/Disband(mob/M)
-		if(src.leader[M.ckey])
-			for(var/ckey in src.members)
-				for(var/mob/m in mobs_online)
-					if(m.client.ckey == ckey)
-						m.client.browser=BROWSER_NONE
-						winset(m.client, "Browser", "is-visible = false")
-						break
-
-			src.leader = new()
-			src.members = new()
-			src.Refresh()
-			squads -= src
-		else
-			M.client.Alert("Only the Squad Leader can disband the Squad.", "Squad")
-
-	proc/RefreshMember(mob/M)
-		if(src && M && src.members[M.client.ckey])
-			src.members[M.ckey] = M.character
-			src.levels[M.ckey] = M.level
-			src.villages[M.ckey] = M.village
-			src.ranks[M.ckey] = M.rank
-
-	proc/Refresh()
-		for(var/client/c in clients_online)
-			if(src && c && src.members[c.ckey] && c.browser == BROWSER_SQUAD && winget(c, "Browser", "is-visible") == "true" )
-				src.members[c.ckey] = c.mob.character
-				src.levels[c.ckey] = c.mob.level
-				src.villages[c.ckey] = c.mob.village
-				src.ranks[c.ckey] = c.mob.rank
-
-				c.mob.Squad()
-				c.mob.Squad()
-
-	proc/Invite(mob/Leader, mob/Invitee)
-		if(Invitee.client.Alert("Would you like to join [Leader]'s squad?", "Join Squad", list("Yes", "No")) == 1)
-			if(!Invitee.GetSquad())
-				if(Leader.GetSquad() == src)
-					var/squad/squad = Leader.GetSquad()
-					if(squad)
-						squad.members[Invitee.ckey] = Invitee.character
-						squad.levels[Invitee.ckey] = Invitee.level
-						squad.villages[Invitee.ckey] = Invitee.village
-						squad.ranks[Invitee.ckey] = Invitee.rank
-						src.Refresh()
-					else Invitee.client.Alert("You cannot join [Leader]'s squad because the squad no longer exists.")
-				else
-					Invitee.client.Alert("You cannot join [Leader]'s squad because they are no longer the squad leader.", "Join Squad")
-			else
-				Invitee.client.Alert("You cannot join [Leader]'s squad because you've already joined another squad.")
-
-
-
-	proc/Leave(mob/M)
-		switch(M.client.Alert("Are you sure you want to leave your squad?", "Leave Squad", list("Yes", "No")))
-			if(1)
-				if(src.leader[M.ckey])
-					for(var/client/C in clients_online) if(C.ckey in src.members - M.ckey)
-						spawn() C.Alert("[M] has disbanded the squad.", "Disband Squad")
-
-					src.Disband(M)
-					M.client.Alert("You have disbanded the squad.", "Disband Squad")
-				else
-					src.members -= M.ckey
-					src.Refresh()
-					M.client.Alert("You have left the squad.", "Leave Squad")
-
-	proc/Kick(mob/Leader, var/ckey)
-		if(src.leader[Leader.ckey])
-			if(ckey in src.members)
-				for(var/client/c in clients_online)
-					if(c.ckey in src.members)
-						c << "[src.members[ckey]] was kicked from the Squad."
-						c.browser=BROWSER_SQUAD
-						winset(c, "Browser", "is-visible = true")
-
-				if(ckey in src.members)
-					src.members -= ckey
-					src.levels -= ckey
-					src.villages -= ckey
-					src.ranks -= ckey
-
-				src.Refresh()
-
-	proc/ChangeLeader(mob/Leader, var/member)
-		if(src.leader[Leader.ckey])
-			if(member in src.members)
-				if(Leader.ckey == member)
-					Leader.client.Alert("You are already the Squad Leader.", "Squad")
-			else
-				src.Refresh()
-				Leader.client.Alert("[member] is no longer in the Squad.", "Squad")
-		else
-			Leader.client.Alert("Only the Squad Leader can promote someone to Squad Leader.", "Squad")
-
-		switch(Leader.client.Alert("Are you sure you want to promote [src.members[member]] to Squad Leader?", "Leave Squad", list("Yes", "No")))
-			if(1)
-				if(src.leader[Leader.ckey])
-					if(member in src.members)
-						if(Leader.ckey != member)
-							src.leader = new()
-							src.leader[member] = src.members[member]
-							src.Refresh()
-						else
-							Leader.client.Alert("You are already the Squad Leader.", "Squad")
-					else
-						Leader.client.Alert("[member] is no longer in the Squad.", "Squad")
-				else
-					Leader.client.Alert("Only the Squad Leader can promote someone to Squad Leader.", "Squad")

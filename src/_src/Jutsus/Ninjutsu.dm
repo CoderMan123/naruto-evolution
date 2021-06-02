@@ -331,7 +331,7 @@ mob/Karasu
 			view(src,10) << sound('Swing5.ogg',0,0,0,100)
 			spawn(2)
 				src.dir = get_dir(src,c_target)
-				if(c_target.dead==0&&!istype(c_target,/mob/NPC/)&&c_target!=src.Owner)
+				if(c_target.dead==0&&!istype(c_target,/mob/npc/)&&c_target!=src.Owner)
 					if(!src.henged) flick("arm shooters",src)
 					if(src.henged) flick("punchr",src)
 					if(c_target.client)spawn()c_target.ScreenShake(1)
@@ -395,7 +395,7 @@ mob/Untargettable
 			flick("Attack",src)
 			view(src)<<sound('wirlwind.wav',0,0,volume=100)
 			for(var/mob/M in orange(5))
-				if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/NPC)) continue
+				if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/npc)) continue
 				M.injutsu=1
 
 				view(src)<<sound('Skill_BigRoketFire.wav',0,0,volume=100)
@@ -418,7 +418,7 @@ mob/Untargettable
 				sleep(25)
 				src.icon_state = "Idle"
 				var/Mobs
-				for(var/mob/M in oview(5))if(M.key!=src.name||istype(M,/mob/NPC))Mobs=1
+				for(var/mob/M in oview(5))if(M.key!=src.name||istype(M,/mob/npc))Mobs=1
 				if(Mobs) src.tailswing()
 	C2
 		icon = 'C2.dmi'

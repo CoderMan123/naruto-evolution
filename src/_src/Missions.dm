@@ -16,7 +16,7 @@ mob/proc/MissionCheck()
 		src << output("You must wait [round(LastMissionTime/600)] minutes before taking another mission.","Action.Output")
 		return 1
 	return 0
-mob/NPC
+mob/npc
 	move=0
 	Move()return
 	Death(killer)return
@@ -297,7 +297,7 @@ obj/MissionObj
 			del(src)
 
 
-mob/NPC/Mission_Lady//mission
+mob/npc/Mission_Lady//mission
 	name = "Hokage's Secretary"
 	icon='WhiteMBase.dmi'
 	pixel_x=-15
@@ -376,10 +376,10 @@ mob/NPC/Mission_Lady//mission
 							usr.MissionUp=0
 							return
 						var/MissionGuys
-						for(var/mob/NPC/MissionGuy/M in world)
+						for(var/mob/npc/MissionGuy/M in world)
 							if(prob(30)) MissionGuys=M
 						if(!MissionGuys)
-							for(var/mob/NPC/MissionGuy/M in world)
+							for(var/mob/npc/MissionGuy/M in world)
 								MissionGuys=M
 						choice="Talk with [MissionGuys]"
 						text="to talk with [MissionGuys], he has some information that could benefit the village.He should be around the village somewhere. Do you accept this mission?"

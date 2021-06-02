@@ -29,6 +29,10 @@ mob
 				sleep(3)
 			del(login_eye)
 
+	Logout()
+		..()
+		for(var/obj/Inventory/mission/deliver_intel/o in src.contents) src.DropItem(o)
+
 	verb/LoginCharacter()
 		set hidden = 1
 		if(src.client && !mobs_online.Find(src))
@@ -351,6 +355,23 @@ mob
 
 mob
 	proc
+		checkRank()
+			switch(src.rank)
+				if(RANK_ACADEMY_STUDENT) return 0
+				if(RANK_GENIN) return 1
+				if(RANK_CHUUNIN) return 2
+				if(RANK_JOUNIN) return 3
+				if(RANK_ANBU) return 4
+				if(RANK_ANBU_LEADER) return 5
+				if(RANK_HOKAGE) return 5
+				if(RANK_KAZEKAGE) return 5
+				if(RANK_MIZUKAGE) return 5
+				if(RANK_OTOKAGE) return 5
+				if(RANK_TSUCHIKAGE) return 5
+				if(RANK_AKATSUKI) return 4
+				if(RANK_AKATSUKI_LEADER) return 5
+				if(RANK_SEVEN_SWORDSMEN_LEADER) return 5
+				
 		HealthRegeneration()
 			while(src)
 				if(src.Gates == null && src.healthregenmod < 1) src.healthregenmod = 1
