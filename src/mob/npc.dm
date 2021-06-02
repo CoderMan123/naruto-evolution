@@ -45,7 +45,7 @@ mob/npc
 							else if(usr.client.Alert("Hey [usr.name], are you here to pickup a mission for your squad?", src.name, list("Yes", "No")) == 1)
 								switch(usr.client.AlertList("What rank mission are you interested in?", src.name, list("D Rank", "C Rank", "B Rank", "A Rank", "S Rank")))
 									if(1)
-										if(src.checkRank() >= 1)
+										if(usr.checkRank() >= 1)
 											var/mission/d_rank/deliver_intel/mission = pick(typesof(/mission/d_rank) - /mission/d_rank)
 											mission = new mission(usr)
 
@@ -63,7 +63,7 @@ mob/npc
 												spawn() squad.Refresh()
 										else
 											usr.client.Alert("Only a Genin rank ninja or higher can take a D rank mission.", src.name)
-											
+
 									if(2) usr << 2
 
 									if(3) usr << 3
