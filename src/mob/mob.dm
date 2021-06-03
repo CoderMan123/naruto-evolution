@@ -56,6 +56,10 @@ mob
 
 			winset(src,"Titlescreen.Password","text=")
 
+			if(fexists("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav.lk"))
+				src.client.Alert("You cannot load this character because it is currently in use.")
+				return 0
+
 			var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav")
 			var/password_hash = sha1("[password][F["password_salt"]]")
 			if(password_hash != F["password"])
