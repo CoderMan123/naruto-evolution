@@ -59,13 +59,13 @@ jobs:
           User $SSH_USER
           Port 22
           IdentityFile ~/.ssh/naruto-evolution
-EOF
+          EOF
 
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/alpha/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/alpha/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/beta/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/beta/
 
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            mv --force ~/naruto-evolution/alpha/naruto-evolution.dmb ~/naruto-evolution/alpha/alpha.dmb
-            mv --force ~/naruto-evolution/alpha/naruto-evolution.rsc ~/naruto-evolution/alpha/alpha.rsc
-            systemctl restart naruto-evolution-alpha
-EOF
+            mv --force ~/naruto-evolution/beta/naruto-evolution.dmb ~/naruto-evolution/beta/beta.dmb
+            mv --force ~/naruto-evolution/beta/naruto-evolution.rsc ~/naruto-evolution/beta/beta.rsc
+            systemctl restart naruto-evolution-beta
+          EOF
