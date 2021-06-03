@@ -12,6 +12,23 @@ jobs:
     name: Deploy Alpha Testing Server
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: |
+          echo "Installing 32 bit dependencies"
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+
+          echo "Installing unzip..."
+          sudo apt-get install unzip
+
+      - name: Install BYOND
+        run: |
+          curl -OL http://www.byond.com/download/build/513/513.1542_byond_linux.zip
+          unzip *_byond_linux.zip
+          cd byond
+          sudo make install
+          
       - name: Checkout repository
         uses: actions/checkout@v2
       
