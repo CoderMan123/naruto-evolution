@@ -21,7 +21,7 @@ mob
 								var/color = input("What custom character name color would you like for [M]?") as null|color
 								if(color) M.name_color = color
 
-						if(M) src.SetName(name)
+						if(M) M.SetName(name)
 			
 			Change_Ryo()
 				set category = "Administrator"
