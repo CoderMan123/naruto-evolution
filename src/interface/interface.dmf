@@ -309,7 +309,6 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -318,8 +317,6 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x603
-		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1658,6 +1655,7 @@ window "Map"
 		size = 1010x675
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1667,7 +1665,9 @@ window "Map"
 		is-pane = true
 		macro = "macro"
 		menu = "menu"
-	elem "map"
+		outer-size = 1024x689
+		inner-size = 1010x675
+	elem "Main"
 		type = MAP
 		pos = 0,0
 		size = 1010x675

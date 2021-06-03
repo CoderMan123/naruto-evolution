@@ -256,7 +256,7 @@ mob
 		Say(msg as text)
 			set hidden=1
 			winset(src, null, {"
-				Main.MapChild.focus = "true";
+				Map.Main.focus = "true";
 				Main.InputChild.is-visible = false;
 			"})
 
