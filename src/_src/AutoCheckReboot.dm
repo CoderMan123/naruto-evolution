@@ -13,9 +13,3 @@ proc
 			else
 				continue
 		AutoCheck()
-
-	AutoReboot()
-		set background=1
-		sleep(864000)//24hrs
-		world<<"<font color=red>World is automatically rebooting!"
-		world.Reboot()
