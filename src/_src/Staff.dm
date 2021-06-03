@@ -27,6 +27,7 @@ mob/proc/AddAdminVerbs()
 		src.verbs+=typesof(/mob/Admin/verb/)
 		src.verbs+=typesof(/mob/Moderator/verb/)
 		src.verbs+=typesof(/mob/PixelArtist/verb/)
+		src.verbs+=typesof(/mob/administrator/verb/)
 		src.admin=1
 		client.control_freak/CONTROL_FREAK_ALL=0
 		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
@@ -46,6 +47,7 @@ mob/proc/RemoveAdminVerbs()
 	src.verbs-=typesof(/mob/Admin/verb/)
 	src.verbs-=typesof(/mob/PixelArtist/verb/)
 	src.verbs-=typesof(/mob/MasterGM/verb/)
+	src.verbs-=typesof(/mob/administrator/verb/)
 	AddAdminVerbs()
 
 mob/PixelArtist/verb/

@@ -371,6 +371,26 @@ mob
 				if(RANK_AKATSUKI) return 4
 				if(RANK_AKATSUKI_LEADER) return 5
 				if(RANK_SEVEN_SWORDSMEN_LEADER) return 5
+		
+		SetRank(var/RANK)
+			if(RANK)
+				src.rank = RANK
+				src.client.UpdateCharacterPanel()
+				switch(RANK)
+					/*if(RANK_ANBU_ROOT)
+						new/obj/Screen/AnbuSymbol(src)*/
+
+					if(RANK_AKATSUKI) 
+						new/obj/Screen/AkatsukiSymbol(src)
+
+					if(RANK_AKATSUKI_LEADER)
+						new/obj/Screen/AkatsukiSymbol(src)
+					
+					// Add SSM
+
+					if(RANK_SEVEN_SWORDSMEN_LEADER)
+						new/obj/Screen/SsmSymbol(src)
+				
 				
 		HealthRegeneration()
 			while(src)

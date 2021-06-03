@@ -52,8 +52,6 @@ mob
 				hearers() << output("You can't pickup items while dead.","Action.Output")
 				return
 
-
-
 			if(src.contents.len < src.maxitems)
 				for(var/obj/Inventory/O in oview(1))
 
@@ -62,14 +60,14 @@ mob
 
 						var/squad/squad = src.GetSquad()
 						// The intel scroll can only be picked up by the originating squad or by another village.
-						if(squad && o.squad && squad != o.squad || src.village == "Hidden Leaf") continue
+						if(!squad && src.village == "Hidden Leaf" || (squad && o.squad && squad != o.squad && src.village == "Hidden Leaf")) continue
 
 					else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
 						var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
 
 						var/squad/squad = src.GetSquad()
 						// The intel scroll can only be picked up by the originating squad or by another village.
-						if(squad && o.squad && squad != o.squad || src.village == "Hidden Sand") continue
+						if(!squad && src.village == "Hidden Sand" || (squad && o.squad && squad != o.squad && src.village == "Hidden Sand")) continue
 
 					if(O.max_stacks > 1)
 						var/obj/Inventory/I
@@ -106,14 +104,14 @@ mob
 
 				var/squad/squad = src.GetSquad()
 				// The intel scroll can only be picked up by the originating squad or by another village.
-				if(squad && o.squad && squad != o.squad || src.village == "Hidden Leaf") return
+				if(!squad && src.village == "Hidden Leaf" || (squad && o.squad && squad != o.squad && src.village == "Hidden Leaf")) return
 
 			else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
 				var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
 
 				var/squad/squad = src.GetSquad()
 				// The intel scroll can only be picked up by the originating squad or by another village.
-				if(squad && o.squad && squad != o.squad || src.village == "Hidden Sand") return
+				if(!squad && src.village == "Hidden Sand" || (squad && o.squad && squad != o.squad && src.village == "Hidden Sand")) return
 
 			if(O.max_stacks > 1)
 				var/obj/Inventory/I

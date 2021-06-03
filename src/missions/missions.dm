@@ -19,50 +19,55 @@ mission
 			if(/mission/d_rank/deliver_intel)
 				var/squad/squad = M.GetSquad()
 				var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in M.contents
-				// The mission belongs the the same squad turning it in, and is also being turned in by the squad leader
-				if(src.squad && squad && src.squad == squad && squad.leader[M.ckey] && O)
+				// The mission belongs the the same squad turning it in
+				if(src.squad && squad && src.squad == squad && O)
 					M.contents -= O
+					//squad.mission = null
+					O.squad.mission = null
 					src.complete = world.realtime
 					spawn() M.client.UpdateInventoryPanel()
 
 					for(var/mob/m in mobs_online)
 						if(squad.members[m.client.ckey])
-							squad.mission = null
-							spawn() squad.Refresh()
+							spawn() squad.RefreshMember(m)
 							m.exp++
 							m.Ryo++
 							m.LevelStat("Ninjutsu",rand(1,2),1)
 							m.Levelup()
-					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", src.mob_objectives[1])
+							//m.squad.mission = null
+					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "Shizune")
 				
-				// The mission belongs the the same squad turning it in, and is NOT being turned in by the squad leader
-				else if(src.squad && squad && src.squad == squad && !squad.leader[M.ckey] && O)
-					spawn() M.client.Alert("I can only accept this intel from your squad leader.", src.mob_objectives[1])
+				else if(src.squad && squad && src.squad == squad && squad.mission && !O)
+					spawn() M.client.Alert("I'm still waiting on that squad intel. Please hurry along and pick it up from [src.mob_objectives[1]]", "Shizune")
 
-				else
-					if(squad && O)
-						M.contents -= O
-						src.complete = world.realtime
-						spawn() M.client.UpdateInventoryPanel()
+				else if(squad && O)
+					M.contents -= O
+					//squad.mission = null
+					O.squad.mission = null
+					src.complete = world.realtime
+					spawn() M.client.UpdateInventoryPanel()
 
-						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey])
-								squad.mission = null
-								spawn() squad.Refresh()
-								m.exp++
-								m.Ryo++
-								m.LevelStat("Ninjutsu",rand(1,2),1)
-								m.Levelup()
-					else if(O)
-						M.contents -= O
-						src.complete = world.realtime
-						spawn() M.client.UpdateInventoryPanel()
-						M.exp++
-						M.Ryo++
-						M.LevelStat("Ninjutsu",rand(1,2),1)
-						M.Levelup()
+					for(var/mob/m in mobs_online)
+						if(squad.members[m.client.ckey])
+							spawn() squad.RefreshMember(m)
+							m.exp++
+							m.Ryo++
+							m.LevelStat("Ninjutsu",rand(1,2),1)
+							m.Levelup()
+							//m.squad.mission = null
 
-					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", src.mob_objectives[1])
+				else if(O)
+					M.contents -= O
+					//squad.mission = null
+					O.squad.mission = null
+					src.complete = world.realtime
+					spawn() M.client.UpdateInventoryPanel()
+					M.exp++
+					M.Ryo++
+					M.LevelStat("Ninjutsu",rand(1,2),1)
+					M.Levelup()
+
+					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "Shizune")
 
 
 

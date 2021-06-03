@@ -18,7 +18,7 @@ client
 
 	proc/Write(savefile/F)
 		if(src)
-			var/list/exclude = list("")
+			var/list/exclude = list("gender")
 			for(var/v in src.vars)
 				if(issaved(src.vars[v]))
 					if(initial(src.vars[v]) == src.vars[v])
@@ -46,12 +46,16 @@ client
 
 	proc/Read(savefile/F)
 		if(src)
+			var/list/exclude = list("gender")
 			if(fexists("[F]"))
 				for(var/v in src.vars)
 					if(issaved(src.vars[v]))
 						if(!isnull(F[v]))
 							F[v] >> src.vars[v]
 							text2file("\[R]: [v] = [src.vars[v]]", LOG_CLIENT_SAVES)
+						else if(exclude.Find(v))
+							F.dir.Remove(v)
+							text2file("\[R]: \[RM]: \[exclude.Find()]:  [v] = [src.vars[v]]", LOG_CLIENT_SAVES)
 						else
 							F.dir.Remove(v)
 							text2file("\[R]: \[RM]: \[isnull()]:  [v] = [src.vars[v]]", LOG_CLIENT_SAVES)

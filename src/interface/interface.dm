@@ -453,6 +453,7 @@ client
 				winset(src, null, {"
 					Character.Avatar.image     = "\icon[src.mob.icon]"
 					Character.Name.text        = "[src.mob.name]"
+					Character.Village.text     = "[src.mob.village] ≡ [src.mob.rank]"
 					Character.Level.text       = "[src.mob.level]"
 					Character.EXP.text         = "[src.mob.exp]/[src.mob.maxexp]"
 					Character.EXPBar.value     = "[round(src.mob.exp/src.mob.maxexp*100)]"

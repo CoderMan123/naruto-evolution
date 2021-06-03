@@ -165,6 +165,7 @@
 #include "src\_src\Variables\WorldVariables.dm"
 #include "src\client\client.dm"
 #include "src\client\save.dm"
+#include "src\client\staff.dm"
 #include "src\interface\cursors.dm"
 #include "src\interface\interface.dm"
 #include "src\interface\logos.dm"

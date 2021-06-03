@@ -10,6 +10,7 @@
 
 #define LOG_ERROR "logs/error.txt"
 #define LOG_STAFF "logs/staff.txt"
+#define LOG_ADMINISTRATOR "logs/administrator.txt"
 #define LOG_KILLS "logs/kills.txt"
 #define LOG_SAVES "logs/saves.txt"
 #define LOG_CLIENT_SAVES "logs/client-saves.txt"

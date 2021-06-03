@@ -150,28 +150,27 @@ mob/npc
 				akirya
 					name = "Akirya"
 					icon = 'DarkMBase.dmi'
-					village="Hidden Leaf"
+					village="Hidden Sand"
 
 				obei
 					name = "Obei"
 					icon = 'DarkMBase.dmi'
-					village="Hidden Leaf"
+					village="Hidden Sand"
 
 				tsunai
 					name = "Tsunai"
-					icon = 'DarkMBase.dmi'
-					village="Hidden Leaf"
+					icon = 'WhiteMBase.dmi'
+					village="Hidden Sand"
 
 				amatsi
 					name = "Amatsi"
-					icon = 'DarkMBase.dmi'
-					village="Hidden Leaf"
-
+					icon = 'WhiteMBase.dmi'
+					village="Hidden Sand"
 
 			sand
 				ayumi
 					name = "Ayumi"
-					icon = 'DarkMBase.dmi'
+					icon = 'WhiteMBase.dmi'
 					village="Hidden Leaf"
 
 				emiraya
@@ -181,7 +180,7 @@ mob/npc
 
 				aiko
 					name = "Aiko"
-					icon = 'DarkMBase.dmi'
+					icon = 'WhiteMBase.dmi'
 					village="Hidden Leaf"
 
 				nevira
