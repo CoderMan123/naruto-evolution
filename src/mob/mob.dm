@@ -378,6 +378,12 @@ mob
 				name.maptext = "<span style=\"-dm-text-outline: [Outline]px black; color: [Color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[Name]</span>"
 				src.name_overlays = image(name, src)
 				src.overlays += src.name_overlays
+		
+		SetVillage(var/village)
+			if(village)
+				src.village = village
+				src.SetName(src.name)
+				src.client.UpdateCharacterPanel()
 
 		checkRank()
 			switch(src.rank)

@@ -565,7 +565,7 @@ mob
 						src.injutsu=0
 					if(J.level==3)
 						src.overlays=0
-						src.Name(src.name)
+						src.SetName(src.name)
 						src.RestoreOverlays()
 						src.injutsu=1
 						src.Step_Back()
@@ -573,7 +573,7 @@ mob
 						src.Step_Back()
 						src.injutsu=0
 						spawn()
-							src.Name(src.name)
+							src.SetName(src.name)
 							src.icon_state=""
 							src.RestoreOverlays()
 					if(J.level>=4 || J.level==4)
@@ -583,7 +583,7 @@ mob
 						B.overlays=src.overlays
 						B.dir=src.dir
 						src.overlays=0
-						src.Name(src.name)
+						src.SetName(src.name)
 						src.RestoreOverlays()
 						src.injutsu=1
 						src.Step_Back()
@@ -592,7 +592,7 @@ mob
 						src.Step_Back()
 						src.injutsu=0
 						spawn()
-							src.Name(src.name)
+							src.SetName(src.name)
 							src.icon_state=""
 							src.RestoreOverlays()
 

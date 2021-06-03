@@ -5,7 +5,7 @@ mob/npc
 	New()
 		..()
 		src.overlays+=/obj/MaleParts/UnderShade
-		src.Name(src.name)
+		src.SetName(src.name)
 
 	onomari
 		name = "Onomari"

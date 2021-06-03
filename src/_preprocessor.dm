@@ -18,7 +18,7 @@
 #define BROWSER_NONE 0
 #define BROWSER_SQUAD 1
 
-#define VILLAGE_MISSING_NIN -1
+#define VILLAGE_MISSING_NIN "Missing-Nin"
 #define VILLAGE_LEAF "Hidden Leaf"
 #define VILLAGE_SAND "Hidden Sand"
 

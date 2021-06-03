@@ -2610,7 +2610,7 @@ mob
 								spawn(5)if(usr)usr.firing=0
 								spawn(40)if(src)
 									src.UpdateHMB()
-									src.Name(src.name)
+									src.SetName(src.name)
 									src.icon_state=""
 									src.RestoreOverlays()
 								spawn(600)if(usr)usr.smokebomb=0

@@ -22,7 +22,7 @@ mob/npc/SensoryNin//sensory
 		if(src.village=="Hidden Rock")
 			src.icon='Akatsuchi-Rock Sensory.dmi'
 			src.name="Akatsuchi"
-		src.Name(name)
+		src.SetName(src.name)
 		OriginalOverlays=overlays.Copy()
 	DblClick()
 		if(usr.dead) return

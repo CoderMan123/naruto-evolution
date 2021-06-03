@@ -952,7 +952,7 @@ obj
 							usr.overlays=0
 							usr.Shoes=null
 							usr.UpdateHMB()
-							usr.Name(usr.name)
+							usr.SetName(usr.name)
 							usr.overlays+=/obj/MaleParts/UnderShade
 							usr.RestoreOverlays()
 							src.layer=OBJ_LAYER

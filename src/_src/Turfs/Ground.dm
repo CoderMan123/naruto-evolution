@@ -785,7 +785,7 @@ turf
 			if(get_dist(src, usr) <=1)
 				usr.overlays=0
 				usr.UpdateHMB()
-				usr.Name(usr.name)
+				usr.SetName(usr.name)
 				usr.overlays+=/obj/MaleParts/UnderShade
 				if(usr.fightlayer=="Normal")
 					usr.layer=MOB_LAYER+7
@@ -844,7 +844,7 @@ turf
 			if(istype(M,/mob))
 				M.overlays=0
 				M.UpdateHMB()
-				M.Name(M.name)
+				M.SetName(M.name)
 				M.overlays+=/obj/MaleParts/UnderShade
 				if(M.fightlayer=="Normal")
 					M.layer=MOB_LAYER+7

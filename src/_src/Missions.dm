@@ -45,7 +45,7 @@ mob/npc
 			src.overlays+='Shirt.dmi'
 		//	src.overlays+='Chunin Vest.dmi'
 			src.overlays+='Sandals.dmi'
-			src.Name(name)
+			src.SetName(src.name)
 			spawn() src.Stuff()
 	DblClick()
 		if(usr.dead) return
@@ -334,7 +334,7 @@ mob/npc/Mission_Lady//mission
 			src.icon='Hisho-Tut Secr.dmi'
 			src.name="Hisho"
 
-		src.Name(name)
+		src.SetName(src.name)
 		OriginalOverlays=overlays.Copy()
 		spawn() src.Stuff()
 	DblClick()

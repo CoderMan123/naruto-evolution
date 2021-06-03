@@ -29,7 +29,7 @@ mob/npc
 			src.overlays+='Shirt.dmi'
 			src.overlays+='Sandals.dmi'
 			OriginalOverlays=overlays.Copy()
-			src.Name(name)
+			src.SetName(src.name)
 			spawn() Stuff()
 			..()
 		icon='WhiteMBase.dmi'
@@ -62,7 +62,7 @@ mob/npc
 			src.overlays+='Shirt.dmi'
 			src.overlays+='Sandals.dmi'
 			OriginalOverlays=overlays.Copy()
-			src.Name(name)
+			src.SetName(src.name)
 			spawn() Stuff()
 			..()
 		DblClick()
@@ -108,7 +108,7 @@ mob/npc
 			src.overlays+='Shirt.dmi'
 			src.overlays+='Sandals.dmi'
 			OriginalOverlays=overlays.Copy()
-			src.Name(name)
+			src.SetName(src.name)
 			spawn() Stuff()
 			..()
 		DblClick()
@@ -157,7 +157,7 @@ mob/npc
 			src.overlays+='Shirt.dmi'
 			src.overlays+='Sandals.dmi'
 			OriginalOverlays=overlays.Copy()
-			src.Name(name)
+			src.SetName(src.name)
 			spawn() Stuff()
 			..()
 		DblClick()

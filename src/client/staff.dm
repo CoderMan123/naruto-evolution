@@ -7,12 +7,38 @@ mob
 				var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(src.client.ckey, 1, 2)]/[src.client.ckey].sav")
 				F["last_mission"] << null
 			
-			Rename()
+			Change_Name()
 				set category = "Administrator"
 				var/mob/M = input("Who would you like to rename?", "Rename") as null|anything in mobs_online
 				if(M)
 					var/name = input("What would you like to rename [M] to?") as null|text
 					if(name) src.SetName(name)
+			
+			Change_Village()
+				set category = "Administrator"
+				var/mob/M = input("Who's village would you like to change?", "Change Rank") as null|anything in mobs_online
+				if(M)
+					switch(input("What would you like to change [M]'s village to?") as null|anything in list(VILLAGE_LEAF, VILLAGE_SAND, VILLAGE_MISSING_NIN))
+						if(VILLAGE_LEAF)
+							if(M)
+								src.client << output("You have changed [M]'s village from [src.village] to [VILLAGE_LEAF].","Action.Output")
+								M.client << output("[src] has changed [M]'s village from [src.village] to [VILLAGE_LEAF].","Action.Output")
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s village from [src.village] to [VILLAGE_LEAF].", LOG_ADMINISTRATOR)
+								M.SetVillage(VILLAGE_LEAF)
+						
+						if(VILLAGE_SAND)
+							if(M)
+								src.client << output("You have changed [M]'s village from [src.village] to [VILLAGE_SAND].","Action.Output")
+								M.client << output("[src] has changed [M]'s village from [src.village] to [VILLAGE_SAND].","Action.Output")
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s village from [src.village] to [VILLAGE_SAND].", LOG_ADMINISTRATOR)
+								M.SetVillage(VILLAGE_SAND)
+						
+						if(VILLAGE_MISSING_NIN)
+							if(M)
+								src.client << output("You have changed [M]'s village from [src.village] to [VILLAGE_MISSING_NIN].","Action.Output")
+								M.client << output("[src] has changed [M]'s village from [src.village] to [VILLAGE_MISSING_NIN].","Action.Output")
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s village from [src.village] to [VILLAGE_MISSING_NIN].", LOG_ADMINISTRATOR)
+								M.SetVillage(VILLAGE_MISSING_NIN)
 
 			Change_Rank()
 				set category = "Administrator"

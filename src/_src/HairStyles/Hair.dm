@@ -94,7 +94,7 @@ obj
 				usr.overlays=0
 				usr.HairStyle=null
 				usr.UpdateHMB()
-				usr.Name(usr.name)
+				usr.SetName(usr.name)
 				usr.RestoreOverlays()
 		Short1
 			icon='Short.dmi'

@@ -379,7 +379,7 @@ mob/NPCs/Shinobi
 			VillageGuard=0
 			src.village=null
 		health=maxhealth
-		src.Name(name)
+		src.SetName(src.name)
 		OriginalOverlays=overlays.Copy()
 		wander()
 		..()
@@ -427,7 +427,7 @@ mob/NPCs/Shinobi
 					src.overlays+='MistChuunin.dmi'
 					src.overlays+='HeadBandLeaf.dmi'
 				src.overlays+='Sandals.dmi'
-				src.Name(name)
+				src.SetName(src.name)
 			if(village==killer.village)//mess with this later.
 
 
