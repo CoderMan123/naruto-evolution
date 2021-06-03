@@ -59,8 +59,8 @@ jobs:
           IdentityFile ~/.ssh/naruto-evolution
           EOF
 
-          rsync --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dme" naruto-evolution:~/naruto-evolution/live/
-          rsync --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/live/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dme" naruto-evolution:~/naruto-evolution/live/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/live/
 
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
             mv --force ~/naruto-evolution/live/naruto-evolution.dme ~/naruto-evolution/live/live.dme
