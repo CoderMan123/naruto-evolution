@@ -962,7 +962,7 @@ obj
 			//Clan="Uchiha"
 			signs="<font color=green>None</font><br>"
 			Clan="Implanted"
-			reqs=list("Intangiable")
+			reqs=list("Intangible")
 			Sprice=5
 			uses=100
 			Description="After a short delay pull yourself into the warp dimension almost entirely safe from the outside world. If someone is targeted you will drag them with you providing you are still targeting them after the delay."
