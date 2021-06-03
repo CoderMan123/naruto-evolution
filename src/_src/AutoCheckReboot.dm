@@ -1,7 +1,7 @@
 var/AFKLog=file("Logs/AFK Log.txt")
 proc
 	AutoCheck()
-		while(true)
+		while(world)
 			sleep(rand(36000, 72000)) // 1-2 hours
 			for(var/mob/M in mobs_online)
 				if(M.key)
