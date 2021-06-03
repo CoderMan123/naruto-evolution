@@ -179,6 +179,10 @@ mob
 			src.verbs-=src.Factionverbs
 			src.Factionverbs=list()
 
+		if(src.equipped == "Weights")
+			usr.overlays+='Weights.dmi'
+			src.move_delay=1
+
 		for(var/obj/Inventory/Clothing/C in src.contents)
 			if(src.suffix == "(Equipped)")
 				src.ClothingOverlays["[C.section]"] = C.icon
