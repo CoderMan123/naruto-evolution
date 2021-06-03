@@ -2540,12 +2540,12 @@ mob
 			if(usr.equipped=="ExplosiveTags")
 				if(usr.explosivetag<6)
 					for(var/obj/Inventory/Weaponry/Explosive_Tag/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
+						if(usr.firing==0&&usr.tagcd==0&&usr.dead==0)
 							var/mob/c_target=usr.Target_Get(TARGET_MOB)
-							usr.firing=1
+							usr.tagcd=1
 							usr.explosivetag++
 							spawn(usr.attkspeed*6)
-								usr.firing=0
+								usr.tagcd=0
 							if(prob(50))
 								flick("throw",usr)
 								view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)

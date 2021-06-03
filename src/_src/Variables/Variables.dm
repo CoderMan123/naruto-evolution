@@ -116,6 +116,7 @@ mob
 			dashcd=0
 			foodpillcd=0
 			dummylocation=0
+			tagcd=0
 var
 	clonesturned=0
 	worldmute=0
