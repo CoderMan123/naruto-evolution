@@ -370,7 +370,7 @@ mob
 						if(VILLAGE_SAND) Color = "#886541"
 
 				var/obj/name = new()
-				name.layer = EFFECTS_LAYER
+				name.layer = MOB_LAYER - 1000
 				name.maptext_width = 128
 				name.pixel_x = name.pixel_x - name.maptext_width / 2 + src.bound_width
 				name.pixel_y -= 16
