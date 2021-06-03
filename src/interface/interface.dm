@@ -48,12 +48,10 @@ client
 			set hidden=1
 			if(winget(src, "Main.OutputChild", "is-visible") == "false")
 				winset(src, null, {"
-					Main.OutputChild.focus = "true";
 					Main.OutputChild.is-visible = "true";
 				"})
 			else
 				winset(src, null, {"
-					Main.OutputChild.focus = "false";
 					Main.OutputChild.is-visible = "false";
 				"})
 
