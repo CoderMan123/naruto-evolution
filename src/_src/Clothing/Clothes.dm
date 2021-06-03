@@ -110,17 +110,28 @@ obj
 						src.Drop(usr)
 						return
 			Click()
+				..()
 				if(get_dist(src,usr)>1) return
 				if(!usr.contents.Find(src))
 					take(usr)
 					return
+				
+				var/icon/I = new(src.icon, src.icon_state)
+				var/iconfile = fcopy_rsc(I)
+				winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+				winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+				usr<<output(null, "Inventory.EquippedItemInfo")
+				usr<<output("<center>[Description]", "Inventory.EquippedItemInfo")
+				
 				if(src in usr)
 					if(!usr.ClothingOverlays[section])
 						Wear()
 					else
 						Remove()
 				usr.client.UpdateInventoryPanel()
+
 			DblClick()
+
 			proc/Wear()
 				if(usr.ClothingOverlays[section]) return
 				C=src
