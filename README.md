@@ -33,8 +33,8 @@ git clone https://github.com/lavenblade/naruto-evolution.git
 ```
 
 2) Switch to preferred branch:
-   * `master`: This is the current release branch and automatically deploys to the public environment.
-   * `develop`: This is the current development branch and automatically deploys to the testing environment.
+   * `master`: This is the current release branch and automatically deploys to the beta testing environment.
+   * `develop`: This is the current development branch and automatically deploys to the alpha testing environment.
 
 ```sh
 git checkout <branch>
