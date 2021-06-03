@@ -309,6 +309,7 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -317,6 +318,8 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x603
+		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -371,7 +374,7 @@ window "Character"
 	elem "Gen"
 		type = LABEL
 		pos = 3,456
-		size = 98x22
+		size = 46x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -398,8 +401,8 @@ window "Character"
 		value = 10
 	elem "GenEXP"
 		type = LABEL
-		pos = 103,456
-		size = 46x22
+		pos = 51,456
+		size = 98x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -426,7 +429,7 @@ window "Character"
 	elem "Nin"
 		type = LABEL
 		pos = 151,396
-		size = 98x22
+		size = 46x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -438,8 +441,8 @@ window "Character"
 		text = "10"
 	elem "NinEXP"
 		type = LABEL
-		pos = 251,396
-		size = 46x22
+		pos = 199,396
+		size = 98x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -452,7 +455,7 @@ window "Character"
 	elem "Tai"
 		type = LABEL
 		pos = 3,396
-		size = 98x22
+		size = 46x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -508,8 +511,8 @@ window "Character"
 		value = 10
 	elem "TaiEXP"
 		type = LABEL
-		pos = 103,396
-		size = 46x22
+		pos = 51,396
+		size = 98x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -536,7 +539,7 @@ window "Character"
 	elem "Agi"
 		type = LABEL
 		pos = 151,336
-		size = 98x22
+		size = 46x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -548,8 +551,8 @@ window "Character"
 		text = "10"
 	elem "AgiEXP"
 		type = LABEL
-		pos = 251,336
-		size = 46x22
+		pos = 199,336
+		size = 98x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -590,7 +593,7 @@ window "Character"
 	elem "Def"
 		type = LABEL
 		pos = 3,336
-		size = 98x22
+		size = 46x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -673,8 +676,8 @@ window "Character"
 		value = 10
 	elem "DefEXP"
 		type = LABEL
-		pos = 103,336
-		size = 46x22
+		pos = 51,336
+		size = 98x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -1655,7 +1658,6 @@ window "Map"
 		size = 1010x675
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1665,8 +1667,6 @@ window "Map"
 		is-pane = true
 		macro = "macro"
 		menu = "menu"
-		outer-size = 1024x689
-		inner-size = 1010x675
 	elem "Main"
 		type = MAP
 		pos = 0,0
