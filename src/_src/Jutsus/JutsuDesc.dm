@@ -446,7 +446,7 @@ obj
 			mouse_drag_pointer = "Flyingthunderkunai"
 			name="Flying Thunder God: Kunai"
 			rank="A"
-			signs="<font color=green>Dog,Rat,Rabbit</font><br>(macro(1))"//needs setting
+			signs="<font color=green>Dog,Rat,Rabbit</font><br>(macro(E, Q, 1))"//needs setting
 			Specialist="Ninjutsu"
 			Clan= "No Clan"
 			Sprice=2
@@ -461,7 +461,7 @@ obj
 			mouse_drag_pointer = "Flyingthunderescape"
 			name="Flying Thunder God: Great Escape"
 			rank="A"
-			signs="<font color=green>Rabbit,Dog,Dog</font><br>(macro(1))"//needs setting
+			signs="<font color=green>Rabbit,Dog,Dog</font><br>(macro(1, E, E))"//needs setting
 			Clan= "Yellow Flash"
 			Sprice=4
 			reqs=list("Flying Thunder God")

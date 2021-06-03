@@ -880,12 +880,12 @@ mob
 						usr.Flying_Thunder_God()
 				if(usr.first=="dog"&&usr.second=="rat"&&usr.third=="rabbit"&&usr.rat==1&&usr.dog==1&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==1)
 					var/obj/Jutsus/Flying_Thunder_God_Kunai/J=new/obj/Jutsus/Flying_Thunder_God_Kunai
-					if(J.type in usr.jutsus)
+					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Flying_Thunder_God_Kunai()
 				if(usr.first=="rabbit"&&usr.second=="dog"&&usr.third=="dog"&&usr.rat==0&&usr.dog==2&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==1)
 					var/obj/Jutsus/Flying_Thunder_God_Great_Escape/J=new/obj/Jutsus/Flying_Thunder_God_Great_Escape
-					if(J.type in usr.jutsus)
+					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Flying_Thunder_God_Great_Escape()
 				if(usr.first=="rabbit"&&usr.second=="rabbit"&&usr.third=="monkey"&&usr.fourth=="monkey"&&usr.rat==0&&usr.dog==0&&usr.ox==0&&usr.dragon==0&&usr.monkey==2&&usr.snake==0&&usr.horse==0&&usr.rabbit==2)
