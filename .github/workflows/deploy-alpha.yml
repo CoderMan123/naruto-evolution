@@ -45,7 +45,6 @@ jobs:
       - name: Build project
         run: |
           DreamMaker "$GITHUB_WORKSPACE/naruto-evolution.dme"
-          ls -lsh "$GITHUB_WORKSPACE/"
       
       - name: Deploy project
         env:
@@ -67,11 +66,11 @@ jobs:
           IdentityFile ~/.ssh/naruto-evolution
           EOF
 
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/beta/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/beta/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/alpha/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/alpha/
 
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            mv --force ~/naruto-evolution/beta/naruto-evolution.dmb ~/naruto-evolution/beta/beta.dmb
-            mv --force ~/naruto-evolution/beta/naruto-evolution.rsc ~/naruto-evolution/beta/beta.rsc
-            systemctl restart naruto-evolution-beta
+            mv --force ~/naruto-evolution/alpha/naruto-evolution.dmb ~/naruto-evolution/alpha/alpha.dmb
+            mv --force ~/naruto-evolution/alpha/naruto-evolution.rsc ~/naruto-evolution/alpha/alpha.rsc
+            systemctl restart naruto-evolution-alpha
           EOF
