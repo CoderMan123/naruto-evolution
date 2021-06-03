@@ -7,6 +7,13 @@ mob
 				var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(src.client.ckey, 1, 2)]/[src.client.ckey].sav")
 				F["last_mission"] << null
 			
+			Rename()
+				set category = "Administrator"
+				var/mob/M = input("Who would you like to rename?", "Rename") as null|anything in mobs_online
+				if(M)
+					var/name = input("What would you like to rename [M] to?") as null|text
+					if(name) src.SetName(name)
+
 			Change_Rank()
 				set category = "Administrator"
 				var/mob/M = input("Who's rank would you like to change?", "Change Rank") as null|anything in mobs_online

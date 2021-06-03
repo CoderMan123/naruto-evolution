@@ -76,7 +76,7 @@ mob/proc
 		if(src.inAngel==0)
 			src.overlays-='Angel Wings.dmi'
 		src.ReAddClothing()
-		src.Name(src.name)
+		src.SetName(src.name)
 
 obj
 	HairStyles

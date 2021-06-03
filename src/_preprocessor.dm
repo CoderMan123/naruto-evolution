@@ -19,8 +19,8 @@
 #define BROWSER_SQUAD 1
 
 #define VILLAGE_MISSING_NIN -1
-#define VILLAGE_LEAF 1
-#define VILLAGE_SAND 2
+#define VILLAGE_LEAF "Hidden Leaf"
+#define VILLAGE_SAND "Hidden Sand"
 
 #define RANK_ACADEMY_STUDENT "Academy Student"
 #define RANK_GENIN "Genin"

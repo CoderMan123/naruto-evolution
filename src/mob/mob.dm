@@ -13,6 +13,9 @@ mob
 		jutsus[0]
 		jutsus_learned[0]
 
+		tmp
+			name_overlays
+
 	Del()
 		..()
 
@@ -153,13 +156,13 @@ mob
 					src.sbought += j.name
 
 			src.creation_date = world.realtime
+			names_taken += src.character
 			src.name = src.character
 			src.rname = src.name
-			names_taken += src.character
 
 			src.pixel_x = -16
 
-			spawn() src.RestoreOverlays()
+			src.RestoreOverlays()
 			spawn() src.Run()
 			spawn() src.HealthRegeneration()
 			spawn() src.WeaponryDelete()
@@ -355,6 +358,27 @@ mob
 
 mob
 	proc
+		SetName(var/Name, var/Color, var/Outline=1)
+			if(Name)
+				if(src.name_overlays)
+					src.overlays -= src.name_overlays
+					src.name_overlays = null
+
+				if(!Color)
+					switch(src.village)
+						if(VILLAGE_LEAF) Color = "#2b7154"
+						if(VILLAGE_SAND) Color = "#886541"
+
+				var/obj/name = new()
+				name.layer = EFFECTS_LAYER
+				name.maptext_width = 128
+				name.pixel_x = name.pixel_x - name.maptext_width / 2 + src.bound_width
+				name.pixel_y -= 16
+				//name.maptext_height = 128
+				name.maptext = "<span style=\"-dm-text-outline: [Outline]px black; color: [Color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[Name]</span>"
+				src.name_overlays = image(name, src)
+				src.overlays += src.name_overlays
+
 		checkRank()
 			switch(src.rank)
 				if(RANK_ACADEMY_STUDENT) return 0
@@ -390,7 +414,6 @@ mob
 
 					if(RANK_SEVEN_SWORDSMEN_LEADER)
 						new/obj/Screen/SsmSymbol(src)
-				
 				
 		HealthRegeneration()
 			while(src)

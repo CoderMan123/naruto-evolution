@@ -94,11 +94,11 @@ mob
 
 		src.pixel_x=-16
 
-		spawn() src.RestoreOverlays()
+		src.RestoreOverlays()
 		spawn() src.Run()
 		spawn() src.HealthRegeneration()
 		spawn() src.WeaponryDelete()
-		spawn() src.AddAdminVerbs()
+		src.AddAdminVerbs()
 		if(src.MuteTime) spawn() src.Muted()
 
 		for(var/obj/Logos/Naruto_Evolution/L in src.client.screen) src.client.screen -= L
