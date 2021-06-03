@@ -23,6 +23,31 @@ mob
 
 						if(M) src.SetName(name)
 			
+			Change_Ryo()
+				set category = "Administrator"
+				var/mob/M = input("Who would you like to give or take Ryo from?", "Change Ryo") as null|anything in mobs_online
+				if(M)
+					switch(alert("Would you like to give or take Ryo from [M]?", "Change Ryo", "Give", "Take", "Cancel"))
+						if("Give")
+							var/ryo = input("How much Ryo would you like to give to [M]?", "Change Ryo") as null|num
+							if(ryo < 0) ryo = 0
+
+							if(M)
+								M.SetRyo(M.Ryo + ryo)
+								src.client << output("You have given <b>[ryo]</b> Ryo to [M].","Action.Output")
+								M.client << output("[src] has given you <b>[ryo]</b> Ryo.","Action.Output")
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s ryo from [ryo] to [M.Ryo + ryo].", LOG_ADMINISTRATOR)
+
+						if("Take")
+							var/ryo = input("How much Ryo would you like to take from [M]?", "Change Ryo") as null|num
+							if(ryo < 0) ryo = 0
+							
+							if(M)
+								M.SetRyo(M.Ryo - ryo)
+								src.client << output("You have taken <b>[ryo]</b> Ryo from [M].","Action.Output")
+								M.client << output("[src] has taken <b>[ryo]</b> Ryo from you.","Action.Output")
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s ryo from [ryo] to [M.Ryo + ryo].", LOG_ADMINISTRATOR)
+							
 			Change_Village()
 				set category = "Administrator"
 				var/mob/M = input("Who's village would you like to change?", "Change Rank") as null|anything in mobs_online
