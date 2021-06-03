@@ -65,7 +65,7 @@ jobs:
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/beta/
 
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            mv --force ~/naruto-evolution/beta/naruto-evolution.dme ~/naruto-evolution/beta/beta.dme
+            mv --force ~/naruto-evolution/beta/naruto-evolution.dmb ~/naruto-evolution/beta/beta.dmb
             mv --force ~/naruto-evolution/beta/naruto-evolution.rsc ~/naruto-evolution/beta/beta.rsc
             systemctl restart naruto-evolution-beta
           EOF
