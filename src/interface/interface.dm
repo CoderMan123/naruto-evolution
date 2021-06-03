@@ -485,7 +485,7 @@ client
 			if(!src) return
 			if(winget(src, "Inventory", "is-visible") == "true")
 				winset(src,"Inventory.Ryo","text=\"[src.mob.Ryo]\"")
-				winset(src,"Inventory.Titlebar","text=\"Inventory - [src.mob.items]/[src.mob.maxitems]\"")
+				winset(src,"Inventory.Titlebar","text=\"Inventory - [src.mob.contents.len]/[src.mob.maxitems]\"")
 				winset(src,"Inventory.Grid","cells=0x0")
 				var/Row = 1
 			//	src<<output("Ryo:","Equip.GridEquip:1,1")

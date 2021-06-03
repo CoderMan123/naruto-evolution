@@ -8,7 +8,7 @@ mob
 		last_online
 
 		items=0
-		maxitems=25
+		maxitems=-1 // Max Satchel Slots: -1 = Unlimited
 		equipped
 		jutsus[0]
 		jutsus_learned[0]

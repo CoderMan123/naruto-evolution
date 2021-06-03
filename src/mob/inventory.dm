@@ -51,51 +51,53 @@ mob
 			if(usr.dead)
 				hearers() << output("You can't pickup items while dead.","Action.Output")
 				return
-
-			if(src.contents.len < src.maxitems)
-				for(var/obj/Inventory/O in oview(1))
-
-					if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
-						var/obj/Inventory/mission/deliver_intel/leaf_intel/o = O
-
-						var/squad/squad = src.GetSquad()
-						// The intel scroll can only be picked up by the originating squad or by another village.
-						if(!squad && src.village == "Hidden Leaf" || (squad && o.squad && squad != o.squad && src.village == "Hidden Leaf")) continue
-
-					else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
-						var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
-
-						var/squad/squad = src.GetSquad()
-						// The intel scroll can only be picked up by the originating squad or by another village.
-						if(!squad && src.village == "Hidden Sand" || (squad && o.squad && squad != o.squad && src.village == "Hidden Sand")) continue
-
-					if(O.max_stacks > 1)
-						var/obj/Inventory/I
-						for(I in src.contents)
-							if(I.type == O.type)
-								if(I.stacks >= I.max_stacks) continue
-								else break
-						if(I)
-							var/convert = min(O.stacks, I.max_stacks - I.stacks)
-							O.stacks -= convert
-							I.stacks += convert
-							I.suffix = "x[I.stacks]"
-							if(O.stacks <= 0) O.loc=null
-							else src.Pickup()
-
-						else
-							src.contents += new O.type
-							O.stacks--
-							O.suffix = "x[O.stacks]"
-							src.Pickup()
-					else
-						src.contents += O
-
-					src.client.UpdateInventoryPanel()
-					break
-			else
-				src << sound('cant.ogg',0,0,7,100)
+			
+			if(src.maxitems > -1 && src.contents.len >= src.maxitems)
 				src << output("Your satchel is too full to carry anymore.","Action.Output")
+				src << sound('cant.ogg',0,0,7,100)
+				return
+
+			for(var/obj/Inventory/O in oview(1))
+
+				if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
+					var/obj/Inventory/mission/deliver_intel/leaf_intel/o = O
+
+					var/squad/squad = src.GetSquad()
+					// The intel scroll can only be picked up by the originating squad or by another village.
+					if(!squad && src.village == "Hidden Leaf" || (squad && o.squad && squad != o.squad && src.village == "Hidden Leaf")) continue
+
+				else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
+					var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
+
+					var/squad/squad = src.GetSquad()
+					// The intel scroll can only be picked up by the originating squad or by another village.
+					if(!squad && src.village == "Hidden Sand" || (squad && o.squad && squad != o.squad && src.village == "Hidden Sand")) continue
+
+				if(O.max_stacks > 1)
+					var/obj/Inventory/I
+					for(I in src.contents)
+						if(I.type == O.type)
+							if(I.stacks >= I.max_stacks) continue
+							else break
+					if(I)
+						var/convert = min(O.stacks, I.max_stacks - I.stacks)
+						O.stacks -= convert
+						I.stacks += convert
+						I.suffix = "x[I.stacks]"
+						if(O.stacks <= 0) O.loc=null
+						else src.Pickup()
+
+					else
+						src.contents += new O.type
+						O.stacks--
+						O.suffix = "x[O.stacks]"
+						src.Pickup()
+				else
+					src.contents += O
+
+				src.client.UpdateInventoryPanel()
+				break
+				
 
 	proc
 		RecieveItem(var/obj/Inventory/O)
