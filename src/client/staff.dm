@@ -1,7 +1,7 @@
 mob
 	administrator
 		verb
-			clear_mission_timer()
+			Reset_Mission_Timer()
 				set category = "Administrator"
 				src.client.last_mission = null
 				var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(src.client.ckey, 1, 2)]/[src.client.ckey].sav")
@@ -9,10 +9,19 @@ mob
 			
 			Change_Name()
 				set category = "Administrator"
-				var/mob/M = input("Who would you like to rename?", "Rename") as null|anything in mobs_online
+				var/mob/M = input("Who would you like to rename?", "Change Name") as null|anything in mobs_online
 				if(M)
-					var/name = input("What would you like to rename [M] to?") as null|text
-					if(name) src.SetName(name)
+					var/name = input("What would you like to rename [M] to?", "Change Name", M.name) as null|text
+					if(name)
+						switch(alert("Please choose a font color for [M].", "Change Name", "Village", "Custom"))
+							if("Village")
+								M.name_color = null
+
+							if("Custom")
+								var/color = input("What custom character name color would you like for [M]?") as null|color
+								if(color) M.name_color = color
+
+						if(M) src.SetName(name)
 			
 			Change_Village()
 				set category = "Administrator"

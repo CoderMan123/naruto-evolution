@@ -7,6 +7,8 @@ mob
 		playtime = 0
 		last_online
 
+		name_color
+
 		items=0
 		maxitems=-1 // Max Satchel Slots: -1 = Unlimited
 		equipped
@@ -358,7 +360,7 @@ mob
 
 mob
 	proc
-		SetName(var/Name, var/Color, var/Outline=1)
+		SetName(var/Name, var/Color = src.name_color, var/Outline = 1)
 			if(Name)
 				if(src.name_overlays)
 					src.overlays -= src.name_overlays
@@ -374,7 +376,6 @@ mob
 				name.maptext_width = 128
 				name.pixel_x = name.pixel_x - name.maptext_width / 2 + src.bound_width
 				name.pixel_y -= 16
-				//name.maptext_height = 128
 				name.maptext = "<span style=\"-dm-text-outline: [Outline]px black; color: [Color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[Name]</span>"
 				src.name_overlays = image(name, src)
 				src.overlays += src.name_overlays
