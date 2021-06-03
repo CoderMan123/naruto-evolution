@@ -4,7 +4,6 @@ logs/
 saves/
 desktop.ini
 *.dmb
-*.int
 *.lk
 *.rsc
 *.sav

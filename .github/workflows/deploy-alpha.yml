@@ -59,7 +59,7 @@ jobs:
           User $SSH_USER
           Port 22
           IdentityFile ~/.ssh/naruto-evolution
-          EOF
+EOF
 
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/alpha/
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/alpha/
@@ -68,4 +68,4 @@ jobs:
             mv --force ~/naruto-evolution/alpha/naruto-evolution.dmb ~/naruto-evolution/alpha/alpha.dmb
             mv --force ~/naruto-evolution/alpha/naruto-evolution.rsc ~/naruto-evolution/alpha/alpha.rsc
             systemctl restart naruto-evolution-alpha
-          EOF
+EOF
