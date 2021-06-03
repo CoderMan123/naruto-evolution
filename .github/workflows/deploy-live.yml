@@ -1,0 +1,49 @@
+name: Deploy
+
+on:
+  tags:        
+    - v2.*
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy Production Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Initialize submodules
+        run: |
+          git submodule init
+          git submodule update --recursive
+
+      - name: Build project
+        run: |
+          DreamMaker "$GITHUB_WORKSPACE/naruto-evolution.dme"
+      
+      - name: Deploy project
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          echo "$SSH_KEY" > ~/.ssh/naruto-evolution
+
+          cat > ~/.ssh/config <<EOF
+          Host naruto-evolution
+          HostName $SSH_HOST
+          User $SSH_USER
+          Port 22
+          IdentityFile ~/.ssh/naruto-evolution
+          EOF
+
+          rsync --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dme" naruto-evolution:~/naruto-evolution/live/
+          rsync --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/live/
+
+          ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
+            mv --force ~/naruto-evolution/live/naruto-evolution.dme ~/naruto-evolution/live/live.dme
+            mv --force ~/naruto-evolution/live/naruto-evolution.rsc ~/naruto-evolution/live/live.rsc
+            systemctl restart naruto-evolution
+          EOF
