@@ -190,6 +190,8 @@ mob
 			clients_online += src.client
 			mobs_online += src
 
+			
+
 			world<<"[src.character] has logged in for the first time."
 			src << output("Welcome to the game. Enjoy. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F5: Hotslots<br>R: Recharge chakra<br>Tab: Target<br>Shift+Tab: Untarget<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","Action.Output")
 			src<<"Now speaking in: [src.client.channel]."

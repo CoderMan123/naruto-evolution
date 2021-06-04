@@ -1,4 +1,4 @@
-var/version
+var/build
 var/server_capacity = 100
 
 var/list/administrators = list("lavenblade", "illusiveblair")
@@ -22,23 +22,22 @@ world
 	view = 16
 	loop_checks = 1
 	New()
+		..()
 		log = file(LOG_ERROR)
 
-		version = file2text("VERSION")
-		if(!version) text2file("", "VERSION")
-
-		spawn(10) GeninExam()
-		spawn(10) ChuuninExam()
-		spawn(10) Advert()
-		spawn(10) RepopWorld()
-		spawn(10) AutoCheck()
-		spawn(5) LinkWarps()
-		spawn(5) UpdateHUB()
-		spawn(5) HTMLlist()
-
+		build = file2text("VERSION")
+		if(!build) text2file("", "VERSION")
 		src.Load()
-		..()
 
+		spawn() UpdateHUB()
+		spawn() GeninExam()
+		spawn() ChuuninExam()
+		spawn() Advert()
+		spawn() RepopWorld()
+		spawn() AutoCheck()
+		spawn() LinkWarps()
+		spawn() HTMLlist()
+		
 	Del()
 		src.Save()
 		..()
@@ -46,8 +45,8 @@ world
 	proc/UpdateHUB()
 		set background = 1
 		while(world)
+			status = "Naruto Evolution v[build] | Ninjas Online ([mobs_online.len]/[server_capacity])"
 			sleep(600)
-			status="Naruto Evolution v[version] | Ninjas Online ([mobs_online.len]/[server_capacity])"
 
 	proc/Save()
 		var/savefile/F = new(SAVEFILE_STAFF)
