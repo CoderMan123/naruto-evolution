@@ -1,7 +1,6 @@
 /var
 	Go="Yes"
 	Players=0
-	MaxPlayers=100
 	list/Members=list()
 	MaxMembers=15
 	Weather="None"
