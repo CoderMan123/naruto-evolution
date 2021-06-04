@@ -73,7 +73,6 @@ jobs:
       - name: Release
         run: |
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
-          gh release delete $(cat ${{ github.workspace }}/VERSION)-alpha
           gh release create $(cat ${{ github.workspace }}/VERSION)-alpha --title $(cat ${{ github.workspace }}/VERSION)-alpha --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
           gh release upload $(cat ${{ github.workspace }}/VERSION)-alpha ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION)-alpha.zip
           gh release upload $(cat ${{ github.workspace }}/VERSION)-alpha ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION)-alpha.tar.gz
