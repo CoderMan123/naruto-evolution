@@ -57,7 +57,11 @@ jobs:
         uses: actions/cache@v2
         id: cache
         with:
-          path: ./*
+          path: |
+            $GITHUB_WORKSPACE/naruto-evolution.dmb
+            $GITHUB_WORKSPACE/naruto-evolution.rsc
+            $GITHUB_WORKSPACE/CHANGELOG.md
+            $GITHUB_WORKSPACE/VERSION
           key: cache
       
       - name: Release
