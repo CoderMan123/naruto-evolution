@@ -368,6 +368,11 @@ mob
 	proc
 		SetName(var/Name, var/Color = src.name_color, var/Outline = 1)
 			if(Name)
+				names_taken.Remove(src.name)
+				names_taken.Add(Name)
+				src.name = Name
+				src.rname = Name
+				
 				if(src.name_overlays)
 					src.overlays -= src.name_overlays
 					src.name_overlays = null

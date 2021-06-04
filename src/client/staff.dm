@@ -13,15 +13,19 @@ mob
 				if(M)
 					var/name = input("What would you like to rename [M] to?", "Change Name", M.name) as null|text
 					if(name)
-						switch(alert("Please choose a font color for [M].", "Change Name", "Village", "Custom"))
-							if("Village")
-								M.name_color = null
+						if(names_taken.Find(name))
+							alert("The name [name] is already in use.", "Change Name")
+							return 0
+						else
+							switch(alert("Please choose a font color for [M].", "Change Name", "Village", "Custom"))
+								if("Village")
+									M.name_color = null
 
-							if("Custom")
-								var/color = input("What custom character name color would you like for [M]?") as null|color
-								if(color) M.name_color = color
+								if("Custom")
+									var/color = input("What custom character name color would you like for [M]?") as null|color
+									if(color) M.name_color = color
 
-						if(M) M.SetName(name)
+							if(M) M.SetName(name)
 			
 			Change_Ryo()
 				set category = "Administrator"
