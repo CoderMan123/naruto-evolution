@@ -62,5 +62,6 @@ jobs:
         run: |
           ls -la .
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+          gh release delete $(cat ${{ github.workspace }}/VERSION)
           gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
         
