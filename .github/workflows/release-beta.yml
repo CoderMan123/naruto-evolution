@@ -1,11 +1,11 @@
-name: Release
+name: Release (Beta)
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    
+
   workflow_dispatch:
 
 jobs:
