@@ -1,0 +1,120 @@
+name: Release
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install BYOND
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+          sudo apt-get install unzip
+          curl -OL http://www.byond.com/download/build/513/513.1542_byond_linux.zip
+          unzip *_byond_linux.zip
+          cd byond
+          sudo make install
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      
+      - name: Checkout LFS objects
+        run: git lfs checkout
+
+      - name: Initialize submodules
+        run: |
+          git submodule init
+          git submodule update --recursive
+
+      - name: Build
+        run: DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+      
+      - name: Cache
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: |
+            ${{ github.workspace }}/*
+          key: ${{ github.sha }}
+
+  Release:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    steps:
+      - name: Restore cache
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: |
+            ${{ github.workspace }}/*
+          key: ${{ github.sha }}
+      
+      - name: Package
+        run: |
+          sudo apt-get install zip
+          sudo mkdir -p /naruto-evolution
+          sudo cp -p ${{ github.workspace }}/naruto-evolution.dmb /naruto-evolution/naruto-evolution.dmb
+          sudo cp -p ${{ github.workspace }}/naruto-evolution.rsc /naruto-evolution/naruto-evolution.rsc
+          sudo cp -p ${{ github.workspace }}/VERSION /naruto-evolution/VERSION
+          sudo cp -p ${{ github.workspace }}/CHANGELOG.md /naruto-evolution/CHANGELOG.md
+          sudo zip -r ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION)-beta.zip /naruto-evolution
+          sudo tar -czf ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION)-beta.tar.gz /naruto-evolution
+      
+      - name: Release
+        run: |
+          gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+          gh release delete $(cat ${{ github.workspace }}/VERSION)-beta
+          gh release create $(cat ${{ github.workspace }}/VERSION)-beta --title $(cat ${{ github.workspace }}/VERSION)-beta --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
+          gh release upload $(cat ${{ github.workspace }}/VERSION)-beta ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION)-beta.zip
+          gh release upload $(cat ${{ github.workspace }}/VERSION)-beta ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION)-beta.tar.gz
+  
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: [Release]
+    steps:
+      - name: Restore build
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: |
+            ${{ github.workspace }}/*
+          key: ${{ github.sha }}
+
+      - name: Deploy project
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/naruto-evolution
+          chmod 600 ~/.ssh/naruto-evolution
+
+          cat > ~/.ssh/config <<EOF
+          Host naruto-evolution
+          HostName $SSH_HOST
+          User $SSH_USER
+          Port 22
+          IdentityFile ~/.ssh/naruto-evolution
+          EOF
+
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/beta/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/beta/
+
+          ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
+            mv --force ~/naruto-evolution/beta/naruto-evolution.dmb ~/naruto-evolution/beta/beta.dmb
+            mv --force ~/naruto-evolution/beta/naruto-evolution.rsc ~/naruto-evolution/beta/beta.rsc
+            systemctl restart naruto-evolution
+          EOF
