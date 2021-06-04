@@ -62,6 +62,6 @@ jobs:
       
       - name: Release
         run: |
-          gh auth login --with-token ${{ secrets.GITHUB_TOKEN }}
+          gh auth login --with-token < ${{ secrets.GITHUB_TOKEN }}
           gh release create v$(cat VERSION) --title $(cat VERSION) --notes-file CHANGELOG.md --target ${{ github.sha }} --draft
         
