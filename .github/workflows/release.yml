@@ -42,12 +42,12 @@ jobs:
         run: |
           sudo apt-get install zip
           sudo mkdir -p /naruto-evolution
-          cp -p ${{ github.workspace }}/naruto-evolution.dmb /naruto-evolution/naruto-evolution.dmb
-          cp -p ${{ github.workspace }}/naruto-evolution.rsc /naruto-evolution/naruto-evolution.rsc
-          cp -p ${{ github.workspace }}/VERSION /naruto-evolution/VERSION
-          cp -p ${{ github.workspace }}/CHANGELOG.md /naruto-evolution/CHANGELOG.md
-          zip -r ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip /naruto-evolution
-          tar -czf ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz /naruto-evolution
+          sudo cp -p ${{ github.workspace }}/naruto-evolution.dmb /naruto-evolution/naruto-evolution.dmb
+          sudo cp -p ${{ github.workspace }}/naruto-evolution.rsc /naruto-evolution/naruto-evolution.rsc
+          sudo cp -p ${{ github.workspace }}/VERSION /naruto-evolution/VERSION
+          sudo cp -p ${{ github.workspace }}/CHANGELOG.md /naruto-evolution/CHANGELOG.md
+          sudo zip -r ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip /naruto-evolution
+          sudo tar -czf ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz /naruto-evolution
       
       - name: Cache build
         uses: actions/cache@v2
