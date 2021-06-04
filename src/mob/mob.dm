@@ -368,8 +368,9 @@ mob
 	proc
 		SetName(var/Name, var/Color = src.name_color, var/Outline = 1)
 			if(Name)
-				names_taken.Remove(src.name)
-				names_taken.Add(Name)
+				if(src.client)
+					names_taken.Remove(src.name)
+					names_taken.Add(Name)
 				src.name = Name
 				src.rname = Name
 				

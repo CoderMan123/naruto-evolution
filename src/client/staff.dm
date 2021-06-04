@@ -13,7 +13,7 @@ mob
 				if(M)
 					var/name = input("What would you like to rename [M] to?", "Change Name", M.name) as null|text
 					if(name)
-						if(names_taken.Find(name))
+						if(M.client && names_taken.Find(name))
 							alert("The name [name] is already in use.", "Change Name")
 							return 0
 						else
