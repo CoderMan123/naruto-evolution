@@ -62,6 +62,10 @@ jobs:
       
       - name: Release
         run: |
+          ls -la .
+          echo ""
+          echo ""
+          ls -la $GITHUB_WORKSPACE/
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
           gh release create v$(cat $GITHUB_WORKSPACE/VERSION) --title $(cat $GITHUB_WORKSPACE/VERSION) --notes-file $GITHUB_WORKSPACE/CHANGELOG.md --target ${{ github.sha }} --draft
         
