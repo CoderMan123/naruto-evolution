@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Beta Testing Server
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Beta Testing Server
+    name: Deploy to Beta Testing Server
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies

@@ -1,13 +1,14 @@
-name: Deploy
+name: Deploy to Production Server
 
 on:
-  tags:        
-    - v2.*
+  push:
+    tags:        
+      - v2.*
   workflow_dispatch:
 
 jobs:
   deploy:
-    name: Deploy Production Server
+    name: Deploy to Production Server
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
