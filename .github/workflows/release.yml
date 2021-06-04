@@ -40,7 +40,7 @@ jobs:
       
       - name: Package build
         run: |
-          apt-get install zip
+          sudo apt-get install zip
           mkdir -p /naruto-evolution
           cp -p ${{ github.workspace }}/naruto-evolution.dmb /naruto-evolution/naruto-evolution.dmb
           cp -p ${{ github.workspace }}/naruto-evolution.rsc /naruto-evolution/naruto-evolution.rsc
