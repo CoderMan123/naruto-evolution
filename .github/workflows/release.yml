@@ -38,14 +38,14 @@ jobs:
       
       - name: Cache build
         uses: actions/cache@v2
-          id: restore-build
-          with:
-            path: |
-              $GITHUB_WORKSPACE/naruto-evolution.dmb
-              $GITHUB_WORKSPACE/naruto-evolution.rsc
-              $GITHUB_WORKSPACE/CHANGELOG.md
-              $GITHUB_WORKSPACE/VERSION
-            key: ${{ github.sha }}
+        id: restore-build
+        with:
+          path: |
+            $GITHUB_WORKSPACE/naruto-evolution.dmb
+            $GITHUB_WORKSPACE/naruto-evolution.rsc
+            $GITHUB_WORKSPACE/CHANGELOG.md
+            $GITHUB_WORKSPACE/VERSION
+          key: ${{ github.sha }}
 
   Release:
     runs-on: ubuntu-latest
@@ -53,10 +53,10 @@ jobs:
     steps:
       - name: Restore build
         uses: actions/cache@v2
-          id: restore-build
-          with:
-            path: ./*
-            key: ${{ github.sha }}
+        id: restore-build
+        with:
+          path: ./*
+          key: ${{ github.sha }}
       
       - name: Release
         run: gh release create v$(cat VERSION) --title $(cat VERSION) --notes-file CHANGELOG.md --target ${{ github.sha }} --draft
