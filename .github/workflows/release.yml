@@ -47,7 +47,7 @@ jobs:
             $GITHUB_WORKSPACE/naruto-evolution.rsc
             $GITHUB_WORKSPACE/CHANGELOG.md
             $GITHUB_WORKSPACE/VERSION
-          key: ${{ github.sha }}
+          key: cache
 
   Release:
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
         id: cache
         with:
           path: ./*
-          key: ${{ github.sha }}
+          key: cache
       
       - name: Release
         run: |
@@ -66,6 +66,9 @@ jobs:
           echo ""
           echo ""
           ls -la $GITHUB_WORKSPACE/
+          echo ""
+          echo ""
+          ls -la ..
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
           gh release create v$(cat $GITHUB_WORKSPACE/VERSION) --title $(cat $GITHUB_WORKSPACE/VERSION) --notes-file $GITHUB_WORKSPACE/CHANGELOG.md --target ${{ github.sha }} --draft
         
