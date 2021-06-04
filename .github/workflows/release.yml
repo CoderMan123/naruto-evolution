@@ -36,18 +36,18 @@ jobs:
           git submodule update --recursive
 
       - name: Build project
-        run: DreamMaker "$GITHUB_WORKSPACE/naruto-evolution.dme"
+        run: DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
       
       - name: Cache build
         uses: actions/cache@v2
         id: cache
         with:
           path: |
-            $GITHUB_WORKSPACE/naruto-evolution.dmb
-            $GITHUB_WORKSPACE/naruto-evolution.rsc
-            $GITHUB_WORKSPACE/CHANGELOG.md
-            $GITHUB_WORKSPACE/VERSION
-          key: $GITHUB_SHA
+            ${{ github.workspace }}/naruto-evolution.dmb
+            ${{ github.workspace }}/naruto-evolution.rsc
+            ${{ github.workspace }}/CHANGELOG.md
+            ${{ github.workspace }}/VERSION
+          key: ${{ github.sha }}
 
   Release:
     runs-on: ubuntu-latest
@@ -58,15 +58,15 @@ jobs:
         id: cache
         with:
           path: |
-            $GITHUB_WORKSPACE/naruto-evolution.dmb
-            $GITHUB_WORKSPACE/naruto-evolution.rsc
-            $GITHUB_WORKSPACE/CHANGELOG.md
-            $GITHUB_WORKSPACE/VERSION
-          key: $GITHUB_SHA
+            ${{ github.workspace }}/naruto-evolution.dmb
+            ${{ github.workspace }}/naruto-evolution.rsc
+            ${{ github.workspace }}/CHANGELOG.md
+            ${{ github.workspace }}/VERSION
+          key: ${{ github.sha }}
       
       - name: Release
         run: |
           ls -la .
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
-          gh release create v$(cat $GITHUB_WORKSPACE/VERSION) --title $(cat $GITHUB_WORKSPACE/VERSION) --notes-file $GITHUB_WORKSPACE/CHANGELOG.md --target ${{ github.sha }} --draft
+          gh release create v$(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }} --draft
         
