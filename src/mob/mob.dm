@@ -425,6 +425,12 @@ mob
 
 					if(RANK_SEVEN_SWORDSMEN_LEADER)
 						new/obj/Screen/SsmSymbol(src)
+		
+		SetRyo(var/ryo)
+			if(ryo)
+				if(ryo < 0) ryo = 0
+				src.Ryo = ryo
+				src.client.UpdateInventoryPanel()
 				
 		HealthRegeneration()
 			while(src)

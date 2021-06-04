@@ -90,7 +90,17 @@ obj
 				usr.client.UpdateInventoryPanel()
 				return
 			..()
+			
 		Weaponry
+			Click()
+				..()
+				var/icon/I = new(src.icon, src.icon_state)
+				var/iconfile = fcopy_rsc(I)
+				winset(usr, "Inventory.EquippedName", "text='[src.name]'")
+				winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
+				usr<<output(null, "Inventory.EquippedItemInfo")
+				usr<<output("<center>[Description]", "Inventory.EquippedItemInfo")
+
 			Shuriken
 				name="Shuriken"
 				icon='Shuriken.dmi'
@@ -102,20 +112,13 @@ obj
 				damage=0
 				Cost=5
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="Shurikens"
 					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="shuriken"
-						var/icon/I = new(src.icon, src.icon_state)
-						var/iconfile = fcopy_rsc(I)
-						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
-						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
-					//for(var/obj/Inventory/Weaponry/X)
-						//X.suffix=""
-					//for(var/obj/Inventory/Weaponry/Shuriken/C)
-						//C.suffix="Throwing Weapon"
+
 			Needle
 				name = "Throwing Needle"
 				icon='Shuriken.dmi'
@@ -127,20 +130,13 @@ obj
 				damage=0
 				Cost=3
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="Needles"
 					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="needle"
-						var/icon/I = new(src.icon, src.icon_state)
-						var/iconfile = fcopy_rsc(I)
-						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
-						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
-					//for(var/obj/Inventory/Weaponry/X)
-					//	X.suffix=""
-					//for(var/obj/Inventory/Weaponry/Needle/C)
-					//	C.suffix="Throwing Weapon"
+
 			Kunai
 				name = "Kunai"
 				icon='Shuriken.dmi'
@@ -152,20 +148,13 @@ obj
 				damage=0
 				Cost=7
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="Kunais"
 					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="kunai"
-						var/icon/I = new(src.icon, src.icon_state)
-						var/iconfile = fcopy_rsc(I)
-						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
-						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
-					//for(var/obj/Inventory/Weaponry/X)
-					//	X.suffix=""
-					//for(var/obj/Inventory/Weaponry/Kunai/C)
-					//	C.suffix="Throwing Weapon"
+
 			Exploding_Kunai
 				name = "Exploding Kunai"
 				icon='Shuriken.dmi'
@@ -175,20 +164,13 @@ obj
 				max_stacks=10000
 				Cost=10
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="ExplodeKunais"
 					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="expl kunai"
-						var/icon/I = new(src.icon, src.icon_state)
-						var/iconfile = fcopy_rsc(I)
-						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
-						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
-					//for(var/obj/Inventory/Weaponry/X)
-					//	X.suffix=""
-					//for(var/obj/Inventory/Weaponry/Exploding_Kunai/C)
-					//	C.suffix="Throwing Weapon"
+
 			Explosive_Tag
 				name ="Explosive Tag"
 				icon='Shuriken.dmi'
@@ -200,20 +182,12 @@ obj
 				damage=0
 				Cost=8
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="ExplosiveTags"
 					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="tag"
-						var/icon/I = new(src.icon, src.icon_state)
-						var/iconfile = fcopy_rsc(I)
-						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
-						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
-					//for(var/obj/Inventory/Weaponry/X)
-					//	X.suffix=""
-					//for(var/obj/Inventory/Weaponry/Explosive_Tag/C)
-					//	C.suffix="Equipped Weapon"
 
 			Food_Pill
 				icon='Shuriken.dmi'
@@ -224,16 +198,13 @@ obj
 				Cost=500
 				Description="A small pill that tastes pretty gross. When consumed it energizes your body increasing your health regeneration for 20 seconds."
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="FoodPill"
 					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="Blood Pill"
-						var/icon/I = new(src.icon, src.icon_state)
-						var/iconfile = fcopy_rsc(I)
-						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
-						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
+
 /*
 			Chakra_Pill
 				icon='Shuriken.dmi'
@@ -244,6 +215,7 @@ obj
 				Cost=15000
 				var/lol=0
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(lol==1)
 						usr.health-=round(usr.maxchakra/2)
@@ -262,10 +234,6 @@ obj
 						for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 							H.icon_state=null
 						del(src)
-					//for(var/obj/Inventory/Weaponry/X)
-					//	X.suffix=""
-					//for(var/obj/Inventory/Weaponry/Stamina_Pill/C)
-					//	C.suffix="Equipped Pill"
 				*/
 			Smoke_Bomb
 				name = "Smoke Bomb"
@@ -277,26 +245,19 @@ obj
 				Description="A darkened sphere, containing large condensed amounts of gas. It is wired to a pressure activation system, and could be useful to make a quick escape if thrown. It seems to be worth about 5 Ryo."
 				Cost=5
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="SmokeBombs"
 					usr<<sound('083.wav',0,0)
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="SmokeBombs"
-						var/icon/I = new(src.icon, src.icon_state)
-						var/iconfile = fcopy_rsc(I)
-						winset(usr, "Inventory.EquippedName", "text='[src.name]'")
-						winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
-						usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
-					//for(var/obj/Inventory/Weaponry/X)
-					//	X.suffix=""
-					//for(var/obj/Inventory/Weaponry/Stamina_Pill/C)
-					//	C.suffix="Equipped Pill"
+
 			MadaraFan
 				Description="THIS ITEM WILL BE SOON CHANGED  -Vik"
 				icon='MadaraFan.dmi'
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
-					usr<<output("<center>[Description]","Inventory.EquippedItemInfo")
 					if(usr.usedwepboost==0)
 						usr.equipped="MadaraFan"
 						usr.usedwepboost=1
@@ -327,6 +288,7 @@ obj
 				Description="Dark Sword. A legendary sword of the Dark Shinobi."
 				Cost=5000
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(usr.usedwep2==0)
 						usr.equipped="Dark Sword"
@@ -336,6 +298,7 @@ obj
 						usr.equipped=null
 						usr.usedwep2=0
 						usr.overlays-='DarkSword.dmi'
+
 			Samehada
 				name ="Samehada"
 				icon='7SM Samehada.dmi'
@@ -345,6 +308,7 @@ obj
 				Description="Samehada. A legendary sword of the Seven Swordsmen"
 				Cost=5000
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(usr.usedwep1==0)
 						usr.equipped="Samehada"
@@ -364,6 +328,7 @@ obj
 				Description="Kubukiribocho. A legendary sword of the Seven Swordsmen."
 				Cost=5000
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(usr.usedwep2==0)
 						usr.equipped="Kubikiribocho"
@@ -382,6 +347,7 @@ obj
 				Description="Hiramekarei. A legendary sword of the Seven Swordsmen"
 				Cost=5000
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(usr.usedwep1==0)
 						usr.equipped="Hiramekarei"
@@ -400,6 +366,7 @@ obj
 				Description="Kabuto Wari. A legendary sword of the Seven Swordsmen."
 				Cost=5000
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(usr.usedwep2==0)
 						usr.equipped="Kabuto Wari"
@@ -418,6 +385,7 @@ obj
 				Description="Kiba. A legendary sword of the Seven Swordsmen"
 				Cost=5000
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(usr.usedwep1==0)
 						usr.equipped="Kiba"
@@ -437,6 +405,7 @@ obj
 				Description="Nuibari. A legendary sword of the Seven Swordsmen."
 				Cost=5000
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(usr.usedwep2==0)
 						usr.equipped="Nuibari"
@@ -455,6 +424,7 @@ obj
 				Description="Shibuki. A legendary sword of the Seven Swordsmen"
 				Cost=5000
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(usr.usedwep1==0)
 						usr.equipped="Shibuki"
@@ -473,6 +443,7 @@ obj
 				Description="Weights. Training weights used to raise ones own Agi."
 				Cost = 1000
 				Click()
+					..()
 					if(!usr.contents.Find(src)) return
 					if(usr.usedwep1==0)
 						usr.equipped="Weights"

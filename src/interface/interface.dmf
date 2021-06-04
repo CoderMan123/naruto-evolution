@@ -330,6 +330,61 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "Precision"
+		type = LABEL
+		pos = 151,456
+		size = 46x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "10"
+	elem "PrecisionExperienceBar"
+		type = BAR
+		pos = 151,480
+		size = 146x10
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #646464
+		saved-params = ""
+		bar-color = #255f47
+		is-slider = false
+		dir = east
+		value = 10
+	elem "PrecisionExperience"
+		type = LABEL
+		pos = 199,456
+		size = 98x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "1/10"
+	elem "label10"
+		type = LABEL
+		pos = 151,432
+		size = 146x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Precision"
 	elem "SkillPoints"
 		type = LABEL
 		pos = 3,564
@@ -357,20 +412,6 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "Skill Points"
-	elem "label40"
-		type = LABEL
-		pos = 151,432
-		size = 146x58
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = "Coming Soon!"
 	elem "Gen"
 		type = LABEL
 		pos = 3,456

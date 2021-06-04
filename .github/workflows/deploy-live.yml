@@ -1,0 +1,75 @@
+name: Deploy to Production Server
+
+on:
+  push:
+    tags:        
+      - v2.*
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Production Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          echo "Installing 32 bit dependencies"
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+
+          echo "Installing unzip..."
+          sudo apt-get install unzip
+
+      - name: Install BYOND
+        run: |
+          curl -OL http://www.byond.com/download/build/513/513.1542_byond_linux.zip
+          unzip *_byond_linux.zip
+          cd byond
+          sudo make install
+
+      - name: Checkout repository and download lfs dependencies
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      
+      - name: Checkout LFS objects
+        run: git lfs checkout
+      
+      - name: Initialize submodules
+        run: |
+          git submodule init
+          git submodule update --recursive
+
+      - name: Build project
+        run: |
+          DreamMaker "$GITHUB_WORKSPACE/naruto-evolution.dme"
+      
+      - name: Deploy project
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/naruto-evolution
+          chmod 600 ~/.ssh/naruto-evolution
+
+          cat > ~/.ssh/config <<EOF
+          Host naruto-evolution
+          HostName $SSH_HOST
+          User $SSH_USER
+          Port 22
+          IdentityFile ~/.ssh/naruto-evolution
+          EOF
+
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/live/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/live/
+
+          ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
+            mv --force ~/naruto-evolution/live/naruto-evolution.dmb ~/naruto-evolution/live/live.dmb
+            mv --force ~/naruto-evolution/live/naruto-evolution.rsc ~/naruto-evolution/live/live.rsc
+            systemctl restart naruto-evolution
+          EOF
