@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Version (release)
+        description: Version (new-release)
         required: true
         default: "2.0.0"
 
