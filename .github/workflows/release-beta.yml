@@ -43,7 +43,7 @@ jobs:
         run: |
           sudo apt-get install npm
           sudo npm install -g auto-changelog
-          sudo auto-changelog --template keepachangelog --output CHANGELOG.md --starting-version $(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta --commit-limit false
+          auto-changelog --template keepachangelog --output CHANGELOG.md --starting-version $(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta --commit-limit false
       
       - name: Cache
         uses: actions/cache@v2
@@ -117,6 +117,8 @@ jobs:
 
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/beta/
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/beta/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:~/naruto-evolution/beta/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:~/naruto-evolution/beta/
 
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
             mv --force ~/naruto-evolution/beta/naruto-evolution.dmb ~/naruto-evolution/beta/beta.dmb
