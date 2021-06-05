@@ -73,7 +73,7 @@ jobs:
       - name: Release
         run: |
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
-          gh release create $(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta --title $(cat ${{ github.workspace }}/VERSION)-beta --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
+          gh release create $(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta --title $(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
           gh release upload $(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta.zip
           gh release upload $(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta.tar.gz
   
