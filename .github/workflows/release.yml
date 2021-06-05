@@ -1,4 +1,4 @@
-name: Release (Live)
+name: Release (Official)
 
 on:
   push:
@@ -113,13 +113,13 @@ jobs:
           IdentityFile ~/.ssh/naruto-evolution
           EOF
 
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/live/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/live/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:~/naruto-evolution/live/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:~/naruto-evolution/live/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/official/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/official/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:~/naruto-evolution/official/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:~/naruto-evolution/official/
           
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            mv --force ~/naruto-evolution/live/naruto-evolution.dmb ~/naruto-evolution/live/live.dmb
-            mv --force ~/naruto-evolution/live/naruto-evolution.rsc ~/naruto-evolution/live/live.rsc
+            mv --force ~/naruto-evolution/official/naruto-evolution.dmb ~/naruto-evolution/official/official.dmb
+            mv --force ~/naruto-evolution/official/naruto-evolution.rsc ~/naruto-evolution/official/official.rsc
             systemctl restart naruto-evolution
           EOF
