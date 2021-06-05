@@ -42,7 +42,7 @@ jobs:
       - name: Generate changelog
         run: |
           sudo apt-get install npm
-          npm install -g auto-changelog
+          sudo npm install -g auto-changelog
           auto-changelog --starting-version $(cat ${{ github.workspace }}/VERSION).${{ github.run_number }}-beta --output CHANGELOG.md --template keepachangelog
       
       - name: Cache
