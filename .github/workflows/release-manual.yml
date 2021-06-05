@@ -2,6 +2,17 @@ name: Release (Manual)
 
 on:
   workflow_dispatch:
+    inputs:
+      server:
+        description: server
+        required: true
+        default: live
+        
+      version:
+        description: version
+        required: true
+        default: 1.0.0
+        
 
 jobs:
   Build:
