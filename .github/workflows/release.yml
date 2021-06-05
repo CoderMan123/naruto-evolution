@@ -37,6 +37,12 @@ jobs:
 
       - name: Build
         run: DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+
+      - name: Generate changelog
+        run: |
+          sudo apt-get install npm
+          npm install -g auto-changelog
+          auto-changelog --starting-version $(cat ${{ github.workspace }}/VERSION) --output CHANGELOG.md --template keepachangelog
       
       - name: Cache
         uses: actions/cache@v2
@@ -73,7 +79,7 @@ jobs:
         run: |
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
           gh release delete $(cat ${{ github.workspace }}/VERSION)
-          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION).${{ github.run_number }} --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
+          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
           gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip
           gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz
   
