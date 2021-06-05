@@ -7,6 +7,11 @@ on:
         description: server
         required: true
         default: live
+      
+      version:
+        description: server version to release
+        required: true
+        default: "2.0.0"
 
 jobs:
   Build:
@@ -26,6 +31,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.inputs.version }}
           lfs: true
       
       - name: Checkout LFS objects
@@ -84,6 +90,8 @@ jobs:
           Port 22
           IdentityFile ~/.ssh/naruto-evolution
           EOF
+
+          printf ${{ github.event.inputs.version }} > ${{ github.workspace }}/VERSION
 
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
