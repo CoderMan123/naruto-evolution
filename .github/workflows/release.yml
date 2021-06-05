@@ -42,7 +42,7 @@ jobs:
         run: |
           sudo apt-get install npm
           sudo npm install -g auto-changelog
-          auto-changelog --tag-prefix "" --starting-version $(cat ${{ github.workspace }}/VERSION) --output CHANGELOG.md --template keepachangelog
+          auto-changelog --tag-prefix "" --tag-pattern .+ --starting-version $(cat ${{ github.workspace }}/VERSION) --output CHANGELOG.md --template keepachangelog
       
       - name: Cache
         uses: actions/cache@v2
