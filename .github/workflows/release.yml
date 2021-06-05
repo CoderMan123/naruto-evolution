@@ -2,6 +2,11 @@ name: Release (Official Server)
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: server version to release
+        required: true
+        default: "2.0.0"
 
 jobs:
   Build:
@@ -21,6 +26,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.inputs.version }}
           lfs: true
       
       - name: Checkout LFS objects
@@ -64,19 +70,20 @@ jobs:
         run: |
           sudo apt-get install zip
           sudo mkdir -p /naruto-evolution
+          printf ${{ github.event.inputs.version }} > ${{ github.workspace }}/VERSION
           sudo cp -p ${{ github.workspace }}/naruto-evolution.dmb /naruto-evolution/naruto-evolution.dmb
           sudo cp -p ${{ github.workspace }}/naruto-evolution.rsc /naruto-evolution/naruto-evolution.rsc
           sudo cp -p ${{ github.workspace }}/VERSION /naruto-evolution/VERSION
           sudo cp -p ${{ github.workspace }}/CHANGELOG.md /naruto-evolution/CHANGELOG.md
-          sudo zip -r ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip /naruto-evolution
-          sudo tar -czf ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz /naruto-evolution
+          sudo zip -r ${{ github.workspace }}/naruto-evolution-${{ github.event.inputs.version }}.zip /naruto-evolution
+          sudo tar -czf ${{ github.workspace }}/naruto-evolution-${{ github.event.inputs.version }}.tar.gz /naruto-evolution
       
       - name: Release
         run: |
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
-          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
-          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip
-          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz
+          gh release create ${{ github.event.inputs.version }} --title ${{ github.event.inputs.version }} --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
+          gh release upload ${{ github.event.inputs.version }} ${{ github.workspace }}/naruto-evolution-${{ github.event.inputs.version }}.zip
+          gh release upload ${{ github.event.inputs.version }} ${{ github.workspace }}/naruto-evolution-${{ github.event.inputs.version }}.tar.gz
   
   Deploy:
     runs-on: ubuntu-latest
