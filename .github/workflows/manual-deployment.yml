@@ -1,12 +1,17 @@
-name: Manual Release
+name: Manual Deployment
 
 on:
   workflow_dispatch:
     inputs:
       server:
-        description: server
+        description: Server (official, beta, alpha)
         required: true
-        default: live
+        default: official
+      
+      version:
+        description: Version (build)
+        required: true
+        default: "2.0.0"
 
 jobs:
   Build:
@@ -26,6 +31,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.inputs.version }}
           lfs: true
       
       - name: Checkout LFS objects
@@ -40,10 +46,10 @@ jobs:
         run: DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
 
       - name: Generate changelog
-        run: |
-          sudo apt-get install npm
-          sudo npm install -g auto-changelog
-          auto-changelog --template keepachangelog --output CHANGELOG.md --starting-version $(cat ${{ github.workspace }}/VERSION) --commit-limit false
+        uses: heinrichreimer/github-changelog-generator-action@v2.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          configureSections: '{"feature":{"prefix":"**Features:**","labels":["Type: Feature"]},"ui":{"prefix":"**User Interface:**","labels":["Type: UI"]},"ux":{"prefix":"**User Experience:**","labels":["Type: UX"]},"combat":{"prefix":"**Combat:**","labels":["Type: Combat"]},"balance":{"prefix":"**Balance:**","labels":["Type: Balance"]},"enhancements":{"prefix":"**Enhancements:**","labels":["Type: Enhancement"]},"bug":{"prefix":"**Bugs:**","labels":["Type: Bug"]},"network":{"prefix":"**Network:**","labels":["Type: Network"]},"text":{"prefix":"**Text:**","labels":["Type: Text"]}}'
       
       - name: Cache
         uses: actions/cache@v2
@@ -84,6 +90,8 @@ jobs:
           Port 22
           IdentityFile ~/.ssh/naruto-evolution
           EOF
+
+          printf ${{ github.event.inputs.version }} > ${{ github.workspace }}/VERSION
 
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
