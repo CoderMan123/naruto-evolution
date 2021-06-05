@@ -12,7 +12,6 @@ on:
         description: version
         required: true
         default: 1.0.0
-        
 
 jobs:
   Build:
