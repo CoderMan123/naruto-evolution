@@ -1,0 +1,10 @@
+assets/maps/backup
+cfg/
+logs/
+saves/
+desktop.ini
+*.dmb
+*.int
+*.lk
+*.rsc
+*.sav
