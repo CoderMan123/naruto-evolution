@@ -1,9 +1,9 @@
-name: Release (Live)
+name: Build
 
 on:
   pull_request:
     branches: [ master, develop ]
-    
+
   workflow_dispatch:
 
 jobs:
