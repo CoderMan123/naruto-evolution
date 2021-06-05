@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: server version to release
+        description: Version (release)
         required: true
         default: "2.0.0"
 

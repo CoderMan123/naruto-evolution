@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       server:
-        description: server
+        description: Server (official, beta, alpha)
         required: true
-        default: live
+        default: official
       
       version:
-        description: server version to release
+        description: Version (build)
         required: true
         default: "2.0.0"
 
