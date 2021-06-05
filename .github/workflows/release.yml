@@ -66,16 +66,16 @@ jobs:
           sudo cp -p ${{ github.workspace }}/naruto-evolution.rsc /naruto-evolution/naruto-evolution.rsc
           sudo cp -p ${{ github.workspace }}/VERSION /naruto-evolution/VERSION
           sudo cp -p ${{ github.workspace }}/CHANGELOG.md /naruto-evolution/CHANGELOG.md
-          sudo zip -r ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip /naruto-evolution
-          sudo tar -czf ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz /naruto-evolution
+          sudo zip -r ${{ github.workspace }}/naruto-evolution.zip /naruto-evolution
+          sudo tar -czf ${{ github.workspace }}/naruto-evolution.tar.gz /naruto-evolution
       
       - name: Release
         run: |
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
           gh release delete $(cat ${{ github.workspace }}/VERSION)
           gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
-          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip
-          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz
+          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution.zip
+          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution.tar.gz
   
   Deploy:
     runs-on: ubuntu-latest
