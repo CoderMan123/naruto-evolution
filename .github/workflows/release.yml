@@ -26,15 +26,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
+          submodules: 'recursive'
           lfs: true
-      
-      - name: Checkout LFS objects
-        run: git lfs checkout
-
-      - name: Initialize submodules
-        run: |
-          git submodule init
-          git submodule update --recursive
 
       - name: Build
         run: DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
