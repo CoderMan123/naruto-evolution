@@ -1,12 +1,12 @@
 # GitHub Workflows
 
-| Workflow                  | Description                             |
-| ------------------------- | --------------------------------------- |
-| Build                     | Build (Automatic [Pull Requests])       |
-| Manual Deployment         | Build, Deploy (Manual Trigger)          |
-| Release (Alpha Server)    | Build, Deploy (Automatic [develop])     |
-| Release (Beta Server)     | Build, Deploy (Automatic [master])      |
-| Release (Official Server) | Build, Release, Deploy (Manual Trigger) |
+| Workflow                  | Description                             | Trigger                   |
+| ------------------------- | --------------------------------------- | ------------------------- |
+| Build                     | Build (Automatic [Pull Requests])       | Automatic (Pull Requests) |
+| Manual Deployment         | Build, Deploy (Manual Trigger)          | Manual                    |
+| Release (Alpha Server)    | Build, Deploy (Automatic [develop])     | Automatic: Branch: develop       |
+| Release (Beta Server)     | Build, Deploy (Automatic [master])      | Automatic (master)        |
+| Release (Official Server) | Build, Release, Deploy (Manual Trigger) | Manual                    |
 
 ## Workflow Inputs
 
