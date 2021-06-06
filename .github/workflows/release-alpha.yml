@@ -38,7 +38,8 @@ jobs:
       - name: Generate changelog
         uses: heinrichreimer/github-changelog-generator-action@v2.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.CI_PAT }}
+          configureSections: '{"feature":{"prefix":"**Features:**","labels":["Type: Feature"]},"ui":{"prefix":"**User Interface:**","labels":["Type: UI"]},"ux":{"prefix":"**User Experience:**","labels":["Type: UX"]},"combat":{"prefix":"**Combat:**","labels":["Type: Combat"]},"balance":{"prefix":"**Balance:**","labels":["Type: Balance"]},"enhancements":{"prefix":"**Enhancements:**","labels":["Type: Enhancement"]},"bug":{"prefix":"**Bugs:**","labels":["Type: Bug"]},"network":{"prefix":"**Network:**","labels":["Type: Network"]},"text":{"prefix":"**Text:**","labels":["Type: Text"]}}'
       
       - name: Cache
         uses: actions/cache@v2
