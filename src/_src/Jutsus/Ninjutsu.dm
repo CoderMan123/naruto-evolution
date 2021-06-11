@@ -705,13 +705,16 @@ obj
 					..()
 					pixel_y+=32
 					layer = MOB_LAYER+1
-					spawn(50)if(src)del(src)
+					spawn(50)
+						if(src)
+							src.loc = null
+							src.Owner = null
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
 							if(M)
-								if(M <> src.Owner)
+								if(M != src.Owner)
 									if(M.dead || M.swimming || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.loc = M.loc
@@ -722,7 +725,14 @@ obj
 										M.Bleed()
 										has_damaged += M
 										if(M.henge==4||M.henge==5)M.HengeUndo()
-						else if(src)del(src)
+								else if(src)
+									M.DealDamage(src.damage,src.Owner,"NinBlue")
+									M.Bleed()
+									src.loc = null
+									src.Owner = null
+						else if(src)
+							src.loc = null
+							src.Owner = null
 			DWS
 				name="DWS"
 				icon = 'risingdragonprojectiles.dmi'
@@ -906,13 +916,16 @@ obj
 					src.damage = 1
 				//	var/obj/O = new/obj
 				//	O.loc = src.loc
-					spawn(50)if(src)del(src)
+					spawn(50)
+						if(src)
+							src.loc = null
+							src.Owner = null
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
 							if(M)
-								if(M <> src.Owner)
+								if(M != src.Owner)
 									var/mob/Owner=src.Owner
 									if(M.dead || M.swimming || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
@@ -924,6 +937,11 @@ obj
 											spawn()if(M)M.Bleed()
 											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
 											if(M.henge==4||M.henge==5)M.HengeUndo()
+								else
+									M.DealDamage(src.damage,src.Owner,"NinBlue")
+									spawn()if(M)M.Bleed()
+									src.loc = null
+									src.Owner = null
 			Shukakku_Spear
 				name="Shukkaku Spear"
 				icon='Shukakku Spear.dmi'
