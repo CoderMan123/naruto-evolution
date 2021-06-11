@@ -7,11 +7,6 @@ on:
         description: Server (official, beta, alpha)
         required: true
         default: official
-      
-      version:
-        description: Version (build)
-        required: true
-        default: "2.0.0"
 
 jobs:
   Build:
@@ -31,7 +26,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.version }}
           submodules: 'recursive'
           lfs: true
 
@@ -84,8 +78,6 @@ jobs:
           IdentityFile ~/.ssh/naruto-evolution
           EOF
 
-          printf ${{ github.event.inputs.version }} > ${{ github.workspace }}/VERSION
-
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
@@ -94,5 +86,9 @@ jobs:
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
             mv --force ~/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.dmb ~/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.dmb
             mv --force ~/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.rsc ~/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.rsc
-            systemctl restart naruto-evolution
+            if [[ ${{ github.event.inputs.server }} == "beta" ]] || [[ ${{ github.event.inputs.server }} == "alpha" ]]
+              systemctl restart naruto-evolution-${{ github.event.inputs.server }}
+            else
+              systemctl restart naruto-evolution
+            fi
           EOF
