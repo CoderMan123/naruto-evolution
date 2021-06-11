@@ -602,11 +602,6 @@ mob/MasterGM/verb
 						Browser.is-visible = "true";
 					"})
 
-	Change_Worldtype()
-		set category="Staff"
-		servertype=src.client.AlertInput("Please input a new server type.","servertype")
-		world<<output("The server type has been changed.","Action.Output")
-
 	Get_GMLog()
 		set category = "Staff"
 		var/gmlog = file(LOG_STAFF)

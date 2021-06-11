@@ -22,7 +22,7 @@ client/Del()
 	if(Members.Find(src.ckey)) Members-=src.ckey
 	..()
 client/New()
-	if(full)
+	if(mobs_online.len >= server_capacity)
 		if(IsByondMember())
 			if(Members.len<MaxMembers)
 				Members++
@@ -33,33 +33,6 @@ client/New()
 		del(src)
 		return
 	..()
-client//the client
-    New()//when logs on to game
-        ..()
-        //if(key=="Guest-[computer_id]")//Checks if guest and finds their id
-           // sleep(20) //hold for a few mili seconds
-            //del(src)//kick them out
-
-var/full=0
-var/servertype = "Version 1.3.9"
-world
-	name = "Naruto Evolution"
-	hub= "Squigs.NETheNewEra"
-	hub_password = "Ue7DTLSxJx1vnALy"
-	status="Naruto Evolution (Connecting...) | Ninjas Online (Connecting...)"
-
-	view = 16
-	loop_checks=1
-	proc/PlayerCount()
-		set background=1
-		while(world)
-			sleep(600)//One minute each to check! Not .2 seconds=EPIC LAG!
-			var/number=0
-			for(var/mob/M in mobs_online)if(M.key)number++
-			Players=number
-			if(Players>=MaxPlayers)full=1
-			else full=0
-			status="Naruto Evolution v[global.servertype] | Ninjas Online ([Players]/[MaxPlayers])"
 
 proc/RepopWorld()
 	set background=1

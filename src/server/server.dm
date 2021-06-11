@@ -1,3 +1,6 @@
+var/build
+var/server_capacity = 100
+
 var/list/administrators = list("lavenblade", "illusiveblair")
 var/list/moderators = list()
 var/list/programmers = list("lavenblade")
@@ -11,26 +14,39 @@ var/list/names_taken = list()
 var/squads[0]
 
 world
+	name = "Naruto Evolution"
+	hub = "Squigs.NETheNewEra"
+	hub_password = "Ue7DTLSxJx1vnALy"
+	status = "Naruto Evolution (Connecting...) | Ninjas Online (Connecting...)"
 	fps = 20
+	view = 16
+	loop_checks = 1
 	New()
-		log = file(LOG_ERROR)
-//		spawn(10) RepopWorld()
-		spawn(10) GeninExam()
-		spawn(10) ChuuninExam()
-		spawn(10) Advert()
-		spawn(10) RepopWorld()
-		spawn(10) AutoCheck()
-		spawn(5) LinkWarps()
-		//spawn() AutoReboot()
-		spawn(5)  PlayerCount()
-		spawn(5)  HTMLlist()
-
-		src.Load()
 		..()
+		log = file(LOG_ERROR)
 
+		build = file2text("VERSION")
+		if(!build) text2file("", "VERSION")
+		src.Load()
+
+		spawn() UpdateHUB()
+		spawn() GeninExam()
+		spawn() ChuuninExam()
+		spawn() Advert()
+		spawn() RepopWorld()
+		spawn() AutoCheck()
+		spawn() LinkWarps()
+		spawn() HTMLlist()
+		
 	Del()
 		src.Save()
 		..()
+	
+	proc/UpdateHUB()
+		set background = 1
+		while(world)
+			status = "Naruto Evolution v[build] | Ninjas Online ([mobs_online.len]/[server_capacity])"
+			sleep(600)
 
 	proc/Save()
 		var/savefile/F = new(SAVEFILE_STAFF)

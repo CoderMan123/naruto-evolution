@@ -68,7 +68,6 @@ mob/npc
 		DblClick()
 			if(usr.dead) return
 			if(get_dist(src,usr)>2) return
-			var/newitems=usr.items+1
 			if(usr.maxitems > -1 && usr.contents.len >= usr.maxitems)
 				usr<<output("This would exceed your amount of avaliable items.","Action.Output")
 				return
@@ -128,7 +127,6 @@ mob/npc
 				usr.move=1
 				return
 			var/RealPrice=S.Cost*AlertInput[2]
-			var/newitems=usr.items+AlertInput[2]
 			if(usr.maxitems > -1 && usr.contents.len >= usr.maxitems)
 				usr<<output("This would exceed your amount of avaliable items.","Action.Output")
 				usr.move=1
