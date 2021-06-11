@@ -2427,7 +2427,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(10, 15))
+							if(loc.loc:Safe!=1) spawn() src.LevelStat("Precision",rand(10, 15))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2440,7 +2440,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(10, 15))
+							if(loc.loc:Safe!=1) spawn() src.LevelStat("Precision",rand(10, 15))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2469,7 +2469,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(8, 13))
+							if(loc.loc:Safe!=1) spawn() src.LevelStat("Precision",rand(8, 13))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2482,7 +2482,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(8, 13))
+							if(loc.loc:Safe!=1) spawn() src.LevelStat("Precision",rand(8, 13))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2511,7 +2511,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(3, 8))
+							if(loc.loc:Safe!=1) spawn() src.LevelStat("Precision",rand(3, 8))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2524,7 +2524,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(3, 8))
+							if(loc.loc:Safe!=1) spawn() src.LevelStat("Precision",rand(3, 8))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2556,7 +2556,7 @@ mob
 								src.dir=get_dir(usr,c_target)
 								usr.Target_Atom(c_target)
 								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 17))
+								if(loc.loc:Safe!=1) spawn() src.LevelStat("Precision",rand(12, 17))
 								if(prob(50))A.pixel_y+=rand(5,10)
 								else A.pixel_y-=rand(5,10)
 								if(prob(50))A.pixel_x+=rand(1,8)
@@ -2572,7 +2572,7 @@ mob
 								step(A,usr.dir)
 							else
 								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 17))
+								if(loc.loc:Safe!=1) spawn() src.LevelStat("Precision",rand(12, 17))
 								if(prob(50))A.pixel_y+=rand(1,8)
 								else A.pixel_y-=rand(1,8)
 								if(prob(50))A.pixel_x+=rand(1,8)
@@ -2598,7 +2598,7 @@ mob
 							spawn(3)
 								usr.smokebomb=1
 								var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(30, 40))
+								if(loc.loc:Safe!=1) spawn() src.LevelStat("Precision",rand(30, 40))
 								SMOKE.loc=usr.loc
 								view(usr)<<sound('flashbang_explode2.wav',0,0)
 								src.overlays=0

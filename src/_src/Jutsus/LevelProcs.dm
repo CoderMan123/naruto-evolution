@@ -99,7 +99,7 @@ mob
 				src.Levelup()
 				spawn(15)
 					src.overlays-=O
-					del(O)
+					O.loc = null
 				next
 			if(src.strengthexp>=src.maxstrengthexp)
 				if(src.strength>=150)
@@ -234,13 +234,13 @@ mob
 					src.maxprecisionexp+=150+round(src.precision/1.5)
 				src.Levelup()
 				next
-			if(!src.client) src.UpdateHMB()
-			else if(!src.likeaclone) src.UpdateHMB()
-			if(src.client) src.client.UpdateCharacterPanel()
+			if(!src.client) spawn() src.UpdateHMB()
+			else if(!src.likeaclone) spawn() src.UpdateHMB()
+			if(src.client) spawn() src.client.UpdateCharacterPanel()
 			if(src.client)
 				var/squad/squad = src.GetSquad()
 				if(squad)
-					squad.Refresh()
+					spawn() squad.Refresh()
 			if(level>=25&&!Element2)
 				var/Elements=list("Fire","Water","Earth","Lightning","Wind")
 				src.Element2=src.CustomInput("Element Options","What secondary element would you like?.",Elements-src.Element)
