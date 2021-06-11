@@ -234,8 +234,8 @@ mob
 					src.maxprecisionexp+=150+round(src.precision/1.5)
 				src.Levelup()
 				next
-			if(!src.client)src.UpdateHMB()
-			else if(!src.likeaclone)src.UpdateHMB()
+			if(!src.client) src.UpdateHMB()
+			else if(!src.likeaclone) src.UpdateHMB()
 			if(src.client) src.client.UpdateCharacterPanel()
 			if(src.client)
 				var/squad/squad = src.GetSquad()
