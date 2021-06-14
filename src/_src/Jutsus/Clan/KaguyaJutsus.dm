@@ -91,7 +91,7 @@ mob
 		Bone_Pulse()
 			if(src.firing==0)
 				if(src.canattack==1)
-					for(var/obj/Jutsus/Bone_Pulse/J in src.jutsus_learned)
+					for(var/obj/Jutsus/Bone_Pulse/J in src.jutsus)
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(src.PreJutsu(J))
 							if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
