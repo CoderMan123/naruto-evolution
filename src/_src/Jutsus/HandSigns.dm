@@ -855,7 +855,7 @@ mob
 						usr.Bone_Tip()
 				if(usr.first=="rat"&&usr.second=="dog"&&usr.third=="ox"&&usr.fourth=="ox"&&usr.rat==1&&usr.dog==1&&usr.ox==2&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/Young_Bracken_Dance/J=new/obj/Jutsus/Young_Bracken_Dance
-					if(J.type in usr.jutsus)
+					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Young_Bracken_Dance()
 				if(usr.first=="ox"&&usr.second=="ox"&&usr.third=="rat"&&usr.rat==1&&usr.dog==0&&usr.ox==2&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
@@ -980,7 +980,7 @@ mob
 						usr.BubbleSpreader()
 				if(usr.first=="dog"&&usr.second=="dog"&&usr.third=="dog"&&usr.fourth=="dog"&&usr.rat==0&&usr.dog==4&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/Bubble_Shield/J=new/obj/Jutsus/Bubble_Spreader
-					if(J.type in usr.jutsus)
+					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Bubble_Shield()
 				if(usr.first=="rabbit"&&usr.second=="dragon"&&usr.third=="dog"&&usr.fourth=="rabbit"&&usr.fifth=="dragon"&&usr.sixth=="dog"&&usr.rat==0&&usr.dog==2&&usr.ox==0&&usr.dragon==2&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==2)
@@ -1230,7 +1230,7 @@ mob
 						//dogsum
 				if(usr.first=="rat"&&usr.second=="horse"&&usr.third=="rat"&&usr.fourth=="dog"&&usr.fifth=="dog"&&usr.rat==2&&usr.dog==2&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==1&&usr.rabbit==0)
 					var/obj/Jutsus/Dog_Summoning/J=new/obj/Jutsus/Dog_Summoning
-					if(J.type in usr.jutsus)
+					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Summoning_Dog()
 						//angelwing
