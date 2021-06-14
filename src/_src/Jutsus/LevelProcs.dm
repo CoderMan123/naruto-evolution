@@ -478,7 +478,7 @@ mob
 						var/looted_pouches = 0
 						var/looted_pouches_ryo = 0
 						for(var/obj/Inventory/ryo_pouch/pouch in src.contents)
-							pouch.loc = X.contents
+							X.contents += pouch
 							looted_pouches++
 							looted_pouches_ryo += pouch.ryo
 						view(X) << "<i>[X] has looted [looted_pouches] Ryo Pouches containing [looted_pouches_ryo] Ryo from [src].</i>"
