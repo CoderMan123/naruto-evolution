@@ -1981,8 +1981,8 @@ obj
 				maxcooltime = jutsucooldown*200
 
 		Blade_Hurricane
-			icon_state="Multiple Chakra Kunai"
-			mouse_drag_pointer = "Multiple Chakra Kunai"
+			icon_state="bladehurri"
+			mouse_drag_pointer = "bladehurri"
 			name="Blade Hurricane"
 			rank="A"
 			signs="<font color=green>Dragon,Horse,Dragon,Horse,Rabbit</font><br>(macro(5,3,5,3,1))"
