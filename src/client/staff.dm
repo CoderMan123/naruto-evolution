@@ -6,7 +6,7 @@ mob
 				src.client.last_mission = null
 				var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(src.client.ckey, 1, 2)]/[src.client.ckey].sav")
 				F["last_mission"] << null
-			
+
 			Change_Name()
 				set category = "Administrator"
 				var/mob/M = input("Who would you like to rename?", "Change Name") as null|anything in mobs_online
@@ -26,7 +26,7 @@ mob
 									if(color) M.name_color = color
 
 							if(M) M.SetName(name)
-			
+
 			Change_Ryo()
 				set category = "Administrator"
 				var/mob/M = input("Who would you like to give or take Ryo from?", "Change Ryo") as null|anything in mobs_online
@@ -37,21 +37,21 @@ mob
 							if(ryo < 0) ryo = 0
 
 							if(M)
-								M.SetRyo(M.Ryo + ryo)
+								M.SetRyo(M.ryo + ryo)
 								src.client << output("You have given <b>[ryo]</b> Ryo to [M].","Action.Output")
 								M.client << output("[src] has given you <b>[ryo]</b> Ryo.","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s ryo from [ryo] to [M.Ryo + ryo].", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s ryo from [ryo] to [M.ryo + ryo].", LOG_ADMINISTRATOR)
 
 						if("Take")
 							var/ryo = input("How much Ryo would you like to take from [M]?", "Change Ryo") as null|num
 							if(ryo < 0) ryo = 0
-							
+
 							if(M)
-								M.SetRyo(M.Ryo - ryo)
+								M.SetRyo(M.ryo - ryo)
 								src.client << output("You have taken <b>[ryo]</b> Ryo from [M].","Action.Output")
 								M.client << output("[src] has taken <b>[ryo]</b> Ryo from you.","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s ryo from [ryo] to [M.Ryo + ryo].", LOG_ADMINISTRATOR)
-							
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s ryo from [ryo] to [M.ryo + ryo].", LOG_ADMINISTRATOR)
+
 			Change_Village()
 				set category = "Administrator"
 				var/mob/M = input("Who's village would you like to change?", "Change Rank") as null|anything in mobs_online
@@ -63,14 +63,14 @@ mob
 								M.client << output("[src] has changed your village from [src.village] to [VILLAGE_LEAF].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s village from [src.village] to [VILLAGE_LEAF].", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_LEAF)
-						
+
 						if(VILLAGE_SAND)
 							if(M)
 								src.client << output("You have changed [M]'s village from [src.village] to [VILLAGE_SAND].","Action.Output")
 								M.client << output("[src] has changed your village from [src.village] to [VILLAGE_SAND].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s village from [src.village] to [VILLAGE_SAND].", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_SAND)
-						
+
 						if(VILLAGE_MISSING_NIN)
 							if(M)
 								src.client << output("You have changed [M]'s village from [src.village] to [VILLAGE_MISSING_NIN].","Action.Output")

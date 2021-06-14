@@ -190,7 +190,7 @@ mob
 			clients_online += src.client
 			mobs_online += src
 
-			
+
 
 			world<<"[src.character] has logged in for the first time."
 			src << output("Welcome to the game. Enjoy. Please read the controls below.<br><br>A: Attack<br>S: Use weapon<br>D: Block/Special<br>1,2,3,4,5,Q,W,E: Handseals<br>Space: Execute handseals<br>Arrows: Move<br>F1 - F5: Hotslots<br>R: Recharge chakra<br>Tab: Target<br>Shift+Tab: Untarget<br>Type /help to view commands that can be spoken verbally. Enter key to talk.","Action.Output")
@@ -364,6 +364,22 @@ mob
 					src << "The following text was trimmed:"
 					src << message_trim
 
+		Create_Ryo_Pouch()
+			set hidden = 1
+			if(!src.ryo)
+				src << output("You don't have any Ryo to create a Ryo Pouch.", "Action.Output")
+			else
+				var/list/prompt=src.client.AlertInput("How much Ryo would you like to bundle in a Ryo Pouch?","Create Ryo Pouch")
+				var/ryo = prompt[2]
+				if(ryo && isnum(ryo))
+					if(src.ryo >= ryo)
+						src.ryo -= ryo
+						new/obj/Inventory/ryo_pouch(src, ryo)
+						view() << "<i>[src] removes [ryo] Ryo from their satchel and bundles it into a Ryo Pouch.</i>"
+						src.client.UpdateInventoryPanel()
+					else
+						src << output("You don't have [ryo] Ryo to drop.", "Action.Output")
+
 mob
 	proc
 		SetName(var/Name, var/Color = src.name_color, var/Outline = 1)
@@ -373,7 +389,7 @@ mob
 					names_taken.Add(Name)
 				src.name = Name
 				src.rname = Name
-				
+
 				if(src.name_overlays)
 					src.overlays -= src.name_overlays
 					src.name_overlays = null
@@ -391,7 +407,7 @@ mob
 				name.maptext = "<span style=\"-dm-text-outline: [Outline]px black; color: [Color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[Name]</span>"
 				src.name_overlays = image(name, src)
 				src.overlays += src.name_overlays
-		
+
 		SetVillage(var/village)
 			if(village)
 				src.village = village
@@ -414,7 +430,7 @@ mob
 				if(RANK_AKATSUKI) return 4
 				if(RANK_AKATSUKI_LEADER) return 5
 				if(RANK_SEVEN_SWORDSMEN_LEADER) return 5
-		
+
 		SetRank(var/RANK)
 			if(RANK)
 				src.rank = RANK
@@ -423,23 +439,23 @@ mob
 					/*if(RANK_ANBU_ROOT)
 						new/obj/Screen/AnbuSymbol(src)*/
 
-					if(RANK_AKATSUKI) 
+					if(RANK_AKATSUKI)
 						new/obj/Screen/AkatsukiSymbol(src)
 
 					if(RANK_AKATSUKI_LEADER)
 						new/obj/Screen/AkatsukiSymbol(src)
-					
+
 					// Add SSM
 
 					if(RANK_SEVEN_SWORDSMEN_LEADER)
 						new/obj/Screen/SsmSymbol(src)
-		
+
 		SetRyo(var/ryo)
 			if(ryo)
 				if(ryo < 0) ryo = 0
-				src.Ryo = ryo
+				src.ryo = ryo
 				src.client.UpdateInventoryPanel()
-				
+
 		HealthRegeneration()
 			while(src)
 				if(src.Gates == null && src.healthregenmod < 1) src.healthregenmod = 1

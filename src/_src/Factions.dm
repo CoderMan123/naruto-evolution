@@ -104,14 +104,14 @@ Faction
 			switch(r:name)
 				if("Cancel") return
 				if("Deposit")
-					if(!M.Ryo)
+					if(!M.ryo)
 						M<<"You have no Ryo to deposit."
 						return
 					var/list/AlertInput=M.client.AlertInput("How much would you like to deposit into clan funds?","Ryo Withdraw")
 					if(!isnum(AlertInput[2]))return
-					if(AlertInput[2]>M.Ryo||AlertInput[2]<=0)return
+					if(AlertInput[2]>M.ryo||AlertInput[2]<=0)return
 					Funds+=AlertInput[2]
-					M.Ryo-=AlertInput[2]
+					M.ryo-=AlertInput[2]
 					M << output("Successfully deposited [AlertInput[2]] funds.","Action.Output")
 					LevelUp()
 					return
@@ -126,9 +126,9 @@ Faction
 						var/list/AlertInput=M.client.AlertInput("How much would you like to withdraw?","Ryo Withdraw")
 						if(!isnum(AlertInput[2]))
 							return
-						if(M.Ryo<AlertInput[2]||AlertInput[2]<=0)
+						if(M.ryo<AlertInput[2]||AlertInput[2]<=0)
 							return
-						M.Ryo+=AlertInput[2]
+						M.ryo+=AlertInput[2]
 						Funds-=AlertInput[2]
 						M << output("Successfully withdrawed [AlertInput[2]] funds.","Action.Output")
 					return
@@ -384,7 +384,7 @@ Faction
 					Factions-=src
 					del(src)
 					return
-			if(usr.Ryo<3000)
+			if(usr.ryo<3000)
 				usr.client.Alert("You need 3000 Ryo to create a Faction.")
 				winset(usr, null, {"
 						Browser.is-visible = "false";
@@ -392,7 +392,7 @@ Faction
 				Factions-=src
 				del(src)
 				return
-			usr.Ryo-=1500
+			usr.ryo-=1500
 			name = href_list["name"]
 			if(href_list["nname"])nname = href_list["nname"]
 			else nname = name

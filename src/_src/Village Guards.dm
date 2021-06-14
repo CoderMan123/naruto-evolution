@@ -368,10 +368,10 @@ mob/NPCs/Shinobi
 			src.Aggressive=pick(0,1)
 			src.name="Rogue Shinobi"
 			src.village=null
-		src.Ryo=rand(10,50)
+		src.ryo=rand(10,50)
 		if(!TutorialGuy)src.maxhealth=rand(1000,2500)
 		else
-			src.Ryo=0
+			src.ryo=0
 			src.name="Rogue Shinobi"
 			src.strength=7
 			src.maxhealth=rand(10,40)

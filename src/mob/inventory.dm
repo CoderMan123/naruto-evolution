@@ -44,6 +44,28 @@ obj
 					hearers() << output("[usr] drops [src].","Action.Output")
 					usr.client.UpdateInventoryPanel()
 
+		ryo_pouch
+			icon='Ryo bills.dmi'
+			icon_state="owned"
+			name="Ryo Pouch"
+			New(mob/M, var/ryo)
+				..()
+				if(M && ryo)
+					src.ryo = ryo
+					src.suffix = "x[ryo] Ryo"
+					M.contents += src
+
+			var/ryo = 0
+			verb
+				Add_to_Satchel()
+					set category = null
+					set src in usr.contents
+					src.loc = null
+					if(src.ryo)
+						usr.ryo += src.ryo
+						view() << "<i>[src] unbundles [ryo] Ryo from a ryo pouch and places it in their satchel.</i>"
+						usr.client.UpdateInventoryPanel()
+
 mob
 	verb
 		Pickup()
@@ -51,7 +73,7 @@ mob
 			if(usr.dead)
 				hearers() << output("You can't pickup items while dead.","Action.Output")
 				return
-			
+
 			if(src.maxitems > -1 && src.contents.len >= src.maxitems)
 				src << output("Your satchel is too full to carry anymore.","Action.Output")
 				src << sound('cant.ogg',0,0,7,100)
@@ -97,7 +119,7 @@ mob
 
 				src.client.UpdateInventoryPanel()
 				break
-				
+
 
 	proc
 		RecieveItem(var/obj/Inventory/O)

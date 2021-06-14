@@ -471,8 +471,18 @@ mob
 						X.levelrate+=2
 						X.exp+=rand(3,(X.levelrate))
 						if(X.levelrate>=5) X.levelrate=5
-						X.Ryo+=src.Ryo
-						X<<output("You have looted [src.Ryo] Ryo from [src].","Action.Output")
+
+						X.ryo += src.ryo
+						view(X) << "<i>[X] has looted [src.ryo] Ryo from [src].</i>"
+
+						var/looted_pouches = 0
+						var/looted_pouches_ryo = 0
+						for(var/obj/Inventory/ryo_pouch/pouch in src.contents)
+							pouch.loc = X.contents
+							looted_pouches++
+							looted_pouches_ryo += pouch.ryo
+						view(X) << "<i>[X] has looted [looted_pouches] Ryo Pouches containing [looted_pouches_ryo] Ryo from [src].</i>"
+
 						X.kills++
 						//X.Multikill++
 						if(X.joinedwar==1)
@@ -518,13 +528,13 @@ mob
 
 						if(VillageAttackers.Find(src.village)&&VillageDefenders.Find(X.village))
 							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","Action.Output")
-							X.Ryo+=10
+							X.ryo+=10
 						if(VillageDefenders.Find(src.village)&&VillageAttackers.Find(X.village))
 							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","Action.Output")
-							X.Ryo+=10
+							X.ryo+=10
 						if(src.Bounty)
 							X<<output("You have claimed the $[src.Bounty] bounty on [src.name]'s head.","Action.Output")
-							X.Ryo+=src.Bounty
+							X.ryo+=src.Bounty
 							src.Bounty=0
 						else X.Bounty+=rand(5,10)
 						if(X.Mission=="Kill [src] ([src.ckey])")
@@ -534,7 +544,7 @@ mob
 							var/MissionExp=10 + WorldXp
 							if(X.Squad)
 								var/mob/M = getOwner(X.Squad.Leader)
-								M.Ryo += (MissionRyo + 1)
+								M.ryo += (MissionRyo + 1)
 								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
 								for(var/i=0,i<MissionExp,i++)
@@ -553,7 +563,7 @@ mob
 									if(getOwner(i))
 										M = getOwner(i)
 										if((M.client.inactivity/10)>=120) continue
-										M.Ryo += MissionRyo + 1
+										M.ryo += MissionRyo + 1
 										M.exp+=MissionExp
 										for(var/i2=0,i2<MissionExp,i2++)
 											var/GAIN = rand(1,3)
@@ -572,7 +582,7 @@ mob
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
-								X.Ryo+=MissionRyo
+								X.ryo+=MissionRyo
 								var/mob/M2 = X
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
@@ -608,7 +618,7 @@ mob
 							var/MissionExp=15 + WorldXp
 							if(X.Squad)
 								var/mob/M = getOwner(X.Squad.Leader)
-								M.Ryo += (MissionRyo + 1)
+								M.ryo += (MissionRyo + 1)
 								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
 								for(var/i=0,i<MissionExp,i++)
@@ -627,7 +637,7 @@ mob
 									if(getOwner(i))
 										M = getOwner(i)
 										if((M.client.inactivity/10)>=120) continue
-										M.Ryo += MissionRyo + 1
+										M.ryo += MissionRyo + 1
 										M.exp+=MissionExp
 										for(var/i2=0,i2<MissionExp,i2++)
 											var/GAIN = rand(1,3)
@@ -646,7 +656,7 @@ mob
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
-								X.Ryo+=MissionRyo
+								X.ryo+=MissionRyo
 								var/mob/M2 = X
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
@@ -667,7 +677,7 @@ mob
 							var/MissionExp=25 + WorldXp
 							if(X.Squad)
 								var/mob/M = getOwner(X.Squad.Leader)
-								M.Ryo += (MissionRyo + 1)
+								M.ryo += (MissionRyo + 1)
 								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
 								for(var/i=0,i<MissionExp,i++)
@@ -686,7 +696,7 @@ mob
 									if(getOwner(i))
 										M = getOwner(i)
 										if((M.client.inactivity/10)>=120) continue
-										M.Ryo += MissionRyo + 1
+										M.ryo += MissionRyo + 1
 										M.exp+=MissionExp
 										for(var/i2=0,i2<MissionExp,i2++)
 											var/GAIN = rand(1,3)
@@ -705,7 +715,7 @@ mob
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
-								X.Ryo+=MissionRyo
+								X.ryo += MissionRyo
 								var/mob/M2 = X
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
@@ -720,7 +730,7 @@ mob
 											M2.LevelStat("Genjutsu",rand(10,25),1)
 											M2.Levelup()
 
-					src.Ryo=0
+					src.ryo=0
 					spawn(300)
 						if(!revived)
 							KOs++
@@ -803,14 +813,14 @@ mob
 						if(usr.Squad)
 							var/mob/M
 							M = getOwner(usr.Squad.Leader)
-							M.Ryo += (MissionRyo + 1)
+							M.ryo += (MissionRyo + 1)
 							M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 							M.exp+=MissionExp
 							for(var/i in usr.Squad.Members)
 								if(getOwner(i))
 									M = getOwner(i)
 									if((M.client.inactivity/10)>=120) continue
-									M.Ryo += MissionRyo + 1
+									M.ryo += MissionRyo + 1
 									M.exp+=MissionExp
 									M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 									if(M.Mission=="K.O a bandit")
@@ -819,7 +829,7 @@ mob
 									Del(src)
 						else
 							usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
-							usr.Ryo+=MissionRyo
+							usr.ryo+=MissionRyo
 							usr.exp+=MissionExp
 							usr.Levelup()
 							Del(src)

@@ -49,7 +49,7 @@ mob
 		Clan=null
 		Specialist="strength"
 		Specialist2
-		Ryo=0
+		ryo=0
 		RyoBanked=0
 		riconstate
 		ricon

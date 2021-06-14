@@ -58,7 +58,7 @@ mob/npc
 			if(usr.Squad)
 				var/mob/M
 				M = getOwner(usr.Squad.Leader)
-				M.Ryo += (MissionRyo + 1)
+				M.ryo += (MissionRyo + 1)
 				M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 				M.exp+=MissionExp
 				for(var/i=0,i<MissionExp,i++)
@@ -77,7 +77,7 @@ mob/npc
 					if(getOwner(i))
 						M = getOwner(i)
 						if((M.client.inactivity/10)>=120) continue
-						M.Ryo += MissionRyo + 1
+						M.ryo += MissionRyo + 1
 						M.exp+=MissionExp
 						for(var/i2=0,i2<MissionExp,i2++)
 							var/GAIN = rand(1,3)
@@ -96,7 +96,7 @@ mob/npc
 						M.Levelup()
 			else
 				usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
-				usr.Ryo+=MissionRyo
+				usr.ryo+=MissionRyo
 				usr.exp+=MissionExp
 				var/mob/M = usr
 				for(var/i=0,i<MissionExp,i++)
@@ -155,7 +155,7 @@ obj/MissionObj
 					if(usr.Squad)
 						var/mob/M
 						M = getOwner(usr.Squad.Leader)
-						M.Ryo += (MissionRyo + 1)
+						M.ryo += (MissionRyo + 1)
 						M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 						M.exp+=MissionExp
 						for(var/i=0,i<MissionExp,i++)
@@ -174,7 +174,7 @@ obj/MissionObj
 							if(getOwner(i))
 								M = getOwner(i)
 								if((M.client.inactivity/10)>=120) continue
-								M.Ryo += MissionRyo + 1
+								M.ryo += MissionRyo + 1
 								M.exp+=MissionExp
 								for(var/i2=0,i2<MissionExp,i2++)
 									var/GAIN = rand(1,3)
@@ -193,7 +193,7 @@ obj/MissionObj
 								M.Levelup()
 					else
 						usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
-						usr.Ryo+=MissionRyo
+						usr.ryo+=MissionRyo
 						usr.exp+=MissionExp
 						var/mob/M = usr
 						for(var/i=0,i<MissionExp,i++)
@@ -240,7 +240,7 @@ obj/MissionObj
 				if(usr.Squad)
 					var/mob/M
 					M = getOwner(usr.Squad.Leader)
-					M.Ryo += (MissionRyo + 1)
+					M.ryo += (MissionRyo + 1)
 					M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 					M.exp+=MissionExp
 					for(var/i=0,i<MissionExp,i++)
@@ -259,7 +259,7 @@ obj/MissionObj
 						if(getOwner(i))
 							M = getOwner(i)
 							if((M.client.inactivity/10)>=120) continue
-							M.Ryo += MissionRyo + 1
+							M.ryo += MissionRyo + 1
 							M.exp+=MissionExp
 							for(var/i2=0,i2<MissionExp,i2++)
 								var/GAIN = rand(1,3)
@@ -278,7 +278,7 @@ obj/MissionObj
 							M.Levelup()
 				else
 					usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
-					usr.Ryo+=MissionRyo
+					usr.ryo+=MissionRyo
 					usr.exp+=MissionExp
 					var/mob/M = usr
 					for(var/i=0,i<MissionExp,i++)

@@ -309,7 +309,6 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -318,8 +317,6 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x603
-		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1239,6 +1236,7 @@ window "Inventory"
 		size = 300x500
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1247,6 +1245,8 @@ window "Inventory"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x514
+		inner-size = 300x500
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1270,21 +1270,6 @@ window "Inventory"
 		border = line
 		saved-params = ""
 		text = "Kunai"
-	elem "Currency"
-		type = LABEL
-		pos = 3,368
-		size = 32x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\symbols\\Ryo.png'
 	elem "EquippedItemInfo"
 		type = OUTPUT
 		pos = 37,440
@@ -1390,6 +1375,22 @@ window "Inventory"
 		text = ""
 		image = 'assets\\interface\\buttons\\Close.png'
 		command = "ToggleInventoryPanel"
+		is-flat = true
+	elem "Currency"
+		type = BUTTON
+		pos = 3,368
+		size = 32x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'assets\\interface\\symbols\\Ryo.png'
+		command = "Create-Ryo-Pouch"
 		is-flat = true
 
 window "JutsuTab"

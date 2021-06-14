@@ -480,12 +480,12 @@ client
 					Character.StatPoints.text  				= "[src.mob.statpoints]"
 					Character.SkillPoints.text 				= "[src.mob.skillpoints]"
 				"})
-				
+
 		UpdateInventoryPanel()
 			set hidden=1
 			if(!src) return
 			if(winget(src, "Inventory", "is-visible") == "true")
-				winset(src,"Inventory.Ryo","text=\"[src.mob.Ryo]\"")
+				winset(src,"Inventory.Ryo","text=\"[src.mob.ryo]\"")
 				winset(src,"Inventory.Titlebar","text=\"Inventory - [src.mob.contents.len]/[src.mob.maxitems]\"")
 				winset(src,"Inventory.Grid","cells=0x0")
 				var/Row = 1

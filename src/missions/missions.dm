@@ -31,12 +31,12 @@ mission
 						if(squad.members[m.client.ckey])
 							spawn() squad.RefreshMember(m)
 							m.exp++
-							m.Ryo++
+							M.ryo++
 							m.LevelStat("Ninjutsu",rand(1,2),1)
 							m.Levelup()
 							//m.squad.mission = null
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "Shizune")
-				
+
 				else if(src.squad && squad && src.squad == squad && squad.mission && !O)
 					spawn() M.client.Alert("I'm still waiting on that squad intel. Please hurry along and pick it up from [src.mob_objectives[1]]", "Shizune")
 
@@ -51,7 +51,7 @@ mission
 						if(squad.members[m.client.ckey])
 							spawn() squad.RefreshMember(m)
 							m.exp++
-							m.Ryo++
+							M.ryo++
 							m.LevelStat("Ninjutsu",rand(1,2),1)
 							m.Levelup()
 							//m.squad.mission = null
@@ -63,7 +63,7 @@ mission
 					src.complete = world.realtime
 					spawn() M.client.UpdateInventoryPanel()
 					M.exp++
-					M.Ryo++
+					M.ryo++
 					M.LevelStat("Ninjutsu",rand(1,2),1)
 					M.Levelup()
 
