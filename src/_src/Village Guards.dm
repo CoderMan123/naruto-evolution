@@ -32,8 +32,7 @@ mob/NPCs/Shinobi
 				src.dir = get_dir(src,c_target)
 				flick("punchl",src)
 				c_target.health-=round(strength/2)
-				var/colour = colour2html("white")
-				F_damage(c_target,round(strength/2),colour)
+				spawn() DamageOverlay(c_target, round(strength/2), "white")
 				c_target.UpdateHMB()
 			spawn(25)if(src)firing=0
 		SickleWeaselNPC()

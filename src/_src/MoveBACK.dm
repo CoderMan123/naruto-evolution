@@ -187,11 +187,12 @@ mob
 						if(O)
 							O.loc = null
 			for(var/obj/A in get_step(src,src.dir))A.layer=OBJ_LAYER
+
 		HealUp()
-			var/colour = colour2html("white")
-			F_damage(src,"+25",colour)
 			src.health += 25
 			if(health>maxhealth) health=maxhealth
+			DamageOverlay(src, 25, "#7fff00")
+
 		DoMirrors(obj/Os)
 			if(Os)
 				var/obj/O = new/obj
@@ -768,12 +769,12 @@ mob
 				//	O.overlays+=image('Misc Effects.dmi',O,"crack[number]")
 					var/damage=rand(10,15)
 					src.health-=damage
-					var/colour = colour2html("white")
-					F_damage(src,damage,colour)
-					if(src.client)spawn() src.ScreenShake(5)
-					UpdateHMB()
+					spawn() DamageOverlay(src, damage, "white")
+					if(src.client) spawn() src.ScreenShake(5)
+					spawn() UpdateHMB()
 					Death(src)
 					src.icon_state=""
+
 				if(istype(O,/turf/Ground/Cliff/Edges/Bottom)||istype(O,/turf/Ground/Cliff))
 					if(!src.copy&&O:Climbable)
 						if(src.dashable==2)
