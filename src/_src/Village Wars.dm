@@ -13,7 +13,7 @@ mob
 				if(!(VillageDefenders.Find(usr.village)) && !(VillageAttackers.Find(usr.village))) {usr<<output("<br><center><b>Your Village isn't in a war!</b><br>","Action.Output");return}
 				if(usr.choosing) return
 				usr.choosing=1
-				var/tmp/list/warVillages=list("Hidden Leaf","Hidden Sand","Hidden Mist","Hidden Sound","Hidden Rock","Akatsuki","Seven Swordsmen","Anbu Root")
+				var/list/warVillages=list("Hidden Leaf","Hidden Sand","Hidden Mist","Hidden Sound","Hidden Rock","Akatsuki","Seven Swordsmen","Anbu Root")
 				if("[usr.village]" in warVillages) warVillages-="[usr.village]"
 				var/input1=input("Make peace with which Village?")in warVillages+"Cancel"
 				if(input1=="Cancel") {usr.choosing=0;return}
@@ -50,7 +50,7 @@ mob
 				if(VillageAttackers.Find(usr.village)) {usr<<output("<br><center><b>Your village is already in a war!</b><br>","Action.Output");return}
 				if(usr.choosing) return
 				usr.choosing=1
-				var/tmp/list/warVillages=list("Hidden Leaf","Hidden Sand","Hidden Mist","Hidden Sound","Hidden Rock","Akatsuki","Seven Swordsmen","Anbu Root")
+				var/list/warVillages=list("Hidden Leaf","Hidden Sand","Hidden Mist","Hidden Sound","Hidden Rock","Akatsuki","Seven Swordsmen","Anbu Root")
 				if(warVillages.Find(usr.village)) warVillages-="[usr.village]"
 				var/input1=input("Declare war with what Village?")in warVillages+"Cancel"
 				if(input1=="Cancel") {usr.choosing=0;return}

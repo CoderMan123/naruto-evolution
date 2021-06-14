@@ -250,14 +250,6 @@ mob
 									O.pixel_y+=rand(1,5)
 							spawn(15)if(O)del(O)
 client
-	var
-		tmp
-			//injutsu=0
-			//likeaclone
-			//copy
-			//cranks
-			//arrow
-			//ArrowTasked
 	North()
 		if(src.mob.Intang==1 && istype(get_step(src.mob, NORTH), /turf/IntangBlocker)) return
 		if(src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
@@ -739,7 +731,7 @@ mob
 //				if(O.strength>=1&&O.strength<25)
 //					step(src,src.dir)
 //					src.stepped=1
-	M.ResetBase()
+	//M.ResetBase()
 	//icon='WhiteMBase.dmi'
 	//	statpanel("Inventory")
 	//	stat("Ryo: ","[src.Ryo]")

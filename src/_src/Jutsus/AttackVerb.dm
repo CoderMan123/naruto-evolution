@@ -235,7 +235,8 @@ mob
 								GF.dir = src.dir
 								GF.icon = 'PressurePoint.dmi'
 								flick('GentleFist.dmi',GF)
-								switch(src.dir)if(WEST) GF.pixel_x=-16
+								switch(src.dir)
+									if(WEST) GF.pixel_x=-16
 								spawn(4)if(GF)del(GF)
 							for(var/mob/Clones/Bunshin/C in world)if(C.Owner==src)flick("punchr",C)
 						else
