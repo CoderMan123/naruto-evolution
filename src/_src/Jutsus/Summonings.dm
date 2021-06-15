@@ -3,8 +3,8 @@ mob
 		SnakeSummoning
 			icon='Pein Summoning.dmi'
 			Names="Snake"
-			health=3000
-			maxhealth=3000
+			health=1500
+			maxhealth=1500
 			icon_state="2"
 			density=1
 			var/mob/lowner
@@ -33,6 +33,9 @@ mob
 					if(A) A.UpdateHMB()
 		DogSummoning
 			icon='Pein Summoning.dmi'
+			Names="Dog"
+			health=1500
+			maxhealth=1500
 			icon_state="1"
 			density=1
 			var/mob/lowner
