@@ -472,16 +472,23 @@ mob
 						X.exp+=rand(3,(X.levelrate))
 						if(X.levelrate>=5) X.levelrate=5
 
+						// Loot Ryo //
 						X.ryo += src.ryo
 						view(X) << "<i>[X] has looted [src.ryo] Ryo from [src].</i>"
 
+						// Loot Ryo Pouches //
 						var/looted_pouches = 0
 						var/looted_pouches_ryo = 0
+
 						for(var/obj/Inventory/ryo_pouch/pouch in src.contents)
 							X.contents += pouch
 							looted_pouches++
 							looted_pouches_ryo += pouch.ryo
-						view(X) << "<i>[X] has looted [looted_pouches] Ryo Pouches containing [looted_pouches_ryo] Ryo from [src].</i>"
+
+						if(looted_pouches)
+							spawn() src.RefreshInventory()
+							spawn() X.RefreshInventory()
+							view(X) << "<i>[X] has looted [looted_pouches] Ryo Pouches containing [looted_pouches_ryo] Ryo from [src].</i>"
 
 						X.kills++
 						//X.Multikill++
