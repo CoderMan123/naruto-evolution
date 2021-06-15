@@ -486,8 +486,8 @@ mob
 							looted_pouches_ryo += pouch.ryo
 
 						if(looted_pouches)
-							spawn() src.RefreshInventory()
-							spawn() X.RefreshInventory()
+							spawn() src.client.UpdateInventoryPanel()
+							spawn() X.client.UpdateInventoryPanel()
 							view(X) << "<i>[X] has looted [looted_pouches] Ryo Pouches containing [looted_pouches_ryo] Ryo from [src].</i>"
 
 						X.kills++
