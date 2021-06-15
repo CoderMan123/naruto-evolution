@@ -53,17 +53,19 @@ mission
 				// The mission belongs to the same squad turning it in
 				if(src.squad && squad && src.squad == squad && O)
 					M.contents -= O
-					O.squad.mission = null
-					src.complete = world.realtime
+					src.squad.mission = null
 					spawn() M.client.UpdateInventoryPanel()
 
 					for(var/mob/m in mobs_online)
 						if(squad.members[m.client.ckey])
-							spawn() squad.RefreshMember(m)
 							m.exp++
-							M.ryo++
+							m.ryo++
 							m.LevelStat("Ninjutsu",rand(1,2),1)
 							m.Levelup()
+							spawn() m.client.UpdateCharacterPanel()
+							spawn() m.UpdateHMB()
+							spawn() squad.RefreshMember(m)
+
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 
 				else if(src.squad && squad && src.squad == squad && squad.mission && !O)
@@ -72,28 +74,53 @@ mission
 				else if(squad && O)
 					M.contents -= O
 					O.squad.mission = null
-					src.complete = world.realtime
 					spawn() M.client.UpdateInventoryPanel()
 
 					for(var/mob/m in mobs_online)
 						if(squad.members[m.client.ckey])
-							spawn() squad.RefreshMember(m)
 							m.exp++
-							M.ryo++
+							m.ryo++
 							m.LevelStat("Ninjutsu",rand(1,2),1)
 							m.Levelup()
+							spawn() m.client.UpdateCharacterPanel()
+							spawn() m.UpdateHMB()
+							spawn() squad.RefreshMember(m)
 
 				else if(O)
 					M.contents -= O
-					O.squad.mission = null
-					src.complete = world.realtime
+					src = null
 					spawn() M.client.UpdateInventoryPanel()
+
 					M.exp++
 					M.ryo++
 					M.LevelStat("Ninjutsu",rand(1,2),1)
 					M.Levelup()
+					spawn() M.client.UpdateCharacterPanel()
+					spawn() M.UpdateHMB()
 
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
+			
+			if(/mission/b_rank/hunting_rogues)
+				if(squad)
+					if(src.required_vars["DEATHS"] >= src.squad.members.len)
+						src = null
+
+						for(var/mob/m in mobs_online)
+							if(squad.members[m.client.ckey])
+								spawn() squad.RefreshMember(m)
+								spawn() M.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
+					
+					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
+						src = null
+
+						for(var/mob/m in mobs_online)
+							if(squad.members[m.client.ckey])
+								M.exp++
+								M.ryo++
+								M.LevelStat("Ninjutsu",rand(1,2),1)
+								M.Levelup()
+								spawn() squad.RefreshMember(m)
+
 
 	New(mob/M)
 		..()
@@ -136,6 +163,19 @@ mission
 	c_rank
 
 	b_rank
+		hunting_rogues
+			name = "Hunting Rogues"
+			New()
+				..()
+				src.description = "Hunt down and elimate rogue ninja and then report to <b>[src.complete_npc]</b>."
+				src.html = {"
+					<b><u>Mission</u></b><br />
+					[src.name]<br /><br />
+					[src.description]
+				"}
+				src.required_vars["KILLS"] = 0
+				src.required_vars["DEATHS"] = 0
+				src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + rand(1,3)) - 1
 
 	a_rank
 

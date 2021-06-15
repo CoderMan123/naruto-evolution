@@ -53,7 +53,7 @@ mob/npc
 								switch(usr.client.AlertList("What rank mission are you interested in?", src.name, list("D Rank", "C Rank", "B Rank", "A Rank", "S Rank")))
 									if(1)
 										if(usr.checkRank() >= 1)
-											var/mission/d_rank/deliver_intel/mission = pick(typesof(/mission/d_rank) - /mission/d_rank)
+											var/mission/d_rank/mission = pick(typesof(/mission/d_rank) - /mission/d_rank)
 											mission = new mission(usr)
 
 											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
@@ -69,15 +69,36 @@ mob/npc
 
 												spawn() squad.Refresh()
 										else
-											usr.client.Alert("Only a Genin rank ninja or higher can take a D rank mission.", src.name)
+											usr.client.Alert("You must be at least Genin rank to take on D rank missions.", src.name)
 
-									if(2) usr << 2
+									if(2)
+										usr.client.Alert("C Rank missions are not currently available.", src.name)
 
-									if(3) usr << 3
+									if(3)
+										if(usr.checkRank() >= 3)
+											var/mission/b_rank/mission = pick(typesof(/mission/b_rank) - /mission/b_rank)
+											mission = new mission(usr)
 
-									if(4) usr << 4
+											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+												squad.mission = mission
+												squad.mission.start = world.realtime
 
-									if(5) usr << 5
+												for(var/mob/m in mobs_online)
+													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+
+												for(var/ckey in squad.members)
+													var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
+													F["last_mission"] << squad.mission.start
+
+												spawn() squad.Refresh()
+										else
+											usr.client.Alert("You must be at least Jonin rank to take on B rank missions.", src.name)
+
+									if(4)
+										usr.client.Alert("A Rank missions are not currently available.", src.name)
+
+									if(5)
+										usr.client.Alert("S Rank missions are not currently available.", src.name)
 
 						// Mission request denied: active mission
 						else if(squad && squad.members[usr.ckey] && squad.mission)
@@ -131,7 +152,7 @@ mob/npc
 						if(/mission/d_rank/deliver_intel)
 							if(squad.mission.required_items.Find(/obj/Inventory/mission/deliver_intel))
 								squad.mission.required_items.Remove(/obj/Inventory/mission/deliver_intel)
-								
+
 								switch(usr.village)
 									if("Hidden Leaf")
 										new /obj/Inventory/mission/deliver_intel/leaf_intel(usr)

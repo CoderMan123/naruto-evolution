@@ -544,6 +544,34 @@ mob
 							X.ryo+=src.Bounty
 							src.Bounty=0
 						else X.Bounty+=rand(5,10)
+
+						// Reward Squad (Killer) for killing a Missing-Nin while on a Hunting Rogues mission
+						var/squad/squad = X.GetSquad()
+						if(squad && squad.mission)
+							switch(squad.mission.type)
+								if(/mission/b_rank/hunting_rogues)
+									if(src.village == VILLAGE_MISSING_NIN)
+										squad.mission.required_vars["KILLS"]++
+										spawn() squad.mission.Complete()
+						
+						// Penalize Squad for dying while on a Hunting Rogues mission
+						squad = src.GetSquad()
+						if(squad && squad.mission)
+							switch(squad.mission.type)
+								if(/mission/b_rank/hunting_rogues)
+									squad.mission.required_vars["DEATHS"]++
+									spawn() squad.mission.Complete()
+						
+						// Reward Missing-Nin (Killer) for killing someone on a Hunting Rogues mission
+						squad = src.GetSquad()
+						if(squad && squad.mission)
+							switch(squad.mission.type)
+								if(/mission/b_rank/hunting_rogues)
+									if(X.village == VILLAGE_MISSING_NIN)
+										X.exp += 1
+										X.ryo += 1
+										spawn() X.Levelup()
+
 						if(X.Mission=="Kill [src] ([src.ckey])")
 							X.Mission=null
 							X<<output("You have successfully completed your mission.","Action.Output")
