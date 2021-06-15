@@ -39,7 +39,7 @@ mission
 
 		if(src.required_mobs)
 			for(var/i = 1, i <= src.required_mobs, i++)
-				src.required_mobs[i] = locate(m.type) in npcs_online
+				src.required_mobs[i] = locate(src.required_mobs[i].type) in npcs_online
 
 	proc/GetTimer()
 		// http://www.byond.com/forum/post/2244993
