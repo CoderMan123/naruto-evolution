@@ -2,8 +2,13 @@ mob/npc
 	mouse_over_pointer = /obj/cursors/speech
 	var/tmp/list/conversations = list()
 
+	move=0
+	Move()return
+	Death(killer)return
+
 	New()
 		..()
+		npcs_online.Add(src)
 		src.overlays+=/obj/MaleParts/UnderShade
 		src.SetName(src.name)
 
@@ -28,11 +33,13 @@ mob/npc
 				if(src.village == usr.village)
 					var/squad/squad = usr.GetSquad()
 					if(squad && squad.mission)
-						squad.mission.Complete(usr) // Complete mission (original squad)
+						// Complete mission (original squad)
+						squad.mission.Complete(usr)
 					else
+						// Complete mission (another squad)
 						var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
 						if(O && O.squad.mission)
-							O.squad.mission.Complete(usr) // Complete mission (another squad)
+							O.squad.mission.Complete(usr)
 
 						// Request mission (Squad leader only)
 						else if(squad && squad.leader[usr.ckey] && !squad.mission)
@@ -84,7 +91,6 @@ mob/npc
 						else if(!squad)
 							usr.client.Alert("I can't send you out on missions until you form a squad.", src.name)
 
-
 				// Rejection
 				else
 					usr.client.Alert("We don't work with your kind here.", src.name)
@@ -119,23 +125,33 @@ mob/npc
 				src.conversations.Add(usr)
 
 				var/squad/squad = usr.GetSquad()
-				if(squad && squad.mission && squad.mission.mob_objectives[1] == src.type)
+				for(var/mob/m in squad.mission.required_mobs)
+					world << "squad.mission.required_mobs length: [squad.mission.required_mobs.len]"
+					world << "mob: [m]"
+					world << "associative: [squad.mission.required_mobs[m]]"
+					world << "type: [m.type]"
+					world << "src: [src]"
+					world << "src type: [src.type]"
+				world << "NPCS ONLINE: [npcs_online.len]"
+				for(var/mob/m2 in npcs_online)
+					world << m2
+
+				if(squad && squad.mission && squad.mission.required_mobs.Find(src)) // Compare type as reference is lost on load and a new mob is created.
 					switch(squad.mission.type)
 						if(/mission/d_rank/deliver_intel)
-							if(squad.mission.obj_objectives.Find(/obj/Inventory/mission/deliver_intel))
-								squad.mission.obj_objectives.Remove(/obj/Inventory/mission/deliver_intel)
+							if(squad.mission.required_items.Find(/obj/Inventory/mission/deliver_intel))
+								squad.mission.required_items.Remove(/obj/Inventory/mission/deliver_intel)
 
 								switch(usr.village)
 									if("Hidden Leaf")
 										new /obj/Inventory/mission/deliver_intel/leaf_intel(usr)
 										spawn() usr.client.UpdateInventoryPanel()
-										usr.client.Alert("I need you to deliver this intel to Shizune.", src.name)
-
+										usr.client.Alert("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 
 									if("Hidden Sand")
 										new /obj/Inventory/mission/deliver_intel/sand_intel(usr)
 										spawn() usr.client.UpdateInventoryPanel()
-										usr.client.Alert("I need you to deliver this intel to Temari.", src.name)
+										usr.client.Alert("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 
 							else
 								usr.client.Alert("I've already given your squad the intel. Quickly, on your way before the enemy show up.", src.name)

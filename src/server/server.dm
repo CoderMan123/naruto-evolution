@@ -10,6 +10,7 @@ var/list/clients_connected = list()
 var/list/clients_online = list()
 var/list/mobs_online = list()
 var/list/names_taken = list()
+var/list/npcs_online = list()
 
 var/squads[0]
 
