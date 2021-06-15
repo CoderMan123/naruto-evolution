@@ -7,6 +7,6 @@ AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 513.1542
 WINDOW: src\interface\interface.dm;src\interface\interface.dmf;src\mob\mob.dm;src\mob\inventory.dm;src\_src\Inventory.dm;src\_src\Village Guards.dm;src\_src\Jutsus\LevelProcs.dm;src\_src\Variables\Variables.dm;assets\maps\map.dmm;src\mob\npc.dm
-FILE: assets\maps\map.dmm
+FILE: src\mob\npc.dm
 */
 // END_INTERNALS

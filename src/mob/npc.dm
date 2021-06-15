@@ -125,23 +125,13 @@ mob/npc
 				src.conversations.Add(usr)
 
 				var/squad/squad = usr.GetSquad()
-				for(var/mob/m in squad.mission.required_mobs)
-					world << "squad.mission.required_mobs length: [squad.mission.required_mobs.len]"
-					world << "mob: [m]"
-					world << "associative: [squad.mission.required_mobs[m]]"
-					world << "type: [m.type]"
-					world << "src: [src]"
-					world << "src type: [src.type]"
-				world << "NPCS ONLINE: [npcs_online.len]"
-				for(var/mob/m2 in npcs_online)
-					world << m2
 
-				if(squad && squad.mission && squad.mission.required_mobs.Find(src)) // Compare type as reference is lost on load and a new mob is created.
+				if(squad && squad.mission && squad.mission.required_mobs.Find(src))
 					switch(squad.mission.type)
 						if(/mission/d_rank/deliver_intel)
 							if(squad.mission.required_items.Find(/obj/Inventory/mission/deliver_intel))
 								squad.mission.required_items.Remove(/obj/Inventory/mission/deliver_intel)
-
+								
 								switch(usr.village)
 									if("Hidden Leaf")
 										new /obj/Inventory/mission/deliver_intel/leaf_intel(usr)
@@ -155,7 +145,6 @@ mob/npc
 
 							else
 								usr.client.Alert("I've already given your squad the intel. Quickly, on your way before the enemy show up.", src.name)
-
 
 				else
 					usr.client.Alert("Got a problem?", src.name)

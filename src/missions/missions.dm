@@ -38,8 +38,8 @@ mission
 			src.complete_npc = locate(src.complete_npc.type) in npcs_online
 
 		if(src.required_mobs)
-			for(var/mob/m in src.required_mobs)
-				src.required_mobs[m] = locate(m.type) in npcs_online
+			for(var/i = 1, i <= src.required_mobs, i++)
+				src.required_mobs[i] = locate(m.type) in npcs_online
 
 	proc/GetTimer()
 		// http://www.byond.com/forum/post/2244993
@@ -50,7 +50,7 @@ mission
 			if(/mission/d_rank/deliver_intel)
 				var/squad/squad = M.GetSquad()
 				var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in M.contents
-				// The mission belongs the the same squad turning it in
+				// The mission belongs to the same squad turning it in
 				if(src.squad && squad && src.squad == squad && O)
 					M.contents -= O
 					O.squad.mission = null
@@ -95,8 +95,6 @@ mission
 
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 
-
-
 	New(mob/M)
 		..()
 		if(M)
@@ -122,6 +120,7 @@ mission
 					switch(M.village)
 						if("Hidden Leaf")
 							npc = locate(pick(typesof(/mob/npc/mission_npc/deliver_intel/leaf) - /mob/npc/mission_npc/deliver_intel/leaf))
+							
 						if("Hidden Sand")
 							npc = locate(pick(typesof(/mob/npc/mission_npc/deliver_intel/sand) - /mob/npc/mission_npc/deliver_intel/sand))
 					src.required_mobs.Add(npc)
