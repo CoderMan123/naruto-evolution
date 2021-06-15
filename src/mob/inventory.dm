@@ -45,7 +45,7 @@ obj
 					usr.client.UpdateInventoryPanel()
 
 		ryo_pouch
-			icon='Ryo bills.dmi'
+			icon='Ryo_Pouch.dmi'
 			icon_state="owned"
 			name="Ryo Pouch"
 			New(mob/M, var/ryo)
