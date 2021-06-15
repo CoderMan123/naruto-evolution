@@ -285,6 +285,7 @@ mob
 			else
 				if(findtext(txt,"Sharingan"))usr.Sharingan()
 				switch(txt)
+					if("Summoning Jutsu: Dog")usr.Summoning_Dog()
 					if("Wood Style: Tree Summoning")usr.Tree_Summoning()
 					if("Ice Explosion")usr.Ice_Explosion()//iceexplosionstuff
 					if("Super Multi-Size Technique")usr.SuperMultiSizeTechnique()//multisizestuff
