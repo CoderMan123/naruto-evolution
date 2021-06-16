@@ -398,6 +398,7 @@ mob
 					switch(src.village)
 						if(VILLAGE_LEAF) Color = "#2b7154"
 						if(VILLAGE_SAND) Color = "#886541"
+						if(VILLAGE_MISSING_NIN) Color = "white"
 
 				var/obj/name = new()
 				name.layer = MOB_LAYER - 1000
