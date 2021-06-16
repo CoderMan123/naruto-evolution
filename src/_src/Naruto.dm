@@ -39,12 +39,7 @@ proc/RepopWorld()
 	while(world)
 		sleep(600*5)
 		world.Repop()
-
-proc/Advert()
-	set background = 1
-	while(world)
-		world<<"<font color=white><b>Don't forget to visit our <a href=\"http://www.byond.com/games/Squigs/NETheNewEra/\">HUB</a>, and join the <a href=\"https://discord.gg/URcN6cc\">Discord</a> for news and updates!</b></font>!"
-		sleep(600*30)
+		
 var/MOTD
 var/list/MapLoadSpawn= newlist()
 var/list/Respawn= newlist()

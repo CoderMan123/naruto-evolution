@@ -1236,7 +1236,6 @@ window "Inventory"
 		size = 300x500
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1245,8 +1244,6 @@ window "Inventory"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x514
-		inner-size = 300x500
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1979,6 +1976,7 @@ window "Output"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1987,6 +1985,8 @@ window "Output"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 514x214
+		inner-size = 500x200
 	elem "OutputBackground"
 		type = LABEL
 		pos = 0,0
@@ -2010,8 +2010,8 @@ window "Output"
 		is-default = true
 		border = line
 		saved-params = "max-lines"
-		link-color = #ffd900
-		visited-color = #df00ff
+		link-color = #be1a0e
+		visited-color = #be1a0e
 		style = "img.icon { width: 10px; height: 10px; }"
 		legacy-size = false
 
