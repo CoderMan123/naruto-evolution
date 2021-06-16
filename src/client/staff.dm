@@ -72,7 +72,7 @@ mob
 					if("Clear Logs")
 						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_ADMINISTRATOR, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
-								switch(alert("Are you sure you want to delete all Logs?", "Manage Logs", "Clear All Logs"))
+								switch(alert("Are you sure you want to delete all Logs?", "Manage Logs", "Clear All Logs", "Cancel"))
 									if("Clear All Logs")
 										fdel(LOG_ADMINISTRATOR)
 										fdel(LOG_BUGS)
@@ -83,37 +83,37 @@ mob
 										fdel(LOG_STAFF)
 							
 							if(LOG_ADMINISTRATOR)
-								switch(alert("Are you sure you want to delete the Administrator Logs?", "Manage Logs", "Clear Logs"))
+								switch(alert("Are you sure you want to delete the Administrator Logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_ADMINISTRATOR)
 							
 							if(LOG_BUGS)
-								switch(alert("Are you sure you want to delete the Bug Logs?", "Manage Logs", "Clear Logs"))
+								switch(alert("Are you sure you want to delete the Bug Logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_BUGS)
 
 							if(LOG_CLIENT_SAVES)
-								switch(alert("Are you sure you want to delete the Client Save Logs?", "Manage Logs", "Clear Logs"))
+								switch(alert("Are you sure you want to delete the Client Save Logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_CLIENT_SAVES)
 
 							if(LOG_ERROR)
-								switch(alert("Are you sure you want to delete the Error Logs?", "Manage Logs", "Clear Logs"))
+								switch(alert("Are you sure you want to delete the Error Logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_ERROR)
 
 							if(LOG_KILLS)
-								switch(alert("Are you sure you want to delete the Kill Logs?", "Manage Logs", "Clear Logs"))
+								switch(alert("Are you sure you want to delete the Kill Logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_KILLS)
 
 							if(LOG_SAVES)
-								switch(alert("Are you sure you want to delete the Mob Save Logs?", "Manage Logs", "Clear Logs"))
+								switch(alert("Are you sure you want to delete the Mob Save Logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_SAVES)
 
 							if(LOG_STAFF)
-								switch(alert("Are you sure you want to delete the Staff Logs?", "Manage Logs", "Clear Logs"))
+								switch(alert("Are you sure you want to delete the Staff Logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_STAFF)
 
