@@ -791,12 +791,12 @@ mob
 
 					KOs++
 					src.dead=0
-					
+
 					var/respawned = 0
 
 					spawn(3000) if(!respawned) src.Respawn()
 
-					if(src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", "Respawn"))
+					if(src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
 						respawned = 1
 						src.Respawn()
 
