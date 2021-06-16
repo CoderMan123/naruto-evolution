@@ -113,23 +113,22 @@ mission
 						for(var/mob/m in mobs_online)
 							if(squad.members[m.client.ckey])
 								spawn() squad.RefreshMember(m)
-								spawn() M.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
+								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 						
 						src = null
 					
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
 						squad.mission.complete = world.realtime
-						
+
 						for(var/mob/m in mobs_online)
 							if(squad.members[m.client.ckey])
-								M.exp++
-								M.ryo++
-								M.LevelStat("Ninjutsu",rand(1,2),1)
-								M.Levelup()
+								m.exp++
+								m.ryo++
+								m.LevelStat("Ninjutsu",rand(1,2),1)
+								m.Levelup()
 								spawn() squad.RefreshMember(m)
 						
 						src = null
-
 
 	New(mob/M)
 		..()
