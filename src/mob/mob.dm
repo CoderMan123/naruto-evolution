@@ -467,6 +467,51 @@ mob
 				spawn() src.UpdateBars()
 				spawn() src.UpdateHMB()
 				sleep(10)
+		
+		Respawn()
+			if(!revived)
+				KOs++
+				src.dead=0
+				if(KOs>=2&&!Chuunins.Find(src))
+					if(X&&X.key&&src!=X)
+						if(X.z in global.warmaps && src.z in global.warmaps)
+							if(X.village == "Hidden Sand")
+								global.sandpoints["[X.z]"]+=src.level
+							if(X.village == "Hidden Leaf")
+								global.leafpoints["[X.z]"]+=src.level
+							if(X.village == "Hidden Mist")
+								global.mistpoints["[X.z]"]+=src.level
+							if(X.village == "Hidden Sound")
+								global.soundpoints["[X.z]"]+=src.level
+							if(X.village == "Hidden Rock")
+								global.rockpoints["[X.z]"]+=src.level
+					if(src.revived==0)
+						var/list/Spawns=RespawnSpawn()
+						if(!Spawns.len) src.loc=locate(1,1,4)
+						else src.loc=pick(src.RespawnSpawn())
+					else src.revived=0
+					KOs=0
+				if(KOs>=2)KOs=0
+				src.density=1
+				src.health=src.maxhealth
+				src.chakra=src.maxchakra
+				src.injutsu=0
+				src.canattack=1
+				src.firing=0
+				src.icon_state=""
+				src.wait=0
+				src.rest=0
+				src.dodge=0
+				src.move=1
+				src.joinedwar=0
+				src.joinedakatshinobiw=0
+				src.swimming=0
+				src.walkingonwater=0
+				src.overlays=0
+				src.RestoreOverlays()
+				src.UpdateHMB()
+				spawn(1)src.Run()
+			revived=0
 
 proc
 	DamageOverlay(mob/M, damage, color, outline=1)

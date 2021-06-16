@@ -474,7 +474,8 @@ mob
 
 						// Loot Ryo //
 						X.ryo += src.ryo
-						view(X) << "<i>[X] has looted [src.ryo] Ryo from [src].</i>"
+						src.ryo = 0
+						view(X) << output("<i>[X] has looted [src.ryo] Ryo from [src].</i>", "Action.Output")
 
 						// Loot Ryo Pouches //
 						var/looted_pouches = 0
@@ -488,7 +489,7 @@ mob
 						if(looted_pouches)
 							spawn() src.client.UpdateInventoryPanel()
 							spawn() X.client.UpdateInventoryPanel()
-							view(X) << "<i>[X] has looted [looted_pouches] Ryo Pouches containing [looted_pouches_ryo] Ryo from [src].</i>"
+							view(X) << output("<i>[X] has looted [looted_pouches] Ryo Pouches containing [looted_pouches_ryo] Ryo from [src].</i>", "Action.Output")
 
 						X.kills++
 						//X.Multikill++
@@ -775,51 +776,14 @@ mob
 											M2.LevelStat("Genjutsu",rand(10,25),1)
 											M2.Levelup()
 
-					src.ryo=0
-					spawn(300)
-						if(!revived)
-							KOs++
-							src.dead=0
-							if(KOs>=2&&!Chuunins.Find(src))
-								if(X&&X.key&&src!=X)
-									if(X.z in global.warmaps && src.z in global.warmaps)
-										if(X.village == "Hidden Sand")
-											global.sandpoints["[X.z]"]+=src.level
-										if(X.village == "Hidden Leaf")
-											global.leafpoints["[X.z]"]+=src.level
-										if(X.village == "Hidden Mist")
-											global.mistpoints["[X.z]"]+=src.level
-										if(X.village == "Hidden Sound")
-											global.soundpoints["[X.z]"]+=src.level
-										if(X.village == "Hidden Rock")
-											global.rockpoints["[X.z]"]+=src.level
-								if(src.revived==0)
-									var/list/Spawns=RespawnSpawn()
-									if(!Spawns.len) src.loc=locate(1,1,4)
-									else src.loc=pick(src.RespawnSpawn())
-								else src.revived=0
-								KOs=0
-							if(KOs>=2)KOs=0
-							src.density=1
-							src.health=src.maxhealth
-							src.chakra=src.maxchakra
-							src.injutsu=0
-							src.canattack=1
-							src.firing=0
-							src.icon_state=""
-							src.wait=0
-							src.rest=0
-							src.dodge=0
-							src.move=1
-							src.joinedwar=0
-							src.joinedakatshinobiw=0
-							src.swimming=0
-							src.walkingonwater=0
-							src.overlays=0
-							src.RestoreOverlays()
-							src.UpdateHMB()
-							spawn(1)src.Run()
-						revived=0
+					var/respawned = 0
+
+					spawn(3000) if(!respawned) src.Respawn()
+
+					if(src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", "Respawn"))
+						respawned = 1
+						src.Respawn()
+
 				if(istype(src,/mob/Clones))
 					var/mob/O=src.Owner
 					if(O.likeaclone)
