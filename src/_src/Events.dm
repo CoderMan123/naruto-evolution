@@ -31,7 +31,7 @@ mob
 				return
 			else
 				..()
-mob/White_Zettsu/proc/Respawn()
+mob/White_Zettsu/proc/RespawnZetsu()
 	src.loc=null
 	spawn(600)
 	src.loc=src.oloc
@@ -55,7 +55,7 @@ mob/White_Zettsu/proc/CombatAI()
 	while(src)
 		if(src.health<=0)
 			src.killed=1
-			src.Respawn()
+			src.RespawnZetsu()
 			return
 		src.Move()
 		for(var/mob/M in oview())
