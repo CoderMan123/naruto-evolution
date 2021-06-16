@@ -108,7 +108,7 @@ mob/npc
 						else if(squad && squad.members[usr.ckey] && !squad.mission)
 							usr.client.Alert("Hey [usr.name], it's nice to see you! Have your squad leader stop by if you're ready to take on a mission.", src.name)
 
-							// Mission request denied: not in a squad
+						// Mission request denied: not in a squad
 						else if(!squad)
 							usr.client.Alert("I can't send you out on missions until you form a squad.", src.name)
 

@@ -73,6 +73,7 @@ mission
 				else if(src.squad && squad && src.squad == squad && squad.mission && !src.squad.mission.complete && !O)
 					spawn() M.client.Alert("I'm still waiting on that squad intel. Please hurry along and pick it up from [src.required_mobs[1]]", "[src.complete_npc]")
 
+				// This mission belongs to another Squad
 				else if(squad && O && !squad.mission.complete)
 					O.squad.mission.complete = world.realtime
 					M.contents -= O
@@ -89,7 +90,8 @@ mission
 							spawn() squad.RefreshMember(m)
 					
 					O.squad.mission = null
-
+				
+				// Solo ninja turning in the mission
 				else if(O)
 					M.contents -= O
 					spawn() M.client.UpdateInventoryPanel()
@@ -101,8 +103,6 @@ mission
 					spawn() M.client.UpdateCharacterPanel()
 					spawn() M.UpdateHMB()
 
-					src = null
-
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 			
 			if(/mission/b_rank/hunting_rogues)
@@ -112,23 +112,25 @@ mission
 
 						for(var/mob/m in mobs_online)
 							if(squad.members[m.client.ckey])
-								spawn() squad.RefreshMember(m)
+								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
+								spawn() squad.RefreshMember(m)
 						
-						src = null
+						squad.mission = null
 					
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
 							if(squad.members[m.client.ckey])
+								m << output("<b>[squad.mission]:</b> You have successfully completed your mission.", "Action.Output")
 								m.exp++
 								m.ryo++
 								m.LevelStat("Ninjutsu",rand(1,2),1)
 								m.Levelup()
 								spawn() squad.RefreshMember(m)
 						
-						src = null
+						squad.mission = null
 
 	New(mob/M)
 		..()
