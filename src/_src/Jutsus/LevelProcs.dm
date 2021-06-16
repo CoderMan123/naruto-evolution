@@ -775,7 +775,23 @@ mob
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
 											M2.Levelup()
+					if(!Chuunins.Find(src))
+						if(X&&X.key&&src!=X)
+							if(X.z in global.warmaps && src.z in global.warmaps)
+								if(X.village == "Hidden Sand")
+									global.sandpoints["[X.z]"]+=src.level
+								if(X.village == "Hidden Leaf")
+									global.leafpoints["[X.z]"]+=src.level
+								if(X.village == "Hidden Mist")
+									global.mistpoints["[X.z]"]+=src.level
+								if(X.village == "Hidden Sound")
+									global.soundpoints["[X.z]"]+=src.level
+								if(X.village == "Hidden Rock")
+									global.rockpoints["[X.z]"]+=src.level
 
+					KOs++
+					src.dead=0
+					
 					var/respawned = 0
 
 					spawn(3000) if(!respawned) src.Respawn()
