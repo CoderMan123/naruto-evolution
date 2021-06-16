@@ -644,19 +644,6 @@ mob
 											M2.Levelup()
 							X.Levelup()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 						if(X.Mission=="Jounin Kill [src] ([src.ckey])")
 							X.Mission=null
 							X<<output("You have successfully completed your mission.","Action.Output")
@@ -788,13 +775,10 @@ mob
 									global.soundpoints["[X.z]"]+=src.level
 								if(X.village == "Hidden Rock")
 									global.rockpoints["[X.z]"]+=src.level
-
-					KOs++
-					src.dead=0
-
+					
 					var/respawned = 0
 
-					spawn(3000) if(!respawned) src.Respawn()
+					spawn(3000) if(!respawned && src.dead) src.Respawn()
 
 					if(src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
 						respawned = 1

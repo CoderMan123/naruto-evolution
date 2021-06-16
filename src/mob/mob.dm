@@ -474,7 +474,8 @@ mob
 				if(!Spawns.len) src.loc=locate(1,1,4)
 				else src.loc=pick(src.RespawnSpawn())
 			else src.revived=0
-			KOs=0
+			
+			src.dead=0
 			src.density=1
 			src.health=src.maxhealth
 			src.chakra=src.maxchakra

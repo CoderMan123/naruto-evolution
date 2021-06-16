@@ -14,7 +14,6 @@ mob
 						if(M.icon_state == "dead" && M.dead)
 							M.revived=1
 							M.dead=0
-							M.KOs=0
 							M.density=1
 							M.health=M.maxhealth
 							M.chakra=M.maxchakra
