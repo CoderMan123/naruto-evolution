@@ -120,8 +120,11 @@ world
 			G >> Faction
 			Factions += Faction
 	
+	proc/GetAdvert()
+		return "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='http://www.byond.com/games/Squigs/NETheNewEra/'>Hub</a>] \[<a href='https://discord.gg/URcN6cc\'>Discord</a>] \[<a href='https://github.com/lavenblade/naruto-evolution-public/issues/new?template=feature-request.md'>Feature Requests</a>] \[<a href='https://github.com/lavenblade/naruto-evolution-public/issues/new?template=bug-report.md'>Bug Reports</a>]</b></center>"
+	
 	proc/Advert()
 		set background = 1
 		while(world)
-			world << "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='http://www.byond.com/games/Squigs/NETheNewEra/'>Hub</a>] \[<a href='https://discord.gg/URcN6cc\'>Discord</a>] \[<a href='https://github.com/lavenblade/naruto-evolution-public/issues/new?template=feature-request.md'>Feature Requests</a>] \[<a href='https://github.com/lavenblade/naruto-evolution-public/issues/new?template=bug-report.md'>Bug Reports</a>]</b></center>"
-			sleep(600*10)
+			world << src.GetAdvert()
+			sleep(600*30)
