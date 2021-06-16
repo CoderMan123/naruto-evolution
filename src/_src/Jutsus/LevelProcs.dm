@@ -552,6 +552,9 @@ mob
 								if(/mission/b_rank/hunting_rogues)
 									if(src.village == VILLAGE_MISSING_NIN)
 										squad.mission.required_vars["KILLS"]++
+										for(var/mob/m in squad.members)
+											m << output("[X] has slain the Missing-Nin [src] while on a mission hunting rogue ninja.", "Action.Output")
+											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] rogue ninja have been eliminated.", "Action.Output")
 										spawn() squad.mission.Complete()
 						
 						// Penalize Squad for dying while on a Hunting Rogues mission
@@ -560,6 +563,9 @@ mob
 							switch(squad.mission.type)
 								if(/mission/b_rank/hunting_rogues)
 									squad.mission.required_vars["DEATHS"]++
+									for(var/mob/m in squad.members)
+										m << output("[src] has died to [src] while on a mission hunting rogue ninja.", "Action.Output")
+										m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting rogue ninja.", "Action.Output")
 									spawn() squad.mission.Complete()
 						
 						// Reward Missing-Nin (Killer) for killing someone on a Hunting Rogues mission
@@ -568,8 +574,10 @@ mob
 							switch(squad.mission.type)
 								if(/mission/b_rank/hunting_rogues)
 									if(X.village == VILLAGE_MISSING_NIN)
+										X << output("You have slain [src] who was on a mission hunting rogue ninja.", "Action.Output")
 										X.exp += 1
 										X.ryo += 1
+										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
 										spawn() X.Levelup()
 
 						if(X.Mission=="Kill [src] ([src.ckey])")

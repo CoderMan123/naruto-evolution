@@ -51,9 +51,9 @@ mission
 				var/squad/squad = M.GetSquad()
 				var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in M.contents
 				// The mission belongs to the same squad turning it in
-				if(src.squad && squad && src.squad == squad && O)
+				if(src.squad && squad && src.squad == squad && !src.squad.mission.complete && O)
+					src.squad.mission.complete = world.realtime
 					M.contents -= O
-					src.squad.mission = null
 					spawn() M.client.UpdateInventoryPanel()
 
 					for(var/mob/m in mobs_online)
@@ -65,15 +65,17 @@ mission
 							spawn() m.client.UpdateCharacterPanel()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
+					
+					src.squad.mission = null
 
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 
-				else if(src.squad && squad && src.squad == squad && squad.mission && !O)
+				else if(src.squad && squad && src.squad == squad && squad.mission && !src.squad.mission.complete && !O)
 					spawn() M.client.Alert("I'm still waiting on that squad intel. Please hurry along and pick it up from [src.required_mobs[1]]", "[src.complete_npc]")
 
-				else if(squad && O)
+				else if(squad && O && !squad.mission.complete)
+					O.squad.mission.complete = world.realtime
 					M.contents -= O
-					O.squad.mission = null
 					spawn() M.client.UpdateInventoryPanel()
 
 					for(var/mob/m in mobs_online)
@@ -85,10 +87,11 @@ mission
 							spawn() m.client.UpdateCharacterPanel()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
+					
+					O.squad.mission = null
 
 				else if(O)
 					M.contents -= O
-					src = null
 					spawn() M.client.UpdateInventoryPanel()
 
 					M.exp++
@@ -98,21 +101,25 @@ mission
 					spawn() M.client.UpdateCharacterPanel()
 					spawn() M.UpdateHMB()
 
+					src = null
+
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 			
 			if(/mission/b_rank/hunting_rogues)
-				if(squad)
+				if(squad && !squad.mission.complete)
 					if(src.required_vars["DEATHS"] >= src.squad.members.len)
-						src = null
+						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
 							if(squad.members[m.client.ckey])
 								spawn() squad.RefreshMember(m)
 								spawn() M.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
+						
+						src = null
 					
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
-						src = null
-
+						squad.mission.complete = world.realtime
+						
 						for(var/mob/m in mobs_online)
 							if(squad.members[m.client.ckey])
 								M.exp++
@@ -120,6 +127,8 @@ mission
 								M.LevelStat("Ninjutsu",rand(1,2),1)
 								M.Levelup()
 								spawn() squad.RefreshMember(m)
+						
+						src = null
 
 
 	New(mob/M)
