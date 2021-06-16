@@ -344,29 +344,6 @@ mob/Admin/verb
 		VotationGoingOn=1
 		Vote_Check()
 		Vote_Election()
-	Get_Bugs()
-		set category = "Staff"
-		var/bugs = file("Bugs.txt")
-		usr << browse(bugs)
-		winset(src, null, {"
-						Browser.is-visible = "true";
-					"})
-	Get_ErrorLog()
-		set category = "Staff"
-		var/ErLog = file(LOG_ERROR)
-		usr << browse(ErLog)
-		winset(src, null, {"
-						Browser.is-visible = "true";
-					"})
-
-	Get_KillLog()
-		set category = "Staff"
-		var/killlog = file(LOG_KILLS)
-		usr << browse(killlog)
-		winset(src, null, {"
-						Browser.is-visible = "true";
-					"})
-
 
 	Promote_to_Position(mob/M in mobs_online)
 		set category = "Staff"

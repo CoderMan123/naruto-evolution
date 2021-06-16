@@ -1,6 +1,122 @@
 mob
 	administrator
 		verb
+			Manage_Logs()
+				set category = "Administrator"
+				switch(alert("What would you like to do?", "Manage Logs", "View Logs", "Download Logs", "Clear Logs"))
+					if("View Logs")
+						switch(input("Which logs would you like to view?", "Logs") as null|anything in list(LOG_ADMINISTRATOR, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+							if(LOG_ADMINISTRATOR)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_ADMINISTRATOR))
+								winset(src, "Browser", "is-visible = true")
+							
+							if(LOG_BUGS)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_BUGS))
+								winset(src, "Browser", "is-visible = true")
+
+							if(LOG_CLIENT_SAVES)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_CLIENT_SAVES))
+								winset(src, "Browser", "is-visible = true")
+
+							if(LOG_ERROR)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_ERROR))
+								winset(src, "Browser", "is-visible = true")
+
+							if(LOG_KILLS)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_KILLS))
+								winset(src, "Browser", "is-visible = true")
+
+							if(LOG_SAVES)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_SAVES))
+								winset(src, "Browser", "is-visible = true")
+
+							if(LOG_STAFF)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_STAFF))
+								winset(src, "Browser", "is-visible = true")
+					
+					if("Download Logs")
+						switch(input("Which logs would you like to download?", "Manage Logs") as null|anything in list("All Logs", LOG_ADMINISTRATOR, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+							if("All Logs")
+								shell("zip -r logs/logs.zip logs/")
+								src << file("logs.zip")
+								fdel(file("logs.zip"))
+							
+							if(LOG_ADMINISTRATOR)
+								src << ftp(LOG_ADMINISTRATOR)
+							
+							if(LOG_BUGS)
+								src << ftp(LOG_BUGS)
+
+							if(LOG_CLIENT_SAVES)
+								src << ftp(LOG_CLIENT_SAVES)
+
+							if(LOG_ERROR)
+								src << ftp(LOG_ERROR)
+
+							if(LOG_KILLS)
+								src << ftp(LOG_KILLS)
+
+							if(LOG_SAVES)
+								src << ftp(LOG_SAVES)
+
+							if(LOG_STAFF)
+								src << ftp(LOG_STAFF)
+
+					if("Clear Logs")
+						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_ADMINISTRATOR, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+							if("All Logs")
+								switch(alert("Are you sure you want to delete all Logs?", "Manage Logs", "Clear All Logs"))
+									if("Clear All Logs")
+										fdel(LOG_ADMINISTRATOR)
+										fdel(LOG_BUGS)
+										fdel(LOG_CLIENT_SAVES)
+										fdel(LOG_ERROR)
+										fdel(LOG_KILLS)
+										fdel(LOG_SAVES)
+										fdel(LOG_STAFF)
+							
+							if(LOG_ADMINISTRATOR)
+								switch(alert("Are you sure you want to delete the Administrator Logs?", "Manage Logs", "Clear Logs"))
+									if("Clear Logs")
+										fdel(LOG_ADMINISTRATOR)
+							
+							if(LOG_BUGS)
+								switch(alert("Are you sure you want to delete the Bug Logs?", "Manage Logs", "Clear Logs"))
+									if("Clear Logs")
+										fdel(LOG_BUGS)
+
+							if(LOG_CLIENT_SAVES)
+								switch(alert("Are you sure you want to delete the Client Save Logs?", "Manage Logs", "Clear Logs"))
+									if("Clear Logs")
+										fdel(LOG_CLIENT_SAVES)
+
+							if(LOG_ERROR)
+								switch(alert("Are you sure you want to delete the Error Logs?", "Manage Logs", "Clear Logs"))
+									if("Clear Logs")
+										fdel(LOG_ERROR)
+
+							if(LOG_KILLS)
+								switch(alert("Are you sure you want to delete the Kill Logs?", "Manage Logs", "Clear Logs"))
+									if("Clear Logs")
+										fdel(LOG_KILLS)
+
+							if(LOG_SAVES)
+								switch(alert("Are you sure you want to delete the Mob Save Logs?", "Manage Logs", "Clear Logs"))
+									if("Clear Logs")
+										fdel(LOG_SAVES)
+
+							if(LOG_STAFF)
+								switch(alert("Are you sure you want to delete the Staff Logs?", "Manage Logs", "Clear Logs"))
+									if("Clear Logs")
+										fdel(LOG_STAFF)
+
 			Reset_Mission_Timer()
 				set category = "Administrator"
 				src.client.last_mission = null

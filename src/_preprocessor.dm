@@ -14,6 +14,7 @@
 #define LOG_KILLS "logs/kills.txt"
 #define LOG_SAVES "logs/saves.txt"
 #define LOG_CLIENT_SAVES "logs/client-saves.txt"
+#define LOG_BUGS "logs/bugs.txt"
 
 #define BROWSER_NONE 0
 #define BROWSER_SQUAD 1
