@@ -72,7 +72,7 @@ mob
 					if("Clear Logs")
 						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_ADMINISTRATOR, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
-								switch(alert("Are you sure you want to delete all Logs?", "Manage Logs", "Clear All Logs", "Cancel"))
+								switch(alert("Are you sure you want to delete all logs?", "Manage Logs", "Clear All Logs", "Cancel"))
 									if("Clear All Logs")
 										fdel(LOG_ADMINISTRATOR)
 										fdel(LOG_BUGS)
@@ -81,47 +81,65 @@ mob
 										fdel(LOG_KILLS)
 										fdel(LOG_SAVES)
 										fdel(LOG_STAFF)
+										src << output("You have cleared all the server logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared all the server logs.", LOG_ADMINISTRATOR)
 							
 							if(LOG_ADMINISTRATOR)
-								switch(alert("Are you sure you want to delete the Administrator Logs?", "Manage Logs", "Clear Logs", "Cancel"))
+								switch(alert("Are you sure you want to delete the Administrator logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_ADMINISTRATOR)
+										src << output("You have cleared the Administrator logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Administrator logs.", LOG_ADMINISTRATOR)
 							
 							if(LOG_BUGS)
-								switch(alert("Are you sure you want to delete the Bug Logs?", "Manage Logs", "Clear Logs", "Cancel"))
+								switch(alert("Are you sure you want to delete the Bug logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_BUGS)
+										src << output("You have cleared the Bug logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Bug logs.", LOG_ADMINISTRATOR)
 
 							if(LOG_CLIENT_SAVES)
-								switch(alert("Are you sure you want to delete the Client Save Logs?", "Manage Logs", "Clear Logs", "Cancel"))
+								switch(alert("Are you sure you want to delete the Client Save logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_CLIENT_SAVES)
+										src << output("You have cleared the Client Save logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Client Save logs.", LOG_ADMINISTRATOR)
 
 							if(LOG_ERROR)
-								switch(alert("Are you sure you want to delete the Error Logs?", "Manage Logs", "Clear Logs", "Cancel"))
+								switch(alert("Are you sure you want to delete the Error logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_ERROR)
+										src << output("You have cleared the Error logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Error logs.", LOG_ADMINISTRATOR)
 
 							if(LOG_KILLS)
-								switch(alert("Are you sure you want to delete the Kill Logs?", "Manage Logs", "Clear Logs", "Cancel"))
+								switch(alert("Are you sure you want to delete the Kill logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_KILLS)
+										src << output("You have cleared the Kill logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Kill logs.", LOG_ADMINISTRATOR)
 
 							if(LOG_SAVES)
-								switch(alert("Are you sure you want to delete the Mob Save Logs?", "Manage Logs", "Clear Logs", "Cancel"))
+								switch(alert("Are you sure you want to delete the Character Save Logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_SAVES)
+										src << output("You have cleared the Character Save logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Character Save logs.", LOG_ADMINISTRATOR)
 
 							if(LOG_STAFF)
 								switch(alert("Are you sure you want to delete the Staff Logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_STAFF)
+										src << output("You have cleared the Staff logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Staff logs.", LOG_ADMINISTRATOR)
 
-			Reset_Mission_Timer()
+			Reset_Mission_Cooldown()
 				set category = "Administrator"
 				src.client.last_mission = null
 				var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(src.client.ckey, 1, 2)]/[src.client.ckey].sav")
 				F["last_mission"] << null
+				src << output("You have reset your mission cooldown.", "Action.Output")
+				text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has reset their mission cooldown.", LOG_ADMINISTRATOR)
 
 			Change_Name()
 				set category = "Administrator"
@@ -141,7 +159,11 @@ mob
 									var/color = input("What custom character name color would you like for [M]?") as null|color
 									if(color) M.name_color = color
 
-							if(M) M.SetName(name)
+							if(M)
+								M.SetName(name)
+								src << "You have changed [M]'s name to <u>[name]</u>."
+								M << "[src] has changed your name to <u>[name]</u>."
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has changed [M]'s ([M.ckey]) name to [name] ([M.ckey]).", LOG_ADMINISTRATOR)
 
 			Change_Ryo()
 				set category = "Administrator"
