@@ -175,17 +175,18 @@ mission
 	b_rank
 		hunting_rogues
 			name = "Hunting Rogues"
-			New()
+			New(mob/M)
 				..()
-				src.description = "Hunt down and elimate rogue ninja and then report to <b>[src.complete_npc]</b>."
-				src.html = {"
-					<b><u>Mission</u></b><br />
-					[src.name]<br /><br />
-					[src.description]
-				"}
-				src.required_vars["KILLS"] = 0
-				src.required_vars["DEATHS"] = 0
-				src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + rand(1,3)) - 1
+				if(M)
+					src.description = "Hunt down and elimate rogue ninja and then report to <b>[src.complete_npc]</b>."
+					src.html = {"
+						<b><u>Mission</u></b><br />
+						[src.name]<br /><br />
+						[src.description]
+					"}
+					src.required_vars["KILLS"] = 0
+					src.required_vars["DEATHS"] = 0
+					src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + rand(1,3)) - 1
 
 	a_rank
 
