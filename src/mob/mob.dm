@@ -474,7 +474,7 @@ mob
 				if(!Spawns.len) src.loc=locate(1,1,4)
 				else src.loc=pick(src.RespawnSpawn())
 			else src.revived=0
-			
+
 			src.dead=0
 			src.density=1
 			src.health=src.maxhealth
@@ -493,8 +493,9 @@ mob
 			src.walkingonwater=0
 			src.overlays=0
 			src.RestoreOverlays()
-			src.UpdateHMB()
-			spawn(1)src.Run()
+			spawn() src.client.UpdateCharacterPanel()
+			spawn() src.UpdateHMB()
+			spawn() src.Run()
 			revived=0
 
 proc
