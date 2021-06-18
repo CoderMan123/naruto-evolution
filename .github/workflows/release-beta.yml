@@ -8,17 +8,6 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install BYOND
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt-get update
-          sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
-          sudo apt-get install unzip
-          curl -OL http://www.byond.com/download/build/513/513.1542_byond_linux.zip
-          unzip *_byond_linux.zip
-          cd byond
-          sudo make install
-
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -26,7 +15,7 @@ jobs:
           lfs: true
 
       - name: Build
-        run: DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} tgstation/byond:latest DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
 
       - name: Generate changelog
         uses: heinrichreimer/github-changelog-generator-action@v2.2
