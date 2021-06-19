@@ -14,28 +14,35 @@ Before you can setup a development environment, you need to make sure that you h
 - [Git](https://git-scm.com/)
 - [Git LFS](https://git-lfs.github.com/)
 
-#### Windows Installation
-Visit the official websites and download the Windows installer.
+**Windows Installation**
 
-#### Linux Installation
-Install the dependencies using your distributions package manager.
+Install using the Windows package manager.
 
-##### Debian / Ubuntu
+```powershell
+winget install git
+winget install git-lfs
+```
+
+**Linux Installation**
+
+Install using your distributions package manager.
+
+- **Debian / Ubuntu:**
 `sudo apt install git git-lfs`
 
-##### CentOS / Fedora
+- **CentOS / Fedora:**
 `yum install git git-lfs`
 
-##### Arch / Manjaro
+- **Arch / Manjaro:**
 `pacman -Syu git git-lfs`
 
-### Instructions
-1) Clone the repository:
+### Clone Project
+1) **Clone the repository:**
 ```sh
 git clone https://github.com/lavenblade/naruto-evolution.git
 ```
 
-2) Switch to preferred branch:
+2) **Switch to preferred branch:**
    * `master`: This is the current release branch and automatically deploys to the beta testing environment.
    * `develop`: This is the current development branch and automatically deploys to the alpha testing environment.
 
@@ -43,7 +50,7 @@ git clone https://github.com/lavenblade/naruto-evolution.git
 git checkout <branch>
 ```
 
-3) Initialize and checkout submodules:
+3) **Initialize and checkout submodules:**
 ```sh
 git submodule init
 git submodule update --recursive
