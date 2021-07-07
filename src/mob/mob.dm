@@ -18,6 +18,12 @@ mob
 		tmp
 			name_overlays
 
+	New()
+		..()
+		sleep(1)
+		if(src.client || istype(src, /mob/summonings) || istype(src, /mob/jutsus) || istype(src, /mob/Rotating_Dummy))
+			src.mouse_over_pointer = /obj/cursors/target
+
 	Del()
 		..()
 
