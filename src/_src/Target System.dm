@@ -13,7 +13,7 @@ image
 			src.underlays = null
 			src.layer = 99
 			src.pixel_x=16
-			src.pixel_y=8
+			src.pixel_y=5
 mob/verb/Target_A_Mob()
 	set hidden=1
 	var/Train=0

@@ -3,6 +3,12 @@
 // BEGIN_FILE_DIR
 #define FILE_DIR .
 #define FILE_DIR "assets"
+#define FILE_DIR "assets/aseprite"
+#define FILE_DIR "assets/aseprite/Chakrabar"
+#define FILE_DIR "assets/aseprite/Expbar"
+#define FILE_DIR "assets/aseprite/Healthbar"
+#define FILE_DIR "assets/aseprite/MobChakrabar"
+#define FILE_DIR "assets/aseprite/MobHealthbar"
 #define FILE_DIR "assets/audio"
 #define FILE_DIR "assets/audio/DBZ"
 #define FILE_DIR "assets/audio/Explode"

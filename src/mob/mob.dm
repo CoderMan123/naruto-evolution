@@ -208,6 +208,7 @@ mob
 				if("Hidden Mist") new/obj/Screen/MistSymbol(src)
 				if("Hidden Sound") new/obj/Screen/SoundSymbol(src)
 				if("Hidden Rock") new/obj/Screen/RockSymbol(src)
+				if("Missing-Nin") new/obj/Screen/MissingSymbol(src)
 				if("Akatsuki") new/obj/Screen/AkatsukiSymbol(src)
 				if("Seven Swordsmen") new/obj/Screen/SsmSymbol(src)
 				if("Anbu Root") new/obj/Screen/AnbuSymbol(src)
@@ -472,7 +473,7 @@ mob
 				spawn() src.UpdateBars()
 				spawn() src.UpdateHMB()
 				sleep(10)
-		
+
 		Respawn()
 			if(!src.revived)
 				var/list/Spawns=RespawnSpawn()

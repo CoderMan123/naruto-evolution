@@ -55,6 +55,7 @@ mob
 				if(src.village == "Akatsuki")new/obj/Screen/AkatsukiSymbol(src)
 				if(src.village == "Seven Swordsmen")new/obj/Screen/SsmSymbol(src)
 				if(src.village == "Anbu Root")new/obj/Screen/AnbuSymbol(src)
+				if(src.village == "Missing-Nin")new/obj/Screen/MissingSymbol(src)
 				new/obj/Screen/WeaponSelect(src)
 				new/obj/Screen/Health(src)
 				new/obj/Screen/Chakra(src)
