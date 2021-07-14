@@ -3,6 +3,8 @@
 [![Release (Alpha)](https://github.com/lavenblade/naruto-evolution/actions/workflows/release-alpha.yml/badge.svg?branch=develop)](https://github.com/lavenblade/naruto-evolution/actions/workflows/release-alpha.yml)
 [![Manual Deployment](https://github.com/lavenblade/naruto-evolution/actions/workflows/manual-deployment.yml/badge.svg)](https://github.com/lavenblade/naruto-evolution/actions/workflows/manual-deployment.yml)
 
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/lavenblade/naruto-evolution)
+
 
 # Naruto Evolution
 
