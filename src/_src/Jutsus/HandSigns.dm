@@ -161,7 +161,7 @@ obj
 								return
 							usr.skillpoints -= src.Sprice
 							if(src.IsGate)
-								if(!usr.jutsus.Find(/obj/Jutsus/EightGates))
+								if(!usr.jutsus_learned.Find(/obj/Jutsus/EightGates))
 									var/obj/J = new /obj/Jutsus/EightGates(null)
 									usr.jutsus.Add(J)
 									usr.jutsus_learned.Add(J.type)
