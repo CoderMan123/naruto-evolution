@@ -65,7 +65,7 @@ mission
 							spawn() m.client.UpdateCharacterPanel()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
-					
+
 					src.squad.mission = null
 
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
@@ -88,9 +88,9 @@ mission
 							spawn() m.client.UpdateCharacterPanel()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
-					
+
 					O.squad.mission = null
-				
+
 				// Solo ninja turning in the mission
 				else if(O)
 					M.contents -= O
@@ -104,7 +104,7 @@ mission
 					spawn() M.UpdateHMB()
 
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
-			
+
 			if(/mission/b_rank/hunting_rogues)
 				if(squad && !squad.mission.complete)
 					if(src.required_vars["DEATHS"] >= src.squad.members.len)
@@ -115,9 +115,9 @@ mission
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() squad.RefreshMember(m)
-						
+
 						squad.mission = null
-					
+
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
 						squad.mission.complete = world.realtime
 
@@ -129,7 +129,7 @@ mission
 								m.LevelStat("Ninjutsu",rand(1,2),1)
 								m.Levelup()
 								spawn() squad.RefreshMember(m)
-						
+
 						squad.mission = null
 
 	New(mob/M)
@@ -157,7 +157,7 @@ mission
 					switch(M.village)
 						if("Hidden Leaf")
 							npc = locate(pick(typesof(/mob/npc/mission_npc/deliver_intel/leaf) - /mob/npc/mission_npc/deliver_intel/leaf))
-							
+
 						if("Hidden Sand")
 							npc = locate(pick(typesof(/mob/npc/mission_npc/deliver_intel/sand) - /mob/npc/mission_npc/deliver_intel/sand))
 					src.required_mobs.Add(npc)
@@ -178,7 +178,21 @@ mission
 			New(mob/M)
 				..()
 				if(M)
-					src.description = "Hunt down and elimate rogue ninja and then report to <b>[src.complete_npc]</b>."
+					src.description = "Hunt down and elimate rogue ninja."
+					src.html = {"
+						<b><u>Mission</u></b><br />
+						[src.name]<br /><br />
+						[src.description]
+					"}
+					src.required_vars["KILLS"] = 0
+					src.required_vars["DEATHS"] = 0
+					src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + rand(1,3)) - 1
+		the_war_effort
+			name = "The War Effort"
+			New(mob/M)
+				..()
+				if(M)
+					src.description = "We're at war! Find and dispose of or defend the village against enemy ninja to further the war effort."
 					src.html = {"
 						<b><u>Mission</u></b><br />
 						[src.name]<br /><br />

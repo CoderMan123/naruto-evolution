@@ -546,10 +546,13 @@ mob
 							src.Bounty=0
 						else X.Bounty+=rand(5,10)
 
-						// Reward Squad (Killer) for killing a Missing-Nin while on a Hunting Rogues mission
+//SEARCH AND DESTROY MISSIONS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+// Reward Squad (Killer) for killing a mob during search and destroy type missions.
 						var/squad/squad = X.GetSquad()
 						if(squad && squad.mission)
 							switch(squad.mission.type)
+//HUNTING ROGUES
 								if(/mission/b_rank/hunting_rogues)
 									if(src.village == VILLAGE_MISSING_NIN)
 										squad.mission.required_vars["KILLS"]++
@@ -558,11 +561,32 @@ mob
 												m << output("[X] has slain the Missing-Nin [src] while on a mission hunting rogue ninja.", "Action.Output")
 												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] rogue ninja have been eliminated.", "Action.Output")
 										spawn() squad.mission.Complete(X)
-						
-						// Penalize Squad for dying while on a Hunting Rogues mission
+//THE WAR EFFORT
+								if(/mission/b_rank/the_war_effort)
+									switch(X.village)
+										if(VILLAGE_LEAF)
+											if(src.village == VILLAGE_SAND)
+												squad.mission.required_vars["KILLS"]++
+												for(var/mob/m in mobs_online)
+													if(squad.members[m.client.ckey])
+														m << output("[X] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
+														m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
+												spawn() squad.mission.Complete(X)
+
+										if(VILLAGE_SAND)
+											if(src.village == VILLAGE_LEAF)
+												squad.mission.required_vars["KILLS"]++
+												for(var/mob/m in mobs_online)
+													if(squad.members[m.client.ckey])
+														m << output("[X] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
+														m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
+												spawn() squad.mission.Complete(X)
+
+// Penalize Squad for dying while on a search and destroy mission
 						squad = src.GetSquad()
 						if(squad && squad.mission)
 							switch(squad.mission.type)
+//HUNTING ROGUES
 								if(/mission/b_rank/hunting_rogues)
 									squad.mission.required_vars["DEATHS"]++
 									for(var/mob/m in mobs_online)
@@ -570,11 +594,20 @@ mob
 											m << output("[src] has died to [X] while on a mission hunting rogue ninja.", "Action.Output")
 											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting rogue ninja.", "Action.Output")
 									spawn() squad.mission.Complete(src)
-						
-						// Reward Missing-Nin (Killer) for killing someone on a Hunting Rogues mission
+//THE WAR EFFORT
+								if(/mission/b_rank/the_war_effort)
+									squad.mission.required_vars["DEATHS"]++
+									for(var/mob/m in mobs_online)
+										if(squad.members[m.client.ckey])
+											m << output("[src] has died to [X] while on a mission hunting enemy ninja.", "Action.Output")
+											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting enemy ninja.", "Action.Output")
+									spawn() squad.mission.Complete(src)
+
+// Reward player (Killer) for killing someone who is on a search and destroy type mission which targets you.
 						squad = src.GetSquad()
 						if(squad && squad.mission)
 							switch(squad.mission.type)
+//HUNTING ROGUES
 								if(/mission/b_rank/hunting_rogues)
 									if(X.village == VILLAGE_MISSING_NIN)
 										X << output("You have slain [src] who was on a mission hunting rogue ninja.", "Action.Output")
@@ -582,6 +615,22 @@ mob
 										X.ryo += 1
 										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
 										spawn() X.Levelup()
+//THE WAR EFFORT
+								if(/mission/b_rank/the_war_effort)
+									if(X.village == VILLAGE_LEAF && src.village != VILLAGE_LEAF)
+										X << output("You have slain [src] who was on a mission hunting leaf ninja!.", "Action.Output")
+										X.exp += 1
+										X.ryo += 1
+										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										spawn() X.Levelup()
+									if(X.village == VILLAGE_SAND && src.village != VILLAGE_SAND)
+										X << output("You have slain [src] who was on a mission hunting leaf ninja!.", "Action.Output")
+										X.exp += 1
+										X.ryo += 1
+										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										spawn() X.Levelup()
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 						if(X.Mission=="Kill [src] ([src.ckey])")
 							X.Mission=null
@@ -775,7 +824,7 @@ mob
 									global.soundpoints["[X.z]"]+=src.level
 								if(X.village == "Hidden Rock")
 									global.rockpoints["[X.z]"]+=src.level
-					
+
 					var/respawned = 0
 
 					spawn(3000) if(!respawned && src.dead) src.Respawn()
