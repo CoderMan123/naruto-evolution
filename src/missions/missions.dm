@@ -132,7 +132,7 @@ mission
 
 						squad.mission = null
 
-			if(/mission/b_rank/the_war effort)
+			if(/mission/b_rank/the_war_effort)
 				if(squad && !squad.mission.complete)
 					if(src.required_vars["DEATHS"] >= src.squad.members.len)
 						squad.mission.complete = world.realtime
