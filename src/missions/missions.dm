@@ -105,7 +105,7 @@ mission
 
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 
-			if(/mission/b_rank/hunting_rogues)
+			if(/mission/b_rank/hunting_rogues || /mission/b_rank/the_war_effort)
 				if(squad && !squad.mission.complete)
 					if(src.required_vars["DEATHS"] >= src.squad.members.len)
 						squad.mission.complete = world.realtime

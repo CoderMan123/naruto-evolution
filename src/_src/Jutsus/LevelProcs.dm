@@ -624,7 +624,7 @@ mob
 										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
 										spawn() X.Levelup()
 									if(X.village == VILLAGE_SAND && src.village != VILLAGE_SAND)
-										X << output("You have slain [src] who was on a mission hunting leaf ninja!.", "Action.Output")
+										X << output("You have slain [src] who was on a mission hunting sand ninja!.", "Action.Output")
 										X.exp += 1
 										X.ryo += 1
 										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
