@@ -474,7 +474,7 @@ mob
 				if(src.rest) src.healthregenmod += 2
 				src.health += round((src.maxhealth/100) * src.healthregenmod)
 				src.health = min(src.health, src.maxhealth)
-				if(src.rest) src.healthregenmod -= 2
+				if(src.rest) src.healthregenmod -= 2 
 				spawn() src.UpdateBars()
 				spawn() src.UpdateHMB()
 				sleep(10)
