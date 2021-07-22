@@ -405,6 +405,7 @@ mob
 						if(VILLAGE_LEAF) Color = "#2b7154"
 						if(VILLAGE_SAND) Color = "#886541"
 						if(VILLAGE_MISSING_NIN) Color = "white"
+						if(VILLAGE_AKATSUKI) Color = "#971e1e"
 
 				var/obj/name = new()
 				name.layer = MOB_LAYER - 1000
@@ -448,9 +449,11 @@ mob
 
 					if(RANK_AKATSUKI)
 						new/obj/Screen/AkatsukiSymbol(src)
+						src.SetVillage(VILLAGE_AKATSUKI)
 
 					if(RANK_AKATSUKI_LEADER)
 						new/obj/Screen/AkatsukiSymbol(src)
+						src.SetVillage(VILLAGE_AKATSUKI)
 
 					// Add SSM
 

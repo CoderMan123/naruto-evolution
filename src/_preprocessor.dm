@@ -22,6 +22,7 @@
 #define VILLAGE_MISSING_NIN "Missing-Nin"
 #define VILLAGE_LEAF "Hidden Leaf"
 #define VILLAGE_SAND "Hidden Sand"
+#define VILLAGE_AKATSUKI "Akatsuki"
 
 #define RANK_ACADEMY_STUDENT "Academy Student"
 #define RANK_GENIN "Genin"
