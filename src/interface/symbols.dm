@@ -36,13 +36,12 @@ obj/Symbols
 			src.icon = 'Squad-Leader.png'
 
 	Role
-		New(var/role)
-			switch(role)
-				if("Trainee") src.icon = null
-				if(MODERATOR) src.icon = 'Moderator.png'
-				if(ADMINISTRATOR) src.icon = 'Administrator.png'
-				if("Community Manager") src.icon = null
-				if("Event Manager") src.icon = null
-				if("Pixel Artist") src.icon = null
-				if("Programmer") src.icon = null
+		New(mob/M)
+			if(M.ckey in administrators) src.icon = 'Administrator.png'
+			else if(M.ckey in moderators) src.icon = 'Moderator.png'
+			//if("Trainee") src.icon = null
+			//if("Community Manager") src.icon = null
+			//if("Event Manager") src.icon = null
+			//if("Pixel Artist") src.icon = null
+			//if("Programmer") src.icon = null
 			..()

@@ -301,11 +301,13 @@ mob
 				return
 
 			else
-				var/obj/Symbols/Village/V = new(src)
-				var/obj/Symbols/Rank/R = new(src)
-				var/obj/Symbols/Role/role
-				if(src.client.ckey in administrators) role=new(ADMINISTRATOR)
-				else if(src.client.ckey in moderators) role=new(MODERATOR)
+				var/obj/Symbols/Village/village = new(src)
+				var/obj/Symbols/Rank/rank = new(src)
+				var/obj/Symbols/Role/role = new(src)
+				var/badges = ""
+				if(role.icon) badges += "\icon[role]"
+				if(village.icon) badges += "\icon[village]"
+				if(rank.icon) badges += "\icon[rank]"
 
 				var/whisper = winget(src, "InputPanel.WhisperInput", "text")
 				if(whisper)
@@ -316,8 +318,8 @@ mob
 					var/whisper_target_online = 0
 					for(var/mob/M in mobs_online)
 						if(whisper == M.name)
-							src << "\[W] \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
-							M << "\[W] \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
+							src << "\[W] [badges] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
+							M << "\[W] [badges] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
 							whisper_target_online = 1
 							break
 
@@ -327,25 +329,25 @@ mob
 				else if(src.likeaclone)
 					if(src.client.channel == "Local")
 						var/mob/clone = src.likeaclone
-						view(clone) << ffilter("\icon[role] \icon[V] \icon[R] <font color='[clone.namecolor]'>[clone.name]</font>: <font color='[clone.chatcolor]'>[html_encode(msg)]</font>")
+						view(clone) << ffilter("[badges] <font color='[clone.namecolor]'>[clone.name]</font>: <font color='[clone.chatcolor]'>[html_encode(msg)]</font>")
 					else
 						src << "Clones can only speak within the say channel."
 
 				else
 					switch(src.client.channel)
 						if("Local")
-							view() << ffilter("\icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
+							view() << ffilter("[badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 						if("Village")
 							for(var/mob/M in mobs_online)
 								if(src.village == M.village || M.admin)
-									M << ffilter("<font color='yellow'>\[V]</font> \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
+									M << ffilter("<font color='yellow'>\[V]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 						if("Squad")
 							if(src.Squad)
 								for(var/mob/M in mobs_online)
 									if(M.ckey == src.Squad.Leader || src.Squad.Members.Find(M.ckey))
-										M << ffilter("<font color='white'>\[S]</font> \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
+										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 							else
 								src << "You cannot speak in the squad channel because you are not currently in a squad."
 
@@ -354,7 +356,7 @@ mob
 								var/Faction/F = src.Faction
 								for(var/mob/M in mobs_online)
 									if(src.Faction == M.Faction || M.admin)
-										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'> [html_encode(msg)]</font>")
+										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'> [html_encode(msg)]</font>")
 
 							else
 								src << "You cannot speak in the faction channel because you are not currently in a faction."
@@ -363,7 +365,7 @@ mob
 							if(worldmute)
 								src << "You cannot speak in the global channel because it is currently muted."
 							else
-								world << ffilter("<font color='red'>\[G]</font> \icon[role] \icon[V] \icon[R] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
+								world << ffilter("<font color='red'>\[G]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 				if(message_trim)
 					src << "Your message was longer than 1000 characters and has been trimmed."
