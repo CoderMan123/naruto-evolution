@@ -30,7 +30,7 @@ mob
 							M.client.perspective = EYE_PERSPECTIVE
 							var/Timer=J.level+2
 							while(Timer&&M)
-								if(J.level==1)
+								if(M)
 									M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage)/6, src, "white")
 								Timer--
 								sleep(5)
@@ -41,7 +41,6 @@ mob
 							M.injutsu=0
 							for(var/obj/TsukuyomiHUD/H in M.client.screen)del H
 							src.Prisoner=null
-							src<<output("wtf")
 							src.firing=0
 							src.injutsu=0
 							src.move=1
