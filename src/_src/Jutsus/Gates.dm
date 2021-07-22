@@ -11,19 +11,19 @@ mob
 				src.Gates = null
 				src.GateTime = 0
 				src.healthregenmod=1
-			ResetBase()
-			//src.icon ='WhiteMBase.dmi'
-			for(var/obj/Jutsus/EightGates/J in src.jutsus)
-				while(J.Excluded)
-					sleep(1)
-				J.Excluded = 1
-				spawn(250)
-					J.Excluded = 0
-					src.GateStopped = 0
-				view(src)<<output("<font color=[colour2html("red")]><b>[src] looks exhausted! They can't use gates for 25 seconds!","Action.Output")
-			for(var/obj/O in LinkFollowers)
-				if(O)
-					del(O)
+				ResetBase()
+				//src.icon ='WhiteMBase.dmi'
+				for(var/obj/Jutsus/EightGates/J in src.jutsus)
+					while(J.Excluded)
+						sleep(1)
+					J.Excluded = 1
+					spawn(250)
+						J.Excluded = 0
+						src.GateStopped = 0
+					view(src)<<output("<font color=[colour2html("red")]><b>[src] looks exhausted! They can't use gates for 25 seconds!","Action.Output")
+				for(var/obj/O in LinkFollowers)
+					if(O)
+						del(O)
 		CSstop()
 			src.CS=0
 			src.icon_state=riconstate
