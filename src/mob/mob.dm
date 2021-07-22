@@ -305,9 +305,9 @@ mob
 				var/obj/Symbols/Rank/rank = new(src)
 				var/obj/Symbols/Role/role = new(src)
 				var/badges = ""
-				if(role.icon) badges += "\icon[role]"
+				if(role.icon) badges += "\icon[role] "
 				if(village.icon) badges += "\icon[village]"
-				if(rank.icon) badges += "\icon[rank]"
+				if(rank.icon) badges += " \icon[rank]"
 
 				var/whisper = winget(src, "InputPanel.WhisperInput", "text")
 				if(whisper)
