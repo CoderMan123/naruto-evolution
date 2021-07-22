@@ -582,6 +582,16 @@ mob
 														m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
 												spawn() squad.mission.Complete(X)
 
+//CLOUDS OF CRIMSON
+
+								if(/mission/s_rank/clouds_of_crimson)
+									if(src.village == VILLAGE_AKATSUKI)
+										squad.mission.required_vars["KILLS"]++
+										for(var/mob/m in mobs_online)
+											if(squad.members[m.client.ckey])
+												m << output("[X] has slain the Akatsuki member [src] while on a mission to eliminate them.", "Action.Output")
+												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] Akatsuki members have been eliminated.", "Action.Output")
+										spawn() squad.mission.Complete(X)
 // Penalize Squad for dying while on a search and destroy mission
 						squad = src.GetSquad()
 						if(squad && squad.mission)
@@ -601,6 +611,16 @@ mob
 										if(squad.members[m.client.ckey])
 											m << output("[src] has died to [X] while on a mission hunting enemy ninja.", "Action.Output")
 											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting enemy ninja.", "Action.Output")
+									spawn() squad.mission.Complete(src)
+
+//CLOUDS OF CRIMSON
+
+								if(/mission/s_rank/clouds_of_crimson)
+									squad.mission.required_vars["DEATHS"]++
+									for(var/mob/m in mobs_online)
+										if(squad.members[m.client.ckey])
+											m << output("[src] has died to [X] while on a mission to eliminate the Akatsuki.", "Action.Output")
+											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting the Akatsuki.", "Action.Output")
 									spawn() squad.mission.Complete(src)
 
 // Reward player (Killer) for killing someone who is on a search and destroy type mission which targets you.
@@ -625,6 +645,16 @@ mob
 										spawn() X.Levelup()
 									if(X.village == VILLAGE_SAND && src.village != VILLAGE_SAND)
 										X << output("You have slain [src] who was on a mission hunting sand ninja!.", "Action.Output")
+										X.exp += 1
+										X.ryo += 1
+										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										spawn() X.Levelup()
+
+//CLOUDS OF CRIMSON
+
+								if(/mission/s_rank/clouds_of_crimson)
+									if(X.village == VILLAGE_AKATSUKI)
+										X << output("You have slain [src] who was on a mission to kill the Akatsuki.", "Action.Output")
 										X.exp += 1
 										X.ryo += 1
 										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")

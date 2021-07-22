@@ -214,6 +214,7 @@ mission
 					src.required_vars["KILLS"] = 0
 					src.required_vars["DEATHS"] = 0
 					src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + rand(1,3)) - 1
+
 		the_war_effort
 			name = "The War Effort"
 			New(mob/M)
@@ -232,3 +233,18 @@ mission
 	a_rank
 
 	s_rank
+
+		clouds_of_crimson
+			name = "Clouds of Crimson"
+			New(mob/M)
+				..()
+				if(M)
+					src.description = "A group of dangerous criminals known as the Akatsuki are plotting something. Find them and take them out."
+					src.html = {"
+						<b><u>Mission</u></b><br />
+						[src.name]<br /><br />
+						[src.description]
+					"}
+					src.required_vars["KILLS"] = 0
+					src.required_vars["DEATHS"] = 0
+					src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + rand(1,3)) - 1
