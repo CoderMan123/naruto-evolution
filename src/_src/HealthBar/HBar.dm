@@ -163,7 +163,6 @@ mob
 			if(src.client)
 				if(LastMissionTime)LastMissionTime-=timeoff
 				if(src.RestOverlays&&!rest) RestUp()
-				if((src.client.inactivity/10)>=120) continue
 				if(!src.key)del(src)
 				/*if(Gates) Why is this here?
 					var/colour = colour2html("red")
