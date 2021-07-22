@@ -562,7 +562,7 @@ mob
 												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] rogue ninja have been eliminated.", "Action.Output")
 										spawn() squad.mission.Complete(X)
 //THE WAR EFFORT
-								if(/mission/b_rank/the_war_effort)
+								if(/mission/c_rank/the_war_effort)
 									switch(X.village)
 										if(VILLAGE_LEAF)
 											if(src.village == VILLAGE_SAND)
@@ -605,7 +605,7 @@ mob
 											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting rogue ninja.", "Action.Output")
 									spawn() squad.mission.Complete(src)
 //THE WAR EFFORT
-								if(/mission/b_rank/the_war_effort)
+								if(/mission/c_rank/the_war_effort)
 									squad.mission.required_vars["DEATHS"]++
 									for(var/mob/m in mobs_online)
 										if(squad.members[m.client.ckey])
@@ -636,7 +636,7 @@ mob
 										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
 										spawn() X.Levelup()
 //THE WAR EFFORT
-								if(/mission/b_rank/the_war_effort)
+								if(/mission/c_rank/the_war_effort)
 									if(X.village == VILLAGE_LEAF && src.village != VILLAGE_LEAF)
 										X << output("You have slain [src] who was on a mission hunting leaf ninja!.", "Action.Output")
 										X.exp += 1

@@ -132,7 +132,7 @@ mission
 
 						squad.mission = null
 
-			if(/mission/b_rank/the_war_effort)
+			if(/mission/c_rank/the_war_effort)
 				if(squad && !squad.mission.complete)
 					if(src.required_vars["DEATHS"] >= src.squad.members.len)
 						squad.mission.complete = world.realtime
@@ -199,13 +199,12 @@ mission
 
 	c_rank
 
-	b_rank
-		hunting_rogues
-			name = "Hunting Rogues"
+		the_war_effort
+			name = "The War Effort"
 			New(mob/M)
 				..()
 				if(M)
-					src.description = "Hunt down and elimate rogue ninja."
+					src.description = "We're at war! Find and dispose of or defend the village against enemy ninja to further the war effort."
 					src.html = {"
 						<b><u>Mission</u></b><br />
 						[src.name]<br /><br />
@@ -215,12 +214,13 @@ mission
 					src.required_vars["DEATHS"] = 0
 					src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + rand(1,3)) - 1
 
-		the_war_effort
-			name = "The War Effort"
+	b_rank
+		hunting_rogues
+			name = "Hunting Rogues"
 			New(mob/M)
 				..()
 				if(M)
-					src.description = "We're at war! Find and dispose of or defend the village against enemy ninja to further the war effort."
+					src.description = "Hunt down and elimate rogue ninja."
 					src.html = {"
 						<b><u>Mission</u></b><br />
 						[src.name]<br /><br />
