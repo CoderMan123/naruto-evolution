@@ -342,7 +342,7 @@ mob
 					src.KillCombo=0
 					Effects["Rasengan"]=null
 					Effects["Chidori"]=null
-					gatestop()
+					spawn() gatestop()
 					if(src.Susanoo)
 						src.health=1
 						return
