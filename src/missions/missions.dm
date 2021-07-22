@@ -159,6 +159,33 @@ mission
 
 						squad.mission = null
 
+			if(/mission/s_rank/clouds_of_crimson)
+				if(squad && !squad.mission.complete)
+					if(src.required_vars["DEATHS"] >= src.squad.members.len)
+						squad.mission.complete = world.realtime
+
+						for(var/mob/m in mobs_online)
+							if(squad.members[m.client.ckey])
+								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
+								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
+								spawn() squad.RefreshMember(m)
+
+						squad.mission = null
+
+					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
+						squad.mission.complete = world.realtime
+
+						for(var/mob/m in mobs_online)
+							if(squad.members[m.client.ckey])
+								m << output("<b>[squad.mission]:</b> You have successfully completed your mission.", "Action.Output")
+								m.exp++
+								m.ryo++
+								m.LevelStat("Ninjutsu",rand(1,2),1)
+								m.Levelup()
+								spawn() squad.RefreshMember(m)
+
+						squad.mission = null
+
 	New(mob/M)
 		..()
 		if(M)
