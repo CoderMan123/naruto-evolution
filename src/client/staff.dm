@@ -160,11 +160,10 @@ mob
 									if(color) M.name_color = color
 
 							if(M)
-								M.SetName(name)
 								src << "You have changed [M]'s name to <u>[name]</u>."
 								M << "[src] has changed your name to <u>[name]</u>."
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has changed [M]'s ([M.ckey]) name to [name] ([M.ckey]).", LOG_ADMINISTRATOR)
-
+								M.SetName(name)
 			Change_Ryo()
 				set category = "Administrator"
 				var/mob/M = input("Who would you like to give or take Ryo from?", "Change Ryo") as null|anything in mobs_online
