@@ -72,7 +72,24 @@ mob/npc
 											usr.client.Alert("You must be at least Genin rank to take on D rank missions.", src.name)
 
 									if(2)
-										usr.client.Alert("C Rank missions are not currently available.", src.name)
+										if(usr.checkRank() >= 2)
+											var/mission/c_rank/mission = pick(typesof(/mission/c_rank) - /mission/c_rank)
+											mission = new mission(usr)
+
+											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+												squad.mission = mission
+												squad.mission.start = world.realtime
+
+												for(var/mob/m in mobs_online)
+													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+
+												for(var/ckey in squad.members)
+													var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
+													F["last_mission"] << squad.mission.start
+
+												spawn() squad.Refresh()
+										else
+											usr.client.Alert("You must be at least Chunin rank to take on C rank missions.", src.name)
 
 									if(3)
 										if(usr.checkRank() >= 3)
@@ -95,10 +112,44 @@ mob/npc
 											usr.client.Alert("You must be at least Jonin rank to take on B rank missions.", src.name)
 
 									if(4)
-										usr.client.Alert("A Rank missions are not currently available.", src.name)
+										if(usr.checkRank() >= 3)
+											var/mission/a_rank/mission = pick(typesof(/mission/a_rank) - /mission/a_rank)
+											mission = new mission(usr)
+
+											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+												squad.mission = mission
+												squad.mission.start = world.realtime
+
+												for(var/mob/m in mobs_online)
+													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+
+												for(var/ckey in squad.members)
+													var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
+													F["last_mission"] << squad.mission.start
+
+												spawn() squad.Refresh()
+										else
+											usr.client.Alert("You must be at least Jonin rank to take on A rank missions.", src.name)
 
 									if(5)
-										usr.client.Alert("S Rank missions are not currently available.", src.name)
+										if(usr.checkRank() >= 4)
+											var/mission/s_rank/mission = pick(typesof(/mission/s_rank) - /mission/s_rank)
+											mission = new mission(usr)
+
+											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+												squad.mission = mission
+												squad.mission.start = world.realtime
+
+												for(var/mob/m in mobs_online)
+													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+
+												for(var/ckey in squad.members)
+													var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
+													F["last_mission"] << squad.mission.start
+
+												spawn() squad.Refresh()
+										else
+											usr.client.Alert("You must be at least ANBU rank to take on S rank missions.", src.name)
 
 						// Mission request denied: active mission
 						else if(squad && squad.members[usr.ckey] && squad.mission)
