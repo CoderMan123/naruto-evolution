@@ -84,7 +84,7 @@ obj/Special/ChuuninExam
 mob/var/cheww=0
 proc/ChuuninExam()
 	while(world)
-		sleep(600*240)
+		sleep(600*120)
 		if(chuuninlock==1)
 			usr<<"Ninja War is in progress...please wait until it's over..."
 			return
