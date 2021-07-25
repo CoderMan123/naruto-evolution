@@ -326,6 +326,8 @@ turf
 						return
 					usr.loc = ToWhere
 					step(usr,NORTH)
+				else if(istype(M,/mob/npc/combat/political_escort))
+					M.loc = ToWhere
 			//Leaf
 			T1	//KH
 			T2	//Dojo
@@ -435,6 +437,8 @@ turf
 						return
 					usr.loc = ToWhere
 					step(usr,SOUTH)
+				else if(istype(M,/mob/npc/combat/political_escort))
+					M.loc = ToWhere
 			//Leaf
 			T1	//KH
 			T2	//Dojo

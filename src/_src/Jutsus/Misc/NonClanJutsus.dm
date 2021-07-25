@@ -876,7 +876,7 @@ mob
 						else view(src) << sound('Spin.ogg',0,0,0,100)
 						for(var/mob/c_target in orange(src,J.level))
 							if(c_target in orange(src,J.level))
-								if(c_target.dead==0&&!istype(c_target,/mob/npc/))
+								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 									if(c_target.fightlayer==src.fightlayer)
 										if(c_target.dodge==0)
 											var/undefendedhit=round(J.damage+round(((src.strength / 300)+(src.agility / 300))*2*J.damage)-(c_target.defence/10))

@@ -13,8 +13,10 @@ mob/npc
 //		src.overlays+='Sandals.dmi'
 //		OriginalOverlays=overlays
 //		..()
-	Death()return
-	Move()return
+
+
+
+
 	proc/Stuff()
 		spawn(20)
 			while(src)

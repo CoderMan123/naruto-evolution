@@ -1,6 +1,20 @@
 mob
 	administrator
 		verb
+			End_Mission()
+				set category = "Administrator"
+				switch(alert("Which would you like to do?", "End Mission", "Fail Mission", "Complete Mission"))
+					if("Complete Mission")
+						var/mob/M = input("Who's mission would you like to complete?", "Complete Mission") as null|anything in mobs_online
+						var/squad/squad = M.GetSquad()
+						if(M)
+							squad.mission.Complete(M)
+					if("Fail Mission")
+						var/mob/M = input("Who's mission would you like to fail?", "Fail Mission") as null|anything in mobs_online
+						var/squad/squad = M.GetSquad()
+						if(M)
+							squad.mission = null
+
 			Manage_Logs()
 				set category = "Administrator"
 				switch(alert("What would you like to do?", "Manage Logs", "View Logs", "Download Logs", "Clear Logs"))
@@ -10,7 +24,7 @@ mob
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_ADMINISTRATOR))
 								winset(src, "Browser", "is-visible = true")
-							
+
 							if(LOG_BUGS)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_BUGS))
@@ -40,17 +54,17 @@ mob
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_STAFF))
 								winset(src, "Browser", "is-visible = true")
-					
+
 					if("Download Logs")
 						switch(input("Which logs would you like to download?", "Manage Logs") as null|anything in list("All Logs", LOG_ADMINISTRATOR, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
 								shell("zip -r logs/logs.zip logs/")
 								src << file("logs.zip")
 								fdel(file("logs.zip"))
-							
+
 							if(LOG_ADMINISTRATOR)
 								src << ftp(LOG_ADMINISTRATOR)
-							
+
 							if(LOG_BUGS)
 								src << ftp(LOG_BUGS)
 
@@ -83,14 +97,14 @@ mob
 										fdel(LOG_STAFF)
 										src << output("You have cleared all the server logs.", "Action.Output")
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared all the server logs.", LOG_ADMINISTRATOR)
-							
+
 							if(LOG_ADMINISTRATOR)
 								switch(alert("Are you sure you want to delete the Administrator logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")
 										fdel(LOG_ADMINISTRATOR)
 										src << output("You have cleared the Administrator logs.", "Action.Output")
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Administrator logs.", LOG_ADMINISTRATOR)
-							
+
 							if(LOG_BUGS)
 								switch(alert("Are you sure you want to delete the Bug logs?", "Manage Logs", "Clear Logs", "Cancel"))
 									if("Clear Logs")

@@ -1,10 +1,19 @@
 mob/npc
 	mouse_over_pointer = /obj/cursors/speech
 	var/tmp/list/conversations = list()
+	var/npcowner
+	var/ownersquad
+	var/tmp/bark
 
 	move=0
-	Move()return
-	Death(killer)return
+
+	Move()
+		if(istype(src, /mob/npc/combat/political_escort)) ..()
+		else return
+
+	Death(killer)
+		if(istype(src, /mob/npc/combat/political_escort)) ..()
+		else return
 
 	New()
 		..()
@@ -58,7 +67,7 @@ mob/npc
 
 											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
 												squad.mission = mission
-												squad.mission.start = world.realtime
+												squad.mission.Start(usr)
 
 												for(var/mob/m in mobs_online)
 													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
@@ -78,7 +87,7 @@ mob/npc
 
 											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
 												squad.mission = mission
-												squad.mission.start = world.realtime
+												squad.mission.Start(usr)
 
 												for(var/mob/m in mobs_online)
 													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
@@ -98,7 +107,7 @@ mob/npc
 
 											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
 												squad.mission = mission
-												squad.mission.start = world.realtime
+												squad.mission.Start(usr)
 
 												for(var/mob/m in mobs_online)
 													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
@@ -118,7 +127,7 @@ mob/npc
 
 											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
 												squad.mission = mission
-												squad.mission.start = world.realtime
+												squad.mission.Start(usr)
 
 												for(var/mob/m in mobs_online)
 													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
@@ -138,7 +147,7 @@ mob/npc
 
 											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
 												squad.mission = mission
-												squad.mission.start = world.realtime
+												squad.mission.Start(usr)
 
 												for(var/mob/m in mobs_online)
 													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
@@ -224,6 +233,9 @@ mob/npc
 				src.conversations.Remove(usr)
 
 			leaf
+				New()
+					..()
+					src.overlays += 'SandChuninVest.dmi'
 				akirya
 					name = "Akirya"
 					icon = 'DarkMBase.dmi'
@@ -245,6 +257,9 @@ mob/npc
 					village="Hidden Sand"
 
 			sand
+				New()
+					..()
+					src.overlays += 'Chunin Vest.dmi'
 				ayumi
 					name = "Ayumi"
 					icon = 'WhiteMBase.dmi'
@@ -264,3 +279,204 @@ mob/npc
 					name = "Nevira"
 					icon = 'DarkMBase.dmi'
 					village="Hidden Leaf"
+
+	combat
+		New()
+			..()
+			var/obj/hbar=new /obj/Screen/healthbar/
+			var/obj/mbar=new /obj/Screen/manabar/
+			src.hbar.Add(hbar)
+			src.hbar.Add(mbar)
+		Death()
+			if(src.health <= 0)
+				spawn(50)
+					if(src)
+						del src
+			..()
+
+		political_escort
+			var/tmp/squad/squad
+			var/tmp/squad_leader_ckey
+			var/tmp/last_location
+			var/tmp/last_location_time
+			var/tmp/obj/last_node
+			health=20000
+			maxhealth=20000
+			New()
+				..()
+				src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
+				src.overlays += 'Shade.dmi'
+				src.overlays+='Shirt.dmi'
+				src.overlays+='Sandals.dmi'
+				src.move=1
+				src.injutsu=0
+				src.canattack=1
+				spawn(5) view() << ffilter("<font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[bark]</font>")
+				spawn()
+					while(src && !src.dead)
+						if(src.last_location != src.loc)
+							src.last_location = src.loc
+							src.last_location_time = world.realtime
+
+						else if(src.last_location == src.loc && src.last_location_time + 2000 <= world.realtime) //last_location_time may be innacurate make sure you test
+							src.loc = src.last_node.loc
+							step_away(src, src.last_node)
+							walk_to(src, src.last_node, 0, 5)
+
+						sleep(10)
+			Death()
+				..()
+				if(src.health <= 0)
+					for(var/mob/m in mobs_online)
+						if(squad.members[m.client.ckey])
+							m << output("<b>[squad.mission.name]:</b> The Daimyo has been killed! Our mission is a failure.", "Action.Output")
+							spawn() m.client.Alert("The Daimyo has been killed! Our mission is a failure.", "Mission Failed")
+							spawn() squad.RefreshMember(m)
+			leaf
+				New()
+					..()
+					walk_to(src, locate(/obj/escort/pel1), 0, 5)
+				haruna
+					name = "Daimyo Haruna"
+					icon = 'WhiteMBase.dmi'
+					village="Hidden Leaf"
+					bark = "Thank you for agreeing to this! Please don't let me get get kidnapped or worse!"
+
+				chikara
+					name = "Daimyo Chikara"
+					icon = 'WhiteMBase.dmi'
+					village="Hidden Leaf"
+					bark = "Let's get this over with quick, I can't wait to get home and have some Udon. I'm starving!"
+
+				toki
+					name = "Daimyo Toki"
+					icon = 'WhiteMBase.dmi'
+					village="Hidden Leaf"
+					bark = "Take good care of me, I don't want to end up like the daimyo before me."
+			sand
+				chichiatsu
+					name = "Daimyo Chichiatsu"
+					icon = 'WhiteMBase.dmi'
+					village="Hidden Sand"
+					bark = "You're supposed to be my escort? Well, don't go letting me down."
+				danjo
+					name = "Daimyo Danjo"
+					icon = 'WhiteMBase.dmi'
+					village="Hidden Sand"
+					bark = "I paid a lot for this so you better not waste my money."
+				tekkan
+					name = "Daimyo Tekkan"
+					icon = 'WhiteMBase.dmi'
+					village="Hidden Sand"
+					bark = "Hmph. That meeting was a waste of time. Oh well, so you'll be my bodyguards then?"
+
+
+obj/escort
+	pel1
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel2), 0, 5)
+			..()
+	pel2
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel3), 0, 5)
+			..()
+	pel3
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel4), 0, 5)
+			..()
+
+	pel4
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel5), 0, 5)
+			..()
+
+	pel5
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				if(political_escort.squad)
+					for(var/mob/player in mobs_online)
+						if(political_escort.squad.members[player.client.ckey])
+							spawn() 
+								political_escort.squad.mission.Complete(player)
+								del m
+			..()
+
+	pes1
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"
+	pes2
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"
+	pes3
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"
+	pes4
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"
+	pes5
+		icon = 'escortnode.dmi'
+		icon_state = "placeholder"
+		New()
+			..()
+			src.icon_state = "blank"

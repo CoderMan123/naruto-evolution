@@ -86,6 +86,9 @@ mob
 		WarpDim()
 			for(var/obj/Jutsus/WarpDim/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
+				if(istype(c_target, /mob/npc/combat/political_escort))
+					src<<output("It appears that the Daimyo is protected against spacial inteferance!","Action.Output")
+					return
 				if(c_target.jailed == 1)
 					src<<output("Your target is jailed.","Action.Output")
 					return

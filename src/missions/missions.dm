@@ -45,6 +45,20 @@ mission
 		// http://www.byond.com/forum/post/2244993
 		return ((src.complete-src.start)/10/60)
 
+	proc/Start(mob/M)
+		var/squad/squad = M.GetSquad()
+		squad.mission.start = world.realtime
+		switch(squad.mission.type)
+
+			if(/mission/a_rank/political_escort)
+
+				switch(M.village)
+					if("Hidden Leaf")
+						var/mob/npc/combat/picked = pick(typesof(/mob/npc/combat/political_escort/leaf) - /mob/npc/combat/political_escort/leaf)
+						var/mob/npc/combat/political_escort/npc = new picked(locate(164,82,2))
+						npc.squad = src.squad
+						npc.squad_leader_ckey = M.ckey
+
 	proc/Complete(mob/M)
 		switch(src.type)
 			if(/mission/d_rank/deliver_intel)
@@ -159,6 +173,21 @@ mission
 
 						squad.mission = null
 
+			if(/mission/a_rank/political_escort)
+				if(squad && !squad.mission.complete)
+					squad.mission.complete = world.realtime
+
+					for(var/mob/m in mobs_online)
+						if(squad.members[m.client.ckey])
+							m << output("<b>[squad.mission]:</b> You have successfully completed your mission.", "Action.Output")
+							m.exp++
+							m.ryo++
+							m.LevelStat("Ninjutsu",rand(1,2),1)
+							m.Levelup()
+							spawn() squad.RefreshMember(m)
+
+					squad.mission = null
+
 			if(/mission/s_rank/clouds_of_crimson)
 				if(squad && !squad.mission.complete)
 					if(src.required_vars["DEATHS"] >= src.squad.members.len)
@@ -185,6 +214,7 @@ mission
 								spawn() squad.RefreshMember(m)
 
 						squad.mission = null
+
 
 	New(mob/M)
 		..()
@@ -258,6 +288,21 @@ mission
 					src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + rand(1,3)) - 1
 
 	a_rank
+
+		political_escort
+			name = "Political Escort"
+			New(mob/M)
+				..()
+				if(M)
+					src.description = "An important political dignitary is being targeted. Protect him while he travels to where he needs to go."
+					src.html = {"
+						<b><u>Mission</u></b><br />
+						[src.name]<br /><br />
+						[src.description]
+					"}
+
+//						if("Hidden Sand")
+
 
 	s_rank
 

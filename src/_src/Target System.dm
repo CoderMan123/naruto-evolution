@@ -50,7 +50,7 @@ mob/proc
 				src << src.target_mob_image
 				src.target_mob_image.loc = target_mob
 	Target_Atom(var/atom/movable/A)
-		if(istype(A,/mob/npc/))return
+		if(istype(A,/mob/npc/) && !istype(A, /mob/npc/combat))return
 		if(istype(A,src.puppets[1]))return
 		if(istype(A,/mob/Untargettable/))return
 		if(src.target_mob==A)return

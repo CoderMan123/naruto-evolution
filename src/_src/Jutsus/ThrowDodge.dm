@@ -185,7 +185,7 @@ mob
 							for(var/mob/M in view(ET,3))
 								if(M.dead==0)
 									M.DealDamage(damage-(M.defence/5),src,"TaiOrange")//HERE
-									if(istype(M,/mob/npc))..()
+									if(istype(M,/mob/npc) && !istype(M,/mob/npc/combat))..()
 									else
 										M.icon_state="push"
 										M.injutsu=1

@@ -103,8 +103,15 @@ mob
 						Z=M
 						check=1
 					if(check==0)Z=src
-					if(Z)
+					if(Z && !istype(Z, /mob/npc/combat/political_escort))
 						Z.DealDamage(Z.maxhealth/J.damage*(src.ninjutsu/150*1.5),src,"HealGreen",1)
+						Z.overlays += 'Healing.dmi'
+						src.icon_state = "punchrS"
+						spawn(5)
+							Z.overlays -= 'Healing.dmi'
+							src.icon_state = ""
+					else if(istype(Z, /mob/npc/combat/political_escort))
+						Z.DealDamage((Z.maxhealth/J.damage*(src.ninjutsu/150*1.5))/2,src,"HealGreen",1)
 						Z.overlays += 'Healing.dmi'
 						src.icon_state = "punchrS"
 						spawn(5)
