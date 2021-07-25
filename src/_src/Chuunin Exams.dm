@@ -93,7 +93,7 @@ proc/ChuuninExam()
 		sleep(600*5)
 		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","Action.Output")
 		ChuuninExam="Written"
-		sleep(600*2)
+		sleep(600*3)
 		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","Action.Output")
 		ChuuninExam="Forest of Death"
 		var/count=0
@@ -251,9 +251,9 @@ obj/ChuuninExam/
 				if(istype(O,/obj/ChuuninExam/Scrolls/EarthScroll))EarthScroll=1
 				if(istype(O,/obj/ChuuninExam/Scrolls/HeavenScroll))HeavenScroll=1
 			if(EarthScroll&&HeavenScroll)
-				usr<<output("If you manage to hold on to both of these scrolls for 25 more seconds you will be teleported to the next area.","Action.Output")
+				usr<<output("If you manage to hold on to both of these scrolls for 40 more seconds you will be teleported to the next area.","Action.Output")
 				hearers() << output("[usr] has aquirred both scrolls.","Action.Output")
-				sleep(250)
+				sleep(400)
 				var/EarthScroll1
 				var/HeavenScroll1
 				for(var/obj/ChuuninExam/Scrolls/X in usr)
