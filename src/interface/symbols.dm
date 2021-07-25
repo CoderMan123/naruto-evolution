@@ -40,6 +40,7 @@ obj/Symbols
 
 	Role
 		New(mob/M)
+			src.loc=null
 			if(M && M.client)
 				if(M.ckey in administrators) src.icon = 'Administrator.png'
 				else if(M.ckey in moderators) src.icon = 'Moderator.png'
