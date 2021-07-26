@@ -885,7 +885,7 @@ mob
 				src.overlays=0
 				src.henge=0
 				src.UpdateHMB()
-				src.Name(src.name)
+				src.SetName(src.name)
 				src.ResetBase()
 				//src.icon='WhiteMBase.dmi'
 				src.icon_state=""

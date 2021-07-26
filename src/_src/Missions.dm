@@ -312,7 +312,7 @@ mob/Missions/Bandit/New()
 	src.overlays+='Gloves.dmi'
 	src.locc=src.loc
 	src.Combat()
-	Name(src.name)
+	src.SetName(src.name)
 mob/Missions/Bandit/Del()
 	src.loc=null
 	spawn(600*4)

@@ -493,47 +493,7 @@ mob
 
 						X.kills++
 						//X.Multikill++
-						if(X.joinedwar==1)
-							world<<"<font color = #C0C0C0>[src],[src.village] shinobi was knocked out by [X]...[X.village] gets 1 point!"
-							if(X.village=="Hidden Sand")
-								sandwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Hidden Mist")
-								mistwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Hidden Leaf")
-								leafwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Hidden Sound")
-								soundwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Hidden Rock")
-								rockwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Anbu Root")
-								rootwarpoints++
-						if(joinedakatshinobiw==1)
-							if(src.village==X.village)
-								world<<"<font color = #C0C0C0>[src],[src.village] ninja was knocked out by [X]...[X.village] LOOSES 1 point in war!"
-								if(X.village=="Akatsuki"||X.village == "Seven Swordsmen")
-									akatpoints--
-									goto rofl
-								else
-									sforcepoints--
-									goto rofl
-							world<<"<font color = #C0C0C0>[src],[src.village] ninja was knocked out by [X]...[X] gets 1 PvP point."
-							X.exp+=rand(5,10)
-							X.pvppoints++
-							if(X.village=="Akatsuki"||X.village == "Seven Swordsmen")
-								world<<"Akatsuki gets 1 point in war!"
-								akatpoints++
-							else
-								world<<"Shinobi Force gets a point!"
-								sforcepoints++
-						rofl
-						//spawn() X.MedalCheck()
-						//spawn(70) X.Multikill=0
-
+						
 						if(VillageAttackers.Find(src.village)&&VillageDefenders.Find(X.village))
 							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","Action.Output")
 							X.ryo+=10

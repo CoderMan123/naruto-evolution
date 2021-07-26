@@ -138,10 +138,6 @@ mob/Moderator/verb/
 
 	Start_Chuunin_Exam()
 		set category="Staff"
-		//ChuuninExam()
-		if(chuuninlock==1)
-			usr<<"Ninja War is in progress...please wait until it's over..."
-			return
 		ChuuninExam="Starting"
 		world<<output("<b><center>A Chuunin exam will begin in 3 minutes.</b></center>","Action.Output")
 		sleep(600*3)

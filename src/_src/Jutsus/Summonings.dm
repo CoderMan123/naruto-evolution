@@ -76,12 +76,7 @@ mob
 			move=0
 			Bump(mob/M)
 				if(src.hited==1) return
-				if(istype(M,/mob/White_Zettsu/))
-					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu / 300)+(OWNER.precision / 300))*2*jutsudamage))/3,src.OWNER,"NinBlue")
-					//if(M.health >= 0) M.Death()
-					//M.Death(src)
-
-				if(istype(M,/mob/))
+				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
 					flick("punch",src)
 					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu / 300)+(OWNER.precision / 300))*2*jutsudamage))/3,src.OWNER,"NinBlue")
 					//if(M.health >= 0) M.Death()
@@ -114,10 +109,7 @@ mob
 			move=0
 			Bump(mob/M)
 				if(src.hited==1) return
-				if(istype(M,/mob/White_Zettsu/))
-					M.DealDamage(src.strength,src.OWNER,"TaiOrange")
-
-				if(istype(M,/mob/))
+				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
 					//flick("punch",src)
 					M.DealDamage(src.strength,src.OWNER,"TaiOrange")
 					src.hited=1
@@ -130,7 +122,7 @@ mob
 					return
 				..()
 			New()
-				spawn(5)//leave 5 here so that it doesnt throw out an run time error caused by target_get proc which is instantly called when summoned and it appears that in jutsu itself owner is defined a split second later lol so theres null.target_get lmao! XD
+				spawn(5)//here to avoid a race condition with target_get
 					src.CombatAI()
 				..()
 

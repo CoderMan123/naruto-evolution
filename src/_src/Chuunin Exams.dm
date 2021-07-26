@@ -85,9 +85,6 @@ mob/var/cheww=0
 proc/ChuuninExam()
 	while(world)
 		sleep(600*120)
-		if(chuuninlock==1)
-			usr<<"Ninja War is in progress...please wait until it's over..."
-			return
 		ChuuninExam="Starting"
 		world<<output("<b><center>A Chuunin exam will begin in 5 minutes.</b></center>","Action.Output")
 		sleep(600*5)

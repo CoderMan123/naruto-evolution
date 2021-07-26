@@ -8,11 +8,11 @@ mob/npc
 	move=0
 
 	Move()
-		if(istype(src, /mob/npc/combat/political_escort)) ..()
+		if(istype(src, /mob/npc/combat)) ..()
 		else return
 
 	Death(killer)
-		if(istype(src, /mob/npc/combat/political_escort)) ..()
+		if(istype(src, /mob/npc/combat)) ..()
 		else return
 
 	New()
@@ -285,6 +285,7 @@ mob/npc
 			..()
 			var/obj/hbar=new /obj/Screen/healthbar/
 			var/obj/mbar=new /obj/Screen/manabar/
+			src.mouse_over_pointer = /obj/cursors/target
 			src.hbar.Add(hbar)
 			src.hbar.Add(mbar)
 		Death()
@@ -370,11 +371,92 @@ mob/npc
 					village="Hidden Sand"
 					bark = "Hmph. That meeting was a waste of time. Oh well, so you'll be my bodyguards then?"
 
+		white_zetsu
+			icon='zettsu.dmi'
+//				Names="White Zetsu"
+			health=2500
+			maxhealth=2500
+			village = VILLAGE_LEAF
+			var/punch_cd=0
+			var/attacking = 0
+			var/tmp/mob/target
+			var/retreating = 0
+			var/next_punch="left"
+
+			SetName()
+				return
+
+			Move()
+				..()
+				if(!src.attacking)
+					src.FindTarget()
+
+			New()
+				..()
+				walk_rand(src,10)
+
+			proc/CombatAI()
+				if(src && src.target && src.attacking)
+					if(get_dist(src,src.target) <= 1 && !src.punch_cd) src.AttackTarget(src.target)
+					else if(get_dist(src,src.target) > 20) src.Idle()
+					else if(src.punch_cd && !src.retreating) src.Retreat(src.target)
+					else if(!src.punch_cd) src.ChaseTarget(src.target)
+					else spawn(5) src.CombatAI()
+				else src.Idle()
+					
+			proc/Idle()
+				src.attacking = 0
+				src.retreating = 0
+				src.target = null
+				walk_rand(src,10)
+
+			proc/FindTarget()
+				if(src)
+					for(var/mob/M in orange(20))
+						if(istype(M,/mob/npc) || M.village == VILLAGE_AKATSUKI || M.dead) continue
+						if(M)
+							src.target = M
+							src.attacking = 1
+						else src.target = null
+						spawn(1) src.CombatAI()
+
+			proc/ChaseTarget(mob/M)
+				if(src && M)
+					src.retreating = 0
+					walk_towards(src,M,2)
+					spawn(5) src.CombatAI()
+
+			proc/AttackTarget(mob/M)
+				if(src && M)
+					switch(next_punch)
+						if("left")
+							next_punch="right"
+							flick("punchl",src)
+						if("right")
+							next_punch="left"
+							flick("punchr",src)
+					M.DealDamage(1,src,"TaiOrange",0,0,1)
+					M.UpdateHMB()
+					M.Death(src)
+					src.punch_cd=1
+					spawn() CombatAI()
+					sleep(6)
+					src.punch_cd=0
+
+			proc/Retreat(mob/M)
+				if(src && M)
+					walk(src,0)
+					step_rand(src)
+					walk_away(src,M,10,2)
+					src.retreating = 1
+					src.FindTarget()
+					spawn(1) src.CombatAI()
+
 
 obj/escort
 	pel1
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
@@ -387,8 +469,8 @@ obj/escort
 				walk_to(m, locate(/obj/escort/pel2), 0, 5)
 			..()
 	pel2
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
@@ -401,8 +483,8 @@ obj/escort
 				walk_to(m, locate(/obj/escort/pel3), 0, 5)
 			..()
 	pel3
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
@@ -416,8 +498,8 @@ obj/escort
 			..()
 
 	pel4
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
@@ -431,8 +513,8 @@ obj/escort
 			..()
 
 	pel5
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
@@ -445,38 +527,38 @@ obj/escort
 				if(political_escort.squad)
 					for(var/mob/player in mobs_online)
 						if(political_escort.squad.members[player.client.ckey])
-							spawn() 
+							spawn()
 								political_escort.squad.mission.Complete(player)
 								del m
 			..()
 
 	pes1
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
 	pes2
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
 	pes3
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
 	pes4
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
 	pes5
-		icon = 'escortnode.dmi'
-		icon_state = "placeholder"
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"

@@ -7,7 +7,7 @@ mob
 		playtime = 0
 		last_online
 
-		name_color
+		name_color = ""
 
 		items=0
 		maxitems=-1 // Max Satchel Slots: -1 = Unlimited
@@ -46,37 +46,45 @@ mob
 
 	verb/LoginCharacter()
 		set hidden = 1
-		if(src.client && !mobs_online.Find(src))
+		if(src.client && !mobs_online.Find(src) && !src.client.logging_in)
+			src.client.logging_in = 1
+
 			var/character=uppercase(winget(src.client, "Titlescreen.Username", "text"), 1)
 			var/password=winget(src.client, "Titlescreen.Password", "text")
 
 			if(!character && !password)
 				src.client.Alert("Please enter your character name and password.")
+				src.client.logging_in = 0
 				return 0
 			else if(!character)
 				src.client.Alert("Please enter your character name.")
+				src.client.logging_in = 0
 				return 0
 			else if(!password)
 				src.client.Alert("Please enter your password.")
+				src.client.logging_in = 0
 				return 0
 
 			winset(src,"Titlescreen.Password","text=")
 
 			if(fexists("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav.lk"))
 				src.client.Alert("You cannot load this character because it is currently in use.")
+				src.client.logging_in = 0
 				return 0
 
 			var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav")
 			var/password_hash = sha1("[password][F["password_salt"]]")
 			if(password_hash != F["password"])
 				src.client.Alert("The character name or password you entered is incorrect.")
+				src.client.logging_in = 0
 			else
 				src.Load(character)
 
 	verb/CreateCharacter()
 		set hidden = 1
+		if(src.client && !mobs_online.Find(src) && !src.client.logging_in)
+			src.client.logging_in = 1
 
-		if(src.client && !mobs_online.Find(src))
 			src.name = null
 			var/list/prompt
 
@@ -403,11 +411,14 @@ mob
 					src.name_overlays = null
 
 				if(!Color)
-					switch(src.village)
-						if(VILLAGE_LEAF) Color = "#2b7154"
-						if(VILLAGE_SAND) Color = "#886541"
-						if(VILLAGE_MISSING_NIN) Color = "white"
-						if(VILLAGE_AKATSUKI) Color = "#971e1e"
+					if(!src.client) Color = "white"
+					if(!src.village) Color = "white"
+					else
+						switch(src.village)
+							if(VILLAGE_LEAF) Color = "#2b7154"
+							if(VILLAGE_SAND) Color = "#886541"
+							if(VILLAGE_MISSING_NIN) Color = "white"
+							if(VILLAGE_AKATSUKI) Color = "#971e1e"
 
 				var/obj/name = new()
 				name.layer = MOB_LAYER - 1000
@@ -498,8 +509,6 @@ mob
 			src.rest=0
 			src.dodge=0
 			src.move=1
-			src.joinedwar=0
-			src.joinedakatshinobiw=0
 			src.swimming=0
 			src.walkingonwater=0
 			src.overlays=0

@@ -2,6 +2,7 @@ client
 	mouse_pointer_icon='cursors.dmi'
 	var/tmp
 		channel = "Local"
+		logging_in = 0
 	var
 		last_mission
 
