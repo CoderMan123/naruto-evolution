@@ -394,7 +394,7 @@ mob/npc
 			New()
 				..()
 				src.ryo = rand(50,150)
-				walk_rand(src,10)
+				src.CombatAI()
 
 /*			Death(mob/killer)
 				..()
@@ -405,13 +405,15 @@ mob/npc
 						killer.ryo += 100 */
 
 			proc/CombatAI()
-				if(src && src.target && src.attacking && !src.dead)
-					if(get_dist(src,src.target) <= 1 && !src.punch_cd) src.AttackTarget(src.target)
-					else if(get_dist(src,src.target) > 20) src.Idle()
-					else if(src.punch_cd && !src.retreating) src.Retreat(src.target)
-					else if(!src.punch_cd) src.ChaseTarget(src.target)
-					else spawn(5) src.CombatAI()
-				else if(!src.dead) src.Idle()
+				while(src)
+					if(src.target && src.attacking && !src.dead)
+						if(get_dist(src,src.target) <= 1 && !src.punch_cd) src.AttackTarget(src.target)
+						else if(get_dist(src,src.target) > 20) src.Idle()
+						else if(src.punch_cd && !src.retreating) src.Retreat(src.target)
+						else if(!src.punch_cd) src.ChaseTarget(src.target)
+	//					else sleep(10) src.CombatAI()
+					else if(!src.dead) src.Idle()
+					sleep(3)
 					
 			proc/Idle()
 				src.attacking = 0
@@ -427,13 +429,13 @@ mob/npc
 							src.target = M
 							src.attacking = 1
 						else src.target = null
-						spawn(1) src.CombatAI()
+//						spawn(1) src.CombatAI()
 
 			proc/ChaseTarget(mob/M)
 				if(src && M)
 					src.retreating = 0
 					walk_towards(src,M,2)
-					spawn(5) src.CombatAI()
+//					spawn(5) src.CombatAI()
 
 			proc/AttackTarget(mob/M)
 				if(src && M)
@@ -448,7 +450,7 @@ mob/npc
 					M.UpdateHMB()
 					M.Death(src)
 					src.punch_cd=1
-					spawn() CombatAI()
+//					spawn() CombatAI()
 					sleep(6)
 					src.punch_cd=0
 
@@ -459,7 +461,7 @@ mob/npc
 					walk_away(src,M,10,2)
 					src.retreating = 1
 					src.FindTarget()
-					spawn(1) src.CombatAI()
+//					spawn(1) src.CombatAI()
 
 
 obj/escort

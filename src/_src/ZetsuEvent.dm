@@ -11,6 +11,7 @@ proc/ZetsuEvent()
 		sleep(600*360)
 
 proc/ZetsuEventStart()
+	zetsu_count = 0
 	if(!zetsu_event_active && zetsu_event_toggle == 1)
 		zetsu_event_active = 1
 
@@ -38,22 +39,22 @@ proc/ZetsuEventEnd(mob/M)
 		zetsu_event_active = 0
 		if(zetsu_count < 1 || akat_lives_left < 1)
 			if(leaf_points == sand_points)
-				world << ("Both villages contributed equally! They have both earned 5 bonus exp for their efforts!")
+				world << output("Both villages contributed equally! They have both earned 5 bonus exp for their efforts!","Action.Output")
 				for(var/mob/m in mobs_online)
 					if(m.village == VILLAGE_LEAF || m.village == VILLAGE_SAND)
 						m.exp += 5
 						m.Levelup()
 			else if(leaf_points > sand_points)
-				world << ("The Hidden Leaf village contributed the most and have earned 10 bonus exp for their efforts!")
+				world << output("The Hidden Leaf village contributed the most and have earned 10 bonus exp for their efforts!","Action.Output")
 				for(var/mob/m in mobs_online)
 					if(m.village == VILLAGE_LEAF)
-						m.exp += 5
+						m.exp += 10
 						m.Levelup()
 			else
-				world << ("<b>The Hidden Sand village contributed the most and have earned 10 bonus exp for their efforts!</b>")
+				world << output("<b>The Hidden Sand village contributed the most and have earned 10 bonus exp for their efforts!</b>","Action.Output")
 				for(var/mob/m in mobs_online)
 					if(m.village == VILLAGE_SAND)
-						m.exp += 5
+						m.exp += 10
 						m.Levelup()
 
 			for(var/mob/m in mobs_online)
@@ -61,6 +62,10 @@ proc/ZetsuEventEnd(mob/M)
 				spawn() m.client.UpdateCharacterPanel()
 				if(squad)
 					spawn() squad.RefreshMember(m)
+			
+			for(var/mob/npc/combat/white_zetsu/m)
+				sleep(1)
+				del m
 
 obj
 	zetsuspawn
