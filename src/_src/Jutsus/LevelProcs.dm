@@ -512,7 +512,6 @@ mob
 	//Zetsu Killed
 						if(src != X)	
 							if(istype(src, /mob/npc/combat/white_zetsu) && zetsu_event_active == 1)
-								var/squad/squad = X.GetSquad()
 								zetsu_count--
 								switch(X.village)
 									if(VILLAGE_LEAF)
@@ -523,17 +522,7 @@ mob
 									if(zetsu_count > 0)
 										world<<output("A white Zetsu has been slain by [X.name] earning the [X.village] village 1 point! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
 									if(zetsu_count < 1)
-										ZetsuEventEnd()
-										world << output("<b><font color= #971e1e>[X.name] has slain the last of the White Zetsu! The Akatsuki's assault has been halted.. for now.</Font></b>","Action.Output")
-										if(squad)	
-											for(var/mob/m in mobs_online)
-												if(squad.members[m.client.ckey])
-													m << output ("[X.name] has killed the last Zetsu, the Akatsuki have failed! Your squad gains 20 extra exp for your efforts!", "Action.Output")
-													m.exp += 20
-													m.Levelup()
-										else 
-											X.exp +=20
-											X.Levelup()
+										ZetsuEventEnd(X)
 								else
 									world<<output("A white Zetsu has been slain by [X.name], a rogue ninja! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
 
@@ -559,17 +548,8 @@ mob
 											X.exp +=20
 											X.Levelup()
 									else
-										ZetsuEventEnd()
-										world << output ("<b><font color= #971e1e>The Akatsuki have suffered too many loses, the Akatsuki have failed!</Font></b>", "Action.Output")
-										if(squad)	
-											for(var/mob/m in mobs_online)
-												if(squad.members[m.client.ckey])
-													m << output ("[X.name] has killed an Akatsuki member leading to their retreat. Your squad has been awarded 15 bonus experience for their efforts!", "Action.Output")
-													m.exp += 15
-													m.Levelup()
-										else 
-											X.exp +=15
-											X.Levelup()
+										ZetsuEventEnd(X)
+
 	//Villager Killed
 							if(src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
 								var/squad/squad = X.GetSquad()
@@ -587,17 +567,8 @@ mob
 											X.exp += 5
 											X.Levelup()
 									else
-										ZetsuEventEnd()
-										world << output ("<b><font color= #971e1e>The Shinobi Alliance have suffered too many loses, the Akatsuki have won the battle and earned themselves 30 experience for their success!</Font></b>", "Action.Output")
-										X << output ("You have slain enough of these fools for now. Your squad has been awarded 10 bonus experience for their efforts!", "Action.Output")
-										if(squad)	
-											for(var/mob/m in mobs_online)
-												if(squad.members[m.client.ckey])
-													m.exp += 10
-													m.Levelup()
-										else 
-											X.exp +=10
-											X.Levelup()
+										ZetsuEventEnd(X)
+
 										for(var/mob/m in mobs_online)
 											if(m.village == VILLAGE_AKATSUKI)
 												m.exp += 30
