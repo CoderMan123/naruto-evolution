@@ -95,6 +95,7 @@
 #include "src\_src\Village Guards.dm"
 #include "src\_src\Village Wars.dm"
 #include "src\_src\Voting.dm"
+#include "src\_src\ZetsuEvent.dm"
 #include "src\_src\Clothing\Clothes.dm"
 #include "src\_src\Deadspace\Marker.dm"
 #include "src\_src\HairStyles\Hair.dm"

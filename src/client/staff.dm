@@ -1,6 +1,21 @@
 mob
 	administrator
 		verb
+			Toggle_Zetsu_Event()
+				set category = "Administrator"
+				if(zetsu_event_toggle)
+					zetsu_event_toggle = 0
+					src << output("<b>Zetsu events disabled.</b>","Action.Output")
+				else
+					zetsu_event_toggle = 1
+					src << output("<b>Zetsu events enabled.</b>","Action.Output")
+
+			Start_Zetsu_Event()
+				set category = "Administrator"
+				if(!zetsu_event_active)
+					ZetsuEventStart()
+				else src << output("<b>There is already a Zetsu event active. Please wait until the current one has finished before starting another.</b>","Action.Output")
+
 			End_Mission()
 				set category = "Administrator"
 				switch(alert("Which would you like to do?", "End Mission", "Fail Mission", "Complete Mission"))

@@ -290,6 +290,7 @@ mob/npc
 			src.hbar.Add(mbar)
 		Death()
 			if(src.health <= 0)
+				walk(src,0)
 				spawn(50)
 					if(src)
 						del src
@@ -373,15 +374,14 @@ mob/npc
 
 		white_zetsu
 			icon='zettsu.dmi'
-//				Names="White Zetsu"
-			health=2500
-			maxhealth=2500
-			village = VILLAGE_LEAF
 			var/punch_cd=0
 			var/attacking = 0
 			var/tmp/mob/target
 			var/retreating = 0
-			var/next_punch="left"
+			var/next_punch = "left"
+			health=2500
+			maxhealth=2500
+
 
 			SetName()
 				return
@@ -393,16 +393,25 @@ mob/npc
 
 			New()
 				..()
+				src.ryo = rand(50,150)
 				walk_rand(src,10)
 
+/*			Death(mob/killer)
+				..()
+					if(zetsu_count > 1)
+						world << output("[killer] has slain a white zetsu! [zetsu_count] remain.", "Action.Output")
+						killer << output ("You gain 5 exp and 100 ryo for your efforts.", "Action.Output")
+						killer.exp += 5
+						killer.ryo += 100 */
+
 			proc/CombatAI()
-				if(src && src.target && src.attacking)
+				if(src && src.target && src.attacking && !src.dead)
 					if(get_dist(src,src.target) <= 1 && !src.punch_cd) src.AttackTarget(src.target)
 					else if(get_dist(src,src.target) > 20) src.Idle()
 					else if(src.punch_cd && !src.retreating) src.Retreat(src.target)
 					else if(!src.punch_cd) src.ChaseTarget(src.target)
 					else spawn(5) src.CombatAI()
-				else src.Idle()
+				else if(!src.dead) src.Idle()
 					
 			proc/Idle()
 				src.attacking = 0
@@ -413,7 +422,7 @@ mob/npc
 			proc/FindTarget()
 				if(src)
 					for(var/mob/M in orange(20))
-						if(istype(M,/mob/npc) || M.village == VILLAGE_AKATSUKI || M.dead) continue
+						if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.village == VILLAGE_AKATSUKI || M.dead) continue
 						if(M)
 							src.target = M
 							src.attacking = 1
