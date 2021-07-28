@@ -394,7 +394,7 @@ mob/npc
 			New()
 				..()
 				src.ryo = rand(50,150)
-				src.CombatAI()
+				spawn() src.CombatAI()
 
 /*			Death(mob/killer)
 				..()
