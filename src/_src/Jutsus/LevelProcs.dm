@@ -576,7 +576,7 @@ mob
 							
 	//Missing nin kills
 							if(X.village == VILLAGE_MISSING_NIN && zetsu_event_active == 1)
-								if(src.village == VILLAGE_AKATSUKI || src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND || src.village == VILLAGE_MISSING_NIN)
+								if(src.village == VILLAGE_AKATSUKI || src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
 									if(src.village == VILLAGE_AKATSUKI)
 										akat_lives_left--
 										world << output("A rogue ninja took advantage of the fray and has killed a member of the Akatuski! (Akatsuki lives remaining: [akat_lives_left])", "Action.Output")
