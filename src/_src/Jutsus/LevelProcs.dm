@@ -513,11 +513,11 @@ mob
 						if(src != X)	
 							if(istype(src, /mob/npc/combat/white_zetsu) && zetsu_event_active == 1)
 								zetsu_count--
-									switch(X.village)
-										if(VILLAGE_LEAF)
-											leaf_points++
-										if(VILLAGE_SAND)
-											sand_points++
+								switch(X.village)
+									if(VILLAGE_LEAF)
+										leaf_points++
+									if(VILLAGE_SAND)
+										sand_points++
 								if(X.village != VILLAGE_MISSING_NIN && X.village != VILLAGE_AKATSUKI)
 									if(zetsu_count > 0)
 										world<<output("A white Zetsu has been slain by [X.name] earning the [X.village] village 1 point! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
@@ -586,7 +586,7 @@ mob
 									X << output ("With everything going on, they never saw you coming. You've earned 8 bonus experience!", "Action.Output")
 									X.exp += 8
 									X.Levelup()
-									if(akat_lives_left < 1 || vill _lives_left < 1)
+									if(akat_lives_left < 1 || vill_lives_left < 1)
 										ZetsuEventEnd(X)
 
 	//Update Panels
