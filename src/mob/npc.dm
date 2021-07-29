@@ -59,104 +59,141 @@ mob/npc
 
 							// Select mission
 							else if(usr.client.Alert("Hey [usr.name], are you here to pickup a mission for your squad?", src.name, list("Yes", "No")) == 1)
+								var/list/excluded_missions = list()
 								switch(usr.client.AlertList("What rank mission are you interested in?", src.name, list("D Rank", "C Rank", "B Rank", "A Rank", "S Rank")))
 									if(1)
 										if(usr.checkRank() >= 1)
-											var/mission/d_rank/mission = pick(typesof(/mission/d_rank) - /mission/d_rank)
-											mission = new mission(usr)
+											var/mission/d_rank/mission
 
-											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
-												squad.mission = mission
-												squad.mission.Start(usr)
+											try
+												mission = pick(typesof(/mission/d_rank) - /mission/d_rank - excluded_missions)
+											catch
+												usr.client.Alert("There are currently no D rank missions avaliable.", src.name)
 
-												for(var/mob/m in mobs_online)
-													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+											if(mission)
+												mission = new mission(usr)
 
-												for(var/ckey in squad.members)
-													var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
-													F["last_mission"] << squad.mission.start
+												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+													squad.mission = mission
+													squad.mission.Start(usr)
 
-												spawn() squad.Refresh()
+													for(var/mob/m in mobs_online)
+														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+
+													for(var/ckey in squad.members)
+														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
+														F["last_mission"] << squad.mission.start
+
+													spawn() squad.Refresh()
 										else
 											usr.client.Alert("You must be at least Genin rank to take on D rank missions.", src.name)
 
 									if(2)
 										if(usr.checkRank() >= 2)
-											var/mission/c_rank/mission = pick(typesof(/mission/c_rank) - /mission/c_rank)
-											mission = new mission(usr)
+											if(!(VillageDefenders.Find(usr.village)) && !(VillageAttackers.Find(usr.village))) excluded_missions += /mission/c_rank/the_war_effort
+											var/mission/c_rank/mission
 
-											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
-												squad.mission = mission
-												squad.mission.Start(usr)
+											try
+												mission = pick(typesof(/mission/c_rank) - /mission/c_rank - excluded_missions)
+											catch
+												usr.client.Alert("There are currently no C rank missions avaliable.", src.name)
 
-												for(var/mob/m in mobs_online)
-													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+											if(mission)
+												mission = new mission(usr)
 
-												for(var/ckey in squad.members)
-													var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
-													F["last_mission"] << squad.mission.start
+												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+													squad.mission = mission
+													squad.mission.Start(usr)
 
-												spawn() squad.Refresh()
+													for(var/mob/m in mobs_online)
+														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+
+													for(var/ckey in squad.members)
+														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
+														F["last_mission"] << squad.mission.start
+
+													spawn() squad.Refresh()
 										else
 											usr.client.Alert("You must be at least Chunin rank to take on C rank missions.", src.name)
 
 									if(3)
 										if(usr.checkRank() >= 3)
-											var/mission/b_rank/mission = pick(typesof(/mission/b_rank) - /mission/b_rank)
-											mission = new mission(usr)
+											var/mission/b_rank/mission
 
-											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
-												squad.mission = mission
-												squad.mission.Start(usr)
+											try
+												mission = pick(typesof(/mission/b_rank) - /mission/b_rank - excluded_missions)
+											catch
+												usr.client.Alert("There are currently no B rank missions avaliable.", src.name)
+											
+											if(mission)
+												mission = new mission(usr)
 
-												for(var/mob/m in mobs_online)
-													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+													squad.mission = mission
+													squad.mission.Start(usr)
 
-												for(var/ckey in squad.members)
-													var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
-													F["last_mission"] << squad.mission.start
+													for(var/mob/m in mobs_online)
+														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
 
-												spawn() squad.Refresh()
+													for(var/ckey in squad.members)
+														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
+														F["last_mission"] << squad.mission.start
+
+													spawn() squad.Refresh()
 										else
 											usr.client.Alert("You must be at least Jonin rank to take on B rank missions.", src.name)
 
 									if(4)
 										if(usr.checkRank() >= 3)
-											var/mission/a_rank/mission = pick(typesof(/mission/a_rank) - /mission/a_rank)
-											mission = new mission(usr)
+											var/mission/a_rank/mission
 
-											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
-												squad.mission = mission
-												squad.mission.Start(usr)
+											try
+												mission = pick(typesof(/mission/a_rank) - /mission/a_rank - excluded_missions)
+											catch
+												usr.client.Alert("There are currently no A rank missions avaliable.", src.name)
+											
+											if(mission)
+												mission = new mission(usr)
 
-												for(var/mob/m in mobs_online)
-													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+													squad.mission = mission
+													squad.mission.Start(usr)
 
-												for(var/ckey in squad.members)
-													var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
-													F["last_mission"] << squad.mission.start
+													for(var/mob/m in mobs_online)
+														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
 
-												spawn() squad.Refresh()
+													for(var/ckey in squad.members)
+														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
+														F["last_mission"] << squad.mission.start
+
+													spawn() squad.Refresh()
 										else
 											usr.client.Alert("You must be at least Jonin rank to take on A rank missions.", src.name)
 
 									if(5)
 										if(usr.checkRank() >= 4)
-											var/mission/s_rank/mission = pick(typesof(/mission/s_rank) - /mission/s_rank)
-											mission = new mission(usr)
+											var/mission/s_rank/mission
+											
+											try
+												mission = pick(typesof(/mission/s_rank) - /mission/s_rank - excluded_missions)
+											catch
+												usr.client.Alert("There are currently no S rank missions avaliable.", src.name)
 
-											if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
-												squad.mission = mission
-												squad.mission.Start(usr)
+											if(mission)
+												mission = new mission(usr)
 
-												for(var/mob/m in mobs_online)
-													if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+													squad.mission = mission
+													squad.mission.Start(usr)
 
-												for(var/ckey in squad.members)
-													var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
-													F["last_mission"] << squad.mission.start
+													for(var/mob/m in mobs_online)
+														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
 
-												spawn() squad.Refresh()
+													for(var/ckey in squad.members)
+														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
+														F["last_mission"] << squad.mission.start
+
+													spawn() squad.Refresh()
 										else
 											usr.client.Alert("You must be at least ANBU rank to take on S rank missions.", src.name)
 
