@@ -1,3 +1,5 @@
+var/tmp/squirrel_count = 0
+var/tmp/chipmonk_count = 0
 
 mob
     npc
@@ -9,7 +11,6 @@ mob
                     maxhealth = 20
                     var/tmp/mob/target
                     var/retreating = 0
-                    var/tmp/squirrel_count = 0
                     var/tmp/climbing = 0
                     var/tmp/tree_location
                     var/tmp/scarred = 0
@@ -96,12 +97,11 @@ mob
                         src.Retreat(M)
 
                 chipmonk
-                    icon = 'Squirrel.dmi'
+                    icon = 'Chipmonk.dmi'
                     health = 20
                     maxhealth = 20
                     var/tmp/mob/target
                     var/retreating = 0
-                    var/tmp/chipmonk_count = 0
                     var/tmp/climbing = 0
                     var/tmp/tree_location
                     var/tmp/scarred = 0
@@ -185,4 +185,3 @@ mob
                         walk(src,0)
                         sleep(3)
                         src.Retreat(M)
-
