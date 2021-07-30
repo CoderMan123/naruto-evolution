@@ -1,6 +1,8 @@
 var/tmp/squirrel_count = 0
 var/tmp/chipmonk_count = 0
 var/tmp/hedgehog_count = 0
+var/tmp/hare_count = 0
+var/tmp/rabbit_count = 0
 
 mob
     npc
@@ -255,4 +257,120 @@ mob
                             flick("hide", src)
                             sleep(3)
                             src.icon_state = "hidden"
+                            src.FindTarget()
+
+                hare
+                    icon = 'Hare.dmi'
+                    health = 20
+                    maxhealth = 20
+                    var/tmp/mob/target
+                    var/retreating = 0
+                    var/tmp/idle = 0
+
+                    SetName()
+                        return
+
+                    New()
+                        ..()
+                        src.overlays-=/obj/MaleParts/UnderShade
+                        src.pixel_x = 0
+                        src.overlays+=/obj/MaleParts/UnderShadeSmall
+                        hare_count++
+                        src.ryo = rand(10,30)
+                        spawn() src.CombatAI()
+
+                    Move()
+                        ..()
+                        src.FindTarget()
+
+                    Death()
+                        ..()
+                        if(src.health <= 0)
+                            hare_count--
+
+                    proc/Idle()
+                        src.idle = 1
+                        src.retreating = 0
+                        src.target = null
+                        walk_rand(src,8)
+
+                    proc/CombatAI()
+                        while(src)
+                            if(!src.dead)
+                                if(!src.retreating && get_dist(src,src.target) <= 10) src.Retreat(src.target)
+                                if(get_dist(src,src.target) > 10 && !src.idle) src.Idle()
+                            else if(!src.dead && !src.idle) src.Idle()
+                            sleep(2)
+
+                    proc/FindTarget()
+                        if(src)
+                            for(var/mob/M in orange(10))
+                                if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+                                if(M)
+                                    src.target = M
+                                else src.target = null
+
+                    proc/Retreat(mob/M)
+                        if(src && M)
+                            src.idle = 0
+                            src.retreating = 1
+                            walk_away(src,M,11,1)
+                            src.FindTarget()
+
+                rabbit
+                    icon = 'Rabbit.dmi'
+                    health = 20
+                    maxhealth = 20
+                    var/tmp/mob/target
+                    var/retreating = 0
+                    var/tmp/idle = 0
+
+                    SetName()
+                        return
+
+                    New()
+                        ..()
+                        src.overlays-=/obj/MaleParts/UnderShade
+                        src.pixel_x = 0
+                        src.overlays+=/obj/MaleParts/UnderShadeSmall
+                        rabbit_count++
+                        src.ryo = rand(10,30)
+                        spawn() src.CombatAI()
+
+                    Move()
+                        ..()
+                        src.FindTarget()
+
+                    Death()
+                        ..()
+                        if(src.health <= 0)
+                            rabbit_count--
+
+                    proc/Idle()
+                        src.idle = 1
+                        src.retreating = 0
+                        src.target = null
+                        walk_rand(src,8)
+
+                    proc/CombatAI()
+                        while(src)
+                            if(!src.dead)
+                                if(!src.retreating && get_dist(src,src.target) <= 10) src.Retreat(src.target)
+                                if(get_dist(src,src.target) > 10 && !src.idle) src.Idle()
+                            else if(!src.dead && !src.idle) src.Idle()
+                            sleep(2)
+
+                    proc/FindTarget()
+                        if(src)
+                            for(var/mob/M in orange(10))
+                                if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+                                if(M)
+                                    src.target = M
+                                else src.target = null
+
+                    proc/Retreat(mob/M)
+                        if(src && M)
+                            src.idle = 0
+                            src.retreating = 1
+                            walk_away(src,M,11,1)
                             src.FindTarget()
