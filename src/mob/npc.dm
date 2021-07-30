@@ -18,7 +18,8 @@ mob/npc
 	New()
 		..()
 		npcs_online.Add(src)
-		src.overlays+=/obj/MaleParts/UnderShade
+		if(!istype(src, /mob/npc/combat/small))
+			src.overlays+=/obj/MaleParts/UnderShade
 		src.SetName(src.name)
 
 	onomari

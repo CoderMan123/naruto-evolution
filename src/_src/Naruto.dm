@@ -62,6 +62,11 @@ obj
 			pixel_y=-2
 			pixel_x=15
 			layer=TURF_LAYER+1
+		UnderShadeSmall
+			icon='Shade.dmi'
+			icon_state="undershade"
+			pixel_y=-2
+			layer=TURF_LAYER+1
 
 obj/CinematicFollower
 	//icon='checkbox.dmi'

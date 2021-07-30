@@ -744,7 +744,7 @@ mob
 	//	stat(src.jutsus)
 		//statpanel("Clothing Collection", src.storage)
 		//statpanel("Quest Items", src.QuestItems)
-	pixel_x=-15
+	
 	New()
 		..()
 		src.overlays+=/obj/MaleParts/UnderShade
