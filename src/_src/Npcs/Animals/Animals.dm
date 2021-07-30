@@ -1,10 +1,12 @@
 var/tmp/squirrel_count = 0
 var/tmp/chipmonk_count = 0
+var/tmp/hedgehog_count = 0
 
 mob
     npc
         combat
             small
+
                 squirrel
                     icon = 'Squirrel.dmi'
                     health = 20
@@ -185,3 +187,65 @@ mob
                         walk(src,0)
                         sleep(3)
                         src.Retreat(M)
+
+                hedgehog
+                    icon = 'Hedgehog.dmi'
+                    health = 20
+                    maxhealth = 20
+                    var/tmp/mob/target
+                    var/tmp/retreating = 0
+                    var/tmp/idle = 0
+
+                    SetName()
+                        return
+
+                    New()
+                        ..()
+                        src.overlays-=/obj/MaleParts/UnderShade
+                        src.pixel_x = 0
+                        src.overlays+=/obj/MaleParts/UnderShadeSmall
+                        hedgehog_count++
+                        src.ryo = rand(10,30)
+                        spawn() src.CombatAI()
+
+                    Move()
+                        ..()
+                        src.FindTarget()
+                    
+                    Death()
+                        ..()
+                        if(src.health <= 0)
+                            hedgehog_count--
+
+                    proc/Idle()
+                        src.icon_state = ""
+                        src.idle = 1
+                        src.retreating = 0
+                        src.target = null
+                        walk_rand(src,8)
+
+                    proc/CombatAI()
+                        while(src)
+                            if(!src.dead && src.target)
+                                if(!src.retreating && get_dist(src,src.target) <= 5) src.Retreat(src.target)
+                                if(get_dist(src,src.target) > 5) src.Idle()
+                            else if(!src.dead && !src.idle) src.Idle()
+                            sleep(2)
+
+                    proc/FindTarget()
+                        if(src)
+                            for(var/mob/M in orange(5))
+                                if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+                                if(M)
+                                    src.target = M
+                                else src.target = null
+
+                    proc/Retreat(mob/M)
+                        if(src && M)
+                            src.retreating = 1
+                            src.idle = 0
+                            walk(src,0)
+                            flick("hide", src)
+                            sleep(3)
+                            src.icon_state = "hidden"
+                            src.FindTarget()
