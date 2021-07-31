@@ -5,6 +5,51 @@ var/tmp/hare_count = 0
 var/tmp/rabbit_count = 0
 var/tmp/doe_count = 0
 var/tmp/buck_count = 0
+var/list/animal_spawns = list()
+
+proc/AnimalPopulater()
+    while(world)
+        for(var/obj/animalspawn/s)
+            animal_spawns += s
+        if(squirrel_count < 10)
+            var/amount_to_spawn = 10 - squirrel_count
+            for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
+                var/obj/animalspawn/spawn_location = pick(animal_spawns)
+                new/mob/npc/combat/small/squirrel(spawn_location.loc)
+        if(chipmonk_count < 10)
+            var/amount_to_spawn = 10 - chipmonk_count
+            for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
+                var/obj/animalspawn/spawn_location = pick(animal_spawns)
+                new/mob/npc/combat/small/chipmonk(spawn_location.loc)
+        if(hedgehog_count < 4)
+            var/amount_to_spawn = 4 - hedgehog_count
+            for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
+                var/obj/animalspawn/spawn_location = pick(animal_spawns)
+                new/mob/npc/combat/small/hedgehog(spawn_location.loc)
+        if(hare_count < 10)
+            var/amount_to_spawn = 10 - hare_count
+            for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
+                var/obj/animalspawn/spawn_location = pick(animal_spawns)
+                new/mob/npc/combat/small/hare(spawn_location.loc)
+        if(rabbit_count < 10)
+            var/amount_to_spawn = 10 - rabbit_count
+            for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
+                var/obj/animalspawn/spawn_location = pick(animal_spawns)
+                new/mob/npc/combat/small/rabbit(spawn_location.loc)
+        if(doe_count < 8)
+            var/amount_to_spawn = 8 - doe_count
+            for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
+                var/obj/animalspawn/spawn_location = pick(animal_spawns)
+                new/mob/npc/combat/doe(spawn_location.loc)
+        if(buck_count < 8)
+            var/amount_to_spawn = 8 - buck_count
+            for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
+                var/obj/animalspawn/spawn_location = pick(animal_spawns)
+                new/mob/npc/combat/buck(spawn_location.loc)
+        sleep(600*3)
+
+
+
 
 mob
     npc
@@ -552,3 +597,11 @@ mob
                         src.retreating = 1
                         walk_away(src,M,16,2)
                         src.FindTarget()
+
+obj
+	animalspawn
+		icon = 'placeholdertiles.dmi'
+		icon_state = "animalspawn"
+		New()
+			..()
+			src.icon_state = "blank"
