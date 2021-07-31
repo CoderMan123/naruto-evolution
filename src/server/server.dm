@@ -33,6 +33,7 @@ world
 		spawn() UpdateHUB()
 		spawn() GeninExam()
 		spawn() ChuuninExam()
+		spawn() ZetsuEvent()
 		spawn() Advert()
 		spawn() RepopWorld()
 		spawn() AutoCheck()

@@ -9,6 +9,7 @@ var/zetsu_event_toggle = 0
 proc/ZetsuEvent()
 	while(world)
 		sleep(600*360)
+		ZetsuEventStart()
 
 proc/ZetsuEventStart()
 	zetsu_count = 0
