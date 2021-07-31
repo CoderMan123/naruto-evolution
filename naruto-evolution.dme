@@ -44,7 +44,6 @@
 #define FILE_DIR "src/_src/Jutsus/Misc"
 #define FILE_DIR "src/_src/Jutsus/Misc/MiscJutIcons"
 #define FILE_DIR "src/_src/Npcs"
-#define FILE_DIR "src/_src/Npcs/Animals"
 #define FILE_DIR "src/_src/Overlays"
 #define FILE_DIR "src/_src/PHOTOS"
 #define FILE_DIR "src/_src/Turfs"
@@ -52,6 +51,12 @@
 #define FILE_DIR "src/_src/Turfs/Rain"
 #define FILE_DIR "src/_src/Turfs/Sand"
 #define FILE_DIR "src/_src/Turfs/Village"
+#define FILE_DIR "src/mob"
+#define FILE_DIR "src/mob/NPCs"
+#define FILE_DIR "src/mob/NPCs/Animals"
+#define FILE_DIR "src/mob/NPCs/Animals/Critters"
+#define FILE_DIR "src/obj"
+#define FILE_DIR "src/obj/mission-objects"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
 #define DEBUG
@@ -156,7 +161,6 @@
 #include "src\_src\Jutsus\Misc\UnobtainableJutsus.dm"
 #include "src\_src\Npcs\Monsters.dm"
 #include "src\_src\Npcs\NPCs.dm"
-#include "src\_src\Npcs\Animals\Animals.dm"
 #include "src\_src\Turfs\BuildingInside.dm"
 #include "src\_src\Turfs\Ground.dm"
 #include "src\_src\Turfs\Leaf\LeafVillage.dm"
@@ -178,6 +182,7 @@
 #include "src\mob\npc.dm"
 #include "src\mob\save.dm"
 #include "src\mob\squad.dm"
+#include "src\mob\NPCs\Animals\Animals.dm"
 #include "src\obj\mission-objects.dm"
 #include "src\server\global.dm"
 #include "src\server\server.dm"
