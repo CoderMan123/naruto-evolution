@@ -1424,58 +1424,9 @@ window "Jutsu"
 		border = line
 		saved-params = ""
 		text = ""
-	elem "SelectedName"
-		type = LABEL
-		pos = 37,416
-		size = 260x22
-		anchor1 = none
-		anchor2 = none
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = ""
-		text = "Byakugan"
-	elem "SelectedInfo"
-		type = OUTPUT
-		pos = 37,440
-		size = 260x57
-		anchor1 = none
-		anchor2 = none
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = "max-lines"
-	elem "label4"
-		type = LABEL
-		pos = 3,392
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = "Jutsu Information"
-	elem "SelectedImage"
-		type = LABEL
-		pos = 3,416
-		size = 32x81
-		anchor1 = none
-		anchor2 = none
-		background-color = #414141
-		border = line
-		saved-params = ""
-		text = ""
 	elem "Total"
 		type = LABEL
-		pos = 3,368
+		pos = 3,475
 		size = 294x22
 		anchor1 = none
 		anchor2 = none
@@ -1489,7 +1440,7 @@ window "Jutsu"
 	elem "Grid"
 		type = GRID
 		pos = 3,24
-		size = 294x342
+		size = 294x449
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
