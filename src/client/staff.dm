@@ -1,12 +1,6 @@
 mob
 	administrator
 		verb
-			Debug_Counter()
-				set category = "Administrator"
-				var/num = 0
-				for(var/a in view(100))
-					num++
-
 			Toggle_Zetsu_Event()
 				set category = "Administrator"
 				if(zetsu_event_toggle)

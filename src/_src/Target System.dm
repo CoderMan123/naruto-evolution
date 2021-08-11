@@ -66,12 +66,14 @@ mob/proc
 					src.target_mob_image.loc = A
 					src << src.target_mob_image
 			src.target_mob = A
+
 	Target_Get()
-		if(!target_mob) return 0
-		if(!(src.target_mob in view(100)))
-			src.Target_Remove(TARGET_MOB)
-			return 0
-		return target_mob
+		if(!src.target_mob) return 0
+		for(var/mob/m in view(100))
+			if(m == src.target_mob)
+				return src.target_mob
+		src.Target_Remove(TARGET_MOB)
+		return 0
 
 atom/movable/Click()
 	//if(!istype(src,/obj/HUD))
