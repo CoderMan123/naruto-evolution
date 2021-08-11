@@ -476,6 +476,10 @@ mob
 
 		SetRyo(var/ryo)
 			if(ryo)
+				for(var/obj/Inventory/ryo_pouch/pouch in src.contents)
+					ryo += pouch.ryo
+					pouch.loc = null
+
 				if(ryo < 0) ryo = 0
 				src.ryo = ryo
 				src.client.UpdateInventoryPanel()
@@ -486,7 +490,7 @@ mob
 				if(src.rest) src.healthregenmod += 2
 				src.health += round((src.maxhealth/100) * src.healthregenmod)
 				src.health = min(src.health, src.maxhealth)
-				if(src.rest) src.healthregenmod -= 2 
+				if(src.rest) src.healthregenmod -= 2
 				spawn() src.UpdateBars()
 				spawn() src.UpdateHMB()
 				sleep(10)
