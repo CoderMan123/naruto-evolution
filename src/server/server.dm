@@ -40,11 +40,11 @@ world
 		spawn() AutoCheck()
 		spawn() LinkWarps()
 		spawn() HTMLlist()
-		
+
 	Del()
 		src.Save()
 		..()
-	
+
 	proc/UpdateHUB()
 		set background = 1
 		while(world)
@@ -121,10 +121,10 @@ world
 			var/Faction/Faction
 			G >> Faction
 			Factions += Faction
-	
+
 	proc/GetAdvert()
 		return "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='http://www.byond.com/games/Squigs/NETheNewEra/'>Hub</a>] \[<a href='https://discord.gg/URcN6cc\'>Discord</a>] \[<a href='https://github.com/lavenblade/naruto-evolution-community/issues/new?assignees=&labels=Type%3A+Feature+Request&template=feature-request.md&title='>Feature Requests</a>] \[<a href='https://github.com/lavenblade/naruto-evolution-community/issues/new?assignees=&labels=Type%3A+Bug&template=bug-report.md&title='>Bug Reports</a>]</b></center>"
-	
+
 	proc/Advert()
 		set background = 1
 		while(world)

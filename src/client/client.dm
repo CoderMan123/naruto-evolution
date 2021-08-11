@@ -1,5 +1,6 @@
 client
 	mouse_pointer_icon='cursors.dmi'
+	fps = 60
 	var/tmp
 		channel = "Local"
 		logging_in = 0
