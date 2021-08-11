@@ -615,7 +615,7 @@ mob/MasterGM/verb
 						C.mob.agility = 150
 						C.mob.level = 100
 
-					C.mob.RefreshJutsus()
+					C.UpdateJutsuPanel()
 
 	Level_Boost()
 		set category = "Staff"

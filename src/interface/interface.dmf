@@ -121,7 +121,7 @@ macro "Macro"
 		command = "ToggleCharacterPanel"
 	elem 
 		name = "P"
-		command = "ViewJutsuTab"
+		command = "ToggleJutsuPanel"
 	elem 
 		name = "Q"
 		command = "HandSeal rat"
@@ -309,6 +309,7 @@ window "Character"
 		size = 300x589
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -317,6 +318,8 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x603
+		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1236,6 +1239,7 @@ window "Inventory"
 		size = 300x500
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1244,6 +1248,8 @@ window "Inventory"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x514
+		inner-size = 300x500
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1390,47 +1396,153 @@ window "Inventory"
 		command = "Create-Ryo-Pouch"
 		is-flat = true
 
-window "JutsuTab"
-	elem "JutsuTab"
+window "Jutsu"
+	elem "Jutsu"
 		type = MAIN
 		pos = 281,0
-		size = 640x480
+		size = 300x500
 		anchor1 = none
 		anchor2 = none
-		background-color = #1b1b1b
+		background-color = none
+		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		is-pane = true
-	elem "button7"
-		type = BUTTON
-		pos = 544,32
-		size = 80x44
-		anchor1 = 85,7
-		anchor2 = 98,16
-		font-family = "@Kozuka Gothic Pro L"
-		font-size = 15
-		text-color = #c4c4c4
-		background-color = #2e2e2e
-		border = line
-		saved-params = "is-checked"
-		text = "Close"
-		command = "ViewJutsuTab"
-		is-flat = true
-	elem "Grid"
-		type = GRID
-		pos = 8,8
-		size = 536x464
+		macro = "Macro"
+		outer-size = 314x514
+		inner-size = 300x500
+	elem "Background"
+		type = LABEL
+		pos = 0,21
+		size = 300x479
 		anchor1 = 0,0
-		anchor2 = 85,100
-		text-color = #bbbbbb
-		background-color = #2e2e2e
+		anchor2 = 100,100
+		background-color = #191919
 		border = line
 		saved-params = ""
-		highlight-color = #000000
+		text = ""
+	elem "SelectedName"
+		type = LABEL
+		pos = 37,416
+		size = 260x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "Byakugan"
+	elem "SelectedInfo"
+		type = OUTPUT
+		pos = 37,440
+		size = 260x57
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "max-lines"
+	elem "label4"
+		type = LABEL
+		pos = 3,392
+		size = 294x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Jutsu Information"
+	elem "SelectedImage"
+		type = LABEL
+		pos = 3,416
+		size = 32x81
+		anchor1 = none
+		anchor2 = none
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = ""
+	elem "Total"
+		type = LABEL
+		pos = 3,368
+		size = 294x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "Learned Jutsu: 0"
+	elem "Grid"
+		type = GRID
+		pos = 3,24
+		size = 294x342
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		cells = 1x1
+		current-cell = 1,1
+		show-lines = horizontal
+		line-color = #646464
+		highlight-color = #ffffff
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 300x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Jutsu"
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
+	elem "Close"
+		type = BUTTON
+		pos = 272,0
+		size = 25x19
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'assets\\interface\\buttons\\Close.png'
+		command = "ToggleJutsuPanel"
+		is-flat = true
 
 window "Leader"
 	elem "Leader"
@@ -1540,6 +1652,8 @@ window "Main"
 		can-resize = false
 		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
+		outer-size = 1294x734
+		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1576,6 +1690,7 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		left = "Navigation"
 		is-vert = false
@@ -1585,6 +1700,7 @@ window "Main"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
+		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -1594,6 +1710,7 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -1646,17 +1763,6 @@ window "Main"
 		is-visible = false
 		saved-params = ""
 		text = "4:30"
-	elem "JutsuTabChild"
-		type = CHILD
-		pos = 914,42
-		size = 364x291
-		anchor1 = 57,9
-		anchor2 = 85,48
-		is-visible = false
-		border = line
-		saved-params = "splitter"
-		left = "JutsuTab"
-		is-vert = false
 	elem "Minimize"
 		type = BUTTON
 		pos = 1226,0
@@ -1976,7 +2082,6 @@ window "Output"
 		size = 500x200
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1985,8 +2090,6 @@ window "Output"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 514x214
-		inner-size = 500x200
 	elem "OutputBackground"
 		type = LABEL
 		pos = 0,0

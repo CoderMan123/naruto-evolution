@@ -158,34 +158,8 @@ mob
 	//				"})
 
 mob
-	var
-		jutsutab=0
 	verb
-		ViewJutsuTab()
-			set hidden=1
-			if(jutsutab)
-				jutsutab=0
-				winset(usr, null, {"
-				JutsuTabChild.focus      = "false";
-				JutsuTabChild.is-visible      = "false";
-				"})
-				return
-			RefreshJutsus()
-			winset(usr, null, {"
-				JutsuTabChild.focus      = "true";
-				JutsuTabChild.is-visible      = "true";
-			"})
-			jutsutab=1
 
-		RefreshJutsus()
-			set hidden=1
-			winset(src,"JutsuTab.Grid","cells=0x0")
-			var/Row = 1
-		//	var/a=1
-			src<<output("","JutsuTab.Grid:1,1")
-			for(var/obj/Jutsus/O in src.jutsus)
-				Row++
-				src << output(O,"JutsuTab.Grid:1,[Row]")
 
 		HealthUp()
 			set hidden=1

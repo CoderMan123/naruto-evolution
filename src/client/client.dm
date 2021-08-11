@@ -18,7 +18,7 @@ client
 			Titlescreen.Child.left=Map;
 			Character.is-visible=false;
 			Inventory.is-visible=false;
-			JutsuTabChild.is-visible=false;
+			Jutsu.is-visible=false;
 			Settings.is-visible=false;
 			Browser.is-visible=false;
 			Leader.is-visible=false;

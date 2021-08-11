@@ -79,6 +79,20 @@ client
 				"})
 				usr<<output("<center>","Inventory.EquippedItemInfo")
 
+		ToggleJutsuPanel()
+			set hidden=1
+			if(winget(src, "Jutsu", "is-visible") == "false")
+				winset(src, "Jutsu", "is-visible=true")
+				src.UpdateJutsuPanel()
+
+			else
+				winset(src, null, {"
+					Jutsu.Name.text=""
+					Jutsu.Image.image=""
+					Jutsu.is-visible=false
+				"})
+				usr<<output("<center>","Jutsu.Info")
+
 		ToggleSettingsPanel()
 			set hidden=1
 			if(winget(src, "Settings", "is-visible") == "false")
@@ -488,13 +502,23 @@ client
 				winset(src,"Inventory.Ryo","text=\"[src.mob.ryo]\"")
 				winset(src,"Inventory.Titlebar","text=\"Inventory - [src.mob.contents.len]/[src.mob.maxitems]\"")
 				winset(src,"Inventory.Grid","cells=0x0")
-				var/Row = 1
-			//	src<<output("Ryo:","Equip.GridEquip:1,1")
-			//	src<<output("Items:","Equip.GridEquip:1,2")
-			//	src<<output("[src.items]/[src.maxitems]","Equip.GridEquip:2,2")
-				src<<output(" ","Inventory.Grid:1,1")
+
+				var/row = 1
+				src<<output("","Inventory.Grid:1,1")
 				for(var/obj/O in src.mob.contents)
-					Row++
-					src << output(O,"Inventory.Grid:1,[Row]")
-					src << output("<span style='text-align: right;'>[O.suffix]</span>","Inventory.Grid:2,[Row]")
-					//sleep(1)
+					row++
+					src << output(O,"Inventory.Grid:1,[row]")
+					src << output("<span style='text-align: right;'>[O.suffix]</span>","Inventory.Grid:2,[row]")
+
+		UpdateJutsuPanel()
+			set hidden=1
+			if(!src) return
+			if(winget(src, "Jutsu", "is-visible") == "true")
+				winset(src,"Jutsu.Total","text=\"Learned Jutsu: [src.mob.jutsus.len]\"")
+				winset(src,"Jutsu.Grid","cells=0x0")
+
+				var/row = 1
+				src<<output("","Jutsu.Grid:1,1")
+				for(var/obj/Jutsus/O in src.mob.jutsus)
+					row++
+					src << output(O,"Jutsu.Grid:1,[row]")
