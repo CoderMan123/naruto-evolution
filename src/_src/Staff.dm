@@ -583,40 +583,6 @@ mob/MasterGM/verb
 						Browser.is-visible = "true";
 					"})
 
-	GiveEverything()
-		set name = "Give Everything"
-		set category="Staff"
-		var/client/C = input("Who would you like to give everything?", "Give Everything") as null | anything in clients_online
-		if(C == "Cancel") return
-		if(src.ckey in administrators)
-			switch(src.client.Alert("Are you sure you want to give everything to [C.mob.name]?", "Give Everything", list("Yes", "No")))
-				if(1)
-					text2file("[src]([src.key]) has used give everything on [C.mob.name]([C.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
-					for(var/J in typesof(/obj/Jutsus) - list(/obj/Jutsus, /obj/Jutsus/Effects))
-						var/obj/Jutsus/jutsu = new J
-						if(jutsu.type in C.mob.jutsus) continue
-
-						C.mob.jutsus += jutsu
-						C.mob.jutsus_learned += jutsu.type
-						jutsu.owner = C.ckey
-						jutsu.level = 4
-						jutsu.uses = 100
-
-						C.mob.skillpoints = 100
-						C.mob.statpoints = 100
-						C.mob.maxchakra = 10000
-						C.mob.chakra = C.mob.maxchakra
-						C.mob.maxhealth = 10000
-						C.mob.health = C.mob.maxhealth
-						C.mob.strength = 150
-						C.mob.ninjutsu = 150
-						C.mob.genjutsu = 150
-						C.mob.defence = 150
-						C.mob.agility = 150
-						C.mob.level = 100
-
-					C.UpdateJutsuPanel()
-
 	Level_Boost()
 		set category = "Staff"
 		if(administrators.Find(src.ckey))

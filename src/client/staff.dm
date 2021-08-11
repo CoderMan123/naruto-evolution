@@ -346,3 +346,50 @@ mob
 								src.client << output("You have changed [M]'s rank from [src.rank] to [RANK_SEVEN_SWORDSMEN_LEADER].","Action.Output")
 								M.client << output("[src] has changed your rank from [src.rank] to [RANK_SEVEN_SWORDSMEN_LEADER].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] has changed [M]'s rank from [src.rank] to [RANK_SEVEN_SWORDSMEN_LEADER].", LOG_ADMINISTRATOR)
+
+			Give_Everything()
+				set category="Administrator"
+				var/client/C = input("Who would you like to give everything?", "Give Everything") as null | anything in clients_online
+				if(C == "Cancel") return
+				if(src.ckey in administrators)
+					if(C.ckey in administrators)
+						switch(src.client.Alert("Are you sure you want to give everything to [C.mob.name]?", "Give Everything", list("Yes", "No")))
+							if(1)
+								var/list/excluded_jutsu = list(/obj/Jutsus)
+								excluded_jutsu += typesof(/obj/Jutsus/Effects)
+
+								for(var/obj/Jutsus/jutsu in C.mob.jutsus)
+									excluded_jutsu += jutsu.type
+
+								for(var/type in typesof(/obj/Jutsus) - excluded_jutsu)
+									var/obj/Jutsus/jutsu = new type
+
+									C.mob.jutsus += jutsu
+									C.mob.jutsus_learned += jutsu.type
+									jutsu.owner = C.ckey
+									jutsu.level = 4
+									jutsu.uses = 100
+
+									C.mob.skillpoints = 100
+									C.mob.statpoints = 100
+									C.mob.maxchakra = 10000
+									C.mob.chakra = C.mob.maxchakra
+									C.mob.maxhealth = 10000
+									C.mob.health = C.mob.maxhealth
+									C.mob.strength = 150
+									C.mob.ninjutsu = 150
+									C.mob.genjutsu = 150
+									C.mob.defence = 150
+									C.mob.agility = 150
+									C.mob.level = 100
+
+								C.UpdateJutsuPanel()
+
+								src.client << output("You have used <u>Give Everything</u> on [C.mob.name].", "Action.Output")
+								C << output("[src.name] has used <u>Give Everything</u> on you.", "Action.Output")
+								text2file("[src]([src.key]) has used give everything on [C.mob.name]([C.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
+					else
+						text2file("[src]([src.key]) has attempted to use give everything on [C.mob.name]([C.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
+						src.client.Alert("You can only use this command on Administrators.")
+				else
+					src.client.Alert("This command is restricted to Administrators.")
