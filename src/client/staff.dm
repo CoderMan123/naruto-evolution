@@ -176,7 +176,7 @@ mob
 				if(M)
 					var/name = input("What would you like to rename [M] to?", "Change Name", M.name) as null|text
 					if(name)
-						if(M.client && names_taken.Find(name))
+						if(M.client && names_taken.Find(lowertext(name)))
 							alert("The name [name] is already in use.", "Change Name")
 							return 0
 						else
@@ -193,6 +193,7 @@ mob
 								M << "[src] has changed your name to <u>[name]</u>."
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has changed [M]'s ([M.ckey]) name to [name] ([M.ckey]).", LOG_ADMINISTRATOR)
 								M.SetName(name)
+								
 			Change_Ryo()
 				set category = "Administrator"
 				var/mob/M = input("Who would you like to give or take Ryo from?", "Change Ryo") as null|anything in mobs_online

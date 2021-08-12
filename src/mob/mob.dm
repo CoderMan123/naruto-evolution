@@ -166,7 +166,7 @@ mob
 					src.sbought += j.name
 
 			src.creation_date = world.realtime
-			names_taken += src.character
+			names_taken += lowertext(src.character)
 			src.name = src.character
 			src.rname = src.name
 
@@ -391,8 +391,8 @@ mob
 		SetName(var/Name, var/Color = src.name_color, var/Outline = 1)
 			if(Name)
 				if(src.client)
-					names_taken.Remove(src.name)
-					names_taken.Add(Name)
+					names_taken.Remove(lowertext(src.name))
+					names_taken.Add(lowertext(Name))
 				src.name = Name
 				src.rname = Name
 
