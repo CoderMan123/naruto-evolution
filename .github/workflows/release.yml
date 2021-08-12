@@ -5,7 +5,7 @@ on:
 
 jobs:
   Build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
           key: ${{ github.sha }}
 
   Release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [Build]
     steps:
       - name: Restore cache
@@ -56,7 +56,7 @@ jobs:
           gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --repo lavenblade/naruto-evolution-public
   
   Deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [Release]
     steps:
       - name: Restore build
