@@ -2,25 +2,52 @@ var/savefile_version = 1
 
 mob
 	proc/Save()
-		var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]).sav")
-		text2file("[time2text(world.realtime, "YYYY/MM/DD hh:mm:ss")] (Write)", LOG_SAVES)
-		text2file("\[O]: [F]...", LOG_SAVES)
-		if(src.Write(F, src.name)) return 1
+		if(src.client && mobs_online.Find(src))
+			var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]).sav")
+			text2file("[time2text(world.realtime, "YYYY/MM/DD hh:mm:ss")] (Write)", LOG_SAVES)
+			text2file("\[O]: [F]...", LOG_SAVES)
+			if(src.Write(F, src.name)) return 1
+			else return 0
 		else return 0
 
-	proc/Load(var/character)
-		var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav")
-		text2file("[time2text(world.realtime, "YYYY/MM/DD hh:mm:ss")] (Read)", LOG_SAVES)
-		text2file("\[O]: [F]...", LOG_SAVES)
-		if(src.Read(F, character)) return 1
-		else return 0
+	proc/Load(var/character, var/password)
+		if(fexists("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav.lk"))
+			src.client.Alert("You cannot load this character because it is currently in use.")
+			src.client.logging_in = 0
+			return 0
+
+		else
+			if(fexists("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav"))
+				var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav")
+				var/password_hash = sha1("[password][F["password_salt"]]")
+				if(password_hash != F["password"])
+					spawn() src.client.Alert("The character name or password you entered is incorrect.")
+					src.client.logging_in = 0
+					return 0
+				else
+					text2file("[time2text(world.realtime, "YYYY/MM/DD hh:mm:ss")] (Read)", LOG_SAVES)
+					text2file("\[O]: [F]...", LOG_SAVES)
+					if(src.Read(F, character, password)) return 1
+					else return 0
+			else
+				var/character_found = 0
+				for(var/directory in flist("[SAVEFILE_CHARACTERS]/"))
+					for(var/savefile in flist("[SAVEFILE_CHARACTERS]/[directory]/"))
+						if(findtext(savefile, character))
+							character_found = 1
+
+				if(character_found)spawn() src.client.Alert("The character you are trying access to not linked to your current BYOND account. Please login with the BYOND account that created this character.")
+				else spawn() src.client.Alert("The character name or password you entered is incorrect.")
+
+				src.client.logging_in = 0
+				return 0
 
 
 	Write(savefile/F, var/character)
 		if(src.client)
-			if(character)
-				var/list/exclude = list("icon", "icon_state", "overlays", "underlays", "alpha", "layer", "bound_width", "bound_height", "bound_x", "bound_y", "pixel_x", "pixel_y", "appearance_flags", "transform", "vis_contents", "filters", "view")
-				if(src.client && mobs_online.Find(src))
+			if(mobs_online.Find(src))
+				if(character)
+					var/list/exclude = list("icon", "icon_state", "overlays", "underlays", "alpha", "layer", "bound_width", "bound_height", "bound_x", "bound_y", "pixel_x", "pixel_y", "appearance_flags", "transform", "vis_contents", "filters", "view")
 					for(var/v in src.vars)
 						if(issaved(src.vars[v]))
 							if(initial(src.vars[v]) == src.vars[v])
@@ -44,11 +71,11 @@ mob
 					text2file("\[C]: [F]\n", LOG_SAVES)
 
 				else
-					text2file("\[E]: \[W]: invalid attempt to write savefile while not logged in.\n", LOG_SAVES)
+					text2file("\[E]: \[W]: null character when attempting to write to savefile.\n", LOG_SAVES)
 					text2file("\[C]: [F]\n", LOG_SAVES)
 					return 0
 			else
-				text2file("\[E]: \[W]: null character when attempting to write to savefile.\n", LOG_SAVES)
+				text2file("\[E]: \[W]: invalid attempt to write savefile while not logged in.\n", LOG_SAVES)
 				text2file("\[C]: [F]\n", LOG_SAVES)
 				return 0
 		else
@@ -58,26 +85,22 @@ mob
 		..()
 
 
-	Read(savefile/F, var/character)
+	Read(savefile/F, var/character, var/password)
 		if(src.client)
 			if(!mobs_online.Find(src))
 				if(character)
-					if(fexists("[F]"))
-						src.last_online = world.realtime
-						for(var/v in src.vars)
-							if(issaved(src.vars[v]))
-								if(!isnull(F[v]))
-									F[v] >> src.vars[v]
-									text2file("\[R]: [v] = [src.vars[v]]", LOG_SAVES)
-								else
-									F.dir.Remove(v)
-									text2file("\[R]: \[RM]: \[isnull()]:  [v] = [src.vars[v]]", LOG_SAVES)
+					src.last_online = world.realtime
+					for(var/v in src.vars)
+						if(issaved(src.vars[v]))
+							if(!isnull(F[v]))
+								F[v] >> src.vars[v]
+								text2file("\[R]: [v] = [src.vars[v]]", LOG_SAVES)
+							else
+								F.dir.Remove(v)
+								text2file("\[R]: \[RM]: \[isnull()]:  [v] = [src.vars[v]]", LOG_SAVES)
 
-						F["password_hotfix"] >> src.password
-						text2file("\[C]: [F]\n", LOG_SAVES)
-					else
-						spawn() src.client.Alert("The username you entered doesn't exist.")
-						return 0
+					F["password_hotfix"] >> src.password
+					text2file("\[C]: [F]\n", LOG_SAVES)
 				else
 					text2file("\[E]: \[R]: null character name when attempting to read from savefile.\n", LOG_SAVES)
 					text2file("\[C]: [F]\n", LOG_SAVES)

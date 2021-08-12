@@ -50,8 +50,8 @@ mob
 		if(src.client && !mobs_online.Find(src) && !src.client.logging_in)
 			src.client.logging_in = 1
 
-			var/character=uppercase(winget(src.client, "Titlescreen.Username", "text"), 1)
-			var/password=winget(src.client, "Titlescreen.Password", "text")
+			var/character = uppercase(winget(src.client, "Titlescreen.Username", "text"), 1)
+			var/password = winget(src.client, "Titlescreen.Password", "text")
 
 			if(!character && !password)
 				src.client.Alert("Please enter your character name and password.")
@@ -67,19 +67,8 @@ mob
 				return 0
 
 			winset(src,"Titlescreen.Password","text=")
-
-			if(fexists("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav.lk"))
-				src.client.Alert("You cannot load this character because it is currently in use.")
-				src.client.logging_in = 0
-				return 0
-
-			var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav")
-			var/password_hash = sha1("[password][F["password_salt"]]")
-			if(password_hash != F["password"])
-				src.client.Alert("The character name or password you entered is incorrect.")
-				src.client.logging_in = 0
-			else
-				src.Load(character)
+			
+			src.Load(character, password)
 
 	verb/CreateCharacter()
 		set hidden = 1
