@@ -189,11 +189,23 @@ mob
 									if(color) M.name_color = color
 
 							if(M)
-								src << "You have changed [M]'s name to <u>[name]</u>."
-								M << "[src] has changed your name to <u>[name]</u>."
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has changed [M]'s ([M.ckey]) name to [name] ([M.ckey]).", LOG_ADMINISTRATOR)
+								var/old_character = M.character
+								var/old_name = M.name
+								var/old_src_name = src.name
 								M.SetName(name)
-								
+								M.Save()
+								M.client.Save()
+								fdel("[SAVEFILE_CHARACTERS]/[copytext(M.ckey, 1, 2)]/[M.ckey] ([lowertext(old_character)]).sav")
+								src << output("You have changed [old_name]'s character name to <u>[name]</u>.", "Action.Output")
+								M << output("[old_src_name] has changed your character name to <u>[name]</u>.", "Action.Output")
+								spawn() M.client.Alert({"
+									[old_src_name] has changed your character name to <u>[name]</u>.
+									<br /><br />
+									<font color='#BE1A0E'><b><u>Warning:</u></b></font>
+									<br />
+									You will need to use your updated character name to login."})
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has changed [M]'s ([M.ckey]) character name to [name] ([M.ckey]).", LOG_ADMINISTRATOR)
+
 			Change_Ryo()
 				set category = "Administrator"
 				var/mob/M = input("Who would you like to give or take Ryo from?", "Change Ryo") as null|anything in mobs_online

@@ -395,6 +395,7 @@ mob
 					names_taken.Add(lowertext(Name))
 				src.name = Name
 				src.rname = Name
+				src.character = Name
 
 				if(src.name_overlays)
 					src.overlays -= src.name_overlays
