@@ -361,12 +361,7 @@ client
 
 		Changelog()
 			set hidden=1
-			if(winget(src, "Browser", "is-visible") == "false")
-				src << output(null, "Browser.Output")
-				src << browse("[CHANGELOG]")
-				winset(src, "Browser", "is-visible = true")
-			else
-				winset(src, "Browser", "is-visible = false")
+			src << link("https://github.com/IllusiveBIair/Naruto-Evolution-Community/releases")
 
 		Who()
 			set hidden = 1
