@@ -144,11 +144,9 @@ mob
 		src << world.GetAdvert()
 
 		for(var/mob/m in mobs_online)
-			if(administrators.Find(m))
+			if(administrators.Find(m.client.ckey))
 				if(clients_multikeying.Find(src.client))
-					var/multikey
-					if(clients_multikeying.Find(src.client)) multikey = " <sup>(Multikey)</sup>"
-					m << "[src][multikey] has logged in."
+					m << "[src] <sup>(Multikey)</sup> has logged in."
 				else
 					m << "[src] has logged in."
 			else
