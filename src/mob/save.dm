@@ -142,7 +142,18 @@ mob
 		mobs_online += src
 
 		src << world.GetAdvert()
-		world << "[src] has logged in."
+
+		for(var/mob/m in mobs_online)
+			if(administrators.Find(m))
+				if(clients_multikeying.Find(src.client))
+					var/multikey
+					if(clients_multikeying.Find(src.client)) multikey = " <sup>(Multikey)</sup>"
+					m << "[src][multikey] has logged in."
+				else
+					m << "[src] has logged in."
+			else
+				m << "[src] has logged in."
+
 		src << "Now speaking in: [src.client.channel]."
 		src << output("<br /><b><u>Basic Controls:</u></b><br><b>A:</b> Attack<br><b>S:</b> Use weapon<br><b>D:</b> Block/Special<br><b>1</b>,<b>2</b>,<b>3</b>,<b>4</b>,<b>5</b>,<b>Q</b>,<b>W</b>,<b>E:</b> Handseals<br><b>Space:</b> Execute handseals<br><b>Arrows:</b> Move<br><b>F1 - F10:</b> Hotslots<br><b>R:</b> Recharge chakra<br><b>I:</b> Inventory<br><b>O:</b> Statpanel<br><b>P:</b> Jutsus<br>Press the <b>\[Enter]</b> key to talk. Type <i>/help</i> to view commands that can be spoken verbally.<br />","Action.Output")
 

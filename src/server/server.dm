@@ -8,6 +8,7 @@ var/list/pixel_artists = list("illusiveblair")
 
 var/list/clients_connected = list()
 var/list/clients_online = list()
+var/list/clients_multikeying = list()
 var/list/mobs_online = list()
 var/list/names_taken = list()
 var/list/npcs_online = list()
@@ -44,6 +45,16 @@ world
 	Del()
 		src.Save()
 		..()
+	
+	proc/UpdateClientsMultikeying()
+		clients_multikeying = list()
+
+		for(var/client/source in clients_connected)
+			for(var/client/target in clients_connected)
+				if(source != target)
+					if(source.address == target.address || source.computer_id == target.computer_id)
+						clients_multikeying.Add(source)
+						clients_multikeying.Add(target)
 
 	proc/UpdateHUB()
 		set background = 1

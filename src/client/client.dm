@@ -14,6 +14,7 @@ client
 	New()
 		..()
 		clients_connected += src
+
 		winset(src, null, {"
 			Main.is-maximized=true
 			Main.Child.right=Titlescreen;
@@ -31,16 +32,20 @@ client
 			Main.UnlockChild.is-visible = "false";
 		"})
 
-		src.Load()
+		world.UpdateClientsMultikeying()
 
+		src.Load()
 		spawn() src.mob.Playtime()
 
 	Del()
 		src.mob.Save()
 		src.Save()
+
 		mobs_online -= src.mob
 		clients_online -= src
 		clients_connected -= src
+
+		world.UpdateClientsMultikeying()
 		..()
 
 	Topic(href, href_list)

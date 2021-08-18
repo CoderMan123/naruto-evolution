@@ -371,19 +371,35 @@ client
 				for(var/client/C)
 					if(C)
 						online++
+
 						var/obj/Symbols/Village/V = new(C.mob)
 						var/obj/Symbols/Rank/R = new(C.mob)
+
 						var/Faction/F = new()
 						F.name="-"
+
+						var/multikey
+						if(clients_multikeying.Find(C)) multikey = "<sup>(Multikey)</sup>"
+
 						if(C.mob.Faction) F=C.mob.Faction
-						players += {"
+						if(src.ckey in administrators)
+							players += {"
 							<tr>
-								<td>[C.mob.name]</td>
+								<td>[C.mob.name] ([C.ckey]) [multikey]</td>
 								<td>\icon[V] [C.mob.village]</td>
 								<td>\icon[R] [C.mob.rank]</td>
 								<td>[F.name]</td>
 							</tr>
 						"}
+						else
+							players += {"
+								<tr>
+									<td>[C.mob.name]</td>
+									<td>\icon[V] [C.mob.village]</td>
+									<td>\icon[R] [C.mob.rank]</td>
+									<td>[F.name]</td>
+								</tr>
+							"}
 
 				var/html = {"
 					<!doctype html>
