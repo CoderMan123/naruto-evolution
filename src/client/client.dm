@@ -4,6 +4,10 @@ client
 	var/tmp
 		channel = "Local"
 		logging_in = 0
+
+	var/tmp/list
+		skill_tree_objects = list()
+
 	var
 		last_mission
 
@@ -20,6 +24,7 @@ client
 			Character.is-visible=false;
 			Inventory.is-visible=false;
 			Jutsu.is-visible=false;
+			SkillTree.is-visible=false;
 			Settings.is-visible=false;
 			Browser.is-visible=false;
 			Leader.is-visible=false;

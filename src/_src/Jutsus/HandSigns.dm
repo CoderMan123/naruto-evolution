@@ -64,7 +64,6 @@ obj
 mob/var/list/sbought = list()
 obj
 	var/Sprice=1
-	var/reqs = list()
 	var/starterjutsu=0
 	var/sharin=0
 	Jutsus
@@ -74,6 +73,7 @@ obj
 		var/Element2
 		var/Kekkai
 		var/Specialist
+		var/list/reqs = list()
 		//var/Damage this might be needed who knows.
 		icon='Misc Effects.dmi'
 		layer=10
@@ -317,7 +317,8 @@ obj
 										D.owner=usr.ckey
 							if(src.name <> "Dust Particle"&&src.name <> "Kakuzu"&&src.name <> "Ice" &&src.name <> "Spider" && src.name <> "Deidara" && src.name <> "Puppeteer" && src.name <> "Sand" && src.name <> "Paper Control")
 								usr<<output("Successfully learned [src.name]. Check your Jutsus list for information on the seals.","Action.Output")
-							usr.updateskills()
+							
+							if(usr.client) usr.client.UpdateSkillTree()
 
 				else
 					usr<<output("You do not meet the requirements for this technique.","Action.Output")
