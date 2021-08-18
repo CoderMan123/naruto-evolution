@@ -382,7 +382,7 @@ client
 						if(clients_multikeying.Find(C)) multikey = "<sup>(Multikey)</sup>"
 
 						if(C.mob.Faction) F=C.mob.Faction
-						if(src.ckey in administrators)
+						if(administrators.Find(src.ckey) || moderators.Find(src.ckey))
 							players += {"
 							<tr>
 								<td>[C.mob.name] ([C.ckey]) [multikey]</td>
