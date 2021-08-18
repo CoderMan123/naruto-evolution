@@ -306,9 +306,10 @@ window "Character"
 	elem "Character"
 		type = MAIN
 		pos = 281,0
-		size = 300x589
+		size = 300x637
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -317,10 +318,12 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x651
+		inner-size = 300x637
 	elem "Background"
 		type = LABEL
 		pos = 0,21
-		size = 300x568
+		size = 300x616
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = #191919
@@ -329,7 +332,7 @@ window "Character"
 		text = ""
 	elem "Precision"
 		type = LABEL
-		pos = 151,456
+		pos = 151,504
 		size = 46x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -342,7 +345,7 @@ window "Character"
 		text = "10"
 	elem "PrecisionExperienceBar"
 		type = BAR
-		pos = 151,480
+		pos = 151,528
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -357,7 +360,7 @@ window "Character"
 		value = 10
 	elem "PrecisionExperience"
 		type = LABEL
-		pos = 199,456
+		pos = 199,504
 		size = 98x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -370,7 +373,7 @@ window "Character"
 		text = "1/10"
 	elem "label10"
 		type = LABEL
-		pos = 151,432
+		pos = 151,480
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -384,7 +387,7 @@ window "Character"
 		text = "Precision"
 	elem "SkillPoints"
 		type = LABEL
-		pos = 3,564
+		pos = 3,612
 		size = 294x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -397,7 +400,7 @@ window "Character"
 		text = "0"
 	elem "label9"
 		type = LABEL
-		pos = 3,540
+		pos = 3,588
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -411,7 +414,7 @@ window "Character"
 		text = "Skill Points"
 	elem "Gen"
 		type = LABEL
-		pos = 3,456
+		pos = 3,504
 		size = 46x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -424,7 +427,7 @@ window "Character"
 		text = "10"
 	elem "GenEXPBar"
 		type = BAR
-		pos = 3,480
+		pos = 3,528
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -439,7 +442,7 @@ window "Character"
 		value = 10
 	elem "GenEXP"
 		type = LABEL
-		pos = 51,456
+		pos = 51,504
 		size = 98x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -452,7 +455,7 @@ window "Character"
 		text = "1/10"
 	elem "label37"
 		type = LABEL
-		pos = 3,432
+		pos = 3,480
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -464,9 +467,36 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "Genjutsu"
+	elem "Name"
+		type = LABEL
+		pos = 3,48
+		size = 294x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "Lavenblade"
+	elem "label16"
+		type = LABEL
+		pos = 3,24
+		size = 294x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Name"
 	elem "Nin"
 		type = LABEL
-		pos = 151,396
+		pos = 151,444
 		size = 46x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -479,7 +509,7 @@ window "Character"
 		text = "10"
 	elem "NinEXP"
 		type = LABEL
-		pos = 199,396
+		pos = 199,444
 		size = 98x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -492,7 +522,7 @@ window "Character"
 		text = "1/10"
 	elem "Tai"
 		type = LABEL
-		pos = 3,396
+		pos = 3,444
 		size = 46x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -505,7 +535,7 @@ window "Character"
 		text = "10"
 	elem "NinEXPBar"
 		type = BAR
-		pos = 151,420
+		pos = 151,468
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -520,7 +550,7 @@ window "Character"
 		value = 10
 	elem "label19"
 		type = LABEL
-		pos = 151,372
+		pos = 151,420
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -534,7 +564,7 @@ window "Character"
 		text = "Ninjutsu"
 	elem "TaiEXPBar"
 		type = BAR
-		pos = 3,420
+		pos = 3,468
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -549,7 +579,7 @@ window "Character"
 		value = 10
 	elem "TaiEXP"
 		type = LABEL
-		pos = 51,396
+		pos = 51,444
 		size = 98x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -562,7 +592,7 @@ window "Character"
 		text = "1/10"
 	elem "label17"
 		type = LABEL
-		pos = 3,372
+		pos = 3,420
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -576,7 +606,7 @@ window "Character"
 		text = "Taijutsu"
 	elem "Agi"
 		type = LABEL
-		pos = 151,336
+		pos = 151,384
 		size = 46x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -589,7 +619,7 @@ window "Character"
 		text = "10"
 	elem "AgiEXP"
 		type = LABEL
-		pos = 199,336
+		pos = 199,384
 		size = 98x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -602,7 +632,7 @@ window "Character"
 		text = "1/10"
 	elem "label34"
 		type = LABEL
-		pos = 3,288
+		pos = 3,336
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -616,7 +646,7 @@ window "Character"
 		text = "Stats"
 	elem "label33"
 		type = LABEL
-		pos = 3,204
+		pos = 3,252
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -630,7 +660,7 @@ window "Character"
 		text = "Attributes"
 	elem "Def"
 		type = LABEL
-		pos = 3,336
+		pos = 3,384
 		size = 46x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -643,7 +673,7 @@ window "Character"
 		text = "10"
 	elem "StatPoints"
 		type = LABEL
-		pos = 3,516
+		pos = 3,564
 		size = 294x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -656,7 +686,7 @@ window "Character"
 		text = "0"
 	elem "label31"
 		type = LABEL
-		pos = 3,492
+		pos = 3,540
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -670,7 +700,7 @@ window "Character"
 		text = "Stat Points"
 	elem "AgiEXPBar"
 		type = BAR
-		pos = 151,360
+		pos = 151,408
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -685,7 +715,7 @@ window "Character"
 		value = 10
 	elem "label29"
 		type = LABEL
-		pos = 151,312
+		pos = 151,360
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -699,7 +729,7 @@ window "Character"
 		text = "Agility"
 	elem "DefEXPBar"
 		type = BAR
-		pos = 3,360
+		pos = 3,408
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -714,7 +744,7 @@ window "Character"
 		value = 10
 	elem "DefEXP"
 		type = LABEL
-		pos = 51,336
+		pos = 51,384
 		size = 98x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -727,7 +757,7 @@ window "Character"
 		text = "1/10"
 	elem "label27"
 		type = LABEL
-		pos = 3,312
+		pos = 3,360
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -741,7 +771,7 @@ window "Character"
 		text = "Defense"
 	elem "ChakraBar"
 		type = BAR
-		pos = 151,276
+		pos = 151,324
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -756,7 +786,7 @@ window "Character"
 		value = 10
 	elem "Chakra"
 		type = LABEL
-		pos = 151,252
+		pos = 151,300
 		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -769,7 +799,7 @@ window "Character"
 		text = "1000 / 1000"
 	elem "button2"
 		type = BUTTON
-		pos = 275,252
+		pos = 275,300
 		size = 22x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -783,7 +813,7 @@ window "Character"
 		is-flat = true
 	elem "label25"
 		type = LABEL
-		pos = 151,228
+		pos = 151,276
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -797,7 +827,7 @@ window "Character"
 		text = "Chakra"
 	elem "HealthBar"
 		type = BAR
-		pos = 3,276
+		pos = 3,324
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -812,7 +842,7 @@ window "Character"
 		value = 10
 	elem "Health"
 		type = LABEL
-		pos = 3,252
+		pos = 3,300
 		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -825,7 +855,7 @@ window "Character"
 		text = "1000 / 1000"
 	elem "button1"
 		type = BUTTON
-		pos = 127,252
+		pos = 127,300
 		size = 22x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -839,7 +869,7 @@ window "Character"
 		is-flat = true
 	elem "label23"
 		type = LABEL
-		pos = 3,228
+		pos = 3,276
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -853,7 +883,7 @@ window "Character"
 		text = "Health"
 	elem "EXPBar"
 		type = BAR
-		pos = 3,192
+		pos = 3,240
 		size = 294x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -868,7 +898,7 @@ window "Character"
 		value = 60
 	elem "EXP"
 		type = LABEL
-		pos = 3,168
+		pos = 3,216
 		size = 294x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -881,7 +911,7 @@ window "Character"
 		text = "6/10"
 	elem "label15"
 		type = LABEL
-		pos = 3,144
+		pos = 3,192
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -895,7 +925,7 @@ window "Character"
 		text = "Experience"
 	elem "Level"
 		type = LABEL
-		pos = 3,120
+		pos = 3,168
 		size = 294x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -908,7 +938,7 @@ window "Character"
 		text = "1"
 	elem "label13"
 		type = LABEL
-		pos = 3,96
+		pos = 3,144
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -920,9 +950,9 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "Level"
-	elem "label12"
+	elem "VillageImage"
 		type = LABEL
-		pos = 109,72
+		pos = 109,120
 		size = 32x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -930,13 +960,12 @@ window "Character"
 		font-size = 10
 		text-color = #c8c8c8
 		background-color = #414141
-		is-disabled = true
 		border = line
 		saved-params = ""
 		text = ""
-	elem "label11"
+	elem "RankImage"
 		type = LABEL
-		pos = 75,72
+		pos = 75,120
 		size = 32x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -944,13 +973,12 @@ window "Character"
 		font-size = 10
 		text-color = #c8c8c8
 		background-color = #414141
-		is-disabled = true
 		border = line
 		saved-params = ""
 		text = ""
 	elem "Village"
 		type = LABEL
-		pos = 143,72
+		pos = 143,120
 		size = 154x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -963,7 +991,7 @@ window "Character"
 		text = "Hidden Leaf ≡ Academy Student"
 	elem "Avatar"
 		type = LABEL
-		pos = 3,24
+		pos = 3,72
 		size = 70x70
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -971,9 +999,9 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = ""
-	elem "Name"
+	elem "Clan"
 		type = LABEL
-		pos = 75,48
+		pos = 75,96
 		size = 222x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -983,7 +1011,7 @@ window "Character"
 		background-color = #414141
 		border = line
 		saved-params = ""
-		text = "Lavenblade"
+		text = "Hyuuga"
 	elem "Titlebar"
 		type = LABEL
 		pos = 0,0
@@ -1016,7 +1044,7 @@ window "Character"
 		is-flat = true
 	elem "label2"
 		type = LABEL
-		pos = 75,24
+		pos = 75,72
 		size = 222x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -1027,7 +1055,7 @@ window "Character"
 		is-disabled = true
 		border = line
 		saved-params = ""
-		text = "Name"
+		text = "Clan"
 	elem "label18"
 		type = LABEL
 		pos = 3,3
@@ -2236,7 +2264,6 @@ window "SkillTree"
 		size = 704x737
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2244,8 +2271,6 @@ window "SkillTree"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		outer-size = 718x751
-		inner-size = 704x737
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2286,7 +2311,6 @@ window "SkillTree"
 		size = 698x710
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "SkillTree-Progress"
@@ -2325,7 +2349,6 @@ window "SkillTree-Progress"
 		size = 693x704
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -2333,8 +2356,6 @@ window "SkillTree-Progress"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 707x718
-		inner-size = 693x704
 	elem "Background"
 		type = LABEL
 		pos = 0,0

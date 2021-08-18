@@ -98,7 +98,7 @@ client
 			if(src.mob.Tutorial < 3)
 				src << output("You cannot open the skill tree during this stage of the tutorial.", "Action.Output")
 				return
-			
+
 			// This completes the step of the tutorial where it asks you to open the skill tree.
 			if(!src.mob.tutorialskilltree) src.mob.tutorialskilltree = 1
 
@@ -490,10 +490,23 @@ client
 		UpdateCharacterPanel()
 			if(!src) return
 			if(winget(src, "Character", "is-visible") == "true")
+				var/icon/mob_image// = new(src.mob.icon, src.mob.icon_state)
+
+				var/obj/Symbols/Village/village = new(src.mob)
+				var/icon/village_image = new(village.icon, icon_state = village.icon_state)
+
+				var/obj/Symbols/Rank/rank = new(src.mob)
+				var/icon/rank_image = new(rank.icon, icon_state = rank.icon_state)
+
 				winset(src, null, {"
-					Character.Avatar.image     				= "\icon[src.mob.icon]"
+					Character.Avatar.image     				= "\ref[fcopy_rsc(mob_image)]"
+					Character.Avatar.image-mode				= "center"
+					Character.Avatar.keep-aspect			= "true"
 					Character.Name.text        				= "[src.mob.name]"
+					Character.Clan.text        				= "[src.mob.Clan]"
 					Character.Village.text     				= "[src.mob.village] ≡ [src.mob.rank]"
+					Character.VillageImage.image     		= "\ref[fcopy_rsc(village_image)]"
+					Character.RankImage.image     			= "\ref[fcopy_rsc(rank_image)]"
 					Character.Level.text       				= "[src.mob.level]"
 					Character.EXP.text         				= "[src.mob.exp]/[src.mob.maxexp]"
 					Character.EXPBar.value     				= "[round(src.mob.exp/src.mob.maxexp*100)]"
@@ -548,7 +561,7 @@ client
 				for(var/obj/Jutsus/O in src.mob.jutsus)
 					row++
 					src << output(O,"Jutsu.Grid:1,[row]")
-		
+
 		UpdateSkillTree()
 			if(!src) return
 			for(var/obj/Jutsus/jutsu in src.skill_tree_objects)
@@ -654,10 +667,10 @@ client
 					else
 						instance_placement_x = 1
 						instance_placement_y++
-					
+
 					var/instance_loading_percent_next = round(instance_loading_counter / instance_map.len * 100, 1)
 					if(instance_loading_percent < instance_loading_percent_next)
 						instance_loading_percent = instance_loading_percent_next
 						winset(src, null, "SkillTree-Progress.Bar.value='[instance_loading_percent]'; SkillTree-Progress.Status.text='Loading... [instance_loading_percent]%'")
-				
+
 				winset(src, null, "SkillTree.Loading.is-visible='false'")
