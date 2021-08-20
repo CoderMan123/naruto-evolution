@@ -65,6 +65,7 @@ mob
 						src.health = 0
 					src.sleephits++
 				src.UpdateHMB()
+				src.UpdateBars()
 				spawn()
 					var/colour = colour2html(colortype)
 					DamageOverlay(src, damage, colour)
