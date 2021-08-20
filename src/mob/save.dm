@@ -127,7 +127,7 @@ mob
 			src.verbs -= typesof(/mob/Kage/verb)
 
 			if(src.rank == RANK_HOKAGE || src.rank == RANK_KAZEKAGE)
-				src.rank == RANK_GENIN
+				src.rank = RANK_GENIN
 
 			for(var/obj/Inventory/Clothing/HeadWrap/HokageHat/S in src.contents)
 				S.loc = null
