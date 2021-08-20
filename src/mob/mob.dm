@@ -239,7 +239,6 @@ mob
 			src.hbar.Add(Mana)
 			for(var/obj/Screen/healthbar/HB in src.hbar) src.overlays+=HB
 			for(var/obj/Screen/manabar/HB in src.hbar) src.overlays+=HB
-			spawn() src.UpdateBars()
 			spawn() src.UpdateHMB()
 
 			if(src.client.Alert("Do you wish to skip the tutorial? Only do this if you are familiar with the game. If you skip this you can't come back without making a new account.", "Skip Tutorial?", list("Yes", "No")) == 1)
@@ -490,7 +489,6 @@ mob
 				src.health += round((src.maxhealth/100) * src.healthregenmod)
 				src.health = min(src.health, src.maxhealth)
 				if(src.rest) src.healthregenmod -= 2
-				spawn() src.UpdateBars()
 				spawn() src.UpdateHMB()
 				sleep(10)
 

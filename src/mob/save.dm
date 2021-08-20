@@ -205,7 +205,6 @@ mob
 		src.hbar.Add(Mana)
 		for(var/obj/Screen/healthbar/HB in src.hbar) src.overlays+=HB
 		for(var/obj/Screen/manabar/HB in src.hbar) src.overlays+=HB
-		spawn() src.UpdateBars()
 		spawn() src.UpdateHMB()
 		spawn() src.UpdateSlots()
 		spawn() src.client.FlashExperienceLock()
