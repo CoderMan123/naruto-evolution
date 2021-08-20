@@ -72,6 +72,9 @@ world
 		F = new(SAVEFILE_NAMES)
 		F["names_taken"] << names_taken
 
+		F = new(SAVEFILE_KAGES)
+		F["kages"] << Kages
+
 		F = new(SAVEFILE_SQUADS)
 		F["squads"] << squads
 
@@ -116,6 +119,9 @@ world
 
 		F = new(SAVEFILE_SQUADS)
 		if(F["squads"]) F["squads"] >> squads
+
+		F = new(SAVEFILE_KAGES)
+		if(F["kages"]) F["kages"] >> Kages
 
 		F = new(SAVEFILE_WORLD)
 		if(!isnull(F["Factions"])) F["Factions"] >> Factionnames

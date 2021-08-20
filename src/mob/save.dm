@@ -122,6 +122,25 @@ mob
 		spawn() src.HealthRegeneration()
 		spawn() src.WeaponryDelete()
 		src.AddAdminVerbs()
+
+		if(Kages["Hidden Leaf"] != src.ckey && Kages["Hidden Sand"] != src.ckey)
+			src.verbs -= typesof(/mob/Kage/verb)
+
+			if(src.rank == RANK_HOKAGE || src.rank == RANK_KAZEKAGE)
+				src.rank == RANK_GENIN
+
+			for(var/obj/Inventory/Clothing/HeadWrap/HokageHat/S in src.contents)
+				S.loc = null
+				
+			for(var/obj/Inventory/Clothing/Robes/HokageRobe/S in src.contents)
+				S.loc = null
+			
+			for(var/obj/Inventory/Clothing/HeadWrap/KazekageHat/S in src.contents)
+				S.loc = null
+
+			for(var/obj/Inventory/Clothing/Robes/KazekageRobe/S in src.contents)
+				S.loc = null
+
 		if(src.MuteTime) spawn() src.Muted()
 
 		for(var/obj/Logos/Naruto_Evolution/L in src.client.screen) src.client.screen -= L

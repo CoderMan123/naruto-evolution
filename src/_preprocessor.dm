@@ -7,6 +7,7 @@
 #define SAVEFILE_CHARACTERS "saves/characters"
 #define SAVEFILE_CLIENT "saves/clients"
 #define SAVEFILE_SQUADS "saves/squads.sav"
+#define SAVEFILE_KAGES "saves/kages.sav"
 
 #define LOG_ERROR "logs/error.txt"
 #define LOG_STAFF "logs/staff.txt"
