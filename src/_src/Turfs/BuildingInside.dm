@@ -290,13 +290,13 @@ turf
 			WarpToMapLoadSpawn
 				Entered(mob/M)
 					if(istype(M,/mob) && M.client)
-						if(M.Tutorial!=6 || M.strength < 5 || M.ninjutsu < 5 || M.genjutsu < 5)//TUT
-							M<<output("Hey, hold your horses! You haven't finished the tutorial yet. Make sure you speak with all the NPCs, do a weeding mission, level Tai Nin and Gen to atleast 5, and take down atleast one rogue shinobi. ","Action.Output")
+						if(M.Tutorial!=6)//TUT
+							M<<output("Hey, hold your horses! You haven't finished the tutorial yet. Make sure you go back and speak with the NPCs in order starting from the room you arrived in!","Action.Output")
 							if(M.lastloc)M.loc=M.lastloc
 							return
 						else
 							M.Tutorial=7
-							M<<output("Congratulations! You've finished the tutorial!","Action.Output")
+							M<<output("Congratulations! You've finished the tutorial! Make sure to ask other players if you need help either in your village chat or on the discord! Look out for the bells icon next to someone name when they speak in chat, that means they're a Jounin and happy to help!","Action.Output")
 						M.loc=M.MapLoadSpawn()
 		layer=TURF_LAYER+1
 		Senders

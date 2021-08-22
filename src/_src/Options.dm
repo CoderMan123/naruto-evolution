@@ -6,8 +6,6 @@ mob
 			src<<"/World -- Shows the current servers IP address."
 			src<<"/Mute -- Vote to mute a player."
 			src<<"/Boot -- Vote to boot an afk player."
-			src<<"Options->Arena Challenge -- Challenge a player."
-			src<<"Options->Who's Online -- Check who is online."
 			src<<"/Help -- View all commands."
 	//	ChangeNameColor()
 	//		namecolor = input("What color will your name be?") as null|color
@@ -60,8 +58,8 @@ mob
 			if(M.client.Alert("Fight [src]?","Duel",list("Yes","No")) == 1)
 				src.opponent=M
 				M.opponent=src
-				M.loc=locate(116,99,3)
-				src.loc=locate(103,99,3)
+				M.loc=locate(172,149,8)
+				src.loc=locate(185,149,8)
 				world<<"[M] accepts challenge from [src]!"
 				src.dueling=1
 				M.dueling=1

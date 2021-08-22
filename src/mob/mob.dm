@@ -187,7 +187,8 @@ mob
 				Main.Child.right=Map;
 			"})
 
-			src.loc = locate(39,158,14)
+			src.loc = locate(136,175,7)
+			src.dir = NORTH
 			src.client.eye = src
 			src.client.perspective = MOB_PERSPECTIVE
 

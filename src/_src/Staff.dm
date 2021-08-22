@@ -282,7 +282,7 @@ mob/Moderator/verb/
 	AdminTele()
 		set category = "Staff"
 		set name = "Enter Admin Hideout"
-		usr.loc = locate(31,38,14)
+		usr.loc = locate(152,162,9)
 	Reboot()
 		set category="Staff"
 		world<<output("World is rebooting.","Action.Output")

@@ -1,7 +1,7 @@
 var/list/VillageDefenders=list()
 var/list/VillageAttackers=list()
-var/list/VillagePoints=list("Hidden Leaf"=1,"Hidden Sand"=0,"Hidden Mist"=0,"Hidden Sound"=0,"Hidden Rock"=0,"Akatsuki"=0,"Seven Swordsmen"=0,"Anbu Root"=0)
-var/list/VillagesInGame=list("Hidden Leaf","Hidden Sand","Hidden Mist","Hidden Sound","Hidden Rock","Akatsuki","Seven Swordsmen","Anbu Root")
+var/list/VillagePoints=list("Hidden Leaf"=0,"Hidden Sand"=0,"Hidden Mist"=0,"Hidden Sound"=0,"Hidden Rock"=0,"Akatsuki"=0,"Seven Swordsmen"=0,"Anbu Root"=0)
+var/list/VillagesInGame=list("Hidden Leaf","Hidden Sand","Akatsuki")
 mob/var/tmp/choosing=0
 mob
 	Kage
@@ -50,7 +50,7 @@ mob
 				if(VillageAttackers.Find(usr.village)) {usr<<output("<br><center><b>Your village is already in a war!</b><br>","Action.Output");return}
 				if(usr.choosing) return
 				usr.choosing=1
-				var/list/warVillages=list("Hidden Leaf","Hidden Sand")//"Hidden Mist","Hidden Sound","Hidden Rock","Akatsuki","Seven Swordsmen","Anbu Root")
+				var/list/warVillages=list("Hidden Leaf","Hidden Sand","Akatsuki")//"Hidden Mist","Hidden Sound","Hidden Rock","Akatsuki","Seven Swordsmen","Anbu Root")
 				if(warVillages.Find(usr.village)) warVillages-="[usr.village]"
 				var/input1=input("Declare war with what Village?")in warVillages+"Cancel"
 				if(input1=="Cancel") {usr.choosing=0;return}

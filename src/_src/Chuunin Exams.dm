@@ -97,7 +97,7 @@ proc/ChuuninExam()
 		for(var/mob/M in mobs_online)
 			if(M.cheww==1)
 				M.cheww=0
-				M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
+				M.loc = pick(block(locate(73,10,8),locate(198,74,8)))
 				if(count==0)
 					var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
 					O.loc = M
@@ -257,8 +257,8 @@ obj/ChuuninExam/
 					if(istype(X,/obj/ChuuninExam/Scrolls/EarthScroll))EarthScroll1=1
 					if(istype(X,/obj/ChuuninExam/Scrolls/HeavenScroll))HeavenScroll1=1
 				if(HeavenScroll1&&EarthScroll1)
-					if(prob(50)) usr.loc=locate(144,44,4)
-					else usr.loc=locate(115,44,4)
+					if(prob(50)) usr.loc=locate(163,93,8)
+					else usr.loc=locate(198,93,8)
 					world<<output("<i>[usr] has made it past the first portion of the Chuunin exam!</i>","Action.Output")
 					usr<<output("Do not start killing. This is a tournament match.","Action.Output")
 					for(var/obj/ChuuninExam/Scrolls/S in usr)del(S)

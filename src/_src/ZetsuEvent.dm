@@ -42,24 +42,24 @@ proc/ZetsuEventEnd(mob/M)
 		if(zetsu_count < 1 || akat_lives_left < 1)
 			if(akat_lives_left < 1)
 				world << output ("<b><font color= #971e1e>The Akatsuki have suffered too many loses, the Akatsuki have failed!</Font></b>", "Action.Output")
-				if(squad)	
+				if(squad)
 					for(var/mob/m in mobs_online)
 						if(squad.members[m.client.ckey])
 							m << output ("[M.name] has killed an Akatsuki member leading to their retreat. Your squad has been awarded 15 bonus experience for their efforts!", "Action.Output")
 							m.exp += 15
 							m.Levelup()
-				else 
+				else
 					M.exp +=15
 					M.Levelup()
 			if(zetsu_count < 1)
 				world << output("<b><font color= #971e1e>[M.name] has slain the last of the White Zetsu! The Akatsuki's assault has been halted.. for now.</Font></b>","Action.Output")
-				if(squad)	
+				if(squad)
 					for(var/mob/m in mobs_online)
 						if(squad.members[m.client.ckey])
 							m << output ("[M.name] has killed the last Zetsu, the Akatsuki have failed! Your squad gains 20 extra exp for your efforts!", "Action.Output")
 							m.exp += 20
 							m.Levelup()
-				else 
+				else
 					M.exp +=20
 					M.Levelup()
 			if(leaf_points == sand_points)
@@ -83,24 +83,26 @@ proc/ZetsuEventEnd(mob/M)
 		if(vill_lives_left < 1)
 			world << output ("<b><font color= #971e1e>The Shinobi Alliance have suffered too many loses, the Akatsuki have won the battle and earned themselves 30 experience for their success!</Font></b>", "Action.Output")
 			M << output ("[M.name] has killed another shinobi. You have slain enough of these fools for now. Your squad has been awarded 10 bonus experience for their efforts!", "Action.Output")
-			if(squad)	
+			if(squad)
 				for(var/mob/m in mobs_online)
 					if(squad.members[m.client.ckey])
 						m.exp += 10
 						m.Levelup()
-			else 
+			else
 				M.exp +=10
 				M.Levelup()
 
 			for(var/mob/m in mobs_online)
-				var/squad/allsquads = m.GetSquad()	
+				var/squad/allsquads = m.GetSquad()
 				spawn() m.client.UpdateCharacterPanel()
 				if(allsquads)
 					spawn() allsquads.RefreshMember(m)
-			
+
 		for(var/mob/npc/combat/white_zetsu/m)
 			sleep(1)
 			del m
+
+		zetsu_count = 0
 
 obj
 	zetsuspawn

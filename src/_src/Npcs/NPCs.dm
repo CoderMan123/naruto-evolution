@@ -76,7 +76,7 @@ mob/npc
 			usr.move=0
 			var/list/Options=list()
 			for(var/obj/Inventory/Clothing/C in world)
-				if(C.loc==locate(199,199,12)) Options["[C.name]-[C.Cost] Ryo"]=C
+				if(C.loc==locate(199,199,9)) Options["[C.name]-[C.Cost] Ryo"]=C
 			var/obj/Choice = usr.CustomInput("Purchase","What would you like to purchase?",Options + "Cancel",0)
 			if(Choice.name=="Cancel")
 				usr.move=1
@@ -118,7 +118,7 @@ mob/npc
 			usr.move=0
 			var/list/Options=list()
 			for(var/obj/Inventory/Weaponry/C in world)
-				if(C.loc==locate(199,199,12)) Options["[C.name]-[C.Cost] Ryo"]=C
+				if(C.loc==locate(199,199,9)) Options["[C.name]-[C.Cost] Ryo"]=C
 			var/obj/Choice=usr.CustomInput("Purchase","What would you like to purchase?",Options + "Cancel")
 			if(Choice.name=="Cancel")
 				usr.move=1

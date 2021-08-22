@@ -744,7 +744,7 @@ mob
 	//	stat(src.jutsus)
 		//statpanel("Clothing Collection", src.storage)
 		//statpanel("Quest Items", src.QuestItems)
-	
+
 	New()
 		..()
 		src.overlays+=/obj/MaleParts/UnderShade
@@ -755,7 +755,6 @@ mob
 			if(M.fightlayer==src.fightlayer)
 				if(src.henge==4||src.henge==5)src.HengeUndo()
 			if(istype(O,/turf))
-				var/turf/T=O
 				src.HengeUndo()
 				if(O.density&&src.icon_state=="push")
 				//	O.overlays+=image('Misc Effects.dmi',O,"crack[number]")
@@ -767,26 +766,6 @@ mob
 					Death(src)
 					src.icon_state=""
 
-				if(istype(O,/turf/Ground/Cliff/Edges/Bottom)||istype(O,/turf/Ground/Cliff))
-					if(!src.copy&&O:Climbable)
-						if(src.dashable==2)
-							if(src.mountainkit)
-								src.loc=locate(T.x,T.y,T.z)
-								src.canattack=0
-								src.firing=1
-								src.icon_state="climbS"
-								src.copy="Climb"
-								src.arrow="L"
-								var/obj/WArrow = image('Misc Effects.dmi',src,icon_state="arrow",layer=99)
-								WArrow.pixel_x=-64
-								WArrow.dir=WEST
-								src.ArrowTasked=WArrow
-								src<<WArrow
-							else
-								if(mountainwalk)src.loc=locate(T.x,T.y,T.z)
-								else ..()
-					else if(src.copy=="Climb")src.loc=locate(T.x,T.y,T.z)
-				else ..()
 
 mob
 	New()

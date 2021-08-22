@@ -56,6 +56,7 @@
 #define FILE_DIR "src/mob/NPCs/Animals"
 #define FILE_DIR "src/mob/NPCs/Animals/Critters"
 #define FILE_DIR "src/obj"
+#define FILE_DIR "src/obj/map-objects"
 #define FILE_DIR "src/obj/mission-objects"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
@@ -183,6 +184,7 @@
 #include "src\mob\save.dm"
 #include "src\mob\squad.dm"
 #include "src\mob\NPCs\Animals\Animals.dm"
+#include "src\obj\map-objects.dm"
 #include "src\obj\mission-objects.dm"
 #include "src\server\global.dm"
 #include "src\server\server.dm"

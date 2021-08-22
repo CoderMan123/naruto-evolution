@@ -18,9 +18,23 @@ mob/npc
 	New()
 		..()
 		npcs_online.Add(src)
-		if(!istype(src, /mob/npc/combat/small))
+		if(!istype(src, /mob/npc/combat/animals/small))
 			src.overlays+=/obj/MaleParts/UnderShade
 		src.SetName(src.name)
+
+	zetsu //not to be confused with white zetsu
+		name = "Zetsu"
+		icon = 'Zetsu.dmi'
+		village = VILLAGE_AKATSUKI
+		//100,161,5
+
+		Click()
+			if(usr.dead)return
+			if(get_dist(src,usr)>2)return
+			if(usr)usr.move=0
+			if(usr.client.Alert("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == 1)
+				usr.loc = locate(100,32,4)
+			usr.move=1
 
 	onomari
 		name = "Onomari"
@@ -125,7 +139,7 @@ mob/npc
 												mission = pick(typesof(/mission/b_rank) - /mission/b_rank - excluded_missions)
 											catch
 												usr.client.Alert("There are currently no B rank missions avaliable.", src.name)
-											
+
 											if(mission)
 												mission = new mission(usr)
 
@@ -152,7 +166,7 @@ mob/npc
 												mission = pick(typesof(/mission/a_rank) - /mission/a_rank - excluded_missions)
 											catch
 												usr.client.Alert("There are currently no A rank missions avaliable.", src.name)
-											
+
 											if(mission)
 												mission = new mission(usr)
 
@@ -174,7 +188,7 @@ mob/npc
 									if(5)
 										if(usr.checkRank() >= 4)
 											var/mission/s_rank/mission
-											
+
 											try
 												mission = pick(typesof(/mission/s_rank) - /mission/s_rank - excluded_missions)
 											catch
@@ -447,12 +461,11 @@ mob/npc
 					if(src.target && src.attacking && !src.dead)
 						if(get_dist(src,src.target) <= 1 && !src.punch_cd) src.AttackTarget(src.target)
 						else if(get_dist(src,src.target) > 20) src.Idle()
-						else if(src.punch_cd && !src.retreating) src.Retreat(src.target)
 						else if(!src.punch_cd) src.ChaseTarget(src.target)
 	//					else sleep(10) src.CombatAI()
 					else if(!src.dead) src.Idle()
 					sleep(3)
-					
+
 			proc/Idle()
 				src.attacking = 0
 				src.retreating = 0
@@ -484,12 +497,14 @@ mob/npc
 						if("right")
 							next_punch="left"
 							flick("punchr",src)
-					M.DealDamage(1,src,"TaiOrange",0,0,1)
+					M.DealDamage(300,src,"TaiOrange",0,0,1)
 					M.UpdateHMB()
 					M.Death(src)
 					src.punch_cd=1
 //					spawn() CombatAI()
-					sleep(6)
+					sleep(2)
+					src.Retreat(M)
+					spawn(4)
 					src.punch_cd=0
 
 			proc/Retreat(mob/M)
@@ -611,3 +626,4 @@ obj/escort
 		New()
 			..()
 			src.icon_state = "blank"
+

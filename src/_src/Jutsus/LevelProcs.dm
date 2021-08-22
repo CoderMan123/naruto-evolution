@@ -396,11 +396,11 @@ mob
 						return
 					if(dueling)
 						world << output("[opponent] has defeated [src] in an arena battle.","Action.Output")
-						src.loc=locate(110,90,3)
+						src.loc=locate(177,136,8)
 						src.health=src.maxhealth
 						src.kawarmi=0
 						var/mob/i=opponent
-						i.loc=locate(110,90,3)
+						i.loc=locate(177,136,8)
 						i.health=i.maxhealth
 						i.kawarmi=0
 						arenaprogress=0
@@ -495,7 +495,7 @@ mob
 
 						X.kills++
 						//X.Multikill++
-						
+
 						if(VillageAttackers.Find(src.village)&&VillageDefenders.Find(X.village))
 							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","Action.Output")
 							X.ryo+=10
@@ -510,7 +510,7 @@ mob
 
 //ZETSU EVENT XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	//Zetsu Killed
-						if(src != X)	
+						if(src != X)
 							if(istype(src, /mob/npc/combat/white_zetsu) && zetsu_event_active == 1)
 								zetsu_count--
 								switch(X.village)
@@ -537,14 +537,14 @@ mob
 										if(VILLAGE_SAND)
 											sand_points += 4
 									if(akat_lives_left > 0)
-										world << output ("[X.name] has slain a member of the Akatsuki earning the [X.village] village 4 points! (Akatsuki lives remaining: [akat_lives_left])", "Action.Output")	
-										if(squad)	
+										world << output ("[X.name] has slain a member of the Akatsuki earning the [X.village] village 4 points! (Akatsuki lives remaining: [akat_lives_left])", "Action.Output")
+										if(squad)
 											for(var/mob/m in mobs_online)
 												if(squad.members[m.client.ckey])
 													m << output ("[X.name] has killed a member of the Akatsuki! You've earned 8 bonus experience for your squad!", "Action.Output")
 													m.exp += 8
 													m.Levelup()
-										else 
+										else
 											X.exp +=20
 											X.Levelup()
 									else
@@ -556,14 +556,14 @@ mob
 								if(X.village == VILLAGE_AKATSUKI && zetsu_event_active == 1 || istype(X, /mob/npc/combat/white_zetsu))
 									vill_lives_left--
 									if(vill_lives_left > 0)
-										world << output ("[X.name] has slain a member of the [src.village] village! (Shinobi Alliance lives remaining: [vill_lives_left])", "Action.Output")	
+										world << output ("[X.name] has slain a member of the [src.village] village! (Shinobi Alliance lives remaining: [vill_lives_left])", "Action.Output")
 										X << output ("It's a slaughter. You've earned 5 bonus experience for your squad!", "Action.Output")
-										if(squad)	
+										if(squad)
 											for(var/mob/m in mobs_online)
 												if(squad.members[m.client.ckey])
 													m.exp += 5
 													m.Levelup()
-										else 
+										else
 											X.exp += 5
 											X.Levelup()
 									else
@@ -573,7 +573,7 @@ mob
 											if(m.village == VILLAGE_AKATSUKI)
 												m.exp += 30
 												m.Levelup()
-							
+
 	//Missing nin kills
 							if(X.village == VILLAGE_MISSING_NIN && zetsu_event_active == 1)
 								if(src.village == VILLAGE_AKATSUKI || src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)

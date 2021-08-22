@@ -26,7 +26,7 @@ mob
 							src.injutsu = 1
 							src.Prisoner=M
 							new/obj/TsukuyomiHUD(M.client)
-							M.client.eye=locate(143,38,14)
+							M.client.eye=locate(161,35,9)
 							M.client.perspective = EYE_PERSPECTIVE
 							var/Timer=J.level+2
 							while(Timer&&M)
