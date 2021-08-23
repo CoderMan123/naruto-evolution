@@ -135,6 +135,7 @@ mob
 							src.overlays+='Dust.dmi'
 							src.RestoreOverlays()
 							src.multisized=1
+							src.SetName(src.name)
 							sleep(60+(10*J.level))
 							multisized=0
 							src.appearance_flags = PIXEL_SCALE | KEEP_TOGETHER
@@ -152,6 +153,7 @@ mob
 							src.move=0
 							src.injutsu=1
 							src.canattack=0
+							src.SetName(src.name)
 							spawn(20)
 								if(!src||src.dead)continue
 								src.icon_state=""
