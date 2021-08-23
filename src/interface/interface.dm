@@ -103,22 +103,47 @@ client
 			if(!src.mob.tutorialskilltree) src.mob.tutorialskilltree = 1
 
 			if(winget(src, "SkillTree", "is-visible") == "false")
-				switch(src.AlertList("Which skill tree would you like to view?", "Skill Tree", list("Elemental Jutsu", "Clan Jutsu (1)", "Clan Jutsu (2)", "Non-clan Jutsu", "Justsu Selection (Debug)")))
-					if(1)
+				switch(input("Which skill tree would you like to view?", "Skill Tree") in list("Elemental Jutsu", "Clan Jutsu", "Non-clan Jutsu", "Cancel"))
+					if("Elemental Jutsu")
 						winset(src, "SkillTree", "is-visible=true")
-						src.UpdateSkillTreePanel(SKILL_TREE_ELEMENTAL_JUTSU)
-					if(2)
+						src.UpdateSkillTreePanel(/obj/skill_tree_locations/elemental)
+
+					if("Clan Jutsu")
 						winset(src, "SkillTree", "is-visible=true")
-						src.UpdateSkillTreePanel(SKILL_TREE_CLAN_JUTSU_1)
-					if(3)
+						switch(src.mob.Clan)
+							if(CLAN_ABURAME) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_aburame)
+							if(CLAN_AKIMICHI) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_akimichi)
+							if(CLAN_BUBBLE) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_bubble)
+							if(CLAN_CLAY) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_clay)
+							if(CLAN_CRYSTAL) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_crystal)
+							if(CLAN_GATES) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_gates)
+							if(CLAN_HYUUGA) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_hyuuga)
+							if(CLAN_ICE) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_ice)
+							if(CLAN_IMPLANT) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_implant)
+							if(CLAN_INK) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_ink)
+							if(CLAN_JASHIN) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_jashin)
+							if(CLAN_KAGUYA) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_kaguya)
+							if(CLAN_KAKUZU) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_kakuzu)
+							if(CLAN_MEDICAL) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_medical)
+							if(CLAN_NARA) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_nara)
+							if(CLAN_NOCLAN) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_noclan)
+							if(CLAN_PAPER) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_paper)
+							if(CLAN_PUPPET) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_puppet)
+							if(CLAN_RINNEGAN) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_rinnegan)
+							if(CLAN_SAGE) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_sage)
+							if(CLAN_SAND) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_sand)
+							if(CLAN_SENJU) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_senju)
+							if(CLAN_SPIDER) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_spider)
+							if(CLAN_UCHIHA) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_uchiha)
+							if(CLAN_WEAPONIST) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_weaponist)
+							if(CLAN_YELLOWFLASH) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_yellowflash)
+
+					if("Non-clan Jutsu")
 						winset(src, "SkillTree", "is-visible=true")
-						src.UpdateSkillTreePanel(SKILL_TREE_CLAN_JUTSU_2)
-					if(4)
-						winset(src, "SkillTree", "is-visible=true")
-						src.UpdateSkillTreePanel(SKILL_TREE_NON_CLAN_JUTSU)
-					if(5)
-						winset(src, "SkillTree", "is-visible=true")
-						src.UpdateSkillTreePanel(SKILL_TREE_JUTSU_SELECTION)
+						switch(src.mob.Specialist)
+							if(SPECIALIZATION_NINJUTSU) src.UpdateSkillTreePanel(/obj/skill_tree_locations/noclan_ninspec)
+							if(SPECIALIZATION_GENJUTSU) src.UpdateSkillTreePanel(/obj/skill_tree_locations/noclan_genspec)
+							if(SPECIALIZATION_TAIJUTSU) src.UpdateSkillTreePanel(/obj/skill_tree_locations/noclan_strspec)
 
 			else
 				winset(src, null, "SkillTree.is-visible=false")
@@ -609,7 +634,7 @@ client
 
 					else if(jutsu.Specialist && jutsu.Specialist != src.mob.Specialist) jutsu.overlays += image('Misc Effects.dmi',"X")
 
-		UpdateSkillTreePanel(var/SKILL_TREE = SKILL_TREE_JUTSU_SELECTION)
+		UpdateSkillTreePanel(var/obj/map_location)
 			if(!src) return
 			if(winget(src, "SkillTree", "is-visible") == "true")
 
@@ -617,76 +642,72 @@ client
 
 				sleep(2)
 
-				var/list/instance_map_data = list(
-					SKILL_TREE_JUTSU_SELECTION	= list("x" = 10, "y" = 74, "z" = 4, "radius" = 11),
-					SKILL_TREE_ELEMENTAL_JUTSU	= list("x" = 54, "y" = 42, "z" = 4, "radius" = 11),
-					SKILL_TREE_CLAN_JUTSU_1		= list("x" = 59, "y" = 10, "z" = 4, "radius" = 11),
-					SKILL_TREE_CLAN_JUTSU_2		= list("x" = 11, "y" = 123, "z" = 4, "radius" = 11),
-					SKILL_TREE_NON_CLAN_JUTSU	= list("x" = 18, "y" = 42, "z" = 4, "radius" = 11)
-				)
+				var/obj/skill_tree_locations/location = locate(map_location)
 
-				var/list/instance_map = block(locate(max(instance_map_data[SKILL_TREE]["x"] - instance_map_data[SKILL_TREE]["radius"], 1), max(instance_map_data[SKILL_TREE]["y"] - instance_map_data[SKILL_TREE]["radius"], 1), instance_map_data[SKILL_TREE]["z"]), locate(min(instance_map_data[SKILL_TREE]["x"] + instance_map_data[SKILL_TREE]["radius"], world.maxx), min(instance_map_data[SKILL_TREE]["y"] + instance_map_data[SKILL_TREE]["radius"], world.maxy), instance_map_data[SKILL_TREE]["z"]))
-				// block(locate(max(10-10, world.min_x), max(74-10, world.min_y), 4), locate(min(10+10, world.max_x), min(74+10, world.max_y), 4))
+				if(location)
 
-				var/instance_placement_x = 1
-				var/instance_placement_y = 1
-				var/instance_loading_percent = 0
-				var/instance_loading_counter = 0
+					var/list/instance_map = block(locate(max(location.x - location.instance_radius, 1), max(location.y - location.instance_radius, 1), location.z), locate(min(location.x + location.instance_radius, world.maxx), min(location.y + location.instance_radius, world.maxy), location.z))
+					// block(locate(max(10-10, world.min_x), max(74-10, world.min_y), 4), locate(min(10+10, world.max_x), min(74+10, world.max_y), 4))
 
-				for(var/turf/t in instance_map)
+					var/instance_placement_x = 1
+					var/instance_placement_y = 1
+					var/instance_loading_percent = 0
+					var/instance_loading_counter = 0
 
-					for(var/atom/movable/o in t)
-						var/obj/map_object = new o.type
-						map_object.icon = o.icon
-						map_object.icon_state = o.icon_state
-						map_object.pixel_x = o.pixel_x
-						map_object.pixel_y = o.pixel_y
-						map_object.overlays = o.overlays
-						map_object.underlays = o.underlays
-						map_object.dir = o.dir
-						map_object.screen_loc = "SkillTreeMap:[instance_placement_x],[instance_placement_y]"
-						src.screen += map_object
-						src.skill_tree_objects += map_object
+					for(var/turf/t in instance_map)
 
-						if(istype(map_object, /obj/Jutsus))
-							var/obj/Jutsus/jutsu = map_object
+						for(var/atom/movable/o in t)
+							var/obj/map_object = new o.type
+							map_object.icon = o.icon
+							map_object.icon_state = o.icon_state
+							map_object.pixel_x = o.pixel_x
+							map_object.pixel_y = o.pixel_y
+							map_object.overlays = o.overlays
+							map_object.underlays = o.underlays
+							map_object.dir = o.dir
+							map_object.screen_loc = "SkillTreeMap:[instance_placement_x],[instance_placement_y]"
+							src.screen += map_object
+							src.skill_tree_objects += map_object
 
-							// Check if the player meets to requirements to learn a jutsu.
-							// This check is purely for visual representation
+							if(istype(map_object, /obj/Jutsus))
+								var/obj/Jutsus/jutsu = map_object
 
-							if(jutsu.type in src.mob.jutsus_learned)
-								jutsu.overlays += image('Misc Effects.dmi', "hasit!")
-							else
-								// TODO: o.reqs should be updated to be a list of objects i.e. list(new /obj/Jutsus/Bone-Tip)
-								// TODO: Update visual state when learning a new jutsu via Click()
-								var/requirement_counter = 0
-								for(var/requirement in jutsu.reqs)
-									for(var/obj/Jutsus/j in src.mob.jutsus)
-										if(requirement == j.name) requirement_counter++
+								// Check if the player meets to requirements to learn a jutsu.
+								// This check is purely for visual representation
 
-								if(requirement_counter != jutsu.reqs.len) jutsu.overlays += image('Misc Effects.dmi', "X")
+								if(jutsu.type in src.mob.jutsus_learned)
+									jutsu.overlays += image('Misc Effects.dmi', "hasit!")
+								else
+									// TODO: o.reqs should be updated to be a list of objects i.e. list(new /obj/Jutsus/Bone-Tip)
+									// TODO: Update visual state when learning a new jutsu via Click()
+									var/requirement_counter = 0
+									for(var/requirement in jutsu.reqs)
+										for(var/obj/Jutsus/j in src.mob.jutsus)
+											if(requirement == j.name) requirement_counter++
 
-								else if(jutsu.Clan && jutsu.Clan != src.mob.Clan) jutsu.overlays += image('Misc Effects.dmi', "X")
+									if(requirement_counter != jutsu.reqs.len) jutsu.overlays += image('Misc Effects.dmi', "X")
 
-								else if(jutsu.Element)
-									if(jutsu.Element != src.mob.Element && jutsu.Element != src.mob.Element2) jutsu.overlays += image('Misc Effects.dmi', "X")
+									else if(jutsu.Clan && jutsu.Clan != src.mob.Clan) jutsu.overlays += image('Misc Effects.dmi', "X")
 
-								else if(jutsu.Element2)
-									if(jutsu.Element2 != src.mob.Element && jutsu.Element2 != src.mob.Element2) jutsu.overlays += image('Misc Effects.dmi',"X")
+									else if(jutsu.Element)
+										if(jutsu.Element != src.mob.Element && jutsu.Element != src.mob.Element2) jutsu.overlays += image('Misc Effects.dmi', "X")
 
-								else if(jutsu.Specialist && jutsu.Specialist != src.mob.Specialist) jutsu.overlays += image('Misc Effects.dmi',"X")
+									else if(jutsu.Element2)
+										if(jutsu.Element2 != src.mob.Element && jutsu.Element2 != src.mob.Element2) jutsu.overlays += image('Misc Effects.dmi',"X")
 
-					instance_loading_counter ++
+									else if(jutsu.Specialist && jutsu.Specialist != src.mob.Specialist) jutsu.overlays += image('Misc Effects.dmi',"X")
 
-					if(instance_placement_x <= instance_map_data[SKILL_TREE]["radius"] * 2)
-						instance_placement_x++
-					else
-						instance_placement_x = 1
-						instance_placement_y++
+						instance_loading_counter ++
 
-					var/instance_loading_percent_next = round(instance_loading_counter / instance_map.len * 100, 1)
-					if(instance_loading_percent < instance_loading_percent_next)
-						instance_loading_percent = instance_loading_percent_next
-						winset(src, null, "SkillTree-Progress.Bar.value='[instance_loading_percent]'; SkillTree-Progress.Status.text='Loading... [instance_loading_percent]%'")
+						if(instance_placement_x <= location.instance_radius * 2)
+							instance_placement_x++
+						else
+							instance_placement_x = 1
+							instance_placement_y++
 
-				winset(src, null, "SkillTree.Loading.is-visible='false'")
+						var/instance_loading_percent_next = round(instance_loading_counter / instance_map.len * 100, 1)
+						if(instance_loading_percent < instance_loading_percent_next)
+							instance_loading_percent = instance_loading_percent_next
+							winset(src, null, "SkillTree-Progress.Bar.value='[instance_loading_percent]'; SkillTree-Progress.Status.text='Loading... [instance_loading_percent]%'")
+
+					winset(src, null, "SkillTree.Loading.is-visible='false'")

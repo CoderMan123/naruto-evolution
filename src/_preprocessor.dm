@@ -40,8 +40,35 @@
 #define RANK_AKATSUKI_LEADER "Akatsuki Leader"
 #define RANK_SEVEN_SWORDSMEN_LEADER "Seven Swordsmen Leader"
 
-#define SKILL_TREE_JUTSU_SELECTION 1
+#define CLAN_ABURAME "Aburame"
+#define CLAN_AKIMICHI "Akimichi"
+#define CLAN_BUBBLE "Bubble"
+#define CLAN_CLAY "Clay" //check
+#define CLAN_CRYSTAL "Crystal"
+#define CLAN_GATES "Gates"
+#define CLAN_HYUUGA "Hyuuga"
+#define CLAN_ICE "Ice"
+#define CLAN_IMPLANT "Implanted"
+#define CLAN_INK "Ink"
+#define CLAN_JASHIN "Jashin"
+#define CLAN_KAGUYA "Kaguya"
+#define CLAN_KAKUZU "Kakuzu" //check
+#define CLAN_MEDICAL "Medical"
+#define CLAN_NARA "Nara"
+#define CLAN_NOCLAN "No Clan"
+#define CLAN_PAPER "Paper"
+#define CLAN_PUPPET "Puppeteer" //check
+#define CLAN_RINNEGAN "Rinnegan"
+#define CLAN_SAGE "SnakeSage"
+#define CLAN_SAND "Sand"
+#define CLAN_SENJU "Senjuu"
+#define CLAN_SPIDER "Spider"
+#define CLAN_UCHIHA "Uchiha"
+#define CLAN_WEAPONIST "Weaponist"
+#define CLAN_YELLOWFLASH "Yellow Flash"
+
+#define SPECIALIZATION_NINJUTSU "Ninjutsu"
+#define SPECIALIZATION_GENJUTSU "Genjutsu"
+#define SPECIALIZATION_TAIJUTSU "strength"
+
 #define SKILL_TREE_ELEMENTAL_JUTSU 2
-#define SKILL_TREE_CLAN_JUTSU_1 3
-#define SKILL_TREE_CLAN_JUTSU_2 4
-#define SKILL_TREE_NON_CLAN_JUTSU 5
