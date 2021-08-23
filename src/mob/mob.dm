@@ -67,7 +67,7 @@ mob
 				return 0
 
 			winset(src,"Titlescreen.Password","text=")
-			
+
 			src.Load(character, password)
 
 	verb/CreateCharacter()
@@ -250,17 +250,7 @@ mob
 				src.jutsus_learned.Add(jutsu.type)
 				jutsu.owner = src.ckey
 				src.skillpoints--
-				switch(src.village)
-					if("Hidden Leaf")
-						src.loc = locate(116,127,18)
-					if("Hidden Sand")
-						src.loc = locate(91,132,10)
-					if("Hidden Mist")
-						src.loc = locate(75,54,8)
-					if("Hidden Sound")
-						src.loc = locate(140,28,6)
-					if("Hidden Rock")
-						src.loc = locate(21,13,16)
+				src.loc=src.MapLoadSpawn()
 
 	proc/Playtime()
 		while(src)
