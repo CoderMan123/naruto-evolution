@@ -413,7 +413,7 @@ mob
 				var/obj/name = new()
 				name.layer = MOB_LAYER - 1000
 				name.maptext_width = 128
-				name.pixel_x = name.pixel_x - name.maptext_width / 2 + src.bound_width
+				name.pixel_x = name.pixel_x - (name.maptext_width / 2) + (name.maptext_width / 2) / 2
 				name.pixel_y -= 16
 				name.maptext = "<span style=\"-dm-text-outline: [Outline]px black; color: [Color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[Name]</span>"
 				src.name_overlays = image(name, src)
