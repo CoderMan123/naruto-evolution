@@ -33,8 +33,11 @@ mob/npc
 			Tutorial=0
 			density=1
 			DblClick()
-				if(usr.Tutorial!=Tutorial)
-					usr<<output("You're not supposed to talk to this Jounin","Action.Output")
+				if(usr.Tutorial < Tutorial)
+					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
+					return
+				if(usr.Tutorial > Tutorial)
+					usr<<output("I've done my part. Go ahead and move on to the next room.","Action.Output")
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
@@ -71,8 +74,11 @@ mob/npc
 			density=1
 			DblClick()
 				if(!usr.TutorialStrength) usr.TutorialStrength=usr.strength
-				if(usr.Tutorial!=Tutorial)
+				if(usr.Tutorial < Tutorial)
 					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
+					return
+				if(usr.Tutorial > Tutorial)
+					usr<<output("I've done my part. Go ahead and move on to the next room.","Action.Output")
 					return
 				if(usr.strength<=usr.TutorialStrength)
 					if(usr) usr.client.Alert(
@@ -103,8 +109,11 @@ mob/npc
 			Tutorial=2
 			density=1
 			DblClick()
-				if(usr.Tutorial!=Tutorial)
+				if(usr.Tutorial < Tutorial)
 					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
+					return
+				if(usr.Tutorial > Tutorial)
+					usr<<output("I've done my part. Go ahead and move on to the next room.","Action.Output")
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
@@ -118,10 +127,10 @@ mob/npc
 				Most techniques will have a mastery level, and it will influence the technique in certain ways depending on it's level growing significantly stronger.
 				Through using the technique, you will be able to gain experience to increase it's mastery level. You can view the levels of your Jutsu via the 'Jutsu' button in the bottom right.
 				Some jutsus increase damage or active time while others will fire more projectiles or have longer effects. Substitution even grants Advanced substitution when leveled enough."},"[src]")
-				if(usr) usr.client.Alert({"Oh that's right you'll definately be needing those. Clone jutsus and Substitution jutsus will be integral to your survival as they'll both cause people around you to stop targeting.
+				if(usr) usr.client.Alert({"Oh that's right you'll definately be needing those jutsu. Clone jutsus and Substitution jutsus will be integral to your survival as they'll both cause people around you to stop targeting.
 				I see you already have a simple clone jutsu which will also create clones that help block the enemy from targeting you by causing them to target the clones instead. But that won't be enough. How about you open the skill tree with the button in the bottom left so that you can learn a Substitution.
 				Select Non-clan from the list and purchase Body Replacement Jutsu by clicking it's icon in the top left. As well as dropping peoples targets, Body Replacement will also move you back sharply to avoid danger leaving behind a solid substituion to block potential threats.
-				When you use it you'll also gain the ability to use and Advanced Body Replacement. This is a special subsitution that once used will designate a target location. The next time you defend with the D key you'll be teleported back to that location, leaving behind a log.
+				When you use it you'll also gain the ability to use Advanced Body Replacement. This is a special subsitution that once used will designate a target location. The next time you defend with the D key you'll be teleported back to that location, leaving behind a log.
 				So long as the jutsu has been set, you can even use it while trapped by an opponents jutsu to escape!"},"[src]")
 				if(usr) usr.client.Alert({"One last thing. Using your jutsu will also level up certain stats. It's a good method for getting stronger. However an alternative for Ninjutsu and Genjutsu is to perform chakra control training.
 				You should be able to find it in your jutsus list by pressing P. Face the correct direction in time and your Ninjutsu and Genjutsu will get a little stronger. The more you succeed the greater the growth!
@@ -143,8 +152,11 @@ mob/npc
 				if(!typesof(/obj/Jutsus/BodyReplace) in usr.jutsus_learned)
 					usr<<"Open up your skill tree first, and purchase the Substitution Technique under Non Clan Skills."
 					return
-				if(usr.Tutorial!=Tutorial)
+				if(usr.Tutorial < Tutorial)
 					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
+					return
+				if(usr.Tutorial > Tutorial)
+					usr<<output("I've done my part. Go ahead and move on to the next room.","Action.Output")
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
