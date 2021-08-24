@@ -30,11 +30,20 @@ mob
 
 	Login()
 		..()
-		var/obj/login_eye = new(locate(101,100,7))
+		var/list/eye_locations = list()
+		for(var/obj/login_screen_locations/location)
+			eye_locations += location
+		var/obj/login_screen_locations/random_location = pick(eye_locations)
+		var/obj/login_eye = new(random_location.loc)
 		src.client.eye = login_eye
 		src.client.perspective = EYE_PERSPECTIVE
 		spawn() GetScreenResolution(src)
 		src.client.screen += new/obj/Logos/Naruto_Evolution
+		spawn()
+			while(!mobs_online.Find(src))
+				sleep(250)
+				random_location = pick(eye_locations)
+				login_eye.loc = random_location.loc
 		spawn()
 			while(!mobs_online.Find(src))
 				step_rand(login_eye)
@@ -413,7 +422,7 @@ mob
 				var/obj/name = new()
 				name.layer = MOB_LAYER - 1000
 				name.maptext_width = 128
-				name.pixel_x = name.pixel_x - (name.maptext_width / 2) + (name.maptext_width / 2) / 2
+				name.pixel_x = name.pixel_x - name.maptext_width / 2 + src.bound_width
 				name.pixel_y -= 16
 				name.maptext = "<span style=\"-dm-text-outline: [Outline]px black; color: [Color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[Name]</span>"
 				src.name_overlays = image(name, src)

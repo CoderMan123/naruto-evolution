@@ -136,6 +136,20 @@ obj
 		clan_yellowflash
 			instance_radius = 4
 
+	login_screen_locations
+		icon = 'placeholdertiles.dmi'
+		icon_state = "loginscreenlocations"
+		New()
+			..()
+			icon_state = "blank"
+
+		leaf
+		sand
+		sound
+		rock
+		akatfront
+		akatback
+
 turf
 	akat_exit
 		Entered()

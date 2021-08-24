@@ -52,12 +52,12 @@
 #define CLAN_INK "Ink"
 #define CLAN_JASHIN "Jashin"
 #define CLAN_KAGUYA "Kaguya"
-#define CLAN_KAKUZU "Kakuzu" //check
+#define CLAN_KAKUZU "Kakuzu"
 #define CLAN_MEDICAL "Medical"
 #define CLAN_NARA "Nara"
 #define CLAN_NOCLAN "No Clan"
 #define CLAN_PAPER "Paper"
-#define CLAN_PUPPET "Puppeteer" //check
+#define CLAN_PUPPET "Puppeteer"
 #define CLAN_RINNEGAN "Rinnegan"
 #define CLAN_SAGE "SnakeSage"
 #define CLAN_SAND "Sand"
