@@ -69,7 +69,6 @@ client
 				src.mob.verbs -= typesof(/mob/pixel_artist/verb)
 			
 			spawn() src.UpdateCharacterPanel()
-			spawn() src.UpdateInventoryPanel()
 			
 mob
 	administrator
@@ -701,7 +700,7 @@ mob
 										if(m.rank == RANK_CHUUNIN || m.rank == RANK_JOUNIN || m.rank == RANK_ANBU)
 											switch(m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to succeed them as [usr.rank]. Do you accept this invitation?", "[usr.rank] Invitation", list("Yes", "No")))
 												if(1)
-													spawn() usr.client.Alert("[m.name] has accepted your invitation to join the [usr.rank].")
+													spawn() usr.client.Alert("[m.name] has accepted your invitation to succeed you as [usr.rank].")
 
 													switch(usr.rank)
 														if(RANK_HOKAGE)
@@ -729,6 +728,9 @@ mob
 
 													var/squad/squad2 = m.GetSquad()
 													if(squad2) spawn() squad2.Refresh()
+												
+												if(2)
+													usr.client.Alert("[m.name] has rejected your invitation to succeed you as [usr.rank].")
 										else
 											usr.client.Alert("You can't send a [usr.rank] invitation to [m.name] because they are no longer a [RANK_CHUUNIN], [RANK_JOUNIN] or [RANK_ANBU].", "Retire [usr.rank]")
 									else

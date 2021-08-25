@@ -537,37 +537,43 @@ mob
 					if(RANK_HOKAGE)
 						kages[VILLAGE_LEAF] = src.ckey
 						kages_last_online[VILLAGE_LEAF] = world.realtime
+
 						new /obj/Inventory/Clothing/HeadWrap/HokageHat(src)
 						new /obj/Inventory/Clothing/Robes/HokageRobe(src)
 					
 					if(RANK_KAZEKAGE)
 						kages[VILLAGE_SAND] = src.ckey
 						kages_last_online[VILLAGE_SAND] = world.realtime
+
 						new /obj/Inventory/Clothing/HeadWrap/KazekageHat(src)
 						new /obj/Inventory/Clothing/Robes/KazekageRobe(src)
 					
 					if(RANK_TSUCHIKAGE)
 						kages[VILLAGE_ROCK] = src.ckey
 						kages_last_online[VILLAGE_ROCK] = world.realtime
+
 						new /obj/Inventory/Clothing/HeadWrap/TsuchikageHat(src)
 						new /obj/Inventory/Clothing/Robes/TsuchikageRobe(src)
 					
 					if(RANK_MIZUKAGE)
 						kages[VILLAGE_MIST] = src.ckey
 						kages_last_online[VILLAGE_MIST] = world.realtime
+
 						new /obj/Inventory/Clothing/HeadWrap/MizukageHat(src)
 						new /obj/Inventory/Clothing/Robes/MizukageRobe(src)
 					
 					if(RANK_OTOKAGE)
 						kages[VILLAGE_SOUND] = src.ckey
 						kages_last_online[VILLAGE_SOUND] = world.realtime
+
 						new /obj/Inventory/Clothing/HeadWrap/OtokageHat(src)
 						new /obj/Inventory/Clothing/Robes/OtokageRobe(src)
 
 				src.rank = RANK
 
 				src.client.StaffCheck()
-				src.client.UpdateCharacterPanel()
+				spawn() src.client.UpdateCharacterPanel()
+				spawn() src.client.UpdateInventoryPanel()
 
 		SetRyo(var/ryo)
 			if(ryo)
