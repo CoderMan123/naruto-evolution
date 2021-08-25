@@ -26,47 +26,47 @@ client
 			
 			if(src.ckey in administrators)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-				src.verbs += typesof(/mob/administrator/verb)
-				src.verbs += typesof(/mob/moderator/verb)
-				src.verbs += typesof(/mob/programmer/verb)
-				src.verbs += typesof(/mob/pixel_artist/verb)
-				src.verbs += typesof(/mob/event/verb/)
-				src.verbs += typesof(/mob/debug/verb/)
-				src.verbs += typesof(/mob/MasterGM/verb)
-				src.verbs += typesof(/mob/Admin/verb)
-				src.verbs += typesof(/mob/Moderator/verb)
-				src.verbs += typesof(/mob/PixelArtist/verb)
+				src.mob.verbs += typesof(/mob/administrator/verb)
+				src.mob.verbs += typesof(/mob/moderator/verb)
+				src.mob.verbs += typesof(/mob/programmer/verb)
+				src.mob.verbs += typesof(/mob/pixel_artist/verb)
+				src.mob.verbs += typesof(/mob/event/verb/)
+				src.mob.verbs += typesof(/mob/debug/verb/)
+				src.mob.verbs += typesof(/mob/MasterGM/verb)
+				src.mob.verbs += typesof(/mob/Admin/verb)
+				src.mob.verbs += typesof(/mob/Moderator/verb)
+				src.mob.verbs += typesof(/mob/PixelArtist/verb)
 				src.control_freak = 0
 			else
-				src.verbs -= typesof(/mob/administrator/verb)
-				src.verbs -= typesof(/mob/moderator/verb)
-				src.verbs -= typesof(/mob/programmer/verb)
-				src.verbs -= typesof(/mob/pixel_artist/verb)
-				src.verbs -= typesof(/mob/event/verb/)
-				src.verbs -= typesof(/mob/debug/verb/)
-				src.verbs -= typesof(/mob/MasterGM/verb)
-				src.verbs -= typesof(/mob/Admin/verb)
-				src.verbs -= typesof(/mob/Moderator/verb)
-				src.verbs -= typesof(/mob/PixelArtist/verb)
+				src.mob.verbs -= typesof(/mob/administrator/verb)
+				src.mob.verbs -= typesof(/mob/moderator/verb)
+				src.mob.verbs -= typesof(/mob/programmer/verb)
+				src.mob.verbs -= typesof(/mob/pixel_artist/verb)
+				src.mob.verbs -= typesof(/mob/event/verb/)
+				src.mob.verbs -= typesof(/mob/debug/verb/)
+				src.mob.verbs -= typesof(/mob/MasterGM/verb)
+				src.mob.verbs -= typesof(/mob/Admin/verb)
+				src.mob.verbs -= typesof(/mob/Moderator/verb)
+				src.mob.verbs -= typesof(/mob/PixelArtist/verb)
 				src.control_freak = CONTROL_FREAK_ALL
 			
 			if(src.ckey in moderators)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-				src.verbs += typesof(/mob/moderator/verb)
+				src.mob.verbs += typesof(/mob/moderator/verb)
 			else
-				src.verbs -= typesof(/mob/moderator/verb)
+				src.mob.verbs -= typesof(/mob/moderator/verb)
 			
 			if(src.ckey in programmers)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-				src.verbs += typesof(/mob/programmer/verb)
+				src.mob.verbs += typesof(/mob/programmer/verb)
 			else
-				src.verbs -= typesof(/mob/programmer/verb)
+				src.mob.verbs -= typesof(/mob/programmer/verb)
 
 			if(src.ckey in pixel_artists)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-				src.verbs += typesof(/mob/pixel_artist/verb)
+				src.mob.verbs += typesof(/mob/pixel_artist/verb)
 			else
-				src.verbs -= typesof(/mob/pixel_artist/verb)
+				src.mob.verbs -= typesof(/mob/pixel_artist/verb)
 			
 			spawn() src.UpdateCharacterPanel()
 			spawn() src.UpdateInventoryPanel()
@@ -74,8 +74,13 @@ client
 mob
 	administrator
 		verb
+    
 			// IMPORTAINT: Only use `usr` in verbs for safety. Calling `src.client` results in runtime errors.
 			// IMPORTAINT: This doesn't apply to verbs of type path: `/mob/verb`.
+      
+			// UPDATE: This issue only happens when you add these verbs to src.client instead of src.mob.
+			// NOTE: Only add verbs to src.mob from now on.
+      
 			Manage_Kages()
 				set category = "Administrator"
 				switch(usr.client.Alert("Which village Kage would you like to manage?", "Manage Kages", list("[VILLAGE_LEAF]", "[VILLAGE_SAND]", "Cancel")))
