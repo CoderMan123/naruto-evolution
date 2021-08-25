@@ -698,7 +698,7 @@ mob
 								var/mob/m = input("Who would you like to succeed you as [usr.rank]?", "Retire [usr.rank]") as null|anything in mobs_online - exclude
 								if(m)
 									if(m.village == usr.village)
-										if(m.rank == RANK_CHUUNIN || m.rank == RANK_JOUNIN || m.rank != RANK_ANBU)
+										if(m.rank == RANK_CHUUNIN || m.rank == RANK_JOUNIN || m.rank == RANK_ANBU)
 											switch(m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to succeed them as [usr.rank]. Do you accept this invitation?", "[usr.rank] Invitation", list("Yes", "No")))
 												if(1)
 													spawn() usr.client.Alert("[m.name] has accepted your invitation to join the [usr.rank].")
