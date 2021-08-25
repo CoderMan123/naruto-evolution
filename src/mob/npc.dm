@@ -22,6 +22,26 @@ mob/npc
 			src.overlays+=/obj/MaleParts/UnderShade
 		src.SetName(src.name)
 
+	shady_man
+		name = "Shady Looking Man"
+		icon = 'WhiteMBase.dmi'
+		New()
+			..()
+			src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
+			src.overlays += 'Shade.dmi'
+			src.overlays+='Shirt.dmi'
+			src.overlays+='Sandals.dmi'
+		Click()
+			if(usr.dead)return
+			if(get_dist(src,usr)>2)return
+			if(usr)usr.move=0
+			var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
+			if(O && O.squad.mission)
+				O.squad.mission.Complete(usr)
+			else
+				usr.client.Alert("Psst, hey you there. If you can get me some intel on the shinobi villages I'll pay you handsomely.", src.name)
+			usr.move=1
+
 	zetsu //not to be confused with white zetsu
 		name = "Zetsu"
 		icon = 'Zetsu.dmi'
@@ -32,11 +52,15 @@ mob/npc
 			if(usr.dead)return
 			if(get_dist(src,usr)>2)return
 			if(usr)usr.move=0
-			if(usr.client.Alert("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == 1)
+			var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
+			if(O && O.squad.mission)
+				O.squad.mission.Complete(usr)
+			else(usr.client.Alert("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == 1)
 				usr.loc = locate(100,32,4)
 			usr.move=1
 
-	onomari
+
+	onomari //reserved for prestige system
 		name = "Onomari"
 		icon = 'WhiteMBase.dmi'
 		village = "Hidden Leaf"
