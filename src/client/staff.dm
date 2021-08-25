@@ -16,13 +16,13 @@ client
 					src << output("You were forced out of office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>, and as a result you have been automatically demoted to [RANK_JOUNIN].", "Action.Output")
 					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.mob.character] ([src.ckey]) was forced out of office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>, and as a result has been automatically demoted to [RANK_JOUNIN].</font><br />", LOG_KAGE)
 					
-					src.mob.SetRank(RANK_JOUNIN)
+					src.mob.SetRank(RANK_CHUUNIN)
 				
 				if(src.mob.rank == RANK_KAZEKAGE)
 					src << output("You were forced out of office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>, and as a result you have been automatically demoted to [RANK_JOUNIN].", "Action.Output")
 					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.mob.character] ([src.ckey]) was forced out of office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>, and as a result has been automatically demoted to [RANK_JOUNIN].</font><br />", LOG_KAGE)
 
-					src.mob.SetRank(RANK_JOUNIN)
+					src.mob.SetRank(RANK_CHUUNIN)
 			
 			if(src.ckey in administrators)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
