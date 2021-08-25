@@ -101,7 +101,6 @@ mob
 			waterhigh=0
 			snowlow=0
 			canattack=1
-			admin=0
 			firing=0
 			infusing=0//chakrainfusionstuff
 			bubbled=0//bubbleshieldstuff

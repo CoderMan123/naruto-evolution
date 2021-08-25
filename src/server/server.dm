@@ -1,10 +1,13 @@
 var/build
 var/server_capacity = 100
 
-var/list/administrators = list("lavenblade", "illusiveblair")
+var/list/administrators = list("douglasparker", "illusiveblair")
 var/list/moderators = list()
-var/list/programmers = list("lavenblade")
+var/list/programmers = list("douglasparker")
 var/list/pixel_artists = list("illusiveblair")
+
+var/list/kages = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
+var/list/kages_last_online = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
 
 var/list/clients_connected = list()
 var/list/clients_online = list()
@@ -25,10 +28,13 @@ world
 	loop_checks = 1
 	New()
 		..()
+		CreateLogs()
+
 		log = file(LOG_ERROR)
 
 		build = file2text("VERSION")
 		if(!build) text2file("", "VERSION")
+
 		src.Load()
 
 		spawn() UpdateHUB()
@@ -41,6 +47,7 @@ world
 		spawn() AutoCheck()
 		spawn() LinkWarps()
 		spawn() HTMLlist()
+		spawn() Kage_Inactivity_Check()
 
 	Del()
 		src.Save()
@@ -55,12 +62,49 @@ world
 					if(source.address == target.address || source.computer_id == target.computer_id)
 						clients_multikeying.Add(source)
 						clients_multikeying.Add(target)
+	
+	proc/Kage_Inactivity_Check()
+		set background = 1
+		while(src)
+			var/days = 5
+			
+			if(kages_last_online[VILLAGE_LEAF] && kages_last_online[VILLAGE_LEAF] + 864000 * days <= world.realtime)
+				var/online
+				for(var/mob/m in mobs_online)
+					if(kages[VILLAGE_LEAF] == m.client.ckey) online = 1
+
+				// Don't demote Kages that are online because kage_last_online[] only updates on mob.Load() and mob.Save().
+				// Otherwise, Kages will be demoted if they do not logout to update their kage_last_online[] timestamp.
+				if(online)
+					world << output("The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
+					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> ([kages[VILLAGE_LEAF]]) was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
+					kages[VILLAGE_LEAF] = null
+					kages_last_online[VILLAGE_LEAF] = null
+			
+			if(kages_last_online[VILLAGE_SAND] && kages_last_online[VILLAGE_SAND] + 864000 * days <= world.realtime)
+				var/online
+				for(var/mob/m in mobs_online)
+					if(kages[VILLAGE_SAND] == m.client.ckey) online = 1
+				
+				// Don't demote Kages that are online because kage_last_online[] only updates on mob.Load() and mob.Save().
+				// Otherwise, Kages will be demoted if they do not logout to update their kage_last_online[] timestamp.
+				if(online)
+					world << output("The [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
+					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_KAZEKAGE] ([kages[VILLAGE_SAND]]) for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
+					kages[VILLAGE_SAND] = null
+					kages_last_online[VILLAGE_SAND] = null
+
+			sleep(600)
 
 	proc/UpdateHUB()
 		set background = 1
 		while(world)
 			status = "Naruto Evolution v[build] | Ninjas Online ([mobs_online.len]/[server_capacity])"
 			sleep(600)
+	
+	proc/CreateLogs()
+		if(!fexists(LOG_KAGE))
+			text2file("<body bgcolor = '#414141'>", LOG_KAGE)
 
 	proc/Save()
 		var/savefile/F = new(SAVEFILE_STAFF)
@@ -73,7 +117,8 @@ world
 		F["names_taken"] << names_taken
 
 		F = new(SAVEFILE_KAGES)
-		F["kages"] << Kages
+		F["kages"] << kages
+		F["kages_last_online"] << kages_last_online
 
 		F = new(SAVEFILE_SQUADS)
 		F["squads"] << squads
@@ -121,7 +166,8 @@ world
 		if(F["squads"]) F["squads"] >> squads
 
 		F = new(SAVEFILE_KAGES)
-		if(F["kages"]) F["kages"] >> Kages
+		if(F["kages"]) F["kages"] >> kages
+		if(F["kages_last_online"]) F["kages_last_online"] >> kages_last_online
 
 		F = new(SAVEFILE_WORLD)
 		if(!isnull(F["Factions"])) F["Factions"] >> Factionnames

@@ -25,7 +25,8 @@ client
 
 				else
 					src.channel = "Local"
-			src<<"Now speaking in: [src.channel]"
+					
+			src<<"Now speaking in channel: [src.channel]"
 
 		ToggleChatInputPanel()
 			set hidden=1

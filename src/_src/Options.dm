@@ -87,7 +87,7 @@ mob
 					src.overlays=null
 					src.ReAddClothing()
 					src.RestoreOverlays()
-					src.RemoveAdminVerbs()
+					src.client.StaffCheck()
 				if(village=="Anbu Root")
 					for(var/obj/Inventory/Clothing/Robes/Anbu_Suit/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
@@ -95,7 +95,7 @@ mob
 					src.overlays=null
 					src.ReAddClothing()
 					src.RestoreOverlays()
-					src.RemoveAdminVerbs()
+					src.client.StaffCheck()
 				if(village=="Seven Swordsmen")
 					for(var/obj/Inventory/Weaponry/Zabuza_Sword/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
