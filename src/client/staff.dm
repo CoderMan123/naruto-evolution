@@ -525,20 +525,20 @@ mob
 
 						if(m)
 							if(m.village == VILLAGE_MISSING_NIN)
-								m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to join the [usr.village] village. Do you accept this invitation?", "Village Invitation", list("Yes", "No"))
-								if(1)
-									if(m.village == VILLAGE_MISSING_NIN)
-										usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village] village.")
-										m.SetVillage(usr.village)
+								switch(m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to join the [usr.village] village. Do you accept this invitation?", "Village Invitation", list("Yes", "No")))
+									if(1)
+										if(m.village == VILLAGE_MISSING_NIN)
+											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village] village.")
+											m.SetVillage(usr.village)
 
-										var/squad/squad = m.GetSquad()
-										if(squad) squad.Refresh()
-									else
-										spawn() usr.client.Alert("[m.name] is no longer a [VILLAGE_MISSING_NIN] and is therefore unable to join the [usr.village] village.")
-										spawn() m.client.Alert("You are no longer a [VILLAGE_MISSING_NIN] and are therefore unable to join the [usr.village] village.")
+											var/squad/squad = m.GetSquad()
+											if(squad) squad.Refresh()
+										else
+											spawn() usr.client.Alert("[m.name] is no longer a [VILLAGE_MISSING_NIN] and is therefore unable to join the [usr.village] village.")
+											spawn() m.client.Alert("You are no longer a [VILLAGE_MISSING_NIN] and are therefore unable to join the [usr.village] village.")
 
-								if(2)
-									usr.client.Alert("[m.name] has rejected your invitation to join the [usr.village] village.")
+									if(2)
+										usr.client.Alert("[m.name] has rejected your invitation to join the [usr.village] village.")
 
 							else
 								usr.client.Alert("You can't send a village invitation to [m.name] because they are not a [VILLAGE_MISSING_NIN].", "Manage Village")
@@ -578,24 +578,24 @@ mob
 						if(m)
 							if(m.village == usr.village)
 								if(m.rank == RANK_CHUUNIN)
-									m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to join the [RANK_JOUNIN]. Do you accept this invitation?", "[RANK_JOUNIN] Invitation", list("Yes", "No"))
-									if(1)
-										if(m.village == usr.village)
-											if(m.rank == RANK_CHUUNIN)
-												spawn() usr.client.Alert("[m.name] has accepted your invitation to join the [RANK_JOUNIN].")
-												m.SetRank(RANK_JOUNIN)
+									switch(m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to join the [RANK_JOUNIN]. Do you accept this invitation?", "[RANK_JOUNIN] Invitation", list("Yes", "No")))
+										if(1)
+											if(m.village == usr.village)
+												if(m.rank == RANK_CHUUNIN)
+													spawn() usr.client.Alert("[m.name] has accepted your invitation to join the [RANK_JOUNIN].")
+													m.SetRank(RANK_JOUNIN)
 
-												var/squad/squad = m.GetSquad()
-												if(squad) squad.Refresh()
+													var/squad/squad = m.GetSquad()
+													if(squad) squad.Refresh()
+												else
+													spawn() usr.client.Alert("[m.name] is no longer a [RANK_CHUUNIN] and is therefore unable to join the [RANK_JOUNIN].")
+													spawn() m.client.Alert("You are no longer in a [RANK_CHUUNIN] and are therefore unable to join the [RANK_JOUNIN].")
 											else
-												spawn() usr.client.Alert("[m.name] is no longer a [RANK_CHUUNIN] and is therefore unable to join the [RANK_JOUNIN].")
-												spawn() m.client.Alert("You are no longer in a [RANK_CHUUNIN] and are therefore unable to join the [RANK_JOUNIN].")
-										else
-											spawn() usr.client.Alert("[m.name] is no longer in the [usr.village] village and is therefore unable to join the [RANK_JOUNIN].")
-											spawn() m.client.Alert("You are no longer in the [usr.village] village and are therefore unable to join the [RANK_JOUNIN].")
+												spawn() usr.client.Alert("[m.name] is no longer in the [usr.village] village and is therefore unable to join the [RANK_JOUNIN].")
+												spawn() m.client.Alert("You are no longer in the [usr.village] village and are therefore unable to join the [RANK_JOUNIN].")
 
-									if(2)
-										usr.client.Alert("[m.name] has rejected your invitation to join the [RANK_JOUNIN].")
+										if(2)
+											usr.client.Alert("[m.name] has rejected your invitation to join the [RANK_JOUNIN].")
 								else
 									usr.client.Alert("You can't send a [RANK_JOUNIN] invitation to [m.name] because they are no longer a [RANK_CHUUNIN].", "Manage [RANK_JOUNIN]")
 							else
@@ -637,24 +637,24 @@ mob
 						if(m)
 							if(m.village == usr.village)
 								if(m.rank == RANK_CHUUNIN || m.rank == RANK_JOUNIN)
-									m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to join the [RANK_ANBU]. Do you accept this invitation?", "[RANK_ANBU] Invitation", list("Yes", "No"))
-									if(1)
-										if(m.village == usr.village)
-											if(m.rank == RANK_CHUUNIN || m.rank == RANK_JOUNIN)
-												spawn() usr.client.Alert("[m.name] has accepted your invitation to join the [RANK_ANBU].")
-												m.SetRank(RANK_ANBU)
+									switch(m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to join the [RANK_ANBU]. Do you accept this invitation?", "[RANK_ANBU] Invitation", list("Yes", "No")))
+										if(1)
+											if(m.village == usr.village)
+												if(m.rank == RANK_CHUUNIN || m.rank == RANK_JOUNIN)
+													spawn() usr.client.Alert("[m.name] has accepted your invitation to join the [RANK_ANBU].")
+													m.SetRank(RANK_ANBU)
 
-												var/squad/squad = m.GetSquad()
-												if(squad) squad.Refresh()
+													var/squad/squad = m.GetSquad()
+													if(squad) squad.Refresh()
+												else
+													spawn() usr.client.Alert("[m.name] is no longer a [RANK_CHUUNIN] or [RANK_JOUNIN] and is therefore unable to join the [RANK_ANBU].")
+													spawn() m.client.Alert("You are no longer in a [RANK_CHUUNIN] or [RANK_JOUNIN] and are therefore unable to join the [RANK_ANBU].")
 											else
-												spawn() usr.client.Alert("[m.name] is no longer a [RANK_CHUUNIN] or [RANK_JOUNIN] and is therefore unable to join the [RANK_ANBU].")
-												spawn() m.client.Alert("You are no longer in a [RANK_CHUUNIN] or [RANK_JOUNIN] and are therefore unable to join the [RANK_ANBU].")
-										else
-											spawn() usr.client.Alert("[m.name] is no longer in the [usr.village] village and is therefore unable to join the [RANK_JOUNIN].")
-											spawn() m.client.Alert("You are no longer in the [usr.village] village and are therefore unable to join the [RANK_JOUNIN].")
+												spawn() usr.client.Alert("[m.name] is no longer in the [usr.village] village and is therefore unable to join the [RANK_JOUNIN].")
+												spawn() m.client.Alert("You are no longer in the [usr.village] village and are therefore unable to join the [RANK_JOUNIN].")
 
-									if(2)
-										usr.client.Alert("[m.name] has rejected your invitation to join the [RANK_ANBU].")
+										if(2)
+											usr.client.Alert("[m.name] has rejected your invitation to join the [RANK_ANBU].")
 								else
 									usr.client.Alert("You can't send a [RANK_ANBU] invitation to [m.name] because they are no longer a [RANK_CHUUNIN] or [RANK_JOUNIN].", "Manage [RANK_ANBU]")
 							else
@@ -699,36 +699,36 @@ mob
 								if(m)
 									if(m.village == usr.village)
 										if(m.rank == RANK_CHUUNIN || m.rank == RANK_JOUNIN || m.rank != RANK_ANBU)
-											m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to succeed them as [usr.rank]. Do you accept this invitation?", "[usr.rank] Invitation", list("Yes", "No"))
-											if(1)
-												spawn() usr.client.Alert("[m.name] has accepted your invitation to join the [usr.rank].")
+											switch(m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to succeed them as [usr.rank]. Do you accept this invitation?", "[usr.rank] Invitation", list("Yes", "No")))
+												if(1)
+													spawn() usr.client.Alert("[m.name] has accepted your invitation to join the [usr.rank].")
 
-												switch(usr.rank)
-													if(RANK_HOKAGE)
-														world << output("[usr.character] has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
-														text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
+													switch(usr.rank)
+														if(RANK_HOKAGE)
+															world << output("[usr.character] has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
+															text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
 
-														world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
-														text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
-													
-													if(RANK_KAZEKAGE)
-														world << output("[usr.character] has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
-														text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
+															world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
+															text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
 														
-														world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
-														text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
-												
-												m.SetRank(usr.rank)
-												m.client.StaffCheck()
+														if(RANK_KAZEKAGE)
+															world << output("[usr.character] has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
+															text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
+															
+															world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
+															text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
+													
+													m.SetRank(usr.rank)
+													m.client.StaffCheck()
 
-												usr.SetRank(RANK_CHUUNIN)
-												usr.client.StaffCheck()
+													usr.SetRank(RANK_CHUUNIN)
+													usr.client.StaffCheck()
 
-												var/squad/squad = usr.GetSquad()
-												if(squad) spawn() squad.Refresh()
+													var/squad/squad = usr.GetSquad()
+													if(squad) spawn() squad.Refresh()
 
-												var/squad/squad2 = m.GetSquad()
-												if(squad2) spawn() squad2.Refresh()
+													var/squad/squad2 = m.GetSquad()
+													if(squad2) spawn() squad2.Refresh()
 										else
 											usr.client.Alert("You can't send a [usr.rank] invitation to [m.name] because they are no longer a [RANK_CHUUNIN], [RANK_JOUNIN] or [RANK_ANBU].", "Retire [usr.rank]")
 									else
