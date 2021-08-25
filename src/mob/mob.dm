@@ -462,39 +462,59 @@ mob
 						o.loc = null
 				
 				if(RANK != RANK_HOKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/HokageHat/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/HeadWrap/HokageHat/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 					
-					for(var/obj/Inventory/Clothing/Robes/HokageRobe/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/Robes/HokageRobe/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 				
 				if(RANK != RANK_KAZEKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/KazekageHat/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/HeadWrap/KazekageHat/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 
-					for(var/obj/Inventory/Clothing/Robes/KazekageRobe/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/Robes/KazekageRobe/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 				
 				if(RANK != RANK_TSUCHIKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/TsuchikageHat/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/HeadWrap/TsuchikageHat/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 
-					for(var/obj/Inventory/Clothing/Robes/TsuchikageRobe/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/Robes/TsuchikageRobe/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 				
 				if(RANK != RANK_MIZUKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/MizukageHat/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/HeadWrap/MizukageHat/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 
-					for(var/obj/Inventory/Clothing/Robes/MizukageRobe/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/Robes/MizukageRobe/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 				
 				if(RANK != RANK_OTOKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/OtokageHat/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/HeadWrap/OtokageHat/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 
-					for(var/obj/Inventory/Clothing/Robes/OtokageRobe/S in src.contents)
-						S.loc = null
+					for(var/obj/Inventory/Clothing/Robes/OtokageRobe/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 
 				switch(RANK)
 					if(RANK_ANBU)
