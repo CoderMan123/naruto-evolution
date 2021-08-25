@@ -693,7 +693,7 @@ mob
 							if(1)
 								var/list/exclude = list(usr)
 								for(var/mob/m in mobs_online)
-									if(m.village != usr.village || m.rank != RANK_CHUUNIN || m.rank != RANK_JOUNIN || m.rank != RANK_ANBU) exclude += m
+									if(m.village != usr.village || (m.rank != RANK_CHUUNIN && m.rank != RANK_JOUNIN && m.rank != RANK_ANBU)) exclude += m
 
 								var/mob/m = input("Who would you like to succeed you as [usr.rank]?", "Retire [usr.rank]") as null|anything in mobs_online - exclude
 								if(m)
@@ -747,7 +747,7 @@ mob
 								
 								kages[usr.village] = null
 								kages_last_online[usr.village] = null
-								
+
 								usr.SetRank(RANK_CHUUNIN)
 
 mob
