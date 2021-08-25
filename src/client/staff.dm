@@ -211,7 +211,7 @@ mob
 							if("All Logs")
 								shell("zip -r logs/logs.zip logs/")
 								usr << file("logs.zip")
-								fdel(file("logs.zip"))
+								fdel("logs.zip")
 
 							if(LOG_ADMINISTRATOR)
 								usr << ftp(LOG_ADMINISTRATOR)
