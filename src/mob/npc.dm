@@ -408,6 +408,9 @@ mob/npc
 					village="Hidden Leaf"
 					bark = "Take good care of me, I don't want to end up like the daimyo before me."
 			sand
+				New()
+					..()
+					walk_to(src, locate(/obj/escort/pes1), 0, 5)
 				chichiatsu
 					name = "Daimyo Chichiatsu"
 					icon = 'WhiteMBase.dmi'
@@ -588,6 +591,322 @@ obj/escort
 				var/mob/npc/combat/political_escort/political_escort = m
 				political_escort.last_node = src
 
+				walk_to(m, locate(/obj/escort/pel6), 0, 5)
+			..()
+
+	pel6
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				m.loc = locate(101,200,3)
+				walk_to(m, locate(/obj/escort/pel7), 0, 5)
+			..()
+
+	pel7
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel8), 0, 5)
+			..()
+
+	pel8
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel9_haruna), 0, 5)
+			..()
+
+	pel9_haruna
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+				if(!istype(m, /mob/npc/combat/political_escort/leaf/haruna))
+					var/mob/npc/combat/political_escort/political_escort = m
+					political_escort.last_node = src
+
+					walk_to(m, locate(/obj/escort/pel10), 0, 5)
+				else
+					var/mob/npc/combat/political_escort/political_escort = m
+					political_escort.last_node = src
+
+					walk_to(m, locate(/obj/escort/pel10_haruna), 0, 5)
+				..()
+
+	pel10_haruna
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/haruna))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel11_haruna), 0, 5)
+			..()
+
+	pel11_haruna
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/haruna))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel12_haruna), 0, 5)
+			..()
+
+	pel12_haruna
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/haruna))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel13_haruna), 0, 5)
+			..()
+
+	pel13_haruna
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/haruna))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel14_haruna), 0, 5)
+			..()
+
+	pel14_haruna
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/haruna))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel_end_haruna), 0, 5)
+			..()
+
+	pel_end_haruna
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				if(political_escort.squad)
+					for(var/mob/player in mobs_online)
+						if(political_escort.squad.members[player.client.ckey])
+							spawn()
+								political_escort.squad.mission.Complete(player)
+								del m
+			..()
+	pel10
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel11), 0, 5)
+			..()
+	pel11
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				m.loc = locate(200,101,5)
+				walk_to(m, locate(/obj/escort/pel12_chikara), 0, 5)
+			..()
+	pel12_chikara
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+				if(!istype(m, /mob/npc/combat/political_escort/leaf/chikara))
+					var/mob/npc/combat/political_escort/political_escort = m
+					political_escort.last_node = src
+
+					walk_to(m, locate(/obj/escort/pel13_toki), 0, 5)
+				else
+					var/mob/npc/combat/political_escort/political_escort = m
+					political_escort.last_node = src
+
+					walk_to(m, locate(/obj/escort/pel13_chikara), 0, 5)
+				..()
+	pel13_chikara
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/chikara))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel14_chikara), 0, 5)
+			..()
+
+	pel14_chikara
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/chikara))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel15_chikara), 0, 5)
+			..()
+
+	pel15_chikara
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/chikara))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel_end_chikara), 0, 5)
+			..()
+
+	pel_end_chikara
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/chikara))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				if(political_escort.squad)
+					for(var/mob/player in mobs_online)
+						if(political_escort.squad.members[player.client.ckey])
+							spawn()
+								political_escort.squad.mission.Complete(player)
+								del m
+			..()
+	pel13_toki
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/toki))
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel14_toki), 0, 5)
+			..()
+
+	pel14_toki
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/leaf/toki))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pel_end_toki), 0, 5)
+			..()
+
+	pel_end_toki
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
 				if(political_escort.squad)
 					for(var/mob/player in mobs_online)
 						if(political_escort.squad.members[player.client.ckey])
@@ -596,34 +915,398 @@ obj/escort
 								del m
 			..()
 
+//SAND escort nodes
+
 	pes1
 		icon = 'placeholdertiles.dmi'
 		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes2), 0, 5)
+			..()
 	pes2
 		icon = 'placeholdertiles.dmi'
 		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes3), 0, 5)
+			..()
 	pes3
 		icon = 'placeholdertiles.dmi'
 		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes4), 0, 5)
+			..()
+
 	pes4
 		icon = 'placeholdertiles.dmi'
 		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes5), 0, 5)
+			..()
+
 	pes5
 		icon = 'placeholdertiles.dmi'
 		icon_state = "escortnode"
 		New()
 			..()
 			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
 
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes6), 0, 5)
+			..()
+
+	pes6
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				m.loc = locate(100,1,6)
+				walk_to(m, locate(/obj/escort/pes7), 0, 5)
+			..()
+
+	pes7
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes8), 0, 5)
+			..()
+
+	pes8
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes9_chichiatsu), 0, 5)
+			..()
+
+	pes9_chichiatsu
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+				if(!istype(m, /mob/npc/combat/political_escort/sand/chichiatsu))
+					var/mob/npc/combat/political_escort/political_escort = m
+					political_escort.last_node = src
+
+					walk_to(m, locate(/obj/escort/pes10), 0, 5)
+				else
+					var/mob/npc/combat/political_escort/political_escort = m
+					political_escort.last_node = src
+
+					walk_to(m, locate(/obj/escort/pes10_chichiatsu), 0, 5)
+				..()
+
+	pes10_chichiatsu
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/chichiatsu))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes11_chichiatsu), 0, 5)
+			..()
+
+	pes11_chichiatsu
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/chichiatsu))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes12_chichiatsu), 0, 5)
+			..()
+
+	pes12_chichiatsu
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/chichiatsu))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes13_chichiatsu), 0, 5)
+			..()
+
+	pes13_chichiatsu
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/chichiatsu))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes14_chichiatsu), 0, 5)
+			..()
+
+	pes14_chichiatsu
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/chichiatsu))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes_end_chichiatsu), 0, 5)
+			..()
+
+	pes_end_chichiatsu
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/chichiatsu))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				if(political_escort.squad)
+					for(var/mob/player in mobs_online)
+						if(political_escort.squad.members[player.client.ckey])
+							spawn()
+								political_escort.squad.mission.Complete(player)
+								del m
+			..()
+	pes10
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes11), 0, 5)
+			..()
+	pes11
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				m.loc = locate(1,103,4)
+				walk_to(m, locate(/obj/escort/pes12_danjo), 0, 5)
+			..()
+	pes12_danjo
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+				if(!istype(m, /mob/npc/combat/political_escort/sand/danjo))
+					var/mob/npc/combat/political_escort/political_escort = m
+					political_escort.last_node = src
+
+					walk_to(m, locate(/obj/escort/pes13_tekkan), 0, 5)
+				else
+					var/mob/npc/combat/political_escort/political_escort = m
+					political_escort.last_node = src
+
+					walk_to(m, locate(/obj/escort/pes13_danjo), 0, 5)
+				..()
+	pes13_danjo
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/danjo))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes14_danjo), 0, 5)
+			..()
+
+	pes14_danjo
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/danjo))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes15_danjo), 0, 5)
+			..()
+
+	pes15_danjo
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/danjo))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes_end_danjo), 0, 5)
+			..()
+
+	pes_end_danjo
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/danjo))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				if(political_escort.squad)
+					for(var/mob/player in mobs_online)
+						if(political_escort.squad.members[player.client.ckey])
+							spawn()
+								political_escort.squad.mission.Complete(player)
+								del m
+			..()
+	pes13_tekkan
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort))
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes14_tekkan), 0, 5)
+			..()
+
+	pes14_tekkan
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/tekkan))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				walk_to(m, locate(/obj/escort/pes_end_tekkan), 0, 5)
+			..()
+
+	pes_end_tekkan
+		icon = 'placeholdertiles.dmi'
+		icon_state = "escortnode"
+		New()
+			..()
+			src.icon_state = "blank"
+		Crossed(mob/m)
+			if(istype(m, /mob/npc/combat/political_escort/sand/tekkan))
+
+				var/mob/npc/combat/political_escort/political_escort = m
+				political_escort.last_node = src
+
+				if(political_escort.squad)
+					for(var/mob/player in mobs_online)
+						if(political_escort.squad.members[player.client.ckey])
+							spawn()
+								political_escort.squad.mission.Complete(player)
+								del m
+			..()
