@@ -59,7 +59,7 @@ mob/npc
 			var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
 			if(O && O.squad.mission)
 				O.squad.mission.Complete(usr)
-			else(usr.client.Alert("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == 1)
+			else if(usr.client.Alert("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == 1)
 				usr.loc = locate(100,32,4)
 			usr.move=1
 
