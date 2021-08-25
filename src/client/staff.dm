@@ -631,7 +631,7 @@ mob
 					if(1)
 						var/list/exclude = list(usr)
 						for(var/mob/m in mobs_online)
-							if(m.village != usr.village || m.rank != RANK_CHUUNIN || m.rank != RANK_JOUNIN) exclude += m
+							if(m.village != usr.village || (m.rank != RANK_CHUUNIN && m.rank != RANK_JOUNIN)) exclude += m
 
 						var/mob/m = input("Who would you like to promote to [RANK_ANBU]?", "Manage [RANK_ANBU]") as null|anything in mobs_online - exclude
 						if(m)
