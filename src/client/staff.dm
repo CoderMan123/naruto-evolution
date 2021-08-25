@@ -745,6 +745,9 @@ mob
 										world << output("[usr.character] has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.", "Action.Output")
 										text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.</font><br />", LOG_KAGE)
 								
+								kages[usr.village] = null
+								kages_last_online[usr.village] = null
+								
 								usr.SetRank(RANK_CHUUNIN)
 
 mob
