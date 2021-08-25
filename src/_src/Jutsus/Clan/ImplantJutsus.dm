@@ -93,6 +93,9 @@ mob
 				if(istype(c_target, /mob/npc/combat/political_escort))
 					src<<output("It appears that the Daimyo is protected against spacial inteferance!","Action.Output")
 					return
+				if(locate(/obj/Inventory/mission/deliver_intel) in c_target.contents)
+					src<<output("The seal in their scroll is preventing spacial travel!","Action.Output")
+					return
 				if(c_target.jailed == 1)
 					src<<output("Your target is jailed.","Action.Output")
 					return

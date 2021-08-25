@@ -609,6 +609,10 @@ mob
 		Shunshin()
 			for(var/obj/Jutsus/Body_Flicker/J in src.jutsus)
 				if(src.PreJutsu(J))
+					var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
+					if(O)
+						src<<output("The seal in the scroll is preventing my Body flicker!","Action.Output")
+						return
 					if(!move) return
 					if(injutsu) return
 					if(copy=="Climb") return
