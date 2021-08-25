@@ -382,8 +382,8 @@ mob/npc
 			var/tmp/last_location
 			var/tmp/last_location_time
 			var/tmp/obj/last_node
-			health=20000
-			maxhealth=20000
+			health=15000
+			maxhealth=15000
 			New()
 				..()
 				src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
