@@ -116,8 +116,15 @@ mission
 					M.Levelup()
 					spawn() M.client.UpdateCharacterPanel()
 					spawn() M.UpdateHMB()
-
-					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
+					if(M.village == VILLAGE_AKATSUKI)
+						M.client.Alert("Excellent work. We'll make good use of this.", "Zetsu")
+						M << output("You have successfully stolen intel and you have recieved 1 exp and 1 ryo for your effort!.", "Action.Output")
+					else if(M.village == VILLAGE_MISSING_NIN)
+						M.client.Alert("Ah wonderful. Here's your money now get lost before someone sees us.", "Shady Looking Figure")
+						M << output("You have successfully stolen intel and you have recieved 1 exp and 1 ryo for your effort!.", "Action.Output")
+					else
+						spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
+						M << output("You have completed your mission and you have recieved 1 exp and 1 ryo for your effort!.", "Action.Output")
 
 			if(/mission/b_rank/hunting_rogues)
 				if(squad && !squad.mission.complete)

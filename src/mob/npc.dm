@@ -23,23 +23,27 @@ mob/npc
 		src.SetName(src.name)
 
 	shady_man
-		name = "Shady Looking Man"
+		name = "Shady Looking Figure"
 		icon = 'WhiteMBase.dmi'
+		village = VILLAGE_MISSING_NIN
 		New()
 			..()
 			src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
 			src.overlays += 'Shade.dmi'
 			src.overlays+='Shirt.dmi'
 			src.overlays+='Sandals.dmi'
-		Click()
+		DblClick()
 			if(usr.dead)return
 			if(get_dist(src,usr)>2)return
 			if(usr)usr.move=0
-			var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
-			if(O && O.squad.mission)
-				O.squad.mission.Complete(usr)
+			if(usr.village == VILLAGE_MISSING_NIN)
+				var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
+				if(O && O.squad.mission)
+					O.squad.mission.Complete(usr)
+				else
+					usr.client.Alert("Psst, hey you there. If you can get me some intel on the shinobi villages I'll pay you handsomely.", src.name)
 			else
-				usr.client.Alert("Psst, hey you there. If you can get me some intel on the shinobi villages I'll pay you handsomely.", src.name)
+				usr.client.Alert("Buzz off, I don't speak with the likes of you.", src.name)
 			usr.move=1
 
 	zetsu //not to be confused with white zetsu
@@ -48,7 +52,7 @@ mob/npc
 		village = VILLAGE_AKATSUKI
 		//100,161,5
 
-		Click()
+		DblClick()
 			if(usr.dead)return
 			if(get_dist(src,usr)>2)return
 			if(usr)usr.move=0
