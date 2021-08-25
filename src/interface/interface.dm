@@ -9,7 +9,7 @@ client
 					src.channel = "Village"
 
 				if("Village")
-					if(src.mob.Squad) src.channel = "Squad"
+					if(src.mob.GetSquad()) src.channel = "Squad"
 					else if(src.mob.Faction) src.channel = "Faction"
 					else src.channel = "Global"
 

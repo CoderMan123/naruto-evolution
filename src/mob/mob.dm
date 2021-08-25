@@ -347,13 +347,14 @@ mob
 
 						if("Village")
 							for(var/mob/M in mobs_online)
-								if(src.village == M.village || M.client.ckey in administrators)
+								if(src.village == M.village || administrators.Find(M.client.ckey))
 									M << ffilter("<font color='yellow'>\[V]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 						if("Squad")
-							if(src.Squad)
+							if(src.GetSquad())
 								for(var/mob/M in mobs_online)
-									if(M.ckey == src.Squad.Leader || src.Squad.Members.Find(M.ckey) || src.client.ckey in administrators)
+									var/squad/squad = M.GetSquad()
+									if(squad.leader[M.ckey] || squad.members.Find(M.ckey) || administrators.Find(src.client.ckey))
 										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 							else
 								src << "You cannot speak in the squad channel because you are not currently in a squad."
@@ -362,7 +363,7 @@ mob
 							if(src.Faction)
 								var/Faction/F = src.Faction
 								for(var/mob/M in mobs_online)
-									if(src.Faction == M.Faction || M.client.ckey in administrators)
+									if(src.Faction == M.Faction || administrators.Find(M.client.ckey))
 										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'> [html_encode(msg)]</font>")
 
 							else
