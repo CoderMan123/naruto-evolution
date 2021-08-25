@@ -125,6 +125,7 @@ mission
 					else
 						spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 						M << output("You have completed your mission and you have recieved 1 exp and 1 ryo for your effort!.", "Action.Output")
+					O.squad.mission = null
 
 			if(/mission/b_rank/hunting_rogues)
 				if(squad && !squad.mission.complete)
