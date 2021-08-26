@@ -2086,21 +2086,21 @@ obj
 							flick("[src.hitstate]",src)
 							src.Hit=1
 							M.DealDamage(src.damage,src.Owner,"NinBlue")
-							if(prob(50))
+							if(prob(80))
 								M.Linkage=src
 								M.overlays+=/obj/Projectiles/Effects/OnFire
 								if(src.level==1)
 									M.burn=4
-									spawn(50)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(Owner)
 								if(src.level==2)
 									M.burn=6
-									spawn(50)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(Owner)
 								if(src.level==3)
 									M.burn=8
-									spawn(50)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(Owner)
 								if(src.level==4)
 									M.burn=10
-									spawn(50)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(Owner)
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							spawn(7)if(src)src.loc=locate(0,0,0)
 						else
@@ -2113,21 +2113,21 @@ obj
 								flick("fireballhit",src)
 								src.Hit=1
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
-								if(prob(50))
+								if(prob(80))
 									M.Linkage=src
 									M.overlays+=/obj/Projectiles/Effects/OnFire
 									if(src.level==1)
 										M.burn=4
-										spawn(50)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(Owner)
 									if(src.level==2)
 										M.burn=6
-										spawn(50)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(Owner)
 									if(src.level==3)
 										M.burn=8
-										spawn(50)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(Owner)
 									if(src.level==4)
 										M.burn=10
-										spawn(50)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(Owner)
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								spawn(7)if(src)src.loc=locate(0,0,0)
 							else src.loc=M.loc
@@ -2386,8 +2386,7 @@ mob
 				view(src)<<sound('boom.wav',0,0)
 				spawn(4)if(src)src.BurnEffect(X)
 			else
-				src.overlays=0
-				src.RestoreOverlays()
+				src.overlays-=/obj/Projectiles/Effects/OnFire
 				if(src.Linkage)
 					var/obj/OBJ=src.Linkage
 					if(OBJ)del(OBJ)
