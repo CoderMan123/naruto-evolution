@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Missions
 - - New missions for all ranks
 
+- And much more!
+
 ### Changed
 - Combat System
 - - Jutsu statistics are now handled modularly with formulas to make balancing far easier
@@ -67,6 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Kage
 - - Can only be one kage no matter what
 - - Kage verbs have been overhauled
+
+- And much more!
 
 ### Fixed
 - Bug Fixes
