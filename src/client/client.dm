@@ -37,6 +37,13 @@ client
 		src.Load()
 		spawn() src.mob.Playtime()
 
+		for(var/client/source in clients_connected)
+			for(var/client/target in clients_connected)
+				if(source != target)
+					if(source.computer_id == target.computer_id)
+						spawn() src.client.Alert("Running multiple clients isn't allowed on this server. Please logout of your other character before proceeding to login. Your connection to the server has been terminated.")
+						del(src)
+
 	Del()
 		src.mob.LogoutCharacter()
 		src.mob.Save()
