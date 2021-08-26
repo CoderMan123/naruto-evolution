@@ -46,6 +46,9 @@ mob
 							src.move=1
 							src.canattack=1
 							src.injutsu=0
+					src.canattack=1
+					src.firing=0
+
 		Amaterasu()
 			for(var/obj/Jutsus/Amaterasu/J in src.jutsus)
 				if(Sharingan<=3)
