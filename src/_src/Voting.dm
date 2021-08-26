@@ -182,7 +182,7 @@ mob/verb/
 		var/mob/P=CustomInput("Who do you want to call a Boot Vote against?","Boot",X+"Cancel")
 		if(P=="Cancel") return
 		var/mob/p = X["[P]"]
-		if(p.admin)
+		if(p.client.ckey in administrators)
 			src<<output("You cannot call a vote against this person.","Action.Output")
 			return
 		Boot_Elects+=p

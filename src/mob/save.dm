@@ -47,6 +47,9 @@ mob
 		if(src.client)
 			if(mobs_online.Find(src))
 				if(character)
+					src.last_online = world.realtime
+					if(kages[src.village] == src.client.ckey) kages_last_online[src.village] = src.last_online
+
 					var/list/exclude = list("icon", "icon_state", "overlays", "underlays", "alpha", "layer", "bound_width", "bound_height", "bound_x", "bound_y", "pixel_x", "pixel_y", "appearance_flags", "transform", "vis_contents", "filters", "view")
 					for(var/v in src.vars)
 						if(issaved(src.vars[v]))
@@ -90,6 +93,8 @@ mob
 			if(!mobs_online.Find(src))
 				if(character)
 					src.last_online = world.realtime
+					if(kages[src.village] == src.client.ckey) kages_last_online[src.village] = src.last_online
+
 					for(var/v in src.vars)
 						if(issaved(src.vars[v]))
 							if(!isnull(F[v]))
@@ -121,25 +126,6 @@ mob
 		spawn() src.Run()
 		spawn() src.HealthRegeneration()
 		spawn() src.WeaponryDelete()
-		src.AddAdminVerbs()
-
-		if(Kages["Hidden Leaf"] != src.ckey && Kages["Hidden Sand"] != src.ckey)
-			src.verbs -= typesof(/mob/Kage/verb)
-
-			if(src.rank == RANK_HOKAGE || src.rank == RANK_KAZEKAGE)
-				src.rank = RANK_GENIN
-
-			for(var/obj/Inventory/Clothing/HeadWrap/HokageHat/S in src.contents)
-				S.loc = null
-				
-			for(var/obj/Inventory/Clothing/Robes/HokageRobe/S in src.contents)
-				S.loc = null
-			
-			for(var/obj/Inventory/Clothing/HeadWrap/KazekageHat/S in src.contents)
-				S.loc = null
-
-			for(var/obj/Inventory/Clothing/Robes/KazekageRobe/S in src.contents)
-				S.loc = null
 
 		if(src.MuteTime) spawn() src.Muted()
 
@@ -171,8 +157,10 @@ mob
 			else
 				m << "[src.name] has logged in."
 
-		src << "Now speaking in: [src.client.channel]."
 		src << output("<br /><b><u>Basic Controls:</u></b><br><b>A:</b> Attack<br><b>S:</b> Use weapon<br><b>D:</b> Block/Special<br><b>1</b>,<b>2</b>,<b>3</b>,<b>4</b>,<b>5</b>,<b>Q</b>,<b>W</b>,<b>E:</b> Handseals<br><b>Space:</b> Execute handseals<br><b>Arrows:</b> Move<br><b>F1 - F10:</b> Hotslots<br><b>R:</b> Recharge chakra<br><b>I:</b> Inventory<br><b>O:</b> Statpanel<br><b>P:</b> Jutsus<br>Press the <b>\[Enter]</b> key to talk. Type <i>/help</i> to view commands that can be spoken verbally.<br />","Action.Output")
+		src << "Now speaking in channel: [src.client.channel]."
+
+		src.client.StaffCheck()
 
 		new/obj/Screen/Bar(src)
 		switch(src.village)
@@ -238,7 +226,6 @@ mob
 			if(src.suffix == "(Equipped)")
 				src.ClothingOverlays["[C.section]"] = C.icon
 
-		// FINISH BELOW THIS LINE
 		GetScreenResolution(src)
 
 		src.density=1
@@ -265,6 +252,3 @@ mob
 			src.swimming=0
 			src.walkingonwater=0
 			src.overlays=0
-
-		src.namecolor="green"
-		src.chatcolor="white"
