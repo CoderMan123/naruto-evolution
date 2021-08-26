@@ -467,12 +467,15 @@ mob
 						if(!istype(src, /mob/npc/combat/white_zetsu))
 							text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)//Kill Log test
 						src<<output("You were knocked out by [X].","Action.Output")
-						var/exp_loss = 2
-						src.exp -= exp_loss
-						src << output("You lose [exp_loss] experience points.","Action.Output")
-						X.levelrate+=2
-						X.exp+=rand(3,(X.levelrate))
-						if(X.levelrate>=5) X.levelrate=5
+						if(!istype(src, /mob/npc/combat/animals))
+							var/exp_loss = 2
+							src.exp -= exp_loss
+							src << output("You lose [exp_loss] experience points.","Action.Output")
+							X.levelrate+=2
+							X.exp+=rand(3,(X.levelrate))
+							if(X.levelrate>=5) X.levelrate=5
+						else
+							X.exp += src.exp_reward
 
 						// Loot Ryo //
 						X.ryo += src.ryo

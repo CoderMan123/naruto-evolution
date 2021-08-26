@@ -70,6 +70,7 @@ mob
 						icon = 'Squirrel.dmi'
 						health = 20
 						maxhealth = 20
+						exp_reward = 2
 						var/tmp/mob/target
 						var/retreating = 0
 						var/tmp/climbing = 0
@@ -164,6 +165,7 @@ mob
 						icon = 'Chipmonk.dmi'
 						health = 20
 						maxhealth = 20
+						exp_reward = 2
 						var/tmp/mob/target
 						var/retreating = 0
 						var/tmp/climbing = 0
@@ -258,6 +260,7 @@ mob
 						icon = 'Hedgehog.dmi'
 						health = 20
 						maxhealth = 20
+						exp_reward = 1
 						var/tmp/mob/target
 						var/tmp/retreating = 0
 						var/tmp/idle = 0
@@ -320,6 +323,7 @@ mob
 						icon = 'Hare.dmi'
 						health = 20
 						maxhealth = 20
+						exp_reward = 1
 						var/tmp/mob/target
 						var/retreating = 0
 						var/tmp/idle = 0
@@ -378,6 +382,7 @@ mob
 						icon = 'Rabbit.dmi'
 						health = 20
 						maxhealth = 20
+						exp_reward = 1
 						var/tmp/mob/target
 						var/retreating = 0
 						var/tmp/idle = 0
@@ -440,6 +445,7 @@ mob
 					icon = 'Buck.dmi'
 					health = 20
 					maxhealth = 20
+					exp_reward = 1
 					var/tmp/mob/target
 					var/retreating = 0
 					var/tmp/idle = 0
@@ -495,6 +501,7 @@ mob
 					icon = 'Doe.dmi'
 					health = 20
 					maxhealth = 20
+					exp_reward = 1
 					var/tmp/mob/target
 					var/retreating = 0
 					var/tmp/idle = 0
@@ -555,6 +562,7 @@ mob
 					icon = 'Fawn.dmi'
 					health = 20
 					maxhealth = 20
+					exp_reward = 1
 					var/tmp/mob/target
 					var/retreating = 0
 					var/tmp/idle = 0
@@ -610,6 +618,7 @@ mob
 
 				snake
 					icon='Snake.dmi'
+					exp_reward = 3
 					var/punch_cd=0
 					var/attacking = 0
 					var/tmp/mob/target

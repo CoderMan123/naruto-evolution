@@ -55,6 +55,7 @@ mob
 		Muted=0
 		skiptut=0
 		JashinSacrifices=0
+		exp_reward = 0
 		tmp
 			AFK=0
 			BeingThrown
