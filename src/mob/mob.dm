@@ -40,20 +40,25 @@ mob
 		src.client.perspective = EYE_PERSPECTIVE
 		spawn() GetScreenResolution(src)
 		src.client.screen += new/obj/Logos/Naruto_Evolution
+
 		spawn()
-			while(!mobs_online.Find(src))
-				sleep(250)
+			while(src && !mobs_online.Find(src))
 				random_location = pick(eye_locations)
 				login_eye.loc = random_location.loc
+				sleep(250)
+
 		spawn()
-			while(!mobs_online.Find(src))
+			while(src && !mobs_online.Find(src))
 				step_rand(login_eye)
 				sleep(3)
 			del(login_eye)
 
 	Logout()
+		if(!src.key)
+			world << "[src.name] has switched mobs."
 		..()
-		for(var/obj/Inventory/mission/deliver_intel/o in src.contents) src.DropItem(o)
+		del(src)
+		
 
 	verb/LoginCharacter()
 		set hidden = 1
@@ -79,6 +84,236 @@ mob
 			winset(src,"Titlescreen.Password","text=")
 
 			src.Load(character, password)
+	
+	proc/LogoutCharacter()
+		for(var/mob/m in mobs_online)
+			if(administrators.Find(m.client.ckey) || moderators.Find(m.client.ckey))
+				if(clients_multikeying.Find(src.client))
+					m << "[src.name] ([src.client.ckey]) <sup>(Multikey)</sup> has logged out."
+				else
+					m << "[src.name] ([src.client.ckey]) has logged out."
+			else
+				m << "[src.name] has logged out."
+
+		for(var/obj/Inventory/mission/deliver_intel/o in src.contents) src.DropItem(o)
+
+		for(var/obj/O in world) if(O.IsJutsuEffect == src) del(O)
+
+		for(var/mob/M in src.puppets) del(M)
+
+		if(src.multisized)
+			src.appearance_flags = PIXEL_SCALE | KEEP_TOGETHER
+
+			var/matrix/m = matrix()
+			m.Scale(1,1)
+			src.transform = m
+
+			src.bound_height = initial(src.bound_height)
+			src.bound_width = initial(src.bound_width)
+			src.bound_x = initial(src.bound_x)
+			src.layer = initial(src.layer)
+
+		if(src.ingpill)
+			src.strength -= 15
+
+		if(src.inypill)
+			src.strength -= 25
+
+		if(src.inrpill)
+			src.strength -= 40
+
+		if(src.dueling)
+			src.loc = MapLoadSpawn()
+			src.opponent.loc = MapLoadSpawn()
+			src.opponent.dueling = 0
+			arenaprogress = 0
+			world<<"[src] has logged out during an Arena challenge. Match has become Null."
+
+		if(src.incalorie)
+			for(var/obj/Jutsus/CalorieControl/J in src.jutsus)
+				src.strength -= J.damage
+				
+		if(src.incurse)
+			src.strength -= 15
+			src.ninjutsu -= 10
+
+		if(src.insage)
+			src.strength -= 10
+			src.ninjutsu -= 20
+
+		if(src.inJC1)
+			src.ninjutsu -= 35
+			src.defence -= 35
+
+		if(src.inJC2)
+			src.ninjutsu -= 35
+			src.agility -= 35
+
+		if(src.inJC3)
+			src.defence -= 50
+
+		if(src.inJC4)
+			src.strength -= 50
+
+		if(src.inJC5)
+			src.strength -= 35
+			src.agility -= 35
+
+		if(src.inJC6)
+			src.ninjutsu -= 50
+
+		if(src.inJC7)
+			src.strength -= 35
+			src.agility -= 35
+
+		if(src.inJC8)
+			src.strength -= 50
+
+		if(src.inJC9)
+			src.strength -= 35
+			src.ninjutsu -= 35
+
+		if(src in global.genintesters)
+			global.genintesters -= src
+			src.loc = MapLoadSpawn()
+
+		if(Chuunins.Find(src))
+			Chuunins -= src
+			src.loc = MapLoadSpawn()
+			for(var/obj/ChuuninExam/Scrolls/S in src) del(S)
+
+		if(src.village != "Anbu Root")
+			for(var/obj/Inventory/Clothing/Robes/Anbu_Suit/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+			for(var/obj/Inventory/Clothing/Masks/Absolute_Zero_Mask/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+		if(src.village != "Akatsuki")
+			for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+			for(var/obj/Inventory/Clothing/HeadWrap/AkatsukiHat/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+				
+			for(var/obj/Inventory/Clothing/Masks/Tobi_Mask/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+		/*if(src.rank != "ANBU")
+			for(var/obj/Inventory/Clothing/Masks/Anbu/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+			for(var/obj/Inventory/Clothing/Masks/Anbu_Black/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+			for(var/obj/Inventory/Clothing/Masks/Anbu_Blue/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+			for(var/obj/Inventory/Clothing/Masks/Anbu_Purple/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)*/
+
+		if(src.rank != "Sage")
+			for(var/obj/Inventory/Clothing/Robes/Sage_Robe/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+		if(src.rank != "Hokage")
+			for(var/obj/Inventory/Clothing/Robes/HokageRobe/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+			for(var/obj/Inventory/Clothing/HeadWrap/HokageHat/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+		if(src.rank != "Kazekage")
+			for(var/obj/Inventory/Clothing/Robes/KazekageRobe/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+				
+			for(var/obj/Inventory/Clothing/HeadWrap/KazekageHat/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+		if(src.rank != "Otokage")
+			for(var/obj/Inventory/Clothing/Robes/OtokageRobe/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+			for(var/obj/Inventory/Clothing/HeadWrap/OtokageHat/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+		if(src.rank != "Mizukage")
+			for(var/obj/Inventory/Clothing/HeadWrap/MizukageHat/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+			for(var/obj/Inventory/Clothing/Robes/MizukageRobe/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+		if(src.rank != "Tsuchikage")
+			for(var/obj/Inventory/Clothing/HeadWrap/TsuchikageHat/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+			for(var/obj/Inventory/Clothing/Robes/TsuchikageRobe/O in src.contents)
+				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+				del(O)
+
+		if(NaraTarget)
+			var/mob/M = NaraTarget
+			if(M)
+				M.move = 1
+				M.injutsu = 0
+				M.canattack = 1
+
+		if(Prisoner)
+			var/mob/M = Prisoner
+			if(M)
+				M.move = 1
+				M.canattack = 1
+				M.injutsu = 0
+
+				if(M.client)
+					M.client.eye = M
+					M.client.perspective = EYE_PERSPECTIVE
+
+		for(var/mob/Clones/C in src.Clones)
+			del(C)
+
+		var/Faction/c = getFaction(src.Faction)
+		if(c)
+			c.onlinemembers -= usr
+			c.members[rname] = list(key, level, Factionrank)
+			usr.verbs -= Factionverbs
+
+		for(var/mob/jutsus/Summon_Spider/A in world)
+			if(A.OWNER == src)
+				del(A)
+
+		for(var/mob/summonings/SnakeSummoning/B in world)
+			if(B.lowner == src)
+				del(B)
+
+		for(var/mob/jutsus/KazekagePuppet/C in world)
+			if(C.OWNER == src)
+				del(C)
+
+		for(var/mob/summonings/DogSummoning/D in world)
+			if(D.lowner == src)
+				del(D)
+		
 
 	verb/CreateCharacter()
 		set hidden = 1

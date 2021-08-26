@@ -38,10 +38,11 @@ client
 		spawn() src.mob.Playtime()
 
 	Del()
+		src.mob.LogoutCharacter()
 		src.mob.Save()
-		src.Save()
-
 		mobs_online -= src.mob
+
+		src.Save()
 		clients_online -= src
 		clients_connected -= src
 

@@ -7,7 +7,6 @@ mob
 		HairColorRed
 		HairColorBlue
 		HairColorGreen
-		inAngel=0
 		Genderswag
 		skintoneswag
 

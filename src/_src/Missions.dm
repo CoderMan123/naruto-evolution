@@ -3,7 +3,6 @@ mob/var/tmp/list/Killed=list()
 mob/var/tmp/Mission
 mob/var/tmp/list/RecentVerbs=list()
 mob/var/LastMissionTime=0
-mob/var/MissionUp = 0
 
 mob/proc/RecentVerbsCheck(var/verbs, var/timer, var/spam = 0)
 	if(src.RecentVerbs[verbs])

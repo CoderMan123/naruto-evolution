@@ -2839,7 +2839,7 @@ obj
 
 
 mob
-	var
+	var/tmp
 		insage=0
 		incurse=0
 		ingpill=0
@@ -2850,6 +2850,8 @@ mob
 		caged=0
 		industprison=0
 		ringed=0
+		inAngel=0
+		
 mob
 	Bump(M)
 		if(src.inboulder==1)//boulderstuff
