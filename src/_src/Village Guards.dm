@@ -449,7 +449,7 @@ mob/NPCs/Shinobi
 						killer.overlays=null
 						killer.ReAddClothing()
 						killer.RestoreOverlays()
-						killer.client.StaffCheck()
+						killer.RemoveAdminVerbs()
 					if(killer.village=="Anbu Root")
 						for(var/obj/Inventory/Clothing/Robes/Anbu_Suit/O in killer)
 							if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
@@ -457,7 +457,7 @@ mob/NPCs/Shinobi
 						killer.overlays=null
 						killer.ReAddClothing()
 						killer.RestoreOverlays()
-						killer.client.StaffCheck()
+						killer.RemoveAdminVerbs()
 					killer.village="Missing-Nin"
 					killer.rank="Missing-Nin"
 					var/squad/squad = killer.GetSquad()

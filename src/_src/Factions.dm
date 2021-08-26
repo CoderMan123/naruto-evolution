@@ -166,7 +166,7 @@ Faction
 			M << output("You are now a [membername]","Action.Output")
 			src.onlinemembers << output("<font color=[src.color]>[M.rname] has joined your Faction. </font>","Action.Output")
 			for(var/mob/P in mobs_online)
-				if(P.client.ckey in administrators) P<<output("<font color=[src.color]>[M.rname]([M.ckey]) is now a member of the [Filter(html_encode(src.name))]</font>","Action.Output")
+				if(P.admin)P<<output("<font color=[src.color]>[M.rname]([M.ckey]) is now a member of the [Filter(html_encode(src.name))]</font>","Action.Output")
 			M.Faction("[name]",color)
 			return 1
 		Fire_Member(mob/M)

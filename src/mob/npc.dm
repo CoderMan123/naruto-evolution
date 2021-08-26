@@ -59,7 +59,7 @@ mob/npc
 			var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
 			if(O && O.squad.mission)
 				O.squad.mission.Complete(usr)
-			else if(usr.client.Alert("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == 1)
+			else(usr.client.Alert("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == 1)
 				usr.loc = locate(100,32,4)
 			usr.move=1
 
@@ -393,7 +393,7 @@ mob/npc
 				src.move=1
 				src.injutsu=0
 				src.canattack=1
-				spawn(5) view() << ffilter("<font color='[src.name_color]'>[src.name]</font>: <font color='[COLOR_CHAT]'>[bark]</font>")
+				spawn(5) view() << ffilter("<font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[bark]</font>")
 				spawn()
 					while(src && !src.dead)
 						if(src.last_location != src.loc)

@@ -7,7 +7,10 @@ mob
 			src<<"/Mute -- Vote to mute a player."
 			src<<"/Boot -- Vote to boot an afk player."
 			src<<"/Help -- View all commands."
-			
+	//	ChangeNameColor()
+	//		namecolor = input("What color will your name be?") as null|color
+	//	ChangeTextColor()
+	//		chatcolor=input("What color will your chat text be?") as null|color
 		Stuck()
 
 			if(Tutorial!=7)//TUT
@@ -84,7 +87,7 @@ mob
 					src.overlays=null
 					src.ReAddClothing()
 					src.RestoreOverlays()
-					src.client.StaffCheck()
+					src.RemoveAdminVerbs()
 				if(village=="Anbu Root")
 					for(var/obj/Inventory/Clothing/Robes/Anbu_Suit/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
@@ -92,7 +95,7 @@ mob
 					src.overlays=null
 					src.ReAddClothing()
 					src.RestoreOverlays()
-					src.client.StaffCheck()
+					src.RemoveAdminVerbs()
 				if(village=="Seven Swordsmen")
 					for(var/obj/Inventory/Weaponry/Zabuza_Sword/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)

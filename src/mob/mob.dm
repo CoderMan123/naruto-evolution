@@ -8,7 +8,6 @@ mob
 		last_online
 
 		name_color = ""
-		name_color_custom = ""
 
 		items=0
 		maxitems=-1 // Max Satchel Slots: -1 = Unlimited
@@ -186,6 +185,7 @@ mob
 			spawn() src.Run()
 			spawn() src.HealthRegeneration()
 			spawn() src.WeaponryDelete()
+			spawn() src.AddAdminVerbs()
 
 			for(var/obj/Logos/Naruto_Evolution/L in src.client.screen) src.client.screen -= L
 
@@ -216,9 +216,7 @@ mob
 					m << "[src] has logged in."
 
 			src << output("<br /><b><u>Basic Controls:</u></b><br><b>A:</b> Attack<br><b>S:</b> Use weapon<br><b>D:</b> Block/Special<br><b>1</b>,<b>2</b>,<b>3</b>,<b>4</b>,<b>5</b>,<b>Q</b>,<b>W</b>,<b>E:</b> Handseals<br><b>Space:</b> Execute handseals<br><b>Arrows:</b> Move<br><b>F1 - F10:</b> Hotslots<br><b>R:</b> Recharge chakra<br><b>I:</b> Inventory<br><b>O:</b> Statpanel<br><b>P:</b> Jutsus<br>Press the <b>\[Enter]</b> key to talk. Type <i>/help</i> to view commands that can be spoken verbally.<br />","Action.Output")
-			src << "Now speaking in channel: [src.client.channel]."
-
-			spawn() src.client.StaffCheck()
+			src << "Now speaking in: [src.client.channel]."
 
 			new/obj/Screen/Bar(src)
 			switch(src.village)
@@ -326,11 +324,8 @@ mob
 					var/whisper_target_online = 0
 					for(var/mob/M in mobs_online)
 						if(whisper == M.name)
-							src << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
-							M << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
-
-							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name] ([src.client.ckey])</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_WHISPER)
-							
+							src << "\[W] [badges] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
+							M << "\[W] [badges] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
 							whisper_target_online = 1
 							break
 
@@ -340,34 +335,25 @@ mob
 				else if(src.likeaclone)
 					if(src.client.channel == "Local")
 						var/mob/clone = src.likeaclone
-						view(clone) << ffilter("[badges] <font color='[clone.name_color]'>[clone.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-
-						text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> [badges] <font color='[clone.name_color]'>[clone.name] ([src.client.ckey])</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_LOCAL)
+						view(clone) << ffilter("[badges] <font color='[clone.namecolor]'>[clone.name]</font>: <font color='[clone.chatcolor]'>[html_encode(msg)]</font>")
 					else
 						src << "Clones can only speak within the say channel."
 
 				else
 					switch(src.client.channel)
 						if("Local")
-							view() << ffilter("[badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-							
-							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_LOCAL)
+							view() << ffilter("[badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 						if("Village")
 							for(var/mob/M in mobs_online)
-								if(src.village == M.village || administrators.Find(M.client.ckey))
-									M << ffilter("<font color='yellow'>\[V]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-							
-							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='yellow'>\[V]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_VILLAGE)
+								if(src.village == M.village || M.admin)
+									M << ffilter("<font color='yellow'>\[V]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 						if("Squad")
-							if(src.GetSquad())
+							if(src.Squad)
 								for(var/mob/M in mobs_online)
-									var/squad/squad = M.GetSquad()
-									if(squad.leader[M.ckey] || squad.members.Find(M.ckey) || administrators.Find(src.client.ckey))
-										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-								
-								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_SQUAD)
+									if(M.ckey == src.Squad.Leader || src.Squad.Members.Find(M.ckey))
+										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 							else
 								src << "You cannot speak in the squad channel because you are not currently in a squad."
 
@@ -375,10 +361,8 @@ mob
 							if(src.Faction)
 								var/Faction/F = src.Faction
 								for(var/mob/M in mobs_online)
-									if(src.Faction == M.Faction || administrators.Find(M.client.ckey))
-										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-								
-								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_FACTION)
+									if(src.Faction == M.Faction || M.admin)
+										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'> [html_encode(msg)]</font>")
 
 							else
 								src << "You cannot speak in the faction channel because you are not currently in a faction."
@@ -387,9 +371,7 @@ mob
 							if(worldmute)
 								src << "You cannot speak in the global channel because it is currently muted."
 							else
-								world << ffilter("<font color='red'>\[G]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-
-								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='red'>\[G]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_GLOBAL)
+								world << ffilter("<font color='red'>\[G]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
 
 				if(message_trim)
 					src << "Your message was longer than 1000 characters and has been trimmed."
@@ -414,7 +396,7 @@ mob
 
 mob
 	proc
-		SetName(var/Name, var/Color = src.name_color_custom, var/Outline = 1)
+		SetName(var/Name, var/Color = src.name_color, var/Outline = 1)
 			if(Name)
 				if(src.client)
 					names_taken.Remove(lowertext(src.name))
@@ -436,13 +418,11 @@ mob
 							if(VILLAGE_SAND) Color = "#886541"
 							if(VILLAGE_MISSING_NIN) Color = "white"
 							if(VILLAGE_AKATSUKI) Color = "#971e1e"
-				
-				src.name_color = Color
 
 				var/obj/name = new()
 				name.layer = MOB_LAYER - 1000
-				name.maptext_width = 256
-				name.pixel_x = name.pixel_x - (name.maptext_width / 2) + (name.maptext_width / 2) / 2
+				name.maptext_width = 128
+				name.pixel_x = name.pixel_x - name.maptext_width / 2 + src.bound_width
 				name.pixel_y -= 16
 				name.maptext = "<span style=\"-dm-text-outline: [Outline]px black; color: [Color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[Name]</span>"
 				src.name_overlays = image(name, src)
@@ -473,125 +453,24 @@ mob
 
 		SetRank(var/RANK)
 			if(RANK)
-				if(RANK != RANK_ANBU)
-					for(var/obj/Inventory/Clothing/Masks/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-				
-				if(RANK != RANK_HOKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/HokageHat/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-					
-					for(var/obj/Inventory/Clothing/Robes/HokageRobe/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-				
-				if(RANK != RANK_KAZEKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/KazekageHat/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-
-					for(var/obj/Inventory/Clothing/Robes/KazekageRobe/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-				
-				if(RANK != RANK_TSUCHIKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/TsuchikageHat/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-
-					for(var/obj/Inventory/Clothing/Robes/TsuchikageRobe/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-				
-				if(RANK != RANK_MIZUKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/MizukageHat/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-
-					for(var/obj/Inventory/Clothing/Robes/MizukageRobe/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-				
-				if(RANK != RANK_OTOKAGE)
-					for(var/obj/Inventory/Clothing/HeadWrap/OtokageHat/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-
-					for(var/obj/Inventory/Clothing/Robes/OtokageRobe/o in src.contents)
-						if(src.ClothingOverlays[o.section] == o.icon)
-							RemoveSection(o.section)
-						o.loc = null
-
-				switch(RANK)
-					if(RANK_ANBU)
-						switch(src.village)
-							if(VILLAGE_LEAF)
-								new /obj/Inventory/Clothing/Masks/Anbu(src)
-
-							if(VILLAGE_SAND)
-								new /obj/Inventory/Clothing/Masks/Anbu_Black(src)
-
-							if(VILLAGE_ROCK)
-								new /obj/Inventory/Clothing/Masks/Anbu_Brown(src)
-
-							if(VILLAGE_MIST)
-								new /obj/Inventory/Clothing/Masks/Anbu_Blue(src)
-
-							if(VILLAGE_SOUND)
-								new /obj/Inventory/Clothing/Masks/Anbu_Purple(src)
-
-					if(RANK_HOKAGE)
-						kages[VILLAGE_LEAF] = src.ckey
-						kages_last_online[VILLAGE_LEAF] = world.realtime
-
-						new /obj/Inventory/Clothing/HeadWrap/HokageHat(src)
-						new /obj/Inventory/Clothing/Robes/HokageRobe(src)
-					
-					if(RANK_KAZEKAGE)
-						kages[VILLAGE_SAND] = src.ckey
-						kages_last_online[VILLAGE_SAND] = world.realtime
-
-						new /obj/Inventory/Clothing/HeadWrap/KazekageHat(src)
-						new /obj/Inventory/Clothing/Robes/KazekageRobe(src)
-					
-					if(RANK_TSUCHIKAGE)
-						kages[VILLAGE_ROCK] = src.ckey
-						kages_last_online[VILLAGE_ROCK] = world.realtime
-
-						new /obj/Inventory/Clothing/HeadWrap/TsuchikageHat(src)
-						new /obj/Inventory/Clothing/Robes/TsuchikageRobe(src)
-					
-					if(RANK_MIZUKAGE)
-						kages[VILLAGE_MIST] = src.ckey
-						kages_last_online[VILLAGE_MIST] = world.realtime
-
-						new /obj/Inventory/Clothing/HeadWrap/MizukageHat(src)
-						new /obj/Inventory/Clothing/Robes/MizukageRobe(src)
-					
-					if(RANK_OTOKAGE)
-						kages[VILLAGE_SOUND] = src.ckey
-						kages_last_online[VILLAGE_SOUND] = world.realtime
-
-						new /obj/Inventory/Clothing/HeadWrap/OtokageHat(src)
-						new /obj/Inventory/Clothing/Robes/OtokageRobe(src)
-
 				src.rank = RANK
+				src.client.UpdateCharacterPanel()
+				switch(RANK)
+					/*if(RANK_ANBU_ROOT)
+						new/obj/Screen/AnbuSymbol(src)*/
 
-				src.client.StaffCheck()
-				spawn() src.client.UpdateCharacterPanel()
-				spawn() src.client.UpdateInventoryPanel()
+					if(RANK_AKATSUKI)
+						new/obj/Screen/AkatsukiSymbol(src)
+						src.SetVillage(VILLAGE_AKATSUKI)
+
+					if(RANK_AKATSUKI_LEADER)
+						new/obj/Screen/AkatsukiSymbol(src)
+						src.SetVillage(VILLAGE_AKATSUKI)
+
+					// Add SSM
+
+					if(RANK_SEVEN_SWORDSMEN_LEADER)
+						new/obj/Screen/SsmSymbol(src)
 
 		SetRyo(var/ryo)
 			if(ryo)
