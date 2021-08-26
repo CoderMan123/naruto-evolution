@@ -70,6 +70,7 @@ mob
 						src.dir = get_dir(src,c_target)
 					src.icon_state = "jutsuse"
 					var/obj/PoisonMist/O=new(src)
+					O.Owner = src
 					O.Ownzorz=src
 					O.IsJutsuEffect=src
 					spawn(1)src.icon_state = ""
