@@ -252,6 +252,3 @@ mob
 			src.swimming=0
 			src.walkingonwater=0
 			src.overlays=0
-
-		src.namecolor="green"
-		src.chatcolor="white"

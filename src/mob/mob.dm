@@ -8,6 +8,7 @@ mob
 		last_online
 
 		name_color = ""
+		name_color_custom = ""
 
 		items=0
 		maxitems=-1 // Max Satchel Slots: -1 = Unlimited
@@ -325,8 +326,11 @@ mob
 					var/whisper_target_online = 0
 					for(var/mob/M in mobs_online)
 						if(whisper == M.name)
-							src << "\[W] [badges] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
-							M << "\[W] [badges] <font color='[src.namecolor]'>[src.name]</font>: [msg]"
+							src << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
+							M << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
+
+							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name] ([src.client.ckey])</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_WHISPER)
+							
 							whisper_target_online = 1
 							break
 
@@ -336,26 +340,34 @@ mob
 				else if(src.likeaclone)
 					if(src.client.channel == "Local")
 						var/mob/clone = src.likeaclone
-						view(clone) << ffilter("[badges] <font color='[clone.namecolor]'>[clone.name]</font>: <font color='[clone.chatcolor]'>[html_encode(msg)]</font>")
+						view(clone) << ffilter("[badges] <font color='[clone.name_color]'>[clone.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
+
+						text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> [badges] <font color='[clone.name_color]'>[clone.name] ([src.client.ckey])</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_LOCAL)
 					else
 						src << "Clones can only speak within the say channel."
 
 				else
 					switch(src.client.channel)
 						if("Local")
-							view() << ffilter("[badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
+							view() << ffilter("[badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
+							
+							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_LOCAL)
 
 						if("Village")
 							for(var/mob/M in mobs_online)
 								if(src.village == M.village || administrators.Find(M.client.ckey))
-									M << ffilter("<font color='yellow'>\[V]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
+									M << ffilter("<font color='yellow'>\[V]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
+							
+							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='yellow'>\[V]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_VILLAGE)
 
 						if("Squad")
 							if(src.GetSquad())
 								for(var/mob/M in mobs_online)
 									var/squad/squad = M.GetSquad()
 									if(squad.leader[M.ckey] || squad.members.Find(M.ckey) || administrators.Find(src.client.ckey))
-										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
+										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
+								
+								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_SQUAD)
 							else
 								src << "You cannot speak in the squad channel because you are not currently in a squad."
 
@@ -364,7 +376,9 @@ mob
 								var/Faction/F = src.Faction
 								for(var/mob/M in mobs_online)
 									if(src.Faction == M.Faction || administrators.Find(M.client.ckey))
-										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'> [html_encode(msg)]</font>")
+										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
+								
+								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_FACTION)
 
 							else
 								src << "You cannot speak in the faction channel because you are not currently in a faction."
@@ -373,7 +387,9 @@ mob
 							if(worldmute)
 								src << "You cannot speak in the global channel because it is currently muted."
 							else
-								world << ffilter("<font color='red'>\[G]</font> [badges] <font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[html_encode(msg)]</font>")
+								world << ffilter("<font color='red'>\[G]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
+
+								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='red'>\[G]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_GLOBAL)
 
 				if(message_trim)
 					src << "Your message was longer than 1000 characters and has been trimmed."
@@ -398,7 +414,7 @@ mob
 
 mob
 	proc
-		SetName(var/Name, var/Color = src.name_color, var/Outline = 1)
+		SetName(var/Name, var/Color = src.name_color_custom, var/Outline = 1)
 			if(Name)
 				if(src.client)
 					names_taken.Remove(lowertext(src.name))
@@ -420,6 +436,8 @@ mob
 							if(VILLAGE_SAND) Color = "#886541"
 							if(VILLAGE_MISSING_NIN) Color = "white"
 							if(VILLAGE_AKATSUKI) Color = "#971e1e"
+				
+				src.name_color = Color
 
 				var/obj/name = new()
 				name.layer = MOB_LAYER - 1000

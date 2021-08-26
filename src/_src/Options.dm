@@ -7,10 +7,7 @@ mob
 			src<<"/Mute -- Vote to mute a player."
 			src<<"/Boot -- Vote to boot an afk player."
 			src<<"/Help -- View all commands."
-	//	ChangeNameColor()
-	//		namecolor = input("What color will your name be?") as null|color
-	//	ChangeTextColor()
-	//		chatcolor=input("What color will your chat text be?") as null|color
+			
 		Stuck()
 
 			if(Tutorial!=7)//TUT

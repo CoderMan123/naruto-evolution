@@ -34,8 +34,6 @@ mob
 		village="Leaf"
 		rank = RANK_ACADEMY_STUDENT
 		dead=0
-		namecolor="green"
-		chatcolor="white"
 		swimming
 		walkingonwater
 		waterwalk

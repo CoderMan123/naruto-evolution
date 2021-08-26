@@ -485,7 +485,6 @@ mob/MasterGM/verb
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Admin.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		administrators.Find(M.ckey)
 		M.client.StaffCheck()
-		M.namecolor="green"
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 

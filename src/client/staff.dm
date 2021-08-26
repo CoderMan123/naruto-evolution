@@ -165,7 +165,37 @@ mob
 				set category = "Administrator"
 				switch(alert("What would you like to do?", "Manage Logs", "View Logs", "Download Logs", "Clear Logs"))
 					if("View Logs")
-						switch(input("Which logs would you like to view?", "Logs") as null|anything in list(LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+						switch(input("Which logs would you like to view?", "Logs") as null|anything in list(LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+							if(LOG_CHAT_LOCAL)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_CHAT_LOCAL))
+								winset(usr, "Browser", "is-visible = true")
+
+							if(LOG_CHAT_VILLAGE)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_CHAT_VILLAGE))
+								winset(usr, "Browser", "is-visible = true")
+
+							if(LOG_CHAT_SQUAD)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_CHAT_SQUAD))
+								winset(usr, "Browser", "is-visible = true")
+
+							if(LOG_CHAT_FACTION)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_CHAT_FACTION))
+								winset(usr, "Browser", "is-visible = true")
+
+							if(LOG_CHAT_GLOBAL)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_CHAT_GLOBAL))
+								winset(usr, "Browser", "is-visible = true")
+
+							if(LOG_CHAT_WHISPER)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_CHAT_WHISPER))
+								winset(usr, "Browser", "is-visible = true")
+
 							if(LOG_ADMINISTRATOR)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_ADMINISTRATOR))
@@ -207,11 +237,29 @@ mob
 								winset(usr, "Browser", "is-visible = true")
 
 					if("Download Logs")
-						switch(input("Which logs would you like to download?", "Manage Logs") as null|anything in list("All Logs", LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+						switch(input("Which logs would you like to download?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
 								shell("zip -r logs/logs.zip logs/")
 								usr << file("logs.zip")
 								fdel("logs.zip")
+							
+							if(LOG_CHAT_LOCAL)
+								src << ftp(LOG_CHAT_LOCAL)
+
+							if(LOG_CHAT_VILLAGE)
+								src << ftp(LOG_CHAT_VILLAGE)
+
+							if(LOG_CHAT_SQUAD)
+								src << ftp(LOG_CHAT_SQUAD)
+
+							if(LOG_CHAT_FACTION)
+								src << ftp(LOG_CHAT_FACTION)
+
+							if(LOG_CHAT_GLOBAL)
+								src << ftp(LOG_CHAT_GLOBAL)
+
+							if(LOG_CHAT_WHISPER)
+								src << ftp(LOG_CHAT_WHISPER)
 
 							if(LOG_ADMINISTRATOR)
 								usr << ftp(LOG_ADMINISTRATOR)
@@ -238,7 +286,7 @@ mob
 								usr << ftp(LOG_STAFF)
 
 					if("Clear Logs")
-						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
 								switch(alert("Are you sure you want to delete all logs?", "Manage Logs", "Clear All Logs", "Cancel"))
 									if("Clear All Logs")
@@ -252,6 +300,48 @@ mob
 										fdel(LOG_STAFF)
 										usr << output("You have cleared all the server logs.", "Action.Output")
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared all the server logs.", LOG_ADMINISTRATOR)
+							
+							if(LOG_CHAT_LOCAL)
+								switch(src.client.Alert("Are you sure you want to delete the Local Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
+									if(1)
+										fdel(LOG_CHAT_LOCAL)
+										src << output("You have cleared the Local Chat logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Local Chat logs.", LOG_ADMINISTRATOR)
+
+							if(LOG_CHAT_VILLAGE)
+								switch(src.client.Alert("Are you sure you want to delete the Village Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
+									if(1)
+										fdel(LOG_CHAT_VILLAGE)
+										src << output("You have cleared the Village Chat logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Village Chat logs.", LOG_ADMINISTRATOR)
+
+							if(LOG_CHAT_SQUAD)
+								switch(src.client.Alert("Are you sure you want to delete the Squad Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
+									if(1)
+										fdel(LOG_CHAT_SQUAD)
+										src << output("You have cleared the Squad Chat logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Squad Chat logs.", LOG_ADMINISTRATOR)
+
+							if(LOG_CHAT_FACTION)
+								switch(src.client.Alert("Are you sure you want to delete the Faction Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
+									if(1)
+										fdel(LOG_CHAT_FACTION)
+										src << output("You have cleared the Faction Chat logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Faction Chat logs.", LOG_ADMINISTRATOR)
+
+							if(LOG_CHAT_GLOBAL)
+								switch(src.client.Alert("Are you sure you want to delete the Global Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
+									if(1)
+										fdel(LOG_CHAT_GLOBAL)
+										src << output("You have cleared the Global Chat logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Global Chat logs.", LOG_ADMINISTRATOR)
+
+							if(LOG_CHAT_WHISPER)
+								switch(src.client.Alert("Are you sure you want to delete the Whisper Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
+									if(1)
+										fdel(LOG_CHAT_WHISPER)
+										src << output("You have cleared the Whisper Chat logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Whisper Chat logs.", LOG_ADMINISTRATOR)
 
 							if(LOG_ADMINISTRATOR)
 								switch(alert("Are you sure you want to delete the Administrator logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -329,11 +419,11 @@ mob
 						else
 							switch(alert("Please choose a font color for [M].", "Change Name", "Village", "Custom"))
 								if("Village")
-									M.name_color = null
+									M.name_color_custom = null
 
 								if("Custom")
 									var/color = input("What custom character name color would you like for [M]?") as null|color
-									if(color) M.name_color = color
+									if(color) M.name_color_custom = color
 
 							if(M)
 								var/old_character = M.character

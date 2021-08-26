@@ -17,6 +17,12 @@
 #define LOG_SAVES "logs/saves.txt"
 #define LOG_CLIENT_SAVES "logs/client-saves.txt"
 #define LOG_BUGS "logs/bugs.txt"
+#define LOG_CHAT_LOCAL "logs/chat/local.html"
+#define LOG_CHAT_VILLAGE "logs/chat/village.html"
+#define LOG_CHAT_SQUAD "logs/chat/squad.html"
+#define LOG_CHAT_FACTION "logs/chat/faction.html"
+#define LOG_CHAT_GLOBAL "logs/chat/global.html"
+#define LOG_CHAT_WHISPER "logs/chat/whisper.html"
 
 #define BROWSER_NONE 0
 #define BROWSER_SQUAD 1

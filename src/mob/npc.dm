@@ -393,7 +393,7 @@ mob/npc
 				src.move=1
 				src.injutsu=0
 				src.canattack=1
-				spawn(5) view() << ffilter("<font color='[src.namecolor]'>[src.name]</font>: <font color='[src.chatcolor]'>[bark]</font>")
+				spawn(5) view() << ffilter("<font color='[src.name_color]'>[src.name]</font>: <font color='[COLOR_CHAT]'>[bark]</font>")
 				spawn()
 					while(src && !src.dead)
 						if(src.last_location != src.loc)

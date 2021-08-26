@@ -103,6 +103,25 @@ world
 			sleep(600)
 	
 	proc/CreateLogs()
+		
+		if(!fexists(LOG_CHAT_LOCAL))
+			text2file("<body bgcolor = '#414141'>", LOG_CHAT_LOCAL)
+		
+		if(!fexists(LOG_CHAT_VILLAGE))
+			text2file("<body bgcolor = '#414141'>", LOG_CHAT_VILLAGE)
+		
+		if(!fexists(LOG_CHAT_SQUAD))
+			text2file("<body bgcolor = '#414141'>", LOG_CHAT_SQUAD)
+		
+		if(!fexists(LOG_CHAT_FACTION))
+			text2file("<body bgcolor = '#414141'>", LOG_CHAT_FACTION)
+		
+		if(!fexists(LOG_CHAT_GLOBAL))
+			text2file("<body bgcolor = '#414141'>", LOG_CHAT_GLOBAL)
+		
+		if(!fexists(LOG_CHAT_WHISPER))
+			text2file("<body bgcolor = '#414141'>", LOG_CHAT_WHISPER)
+		
 		if(!fexists(LOG_KAGE))
 			text2file("<body bgcolor = '#414141'>", LOG_KAGE)
 
