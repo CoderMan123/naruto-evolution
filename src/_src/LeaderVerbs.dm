@@ -1,268 +1,3 @@
-mob/Kage/verb
-	Boot_From_Village()
-		set category="Kage"
-		var/list/X = list()
-		for(var/mob/M in world)
-			if(M==src||!M.client||!M.key||M.village!=src.village) continue
-			X+=M
-		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
-		var/mob/P=CustomInput("Who do you want to use this on?","Invite",X+"Cancel")
-		if(P=="Cancel") return
-		var/mob/M = X["[P]"]
-		if(M==src) return
-		//if(Kages["[Village]"]!=src.ckey) return
-		if(M.village!=src.village)
-			src<<output("They're not from your village.","Action.Output")
-			return
-		if(client.Alert("Are you sure you want to boot [M] from the [village] village?","Confirm",list("No","Yes"))==1) return
-		world<<output("[M] has been booted from the [village] village.","Action.Output")
-		M.village="Missing-Nin"
-		M.rank="Missing-Nin"
-		var/squad/squad = M.GetSquad()
-		if(squad)
-			squad.Refresh()
-
-	Invite_to_Village()
-		set category="Kage"
-		var/list/X = list()
-		for(var/mob/M in world)
-			if(M==src||!M.client||!M.key||M.rank != "Missing-Nin") continue
-			X+=M
-		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
-		var/mob/P=CustomInput("Who do you want to use this on?","Invite",X+"Cancel")
-		if(P=="Cancel") return
-		var/mob/M = X["[P]"]
-		if(M.client.Alert("[src] invites you to join the [village] village, accept?","Confirm",list("No","Yes"))==1) return
-		world<<output("[M] has joined the [village] village.","Action.Output")
-		M.village="[village]"
-		M.rank = RANK_GENIN
-		var/squad/squad = M.GetSquad()
-		if(squad)
-			squad.Refresh()
-
-	Make_ANBU()
-		set category="Kage"
-		var/list/X = list()
-		for(var/mob/M in world)
-			if(M==src||!M.client||!M.key||M.village!=src.village||M.rank != "Jounin") continue
-			X+=M
-		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
-		var/mob/P=CustomInput("Who do you want to promote to ANBU?","Promote",X+"Cancel")
-		if(P=="Cancel") return
-		var/mob/M = X["[P]"]
-		M<<output("You have been promoted to the ANBU Ops.","Action.Output")
-		M.rank = RANK_ANBU
-		var/squad/squad = M.GetSquad()
-		if(squad)
-			squad.Refresh()
-
-		if(M.village=="Hidden Leaf")//"Hidden Sand"||"Hidden Mist"||
-			new/obj/Inventory/Clothing/Masks/Anbu(M)
-		if(M.village=="Hidden Sand")
-			new/obj/Inventory/Clothing/Masks/Anbu_Black(M)
-		if(M.village=="Hidden Mist")
-			new/obj/Inventory/Clothing/Masks/Anbu_Blue(M)
-		if(M.village=="Hidden Sound")
-			new/obj/Inventory/Clothing/Masks/Anbu_Purple(M)
-		if(M.village=="Hidden Rock")
-			new/obj/Inventory/Clothing/Masks/Anbu_Brown(M)
-		else return
-
-	Demote_ANBU()
-		set category="Kage"
-		var/list/X = list()
-		for(var/mob/M in world)
-			if(M==src||!M.client||!M.key||M.village!=src.village||M.rank != "ANBU") continue
-			X+=M
-		for(var/mob/e in X) if(e.ckey&&e.rank=="ANBU") X["[e.name] ([e.key])"]=e
-		var/mob/P=CustomInput("Who do you want to demote from ANBU?","Demotion",X+"Cancel")
-		if(P=="Cancel") return
-		var/mob/M = X["[P]"]
-		M<<output("You have been booted from the ANBU Ops, and are now a Jounin.","Action.Output")
-		M.rank = RANK_JOUNIN
-		var/squad/squad = M.GetSquad()
-		if(squad)
-			squad.Refresh()
-
-		for(var/obj/Inventory/Clothing/Masks/Anbu/O in M)
-			if(ClothingOverlays[O.section]==O.icon)
-				RemoveSection(O.section)
-			del(O)
-		for(var/obj/Inventory/Clothing/Masks/Anbu_Black/O in M)
-			if(ClothingOverlays[O.section]==O.icon)
-				RemoveSection(O.section)
-			del(O)
-		M.overlays=null
-		M.RestoreOverlays()
-		M.RemoveAdminVerbs()
-	Make_Jounin()
-		set category="Kage"
-		var/list/X = list()
-		for(var/mob/M in world)
-			if(M==src||!M.client||!M.key||M.village!=src.village||M.rank != "Chuunin") continue
-			X+=M
-		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
-		var/mob/P=CustomInput("Who do you want to promote to Jounin?","Promote",X+"Cancel")
-		if(P=="Cancel") return
-		var/mob/M = X["[P]"]
-		M<<output("You have been promoted to Jounin.","Action.Output")
-		M.rank = RANK_JOUNIN
-		var/squad/squad = M.GetSquad()
-		if(squad)
-			squad.Refresh()
-
-	Demote_Jounin()
-		set category="Kage"
-		var/list/X = list()
-		for(var/mob/M in world)
-			if(M==src||!M.client||!M.key||M.village!=src.village||M.rank != "Jounin") continue
-			X+=M
-		for(var/mob/e in X) if(e.ckey&&e.rank=="Jounin") X["[e.name] ([e.key])"]=e
-		var/mob/P=CustomInput("Who do you want to demote from Jounin?","Demotion",X+"Cancel")
-		if(P=="Cancel") return
-		var/mob/M = X["[P]"]
-		M<<output("You have been demoted from Jounin, and are now a Chuunin.","Action.Output")
-		M.rank = RANK_CHUUNIN
-		var/squad/squad = M.GetSquad()
-		if(squad)
-			squad.Refresh()
-
-		for(var/obj/Inventory/Clothing/Masks/Anbu/O in M)
-			if(ClothingOverlays[O.section]==O.icon)
-				RemoveSection(O.section)
-			del(O)
-		for(var/obj/Inventory/Clothing/Masks/Anbu_Black/O in M)
-			if(ClothingOverlays[O.section]==O.icon)
-				RemoveSection(O.section)
-			del(O)
-		M.overlays=null
-		M.RestoreOverlays()
-		M.RemoveAdminVerbs()
-		M.overlays=null
-		M.RestoreOverlays()
-		M.RemoveAdminVerbs()
-		M.overlays=null
-		M.RestoreOverlays()
-		M.RemoveAdminVerbs()
-
-	Retire()
-		set category="Kage"
-		var/list/X=list()
-		if(client.Alert("Are you sure you would like to retire as kage?","Confirmation",list("No","Yes"))==1) return
-		for(var/mob/M in world)
-			if(M==src||!M.client||!M.key||M.village!=src.village) continue
-			X+=M
-		for(var/mob/e in X) if(e.ckey) X["[e.name] ([e.key])"]=e
-		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
-		if(P=="Cancel") return
-		if(P==src)
-			src<<"You're already the kage."
-			return
-		var/mob/M = X["[P]"]
-		if(!M)
-			src<<"Something went wrong, please try again."
-			return
-		Kages["[village]"]=null
-		rank="Elder"
-		var/squad/squad = src.GetSquad()
-		if(squad)
-			squad.Refresh()
-
-		RemoveAdminVerbs()
-		switch(village)
-			if("Hidden Leaf")
-				world<<output("<b><center>[src] has retired as Hokage, and [M] has been promoted as their successor!<b></center>","Action.Output")
-				text2file("[src] has retired as Hokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-
-				M.rank = RANK_HOKAGE
-				Kages["Hidden Leaf"]=M.ckey
-				M.village="Hidden Leaf"
-				squad = M.GetSquad()
-				if(squad)
-					squad.Refresh()
-				for(var/obj/Inventory/Clothing/HeadWrap/HokageHat/S in src)
-					del(S)
-				for(var/obj/Inventory/Clothing/Robes/HokageRobe/S in src)
-					del(S)
-				new/obj/Inventory/Clothing/HeadWrap/HokageHat(M)
-				new/obj/Inventory/Clothing/Robes/HokageRobe(M)
-
-			if("Hidden Sand")
-				world<<output("<b><center>[src] has retired as Kazekage, and [M] has been promoted as their successor!<b></center>","Action.Output")
-				text2file("[src] has retired as Kazekage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-
-				M.rank = RANK_KAZEKAGE
-				Kages["Hidden Sand"]=M.ckey
-				M.village="Hidden Sand"
-				squad = M.GetSquad()
-				if(squad)
-					squad.Refresh()
-
-				for(var/obj/Inventory/Clothing/HeadWrap/KazekageHat/S in src)
-					del(S)
-				for(var/obj/Inventory/Clothing/Robes/KazekageRobe/S in src)
-					del(S)
-				new/obj/Inventory/Clothing/HeadWrap/KazekageHat(M)
-				new/obj/Inventory/Clothing/Robes/KazekageRobe(M)
-
-			if("Hidden Mist")
-				world<<output("<b><center>[src] has retired as Mizukage, and [M] has been promoted as their succesor!<b></center>","Action.Output")
-				text2file("[src] has retired as Mizukage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-
-				M.rank = RANK_MIZUKAGE
-				Kages["Hidden Mist"]=M.ckey
-				M.village="Hidden Mist"
-				squad = M.GetSquad()
-				if(squad)
-					squad.Refresh()
-
-				for(var/obj/Inventory/Clothing/HeadWrap/MizukageHat/S in src)
-					del(S)
-				for(var/obj/Inventory/Clothing/Robes/MizukageRobe/S in src)
-					del(S)
-				new/obj/Inventory/Clothing/HeadWrap/MizukageHat(M)
-				new/obj/Inventory/Clothing/Robes/MizukageRobe(M)
-
-			if("Hidden Sound")
-				world<<output("<b><center>[src] has retired as Otokage, and [M] has been promoted as their successor!<b></center>","Action.Output")
-				text2file("[src] has retired as Otokage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-
-				M.rank = RANK_OTOKAGE
-				Kages["Hidden Sound"]=M.ckey
-				M.village="Hidden Sound"
-				squad = M.GetSquad()
-				if(squad)
-					squad.Refresh()
-
-				for(var/obj/Inventory/Clothing/HeadWrap/OtokageHat/S in src)
-					del(S)
-				for(var/obj/Inventory/Clothing/Robes/OtokageRobe/S in src)
-					del(S)
-				new/obj/Inventory/Clothing/HeadWrap/OtokageHat(M)
-				new/obj/Inventory/Clothing/Robes/OtokageRobe(M)
-
-			if("Hidden Rock")
-				world<<output("<b><center>[src] has retired as Tsuchikage, and [M] has been promoted as their successor!<b></center>","Action.Output")
-				text2file("[src] has retired as Tsuchikage, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-
-				M.rank = RANK_TSUCHIKAGE
-				Kages["Hidden Rock"]=M.ckey
-				M.village="Hidden Rock"
-				squad = M.GetSquad()
-				if(squad)
-					squad.Refresh()
-
-				for(var/obj/Inventory/Clothing/HeadWrap/TsuchikageHat/S in src)
-					del(S)
-				for(var/obj/Inventory/Clothing/Robes/TsuchikageRobe/S in src)
-					del(S)
-				new/obj/Inventory/Clothing/HeadWrap/TsuchikageHat(M)
-				new/obj/Inventory/Clothing/Robes/TsuchikageRobe(M)
-
-		M.AddAdminVerbs()
-		src.overlays=0
-		src.RestoreOverlays()
-
 mob/AnbuLeader/verb/
 	Make_Anbu_Root()
 		set category="Anbu Root"
@@ -287,7 +22,7 @@ mob/AnbuLeader/verb/
 
 		new/obj/Inventory/Clothing/Robes/Anbu_Suit(M)
 		new/obj/Inventory/Clothing/Masks/Anbu_Purple(M)
-		M.AddAdminVerbs()
+		M.client.StaffCheck()
 
 	Remove_Anbu_Root()
 		set category="Anbu Root"
@@ -313,7 +48,7 @@ mob/AnbuLeader/verb/
 			del(O)
 		M.overlays=null
 		M.RestoreOverlays()
-		M.RemoveAdminVerbs()
+		M.client.StaffCheck()
 
 	Retire()
 		set category="Anbu Root"
@@ -335,7 +70,7 @@ mob/AnbuLeader/verb/
 			squad.Refresh()
 		text2file("[src] has retired as Anbu Leader, and [M] has been promoted as their successor!: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-		M.AddAdminVerbs()
+		M.client.StaffCheck()
 
 mob/AkatsukiLeader/verb/
 	Make_Akatsuki()
@@ -366,7 +101,7 @@ mob/AkatsukiLeader/verb/
 		AkatInvites++
 		new/obj/Inventory/Clothing/Robes/Akatsuki_Robe(M)
 		new/obj/Inventory/Clothing/HeadWrap/AkatsukiHat(M)
-		M.AddAdminVerbs()
+		M.client.StaffCheck()
 
 	Remove_Akatsuki()
 		set category="Akatsuki"
@@ -394,7 +129,7 @@ mob/AkatsukiLeader/verb/
 			del(O)
 		M.overlays=null
 		M.RestoreOverlays()
-		M.RemoveAdminVerbs()
+		M.client.StaffCheck()
 
 	Retire()
 		set category="Akatsuki"
@@ -417,13 +152,13 @@ mob/AkatsukiLeader/verb/
 			del(O)
 		overlays=null
 		RestoreOverlays()
-		RemoveAdminVerbs()
+		src.client.StaffCheck()
 		M.rank = RANK_AKATSUKI_LEADER
 		squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
 
-		M.AddAdminVerbs()
+		M.client.StaffCheck()
 
 mob/SevenSwordsmenLeader/verb/
 	Make_SevenSwordsmen()
@@ -448,7 +183,7 @@ mob/SevenSwordsmenLeader/verb/
 		if(squad)
 			squad.Refresh()
 
-		M.AddAdminVerbs()
+		M.client.StaffCheck()
 
 	Remove_SevenSwordsmen()
 		set category="Seven Swordsmen"
@@ -504,7 +239,7 @@ mob/SevenSwordsmenLeader/verb/
 
 		M.overlays=null
 		M.RestoreOverlays()
-		M.RemoveAdminVerbs()
+		M.client.StaffCheck()
 
 	Retire()
 		set category="Seven Swordsmen"
@@ -527,13 +262,13 @@ mob/SevenSwordsmenLeader/verb/
 			del(O)
 		overlays=null
 		RestoreOverlays()
-		RemoveAdminVerbs()
+		src.client.StaffCheck()
 		M.rank = RANK_SEVEN_SWORDSMEN_LEADER
 		squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
 
-		M.AddAdminVerbs()
+		M.client.StaffCheck()
 
 	Give_Kubikiribocho()
 		set category="Seven Swordsmen"
@@ -559,7 +294,7 @@ mob/SevenSwordsmenLeader/verb/
 
 			new/obj/Inventory/Weaponry/Zabuza_Sword(M)
 			givenkubi=1
-			M.AddAdminVerbs()
+			M.client.StaffCheck()
 
 	Give_Samehada()
 		set category="Seven Swordsmen"
@@ -585,7 +320,7 @@ mob/SevenSwordsmenLeader/verb/
 
 			new/obj/Inventory/Weaponry/Samehada(M)
 			givensame=1
-			M.AddAdminVerbs()
+			M.client.StaffCheck()
 
 	Give_Nuibari()
 		set category="Seven Swordsmen"
@@ -611,7 +346,7 @@ mob/SevenSwordsmenLeader/verb/
 
 			new/obj/Inventory/Weaponry/Nuibari(M)
 			givennui=1
-			M.AddAdminVerbs()
+			M.client.StaffCheck()
 
 	Give_Shibuki()
 		set category="Seven Swordsmen"
@@ -637,7 +372,7 @@ mob/SevenSwordsmenLeader/verb/
 
 			new/obj/Inventory/Weaponry/Shibuki(M)
 			givenshibu=1
-			M.AddAdminVerbs()
+			M.client.StaffCheck()
 
 	Give_Kabutowari()
 		set category="Seven Swordsmen"
@@ -663,7 +398,7 @@ mob/SevenSwordsmenLeader/verb/
 
 			new/obj/Inventory/Weaponry/Kabutowari(M)
 			givenkabu=1
-			M.AddAdminVerbs()
+			M.client.StaffCheck()
 
 	Give_Kiba()
 		set category="Seven Swordsmen"
@@ -689,7 +424,7 @@ mob/SevenSwordsmenLeader/verb/
 
 			new/obj/Inventory/Weaponry/Kiba(M)
 			givenkiba=1
-			M.AddAdminVerbs()
+			M.client.StaffCheck()
 
 var/givenkubi=0
 var/givensame=0

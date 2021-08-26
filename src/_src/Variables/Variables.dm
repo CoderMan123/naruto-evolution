@@ -34,8 +34,6 @@ mob
 		village="Leaf"
 		rank = RANK_ACADEMY_STUDENT
 		dead=0
-		namecolor="green"
-		chatcolor="white"
 		swimming
 		walkingonwater
 		waterwalk
@@ -101,7 +99,6 @@ mob
 			waterhigh=0
 			snowlow=0
 			canattack=1
-			admin=0
 			firing=0
 			infusing=0//chakrainfusionstuff
 			bubbled=0//bubbleshieldstuff

@@ -1,5 +1,6 @@
 obj
 	Jutsus
+		layer = 10000
 //NonClan
 		Chakra_Infusion_Training//chakrainfusionstuff
 			icon_state="Sage2"

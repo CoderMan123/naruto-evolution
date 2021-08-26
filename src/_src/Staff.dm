@@ -1,54 +1,9 @@
-var/list/Kages = list("Hidden Leaf"=null,"Hidden Sand"=null,"Hidden Mist"=null,"Hidden Sound"=null,"Hidden Rock"=null)//kensei = bane, punky = taco, qwesti = Rise, raunts = sisa, Flyboyed = Yohan
+
 var/HostKey = file(CFG_HOST)
 
 mob/var/
 	canteleport = 1
 	jailed=0
-
-mob/proc/AddAdminVerbs()
-	if(Kages["[village]"]==src.ckey||rank=="Hokage"||rank=="Kazekage"||rank=="Mizukage"||rank=="Otokage"||rank=="Tsuchikage")
-		src.verbs+=typesof(/mob/Kage/verb/)
-		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-
-	if(rank=="Akatsuki Leader")
-		src.verbs+=typesof(/mob/AkatsukiLeader/verb/)
-		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-
-	if(rank=="Anbu Leader")
-		src.verbs+=typesof(/mob/AnbuLeader/verb/)
-		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-
-	if(rank=="Seven Swordsmen Leader")
-		src.verbs+=typesof(/mob/SevenSwordsmenLeader/verb/)
-		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-
-	if(administrators.Find(src.ckey))
-		src.verbs+=typesof(/mob/MasterGM/verb/)
-		src.verbs+=typesof(/mob/Admin/verb/)
-		src.verbs+=typesof(/mob/Moderator/verb/)
-		src.verbs+=typesof(/mob/PixelArtist/verb/)
-		src.verbs+=typesof(/mob/administrator/verb/)
-		src.admin=1
-		client.control_freak/CONTROL_FREAK_ALL=0
-		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-
-	if(moderators.Find(src.ckey))
-		src.verbs+=typesof(/mob/Moderator/verb/)
-		src.admin=1
-		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-
-	if(pixel_artists.Find(src.ckey))
-		src.verbs+=typesof(/mob/PixelArtist/verb/)
-		winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-
-mob/proc/RemoveAdminVerbs()
-	src.verbs-=typesof(/mob/Kage/verb/)
-	src.verbs-=typesof(/mob/Moderator/verb/)
-	src.verbs-=typesof(/mob/Admin/verb/)
-	src.verbs-=typesof(/mob/PixelArtist/verb/)
-	src.verbs-=typesof(/mob/MasterGM/verb/)
-	src.verbs-=typesof(/mob/administrator/verb/)
-	AddAdminVerbs()
 
 mob/PixelArtist/verb/
 	Add_Overlay(icon1 as icon,overlay1 as text)
@@ -297,7 +252,6 @@ mob/Admin/verb
 	Announce(t as text)
 		set category = "Staff"
 		if(!t) return
-		if(!admin) return
 		world<<"<center><b>---------------------------------</b></center>"
 		world<<"<center><b>Announcement from [src]</b><br><br>[t]</b></font></center></p></br></b></center>"
 		world<<"<center><b>---------------------------------</b></center>"
@@ -306,7 +260,6 @@ mob/Admin/verb
 	Staff_Who()
 		set category = "Staff"
 		var/amount=0
-		if(!admin) return
 		var/Who={"<html><center>
 <head><title>Who's Online</title><body>
 <body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
@@ -374,7 +327,7 @@ mob/Admin/verb
 		if(squad)
 			squad.Refresh()
 
-		M.AddAdminVerbs()
+		M.client.StaffCheck()
 
 	Remove_Position(mob/M in mobs_online)
 		set category = "Staff"
@@ -389,7 +342,7 @@ mob/Admin/verb
 
 		text2file("[usr]([usr.key]) demoted [M]([M.key]) from [Position].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		Positions["[Position]"]=null
-		M.RemoveAdminVerbs()
+		M.client.StaffCheck()
 
 	Promote_To_Kage(mob/M in mobs_online)
 		set category = "Staff"
@@ -401,7 +354,8 @@ mob/Admin/verb
 				world<<output("<b><center>[M] has been promoted to the Hokage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Hokage by [usr]([usr.key]): [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank = RANK_HOKAGE
-				Kages["Hidden Leaf"]=M.ckey
+				kages["Hidden Leaf"]=M.ckey
+				kages_last_online[VILLAGE_LEAF] = world.realtime
 				M.village="Hidden Leaf"
 				var/squad/squad = M.GetSquad()
 				if(squad)
@@ -414,7 +368,8 @@ mob/Admin/verb
 				world<<output("<b><center>[M] has been promoted to the Kazekage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Kazekage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank = RANK_KAZEKAGE
-				Kages["Hidden Sand"]=M.ckey
+				kages["Hidden Sand"]=M.ckey
+				kages_last_online[VILLAGE_SAND] = world.realtime
 				M.village="Hidden Sand"
 				var/squad/squad = M.GetSquad()
 				if(squad)
@@ -427,7 +382,7 @@ mob/Admin/verb
 				world<<output("<b><center>[M] has been promoted to the Mizukage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Mizukage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank = RANK_MIZUKAGE
-				Kages["Hidden Mist"]=M.ckey
+				kages["Hidden Mist"]=M.ckey
 				M.village="Hidden Mist"
 				var/squad/squad = M.GetSquad()
 				if(squad)
@@ -440,7 +395,7 @@ mob/Admin/verb
 				world<<output("<b><center>[M] has been promoted to the Otokage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Otokage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank = RANK_OTOKAGE
-				Kages["Hidden Sound"]=M.ckey
+				kages["Hidden Sound"]=M.ckey
 				M.village="Hidden Sound"
 				var/squad/squad = M.GetSquad()
 				if(squad)
@@ -453,7 +408,7 @@ mob/Admin/verb
 				world<<output("<b><center>[M] has been promoted to the Tsuchikage!<b></center>","Action.Output")
 				text2file("[M]([M.key]) was promoted to Tsuchikage by [usr]([usr.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 				M.rank = RANK_TSUCHIKAGE
-				Kages["Hidden Rock"]=M.ckey
+				kages["Hidden Rock"]=M.ckey
 				M.village="Hidden Rock"
 				var/squad/squad = M.GetSquad()
 				if(squad)
@@ -461,20 +416,20 @@ mob/Admin/verb
 
 				new/obj/Inventory/Clothing/HeadWrap/TsuchikageHat(M)
 				new/obj/Inventory/Clothing/Robes/TsuchikageRobe(M)
-		M.AddAdminVerbs()
+		M.client.StaffCheck()
 
 	Remove_Kage(mob/M in mobs_online)
 		set category = "Staff"
 		var/list/Villages=list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/)
 		var/VillageLead=input("What village will you affect?","Demotion") in Villages + "Cancel"
 		if(VillageLead=="Cancel") return
-		Kages["[VillageLead]"]=null
+		kages["[VillageLead]"]=null
 		M.rank = RANK_GENIN
 		var/squad/squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
 
-		M.RemoveAdminVerbs()
+		M.client.StaffCheck()
 		text2file("[usr]([usr.key]) removed [M]([M.key]) from [VillageLead] Kage.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		winset(src, "Navigation.LeaderButton", "is-disabled = 'true'")
 
@@ -497,8 +452,7 @@ mob/Admin/verb
 		world<<output("[M] now has pixel artist verbs.","Action.Output")
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to PA.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		pixel_artists.Add(M.ckey)
-		M.AddAdminVerbs()
-		M.admin=1
+		M.client.StaffCheck()
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 	Add_Moderator(mob/M in mobs_online)
@@ -506,8 +460,7 @@ mob/Admin/verb
 		world<<output("[M] is now a moderator.","Action.Output")
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Mod.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		moderators.Add(M.ckey)
-		M.AddAdminVerbs()
-		M.admin=1
+		M.client.StaffCheck()
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 
@@ -522,7 +475,7 @@ mob/Admin/verb
 		moderators.Remove(M.ckey)
 		programmers.Remove(M.ckey)
 		pixel_artists.Remove(M.ckey)
-		M.RemoveAdminVerbs()
+		M.client.StaffCheck()
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'true'")
 
 mob/MasterGM/verb
@@ -531,9 +484,7 @@ mob/MasterGM/verb
 		world<<output("[M] is now an admin.","Action.Output")
 		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Admin.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 		administrators.Find(M.ckey)
-		M.AddAdminVerbs()
-		M.admin=1
-		M.namecolor="green"
+		M.client.StaffCheck()
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
 
 
@@ -564,7 +515,7 @@ mob/MasterGM/verb
 		set desc = "() Create an object of any type"
 		set category = "Staff"
 		var/html = "<html><body bgcolor=gray text=#CCCCCC link=white vlink=white alink=white>"
-		if(!admin) return
+		if(!src.client.ckey in administrators) return
 		var/L[] = typesof(/atom)
 		for(var/X in L)
 			switch("[X]")
@@ -713,15 +664,15 @@ atom/Topic(href,href_list[])
 mob/Topic(href,href_list[])
 	switch(href_list["action"])
 		if("create")
-			if(!admin) return
+			if(!src.client.ckey in administrators) return
 			var/new_type = href_list["type"]
 			var/atom/O = new new_type(src.loc)
 			src << "Created a new [O.name]."
 		if("listview")
-			if(!admin) return
+			if(!src.client.ckey in administrators) return
 			list_view(locate(href_list["list"]),href_list["title"])
 		if("listedit")
-			if(!admin) return
+			if(!src.client.ckey in administrators) return
 			var/list/theList = locate(href_list["list"])
 			var/title = href_list["title"]
 			var/old_index = text2num(href_list["value"])

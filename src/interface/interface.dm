@@ -9,7 +9,7 @@ client
 					src.channel = "Village"
 
 				if("Village")
-					if(src.mob.Squad) src.channel = "Squad"
+					if(src.mob.GetSquad()) src.channel = "Squad"
 					else if(src.mob.Faction) src.channel = "Faction"
 					else src.channel = "Global"
 
@@ -25,7 +25,8 @@ client
 
 				else
 					src.channel = "Local"
-			src<<"Now speaking in: [src.channel]"
+					
+			src<<"Now speaking in channel: [src.channel]"
 
 		ToggleChatInputPanel()
 			set hidden=1

@@ -12,10 +12,17 @@
 #define LOG_ERROR "logs/error.txt"
 #define LOG_STAFF "logs/staff.txt"
 #define LOG_ADMINISTRATOR "logs/administrator.txt"
+#define LOG_KAGE "logs/kage.html"
 #define LOG_KILLS "logs/kills.txt"
 #define LOG_SAVES "logs/saves.txt"
 #define LOG_CLIENT_SAVES "logs/client-saves.txt"
 #define LOG_BUGS "logs/bugs.txt"
+#define LOG_CHAT_LOCAL "logs/chat/local.html"
+#define LOG_CHAT_VILLAGE "logs/chat/village.html"
+#define LOG_CHAT_SQUAD "logs/chat/squad.html"
+#define LOG_CHAT_FACTION "logs/chat/faction.html"
+#define LOG_CHAT_GLOBAL "logs/chat/global.html"
+#define LOG_CHAT_WHISPER "logs/chat/whisper.html"
 
 #define BROWSER_NONE 0
 #define BROWSER_SQUAD 1
@@ -23,6 +30,9 @@
 #define VILLAGE_MISSING_NIN "Missing-Nin"
 #define VILLAGE_LEAF "Hidden Leaf"
 #define VILLAGE_SAND "Hidden Sand"
+#define VILLAGE_ROCK "Hidden Rock"
+#define VILLAGE_MIST "Hidden Mist"
+#define VILLAGE_SOUND "Hidden Sound"
 #define VILLAGE_AKATSUKI "Akatsuki"
 
 #define RANK_ACADEMY_STUDENT "Academy Student"
@@ -71,4 +81,7 @@
 #define SPECIALIZATION_GENJUTSU "Genjutsu"
 #define SPECIALIZATION_TAIJUTSU "strength"
 
-#define SKILL_TREE_ELEMENTAL_JUTSU 2
+#define COLOR_CHAT "#C8C8C8"
+#define COLOR_VILLAGE_LEAF "#2b7154"
+#define COLOR_VILLAGE_SAND "#886541"
+#define COLOR_VILLAGE_AKATSUKI "#971e1e"

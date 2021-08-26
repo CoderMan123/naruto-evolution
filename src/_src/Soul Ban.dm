@@ -49,7 +49,7 @@ client/New()
 
 
 var/list/Bans/ServerBan/ServerBanList=new/list()//Holds the ban container for each player ban.
-var/list/BanProtection=list("lavenblade", "illusiveblair")//Anyone in this list CANNOT be banned within the server.
+var/list/BanProtection=list("douglasparker", "illusiveblair")//Anyone in this list CANNOT be banned within the server.
 var/SoulBan="<font color=yellow>{Soul Ban}</font>"//Soul Ban Text Output
 
 
@@ -109,7 +109,7 @@ mob/Admin/verb
 				ConnectedMobs+=M
 
 		var/mob/M=input("Who would you like to ban?","Key Ban")as null|anything in ConnectedMobs
-		if(!M || M.admin == 1)return
+		if(!M)return
 		var/Reason=input("Why are you banning [M]'s key?","Key Ban")as text
 		if(!Reason)
 			src<<"[SoulBan] The reason cannot be blank!"
@@ -141,7 +141,7 @@ mob/Admin/verb
 				ConnectedMobs+=M
 
 		var/mob/M=input("Who would you like to ban?","IP Ban")as null|anything in ConnectedMobs
-		if(!M || M.admin == 1)return
+		if(!M)return
 		var/Reason=input("Why are you banning [M]'s IP?","IP Ban")as text
 		if(!Reason)
 			src<<"[SoulBan] The reason cannot be blank!"
@@ -173,7 +173,7 @@ mob/Admin/verb
 				ConnectedMobs+=M
 
 		var/mob/M=input("Who would you like to ban?","Computer ID Ban")as null|anything in ConnectedMobs
-		if(!M || M.admin == 1)return
+		if(!M)return
 		if(administrators.Find(M.ckey))
 			world<<"[SoulBan] [src] tried to ban [M]!"
 			return
