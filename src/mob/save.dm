@@ -187,6 +187,14 @@ mob
 		new/obj/HotSlots/HotSlot8(src)
 		new/obj/HotSlots/HotSlot9(src)
 		new/obj/HotSlots/HotSlot10(src)
+		new/obj/HotSlots/HotSlot11(src)
+		new/obj/HotSlots/HotSlot12(src)
+		new/obj/HotSlots/HotSlot13(src)
+		new/obj/HotSlots/HotSlot14(src)
+		new/obj/HotSlots/HotSlot15(src)
+		new/obj/HotSlots/HotSlot16(src)
+		new/obj/HotSlots/HotSlot17(src)
+		new/obj/HotSlots/HotSlot18(src)
 		var/obj/O=new/obj/Screen/healthbar
 		var/obj/Mana=new/obj/Screen/manabar
 		src.hbar.Add(O)

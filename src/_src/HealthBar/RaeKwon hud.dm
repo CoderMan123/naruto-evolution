@@ -1,4 +1,4 @@
-mob/var/list/HotSlotSave=list("HotSlot1"=null,"HotSlot2"=null,"HotSlot3"=null,"HotSlot4"=null,"HotSlot5"=null,"HotSlot6"=null,"HotSlot7"=null,"HotSlot8"=null,"HotSlot9"=null,"HotSlot10"=null)
+mob/var/list/HotSlotSave=list("HotSlot1"=null,"HotSlot2"=null,"HotSlot3"=null,"HotSlot4"=null,"HotSlot5"=null,"HotSlot6"=null,"HotSlot7"=null,"HotSlot8"=null,"HotSlot9"=null,"HotSlot10"=null,"HotSlot11"=null,"HotSlot12"=null,"HotSlot13"=null,"HotSlot14"=null,"HotSlot15"=null,"HotSlot16"=null,"HotSlot17"=null,"HotSlot18"=null)
 mob/var/tmp/XView
 mob/var/tmp/YView
 mob
@@ -59,10 +59,10 @@ obj
 			//screen_loc = "25,5"
 			New(var/mob/M)
 				if(!ismob(M)) return
-				screen_loc = "[round((M.XView/2)-3)],3.5"
+				screen_loc = "[round((M.XView/2)-4)],3.5"
 				M.client.screen+=src
 				src.loc=locate(0,0,0)
-				HotSlotNumber("F1")
+				HotSlotNumber("Z")
 				..()
 		HotSlot2
 			name="2"
@@ -72,8 +72,8 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round(M.XView/2)-1],3.5"
-				HotSlotNumber("F2")
+				screen_loc = "[round(M.XView/2)-2],3.5"
+				HotSlotNumber("X")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot3
@@ -84,8 +84,8 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+1)],3.5"
-				HotSlotNumber("F3")
+				screen_loc = "[round((M.XView/2))],3.5"
+				HotSlotNumber("C")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot4
@@ -96,8 +96,8 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+3)],3.5"
-				HotSlotNumber("F4")
+				screen_loc = "[round((M.XView/2)+2)],3.5"
+				HotSlotNumber("V")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot5
@@ -108,8 +108,8 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+5)],3.5"
-				HotSlotNumber("F5")
+				screen_loc = "[round((M.XView/2)+4)],3.5"
+				HotSlotNumber("B")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot6
@@ -120,56 +120,154 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)-3)],4.5"
-				HotSlotNumber("F6")
+				screen_loc = "[round((M.XView/2)+6)],3.5"
+				HotSlotNumber("N")
 				src.loc=locate(0,0,0)
 				..()
+
 		HotSlot7
-			name="7"
+			name="1"
 			layer=9999
 			icon = 'HotSlot.dmi'
 			//screen_loc = "25,5"
 			New(var/mob/M)
 				if(!ismob(M)) return
+				screen_loc = "[round((M.XView/2)-4)],4.5"
 				M.client.screen+=src
-				screen_loc = "[round(M.XView/2)-1],4.5"
-				HotSlotNumber("F7")
 				src.loc=locate(0,0,0)
+				HotSlotNumber("F7")
 				..()
 		HotSlot8
-			name="8"
+			name="2"
 			layer=9999
 			icon = 'HotSlot.dmi'
 			//screen_loc = "25,5"
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+1)],4.5"
+				screen_loc = "[round(M.XView/2)-2],4.5"
 				HotSlotNumber("F8")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot9
-			name="9"
+			name="3"
 			layer=9999
 			icon = 'HotSlot.dmi'
 			//screen_loc = "25,5"
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+3)],4.5"
+				screen_loc = "[round((M.XView/2))],4.5"
 				HotSlotNumber("F9")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot10
-			name="10"
+			name="4"
 			layer=9999
 			icon = 'HotSlot.dmi'
 			//screen_loc = "25,5"
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+5)],4.5"
+				screen_loc = "[round((M.XView/2)+2)],4.5"
 				HotSlotNumber("F10")
+				src.loc=locate(0,0,0)
+				..()
+		HotSlot11
+			name="5"
+			layer=9999
+			icon = 'HotSlot.dmi'
+			//screen_loc = "25,5"
+			New(var/mob/M)
+				if(!ismob(M)) return
+				M.client.screen+=src
+				screen_loc = "[round((M.XView/2)+4)],4.5"
+				HotSlotNumber("F11")
+				src.loc=locate(0,0,0)
+				..()
+		HotSlot12
+			name="6"
+			layer=9999
+			icon = 'HotSlot.dmi'
+			//screen_loc = "25,5"
+			New(var/mob/M)
+				if(!ismob(M)) return
+				M.client.screen+=src
+				screen_loc = "[round((M.XView/2)+6)],4.5"
+				HotSlotNumber("F12")
+				src.loc=locate(0,0,0)
+				..()
+
+		HotSlot13
+			name="1"
+			layer=9999
+			icon = 'HotSlot.dmi'
+			//screen_loc = "25,5"
+			New(var/mob/M)
+				if(!ismob(M)) return
+				screen_loc = "[round((M.XView/2)-4)],5.5"
+				M.client.screen+=src
+				src.loc=locate(0,0,0)
+				HotSlotNumber("F1")
+				..()
+		HotSlot14
+			name="2"
+			layer=9999
+			icon = 'HotSlot.dmi'
+			//screen_loc = "25,5"
+			New(var/mob/M)
+				if(!ismob(M)) return
+				M.client.screen+=src
+				screen_loc = "[round(M.XView/2)-2],5.5"
+				HotSlotNumber("F2")
+				src.loc=locate(0,0,0)
+				..()
+		HotSlot15
+			name="3"
+			layer=9999
+			icon = 'HotSlot.dmi'
+			//screen_loc = "25,5"
+			New(var/mob/M)
+				if(!ismob(M)) return
+				M.client.screen+=src
+				screen_loc = "[round((M.XView/2))],5.5"
+				HotSlotNumber("F3")
+				src.loc=locate(0,0,0)
+				..()
+		HotSlot16
+			name="4"
+			layer=9999
+			icon = 'HotSlot.dmi'
+			//screen_loc = "25,5"
+			New(var/mob/M)
+				if(!ismob(M)) return
+				M.client.screen+=src
+				screen_loc = "[round((M.XView/2)+2)],5.5"
+				HotSlotNumber("F4")
+				src.loc=locate(0,0,0)
+				..()
+		HotSlot17
+			name="5"
+			layer=9999
+			icon = 'HotSlot.dmi'
+			//screen_loc = "25,5"
+			New(var/mob/M)
+				if(!ismob(M)) return
+				M.client.screen+=src
+				screen_loc = "[round((M.XView/2)+4)],5.5"
+				HotSlotNumber("F5")
+				src.loc=locate(0,0,0)
+				..()
+		HotSlot18
+			name="6"
+			layer=9999
+			icon = 'HotSlot.dmi'
+			//screen_loc = "25,5"
+			New(var/mob/M)
+				if(!ismob(M)) return
+				M.client.screen+=src
+				screen_loc = "[round((M.XView/2)+6)],5.5"
+				HotSlotNumber("F6")
 				src.loc=locate(0,0,0)
 				..()
 mob
@@ -185,6 +283,15 @@ mob
 		hotslot8
 		hotslot9
 		hotslot10
+		hotslot11
+		hotslot12
+		hotslot13
+		hotslot14
+		hotslot15
+		hotslot16
+		hotslot17
+		hotslot18
+
 	proc
 		UpdateSlots()
 			for(var/obj/HotSlots/h in src.client.screen)
@@ -193,43 +300,50 @@ mob
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F1")
+					h.HotSlotNumber("Z")
+
 				if(istype(h,/obj/HotSlots/HotSlot2))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot2"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F2")
+					h.HotSlotNumber("X")
+
 				if(istype(h,/obj/HotSlots/HotSlot3))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot3"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F3")
+					h.HotSlotNumber("C")
+
 				if(istype(h,/obj/HotSlots/HotSlot4))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot4"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F4")
+					h.HotSlotNumber("V")
+
 				if(istype(h,/obj/HotSlots/HotSlot5))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot5"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F5")
+					h.HotSlotNumber("B")
+
 				if(istype(h,/obj/HotSlots/HotSlot6))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot6"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F6")
+					h.HotSlotNumber("N")
+
 				if(istype(h,/obj/HotSlots/HotSlot7))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot7"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
 					h.HotSlotNumber("F7")
+
 				if(istype(h,/obj/HotSlots/HotSlot8))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot8"])
 					I.pixel_x=12
@@ -243,12 +357,69 @@ mob
 					h.overlays=null
 					h.overlays+=I
 					h.HotSlotNumber("F9")
+
 				if(istype(h,/obj/HotSlots/HotSlot10))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot10"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
 					h.HotSlotNumber("F10")
+
+				if(istype(h,/obj/HotSlots/HotSlot11))
+					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot11"])
+					I.pixel_x=12
+					h.overlays=null
+					h.overlays+=I
+					h.HotSlotNumber("F11")
+
+				if(istype(h,/obj/HotSlots/HotSlot12))
+					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot12"])
+					I.pixel_x=12
+					h.overlays=null
+					h.overlays+=I
+					h.HotSlotNumber("F12")
+
+				if(istype(h,/obj/HotSlots/HotSlot13))
+					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot13"])
+					I.pixel_x=12
+					h.overlays=null
+					h.overlays+=I
+					h.HotSlotNumber("F1")
+
+				if(istype(h,/obj/HotSlots/HotSlot14))
+					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot14"])
+					I.pixel_x=12
+					h.overlays=null
+					h.overlays+=I
+					h.HotSlotNumber("F2")
+
+				if(istype(h,/obj/HotSlots/HotSlot15))
+					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot15"])
+					I.pixel_x=12
+					h.overlays=null
+					h.overlays+=I
+					h.HotSlotNumber("F3")
+
+				if(istype(h,/obj/HotSlots/HotSlot16))
+					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot16"])
+					I.pixel_x=12
+					h.overlays=null
+					h.overlays+=I
+					h.HotSlotNumber("F4")
+
+				if(istype(h,/obj/HotSlots/HotSlot17))
+					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot17"])
+					I.pixel_x=12
+					h.overlays=null
+					h.overlays+=I
+					h.HotSlotNumber("F5")
+
+				if(istype(h,/obj/HotSlots/HotSlot18))
+					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot18"])
+					I.pixel_x=12
+					h.overlays=null
+					h.overlays+=I
+					h.HotSlotNumber("F6")
 			/*for(var/obj/Jutsus/J in world)
 				if(J.name==hotslot1)
 					for(var/obj/HotSlots/HotSlot1/h in src.client.screen)
@@ -504,55 +675,114 @@ mob
 
 
 		HotSlots()
-			if(usr.hotslot=="1")usr.doslot(usr.hotslot1)
-			if(usr.hotslot=="2")usr.doslot(usr.hotslot2)
-			if(usr.hotslot=="3")usr.doslot(usr.hotslot3)
-			if(usr.hotslot=="4")usr.doslot(usr.hotslot4)
-			if(usr.hotslot=="5")usr.doslot(usr.hotslot5)
-			if(usr.hotslot=="6")usr.doslot(usr.hotslot6)
-			if(usr.hotslot=="7")usr.doslot(usr.hotslot7)
-			if(usr.hotslot=="8")usr.doslot(usr.hotslot8)
-			if(usr.hotslot=="9")usr.doslot(usr.hotslot9)
-			if(usr.hotslot=="10")usr.doslot(usr.hotslot10)
+			if(usr.hotslot=="1") usr.doslot(usr.hotslot1)
+			if(usr.hotslot=="2") usr.doslot(usr.hotslot2)
+			if(usr.hotslot=="3") usr.doslot(usr.hotslot3)
+			if(usr.hotslot=="4") usr.doslot(usr.hotslot4)
+			if(usr.hotslot=="5") usr.doslot(usr.hotslot5)
+			if(usr.hotslot=="6") usr.doslot(usr.hotslot6)
+			if(usr.hotslot=="7") usr.doslot(usr.hotslot7)
+			if(usr.hotslot=="8") usr.doslot(usr.hotslot8)
+			if(usr.hotslot=="9") usr.doslot(usr.hotslot9)
+			if(usr.hotslot=="10") usr.doslot(usr.hotslot10)
+			if(usr.hotslot=="11") usr.doslot(usr.hotslot11)
+			if(usr.hotslot=="12") usr.doslot(usr.hotslot12)
+			if(usr.hotslot=="13") usr.doslot(usr.hotslot13)
+			if(usr.hotslot=="14") usr.doslot(usr.hotslot14)
+			if(usr.hotslot=="15") usr.doslot(usr.hotslot15)
+			if(usr.hotslot=="16") usr.doslot(usr.hotslot16)
+			if(usr.hotslot=="17") usr.doslot(usr.hotslot17)
+			if(usr.hotslot=="18") usr.doslot(usr.hotslot18)
+
 mob
 	verb
 		HotSlot1()
 			set hidden=1
 			usr.hotslot="1"
 			usr.HotSlots()
+
 		HotSlot2()
 			set hidden=1
 			usr.hotslot="2"
 			usr.HotSlots()
+
 		HotSlot3()
 			set hidden=1
 			usr.hotslot="3"
 			usr.HotSlots()
+
 		HotSlot4()
 			set hidden=1
 			usr.hotslot="4"
 			usr.HotSlots()
+
 		HotSlot5()
 			set hidden=1
 			usr.hotslot="5"
 			usr.HotSlots()
+
 		HotSlot6()
 			set hidden=1
 			usr.hotslot="6"
 			usr.HotSlots()
+
 		HotSlot7()
 			set hidden=1
 			usr.hotslot="7"
 			usr.HotSlots()
+
 		HotSlot8()
 			set hidden=1
 			usr.hotslot="8"
 			usr.HotSlots()
+
 		HotSlot9()
 			set hidden=1
 			usr.hotslot="9"
 			usr.HotSlots()
+
 		HotSlot10()
 			set hidden=1
 			usr.hotslot="10"
 			usr.HotSlots()
+
+		HotSlot11()
+			set hidden=1
+			usr.hotslot="11"
+			usr.HotSlots()
+
+		HotSlot12()
+			set hidden=1
+			usr.hotslot="12"
+			usr.HotSlots()
+
+		HotSlot13()
+			set hidden=1
+			usr.hotslot="13"
+			usr.HotSlots()
+
+		HotSlot14()
+			set hidden=1
+			usr.hotslot="14"
+			usr.HotSlots()
+
+		HotSlot15()
+			set hidden=1
+			usr.hotslot="15"
+			usr.HotSlots()
+
+		HotSlot16()
+			set hidden=1
+			usr.hotslot="16"
+			usr.HotSlots()
+
+		HotSlot17()
+			set hidden=1
+			usr.hotslot="17"
+			usr.HotSlots()
+
+		HotSlot18()
+			set hidden=1
+			usr.hotslot="18"
+			usr.HotSlots()
+

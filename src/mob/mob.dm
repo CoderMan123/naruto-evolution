@@ -245,6 +245,14 @@ mob
 			new/obj/HotSlots/HotSlot8(src)
 			new/obj/HotSlots/HotSlot9(src)
 			new/obj/HotSlots/HotSlot10(src)
+			new/obj/HotSlots/HotSlot11(src)
+			new/obj/HotSlots/HotSlot12(src)
+			new/obj/HotSlots/HotSlot13(src)
+			new/obj/HotSlots/HotSlot14(src)
+			new/obj/HotSlots/HotSlot15(src)
+			new/obj/HotSlots/HotSlot16(src)
+			new/obj/HotSlots/HotSlot17(src)
+			new/obj/HotSlots/HotSlot18(src)
 			var/obj/O=new/obj/Screen/healthbar
 			var/obj/Mana=new/obj/Screen/manabar
 			src.hbar.Add(O)
@@ -330,7 +338,7 @@ mob
 							M << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
 
 							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name] ([src.client.ckey])</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_WHISPER)
-							
+
 							whisper_target_online = 1
 							break
 
@@ -350,14 +358,14 @@ mob
 					switch(src.client.channel)
 						if("Local")
 							view() << ffilter("[badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-							
+
 							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_LOCAL)
 
 						if("Village")
 							for(var/mob/M in mobs_online)
 								if(src.village == M.village || administrators.Find(M.client.ckey))
 									M << ffilter("<font color='yellow'>\[V]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-							
+
 							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='yellow'>\[V]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_VILLAGE)
 
 						if("Squad")
@@ -366,7 +374,7 @@ mob
 									var/squad/squad = M.GetSquad()
 									if(squad.leader[M.ckey] || squad.members.Find(M.ckey) || administrators.Find(src.client.ckey))
 										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-								
+
 								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_SQUAD)
 							else
 								src << "You cannot speak in the squad channel because you are not currently in a squad."
@@ -377,7 +385,7 @@ mob
 								for(var/mob/M in mobs_online)
 									if(src.Faction == M.Faction || administrators.Find(M.client.ckey))
 										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-								
+
 								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_FACTION)
 
 							else
@@ -436,7 +444,7 @@ mob
 							if(VILLAGE_SAND) Color = "#886541"
 							if(VILLAGE_MISSING_NIN) Color = "white"
 							if(VILLAGE_AKATSUKI) Color = "#971e1e"
-				
+
 				src.name_color = Color
 
 				var/obj/name = new()
@@ -478,18 +486,18 @@ mob
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
 						o.loc = null
-				
+
 				if(RANK != RANK_HOKAGE)
 					for(var/obj/Inventory/Clothing/HeadWrap/HokageHat/o in src.contents)
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
 						o.loc = null
-					
+
 					for(var/obj/Inventory/Clothing/Robes/HokageRobe/o in src.contents)
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
 						o.loc = null
-				
+
 				if(RANK != RANK_KAZEKAGE)
 					for(var/obj/Inventory/Clothing/HeadWrap/KazekageHat/o in src.contents)
 						if(src.ClothingOverlays[o.section] == o.icon)
@@ -500,7 +508,7 @@ mob
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
 						o.loc = null
-				
+
 				if(RANK != RANK_TSUCHIKAGE)
 					for(var/obj/Inventory/Clothing/HeadWrap/TsuchikageHat/o in src.contents)
 						if(src.ClothingOverlays[o.section] == o.icon)
@@ -511,7 +519,7 @@ mob
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
 						o.loc = null
-				
+
 				if(RANK != RANK_MIZUKAGE)
 					for(var/obj/Inventory/Clothing/HeadWrap/MizukageHat/o in src.contents)
 						if(src.ClothingOverlays[o.section] == o.icon)
@@ -522,7 +530,7 @@ mob
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
 						o.loc = null
-				
+
 				if(RANK != RANK_OTOKAGE)
 					for(var/obj/Inventory/Clothing/HeadWrap/OtokageHat/o in src.contents)
 						if(src.ClothingOverlays[o.section] == o.icon)
@@ -558,28 +566,28 @@ mob
 
 						new /obj/Inventory/Clothing/HeadWrap/HokageHat(src)
 						new /obj/Inventory/Clothing/Robes/HokageRobe(src)
-					
+
 					if(RANK_KAZEKAGE)
 						kages[VILLAGE_SAND] = src.ckey
 						kages_last_online[VILLAGE_SAND] = world.realtime
 
 						new /obj/Inventory/Clothing/HeadWrap/KazekageHat(src)
 						new /obj/Inventory/Clothing/Robes/KazekageRobe(src)
-					
+
 					if(RANK_TSUCHIKAGE)
 						kages[VILLAGE_ROCK] = src.ckey
 						kages_last_online[VILLAGE_ROCK] = world.realtime
 
 						new /obj/Inventory/Clothing/HeadWrap/TsuchikageHat(src)
 						new /obj/Inventory/Clothing/Robes/TsuchikageRobe(src)
-					
+
 					if(RANK_MIZUKAGE)
 						kages[VILLAGE_MIST] = src.ckey
 						kages_last_online[VILLAGE_MIST] = world.realtime
 
 						new /obj/Inventory/Clothing/HeadWrap/MizukageHat(src)
 						new /obj/Inventory/Clothing/Robes/MizukageRobe(src)
-					
+
 					if(RANK_OTOKAGE)
 						kages[VILLAGE_SOUND] = src.ckey
 						kages_last_online[VILLAGE_SOUND] = world.realtime
