@@ -19,7 +19,7 @@ mob
 					J.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 					var/Timer = J.level * 1.5 //determines how many ticks of damage as well as scaled bind duration
 					if(src.inAngel==1) Timer *= 1.5
-					Timer = ceil(Timer)
+					Timer = round(Timer + 3)
 					var/obj/A = new/obj(usr.loc)
 					A.icon='Shikigami Dance.dmi'
 					flick("anim", A)
@@ -35,11 +35,11 @@ mob
 							c_target.move=0
 							c_target.canattack=0
 							c_target.injutsu=1
-							while(Timer&&c_target&&src)
+							var/bound_location = c_target.loc
+							while(Timer&&c_target&&src&&c_target.loc == bound_location)
 								sleep(5)
 								Timer--
 								c_target.DealDamage(J.damage,src,"NinBlue")
-							sleep(15) //determines base duration of bind before scaled duration is applied
 							if(c_target)
 								c_target.move=1
 								c_target.canattack=1
