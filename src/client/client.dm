@@ -40,6 +40,7 @@ client
 		for(var/client/source in clients_connected)
 			for(var/client/target in clients_connected)
 				if(source != target)
+					if(administrators.Find(source.ckey) || administrators.Find(target.ckey)) continue
 					if(source.computer_id == target.computer_id)
 						spawn() src.Alert("Running multiple clients isn't allowed on this server. Please logout of your other character before proceeding to login. Your connection to the server has been terminated.")
 						del(src)
