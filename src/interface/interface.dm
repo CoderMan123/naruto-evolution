@@ -493,7 +493,7 @@ client
 					Character.GenEXPBar.value  				= "[round(src.mob.genexp/src.mob.maxgenexp*100)]"
 					Character.Precision.text         		= "[src.mob.precision]"
 					Character.PrecisionExperience.text      = "[src.mob.precisionexp]/[src.mob.maxprecisionexp]"
-					Character.PrecisionExperienceBar.value  = "[round(src.mob.maxprecisionexp/src.mob.maxprecisionexp*100)]"
+					Character.PrecisionExperienceBar.value  = "[round(src.mob.precisionexp/src.mob.maxprecisionexp*100)]"
 					Character.StatPoints.text  				= "[src.mob.statpoints]"
 					Character.SkillPoints.text 				= "[src.mob.skillpoints]"
 				"})
