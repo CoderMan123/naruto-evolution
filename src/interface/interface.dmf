@@ -2107,10 +2107,11 @@ window "Output"
 window "Settings"
 	elem "Settings"
 		type = MAIN
-		pos = 281,0
+		pos = 372,0
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2119,6 +2120,8 @@ window "Settings"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 516x416
+		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2179,7 +2182,7 @@ window "Settings"
 		border = line
 		saved-params = "is-checked"
 		text = "Ninja Handbook"
-		command = ""
+		command = "Ninja-Handbook"
 		is-flat = true
 	elem "button3"
 		type = BUTTON
@@ -2221,7 +2224,7 @@ window "Settings"
 		border = line
 		saved-params = "is-checked"
 		text = "Community Guidelines"
-		command = "CommunityGuidelines"
+		command = "Community-Guidelines"
 		is-flat = true
 	elem "LogoutButton"
 		type = BUTTON
