@@ -3,10 +3,7 @@ mob/var/tmp/XView
 mob/var/tmp/YView
 mob
 	var/tmp/BOW
-obj
-	HotSlotNumber
-		icon='Letters.dmi'
-		layer=9999
+
 proc/GetScreenResolution(mob/M)
 	var/POS = "[winget(M, "label","pos")]"
 	var/COMA = findtext(POS,",",1,0)
@@ -27,28 +24,6 @@ obj/Titlescreen/Logo
 			M.client.screen+=src
 			..()
 
-atom
-	proc
-		HotSlotNumber(text as text)
-			if(length(text)>=21)
-				text=copytext(text,1,21)
-				text+="..."
-			var/list/letters=list()
-			var/CX
-			var/OOE=(length(text))
-			if(OOE%2==0) CX+=11-((length(text))/2*5)
-			else CX+=12-((length(text))/2*5)
-			for(var/a=1, a<length(text)+1, a++)
-				letters += copytext(text, a, a+1)
-			for(var/X in letters)
-				var/obj/HotSlotNumber/O = new/obj/HotSlotNumber
-				O.icon_state = X
-				O.pixel_x = CX
-				O.pixel_y = -10
-				O.pixel_x -= 5
-				CX += 6
-				src.overlays += O
-
 obj
 	HotSlots
 		Hengable=0
@@ -62,7 +37,7 @@ obj
 				screen_loc = "[round((M.XView/2)-4)],3.5"
 				M.client.screen+=src
 				src.loc=locate(0,0,0)
-				HotSlotNumber("Z")
+				src.SetName("Z")
 				..()
 		HotSlot2
 			name="2"
@@ -73,7 +48,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round(M.XView/2)-2],3.5"
-				HotSlotNumber("X")
+				src.SetName("X")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot3
@@ -85,7 +60,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2))],3.5"
-				HotSlotNumber("C")
+				src.SetName("C")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot4
@@ -97,7 +72,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2)+2)],3.5"
-				HotSlotNumber("V")
+				src.SetName("V")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot5
@@ -109,7 +84,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2)+4)],3.5"
-				HotSlotNumber("B")
+				src.SetName("B")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot6
@@ -121,7 +96,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2)+6)],3.5"
-				HotSlotNumber("N")
+				src.SetName("N")
 				src.loc=locate(0,0,0)
 				..()
 
@@ -135,7 +110,7 @@ obj
 				screen_loc = "[round((M.XView/2)-4)],4.5"
 				M.client.screen+=src
 				src.loc=locate(0,0,0)
-				HotSlotNumber("F7")
+				src.SetName("F7")
 				..()
 		HotSlot8
 			name="2"
@@ -146,7 +121,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round(M.XView/2)-2],4.5"
-				HotSlotNumber("F8")
+				src.SetName("F8")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot9
@@ -158,7 +133,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2))],4.5"
-				HotSlotNumber("F9")
+				src.SetName("F9")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot10
@@ -170,7 +145,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2)+2)],4.5"
-				HotSlotNumber("F10")
+				src.SetName("F10")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot11
@@ -182,7 +157,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2)+4)],4.5"
-				HotSlotNumber("F11")
+				src.SetName("F11")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot12
@@ -194,7 +169,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2)+6)],4.5"
-				HotSlotNumber("F12")
+				src.SetName("F12")
 				src.loc=locate(0,0,0)
 				..()
 
@@ -208,7 +183,7 @@ obj
 				screen_loc = "[round((M.XView/2)-4)],5.5"
 				M.client.screen+=src
 				src.loc=locate(0,0,0)
-				HotSlotNumber("F1")
+				src.SetName("F1")
 				..()
 		HotSlot14
 			name="2"
@@ -219,7 +194,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round(M.XView/2)-2],5.5"
-				HotSlotNumber("F2")
+				src.SetName("F2")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot15
@@ -231,7 +206,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2))],5.5"
-				HotSlotNumber("F3")
+				src.SetName("F3")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot16
@@ -243,7 +218,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2)+2)],5.5"
-				HotSlotNumber("F4")
+				src.SetName("F4")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot17
@@ -255,7 +230,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2)+4)],5.5"
-				HotSlotNumber("F5")
+				src.SetName("F5")
 				src.loc=locate(0,0,0)
 				..()
 		HotSlot18
@@ -267,7 +242,7 @@ obj
 				if(!ismob(M)) return
 				M.client.screen+=src
 				screen_loc = "[round((M.XView/2)+6)],5.5"
-				HotSlotNumber("F6")
+				src.SetName("F6")
 				src.loc=locate(0,0,0)
 				..()
 mob
@@ -300,152 +275,152 @@ mob
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("Z")
+					h.SetName("Z")
 
 				if(istype(h,/obj/HotSlots/HotSlot2))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot2"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("X")
+					h.SetName("X")
 
 				if(istype(h,/obj/HotSlots/HotSlot3))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot3"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("C")
+					h.SetName("C")
 
 				if(istype(h,/obj/HotSlots/HotSlot4))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot4"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("V")
+					h.SetName("V")
 
 				if(istype(h,/obj/HotSlots/HotSlot5))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot5"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("B")
+					h.SetName("B")
 
 				if(istype(h,/obj/HotSlots/HotSlot6))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot6"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("N")
+					h.SetName("N")
 
 				if(istype(h,/obj/HotSlots/HotSlot7))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot7"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F7")
+					h.SetName("F7")
 
 				if(istype(h,/obj/HotSlots/HotSlot8))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot8"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F8")
+					h.SetName("F8")
 
 				if(istype(h,/obj/HotSlots/HotSlot9))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot9"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F9")
+					h.SetName("F9")
 
 				if(istype(h,/obj/HotSlots/HotSlot10))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot10"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F10")
+					h.SetName("F10")
 
 				if(istype(h,/obj/HotSlots/HotSlot11))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot11"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F11")
+					h.SetName("F11")
 
 				if(istype(h,/obj/HotSlots/HotSlot12))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot12"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F12")
+					h.SetName("F12")
 
 				if(istype(h,/obj/HotSlots/HotSlot13))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot13"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F1")
+					h.SetName("F1")
 
 				if(istype(h,/obj/HotSlots/HotSlot14))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot14"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F2")
+					h.SetName("F2")
 
 				if(istype(h,/obj/HotSlots/HotSlot15))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot15"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F3")
+					h.SetName("F3")
 
 				if(istype(h,/obj/HotSlots/HotSlot16))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot16"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F4")
+					h.SetName("F4")
 
 				if(istype(h,/obj/HotSlots/HotSlot17))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot17"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F5")
+					h.SetName("F5")
 
 				if(istype(h,/obj/HotSlots/HotSlot18))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot18"])
 					I.pixel_x=12
 					h.overlays=null
 					h.overlays+=I
-					h.HotSlotNumber("F6")
+					h.SetName("F6")
 			/*for(var/obj/Jutsus/J in world)
 				if(J.name==hotslot1)
 					for(var/obj/HotSlots/HotSlot1/h in src.client.screen)
 						h.overlays=0
 						h.overlays+=J
-						h.HotSlotNumber("F1")
+						h.SetName("F1")
 				if(J.name==hotslot2)
 					for(var/obj/HotSlots/HotSlot2/h in src.client.screen)
 						h.overlays=0
 						h.overlays+=J
-						h.HotSlotNumber("F2")
+						h.SetName("F2")
 				if(J.name==hotslot3)
 					for(var/obj/HotSlots/HotSlot3/h in src.client.screen)
 						h.overlays=0
 						h.overlays+=J
-						h.HotSlotNumber("F3")
+						h.SetName("F3")
 				if(J.name==hotslot4)
 					for(var/obj/HotSlots/HotSlot4/h in src.client.screen)
 						h.overlays=0
 						h.overlays+=J
-						h.HotSlotNumber("F4")
+						h.SetName("F4")
 				if(J.name==hotslot5)
 					for(var/obj/HotSlots/HotSlot5/h in src.client.screen)
 						h.overlays=0
 						h.overlays+=J
-						h.HotSlotNumber("F5")*/
+						h.SetName("F5")*/
 		doslot(txt)//CANNOT MACRO***
 			if(usr.NaraTarget)
 				switch(txt)

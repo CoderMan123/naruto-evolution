@@ -7,17 +7,11 @@ mob
 		playtime = 0
 		last_online
 
-		name_color = ""
-		name_color_custom = ""
-
 		items=0
 		maxitems=-1 // Max Satchel Slots: -1 = Unlimited
 		equipped
 		jutsus[0]
 		jutsus_learned[0]
-
-		tmp
-			name_overlays
 
 	New()
 		pixel_x=-16
@@ -657,40 +651,6 @@ mob
 
 mob
 	proc
-		SetName(var/Name, var/Color = src.name_color_custom, var/Outline = 1)
-			if(Name)
-				if(src.client)
-					names_taken.Remove(lowertext(src.name))
-					names_taken.Add(lowertext(Name))
-				src.name = Name
-				src.rname = Name
-				src.character = Name
-
-				if(src.name_overlays)
-					src.overlays -= src.name_overlays
-					src.name_overlays = null
-
-				if(!Color)
-					if(!src.client) Color = "white"
-					if(!src.village) Color = "white"
-					else
-						switch(src.village)
-							if(VILLAGE_LEAF) Color = "#2b7154"
-							if(VILLAGE_SAND) Color = "#886541"
-							if(VILLAGE_MISSING_NIN) Color = "white"
-							if(VILLAGE_AKATSUKI) Color = "#971e1e"
-
-				src.name_color = Color
-
-				var/obj/name = new()
-				name.layer = MOB_LAYER - 1000
-				name.maptext_width = 1000
-				name.pixel_x = name.pixel_x - (name.maptext_width / 2) + ((src.pixel_x * 2) * -1)
-				name.pixel_y -= 16
-				name.maptext = "<span style=\"-dm-text-outline: [Outline]px black; color: [Color]; font-family: 'Open Sans'; font-weight: bold; text-align: center; vertical-align: bottom;\">[Name]</span>"
-				src.name_overlays = image(name, src)
-				src.overlays += src.name_overlays
-
 		SetVillage(var/village)
 			if(village)
 				src.village = village
