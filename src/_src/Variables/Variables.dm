@@ -56,6 +56,7 @@ mob
 		skiptut=0
 		JashinSacrifices=0
 		exp_reward = 0
+		last_damage_taken_time
 		tmp
 			AFK=0
 			BeingThrown

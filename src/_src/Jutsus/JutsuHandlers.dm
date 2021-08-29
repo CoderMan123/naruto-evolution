@@ -64,6 +64,7 @@ mob
 					if(src.health < 0)
 						src.health = 0
 					src.sleephits++
+					src.last_damage_taken_time = world.timeofday
 				src.UpdateHMB()
 				spawn()
 					var/colour = colour2html(colortype)

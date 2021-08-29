@@ -52,7 +52,7 @@ mob
 			world << "[src.name] has switched mobs."
 		..()
 		del(src)
-		
+
 
 	verb/LoginCharacter()
 		set hidden = 1
@@ -78,7 +78,7 @@ mob
 			winset(src,"Titlescreen.Password","text=")
 
 			src.Load(character, password)
-	
+
 	proc/LogoutCharacter()
 		for(var/mob/m in mobs_online)
 			if(administrators.Find(m.client.ckey) || moderators.Find(m.client.ckey))
@@ -126,7 +126,7 @@ mob
 		if(src.incalorie)
 			for(var/obj/Jutsus/CalorieControl/J in src.jutsus)
 				src.strength -= J.damage
-				
+
 		if(src.incurse)
 			src.strength -= 15
 			src.ninjutsu -= 10
@@ -193,7 +193,7 @@ mob
 			for(var/obj/Inventory/Clothing/HeadWrap/AkatsukiHat/O in src.contents)
 				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 				del(O)
-				
+
 			for(var/obj/Inventory/Clothing/Masks/Tobi_Mask/O in src.contents)
 				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 				del(O)
@@ -233,7 +233,7 @@ mob
 			for(var/obj/Inventory/Clothing/Robes/KazekageRobe/O in src.contents)
 				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 				del(O)
-				
+
 			for(var/obj/Inventory/Clothing/HeadWrap/KazekageHat/O in src.contents)
 				if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 				del(O)
@@ -307,7 +307,7 @@ mob
 		for(var/mob/summonings/DogSummoning/D in world)
 			if(D.lowner == src)
 				del(D)
-		
+
 
 	verb/CreateCharacter()
 		set hidden = 1
@@ -808,12 +808,13 @@ mob
 
 		HealthRegeneration()
 			while(src)
-				if(src.Gates == null && src.healthregenmod < 1) src.healthregenmod = 1
-				if(src.rest) src.healthregenmod += 2
-				src.health += round((src.maxhealth/100) * src.healthregenmod)
-				src.health = min(src.health, src.maxhealth)
-				if(src.rest) src.healthregenmod -= 2
-				spawn() src.UpdateHMB()
+				if(src.last_damage_taken_time + 30 < world.timeofday)
+					if(src.Gates == null && src.healthregenmod < 1) src.healthregenmod = 1
+					if(src.rest) src.healthregenmod += 2
+					src.health += round((src.maxhealth/100) * src.healthregenmod)
+					src.health = min(src.health, src.maxhealth)
+					if(src.rest) src.healthregenmod -= 2
+					spawn() src.UpdateHMB()
 				sleep(10)
 
 		Respawn()
