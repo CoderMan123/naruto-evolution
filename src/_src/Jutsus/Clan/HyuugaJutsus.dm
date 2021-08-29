@@ -179,7 +179,7 @@ mob
 						src.ArrowTasked = A
 						step(src,src.dir)
 						if(c_target) step_towards(src,c_target)
-						sleep(5)
+						sleep(7)
 						if(A)
 							c_target.move=1
 							c_target.injutsu=0
@@ -199,7 +199,7 @@ mob
 							src.ArrowTasked = A2
 							step(src,src.dir)
 							if(c_target)step_towards(src,c_target)
-							sleep(5)
+							sleep(7)
 							if(A2)
 								c_target.move=1
 								c_target.injutsu=0
@@ -219,7 +219,7 @@ mob
 								src.ArrowTasked = A3
 								step(src,src.dir)
 								if(c_target)step_towards(src,c_target)
-								sleep(5)
+								sleep(7)
 								if(A3)
 									c_target.move=1
 									c_target.injutsu=0
@@ -240,7 +240,7 @@ mob
 									src.ArrowTasked = A4
 									step(src,src.dir)
 									if(c_target)step_towards(src,c_target)
-									sleep(5)
+									sleep(7)
 									if(A4)
 										c_target.move=1
 										c_target.injutsu=0

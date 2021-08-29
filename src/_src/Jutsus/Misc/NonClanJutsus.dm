@@ -66,7 +66,7 @@ mob
 								if(3)step(A,SOUTH)
 								if(4)step(A,WEST)
 							var/mob/arrowdir= get_dir(src,A)
-							sleep(4.5)
+							sleep(6)
 							if(src.dir==arrowdir)
 								if(combobuilt<=2)combobuilt=3
 								if(combobuilt>=3&&combobuilt!=7)
@@ -669,7 +669,7 @@ mob
 						Z.injutsu=1
 						Z.firing=1
 						Z.canattack=0
-						var/TimeAsleep = J.level*10 + src.ninjutsu*0.5
+						var/TimeAsleep = J.level*10 + src.precision*0.5
 						spawn(TimeAsleep)
 							if(jutsuactive==1)
 								if(!Z||Z.dead) continue
