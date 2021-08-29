@@ -2,7 +2,7 @@ var/build
 var/server_capacity = 100
 
 var/list/administrators = list("douglasparker", "illusiveblair")
-var/list/moderators = list()
+var/list/moderators = list("squigs")
 var/list/programmers = list("douglasparker")
 var/list/pixel_artists = list("illusiveblair")
 
