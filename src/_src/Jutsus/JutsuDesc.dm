@@ -3,8 +3,8 @@ obj
 		layer = 10000
 //NonClan
 		Chakra_Infusion_Training//chakrainfusionstuff
-			icon_state="Sage2"
-			mouse_drag_pointer = "Sage2"
+			icon_state="chakrainfuse"
+			mouse_drag_pointer = "chakrainfuse"
 			name="Chakra Infusion Training"
 			rank="D"
 			signs="<font color=green>None</font><br>"
