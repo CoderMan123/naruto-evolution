@@ -80,17 +80,6 @@ mob/Moderator/verb/
 		usr.client.perspective = EYE_PERSPECTIVE
 		usr.client.eye = usr
 
-	Delete(atom/O in world)
-		set category="Staff"
-		if(!administrators.Find(src.ckey)) return
-		if(ismob(O))
-			var/mob/M=O
-			if(!M.client) del(M)
-			if(alert("Are you sure you want to delete the Atom [O.name]?","Confirm!","No","Yes")=="Yes")
-				text2file("[usr] deleted [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-				del(M)
-		else del(O)
-
 	Start_Chuunin_Exam()
 		set category="Staff"
 		ChuuninExam="Starting"
@@ -205,18 +194,6 @@ mob/Moderator/verb/
 			M.MuteTime=1
 			M.Muted()
 
-	Teleport(mob/M in world)
-		set category="Staff"
-		if(M.canteleport == 0) return
-		src.loc=M.loc
-
-	Summon(mob/M in mobs_online)
-		set category="Staff"
-		src.overlays+=image('Smoke.dmi',"smoke")
-		M.loc=src.loc
-		sleep(13)
-		src.overlays-=image('Smoke.dmi',"smoke")
-
 	Jail(var/mob/M in mobs_online)
 		set category = "Staff"
 		spawn(1)
@@ -234,15 +211,6 @@ mob/Moderator/verb/
 					world<<"[M] has been Un-jailed!"
 					M.loc=MapLoadSpawn()
 				else return
-	AdminTele()
-		set category = "Staff"
-		set name = "Enter Admin Hideout"
-		usr.loc = locate(152,162,9)
-	Reboot()
-		set category="Staff"
-		world<<output("World is rebooting.","Action.Output")
-		text2file("[usr]([src.key]) rebooted.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
-		world.Reboot()
 
 
 mob/var/xplock=0
@@ -479,6 +447,40 @@ mob/Admin/verb
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'true'")
 
 mob/MasterGM/verb
+
+	AdminTele()
+		set category = "Staff"
+		set name = "Enter Admin Hideout"
+		usr.loc = locate(152,162,9)
+	Reboot()
+		set category="Staff"
+		world<<output("World is rebooting.","Action.Output")
+		text2file("[usr]([src.key]) rebooted.: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
+		world.Reboot()
+
+	Teleport(mob/M in world)
+		set category="Staff"
+		if(M.canteleport == 0) return
+		src.loc=M.loc
+
+	Summon(mob/M in mobs_online)
+		set category="Staff"
+		src.overlays+=image('Smoke.dmi',"smoke")
+		M.loc=src.loc
+		sleep(13)
+		src.overlays-=image('Smoke.dmi',"smoke")
+
+	Delete(atom/O in world)
+		set category="Staff"
+		if(!administrators.Find(src.ckey)) return
+		if(ismob(O))
+			var/mob/M=O
+			if(!M.client) del(M)
+			if(alert("Are you sure you want to delete the Atom [O.name]?","Confirm!","No","Yes")=="Yes")
+				text2file("[usr] deleted [O.name]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
+				del(M)
+		else del(O)
+
 	Add_Admin(mob/M in mobs_online)
 		set category="Staff"
 		world<<output("[M] is now an admin.","Action.Output")
