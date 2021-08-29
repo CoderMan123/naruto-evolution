@@ -16,6 +16,8 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(c_target)
 						src.dir=get_dir(src,c_target)
+						flick("throw",src)
+						view(src)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 						var/obj/Projectiles/Effects/FTGkunai/A = new/obj/Projectiles/Effects/FTGkunai(src.loc)
 						A.IsJutsuEffect=src
 						A.Owner=src
@@ -27,6 +29,8 @@ mob
 						spawn(4)if(A.icon_state=="thrown")walk(A,A.dir)
 						src.ftgkunai=A
 					else
+						flick("throw",src)
+						view(src)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
 						var/obj/Projectiles/Effects/FTGkunai/A = new/obj/Projectiles/Effects/FTGkunai(src.loc)
 						A.IsJutsuEffect=src
 						A.Owner=src
