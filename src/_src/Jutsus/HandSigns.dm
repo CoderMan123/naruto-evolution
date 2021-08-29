@@ -77,7 +77,6 @@ obj
 		//var/Damage this might be needed who knows.
 		icon='Misc Effects.dmi'
 		layer=10
-		pixel_x=12
 		New()
 			if(src.z==4)invisibility=1
 		Click()
@@ -387,6 +386,7 @@ obj
 
 				else
 					usr<<output("You do not meet the requirements for this technique.","Action.Output")
+
 		MouseDrop(var/H)
 			if(!src in usr.jutsus)
 				return
@@ -395,131 +395,240 @@ obj
 				return
 			if(src.uses>=((80-round(src.maxcooltime/15))*jutsumastery))
 				if(istype(H,/obj/HotSlots/HotSlot1))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot1"]="[src.icon_state]"
-					usr.hotslot1=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("Z")
+
+					usr.hotslot1 = src.name
+					usr.HotSlotSave["HotSlot1"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot2))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot2"]="[src.icon_state]"
-					usr.hotslot2=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("X")
+
+					usr.hotslot2 = src.name
+					usr.HotSlotSave["HotSlot2"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot3))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot3"]="[src.icon_state]"
-					usr.hotslot3=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("C")
+
+					usr.hotslot3 = src.name
+					usr.HotSlotSave["HotSlot3"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot4))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot4"]="[src.icon_state]"
-					usr.hotslot4=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("V")
+
+					usr.hotslot4 = src.name
+					usr.HotSlotSave["HotSlot4"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot5))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot5"]="[src.icon_state]"
-					usr.hotslot5=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("B")
+
+					usr.hotslot5 = src.name
+					usr.HotSlotSave["HotSlot5"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot6))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot6"]="[src.icon_state]"
-					usr.hotslot6=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("N")
+
+					usr.hotslot6 = src.name
+					usr.HotSlotSave["HotSlot6"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot7))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot7"]="[src.icon_state]"
-					usr.hotslot7=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F7")
+
+					usr.hotslot7 = src.name
+					usr.HotSlotSave["HotSlot7"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot8))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot8"]="[src.icon_state]"
-					usr.hotslot8=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F8")
+
+					usr.hotslot8 = src.name
+					usr.HotSlotSave["HotSlot8"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot9))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot9"]="[src.icon_state]"
-					usr.hotslot9=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F9")
+
+					usr.hotslot9 = src.name
+					usr.HotSlotSave["HotSlot9"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot10))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot10"]="[src.icon_state]"
-					usr.hotslot10=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F10")
+
+					usr.hotslot10 = src.name
+					usr.HotSlotSave["HotSlot10"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot11))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot11"]="[src.icon_state]"
-					usr.hotslot11=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F11")
+
+					usr.hotslot11 = src.name
+					usr.HotSlotSave["HotSlot11"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot12))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot12"]="[src.icon_state]"
-					usr.hotslot12=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F12")
+
+					usr.hotslot12 = src.name
+					usr.HotSlotSave["HotSlot12"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot13))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot13"]="[src.icon_state]"
-					usr.hotslot13=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F1")
+
+					usr.hotslot13 = src.name
+					usr.HotSlotSave["HotSlot13"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot14))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot14"]="[src.icon_state]"
-					usr.hotslot14=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F2")
+
+					usr.hotslot14 = src.name
+					usr.HotSlotSave["HotSlot14"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot15))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot15"]="[src.icon_state]"
-					usr.hotslot15=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F3")
+
+					usr.hotslot15 = src.name
+					usr.HotSlotSave["HotSlot15"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot16))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot16"]="[src.icon_state]"
-					usr.hotslot16=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F4")
+
+					usr.hotslot16 = src.name
+					usr.HotSlotSave["HotSlot16"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot17))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot17"]="[src.icon_state]"
-					usr.hotslot17=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F5")
+
+					usr.hotslot17 = src.name
+					usr.HotSlotSave["HotSlot17"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot18))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot18"]="[src.icon_state]"
-					usr.hotslot18=src.name
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
 					h.SetName("F6")
+
+					usr.hotslot18 = src.name
+					usr.HotSlotSave["HotSlot18"] = "[src.icon_state]"
+
+
 			else
 				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
 

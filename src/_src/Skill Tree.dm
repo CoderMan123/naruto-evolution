@@ -37,6 +37,5 @@ obj/SkillTree
 obj/SkillTree/Linker
 	icon='Misc Effects.dmi'
 	icon_state="Linker"
-	pixel_x=12
 	layer = 2
 

@@ -272,129 +272,166 @@ mob
 			for(var/obj/HotSlots/h in src.client.screen)
 				if(istype(h,/obj/HotSlots/HotSlot1))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot1"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("Z")
 
 				if(istype(h,/obj/HotSlots/HotSlot2))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot2"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("X")
 
 				if(istype(h,/obj/HotSlots/HotSlot3))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot3"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("C")
 
 				if(istype(h,/obj/HotSlots/HotSlot4))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot4"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("V")
 
 				if(istype(h,/obj/HotSlots/HotSlot5))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot5"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("B")
 
 				if(istype(h,/obj/HotSlots/HotSlot6))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot6"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("N")
 
 				if(istype(h,/obj/HotSlots/HotSlot7))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot7"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F7")
 
 				if(istype(h,/obj/HotSlots/HotSlot8))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot8"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F8")
 
 				if(istype(h,/obj/HotSlots/HotSlot9))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot9"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F9")
 
 				if(istype(h,/obj/HotSlots/HotSlot10))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot10"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F10")
 
 				if(istype(h,/obj/HotSlots/HotSlot11))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot11"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F11")
 
 				if(istype(h,/obj/HotSlots/HotSlot12))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot12"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F12")
 
 				if(istype(h,/obj/HotSlots/HotSlot13))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot13"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F1")
 
 				if(istype(h,/obj/HotSlots/HotSlot14))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot14"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F2")
 
 				if(istype(h,/obj/HotSlots/HotSlot15))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot15"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F3")
 
 				if(istype(h,/obj/HotSlots/HotSlot16))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot16"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F4")
 
 				if(istype(h,/obj/HotSlots/HotSlot17))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot17"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F5")
 
 				if(istype(h,/obj/HotSlots/HotSlot18))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot18"])
-					I.pixel_x=12
+					I.pixel_x = 12
+					I.pixel_y = -1
+
 					h.overlays=null
 					h.overlays+=I
 					h.SetName("F6")
+
 			/*for(var/obj/Jutsus/J in world)
 				if(J.name==hotslot1)
 					for(var/obj/HotSlots/HotSlot1/h in src.client.screen)
