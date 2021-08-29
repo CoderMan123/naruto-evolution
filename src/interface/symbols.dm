@@ -51,3 +51,14 @@ obj/Symbols
 				//if("Pixel Artist") src.icon = null
 				//if("Programmer") src.icon = null
 			..()
+
+	missions
+		intel_scroll
+			pixel_x = 24
+			pixel_y = 80
+			leaf
+				icon = 'overhead_icons.dmi'
+				icon_state = "leafintel"
+			sand
+				icon = 'overhead_icons.dmi'
+				icon_state = "sandintel"
