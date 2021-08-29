@@ -330,9 +330,10 @@ window "Character"
 	elem "Character"
 		type = MAIN
 		pos = 281,0
-		size = 300x637
+		size = 300x589
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -341,10 +342,12 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x603
+		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
-		size = 300x616
+		size = 300x568
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = #191919
@@ -408,8 +411,8 @@ window "Character"
 		text = "Precision"
 	elem "SkillPoints"
 		type = LABEL
-		pos = 3,612
-		size = 294x22
+		pos = 151,564
+		size = 146x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -421,8 +424,8 @@ window "Character"
 		text = "0"
 	elem "label9"
 		type = LABEL
-		pos = 3,588
-		size = 294x22
+		pos = 151,540
+		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
@@ -695,7 +698,7 @@ window "Character"
 	elem "StatPoints"
 		type = LABEL
 		pos = 3,564
-		size = 294x22
+		size = 146x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -708,7 +711,7 @@ window "Character"
 	elem "label31"
 		type = LABEL
 		pos = 3,540
-		size = 294x22
+		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
@@ -2111,7 +2114,6 @@ window "Settings"
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2120,8 +2122,6 @@ window "Settings"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 516x416
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2285,9 +2285,10 @@ window "SkillTree"
 	elem "SkillTree"
 		type = MAIN
 		pos = 281,0
-		size = 704x737
+		size = 425x425
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2295,10 +2296,12 @@ window "SkillTree"
 		can-close = false
 		can-minimize = false
 		can-resize = false
+		outer-size = 439x439
+		inner-size = 425x425
 	elem "Background"
 		type = LABEL
 		pos = 0,21
-		size = 704x716
+		size = 425x404
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = #191919
@@ -2308,7 +2311,7 @@ window "SkillTree"
 	elem "Titlebar"
 		type = LABEL
 		pos = 0,0
-		size = 704x22
+		size = 425x22
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
@@ -2322,7 +2325,7 @@ window "SkillTree"
 	elem "SkillTreeMap"
 		type = MAP
 		pos = 3,24
-		size = 698x710
+		size = 419x398
 		anchor1 = 0,0
 		anchor2 = 100,100
 		font-family = "Open Sans"
@@ -2332,16 +2335,17 @@ window "SkillTree"
 	elem "Loading"
 		type = CHILD
 		pos = 3,24
-		size = 698x710
+		size = 419x398
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "SkillTree-Progress"
 		is-vert = false
 	elem "Close"
 		type = BUTTON
-		pos = 676,0
+		pos = 397,0
 		size = 25x19
 		anchor1 = 100,0
 		anchor2 = none
@@ -2369,10 +2373,11 @@ window "SkillTree"
 window "SkillTree-Progress"
 	elem "SkillTree-Progress"
 		type = MAIN
-		pos = 281,0
-		size = 693x704
+		pos = 0,0
+		size = 425x425
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -2380,10 +2385,12 @@ window "SkillTree-Progress"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 439x439
+		inner-size = 425x425
 	elem "Background"
 		type = LABEL
 		pos = 0,0
-		size = 693x704
+		size = 425x425
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = #414141
@@ -2391,7 +2398,7 @@ window "SkillTree-Progress"
 		text = ""
 	elem "Bar2"
 		type = BAR
-		pos = 146,344
+		pos = 13,203
 		size = 400x16
 		anchor1 = none
 		anchor2 = none
@@ -2407,7 +2414,7 @@ window "SkillTree-Progress"
 		dir = east
 	elem "Status"
 		type = LABEL
-		pos = 146,363
+		pos = 13,222
 		size = 400x16
 		anchor1 = none
 		anchor2 = none
@@ -2419,7 +2426,7 @@ window "SkillTree-Progress"
 		text = "Loading..."
 	elem "Bar"
 		type = BAR
-		pos = 330,328
+		pos = 197,187
 		size = 32x32
 		anchor1 = none
 		anchor2 = none
