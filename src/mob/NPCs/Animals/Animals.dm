@@ -623,8 +623,8 @@ mob
 					var/attacking = 0
 					var/tmp/mob/target
 					var/retreating = 0
-					health=2500
-					maxhealth=2500
+					health=200
+					maxhealth=200
 
 
 					SetName()
