@@ -46,8 +46,8 @@ mission
 			src.complete_npc = locate(src.complete_npc.type) in npcs_online
 
 		if(src.required_mobs)
-			for(var/i = 1, i <= src.required_mobs, i++)
-				src.required_mobs[i] = locate(src.required_mobs[i].type) in npcs_online
+			for(var/mob/m in src.required_mobs)
+				m = locate(m.type) in npcs_online
 
 	proc/GetTimer()
 		// http://www.byond.com/forum/post/2244993
