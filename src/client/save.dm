@@ -35,11 +35,11 @@ client
 					text2file("\[W]: \[RM]: \[!issaved()]:  [v] = [src.vars[v]]", LOG_CLIENT_SAVES)
 
 			F["savefile_version"] << savefile_version
-			text2file("\[C]: [F]\n", LOG_CLIENT_SAVES)
+			text2file("\[C]: [F]<br />", LOG_CLIENT_SAVES)
 
 		else
-			text2file("\[E]: \[W]: null client when attempting to write to savefile.\n", LOG_CLIENT_SAVES)
-			text2file("\[C]: [F]\n", LOG_CLIENT_SAVES)
+			text2file("\[E]: \[W]: null client when attempting to write to savefile.<br />", LOG_CLIENT_SAVES)
+			text2file("\[C]: [F]<br />", LOG_CLIENT_SAVES)
 			return 0
 		..()
 
@@ -60,12 +60,12 @@ client
 							F.dir.Remove(v)
 							text2file("\[R]: \[RM]: \[isnull()]:  [v] = [src.vars[v]]", LOG_CLIENT_SAVES)
 
-				text2file("\[C]: [F]\n", LOG_CLIENT_SAVES)
+				text2file("\[C]: [F]<br />", LOG_CLIENT_SAVES)
 			else
-				text2file("\[E]: \[R]: A client savefile doesn't exist.\n", LOG_CLIENT_SAVES)
+				text2file("\[E]: \[R]: A client savefile doesn't exist.<br />", LOG_CLIENT_SAVES)
 				return 0
 		else
-			text2file("\[E]: \[R]: null client when attempting to read from savefile.\n", LOG_CLIENT_SAVES)
-			text2file("\[C]: [F]\n", LOG_CLIENT_SAVES)
+			text2file("\[E]: \[R]: null client when attempting to read from savefile.<br />", LOG_CLIENT_SAVES)
+			text2file("\[C]: [F]<br />", LOG_CLIENT_SAVES)
 			return 0
 		..()

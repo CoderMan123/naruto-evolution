@@ -103,6 +103,33 @@ world
 			sleep(600)
 	
 	proc/CreateLogs()
+
+		if(!fexists(LOG_ERROR))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_ERROR)
+		
+		if(!fexists(LOG_BUGS))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_BUGS)
+		
+		if(!fexists(LOG_SAVES))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_SAVES)
+		
+		if(!fexists(LOG_CLIENT_SAVES))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_CLIENT_SAVES)
+		
+		if(!fexists(LOG_KILLS))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_KILLS)
+		
+		if(!fexists(LOG_STAFF))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_STAFF)
+		
+		if(!fexists(LOG_ADMINISTRATOR))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_ADMINISTRATOR)
+		
+		if(!fexists(LOG_MODERATOR))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_MODERATOR)
+		
+		if(!fexists(LOG_KAGE))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_KAGE)
 		
 		if(!fexists(LOG_CHAT_LOCAL))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_LOCAL)

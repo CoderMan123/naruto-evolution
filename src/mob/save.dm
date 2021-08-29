@@ -71,19 +71,19 @@ mob
 					F["y"] << src.y
 					F["z"] << src.z
 					F["savefile_version"] << savefile_version
-					text2file("\[C]: [F]\n", LOG_SAVES)
+					text2file("\[C]: [F]<br />", LOG_SAVES)
 
 				else
-					text2file("\[E]: \[W]: null character when attempting to write to savefile.\n", LOG_SAVES)
-					text2file("\[C]: [F]\n", LOG_SAVES)
+					text2file("\[E]: \[W]: null character when attempting to write to savefile.<br />", LOG_SAVES)
+					text2file("\[C]: [F]<br />", LOG_SAVES)
 					return 0
 			else
-				text2file("\[E]: \[W]: invalid attempt to write savefile while not logged in.\n", LOG_SAVES)
-				text2file("\[C]: [F]\n", LOG_SAVES)
+				text2file("\[E]: \[W]: invalid attempt to write savefile while not logged in.<br />", LOG_SAVES)
+				text2file("\[C]: [F]<br />", LOG_SAVES)
 				return 0
 		else
-			text2file("\[E]: \[W]: null client when attempting to write to savefile.\n", LOG_SAVES)
-			text2file("\[C]: [F]\n", LOG_SAVES)
+			text2file("\[E]: \[W]: null client when attempting to write to savefile.<br />", LOG_SAVES)
+			text2file("\[C]: [F]<br />", LOG_SAVES)
 			return 0
 		..()
 
@@ -105,18 +105,18 @@ mob
 								text2file("\[R]: \[RM]: \[isnull()]:  [v] = [src.vars[v]]", LOG_SAVES)
 
 					F["password_hotfix"] >> src.password
-					text2file("\[C]: [F]\n", LOG_SAVES)
+					text2file("\[C]: [F]<br />", LOG_SAVES)
 				else
-					text2file("\[E]: \[R]: null character name when attempting to read from savefile.\n", LOG_SAVES)
-					text2file("\[C]: [F]\n", LOG_SAVES)
+					text2file("\[E]: \[R]: null character name when attempting to read from savefile.<br />", LOG_SAVES)
+					text2file("\[C]: [F]<br />", LOG_SAVES)
 					return 0
 			else
-				text2file("\[E]: \[R]: invalid attempt to read savefile while already logged in.\n", LOG_SAVES)
-				text2file("\[C]: [F]\n", LOG_SAVES)
+				text2file("\[E]: \[R]: invalid attempt to read savefile while already logged in.<br />", LOG_SAVES)
+				text2file("\[C]: [F]<br />", LOG_SAVES)
 				return 0
 		else
-			text2file("\[E]: \[R]: null client when attempting to read from savefile.\n", LOG_SAVES)
-			text2file("\[C]: [F]\n", LOG_SAVES)
+			text2file("\[E]: \[R]: null client when attempting to read from savefile.<br />", LOG_SAVES)
+			text2file("\[C]: [F]<br />", LOG_SAVES)
 			return 0
 		..()
 
