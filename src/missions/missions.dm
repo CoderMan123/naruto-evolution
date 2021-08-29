@@ -77,7 +77,9 @@ mission
 				// The mission belongs to the same squad turning it in
 				if(src.squad && squad && src.squad == squad && !src.squad.mission.complete && O)
 					src.squad.mission.complete = world.realtime
-					M.contents -= O
+
+					M.DestroyItem(O)
+
 					spawn() M.client.UpdateInventoryPanel()
 
 					for(var/mob/m in mobs_online)
@@ -100,7 +102,9 @@ mission
 				// This mission belongs to another Squad
 				else if(squad && O && !squad.mission.complete)
 					O.squad.mission.complete = world.realtime
-					M.contents -= O
+
+					M.DestroyItem(O)
+
 					spawn() M.client.UpdateInventoryPanel()
 
 					for(var/mob/m in mobs_online)
@@ -125,7 +129,8 @@ mission
 
 				// Solo ninja turning in the mission
 				else if(O)
-					M.contents -= O
+					M.DestroyItem(O)
+
 					spawn() M.client.UpdateInventoryPanel()
 					M.exp += exp_reward
 					M.ryo += ryo_reward

@@ -202,9 +202,18 @@ mob
 						else
 							destroy_quantity -= I.stacks
 							I.loc = null
+
+							if(istype(O, /obj/Inventory/mission/deliver_intel))
+								var/obj/Inventory/mission/deliver_intel/o = O
+								o.squad = null
+
 							src.DestroyItem(O, destroy_quantity)
 						break
 			else
-				O.loc=null
+				O.loc = null
+				
+				if(istype(O, /obj/Inventory/mission/deliver_intel))
+					var/obj/Inventory/mission/deliver_intel/o = O
+					o.squad = null
 
 			src.client.UpdateInventoryPanel()

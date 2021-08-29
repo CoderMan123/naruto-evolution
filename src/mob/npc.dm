@@ -295,12 +295,14 @@ mob/npc
 
 								switch(usr.village)
 									if("Hidden Leaf")
-										new /obj/Inventory/mission/deliver_intel/leaf_intel(usr)
+										var/obj/Inventory/mission/deliver_intel/leaf_intel/o = new(usr)
+										usr.RecieveItem(o)
 										spawn() usr.client.UpdateInventoryPanel()
 										usr.client.Alert("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 
 									if("Hidden Sand")
-										new /obj/Inventory/mission/deliver_intel/sand_intel(usr)
+										var/obj/Inventory/mission/deliver_intel/sand_intel/o = new(usr)
+										usr.RecieveItem(o)
 										spawn() usr.client.UpdateInventoryPanel()
 										usr.client.Alert("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 
