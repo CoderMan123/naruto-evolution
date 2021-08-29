@@ -53,6 +53,9 @@ world
 		src.Save()
 		..()
 	
+	Error(exception/ex)
+		text2file("<b>Runtime Error:</b> [ex.name]<br /><b>File:</b> [ex.file]<br /><b>Line:</b> [ex.line]<br /><b><u>Description:</u></b><br />[ex.desc]<br /><br />", LOG_ERROR)
+	
 	proc/UpdateClientsMultikeying()
 		clients_multikeying = list()
 
