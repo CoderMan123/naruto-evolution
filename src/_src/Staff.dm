@@ -197,7 +197,7 @@ mob/Moderator/verb/
 	Jail(var/mob/M in mobs_online)
 		set category = "Staff"
 		spawn(1)
-			M.loc=locate(106,35,16)
+			M.loc=locate(172,189,7)
 			M.xplock=1
 			M.jailed=1
 			var/timer = input("How many minutes should they be jailed?") as num
