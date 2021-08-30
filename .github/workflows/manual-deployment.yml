@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       server:
-        description: Server (official, beta, alpha)
+        description: Server (production, beta, alpha)
         required: true
-        default: official
+        default: production
 
 jobs:
   Build:

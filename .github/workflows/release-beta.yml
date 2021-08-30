@@ -2,7 +2,7 @@ name: Release (Beta Server)
 
 on:
   push:
-    branches: [ master ]
+    branches: [ release ]
 
 jobs:
   Build:
