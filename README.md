@@ -54,7 +54,7 @@ git clone https://github.com/lavenblade/naruto-evolution.git
 git checkout develop
 ```
 
-- **master**: This is the current release branch and automatically deploys to the beta testing environment.
+- **release**: This is the current release branch and automatically deploys to the beta testing environment.
 
 - **develop**: This is the current development branch and automatically deploys to the alpha testing environment.
 
