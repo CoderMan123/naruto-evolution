@@ -1,4 +1,4 @@
-name: Release (Official Server)
+name: Release (Production Server)
 
 on:
   workflow_dispatch:
