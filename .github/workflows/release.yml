@@ -93,7 +93,7 @@ jobs:
           rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:/opt/naruto-evolution/production/
           
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            mv --force /opt/naruto-evolution/production/naruto-evolution.dmb /opt/naruto-evolution/official/official.dmb
-            mv --force /opt/naruto-evolution/production/naruto-evolution.rsc /opt/naruto-evolution/official/official.rsc
+            mv --force /opt/naruto-evolution/production/naruto-evolution.dmb /opt/naruto-evolution/production/production.dmb
+            mv --force /opt/naruto-evolution/production/naruto-evolution.rsc /opt/naruto-evolution/production/production.rsc
             systemctl restart naruto-evolution
           EOF
