@@ -45,7 +45,7 @@ Install using your distributions package manager.
 1) **Clone the repository:**
 
 ```sh
-git clone https://github.com/lavenblade/naruto-evolution.git
+git clone https://github.com/IllusiveBIair/Naruto-Evolution.git
 ```
 
 2) **Switch to preferred branch:**
