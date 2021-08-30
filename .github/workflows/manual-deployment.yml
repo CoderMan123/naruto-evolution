@@ -61,14 +61,14 @@ jobs:
           IdentityFile ~/.ssh/naruto-evolution
           EOF
 
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:/opt/naruto-evolution/${{ github.event.inputs.server }}/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:/opt/naruto-evolution/${{ github.event.inputs.server }}/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:/opt/naruto-evolution/${{ github.event.inputs.server }}/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:/opt/naruto-evolution/${{ github.event.inputs.server }}/
 
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            mv --force ~/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.dmb ~/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.dmb
-            mv --force ~/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.rsc ~/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.rsc
+            mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.dmb /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.dmb
+            mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.rsc /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.rsc
             if [[ ${{ github.event.inputs.server }} == "beta" ]] || [[ ${{ github.event.inputs.server }} == "alpha" ]]
               systemctl restart naruto-evolution-${{ github.event.inputs.server }}
             else
