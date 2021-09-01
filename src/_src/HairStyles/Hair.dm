@@ -34,7 +34,7 @@ mob/proc
 				var/image/I=image('VillageSymbols.dmi',"Hidden Sand")
 				I.pixel_y=32
 				overlays+=I*/
-		for(var/obj/Inventory/mission/deliver_intel/O in usr.contents)
+		for(var/obj/Inventory/mission/deliver_intel/O in src.contents)
 			if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
 				src.overlays += /obj/Symbols/missions/intel_scroll/leaf
 

@@ -54,11 +54,12 @@ obj/Symbols
 
 	missions
 		intel_scroll
-			pixel_x = 24
 			pixel_y = 80
 			leaf
+				pixel_x = 20
 				icon = 'overhead_icons.dmi'
 				icon_state = "leafintel"
 			sand
+				pixel_x = 28
 				icon = 'overhead_icons.dmi'
 				icon_state = "sandintel"
