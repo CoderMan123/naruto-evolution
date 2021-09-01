@@ -340,14 +340,19 @@ mob
 				sleep(1)
 
 			while(src && !src.password)
-				prompt = src.client.AlertInput("Please select a password for this account. Passwords are now hashed and unreadable by admins or the host.","Password", mask=1)
+				prompt = src.client.AlertInput("Please select a password for this account.","Password", mask=1)
 				src.password = prompt[2]
 				if(length(src.password) < 3)
 					src.client.Alert("Password must have atleast 3 characters.")
 					src.password = null
 				else
-					src.password_salt = sha1(src.ckey)
-					src.password = sha1("[src.password][src.password_salt]")
+					var/list/password_confirmation = src.client.AlertInput("Please confirm your password for this account.","Password", mask=1)
+					if(src.password != password_confirmation[2])
+						src.client.Alert("Your passwords do not match. Please try setting your password again.")
+						src.password = null
+					else
+						src.password_salt = sha1(src.ckey)
+						src.password = sha1("[src.password][src.password_salt]")
 
 				sleep(1)
 
