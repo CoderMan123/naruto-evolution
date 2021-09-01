@@ -258,8 +258,14 @@ client
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,NORTH)
-			spawn(0.5)if(src.mob)step(src.mob,NORTH)
-			spawn(1)if(src.mob)step(src.mob,NORTH)
+			spawn(0.5)
+				if(src.mob)
+					step(src.mob,NORTH)
+					step(src.mob,NORTH)
+			spawn(1)
+				if(src.mob)
+					step(src.mob,NORTH)
+					step(src.mob,NORTH)
 			spawn(1.5)
 				if(src.mob)step(src.mob,NORTH)
 				if(src.mob)src.mob.dashable=0
@@ -385,8 +391,14 @@ client
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,SOUTH)
-			spawn(0.5)if(src.mob)step(src.mob,SOUTH)
-			spawn(1)if(src.mob)step(src.mob,SOUTH)
+			spawn(0.5)
+				if(src.mob)
+					step(src.mob,SOUTH)
+					step(src.mob,SOUTH)
+			spawn(1)
+				if(src.mob)
+					step(src.mob,SOUTH)
+					step(src.mob,SOUTH)
 			spawn(1.5)
 				if(src.mob)step(src.mob,SOUTH)
 				if(src.mob)src.mob.dashable=0
@@ -476,8 +488,14 @@ client
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,WEST)
-			spawn(0.5)if(src.mob)step(src.mob,WEST)
-			spawn(1)if(src.mob)step(src.mob,WEST)
+			spawn(0.5)
+				if(src.mob)
+					step(src.mob,WEST)
+					step(src.mob,WEST)
+			spawn(1)
+				if(src.mob)
+					step(src.mob,WEST)
+					step(src.mob,WEST)
 			spawn(1.5)
 				if(src.mob)step(src.mob,WEST)
 				if(src.mob)src.mob.dashable=0
@@ -583,8 +601,14 @@ client
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,EAST)
-			spawn(0.5)if(src.mob)step(src.mob,EAST)
-			spawn(1)if(src.mob)step(src.mob,EAST)
+			spawn(0.5)
+				if(src.mob)
+					step(src.mob,EAST)
+					step(src.mob,EAST)
+			spawn(1)
+				if(src.mob)
+					step(src.mob,EAST)
+					step(src.mob,EAST)
 			spawn(1.5)
 				if(src.mob)step(src.mob,EAST)
 				if(src.mob)src.mob.dashable=0
@@ -797,11 +821,11 @@ client
 
 						if(istype(mob.loc,/turf/Ground/Water))
 							if(mob.swimming)//SWIM
-								mob.LevelStat("Agility",rand(0.1,0.2))
+								mob.LevelStat("Agility",rand(2,4))
 								mob.Levelup()
 
 							if(mob.walkingonwater)
-								mob.LevelStat("Ninjutsu",rand(0.1,0.2))
+								mob.LevelStat("Ninjutsu",rand(4,8))
 								mob.Levelup()
 
 						if(mob.speeding<0)mob.speeding=0
@@ -821,10 +845,10 @@ client
 						..()
 						if(src.mob.equipped=="Weights")
 							if(prob(50))
-								spawn() src.mob.LevelStat("Agility",round(rand(2,8)*trainingexp))
+								spawn() src.mob.LevelStat("Agility",round(rand(5,10)*trainingexp))
 						else
 							if(prob(40))
-								spawn() src.mob.LevelStat("Agility",rand(0,1))
+								spawn() src.mob.LevelStat("Agility",rand(1,2))
 
 						sleep(mob.move_delay)
 						mob.moving=0

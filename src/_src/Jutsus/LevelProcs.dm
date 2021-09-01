@@ -59,12 +59,12 @@ mob
 				src<<output("<font color=red><small><small>You're currently exp locked! Use the Remove Exp Lock button under the options pane!</small></Font>","Action.Output")
 				return
 			switch(stat)
-				if("Defence")defexp+=howmuch
-				if("Strength")strengthexp+=howmuch
-				if("Ninjutsu")ninexp+=howmuch
-				if("Genjutsu")genexp+=howmuch
-				if("Agility")agilityexp+=howmuch
-				if("Precision")precisionexp+=howmuch
+				if("Defence")defexp += round(howmuch)
+				if("Strength")strengthexp += round(howmuch)
+				if("Ninjutsu")ninexp += round(howmuch)
+				if("Genjutsu")genexp += round(howmuch)
+				if("Agility")agilityexp += round(howmuch)
+				if("Precision")precisionexp += round(howmuch)
 			Levelup()
 		Levelup()
 			if(src.xplock==1)
