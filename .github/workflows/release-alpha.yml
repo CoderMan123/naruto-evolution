@@ -65,6 +65,6 @@ jobs:
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
             mv --force /opt/naruto-evolution/alpha/naruto-evolution.dmb /opt/naruto-evolution/alpha/alpha.dmb
             mv --force /opt/naruto-evolution/alpha/naruto-evolution.rsc /opt/naruto-evolution/alpha/alpha.rsc
-            printf "-alpha" >> /opt/naruto-evolution/alpha/VERSION
+            print "-alpha" >> /opt/naruto-evolution/alpha/VERSION
             systemctl restart naruto-evolution-alpha
           EOF
