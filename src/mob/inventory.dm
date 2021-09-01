@@ -96,7 +96,7 @@ mob
 					if(!squad && src.village == "Hidden Leaf" || (squad && o.squad && squad != o.squad && src.village == "Hidden Leaf")) continue
 
 				else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
-					src.overlays+= /obj/Symbols/missions/intel_scroll/leaf
+					src.overlays+= /obj/Symbols/missions/intel_scroll/sand
 					var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
 
 					var/squad/squad = src.GetSquad()
