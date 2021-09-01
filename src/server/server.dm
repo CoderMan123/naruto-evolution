@@ -9,6 +9,9 @@ var/list/pixel_artists = list("illusiveblair")
 var/list/kages = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
 var/list/kages_last_online = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
 
+var/list/alpha_testers = list()
+var/list/beta_testers = list()
+
 var/list/clients_connected = list()
 var/list/clients_online = list()
 var/list/clients_multikeying = list()

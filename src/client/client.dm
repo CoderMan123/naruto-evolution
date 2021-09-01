@@ -37,6 +37,16 @@ client
 		src.Load()
 		spawn() src.mob.Playtime()
 
+		if(findtext(lowertext(build), "alpha"))
+			if(!administrators.Find(src.ckey) && !alpha_testers.Find(src.ckey))
+				spawn() src.Alert("You do not have authorization to access the alpha server. If this is in error, please contact support.<br /><br />support@narutoevolution.com", "Alpha Server: Access Authorization")
+				del(src)
+
+		else if(findtext(lowertext(build), "beta"))
+			if(!administrators.Find(src.ckey) && !beta_testers.Find(src.ckey))
+				spawn() src.Alert("You do not have authorization to access the beta server. If this is in error, please contact support.<br /><br />support@narutoevolution.com", "Beta Server: Access Authorization")
+				del(src)
+
 		for(var/client/source in clients_connected)
 			for(var/client/target in clients_connected)
 				if(source != target)

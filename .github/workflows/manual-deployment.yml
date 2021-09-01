@@ -70,6 +70,7 @@ jobs:
             mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.dmb /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.dmb
             mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.rsc /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.rsc
             if [[ ${{ github.event.inputs.server }} == "beta" ]] || [[ ${{ github.event.inputs.server }} == "alpha" ]]
+              printf "-${{ github.event.inputs.server }}" >> /opt/naruto-evolution/alpha/VERSION
               systemctl restart naruto-evolution-${{ github.event.inputs.server }}
             else
               systemctl restart naruto-evolution
