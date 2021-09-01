@@ -32,8 +32,7 @@ mob/NPCs/Shinobi
 				src.dir = get_dir(src,c_target)
 				flick("punchl",src)
 				c_target.health-=round(strength/2)
-				var/colour = colour2html("white")
-				F_damage(c_target,round(strength/2),colour)
+				spawn() DamageOverlay(c_target, round(strength/2), "white")
 				c_target.UpdateHMB()
 			spawn(25)if(src)firing=0
 		SickleWeaselNPC()
@@ -369,10 +368,10 @@ mob/NPCs/Shinobi
 			src.Aggressive=pick(0,1)
 			src.name="Rogue Shinobi"
 			src.village=null
-		src.Ryo=rand(10,50)
+		src.ryo=rand(10,50)
 		if(!TutorialGuy)src.maxhealth=rand(1000,2500)
 		else
-			src.Ryo=0
+			src.ryo=0
 			src.name="Rogue Shinobi"
 			src.strength=7
 			src.maxhealth=rand(10,40)
@@ -450,7 +449,7 @@ mob/NPCs/Shinobi
 						killer.overlays=null
 						killer.ReAddClothing()
 						killer.RestoreOverlays()
-						killer.RemoveAdminVerbs()
+						killer.client.StaffCheck()
 					if(killer.village=="Anbu Root")
 						for(var/obj/Inventory/Clothing/Robes/Anbu_Suit/O in killer)
 							if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
@@ -458,7 +457,7 @@ mob/NPCs/Shinobi
 						killer.overlays=null
 						killer.ReAddClothing()
 						killer.RestoreOverlays()
-						killer.RemoveAdminVerbs()
+						killer.client.StaffCheck()
 					killer.village="Missing-Nin"
 					killer.rank="Missing-Nin"
 					var/squad/squad = killer.GetSquad()

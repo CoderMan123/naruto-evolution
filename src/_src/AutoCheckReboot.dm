@@ -1,4 +1,3 @@
-var/AFKLog=file("Logs/AFK Log.txt")
 proc
 	AutoCheck()
 		while(world)

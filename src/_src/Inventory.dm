@@ -7,35 +7,6 @@ proc
 			if(l != "_" && l != " ")Nmsg += l
 		return Nmsg
 
-obj/RyoBag
-	icon='Ryo bills.dmi'
-	icon_state="owned"
-	name="Ryo"
-	var/Worth=0
-	DblClick()
-		if(get_dist(src,usr)>1) return
-		if(!src) return
-		var/mob/M=usr
-		if(M.dead) return
-		hearers()<<output("[M] picks up [Worth] [src].","Action.Output")
-		M.Ryo+=Worth
-		del(src)
-mob
-	verb
-		DropRyo()
-			set hidden=1
-			if(!usr.Ryo)
-				usr << output("You don't have any Ryo to drop.","Action.Output")
-				return
-			var/list/AlertInput=usr.client.AlertInput("How much Ryo would you like to drop?","Drop Ryo")
-			if(!isnum(AlertInput[2]))return
-			if(usr.Ryo<AlertInput[2]||AlertInput[2]<=0)return
-			usr.Ryo-=AlertInput[2]
-			var/obj/RyoBag/O=new(src.loc)
-			O.Worth=AlertInput[2]
-			src.client.UpdateInventoryPanel()
-			src << output("You drop [AlertInput[2]] Ryo.","Action.Output")
-
 obj
 	Inventory
 		mouse_opacity=2
@@ -90,7 +61,7 @@ obj
 				usr.client.UpdateInventoryPanel()
 				return
 			..()
-			
+
 		Weaponry
 			Click()
 				..()

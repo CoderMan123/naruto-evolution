@@ -179,7 +179,7 @@ mob
 						src.ArrowTasked = A
 						step(src,src.dir)
 						if(c_target) step_towards(src,c_target)
-						sleep(5)
+						sleep(7)
 						if(A)
 							c_target.move=1
 							c_target.injutsu=0
@@ -199,7 +199,7 @@ mob
 							src.ArrowTasked = A2
 							step(src,src.dir)
 							if(c_target)step_towards(src,c_target)
-							sleep(5)
+							sleep(7)
 							if(A2)
 								c_target.move=1
 								c_target.injutsu=0
@@ -219,7 +219,7 @@ mob
 								src.ArrowTasked = A3
 								step(src,src.dir)
 								if(c_target)step_towards(src,c_target)
-								sleep(5)
+								sleep(7)
 								if(A3)
 									c_target.move=1
 									c_target.injutsu=0
@@ -240,7 +240,7 @@ mob
 									src.ArrowTasked = A4
 									step(src,src.dir)
 									if(c_target)step_towards(src,c_target)
-									sleep(5)
+									sleep(7)
 									if(A4)
 										c_target.move=1
 										c_target.injutsu=0
@@ -301,7 +301,7 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(J.level==4)
 						for(var/mob/M in range(4))
-							if(!istype(M,/mob/npc) && M.injutsu==0 && !M.dead && !M.swimming)
+							if(!istype(M,/mob/npc) && M.injutsu==0 && !M.dead && !M.swimming || istype(M,/mob/npc/combat) && M.injutsu==0 && !M.dead && !M.swimming)
 								var/ki = get_dist(M,src)
 								for(var/i=0,i<ki,i++) spawn() step_away(M,src); sleep(1.5)
 					for(var/i=0,i<17,i++)
@@ -318,7 +318,7 @@ mob
 							walk(Ok,Ok.dir)
 						for(var/mob/M in orange(2))
 							if(M.dead || M.swimming) continue
-							if(!istype(M,/mob/npc))
+							if(!istype(M,/mob/npc) || !istype(M,/mob/npc/combat))
 								M.icon_state="push"
 								M.injutsu=1
 								M.DealDamage(J.damage+round(((src.ninjutsu / 300)+(src.agility / 300))*2*J.damage),src,"NinBlue")
@@ -454,7 +454,7 @@ mob
 								src.dir = get_dir(src,c_target)
 								src.Target_Atom(c_target)
 								if(c_target in view(O,0))
-									if(c_target.dead==0&&!istype(c_target,/mob/npc/))
+									if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 										if(c_target.fightlayer==src.fightlayer)
 											if(c_target.dodge==0)
 												var/undefendedhit=J.damage+round(((src.ninjutsu / 300)+(src.strength / 300))*2*J.damage)

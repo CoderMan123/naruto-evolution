@@ -67,7 +67,7 @@ mob
 							SC.dir = get_dir(SC,C)
 							for(c_target in get_step(SC,SC.dir))
 								if(c_target in get_step(SC,SC.dir))
-									if(c_target.dead==0&&!istype(c_target,/mob/npc/)&&c_target!=SC.Owner)
+									if(c_target.dead==0&&!istype(c_target,/mob/npc/)&&c_target!=SC.Owner || c_target.dead==0&&istype(c_target,/mob/npc/combat)&&c_target!=SC.Owner)
 										if(c_target.fightlayer==SC.fightlayer)
 											if(c_target.client)spawn()c_target.ScreenShake(1)
 											if(c_target.dodge==0)
@@ -235,7 +235,8 @@ mob
 								GF.dir = src.dir
 								GF.icon = 'PressurePoint.dmi'
 								flick('GentleFist.dmi',GF)
-								switch(src.dir)if(WEST) GF.pixel_x=-16
+								switch(src.dir)
+									if(WEST) GF.pixel_x=-16
 								spawn(4)if(GF)del(GF)
 							for(var/mob/Clones/Bunshin/C in world)if(C.Owner==src)flick("punchr",C)
 						else
@@ -251,7 +252,7 @@ mob
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
 							if(c_target in get_step(src,src.dir))
-								if(c_target.dead==0&&!istype(c_target,/mob/npc/))
+								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 									var/canhityou=1
 									if(c_target.Clan == "Sand")
 										var/blockchance = rand(1,2)
@@ -405,7 +406,7 @@ mob
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
 							if(c_target in get_step(src,src.dir))
-								if(c_target.dead==0&&!istype(c_target,/mob/npc/))
+								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 									var/canhityou=1
 									if(c_target.Clan == "Sand")
 										var/blockchance = rand(1,3)

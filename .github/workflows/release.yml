@@ -1,28 +1,12 @@
-name: Release (Official Server)
+name: Release (Production Server)
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: Version (create-release)
-        required: true
-        default: "2.0.0"
 
 jobs:
   Build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
-      - name: Install BYOND
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt-get update
-          sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
-          sudo apt-get install unzip
-          curl -OL http://www.byond.com/download/build/513/513.1542_byond_linux.zip
-          unzip *_byond_linux.zip
-          cd byond
-          sudo make install
-
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -30,13 +14,7 @@ jobs:
           lfs: true
 
       - name: Build
-        run: DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
-
-      - name: Generate changelog
-        uses: heinrichreimer/github-changelog-generator-action@v2.2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          configureSections: '{"feature":{"prefix":"**Features:**","labels":["Type: Feature"]},"ui":{"prefix":"**User Interface:**","labels":["Type: UI"]},"ux":{"prefix":"**User Experience:**","labels":["Type: UX"]},"combat":{"prefix":"**Combat:**","labels":["Type: Combat"]},"balance":{"prefix":"**Balance:**","labels":["Type: Balance"]},"enhancements":{"prefix":"**Enhancements:**","labels":["Type: Enhancement"]},"bug":{"prefix":"**Bugs:**","labels":["Type: Bug"]},"network":{"prefix":"**Network:**","labels":["Type: Network"]},"text":{"prefix":"**Text:**","labels":["Type: Text"]}}'
+        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} tgstation/byond:514.1566 DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
 
       - name: Cache
         uses: actions/cache@v2
@@ -47,7 +25,7 @@ jobs:
           key: ${{ github.sha }}
 
   Release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [Build]
     steps:
       - name: Restore cache
@@ -62,23 +40,23 @@ jobs:
         run: |
           sudo apt-get install zip
           sudo mkdir -p /naruto-evolution
-          printf ${{ github.event.inputs.version }} > ${{ github.workspace }}/VERSION
           sudo cp -p ${{ github.workspace }}/naruto-evolution.dmb /naruto-evolution/naruto-evolution.dmb
           sudo cp -p ${{ github.workspace }}/naruto-evolution.rsc /naruto-evolution/naruto-evolution.rsc
           sudo cp -p ${{ github.workspace }}/VERSION /naruto-evolution/VERSION
           sudo cp -p ${{ github.workspace }}/CHANGELOG.md /naruto-evolution/CHANGELOG.md
-          sudo zip -r ${{ github.workspace }}/naruto-evolution-${{ github.event.inputs.version }}.zip /naruto-evolution
-          sudo tar -czf ${{ github.workspace }}/naruto-evolution-${{ github.event.inputs.version }}.tar.gz /naruto-evolution
+          sudo zip -r ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip /naruto-evolution
+          sudo tar -czf ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz /naruto-evolution
       
       - name: Release
         run: |
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
-          gh release create ${{ github.event.inputs.version }} --title ${{ github.event.inputs.version }} --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
-          gh release upload ${{ github.event.inputs.version }} ${{ github.workspace }}/naruto-evolution-${{ github.event.inputs.version }}.zip
-          gh release upload ${{ github.event.inputs.version }} ${{ github.workspace }}/naruto-evolution-${{ github.event.inputs.version }}.tar.gz
+          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
+          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip
+          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz
+          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --repo IllusiveBIair/Naruto-Evolution-Community
   
   Deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [Release]
     steps:
       - name: Restore build
@@ -109,13 +87,13 @@ jobs:
           IdentityFile ~/.ssh/naruto-evolution
           EOF
 
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/official/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/official/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:~/naruto-evolution/official/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:~/naruto-evolution/official/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:/opt/naruto-evolution/production/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:/opt/naruto-evolution/production/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:/opt/naruto-evolution/production/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:/opt/naruto-evolution/production/
           
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            mv --force ~/naruto-evolution/official/naruto-evolution.dmb ~/naruto-evolution/official/official.dmb
-            mv --force ~/naruto-evolution/official/naruto-evolution.rsc ~/naruto-evolution/official/official.rsc
+            mv --force /opt/naruto-evolution/production/naruto-evolution.dmb /opt/naruto-evolution/production/production.dmb
+            mv --force /opt/naruto-evolution/production/naruto-evolution.rsc /opt/naruto-evolution/production/production.rsc
             systemctl restart naruto-evolution
           EOF

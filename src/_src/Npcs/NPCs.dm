@@ -13,8 +13,10 @@ mob/npc
 //		src.overlays+='Sandals.dmi'
 //		OriginalOverlays=overlays
 //		..()
-	Death()return
-	Move()return
+
+
+
+
 	proc/Stuff()
 		spawn(20)
 			while(src)
@@ -74,13 +76,13 @@ mob/npc
 			usr.move=0
 			var/list/Options=list()
 			for(var/obj/Inventory/Clothing/C in world)
-				if(C.loc==locate(199,199,12)) Options["[C.name]-[C.Cost] Ryo"]=C
+				if(C.loc==locate(199,199,9)) Options["[C.name]-[C.Cost] Ryo"]=C
 			var/obj/Choice = usr.CustomInput("Purchase","What would you like to purchase?",Options + "Cancel",0)
 			if(Choice.name=="Cancel")
 				usr.move=1
 				return
 			var/obj/S = Options["[Choice]"]
-			if(usr.Ryo>=S.Cost)
+			if(usr.ryo>=S.Cost)
 				var/obj/I=new S.type()
 				if(I.Colorable)
 					var/list/Colors=usr.ColorInput("What colour would you like the [I] to be?")
@@ -91,7 +93,7 @@ mob/npc
 				usr.RecieveItem(I)
 				usr.client.UpdateInventoryPanel()
 				usr<<output("You bought the [S.name] for [S.Cost] Ryo.","Action.Output")
-				usr.Ryo-=S.Cost
+				usr.ryo-=S.Cost
 				usr.move=1
 			else
 				usr.move=1
@@ -116,7 +118,7 @@ mob/npc
 			usr.move=0
 			var/list/Options=list()
 			for(var/obj/Inventory/Weaponry/C in world)
-				if(C.loc==locate(199,199,12)) Options["[C.name]-[C.Cost] Ryo"]=C
+				if(C.loc==locate(199,199,9)) Options["[C.name]-[C.Cost] Ryo"]=C
 			var/obj/Choice=usr.CustomInput("Purchase","What would you like to purchase?",Options + "Cancel")
 			if(Choice.name=="Cancel")
 				usr.move=1
@@ -134,13 +136,13 @@ mob/npc
 			if(AlertInput[2]<=0)
 				usr.move=1
 				return
-			if(usr.Ryo>=RealPrice)
+			if(usr.ryo>=RealPrice)
 				var/obj/Inventory/I=new S.type()
 				I.stacks = AlertInput[2]
 				usr.RecieveItem(I)
 				usr.client.UpdateInventoryPanel()
 				usr<<output("You bought [AlertInput[2]] [S.name](s) for [RealPrice] Ryo.","Action.Output")
-				usr.Ryo-=RealPrice
+				usr.ryo-=RealPrice
 				usr.move=1
 			else
 				usr<<output("You need [RealPrice] Ryo to purchase this.","Action.Output")
@@ -163,20 +165,20 @@ mob/npc
 			if(get_dist(src,usr)>2) return
 			if(!usr.move) return
 			usr.move=0
-			switch(usr.client.Alert("You have [usr.Ryo] Ryo on you and [usr.RyoBanked] banked here.","Bank",list("Deposit","Withdraw","Cancel")))
+			switch(usr.client.Alert("You have [usr.ryo] Ryo on you and [usr.RyoBanked] banked here.","Bank",list("Deposit","Withdraw","Cancel")))
 				if(1)
-					if(!usr.Ryo)
+					if(!usr.ryo)
 						usr << output("[src] says, You don't have any Ryo to deposit","Action.Output")
 					else
 						var/list/AlertInput=usr.client.AlertInput("How much would you like to deposit?","Ryo Deposit")
 						if(!isnum(AlertInput[2]))
 							usr.move=1
 							return
-						if(usr.Ryo<AlertInput[2]||AlertInput[2]<=0)
+						if(usr.ryo<AlertInput[2]||AlertInput[2]<=0)
 							usr.move=1
 							return
 						usr.RyoBanked+=AlertInput[2]
-						usr.Ryo-=AlertInput[2]
+						usr.ryo-=AlertInput[2]
 						usr << output("[src] says,  Thank you for your deposit.","Action.Output")
 					usr.move=1
 					return
@@ -192,7 +194,7 @@ mob/npc
 						if(usr.RyoBanked<AlertInput[2]||AlertInput[2]<=0)
 							usr.move=1
 							return
-						usr.Ryo+=AlertInput[2]
+						usr.ryo+=AlertInput[2]
 						usr.RyoBanked-=AlertInput[2]
 						usr << output("[src] says, Thanks, here's your Ryo.","Action.Output")
 					usr.move=1

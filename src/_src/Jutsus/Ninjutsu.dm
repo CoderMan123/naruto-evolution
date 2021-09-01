@@ -331,7 +331,7 @@ mob/Karasu
 			view(src,10) << sound('Swing5.ogg',0,0,0,100)
 			spawn(2)
 				src.dir = get_dir(src,c_target)
-				if(c_target.dead==0&&!istype(c_target,/mob/npc/)&&c_target!=src.Owner)
+				if(c_target.dead==0&&!istype(c_target,/mob/npc/)&&c_target!=src.Owner || c_target.dead==0&&istype(c_target,/mob/npc/combat)&&c_target!=src.Owner )
 					if(!src.henged) flick("arm shooters",src)
 					if(src.henged) flick("punchr",src)
 					if(c_target.client)spawn()c_target.ScreenShake(1)
@@ -395,7 +395,7 @@ mob/Untargettable
 			flick("Attack",src)
 			view(src)<<sound('wirlwind.wav',0,0,volume=100)
 			for(var/mob/M in orange(5))
-				if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/npc)) continue
+				if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) continue
 				M.injutsu=1
 
 				view(src)<<sound('Skill_BigRoketFire.wav',0,0,volume=100)
@@ -418,7 +418,7 @@ mob/Untargettable
 				sleep(25)
 				src.icon_state = "Idle"
 				var/Mobs
-				for(var/mob/M in oview(5))if(M.key!=src.name||istype(M,/mob/npc))Mobs=1
+				for(var/mob/M in oview(5))if(M.key!=src.name||istype(M,/mob/npc) && !istype(M,/mob/npc/combat))Mobs=1
 				if(Mobs) src.tailswing()
 	C2
 		icon = 'C2.dmi'
@@ -705,13 +705,16 @@ obj
 					..()
 					pixel_y+=32
 					layer = MOB_LAYER+1
-					spawn(50)if(src)del(src)
+					spawn(50)
+						if(src)
+							src.loc = null
+							src.Owner = null
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
 							if(M)
-								if(M <> src.Owner)
+								if(M != src.Owner)
 									if(M.dead || M.swimming || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.loc = M.loc
@@ -722,7 +725,14 @@ obj
 										M.Bleed()
 										has_damaged += M
 										if(M.henge==4||M.henge==5)M.HengeUndo()
-						else if(src)del(src)
+								else if(src)
+									M.DealDamage(src.damage,src.Owner,"NinBlue")
+									M.Bleed()
+									src.loc = null
+									src.Owner = null
+						else if(src)
+							src.loc = null
+							src.Owner = null
 			DWS
 				name="DWS"
 				icon = 'risingdragonprojectiles.dmi'
@@ -906,13 +916,16 @@ obj
 					src.damage = 1
 				//	var/obj/O = new/obj
 				//	O.loc = src.loc
-					spawn(50)if(src)del(src)
+					spawn(50)
+						if(src)
+							src.loc = null
+							src.Owner = null
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
 							if(M)
-								if(M <> src.Owner)
+								if(M != src.Owner)
 									var/mob/Owner=src.Owner
 									if(M.dead || M.swimming || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
@@ -924,6 +937,11 @@ obj
 											spawn()if(M)M.Bleed()
 											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
 											if(M.henge==4||M.henge==5)M.HengeUndo()
+								else
+									M.DealDamage(src.damage,src.Owner,"NinBlue")
+									spawn()if(M)M.Bleed()
+									src.loc = null
+									src.Owner = null
 			Shukakku_Spear
 				name="Shukkaku Spear"
 				icon='Shukakku Spear.dmi'
@@ -2068,21 +2086,21 @@ obj
 							flick("[src.hitstate]",src)
 							src.Hit=1
 							M.DealDamage(src.damage,src.Owner,"NinBlue")
-							if(prob(50))
+							if(prob(80))
 								M.Linkage=src
 								M.overlays+=/obj/Projectiles/Effects/OnFire
 								if(src.level==1)
 									M.burn=4
-									spawn(50)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(Owner)
 								if(src.level==2)
 									M.burn=6
-									spawn(50)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(Owner)
 								if(src.level==3)
 									M.burn=8
-									spawn(50)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(Owner)
 								if(src.level==4)
 									M.burn=10
-									spawn(50)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(Owner)
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							spawn(7)if(src)src.loc=locate(0,0,0)
 						else
@@ -2095,21 +2113,21 @@ obj
 								flick("fireballhit",src)
 								src.Hit=1
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
-								if(prob(50))
+								if(prob(80))
 									M.Linkage=src
 									M.overlays+=/obj/Projectiles/Effects/OnFire
 									if(src.level==1)
 										M.burn=4
-										spawn(50)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(Owner)
 									if(src.level==2)
 										M.burn=6
-										spawn(50)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(Owner)
 									if(src.level==3)
 										M.burn=8
-										spawn(50)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(Owner)
 									if(src.level==4)
 										M.burn=10
-										spawn(50)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(Owner)
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								spawn(7)if(src)src.loc=locate(0,0,0)
 							else src.loc=M.loc
@@ -2368,8 +2386,7 @@ mob
 				view(src)<<sound('boom.wav',0,0)
 				spawn(4)if(src)src.BurnEffect(X)
 			else
-				src.overlays=0
-				src.RestoreOverlays()
+				src.overlays-=/obj/Projectiles/Effects/OnFire
 				if(src.Linkage)
 					var/obj/OBJ=src.Linkage
 					if(OBJ)del(OBJ)
@@ -2822,7 +2839,7 @@ obj
 
 
 mob
-	var
+	var/tmp
 		insage=0
 		incurse=0
 		ingpill=0
@@ -2833,6 +2850,8 @@ mob
 		caged=0
 		industprison=0
 		ringed=0
+		inAngel=0
+		
 mob
 	Bump(M)
 		if(src.inboulder==1)//boulderstuff

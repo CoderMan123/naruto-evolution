@@ -1,9 +1,10 @@
 obj
 	Jutsus
+		layer = 10000
 //NonClan
 		Chakra_Infusion_Training//chakrainfusionstuff
-			icon_state="Sage2"
-			mouse_drag_pointer = "Sage2"
+			icon_state="chakrainfuse"
+			mouse_drag_pointer = "chakrainfuse"
 			name="Chakra Infusion Training"
 			rank="D"
 			signs="<font color=green>None</font><br>"
@@ -1981,8 +1982,8 @@ obj
 				maxcooltime = jutsucooldown*200
 
 		Blade_Hurricane
-			icon_state="Multiple Chakra Kunai"
-			mouse_drag_pointer = "Multiple Chakra Kunai"
+			icon_state="bladehurri"
+			mouse_drag_pointer = "bladehurri"
 			name="Blade Hurricane"
 			rank="A"
 			signs="<font color=green>Dragon,Horse,Dragon,Horse,Rabbit</font><br>(macro(5,3,5,3,1))"

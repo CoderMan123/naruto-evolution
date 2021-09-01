@@ -4,46 +4,23 @@ on:
   workflow_dispatch:
     inputs:
       server:
-        description: Server (official, beta, alpha)
+        description: Server (production, beta, alpha)
         required: true
-        default: official
-      
-      version:
-        description: Version (build)
-        required: true
-        default: "2.0.0"
+        default: production
 
 jobs:
   Build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
-      - name: Install BYOND
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt-get update
-          sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
-          sudo apt-get install unzip
-          curl -OL http://www.byond.com/download/build/513/513.1542_byond_linux.zip
-          unzip *_byond_linux.zip
-          cd byond
-          sudo make install
-
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.version }}
           submodules: 'recursive'
           lfs: true
 
       - name: Build
-        run: DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
-
-      - name: Generate changelog
-        uses: heinrichreimer/github-changelog-generator-action@v2.2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          configureSections: '{"feature":{"prefix":"**Features:**","labels":["Type: Feature"]},"ui":{"prefix":"**User Interface:**","labels":["Type: UI"]},"ux":{"prefix":"**User Experience:**","labels":["Type: UX"]},"combat":{"prefix":"**Combat:**","labels":["Type: Combat"]},"balance":{"prefix":"**Balance:**","labels":["Type: Balance"]},"enhancements":{"prefix":"**Enhancements:**","labels":["Type: Enhancement"]},"bug":{"prefix":"**Bugs:**","labels":["Type: Bug"]},"network":{"prefix":"**Network:**","labels":["Type: Network"]},"text":{"prefix":"**Text:**","labels":["Type: Text"]}}'
-      
+        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} tgstation/byond:514.1566 DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+        
       - name: Cache
         uses: actions/cache@v2
         id: cache
@@ -53,8 +30,8 @@ jobs:
           key: ${{ github.sha }}
   
   Deploy:
-    runs-on: ubuntu-latest
-    needs: [Release]
+    runs-on: ubuntu-20.04
+    needs: [Build]
     steps:
       - name: Restore build
         uses: actions/cache@v2
@@ -84,15 +61,18 @@ jobs:
           IdentityFile ~/.ssh/naruto-evolution
           EOF
 
-          printf ${{ github.event.inputs.version }} > ${{ github.workspace }}/VERSION
-
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:~/naruto-evolution/${{ github.event.inputs.server }}/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:/opt/naruto-evolution/${{ github.event.inputs.server }}/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:/opt/naruto-evolution/${{ github.event.inputs.server }}/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:/opt/naruto-evolution/${{ github.event.inputs.server }}/
+          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:/opt/naruto-evolution/${{ github.event.inputs.server }}/
 
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            mv --force ~/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.dmb ~/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.dmb
-            mv --force ~/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.rsc ~/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.rsc
-            systemctl restart naruto-evolution
+            mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.dmb /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.dmb
+            mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.rsc /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.rsc
+            if [[ ${{ github.event.inputs.server }} == "beta" ]] || [[ ${{ github.event.inputs.server }} == "alpha" ]]
+              echo "-${{ github.event.inputs.server }}" >> /opt/naruto-evolution/${{ github.event.inputs.server }}/VERSION
+              systemctl restart naruto-evolution-${{ github.event.inputs.server }}
+            else
+              systemctl restart naruto-evolution
+            fi
           EOF

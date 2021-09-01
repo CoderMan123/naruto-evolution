@@ -1,5 +1,5 @@
 mob
-	var
+	var/tmp
 		inJC1=0
 		inJC2=0
 		inJC3=0

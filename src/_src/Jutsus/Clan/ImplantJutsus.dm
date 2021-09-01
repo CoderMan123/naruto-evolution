@@ -10,8 +10,12 @@ turf
 			..()
 			src.icon_state = "Blank"
 		Entered(mob/M)
-			M.DealDamage(100000, /mob/Void)
+			M.Intang = 0
+			var/mob/Void/Void = new()
+			M.DealDamage(100000, Void)
+			Void.loc = null
 			M<<"I ventured too far into the void!"
+			world<<output("[src] was knocked out by [Void]!","Action.Output")
 
 mob
 	proc
@@ -86,6 +90,12 @@ mob
 		WarpDim()
 			for(var/obj/Jutsus/WarpDim/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
+				if(istype(c_target, /mob/npc/combat/political_escort))
+					src<<output("It appears that the Daimyo is protected against spacial inteferance!","Action.Output")
+					return
+				if(locate(/obj/Inventory/mission/deliver_intel) in c_target.contents)
+					src<<output("The seal in their scroll is preventing spacial travel!","Action.Output")
+					return
 				if(c_target.jailed == 1)
 					src<<output("Your target is jailed.","Action.Output")
 					return
@@ -119,8 +129,8 @@ mob
 						spawn(10)
 							M=src.Target_Get(TARGET_MOB)
 							if(M)
-								c_target.loc=locate(105,166,3)//97 166 3 is middle
-								src.loc=locate(90,166,3)
+								c_target.loc=locate(165,183,8)
+								src.loc=locate(175,183,3)
 								c_target.canattack=1
 								c_target.injutsu=0
 								c_target.move=1

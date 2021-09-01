@@ -59,12 +59,12 @@ mob
 				src<<output("<font color=red><small><small>You're currently exp locked! Use the Remove Exp Lock button under the options pane!</small></Font>","Action.Output")
 				return
 			switch(stat)
-				if("Defence")defexp+=howmuch
-				if("Strength")strengthexp+=howmuch
-				if("Ninjutsu")ninexp+=howmuch
-				if("Genjutsu")genexp+=howmuch
-				if("Agility")agilityexp+=howmuch
-				if("Precision")precisionexp+=howmuch
+				if("Defence")defexp += round(howmuch)
+				if("Strength")strengthexp += round(howmuch)
+				if("Ninjutsu")ninexp += round(howmuch)
+				if("Genjutsu")genexp += round(howmuch)
+				if("Agility")agilityexp += round(howmuch)
+				if("Precision")precisionexp += round(howmuch)
 			Levelup()
 		Levelup()
 			if(src.xplock==1)
@@ -99,7 +99,7 @@ mob
 				src.Levelup()
 				spawn(15)
 					src.overlays-=O
-					del(O)
+					O.loc = null
 				next
 			if(src.strengthexp>=src.maxstrengthexp)
 				if(src.strength>=150)
@@ -234,13 +234,14 @@ mob
 					src.maxprecisionexp+=150+round(src.precision/1.5)
 				src.Levelup()
 				next
-			if(!src.client)src.UpdateHMB()
-			else if(!src.likeaclone)src.UpdateHMB()
-			if(src.client) src.client.UpdateCharacterPanel()
+			if(!src.client) spawn() src.UpdateHMB()
+			else if(!src.likeaclone) spawn() src.UpdateHMB()
+			if(src.client) spawn() src.client.UpdateCharacterPanel()
 			if(src.client)
-				var/squad/squad = src.GetSquad()
-				if(squad)
-					squad.Refresh()
+				spawn()
+					var/squad/squad = src.GetSquad()
+					if(squad)
+						squad.Refresh()
 			if(level>=25&&!Element2)
 				var/Elements=list("Fire","Water","Earth","Lightning","Wind")
 				src.Element2=src.CustomInput("Element Options","What secondary element would you like?.",Elements-src.Element)
@@ -341,7 +342,7 @@ mob
 					src.KillCombo=0
 					Effects["Rasengan"]=null
 					Effects["Chidori"]=null
-					gatestop()
+					spawn() gatestop()
 					if(src.Susanoo)
 						src.health=1
 						return
@@ -395,11 +396,11 @@ mob
 						return
 					if(dueling)
 						world << output("[opponent] has defeated [src] in an arena battle.","Action.Output")
-						src.loc=locate(110,90,3)
+						src.loc=locate(177,136,8)
 						src.health=src.maxhealth
 						src.kawarmi=0
 						var/mob/i=opponent
-						i.loc=locate(110,90,3)
+						i.loc=locate(177,136,8)
 						i.health=i.maxhealth
 						i.kawarmi=0
 						arenaprogress=0
@@ -461,71 +462,259 @@ mob
 							chuuninskip
 							X.KillCombo=0
 
-						else world<<output("[src] was knocked out by [X]!","Action.Output")
-						text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)//Kill Log test
+						else if(!istype(src, /mob/npc/combat/white_zetsu)) world<<output("[src] was knocked out by [X]!","Action.Output")
+
+						if(!istype(src, /mob/npc/combat/white_zetsu))
+							text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)//Kill Log test
 						src<<output("You were knocked out by [X].","Action.Output")
-						var/exp_loss = 2
-						src.exp -= exp_loss
-						src << output("You lose [exp_loss] experience points.","Action.Output")
-						X.levelrate+=2
-						X.exp+=rand(3,(X.levelrate))
-						if(X.levelrate>=5) X.levelrate=5
-						X.Ryo+=src.Ryo
-						X<<output("You have looted [src.Ryo] Ryo from [src].","Action.Output")
+						if(!istype(src, /mob/npc/combat/animals))
+							var/exp_loss = 2
+							src.exp -= exp_loss
+							src << output("You lose [exp_loss] experience points.","Action.Output")
+							X.levelrate+=2
+							X.exp+=rand(3,(X.levelrate))
+							if(X.levelrate>=5) X.levelrate=5
+						else
+							X.exp += src.exp_reward
+
+						// Loot Ryo //
+						X.ryo += src.ryo
+						src.ryo = 0
+						view(X) << output("<i>[X] has looted [src.ryo] Ryo from [src].</i>", "Action.Output")
+
+						// Loot Ryo Pouches //
+						var/looted_pouches = 0
+						var/looted_pouches_ryo = 0
+
+						for(var/obj/Inventory/ryo_pouch/pouch in src.contents)
+							X.contents += pouch
+							looted_pouches++
+							looted_pouches_ryo += pouch.ryo
+
+						if(looted_pouches)
+							spawn() src.client.UpdateInventoryPanel()
+							spawn() X.client.UpdateInventoryPanel()
+							view(X) << output("<i>[X] has looted [looted_pouches] Ryo Pouches containing [looted_pouches_ryo] Ryo from [src].</i>", "Action.Output")
+
 						X.kills++
 						//X.Multikill++
-						if(X.joinedwar==1)
-							world<<"<font color = #C0C0C0>[src],[src.village] shinobi was knocked out by [X]...[X.village] gets 1 point!"
-							if(X.village=="Hidden Sand")
-								sandwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Hidden Mist")
-								mistwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Hidden Leaf")
-								leafwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Hidden Sound")
-								soundwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Hidden Rock")
-								rockwarpoints++
-								X.exp+=rand(3,5)
-							if(X.village=="Anbu Root")
-								rootwarpoints++
-						if(joinedakatshinobiw==1)
-							if(src.village==X.village)
-								world<<"<font color = #C0C0C0>[src],[src.village] ninja was knocked out by [X]...[X.village] LOOSES 1 point in war!"
-								if(X.village=="Akatsuki"||X.village == "Seven Swordsmen")
-									akatpoints--
-									goto rofl
-								else
-									sforcepoints--
-									goto rofl
-							world<<"<font color = #C0C0C0>[src],[src.village] ninja was knocked out by [X]...[X] gets 1 PvP point."
-							X.exp+=rand(5,10)
-							X.pvppoints++
-							if(X.village=="Akatsuki"||X.village == "Seven Swordsmen")
-								world<<"Akatsuki gets 1 point in war!"
-								akatpoints++
-							else
-								world<<"Shinobi Force gets a point!"
-								sforcepoints++
-						rofl
-						//spawn() X.MedalCheck()
-						//spawn(70) X.Multikill=0
 
 						if(VillageAttackers.Find(src.village)&&VillageDefenders.Find(X.village))
 							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","Action.Output")
-							X.Ryo+=10
+							X.ryo+=10
 						if(VillageDefenders.Find(src.village)&&VillageAttackers.Find(X.village))
 							X<<output("You killed an enemy Shinobi! 10 Ryo has been granted to you for your efforts!","Action.Output")
-							X.Ryo+=10
+							X.ryo+=10
 						if(src.Bounty)
 							X<<output("You have claimed the $[src.Bounty] bounty on [src.name]'s head.","Action.Output")
-							X.Ryo+=src.Bounty
+							X.ryo+=src.Bounty
 							src.Bounty=0
 						else X.Bounty+=rand(5,10)
+
+//ZETSU EVENT XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	//Zetsu Killed
+						if(src != X)
+							if(istype(src, /mob/npc/combat/white_zetsu) && zetsu_event_active == 1)
+								zetsu_count--
+								switch(X.village)
+									if(VILLAGE_LEAF)
+										leaf_points++
+									if(VILLAGE_SAND)
+										sand_points++
+								if(X.village != VILLAGE_MISSING_NIN && X.village != VILLAGE_AKATSUKI)
+									if(zetsu_count > 0)
+										world<<output("A white Zetsu has been slain by [X.name] earning the [X.village] village 1 point! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
+									if(zetsu_count < 1)
+										ZetsuEventEnd(X)
+								else
+									world<<output("A white Zetsu has been slain by [X.name], a rogue ninja! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
+
+	//Akatsuki Killed
+							if(src.village == VILLAGE_AKATSUKI && zetsu_event_active == 1)
+								var/squad/squad = X.GetSquad()
+								if(X.village == VILLAGE_LEAF || X.village == VILLAGE_SAND)
+									akat_lives_left--
+									switch(X.village)
+										if(VILLAGE_LEAF)
+											leaf_points += 4
+										if(VILLAGE_SAND)
+											sand_points += 4
+									if(akat_lives_left > 0)
+										world << output ("[X.name] has slain a member of the Akatsuki earning the [X.village] village 4 points! (Akatsuki lives remaining: [akat_lives_left])", "Action.Output")
+										if(squad)
+											for(var/mob/m in mobs_online)
+												if(squad.members[m.client.ckey])
+													m << output ("[X.name] has killed a member of the Akatsuki! You've earned 8 bonus experience for your squad!", "Action.Output")
+													m.exp += 8
+													m.Levelup()
+										else
+											X.exp +=20
+											X.Levelup()
+									else
+										ZetsuEventEnd(X)
+
+	//Villager Killed
+							if(src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
+								var/squad/squad = X.GetSquad()
+								if(X.village == VILLAGE_AKATSUKI && zetsu_event_active == 1 || istype(X, /mob/npc/combat/white_zetsu))
+									vill_lives_left--
+									if(vill_lives_left > 0)
+										world << output ("[X.name] has slain a member of the [src.village] village! (Shinobi Alliance lives remaining: [vill_lives_left])", "Action.Output")
+										X << output ("It's a slaughter. You've earned 5 bonus experience for your squad!", "Action.Output")
+										if(squad)
+											for(var/mob/m in mobs_online)
+												if(squad.members[m.client.ckey])
+													m.exp += 5
+													m.Levelup()
+										else
+											X.exp += 5
+											X.Levelup()
+									else
+										ZetsuEventEnd(X)
+
+										for(var/mob/m in mobs_online)
+											if(m.village == VILLAGE_AKATSUKI)
+												m.exp += 30
+												m.Levelup()
+
+	//Missing nin kills
+							if(X.village == VILLAGE_MISSING_NIN && zetsu_event_active == 1)
+								if(src.village == VILLAGE_AKATSUKI || src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
+									if(src.village == VILLAGE_AKATSUKI)
+										akat_lives_left--
+										world << output("A rogue ninja took advantage of the fray and has killed a member of the Akatuski! (Akatsuki lives remaining: [akat_lives_left])", "Action.Output")
+									if(src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
+										vill_lives_left--
+										world << output("A rogue ninja took advantage of the fray and has killed a member of the [X.village] village! (Shinobi Alliance lives remaining: [vill_lives_left])", "Action.Output")
+									X << output ("With everything going on, they never saw you coming. You've earned 8 bonus experience!", "Action.Output")
+									X.exp += 8
+									X.Levelup()
+									if(akat_lives_left < 1 || vill_lives_left < 1)
+										ZetsuEventEnd(X)
+
+	//Update Panels
+							for(var/mob/m in mobs_online)
+								var/squad/squad = m.GetSquad()
+								spawn() m.client.UpdateCharacterPanel()
+								if(squad)
+									spawn() squad.RefreshMember(m)
+
+//SEARCH AND DESTROY MISSIONS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+// Reward Squad (Killer) for killing a mob during search and destroy type missions.
+						var/squad/squad = X.GetSquad()
+						if(squad && squad.mission)
+							switch(squad.mission.type)
+//HUNTING ROGUES
+								if(/mission/b_rank/hunting_rogues)
+									if(src.village == VILLAGE_MISSING_NIN)
+										squad.mission.required_vars["KILLS"]++
+										for(var/mob/m in mobs_online)
+											if(squad.members[m.client.ckey])
+												m << output("[X] has slain the Missing-Nin [src] while on a mission hunting rogue ninja.", "Action.Output")
+												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] rogue ninja have been eliminated.", "Action.Output")
+										spawn() squad.mission.Complete(X)
+//THE WAR EFFORT
+								if(/mission/c_rank/the_war_effort)
+									switch(X.village)
+										if(VILLAGE_LEAF)
+											if(src.village == VILLAGE_SAND)
+												squad.mission.required_vars["KILLS"]++
+												for(var/mob/m in mobs_online)
+													if(squad.members[m.client.ckey])
+														m << output("[X] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
+														m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
+												spawn() squad.mission.Complete(X)
+
+										if(VILLAGE_SAND)
+											if(src.village == VILLAGE_LEAF)
+												squad.mission.required_vars["KILLS"]++
+												for(var/mob/m in mobs_online)
+													if(squad.members[m.client.ckey])
+														m << output("[X] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
+														m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
+												spawn() squad.mission.Complete(X)
+
+//CLOUDS OF CRIMSON
+
+								if(/mission/s_rank/clouds_of_crimson)
+									if(src.village == VILLAGE_AKATSUKI)
+										squad.mission.required_vars["KILLS"]++
+										for(var/mob/m in mobs_online)
+											if(squad.members[m.client.ckey])
+												m << output("[X] has slain the Akatsuki member [src] while on a mission to eliminate them.", "Action.Output")
+												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] Akatsuki members have been eliminated.", "Action.Output")
+										spawn() squad.mission.Complete(X)
+// Penalize Squad for dying while on a search and destroy mission
+						squad = src.GetSquad()
+						if(squad && squad.mission)
+							switch(squad.mission.type)
+//HUNTING ROGUES
+								if(/mission/b_rank/hunting_rogues)
+									squad.mission.required_vars["DEATHS"]++
+									for(var/mob/m in mobs_online)
+										if(squad.members[m.client.ckey])
+											m << output("[src] has died to [X] while on a mission hunting rogue ninja.", "Action.Output")
+											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting rogue ninja.", "Action.Output")
+									spawn() squad.mission.Complete(src)
+//THE WAR EFFORT
+								if(/mission/c_rank/the_war_effort)
+									squad.mission.required_vars["DEATHS"]++
+									for(var/mob/m in mobs_online)
+										if(squad.members[m.client.ckey])
+											m << output("[src] has died to [X] while on a mission hunting enemy ninja.", "Action.Output")
+											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting enemy ninja.", "Action.Output")
+									spawn() squad.mission.Complete(src)
+
+//CLOUDS OF CRIMSON
+
+								if(/mission/s_rank/clouds_of_crimson)
+									squad.mission.required_vars["DEATHS"]++
+									for(var/mob/m in mobs_online)
+										if(squad.members[m.client.ckey])
+											m << output("[src] has died to [X] while on a mission to eliminate the Akatsuki.", "Action.Output")
+											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting the Akatsuki.", "Action.Output")
+									spawn() squad.mission.Complete(src)
+
+// Reward player (Killer) for killing someone who is on a search and destroy type mission which targets you.
+						squad = src.GetSquad()
+						if(squad && squad.mission)
+							switch(squad.mission.type)
+//HUNTING ROGUES
+								if(/mission/b_rank/hunting_rogues)
+									if(X.village == VILLAGE_MISSING_NIN)
+										X << output("You have slain [src] who was on a mission hunting rogue ninja.", "Action.Output")
+										X.exp += 1
+										X.ryo += 1
+										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										spawn() X.Levelup()
+//THE WAR EFFORT
+								if(/mission/c_rank/the_war_effort)
+									if(X.village == VILLAGE_LEAF && src.village != VILLAGE_LEAF)
+										X << output("You have slain [src] who was on a mission hunting leaf ninja!.", "Action.Output")
+										X.exp += 1
+										X.ryo += 1
+										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										spawn() X.Levelup()
+									if(X.village == VILLAGE_SAND && src.village != VILLAGE_SAND)
+										X << output("You have slain [src] who was on a mission hunting sand ninja!.", "Action.Output")
+										X.exp += 1
+										X.ryo += 1
+										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										spawn() X.Levelup()
+
+//CLOUDS OF CRIMSON
+
+								if(/mission/s_rank/clouds_of_crimson)
+									if(X.village == VILLAGE_AKATSUKI)
+										X << output("You have slain [src] who was on a mission to kill the Akatsuki.", "Action.Output")
+										X.exp += 1
+										X.ryo += 1
+										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										spawn() X.Levelup()
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 						if(X.Mission=="Kill [src] ([src.ckey])")
 							X.Mission=null
 							X<<output("You have successfully completed your mission.","Action.Output")
@@ -533,7 +722,7 @@ mob
 							var/MissionExp=10 + WorldXp
 							if(X.Squad)
 								var/mob/M = getOwner(X.Squad.Leader)
-								M.Ryo += (MissionRyo + 1)
+								M.ryo += (MissionRyo + 1)
 								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
 								for(var/i=0,i<MissionExp,i++)
@@ -552,7 +741,7 @@ mob
 									if(getOwner(i))
 										M = getOwner(i)
 										if((M.client.inactivity/10)>=120) continue
-										M.Ryo += MissionRyo + 1
+										M.ryo += MissionRyo + 1
 										M.exp+=MissionExp
 										for(var/i2=0,i2<MissionExp,i2++)
 											var/GAIN = rand(1,3)
@@ -571,7 +760,7 @@ mob
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
-								X.Ryo+=MissionRyo
+								X.ryo+=MissionRyo
 								var/mob/M2 = X
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
@@ -587,19 +776,6 @@ mob
 											M2.Levelup()
 							X.Levelup()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 						if(X.Mission=="Jounin Kill [src] ([src.ckey])")
 							X.Mission=null
 							X<<output("You have successfully completed your mission.","Action.Output")
@@ -607,7 +783,7 @@ mob
 							var/MissionExp=15 + WorldXp
 							if(X.Squad)
 								var/mob/M = getOwner(X.Squad.Leader)
-								M.Ryo += (MissionRyo + 1)
+								M.ryo += (MissionRyo + 1)
 								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
 								for(var/i=0,i<MissionExp,i++)
@@ -626,7 +802,7 @@ mob
 									if(getOwner(i))
 										M = getOwner(i)
 										if((M.client.inactivity/10)>=120) continue
-										M.Ryo += MissionRyo + 1
+										M.ryo += MissionRyo + 1
 										M.exp+=MissionExp
 										for(var/i2=0,i2<MissionExp,i2++)
 											var/GAIN = rand(1,3)
@@ -645,7 +821,7 @@ mob
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
-								X.Ryo+=MissionRyo
+								X.ryo+=MissionRyo
 								var/mob/M2 = X
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
@@ -666,7 +842,7 @@ mob
 							var/MissionExp=25 + WorldXp
 							if(X.Squad)
 								var/mob/M = getOwner(X.Squad.Leader)
-								M.Ryo += (MissionRyo + 1)
+								M.ryo += (MissionRyo + 1)
 								M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 								M.exp+=MissionExp
 								for(var/i=0,i<MissionExp,i++)
@@ -685,7 +861,7 @@ mob
 									if(getOwner(i))
 										M = getOwner(i)
 										if((M.client.inactivity/10)>=120) continue
-										M.Ryo += MissionRyo + 1
+										M.ryo += MissionRyo + 1
 										M.exp+=MissionExp
 										for(var/i2=0,i2<MissionExp,i2++)
 											var/GAIN = rand(1,3)
@@ -704,7 +880,7 @@ mob
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
 							else
 								X<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset","Action.Output")
-								X.Ryo+=MissionRyo
+								X.ryo += MissionRyo
 								var/mob/M2 = X
 								for(var/i=0,i<MissionExp,i++)
 									var/GAIN = rand(1,3)
@@ -718,52 +894,28 @@ mob
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
 											M2.Levelup()
+					if(!Chuunins.Find(src))
+						if(X&&X.key&&src!=X)
+							if(X.z in global.warmaps && src.z in global.warmaps)
+								if(X.village == "Hidden Sand")
+									global.sandpoints["[X.z]"]+=src.level
+								if(X.village == "Hidden Leaf")
+									global.leafpoints["[X.z]"]+=src.level
+								if(X.village == "Hidden Mist")
+									global.mistpoints["[X.z]"]+=src.level
+								if(X.village == "Hidden Sound")
+									global.soundpoints["[X.z]"]+=src.level
+								if(X.village == "Hidden Rock")
+									global.rockpoints["[X.z]"]+=src.level
 
-					src.Ryo=0
-					spawn(300)
-						if(!revived)
-							KOs++
-							src.dead=0
-							if(KOs>=2&&!Chuunins.Find(src))
-								if(X&&X.key&&src!=X)
-									if(X.z in global.warmaps && src.z in global.warmaps)
-										if(X.village == "Hidden Sand")
-											global.sandpoints["[X.z]"]+=src.level
-										if(X.village == "Hidden Leaf")
-											global.leafpoints["[X.z]"]+=src.level
-										if(X.village == "Hidden Mist")
-											global.mistpoints["[X.z]"]+=src.level
-										if(X.village == "Hidden Sound")
-											global.soundpoints["[X.z]"]+=src.level
-										if(X.village == "Hidden Rock")
-											global.rockpoints["[X.z]"]+=src.level
-								if(src.revived==0)
-									var/list/Spawns=RespawnSpawn()
-									if(!Spawns.len) src.loc=locate(1,1,4)
-									else src.loc=pick(src.RespawnSpawn())
-								else src.revived=0
-								KOs=0
-							if(KOs>=2)KOs=0
-							src.density=1
-							src.health=src.maxhealth
-							src.chakra=src.maxchakra
-							src.injutsu=0
-							src.canattack=1
-							src.firing=0
-							src.icon_state=""
-							src.wait=0
-							src.rest=0
-							src.dodge=0
-							src.move=1
-							src.joinedwar=0
-							src.joinedakatshinobiw=0
-							src.swimming=0
-							src.walkingonwater=0
-							src.overlays=0
-							src.RestoreOverlays()
-							src.UpdateHMB()
-							spawn(1)src.Run()
-						revived=0
+					var/respawned = 0
+
+					spawn(3000) if(!respawned && src.dead) src.Respawn()
+
+					if(src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
+						respawned = 1
+						src.Respawn()
+
 				if(istype(src,/mob/Clones))
 					var/mob/O=src.Owner
 					if(O.likeaclone)
@@ -802,14 +954,14 @@ mob
 						if(usr.Squad)
 							var/mob/M
 							M = getOwner(usr.Squad.Leader)
-							M.Ryo += (MissionRyo + 1)
+							M.ryo += (MissionRyo + 1)
 							M<<output("You have gained [(MissionRyo + 1)] Ryo and [MissionExp] EXP from your mission!","Action.Output")
 							M.exp+=MissionExp
 							for(var/i in usr.Squad.Members)
 								if(getOwner(i))
 									M = getOwner(i)
 									if((M.client.inactivity/10)>=120) continue
-									M.Ryo += MissionRyo + 1
+									M.ryo += MissionRyo + 1
 									M.exp+=MissionExp
 									M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 									if(M.Mission=="K.O a bandit")
@@ -818,7 +970,7 @@ mob
 									Del(src)
 						else
 							usr<<output("You have gained [MissionRyo] Ryo and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
-							usr.Ryo+=MissionRyo
+							usr.ryo+=MissionRyo
 							usr.exp+=MissionExp
 							usr.Levelup()
 							Del(src)

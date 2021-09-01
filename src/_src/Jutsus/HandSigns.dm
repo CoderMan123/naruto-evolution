@@ -64,7 +64,6 @@ obj
 mob/var/list/sbought = list()
 obj
 	var/Sprice=1
-	var/reqs = list()
 	var/starterjutsu=0
 	var/sharin=0
 	Jutsus
@@ -74,10 +73,10 @@ obj
 		var/Element2
 		var/Kekkai
 		var/Specialist
+		var/list/reqs = list()
 		//var/Damage this might be needed who knows.
 		icon='Misc Effects.dmi'
 		layer=10
-		pixel_x=12
 		New()
 			if(src.z==4)invisibility=1
 		Click()
@@ -161,7 +160,7 @@ obj
 								return
 							usr.skillpoints -= src.Sprice
 							if(src.IsGate)
-								if(!usr.jutsus.Find(/obj/Jutsus/EightGates))
+								if(!usr.jutsus_learned.Find(/obj/Jutsus/EightGates))
 									var/obj/J = new /obj/Jutsus/EightGates(null)
 									usr.jutsus.Add(J)
 									usr.jutsus_learned.Add(J.type)
@@ -229,7 +228,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot1"]="[src.icon_state]"
 												usr.hotslot1=src.name
-												h.HotSlotNumber("F1")
+												h.SetName("Z")
 										if(usr.HotSlotSave["HotSlot2"]==os)
 											for(var/obj/HotSlots/HotSlot2/H in usr.client.screen)
 												var/obj/h=H
@@ -237,7 +236,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot2"]="[src.icon_state]"
 												usr.hotslot2=src.name
-												h.HotSlotNumber("F2")
+												h.SetName("X")
 										if(usr.HotSlotSave["HotSlot3"]==os)
 											for(var/obj/HotSlots/HotSlot3/H in usr.client.screen)
 												var/obj/h=H
@@ -245,7 +244,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot3"]="[src.icon_state]"
 												usr.hotslot3=src.name
-												h.HotSlotNumber("F3")
+												h.SetName("C")
 										if(usr.HotSlotSave["HotSlot4"]==os)
 											for(var/obj/HotSlots/HotSlot4/H in usr.client.screen)
 												var/obj/h=H
@@ -253,7 +252,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot4"]="[src.icon_state]"
 												usr.hotslot4=src.name
-												h.HotSlotNumber("F4")
+												h.SetName("V")
 										if(usr.HotSlotSave["HotSlot5"]==os)
 											for(var/obj/HotSlots/HotSlot5/H in usr.client.screen)
 												var/obj/h=H
@@ -261,7 +260,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot5"]="[src.icon_state]"
 												usr.hotslot5=src.name
-												h.HotSlotNumber("F5")
+												h.SetName("B")
 										if(usr.HotSlotSave["HotSlot6"]==os)
 											for(var/obj/HotSlots/HotSlot6/H in usr.client.screen)
 												var/obj/h=H
@@ -269,7 +268,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot6"]="[src.icon_state]"
 												usr.hotslot6=src.name
-												h.HotSlotNumber("F6")
+												h.SetName("N")
 										if(usr.HotSlotSave["HotSlot7"]==os)
 											for(var/obj/HotSlots/HotSlot7/H in usr.client.screen)
 												var/obj/h=H
@@ -277,7 +276,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot7"]="[src.icon_state]"
 												usr.hotslot7=src.name
-												h.HotSlotNumber("F7")
+												h.SetName("F7")
 										if(usr.HotSlotSave["HotSlot8"]==os)
 											for(var/obj/HotSlots/HotSlot8/H in usr.client.screen)
 												var/obj/h=H
@@ -285,7 +284,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot8"]="[src.icon_state]"
 												usr.hotslot8=src.name
-												h.HotSlotNumber("F8")
+												h.SetName("F8")
 										if(usr.HotSlotSave["HotSlot9"]==os)
 											for(var/obj/HotSlots/HotSlot9/H in usr.client.screen)
 												var/obj/h=H
@@ -293,7 +292,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot9"]="[src.icon_state]"
 												usr.hotslot9=src.name
-												h.HotSlotNumber("F9")
+												h.SetName("F9")
 										if(usr.HotSlotSave["HotSlot10"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -301,7 +300,72 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot10"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.HotSlotNumber("F10")
+												h.SetName("F10")
+										if(usr.HotSlotSave["HotSlot11"]==os)
+											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
+												var/obj/h=H
+												h.overlays=0
+												h.overlays+=src
+												usr.HotSlotSave["HotSlot11"]="[src.icon_state]"
+												usr.hotslot10=src.name
+												h.SetName("F11")
+										if(usr.HotSlotSave["HotSlot12"]==os)
+											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
+												var/obj/h=H
+												h.overlays=0
+												h.overlays+=src
+												usr.HotSlotSave["HotSlot12"]="[src.icon_state]"
+												usr.hotslot10=src.name
+												h.SetName("F12")
+										if(usr.HotSlotSave["HotSlot13"]==os)
+											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
+												var/obj/h=H
+												h.overlays=0
+												h.overlays+=src
+												usr.HotSlotSave["HotSlot13"]="[src.icon_state]"
+												usr.hotslot10=src.name
+												h.SetName("F1")
+										if(usr.HotSlotSave["HotSlot14"]==os)
+											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
+												var/obj/h=H
+												h.overlays=0
+												h.overlays+=src
+												usr.HotSlotSave["HotSlot14"]="[src.icon_state]"
+												usr.hotslot10=src.name
+												h.SetName("F2")
+										if(usr.HotSlotSave["HotSlot15"]==os)
+											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
+												var/obj/h=H
+												h.overlays=0
+												h.overlays+=src
+												usr.HotSlotSave["HotSlot15"]="[src.icon_state]"
+												usr.hotslot10=src.name
+												h.SetName("F3")
+										if(usr.HotSlotSave["HotSlot16"]==os)
+											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
+												var/obj/h=H
+												h.overlays=0
+												h.overlays+=src
+												usr.HotSlotSave["HotSlot16"]="[src.icon_state]"
+												usr.hotslot10=src.name
+												h.SetName("F4")
+										if(usr.HotSlotSave["HotSlot17"]==os)
+											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
+												var/obj/h=H
+												h.overlays=0
+												h.overlays+=src
+												usr.HotSlotSave["HotSlot17"]="[src.icon_state]"
+												usr.hotslot10=src.name
+												h.SetName("F5")
+										if(usr.HotSlotSave["HotSlot18"]==os)
+											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
+												var/obj/h=H
+												h.overlays=0
+												h.overlays+=src
+												usr.HotSlotSave["HotSlot18"]="[src.icon_state]"
+												usr.hotslot10=src.name
+												h.SetName("F6")
+
 										SH.level ++
 								else
 									usr.sbought+=src.name
@@ -317,10 +381,12 @@ obj
 										D.owner=usr.ckey
 							if(src.name <> "Dust Particle"&&src.name <> "Kakuzu"&&src.name <> "Ice" &&src.name <> "Spider" && src.name <> "Deidara" && src.name <> "Puppeteer" && src.name <> "Sand" && src.name <> "Paper Control")
 								usr<<output("Successfully learned [src.name]. Check your Jutsus list for information on the seals.","Action.Output")
-							usr.updateskills()
+
+							if(usr.client) usr.client.UpdateSkillTree()
 
 				else
 					usr<<output("You do not meet the requirements for this technique.","Action.Output")
+
 		MouseDrop(var/H)
 			if(!src in usr.jutsus)
 				return
@@ -329,75 +395,240 @@ obj
 				return
 			if(src.uses>=((80-round(src.maxcooltime/15))*jutsumastery))
 				if(istype(H,/obj/HotSlots/HotSlot1))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot1"]="[src.icon_state]"
-					usr.hotslot1=src.name
-					h.HotSlotNumber("F1")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("Z")
+
+					usr.hotslot1 = src.name
+					usr.HotSlotSave["HotSlot1"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot2))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot2"]="[src.icon_state]"
-					usr.hotslot2=src.name
-					h.HotSlotNumber("F2")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("X")
+
+					usr.hotslot2 = src.name
+					usr.HotSlotSave["HotSlot2"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot3))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot3"]="[src.icon_state]"
-					usr.hotslot3=src.name
-					h.HotSlotNumber("F3")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("C")
+
+					usr.hotslot3 = src.name
+					usr.HotSlotSave["HotSlot3"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot4))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot4"]="[src.icon_state]"
-					usr.hotslot4=src.name
-					h.HotSlotNumber("F4")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("V")
+
+					usr.hotslot4 = src.name
+					usr.HotSlotSave["HotSlot4"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot5))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot5"]="[src.icon_state]"
-					usr.hotslot5=src.name
-					h.HotSlotNumber("F5")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("B")
+
+					usr.hotslot5 = src.name
+					usr.HotSlotSave["HotSlot5"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot6))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot6"]="[src.icon_state]"
-					usr.hotslot6=src.name
-					h.HotSlotNumber("F6")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("N")
+
+					usr.hotslot6 = src.name
+					usr.HotSlotSave["HotSlot6"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot7))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot7"]="[src.icon_state]"
-					usr.hotslot7=src.name
-					h.HotSlotNumber("F7")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F7")
+
+					usr.hotslot7 = src.name
+					usr.HotSlotSave["HotSlot7"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot8))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot8"]="[src.icon_state]"
-					usr.hotslot8=src.name
-					h.HotSlotNumber("F8")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F8")
+
+					usr.hotslot8 = src.name
+					usr.HotSlotSave["HotSlot8"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot9))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot9"]="[src.icon_state]"
-					usr.hotslot9=src.name
-					h.HotSlotNumber("F9")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F9")
+
+					usr.hotslot9 = src.name
+					usr.HotSlotSave["HotSlot9"] = "[src.icon_state]"
+
 				if(istype(H,/obj/HotSlots/HotSlot10))
-					var/obj/h=H
-					h.overlays=0
-					h.overlays+=src
-					usr.HotSlotSave["HotSlot10"]="[src.icon_state]"
-					usr.hotslot10=src.name
-					h.HotSlotNumber("F10")
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F10")
+
+					usr.hotslot10 = src.name
+					usr.HotSlotSave["HotSlot10"] = "[src.icon_state]"
+
+				if(istype(H,/obj/HotSlots/HotSlot11))
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F11")
+
+					usr.hotslot11 = src.name
+					usr.HotSlotSave["HotSlot11"] = "[src.icon_state]"
+
+				if(istype(H,/obj/HotSlots/HotSlot12))
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F12")
+
+					usr.hotslot12 = src.name
+					usr.HotSlotSave["HotSlot12"] = "[src.icon_state]"
+
+				if(istype(H,/obj/HotSlots/HotSlot13))
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F1")
+
+					usr.hotslot13 = src.name
+					usr.HotSlotSave["HotSlot13"] = "[src.icon_state]"
+
+				if(istype(H,/obj/HotSlots/HotSlot14))
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F2")
+
+					usr.hotslot14 = src.name
+					usr.HotSlotSave["HotSlot14"] = "[src.icon_state]"
+
+				if(istype(H,/obj/HotSlots/HotSlot15))
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F3")
+
+					usr.hotslot15 = src.name
+					usr.HotSlotSave["HotSlot15"] = "[src.icon_state]"
+
+				if(istype(H,/obj/HotSlots/HotSlot16))
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F4")
+
+					usr.hotslot16 = src.name
+					usr.HotSlotSave["HotSlot16"] = "[src.icon_state]"
+
+				if(istype(H,/obj/HotSlots/HotSlot17))
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F5")
+
+					usr.hotslot17 = src.name
+					usr.HotSlotSave["HotSlot17"] = "[src.icon_state]"
+
+				if(istype(H,/obj/HotSlots/HotSlot18))
+					var/image/I = image(src, src.icon_state)
+					I.pixel_x = 12
+					I.pixel_y = -1
+
+					var/obj/HotSlots/h = H
+					h.overlays = null
+					h.overlays += I
+					h.SetName("F6")
+
+					usr.hotslot18 = src.name
+					usr.HotSlotSave["HotSlot18"] = "[src.icon_state]"
+
+
 			else
 				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
 
@@ -855,7 +1086,7 @@ mob
 						usr.Bone_Tip()
 				if(usr.first=="rat"&&usr.second=="dog"&&usr.third=="ox"&&usr.fourth=="ox"&&usr.rat==1&&usr.dog==1&&usr.ox==2&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/Young_Bracken_Dance/J=new/obj/Jutsus/Young_Bracken_Dance
-					if(J.type in usr.jutsus)
+					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Young_Bracken_Dance()
 				if(usr.first=="ox"&&usr.second=="ox"&&usr.third=="rat"&&usr.rat==1&&usr.dog==0&&usr.ox==2&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
@@ -980,7 +1211,7 @@ mob
 						usr.BubbleSpreader()
 				if(usr.first=="dog"&&usr.second=="dog"&&usr.third=="dog"&&usr.fourth=="dog"&&usr.rat==0&&usr.dog==4&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/Bubble_Shield/J=new/obj/Jutsus/Bubble_Spreader
-					if(J.type in usr.jutsus)
+					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Bubble_Shield()
 				if(usr.first=="rabbit"&&usr.second=="dragon"&&usr.third=="dog"&&usr.fourth=="rabbit"&&usr.fifth=="dragon"&&usr.sixth=="dog"&&usr.rat==0&&usr.dog==2&&usr.ox==0&&usr.dragon==2&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==2)
@@ -1230,7 +1461,7 @@ mob
 						//dogsum
 				if(usr.first=="rat"&&usr.second=="horse"&&usr.third=="rat"&&usr.fourth=="dog"&&usr.fifth=="dog"&&usr.rat==2&&usr.dog==2&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==1&&usr.rabbit==0)
 					var/obj/Jutsus/Dog_Summoning/J=new/obj/Jutsus/Dog_Summoning
-					if(J.type in usr.jutsus)
+					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Summoning_Dog()
 						//angelwing

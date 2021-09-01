@@ -1,4 +1,4 @@
-image: tgstation/byond:latest
+image: tgstation/byond:514.1566
 
 variables:
     BYOND_DME: "Project-Evolution.dme"

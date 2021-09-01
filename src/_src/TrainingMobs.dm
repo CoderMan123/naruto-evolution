@@ -21,10 +21,10 @@ mob
 			src.DummyAI()
 
 		Move()
-			..()
-			src.loc = dummylocation
+			return
 
-
+		Death()
+			return
 
 		proc
 			SpinAttack()

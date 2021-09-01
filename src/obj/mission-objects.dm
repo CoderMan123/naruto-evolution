@@ -9,8 +9,10 @@ obj/Inventory
 			leaf_intel
 				name = "Hidden Leaf Intelligence"
 				icon = 'JMastScroll.dmi'
+				icon_state = "leafintel"
 
 
 			sand_intel
 				name = "Hidden Sand Intelligence"
 				icon = 'JMastScroll.dmi'
+				icon_state = "sandintel"

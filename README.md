@@ -3,47 +3,63 @@
 [![Release (Alpha)](https://github.com/lavenblade/naruto-evolution/actions/workflows/release-alpha.yml/badge.svg?branch=develop)](https://github.com/lavenblade/naruto-evolution/actions/workflows/release-alpha.yml)
 [![Manual Deployment](https://github.com/lavenblade/naruto-evolution/actions/workflows/manual-deployment.yml/badge.svg)](https://github.com/lavenblade/naruto-evolution/actions/workflows/manual-deployment.yml)
 
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/lavenblade/naruto-evolution)
+
 
 # Naruto Evolution
+
 A fan inspired online game based on the Naruto Universe.
 
 ## Setup Development Environment
 
 ### Prerequisites
+
 Before you can setup a development environment, you need to make sure that you have the following dependencies installed.
 - [Git](https://git-scm.com/)
 - [Git LFS](https://git-lfs.github.com/)
 
-#### Windows Installation
-Visit the official websites and download the Windows installer.
+**Windows Installation**
 
-#### Linux Installation
-Install the dependencies using your distributions package manager.
+Install using the Windows package manager.
 
-##### Debian / Ubuntu
+```powershell
+winget install git
+winget install git-lfs
+```
+
+**Linux Installation**
+
+Install using your distributions package manager.
+
+- **Debian / Ubuntu:**
 `sudo apt install git git-lfs`
 
-##### CentOS / Fedora
+- **CentOS / Fedora:**
 `yum install git git-lfs`
 
-##### Arch / Manjaro
+- **Arch / Manjaro:**
 `pacman -Syu git git-lfs`
 
-### Instructions
-1) Clone the repository:
-```sh
-git clone https://github.com/lavenblade/naruto-evolution.git
-```
+### Clone Project
 
-2) Switch to preferred branch:
-   * `master`: This is the current release branch and automatically deploys to the beta testing environment.
-   * `develop`: This is the current development branch and automatically deploys to the alpha testing environment.
+1) **Clone the repository:**
 
 ```sh
-git checkout <branch>
+git clone https://github.com/IllusiveBIair/Naruto-Evolution.git
 ```
 
-3) Initialize and checkout submodules:
+2) **Switch to preferred branch:**
+
+```sh
+git checkout develop
+```
+
+- **release**: This is the current release branch and automatically deploys to the beta testing environment.
+
+- **develop**: This is the current development branch and automatically deploys to the alpha testing environment.
+
+3) **Initialize and checkout submodules:**
+
 ```sh
 git submodule init
 git submodule update --recursive

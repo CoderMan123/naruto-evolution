@@ -96,6 +96,12 @@ macro "Macro"
 		name = "A+REP"
 		command = "Basic-Attack"
 	elem 
+		name = "B"
+		command = "HotSlot5"
+	elem 
+		name = "C"
+		command = "HotSlot3"
+	elem 
 		name = "ALT+D"
 		command = "puppetdash2"
 	elem 
@@ -117,11 +123,14 @@ macro "Macro"
 		name = "I"
 		command = "ToggleInventoryPanel"
 	elem 
+		name = "N"
+		command = "HotSlot6"
+	elem 
 		name = "O"
 		command = "ToggleCharacterPanel"
 	elem 
 		name = "P"
-		command = "ViewJutsuTab"
+		command = "ToggleJutsuPanel"
 	elem 
 		name = "Q"
 		command = "HandSeal rat"
@@ -141,26 +150,35 @@ macro "Macro"
 		name = "CTRL+S"
 		command = "puppetgrab1"
 	elem 
+		name = "V"
+		command = "HotSlot4"
+	elem 
 		name = "W"
 		command = "HandSeal ox"
 	elem 
-		name = "F1"
-		command = "HotSlot1"
-	elem 
-		name = "F2"
+		name = "X"
 		command = "HotSlot2"
 	elem 
+		name = "Z"
+		command = "HotSlot1"
+	elem 
+		name = "F1"
+		command = "HotSlot13"
+	elem 
+		name = "F2"
+		command = "HotSlot14"
+	elem 
 		name = "F3"
-		command = "HotSlot3"
+		command = "HotSlot15"
 	elem 
 		name = "F4"
-		command = "HotSlot4"
+		command = "HotSlot16"
 	elem 
 		name = "F5"
-		command = "HotSlot5"
+		command = "HotSlot17"
 	elem 
 		name = "F6"
-		command = "HotSlot6"
+		command = "HotSlot18"
 	elem 
 		name = "F7"
 		command = "HotSlot7"
@@ -173,6 +191,12 @@ macro "Macro"
 	elem 
 		name = "F10"
 		command = "HotSlot10"
+	elem 
+		name = "F11"
+		command = "HotSlot11"
+	elem 
+		name = "F12"
+		command = "HotSlot12"
 
 
 menu "menu"
@@ -332,7 +356,7 @@ window "Character"
 		text = ""
 	elem "Precision"
 		type = LABEL
-		pos = 151,456
+		pos = 151,504
 		size = 46x22
 		anchor1 = none
 		anchor2 = none
@@ -345,7 +369,7 @@ window "Character"
 		text = "10"
 	elem "PrecisionExperienceBar"
 		type = BAR
-		pos = 151,480
+		pos = 151,528
 		size = 146x10
 		anchor1 = none
 		anchor2 = none
@@ -360,7 +384,7 @@ window "Character"
 		value = 10
 	elem "PrecisionExperience"
 		type = LABEL
-		pos = 199,456
+		pos = 199,504
 		size = 98x22
 		anchor1 = none
 		anchor2 = none
@@ -373,7 +397,7 @@ window "Character"
 		text = "1/10"
 	elem "label10"
 		type = LABEL
-		pos = 151,432
+		pos = 151,480
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -387,8 +411,8 @@ window "Character"
 		text = "Precision"
 	elem "SkillPoints"
 		type = LABEL
-		pos = 3,564
-		size = 294x22
+		pos = 151,564
+		size = 146x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -400,8 +424,8 @@ window "Character"
 		text = "0"
 	elem "label9"
 		type = LABEL
-		pos = 3,540
-		size = 294x22
+		pos = 151,540
+		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
@@ -414,7 +438,7 @@ window "Character"
 		text = "Skill Points"
 	elem "Gen"
 		type = LABEL
-		pos = 3,456
+		pos = 3,504
 		size = 46x22
 		anchor1 = none
 		anchor2 = none
@@ -427,7 +451,7 @@ window "Character"
 		text = "10"
 	elem "GenEXPBar"
 		type = BAR
-		pos = 3,480
+		pos = 3,528
 		size = 146x10
 		anchor1 = none
 		anchor2 = none
@@ -442,7 +466,7 @@ window "Character"
 		value = 10
 	elem "GenEXP"
 		type = LABEL
-		pos = 51,456
+		pos = 51,504
 		size = 98x22
 		anchor1 = none
 		anchor2 = none
@@ -455,7 +479,7 @@ window "Character"
 		text = "1/10"
 	elem "label37"
 		type = LABEL
-		pos = 3,432
+		pos = 3,480
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -467,9 +491,36 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "Genjutsu"
+	elem "Name"
+		type = LABEL
+		pos = 3,48
+		size = 294x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "Lavenblade"
+	elem "label16"
+		type = LABEL
+		pos = 3,24
+		size = 294x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Name"
 	elem "Nin"
 		type = LABEL
-		pos = 151,396
+		pos = 151,444
 		size = 46x22
 		anchor1 = none
 		anchor2 = none
@@ -482,7 +533,7 @@ window "Character"
 		text = "10"
 	elem "NinEXP"
 		type = LABEL
-		pos = 199,396
+		pos = 199,444
 		size = 98x22
 		anchor1 = none
 		anchor2 = none
@@ -495,7 +546,7 @@ window "Character"
 		text = "1/10"
 	elem "Tai"
 		type = LABEL
-		pos = 3,396
+		pos = 3,444
 		size = 46x22
 		anchor1 = none
 		anchor2 = none
@@ -508,7 +559,7 @@ window "Character"
 		text = "10"
 	elem "NinEXPBar"
 		type = BAR
-		pos = 151,420
+		pos = 151,468
 		size = 146x10
 		anchor1 = none
 		anchor2 = none
@@ -523,7 +574,7 @@ window "Character"
 		value = 10
 	elem "label19"
 		type = LABEL
-		pos = 151,372
+		pos = 151,420
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -537,7 +588,7 @@ window "Character"
 		text = "Ninjutsu"
 	elem "TaiEXPBar"
 		type = BAR
-		pos = 3,420
+		pos = 3,468
 		size = 146x10
 		anchor1 = none
 		anchor2 = none
@@ -552,7 +603,7 @@ window "Character"
 		value = 10
 	elem "TaiEXP"
 		type = LABEL
-		pos = 51,396
+		pos = 51,444
 		size = 98x22
 		anchor1 = none
 		anchor2 = none
@@ -565,7 +616,7 @@ window "Character"
 		text = "1/10"
 	elem "label17"
 		type = LABEL
-		pos = 3,372
+		pos = 3,420
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -579,7 +630,7 @@ window "Character"
 		text = "Taijutsu"
 	elem "Agi"
 		type = LABEL
-		pos = 151,336
+		pos = 151,384
 		size = 46x22
 		anchor1 = none
 		anchor2 = none
@@ -592,7 +643,7 @@ window "Character"
 		text = "10"
 	elem "AgiEXP"
 		type = LABEL
-		pos = 199,336
+		pos = 199,384
 		size = 98x22
 		anchor1 = none
 		anchor2 = none
@@ -605,7 +656,7 @@ window "Character"
 		text = "1/10"
 	elem "label34"
 		type = LABEL
-		pos = 3,288
+		pos = 3,336
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -619,7 +670,7 @@ window "Character"
 		text = "Stats"
 	elem "label33"
 		type = LABEL
-		pos = 3,204
+		pos = 3,252
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -633,7 +684,7 @@ window "Character"
 		text = "Attributes"
 	elem "Def"
 		type = LABEL
-		pos = 3,336
+		pos = 3,384
 		size = 46x22
 		anchor1 = none
 		anchor2 = none
@@ -646,8 +697,8 @@ window "Character"
 		text = "10"
 	elem "StatPoints"
 		type = LABEL
-		pos = 3,516
-		size = 294x22
+		pos = 3,564
+		size = 146x22
 		anchor1 = none
 		anchor2 = none
 		font-family = "Open Sans"
@@ -659,8 +710,8 @@ window "Character"
 		text = "0"
 	elem "label31"
 		type = LABEL
-		pos = 3,492
-		size = 294x22
+		pos = 3,540
+		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
@@ -673,7 +724,7 @@ window "Character"
 		text = "Stat Points"
 	elem "AgiEXPBar"
 		type = BAR
-		pos = 151,360
+		pos = 151,408
 		size = 146x10
 		anchor1 = none
 		anchor2 = none
@@ -688,7 +739,7 @@ window "Character"
 		value = 10
 	elem "label29"
 		type = LABEL
-		pos = 151,312
+		pos = 151,360
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -702,7 +753,7 @@ window "Character"
 		text = "Agility"
 	elem "DefEXPBar"
 		type = BAR
-		pos = 3,360
+		pos = 3,408
 		size = 146x10
 		anchor1 = none
 		anchor2 = none
@@ -717,7 +768,7 @@ window "Character"
 		value = 10
 	elem "DefEXP"
 		type = LABEL
-		pos = 51,336
+		pos = 51,384
 		size = 98x22
 		anchor1 = none
 		anchor2 = none
@@ -730,7 +781,7 @@ window "Character"
 		text = "1/10"
 	elem "label27"
 		type = LABEL
-		pos = 3,312
+		pos = 3,360
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -744,7 +795,7 @@ window "Character"
 		text = "Defense"
 	elem "ChakraBar"
 		type = BAR
-		pos = 151,276
+		pos = 151,324
 		size = 146x10
 		anchor1 = none
 		anchor2 = none
@@ -759,7 +810,7 @@ window "Character"
 		value = 10
 	elem "Chakra"
 		type = LABEL
-		pos = 151,252
+		pos = 151,300
 		size = 146x22
 		anchor1 = none
 		anchor2 = none
@@ -772,7 +823,7 @@ window "Character"
 		text = "1000 / 1000"
 	elem "button2"
 		type = BUTTON
-		pos = 275,252
+		pos = 275,300
 		size = 22x22
 		anchor1 = none
 		anchor2 = none
@@ -786,7 +837,7 @@ window "Character"
 		is-flat = true
 	elem "label25"
 		type = LABEL
-		pos = 151,228
+		pos = 151,276
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -800,7 +851,7 @@ window "Character"
 		text = "Chakra"
 	elem "HealthBar"
 		type = BAR
-		pos = 3,276
+		pos = 3,324
 		size = 146x10
 		anchor1 = none
 		anchor2 = none
@@ -815,7 +866,7 @@ window "Character"
 		value = 10
 	elem "Health"
 		type = LABEL
-		pos = 3,252
+		pos = 3,300
 		size = 146x22
 		anchor1 = none
 		anchor2 = none
@@ -828,7 +879,7 @@ window "Character"
 		text = "1000 / 1000"
 	elem "button1"
 		type = BUTTON
-		pos = 127,252
+		pos = 127,300
 		size = 22x22
 		anchor1 = none
 		anchor2 = none
@@ -842,7 +893,7 @@ window "Character"
 		is-flat = true
 	elem "label23"
 		type = LABEL
-		pos = 3,228
+		pos = 3,276
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -856,7 +907,7 @@ window "Character"
 		text = "Health"
 	elem "EXPBar"
 		type = BAR
-		pos = 3,192
+		pos = 3,240
 		size = 294x10
 		anchor1 = none
 		anchor2 = none
@@ -871,7 +922,7 @@ window "Character"
 		value = 60
 	elem "EXP"
 		type = LABEL
-		pos = 3,168
+		pos = 3,216
 		size = 294x22
 		anchor1 = none
 		anchor2 = none
@@ -884,7 +935,7 @@ window "Character"
 		text = "6/10"
 	elem "label15"
 		type = LABEL
-		pos = 3,144
+		pos = 3,192
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -898,7 +949,7 @@ window "Character"
 		text = "Experience"
 	elem "Level"
 		type = LABEL
-		pos = 3,120
+		pos = 3,168
 		size = 294x22
 		anchor1 = none
 		anchor2 = none
@@ -911,7 +962,7 @@ window "Character"
 		text = "1"
 	elem "label13"
 		type = LABEL
-		pos = 3,96
+		pos = 3,144
 		size = 294x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -923,9 +974,9 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "Level"
-	elem "label12"
+	elem "VillageImage"
 		type = LABEL
-		pos = 109,72
+		pos = 109,120
 		size = 32x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -933,13 +984,12 @@ window "Character"
 		font-size = 10
 		text-color = #c8c8c8
 		background-color = #414141
-		is-disabled = true
 		border = line
 		saved-params = ""
 		text = ""
-	elem "label11"
+	elem "RankImage"
 		type = LABEL
-		pos = 75,72
+		pos = 75,120
 		size = 32x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -947,13 +997,12 @@ window "Character"
 		font-size = 10
 		text-color = #c8c8c8
 		background-color = #414141
-		is-disabled = true
 		border = line
 		saved-params = ""
 		text = ""
 	elem "Village"
 		type = LABEL
-		pos = 143,72
+		pos = 143,120
 		size = 154x22
 		anchor1 = none
 		anchor2 = none
@@ -966,7 +1015,7 @@ window "Character"
 		text = "Hidden Leaf ≡ Academy Student"
 	elem "Avatar"
 		type = LABEL
-		pos = 3,24
+		pos = 3,72
 		size = 70x70
 		anchor1 = none
 		anchor2 = none
@@ -974,9 +1023,9 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = ""
-	elem "Name"
+	elem "Clan"
 		type = LABEL
-		pos = 75,48
+		pos = 75,96
 		size = 222x22
 		anchor1 = none
 		anchor2 = none
@@ -986,7 +1035,7 @@ window "Character"
 		background-color = #414141
 		border = line
 		saved-params = ""
-		text = "Lavenblade"
+		text = "Hyuuga"
 	elem "Titlebar"
 		type = LABEL
 		pos = 0,0
@@ -1019,7 +1068,7 @@ window "Character"
 		is-flat = true
 	elem "label2"
 		type = LABEL
-		pos = 75,24
+		pos = 75,72
 		size = 222x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -1030,7 +1079,7 @@ window "Character"
 		is-disabled = true
 		border = line
 		saved-params = ""
-		text = "Name"
+		text = "Clan"
 	elem "label18"
 		type = LABEL
 		pos = 3,3
@@ -1270,21 +1319,6 @@ window "Inventory"
 		border = line
 		saved-params = ""
 		text = "Kunai"
-	elem "Currency"
-		type = LABEL
-		pos = 3,368
-		size = 32x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\symbols\\Ryo.png'
 	elem "EquippedItemInfo"
 		type = OUTPUT
 		pos = 37,440
@@ -1391,48 +1425,118 @@ window "Inventory"
 		image = 'assets\\interface\\buttons\\Close.png'
 		command = "ToggleInventoryPanel"
 		is-flat = true
-
-window "JutsuTab"
-	elem "JutsuTab"
-		type = MAIN
-		pos = 281,0
-		size = 640x480
+	elem "Currency"
+		type = BUTTON
+		pos = 3,368
+		size = 32x22
 		anchor1 = none
 		anchor2 = none
-		background-color = #1b1b1b
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'assets\\interface\\symbols\\Ryo.png'
+		command = "Create-Ryo-Pouch"
+		is-flat = true
+
+window "Jutsu"
+	elem "Jutsu"
+		type = MAIN
+		pos = 281,0
+		size = 300x500
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		is-pane = true
-	elem "button7"
-		type = BUTTON
-		pos = 544,32
-		size = 80x44
-		anchor1 = 85,7
-		anchor2 = 98,16
-		font-family = "@Kozuka Gothic Pro L"
-		font-size = 15
-		text-color = #c4c4c4
-		background-color = #2e2e2e
-		border = line
-		saved-params = "is-checked"
-		text = "Close"
-		command = "ViewJutsuTab"
-		is-flat = true
-	elem "Grid"
-		type = GRID
-		pos = 8,8
-		size = 536x464
+		macro = "Macro"
+	elem "Background"
+		type = LABEL
+		pos = 0,21
+		size = 300x479
 		anchor1 = 0,0
-		anchor2 = 85,100
-		text-color = #bbbbbb
-		background-color = #2e2e2e
+		anchor2 = 100,100
+		background-color = #191919
 		border = line
 		saved-params = ""
-		highlight-color = #000000
+		text = ""
+	elem "Total"
+		type = LABEL
+		pos = 3,475
+		size = 294x22
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "Learned Jutsu: 0"
+	elem "Grid"
+		type = GRID
+		pos = 3,24
+		size = 294x449
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		cells = 1x1
+		current-cell = 1,1
+		show-lines = horizontal
+		line-color = #646464
+		highlight-color = #ffffff
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 300x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Jutsu"
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
+	elem "Close"
+		type = BUTTON
+		pos = 272,0
+		size = 25x19
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'assets\\interface\\buttons\\Close.png'
+		command = "ToggleJutsuPanel"
+		is-flat = true
 
 window "Leader"
 	elem "Leader"
@@ -1648,17 +1752,6 @@ window "Main"
 		is-visible = false
 		saved-params = ""
 		text = "4:30"
-	elem "JutsuTabChild"
-		type = CHILD
-		pos = 914,42
-		size = 364x291
-		anchor1 = 57,9
-		anchor2 = 85,48
-		is-visible = false
-		border = line
-		saved-params = "splitter"
-		left = "JutsuTab"
-		is-vert = false
 	elem "Minimize"
 		type = BUTTON
 		pos = 1226,0
@@ -1926,7 +2019,7 @@ window "Navigation"
 		border = line
 		saved-params = "is-checked"
 		text = "Skill Tree"
-		command = "viewskilltree"
+		command = "ToggleSkillTreePanel"
 		is-flat = true
 	elem "JutsusButton"
 		type = BUTTON
@@ -2009,15 +2102,15 @@ window "Output"
 		is-default = true
 		border = line
 		saved-params = "max-lines"
-		link-color = #ffd900
-		visited-color = #df00ff
+		link-color = #be1a0e
+		visited-color = #be1a0e
 		style = "img.icon { width: 10px; height: 10px; }"
 		legacy-size = false
 
 window "Settings"
 	elem "Settings"
 		type = MAIN
-		pos = 281,0
+		pos = 372,0
 		size = 500x400
 		anchor1 = none
 		anchor2 = none
@@ -2089,7 +2182,7 @@ window "Settings"
 		border = line
 		saved-params = "is-checked"
 		text = "Ninja Handbook"
-		command = ""
+		command = "Ninja-Handbook"
 		is-flat = true
 	elem "button3"
 		type = BUTTON
@@ -2131,7 +2224,7 @@ window "Settings"
 		border = line
 		saved-params = "is-checked"
 		text = "Community Guidelines"
-		command = "CommunityGuidelines"
+		command = "Community-Guidelines"
 		is-flat = true
 	elem "LogoutButton"
 		type = BUTTON
@@ -2187,6 +2280,167 @@ window "Settings"
 		saved-params = ""
 		text = ""
 		image = 'assets\\interface\\Taskbar-16.png'
+
+window "SkillTree"
+	elem "SkillTree"
+		type = MAIN
+		pos = 281,0
+		size = 425x425
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		outer-size = 439x439
+		inner-size = 425x425
+	elem "Background"
+		type = LABEL
+		pos = 0,21
+		size = 425x404
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = ""
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 425x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Skill Tree"
+	elem "SkillTreeMap"
+		type = MAP
+		pos = 3,24
+		size = 419x398
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Open Sans"
+		background-color = #414141
+		saved-params = "zoom;letterbox;zoom-mode"
+		zoom = 1
+	elem "Loading"
+		type = CHILD
+		pos = 3,24
+		size = 419x398
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = none
+		is-visible = false
+		saved-params = "splitter"
+		left = "SkillTree-Progress"
+		is-vert = false
+	elem "Close"
+		type = BUTTON
+		pos = 397,0
+		size = 25x19
+		anchor1 = 100,0
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'assets\\interface\\buttons\\Close.png'
+		command = "ToggleSkillTreePanel"
+		is-flat = true
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = none
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
+
+window "SkillTree-Progress"
+	elem "SkillTree-Progress"
+		type = MAIN
+		pos = 0,0
+		size = 425x425
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		outer-size = 439x439
+		inner-size = 425x425
+	elem "Background"
+		type = LABEL
+		pos = 0,0
+		size = 425x425
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #414141
+		saved-params = ""
+		text = ""
+	elem "Bar2"
+		type = BAR
+		pos = 13,203
+		size = 400x16
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		is-visible = false
+		saved-params = ""
+		bar-color = #255f47
+		is-slider = false
+		width = 16
+		dir = east
+	elem "Status"
+		type = LABEL
+		pos = 13,222
+		size = 400x16
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		saved-params = ""
+		text = "Loading..."
+	elem "Bar"
+		type = BAR
+		pos = 197,187
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		saved-params = ""
+		bar-color = #255f47
+		is-slider = false
+		width = 8
+		dir = clockwise
+		angle2 = 359
+		value = 33
 
 window "Titlescreen"
 	elem "Titlescreen"

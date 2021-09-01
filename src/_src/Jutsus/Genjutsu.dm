@@ -240,8 +240,8 @@ mob
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
 					spawn(12)if(src)src.canattack=1
 		MizuBunshin
-			//health=1
-			//maxhealth=1
+			health=1
+			maxhealth=1
 			chakra=400
 			maxchakra=400
 			density=1
@@ -250,13 +250,12 @@ mob
 			icon='Water Bunshin.dmi'
 			New()
 				..()
+				flick("form",src)
 				spawn(1)BAi()
 				spawn() Imprison()
 				var/obj/Jutsus/WaterPrison/J=new
 				jutsus+=J
 				J.level=2
-				ResetBase()
-				//icon = 'WhiteMBase.dmi'
 				icon_state = ""
 			Del()
 				if(Prisoner)
@@ -274,12 +273,6 @@ mob
 						if(P.loc==src.loc)
 							step(src,pick(NORTH,SOUTH,WEST,EAST,NORTHWEST,NORTHEAST,SOUTHWEST,SOUTHEAST))
 							if(prob(50))step_rand(src)
-							var/list/k = src.overlays.Copy()
-							src.overlays=null
-							flick("form",src)
-							spawn(3) src.overlays = k.Copy()
-							ResetBase()
-							//icon='WhiteMBase.dmi'
 			Bump(atom/O)
 				/*if(istype(O,/mob))
 					var/mob/M=O

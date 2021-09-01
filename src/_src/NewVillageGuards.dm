@@ -20,7 +20,7 @@ mob
 			Attack(mob/M)
 				var/ppunch="left"
 				if(src.hited==1) return
-				if(istype(M,/mob/White_Zettsu/))
+				if(istype(M,/mob/npc/combat/white_zetsu/))
 					return
 				if(istype(M,/mob/))
 					if(ppunch=="left")

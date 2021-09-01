@@ -1,6 +1,30 @@
 obj
 	Ground
 		Trees
+			desert_tree
+				icon='NTree3.dmi'
+				icon_state="2,0"
+				density=1
+				layer=TURF_LAYER+2
+				New()
+					..()
+					src.overlays+=/obj/Ground/Trees/MTree3/B1
+					src.overlays+=/obj/Ground/Trees/MTree3/B3
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left2/B03
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B11
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B12
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B13
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B14
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Left/B15
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B21
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B22
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B23
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B24
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B25
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Middle/B26
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Right/B32
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Right/B33
+					src.overlays+=/obj/Ground/Trees/MTree3/Overlays/Right/B34
 			MTree1
 				icon='NTree1.dmi'
 				B1
@@ -634,8 +658,13 @@ turf
 		density=1
 		layer=100
 	HighLayerDensity
+		icon ='placeholdertiles.dmi'
+		icon_state = "forcedense"
 		density=1
 		layer=999
+		New()
+			icon_state = "blank"
+			..()
 	TopLayerDensity
 		density=1
 		layer=100
@@ -1274,6 +1303,34 @@ turf
 				//for(var/turf/T in range(src,0))
 				//	T.density=1
 				..()
+			Enter(mob/M)
+				if(!M.copy&&src:Climbable)
+					if(M.dashable==2)
+						if(M.mountainkit)
+							M.loc=locate(src.x,src.y,src.z)
+							M.canattack=0
+							M.firing=1
+							M.icon_state="climbS"
+							M.copy="Climb"
+							M.arrow="L"
+							var/obj/WArrow = image('Misc Effects.dmi',M,icon_state="arrow",layer=99)
+							WArrow.pixel_x=-64
+							WArrow.dir=WEST
+							M.ArrowTasked=WArrow
+							M<<WArrow
+						else
+							if(M.mountainwalk)M.loc=locate(src.x,src.y,src.z)
+							else ..()
+						M.icon_state = "climbS"
+				else
+					if(M.copy=="Climb")
+						M.loc=locate(src.x,src.y,src.z)
+						M.icon_state = "climbS"
+					else ..()
+			Entered(mob/M)
+				if(M.copy=="Climb")
+					M.icon_state="climbS"
+
 			Edges
 				//layer=MOB_LAYER+6
 				Left
@@ -1480,11 +1537,11 @@ obj/Ground
 
 obj
 	AkatsukiArms1
-		//icon='AkatsukiHands.dmi'
+		icon='AkatsukiHands.dmi'
 		icon_state="Hand1"
 		density=1
 	AkatsukiArms2
-		//icon='AkatsukiHands.dmi'
+		icon='AkatsukiHands.dmi'
 		icon_state="Hand2"
 		density=1
-
+		pixel_x = 13

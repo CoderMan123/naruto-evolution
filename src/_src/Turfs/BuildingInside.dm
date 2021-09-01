@@ -42,7 +42,7 @@ world
 				world << output("<b>The Hidden Sand has captured an area!","Action.Output")
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Sand" && M.z == LevelTo)
-						M.Ryo += (100 + 1)
+						M.ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
@@ -62,7 +62,7 @@ world
 				world << output("<b>The Hidden Leaf has captured an area!","Action.Output")
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Leaf" && M.z == LevelTo)
-						M.Ryo += (100 + 1)
+						M.ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
@@ -82,7 +82,7 @@ world
 				world << output("<b>The Hidden Mist has captured an area!","Action.Output")
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Mist" && M.z == LevelTo)
-						M.Ryo += (100 + 1)
+						M.ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
@@ -102,7 +102,7 @@ world
 				world << output("<b>The Hidden Sound has captured an area!","Action.Output")
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Sound" && M.z == LevelTo)
-						M.Ryo += (100 + 1)
+						M.ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
@@ -122,7 +122,7 @@ world
 				world << output("<b>The Hidden Rock has captured an area!","Action.Output")
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Rock" && M.z == LevelTo)
-						M.Ryo += (100 + 1)
+						M.ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 10 EXP from the capture!","Action.Output")
 						M.exp+=10
 						for(var/i=0,i<3,i++)
@@ -149,7 +149,7 @@ world
 				global.leafpoints["[LevelTo]"]=0
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Sand" && M.z == LevelTo)
-						M.Ryo += (100 + 1)
+						M.ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 6 EXP from the battle!","Action.Output")
 						M.exp+=6
 						for(var/i=0,i<5,i++)
@@ -171,7 +171,7 @@ world
 				global.leafpoints["[LevelTo]"]=0
 				for(var/mob/M in mobs_online)
 					if(M.client && M.village == "Hidden Leaf" && M.z == LevelTo)
-						M.Ryo += (100 + 1)
+						M.ryo += (100 + 1)
 						M<<output("<b>You have gained [(100 + 1)] Ryo and 6 EXP from the battle!","Action.Output")
 						M.exp+=6
 						for(var/i=0,i<5,i++)
@@ -290,13 +290,13 @@ turf
 			WarpToMapLoadSpawn
 				Entered(mob/M)
 					if(istype(M,/mob) && M.client)
-						if(M.Tutorial!=6 || M.strength < 5 || M.ninjutsu < 5 || M.genjutsu < 5)//TUT
-							M<<output("Hey, hold your horses! You haven't finished the tutorial yet. Make sure you speak with all the NPCs, do a weeding mission, level Tai Nin and Gen to atleast 5, and take down atleast one rogue shinobi. ","Action.Output")
+						if(M.Tutorial!=6)//TUT
+							M<<output("Hey, hold your horses! You haven't finished the tutorial yet. Make sure you go back and speak with the NPCs in order starting from the room you arrived in!","Action.Output")
 							if(M.lastloc)M.loc=M.lastloc
 							return
 						else
 							M.Tutorial=7
-							M<<output("Congratulations! You've finished the tutorial!","Action.Output")
+							M<<output("Congratulations! You've finished the tutorial! Make sure to ask other players if you need help either in your village chat or on the discord! Look out for the bells icon next to someone name when they speak in chat, that means they're a Jounin and happy to help!","Action.Output")
 						M.loc=M.MapLoadSpawn()
 		layer=TURF_LAYER+1
 		Senders
@@ -326,6 +326,8 @@ turf
 						return
 					usr.loc = ToWhere
 					step(usr,NORTH)
+				else if(istype(M,/mob/npc/combat/political_escort))
+					M.loc = ToWhere
 			//Leaf
 			T1	//KH
 			T2	//Dojo
@@ -435,6 +437,8 @@ turf
 						return
 					usr.loc = ToWhere
 					step(usr,SOUTH)
+				else if(istype(M,/mob/npc/combat/political_escort))
+					M.loc = ToWhere
 			//Leaf
 			T1	//KH
 			T2	//Dojo

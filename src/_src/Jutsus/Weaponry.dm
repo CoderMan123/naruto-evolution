@@ -29,7 +29,7 @@ obj
 							for(var/mob/X in view(src,3))
 								if(X.dead==0)
 									X.DealDamage(damage-(X.defence/5),src.Owner,"TaiOrange")
-									if(istype(X,/mob/npc))..()
+									if(istype(X,/mob/npc) && !istype(X,/mob/npc/combat))..()
 									else
 										X.icon_state="push"
 										X.injutsu=1
@@ -65,7 +65,7 @@ obj
 									for(var/mob/X in view(src,3))
 										if(X.dead==0)
 											X.DealDamage(damage,src.Owner,"TaiOrange")
-											if(istype(X,/mob/npc))
+											if(istype(X,/mob/npc) && !istype(X,/mob/npc/combat))
 												..()
 											else
 												X.icon_state="push"
@@ -102,7 +102,7 @@ obj
 										for(var/mob/X in view(src,3))
 											if(X.dead==0)
 												X.DealDamage(damage,src.Owner,"TaiOrange")
-												if(istype(X,/mob/npc))..()
+												if(istype(X,/mob/npc) && !istype(X,/mob/npc/combat)) ..()
 												else
 													X.icon_state="push"
 													X.injutsu=1
@@ -135,7 +135,7 @@ obj
 									for(var/mob/M in view(src,3))
 										if(M.dead==0)
 											M.DealDamage(damage,src.Owner,"TaiOrange")
-											if(istype(M,/mob/npc))..()
+											if(istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) ..()
 											else
 												M.icon_state="push"
 												M.injutsu=1
@@ -166,7 +166,7 @@ obj
 									for(var/mob/M in view(src,3))
 										if(M.dead==0)
 											M.DealDamage(damage,src.Owner,"TaiOrange")
-											if(istype(M,/mob/npc))..()
+											if(istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) ..()
 											else
 												M.icon_state="push"
 												M.injutsu=1
@@ -224,7 +224,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -258,7 +258,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -339,7 +339,7 @@ obj
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(45))M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									else
 										if(M.amounthits<6)
@@ -413,7 +413,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(45))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										else
 											if(M.amounthits<6)
@@ -637,7 +637,7 @@ obj
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(75))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									else
 										if(M.amounthits<6)
@@ -712,7 +712,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										else
 											if(M.amounthits<6)
@@ -936,7 +936,7 @@ obj
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(30))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									else
 										if(M.amounthits<6)
@@ -1012,7 +1012,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										else
 											if(M.amounthits<6)
@@ -1239,7 +1239,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -1274,7 +1274,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -1363,7 +1363,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,4))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -1397,7 +1397,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -1482,7 +1482,7 @@ obj
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,4))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -1514,7 +1514,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -1607,7 +1607,7 @@ obj
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,6))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -1634,7 +1634,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,6))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -1722,7 +1722,7 @@ obj
 									spawn() if(M) M.Bleed()
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									else
 										if(M.amounthits<6)
@@ -1783,7 +1783,7 @@ obj
 										spawn() if(M) M.Bleed()
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										else
 											if(M.amounthits<6)
@@ -1965,7 +1965,7 @@ obj
 										Owner.Levelup()
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -2001,7 +2001,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -2090,7 +2090,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,2))
 									if(prob(15))
 										M.speeding=0
-									if(istype(O,/mob/npc))
+									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 										..()
 									if(M.henge==4||M.henge==5)
 										M.HengeUndo()
@@ -2125,7 +2125,7 @@ obj
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,4))
 										if(prob(15))
 											M.speeding=0
-										if(istype(O,/mob/npc))
+										if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
 											..()
 										if(M.henge==4||M.henge==5)
 											M.HengeUndo()
@@ -2385,7 +2385,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(5, 10))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(18, 30))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2398,7 +2398,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else if(!c_target)
 							var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(5, 10))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(18, 30))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2427,7 +2427,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(10, 15))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 55))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2440,7 +2440,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(10, 15))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 55))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2469,7 +2469,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(8, 13))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(20, 39))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2482,7 +2482,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(8, 13))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(20, 39))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2511,7 +2511,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(3, 8))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 24))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2524,7 +2524,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(3, 8))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 24))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2556,7 +2556,7 @@ mob
 								src.dir=get_dir(usr,c_target)
 								usr.Target_Atom(c_target)
 								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 17))
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 51))
 								if(prob(50))A.pixel_y+=rand(5,10)
 								else A.pixel_y-=rand(5,10)
 								if(prob(50))A.pixel_x+=rand(1,8)
@@ -2572,7 +2572,7 @@ mob
 								step(A,usr.dir)
 							else
 								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 17))
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 51))
 								if(prob(50))A.pixel_y+=rand(1,8)
 								else A.pixel_y-=rand(1,8)
 								if(prob(50))A.pixel_x+=rand(1,8)
@@ -2598,7 +2598,7 @@ mob
 							spawn(3)
 								usr.smokebomb=1
 								var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(30, 40))
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(90, 160))
 								SMOKE.loc=usr.loc
 								view(usr)<<sound('flashbang_explode2.wav',0,0)
 								src.overlays=0

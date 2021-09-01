@@ -26,11 +26,11 @@ mob
 							src.injutsu = 1
 							src.Prisoner=M
 							new/obj/TsukuyomiHUD(M.client)
-							M.client.eye=locate(143,38,14)
+							M.client.eye=locate(161,35,9)
 							M.client.perspective = EYE_PERSPECTIVE
 							var/Timer=J.level+2
 							while(Timer&&M)
-								if(J.level==1)
+								if(M)
 									M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage)/6, src, "white")
 								Timer--
 								sleep(5)
@@ -41,12 +41,14 @@ mob
 							M.injutsu=0
 							for(var/obj/TsukuyomiHUD/H in M.client.screen)del H
 							src.Prisoner=null
-							src<<output("wtf")
 							src.firing=0
 							src.injutsu=0
 							src.move=1
 							src.canattack=1
 							src.injutsu=0
+					src.canattack=1
+					src.firing=0
+
 		Amaterasu()
 			for(var/obj/Jutsus/Amaterasu/J in src.jutsus)
 				if(Sharingan<=3)

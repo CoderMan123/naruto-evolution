@@ -23,8 +23,6 @@ mob
 						var/mob/Clones/MizuBunshin/A = new/mob/Clones/MizuBunshin(src.loc)
 						A.loc=src.loc
 						A.Owner=src
-						A.icon=src.icon
-						A.overlays=src.overlays.Copy()
 						A.strength=round(src.strength/bun)
 						A.defence=round(src.defence/bun)
 						A.health=100//round(src.health/bun)
@@ -34,7 +32,10 @@ mob
 						var/obj/M=new /obj/Screen/manabar/
 						A.hbar.Add(O)
 						A.hbar.Add(M)
-						spawn(3) if(A) A.icon = src.icon
+						spawn(3)
+							if(A)
+								A.icon = src.icon
+								A.overlays=src.overlays.Copy()
 						A.overlays-=/obj/Screen/healthbar
 						A.overlays-=/obj/Screen/manabar
 						for(var/obj/Screen/healthbar/HB in A.hbar)A.overlays+=HB

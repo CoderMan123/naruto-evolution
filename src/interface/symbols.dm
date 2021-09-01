@@ -1,32 +1,36 @@
 obj/Symbols
 	Squad
 		New(mob/M, var/ckey)
-			var/squad/squad = M.GetSquad()
-			if(squad && squad.leader[ckey]) src.icon = 'Squad-Leader.png'
+			if(M && M.client)
+				var/squad/squad = M.GetSquad()
+				if(squad && squad.leader[ckey]) src.icon = 'Squad-Leader.png'
 	Village
 		New(mob/M)
 			src.loc=null
-			switch(M.village)
-				if("Hidden Sand") src.icon = 'Sand.png'
-				if("Hidden Leaf") src.icon = 'Leaf.png'
-				if("Hidden Mist") src.icon = 'Missing-Nin.png'
-				if("Hidden Sound") src.icon = 'Missing-Nin.png'
-				if("Hidden Rock") src.icon = 'Missing-Nin.png'
-				if("Seven Swordsmen") src.icon = 'Missing-Nin.png'
-				if("Missing-Nin") src.icon = 'Missing-Nin.png'
-				if("Akatsuki") src.icon = 'Akatsuki.png'
-				if("Anbu Root") src.icon = 'Missing-Nin.png'
+			if(M && M.client)
+				switch(M.village)
+					if(VILLAGE_LEAF) src.icon = 'Leaf.png'
+					if(VILLAGE_SAND) src.icon = 'Sand.png'
+					if(VILLAGE_ROCK) src.icon = 'Missing-Nin.png'
+					if(VILLAGE_MIST) src.icon = 'Missing-Nin.png'
+					if(VILLAGE_SOUND) src.icon = 'Missing-Nin.png'
+					if(VILLAGE_MISSING_NIN) src.icon = 'Missing-Nin.png'
+					if(VILLAGE_AKATSUKI) src.icon = 'Akatsuki.png'
+					if("Seven Swordsmen") src.icon = 'Missing-Nin.png'
+					if("Anbu Root") src.icon = 'Missing-Nin.png'
 			..()
 	Rank
 		New(mob/M)
 			src.loc=null
-			switch(M.rank)
-				if("Academy Student") src.icon = 'Academy-Student.png'
-				if("Genin") src.icon = 'Genin.png'
-				if("Chuunin") src.icon = 'Chuunin.png'
-				if("Jonin") src.icon = 'Jonin.png'
-				if("Anbu") src.icon = 'Anbu.png'
-				if("Kage") src.icon = 'Kage.png'
+			if(M && M.client)
+				switch(M.rank)
+					if(RANK_ACADEMY_STUDENT) src.icon = 'Academy-Student.png'
+					if(RANK_GENIN) src.icon = 'Genin.png'
+					if(RANK_CHUUNIN) src.icon = 'Chuunin.png'
+					if(RANK_JOUNIN) src.icon = 'Jonin.png'
+					if(RANK_ANBU) src.icon = 'Anbu.png'
+					if(RANK_HOKAGE) src.icon = 'Kage.png'
+					if(RANK_KAZEKAGE) src.icon = 'Kage.png'
 			..()
 
 	Squad
@@ -36,13 +40,26 @@ obj/Symbols
 			src.icon = 'Squad-Leader.png'
 
 	Role
-		New(var/role)
-			switch(role)
-				if("Trainee") src.icon = null
-				if(MODERATOR) src.icon = 'Moderator.png'
-				if(ADMINISTRATOR) src.icon = 'Administrator.png'
-				if("Community Manager") src.icon = null
-				if("Event Manager") src.icon = null
-				if("Pixel Artist") src.icon = null
-				if("Programmer") src.icon = null
+		New(mob/M)
+			src.loc=null
+			if(M && M.client)
+				if(M.ckey in administrators) src.icon = 'Administrator.png'
+				else if(M.ckey in moderators) src.icon = 'Moderator.png'
+				//if("Trainee") src.icon = null
+				//if("Community Manager") src.icon = null
+				//if("Event Manager") src.icon = null
+				//if("Pixel Artist") src.icon = null
+				//if("Programmer") src.icon = null
 			..()
+
+	missions
+		intel_scroll
+			pixel_y = 80
+			leaf
+				pixel_x = 20
+				icon = 'overhead_icons.dmi'
+				icon_state = "leafintel"
+			sand
+				pixel_x = 28
+				icon = 'overhead_icons.dmi'
+				icon_state = "sandintel"

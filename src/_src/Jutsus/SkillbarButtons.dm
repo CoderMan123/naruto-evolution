@@ -101,7 +101,7 @@ The game creators will work on it as soon as possible.
 
 </body>
 </html>"}
-			var/bugs = file("Bugs.txt")
+			var/bugs = file(LOG_BUGS)
 			var/msg = html_encode(href_list["report"])
 			var/who = html_encode(href_list["name"])
 			if(usr.Bugreported)

@@ -187,11 +187,12 @@ mob
 						if(O)
 							O.loc = null
 			for(var/obj/A in get_step(src,src.dir))A.layer=OBJ_LAYER
+
 		HealUp()
-			var/colour = colour2html("white")
-			F_damage(src,"+25",colour)
 			src.health += 25
 			if(health>maxhealth) health=maxhealth
+			DamageOverlay(src, 25, "#7fff00")
+
 		DoMirrors(obj/Os)
 			if(Os)
 				var/obj/O = new/obj
@@ -249,14 +250,6 @@ mob
 									O.pixel_y+=rand(1,5)
 							spawn(15)if(O)del(O)
 client
-	var
-		tmp
-			//injutsu=0
-			//likeaclone
-			//copy
-			//cranks
-			//arrow
-			//ArrowTasked
 	North()
 		if(src.mob.Intang==1 && istype(get_step(src.mob, NORTH), /turf/IntangBlocker)) return
 		if(src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
@@ -265,8 +258,14 @@ client
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,NORTH)
-			spawn(0.5)if(src.mob)step(src.mob,NORTH)
-			spawn(1)if(src.mob)step(src.mob,NORTH)
+			spawn(0.5)
+				if(src.mob)
+					step(src.mob,NORTH)
+					step(src.mob,NORTH)
+			spawn(1)
+				if(src.mob)
+					step(src.mob,NORTH)
+					step(src.mob,NORTH)
 			spawn(1.5)
 				if(src.mob)step(src.mob,NORTH)
 				if(src.mob)src.mob.dashable=0
@@ -392,8 +391,14 @@ client
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,SOUTH)
-			spawn(0.5)if(src.mob)step(src.mob,SOUTH)
-			spawn(1)if(src.mob)step(src.mob,SOUTH)
+			spawn(0.5)
+				if(src.mob)
+					step(src.mob,SOUTH)
+					step(src.mob,SOUTH)
+			spawn(1)
+				if(src.mob)
+					step(src.mob,SOUTH)
+					step(src.mob,SOUTH)
 			spawn(1.5)
 				if(src.mob)step(src.mob,SOUTH)
 				if(src.mob)src.mob.dashable=0
@@ -483,8 +488,14 @@ client
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,WEST)
-			spawn(0.5)if(src.mob)step(src.mob,WEST)
-			spawn(1)if(src.mob)step(src.mob,WEST)
+			spawn(0.5)
+				if(src.mob)
+					step(src.mob,WEST)
+					step(src.mob,WEST)
+			spawn(1)
+				if(src.mob)
+					step(src.mob,WEST)
+					step(src.mob,WEST)
 			spawn(1.5)
 				if(src.mob)step(src.mob,WEST)
 				if(src.mob)src.mob.dashable=0
@@ -590,8 +601,14 @@ client
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,EAST)
-			spawn(0.5)if(src.mob)step(src.mob,EAST)
-			spawn(1)if(src.mob)step(src.mob,EAST)
+			spawn(0.5)
+				if(src.mob)
+					step(src.mob,EAST)
+					step(src.mob,EAST)
+			spawn(1)
+				if(src.mob)
+					step(src.mob,EAST)
+					step(src.mob,EAST)
 			spawn(1.5)
 				if(src.mob)step(src.mob,EAST)
 				if(src.mob)src.mob.dashable=0
@@ -738,7 +755,7 @@ mob
 //				if(O.strength>=1&&O.strength<25)
 //					step(src,src.dir)
 //					src.stepped=1
-	M.ResetBase()
+	//M.ResetBase()
 	//icon='WhiteMBase.dmi'
 	//	statpanel("Inventory")
 	//	stat("Ryo: ","[src.Ryo]")
@@ -751,7 +768,7 @@ mob
 	//	stat(src.jutsus)
 		//statpanel("Clothing Collection", src.storage)
 		//statpanel("Quest Items", src.QuestItems)
-	pixel_x=-15
+
 	New()
 		..()
 		src.overlays+=/obj/MaleParts/UnderShade
@@ -762,38 +779,17 @@ mob
 			if(M.fightlayer==src.fightlayer)
 				if(src.henge==4||src.henge==5)src.HengeUndo()
 			if(istype(O,/turf))
-				var/turf/T=O
 				src.HengeUndo()
 				if(O.density&&src.icon_state=="push")
 				//	O.overlays+=image('Misc Effects.dmi',O,"crack[number]")
 					var/damage=rand(10,15)
 					src.health-=damage
-					var/colour = colour2html("white")
-					F_damage(src,damage,colour)
-					if(src.client)spawn() src.ScreenShake(5)
-					UpdateHMB()
+					spawn() DamageOverlay(src, damage, "white")
+					if(src.client) spawn() src.ScreenShake(5)
+					spawn() UpdateHMB()
 					Death(src)
 					src.icon_state=""
-				if(istype(O,/turf/Ground/Cliff/Edges/Bottom)||istype(O,/turf/Ground/Cliff))
-					if(!src.copy&&O:Climbable)
-						if(src.dashable==2)
-							if(src.mountainkit)
-								src.loc=locate(T.x,T.y,T.z)
-								src.canattack=0
-								src.firing=1
-								src.icon_state="climbS"
-								src.copy="Climb"
-								src.arrow="L"
-								var/obj/WArrow = image('Misc Effects.dmi',src,icon_state="arrow",layer=99)
-								WArrow.pixel_x=-64
-								WArrow.dir=WEST
-								src.ArrowTasked=WArrow
-								src<<WArrow
-							else
-								if(mountainwalk)src.loc=locate(T.x,T.y,T.z)
-								else ..()
-					else if(src.copy=="Climb")src.loc=locate(T.x,T.y,T.z)
-				else ..()
+
 
 mob
 	New()
@@ -825,11 +821,11 @@ client
 
 						if(istype(mob.loc,/turf/Ground/Water))
 							if(mob.swimming)//SWIM
-								mob.LevelStat("Agility",rand(0.1,0.2))
+								mob.LevelStat("Agility",rand(2,4))
 								mob.Levelup()
 
 							if(mob.walkingonwater)
-								mob.LevelStat("Ninjutsu",rand(0.1,0.2))
+								mob.LevelStat("Ninjutsu",rand(4,8))
 								mob.Levelup()
 
 						if(mob.speeding<0)mob.speeding=0
@@ -849,10 +845,10 @@ client
 						..()
 						if(src.mob.equipped=="Weights")
 							if(prob(50))
-								spawn() src.mob.LevelStat("Agility",round(rand(2,8)*trainingexp))
+								spawn() src.mob.LevelStat("Agility",round(rand(5,10)*trainingexp))
 						else
 							if(prob(40))
-								spawn() src.mob.LevelStat("Agility",rand(0,1))
+								spawn() src.mob.LevelStat("Agility",rand(1,2))
 
 						sleep(mob.move_delay)
 						mob.moving=0
@@ -892,7 +888,7 @@ mob
 				src.overlays=0
 				src.henge=0
 				src.UpdateHMB()
-				src.Name(src.name)
+				src.SetName(src.name)
 				src.ResetBase()
 				//src.icon='WhiteMBase.dmi'
 				src.icon_state=""

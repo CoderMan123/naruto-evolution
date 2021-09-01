@@ -1,5 +1,4 @@
 //Gates. Attack Defend. Other big procs.
-mob/var/tmp/KOs
 
 
 mob

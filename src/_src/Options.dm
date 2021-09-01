@@ -6,13 +6,8 @@ mob
 			src<<"/World -- Shows the current servers IP address."
 			src<<"/Mute -- Vote to mute a player."
 			src<<"/Boot -- Vote to boot an afk player."
-			src<<"Options->Arena Challenge -- Challenge a player."
-			src<<"Options->Who's Online -- Check who is online."
 			src<<"/Help -- View all commands."
-	//	ChangeNameColor()
-	//		namecolor = input("What color will your name be?") as null|color
-	//	ChangeTextColor()
-	//		chatcolor=input("What color will your chat text be?") as null|color
+			
 		Stuck()
 
 			if(Tutorial!=7)//TUT
@@ -60,8 +55,8 @@ mob
 			if(M.client.Alert("Fight [src]?","Duel",list("Yes","No")) == 1)
 				src.opponent=M
 				M.opponent=src
-				M.loc=locate(116,99,3)
-				src.loc=locate(103,99,3)
+				M.loc=locate(172,149,8)
+				src.loc=locate(185,149,8)
 				world<<"[M] accepts challenge from [src]!"
 				src.dueling=1
 				M.dueling=1
@@ -89,7 +84,7 @@ mob
 					src.overlays=null
 					src.ReAddClothing()
 					src.RestoreOverlays()
-					src.RemoveAdminVerbs()
+					src.client.StaffCheck()
 				if(village=="Anbu Root")
 					for(var/obj/Inventory/Clothing/Robes/Anbu_Suit/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
@@ -97,7 +92,7 @@ mob
 					src.overlays=null
 					src.ReAddClothing()
 					src.RestoreOverlays()
-					src.RemoveAdminVerbs()
+					src.client.StaffCheck()
 				if(village=="Seven Swordsmen")
 					for(var/obj/Inventory/Weaponry/Zabuza_Sword/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
@@ -158,34 +153,8 @@ mob
 	//				"})
 
 mob
-	var
-		jutsutab=0
 	verb
-		ViewJutsuTab()
-			set hidden=1
-			if(jutsutab)
-				jutsutab=0
-				winset(usr, null, {"
-				JutsuTabChild.focus      = "false";
-				JutsuTabChild.is-visible      = "false";
-				"})
-				return
-			RefreshJutsus()
-			winset(usr, null, {"
-				JutsuTabChild.focus      = "true";
-				JutsuTabChild.is-visible      = "true";
-			"})
-			jutsutab=1
 
-		RefreshJutsus()
-			set hidden=1
-			winset(src,"JutsuTab.Grid","cells=0x0")
-			var/Row = 1
-		//	var/a=1
-			src<<output("","JutsuTab.Grid:1,1")
-			for(var/obj/Jutsus/O in src.jutsus)
-				Row++
-				src << output(O,"JutsuTab.Grid:1,[Row]")
 
 		HealthUp()
 			set hidden=1

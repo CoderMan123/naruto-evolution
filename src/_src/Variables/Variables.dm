@@ -34,8 +34,6 @@ mob
 		village="Leaf"
 		rank = RANK_ACADEMY_STUDENT
 		dead=0
-		namecolor="green"
-		chatcolor="white"
 		swimming
 		walkingonwater
 		waterwalk
@@ -49,7 +47,7 @@ mob
 		Clan=null
 		Specialist="strength"
 		Specialist2
-		Ryo=0
+		ryo=0
 		RyoBanked=0
 		riconstate
 		ricon
@@ -57,6 +55,8 @@ mob
 		Muted=0
 		skiptut=0
 		JashinSacrifices=0
+		exp_reward = 0
+		last_damage_taken_time
 		tmp
 			AFK=0
 			BeingThrown
@@ -101,7 +101,6 @@ mob
 			waterhigh=0
 			snowlow=0
 			canattack=1
-			admin=0
 			firing=0
 			infusing=0//chakrainfusionstuff
 			bubbled=0//bubbleshieldstuff

@@ -13,7 +13,7 @@ image
 			src.underlays = null
 			src.layer = 99
 			src.pixel_x=16
-			src.pixel_y=8
+			src.pixel_y=5
 mob/verb/Target_A_Mob()
 	set hidden=1
 	var/Train=0
@@ -50,11 +50,11 @@ mob/proc
 				src << src.target_mob_image
 				src.target_mob_image.loc = target_mob
 	Target_Atom(var/atom/movable/A)
-		if(istype(A,/mob/npc/))return
+		if(istype(A,/mob/npc/) && !istype(A, /mob/npc/combat))return
 		if(istype(A,src.puppets[1]))return
 		if(istype(A,/mob/Untargettable/))return
 		if(src.target_mob==A)return
-		if(!istype(A)||!(A in view()))return
+		if(!istype(A)||!(A in view(100)))return
 
 		//if(istype(loc,/turf/Arena)&& A!=opponent) return
 
@@ -66,12 +66,15 @@ mob/proc
 					src.target_mob_image.loc = A
 					src << src.target_mob_image
 			src.target_mob = A
+
 	Target_Get()
-		if(!target_mob) return 0
-		if(!(src.target_mob in range()))
-			src.Target_Remove(TARGET_MOB)
-			return 0
-		return target_mob
+		if(!src.target_mob) return 0
+		for(var/mob/m in view(100))
+			if(m == src.target_mob)
+				return src.target_mob
+		src.Target_Remove(TARGET_MOB)
+		return 0
+
 atom/movable/Click()
 	//if(!istype(src,/obj/HUD))
 	if(usr.Target_Get()==src)
@@ -80,6 +83,29 @@ atom/movable/Click()
 		return
 	if(ismob(src))usr.Target_Atom(src)
 	..()
+
+turf
+	Click()
+		//if(!istype(src,/obj/HUD))
+		for(var/mob/m in range(0, src))
+			if(m.client || istype(m, /mob/summonings) || istype(m, /mob/jutsus) || istype(m, /mob/Rotating_Dummy))
+				if(usr.Target_Get()==m)
+					usr.Target_Remove()
+					break
+				else usr.Target_Atom(m)
+		..()
+
+/*	Entered(atom/movable/a)
+		..()
+		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/Rotating_Dummy))
+			src.mouse_over_pointer = /obj/cursors/target*/
+
+/*	Exited(atom/movable/a)
+		..()
+		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/Rotating_Dummy))
+			if(!locate(/client) in src.loc && !locate(/mob/summonings) in src.loc && !locate(/mob/jutsus) in src.loc && !locate(/mob/Rotating_Dummy) in src.loc)
+				src.mouse_over_pointer = MOUSE_INACTIVE_POINTER*/
+
 obj/var/mob/owner=null
 obj/projectiles/var
 	speed=0

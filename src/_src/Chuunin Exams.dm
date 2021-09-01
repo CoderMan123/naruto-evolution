@@ -84,23 +84,20 @@ obj/Special/ChuuninExam
 mob/var/cheww=0
 proc/ChuuninExam()
 	while(world)
-		sleep(600*240)
-		if(chuuninlock==1)
-			usr<<"Ninja War is in progress...please wait until it's over..."
-			return
+		sleep(600*120)
 		ChuuninExam="Starting"
 		world<<output("<b><center>A Chuunin exam will begin in 5 minutes.</b></center>","Action.Output")
 		sleep(600*5)
 		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","Action.Output")
 		ChuuninExam="Written"
-		sleep(600*2)
+		sleep(600*3)
 		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","Action.Output")
 		ChuuninExam="Forest of Death"
 		var/count=0
 		for(var/mob/M in mobs_online)
 			if(M.cheww==1)
 				M.cheww=0
-				M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
+				M.loc = pick(block(locate(73,10,8),locate(198,74,8)))
 				if(count==0)
 					var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
 					O.loc = M
@@ -251,17 +248,17 @@ obj/ChuuninExam/
 				if(istype(O,/obj/ChuuninExam/Scrolls/EarthScroll))EarthScroll=1
 				if(istype(O,/obj/ChuuninExam/Scrolls/HeavenScroll))HeavenScroll=1
 			if(EarthScroll&&HeavenScroll)
-				usr<<output("If you manage to hold on to both of these scrolls for 25 more seconds you will be teleported to the next area.","Action.Output")
+				usr<<output("If you manage to hold on to both of these scrolls for 40 more seconds you will be teleported to the next area.","Action.Output")
 				hearers() << output("[usr] has aquirred both scrolls.","Action.Output")
-				sleep(250)
+				sleep(400)
 				var/EarthScroll1
 				var/HeavenScroll1
 				for(var/obj/ChuuninExam/Scrolls/X in usr)
 					if(istype(X,/obj/ChuuninExam/Scrolls/EarthScroll))EarthScroll1=1
 					if(istype(X,/obj/ChuuninExam/Scrolls/HeavenScroll))HeavenScroll1=1
 				if(HeavenScroll1&&EarthScroll1)
-					if(prob(50)) usr.loc=locate(144,44,4)
-					else usr.loc=locate(115,44,4)
+					if(prob(50)) usr.loc=locate(163,93,8)
+					else usr.loc=locate(198,93,8)
 					world<<output("<i>[usr] has made it past the first portion of the Chuunin exam!</i>","Action.Output")
 					usr<<output("Do not start killing. This is a tournament match.","Action.Output")
 					for(var/obj/ChuuninExam/Scrolls/S in usr)del(S)

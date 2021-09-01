@@ -141,7 +141,10 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					J.damage = J.damage/10
 					view(src)<<sound('wirlwind.wav',0,0)
-					var/turf/T=src.loc
+					//var/turf/T=src.loc
+					var/p_x = src.x
+					var/p_y = src.y
+					var/p_z = src.z
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					src.canattack=0
 					src.move=0
@@ -166,7 +169,7 @@ mob
 					while(timer>=1)
 						if(c_target)
 							src.dir=get_dir(src, c_target)
-						if(src.loc!=T)
+						if(/*src.loc!=T*/src.x != p_x || src.y != p_y || src.z != p_z)
 							src.canattack=1
 							src.move=1
 							src.firing=0
@@ -233,8 +236,8 @@ mob
 						A.icon = 'risingdragonprojectiles.dmi'
 						A.icon_state="[rand(1,4)]"
 						step(A, src.dir)
-						walk_away(A,src)
-						walk(A,A.dir)
+						if(A) walk_away(A,src)
+						if(A) walk(A,A.dir)
 					src.canattack=1
 					src.move=1
 					src.firing=0

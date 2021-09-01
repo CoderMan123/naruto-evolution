@@ -66,7 +66,7 @@ mob
 								if(3)step(A,SOUTH)
 								if(4)step(A,WEST)
 							var/mob/arrowdir= get_dir(src,A)
-							sleep(4.5)
+							sleep(6)
 							if(src.dir==arrowdir)
 								if(combobuilt<=2)combobuilt=3
 								if(combobuilt>=3&&combobuilt!=7)
@@ -74,14 +74,14 @@ mob
 									src.overlays+=/obj/Overlays/Chakra
 								switch(src.Specialist)
 									if("Ninjutsu")
-										src.LevelStat("Ninjutsu",round((trainingexp*rand(25,35)*(combobuilt-3))))
-										src.LevelStat("Genjutsu",round((trainingexp*rand(15,25)*(combobuilt-3))))
+										src.LevelStat("Ninjutsu",round((trainingexp*rand(22,32)*(combobuilt-3))))
+										src.LevelStat("Genjutsu",round((trainingexp*rand(12,22)*(combobuilt-3))))
 									if("Genjutsu")
-										src.LevelStat("Genjutsu",round((trainingexp*rand(25,35)*(combobuilt-3))))
-										src.LevelStat("Ninjutsu",round((trainingexp*rand(15,25)*(combobuilt-3))))
+										src.LevelStat("Genjutsu",round((trainingexp*rand(22,32)*(combobuilt-3))))
+										src.LevelStat("Ninjutsu",round((trainingexp*rand(12,22)*(combobuilt-3))))
 									else
-										src.LevelStat("Genjutsu",round((trainingexp*rand(15,25)*(combobuilt-3))))
-										src.LevelStat("Ninjutsu",round((trainingexp*rand(15,25)*(combobuilt-3))))
+										src.LevelStat("Genjutsu",round((trainingexp*rand(12,22)*(combobuilt-3))))
+										src.LevelStat("Ninjutsu",round((trainingexp*rand(12,22)*(combobuilt-3))))
 								del(A)
 								del(C1)
 								del(C2)
@@ -609,6 +609,10 @@ mob
 		Shunshin()
 			for(var/obj/Jutsus/Body_Flicker/J in src.jutsus)
 				if(src.PreJutsu(J))
+					var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
+					if(O)
+						src<<output("The seal in the scroll is preventing my Body flicker!","Action.Output")
+						return
 					if(!move) return
 					if(injutsu) return
 					if(copy=="Climb") return
@@ -665,7 +669,7 @@ mob
 						Z.injutsu=1
 						Z.firing=1
 						Z.canattack=0
-						var/TimeAsleep = J.level*10 + src.ninjutsu*0.5
+						var/TimeAsleep = J.level*10 + src.precision*0.5
 						spawn(TimeAsleep)
 							if(jutsuactive==1)
 								if(!Z||Z.dead) continue
@@ -876,7 +880,7 @@ mob
 						else view(src) << sound('Spin.ogg',0,0,0,100)
 						for(var/mob/c_target in orange(src,J.level))
 							if(c_target in orange(src,J.level))
-								if(c_target.dead==0&&!istype(c_target,/mob/npc/))
+								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 									if(c_target.fightlayer==src.fightlayer)
 										if(c_target.dodge==0)
 											var/undefendedhit=round(J.damage+round(((src.strength / 300)+(src.agility / 300))*2*J.damage)-(c_target.defence/10))

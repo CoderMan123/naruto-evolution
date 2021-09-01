@@ -44,6 +44,34 @@ obj
 					hearers() << output("[usr] drops [src].","Action.Output")
 					usr.client.UpdateInventoryPanel()
 
+				if(istype(src, /obj/Inventory/mission/deliver_intel/leaf_intel))
+					usr.overlays-= /obj/Symbols/missions/intel_scroll/leaf
+
+				else if(istype(src, /obj/Inventory/mission/deliver_intel/sand_intel))
+					usr.overlays-= /obj/Symbols/missions/intel_scroll/sand
+
+		ryo_pouch
+			icon='Ryo_Pouch.dmi'
+			icon_state="owned"
+			name="Ryo Pouch"
+			New(mob/M, var/ryo)
+				..()
+				if(M && ryo)
+					src.ryo = ryo
+					src.suffix = "x[ryo] Ryo"
+					M.contents += src
+
+			var/ryo = 0
+			verb
+				Add_to_Satchel()
+					set category = null
+					set src in usr.contents
+					src.loc = null
+					if(src.ryo)
+						usr.ryo += src.ryo
+						view() << "<i>[src] unbundles [ryo] Ryo from a ryo pouch and places it in their satchel.</i>"
+						usr.client.UpdateInventoryPanel()
+
 mob
 	verb
 		Pickup()
@@ -51,7 +79,7 @@ mob
 			if(usr.dead)
 				hearers() << output("You can't pickup items while dead.","Action.Output")
 				return
-			
+
 			if(src.maxitems > -1 && src.contents.len >= src.maxitems)
 				src << output("Your satchel is too full to carry anymore.","Action.Output")
 				src << sound('cant.ogg',0,0,7,100)
@@ -60,6 +88,7 @@ mob
 			for(var/obj/Inventory/O in oview(1))
 
 				if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
+					src.overlays+= /obj/Symbols/missions/intel_scroll/leaf
 					var/obj/Inventory/mission/deliver_intel/leaf_intel/o = O
 
 					var/squad/squad = src.GetSquad()
@@ -67,6 +96,7 @@ mob
 					if(!squad && src.village == "Hidden Leaf" || (squad && o.squad && squad != o.squad && src.village == "Hidden Leaf")) continue
 
 				else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
+					src.overlays+= /obj/Symbols/missions/intel_scroll/sand
 					var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
 
 					var/squad/squad = src.GetSquad()
@@ -97,11 +127,12 @@ mob
 
 				src.client.UpdateInventoryPanel()
 				break
-				
+
 
 	proc
 		RecieveItem(var/obj/Inventory/O)
 			if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
+				src.overlays+= /obj/Symbols/missions/intel_scroll/leaf
 				var/obj/Inventory/mission/deliver_intel/leaf_intel/o = O
 
 				var/squad/squad = src.GetSquad()
@@ -109,6 +140,7 @@ mob
 				if(!squad && src.village == "Hidden Leaf" || (squad && o.squad && squad != o.squad && src.village == "Hidden Leaf")) return
 
 			else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
+				src.overlays+= /obj/Symbols/missions/intel_scroll/sand
 				var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
 
 				var/squad/squad = src.GetSquad()
@@ -142,6 +174,12 @@ mob
 		DropItem(obj/Inventory/O, var/quantity=1)
 			//TODO: make dropping more than 1 quantity work with non stackables
 			//TODO: quantity = -1 means drop maximum, stacking and non stacking included.
+			if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
+				src.overlays-= /obj/Symbols/missions/intel_scroll/leaf
+
+			else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
+				src.overlays-= /obj/Symbols/missions/intel_scroll/sand
+
 			if(O.stacks > 1)
 				if(!quantity) return
 				//if(quantity == -1)
@@ -168,6 +206,13 @@ mob
 				src.client.UpdateInventoryPanel()
 
 		DestroyItem(obj/Inventory/O, var/destroy_quantity=1)
+
+			if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
+				src.overlays-= /obj/Symbols/missions/intel_scroll/leaf
+
+			else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
+				src.overlays-= /obj/Symbols/missions/intel_scroll/sand
+
 			if(O.max_stacks > 1)
 				var/obj/Inventory/I
 				for(I in src.contents)
@@ -180,9 +225,18 @@ mob
 						else
 							destroy_quantity -= I.stacks
 							I.loc = null
+
+							if(istype(O, /obj/Inventory/mission/deliver_intel))
+								var/obj/Inventory/mission/deliver_intel/o = O
+								o.squad = null
+
 							src.DestroyItem(O, destroy_quantity)
 						break
 			else
-				O.loc=null
+				O.loc = null
+
+				if(istype(O, /obj/Inventory/mission/deliver_intel))
+					var/obj/Inventory/mission/deliver_intel/o = O
+					o.squad = null
 
 			src.client.UpdateInventoryPanel()
