@@ -819,15 +819,6 @@ client
 						mob.moving=1
 						mob.speeding += 1
 
-						if(istype(mob.loc,/turf/Ground/Water))
-							if(mob.swimming)//SWIM
-								mob.LevelStat("Agility",rand(2,4))
-								mob.Levelup()
-
-							if(mob.walkingonwater)
-								mob.LevelStat("Ninjutsu",rand(4,8))
-								mob.Levelup()
-
 						if(mob.speeding<0)mob.speeding=0
 						if(mob.speeding<=40)
 							if(mob.dead==0&&mob.icon_state<>"blank"&&mob.icon_state<>"swim"&&mob.icon_state<>"climbS"&&mob.henge==0&&mob.dodge==0&&mob.rest==0)
@@ -843,9 +834,19 @@ client
 										mob.icon_state = ""
 						mob.lastloc=mob.loc
 						..()
+
+						if(istype(mob.loc,/turf/Ground/Water))
+							if(mob.swimming)//SWIM
+								//mob.LevelStat("Agility",rand(2,4))
+								//mob.Levelup()
+
+							if(mob.walkingonwater)
+								//mob.LevelStat("Ninjutsu",rand(4,8))
+								//mob.Levelup()
+
 						if(src.mob.equipped=="Weights")
 							if(prob(50))
-								spawn() src.mob.LevelStat("Agility",round(rand(5,10)*trainingexp))
+								spawn() src.mob.LevelStat("Agility",round(rand(8,15)*trainingexp))
 						else
 							if(prob(40))
 								spawn() src.mob.LevelStat("Agility",rand(1,2))
