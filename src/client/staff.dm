@@ -53,8 +53,10 @@ client
 			if(src.ckey in moderators)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.mob.verbs += typesof(/mob/moderator/verb)
+				src.mob.verbs += typesof(/mob/Moderator/verb)
 			else
 				src.mob.verbs -= typesof(/mob/moderator/verb)
+				src.mob.verbs -= typesof(/mob/Moderator/verb)
 			
 			if(src.ckey in programmers)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
