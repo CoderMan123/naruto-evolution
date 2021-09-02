@@ -295,9 +295,10 @@ mob
 						src.icon_state = "punchrS"
 						for(var/mob/M in get_step(src,src.dir))
 							Z=M
+							break
+						if(Z)
 							Z.move=0
 							Z.canattack=0
-						if(Z)
 							for(i=0,i<2,i++)
 								sleep(2)
 								Z.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/2,src,"NinBlue")
