@@ -914,5 +914,9 @@ mob
 mob
 	debug
 		verb
-			Placeholder()
+			Restore_Base()
 				set category = "Debug"
+				var/mob/m = input("Who's base would you like to restore?", "Reset Icon") as null|anything in mobs_online
+				if(m)
+					m.ResetBase()
+					m.RestoreOverlays()
