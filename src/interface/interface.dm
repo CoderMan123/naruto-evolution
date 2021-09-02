@@ -452,6 +452,7 @@ client
 		UpdateWho()
 			if(winget(src, "Browser", "is-visible") == "true")
 				src.Who()
+				sleep(1)
 				src.Who()
 		
 		UpdateWhoAll()
