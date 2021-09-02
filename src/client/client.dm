@@ -34,7 +34,7 @@ client
 
 		world.UpdateClientsMultikeying()
 
-		spawn() src.mob.UpdateWhoAll()
+		spawn() src.UpdateWhoAll()
 
 		src.Load()
 		spawn() src.mob.Playtime()
@@ -71,7 +71,7 @@ client
 
 		world.UpdateClientsMultikeying()
 
-		spawn() src.mob.UpdateWhoAll()
+		spawn() src.UpdateWhoAll()
 		..()
 
 	Topic(href, href_list)

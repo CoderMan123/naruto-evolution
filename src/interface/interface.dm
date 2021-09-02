@@ -456,7 +456,7 @@ client
 		
 		UpdateWhoAll()
 			for(var/client/c in clients_online)
-				if(c) c.mob.UpdateWho()
+				if(c) c.UpdateWho()
 
 		UpdateCharacterPanel()
 			if(!src) return

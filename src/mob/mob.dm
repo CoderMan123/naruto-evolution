@@ -454,7 +454,7 @@ mob
 
 			spawn() src.client.StaffCheck()
 
-			spawn() src.mob.UpdateWhoAll()
+			spawn() src.client.UpdateWhoAll()
 
 			new/obj/Screen/Bar(src)
 			switch(src.village)

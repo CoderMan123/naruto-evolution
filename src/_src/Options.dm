@@ -133,7 +133,7 @@ mob
 						src.equipped = null
 						givennui=0
 						del(O)
-						
+
 					for(var/obj/Inventory/Weaponry/Shibuki/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						src.equipped = null
@@ -143,7 +143,7 @@ mob
 				village = VILLAGE_MISSING_NIN
 				rank = ""
 
-				spawn() src.UpdateWhoAll()
+				spawn() src.client.UpdateWhoAll()
 
 				var/squad/squad = src.GetSquad()
 				if(squad)
