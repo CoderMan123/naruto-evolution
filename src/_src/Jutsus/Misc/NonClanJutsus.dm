@@ -473,16 +473,17 @@ mob
 								M.Sleeping=0
 								M.firing=0
 								jutsuactive=0
-						while(jutsuactive==1)
-							sleep(1)
-							if(reqhits<=M.sleephits)
-								jutsuactive=0
-								M.icon_state=""
-								M.move=1
-								M.injutsu=0
-								M.canattack=1
-								M.Sleeping=0
-								M.firing=0
+						spawn()
+							while(jutsuactive==1)
+								sleep(1)
+								if(M && reqhits<=M.sleephits)
+									jutsuactive=0
+									M.icon_state=""
+									M.move=1
+									M.injutsu=0
+									M.canattack=1
+									M.Sleeping=0
+									M.firing=0
 
 					src.firing=0
 					src.canattack=1
