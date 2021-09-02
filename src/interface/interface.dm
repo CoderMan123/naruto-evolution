@@ -451,7 +451,7 @@ client
 			if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 		
 		UpdateWho()
-			if(src.browser == "Who" && winget(src, "Browser", "is-visible") == "true")
+			if(src.browser == BROWSER_WHO && winget(src, "Browser", "is-visible") == "true")
 				src.Who()
 				src.Who()
 		
