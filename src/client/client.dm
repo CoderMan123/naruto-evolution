@@ -4,6 +4,7 @@ client
 	var/tmp
 		channel = "Local"
 		logging_in = 0
+		browser = BROWSER_NONE
 
 	var/tmp/list
 		skill_tree_objects = list()

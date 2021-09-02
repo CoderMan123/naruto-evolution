@@ -27,7 +27,9 @@
 #define LOG_CHAT_WHISPER "logs/chat/whisper.html"
 
 #define BROWSER_NONE 0
-#define BROWSER_SQUAD 1
+#define BROWSER_WHO 1
+#define BROWSER_JUTSU_REFERENCE 2
+#define BROWSER_SQUAD 3
 
 #define VILLAGE_MISSING_NIN "Missing-Nin"
 #define VILLAGE_LEAF "Hidden Leaf"
