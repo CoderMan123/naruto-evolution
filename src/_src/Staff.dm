@@ -225,29 +225,6 @@ mob/Admin/verb
 		world<<"<center><b>---------------------------------</b></center>"
 		text2file("[src]([src.key]) announced [t].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-	Staff_Who()
-		set category = "Staff"
-		var/amount=0
-		var/Who={"<html><center>
-<head><title>Who's Online</title><body>
-<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
-</body><html>"}
-		for(var/mob/M) if(M.client) amount+=1
-		for(var/mob/M) if(M.client) Who+={"<html><center>
-<head><title>Staff Who</title><body>
-<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
-<br><font color=white>[M.name] ([M.key]) - (Level: [M.level])
-</body><html>"}
-		Who+={"<html>
-<head><title></head></title><body>
-<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color=blue><b>
-<br><u>[amount] player(s) online</u>
-</body><html>"}
-		src<<browse(Who,"window=Who;size=400x400")
-		Who={"<html><center>
-<head><title>Staff Who</title><body>
-<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
-</body><html>"}
 	Votation(t as text)
 		set desc = "What Would You like To Create A Votation For?"
 		set category = "Staff"
