@@ -3,8 +3,8 @@ var/jutsustatexp=1 //A global vairable to act as a multiplier for the amount of 
 var/jutsumastery=1 //A global variable to act as a multiplier for the amount of uses a jutsu needs before it is hotkeyable
 var/jutsuchakra=50  //A global variable to act as the baseline for the amount of chakra jutsu cost to use
 var/jutsucooldown=1  //A global variable to act as the baseline for the amount of chakra jutsu cost to use
-var/punchstatexp=2.5 //A global vairable to act as a multiplier for the amount of stat exp gained when punching
-var/trainingexp=0.6 //A global variable to act as a multiplier for the amount of exp gained when using training methods
+var/punchstatexp=1.5 //A global vairable to act as a multiplier for the amount of stat exp gained when punching (2.5 once attack speed bug is fixed)
+var/trainingexp=0.4 //A global variable to act as a multiplier for the amount of exp gained when using training methods
 var/weapondamage=1 //A global variable to act as a multiplier for the amount of damage all weaponry deal (including swords)
 
 mob
