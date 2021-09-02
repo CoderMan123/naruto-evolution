@@ -41,8 +41,8 @@ client
 				"})
 			else
 				winset(src, null, {"
+					Main.InputChild.is-visible = "false";
 					Map.Main.focus = "true";
-					Main.MapChild.focus = "true";
 				"})
 
 		ToggleChatOutputPanel()
