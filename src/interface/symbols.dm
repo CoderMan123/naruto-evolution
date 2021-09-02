@@ -22,7 +22,7 @@ obj/Symbols
 	Rank
 		New(mob/M)
 			src.loc=null
-			if(M && M.client)
+			if(M && M.client && M.rank)
 				switch(M.rank)
 					if(RANK_ACADEMY_STUDENT) src.icon = 'Academy-Student.png'
 					if(RANK_GENIN) src.icon = 'Genin.png'

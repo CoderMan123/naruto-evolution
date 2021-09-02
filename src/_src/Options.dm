@@ -70,14 +70,16 @@ mob
 	verb
 		LeaveVillage()
 			set hidden=1
-			if(village=="Missing-Nin") return
-			if(rank=="Missing-Nin") return
-			if(Tutorial<7)
+			if(village == VILLAGE_MISSING_NIN) return
+
+			if(Tutorial < 7)
 				usr<<"You can't leave your village while you're in the tutorial!"
 				return
+
 			if(client.Alert("Are you sure you want to leave your village?","Confirmation",list("Yes","No"))==1)
 				world<<output("[src.name] has defected from the [src.village] village.","Action.Output")
-				if(village=="Akatsuki")
+
+				if(village == VILLAGE_AKATSUKI)
 					for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						del(O)
@@ -85,6 +87,7 @@ mob
 					src.ReAddClothing()
 					src.RestoreOverlays()
 					src.client.StaffCheck()
+
 				if(village=="Anbu Root")
 					for(var/obj/Inventory/Clothing/Robes/Anbu_Suit/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
@@ -93,45 +96,55 @@ mob
 					src.ReAddClothing()
 					src.RestoreOverlays()
 					src.client.StaffCheck()
+
 				if(village=="Seven Swordsmen")
 					for(var/obj/Inventory/Weaponry/Zabuza_Sword/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						src.equipped = null
 						givenkubi=0
 						del(O)
+
 					for(var/obj/Inventory/Weaponry/Samehada/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						src.equipped = null
 						givensame=0
 						del(O)
+
 					for(var/obj/Inventory/Weaponry/Hiramekarei/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						src.equipped = null
 						del(O)
 						//no give for this because it's leader wep
+
 					for(var/obj/Inventory/Weaponry/Kabutowari/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						src.equipped = null
 						givenkabu=0
 						del(O)
+
 					for(var/obj/Inventory/Weaponry/Kiba/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						src.equipped = null
 						givenkiba=0
 						del(O)
+
 					for(var/obj/Inventory/Weaponry/Nuibari/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						src.equipped = null
 						givennui=0
 						del(O)
+
 					for(var/obj/Inventory/Weaponry/Shibuki/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						src.equipped = null
 						givenshibu=0
 						del(O)
 
-				village="Missing-Nin"
-				rank="Missing-Nin"
+				village = VILLAGE_MISSING_NIN
+				rank = ""
+
+				spawn() src.client.UpdateWhoAll()
+
 				var/squad/squad = src.GetSquad()
 				if(squad)
 					squad.Refresh()

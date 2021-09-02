@@ -69,7 +69,7 @@ jobs:
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
             mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.dmb /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.dmb
             mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.rsc /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.rsc
-            if [[ ${{ github.event.inputs.server }} == "beta" ]] || [[ ${{ github.event.inputs.server }} == "alpha" ]]
+            if [[ ${{ github.event.inputs.server }} == "beta" ]] || [[ ${{ github.event.inputs.server }} == "alpha" ]]; then
               echo "-${{ github.event.inputs.server }}" >> /opt/naruto-evolution/${{ github.event.inputs.server }}/VERSION
               systemctl restart naruto-evolution-${{ github.event.inputs.server }}
             else
