@@ -895,7 +895,7 @@ client
 						spawn() src.mob.LevelStat("Agility", round(rand(8, 15) * trainingexp))
 				else
 					if(prob(40))
-						spawn() src.mob.LevelStat("Agility", 1)
+						spawn() src.mob.LevelStat("Agility", rand(1,2))
 
 				sleep(src.mob.move_delay)
 				src.mob.moving=0
