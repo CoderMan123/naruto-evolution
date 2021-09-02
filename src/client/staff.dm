@@ -621,19 +621,19 @@ mob
 mob
 	moderator
 		verb
-			Test()
+			Placeholder()
 				set category = "Moderator"
 
 mob
 	programmer
 		verb
-			Test()
+			Placeholder()
 				set category = "Programmer"
 
 mob
 	pixel_artist
 		verb
-			Test()
+			Placeholder()
 				set category = "Pixel Artist"
 
 mob
