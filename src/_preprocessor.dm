@@ -57,7 +57,7 @@
 #define CLAN_ABURAME "Aburame"
 #define CLAN_AKIMICHI "Akimichi"
 #define CLAN_BUBBLE "Bubble"
-#define CLAN_CLAY "Clay" //check
+#define CLAN_CLAY "Deidara" //check
 #define CLAN_CRYSTAL "Crystal"
 #define CLAN_GATES "Gates"
 #define CLAN_HYUUGA "Hyuuga"
