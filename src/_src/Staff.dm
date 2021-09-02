@@ -94,7 +94,7 @@ mob/Moderator/verb/
 		for(var/mob/M in mobs_online)
 			if(M.cheww==1)
 				M.cheww=0
-				M.loc = pick(block(locate(73,97,4),locate(198,161,4)))
+				M.loc = pick(block(locate(73,10,8),locate(198,74,8)))
 				if(count==0)
 					var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
 					O.loc = M
