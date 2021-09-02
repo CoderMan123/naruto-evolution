@@ -338,10 +338,21 @@ client
 						if(clients_multikeying.Find(C)) multikey = "<sup>(Multikey)</sup>"
 
 						if(C.mob.Faction) F=C.mob.Faction
-						if(administrators.Find(src.ckey) || moderators.Find(src.ckey))
+						if(administrators.Find(src.ckey))
 							players += {"
 							<tr>
 								<td>[C.mob.name] ([C.ckey]) [multikey]</td>
+								<td>[C.mob.level]</td>
+								<td>\icon[V] [C.mob.village]</td>
+								<td>\icon[R] [C.mob.rank]</td>
+								<td>[F.name]</td>
+							</tr>
+						"}
+						else if(moderators.Find(src.ckey))
+							players += {"
+							<tr>
+								<td>[C.mob.name] ([C.ckey]) [multikey]</td>
+								<td><i>Hidden</i></td>
 								<td>\icon[V] [C.mob.village]</td>
 								<td>\icon[R] [C.mob.rank]</td>
 								<td>[F.name]</td>
@@ -351,6 +362,7 @@ client
 							players += {"
 								<tr>
 									<td>[C.mob.name]</td>
+									<td><i>Hidden</i></td>
 									<td>\icon[V] [C.mob.village]</td>
 									<td>\icon[R] [C.mob.rank]</td>
 									<td>[F.name]</td>
@@ -418,6 +430,7 @@ client
 							<thead>
 								<tr>
 									<th scope="col">Character</th>
+									<th scope="col">Level</th>
 									<th scope="col">Village</th>
 									<th scope="col">Rank</th>
 									<th scope="col">Faction</th>
@@ -428,6 +441,7 @@ client
 
 								<tr>
 									<td scope="col"><span style="font-weight: bold;">Total Online:</span> [online]</td>
+									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>
