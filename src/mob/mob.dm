@@ -454,6 +454,8 @@ mob
 
 			spawn() src.client.StaffCheck()
 
+			spawn() src.mob.UpdateWhoAll()
+
 			new/obj/Screen/Bar(src)
 			switch(src.village)
 				if("Hidden Leaf") new/obj/Screen/LeafSymbol(src)

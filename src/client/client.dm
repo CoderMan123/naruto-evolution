@@ -34,6 +34,8 @@ client
 
 		world.UpdateClientsMultikeying()
 
+		spawn() src.mob.UpdateWhoAll()
+
 		src.Load()
 		spawn() src.mob.Playtime()
 
@@ -68,6 +70,8 @@ client
 		clients_connected -= src
 
 		world.UpdateClientsMultikeying()
+
+		spawn() src.mob.UpdateWhoAll()
 		..()
 
 	Topic(href, href_list)
