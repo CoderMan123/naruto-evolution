@@ -25,6 +25,7 @@
 #define LOG_CHAT_FACTION "logs/chat/faction.html"
 #define LOG_CHAT_GLOBAL "logs/chat/global.html"
 #define LOG_CHAT_WHISPER "logs/chat/whisper.html"
+#define LOG_CHAT_STAFF "logs/chat/staff.html"
 
 #define BROWSER_NONE 0
 #define BROWSER_WHO "browse://who"

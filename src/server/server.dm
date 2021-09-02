@@ -155,6 +155,9 @@ world
 		if(!fexists(LOG_CHAT_WHISPER))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_WHISPER)
 		
+		if(!fexists(LOG_CHAT_STAFF))
+			text2file("<body bgcolor = '#414141'>", LOG_CHAT_STAFF)
+		
 		if(!fexists(LOG_KAGE))
 			text2file("<body bgcolor = '#414141'>", LOG_KAGE)
 
