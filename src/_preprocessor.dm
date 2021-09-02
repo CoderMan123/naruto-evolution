@@ -30,6 +30,7 @@
 #define BROWSER_WHO 1
 #define BROWSER_JUTSU_REFERENCE 2
 #define BROWSER_SQUAD 3
+#define BROWSER_LOGS 4
 
 #define VILLAGE_MISSING_NIN "Missing-Nin"
 #define VILLAGE_LEAF "Hidden Leaf"

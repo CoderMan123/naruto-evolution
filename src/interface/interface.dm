@@ -26,6 +26,15 @@ client
 					src.channel = "Local"
 					
 			src<<"Now speaking in channel: [src.channel]"
+		
+		CloseBrowser()
+			set hidden=1
+			src.client.browser = BROWSER_NONE
+			winset(src, null, {"Browser.is-visible = "false";"})
+			
+		MiniWindow()
+			set hidden=1
+			winset(usr, "Main", "is-minimized=true")
 
 		ToggleChatInputPanel()
 			set hidden=1
@@ -203,7 +212,6 @@ client
 
 		JutsuReference()
 			set hidden=1
-			src.browser = BROWSER_JUTSU_REFERENCE
 			if(winget(src, "Browser", "is-visible") == "false")
 				var/html_jutsus = ""
 
@@ -301,8 +309,10 @@ client
 
 				src << output(null, "Browser.Output")
 				src << browse("[html]")
+				src.browser = BROWSER_JUTSU_REFERENCE
 				winset(src, "Browser", "is-visible = true")
 			else
+				src.browser = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
 
 		Changelog()
@@ -312,7 +322,6 @@ client
 		Who()
 			set hidden = 1
 			if(winget(src, "Browser", "is-visible") == "false")
-				src.browser = BROWSER_WHO
 				var/online = 0
 				var/players = ""
 				for(var/client/C)
@@ -437,8 +446,10 @@ client
 
 				src << output(null, "Browser.Output")
 				src << browse("[html]")
+				src.browser = BROWSER_WHO
 				winset(src, "Browser", "is-visible = true")
 			else
+				src.browser = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
 
 	proc

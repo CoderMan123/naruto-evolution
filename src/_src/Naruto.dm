@@ -90,18 +90,7 @@ obj/FadingHUD
 		C.screen += src
 		spawn(10) del(src)
 
-mob/var/tmp/Prisoner		
-
-mob
-	verb
-		CloseBrowser()
-			set hidden=1
-			winset(src, null, {"
-						Browser.is-visible = "false";
-					"})
-		MiniWindow()
-			set hidden=1
-			winset(usr, "Main", "is-minimized=true")
+mob/var/tmp/Prisoner
 
 /*
 mob
