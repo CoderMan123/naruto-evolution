@@ -835,12 +835,12 @@ client
 						mob.lastloc=mob.loc
 						..()
 
-						if(istype(mob.loc,/turf/Ground/Water))
-							if(mob.swimming)//SWIM
+						//if(istype(mob.loc,/turf/Ground/Water))
+							//if(mob.swimming)//SWIM
 								//mob.LevelStat("Agility",rand(2,4))
 								//mob.Levelup()
 
-							if(mob.walkingonwater)
+							//if(mob.walkingonwater)
 								//mob.LevelStat("Ninjutsu",rand(4,8))
 								//mob.Levelup()
 
