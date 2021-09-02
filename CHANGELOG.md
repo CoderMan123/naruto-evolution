@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.6
+### Added
+- Made a new staff verb to fix peoples visuals.
+- Added village counter to who page.
+
+### Fixed
+- Fixed staff chat being viewable to all.
+- Fixed a few issues with browser window.
+- Major performance improvements and bug fixes to movement.
+- Reverted nerfs to certain training methods due to bug fixes.
+
+### Changed
+- Updated internal links.
+- Improved performance of the internal browser.
+
+### Removed
+- Staff who.
+
+
 ## 2.0.5
 ### Fixed
 - Fixed a bug with the rinnegan skill tree.

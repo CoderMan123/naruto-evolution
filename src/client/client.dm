@@ -4,7 +4,7 @@ client
 	var/tmp
 		channel = "Local"
 		logging_in = 0
-		browser = BROWSER_NONE
+		browser_url = BROWSER_NONE
 
 	var/tmp/list
 		skill_tree_objects = list()
@@ -73,7 +73,7 @@ client
 
 		world.UpdateClientsMultikeying()
 
-		spawn() src.UpdateWhoAll()
+		src.UpdateWhoAll()
 
 		winset(src, null, {"
 			Main.ReconnectChild.is-visible=true;

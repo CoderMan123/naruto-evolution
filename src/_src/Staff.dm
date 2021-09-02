@@ -150,14 +150,14 @@ mob/Moderator/verb/
 	GM_Chat(c as text)
 		set category="Staff"
 		if(!c) return
-		if(length(c)<=750)
+		if(length(c) <= 750)
 			for(var/mob/M in mobs_online)
-				if(administrators.Find(src.ckey) || moderators.Find(src.ckey))
-					M<<"<font color=yellow> GM| [src.rname]:</font>[html_encode(c)]"
-			text2file("GM>>[src.rname]:</font> [html_encode(c)]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
+				if(administrators.Find(M.ckey) || moderators.Find(M.ckey))
+					M << "<font color=yellow> \[Staff] [src.character]:</font> <font color='[COLOR_CHAT]'>[html_encode(c)]</font>"
+			text2file("<font color='[COLOR_CHAT]'>[time2text(world.timeofday, "MMM DD hh:mm:ss")]</font> <font color=yellow> \[Staff] [src.character]:</font> <font color='[COLOR_CHAT]'>[html_encode(c)]</font><br />", LOG_CHAT_STAFF)
 		else
-			src<<"Please do not use more than 250 characters."
-			src<<"Message was <i>[c]</i>"
+			src << "Please do not use more than 750 characters."
+			src << "Message was <i>[c]</i>"
 			return
 
 	Boot(mob/M in mobs_online)
@@ -225,29 +225,6 @@ mob/Admin/verb
 		world<<"<center><b>---------------------------------</b></center>"
 		text2file("[src]([src.key]) announced [t].: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
-	Staff_Who()
-		set category = "Staff"
-		var/amount=0
-		var/Who={"<html><center>
-<head><title>Who's Online</title><body>
-<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
-</body><html>"}
-		for(var/mob/M) if(M.client) amount+=1
-		for(var/mob/M) if(M.client) Who+={"<html><center>
-<head><title>Staff Who</title><body>
-<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
-<br><font color=white>[M.name] ([M.key]) - (Level: [M.level])
-</body><html>"}
-		Who+={"<html>
-<head><title></head></title><body>
-<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color=blue><b>
-<br><u>[amount] player(s) online</u>
-</body><html>"}
-		src<<browse(Who,"window=Who;size=400x400")
-		Who={"<html><center>
-<head><title>Staff Who</title><body>
-<body bgcolor="green"><font family='Comic Sans MS'><font size=2><font color="#0099FF"><b>
-</body><html>"}
 	Votation(t as text)
 		set desc = "What Would You like To Create A Votation For?"
 		set category = "Staff"

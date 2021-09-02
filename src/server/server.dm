@@ -2,7 +2,7 @@ var/build
 var/server_capacity = 100
 
 var/list/administrators = list("douglasparker", "illusiveblair")
-var/list/moderators = list("squigs")
+var/list/moderators = list()
 var/list/programmers = list("douglasparker")
 var/list/pixel_artists = list("illusiveblair")
 
@@ -23,8 +23,8 @@ var/squads[0]
 
 world
 	name = "Naruto Evolution"
-	hub = "Squigs.NETheNewEra"
-	hub_password = "Ue7DTLSxJx1vnALy"
+	hub = "IllusiveBlair.NarutoEvolution"
+	hub_password = "Z3qzsVoh46BuHSNC"
 	status = "Naruto Evolution (Connecting...) | Ninjas Online (Connecting...)"
 	fps = 20
 	view = 16
@@ -155,6 +155,9 @@ world
 		if(!fexists(LOG_CHAT_WHISPER))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_WHISPER)
 		
+		if(!fexists(LOG_CHAT_STAFF))
+			text2file("<body bgcolor = '#414141'>", LOG_CHAT_STAFF)
+		
 		if(!fexists(LOG_KAGE))
 			text2file("<body bgcolor = '#414141'>", LOG_KAGE)
 
@@ -238,7 +241,7 @@ world
 			Factions += Faction
 
 	proc/GetAdvert()
-		return "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='http://www.byond.com/games/Squigs/NETheNewEra/'>Hub</a>] \[<a href='https://community.narutoevolution.com/'>Forums</a>] \[<a href='https://wiki.narutoevolution.com/'>Wiki</a>] \[<a href='https://discord.gg/URcN6cc\'>Discord</a>]<br />\[<a href='https://github.com/IllusiveBIair/Naruto-Evolution-Community/issues/new?assignees=&labels=Type%3A+Feature+Request&template=feature-request.md&title='>Feature Requests</a>] \[<a href='https://github.com/IllusiveBIair/Naruto-Evolution-Community/issues/new?assignees=&labels=Type%3A+Bug&template=bug-report.md&title='>Bug Reports</a>]</b></center>"
+		return "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='https://www.byond.com/games/IllusiveBlair/NarutoEvolution'>Hub</a>] \[<a href='https://community.narutoevolution.com/'>Forums</a>] \[<a href='https://wiki.narutoevolution.com/'>Wiki</a>] \[<a href='https://discord.gg/pweBQzuJnZ'>Discord</a>]<br />\[<a href='https://github.com/IllusiveBIair/Naruto-Evolution-Community/issues/new?assignees=&labels=Type%3A+Feature+Request&template=feature-request.md&title='>Feature Requests</a>] \[<a href='https://github.com/IllusiveBIair/Naruto-Evolution-Community/issues/new?assignees=&labels=Type%3A+Bug&template=bug-report.md&title='>Bug Reports</a>]</b></center>"
 
 	proc/Advert()
 		set background = 1

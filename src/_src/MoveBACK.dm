@@ -794,89 +794,114 @@ mob
 mob
 	New()
 		..()
-		src.move_delay = min(0.5, 0.8-((src.agility/150)*0.3))
+		src.move_delay = min(0.5, 0.8 - ( (src.agility / 150) * 0.3) )
 
 	var/tmp/move_delay=0.8
 	var/tmp/moving=0
 
 client
 	Move(Loc)
-		if(mob.moving) return
-		if(!mob.likeaclone)
-			if(!mob.injutsu&&!mob.rest&&!mob.dead&&!mob.shielded&&!mob.Sleeping)
-				if(mob.dashable<>2)
-					if(mob.move==1)
-						if(mob.ThrowingMob)
-							for(var/mob/M in mobs_online)if(M==mob.ThrowingMob)step_to(M,mob,0)
-						if(mob.BeingThrown)
-							for(var/mob/M in mobs_online)if(M.ThrowingMob==mob) M.ThrowingMob=null; mob.BeingThrown=0
-						if(mob.bunshin)
-							for(var/mob/Clones/C2 in mob.Clones)
-								if(C2.Owner==mob&&!C2.target_mob)
-									step(C2,mob.dir)
-									if(C2)	C2.icon_state="[mob.icon_state]"
-						if(!mob.dashable)mob.dashable=1
-						mob.moving=1
-						mob.speeding += 1
+		if(src.mob.moving) return 0
 
-						if(mob.speeding<0)mob.speeding=0
-						if(mob.speeding<=40)
-							if(mob.dead==0&&mob.icon_state<>"blank"&&mob.icon_state<>"swim"&&mob.icon_state<>"climbS"&&mob.henge==0&&mob.dodge==0&&mob.rest==0)
-								mob.icon_state=""
-						if(mob.speeding>= 41&&mob.health>=mob.maxhealth/3)
-							if(mob.dead==0&&mob.icon_state<>"blank"&&mob.icon_state<>"swim"&&mob.icon_state<>"climbS"&&mob.dodge==0)
-								mob.icon_state="run"
-								//mob.layer=MOB_LAYER
-								var/turf/T = mob.loc
-								spawn(10)
-									if(mob.loc == T)
-										mob.speeding=0
-										mob.icon_state = ""
-						mob.lastloc=mob.loc
-						..()
+		if(src.mob.likeaclone)
+			var/mob/Clones/SC = src.mob.likeaclone
 
-						//if(istype(mob.loc,/turf/Ground/Water))
-							//if(mob.swimming)//SWIM
-								//mob.LevelStat("Agility",rand(2,4))
-								//mob.Levelup()
+			if(SC.ThrowingMob)
+				spawn()
+					for(var/mob/M in mobs_online)
+						if(M == SC.ThrowingMob) step_to(M, SC, 0)
 
-							//if(mob.walkingonwater)
-								//mob.LevelStat("Ninjutsu",rand(4,8))
-								//mob.Levelup()
+			if(SC.BeingThrown)
+				spawn()
+					for(var/mob/M in mobs_online)
+						if(M.ThrowingMob == SC)
+							M.ThrowingMob = null
+							SC.BeingThrown = 0
 
-						if(src.mob.equipped=="Weights")
-							if(prob(50))
-								spawn() src.mob.LevelStat("Agility",round(rand(8,15)*trainingexp)) //8,15
-						else
-							if(prob(40))
-								spawn() src.mob.LevelStat("Agility",1) // rand(1,2)
+			if(!SC.dashable) SC.dashable = 1
 
-						sleep(mob.move_delay)
-						mob.moving=0
+			step(SC, get_dir(src.mob, Loc))
 
-						spawn(2) if(mob.dashable<>2)mob.dashable=0
-						/*sleep(mob.speeddelay)
-						if(!mob.move)mob.move=1
-						switch(mob.dir)
-							if(NORTH) mob.pixel_move(0,7)
-							if(SOUTH) mob.pixel_move(0,-7)
-							if(EAST) mob.pixel_move(7,0)
-							if(WEST) mob.pixel_move(-7,0)
-							if(NORTHEAST) mob.pixel_move(7,7)
-							if(NORTHWEST) mob.pixel_move(-7,7)
-							if(SOUTHEAST) mob.pixel_move(7,-7)
-							if(SOUTHWEST) mob.pixel_move(-7,-7)*/
-					else if(!mob.move)return
-				else return
-			else return
+			src.mob.moving = 1
+			sleep(src.mob.move_delay)
+			src.mob.moving=0
+
+
+			spawn(2)
+				if(SC && SC.dashable != 2) SC.dashable = 0
+		
 		else
-			var/mob/Clones/SC=src.mob.likeaclone
-			if(SC.ThrowingMob)for(var/mob/M in mobs_online) if(M==SC.ThrowingMob)step_to(M,SC,0)
-			if(SC.BeingThrown)for(var/mob/M in mobs_online)if(M.ThrowingMob==SC) M.ThrowingMob=null; SC.BeingThrown=0
-			var/Dir = get_dir(mob,Loc)
-			if(!SC.dashable)SC.dashable=1
-			step(SC,Dir)
-			spawn(2)if(SC)if(SC.dashable<>2)SC.dashable=0
+
+			if(!src.mob.move) return 0
+			if(src.mob.dashable == 2) return 0
+			if(src.mob.injutsu || src.mob.rest || src.mob.dead || src.mob.shielded || src.mob.Sleeping) return 0
+			
+			. = ..()
+
+			if(.)
+				if(src.mob.ThrowingMob)
+					spawn()
+						for(var/mob/M in mobs_online)
+							if(M == src.mob.ThrowingMob) step_to(M, src.mob, 0)
+
+				if(src.mob.BeingThrown)
+					spawn()
+						for(var/mob/M in mobs_online)
+							if(M.ThrowingMob == src.mob)
+								M.ThrowingMob = null
+								src.mob.BeingThrown = 0
+
+				if(src.mob.bunshin)
+					spawn()
+						for(var/mob/Clones/C2 in src.mob.Clones)
+							if(C2.Owner == src.mob && !C2.target_mob)
+								step(C2, src.mob.dir)
+								if(C2) C2.icon_state="[src.mob.icon_state]"
+
+				if(!src.mob.dashable) src.mob.dashable=1
+
+				src.mob.moving = 1
+				src.mob.speeding += 1
+
+				if(src.mob.speeding < 0) src.mob.speeding = 0
+				if(src.mob.speeding <= 40)
+					if(!src.mob.dead && src.mob.icon_state != "blank" && src.mob.icon_state != "swim" && src.mob.icon_state != "climbS" && !src.mob.henge && !src.mob.dodge && !src.mob.rest)
+						mob.icon_state=""
+
+				if(src.mob.speeding >= 41 && src.mob.health >= src.mob.maxhealth/3)
+					if(!src.mob.dead && src.mob.icon_state != "blank" && src.mob.icon_state != "swim" && src.mob.icon_state != "climbS" && !src.mob.dodge)
+						src.mob.icon_state="run"
+
+						var/turf/T = src.mob.loc
+
+						spawn(10)
+							if(src.mob.loc == T)
+								src.mob.speeding = 0
+								src.mob.icon_state = ""
+
+				src.mob.lastloc = src.mob.loc
+
+				if(istype(src.mob.loc, /turf/Ground/Water))
+					if(src.mob.swimming)
+						spawn() src.mob.LevelStat("Agility", rand(2,4))
+						spawn() src.mob.Levelup()
+
+					if(src.mob.walkingonwater)
+						spawn() src.mob.LevelStat("Ninjutsu", rand(4,8))
+						spawn() src.mob.Levelup()
+
+				if(src.mob.equipped == "Weights")
+					if(prob(50))
+						spawn() src.mob.LevelStat("Agility", round(rand(8, 15) * trainingexp))
+				else
+					if(prob(40))
+						spawn() src.mob.LevelStat("Agility", rand(1,2))
+
+				sleep(src.mob.move_delay)
+				src.mob.moving=0
+
+				spawn(2) if(src.mob.dashable != 2) src.mob.dashable = 0
+				
 obj
 	var/tmp/stepped=0
 mob

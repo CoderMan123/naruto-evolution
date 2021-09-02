@@ -26,6 +26,15 @@ client
 					src.channel = "Local"
 					
 			src<<"Now speaking in channel: [src.channel]"
+		
+		CloseBrowser()
+			set hidden=1
+			src.browser_url = BROWSER_NONE
+			winset(src, null, {"Browser.is-visible = "false";"})
+			
+		MiniWindow()
+			set hidden=1
+			winset(usr, "Main", "is-minimized=true")
 
 		ToggleChatInputPanel()
 			set hidden=1
@@ -203,8 +212,7 @@ client
 
 		JutsuReference()
 			set hidden=1
-			src.browser = BROWSER_JUTSU_REFERENCE
-			if(winget(src, "Browser", "is-visible") == "false")
+			if(src.browser_url != BROWSER_JUTSU_REFERENCE)
 				var/html_jutsus = ""
 
 				for(var/obj/Jutsus/I in src.mob.jutsus)
@@ -301,8 +309,10 @@ client
 
 				src << output(null, "Browser.Output")
 				src << browse("[html]")
+				src.browser_url = BROWSER_JUTSU_REFERENCE
 				winset(src, "Browser", "is-visible = true")
 			else
+				src.browser_url = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
 
 		Changelog()
@@ -311,13 +321,16 @@ client
 
 		Who()
 			set hidden = 1
-			if(winget(src, "Browser", "is-visible") == "false")
-				src.browser = BROWSER_WHO
+			if(src.browser_url != BROWSER_WHO)
 				var/online = 0
+				var/leaf_online = 0
+				var/sand_online = 0
 				var/players = ""
 				for(var/client/C)
 					if(C)
 						online++
+						if(C.mob.village == VILLAGE_LEAF) leaf_online++
+						if(C.mob.village == VILLAGE_SAND) sand_online++
 
 						var/obj/Symbols/Village/V = new(C.mob)
 						var/obj/Symbols/Rank/R = new(C.mob)
@@ -329,10 +342,21 @@ client
 						if(clients_multikeying.Find(C)) multikey = "<sup>(Multikey)</sup>"
 
 						if(C.mob.Faction) F=C.mob.Faction
-						if(administrators.Find(src.ckey) || moderators.Find(src.ckey))
+						if(administrators.Find(src.ckey))
 							players += {"
 							<tr>
 								<td>[C.mob.name] ([C.ckey]) [multikey]</td>
+								<td>[C.mob.level]</td>
+								<td>\icon[V] [C.mob.village]</td>
+								<td>\icon[R] [C.mob.rank]</td>
+								<td>[F.name]</td>
+							</tr>
+						"}
+						else if(moderators.Find(src.ckey))
+							players += {"
+							<tr>
+								<td>[C.mob.name] ([C.ckey]) [multikey]</td>
+								<td><i>Hidden</i></td>
 								<td>\icon[V] [C.mob.village]</td>
 								<td>\icon[R] [C.mob.rank]</td>
 								<td>[F.name]</td>
@@ -342,6 +366,7 @@ client
 							players += {"
 								<tr>
 									<td>[C.mob.name]</td>
+									<td><i>Hidden</i></td>
 									<td>\icon[V] [C.mob.village]</td>
 									<td>\icon[R] [C.mob.rank]</td>
 									<td>[F.name]</td>
@@ -409,17 +434,19 @@ client
 							<thead>
 								<tr>
 									<th scope="col">Character</th>
+									<th scope="col">Level</th>
 									<th scope="col">Village</th>
 									<th scope="col">Rank</th>
 									<th scope="col">Faction</th>
 								</tr>
 							</thead>
+
 							<tbody>
 								[players]
-
 								<tr>
-									<td scope="col"><span style="font-weight: bold;">Total Online:</span> [online]</td>
-									<td></td>
+									<td><span style="font-weight: bold;">Total Online:</span> [online]</td>
+									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">Leaf Village:</span> [leaf_online]</td>
+									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">Sand Village:</span> [sand_online]</td>
 									<td></td>
 									<td></td>
 								</tr>
@@ -437,8 +464,10 @@ client
 
 				src << output(null, "Browser.Output")
 				src << browse("[html]")
+				src.browser_url = BROWSER_WHO
 				winset(src, "Browser", "is-visible = true")
 			else
+				src.browser_url = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
 
 	proc
@@ -451,7 +480,7 @@ client
 			if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 		
 		UpdateWho()
-			if(src.browser == BROWSER_WHO && winget(src, "Browser", "is-visible") == "true")
+			if(src.browser_url == BROWSER_WHO && winget(src, "Browser", "is-visible") == "true")
 				src.Who()
 				src.Who()
 		

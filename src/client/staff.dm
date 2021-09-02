@@ -167,79 +167,99 @@ mob
 				set category = "Administrator"
 				switch(alert("What would you like to do?", "Manage Logs", "View Logs", "Download Logs", "Clear Logs"))
 					if("View Logs")
-						switch(input("Which logs would you like to view?", "Logs") as null|anything in list(LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+						switch(input("Which logs would you like to view?", "Logs") as null|anything in list(LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if(LOG_CHAT_LOCAL)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_LOCAL))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_VILLAGE)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_VILLAGE))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_SQUAD)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_SQUAD))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_FACTION)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_FACTION))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_GLOBAL)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_GLOBAL))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_WHISPER)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_WHISPER))
+								src.client.browser_url = BROWSER_LOGS
+								winset(usr, "Browser", "is-visible = true")
+							
+							if(LOG_CHAT_STAFF)
+								src << output(null, "Browser.Output")
+								src << browse(file(LOG_CHAT_STAFF))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_ADMINISTRATOR)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_ADMINISTRATOR))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 							
 							if(LOG_KAGE)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_KAGE))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_BUGS)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_BUGS))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CLIENT_SAVES)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_CLIENT_SAVES))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_ERROR)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_ERROR))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_KILLS)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_KILLS))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_SAVES)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_SAVES))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_STAFF)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_STAFF))
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 					if("Download Logs")
-						switch(input("Which logs would you like to download?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+						switch(input("Which logs would you like to download?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
 								shell("zip -r logs/logs.zip logs/")
 								usr << file("logs.zip")
@@ -262,6 +282,9 @@ mob
 
 							if(LOG_CHAT_WHISPER)
 								src << ftp(LOG_CHAT_WHISPER)
+							
+							if(LOG_CHAT_STAFF)
+								src << ftp(LOG_CHAT_STAFF)
 
 							if(LOG_ADMINISTRATOR)
 								usr << ftp(LOG_ADMINISTRATOR)
@@ -288,7 +311,7 @@ mob
 								usr << ftp(LOG_STAFF)
 
 					if("Clear Logs")
-						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
 								switch(alert("Are you sure you want to delete all logs?", "Manage Logs", "Clear All Logs", "Cancel"))
 									if("Clear All Logs")
@@ -344,6 +367,13 @@ mob
 										fdel(LOG_CHAT_WHISPER)
 										src << output("You have cleared the Whisper Chat logs.", "Action.Output")
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Whisper Chat logs.<br />", LOG_ADMINISTRATOR)
+							
+							if(LOG_CHAT_STAFF)
+								switch(src.client.Alert("Are you sure you want to delete the Staff Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
+									if(1)
+										fdel(LOG_CHAT_STAFF)
+										src << output("You have cleared the Staff Chat logs.", "Action.Output")
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Staff Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_ADMINISTRATOR)
 								switch(alert("Are you sure you want to delete the Administrator logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -900,5 +930,9 @@ mob
 mob
 	debug
 		verb
-			Placeholder()
+			Restore_Base()
 				set category = "Debug"
+				var/mob/m = input("Who's base would you like to restore?", "Reset Icon") as null|anything in mobs_online
+				if(m)
+					m.ResetBase()
+					m.RestoreOverlays()
