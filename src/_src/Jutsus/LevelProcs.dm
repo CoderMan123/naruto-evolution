@@ -462,9 +462,9 @@ mob
 							chuuninskip
 							X.KillCombo=0
 
-						else if(!istype(src, /mob/npc/combat/white_zetsu)) world<<output("[src] was knocked out by [X]!","Action.Output")
+						else if(!istype(src, /mob/npc/combat/white_zetsu) && !istype(src, /mob/npc/combat/animals)) world<<output("[src] was knocked out by [X]!","Action.Output")
 
-						if(!istype(src, /mob/npc/combat/white_zetsu))
+						if(!istype(src, /mob/npc/combat/white_zetsu)&&!istype(src, /mob/npc/combat/animals))
 							text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)//Kill Log test
 						src<<output("You were knocked out by [X].","Action.Output")
 						if(!istype(src, /mob/npc/combat/animals))
@@ -509,7 +509,8 @@ mob
 							X<<output("You have claimed the $[src.Bounty] bounty on [src.name]'s head.","Action.Output")
 							X.ryo+=src.Bounty
 							src.Bounty=0
-						else X.Bounty+=rand(5,10)
+						else if(!istype(src, /mob/npc/combat/animals) && !istype(src, /mob/npc/combat/white_zetsu))
+							X.Bounty+=rand(5,10)
 
 //ZETSU EVENT XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	//Zetsu Killed

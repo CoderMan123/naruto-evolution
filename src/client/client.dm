@@ -4,6 +4,7 @@ client
 	var/tmp
 		channel = "Local"
 		logging_in = 0
+		browser = BROWSER_NONE
 
 	var/tmp/list
 		skill_tree_objects = list()
@@ -21,6 +22,7 @@ client
 			Main.OutputChild.is-visible=false;
 			Main.ActionChild.is-visible=false;
 			Main.NavigationChild.is-visible=false;
+			Main.ReconnectChild.is-visible=false;
 			Titlescreen.Child.left=Map;
 			Character.is-visible=false;
 			Inventory.is-visible=false;
@@ -72,6 +74,12 @@ client
 		world.UpdateClientsMultikeying()
 
 		spawn() src.UpdateWhoAll()
+
+		winset(src, null, {"
+			Main.ReconnectChild.is-visible=true;
+		"})
+
+		src << output("You have been disconnected from the server.", "Reconnect.Message")
 		..()
 
 	Topic(href, href_list)

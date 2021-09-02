@@ -24,7 +24,7 @@ client
 
 					src.mob.SetRank(RANK_CHUUNIN)
 			
-			if(src.ckey in administrators)
+			if(administrators.Find(src.ckey))
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.mob.verbs += typesof(/mob/administrator/verb)
 				src.mob.verbs += typesof(/mob/moderator/verb)
@@ -50,7 +50,7 @@ client
 				src.mob.verbs -= typesof(/mob/PixelArtist/verb)
 				src.control_freak = CONTROL_FREAK_ALL
 			
-			if(src.ckey in moderators)
+			if(moderators.Find(src.ckey) || administrators.Find(src.ckey))
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.mob.verbs += typesof(/mob/moderator/verb)
 				src.mob.verbs += typesof(/mob/Moderator/verb)
@@ -58,13 +58,13 @@ client
 				src.mob.verbs -= typesof(/mob/moderator/verb)
 				src.mob.verbs -= typesof(/mob/Moderator/verb)
 			
-			if(src.ckey in programmers)
+			if(programmers.Find(src.ckey) || administrators.Find(src.ckey))
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.mob.verbs += typesof(/mob/programmer/verb)
 			else
 				src.mob.verbs -= typesof(/mob/programmer/verb)
 
-			if(src.ckey in pixel_artists)
+			if(pixel_artists.Find(src.ckey) || administrators.Find(src.ckey))
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.mob.verbs += typesof(/mob/pixel_artist/verb)
 			else

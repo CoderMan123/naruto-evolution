@@ -9,26 +9,26 @@ obj/Special/ChuuninExam
 	icon_state="paper"
 	mouse_opacity=2
 	var/list/Questions=list("Morning Peacock is a strength technique"=1,
-	"Eight Trigrams 64 Palms requires no reaction commands."=2,
-"Anbu are the right hand men and women of the akatsuki."=2,
+	"Eight Trigrams 64 Palms requires no reaction commands."=0,
+"Anbu are the right hand men and women of the akatsuki."=0,
 "Ash Pile Burning is triggered with the down arrow."=1,
 "The Genin exam was too easy."=1,
-"Rasengan is a thunder element technique."=2,
+"Rasengan is a thunder element technique."=0,
 "Sensatsu Suishou is an ice element technique."=1,
 "Akatsuki are bounty hunters."=1,
-"Heavenly Spin requires Byakugan active."=2,
-"Sickle Weasel Slash is an earth element technique."=2,
+"Heavenly Spin requires Byakugan active."=0,
+"Sickle Weasel Slash is an earth element technique."=0,
 "Gentle Fist can disable chakra points."=1,
 "Bone Sensation only works if there is a Bone Bullet lodged in your enemy."=1,
 "Multiple Shadow Clone Jutsu creates clones that can attack."=1,
-"Chidori Nagashi is an earth element technique."=2,
+"Chidori Nagashi is an earth element technique."=0,
 "The skill tree is divided in non-clan, elemental, and clan jutsus."=1,
-"Tsukuyomi is utilized by the Nara clan."=2,
+"Tsukuyomi is utilized by the Nara clan."=0,
 "Susano'o is an Uchiha clan technique."=1,
-"Aburame utilize ink drawings to attack enemies."=2,
+"Aburame utilize ink drawings to attack enemies."=0,
 "Jounin is the rank where higher levels are able to begin taking students."=1,
 "Players will lose 50% of the experience points for killing a fellow villager."=1,
-"The level requirement for the Genin Exams is 10."=2,
+"The level requirement for the Genin Exams is 10."=0,
 "D rank missions are easiest but give you the least ammount of experience."=1,
 "B rank missions are assigned to Chuunin level shinobi."="True","An A rank mission may send you against enemy villagers."=1,
 "The resting graphic will change according to your player's maximum chakra levels."=1)
@@ -66,8 +66,14 @@ obj/Special/ChuuninExam
 				var/Question=pick(NewQuestions)
 				NewQuestions-=Question
 				QuestionNum++
-				if(usr.client.Alert("Question #[QuestionNum]: [Question]","Question [QuestionNum]",list("True","False"))=="[Questions[Question]]")
-					CorrectAnswer++
+				
+				switch(usr.client.Alert("Question #[QuestionNum]: [Question]", "Question [QuestionNum]", list("True", "False")))
+					if(1)
+						if(Questions[Question] == 1) CorrectAnswer++
+
+					if(2)
+						if(Questions[Question] == 0) CorrectAnswer++
+
 		else
 			usr << output("You don't have to take the written exam at your level.","Action.Output")
 			usr << output("You have completed the test, please wait for the result.","Action.Output")
@@ -110,14 +116,15 @@ proc/ChuuninExam()
 		world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","Action.Output")
 		ChuuninExam="Tournament"
 		ChuuninExamGo()
+
 proc/ChuuninExamGo()
 	//Remember to add a check for people here to see if they were in the FoD when it ended. Proper teleportation.
 	for(var/mob/M in mobs_online)
-		if(M.loc in block(locate(71,95,4),locate(200,163,4))) // If they are in FoD
+		if(M.loc in block(locate(68,5,8),locate(200,82,8))) // If they are in FoD
 			M.loc=M.MapLoadSpawn() // Remember to change depending on villages!
 			for(var/obj/ChuuninExam/Scrolls/S in M)	del(S)
 	for(var/mob/M in mobs_online)
-		if(M.loc in block(locate(113,29,4),locate(146,58,4))) // If they are in tournament zone
+		if(M.loc in block(locate(162,87,8),locate(199,126,8))) // If they are in tournament zone
 			Chuunins+=M
 			for(var/obj/ChuuninExam/Scrolls/S in M)del(S)
 	if(Chuunins.len<2)
@@ -170,8 +177,8 @@ proc/ChuuninExamGo()
 			return
 		ChuuninOpponentOne=pick(Chuunins)
 		ChuuninOpponentTwo=pick(Chuunins-ChuuninOpponentOne)
-		ChuuninOpponentTwo.loc=locate(126,35,4)
-		ChuuninOpponentOne.loc=locate(126,50,4)
+		ChuuninOpponentTwo.loc=locate(180,113,8)
+		ChuuninOpponentOne.loc=locate(180,97,8)
 		world<<output("<i><center>Match Beginning: [ChuuninOpponentOne] vs. [ChuuninOpponentTwo].</center></i>","Action.Output")
 		for(var/obj/ChuuninExam/Barrier/O in world)O.invisibility=0 // Barriers up!
 		var/timer=5

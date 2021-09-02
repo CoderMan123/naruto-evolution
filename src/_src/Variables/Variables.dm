@@ -31,7 +31,7 @@ mob
 		statpoints=0
 		skillpoints=1
 		kills=0
-		village="Leaf"
+		village = ""
 		rank = RANK_ACADEMY_STUDENT
 		dead=0
 		swimming

@@ -60,11 +60,9 @@ mob
 						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 						if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsu",src)
-						var/iicon
 						src.move=0
 						src.canattack=0
 						src.firing=1
-						iicon=src.icon
 						src.icon='AkimichiBullet.dmi'
 						src.overlays=0
 						src.inboulder=1
@@ -73,8 +71,8 @@ mob
 							step(src,src.dir)
 							sleep(0.5)
 							for(var/mob/M in orange(1,src))
-								if(M == src) return
-								if(M.dead || M.swimming)return
+								if(M == src) continue
+								if(M.dead || M.swimming) continue
 								M.DealDamage(round((src.ninjutsu / 300)+(src.strength / 300)*2*J.damage)/12,src,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="dead"
@@ -90,9 +88,9 @@ mob
 						src.inboulder=0
 						src.canattack=1
 						src.firing=0
-						src.icon=iicon
 						src.move=1
 						src.RestoreOverlays()
+						src.ResetBase()
 
 		CalorieControl()
 			if(firing)return

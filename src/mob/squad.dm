@@ -218,6 +218,7 @@ mob
 	verb/Squad()
 		set hidden = 1
 		if(winget(src, "Browser", "is-visible") == "false")
+			src.client.browser = BROWSER_SQUAD
 			var/squad/squad = src.GetSquad()
 			if(!squad)
 				var/html = {"

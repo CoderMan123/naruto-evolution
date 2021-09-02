@@ -27,7 +27,9 @@
 #define LOG_CHAT_WHISPER "logs/chat/whisper.html"
 
 #define BROWSER_NONE 0
-#define BROWSER_SQUAD 1
+#define BROWSER_WHO 1
+#define BROWSER_JUTSU_REFERENCE 2
+#define BROWSER_SQUAD 3
 
 #define VILLAGE_MISSING_NIN "Missing-Nin"
 #define VILLAGE_LEAF "Hidden Leaf"
@@ -55,7 +57,7 @@
 #define CLAN_ABURAME "Aburame"
 #define CLAN_AKIMICHI "Akimichi"
 #define CLAN_BUBBLE "Bubble"
-#define CLAN_CLAY "Clay" //check
+#define CLAN_CLAY "Deidara" //check
 #define CLAN_CRYSTAL "Crystal"
 #define CLAN_GATES "Gates"
 #define CLAN_HYUUGA "Hyuuga"

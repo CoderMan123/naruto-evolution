@@ -1,6 +1,5 @@
 client
 	var/tmp/exp_lock_verify=0
-	var/tmp/browser = BROWSER_NONE
 	verb
 		ChangeChannel()
 			set hidden=1
@@ -204,6 +203,7 @@ client
 
 		JutsuReference()
 			set hidden=1
+			src.browser = BROWSER_JUTSU_REFERENCE
 			if(winget(src, "Browser", "is-visible") == "false")
 				var/html_jutsus = ""
 
@@ -312,6 +312,7 @@ client
 		Who()
 			set hidden = 1
 			if(winget(src, "Browser", "is-visible") == "false")
+				src.browser = BROWSER_WHO
 				var/online = 0
 				var/players = ""
 				for(var/client/C)
@@ -450,7 +451,7 @@ client
 			if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 		
 		UpdateWho()
-			if(winget(src, "Browser", "is-visible") == "true")
+			if(src.browser == "Who" && winget(src, "Browser", "is-visible") == "true")
 				src.Who()
 				src.Who()
 		
