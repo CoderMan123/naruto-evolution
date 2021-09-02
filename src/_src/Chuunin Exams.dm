@@ -120,11 +120,11 @@ proc/ChuuninExam()
 proc/ChuuninExamGo()
 	//Remember to add a check for people here to see if they were in the FoD when it ended. Proper teleportation.
 	for(var/mob/M in mobs_online)
-		if(M.loc in block(locate(71,95,4),locate(200,163,4))) // If they are in FoD
+		if(M.loc in block(locate(68,5,8),locate(200,82,8))) // If they are in FoD
 			M.loc=M.MapLoadSpawn() // Remember to change depending on villages!
 			for(var/obj/ChuuninExam/Scrolls/S in M)	del(S)
 	for(var/mob/M in mobs_online)
-		if(M.loc in block(locate(113,29,4),locate(146,58,4))) // If they are in tournament zone
+		if(M.loc in block(locate(162,87,8),locate(199,126,8))) // If they are in tournament zone
 			Chuunins+=M
 			for(var/obj/ChuuninExam/Scrolls/S in M)del(S)
 	if(Chuunins.len<2)
@@ -177,8 +177,8 @@ proc/ChuuninExamGo()
 			return
 		ChuuninOpponentOne=pick(Chuunins)
 		ChuuninOpponentTwo=pick(Chuunins-ChuuninOpponentOne)
-		ChuuninOpponentTwo.loc=locate(126,35,4)
-		ChuuninOpponentOne.loc=locate(126,50,4)
+		ChuuninOpponentTwo.loc=locate(180,113,8)
+		ChuuninOpponentOne.loc=locate(180,97,8)
 		world<<output("<i><center>Match Beginning: [ChuuninOpponentOne] vs. [ChuuninOpponentTwo].</center></i>","Action.Output")
 		for(var/obj/ChuuninExam/Barrier/O in world)O.invisibility=0 // Barriers up!
 		var/timer=5
