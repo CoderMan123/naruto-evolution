@@ -80,7 +80,7 @@ squad
 				for(var/ckey in src.members)
 					for(var/mob/m in mobs_online)
 						if(m.client.ckey == ckey)
-							m.client.browser = BROWSER_NONE
+							m.client.browser_url = BROWSER_NONE
 							winset(m.client, "Browser", "is-visible = false")
 							break
 
@@ -149,7 +149,7 @@ squad
 					for(var/client/c in clients_online)
 						if(c.ckey in src.members)
 							c << "[src.members[ckey]] was kicked from the Squad."
-							c.browser = BROWSER_SQUAD
+							c.browser_url = BROWSER_SQUAD
 							winset(c, "Browser", "is-visible = true")
 
 					if(ckey in src.members)
@@ -192,7 +192,7 @@ squad
 			M.client.Alert("Only the Squad Leader can promote someone to the Squad Leader.", "Squad")
 
 	proc/RefreshMember(mob/M)
-		if(src && M && src.members[M.client.ckey] && src.members[M.ckey] == M.character && M.client.browser == BROWSER_SQUAD)
+		if(src && M && src.members[M.client.ckey] && src.members[M.ckey] == M.character && M.client.browser_url == BROWSER_SQUAD)
 			src.levels[M.ckey] = M.level
 			src.villages[M.ckey] = M.village
 			src.ranks[M.ckey] = M.rank
@@ -201,7 +201,7 @@ squad
 
 	proc/Refresh()
 		for(var/client/c in clients_online)
-			if(src && c && src.members[c.ckey] && src.members[c.ckey] == c.mob.character && c.browser == BROWSER_SQUAD)
+			if(src && c && src.members[c.ckey] && src.members[c.ckey] == c.mob.character && c.browser_url == BROWSER_SQUAD)
 				src.levels[c.ckey] = c.mob.level
 				src.villages[c.ckey] = c.mob.village
 				src.ranks[c.ckey] = c.mob.rank
@@ -217,7 +217,7 @@ mob
 
 	verb/Squad()
 		set hidden = 1
-		if(winget(src, "Browser", "is-visible") == "false")
+		if(src.client.browser_url != BROWSER_SQUAD)
 			var/squad/squad = src.GetSquad()
 			if(!squad)
 				var/html = {"
@@ -303,7 +303,7 @@ mob
 
 				src << output(null, "Browser.Output")
 				src << browse("[html]")
-				src.client.browser = BROWSER_SQUAD
+				src.client.browser_url = BROWSER_SQUAD
 				winset(src, "Browser", "is-visible = true")
 			else
 				var/squad_members
@@ -540,8 +540,8 @@ mob
 
 				src << output(null, "Browser.Output")
 				src << browse("[html]")
-				src.client.browser = BROWSER_SQUAD
+				src.client.browser_url = BROWSER_SQUAD
 				winset(src, "Browser", "is-visible = true")
 		else
-			src.client.browser = BROWSER_NONE
+			src.client.browser_url = BROWSER_NONE
 			winset(src, "Browser", "is-visible = false")

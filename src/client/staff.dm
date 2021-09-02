@@ -171,85 +171,85 @@ mob
 							if(LOG_CHAT_LOCAL)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_LOCAL))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_VILLAGE)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_VILLAGE))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_SQUAD)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_SQUAD))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_FACTION)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_FACTION))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_GLOBAL)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_GLOBAL))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CHAT_WHISPER)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_WHISPER))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_ADMINISTRATOR)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_ADMINISTRATOR))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 							
 							if(LOG_KAGE)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_KAGE))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_BUGS)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_BUGS))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_CLIENT_SAVES)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_CLIENT_SAVES))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_ERROR)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_ERROR))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_KILLS)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_KILLS))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_SAVES)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_SAVES))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 							if(LOG_STAFF)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_STAFF))
-								src.browser = BROWSER_LOGS
+								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 
 					if("Download Logs")

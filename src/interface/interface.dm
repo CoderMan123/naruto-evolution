@@ -29,7 +29,7 @@ client
 		
 		CloseBrowser()
 			set hidden=1
-			src.client.browser = BROWSER_NONE
+			src.browser_url = BROWSER_NONE
 			winset(src, null, {"Browser.is-visible = "false";"})
 			
 		MiniWindow()
@@ -212,7 +212,7 @@ client
 
 		JutsuReference()
 			set hidden=1
-			if(winget(src, "Browser", "is-visible") == "false")
+			if(src.browser_url != BROWSER_JUTSU_REFERENCE)
 				var/html_jutsus = ""
 
 				for(var/obj/Jutsus/I in src.mob.jutsus)
@@ -309,10 +309,10 @@ client
 
 				src << output(null, "Browser.Output")
 				src << browse("[html]")
-				src.browser = BROWSER_JUTSU_REFERENCE
+				src.browser_url = BROWSER_JUTSU_REFERENCE
 				winset(src, "Browser", "is-visible = true")
 			else
-				src.browser = BROWSER_NONE
+				src.browser_url = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
 
 		Changelog()
@@ -321,7 +321,7 @@ client
 
 		Who()
 			set hidden = 1
-			if(winget(src, "Browser", "is-visible") == "false")
+			if(src.browser_url != BROWSER_WHO)
 				var/online = 0
 				var/players = ""
 				for(var/client/C)
@@ -446,10 +446,10 @@ client
 
 				src << output(null, "Browser.Output")
 				src << browse("[html]")
-				src.browser = BROWSER_WHO
+				src.browser_url = BROWSER_WHO
 				winset(src, "Browser", "is-visible = true")
 			else
-				src.browser = BROWSER_NONE
+				src.browser_url = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
 
 	proc
@@ -462,7 +462,7 @@ client
 			if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 		
 		UpdateWho()
-			if(src.browser == BROWSER_WHO && winget(src, "Browser", "is-visible") == "true")
+			if(src.browser_url == BROWSER_WHO && winget(src, "Browser", "is-visible") == "true")
 				src.Who()
 				src.Who()
 		

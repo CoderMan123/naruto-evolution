@@ -27,10 +27,10 @@
 #define LOG_CHAT_WHISPER "logs/chat/whisper.html"
 
 #define BROWSER_NONE 0
-#define BROWSER_WHO 1
-#define BROWSER_JUTSU_REFERENCE 2
-#define BROWSER_SQUAD 3
-#define BROWSER_LOGS 4
+#define BROWSER_WHO "browse://who"
+#define BROWSER_JUTSU_REFERENCE "browse://jutsu-reference"
+#define BROWSER_SQUAD "browse://squad"
+#define BROWSER_LOGS "browse://logs"
 
 #define VILLAGE_MISSING_NIN "Missing-Nin"
 #define VILLAGE_LEAF "Hidden Leaf"
