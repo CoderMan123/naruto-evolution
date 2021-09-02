@@ -60,11 +60,9 @@ mob
 						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 						if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsu",src)
-						var/iicon
 						src.move=0
 						src.canattack=0
 						src.firing=1
-						iicon=src.icon
 						src.icon='AkimichiBullet.dmi'
 						src.overlays=0
 						src.inboulder=1
@@ -90,9 +88,9 @@ mob
 						src.inboulder=0
 						src.canattack=1
 						src.firing=0
-						src.icon=iicon
 						src.move=1
 						src.RestoreOverlays()
+						src.ResetBase()
 
 		CalorieControl()
 			if(firing)return
