@@ -496,10 +496,18 @@ mob
 								var/old_character = M.character
 								var/old_name = M.name
 								var/old_src_name = usr.name
+
+								names_taken.Remove(lowertext(old_character))
+								names_taken.Add(lowertext(name))
+
+								M.character = name
 								M.SetName(name)
+
 								M.Save()
 								M.client.Save()
+								
 								fdel("[SAVEFILE_CHARACTERS]/[copytext(M.ckey, 1, 2)]/[M.ckey] ([lowertext(old_character)]).sav")
+
 								usr << output("You have changed [old_name]'s character name to <u>[name]</u>.", "Action.Output")
 								M << output("[old_src_name] has changed your character name to <u>[name]</u>.", "Action.Output")
 								spawn() M.client.Alert({"
