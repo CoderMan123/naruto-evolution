@@ -505,7 +505,7 @@ mob
 
 								M.Save()
 								M.client.Save()
-								
+
 								fdel("[SAVEFILE_CHARACTERS]/[copytext(M.ckey, 1, 2)]/[M.ckey] ([lowertext(old_character)]).sav")
 
 								usr << output("You have changed [old_name]'s character name to <u>[name]</u>.", "Action.Output")
@@ -517,6 +517,25 @@ mob
 									<br />
 									You will need to use your updated character name to login."})
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has changed [M]'s ([M.ckey]) character name to [name] ([M.ckey]).<br />", LOG_ADMINISTRATOR)
+			
+			Manage_Names()
+				set category = "Administrator"
+				switch(alert("Would you like to add or remove a name from the list of taken character names?", "Manage Names", "Add", "Remove"))
+					if("Add")
+						var/name = input("What character name would you like to add to the list of taken character names?", "Manage Names") as text
+						
+						if(name)
+							names_taken.Add(name)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has added [name] to the list of taken character names.<br />", LOG_ADMINISTRATOR)
+							alert("The character name, [name], has been added to the list of taken character names.", "Manage Names")
+
+					if("Remove")
+						var/name = input("Which character name would you like to remove from the list of taken character names?", "Manage Names") as null|anything in names_taken
+						
+						if(name)
+							names_taken.Remove(name)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has removed [name] from the list of taken character names.<br />", LOG_ADMINISTRATOR)
+							alert("The character name, [name], has been removed from the list of taken character names.", "Manage Names")
 
 			Change_Ryo()
 				set category = "Administrator"
