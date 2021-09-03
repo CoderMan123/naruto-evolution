@@ -324,6 +324,7 @@ mob
 										fdel(LOG_SAVES)
 										fdel(LOG_STAFF)
 										usr << output("You have cleared all the server logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared all the server logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_CHAT_LOCAL)
@@ -331,6 +332,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_LOCAL)
 										src << output("You have cleared the Local Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Local Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_VILLAGE)
@@ -338,6 +340,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_VILLAGE)
 										src << output("You have cleared the Village Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Village Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_SQUAD)
@@ -345,6 +348,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_SQUAD)
 										src << output("You have cleared the Squad Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Squad Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_FACTION)
@@ -352,6 +356,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_FACTION)
 										src << output("You have cleared the Faction Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Faction Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_GLOBAL)
@@ -359,6 +364,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_GLOBAL)
 										src << output("You have cleared the Global Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Global Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_WHISPER)
@@ -366,6 +372,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_WHISPER)
 										src << output("You have cleared the Whisper Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Whisper Chat logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_CHAT_STAFF)
@@ -373,6 +380,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_STAFF)
 										src << output("You have cleared the Staff Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Staff Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_ADMINISTRATOR)
@@ -380,6 +388,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_ADMINISTRATOR)
 										usr << output("You have cleared the Administrator logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Administrator logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_KAGE)
@@ -387,6 +396,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_KAGE)
 										usr << output("You have cleared the Kage logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Kage logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_BUGS)
@@ -394,6 +404,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_BUGS)
 										usr << output("You have cleared the Bug logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Bug logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CLIENT_SAVES)
@@ -401,6 +412,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_CLIENT_SAVES)
 										usr << output("You have cleared the Client Save logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Client Save logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_ERROR)
@@ -408,6 +420,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_ERROR)
 										usr << output("You have cleared the Error logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Error logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_KILLS)
@@ -415,6 +428,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_KILLS)
 										usr << output("You have cleared the Kill logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Kill logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_SAVES)
@@ -422,6 +436,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_SAVES)
 										usr << output("You have cleared the Character Save logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Character Save logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_STAFF)
@@ -429,6 +444,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_STAFF)
 										usr << output("You have cleared the Staff logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Staff logs.<br />", LOG_ADMINISTRATOR)
 			
 			Manage_Mission()
