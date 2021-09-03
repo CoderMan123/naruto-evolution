@@ -328,16 +328,19 @@ mob
 					var/start
 					var/complete
 					var/timer
-					var/score
+
 					if(squad.mission.start) start = time2text(squad.mission.start, "MM/DD/YYYY hh:mm:ss")
 					if(squad.mission.complete) complete = time2text(squad.mission.complete, "MM/DD/YYYY hh:mm:ss")
-					timer = squad.mission.GetTimer()
-					if(timer <= squad.mission.limit && squad.mission.complete)
-						score = "Pass"
-					else if(timer > squad.mission.limit)
-						score = "Fail"
-					else
-						score = "TBD"
+					
+					if(squad.mission.limit)
+						timer = squad.mission.GetTimer()
+						if(timer <= squad.mission.limit && squad.mission.complete)
+							squad.mission.status = "Pass"
+						else if(timer > squad.mission.limit)
+							squad.mission.status = "Failure"
+						else
+							squad.mission.status = "In-Progress"
+
 					mission = {"
 						<h2>Mission</h2>
 
@@ -349,7 +352,7 @@ mob
 									<th scope="col">Complete</th>
 									<th scope="col">Timer</th>
 									<th scope="col">Limit</th>
-									<th scope="col">Score</th>
+									<th scope="col">Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -359,7 +362,7 @@ mob
 									<td>[complete]</td>
 									<td>[round(timer, 0.01)] m</td>
 									<td>[squad.mission.limit] m</td>
-									<td>[score]</td>
+									<td>[squad.mission.status]</td>
 								</tr>
 							</tbody>
 						</table>

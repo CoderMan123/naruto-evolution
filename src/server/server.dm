@@ -53,6 +53,7 @@ world
 		spawn() Kage_Inactivity_Check()
 
 	Del()
+		src.FailMissions()
 		src.Save()
 		..()
 	
@@ -248,3 +249,15 @@ world
 		while(world)
 			world << src.GetAdvert()
 			sleep(600*30)
+	
+	proc/FailMissions()
+		for(var/squad/squad in squads)
+			if(squad.mission)
+				switch(squad.mission.type)
+					if(/mission/d_rank/deliver_intel)
+						squad.mission.complete = world.realtime
+						squad.mission.status = "Failure"
+					
+					if(/mission/a_rank/political_escort)
+						squad.mission.complete = world.realtime
+						squad.mission.status = "Failure"

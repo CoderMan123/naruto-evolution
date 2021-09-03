@@ -4,7 +4,8 @@ mission
 	var/tmp/html
 	var/start
 	var/complete
-	var/limit = 30 //mission time limit (in minutes)
+	var/limit = 0 //mission time limit (in minutes)
+	var/status = "In-Progress"
 	var/mob/start_npc
 	var/mob/complete_npc
 	var/list/required_mobs = list()
