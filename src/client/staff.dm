@@ -522,7 +522,7 @@ mob
 				set category = "Administrator"
 				switch(alert("Would you like to add or remove a name from the list of taken character names?", "Manage Names", "Add", "Remove"))
 					if("Add")
-						var/name = input("What character name would you like to add to the list of taken character names?", "Manage Names") as text
+						var/name = input("What character name would you like to add to the list of taken character names?", "Manage Names") as null|text
 						
 						if(name)
 							names_taken.Add(name)
