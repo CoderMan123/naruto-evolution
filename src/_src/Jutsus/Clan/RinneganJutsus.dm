@@ -160,7 +160,7 @@ mob
 						view(usr)<<sound('flashbang_explode2.wav',0,0)
 						var/mob/summonings/DogSummoning/D = new/mob/summonings/DogSummoning(usr.loc)
 						D.loc=usr.loc
-						D.lowner=src
+						D.OWNER=src
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(c_target)
 							walk_to(D,c_target)

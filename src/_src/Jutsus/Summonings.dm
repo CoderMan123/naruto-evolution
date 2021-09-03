@@ -1,68 +1,85 @@
 mob
 	summonings
+		var/mob/OWNER
 		SnakeSummoning
 			icon='Pein Summoning.dmi'
 			Names="Snake"
 			health=1500
 			maxhealth=1500
 			icon_state="2"
-			density=1
-			var/mob/lowner
-			New()
-				spawn(1)
-					src.SnakeCombat()
+			var/hited=0
+			move=0
+			Bump(mob/M)
+				if(src.hited==1) return
+				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
+					flick("punch",src)
+					M.DealDamage((jutsudamage+round((OWNER.ninjutsu / 150)*2*jutsudamage))/3,src.OWNER,"NinBlue")
+					//if(M.health >= 0) M.Death()
+					//M.Death(src)
+
+					src.hited=1
+					sleep(7)
+					src.hited=0
+				else
+					return
+			Move()
+				//sleep(3)
+				if(src.move==1)
+					return
 				..()
-			proc
-				SnakeCombat()
-					while(src)
-						var/mob/c_target=lowner.Target_Get(TARGET_MOB)
-						if(c_target&&c_target==src) return
-						sleep(1)
-						if(c_target)
-							if(src.health<=0)
-								del(src)
-							src.Move()
-							step_towards(src,c_target)
-							if(get_dist(src,c_target)<=1)
-								if(c_target.dead==1) return
-								src.Strike(c_target)
-							sleep(4)
-						sleep(1)
-				Strike(mob/A)
-					A.DealDamage((jutsudamage+round((lowner.ninjutsu / 150)*2*jutsudamage))/4,src.lowner,"cyan")
-					if(A) A.UpdateHMB()
+			New()
+				spawn(5)
+
+					src.CombatAI()
+				..()
+
 		DogSummoning
 			icon='Pein Summoning.dmi'
 			Names="Dog"
 			health=1500
 			maxhealth=1500
 			icon_state="1"
-			density=1
-			var/mob/lowner
-			New()
-				spawn(1)
-					src.SnakeCombat()
-				..()
-			proc
-				SnakeCombat()
-					while(src)
-						var/mob/c_target=lowner.Target_Get(TARGET_MOB)
-						if(c_target&&c_target==src) return
-						sleep(1)
-						if(c_target)
-							if(src.health<=0)
-								del(src)
-							src.Move()
-							step_towards(src,c_target)
-							if(get_dist(src,c_target)<=1)
-								if(c_target.dead==1) return
-								src.Strike(c_target)
-							sleep(4)
-						sleep(1)
-				Strike(mob/A)
-					A.DealDamage(lowner.strength+lowner.ninjutsu+lowner.genjutsu,src.lowner,"cyan")
-					if(A) A.UpdateHMB()
+			var/hited=0
+			move=0
+			Bump(mob/M)
+				if(src.hited==1) return
+				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
+					flick("punch",src)
+					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu / 450)+(OWNER.strength / 450)+(OWNER.genjutsu / 450))*2*jutsudamage))/3,src.OWNER,"NinBlue")
+					//if(M.health >= 0) M.Death()
+					//M.Death(src)
 
+					src.hited=1
+					sleep(7)
+					src.hited=0
+				else
+					return
+			Move()
+				//sleep(3)
+				if(src.move==1)
+					return
+				..()
+			New()
+				spawn(5)
+
+					src.CombatAI()
+				..()
+
+mob/summonings/proc/CombatAI()
+	while(src)
+		var/mob/c_target=OWNER.Target_Get(TARGET_MOB)
+		if(c_target&&c_target==src) return
+		sleep(1)
+		if(c_target)
+			if(src.health<=0)
+				del(src)
+			src.Move()
+			step_towards(src,c_target)
+			if(get_dist(src,c_target)<=1)
+				if(c_target.dead==1) return
+				Bump(c_target)
+			sleep(4)
+		sleep(1)
 
 mob
 	jutsus

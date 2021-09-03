@@ -297,7 +297,7 @@ mob
 				del(A)
 
 		for(var/mob/summonings/SnakeSummoning/B in world)
-			if(B.lowner == src)
+			if(B.OWNER == src)
 				del(B)
 
 		for(var/mob/jutsus/KazekagePuppet/C in world)
@@ -305,7 +305,7 @@ mob
 				del(C)
 
 		for(var/mob/summonings/DogSummoning/D in world)
-			if(D.lowner == src)
+			if(D.OWNER == src)
 				del(D)
 
 
