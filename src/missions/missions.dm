@@ -90,8 +90,6 @@ mission
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
 
-					src.squad.mission = null
-
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 					M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 
@@ -123,10 +121,8 @@ mission
 								spawn() M.client.Alert("Well done. That'll teach them not to spy on us.", "[src.complete_npc]")
 								M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 
-					O.squad.mission = null
-
 				// Solo ninja turning in the mission
-				else if(O)
+				else if(O && !O.squad.mission.complete)
 					M.DestroyItem(O)
 
 					spawn() M.client.UpdateInventoryPanel()
@@ -143,7 +139,6 @@ mission
 					else
 						spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 						M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
-					O.squad.mission = null
 
 			if(/mission/c_rank/the_war_effort)
 				if(squad && !squad.mission.complete)
@@ -159,8 +154,6 @@ mission
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
-						squad.mission = null
-
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
 						squad.mission.complete = world.realtime
 
@@ -172,8 +165,6 @@ mission
 								m.Levelup()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
-
-						squad.mission = null
 
 			if(/mission/b_rank/hunting_rogues)
 				if(squad && !squad.mission.complete)
@@ -189,8 +180,6 @@ mission
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
-						squad.mission = null
-
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
 						squad.mission.complete = world.realtime
 
@@ -202,8 +191,6 @@ mission
 								m.Levelup()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
-
-						squad.mission = null
 
 			if(/mission/a_rank/political_escort)
 				if(squad && !squad.mission.complete)
@@ -220,8 +207,6 @@ mission
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
 
-					squad.mission = null
-
 			if(/mission/s_rank/clouds_of_crimson)
 				if(squad && !squad.mission.complete)
 					var/exp_reward = round(mission_exp_mod * A_reward)
@@ -236,8 +221,6 @@ mission
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
-						squad.mission = null
-
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
 						squad.mission.complete = world.realtime
 
@@ -249,9 +232,6 @@ mission
 								m.Levelup()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
-
-						squad.mission = null
-
 
 	New(mob/M)
 		..()
