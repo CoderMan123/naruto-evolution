@@ -154,7 +154,7 @@ mob/Moderator/verb/
 			for(var/mob/M in mobs_online)
 				if(administrators.Find(M.ckey) || moderators.Find(M.ckey))
 					M << "<font color=yellow> \[Staff] [src.character]:</font> <font color='[COLOR_CHAT]'>[html_encode(c)]</font>"
-			text2file("<font color='[COLOR_CHAT]'>[time2text(world.timeofday, "MMM DD hh:mm:ss")]</font> <font color=yellow> \[Staff] [src.character]:</font> <font color='[COLOR_CHAT]'>[html_encode(c)]</font><br />", LOG_CHAT_STAFF)
+			text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color=yellow> \[Staff] [src.character]:</font> <font color='[COLOR_CHAT]'>[html_encode(c)]</font><br />", LOG_CHAT_STAFF)
 		else
 			src << "Please do not use more than 750 characters."
 			src << "Message was <i>[c]</i>"
