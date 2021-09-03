@@ -66,7 +66,7 @@ mob
 				if("Agility")agilityexp += round(howmuch)
 				if("Precision")precisionexp += round(howmuch)
 			Levelup()
-			
+
 		Levelup()
 			if(src.xplock==1)
 				src<<output("You have an Experience lock on you. This measure is used against the abusers / AFK trainers. Admin decides when this is removed.","Action.Output")
@@ -734,13 +734,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M.LevelStat("Ninjutsu",rand(10,25),1)
-											M.Levelup()
+
 										if(2)
 											M.LevelStat("strength",rand(10,25),1)
-											M.Levelup()
+
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
-											M.Levelup()
+
 								for(var/i in X.Squad.Members)
 									if(getOwner(i))
 										M = getOwner(i)
@@ -752,13 +752,13 @@ mob
 											switch(GAIN)
 												if(1)
 													M.LevelStat("Ninjutsu",rand(10,25),1)
-													M.Levelup()
+
 												if(2)
 													M.LevelStat("strength",rand(10,25),1)
-													M.Levelup()
+
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
-													M.Levelup()
+
 										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 										//M.Mission=null
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
@@ -771,13 +771,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
-											M2.Levelup()
+
 										if(2)
 											M2.LevelStat("strength",rand(10,25),1)
-											M2.Levelup()
+
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
-											M2.Levelup()
+
 							X.Levelup()
 
 						if(X.Mission=="Jounin Kill [src] ([src.ckey])")
@@ -795,13 +795,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M.LevelStat("Ninjutsu",rand(10,25),1)
-											M.Levelup()
+
 										if(2)
 											M.LevelStat("strength",rand(10,25),1)
-											M.Levelup()
+
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
-											M.Levelup()
+
 								for(var/i in X.Squad.Members)
 									if(getOwner(i))
 										M = getOwner(i)
@@ -813,13 +813,13 @@ mob
 											switch(GAIN)
 												if(1)
 													M.LevelStat("Ninjutsu",rand(10,25),1)
-													M.Levelup()
+
 												if(2)
 													M.LevelStat("strength",rand(10,25),1)
-													M.Levelup()
+
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
-													M.Levelup()
+
 										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 										//M.Mission=null
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
@@ -832,13 +832,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
-											M2.Levelup()
+
 										if(2)
 											M2.LevelStat("strength",rand(10,25),1)
-											M2.Levelup()
+
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
-											M2.Levelup()
+
 						if(X.Mission=="Elite Kill [src] ([src.ckey])")
 							X.Mission=null
 							X<<output("You have successfully completed your mission.","Action.Output")
@@ -854,13 +854,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M.LevelStat("Ninjutsu",rand(10,25),1)
-											M.Levelup()
+
 										if(2)
 											M.LevelStat("strength",rand(10,25),1)
-											M.Levelup()
+
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
-											M.Levelup()
+
 								for(var/i in X.Squad.Members)
 									if(getOwner(i))
 										M = getOwner(i)
@@ -872,13 +872,13 @@ mob
 											switch(GAIN)
 												if(1)
 													M.LevelStat("Ninjutsu",rand(10,25),1)
-													M.Levelup()
+
 												if(2)
 													M.LevelStat("strength",rand(10,25),1)
-													M.Levelup()
+
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
-													M.Levelup()
+
 										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 										//M.Mission=null
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
@@ -891,13 +891,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
-											M2.Levelup()
+
 										if(2)
 											M2.LevelStat("strength",rand(10,25),1)
-											M2.Levelup()
+
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
-											M2.Levelup()
+											
 					if(!Chuunins.Find(src))
 						if(X&&X.key&&src!=X)
 							if(X.z in global.warmaps && src.z in global.warmaps)

@@ -492,7 +492,6 @@ mob
 												else
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(10,20))
-													if(c_target.loc.loc:Safe!=1) c_target.Levelup()
 						del(O)
 			/*				for(var/obj/Training/T in view(O,0))
 								if(T.health>=1)

@@ -87,7 +87,6 @@ mission
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m.Levelup()
-							spawn() m.client.UpdateCharacterPanel()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
 
@@ -112,7 +111,6 @@ mission
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m.Levelup()
-							spawn() m.client.UpdateCharacterPanel()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
 							if(M.village == VILLAGE_AKATSUKI)
@@ -135,7 +133,6 @@ mission
 					M.exp += exp_reward
 					M.ryo += ryo_reward
 					M.Levelup()
-					spawn() M.client.UpdateCharacterPanel()
 					spawn() M.UpdateHMB()
 					if(M.village == VILLAGE_AKATSUKI)
 						M.client.Alert("Excellent work. We'll make good use of this.", "Zetsu")
@@ -174,7 +171,6 @@ mission
 								m.exp += exp_reward
 								m.ryo += ryo_reward
 								m.Levelup()
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
@@ -206,7 +202,6 @@ mission
 								m.exp += exp_reward
 								m.ryo += ryo_reward
 								m.Levelup()
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
@@ -224,7 +219,6 @@ mission
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m.Levelup()
-							spawn() m.client.UpdateCharacterPanel()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
 
@@ -256,7 +250,6 @@ mission
 								m.exp += exp_reward
 								m.ryo += ryo_reward
 								m.Levelup()
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 

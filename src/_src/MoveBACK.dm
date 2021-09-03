@@ -91,8 +91,7 @@ mob
 					view(src)<<sound('SkillDam_ThrowSuriken3.wav',0,0,volume=100)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
-					if(loc.loc:Safe!=1)src.LevelStat("Ninjutsu",rand(6,10))
-					src.Levelup()
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
 					//spawn(3)if(M) M.injutsu=0
@@ -116,7 +115,6 @@ mob
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
-					src.Levelup()
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
 					//spawn(3) if(M) M.injutsu=0
@@ -140,7 +138,6 @@ mob
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
-					src.Levelup()
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
 					//spawn(4) if(M) M.injutsu=0
@@ -164,7 +161,6 @@ mob
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
-					src.Levelup()
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
 					//spawn(5)if(M)M.injutsu=0
@@ -292,7 +288,6 @@ client
 						src.mob.arrow="L"
 						flick("climb",src.mob)
 						if(mob.loc.loc:Safe!=1) src.mob.LevelStat("Strength",rand(1,4))
-						src.mob.Levelup()
 						..()
 						//step(src,NORTH)
 						//return
@@ -522,7 +517,6 @@ client
 						src.mob.arrow="L"
 						flick("climb",src.mob)
 						src.mob.LevelStat("Strength",rand(1,2))
-						src.mob.Levelup()
 						..()
 				if(src.mob.arrow=="L")
 					spawn()
@@ -635,7 +629,6 @@ client
 						src.mob.arrow="L"
 						flick("climb",src.mob)
 						src.mob.LevelStat("Strength",rand(1,2))
-						src.mob.Levelup()
 						..()
 				if(src.mob.arrow=="R")
 					spawn()
@@ -884,11 +877,9 @@ client
 				if(istype(src.mob.loc, /turf/Ground/Water))
 					if(src.mob.swimming)
 						spawn() src.mob.LevelStat("Agility", rand(2,4))
-						spawn() src.mob.Levelup()
 
 					if(src.mob.walkingonwater)
 						spawn() src.mob.LevelStat("Ninjutsu", rand(4,8))
-						spawn() src.mob.Levelup()
 
 				if(src.mob.equipped == "Weights")
 					if(prob(50))

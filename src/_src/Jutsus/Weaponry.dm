@@ -268,7 +268,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -392,7 +391,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									del(src)
 							else
 								if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
@@ -466,7 +464,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										del(src)
 								else
 									src.loc=M.loc
@@ -690,7 +687,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									del(src)
 
 							else
@@ -765,7 +761,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										del(src)
 								else
 									src.loc=M.loc
@@ -990,7 +985,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									del(src)
 
 							else
@@ -1066,7 +1060,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 
 										del(src)
 								else
@@ -1251,7 +1244,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -1524,7 +1516,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -1762,7 +1753,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -1823,7 +1813,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -1962,7 +1951,7 @@ obj
 									if(Owner)
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,2))
-										Owner.Levelup()
+
 									if(prob(15))
 										M.speeding=0
 									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
@@ -1978,7 +1967,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -2011,7 +1999,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -2102,7 +2089,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -2135,7 +2121,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
