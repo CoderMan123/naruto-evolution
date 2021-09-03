@@ -536,6 +536,47 @@ mob
 							names_taken.Remove(name)
 							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has removed [name] from the list of taken character names.<br />", LOG_ADMINISTRATOR)
 							alert("The character name, [name], has been removed from the list of taken character names.", "Manage Names")
+			
+			Change_Password()
+				set category = "Administrator"
+				
+				var/list/savefile_dirs = flist("[SAVEFILE_CHARACTERS]/")
+				var/list/savefile_list = list()
+				
+				for(var/dir in savefile_dirs)
+					savefile_list.Add(flist("[SAVEFILE_CHARACTERS]/[dir]"))
+				
+				for(var/sav in savefile_list)
+					if(findlasttext(sav, ".sav.lk")) savefile_list.Remove(sav)
+					if(findlasttext(sav, ".sav.backup")) savefile_list.Remove(sav)
+					if(findlasttext(sav, ".sav") == 0) savefile_list.Remove(sav)
+
+				var/savefile = input("Select which savefile you'd like to update the account password to.") as null|anything in savefile_list
+
+				if(savefile)
+					for(var/dir in savefile_dirs)
+					
+						if(fexists("[SAVEFILE_CHARACTERS]/[dir]/[savefile].lk"))
+							alert("This savefile is locked and cannot be modified.", "Change Password")
+							
+							break
+		
+						else if(fexists("[SAVEFILE_CHARACTERS]/[dir]/[savefile]"))
+							var/password = input("Please enter a new password for the savefile: [savefile].", "Change Password") as null|text
+							if(password)
+								if(fcopy("[SAVEFILE_CHARACTERS]/[dir]/[savefile]", "[SAVEFILE_CHARACTERS]/[dir]/[time2text(world.realtime, "YYYY-MM-DD")]_[world.timeofday]-[savefile].backup"))
+									var/savefile/F = new(savefile)
+									password = sha1("[password][sha1(ckey(F["key"]))]")
+									F["password_hotfix"] << password
+									alert("You have updated the password for the savefile: [savefile].", "Change Password")
+									
+								else
+									alert("Savefile backup failed, so the savefile password was not updated.", "Change Password")
+									
+							else if(!isnull(password))
+								alert("The password may not be blank.", "Change Password")
+								
+							break
 
 			Change_Ryo()
 				set category = "Administrator"
