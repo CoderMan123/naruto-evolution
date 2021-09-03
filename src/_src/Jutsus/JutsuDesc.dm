@@ -3,7 +3,7 @@ obj
 		layer = 10000
 		verb
 			View_Description()
-				set category = hidden
+				set category = null
 				set src in usr.contents
 				usr.client.Alert(src.Description, src.name)
 
