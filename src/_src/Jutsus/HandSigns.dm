@@ -151,7 +151,7 @@ obj
 					usr<<output("You are not the appropriate speciality to learn this technique. ([Specialist]).","Action.Output")
 					return
 				if(has_reqs==1)
-					var/I=usr.CustomInput("Skill Tree","[Description]<br><br>Buy this jutsu for [src.Sprice] skill points?",list("Yes","No"))
+					var/I=usr.CustomInput("[src.name]","[Description]<br><br>Buy this jutsu for [src.Sprice] skill points?",list("Yes","No"))
 					if(!I) return
 					switch(I:name)
 						if("Yes")
