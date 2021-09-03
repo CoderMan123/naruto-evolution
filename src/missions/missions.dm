@@ -99,7 +99,7 @@ mission
 					spawn() M.client.Alert("I'm still waiting on that squad intel. Please hurry along and pick it up from [src.required_mobs[1]]", "[src.complete_npc]")
 
 				// This mission belongs to another Squad
-				else if(squad && O && !squad.mission.complete)
+				else if(squad && O && !O.squad.mission.complete)
 					O.squad.mission.complete = world.realtime
 
 					M.DestroyItem(O)
