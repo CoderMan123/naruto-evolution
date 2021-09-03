@@ -387,10 +387,8 @@ mob/Admin/verb
 
 	Edit(atom/O in world)
 		set category = "Staff"
-		var/reasonforedit=input("Why are you editing?") as text
-		world<<"[usr] is editing [O]! Reason : [reasonforedit]"
 		Edited(O)
-		text2file("[usr]([usr.key]) edited [O]! Reason : [reasonforedit]: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
+		text2file("[usr]([usr.key]) edited [O]! [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
 
 	Add_Pixel_Artist(mob/M in mobs_online)
 		set category="Staff"
