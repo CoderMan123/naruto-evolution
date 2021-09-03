@@ -4,8 +4,10 @@ mob
 	proc/Save()
 		if(src.client && mobs_online.Find(src))
 			var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]).sav")
+			#ifdef DEBUG_SAVEFILE
 			text2file("[time2text(world.realtime, "YYYY/MM/DD hh:mm:ss")] (Write)<br />", LOG_SAVES)
 			text2file("\[O]: [F]...<br />", LOG_SAVES)
+			#endif
 			if(src.Write(F, src.name)) return 1
 			else return 0
 		else return 0
@@ -25,8 +27,10 @@ mob
 					src.client.logging_in = 0
 					return 0
 				else
+					#ifdef DEBUG_SAVEFILE
 					text2file("[time2text(world.realtime, "YYYY/MM/DD hh:mm:ss")] (Read)<br />", LOG_SAVES)
 					text2file("\[O]: [F]...<br />", LOG_SAVES)
+					#endif
 					if(src.Read(F, character, password)) return 1
 					else return 0
 			else
@@ -55,35 +59,51 @@ mob
 						if(issaved(src.vars[v]))
 							if(initial(src.vars[v]) == src.vars[v])
 								F.dir.Remove(v)
+								#ifdef DEBUG_SAVEFILE
 								text2file("\[W]: \[RM]: \[initial()]:  [v] = [src.vars[v]]<br />", LOG_SAVES)
+								#endif
 							else if(exclude.Find(v))
 								F.dir.Remove(v)
+								#ifdef DEBUG_SAVEFILE
 								text2file("\[W]: \[RM]: \[exclude.Find()]:  [v] = [src.vars[v]]<br />", LOG_SAVES)
+								#endif
 							else
 								F[v] << src.vars[v]
+								#ifdef DEBUG_SAVEFILE
 								text2file("\[W]: [v] = [src.vars[v]]<br />", LOG_SAVES)
+								#endif
 						else
 							F.dir.Remove(v)
+							#ifdef DEBUG_SAVEFILE
 							text2file("\[W]: \[RM]: \[!issaved()]:  [v] = [src.vars[v]]<br />", LOG_SAVES)
+							#endif
 
 					F["password_hotfix"] << src.password
 					F["x"] << src.x
 					F["y"] << src.y
 					F["z"] << src.z
 					F["savefile_version"] << savefile_version
+					#ifdef DEBUG_SAVEFILE
 					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
+					#endif
 
 				else
+					#ifdef DEBUG_SAVEFILE
 					text2file("\[E]: \[W]: null character when attempting to write to savefile.<br />", LOG_SAVES)
 					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
+					#endif
 					return 0
 			else
+				#ifdef DEBUG_SAVEFILE
 				text2file("\[E]: \[W]: invalid attempt to write savefile while not logged in.<br />", LOG_SAVES)
 				text2file("\[C]: [F]<br /><br />", LOG_SAVES)
+				#endif
 				return 0
 		else
+			#ifdef DEBUG_SAVEFILE
 			text2file("\[E]: \[W]: null client when attempting to write to savefile.<br />", LOG_SAVES)
 			text2file("\[C]: [F]<br /><br />", LOG_SAVES)
+			#endif
 			return 0
 		..()
 
@@ -99,24 +119,36 @@ mob
 						if(issaved(src.vars[v]))
 							if(!isnull(F[v]))
 								F[v] >> src.vars[v]
+								#ifdef DEBUG_SAVEFILE
 								text2file("\[R]: [v] = [src.vars[v]]<br />", LOG_SAVES)
+								#endif
 							else
 								F.dir.Remove(v)
+								#ifdef DEBUG_SAVEFILE
 								text2file("\[R]: \[RM]: \[isnull()]:  [v] = [src.vars[v]]<br />", LOG_SAVES)
+								#endif
 
 					F["password_hotfix"] >> src.password
+					#ifdef DEBUG_SAVEFILE
 					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
+					#endif
 				else
+					#ifdef DEBUG_SAVEFILE
 					text2file("\[E]: \[R]: null character name when attempting to read from savefile.<br />", LOG_SAVES)
 					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
+					#endif
 					return 0
 			else
+				#ifdef DEBUG_SAVEFILE
 				text2file("\[E]: \[R]: invalid attempt to read savefile while already logged in.<br />", LOG_SAVES)
 				text2file("\[C]: [F]<br /><br />", LOG_SAVES)
+				#endif
 				return 0
 		else
+			#ifdef DEBUG_SAVEFILE
 			text2file("\[E]: \[R]: null client when attempting to read from savefile.<br />", LOG_SAVES)
 			text2file("\[C]: [F]<br /><br />", LOG_SAVES)
+			#endif
 			return 0
 		..()
 
