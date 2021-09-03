@@ -4,7 +4,7 @@ obj
 		verb
 			View_Description()
 				set category = null
-				set src in usr.contents
+				set src in usr.jutsus
 				usr.client.Alert(src.Description, src.name)
 
 //NonClan
