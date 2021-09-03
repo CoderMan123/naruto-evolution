@@ -90,11 +90,11 @@ mob/npc
 					else
 						// Complete mission (another squad)
 						var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
-						if(O && O.squad.mission)
+						if(O && O.squad.mission && !O.squad.mission.complete)
 							O.squad.mission.Complete(usr)
 
 						// Request mission (Squad leader only)
-						else if(squad && squad.leader[usr.ckey] && !squad.mission)
+						else if(squad && squad.leader[usr.ckey])
 							// Check for mission cooldown
 							var/mission_delay = ((world.realtime - usr.client.last_mission)/10/60)
 							if(mission_delay < 20)
