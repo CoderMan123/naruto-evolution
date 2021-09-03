@@ -74,7 +74,7 @@ squad
 
 	proc/Disband(mob/M)
 		if(src.leader[M.ckey])
-			if(src.mission)
+			if(src.mission && !src.mission.complete)
 				M.client.Alert("You can't disband your squad while on a mission.")
 			else
 				for(var/ckey in src.members)
@@ -93,7 +93,7 @@ squad
 
 	proc/Invite(mob/M)
 		if(src.leader[M.ckey])
-			if(src.mission)
+			if(src.mission && !src.mission.complete)
 				M.client.Alert("You can't invite anyone to your squad while on a mission.")
 
 			else if(src.members.len > 4)
@@ -123,7 +123,7 @@ squad
 			M.client.Alert("Only the Squad Leader can invite someone to the Squad.", "Squad")
 
 	proc/Leave(mob/M)
-		if(src.mission)
+		if(src.mission && !src.mission.complete)
 			M.client.Alert("You can't leave your squad while on a mission.")
 		else
 			switch(M.client.Alert("Are you sure you want to leave your squad?", "Leave Squad", list("Yes", "No")))
@@ -141,7 +141,7 @@ squad
 
 	proc/Kick(mob/M, var/ckey)
 		if(src.leader[M.ckey])
-			if(src.mission)
+			if(src.mission && !src.mission.complete)
 				M.client.Alert("You can't kick someone from your squad while on a mission.")
 
 			else
