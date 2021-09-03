@@ -61,7 +61,7 @@ mob
 					if(src.Intang)
 						return
 					if(src.multisized)
-						damage = damage*0.3
+						damage = round(damage*0.3)
 					src.health -= damage
 					if(src.health < 0)
 						src.health = 0
