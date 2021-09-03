@@ -668,7 +668,6 @@ obj
 										M.DealDamage(src.damage,src.Owner,"NinBlue")
 										M.Bleed()
 										victim = M
-										world<<"[victim]"//debug
 										if(M.henge==4||M.henge==5)M.HengeUndo()
 										if(M&&!M.dead)
 											M.ftgmarked=1
@@ -678,11 +677,9 @@ obj
 											src.pixel_y=88
 											spawn(80)
 												if(src)
-													world<<"if(src)"//debug
 													src.loc=null
 													P.ftgkunai=null
 													if(M)
-														world<<"if(victim)"//debug
 														M.ftgmarked = 0
 														victim = null
 										else
