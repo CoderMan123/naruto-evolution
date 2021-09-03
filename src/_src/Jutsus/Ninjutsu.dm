@@ -636,6 +636,7 @@ obj
 				density=1
 				var/mob/P
 				var/obj/ftgkunai
+				var/mob/victim
 				New()
 					..()
 					P=src.Owner
@@ -652,6 +653,9 @@ obj
 								if(src)
 									ftgkunai.loc=null
 									P.ftgkunai=null
+									if(victim)
+										victim.ftgmarked = 0
+										victim = null
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
@@ -663,6 +667,7 @@ obj
 										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
 										M.DealDamage(src.damage,src.Owner,"NinBlue")
 										M.Bleed()
+										victim = M
 										if(M.henge==4||M.henge==5)M.HengeUndo()
 										if(M&&!M.dead)
 											M.ftgmarked=1
@@ -674,6 +679,9 @@ obj
 												if(src)
 													ftgkunai.loc=null
 													P.ftgkunai=null
+													if(victim)
+														victim.ftgmarked = 0
+														victim = null
 										else
 											if(src)
 												src.density=0

@@ -80,6 +80,7 @@ mob
 								if(M) M.dir = get_dir(M,src)
 								if(M) M.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/4,src,"NinBlue")
 								sleep(1)
+							M.ftgmarked = 0
 					src.icon_state = ""
 					src.move=1
 					src.injutsu=0
