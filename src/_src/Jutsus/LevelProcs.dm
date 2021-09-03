@@ -916,7 +916,7 @@ mob
 
 					spawn(3000) if(!respawned && src.dead) src.Respawn()
 
-					if(src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
+					if(src.client && src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
 						respawned = 1
 						src.Respawn()
 
