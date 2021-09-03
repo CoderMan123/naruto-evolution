@@ -66,6 +66,7 @@ mob
 				if("Agility")agilityexp += round(howmuch)
 				if("Precision")precisionexp += round(howmuch)
 			Levelup()
+			
 		Levelup()
 			if(src.xplock==1)
 				src<<output("You have an Experience lock on you. This measure is used against the abusers / AFK trainers. Admin decides when this is removed.","Action.Output")
@@ -96,6 +97,13 @@ mob
 					src.maxexp+=8
 				if(src.level>80&&src.level<=100)
 					src.maxexp+=11
+
+				if(src.client)
+					spawn()
+						var/squad/squad = src.GetSquad()
+						if(squad)
+							squad.Refresh()
+
 				src.Levelup()
 				spawn(15)
 					src.overlays-=O
@@ -234,14 +242,9 @@ mob
 					src.maxprecisionexp+=150+round(src.precision/1.5)
 				src.Levelup()
 				next
-			if(!src.client) spawn() src.UpdateHMB()
-			else if(!src.likeaclone) spawn() src.UpdateHMB()
-			if(src.client) spawn() src.client.UpdateCharacterPanel()
-			if(src.client)
-				spawn()
-					var/squad/squad = src.GetSquad()
-					if(squad)
-						squad.Refresh()
+
+			spawn() src.UpdateHMB()
+			
 			if(level>=25&&!Element2)
 				var/Elements=list("Fire","Water","Earth","Lightning","Wind")
 				src.Element2=src.CustomInput("Element Options","What secondary element would you like?.",Elements-src.Element)

@@ -478,8 +478,10 @@ mob
 						if(100) H.icon = 'assets/aseprite/Expbar/1.png'
 
 		UpdateHMB()
-			spawn() src.UpdateBars()
-			if(src.client) spawn() src.client.UpdateCharacterPanel()
+			if(src.client)
+				spawn() src.UpdateBars()
+				spawn() src.client.UpdateCharacterPanel()
+
 			if(!src.henge)
 				for(var/obj/Screen/O in src.hbar)
 					if(istype(O, /obj/Screen/healthbar))
