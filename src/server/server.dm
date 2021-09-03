@@ -47,7 +47,7 @@ world
 		spawn() ZetsuEvent()
 		spawn() Advert()
 		spawn() RepopWorld()
-		spawn() AutoCheck()
+		spawn() AutomaticExperienceLock()
 		spawn() LinkWarps()
 		spawn() HTMLlist()
 		spawn() Kage_Inactivity_Check()
