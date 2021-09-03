@@ -84,7 +84,7 @@ mob/npc
 				// Only speak to players in the same village
 				if(src.village == usr.village)
 					var/squad/squad = usr.GetSquad()
-					if(squad && squad.mission)
+					if(squad && squad.mission && !squad.mission.complete)
 						// Complete mission (original squad)
 						squad.mission.Complete(usr)
 					else
@@ -241,7 +241,7 @@ mob/npc
 											usr.client.Alert("You must be at least ANBU rank to take on S rank missions.", src.name)
 
 						// Mission request denied: active mission
-						else if(squad && squad.members[usr.ckey] && squad.mission)
+						else if(squad && squad.members[usr.ckey] && squad.mission && !squad.mission.complete)
 							usr.client.Alert("Your squad already has an active mission.", src.name)
 
 						// Mission request denied: leader must request mission
