@@ -641,9 +641,9 @@ mob
 
 								usr.client << output("You have used <u>Give Everything</u> on [C.mob.name].", "Action.Output")
 								C << output("[usr.name] has used <u>Give Everything</u> on you.", "Action.Output")
-								text2file("[usr]([usr.key]) has used give everything on [C.mob.name]([C.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
+								text2file("[usr]([usr.key]) has used give everything on [C.mob.name]([C.key]).: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>", LOG_STAFF)
 					else
-						text2file("[usr]([usr.key]) has attempted to use give everything on [C.mob.name]([C.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
+						text2file("[usr]([usr.key]) has attempted to use give everything on [C.mob.name]([C.key]).: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>", LOG_STAFF)
 						usr.client.Alert("You can only use this command on Administrators.")
 				else
 					usr.client.Alert("This command is restricted to Administrators.")

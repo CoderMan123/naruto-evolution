@@ -453,7 +453,7 @@ mob
 							X.KillCombo++
 						if(X.village==src.village&&X.village!="Missing-Nin"&&src.village!="Missing-Nin")
 							world<<output("[src] was knocked out by [X], and they were both from the [src.village]!","Action.Output")
-							//text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)
+							//text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_KILLS)
 							if(X.village == "Missing-Nin"|| X.village == "Seven Swordsmen"||X.village=="Akatsuki"||X.village=="Anbu Root") goto MissSkip
 							if(loc in block(locate(71,95,4),locate(200,163,4))) goto chuuninskip
 							X.exp-=round(X.exp*0.5)
@@ -468,7 +468,7 @@ mob
 						else if(!istype(src, /mob/npc/combat/white_zetsu) && !istype(src, /mob/npc/combat/animals)) world<<output("[src] was knocked out by [X]!","Action.Output")
 
 						if(!istype(src, /mob/npc/combat/white_zetsu)&&!istype(src, /mob/npc/combat/animals))
-							text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)//Kill Log test
+							text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_KILLS)//Kill Log test
 						src<<output("You were knocked out by [X].","Action.Output")
 						if(!istype(src, /mob/npc/combat/animals))
 							var/exp_loss = 2

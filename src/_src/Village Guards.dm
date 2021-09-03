@@ -440,7 +440,7 @@ mob/NPCs/Shinobi
 					killer<<output("Careful! Killing your villagers will get you kicked from the village. ([killer.Vkill]/5)","Action.Output")
 				else //if(killer.CheckVkill())
 					world<<output("[killer] has been booted from [killer.village] for village killing!","Action.Output")
-					text2file("[killer] has been booted from [killer.village] for village killing: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_STAFF)
+					text2file("[killer] has been booted from [killer.village] for village killing: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 
 					if(killer.village=="Akatsuki")
 						for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in killer)
