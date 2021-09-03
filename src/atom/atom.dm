@@ -10,12 +10,8 @@ atom
 				if(istype(src, /mob))
 					var/mob/m = src
 
-					if(m.client)
-						names_taken.Remove(lowertext(m.name))
-						names_taken.Add(lowertext(Name))
 					m.name = Name
 					m.rname = Name
-					m.character = Name
 
 				if(src.name_overlays)
 					src.overlays -= src.name_overlays
