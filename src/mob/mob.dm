@@ -847,7 +847,6 @@ mob
 			src.walkingonwater=0
 			src.overlays=0
 			src.RestoreOverlays()
-			spawn() src.client.UpdateCharacterPanel()
 			spawn() src.UpdateHMB()
 			spawn() src.Run()
 			revived=0
