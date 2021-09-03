@@ -131,8 +131,8 @@ mob/Moderator/verb/
 		world<<"<font color=red>Exp lock manually initiated! Everyone on the server is now officially Exp Locked!"
 		world<<"<font color=red>Please use the button \"Remove Exp Lock\" on the bottom bar to remove the lock!"
 		for(var/mob/M in world)
-			if(M.key)
-				M.exp_locked=1
+			if(M.key && !M.exp_locked)
+				M.exp_locked = 1
 				winset(M, "Navigation.ExpLockButton", "is-disabled = 'false'")
 				spawn() M.client.FlashExperienceLock()
 			else
