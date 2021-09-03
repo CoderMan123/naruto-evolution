@@ -121,9 +121,14 @@ mob
 			if(src.byakugan==0)
 				src<<output("<font color=#C0C0C0>You must have Byakugan activated.</font>","Action.Output")
 				return
+
+			var/mob/c_target = src.Target_Get(TARGET_MOB)
+			if(!c_target)
+				src << output("This jutsu requires a target","Action.Output")
+				return
+
 			for(var/obj/Jutsus/Eight_Trigrams_64_Palms/J in src.jutsus)
 				if(src.PreJutsu(J))
-					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/30)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/30)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/30)*jutsustatexp))
