@@ -469,6 +469,10 @@ client
 			else
 				src.browser_url = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
+		
+		View_Description(obj/Jutsu/J in usr.jutsus)
+			set category = null
+			usr.client.Alert(J.Description, J.name)
 
 	proc
 		FlashExperienceLock()

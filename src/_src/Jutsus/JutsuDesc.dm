@@ -1,11 +1,6 @@
 obj
 	Jutsus
 		layer = 10000
-		verb
-			View_Description()
-				set category = null
-				set src in usr.jutsus
-				usr.client.Alert(src.Description, src.name)
 
 //NonClan
 		Chakra_Infusion_Training//chakrainfusionstuff
