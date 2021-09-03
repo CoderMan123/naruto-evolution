@@ -156,7 +156,6 @@ mission
 							if(squad.members[m.client.ckey])
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
@@ -187,7 +186,6 @@ mission
 							if(squad.members[m.client.ckey])
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
@@ -235,7 +233,6 @@ mission
 							if(squad.members[m.client.ckey])
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
