@@ -2268,7 +2268,7 @@ mob
 				flick("groundjutsu",src)
 				for(var/mob/M in orange(7))
 					if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/npc)) continue
-					M.DealDamage(jutsudamage+round((src.strength / 150)*2*jutsudamage*0.6),src,"TaiOrange")
+					M.DealDamage(jutsudamage+round((src.strength / 150)*2*jutsudamage*1.2),src,"TaiOrange")
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					M.icon_state="dead"
 					M.move=0
