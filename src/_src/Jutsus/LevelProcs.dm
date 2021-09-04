@@ -56,7 +56,6 @@ mob
 			if(!A) return
 			if(A.Safe&&!mission) return
 			if(src.exp_locked)
-				src<<output("<font color=red><small><small>You're currently exp locked! Use the Remove Exp Lock button under the options pane!</small></Font>","Action.Output")
 				return
 			switch(stat)
 				if("Defence")defexp += round(howmuch)
