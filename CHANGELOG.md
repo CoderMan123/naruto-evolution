@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Certain jutsu now level at the correct rate
 - Health regen no longer triggers FTG: Great Escape
 - Fixed bugs with FTG, FTG: Kunai and Warp Rasengan
+- Fixed Political Escort missions
 
 ### Changed
 - Can no longer use 64 palms without a target
@@ -33,6 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Buffed Super Multi-Size Technique's damage
 - Nerf Tsukuyomi's damage
 - Buffed stat exp gain from casting jutsu
+- Buffed stat exp gain from Ninja Tools
+- Buffed stat exp gain from weights
 
 ### Removed
 
