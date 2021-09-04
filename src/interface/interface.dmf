@@ -266,6 +266,7 @@ window "Browser"
 		can-close = false
 		can-minimize = false
 		can-resize = false
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -1643,6 +1644,8 @@ window "Main"
 		can-resize = false
 		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
+		outer-size = 1294x734
+		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1679,6 +1682,7 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		left = "Navigation"
 		is-vert = false
@@ -1688,6 +1692,7 @@ window "Main"
 		size = 1x1
 		anchor1 = 100,100
 		anchor2 = 100,100
+		background-color = none
 		is-visible = false
 		saved-params = ""
 		text = ""
@@ -1697,6 +1702,7 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -1732,10 +1738,27 @@ window "Main"
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "Reconnect"
 		is-vert = false
+	elem "Reconnect"
+		type = BUTTON
+		pos = 1200,0
+		size = 25x19
+		anchor1 = 100,0
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'assets\\interface\\buttons\\Minimize.png'
+		command = ".reconnect"
+		is-flat = true
 	elem "label18"
 		type = LABEL
 		pos = 3,3
@@ -2130,8 +2153,6 @@ window "Reconnect"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
-		outer-size = 314x169
-		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -2198,7 +2219,7 @@ window "Reconnect"
 window "Settings"
 	elem "Settings"
 		type = MAIN
-		pos = 372,0
+		pos = 281,0
 		size = 500x400
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -2383,6 +2404,7 @@ window "SkillTree"
 		can-close = false
 		can-minimize = false
 		can-resize = false
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2457,7 +2479,7 @@ window "SkillTree"
 window "SkillTree-Progress"
 	elem "SkillTree-Progress"
 		type = MAIN
-		pos = 0,0
+		pos = 281,0
 		size = 425x425
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -3194,7 +3216,7 @@ window "AlertBox3"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3300,7 +3322,7 @@ window "AlertBox_Input1"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3391,7 +3413,7 @@ window "AlertBox_Input2"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3496,7 +3518,7 @@ window "AlertBox_Input3"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3615,7 +3637,7 @@ window "AlertBox_List1"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3693,7 +3715,7 @@ window "AlertBox_List2"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3785,7 +3807,7 @@ window "AlertBox_List3"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3891,7 +3913,7 @@ window "AlertBox_List4"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4011,7 +4033,7 @@ window "AlertBox_List5"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4145,7 +4167,7 @@ window "AlertBox_List6"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4293,7 +4315,7 @@ window "AlertBox_List7"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4455,7 +4477,7 @@ window "AlertBox_List8"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		macro = "Main"
+		macro = "Macro"
 	elem "Background"
 		type = LABEL
 		pos = 0,0

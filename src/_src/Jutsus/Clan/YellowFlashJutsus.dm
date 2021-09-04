@@ -80,6 +80,7 @@ mob
 								if(M) M.dir = get_dir(M,src)
 								if(M) M.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/4,src,"NinBlue")
 								sleep(1)
+							M.ftgmarked = 0
 					src.icon_state = ""
 					src.move=1
 					src.injutsu=0
@@ -137,8 +138,10 @@ mob
 					T.icon='YellowFlashKunai.dmi'
 					T.icon_state="ground"
 					src<<output("You will be sent to this location the next time your character accumulates damage in the next 20 seconds!.","Action.Output")
-					var/X = src.health
-					while(src.health == X)sleep(1)
+					var/lasthp = src.health
+					while(src.health >= lasthp)
+						lasthp = src.health
+						sleep(1)
 					if(get_dist(usr,T)>50||usr.z != T.z)
 						usr<<"\red <b>Your substitution was set too far away. Jutsu failed!"
 						T.loc = null

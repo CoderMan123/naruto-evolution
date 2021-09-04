@@ -4,6 +4,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.7
+### Added
+- Added damage reduction while in Super Multi-Size Technique
+- Added the ability to view jutsu descriptions by right clicking them in the P menu
+- Added a reconnect button to the title bar
+
+### Fixed
+- Fixed squad channel
+- Fixed Squad window spam refreshing
+- Made many performance optimizations
+- Fixed macros not functining when focus is on a window
+- Fixed Rinnegan activation being annouced to the whole server
+- Players can no longer dash while knocked down by rotating dummy
+- Fixed a bug with dodging while knocked down or dead
+- Fixed bug with experience lock button
+- Fixed stolen intel scrolls not being handed in
+- Certain missions will now fail on reboot instead of bugging the squad
+- Mission status now displays correctly
+- Human Bullet Tank no longer deals massive damage when stuck ontop of someone
+- Certain jutsu now level at the correct rate
+- Health regen no longer triggers FTG: Great Escape
+- Fixed bugs with FTG, FTG: Kunai and Warp Rasengan
+- Fixed Political Escort missions
+
+### Changed
+- Can no longer use 64 palms without a target
+- Buffed Human Bullet Tank
+- Buffed Super Multi-Size Technique's damage
+- Nerf Tsukuyomi's damage
+- Buffed stat exp gain from casting jutsu
+- Buffed stat exp gain from Ninja Tools
+- Buffed stat exp gain from weights
+
+### Removed
+
+
 ## 2.0.6
 ### Added
 - Made a new staff verb to fix peoples visuals.

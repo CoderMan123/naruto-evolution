@@ -80,6 +80,8 @@ mob
 							M.BeingThrown=1
 		Dodge()
 			set hidden=1
+			if(src.icon_state == "dead") return
+
 			src.HengeUndo()
 			if(src.kawarmi)
 				/*if(src.Intang)

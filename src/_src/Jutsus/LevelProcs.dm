@@ -66,6 +66,7 @@ mob
 				if("Agility")agilityexp += round(howmuch)
 				if("Precision")precisionexp += round(howmuch)
 			Levelup()
+
 		Levelup()
 			if(src.xplock==1)
 				src<<output("You have an Experience lock on you. This measure is used against the abusers / AFK trainers. Admin decides when this is removed.","Action.Output")
@@ -96,6 +97,13 @@ mob
 					src.maxexp+=8
 				if(src.level>80&&src.level<=100)
 					src.maxexp+=11
+
+				if(src.client)
+					spawn()
+						var/squad/squad = src.GetSquad()
+						if(squad)
+							squad.Refresh()
+
 				src.Levelup()
 				spawn(15)
 					src.overlays-=O
@@ -234,14 +242,9 @@ mob
 					src.maxprecisionexp+=150+round(src.precision/1.5)
 				src.Levelup()
 				next
-			if(!src.client) spawn() src.UpdateHMB()
-			else if(!src.likeaclone) spawn() src.UpdateHMB()
-			if(src.client) spawn() src.client.UpdateCharacterPanel()
-			if(src.client)
-				spawn()
-					var/squad/squad = src.GetSquad()
-					if(squad)
-						squad.Refresh()
+
+			spawn() src.UpdateHMB()
+			
 			if(level>=25&&!Element2)
 				var/Elements=list("Fire","Water","Earth","Lightning","Wind")
 				src.Element2=src.CustomInput("Element Options","What secondary element would you like?.",Elements-src.Element)
@@ -450,7 +453,7 @@ mob
 							X.KillCombo++
 						if(X.village==src.village&&X.village!="Missing-Nin"&&src.village!="Missing-Nin")
 							world<<output("[src] was knocked out by [X], and they were both from the [src.village]!","Action.Output")
-							//text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)
+							//text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_KILLS)
 							if(X.village == "Missing-Nin"|| X.village == "Seven Swordsmen"||X.village=="Akatsuki"||X.village=="Anbu Root") goto MissSkip
 							if(loc in block(locate(71,95,4),locate(200,163,4))) goto chuuninskip
 							X.exp-=round(X.exp*0.5)
@@ -465,7 +468,7 @@ mob
 						else if(!istype(src, /mob/npc/combat/white_zetsu) && !istype(src, /mob/npc/combat/animals)) world<<output("[src] was knocked out by [X]!","Action.Output")
 
 						if(!istype(src, /mob/npc/combat/white_zetsu)&&!istype(src, /mob/npc/combat/animals))
-							text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>",LOG_KILLS)//Kill Log test
+							text2file("[src]([src.key]) was ko'd by [X]([X.key]) at [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_KILLS)//Kill Log test
 						src<<output("You were knocked out by [X].","Action.Output")
 						if(!istype(src, /mob/npc/combat/animals))
 							var/exp_loss = 2
@@ -731,13 +734,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M.LevelStat("Ninjutsu",rand(10,25),1)
-											M.Levelup()
+
 										if(2)
 											M.LevelStat("strength",rand(10,25),1)
-											M.Levelup()
+
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
-											M.Levelup()
+
 								for(var/i in X.Squad.Members)
 									if(getOwner(i))
 										M = getOwner(i)
@@ -749,13 +752,13 @@ mob
 											switch(GAIN)
 												if(1)
 													M.LevelStat("Ninjutsu",rand(10,25),1)
-													M.Levelup()
+
 												if(2)
 													M.LevelStat("strength",rand(10,25),1)
-													M.Levelup()
+
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
-													M.Levelup()
+
 										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 										//M.Mission=null
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
@@ -768,13 +771,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
-											M2.Levelup()
+
 										if(2)
 											M2.LevelStat("strength",rand(10,25),1)
-											M2.Levelup()
+
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
-											M2.Levelup()
+
 							X.Levelup()
 
 						if(X.Mission=="Jounin Kill [src] ([src.ckey])")
@@ -792,13 +795,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M.LevelStat("Ninjutsu",rand(10,25),1)
-											M.Levelup()
+
 										if(2)
 											M.LevelStat("strength",rand(10,25),1)
-											M.Levelup()
+
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
-											M.Levelup()
+
 								for(var/i in X.Squad.Members)
 									if(getOwner(i))
 										M = getOwner(i)
@@ -810,13 +813,13 @@ mob
 											switch(GAIN)
 												if(1)
 													M.LevelStat("Ninjutsu",rand(10,25),1)
-													M.Levelup()
+
 												if(2)
 													M.LevelStat("strength",rand(10,25),1)
-													M.Levelup()
+
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
-													M.Levelup()
+
 										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 										//M.Mission=null
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
@@ -829,13 +832,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
-											M2.Levelup()
+
 										if(2)
 											M2.LevelStat("strength",rand(10,25),1)
-											M2.Levelup()
+
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
-											M2.Levelup()
+
 						if(X.Mission=="Elite Kill [src] ([src.ckey])")
 							X.Mission=null
 							X<<output("You have successfully completed your mission.","Action.Output")
@@ -851,13 +854,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M.LevelStat("Ninjutsu",rand(10,25),1)
-											M.Levelup()
+
 										if(2)
 											M.LevelStat("strength",rand(10,25),1)
-											M.Levelup()
+
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
-											M.Levelup()
+
 								for(var/i in X.Squad.Members)
 									if(getOwner(i))
 										M = getOwner(i)
@@ -869,13 +872,13 @@ mob
 											switch(GAIN)
 												if(1)
 													M.LevelStat("Ninjutsu",rand(10,25),1)
-													M.Levelup()
+
 												if(2)
 													M.LevelStat("strength",rand(10,25),1)
-													M.Levelup()
+
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
-													M.Levelup()
+
 										M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 										//M.Mission=null
 										for(var/obj/MissionObj/O in M) M.DestroyItem(O)
@@ -888,13 +891,13 @@ mob
 									switch(GAIN)
 										if(1)
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
-											M2.Levelup()
+
 										if(2)
 											M2.LevelStat("strength",rand(10,25),1)
-											M2.Levelup()
+
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
-											M2.Levelup()
+											
 					if(!Chuunins.Find(src))
 						if(X&&X.key&&src!=X)
 							if(X.z in global.warmaps && src.z in global.warmaps)
@@ -913,7 +916,7 @@ mob
 
 					spawn(3000) if(!respawned && src.dead) src.Respawn()
 
-					if(src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
+					if(src.client && src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
 						respawned = 1
 						src.Respawn()
 

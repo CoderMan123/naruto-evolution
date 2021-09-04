@@ -1,6 +1,7 @@
 obj
 	Jutsus
 		layer = 10000
+
 //NonClan
 		Chakra_Infusion_Training//chakrainfusionstuff
 			icon_state="chakrainfuse"
@@ -2125,7 +2126,7 @@ obj
 			reqs=list("RedPill")
 			Sprice=4
 			uses=100
-			Description="Convert your calories into vast amounts of chakra allowing you to grow in size exponencially for a duration. While in this form it is much easier for people to hit you and impossible to fit through tight spaces but you are able to smash the ground with 'S' dealing damage (Str|Nin) in a large radius around you. You must use Colorie Control or the Red Pill to be able to control your body well enough to use this."
+			Description="Convert your calories into vast amounts of chakra allowing you to grow in size exponencially for a duration. While in this form it is much easier for people to hit you and impossible to fit through tight spaces but you are able to smash the ground with 'S' dealing damage (Str|Nin) in a large radius around you and you're far more resistent to most damage. You must use Colorie Control or the Red Pill to be able to control your body well enough to use this."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*3

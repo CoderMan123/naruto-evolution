@@ -304,8 +304,7 @@ mob
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/6
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					src.Levelup()
-					src.UpdateHMB()
+					spawn() src.UpdateHMB()
 					//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 					flick("2fist",src)
 					view(src)<<sound('046.wav',0,0)

@@ -268,7 +268,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -392,7 +391,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									del(src)
 							else
 								if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
@@ -466,7 +464,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										del(src)
 								else
 									src.loc=M.loc
@@ -690,7 +687,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									del(src)
 
 							else
@@ -765,7 +761,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										del(src)
 								else
 									src.loc=M.loc
@@ -990,7 +985,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									del(src)
 
 							else
@@ -1066,7 +1060,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 
 										del(src)
 								else
@@ -1251,7 +1244,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -1524,7 +1516,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -1762,7 +1753,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -1823,7 +1813,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -1962,7 +1951,7 @@ obj
 									if(Owner)
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("strength",rand(1,2))
-										Owner.Levelup()
+
 									if(prob(15))
 										M.speeding=0
 									if(istype(O,/mob/npc) && !istype(O,/mob/npc/combat))
@@ -1978,7 +1967,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -2011,7 +1999,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -2102,7 +2089,6 @@ obj
 								else
 									flick("dodge",M)
 									if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-									M.Levelup()
 									src.loc=M.loc
 
 							else
@@ -2135,7 +2121,6 @@ obj
 									else
 										flick("dodge",M)
 										if(M.loc.loc:Safe!=1) M.LevelStat("Agility",rand(3,6))
-										M.Levelup()
 										src.loc=M.loc
 								else
 									src.loc=M.loc
@@ -2283,7 +2268,7 @@ mob
 				flick("groundjutsu",src)
 				for(var/mob/M in orange(7))
 					if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/npc)) continue
-					M.DealDamage(jutsudamage+round((src.strength / 150)*2*jutsudamage*0.6),src,"TaiOrange")
+					M.DealDamage(jutsudamage+round((src.strength / 150)*2*jutsudamage*1.2),src,"TaiOrange")
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					M.icon_state="dead"
 					M.move=0
@@ -2385,7 +2370,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(18, 30))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 60))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2398,7 +2383,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else if(!c_target)
 							var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(18, 30))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 60))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2427,7 +2412,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 55))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(80, 110))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2440,7 +2425,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 55))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(80, 110))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2469,7 +2454,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(20, 39))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 78))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2482,7 +2467,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(20, 39))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 78))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2511,7 +2496,7 @@ mob
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
 							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 24))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(24, 48))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2524,7 +2509,7 @@ mob
 							spawn(4)if(A)walk(A,A.dir)
 						else
 							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(12, 24))
+							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(24, 48))
 							if(prob(50))A.pixel_y+=rand(5,10)
 							else A.pixel_y-=rand(5,10)
 							if(prob(50))A.pixel_x+=rand(1,8)
@@ -2556,7 +2541,7 @@ mob
 								src.dir=get_dir(usr,c_target)
 								usr.Target_Atom(c_target)
 								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 51))
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(72, 102))
 								if(prob(50))A.pixel_y+=rand(5,10)
 								else A.pixel_y-=rand(5,10)
 								if(prob(50))A.pixel_x+=rand(1,8)
@@ -2572,7 +2557,7 @@ mob
 								step(A,usr.dir)
 							else
 								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 51))
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(72, 102))
 								if(prob(50))A.pixel_y+=rand(1,8)
 								else A.pixel_y-=rand(1,8)
 								if(prob(50))A.pixel_x+=rand(1,8)
@@ -2598,7 +2583,7 @@ mob
 							spawn(3)
 								usr.smokebomb=1
 								var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(90, 160))
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(180, 320))
 								SMOKE.loc=usr.loc
 								view(usr)<<sound('flashbang_explode2.wav',0,0)
 								src.overlays=0

@@ -74,7 +74,7 @@ squad
 
 	proc/Disband(mob/M)
 		if(src.leader[M.ckey])
-			if(src.mission)
+			if(src.mission && !src.mission.complete)
 				M.client.Alert("You can't disband your squad while on a mission.")
 			else
 				for(var/ckey in src.members)
@@ -93,7 +93,7 @@ squad
 
 	proc/Invite(mob/M)
 		if(src.leader[M.ckey])
-			if(src.mission)
+			if(src.mission && !src.mission.complete)
 				M.client.Alert("You can't invite anyone to your squad while on a mission.")
 
 			else if(src.members.len > 4)
@@ -123,7 +123,7 @@ squad
 			M.client.Alert("Only the Squad Leader can invite someone to the Squad.", "Squad")
 
 	proc/Leave(mob/M)
-		if(src.mission)
+		if(src.mission && !src.mission.complete)
 			M.client.Alert("You can't leave your squad while on a mission.")
 		else
 			switch(M.client.Alert("Are you sure you want to leave your squad?", "Leave Squad", list("Yes", "No")))
@@ -141,7 +141,7 @@ squad
 
 	proc/Kick(mob/M, var/ckey)
 		if(src.leader[M.ckey])
-			if(src.mission)
+			if(src.mission && !src.mission.complete)
 				M.client.Alert("You can't kick someone from your squad while on a mission.")
 
 			else
@@ -328,16 +328,19 @@ mob
 					var/start
 					var/complete
 					var/timer
-					var/score
+
 					if(squad.mission.start) start = time2text(squad.mission.start, "MM/DD/YYYY hh:mm:ss")
 					if(squad.mission.complete) complete = time2text(squad.mission.complete, "MM/DD/YYYY hh:mm:ss")
-					timer = squad.mission.GetTimer()
-					if(timer <= squad.mission.limit && squad.mission.complete)
-						score = "Pass"
-					else if(timer > squad.mission.limit)
-						score = "Fail"
-					else
-						score = "TBD"
+					
+					if(squad.mission.limit)
+						timer = squad.mission.GetTimer()
+						if(timer <= squad.mission.limit && squad.mission.complete)
+							squad.mission.status = "Pass"
+						else if(timer > squad.mission.limit)
+							squad.mission.status = "Failure"
+						else
+							squad.mission.status = "In-Progress"
+
 					mission = {"
 						<h2>Mission</h2>
 
@@ -349,7 +352,7 @@ mob
 									<th scope="col">Complete</th>
 									<th scope="col">Timer</th>
 									<th scope="col">Limit</th>
-									<th scope="col">Score</th>
+									<th scope="col">Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -359,7 +362,7 @@ mob
 									<td>[complete]</td>
 									<td>[round(timer, 0.01)] m</td>
 									<td>[squad.mission.limit] m</td>
-									<td>[score]</td>
+									<td>[squad.mission.status]</td>
 								</tr>
 							</tbody>
 						</table>

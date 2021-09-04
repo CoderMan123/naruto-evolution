@@ -16,7 +16,7 @@ mob
 						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 						if(J.level<4)
 							if(loc.loc:Safe!=1)
-								J.exp+=(jutsumastery/50)*(J.maxcooltime/20)
+								J.exp+=(jutsumastery/20)*(J.maxcooltime/20)
 								J.Levelup()
 						for(var/mob/M in oview(src,13))M.Target_Remove()
 						src.mizubunshin++
@@ -55,7 +55,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4)
 						if(loc.loc:Safe!=1)
-							J.exp+=(jutsumastery/50)*(J.maxcooltime/20)
+							J.exp+=(jutsumastery/20)*(J.maxcooltime/20)
 							J.Levelup()
 					flick("groundjutsu",src)
 					if(c_target)

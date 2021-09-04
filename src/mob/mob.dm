@@ -297,7 +297,7 @@ mob
 				del(A)
 
 		for(var/mob/summonings/SnakeSummoning/B in world)
-			if(B.lowner == src)
+			if(B.OWNER == src)
 				del(B)
 
 		for(var/mob/jutsus/KazekagePuppet/C in world)
@@ -305,7 +305,7 @@ mob
 				del(C)
 
 		for(var/mob/summonings/DogSummoning/D in world)
-			if(D.lowner == src)
+			if(D.OWNER == src)
 				del(D)
 
 
@@ -608,7 +608,7 @@ mob
 							if(src.GetSquad())
 								for(var/mob/M in mobs_online)
 									var/squad/squad = M.GetSquad()
-									if(squad.leader[M.ckey] || squad.members.Find(M.ckey) || administrators.Find(src.client.ckey))
+									if(squad && squad.leader[M.ckey] || squad.members.Find(M.ckey) || administrators.Find(src.client.ckey))
 										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
 
 								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_SQUAD)
@@ -847,7 +847,6 @@ mob
 			src.walkingonwater=0
 			src.overlays=0
 			src.RestoreOverlays()
-			spawn() src.client.UpdateCharacterPanel()
 			spawn() src.UpdateHMB()
 			spawn() src.Run()
 			revived=0

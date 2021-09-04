@@ -527,7 +527,7 @@ mob/Untargettable
 				spawn(20)if(src)src.bec2()
 obj
 	proc/linkfollow(mob/M)
-		if(M && src)
+		if(M && src && src.loc)
 			M.LinkFollowers+=src
 			src.loc = M.loc
 			spawn(0.2) src.linkfollow(M)
@@ -636,8 +636,8 @@ obj
 				density=1
 				var/mob/P
 				var/obj/ftgkunai
+				var/mob/victim
 				New()
-					..()
 					P=src.Owner
 					ftgkunai=P.ftgkunai
 					pixel_y+=32
@@ -652,17 +652,22 @@ obj
 								if(src)
 									ftgkunai.loc=null
 									P.ftgkunai=null
+									if(victim)
+										victim.ftgmarked = 0
+										victim = null
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
+							P=src.Owner
 							if(M)
 								if(M <> src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
 										M.DealDamage(src.damage,src.Owner,"NinBlue")
 										M.Bleed()
+										victim = M
 										if(M.henge==4||M.henge==5)M.HengeUndo()
 										if(M&&!M.dead)
 											M.ftgmarked=1
@@ -672,8 +677,11 @@ obj
 											src.pixel_y=88
 											spawn(80)
 												if(src)
-													ftgkunai.loc=null
+													src.loc=null
 													P.ftgkunai=null
+													if(M)
+														M.ftgmarked = 0
+														victim = null
 										else
 											if(src)
 												src.density=0

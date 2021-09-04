@@ -1303,33 +1303,45 @@ turf
 				//for(var/turf/T in range(src,0))
 				//	T.density=1
 				..()
-			Enter(mob/M)
-				if(!M.copy&&src:Climbable)
-					if(M.dashable==2)
-						if(M.mountainkit)
+			Enter(atom/A)
+				if(istype(A, /mob))
+					var/mob/M = A
+
+					if(!M.copy&&src:Climbable)
+						if(M.dashable==2)
+							if(M.mountainkit)
+								M.loc=locate(src.x,src.y,src.z)
+								M.canattack=0
+								M.firing=1
+								M.icon_state="climbS"
+								M.copy="Climb"
+								M.arrow="L"
+								var/obj/WArrow = image('Misc Effects.dmi',M,icon_state="arrow",layer=99)
+								WArrow.pixel_x=-64
+								WArrow.dir=WEST
+								M.ArrowTasked=WArrow
+								M<<WArrow
+							else
+								if(M.mountainwalk)M.loc=locate(src.x,src.y,src.z)
+								else ..()
+							M.icon_state = "climbS"
+					else
+						if(M.copy=="Climb")
 							M.loc=locate(src.x,src.y,src.z)
-							M.canattack=0
-							M.firing=1
-							M.icon_state="climbS"
-							M.copy="Climb"
-							M.arrow="L"
-							var/obj/WArrow = image('Misc Effects.dmi',M,icon_state="arrow",layer=99)
-							WArrow.pixel_x=-64
-							WArrow.dir=WEST
-							M.ArrowTasked=WArrow
-							M<<WArrow
-						else
-							if(M.mountainwalk)M.loc=locate(src.x,src.y,src.z)
-							else ..()
-						M.icon_state = "climbS"
+							M.icon_state = "climbS"
+						else ..()
+
 				else
+					..()
+
+			Enter(atom/A)
+				if(istype(A, /mob))
+					var/mob/M = A
+
 					if(M.copy=="Climb")
-						M.loc=locate(src.x,src.y,src.z)
-						M.icon_state = "climbS"
-					else ..()
-			Entered(mob/M)
-				if(M.copy=="Climb")
-					M.icon_state="climbS"
+						M.icon_state="climbS"
+				else
+					..()
 
 			Edges
 				//layer=MOB_LAYER+6

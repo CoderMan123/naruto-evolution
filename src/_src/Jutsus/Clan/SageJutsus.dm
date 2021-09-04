@@ -333,7 +333,7 @@ mob
 						view(usr)<<sound('flashbang_explode2.wav',0,0)
 						var/mob/summonings/SnakeSummoning/B = new/mob/summonings/SnakeSummoning(usr.loc)
 						B.loc=usr.loc
-						B.lowner=src
+						B.OWNER=src
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(c_target)
 							walk_to(B,c_target)

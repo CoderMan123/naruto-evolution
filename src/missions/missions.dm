@@ -4,7 +4,8 @@ mission
 	var/tmp/html
 	var/start
 	var/complete
-	var/limit = 30 //mission time limit (in minutes)
+	var/limit = 0 //mission time limit (in minutes)
+	var/status = "In-Progress"
 	var/mob/start_npc
 	var/mob/complete_npc
 	var/list/required_mobs = list()
@@ -61,9 +62,17 @@ mission
 			if(/mission/a_rank/political_escort)
 
 				switch(M.village)
-					if("Hidden Leaf")
+					if(VILLAGE_LEAF)
 						var/mob/npc/combat/picked = pick(typesof(/mob/npc/combat/political_escort/leaf) - /mob/npc/combat/political_escort/leaf)
-						var/mob/npc/combat/political_escort/npc = new picked(locate(164,82,2))
+						var/mob/npc/combat/political_escort/npc = new picked(locate(75,26,7))
+						src.complete_npc = npc
+						npc.squad = src.squad
+						npc.squad_leader_ckey = M.ckey
+					
+					if(VILLAGE_SAND)
+						var/mob/npc/combat/picked = pick(typesof(/mob/npc/combat/political_escort/sand) - /mob/npc/combat/political_escort/sand)
+						var/mob/npc/combat/political_escort/npc = new picked(locate(10,25,7))
+						src.complete_npc = npc
 						npc.squad = src.squad
 						npc.squad_leader_ckey = M.ckey
 
@@ -87,11 +96,8 @@ mission
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m.Levelup()
-							spawn() m.client.UpdateCharacterPanel()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
-
-					src.squad.mission = null
 
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 					M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
@@ -100,7 +106,7 @@ mission
 					spawn() M.client.Alert("I'm still waiting on that squad intel. Please hurry along and pick it up from [src.required_mobs[1]]", "[src.complete_npc]")
 
 				// This mission belongs to another Squad
-				else if(squad && O && !squad.mission.complete)
+				else if(squad && O && !O.squad.mission.complete)
 					O.squad.mission.complete = world.realtime
 
 					M.DestroyItem(O)
@@ -112,7 +118,6 @@ mission
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m.Levelup()
-							spawn() m.client.UpdateCharacterPanel()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
 							if(M.village == VILLAGE_AKATSUKI)
@@ -125,17 +130,14 @@ mission
 								spawn() M.client.Alert("Well done. That'll teach them not to spy on us.", "[src.complete_npc]")
 								M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 
-					O.squad.mission = null
-
 				// Solo ninja turning in the mission
-				else if(O)
+				else if(O && !O.squad.mission.complete)
 					M.DestroyItem(O)
 
 					spawn() M.client.UpdateInventoryPanel()
 					M.exp += exp_reward
 					M.ryo += ryo_reward
 					M.Levelup()
-					spawn() M.client.UpdateCharacterPanel()
 					spawn() M.UpdateHMB()
 					if(M.village == VILLAGE_AKATSUKI)
 						M.client.Alert("Excellent work. We'll make good use of this.", "Zetsu")
@@ -146,7 +148,6 @@ mission
 					else
 						spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 						M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
-					O.squad.mission = null
 
 			if(/mission/c_rank/the_war_effort)
 				if(squad && !squad.mission.complete)
@@ -159,11 +160,8 @@ mission
 							if(squad.members[m.client.ckey])
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
-
-						squad.mission = null
 
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
 						squad.mission.complete = world.realtime
@@ -174,11 +172,8 @@ mission
 								m.exp += exp_reward
 								m.ryo += ryo_reward
 								m.Levelup()
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
-
-						squad.mission = null
 
 			if(/mission/b_rank/hunting_rogues)
 				if(squad && !squad.mission.complete)
@@ -191,11 +186,8 @@ mission
 							if(squad.members[m.client.ckey])
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
-
-						squad.mission = null
 
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
 						squad.mission.complete = world.realtime
@@ -206,29 +198,59 @@ mission
 								m.exp += exp_reward
 								m.ryo += ryo_reward
 								m.Levelup()
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
-						squad.mission = null
-
 			if(/mission/a_rank/political_escort)
 				if(squad && !squad.mission.complete)
-					var/exp_reward = round(mission_exp_mod * A_reward)
-					var/ryo_reward = round(mission_ryo_mod * A_reward)
-					squad.mission.complete = world.realtime
+					var/can_complete = 0
 
-					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
-							m << output("<b>[squad.mission]:</b> You have successfully completed your mission and have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
-							m.exp += exp_reward
-							m.ryo += ryo_reward
-							m.Levelup()
-							spawn() m.client.UpdateCharacterPanel()
-							spawn() m.UpdateHMB()
-							spawn() squad.RefreshMember(m)
+					var/mob/npc/combat/political_escort/npc = squad.mission.complete_npc
 
-					squad.mission = null
+					switch(npc.type)
+						if(/mob/npc/combat/political_escort/leaf/haruna)
+							var/obj/escort/pel_end_haruna/end = locate()
+							if(end && end.loc == npc.loc)
+								can_complete = 1
+
+						if(/mob/npc/combat/political_escort/leaf/chikara)
+							var/obj/escort/pel_end_chikara/end = locate()
+							if(end && end.loc == npc.loc)
+								can_complete = 1
+
+						if(/mob/npc/combat/political_escort/leaf/toki)
+							var/obj/escort/pel_end_toki/end = locate()
+							if(end && end.loc == npc.loc)
+								can_complete = 1
+						
+						if(/mob/npc/combat/political_escort/sand/chichiatsu)
+							var/obj/escort/pes_end_chichiatsu/end = locate()
+							if(end && end.loc == npc.loc)
+								can_complete = 1
+
+						if(/mob/npc/combat/political_escort/sand/danjo)
+							var/obj/escort/pes_end_danjo/end = locate()
+							if(end && end.loc == npc.loc)
+								can_complete = 1
+
+						if(/mob/npc/combat/political_escort/sand/tekkan)
+							var/obj/escort/pes_end_tekkan/end = locate()
+							if(end && end.loc == npc.loc)
+								can_complete = 1
+
+					if(can_complete)
+						var/exp_reward = round(mission_exp_mod * A_reward)
+						var/ryo_reward = round(mission_ryo_mod * A_reward)
+						squad.mission.complete = world.realtime
+
+						for(var/mob/m in mobs_online)
+							if(squad.members[m.client.ckey])
+								m << output("<b>[squad.mission]:</b> You have successfully completed your mission and have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+								m.exp += exp_reward
+								m.ryo += ryo_reward
+								m.Levelup()
+								spawn() m.UpdateHMB()
+								spawn() squad.RefreshMember(m)
 
 			if(/mission/s_rank/clouds_of_crimson)
 				if(squad && !squad.mission.complete)
@@ -241,11 +263,8 @@ mission
 							if(squad.members[m.client.ckey])
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
-
-						squad.mission = null
 
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
 						squad.mission.complete = world.realtime
@@ -256,12 +275,8 @@ mission
 								m.exp += exp_reward
 								m.ryo += ryo_reward
 								m.Levelup()
-								spawn() m.client.UpdateCharacterPanel()
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
-
-						squad.mission = null
-
 
 	New(mob/M)
 		..()

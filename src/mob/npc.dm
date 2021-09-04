@@ -84,17 +84,17 @@ mob/npc
 				// Only speak to players in the same village
 				if(src.village == usr.village)
 					var/squad/squad = usr.GetSquad()
-					if(squad && squad.mission)
+					if(squad && squad.mission && !squad.mission.complete)
 						// Complete mission (original squad)
 						squad.mission.Complete(usr)
 					else
 						// Complete mission (another squad)
 						var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
-						if(O && O.squad.mission)
+						if(O && O.squad.mission && !O.squad.mission.complete)
 							O.squad.mission.Complete(usr)
 
 						// Request mission (Squad leader only)
-						else if(squad && squad.leader[usr.ckey] && !squad.mission)
+						else if(squad && squad.leader[usr.ckey])
 							// Check for mission cooldown
 							var/mission_delay = ((world.realtime - usr.client.last_mission)/10/60)
 							if(mission_delay < 20)
@@ -241,7 +241,7 @@ mob/npc
 											usr.client.Alert("You must be at least ANBU rank to take on S rank missions.", src.name)
 
 						// Mission request denied: active mission
-						else if(squad && squad.members[usr.ckey] && squad.mission)
+						else if(squad && squad.members[usr.ckey] && squad.mission && !squad.mission.complete)
 							usr.client.Alert("Your squad already has an active mission.", src.name)
 
 						// Mission request denied: leader must request mission
@@ -777,12 +777,9 @@ obj/escort
 				var/mob/npc/combat/political_escort/political_escort = m
 				political_escort.last_node = src
 
-				if(political_escort.squad)
-					for(var/mob/player in mobs_online)
-						if(political_escort.squad.members[player.client.ckey])
-							spawn()
-								political_escort.squad.mission.Complete(player)
-								del m
+				if(political_escort.squad && political_escort.squad.mission)
+					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
+					del political_escort
 			..()
 	pel10
 		icon = 'placeholdertiles.dmi'
@@ -889,12 +886,9 @@ obj/escort
 				var/mob/npc/combat/political_escort/political_escort = m
 				political_escort.last_node = src
 
-				if(political_escort.squad)
-					for(var/mob/player in mobs_online)
-						if(political_escort.squad.members[player.client.ckey])
-							spawn()
-								political_escort.squad.mission.Complete(player)
-								del m
+				if(political_escort.squad && political_escort.squad.mission)
+					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
+					del political_escort
 			..()
 	pel13_toki
 		icon = 'placeholdertiles.dmi'
@@ -937,12 +931,9 @@ obj/escort
 				var/mob/npc/combat/political_escort/political_escort = m
 				political_escort.last_node = src
 
-				if(political_escort.squad)
-					for(var/mob/player in mobs_online)
-						if(political_escort.squad.members[player.client.ckey])
-							spawn()
-								political_escort.squad.mission.Complete(player)
-								del m
+				if(political_escort.squad && political_escort.squad.mission)
+					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
+					del political_escort
 			..()
 
 //SAND escort nodes
@@ -1173,12 +1164,9 @@ obj/escort
 				var/mob/npc/combat/political_escort/political_escort = m
 				political_escort.last_node = src
 
-				if(political_escort.squad)
-					for(var/mob/player in mobs_online)
-						if(political_escort.squad.members[player.client.ckey])
-							spawn()
-								political_escort.squad.mission.Complete(player)
-								del m
+				if(political_escort.squad && political_escort.squad.mission)
+					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
+					del political_escort
 			..()
 	pes10
 		icon = 'placeholdertiles.dmi'
@@ -1285,12 +1273,9 @@ obj/escort
 				var/mob/npc/combat/political_escort/political_escort = m
 				political_escort.last_node = src
 
-				if(political_escort.squad)
-					for(var/mob/player in mobs_online)
-						if(political_escort.squad.members[player.client.ckey])
-							spawn()
-								political_escort.squad.mission.Complete(player)
-								del m
+				if(political_escort.squad && political_escort.squad.mission)
+					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
+					del political_escort
 			..()
 	pes13_tekkan
 		icon = 'placeholdertiles.dmi'
@@ -1333,10 +1318,7 @@ obj/escort
 				var/mob/npc/combat/political_escort/political_escort = m
 				political_escort.last_node = src
 
-				if(political_escort.squad)
-					for(var/mob/player in mobs_online)
-						if(political_escort.squad.members[player.client.ckey])
-							spawn()
-								political_escort.squad.mission.Complete(player)
-								del m
+				if(political_escort.squad && political_escort.squad.mission)
+					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
+					del political_escort
 			..()

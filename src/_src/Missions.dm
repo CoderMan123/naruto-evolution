@@ -151,13 +151,11 @@ obj/MissionObj
 						switch(GAIN)
 							if(1)
 								M.LevelStat("Ninjutsu",rand(25,45),1)
-								M.Levelup()
 							if(2)
 								M.LevelStat("strength",rand(25,45),1)
-								M.Levelup()
 							if(3)
 								M.LevelStat("Genjutsu",rand(25,45),1)
-								M.Levelup()
+
 					for(var/i in usr.Squad.Members)
 						if(getOwner(i))
 							M = getOwner(i)
@@ -169,13 +167,13 @@ obj/MissionObj
 								switch(GAIN)
 									if(1)
 										M.LevelStat("Ninjutsu",rand(25,45),1)
-										M.Levelup()
+
 									if(2)
 										M.LevelStat("strength",rand(25,45),1)
-										M.Levelup()
+
 									if(3)
 										M.LevelStat("Genjutsu",rand(25,45),1)
-										M.Levelup()
+
 							M<<output("<I><font color=blue>You gained [(MissionRyo + 1)] Ryo, and [MissionExp] EXP from your mission! Mission reset.","Action.Output")
 							//M.Mission=null
 							M.Levelup()
@@ -189,13 +187,13 @@ obj/MissionObj
 						switch(GAIN)
 							if(1)
 								M.LevelStat("Ninjutsu",rand(25,45),1)
-								M.Levelup()
+
 							if(2)
 								M.LevelStat("strength",rand(25,45),1)
-								M.Levelup()
+
 							if(3)
 								M.LevelStat("Genjutsu",rand(25,45),1)
-								M.Levelup()
+								
 				usr.Levelup()
 			del(src)
 

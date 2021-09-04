@@ -54,10 +54,10 @@ mob
 						if(src.inboulder==1) return
 						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
-						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*1.3
+						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*1.3
+						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*1.3
+						if(J.level==4) J.damage=(jutsudamage*J.Sprice)*1.3
 						if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsu",src)
 						src.move=0
@@ -67,12 +67,15 @@ mob
 						src.overlays=0
 						src.inboulder=1
 						var/i=0
+						var/lastloc
 						for(i=0,i<100,i++)
+							lastloc = src.loc
 							step(src,src.dir)
 							sleep(0.5)
 							for(var/mob/M in orange(1,src))
 								if(M == src) continue
 								if(M.dead || M.swimming) continue
+								if(src.loc == lastloc) continue
 								M.DealDamage(round((src.ninjutsu / 300)+(src.strength / 300)*2*J.damage)/12,src,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="dead"

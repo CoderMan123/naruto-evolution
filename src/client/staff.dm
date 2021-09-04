@@ -313,6 +313,8 @@ mob
 					if("Clear Logs")
 						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
+								alert("Clearing of all logs has been disabled. This will be replaced with rotate logs soon.")
+								return
 								switch(alert("Are you sure you want to delete all logs?", "Manage Logs", "Clear All Logs", "Cancel"))
 									if("Clear All Logs")
 										fdel(LOG_ADMINISTRATOR)
@@ -324,6 +326,7 @@ mob
 										fdel(LOG_SAVES)
 										fdel(LOG_STAFF)
 										usr << output("You have cleared all the server logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared all the server logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_CHAT_LOCAL)
@@ -331,6 +334,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_LOCAL)
 										src << output("You have cleared the Local Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Local Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_VILLAGE)
@@ -338,6 +342,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_VILLAGE)
 										src << output("You have cleared the Village Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Village Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_SQUAD)
@@ -345,6 +350,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_SQUAD)
 										src << output("You have cleared the Squad Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Squad Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_FACTION)
@@ -352,6 +358,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_FACTION)
 										src << output("You have cleared the Faction Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Faction Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_GLOBAL)
@@ -359,6 +366,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_GLOBAL)
 										src << output("You have cleared the Global Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Global Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_WHISPER)
@@ -366,6 +374,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_WHISPER)
 										src << output("You have cleared the Whisper Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Whisper Chat logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_CHAT_STAFF)
@@ -373,6 +382,7 @@ mob
 									if(1)
 										fdel(LOG_CHAT_STAFF)
 										src << output("You have cleared the Staff Chat logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Staff Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_ADMINISTRATOR)
@@ -380,6 +390,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_ADMINISTRATOR)
 										usr << output("You have cleared the Administrator logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Administrator logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_KAGE)
@@ -387,6 +398,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_KAGE)
 										usr << output("You have cleared the Kage logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Kage logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_BUGS)
@@ -394,6 +406,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_BUGS)
 										usr << output("You have cleared the Bug logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Bug logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CLIENT_SAVES)
@@ -401,6 +414,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_CLIENT_SAVES)
 										usr << output("You have cleared the Client Save logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Client Save logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_ERROR)
@@ -408,6 +422,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_ERROR)
 										usr << output("You have cleared the Error logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Error logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_KILLS)
@@ -415,6 +430,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_KILLS)
 										usr << output("You have cleared the Kill logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Kill logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_SAVES)
@@ -422,6 +438,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_SAVES)
 										usr << output("You have cleared the Character Save logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Character Save logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_STAFF)
@@ -429,6 +446,7 @@ mob
 									if("Clear Logs")
 										fdel(LOG_STAFF)
 										usr << output("You have cleared the Staff logs.", "Action.Output")
+										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Staff logs.<br />", LOG_ADMINISTRATOR)
 			
 			Manage_Mission()
@@ -480,7 +498,7 @@ mob
 				if(M)
 					var/name = input("What would you like to rename [M] to?", "Change Name", M.name) as null|text
 					if(name)
-						if(M.client && names_taken.Find(lowertext(name)))
+						if(M.client && lowertext(M.name) != lowertext(name) && names_taken.Find(lowertext(name)))
 							alert("The name [name] is already in use.", "Change Name")
 							return 0
 						else
@@ -496,10 +514,18 @@ mob
 								var/old_character = M.character
 								var/old_name = M.name
 								var/old_src_name = usr.name
+
+								names_taken.Remove(lowertext(old_character))
+								names_taken.Add(lowertext(name))
+
+								M.character = name
 								M.SetName(name)
+
 								M.Save()
 								M.client.Save()
+
 								fdel("[SAVEFILE_CHARACTERS]/[copytext(M.ckey, 1, 2)]/[M.ckey] ([lowertext(old_character)]).sav")
+
 								usr << output("You have changed [old_name]'s character name to <u>[name]</u>.", "Action.Output")
 								M << output("[old_src_name] has changed your character name to <u>[name]</u>.", "Action.Output")
 								spawn() M.client.Alert({"
@@ -509,6 +535,66 @@ mob
 									<br />
 									You will need to use your updated character name to login."})
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has changed [M]'s ([M.ckey]) character name to [name] ([M.ckey]).<br />", LOG_ADMINISTRATOR)
+			
+			Manage_Names()
+				set category = "Administrator"
+				switch(alert("Would you like to add or remove a name from the list of taken character names?", "Manage Names", "Add", "Remove"))
+					if("Add")
+						var/name = input("What character name would you like to add to the list of taken character names?", "Manage Names") as null|text
+						
+						if(name)
+							names_taken.Add(name)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has added [name] to the list of taken character names.<br />", LOG_ADMINISTRATOR)
+							alert("The character name, [name], has been added to the list of taken character names.", "Manage Names")
+
+					if("Remove")
+						var/name = input("Which character name would you like to remove from the list of taken character names?", "Manage Names") as null|anything in names_taken
+						
+						if(name)
+							names_taken.Remove(name)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has removed [name] from the list of taken character names.<br />", LOG_ADMINISTRATOR)
+							alert("The character name, [name], has been removed from the list of taken character names.", "Manage Names")
+			
+			Change_Password()
+				set category = "Administrator"
+				
+				var/list/savefile_dirs = flist("[SAVEFILE_CHARACTERS]/")
+				var/list/savefile_list = list()
+				
+				for(var/dir in savefile_dirs)
+					savefile_list.Add(flist("[SAVEFILE_CHARACTERS]/[dir]"))
+				
+				for(var/sav in savefile_list)
+					if(findlasttext(sav, ".sav.lk")) savefile_list.Remove(sav)
+					if(findlasttext(sav, ".sav.backup")) savefile_list.Remove(sav)
+					if(findlasttext(sav, ".sav") == 0) savefile_list.Remove(sav)
+
+				var/savefile = input("Select which savefile you'd like to update the account password to.") as null|anything in savefile_list
+
+				if(savefile)
+					for(var/dir in savefile_dirs)
+					
+						if(fexists("[SAVEFILE_CHARACTERS]/[dir]/[savefile].lk"))
+							alert("This savefile is locked and cannot be modified.", "Change Password")
+							
+							break
+		
+						else if(fexists("[SAVEFILE_CHARACTERS]/[dir]/[savefile]"))
+							var/password = input("Please enter a new password for the savefile: [savefile].", "Change Password") as null|text
+							if(password)
+								if(fcopy("[SAVEFILE_CHARACTERS]/[dir]/[savefile]", "[SAVEFILE_CHARACTERS]/[dir]/[time2text(world.realtime, "YYYY-MM-DD")]_[world.timeofday]-[savefile].backup"))
+									var/savefile/F = new(savefile)
+									password = sha1("[password][sha1(ckey(F["key"]))]")
+									F["password_hotfix"] << password
+									alert("You have updated the password for the savefile: [savefile].", "Change Password")
+									
+								else
+									alert("Savefile backup failed, so the savefile password was not updated.", "Change Password")
+									
+							else if(!isnull(password))
+								alert("The password may not be blank.", "Change Password")
+								
+							break
 
 			Change_Ryo()
 				set category = "Administrator"
@@ -641,9 +727,9 @@ mob
 
 								usr.client << output("You have used <u>Give Everything</u> on [C.mob.name].", "Action.Output")
 								C << output("[usr.name] has used <u>Give Everything</u> on you.", "Action.Output")
-								text2file("[usr]([usr.key]) has used give everything on [C.mob.name]([C.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
+								text2file("[usr]([usr.key]) has used give everything on [C.mob.name]([C.key]).: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>", LOG_STAFF)
 					else
-						text2file("[usr]([usr.key]) has attempted to use give everything on [C.mob.name]([C.key]).: [time2text(world.timeofday, "MMM DD hh:mm:ss")]<br>", LOG_STAFF)
+						text2file("[usr]([usr.key]) has attempted to use give everything on [C.mob.name]([C.key]).: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>", LOG_STAFF)
 						usr.client.Alert("You can only use this command on Administrators.")
 				else
 					usr.client.Alert("This command is restricted to Administrators.")

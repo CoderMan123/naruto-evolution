@@ -108,7 +108,6 @@ mob
 								T.health-=undefendedhit
 								if(T) if(T.Good) LevelStat("Strength",10*punchstatexp)
 								else LevelStat("Strength",10*punchstatexp)
-								src.Levelup()
 								if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
 								if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 								T.Break(src)

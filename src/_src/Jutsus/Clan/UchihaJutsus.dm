@@ -31,7 +31,7 @@ mob
 							var/Timer=J.level+2
 							while(Timer&&M)
 								if(M)
-									M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage)/6, src, "white")
+									M.DealDamage(J.damage+round((src.genjutsu / 150)*2*J.damage)/12, src, "white")
 								Timer--
 								sleep(5)
 							M.client.eye=M

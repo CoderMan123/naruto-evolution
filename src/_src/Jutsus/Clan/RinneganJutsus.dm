@@ -44,14 +44,14 @@ mob
 				if(src.Rinnegan)
 					for(var/image/i in client.images)if(i.name=="RinneganCircle")del(i)
 					src.Rinnegan=0
-					world<<output("<font color=#C0C0C0><b>[src] deactivated Rinnegan","Action.Output")
+					hearers(src) << output("<font color=#C0C0C0><b>[src] deactivated Rinnegan","Action.Output")
 					src << output("<font color=#C0C0C0><b>You deactivate Rinnegan","Action.Output")
 					return
 				if(!src.Rinnegan)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						src << output("<font color=#C0C0C0><b>You activate your Rinnegan.","Action.Output")
-						world<<output("<font color=#C0C0C0><b>[src] activated their Rinnegan!","Action.Output")
+						hearers(src) << output("<font color=#C0C0C0><b>[src] activated their Rinnegan!","Action.Output")
 						src.Rinnegan=1
 						/*if(J.level<4)
 							if(loc.loc:Safe!=1) J.exp+=rand(5,15)
@@ -160,7 +160,7 @@ mob
 						view(usr)<<sound('flashbang_explode2.wav',0,0)
 						var/mob/summonings/DogSummoning/D = new/mob/summonings/DogSummoning(usr.loc)
 						D.loc=usr.loc
-						D.lowner=src
+						D.OWNER=src
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(c_target)
 							walk_to(D,c_target)

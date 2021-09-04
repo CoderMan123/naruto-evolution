@@ -177,7 +177,7 @@ mob
 			statpoints--
 			maxhealth+=30
 			src<<output("<font color=yellow>You leveled up Health!</Font>","Action.Output")
-			src.client.UpdateCharacterPanel()
+			src.UpdateHMB()
 
 		ChakraUp()
 			set hidden=1
@@ -187,4 +187,4 @@ mob
 			statpoints--
 			maxchakra+=25
 			src<<output("<font color=yellow>You leveled up Chakra!</Font>","Action.Output")
-			src.client.UpdateCharacterPanel()
+			src.UpdateHMB()

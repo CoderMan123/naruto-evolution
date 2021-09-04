@@ -149,7 +149,6 @@ mob
 												if(defendedhit<0)defendedhit=1
 												//if(loc.loc:Safe!=1)src.strength++
 												if(loc.loc:Safe!=1)src.LevelStat("strength",1)
-												src.Levelup()
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(5,10))
 												if(defence<src.strength/3)
 													var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)

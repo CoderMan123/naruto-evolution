@@ -136,7 +136,7 @@ mob
 						view(src) << sound('Skill_MashHit.wav', 0, 0)
 						if(J.level < 4)
 							if(loc.loc:Safe != 1)
-								J.exp+=(jutsumastery/50)*(J.maxcooltime/20)
+								J.exp+=(jutsumastery/20)*(J.maxcooltime/20)
 								J.Levelup()
 						src << output("<b>Now to detonate use the defend verb (D).", "Action.Output")
 						var/obj/O = new/obj/C3bomb(src)//	var/obj/C3bomb/O = new(src)

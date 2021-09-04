@@ -323,7 +323,7 @@ mob
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4)
-						J.exp+=(jutsumastery/50)*(J.maxcooltime/20)
+						J.exp+=(jutsumastery/20)*(J.maxcooltime/20)
 						J.Levelup()
 					spawn(5)
 						while(I)
@@ -414,7 +414,7 @@ mob
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4)
-						if(loc.loc:Safe!=1) J.exp+=(jutsumastery/50)*(J.maxcooltime/20)
+						if(loc.loc:Safe!=1) J.exp+=(jutsumastery/20)*(J.maxcooltime/20)
 						J.Levelup()
 					src.injutsu=1
 					src.icon_state = "jutsuse"
