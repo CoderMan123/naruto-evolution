@@ -883,7 +883,7 @@ client
 
 				if(src.mob.equipped == "Weights")
 					if(prob(50))
-						spawn() src.mob.LevelStat("Agility", round(rand(8, 15) * trainingexp))
+						spawn() src.mob.LevelStat("Agility", round(rand(15, 20) * trainingexp))
 				else
 					if(prob(40))
 						spawn() src.mob.LevelStat("Agility", rand(1,2))
