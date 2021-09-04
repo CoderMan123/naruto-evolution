@@ -130,14 +130,14 @@ mob
 							M=src.Target_Get(TARGET_MOB)
 							if(M)
 								c_target.loc=locate(165,183,8)
-								src.loc=locate(175,183,3)
+								src.loc=locate(175,183,8)
 								c_target.canattack=1
 								c_target.injutsu=0
 								c_target.move=1
 								del O
 							else
 								src<<output("You failed to pull them in with you!","Action.Output")
-								src.loc=locate(90,166,3)
+								src.loc=locate(175,183,8)
 								move=1
 								canattack=1
 								firing=0
