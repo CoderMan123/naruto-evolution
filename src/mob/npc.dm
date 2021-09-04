@@ -420,7 +420,7 @@ mob/npc
 							spawn() m.client.Alert("The Daimyo has been killed! Our mission is a failure.", "Mission Failed")
 							spawn() squad.RefreshMember(m)
 
-					if(killer)
+					if(killer && killer.village != src.village)
 						var/squad/ksquad = killer.GetSquad()
 						if(ksquad)
 							var/exp_reward = round(squad.mission.mission_exp_mod * squad.mission.A_reward)
