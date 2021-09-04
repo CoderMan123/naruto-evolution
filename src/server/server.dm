@@ -255,9 +255,9 @@ world
 			if(squad.mission)
 				switch(squad.mission.type)
 					if(/mission/d_rank/deliver_intel)
-						squad.mission.complete = world.realtime
 						squad.mission.status = "Failure"
+						squad.mission.complete = world.realtime
 					
 					if(/mission/a_rank/political_escort)
-						squad.mission.complete = world.realtime
 						squad.mission.status = "Failure"
+						squad.mission.complete = world.realtime
