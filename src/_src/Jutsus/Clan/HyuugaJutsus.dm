@@ -392,7 +392,9 @@ mob
 							src.canattack=1
 						while(src.byakugan)
 							sleep(1)
-							if(src)
+							if(src && src.byakugan)
+								src.DealDamage(10, src, "aliceblue", 0, 1)
+								
 								for(var/atom/movable/ZX in orange())
 									if(!ZX) continue
 									sleep(1)
@@ -403,7 +405,7 @@ mob
 										if(istype(ZX,/mob/Clones/)) QWE+=rgb(255,0,0)
 										src << QWE
 										spawn(5)if(QWE)del(QWE)
-							src.DealDamage(10, src, "aliceblue", 0, 1)
+							
 							sleep(12)
 							if(src.chakra<=0)
 								src.chakra=0

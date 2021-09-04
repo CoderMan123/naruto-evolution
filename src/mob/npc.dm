@@ -408,14 +408,38 @@ mob/npc
 							walk_to(src, src.last_node, 0, 5)
 
 						sleep(10)
-			Death()
+
+			Death(mob/killer)
 				..()
-				if(src.health <= 0)
+				if(src.squad && src.health <= 0)
 					for(var/mob/m in mobs_online)
 						if(squad.members[m.client.ckey])
+							squad.mission.status = "Failure"
+							squad.mission.complete = world.realtime
 							m << output("<b>[squad.mission.name]:</b> The Daimyo has been killed! Our mission is a failure.", "Action.Output")
 							spawn() m.client.Alert("The Daimyo has been killed! Our mission is a failure.", "Mission Failed")
 							spawn() squad.RefreshMember(m)
+
+					if(killer)
+						var/squad/ksquad = killer.GetSquad()
+						if(ksquad)
+							var/exp_reward = round(squad.mission.mission_exp_mod * squad.mission.A_reward)
+							var/ryo_reward = round(squad.mission.mission_ryo_mod * squad.mission.A_reward)
+							for(var/mob/m in mobs_online)
+								if(ksquad.members[m.client.ckey])
+									m.exp += exp_reward
+									m.ryo += ryo_reward
+									m.Levelup()
+									m << output("<b>[squad.mission.name]:</b> [killer.name] killed an enemy Daimyo and have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!", "Action.Output")
+
+						else
+							var/exp_reward = round(squad.mission.mission_exp_mod * squad.mission.A_reward)
+							var/ryo_reward = round(squad.mission.mission_ryo_mod * squad.mission.A_reward)
+							killer.exp += exp_reward
+							killer.ryo += ryo_reward
+							killer.Levelup()
+							killer << output("<b>[squad.mission.name]:</b> You've killed an enemy Daimyo and have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!", "Action.Output")
+
 			leaf
 				New()
 					..()

@@ -56,7 +56,6 @@ mob
 			if(!A) return
 			if(A.Safe&&!mission) return
 			if(src.exp_locked)
-				src<<output("<font color=red><small><small>You're currently exp locked! Use the Remove Exp Lock button under the options pane!</small></Font>","Action.Output")
 				return
 			switch(stat)
 				if("Defence")defexp += round(howmuch)
@@ -917,8 +916,9 @@ mob
 					spawn(3000) if(!respawned && src.dead) src.Respawn()
 
 					if(src.client && src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
-						respawned = 1
-						src.Respawn()
+						if(src.dead)
+							respawned = 1
+							src.Respawn()
 
 				if(istype(src,/mob/Clones))
 					var/mob/O=src.Owner
