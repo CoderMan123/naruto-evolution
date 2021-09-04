@@ -916,8 +916,9 @@ mob
 					spawn(3000) if(!respawned && src.dead) src.Respawn()
 
 					if(src.client && src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
-						respawned = 1
-						src.Respawn()
+						if(src.dead)
+							respawned = 1
+							src.Respawn()
 
 				if(istype(src,/mob/Clones))
 					var/mob/O=src.Owner
