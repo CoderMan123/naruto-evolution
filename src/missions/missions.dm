@@ -85,7 +85,7 @@ mission
 				var/ryo_reward = round(mission_ryo_mod * D_reward)
 				// The mission belongs to the same squad turning it in
 				if(src.squad && squad && src.squad == squad && !src.squad.mission.complete && O)
-					src.squads.mission.status = "Success"
+					src.squad.mission.status = "Success"
 					src.squad.mission.complete = world.realtime
 
 					M.DestroyItem(O)
@@ -108,7 +108,7 @@ mission
 
 				// This mission belongs to another Squad
 				else if(squad && O && !O.squad.mission.complete)
-					O.squads.mission.status = "Failure"
+					O.squad.mission.status = "Failure"
 					O.squad.mission.complete = world.realtime
 
 					M.DestroyItem(O)
@@ -156,7 +156,7 @@ mission
 					var/exp_reward = round(mission_exp_mod * C_reward)
 					var/ryo_reward = round(mission_ryo_mod * C_reward)
 					if(src.required_vars["DEATHS"] >= src.squad.members.len)
-						squads.mission.status = "Failure"
+						squad.mission.status = "Failure"
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
@@ -167,7 +167,7 @@ mission
 								spawn() squad.RefreshMember(m)
 
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
-						squads.mission.status = "Success"
+						squad.mission.status = "Success"
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
@@ -184,7 +184,7 @@ mission
 					var/exp_reward = round(mission_exp_mod * B_reward)
 					var/ryo_reward = round(mission_ryo_mod * B_reward)
 					if(src.required_vars["DEATHS"] >= src.squad.members.len)
-						squads.mission.status = "Failure"
+						squad.mission.status = "Failure"
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
@@ -195,7 +195,7 @@ mission
 								spawn() squad.RefreshMember(m)
 
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
-						squads.mission.status = "Success"
+						squad.mission.status = "Success"
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
@@ -247,7 +247,7 @@ mission
 					if(can_complete)
 						var/exp_reward = round(mission_exp_mod * A_reward)
 						var/ryo_reward = round(mission_ryo_mod * A_reward)
-						squads.mission.status = "Success"
+						squad.mission.status = "Success"
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
@@ -264,7 +264,7 @@ mission
 					var/exp_reward = round(mission_exp_mod * A_reward)
 					var/ryo_reward = round(mission_ryo_mod * A_reward)
 					if(src.required_vars["DEATHS"] >= src.squad.members.len)
-						squads.mission.status = "Failure"
+						squad.mission.status = "Failure"
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
@@ -275,7 +275,7 @@ mission
 								spawn() squad.RefreshMember(m)
 
 					else if(src.required_vars["KILLS"] >= src.required_vars["REQUIRED_KILLS"])
-						squads.mission.status = "Success"
+						squad.mission.status = "Success"
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
