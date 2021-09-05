@@ -326,7 +326,7 @@ client
 				var/leaf_online = 0
 				var/sand_online = 0
 				var/players = ""
-				for(var/client/C)
+				for(var/client/C in clients_online)
 					if(C)
 						online++
 						if(C.mob.village == VILLAGE_LEAF) leaf_online++

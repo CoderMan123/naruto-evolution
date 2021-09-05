@@ -1,4 +1,18 @@
 client
+	Stat()
+		if(administrators.Find(src.ckey))
+			statpanel("Server Information")
+			stat("Name:", world.name)
+			stat("Status:", world.status)
+			stat("Server Time:", "[time2text(world.timeofday, "hh:mm:ss", world.timezone)] (UTC[world.timezone])")
+			stat("Local Time:", "[time2text(world.timeofday, "hh:mm:ss", src.timezone)] (UTC[src.timezone])")
+			stat("Address:", "[world.address]:[world.port]")
+			stat("BYOND Version:", "[world.byond_version].[world.byond_build]")
+			stat("FPS:", world.fps)
+			stat("CPU:", world.cpu)
+			stat("Map CPU:", world.map_cpu)
+
+client
 	proc
 		StaffCheck()
 			winset(src, "Navigation.LeaderButton", "is-disabled = 'true'")
@@ -327,7 +341,7 @@ mob
 										fdel(LOG_STAFF)
 										usr << output("You have cleared all the server logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared all the server logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared all the server logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_CHAT_LOCAL)
 								switch(src.client.Alert("Are you sure you want to delete the Local Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
@@ -335,7 +349,7 @@ mob
 										fdel(LOG_CHAT_LOCAL)
 										src << output("You have cleared the Local Chat logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Local Chat logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has cleared the Local Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_VILLAGE)
 								switch(src.client.Alert("Are you sure you want to delete the Village Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
@@ -343,7 +357,7 @@ mob
 										fdel(LOG_CHAT_VILLAGE)
 										src << output("You have cleared the Village Chat logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Village Chat logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has cleared the Village Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_SQUAD)
 								switch(src.client.Alert("Are you sure you want to delete the Squad Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
@@ -351,7 +365,7 @@ mob
 										fdel(LOG_CHAT_SQUAD)
 										src << output("You have cleared the Squad Chat logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Squad Chat logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has cleared the Squad Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_FACTION)
 								switch(src.client.Alert("Are you sure you want to delete the Faction Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
@@ -359,7 +373,7 @@ mob
 										fdel(LOG_CHAT_FACTION)
 										src << output("You have cleared the Faction Chat logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Faction Chat logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has cleared the Faction Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_GLOBAL)
 								switch(src.client.Alert("Are you sure you want to delete the Global Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
@@ -367,7 +381,7 @@ mob
 										fdel(LOG_CHAT_GLOBAL)
 										src << output("You have cleared the Global Chat logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Global Chat logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has cleared the Global Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CHAT_WHISPER)
 								switch(src.client.Alert("Are you sure you want to delete the Whisper Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
@@ -375,7 +389,7 @@ mob
 										fdel(LOG_CHAT_WHISPER)
 										src << output("You have cleared the Whisper Chat logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Whisper Chat logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has cleared the Whisper Chat logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_CHAT_STAFF)
 								switch(src.client.Alert("Are you sure you want to delete the Staff Chat logs?", "Manage Logs", list("Clear Logs", "Cancel")))
@@ -383,7 +397,7 @@ mob
 										fdel(LOG_CHAT_STAFF)
 										src << output("You have cleared the Staff Chat logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has cleared the Staff Chat logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has cleared the Staff Chat logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_ADMINISTRATOR)
 								switch(alert("Are you sure you want to delete the Administrator logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -391,7 +405,7 @@ mob
 										fdel(LOG_ADMINISTRATOR)
 										usr << output("You have cleared the Administrator logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Administrator logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Administrator logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_KAGE)
 								switch(alert("Are you sure you want to delete the Kage logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -399,7 +413,7 @@ mob
 										fdel(LOG_KAGE)
 										usr << output("You have cleared the Kage logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Kage logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Kage logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_BUGS)
 								switch(alert("Are you sure you want to delete the Bug logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -407,7 +421,7 @@ mob
 										fdel(LOG_BUGS)
 										usr << output("You have cleared the Bug logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Bug logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Bug logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_CLIENT_SAVES)
 								switch(alert("Are you sure you want to delete the Client Save logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -415,7 +429,7 @@ mob
 										fdel(LOG_CLIENT_SAVES)
 										usr << output("You have cleared the Client Save logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Client Save logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Client Save logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_ERROR)
 								switch(alert("Are you sure you want to delete the Error logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -423,7 +437,7 @@ mob
 										fdel(LOG_ERROR)
 										usr << output("You have cleared the Error logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Error logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Error logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_KILLS)
 								switch(alert("Are you sure you want to delete the Kill logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -431,7 +445,7 @@ mob
 										fdel(LOG_KILLS)
 										usr << output("You have cleared the Kill logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Kill logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Kill logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_SAVES)
 								switch(alert("Are you sure you want to delete the Character Save Logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -439,7 +453,7 @@ mob
 										fdel(LOG_SAVES)
 										usr << output("You have cleared the Character Save logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Character Save logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Character Save logs.<br />", LOG_ADMINISTRATOR)
 
 							if(LOG_STAFF)
 								switch(alert("Are you sure you want to delete the Staff Logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -447,7 +461,7 @@ mob
 										fdel(LOG_STAFF)
 										usr << output("You have cleared the Staff logs.", "Action.Output")
 										world.CreateLogs()
-										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has cleared the Staff logs.<br />", LOG_ADMINISTRATOR)
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Staff logs.<br />", LOG_ADMINISTRATOR)
 			
 			Manage_Mission()
 				set category = "Administrator"
@@ -458,7 +472,7 @@ mob
 						if(1)
 							if(M)
 								squad.mission.Complete(M)
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src.name] ([src.ckey]) has completed [M.name]'s mission for their entire Squad.<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.name] ([src.ckey]) has completed [M.name]'s mission for their entire Squad.<br />", LOG_ADMINISTRATOR)
 								
 								if(src.client.Alert("Would you like to reset mission cooldown for [M.name]'s Squad?", "Manage Mission", list("Yes", "No")) == 1)
 									for(var/mob/m in mobs_online)
@@ -467,7 +481,7 @@ mob
 											var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(m.client.ckey, 1, 2)]/[m.client.ckey].sav")
 											F["last_mission"] << null
 									
-									text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src.name] ([src.ckey]) has reset the mission cooldown for [M.name]'s entire Squad.<br />", LOG_ADMINISTRATOR)
+									text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.name] ([src.ckey]) has reset the mission cooldown for [M.name]'s entire Squad.<br />", LOG_ADMINISTRATOR)
 							
 							else
 								src.client.Alert("[M.name] isn't currently in a Squad.", "Manage Mission")
@@ -475,7 +489,7 @@ mob
 						if(2)
 							if(M)
 								squad.mission = null
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src.name] ([src.ckey]) has failed [M.name]'s mission for their entire Squad.<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.name] ([src.ckey]) has failed [M.name]'s mission for their entire Squad.<br />", LOG_ADMINISTRATOR)
 
 								if(src.client.Alert("Would you like to reset mission cooldown for [M.name]'s Squad?", "Manage Mission", list("Yes", "No")) == 1)
 									for(var/mob/m in mobs_online)
@@ -484,7 +498,7 @@ mob
 											var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(m.client.ckey, 1, 2)]/[m.client.ckey].sav")
 											F["last_mission"] << null
 
-									text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src.name] ([src.ckey]) has reset the mission cooldown for [M.name]'s entire Squad.<br />", LOG_ADMINISTRATOR)
+									text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.name] ([src.ckey]) has reset the mission cooldown for [M.name]'s entire Squad.<br />", LOG_ADMINISTRATOR)
 							
 							else
 								src.client.Alert("[M.name] isn't currently in a Squad.", "Manage Mission")
@@ -534,7 +548,7 @@ mob
 									<font color='#BE1A0E'><b><u>Warning:</u></b></font>
 									<br />
 									You will need to use your updated character name to login."})
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] ([usr.ckey]) has changed [M]'s ([M.ckey]) character name to [name] ([M.ckey]).<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has changed [M]'s ([M.ckey]) character name to [name] ([M.ckey]).<br />", LOG_ADMINISTRATOR)
 			
 			Manage_Names()
 				set category = "Administrator"
@@ -544,7 +558,7 @@ mob
 						
 						if(name)
 							names_taken.Add(name)
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has added [name] to the list of taken character names.<br />", LOG_ADMINISTRATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has added [name] to the list of taken character names.<br />", LOG_ADMINISTRATOR)
 							alert("The character name, [name], has been added to the list of taken character names.", "Manage Names")
 
 					if("Remove")
@@ -552,7 +566,7 @@ mob
 						
 						if(name)
 							names_taken.Remove(name)
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [src] ([src.ckey]) has removed [name] from the list of taken character names.<br />", LOG_ADMINISTRATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has removed [name] from the list of taken character names.<br />", LOG_ADMINISTRATOR)
 							alert("The character name, [name], has been removed from the list of taken character names.", "Manage Names")
 			
 			Change_Password()
@@ -609,7 +623,7 @@ mob
 								M.SetRyo(M.ryo + ryo)
 								usr.client << output("You have given <b>[ryo]</b> Ryo to [M].","Action.Output")
 								M.client << output("[usr] has given you <b>[ryo]</b> Ryo.","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s ryo from [ryo] to [M.ryo + ryo].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s ryo from [ryo] to [M.ryo + ryo].<br />", LOG_ADMINISTRATOR)
 
 						if("Take")
 							var/ryo = input("How much Ryo would you like to take from [M]?", "Change Ryo") as null|num
@@ -619,7 +633,7 @@ mob
 								M.SetRyo(M.ryo - ryo)
 								usr.client << output("You have taken <b>[ryo]</b> Ryo from [M].","Action.Output")
 								M.client << output("[usr] has taken <b>[ryo]</b> Ryo from you.","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s ryo from [ryo] to [M.ryo + ryo].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s ryo from [ryo] to [M.ryo + ryo].<br />", LOG_ADMINISTRATOR)
 
 			Change_Village()
 				set category = "Administrator"
@@ -630,21 +644,21 @@ mob
 							if(M)
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_LEAF].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_LEAF].","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_LEAF].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_LEAF].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_LEAF)
 
 						if(VILLAGE_SAND)
 							if(M)
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_SAND].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_SAND].","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_SAND].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_SAND].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_SAND)
 
 						if(VILLAGE_MISSING_NIN)
 							if(M)
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_MISSING_NIN].","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_MISSING_NIN)
 
 			Change_Rank()
@@ -657,35 +671,35 @@ mob
 								M.SetRank(RANK_ACADEMY_STUDENT)
 								usr.client << output("You have changed [M]'s rank from [usr.rank] to [RANK_ACADEMY_STUDENT].","Action.Output")
 								M.client << output("[usr] has changed your rank from [usr.rank] to [RANK_ACADEMY_STUDENT].","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s rank from [usr.rank] to [RANK_ACADEMY_STUDENT].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s rank from [usr.rank] to [RANK_ACADEMY_STUDENT].<br />", LOG_ADMINISTRATOR)
 
 						if(RANK_GENIN)
 							if(M)
 								M.SetRank(RANK_GENIN)
 								usr.client << output("You have changed [M]'s rank from [usr.rank] to [RANK_GENIN].","Action.Output")
 								M.client << output("[usr] has changed your rank from [usr.rank] to [RANK_GENIN].","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s rank from [usr.rank] to [RANK_GENIN].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s rank from [usr.rank] to [RANK_GENIN].<br />", LOG_ADMINISTRATOR)
 
 						if(RANK_CHUUNIN)
 							if(M)
 								M.SetRank(RANK_CHUUNIN)
 								usr.client << output("You have changed [M]'s rank from [usr.rank] to [RANK_CHUUNIN].","Action.Output")
 								M.client << output("[usr] has changed your rank from [usr.rank] to [RANK_CHUUNIN].","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s rank from [usr.rank] to [RANK_CHUUNIN].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s rank from [usr.rank] to [RANK_CHUUNIN].<br />", LOG_ADMINISTRATOR)
 
 						if(RANK_JOUNIN)
 							if(M)
 								M.SetRank(RANK_JOUNIN)
 								usr.client << output("You have changed [M]'s rank from [usr.rank] to [RANK_JOUNIN].","Action.Output")
 								M.client << output("[usr] has changed your rank from [usr.rank] to [RANK_JOUNIN].","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s rank from [usr.rank] to [RANK_JOUNIN].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s rank from [usr.rank] to [RANK_JOUNIN].<br />", LOG_ADMINISTRATOR)
 
 						if(RANK_ANBU)
 							if(M)
 								M.SetRank(RANK_ANBU)
 								usr.client << output("You have changed [M]'s rank from [usr.rank] to [RANK_ANBU].","Action.Output")
 								M.client << output("[usr] has changed your rank from [usr.rank] to [RANK_ANBU].","Action.Output")
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)") ] [usr] has changed [M]'s rank from [usr.rank] to [RANK_ANBU].<br />", LOG_ADMINISTRATOR)
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s rank from [usr.rank] to [RANK_ANBU].<br />", LOG_ADMINISTRATOR)
 
 			Give_Everything()
 				set category="Administrator"
@@ -1020,5 +1034,9 @@ mob
 				set category = "Debug"
 				var/mob/m = input("Who's base would you like to restore?", "Reset Icon") as null|anything in mobs_online
 				if(m)
+					for(var/obj/Inventory/Clothing/o in m.contents)
+						o.suffix = ""
+						
+					m.ClothingOverlays = null
 					m.ResetBase()
 					m.RestoreOverlays()

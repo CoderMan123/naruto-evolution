@@ -29,29 +29,31 @@ mob
 		proc
 			SpinAttack()
 				flick("flash", src)
+
 				sleep(10)
-				src.overlays+=/obj/Overlays/DummyDust
-				spawn(8) src.overlays-=/obj/Overlays/DummyDust
+
+				src.overlays += /obj/Overlays/DummyDust
+				spawn(8) src.overlays -= /obj/Overlays/DummyDust
+
 				flick("spin", src)
+
 				for(var/mob/M in orange(1, src))
 					if(!M.dodge)
 						M.DealDamage(src.strength*10,src,"NinBlue")
-						M.icon_state="dead"
-						M.move=0
-						M.injutsu=1
-						M.canattack=0
+						
+						AddState(M, new/state/knocked_down, 50)
+
 						step_away(M, src, 3)
+
 						src.agility=1
 						src.strength=1
-						spawn(50)
-							M.icon_state=""
-							M.move=1
-							M.injutsu=0
-							M.canattack=1
+
 					else
 						flick("dodge",M)
-						if(M.loc.loc:Safe!=1) M.LevelStat("Defence",rand(30,50)+round(src.strength/2))
-						if(M.loc.loc:Safe!=1) M.LevelStat("Strength",rand(30,50)+round(src.strength/2))
+
+						if(M.loc.loc:Safe != 1) M.LevelStat("Defence", rand(30,50) + round(src.strength / 2))
+						if(M.loc.loc:Safe != 1) M.LevelStat("Strength", rand(30,50) + round(src.strength / 2))
+
 						src.agility++
 						src.strength++
 

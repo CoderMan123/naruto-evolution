@@ -13,6 +13,10 @@ mob
 		jutsus[0]
 		jutsus_learned[0]
 
+		#ifdef STATE_MANAGER
+		tmp/list/state_manager = list()
+		#endif
+
 	New()
 		pixel_x=-16
 		..()
