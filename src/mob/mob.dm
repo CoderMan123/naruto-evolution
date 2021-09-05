@@ -536,6 +536,19 @@ mob
 			else if(length(msg) > 600)
 				message_trim = copytext(msg, 600)
 				msg = copytext(msg, 1, 600)
+			
+			if(msg == "/restore-base")
+				spawn() src.client.Alert("Your character base and overlays will be restored in 60 seconds.", "Naruto Evolution")
+				sleep(600)
+				if(src)
+					for(var/obj/Inventory/Clothing/o in src.contents)
+						o.suffix = ""
+						
+					src.ClothingOverlays = null
+					src.ResetBase()
+					src.RestoreOverlays()
+
+				return 0
 
 			if(findtext(msg, "/stuck"))
 				src.Stuck()
