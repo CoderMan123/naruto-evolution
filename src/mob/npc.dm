@@ -383,6 +383,7 @@ mob/npc
 			var/tmp/squad_leader_ckey
 			var/tmp/last_location
 			var/tmp/last_location_time
+			var/tmp/obj/next_node
 			var/tmp/obj/last_node
 			health=15000
 			maxhealth=15000
@@ -406,6 +407,9 @@ mob/npc
 							src.loc = src.last_node.loc
 							step_away(src, src.last_node)
 							walk_to(src, src.last_node, 0, 5)
+
+						else if(src.move)
+							walk_to(src, src.next_node, 0, 5)
 
 						sleep(10)
 
@@ -588,6 +592,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel2), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel2)
 			..()
 	pel2
 		icon = 'placeholdertiles.dmi'
@@ -602,6 +607,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel3), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel3)
 			..()
 	pel3
 		icon = 'placeholdertiles.dmi'
@@ -616,6 +622,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel4), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel4)
 			..()
 
 	pel4
@@ -631,6 +638,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel5), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel5)
 			..()
 
 	pel5
@@ -646,6 +654,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel6), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel6)
 			..()
 
 	pel6
@@ -662,6 +671,7 @@ obj/escort
 
 				m.loc = locate(101,200,3)
 				walk_to(m, locate(/obj/escort/pel7), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel7)
 			..()
 
 	pel7
@@ -677,6 +687,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel8), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel8)
 			..()
 
 	pel8
@@ -692,6 +703,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel9_haruna), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel9_haruna)
 			..()
 
 	pel9_haruna
@@ -707,11 +719,13 @@ obj/escort
 					political_escort.last_node = src
 
 					walk_to(m, locate(/obj/escort/pel10), 0, 5)
+					political_escort.next_node = locate(/obj/escort/pel10)
 				else
 					var/mob/npc/combat/political_escort/political_escort = m
 					political_escort.last_node = src
 
 					walk_to(m, locate(/obj/escort/pel10_haruna), 0, 5)
+					political_escort.next_node = locate(/obj/escort/pel10_haruna)
 				..()
 
 	pel10_haruna
@@ -727,6 +741,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel11_haruna), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel11_haruna)
 			..()
 
 	pel11_haruna
@@ -742,6 +757,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel12_haruna), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel12_haruna)
 			..()
 
 	pel12_haruna
@@ -757,6 +773,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel13_haruna), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel13_haruna)
 			..()
 
 	pel13_haruna
@@ -772,6 +789,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel14_haruna), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel14_haruna)
 			..()
 
 	pel14_haruna
@@ -787,6 +805,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel_end_haruna), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel_end_haruna)
 			..()
 
 	pel_end_haruna
@@ -818,6 +837,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel11), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel11)
 			..()
 	pel11
 		icon = 'placeholdertiles.dmi'
@@ -833,6 +853,7 @@ obj/escort
 
 				m.loc = locate(200,101,5)
 				walk_to(m, locate(/obj/escort/pel12_chikara), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel12_chikara)
 			..()
 	pel12_chikara
 		icon = 'placeholdertiles.dmi'
@@ -847,11 +868,13 @@ obj/escort
 					political_escort.last_node = src
 
 					walk_to(m, locate(/obj/escort/pel13_toki), 0, 5)
+					political_escort.next_node = locate(/obj/escort/pel13_toki)
 				else
 					var/mob/npc/combat/political_escort/political_escort = m
 					political_escort.last_node = src
 
 					walk_to(m, locate(/obj/escort/pel13_chikara), 0, 5)
+					political_escort.next_node = locate(/obj/escort/pel13_chikara)
 				..()
 	pel13_chikara
 		icon = 'placeholdertiles.dmi'
@@ -866,6 +889,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel14_chikara), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel14_chikara)
 			..()
 
 	pel14_chikara
@@ -881,6 +905,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel15_chikara), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel15_chikara)
 			..()
 
 	pel15_chikara
@@ -896,6 +921,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel_end_chikara), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel_end_chikara)
 			..()
 
 	pel_end_chikara
@@ -926,6 +952,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel14_toki), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel13_toki)
 			..()
 
 	pel14_toki
@@ -941,6 +968,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pel_end_toki), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pel_end_toki)
 			..()
 
 	pel_end_toki
@@ -975,6 +1003,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes2), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes2)
 			..()
 	pes2
 		icon = 'placeholdertiles.dmi'
@@ -989,6 +1018,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes3), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes3)
 			..()
 	pes3
 		icon = 'placeholdertiles.dmi'
@@ -1003,6 +1033,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes4), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes4)
 			..()
 
 	pes4
@@ -1018,6 +1049,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes5), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes5)
 			..()
 
 	pes5
@@ -1033,6 +1065,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes6), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes6)
 			..()
 
 	pes6
@@ -1049,6 +1082,7 @@ obj/escort
 
 				m.loc = locate(100,1,6)
 				walk_to(m, locate(/obj/escort/pes7), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes7)
 			..()
 
 	pes7
@@ -1064,6 +1098,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes8), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes8)
 			..()
 
 	pes8
@@ -1079,6 +1114,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes9_chichiatsu), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes9_chichiatsu)
 			..()
 
 	pes9_chichiatsu
@@ -1094,11 +1130,13 @@ obj/escort
 					political_escort.last_node = src
 
 					walk_to(m, locate(/obj/escort/pes10), 0, 5)
+					political_escort.next_node = locate(/obj/escort/pes10)
 				else
 					var/mob/npc/combat/political_escort/political_escort = m
 					political_escort.last_node = src
 
 					walk_to(m, locate(/obj/escort/pes10_chichiatsu), 0, 5)
+					political_escort.next_node = locate(/obj/escort/pes10_chichiatsu)
 				..()
 
 	pes10_chichiatsu
@@ -1114,6 +1152,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes11_chichiatsu), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes11_chichiatsu)
 			..()
 
 	pes11_chichiatsu
@@ -1129,6 +1168,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes12_chichiatsu), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes12_chichiatsu)
 			..()
 
 	pes12_chichiatsu
@@ -1144,6 +1184,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes13_chichiatsu), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes13_chichiatsu)
 			..()
 
 	pes13_chichiatsu
@@ -1159,6 +1200,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes14_chichiatsu), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes14_chichiatsu)
 			..()
 
 	pes14_chichiatsu
@@ -1174,6 +1216,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes_end_chichiatsu), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes_end_chichiatsu)
 			..()
 
 	pes_end_chichiatsu
@@ -1205,6 +1248,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes11), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes11)
 			..()
 	pes11
 		icon = 'placeholdertiles.dmi'
@@ -1220,6 +1264,7 @@ obj/escort
 
 				m.loc = locate(1,103,4)
 				walk_to(m, locate(/obj/escort/pes12_danjo), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes12_danjo)
 			..()
 	pes12_danjo
 		icon = 'placeholdertiles.dmi'
@@ -1234,11 +1279,13 @@ obj/escort
 					political_escort.last_node = src
 
 					walk_to(m, locate(/obj/escort/pes13_tekkan), 0, 5)
+					political_escort.next_node = locate(/obj/escort/pes13_tekkan)
 				else
 					var/mob/npc/combat/political_escort/political_escort = m
 					political_escort.last_node = src
 
 					walk_to(m, locate(/obj/escort/pes13_danjo), 0, 5)
+					political_escort.next_node = locate(/obj/escort/pes13_danjo)
 				..()
 	pes13_danjo
 		icon = 'placeholdertiles.dmi'
@@ -1253,6 +1300,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes14_danjo), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes14_danjo)
 			..()
 
 	pes14_danjo
@@ -1268,6 +1316,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes15_danjo), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes15_danjo)
 			..()
 
 	pes15_danjo
@@ -1283,6 +1332,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes_end_danjo), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes_end_danjo)
 			..()
 
 	pes_end_danjo
@@ -1313,6 +1363,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes14_tekkan), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes14_tekkan)
 			..()
 
 	pes14_tekkan
@@ -1328,6 +1379,7 @@ obj/escort
 				political_escort.last_node = src
 
 				walk_to(m, locate(/obj/escort/pes_end_tekkan), 0, 5)
+				political_escort.next_node = locate(/obj/escort/pes_end_tekkan)
 			..()
 
 	pes_end_tekkan
