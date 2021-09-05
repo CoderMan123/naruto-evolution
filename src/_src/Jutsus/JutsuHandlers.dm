@@ -16,7 +16,7 @@ mob
 mob
 	proc
 		PreJutsu(var/obj/Jutsus/J)
-			if(CheckEffect(src, new/effect/knocked_down)) return 0
+			if(CheckState(src, new/state/knocked_down)) return 0
 
 			if(src.multisized==1)//multisizestuff
 				return

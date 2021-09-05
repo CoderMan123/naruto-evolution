@@ -101,6 +101,7 @@ mob
 	verb
 		Rest()
 			set hidden=1
+			if(CheckState(src, new/state/knocked_down)) return 0
 			src.HengeUndo()
 			if(injutsu) return
 			if(usr.canattack==1&&usr.dead==0&&usr.rest==0&&usr.move&& !Gates)

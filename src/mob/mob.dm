@@ -13,8 +13,8 @@ mob
 		jutsus[0]
 		jutsus_learned[0]
 
-		#ifdef EFFECTS
-		tmp/list/effects = list()
+		#ifdef STATE_MANAGER
+		tmp/list/state_manager = list()
 		#endif
 
 	New()

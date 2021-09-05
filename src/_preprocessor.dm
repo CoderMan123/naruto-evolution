@@ -1,3 +1,5 @@
+#define STATE_MANAGER
+
 #define CFG_ADMIN "cfg/admin.txt"
 #define CFG_HOST "cfg/host.txt"
 #define SAVEFILE_WORLD "saves/world.sav"

@@ -41,7 +41,7 @@ mob
 					if(!M.dodge)
 						M.DealDamage(src.strength*10,src,"NinBlue")
 						
-						AddEffect(M, new/effect/knocked_down, 50)
+						AddState(M, new/state/knocked_down, 50)
 
 						step_away(M, src, 3)
 

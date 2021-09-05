@@ -2,7 +2,7 @@ mob
 	verb
 		Basic_Attack()
 			set hidden=1
-			if(CheckEffect(src, new/effect/knocked_down)) return 0
+			if(CheckState(src, new/state/knocked_down)) return 0
 
 			if(src.canattack==0)
 
