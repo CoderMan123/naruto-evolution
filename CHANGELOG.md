@@ -1,10 +1,21 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 2.0.9
+## 2.0.11
+
+### Added
+- Added state manager.
+- Added backend changes to help with diagnosing bugs.
+
+### Changed
+- The Who browser will only display logged in clients.
+
+### Fixed
+- Fixed rotating dummy to knock down with state manager.
+
+## 2.0.10
 ### Fixed
 - Fixed some backend issues
 - Fixed escort npcs stopping when hit by certain jutsu
