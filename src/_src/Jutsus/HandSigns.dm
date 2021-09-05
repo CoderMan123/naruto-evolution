@@ -673,6 +673,8 @@ mob
 	verb
 		HandSealActivate()
 			set hidden=1
+			if(CheckEffect(src, new/effect/knocked_down)) return 0
+			
 			if(client.eye==locate(10,10,4)||client.eye==locate(60,10,4)||client.eye==locate(12,43,4)||client.eye==locate(55,43,4)||usr.client.eye==locate(10,75,4)) return
 			src.HengeUndo()
 			if(usr.SealCount>=1)

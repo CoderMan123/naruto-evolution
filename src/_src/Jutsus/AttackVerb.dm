@@ -1,12 +1,16 @@
 mob
 	verb
 		Basic_Attack()
-			var/mob/c_target=src.Target_Get(TARGET_MOB)
 			set hidden=1
+			if(CheckEffect(src, new/effect/knocked_down)) return 0
+
 			if(src.canattack==0)
+
 				return
 			if(src.multisized==1)//multisizestuff
 				return
+
+			var/mob/c_target=src.Target_Get(TARGET_MOB)
 			if(src.shielded==1)
 				if(src.Clan == "Sand"&&canattack)
 					canattack=0

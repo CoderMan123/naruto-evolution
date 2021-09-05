@@ -5,8 +5,10 @@
 #define EFFECT_REMOVE_ALL 3
 
 proc
-	AddEffect(mob/m, var/effect/e)
+	AddEffect(mob/m, var/effect/e, var/duration = 0)
 		e.mob = m
+		e.duration = duration
+		e.expiration = world.timeofday + e.duration
 		e.mob.effects.Add(e)
 
 	RemoveEffect(mob/m, var/effect/e, var/remove_action = EFFECT_REMOVE_REF)
@@ -37,9 +39,7 @@ proc
 	var/duration
 	var/expiration
 
-	New(var/duration)
-		src.duration = duration
-		src.expiration = world.timeofday + src.duration
+	New()
 		..()
 
 		spawn() src.Ticker()
@@ -55,23 +55,30 @@ proc
 	proc/OnTick()
 		..()
 
-	stun
+	stunned
 		OnTick()
 			..()
 
-	burn
+	burning
 		OnTick()
 			..()
 
-	knock_down
+	knocked_down
+		Ticker()
+			var/mob/m = src.mob
+			m.icon_state = "dead"
+			..()
+			if(!CheckEffect(m, new/effect/casting_jutsu) && !CheckEffect(m, new/effect/knocked_down) && !CheckEffect(m, new/effect/knocked_back) && !CheckEffect(m, new/effect/dead))
+				m.icon_state = ""
+
 		OnTick()
 			..()
 
-	knock_back
+	knocked_back
 		OnTick()
 			..()
 
-	cast_jutsu
+	casting_jutsu
 		OnTick()
 			..()
 
@@ -79,15 +86,15 @@ proc
 		OnTick()
 			..()
 
-	punch
+	punching
 		OnTick()
 			..()
 	
-	block
+	blocking
 		OnTick()
 			..()
 
-	walk
+	walking
 		OnTick()
 			..()
 
@@ -96,17 +103,17 @@ mob
 	verb
 		Example()
 
-			AddEffect(src, new/effect/burn(100))
+			AddEffect(src, new/effect/burn, 100)
 			RemoveEffect(src, new/effect/burn, EFFECT_REMOVE_ALL)
 
-			AddEffect(src, new/effect/stun(20))
+			AddEffect(src, new/effect/stun, 20)
 			if(CheckEffect(src, new/effect/stun))
 				src << "I'm stunned!"
 			
-			AddEffect(src, new/effect/knock_down(600))
+			AddEffect(src, new/effect/knock_down, 600)
 			RemoveEffect(src, new/effect/knock_down, EFFECT_REMOVE_ANY)
 
-			var/effect/knocked_back/e = new(50)
-			AddEffect(src, e)
+			var/effect/knocked_back/e = new()
+			AddEffect(src, e, 50)
 			RemoveEffect(src, e, EFFECT_REMOVE_REF)
 #endif

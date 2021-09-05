@@ -795,6 +795,8 @@ mob
 client
 	Move(Loc)
 		if(src.mob.moving) return 0
+		
+		if(CheckEffect(src.mob, new/effect/knocked_down)) return 0
 
 		if(src.mob.likeaclone)
 			var/mob/Clones/SC = src.mob.likeaclone
