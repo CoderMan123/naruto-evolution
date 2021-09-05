@@ -71,7 +71,7 @@ mob
 							c_target.move=0
 							c_target.injutsu=1
 							c_target.canattack=0
-							spawn(15+(J.level*2))
+							spawn(12+(J.level*2))
 								if(c_target)
 									c_target.move=1
 									c_target.injutsu=0
@@ -120,7 +120,7 @@ mob
 						if(A.Safe) break
 						c_target.sbugged=1
 						c_target.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
-						sleep(2)
+						sleep(4)
 					del(O)
 					if(c_target)c_target.sbugged=0
 
@@ -156,8 +156,8 @@ mob
 							A.fightlayer=src.fightlayer
 							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							A.dir = get_dir(A,c_target)
-							walk_towards(A,c_target.loc,5)
-							spawn(25)if(A)walk(A,A.dir,5)
+							walk_towards(A,c_target.loc,3)
+							spawn(25)if(A)walk(A,A.dir,3)
 					else
 						while(num)
 							sleep(1)
@@ -175,7 +175,7 @@ mob
 							A.fightlayer=src.fightlayer
 							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							A.dir = src.dir
-							if(A)walk(A,A.dir,5)
+							if(A)walk(A,A.dir,3)
 					spawn(5)
 						src.firing=0
 						src.canattack=1
@@ -189,10 +189,10 @@ mob
 					view(src)<<sound('bugs.wav',0,0)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=0.05*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.05*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.05*((jutsudamage*J.Sprice)/1.5)
-					if(J.level==4) J.damage=0.05*(jutsudamage*J.Sprice)
+					if(J.level==1) J.damage=0.8*((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=0.8*((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=0.8*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=0.8*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(c_target)
 						src.dir=get_dir(src,c_target)
@@ -241,8 +241,7 @@ mob
 						A.fightlayer=src.fightlayer
 						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.dir = get_dir(A,c_target)
-						walk_towards(A,c_target.loc,2)
-						spawn(20)if(A)walk(A,A.dir,5)
+						walk_towards(A,c_target.loc,3)
 					else
 						var/obj/Projectiles/Effects/BugTornado/A = new/obj/Projectiles/Effects/BugTornado(src.loc)
 						A.IsJutsuEffect=src
@@ -253,7 +252,7 @@ mob
 						A.fightlayer=src.fightlayer
 						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.dir = src.dir
-						spawn(20)if(A)walk(A,A.dir,5)
+						spawn(20)if(A)walk(A,A.dir,3)
 					spawn(5)
 						src.firing=0
 						src.canattack=1
