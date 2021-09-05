@@ -1020,5 +1020,9 @@ mob
 				set category = "Debug"
 				var/mob/m = input("Who's base would you like to restore?", "Reset Icon") as null|anything in mobs_online
 				if(m)
+					for(var/obj/Inventory/Clothing/o in m.contents)
+						o.suffix = ""
+						
+					m.ClothingOverlays = null
 					m.ResetBase()
 					m.RestoreOverlays()

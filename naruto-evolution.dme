@@ -179,6 +179,7 @@
 #include "src\interface\symbols.dm"
 #include "src\interface\interface.dmf"
 #include "src\missions\missions.dm"
+#include "src\mob\effects.dm"
 #include "src\mob\inventory.dm"
 #include "src\mob\mob.dm"
 #include "src\mob\npc.dm"

@@ -13,6 +13,10 @@ mob
 		jutsus[0]
 		jutsus_learned[0]
 
+		#ifdef EFFECTS
+		tmp/list/effects = list()
+		#endif
+
 	New()
 		pixel_x=-16
 		..()
