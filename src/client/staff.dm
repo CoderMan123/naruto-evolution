@@ -1,4 +1,18 @@
 client
+	Stat()
+		if(administrators.Find(src.ckey))
+			statpanel("Server Information")
+			stat("Name:", world.name)
+			stat("Status:", world.status)
+			stat("Server Time:", "[time2text(world.timeofday, "hh:mm:ss", world.timezone)] (UTC[world.timezone])")
+			stat("Local Time:", "[time2text(world.timeofday, "hh:mm:ss", src.timezone)] (UTC[src.timezone])")
+			stat("Address:", "[world.address]:[world.port]")
+			stat("BYOND Version:", "[world.byond_version].[world.byond_build]")
+			stat("FPS:", world.fps)
+			stat("CPU:", world.cpu)
+			stat("Map CPU:", world.map_cpu)
+
+client
 	proc
 		StaffCheck()
 			winset(src, "Navigation.LeaderButton", "is-disabled = 'true'")
