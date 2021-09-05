@@ -1292,7 +1292,6 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							var/mob/Owner=src.Owner // that double type cast, though...
 							if(M.dead || M.swimming || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								view(src)<<sound('LPunchHIt.ogg',0,0,volume=50)
@@ -1346,7 +1345,6 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							var/mob/Owner=src.Owner
 							if(M.dead || M.swimming || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								view(src)<<sound('LPunchHIt.ogg',0,0,volume=50)
