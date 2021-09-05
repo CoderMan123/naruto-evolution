@@ -10,6 +10,7 @@ proc
 		e.duration = duration
 		e.expiration = world.timeofday + e.duration
 		e.mob.effects.Add(e)
+		spawn() e.Ticker()
 
 	RemoveEffect(mob/m, var/effect/e, var/remove_action = EFFECT_REMOVE_REF)
 		switch(remove_action)
@@ -41,16 +42,15 @@ proc
 
 	New()
 		..()
-
-		spawn() src.Ticker()
 	
 	proc/Ticker()
 		while(src && src.mob && world.timeofday < src.expiration || src.duration == -1)
 			sleep(world.tick_lag)
 			src.OnTick()
-
-		src.mob.effects.Remove(src)
-		src.mob = null
+		
+		if(src && src.mob)
+			src.mob.effects.Remove(src)
+			src.mob = null
 
 	proc/OnTick()
 		..()
@@ -66,9 +66,9 @@ proc
 	knocked_down
 		Ticker()
 			var/mob/m = src.mob
-			m.icon_state = "dead"
+			if(m) m.icon_state = "dead"
 			..()
-			if(!CheckEffect(m, new/effect/casting_jutsu) && !CheckEffect(m, new/effect/knocked_down) && !CheckEffect(m, new/effect/knocked_back) && !CheckEffect(m, new/effect/dead))
+			if(m && !CheckEffect(m, new/effect/casting_jutsu) && !CheckEffect(m, new/effect/knocked_down) && !CheckEffect(m, new/effect/knocked_back) && !CheckEffect(m, new/effect/dead))
 				m.icon_state = ""
 
 		OnTick()
