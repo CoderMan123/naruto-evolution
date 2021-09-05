@@ -14,6 +14,7 @@ client
 
 	New()
 		..()
+		src.mob.loc = null
 		clients_connected += src
 
 		winset(src, null, {"
