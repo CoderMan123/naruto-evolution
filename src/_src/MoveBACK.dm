@@ -876,10 +876,10 @@ client
 
 				if(istype(src.mob.loc, /turf/Ground/Water))
 					if(src.mob.swimming)
-						spawn() src.mob.LevelStat("Agility", rand(2,4))
+						spawn() src.mob.LevelStat("Agility", rand(1,2))
 
 					if(src.mob.walkingonwater)
-						spawn() src.mob.LevelStat("Ninjutsu", rand(4,8))
+						spawn() src.mob.LevelStat("Ninjutsu", rand(1,1))
 
 				if(src.mob.equipped == "Weights")
 					if(prob(50))

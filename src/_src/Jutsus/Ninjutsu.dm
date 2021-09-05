@@ -1275,7 +1275,6 @@ obj
 									M.DealDamage(src.damage,src.Owner,"NinBlue")
 								else
 									M.DealDamage(src.damage,src.Owner,"NinBlue")
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",0.2)
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 			Bug_Swarm
 				name="Bug Swarm"
@@ -1293,7 +1292,6 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							var/mob/Owner=src.Owner // that double type cast, though...
 							if(M.dead || M.swimming || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								view(src)<<sound('LPunchHIt.ogg',0,0,volume=50)
@@ -1302,13 +1300,13 @@ obj
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								step(M,src.dir)
 								M.dir = get_dir(M,src)
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 			HunterScarab
 				name="Hunter Scarab"
 				icon='Destruction Bug Hunter Scarabs.dmi'
 				icon_state=""
 				density=1
+				var/hits
 				New()
 					..()
 					pixel_x=-16
@@ -1328,14 +1326,16 @@ obj
 								src.loc = M.loc
 								if(M!=src.Owner)
 									M.DealDamage(2+src.damage+(Owner.ninjutsu/10),src.Owner,"NinBlue")
+									src.hits++
 								step(M,src.dir)
 								M.dir = get_dir(M,src)
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(5,7))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
+								if(src.hits >= 16) del(src)
 			BugTornado
 				name="Bug Tornado"
 				icon='AburameUltimate.dmi'
 				density=1
+				var/hits
 				New()
 					..()
 					layer = MOB_LAYER+1
@@ -1345,17 +1345,17 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							var/mob/Owner=src.Owner
 							if(M.dead || M.swimming || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								view(src)<<sound('LPunchHIt.ogg',0,0,volume=50)
 								src.layer=MOB_LAYER+1
 								src.loc = M.loc
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
+								src.hits++
 								step(M,src.dir)
 								M.dir = get_dir(M,src)
-								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(1,3))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
+								if(src.hits >= 12) del(src)
 
 			WaterShark
 				name="Water Shark"

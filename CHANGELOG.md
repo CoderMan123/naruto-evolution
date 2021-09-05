@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 2.0.9
 ### Fixed
+- Fixed some backend issues
+- Fixed escort npcs stopping when hit by certain jutsu
+- Fixed certain jutsus not leveling properly (for real this time)
+
+### Changed
+- Buffed Hunter Scarabs
+- Buffed Bug Swarm
+- Buffed Bug Tornado
+- Adjustment to stealth bugs
+- Small nerf to bug neurotoxin
+- Hard nerfed nin gains from water walking
+
+
+## 2.0.9
+### Fixed
 - Emergancy fix for A rank missions
 
 ## 2.0.8
