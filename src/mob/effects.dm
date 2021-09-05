@@ -45,7 +45,7 @@ proc
 		spawn() src.Ticker()
 	
 	proc/Ticker()
-		while(src && src.mob && world.timeofday < src.expiration)
+		while(src && src.mob && world.timeofday < src.expiration || src.duration == -1)
 			sleep(world.tick_lag)
 			src.OnTick()
 
