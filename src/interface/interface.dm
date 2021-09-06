@@ -439,17 +439,17 @@ client
 								[players]
 								<tr>
 									<td><span style="font-weight: bold;">Total Online:</span> [global.mobs_online.len]</td>
-									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">Leaf Village:</span> [global.leaf_online]</td>
-									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">Sand Village:</span> [global.sand_online]</td>
-									<td></td>
-									<td></td>
+									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">[VILLAGE_LEAF]:</span> [global.leaf_online]</td>
+									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">[VILLAGE_SAND]:</span> [global.sand_online]</td>
+									<td><span style="color: [COLOR_VILLAGE_MISSING_NIN]; font-weight: bold;">[VILLAGE_MISSING_NIN]:</span> [global.missing_nin_online]</td>
+									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">[VILLAGE_AKATSUKI]:</span> [global.akatsuki_online]</td>
 								</tr>
 								<tr>
-									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">Hokage:</span> [kages[VILLAGE_LEAF]]</td>
-									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">Kazekage:</span> [kages[VILLAGE_SAND]]</td>
-									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">Akatsuki:</span> [akatsuki]</td>
 									<td></td>
+									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">[RANK_HOKAGE]:</span> [kages[VILLAGE_LEAF]]</td>
+									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">[RANK_KAZEKAGE]:</span> [kages[VILLAGE_SAND]]</td>
 									<td></td>
+									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">[RANK_AKATSUKI_LEADER]:</span> [akatsuki]</td>
 								</tr>
 							</tbody>
 						</table>

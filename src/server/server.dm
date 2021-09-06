@@ -24,6 +24,8 @@ var/list/npcs_online = list()
 
 var/leaf_online = 0
 var/sand_online = 0
+var/missing_nin_online = 0
+var/akatsuki_online = 0
 
 var/squads[0]
 
@@ -70,10 +72,14 @@ world
 	proc/UpdateVillageCount()
 		leaf_online = 0
 		sand_online = 0
+		missing_nin_online = 0
+		akatsuki_online = 0
 
 		for(var/mob/m in mobs_online)
 			if(m.village == VILLAGE_LEAF) leaf_online++
 			if(m.village == VILLAGE_SAND) sand_online++
+			if(m.village == VILLAGE_MISSING_NIN) missing_nin_online++
+			if(m.village == VILLAGE_AKATSUKI) akatsuki_online++
 
 	proc/UpdateClientsMultikeying()
 		clients_multikeying = list()
