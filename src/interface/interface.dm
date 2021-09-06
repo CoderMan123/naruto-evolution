@@ -322,15 +322,9 @@ client
 		Who()
 			set hidden = 1
 			if(src.browser_url != BROWSER_WHO)
-				var/online = 0
-				var/leaf_online = 0
-				var/sand_online = 0
 				var/players = ""
 				for(var/client/C in clients_online)
 					if(C)
-						online++
-						if(C.mob.village == VILLAGE_LEAF) leaf_online++
-						if(C.mob.village == VILLAGE_SAND) sand_online++
 
 						var/obj/Symbols/Village/V = new(C.mob)
 						var/obj/Symbols/Rank/R = new(C.mob)
@@ -444,9 +438,9 @@ client
 							<tbody>
 								[players]
 								<tr>
-									<td><span style="font-weight: bold;">Total Online:</span> [online]</td>
-									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">Leaf Village:</span> [leaf_online]</td>
-									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">Sand Village:</span> [sand_online]</td>
+									<td><span style="font-weight: bold;">Total Online:</span> [global.mobs_online.len]</td>
+									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">Leaf Village:</span> [global.leaf_online]</td>
+									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">Sand Village:</span> [global.sand_online]</td>
 									<td></td>
 									<td></td>
 								</tr>

@@ -19,6 +19,9 @@ var/list/mobs_online = list()
 var/list/names_taken = list()
 var/list/npcs_online = list()
 
+var/leaf_online = 0
+var/sand_online = 0
+
 var/squads[0]
 
 world
@@ -60,6 +63,14 @@ world
 	Error(exception/ex)
 		text2file("<b>Timestamp:</b> [time2text(world.realtime , "YYYY-MM-DD hh:mm:ss")]<br /><b>Runtime Error:</b> [ex.name]<br /><b>File:</b> [ex.file]<br /><b>Line:</b> [ex.line]<br /><b><u>Description:</u></b><br />[ex.desc]<br /><br />", LOG_ERROR)
 	
+	proc/UpdateVillageCount()
+		leaf_online = 0
+		sand_online = 0
+
+		for(var/mob/m in mobs_online)
+			if(m.village == VILLAGE_LEAF) leaf_online++
+			if(m.village == VILLAGE_SAND) sand_online++
+
 	proc/UpdateClientsMultikeying()
 		clients_multikeying = list()
 

@@ -459,6 +459,8 @@ mob
 
 			spawn() src.client.StaffCheck()
 
+			world.UpdateVillageCount()
+			
 			spawn() src.client.UpdateWhoAll()
 
 			new/obj/Screen/Bar(src)

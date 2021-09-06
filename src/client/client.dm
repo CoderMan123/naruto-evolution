@@ -74,6 +74,8 @@ client
 
 		world.UpdateClientsMultikeying()
 
+		world.UpdateVillageCount()
+		
 		src.UpdateWhoAll()
 
 		winset(src, null, {"

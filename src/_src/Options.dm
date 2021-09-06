@@ -143,6 +143,8 @@ mob
 				village = VILLAGE_MISSING_NIN
 				rank = ""
 
+				world.UpdateVillageCount()
+				
 				spawn() src.client.UpdateWhoAll()
 
 				var/squad/squad = src.GetSquad()
