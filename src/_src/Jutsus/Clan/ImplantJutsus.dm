@@ -114,7 +114,33 @@ mob
 					if(J.level==2) J.damage=100
 					if(J.level==3) J.damage=150
 					if(J.level==4) J.damage=250
-					if(src.loc.z != 3)//if not used inside dimension(or the arena building i guess lol
+					if(src.loc in block(locate(148,128,8),locate(199,199,8)))//if used inside dimension or arena
+						view(10)<<"[usr]: Let us get back to the real world."
+						var/obj/O = new(c_target.loc)
+						O.IsJutsuEffect=src
+						O.icon='kamui.dmi'
+						O.icon_state="kamui"
+						O.layer=MOB_LAYER+1
+						O.pixel_x=-35
+						O.name="kamui"
+						O.loc = src.loc
+						sleep(10)
+						if(src.PrevLoc == null) PrevLoc = src.MapLoadSpawn()
+						if(c_target)
+							RemoveState(c_target, new/state/in_warp_dimension, STATE_REMOVE_ALL)
+							c_target.loc=PrevLoc
+							c_target.canattack=1
+							c_target.injutsu=0
+							c_target.move=1
+						src.loc=PrevLoc
+						src.move=1
+						src.canattack=1
+						src.injutsu=0
+						src.firing=0
+						flick("jutsuse",src)
+						src.icon_state = "jutsuse"
+						del O
+					else //anywhere else
 						view(10)<<"[usr]: Let's take this to my own little world."
 						PrevLoc = src.loc
 						var/mob/M = c_target
@@ -129,6 +155,7 @@ mob
 						spawn(10)
 							M=src.Target_Get(TARGET_MOB)
 							if(M)
+								AddState(M, new/state/in_warp_dimension, 200)
 								c_target.loc=locate(165,183,8)
 								src.loc=locate(175,183,8)
 								c_target.canattack=1
@@ -142,30 +169,6 @@ mob
 								canattack=1
 								firing=0
 								del O
-					else//if in the dimension Z
-						view(10)<<"[usr]: Let us get back to the real world."
-						var/obj/O = new(c_target.loc)
-						O.IsJutsuEffect=src
-						O.icon='kamui.dmi'
-						O.icon_state="kamui"
-						O.layer=MOB_LAYER+1
-						O.pixel_x=-35
-						O.name="kamui"
-						O.loc = src.loc
-						sleep(10)
-						if(src.PrevLoc == null) PrevLoc = src.MapLoadSpawn()
-						c_target.loc=PrevLoc
-						src.loc=PrevLoc
-						c_target.canattack=1
-						c_target.injutsu=0
-						c_target.move=1
-						src.move=1
-						src.canattack=1
-						src.injutsu=0
-						src.firing=0
-						flick("jutsuse",src)
-						src.icon_state = "jutsuse"
-						del O
 
 
 		Intangible_Jutsu()
@@ -183,7 +186,7 @@ mob
 					if(jailed==1)
 						src<<output("You're not allowed to use intangibility to break out of jail!","Action.Output")
 						return
-					if(src.loc.z == 3)
+					if(src.loc in block(locate(148,128,8),locate(199,199,8)))
 						src<<output("You can't use this in the dimension or an arena battle!","Action.Output")
 						return
 

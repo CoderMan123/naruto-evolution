@@ -95,6 +95,13 @@ proc
 	walking
 		OnTick()
 			..()
+	
+	in_warp_dimension
+		Ticker()
+			var/victims_previous_loc = src.mob.loc
+			..()
+			src.mob<<output("The warp dimension couldn't hold you any longer!","Action.Output")
+			src.mob.loc = victims_previous_loc
 
 #ifdef STATE_MANAGER_DEBUG
 mob
