@@ -120,7 +120,7 @@ mob
 						else
 							var/list/exclude = list()
 							for(var/mob/m in mobs_online)
-								if(m.village != VILLAGE_MISSING_NIN || m.village != VILLAGE_AKATSUKI) exclude += m
+								if(m.village != VILLAGE_MISSING_NIN && m.village != VILLAGE_AKATSUKI) exclude += m
 
 							var/mob/m = input("Who would you like to promote to [RANK_AKATSUKI_LEADER]", "Manage Akatsuki") as null|anything in mobs_online - exclude
 							if(m)
