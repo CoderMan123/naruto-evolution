@@ -127,6 +127,9 @@ mob
 								m.SetVillage(VILLAGE_AKATSUKI)
 								m.SetRank(RANK_AKATSUKI_LEADER)
 
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
+
 								var/squad/squad = m.GetSquad()
 								if(squad)
 									spawn() squad.Refresh()
@@ -1027,7 +1030,9 @@ mob
 								spawn() m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally exiles you from the [usr.village] village.", "Village Exile")
 
 								m.SetVillage(VILLAGE_MISSING_NIN)
+
 								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
 
 								var/squad/squad = m.GetSquad()
 								if(squad) squad.Refresh()
