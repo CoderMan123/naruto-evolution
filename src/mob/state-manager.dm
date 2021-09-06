@@ -96,6 +96,7 @@ proc
 		Ticker()
 			var/mob/m = src.mob
 			var/victims_previous_loc = m.loc
+			m.loc = locate(165,183,8)
 			..()
 			if(m)
 				m<<output("The warp dimension couldn't hold you any longer!","Action.Output")

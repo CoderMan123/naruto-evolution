@@ -93,6 +93,12 @@ mob
 				if(istype(c_target, /mob/npc/combat/political_escort))
 					src<<output("It appears that the Daimyo is protected against spacial inteferance!","Action.Output")
 					return
+				if(istype(c_target, /mob/npc/combat/white_zetsu))
+					src<<output("Something is preventing me from pulling it into the dimension!","Action.Output")
+					return
+				if(istype(c_target, /mob/Rotating_Dummy))
+					src<<output("I can't do that, it's fastened to the ground!","Action.Output")
+					return
 				if(locate(/obj/Inventory/mission/deliver_intel) in c_target.contents)
 					src<<output("The seal in their scroll is preventing spacial travel!","Action.Output")
 					return
@@ -156,7 +162,6 @@ mob
 							M=src.Target_Get(TARGET_MOB)
 							if(M)
 								AddState(M, new/state/in_warp_dimension, 200)
-								c_target.loc=locate(165,183,8)
 								src.loc=locate(175,183,8)
 								c_target.canattack=1
 								c_target.injutsu=0
