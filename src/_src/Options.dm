@@ -139,9 +139,8 @@ mob
 						src.equipped = null
 						givenshibu=0
 						del(O)
-
-				village = VILLAGE_MISSING_NIN
-				rank = ""
+				
+				src.SetVillage(VILLAGE_MISSING_NIN)
 
 				world.UpdateVillageCount()
 				

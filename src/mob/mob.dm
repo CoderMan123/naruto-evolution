@@ -681,6 +681,7 @@ mob
 		SetVillage(var/village)
 			if(village)
 				src.village = village
+				if(village == VILLAGE_MISSING_NIN) src.rank = ""
 				src.SetName(src.name)
 				src.client.UpdateCharacterPanel()
 

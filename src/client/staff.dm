@@ -720,12 +720,18 @@ mob
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_LEAF].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_LEAF)
 
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
+
 						if(VILLAGE_SAND)
 							if(M)
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_SAND].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_SAND].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_SAND].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_SAND)
+
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
 						
 						if(VILLAGE_AKATSUKI)
 							if(M)
@@ -734,12 +740,18 @@ mob
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_AKATSUKI].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_AKATSUKI)
 
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
+
 						if(VILLAGE_MISSING_NIN)
 							if(M)
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_MISSING_NIN].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_MISSING_NIN)
+
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
 
 			Change_Rank()
 				set category = "Administrator"
@@ -865,7 +877,11 @@ mob
 									if(1)
 										if(m.village == VILLAGE_MISSING_NIN)
 											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village].")
+
 											m.SetVillage(usr.village)
+											world.UpdateVillageCount()
+				
+											spawn() src.client.UpdateWhoAll()
 
 											var/squad/squad = m.GetSquad()
 											if(squad) squad.Refresh()
@@ -893,7 +909,11 @@ mob
 							if(m.village == usr.village)
 								spawn() usr.client.Alert("You have formally exiled [m.name] from the [usr.village].", "Member Exile")
 								spawn() m.client.Alert("The [usr.rank], [usr.name], formally exiles you from the [usr.village].", "Member Exile")
+
 								m.SetVillage(VILLAGE_MISSING_NIN)
+								world.UpdateVillageCount()
+				
+								spawn() src.client.UpdateWhoAll()
 
 								var/squad/squad = m.GetSquad()
 								if(squad) squad.Refresh()
@@ -973,7 +993,11 @@ mob
 									if(1)
 										if(m.village == VILLAGE_MISSING_NIN)
 											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village] village.")
+
 											m.SetVillage(usr.village)
+											world.UpdateVillageCount()
+				
+											spawn() src.client.UpdateWhoAll()
 
 											var/squad/squad = m.GetSquad()
 											if(squad) squad.Refresh()
@@ -1001,7 +1025,9 @@ mob
 							if(m.village == usr.village)
 								spawn() usr.client.Alert("You have formally exiled [m.name] from the [usr.village] village.", "Village Exile")
 								spawn() m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally exiles you from the [usr.village] village.", "Village Exile")
+
 								m.SetVillage(VILLAGE_MISSING_NIN)
+								world.UpdateVillageCount()
 
 								var/squad/squad = m.GetSquad()
 								if(squad) squad.Refresh()
