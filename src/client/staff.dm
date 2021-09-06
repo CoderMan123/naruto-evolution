@@ -38,6 +38,21 @@ client
 
 					src.mob.SetRank(RANK_CHUUNIN)
 			
+			// Akatsuki Check //
+
+			if(akatsuki == src.ckey)
+				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
+				src.verbs += typesof(/mob/akatsuki/verb)
+
+			else
+				src.verbs -= typesof(/mob/akatsuki/verb)
+
+				if(src.mob.rank == RANK_AKATSUKI_LEADER)
+					src << output("You were forced out of office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>, and as a result you have been automatically demoted to [RANK_AKATSUKI].", "Action.Output")
+					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.mob.character] ([src.ckey]) was forced out of office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>, and as a result has been automatically demoted to [RANK_AKATSUKI].</font><br />", LOG_AKATSUKI)
+					
+					src.mob.SetRank(RANK_AKATSUKI)
+			
 			if(administrators.Find(src.ckey))
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.mob.verbs += typesof(/mob/administrator/verb)
@@ -95,7 +110,47 @@ mob
       
 			// UPDATE: This issue only happens when you add these verbs to src.client instead of src.mob.
 			// NOTE: Only add verbs to src.mob from now on.
-      
+
+			Manage_Akatsuki()
+				set category = "Administrator"
+					switch(usr.client.Alert("Would you like to promote or demote the [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Promote", "Demote", "Cancel")))
+						if(1)
+							if(akatsuki)
+								usr.client.Alert("There is already an [RANK_AKATSUKI_LEADER].", "Manage Akatsuki")
+							else
+								var/list/exclude = list()
+								for(var/mob/m in mobs_online)
+									if(m.village != VILLAGE_MISSING_NIN || m.village != VILLAGE_AKATSUKI) exclude += m
+
+								var/mob/m = input("Who would you like to promote to [RANK_AKATSUKI_LEADER]", "Manage Akatsuki") as null|anything in mobs_online - exclude
+								if(m)
+									m.SetVillage(VILLAGE_AKATSUKI)
+									m.SetRank(RANK_AKATSUKI_LEADER)
+
+									var/squad/squad = m.GetSquad()
+									if(squad)
+										spawn() squad.Refresh()
+									
+									m.client.StaffCheck()
+
+									world << output("[usr.character] has elected [m.character] into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
+									text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has elected [m.character] ([m.client.ckey]) into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.</font><br />", LOG_AKATSUKI)
+						
+						if(2)
+							if(akatsuki)
+								switch(usr.client.Alert("Are you sure you want to demote the [VILLAGE_AKATSUKI] [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Demote", "Cancel")))
+									if(1)
+										world << output("The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character].", "Action.Output")
+										text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character] ([usr.client.ckey]).</font><br />", LOG_AKATSUKI)
+										
+										akatsuki = null
+										akatsuki_last_online = null
+
+										for(var/mob/m in mobs_online)
+											m.client.StaffCheck()
+							else
+								usr.client.Alert("There isn't a [RANK_AKATSUKI_LEADER] currently in office for the [VILLAGE_AKATSUKI].", "Manage Akatsuki")
+
 			Manage_Kages()
 				set category = "Administrator"
 				switch(usr.client.Alert("Which village Kage would you like to manage?", "Manage Kages", list("[VILLAGE_LEAF]", "[VILLAGE_SAND]", "Cancel")))
@@ -639,7 +694,7 @@ mob
 				set category = "Administrator"
 				var/mob/M = input("Who's village would you like to change?", "Change Rank") as null|anything in mobs_online
 				if(M)
-					switch(input("What would you like to change [M]'s village to?") as null|anything in list(VILLAGE_LEAF, VILLAGE_SAND, VILLAGE_MISSING_NIN))
+					switch(input("What would you like to change [M]'s village to?") as null|anything in list(VILLAGE_LEAF, VILLAGE_SAND, VILLAGE_AKATSUKI, VILLAGE_MISSING_NIN))
 						if(VILLAGE_LEAF)
 							if(M)
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_LEAF].","Action.Output")
@@ -653,6 +708,13 @@ mob
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_SAND].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_SAND].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_SAND)
+						
+						if(VILLAGE_AKATSUKI)
+							if(M)
+								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_AKATSUKI].","Action.Output")
+								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_AKATSUKI].","Action.Output")
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_AKATSUKI].<br />", LOG_ADMINISTRATOR)
+								M.SetVillage(VILLAGE_AKATSUKI)
 
 						if(VILLAGE_MISSING_NIN)
 							if(M)
