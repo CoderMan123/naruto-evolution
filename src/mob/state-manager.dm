@@ -1,7 +1,3 @@
-#define STATE_REMOVE_REF 1
-#define STATE_REMOVE_ANY 2
-#define STATE_REMOVE_ALL 3
-
 proc
 	AddState(mob/m, var/state/s, var/duration = 0)
 		s.mob = m

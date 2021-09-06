@@ -93,3 +93,8 @@
 #define COLOR_VILLAGE_LEAF "#2b7154"
 #define COLOR_VILLAGE_SAND "#886541"
 #define COLOR_VILLAGE_AKATSUKI "#971e1e"
+
+// State Manager //
+#define STATE_REMOVE_REF 1
+#define STATE_REMOVE_ANY 2
+#define STATE_REMOVE_ALL 3
