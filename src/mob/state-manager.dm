@@ -94,10 +94,12 @@ proc
 	
 	in_warp_dimension
 		Ticker()
-			var/victims_previous_loc = src.mob.loc
+			var/mob/m = src.mob
+			var/victims_previous_loc = m.loc
 			..()
-			src.mob<<output("The warp dimension couldn't hold you any longer!","Action.Output")
-			src.mob.loc = victims_previous_loc
+			if(m)
+				m<<output("The warp dimension couldn't hold you any longer!","Action.Output")
+				m.loc = victims_previous_loc
 
 #ifdef STATE_MANAGER_DEBUG
 mob
