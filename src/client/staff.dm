@@ -113,43 +113,43 @@ mob
 
 			Manage_Akatsuki()
 				set category = "Administrator"
-					switch(usr.client.Alert("Would you like to promote or demote the [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Promote", "Demote", "Cancel")))
-						if(1)
-							if(akatsuki)
-								usr.client.Alert("There is already an [RANK_AKATSUKI_LEADER].", "Manage Akatsuki")
-							else
-								var/list/exclude = list()
-								for(var/mob/m in mobs_online)
-									if(m.village != VILLAGE_MISSING_NIN || m.village != VILLAGE_AKATSUKI) exclude += m
+				switch(usr.client.Alert("Would you like to promote or demote the [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Promote", "Demote", "Cancel")))
+					if(1)
+						if(akatsuki)
+							usr.client.Alert("There is already an [RANK_AKATSUKI_LEADER].", "Manage Akatsuki")
+						else
+							var/list/exclude = list()
+							for(var/mob/m in mobs_online)
+								if(m.village != VILLAGE_MISSING_NIN || m.village != VILLAGE_AKATSUKI) exclude += m
 
-								var/mob/m = input("Who would you like to promote to [RANK_AKATSUKI_LEADER]", "Manage Akatsuki") as null|anything in mobs_online - exclude
-								if(m)
-									m.SetVillage(VILLAGE_AKATSUKI)
-									m.SetRank(RANK_AKATSUKI_LEADER)
+							var/mob/m = input("Who would you like to promote to [RANK_AKATSUKI_LEADER]", "Manage Akatsuki") as null|anything in mobs_online - exclude
+							if(m)
+								m.SetVillage(VILLAGE_AKATSUKI)
+								m.SetRank(RANK_AKATSUKI_LEADER)
 
-									var/squad/squad = m.GetSquad()
-									if(squad)
-										spawn() squad.Refresh()
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() squad.Refresh()
+								
+								m.client.StaffCheck()
+
+								world << output("[usr.character] has elected [m.character] into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
+								text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has elected [m.character] ([m.client.ckey]) into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.</font><br />", LOG_AKATSUKI)
+					
+					if(2)
+						if(akatsuki)
+							switch(usr.client.Alert("Are you sure you want to demote the [VILLAGE_AKATSUKI] [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Demote", "Cancel")))
+								if(1)
+									world << output("The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character].", "Action.Output")
+									text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character] ([usr.client.ckey]).</font><br />", LOG_AKATSUKI)
 									
-									m.client.StaffCheck()
+									akatsuki = null
+									akatsuki_last_online = null
 
-									world << output("[usr.character] has elected [m.character] into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
-									text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has elected [m.character] ([m.client.ckey]) into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.</font><br />", LOG_AKATSUKI)
-						
-						if(2)
-							if(akatsuki)
-								switch(usr.client.Alert("Are you sure you want to demote the [VILLAGE_AKATSUKI] [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Demote", "Cancel")))
-									if(1)
-										world << output("The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character].", "Action.Output")
-										text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character] ([usr.client.ckey]).</font><br />", LOG_AKATSUKI)
-										
-										akatsuki = null
-										akatsuki_last_online = null
-
-										for(var/mob/m in mobs_online)
-											m.client.StaffCheck()
-							else
-								usr.client.Alert("There isn't a [RANK_AKATSUKI_LEADER] currently in office for the [VILLAGE_AKATSUKI].", "Manage Akatsuki")
+									for(var/mob/m in mobs_online)
+										m.client.StaffCheck()
+						else
+							usr.client.Alert("There isn't a [RANK_AKATSUKI_LEADER] currently in office for the [VILLAGE_AKATSUKI].", "Manage Akatsuki")
 
 			Manage_Kages()
 				set category = "Administrator"
