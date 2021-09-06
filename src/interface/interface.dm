@@ -444,6 +444,13 @@ client
 									<td></td>
 									<td></td>
 								</tr>
+								<tr>
+									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">Hokage:</span> [kages[VILLAGE_LEAF]]</td>
+									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">Kazekage:</span> [kages[VILLAGE_SAND]]</td>
+									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">Akatsuki:</span> [akatsuki]</td>
+									<td></td>
+									<td></td>
+								</tr>
 							</tbody>
 						</table>
 
