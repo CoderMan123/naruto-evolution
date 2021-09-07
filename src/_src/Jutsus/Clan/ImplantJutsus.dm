@@ -66,7 +66,7 @@ mob
 					spawn(10) del(A)
 					var/mob/M = c_target
 					var/Timer=J.level*5
-					spawn(5)
+					spawn(10)
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
 							var/obj/O = new(c_target.loc)

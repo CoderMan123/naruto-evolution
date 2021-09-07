@@ -29,7 +29,7 @@ mob
 					var/matrix/x = matrix()
 					x.Translate(-16,0)
 					A.transform = x
-					spawn(5)
+					spawn(10)
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
 							c_target.move=0

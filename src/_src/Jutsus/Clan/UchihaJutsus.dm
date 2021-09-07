@@ -70,9 +70,9 @@ mob
 					i.pixel_x=16
 					i.pixel_y=16
 					M.overlays+=i
-					spawn(8)
-					M.overlays-=i
-					spawn(8)
+					spawn(10)
+						M.overlays-=i
+					spawn(10)
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
 							var/obj/O = new(M.loc)
