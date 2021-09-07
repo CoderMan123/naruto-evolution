@@ -477,12 +477,17 @@ client
 
 	proc
 		FlashExperienceLock()
+			src.mob.overlays += /obj/Symbols/exp_lock
+
 			while(src && src.mob.exp_locked)
 				if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C80000")
 				sleep(10)
 				if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 				sleep(10)
-			if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
+
+			if(src)
+				winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
+				src.mob.overlays -= /obj/Symbols/exp_lock
 		
 		UpdateWho()
 			if(src.browser_url == BROWSER_WHO && winget(src, "Browser", "is-visible") == "true")

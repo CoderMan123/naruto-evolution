@@ -1,4 +1,9 @@
 obj/Symbols
+	exp_lock
+		icon = 'Padlock.png'
+		pixel_x = 48
+		pixel_y = 66
+
 	Squad
 		New(mob/M, var/ckey)
 			if(M && M.client)
