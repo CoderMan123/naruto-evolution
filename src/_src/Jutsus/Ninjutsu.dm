@@ -762,7 +762,7 @@ obj
 
 							if(M)
 								if(M <> src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
 										src.layer=MOB_LAYER+1
