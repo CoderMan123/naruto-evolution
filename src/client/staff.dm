@@ -913,6 +913,7 @@ mob
 											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village].")
 
 											m.SetVillage(usr.village)
+											m.SetRank(RANK_AKATSUKI)
 											world.UpdateVillageCount()
 				
 											spawn() src.client.UpdateWhoAll()
@@ -1038,6 +1039,7 @@ mob
 											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village] village.")
 
 											m.SetVillage(usr.village)
+											m.SetRank(RANK_GENIN)
 											world.UpdateVillageCount()
 				
 											spawn() src.client.UpdateWhoAll()
