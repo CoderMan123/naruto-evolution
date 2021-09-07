@@ -15,6 +15,7 @@
 #define FILE_DIR "assets/audio/fire"
 #define FILE_DIR "assets/audio/Skills"
 #define FILE_DIR "assets/audio/Walk"
+#define FILE_DIR "assets/HUB"
 #define FILE_DIR "assets/interface"
 #define FILE_DIR "assets/interface/buttons"
 #define FILE_DIR "assets/interface/cursors"

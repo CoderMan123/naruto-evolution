@@ -1,7 +1,3 @@
-#define STATE_REMOVE_REF 1
-#define STATE_REMOVE_ANY 2
-#define STATE_REMOVE_ALL 3
-
 proc
 	AddState(mob/m, var/state/s, var/duration = 0)
 		s.mob = m
@@ -95,6 +91,16 @@ proc
 	walking
 		OnTick()
 			..()
+	
+	in_warp_dimension
+		Ticker()
+			var/mob/m = src.mob
+			var/victims_previous_loc = m.loc
+			m.loc = locate(165,183,8)
+			..()
+			if(m)
+				m<<output("The warp dimension couldn't hold you any longer!","Action.Output")
+				m.loc = victims_previous_loc
 
 #ifdef STATE_MANAGER_DEBUG
 mob

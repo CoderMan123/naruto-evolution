@@ -322,15 +322,9 @@ client
 		Who()
 			set hidden = 1
 			if(src.browser_url != BROWSER_WHO)
-				var/online = 0
-				var/leaf_online = 0
-				var/sand_online = 0
 				var/players = ""
 				for(var/client/C in clients_online)
 					if(C)
-						online++
-						if(C.mob.village == VILLAGE_LEAF) leaf_online++
-						if(C.mob.village == VILLAGE_SAND) sand_online++
 
 						var/obj/Symbols/Village/V = new(C.mob)
 						var/obj/Symbols/Rank/R = new(C.mob)
@@ -444,11 +438,18 @@ client
 							<tbody>
 								[players]
 								<tr>
-									<td><span style="font-weight: bold;">Total Online:</span> [online]</td>
-									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">Leaf Village:</span> [leaf_online]</td>
-									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">Sand Village:</span> [sand_online]</td>
+									<td><span style="font-weight: bold;">Total Online:</span> [global.mobs_online.len]</td>
+									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">[VILLAGE_LEAF]:</span> [global.leaf_online]</td>
+									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">[VILLAGE_SAND]:</span> [global.sand_online]</td>
+									<td><span style="color: [COLOR_VILLAGE_MISSING_NIN]; font-weight: bold;">[VILLAGE_MISSING_NIN]:</span> [global.missing_nin_online]</td>
+									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">[VILLAGE_AKATSUKI]:</span> [global.akatsuki_online]</td>
+								</tr>
+								<tr>
 									<td></td>
+									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">[RANK_HOKAGE]:</span> [kages[VILLAGE_LEAF]]</td>
+									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">[RANK_KAZEKAGE]:</span> [kages[VILLAGE_SAND]]</td>
 									<td></td>
+									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">[RANK_AKATSUKI_LEADER]:</span> [akatsuki]</td>
 								</tr>
 							</tbody>
 						</table>
@@ -476,12 +477,17 @@ client
 
 	proc
 		FlashExperienceLock()
+			src.mob.overlays += /obj/Symbols/exp_lock
+
 			while(src && src.mob.exp_locked)
 				if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C80000")
 				sleep(10)
 				if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 				sleep(10)
-			if(src) winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
+
+			if(src)
+				winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
+				src.mob.overlays -= /obj/Symbols/exp_lock
 		
 		UpdateWho()
 			if(src.browser_url == BROWSER_WHO && winget(src, "Browser", "is-visible") == "true")

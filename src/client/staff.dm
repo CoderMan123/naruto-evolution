@@ -4,7 +4,7 @@ client
 			statpanel("Server Information")
 			stat("Name:", world.name)
 			stat("Status:", world.status)
-			stat("Server Time:", "[time2text(world.timeofday, "hh:mm:ss", world.timezone)] (UTC[world.timezone])")
+			stat("Server Time:", "[time2text(world.timeofday, "hh:mm:ss", world.timezone)] (UTC-[world.timezone])")
 			stat("Local Time:", "[time2text(world.timeofday, "hh:mm:ss", src.timezone)] (UTC[src.timezone])")
 			stat("Address:", "[world.address]:[world.port]")
 			stat("BYOND Version:", "[world.byond_version].[world.byond_build]")
@@ -37,6 +37,21 @@ client
 					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.mob.character] ([src.ckey]) was forced out of office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>, and as a result has been automatically demoted to [RANK_JOUNIN].</font><br />", LOG_KAGE)
 
 					src.mob.SetRank(RANK_CHUUNIN)
+			
+			// Akatsuki Check //
+
+			if(akatsuki == src.ckey)
+				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
+				src.verbs += typesof(/mob/akatsuki/verb)
+
+			else
+				src.verbs -= typesof(/mob/akatsuki/verb)
+
+				if(src.mob.rank == RANK_AKATSUKI_LEADER)
+					src << output("You were forced out of office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>, and as a result you have been automatically demoted to [RANK_AKATSUKI].", "Action.Output")
+					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.mob.character] ([src.ckey]) was forced out of office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>, and as a result has been automatically demoted to [RANK_AKATSUKI].</font><br />", LOG_AKATSUKI)
+					
+					src.mob.SetRank(RANK_AKATSUKI)
 			
 			if(administrators.Find(src.ckey))
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
@@ -95,7 +110,53 @@ mob
       
 			// UPDATE: This issue only happens when you add these verbs to src.client instead of src.mob.
 			// NOTE: Only add verbs to src.mob from now on.
-      
+
+			Manage_Akatsuki()
+				set category = "Administrator"
+				switch(usr.client.Alert("Would you like to promote or demote the [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Promote", "Demote", "Cancel")))
+					if(1)
+						if(akatsuki)
+							usr.client.Alert("There is already an [RANK_AKATSUKI_LEADER].", "Manage Akatsuki")
+						else
+							var/list/exclude = list()
+							for(var/mob/m in mobs_online)
+								if(m.village != VILLAGE_MISSING_NIN && m.village != VILLAGE_AKATSUKI) exclude += m
+
+							var/mob/m = input("Who would you like to promote to [RANK_AKATSUKI_LEADER]", "Manage Akatsuki") as null|anything in mobs_online - exclude
+							if(m)
+
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You cannot promote [m.character] to [RANK_AKATSUKI_LEADER] while in a Squad.", "Naruto Evolution")
+									spawn() m.client.Alert("You cannot be promoted to [RANK_AKATSUKI_LEADER] while in a Squad.", "Naruto Evolution")
+									return 0
+
+								m.SetVillage(VILLAGE_AKATSUKI)
+								m.SetRank(RANK_AKATSUKI_LEADER)
+
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
+								
+								m.client.StaffCheck()
+
+								world << output("[usr.character] has elected [m.character] into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
+								text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has elected [m.character] ([m.client.ckey]) into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.</font><br />", LOG_AKATSUKI)
+					
+					if(2)
+						if(akatsuki)
+							switch(usr.client.Alert("Are you sure you want to demote the [VILLAGE_AKATSUKI] [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Demote", "Cancel")))
+								if(1)
+									world << output("The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character].", "Action.Output")
+									text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character] ([usr.client.ckey]).</font><br />", LOG_AKATSUKI)
+									
+									akatsuki = null
+									akatsuki_last_online = null
+
+									for(var/mob/m in mobs_online)
+										m.client.StaffCheck()
+						else
+							usr.client.Alert("There isn't a [RANK_AKATSUKI_LEADER] currently in office for the [VILLAGE_AKATSUKI].", "Manage Akatsuki")
+
 			Manage_Kages()
 				set category = "Administrator"
 				switch(usr.client.Alert("Which village Kage would you like to manage?", "Manage Kages", list("[VILLAGE_LEAF]", "[VILLAGE_SAND]", "Cancel")))
@@ -181,7 +242,7 @@ mob
 				set category = "Administrator"
 				switch(alert("What would you like to do?", "Manage Logs", "View Logs", "Download Logs", "Clear Logs"))
 					if("View Logs")
-						switch(input("Which logs would you like to view?", "Logs") as null|anything in list(LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+						switch(input("Which logs would you like to view?", "Logs") as null|anything in list(LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_AKATSUKI, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if(LOG_CHAT_LOCAL)
 								src << output(null, "Browser.Output")
 								src << browse(file(LOG_CHAT_LOCAL))
@@ -230,6 +291,12 @@ mob
 								src.client.browser_url = BROWSER_LOGS
 								winset(usr, "Browser", "is-visible = true")
 							
+							if(LOG_AKATSUKI)
+								usr << output(null, "Browser.Output")
+								usr << browse(file(LOG_AKATSUKI))
+								src.client.browser_url = BROWSER_LOGS
+								winset(usr, "Browser", "is-visible = true")
+							
 							if(LOG_KAGE)
 								usr << output(null, "Browser.Output")
 								usr << browse(file(LOG_KAGE))
@@ -273,7 +340,7 @@ mob
 								winset(usr, "Browser", "is-visible = true")
 
 					if("Download Logs")
-						switch(input("Which logs would you like to download?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+						switch(input("Which logs would you like to download?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_AKATSUKI, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
 								shell("zip -r logs/logs.zip logs/")
 								usr << file("logs.zip")
@@ -303,6 +370,9 @@ mob
 							if(LOG_ADMINISTRATOR)
 								usr << ftp(LOG_ADMINISTRATOR)
 							
+							if(LOG_AKATSUKI)
+								usr << ftp(LOG_AKATSUKI)
+							
 							if(LOG_KAGE)
 								usr << ftp(LOG_KAGE)
 
@@ -325,13 +395,14 @@ mob
 								usr << ftp(LOG_STAFF)
 
 					if("Clear Logs")
-						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
+						switch(input("Which logs would you like to clear?", "Manage Logs") as null|anything in list("All Logs", LOG_CHAT_LOCAL, LOG_CHAT_VILLAGE, LOG_CHAT_SQUAD, LOG_CHAT_FACTION, LOG_CHAT_GLOBAL, LOG_CHAT_WHISPER, LOG_CHAT_STAFF, LOG_ADMINISTRATOR, LOG_AKATSUKI, LOG_KAGE, LOG_BUGS, LOG_CLIENT_SAVES, LOG_ERROR, LOG_KILLS, LOG_SAVES, LOG_STAFF))
 							if("All Logs")
 								alert("Clearing of all logs has been disabled. This will be replaced with rotate logs soon.")
 								return
 								switch(alert("Are you sure you want to delete all logs?", "Manage Logs", "Clear All Logs", "Cancel"))
 									if("Clear All Logs")
 										fdel(LOG_ADMINISTRATOR)
+										fdel(LOG_AKATSUKI)
 										fdel(LOG_KAGE)
 										fdel(LOG_BUGS)
 										fdel(LOG_CLIENT_SAVES)
@@ -406,6 +477,14 @@ mob
 										usr << output("You have cleared the Administrator logs.", "Action.Output")
 										world.CreateLogs()
 										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Administrator logs.<br />", LOG_ADMINISTRATOR)
+							
+							if(LOG_AKATSUKI)
+								switch(alert("Are you sure you want to delete the Akatsuki logs?", "Manage Logs", "Clear Logs", "Cancel"))
+									if("Clear Logs")
+										fdel(LOG_AKATSUKI)
+										usr << output("You have cleared the Akatsuki logs.", "Action.Output")
+										world.CreateLogs()
+										text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] ([usr.ckey]) has cleared the Akatsuki logs.<br />", LOG_ADMINISTRATOR)
 							
 							if(LOG_KAGE)
 								switch(alert("Are you sure you want to delete the Kage logs?", "Manage Logs", "Clear Logs", "Cancel"))
@@ -639,27 +718,66 @@ mob
 				set category = "Administrator"
 				var/mob/M = input("Who's village would you like to change?", "Change Rank") as null|anything in mobs_online
 				if(M)
-					switch(input("What would you like to change [M]'s village to?") as null|anything in list(VILLAGE_LEAF, VILLAGE_SAND, VILLAGE_MISSING_NIN))
+					switch(input("What would you like to change [M]'s village to?") as null|anything in list(VILLAGE_LEAF, VILLAGE_SAND, VILLAGE_AKATSUKI, VILLAGE_MISSING_NIN))
 						if(VILLAGE_LEAF)
 							if(M)
+								var/squad/squad = M.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You change [M.character]'s village while they're in a Squad.", "Naruto Evolution")
+									return 0
+
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_LEAF].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_LEAF].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_LEAF].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_LEAF)
 
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
+
 						if(VILLAGE_SAND)
 							if(M)
+								var/squad/squad = M.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You change [M.character]'s village while they're in a Squad.", "Naruto Evolution")
+									return 0
+
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_SAND].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_SAND].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_SAND].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_SAND)
 
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
+						
+						if(VILLAGE_AKATSUKI)
+							if(M)
+								var/squad/squad = M.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You change [M.character]'s village while they're in a Squad.", "Naruto Evolution")
+									return 0
+
+								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_AKATSUKI].","Action.Output")
+								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_AKATSUKI].","Action.Output")
+								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_AKATSUKI].<br />", LOG_ADMINISTRATOR)
+								M.SetVillage(VILLAGE_AKATSUKI)
+
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
+
 						if(VILLAGE_MISSING_NIN)
 							if(M)
+								var/squad/squad = M.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You change [M.character]'s village while they're in a Squad.", "Naruto Evolution")
+									return 0
+									
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_MISSING_NIN].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].<br />", LOG_ADMINISTRATOR)
 								M.SetVillage(VILLAGE_MISSING_NIN)
+
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
 
 			Change_Rank()
 				set category = "Administrator"
@@ -767,6 +885,131 @@ mob
 				set category = "Pixel Artist"
 
 mob
+	akatsuki 
+		verb
+			Manage_Members()
+				set category = "Akatsuki"
+				switch(usr.client.Alert("Would you like to invite or boot ninja from the [VILLAGE_AKATSUKI]?", "Manage Members", list("Invite", "Exile", "Cancel")))
+					if(1)
+						var/list/exclude = list(usr)
+						for(var/mob/m in mobs_online)
+							if(m.village != VILLAGE_MISSING_NIN) exclude += m
+
+						var/mob/m = input("Who would you like to invite to the [VILLAGE_AKATSUKI]", "Manage Members") as null|anything in mobs_online - exclude
+
+						if(m)
+							if(m.village == VILLAGE_MISSING_NIN)
+								switch(m.client.Alert("The [usr.rank], [usr.name], formally invites you to join the [usr.village]. Do you accept this invitation?", "Akatsuki Invitation", list("Yes", "No")))
+									if(1)
+										if(m.village == VILLAGE_MISSING_NIN)
+
+											var/squad/squad = m.GetSquad()
+											if(squad)
+												spawn() src.client.Alert("You cannot invite someone who is in a Squad.", "Naruto Evolution")
+												spawn() m.client.Alert("You cannot join a village while in a Squad.", "Naruto Evolution")
+												return 0
+
+											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village].")
+
+											m.SetVillage(usr.village)
+											world.UpdateVillageCount()
+				
+											spawn() src.client.UpdateWhoAll()
+
+										else
+											spawn() usr.client.Alert("[m.name] is no longer a [VILLAGE_MISSING_NIN] and is therefore unable to join the [usr.village].")
+											spawn() m.client.Alert("You are no longer a [VILLAGE_MISSING_NIN] and are therefore unable to join the [usr.village].")
+
+									if(2)
+										usr.client.Alert("[m.name] has rejected your invitation to join the [usr.village].")
+
+							else
+								usr.client.Alert("You can't send a village invitation to [m.name] because they are not a [VILLAGE_MISSING_NIN].", "Manage Members")
+						
+						else
+							usr.client.Alert("The ninja you were going to invite is no longer online and is therefore unable to be invited.", "Manage Members")
+
+					if(2)
+						var/list/exclude = list(usr)
+						for(var/mob/m in mobs_online)
+							if(m.village != usr.village) exclude += m
+
+						var/mob/m = input("Who would you like to boot from the [usr.village]?", "Manage Members") as null|anything in mobs_online - exclude
+
+						if(m)
+							if(m.village == usr.village)
+							
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You can't exile [m.name] from the [usr.village] village because they are currently in a Squad.")
+									return 0
+
+								spawn() usr.client.Alert("You have formally exiled [m.name] from the [usr.village].", "Member Exile")
+								spawn() m.client.Alert("The [usr.rank], [usr.name], formally exiles you from the [usr.village].", "Member Exile")
+
+								m.SetVillage(VILLAGE_MISSING_NIN)
+								world.UpdateVillageCount()
+				
+								spawn() src.client.UpdateWhoAll()
+
+							else
+								usr.client.Alert("[m.name] is no longer in the [usr.village] village and is therefore unable to be exiled.", "Manage Members")
+						else
+							usr.client.Alert("The ninja you were going to exile is no longer online and is therefore unable to be exiled.", "Manage Members")
+			
+			Retire()
+				set category = "Akatsuki"
+				switch(usr.client.Alert("Are you sure that you want to retire as [usr.rank]?", "Retire [usr.rank]", list("Retire", "Cancel")))
+					if(1)
+						switch(usr.client.Alert("Would you like to choose a successor?", "Retire [usr.rank]", list("Yes", "No", "Cancel")))
+							if(1)
+								var/list/exclude = list(usr)
+								for(var/mob/m in mobs_online)
+									if(m.village != VILLAGE_AKATSUKI) exclude += m
+
+								var/mob/m = input("Who would you like to succeed you as [usr.rank]?", "Retire [usr.rank]") as null|anything in mobs_online - exclude
+								if(m)
+									if(m.village == VILLAGE_AKATSUKI)
+										switch(m.client.Alert("The [usr.rank], [usr.name], formally invites you to succeed them as the [usr.rank]. Do you accept this invitation?", "[usr.rank] Invitation", list("Yes", "No")))
+											if(1)
+												spawn() usr.client.Alert("[m.name] has accepted your invitation to succeed you as the [usr.rank].")
+
+												world << output("[usr.character] has retired from office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
+												text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.</font><br />", LOG_AKATSUKI)
+
+												world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
+												text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.</font><br />", LOG_AKATSUKI)
+
+												m.SetRank(usr.rank)
+												m.client.StaffCheck()
+
+												usr.SetRank(RANK_AKATSUKI)
+												usr.client.StaffCheck()
+
+												var/squad/squad = usr.GetSquad()
+												if(squad) spawn() squad.Refresh()
+
+												var/squad/squad2 = m.GetSquad()
+												if(squad2) spawn() squad2.Refresh()
+											
+											if(2)
+												usr.client.Alert("[m.name] has rejected your invitation to succeed you as the [usr.rank].")
+									else
+										usr.client.Alert("You can't send a [usr.rank] invitation to [m.name] because they are no longer in the [usr.village].", "Retire [usr.rank]")
+								else
+									usr.client.Alert("The ninja you were going to promote to [usr.rank] is no longer online and is therefore unable to be promoted.", "Retire [usr.rank]")
+										
+							if(2)
+
+								world << output("[usr.character] has retired from office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
+								text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.</font><br />", LOG_AKATSUKI)
+																
+								akatsuki = null
+								akatsuki_last_online = null
+
+								usr.SetRank(RANK_AKATSUKI)
+
+mob
 	kage
 		verb
 			Manage_Village()
@@ -784,11 +1027,20 @@ mob
 								switch(m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to join the [usr.village] village. Do you accept this invitation?", "Village Invitation", list("Yes", "No")))
 									if(1)
 										if(m.village == VILLAGE_MISSING_NIN)
-											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village] village.")
-											m.SetVillage(usr.village)
 
 											var/squad/squad = m.GetSquad()
-											if(squad) squad.Refresh()
+											if(squad)
+												spawn() src.client.Alert("You cannot invite someone who is in a Squad.", "Naruto Evolution")
+												spawn() m.client.Alert("You cannot join a village while in a Squad.", "Naruto Evolution")
+												return 0
+
+											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village] village.")
+
+											m.SetVillage(usr.village)
+											world.UpdateVillageCount()
+				
+											spawn() src.client.UpdateWhoAll()
+
 										else
 											spawn() usr.client.Alert("[m.name] is no longer a [VILLAGE_MISSING_NIN] and is therefore unable to join the [usr.village] village.")
 											spawn() m.client.Alert("You are no longer a [VILLAGE_MISSING_NIN] and are therefore unable to join the [usr.village] village.")
@@ -811,12 +1063,20 @@ mob
 
 						if(m)
 							if(m.village == usr.village)
-								spawn() usr.client.Alert("You have formally exiled [m.name] from the [usr.village] village.", "Village Exile")
-								spawn() m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally exiles you from the [usr.village] village.", "Village Exile")
-								m.SetVillage(VILLAGE_MISSING_NIN)
 
 								var/squad/squad = m.GetSquad()
-								if(squad) squad.Refresh()
+								if(squad)
+									spawn() src.client.Alert("You can't exile [m.name] from the [usr.village] village because they are currently in a Squad.")
+									return 0
+
+								spawn() usr.client.Alert("You have formally exiled [m.name] from the [usr.village] village.", "Village Exile")
+								spawn() m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally exiles you from the [usr.village] village.", "Village Exile")
+
+								m.SetVillage(VILLAGE_MISSING_NIN)
+
+								world.UpdateVillageCount()
+								spawn() src.client.UpdateWhoAll()
+
 							else
 								usr.client.Alert("[m.name] is no longer in the [usr.village] village and is therefore unable to be exiled.", "Manage Village")
 						else
@@ -968,11 +1228,11 @@ mob
 															text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
 														
 														if(RANK_KAZEKAGE)
-															world << output("[usr.character] has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
-															text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
+															world << output("[usr.character] has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.", "Action.Output")
+															text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.</font><br />", LOG_KAGE)
 															
-															world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
-															text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
+															world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.", "Action.Output")
+															text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.</font><br />", LOG_KAGE)
 													
 													m.SetRank(usr.rank)
 													m.client.StaffCheck()

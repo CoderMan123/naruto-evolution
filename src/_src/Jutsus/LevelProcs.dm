@@ -529,8 +529,12 @@ mob
 										world<<output("A white Zetsu has been slain by [X.name] earning the [X.village] village 1 point! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
 									if(zetsu_count < 1)
 										ZetsuEventEnd(X)
-								else
-									world<<output("A white Zetsu has been slain by [X.name], a rogue ninja! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
+								else	
+									if(zetsu_count > 0)
+										world<<output("A white Zetsu has been slain by [X.name]! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
+									if(zetsu_count < 1)
+										ZetsuEventEnd(X)
+
 
 	//Akatsuki Killed
 							if(src.village == VILLAGE_AKATSUKI && zetsu_event_active == 1)
@@ -547,11 +551,11 @@ mob
 										if(squad)
 											for(var/mob/m in mobs_online)
 												if(squad.members[m.client.ckey])
-													m << output ("[X.name] has killed a member of the Akatsuki! You've earned 8 bonus experience for your squad!", "Action.Output")
-													m.exp += 8
+													m << output ("[X.name] has killed a member of the Akatsuki! You've earned 10 bonus experience for your squad!", "Action.Output")
+													m.exp += 10
 													m.Levelup()
 										else
-											X.exp +=20
+											X.exp += 10
 											X.Levelup()
 									else
 										ZetsuEventEnd(X)
@@ -563,22 +567,17 @@ mob
 									vill_lives_left--
 									if(vill_lives_left > 0)
 										world << output ("[X.name] has slain a member of the [src.village] village! (Shinobi Alliance lives remaining: [vill_lives_left])", "Action.Output")
-										X << output ("It's a slaughter. You've earned 5 bonus experience for your squad!", "Action.Output")
+										X << output ("It's a slaughter. You've earned 10 bonus experience for your squad!", "Action.Output")
 										if(squad)
 											for(var/mob/m in mobs_online)
 												if(squad.members[m.client.ckey])
-													m.exp += 5
+													m.exp += 10
 													m.Levelup()
 										else
-											X.exp += 5
+											X.exp += 10
 											X.Levelup()
 									else
 										ZetsuEventEnd(X)
-
-										for(var/mob/m in mobs_online)
-											if(m.village == VILLAGE_AKATSUKI)
-												m.exp += 30
-												m.Levelup()
 
 	//Missing nin kills
 							if(X.village == VILLAGE_MISSING_NIN && zetsu_event_active == 1)
@@ -589,8 +588,8 @@ mob
 									if(src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
 										vill_lives_left--
 										world << output("A rogue ninja took advantage of the fray and has killed a member of the [X.village] village! (Shinobi Alliance lives remaining: [vill_lives_left])", "Action.Output")
-									X << output ("With everything going on, they never saw you coming. You've earned 8 bonus experience!", "Action.Output")
-									X.exp += 8
+									X << output ("With everything going on, they never saw you coming. You've earned 15 bonus experience!", "Action.Output")
+									X.exp += 15
 									X.Levelup()
 									if(akat_lives_left < 1 || vill_lives_left < 1)
 										ZetsuEventEnd(X)

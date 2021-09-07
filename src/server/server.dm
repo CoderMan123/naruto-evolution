@@ -9,8 +9,11 @@ var/list/pixel_artists = list("illusiveblair")
 var/list/kages = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
 var/list/kages_last_online = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
 
-var/list/alpha_testers = list()
-var/list/beta_testers = list()
+var/akatsuki
+var/akatsuki_last_online
+
+var/list/alpha_testers = list("djinnythedjin", "lavenblade")
+var/list/beta_testers = list("djinnythedjin", "lavenblade")
 
 var/list/clients_connected = list()
 var/list/clients_online = list()
@@ -18,6 +21,11 @@ var/list/clients_multikeying = list()
 var/list/mobs_online = list()
 var/list/names_taken = list()
 var/list/npcs_online = list()
+
+var/leaf_online = 0
+var/sand_online = 0
+var/missing_nin_online = 0
+var/akatsuki_online = 0
 
 var/squads[0]
 
@@ -51,6 +59,7 @@ world
 		spawn() LinkWarps()
 		spawn() HTMLlist()
 		spawn() Kage_Inactivity_Check()
+		spawn() Akatsuki_Inactivity_Check()
 
 	Del()
 		src.FailMissions()
@@ -58,8 +67,20 @@ world
 		..()
 	
 	Error(exception/ex)
-		text2file("<b>Timestamp:</b> [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br /><b>Runtime Error:</b> [ex.name]<br /><b>File:</b> [ex.file]<br /><b>Line:</b> [ex.line]<br /><b><u>Description:</u></b><br />[ex.desc]<br /><br />", LOG_ERROR)
+		text2file("<b>Timestamp:</b> [time2text(world.realtime , "YYYY-MM-DD hh:mm:ss")]<br /><b>Runtime Error:</b> [ex.name]<br /><b>File:</b> [ex.file]<br /><b>Line:</b> [ex.line]<br /><b><u>Description:</u></b><br />[ex.desc]<br /><br />", LOG_ERROR)
 	
+	proc/UpdateVillageCount()
+		leaf_online = 0
+		sand_online = 0
+		missing_nin_online = 0
+		akatsuki_online = 0
+
+		for(var/mob/m in mobs_online)
+			if(m.village == VILLAGE_LEAF) leaf_online++
+			if(m.village == VILLAGE_SAND) sand_online++
+			if(m.village == VILLAGE_MISSING_NIN) missing_nin_online++
+			if(m.village == VILLAGE_AKATSUKI) akatsuki_online++
+
 	proc/UpdateClientsMultikeying()
 		clients_multikeying = list()
 
@@ -102,6 +123,26 @@ world
 					kages_last_online[VILLAGE_SAND] = null
 
 			sleep(600)
+	
+	proc/Akatsuki_Inactivity_Check()
+		set background = 1
+		while(src)
+			var/days = 5
+			
+			if(akatsuki_last_online && akatsuki_last_online + 864000 * days <= world.realtime)
+				var/online
+				for(var/mob/m in mobs_online)
+					if(akatsuki == m.client.ckey) online = 1
+
+				// Don't demote Akatsuki that are online because akatsuki_last_online only updates on mob.Load() and mob.Save().
+				// Otherwise, Akatsuki will be demoted if they do not logout to update their akatsuki_last_online timestamp.
+				if(online)
+					world << output("The [RANK_AKATSUKI] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
+					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> ([kages[VILLAGE_AKATSUKI]]) was forced out of office due to inactivity for [days] days.</font><br />", LOG_AKATSUKI)
+					akatsuki = null
+					akatsuki_last_online = null
+
+			sleep(600)
 
 	proc/UpdateHUB()
 		set background = 1
@@ -137,6 +178,9 @@ world
 		
 		if(!fexists(LOG_KAGE))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_KAGE)
+		
+		if(!fexists(LOG_AKATSUKI))
+			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_AKATSUKI)
 		
 		if(!fexists(LOG_CHAT_LOCAL))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_LOCAL)
@@ -175,6 +219,10 @@ world
 		F = new(SAVEFILE_KAGES)
 		F["kages"] << kages
 		F["kages_last_online"] << kages_last_online
+
+		F = new(SAVEFILE_AKATSUKI)
+		F["akatsuki"] << akatsuki
+		F["akatsuki_last_online"] << akatsuki_last_online
 
 		F = new(SAVEFILE_SQUADS)
 		F["squads"] << squads
@@ -224,6 +272,10 @@ world
 		F = new(SAVEFILE_KAGES)
 		if(F["kages"]) F["kages"] >> kages
 		if(F["kages_last_online"]) F["kages_last_online"] >> kages_last_online
+
+		F = new(SAVEFILE_AKATSUKI)
+		if(F["akatsuki"]) F["akatsuki"] >> akatsuki
+		if(F["akatsuki_last_online"]) F["akatsuki_last_online"] >> akatsuki_last_online
 
 		F = new(SAVEFILE_WORLD)
 		if(!isnull(F["Factions"])) F["Factions"] >> Factionnames

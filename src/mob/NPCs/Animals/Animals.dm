@@ -10,11 +10,11 @@ var/list/animal_spawns = list()
 var/list/desert_animal_spawns = list()
 
 proc/AnimalPopulater()
+	for(var/obj/animalspawn/s)
+		animal_spawns += s
+	for(var/obj/animalspawndesert/s)
+		desert_animal_spawns += s
 	while(world)
-		for(var/obj/animalspawn/s)
-			animal_spawns += s
-		for(var/obj/animalspawndesert/s)
-			desert_animal_spawns += s
 		if(squirrel_count < 10)
 			var/amount_to_spawn = 10 - squirrel_count
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)

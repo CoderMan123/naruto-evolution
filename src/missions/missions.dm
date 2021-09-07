@@ -77,6 +77,15 @@ mission
 						npc.squad_leader_ckey = M.ckey
 
 	proc/Complete(mob/M)
+		switch(M.village)
+			if(VILLAGE_LEAF)
+				if(sand_online > leaf_online) mission_exp_mod = initial(mission_exp_mod) + (0.05 * (sand_online - leaf_online))
+				else mission_exp_mod = initial(mission_exp_mod)
+
+			if(VILLAGE_SAND)
+				if(leaf_online > sand_online) mission_exp_mod = initial(mission_exp_mod) + (0.05 * (leaf_online - sand_online))
+				else mission_exp_mod = initial(mission_exp_mod)
+
 		switch(src.type)
 			if(/mission/d_rank/deliver_intel)
 				var/squad/squad = M.GetSquad()

@@ -459,6 +459,8 @@ mob
 
 			spawn() src.client.StaffCheck()
 
+			world.UpdateVillageCount()
+
 			spawn() src.client.UpdateWhoAll()
 
 			new/obj/Screen/Bar(src)
@@ -536,6 +538,19 @@ mob
 			else if(length(msg) > 600)
 				message_trim = copytext(msg, 600)
 				msg = copytext(msg, 1, 600)
+			
+			if(msg == "/restore-base")
+				spawn() src.client.Alert("Your character base and overlays will be restored in 60 seconds.", "Naruto Evolution")
+				sleep(600)
+				if(src)
+					for(var/obj/Inventory/Clothing/o in src.contents)
+						o.suffix = ""
+						
+					src.ClothingOverlays = null
+					src.ResetBase()
+					src.RestoreOverlays()
+
+				return 0
 
 			if(findtext(msg, "/stuck"))
 				src.Stuck()
@@ -666,6 +681,7 @@ mob
 		SetVillage(var/village)
 			if(village)
 				src.village = village
+				if(village == VILLAGE_MISSING_NIN) src.rank = ""
 				src.SetName(src.name)
 				src.client.UpdateCharacterPanel()
 
@@ -688,8 +704,14 @@ mob
 
 		SetRank(var/RANK)
 			if(RANK)
-				if(RANK != RANK_ANBU)
-					for(var/obj/Inventory/Clothing/Masks/o in src.contents)
+
+				if(RANK != RANK_AKATSUKI)
+					for(var/obj/Inventory/Clothing/HeadWrap/AkatsukiHat/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
+
+					for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/o in src.contents)
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
 						o.loc = null
@@ -748,24 +770,21 @@ mob
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
 						o.loc = null
+				
+				if(RANK != RANK_ANBU)
+					for(var/obj/Inventory/Clothing/Masks/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 
 				switch(RANK)
-					if(RANK_ANBU)
-						switch(src.village)
-							if(VILLAGE_LEAF)
-								new /obj/Inventory/Clothing/Masks/Anbu(src)
+					
+					if(RANK_AKATSUKI_LEADER)
+						akatsuki = src.ckey
+						akatsuki_last_online = world.realtime
 
-							if(VILLAGE_SAND)
-								new /obj/Inventory/Clothing/Masks/Anbu_Black(src)
-
-							if(VILLAGE_ROCK)
-								new /obj/Inventory/Clothing/Masks/Anbu_Brown(src)
-
-							if(VILLAGE_MIST)
-								new /obj/Inventory/Clothing/Masks/Anbu_Blue(src)
-
-							if(VILLAGE_SOUND)
-								new /obj/Inventory/Clothing/Masks/Anbu_Purple(src)
+						new /obj/Inventory/Clothing/HeadWrap/AkatsukiHat(src)
+						new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
 
 					if(RANK_HOKAGE)
 						kages[VILLAGE_LEAF] = src.ckey
@@ -801,6 +820,23 @@ mob
 
 						new /obj/Inventory/Clothing/HeadWrap/OtokageHat(src)
 						new /obj/Inventory/Clothing/Robes/OtokageRobe(src)
+					
+					if(RANK_ANBU)
+						switch(src.village)
+							if(VILLAGE_LEAF)
+								new /obj/Inventory/Clothing/Masks/Anbu(src)
+
+							if(VILLAGE_SAND)
+								new /obj/Inventory/Clothing/Masks/Anbu_Black(src)
+
+							if(VILLAGE_ROCK)
+								new /obj/Inventory/Clothing/Masks/Anbu_Brown(src)
+
+							if(VILLAGE_MIST)
+								new /obj/Inventory/Clothing/Masks/Anbu_Blue(src)
+
+							if(VILLAGE_SOUND)
+								new /obj/Inventory/Clothing/Masks/Anbu_Purple(src)
 
 				src.rank = RANK
 

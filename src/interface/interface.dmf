@@ -1756,7 +1756,7 @@ window "Main"
 		border = line
 		saved-params = "is-checked"
 		text = ""
-		image = 'assets\\interface\\buttons\\Minimize.png'
+		image = 'assets\\interface\\buttons\\Reconnect.png'
 		command = ".reconnect"
 		is-flat = true
 	elem "label18"

@@ -10,6 +10,7 @@
 #define SAVEFILE_CLIENT "saves/clients"
 #define SAVEFILE_SQUADS "saves/squads.sav"
 #define SAVEFILE_KAGES "saves/kages.sav"
+#define SAVEFILE_AKATSUKI "saves/akatsuki.sav"
 
 #define LOG_ERROR "logs/error.html"
 #define LOG_BUGS "logs/bugs.html"
@@ -20,6 +21,7 @@
 #define LOG_ADMINISTRATOR "logs/administrator.html"
 #define LOG_MODERATOR "logs/moderator.html"
 #define LOG_KAGE "logs/kage.html"
+#define LOG_AKATSUKI "logs/akatsuki.html"
 
 #define LOG_CHAT_LOCAL "logs/chat/local.html"
 #define LOG_CHAT_VILLAGE "logs/chat/village.html"
@@ -93,3 +95,9 @@
 #define COLOR_VILLAGE_LEAF "#2b7154"
 #define COLOR_VILLAGE_SAND "#886541"
 #define COLOR_VILLAGE_AKATSUKI "#971e1e"
+#define COLOR_VILLAGE_MISSING_NIN "#ffffff"
+
+// State Manager //
+#define STATE_REMOVE_REF 1
+#define STATE_REMOVE_ANY 2
+#define STATE_REMOVE_ALL 3
