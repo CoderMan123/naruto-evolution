@@ -151,10 +151,6 @@ mob
 				
 				spawn() src.client.UpdateWhoAll()
 
-				var/squad/squad = src.GetSquad()
-				if(squad)
-					squad.Refresh()
-
 	//	AdminUp()
 	//		set hidden=1
 	//		if(usr.dead==0)

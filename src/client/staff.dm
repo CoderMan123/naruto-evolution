@@ -136,10 +136,6 @@ mob
 
 								world.UpdateVillageCount()
 								spawn() src.client.UpdateWhoAll()
-
-								var/squad/squad = m.GetSquad()
-								if(squad)
-									spawn() squad.Refresh()
 								
 								m.client.StaffCheck()
 
@@ -725,9 +721,9 @@ mob
 					switch(input("What would you like to change [M]'s village to?") as null|anything in list(VILLAGE_LEAF, VILLAGE_SAND, VILLAGE_AKATSUKI, VILLAGE_MISSING_NIN))
 						if(VILLAGE_LEAF)
 							if(M)
-								var/squad/squad = m.GetSquad()
+								var/squad/squad = M.GetSquad()
 								if(squad)
-									spawn() src.client.Alert("You change [m.character]'s village while they're in a Squad.", "Naruto Evolution")
+									spawn() src.client.Alert("You change [M.character]'s village while they're in a Squad.", "Naruto Evolution")
 									return 0
 
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_LEAF].","Action.Output")
@@ -740,9 +736,9 @@ mob
 
 						if(VILLAGE_SAND)
 							if(M)
-								var/squad/squad = m.GetSquad()
+								var/squad/squad = M.GetSquad()
 								if(squad)
-									spawn() src.client.Alert("You change [m.character]'s village while they're in a Squad.", "Naruto Evolution")
+									spawn() src.client.Alert("You change [M.character]'s village while they're in a Squad.", "Naruto Evolution")
 									return 0
 
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_SAND].","Action.Output")
@@ -755,9 +751,9 @@ mob
 						
 						if(VILLAGE_AKATSUKI)
 							if(M)
-								var/squad/squad = m.GetSquad()
+								var/squad/squad = M.GetSquad()
 								if(squad)
-									spawn() src.client.Alert("You change [m.character]'s village while they're in a Squad.", "Naruto Evolution")
+									spawn() src.client.Alert("You change [M.character]'s village while they're in a Squad.", "Naruto Evolution")
 									return 0
 
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_AKATSUKI].","Action.Output")
@@ -770,9 +766,9 @@ mob
 
 						if(VILLAGE_MISSING_NIN)
 							if(M)
-								var/squad/squad = m.GetSquad()
+								var/squad/squad = M.GetSquad()
 								if(squad)
-									spawn() src.client.Alert("You change [m.character]'s village while they're in a Squad.", "Naruto Evolution")
+									spawn() src.client.Alert("You change [M.character]'s village while they're in a Squad.", "Naruto Evolution")
 									return 0
 									
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].","Action.Output")
@@ -920,8 +916,6 @@ mob
 				
 											spawn() src.client.UpdateWhoAll()
 
-											var/squad/squad = m.GetSquad()
-											if(squad) squad.Refresh()
 										else
 											spawn() usr.client.Alert("[m.name] is no longer a [VILLAGE_MISSING_NIN] and is therefore unable to join the [usr.village].")
 											spawn() m.client.Alert("You are no longer a [VILLAGE_MISSING_NIN] and are therefore unable to join the [usr.village].")
@@ -958,8 +952,6 @@ mob
 				
 								spawn() src.client.UpdateWhoAll()
 
-								var/squad/squad = m.GetSquad()
-								if(squad) squad.Refresh()
 							else
 								usr.client.Alert("[m.name] is no longer in the [usr.village] village and is therefore unable to be exiled.", "Manage Members")
 						else
@@ -1049,8 +1041,6 @@ mob
 				
 											spawn() src.client.UpdateWhoAll()
 
-											var/squad/squad = m.GetSquad()
-											if(squad) squad.Refresh()
 										else
 											spawn() usr.client.Alert("[m.name] is no longer a [VILLAGE_MISSING_NIN] and is therefore unable to join the [usr.village] village.")
 											spawn() m.client.Alert("You are no longer a [VILLAGE_MISSING_NIN] and are therefore unable to join the [usr.village] village.")
