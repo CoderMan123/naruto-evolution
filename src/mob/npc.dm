@@ -821,8 +821,11 @@ obj/escort
 				political_escort.last_node = src
 
 				if(political_escort.squad && political_escort.squad.mission)
-					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
-					del political_escort
+					for(var/mob/s_leader in mobs_online)
+						if(political_escort.squad.leader[s_leader.ckey])
+							political_escort.squad.mission.Complete(s_leader)
+							del political_escort
+							break
 			..()
 	pel10
 		icon = 'placeholdertiles.dmi'
@@ -937,8 +940,11 @@ obj/escort
 				political_escort.last_node = src
 
 				if(political_escort.squad && political_escort.squad.mission)
-					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
-					del political_escort
+					for(var/mob/s_leader in mobs_online)
+						if(political_escort.squad.leader[s_leader.ckey])
+							political_escort.squad.mission.Complete(s_leader)
+							del political_escort
+							break
 			..()
 	pel13_toki
 		icon = 'placeholdertiles.dmi'
@@ -984,8 +990,11 @@ obj/escort
 				political_escort.last_node = src
 
 				if(political_escort.squad && political_escort.squad.mission)
-					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
-					del political_escort
+					for(var/mob/s_leader in mobs_online)
+						if(political_escort.squad.leader[s_leader.ckey])
+							political_escort.squad.mission.Complete(s_leader)
+							del political_escort
+							break
 			..()
 
 //SAND escort nodes
@@ -1232,8 +1241,11 @@ obj/escort
 				political_escort.last_node = src
 
 				if(political_escort.squad && political_escort.squad.mission)
-					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
-					del political_escort
+					for(var/mob/s_leader in mobs_online)
+						if(political_escort.squad.leader[s_leader.ckey])
+							political_escort.squad.mission.Complete(s_leader)
+							del political_escort
+							break
 			..()
 	pes10
 		icon = 'placeholdertiles.dmi'
@@ -1348,8 +1360,11 @@ obj/escort
 				political_escort.last_node = src
 
 				if(political_escort.squad && political_escort.squad.mission)
-					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
-					del political_escort
+					for(var/mob/s_leader in mobs_online)
+						if(political_escort.squad.leader[s_leader.ckey])
+							political_escort.squad.mission.Complete(s_leader)
+							del political_escort
+							break
 			..()
 	pes13_tekkan
 		icon = 'placeholdertiles.dmi'
@@ -1395,6 +1410,9 @@ obj/escort
 				political_escort.last_node = src
 
 				if(political_escort.squad && political_escort.squad.mission)
-					political_escort.squad.mission.Complete(political_escort.squad.leader[1])
-					del political_escort
+					for(var/mob/s_leader in mobs_online)
+						if(political_escort.squad.leader[s_leader.ckey])
+							political_escort.squad.mission.Complete(s_leader)
+							del political_escort
+							break
 			..()
