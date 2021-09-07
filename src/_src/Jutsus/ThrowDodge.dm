@@ -104,7 +104,6 @@ mob
 					usr.canattack=1
 					usr.caged=0
 					usr.Sleeping=0
-					usr.firing=0
 					usr.kawarmi=0
 					usr.inshadowfield=0
 					var/obj/A = new/obj/MiscEffects/Smoke(usr.loc)
