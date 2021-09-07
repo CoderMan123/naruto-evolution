@@ -85,7 +85,7 @@ proc/ZetsuEventEnd(mob/M)
 						m.Levelup()
 			for(var/mob/m in mobs_online)
 				if(m.village == VILLAGE_LEAF || m.village == VILLAGE_SAND)
-					m.exp += 80
+					m.exp += 40
 					m.Levelup()
 		if(vill_lives_left < 1)
 			world << output ("<b><font color= #971e1e>The Shinobi Alliance have suffered too many loses, the Akatsuki have won the battle and earned themselves 120 experience for their success!</Font></b>", "Action.Output")
