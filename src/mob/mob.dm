@@ -189,8 +189,13 @@ mob
 				for(var/obj/Inventory/Clothing/Masks/Absolute_Zero_Mask/O in src.contents)
 					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 					del(O)
+			
+			if(src.rank != RANK_AKATSUKI_LEADER)
+				for(var/obj/Inventory/Clothing/Masks/Tobi_Mask/O in src.contents)
+					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
+					del(O)
 
-			if(src.village != "Akatsuki")
+			if(src.rank != RANK_AKATSUKI || src.rank != RANK_AKATSUKI_LEADER)
 				for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in src.contents)
 					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 					del(O)
@@ -199,9 +204,7 @@ mob
 					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 					del(O)
 
-				for(var/obj/Inventory/Clothing/Masks/Tobi_Mask/O in src.contents)
-					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
-					del(O)
+				
 
 			/*if(src.rank != "ANBU")
 				for(var/obj/Inventory/Clothing/Masks/Anbu/O in src.contents)
@@ -704,8 +707,13 @@ mob
 
 		SetRank(var/RANK)
 			if(RANK)
+				if(RANK != RANK_AKATSUKI_LEADER)
+					for(var/obj/Inventory/Clothing/Masks/Tobi_Mask/o in src.contents)
+						if(src.ClothingOverlays[o.section] == o.icon)
+							RemoveSection(o.section)
+						o.loc = null
 
-				if(RANK != RANK_AKATSUKI)
+				if(RANK != RANK_AKATSUKI || RANK != RANK_AKATSUKI_LEADER)
 					for(var/obj/Inventory/Clothing/HeadWrap/AkatsukiHat/o in src.contents)
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
@@ -783,6 +791,11 @@ mob
 						akatsuki = src.ckey
 						akatsuki_last_online = world.realtime
 
+						new /obj/Inventory/Clothing/Masks/Tobi_Mask(src)
+						new /obj/Inventory/Clothing/HeadWrap/AkatsukiHat(src)
+						new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
+					
+					if(RANK_AKATSUKI)
 						new /obj/Inventory/Clothing/HeadWrap/AkatsukiHat(src)
 						new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
 
