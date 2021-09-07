@@ -3,6 +3,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.12
+
+### Added
+- added /restore-base command for players
+- added reconnect button icon
+- added an exp lock icon that appears next to a players hp bar when they're locked
+### Fixed
+- fixed a text bug
+- fixed animal spawns increasing over time
+- fixed bugs with warp dimension
+- fixed an issue with bug swarm
+
+### Changed
+- Made improvements to akatsuki leader verbs
+- Can no longer change village while in a squad
+- increased delays for certain 'auto hit' jutsus so that they're easier to avoid
+- Made some changes to zetsu event in preparation for akat release
+
 ## 2.0.11
 
 ### Added
