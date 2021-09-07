@@ -391,8 +391,6 @@ mob/NPCs/Shinobi
 			if(!target||!target_mob)
 				src:target_mob = killer
 				src:target = killer
-			killer.Attacked=src
-			spawn(200) if(killer) killer.Attacked=null
 		if(src.health<=0&&!dead&&ismob(killer))
 			if(TutorialGuy&&killer.Tutorial==5)
 				killer.Tutorial=6
@@ -507,7 +505,6 @@ mob/NPCs/Shinobi
 					dostuff=1
 				if(VillageGuard&&!target&&!AttackAll)
 					for(var/mob/M in oview(src))
-						var/mob/X=M.Attacked
 						if(X&&ismob(X)) if(!M.dead&&X.village==src.village)
 							src:target_mob = M
 							target=M

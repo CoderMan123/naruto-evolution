@@ -19,7 +19,7 @@ mob/verb/Target_A_Mob()
 	var/Train=0
 	for(var/obj/Training/T in orange(1))Train=1
 	if(Train)return
-	for(var/mob/M in oview(src))if(M.Attacked==src&&!target_mob==M)src.Target_Atom(M)
+	//for(var/mob/M in oview(src))if(M.Attacked==src&&!target_mob==M)src.Target_Atom(M)
 	for(var/mob/M in oview(src))
 
 		if(istype(loc,/turf/Arena))//If you're in the arena, and your trying to tab target a person, it will only target your opponent.
