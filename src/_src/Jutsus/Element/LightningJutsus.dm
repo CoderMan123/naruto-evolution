@@ -56,15 +56,14 @@ mob
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/Jutsu=4
-					J.damage+=0.7*round((src.ninjutsu / 150)*2*J.damage)
+					J.damage+=0.6*round((src.ninjutsu / 150)*2*J.damage)
 					var/Damage=J.damage/Jutsu
 					var/mob/M = c_target
 					var/image/i = new('Chidori Nigashi.dmi')
 					i.pixel_y = 32
 					M.overlays+=i
-					spawn(8)
-					M.overlays-=i
-					spawn(8)
+					spawn(15)
+						M.overlays-=i
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
 							view()<<sound('Thunder.ogg')
