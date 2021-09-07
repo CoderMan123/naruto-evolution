@@ -80,7 +80,6 @@ mob
 							M.BeingThrown=1
 		Dodge()
 			set hidden=1
-			if(src.icon_state == "dead") return
 
 			src.HengeUndo()
 			if(src.kawarmi)
@@ -147,6 +146,9 @@ mob
 				else
 					usr.mark=null
 					usr.kawarmi=0
+
+			if(src.icon_state == "dead") return
+
 			if(ChakraCheck(0)) return
 			if(src.likeaclone)
 				var/mob/Clones/SC=src.likeaclone
