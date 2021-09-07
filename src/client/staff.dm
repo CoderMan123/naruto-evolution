@@ -124,6 +124,13 @@ mob
 
 							var/mob/m = input("Who would you like to promote to [RANK_AKATSUKI_LEADER]", "Manage Akatsuki") as null|anything in mobs_online - exclude
 							if(m)
+
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You cannot promote [m.character] to [RANK_AKATSUKI_LEADER] while in a Squad.", "Naruto Evolution")
+									spawn() m.client.Alert("You cannot be promoted to [RANK_AKATSUKI_LEADER] while in a Squad.", "Naruto Evolution")
+									return 0
+
 								m.SetVillage(VILLAGE_AKATSUKI)
 								m.SetRank(RANK_AKATSUKI_LEADER)
 
@@ -718,6 +725,11 @@ mob
 					switch(input("What would you like to change [M]'s village to?") as null|anything in list(VILLAGE_LEAF, VILLAGE_SAND, VILLAGE_AKATSUKI, VILLAGE_MISSING_NIN))
 						if(VILLAGE_LEAF)
 							if(M)
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You change [m.character]'s village while they're in a Squad.", "Naruto Evolution")
+									return 0
+
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_LEAF].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_LEAF].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_LEAF].<br />", LOG_ADMINISTRATOR)
@@ -728,6 +740,11 @@ mob
 
 						if(VILLAGE_SAND)
 							if(M)
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You change [m.character]'s village while they're in a Squad.", "Naruto Evolution")
+									return 0
+
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_SAND].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_SAND].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_SAND].<br />", LOG_ADMINISTRATOR)
@@ -738,6 +755,11 @@ mob
 						
 						if(VILLAGE_AKATSUKI)
 							if(M)
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You change [m.character]'s village while they're in a Squad.", "Naruto Evolution")
+									return 0
+
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_AKATSUKI].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_AKATSUKI].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_AKATSUKI].<br />", LOG_ADMINISTRATOR)
@@ -748,6 +770,11 @@ mob
 
 						if(VILLAGE_MISSING_NIN)
 							if(M)
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You change [m.character]'s village while they're in a Squad.", "Naruto Evolution")
+									return 0
+									
 								usr.client << output("You have changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].","Action.Output")
 								M.client << output("[usr] has changed your village from [usr.village] to [VILLAGE_MISSING_NIN].","Action.Output")
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr] has changed [M]'s village from [usr.village] to [VILLAGE_MISSING_NIN].<br />", LOG_ADMINISTRATOR)
@@ -879,6 +906,13 @@ mob
 								switch(m.client.Alert("The [usr.rank], [usr.name], formally invites you to join the [usr.village]. Do you accept this invitation?", "Akatsuki Invitation", list("Yes", "No")))
 									if(1)
 										if(m.village == VILLAGE_MISSING_NIN)
+
+											var/squad/squad = m.GetSquad()
+											if(squad)
+												spawn() src.client.Alert("You cannot invite someone who is in a Squad.", "Naruto Evolution")
+												spawn() m.client.Alert("You cannot join a village while in a Squad.", "Naruto Evolution")
+												return 0
+
 											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village].")
 
 											m.SetVillage(usr.village)
@@ -910,6 +944,12 @@ mob
 
 						if(m)
 							if(m.village == usr.village)
+							
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You can't exile [m.name] from the [usr.village] village because they are currently in a Squad.")
+									return 0
+
 								spawn() usr.client.Alert("You have formally exiled [m.name] from the [usr.village].", "Member Exile")
 								spawn() m.client.Alert("The [usr.rank], [usr.name], formally exiles you from the [usr.village].", "Member Exile")
 
@@ -995,6 +1035,13 @@ mob
 								switch(m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally invites you to join the [usr.village] village. Do you accept this invitation?", "Village Invitation", list("Yes", "No")))
 									if(1)
 										if(m.village == VILLAGE_MISSING_NIN)
+
+											var/squad/squad = m.GetSquad()
+											if(squad)
+												spawn() src.client.Alert("You cannot invite someone who is in a Squad.", "Naruto Evolution")
+												spawn() m.client.Alert("You cannot join a village while in a Squad.", "Naruto Evolution")
+												return 0
+
 											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village] village.")
 
 											m.SetVillage(usr.village)
@@ -1026,6 +1073,12 @@ mob
 
 						if(m)
 							if(m.village == usr.village)
+
+								var/squad/squad = m.GetSquad()
+								if(squad)
+									spawn() src.client.Alert("You can't exile [m.name] from the [usr.village] village because they are currently in a Squad.")
+									return 0
+
 								spawn() usr.client.Alert("You have formally exiled [m.name] from the [usr.village] village.", "Village Exile")
 								spawn() m.client.Alert("The [usr.village] [usr.rank], [usr.name], formally exiles you from the [usr.village] village.", "Village Exile")
 
@@ -1034,8 +1087,6 @@ mob
 								world.UpdateVillageCount()
 								spawn() src.client.UpdateWhoAll()
 
-								var/squad/squad = m.GetSquad()
-								if(squad) squad.Refresh()
 							else
 								usr.client.Alert("[m.name] is no longer in the [usr.village] village and is therefore unable to be exiled.", "Manage Village")
 						else

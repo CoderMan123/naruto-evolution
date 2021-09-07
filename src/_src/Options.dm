@@ -72,6 +72,11 @@ mob
 			set hidden=1
 			if(village == VILLAGE_MISSING_NIN) return
 
+			var/squad/squad = src.GetSquad()
+			if(squad)
+				src.client.Alert("You cannot leave your village while in a Squad.", "Naruto Evolution")
+				return
+
 			if(Tutorial < 7)
 				usr<<"You can't leave your village while you're in the tutorial!"
 				return
