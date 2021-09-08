@@ -356,11 +356,6 @@ mob/Karasu
 			for(var/mob/M in world)
 				if(!M.client) continue
 				if(M.client.eye==src) M.client.eye=M
-				if(M.puppets[1]==src||M.puppets[2]==src)
-					if(istype(killer,/mob/NPCs/Shinobi))
-						var/mob/NPCs/Shinobi/X=killer
-						X.target=M
-						X.Target_Atom(M)
 			if(src)del(src)
 	Del()
 		for(var/mob/M in world)
@@ -762,7 +757,7 @@ obj
 
 							if(M)
 								if(M <> src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
 										src.layer=MOB_LAYER+1

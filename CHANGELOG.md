@@ -3,6 +3,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.13
+### Added
+- Map warpers will now no longer let you pass if you're in combat
+
+### Fixed
+- Fixed in combat state to function correctly
+- Fixed akatsuki not getting their clothing
+- Fixed having no rank when changing village
+- Fixed Political Escort missions bug
+- Fixed advanced body replacement speeding up ninja tools
+- Fixed advanced body replacement not working with certain jutsus
+- Fixed Human Bullet Tank dialing your speed up massively on kill
+- Fixed a couple backend issues
+
+### Changed
+- nerfed kirin's damage and increased dodge window
+- nerfed shikigami dance damage
+- shadow extension now requires a target to cast
+
 ## 2.0.12
 
 ### Added

@@ -71,7 +71,7 @@ mob
 						for(i=0,i<100,i++)
 							lastloc = src.loc
 							step(src,src.dir)
-							sleep(0.5)
+							sleep(30)
 							for(var/mob/M in orange(1,src))
 								if(M == src) continue
 								if(M.dead || M.swimming) continue
@@ -83,11 +83,11 @@ mob
 								M.injutsu=1
 								M.canattack=0
 								spawn(5)
-									if(!M||M.dead)continue
-									M.icon_state=""
-									M.move=1
-									M.injutsu=0
-									M.canattack=1
+									if(M||!M.dead)
+										M.icon_state=""
+										M.move=1
+										M.injutsu=0
+										M.canattack=1
 						src.inboulder=0
 						src.canattack=1
 						src.firing=0

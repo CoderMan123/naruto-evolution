@@ -11,10 +11,10 @@ mob
 					flick("jutsuse",src)
 					view(src)<<sound('wirlwind.wav',0,0)
 					src.Prisoner=c_target
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/7
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/7
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/7
-					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/7
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/9
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/9
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/9
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/9
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					J.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 					var/Timer = J.level * 1.5 //determines how many ticks of damage as well as scaled bind duration

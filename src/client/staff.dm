@@ -567,7 +567,8 @@ mob
 
 						if(2)
 							if(M)
-								squad.mission = null
+								squad.mission.status = "Failure"
+								squad.mission.complete = world.realtime
 								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.name] ([src.ckey]) has failed [M.name]'s mission for their entire Squad.<br />", LOG_ADMINISTRATOR)
 
 								if(src.client.Alert("Would you like to reset mission cooldown for [M.name]'s Squad?", "Manage Mission", list("Yes", "No")) == 1)
@@ -912,6 +913,7 @@ mob
 											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village].")
 
 											m.SetVillage(usr.village)
+											m.SetRank(RANK_AKATSUKI)
 											world.UpdateVillageCount()
 				
 											spawn() src.client.UpdateWhoAll()
@@ -1037,6 +1039,7 @@ mob
 											usr.client.Alert("[m.name] has accepted your invitation to join the [usr.village] village.")
 
 											m.SetVillage(usr.village)
+											m.SetRank(RANK_GENIN)
 											world.UpdateVillageCount()
 				
 											spawn() src.client.UpdateWhoAll()

@@ -101,6 +101,9 @@ proc
 			if(m)
 				m<<output("The warp dimension couldn't hold you any longer!","Action.Output")
 				m.loc = victims_previous_loc
+	
+	in_combat
+
 
 #ifdef STATE_MANAGER_DEBUG
 mob

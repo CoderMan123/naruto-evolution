@@ -260,7 +260,6 @@ obj
 				//pixel_x=32
 mob/var/tmp/hit
 mob/var/tmp/KillCombo=0
-mob/var/tmp/Attacked
 mob/var/tmp/levelrate=0
 mob/var
 	undlvlatck=0
@@ -331,8 +330,6 @@ mob
 						return
 				if(src.key&&X&&X!=src&&X.key&&!dueling)
 					var/area/AK=X.loc.loc
-					X.Attacked=src
-					spawn(200) if(X) X.Attacked=null
 					if(A.Safe==1||AK.Safe==1)
 						src.health=src.maxhealth
 						src.UpdateHMB()
