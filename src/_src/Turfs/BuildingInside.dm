@@ -190,6 +190,10 @@ turf
 	MapWarps
 		var/LevelTo
 		Entered(mob/M)
+			if(istype(M,/mob) && !istype(M, /mob/npc))
+				if(CheckState(M, new/state/in_combat))
+					M<<"You were recently in combat. Please wait to do this."
+					return
 			if(istype(M,/mob) && M.client)
 				var/counts=0
 				var/check=0
