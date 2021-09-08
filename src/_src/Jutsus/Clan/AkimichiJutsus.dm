@@ -71,7 +71,7 @@ mob
 						for(i=0,i<100,i++)
 							lastloc = src.loc
 							step(src,src.dir)
-							sleep(30)
+							sleep(5)
 							for(var/mob/M in orange(1,src))
 								if(M == src) continue
 								if(M.dead || M.swimming) continue
