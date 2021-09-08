@@ -36,7 +36,6 @@ mob
 		var/obj/login_eye = new(random_location.loc)
 		src.client.eye = login_eye
 		src.client.perspective = EYE_PERSPECTIVE
-		spawn() GetScreenResolution(src)
 		src.client.screen += new/obj/Logos/Naruto_Evolution
 
 		spawn()

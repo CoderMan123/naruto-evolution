@@ -1639,6 +1639,7 @@ window "Main"
 		background-color = #1b1b1b
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
+		on-size = "GetScreenResolution"
 		titlebar = false
 		statusbar = false
 		can-resize = false
@@ -1686,16 +1687,6 @@ window "Main"
 		saved-params = "splitter"
 		left = "Navigation"
 		is-vert = false
-	elem "label"
-		type = LABEL
-		pos = 1303,743
-		size = 1x1
-		anchor1 = 100,100
-		anchor2 = 100,100
-		background-color = none
-		is-visible = false
-		saved-params = ""
-		text = ""
 	elem "InputChild"
 		type = CHILD
 		pos = 0,469

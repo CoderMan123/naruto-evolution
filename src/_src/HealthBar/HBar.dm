@@ -21,7 +21,7 @@ obj/Screen/Bar
 	layer=999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/LeafSymbol
@@ -31,7 +31,7 @@ obj/Screen/LeafSymbol
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/SandSymbol
@@ -41,7 +41,7 @@ obj/Screen/SandSymbol
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/MistSymbol
@@ -51,7 +51,7 @@ obj/Screen/MistSymbol
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/SoundSymbol
@@ -61,7 +61,7 @@ obj/Screen/SoundSymbol
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/RockSymbol
@@ -71,7 +71,7 @@ obj/Screen/RockSymbol
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/MissingSymbol
@@ -81,7 +81,7 @@ obj/Screen/MissingSymbol
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/AkatsukiSymbol
@@ -91,7 +91,7 @@ obj/Screen/AkatsukiSymbol
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/AnbuSymbol
@@ -101,7 +101,7 @@ obj/Screen/AnbuSymbol
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/SsmSymbol
@@ -111,7 +111,7 @@ obj/Screen/SsmSymbol
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/WeaponSelect
@@ -121,7 +121,7 @@ obj/Screen/WeaponSelect
 	layer=9999
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/Health
@@ -131,7 +131,7 @@ obj/Screen/Health
 	layer=9998
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/Chakra
@@ -141,7 +141,7 @@ obj/Screen/Chakra
 	layer=9998
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 obj/Screen/EXP
@@ -151,7 +151,7 @@ obj/Screen/EXP
 	layer=9998
 	New(var/mob/M)
 		if(!ismob(M)) return
-		screen_loc = "2,[(M.YView-7)]"
+		screen_loc = "2,[(M.client.map_resolution_y-7)]"
 		M.client.screen+=src
 		src.loc=locate(0,0,0)
 mob
