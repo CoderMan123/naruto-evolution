@@ -52,21 +52,19 @@ mob
 
 		Shadow_Extension()
 			for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
+				var/mob/c_target=src.Target_Get(TARGET_MOB)
+				if(!c_target||!istype(c_target))
+					src<<output("You require a target to use this technique.","Action.Output")
+					return
 				if(src.PreJutsu(J))
-					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
 					view(src)<<sound('dash.wav',0,0)
 					if(c_target)
 						dir = get_dir(src,c_target)
-						CreateTrailNara(c_target,J.level*5)
-					else
-						Target_A_Mob()
-						c_target=src.Target_Get(TARGET_MOB)
-						if(c_target)
-							dir = get_dir(src,c_target)
-							CreateTrailNara(c_target,J.level*4)
+						CreateTrailNara(c_target,J.level*4)
+
 		Shadow_Explosion()
 			for(var/obj/Jutsus/Shadow_Explosion/J in src.jutsus)
 				if(src.PreJutsu(J))
