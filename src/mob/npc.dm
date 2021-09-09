@@ -370,7 +370,7 @@ mob/npc
 			src.mouse_over_pointer = /obj/cursors/target
 			src.hbar.Add(hbar)
 			src.hbar.Add(mbar)
-		Death()
+		Death(killer)
 			if(src.health <= 0)
 				walk(src,0)
 				spawn(50)

@@ -39,6 +39,7 @@ mob
 
 		DealDamage(amount = 0, Owner, colortype, heal = 0, chakra = 0, punch = 0)
 		//	world << output("[amount], [Owner], [colortype], [heal], [chakra], [punch]")//DEBUG INFO
+			ASSERT(Owner)
 			if(src.bubbled==0)//bubbleshieldstuff
 				if(src.dead)
 					return
