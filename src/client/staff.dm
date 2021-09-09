@@ -1,4 +1,5 @@
 client
+	var/tmp/stat_display_mobs = 0
 	Stat()
 		if(src && administrators.Find(src.ckey))
 			statpanel("Server Information")
@@ -11,6 +12,21 @@ client
 			stat("FPS:", world.fps)
 			stat("CPU:", world.cpu)
 			stat("Map CPU:", world.map_cpu)
+		
+		if(src && administrators.Find(src.ckey) && src.stat_display_mobs)
+			statpanel("Mob Information")
+			stat("Animal Counters", "")
+			stat("Buck:", buck_count)
+			stat("Snake:", snake_count)
+			stat("Doe:", doe_count)
+			stat("Rabbit:", rabbit_count)
+			stat("Hare:", hare_count)
+			stat("Hedgehog:", hedgehog_count)
+			stat("Chipmonk:", chipmonk_count)
+			stat("Squirrel:", squirrel_count)
+			stat("Spawn Counters", "")
+			stat("Forest Spawns:", animal_spawns.len)
+			stat("Desert Spawns:", desert_animal_spawns.len)
 
 client
 	proc
@@ -108,6 +124,10 @@ mob
       
 			// UPDATE: This issue only happens when you add these verbs to src.client instead of src.mob.
 			// NOTE: Only add verbs to src.mob from now on.
+
+			Toggle_Mob_Information()
+				set category = "Administrator"
+				src.client.stat_display_mobs = src.client.stat_display_mobs ? 0 : 1
 
 			Restore_Base()
 				set category = "Administrator"
