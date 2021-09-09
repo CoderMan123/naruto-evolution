@@ -1,11 +1,14 @@
 mob
 	proc
 		Chakra_Infusion_Training()//chakrainfusionstuff
+			if(infusing == 1)
+				src.infusing = 0
+				return
 			for(var/obj/Jutsus/Chakra_Infusion_Training/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(src.chakra<src.maxchakra)
 						src<<output("Your chakra needs to be full for this kind of training.","Action.Output")
-					if(src.chakra==src.maxchakra)
+					if(src.chakra == src.maxchakra)
 						src.move=0
 						src.canattack=0
 						src.firing=1
@@ -14,7 +17,7 @@ mob
 						src.infusing=1
 						var/combobuilt=3
 
-						while(infusing== 1)
+						while(infusing)
 							var/arrowcolour=rand(100,255)
 
 							var/obj/C1 = new/obj(usr.loc)//circles
