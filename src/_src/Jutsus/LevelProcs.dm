@@ -209,10 +209,6 @@ mob
 					src.maxagilityexp+=150+round(src.agility/2)
 				src.Levelup()
 				src.attkspeed=(8-(0.04*src.agility))
-				if(src.equipped=="Weights")
-					src.move_delay = 1
-				else
-					src.move_delay = min(0.5, 0.8-((src.agility/150)*0.3))
 //				if(src.agility==10)src.attkspeed=7
 //				if(src.agility==20)src.attkspeed=6
 //				if(src.agility==30)src.attkspeed=5

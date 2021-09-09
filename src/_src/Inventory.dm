@@ -425,7 +425,7 @@ obj
 						usr.equipped=null
 						usr.usedwep1=0
 						usr.overlays-='Weights.dmi'
-						usr.move_delay = min(0.5, 0.8-((usr.agility/150)*0.3))
+						usr.move_delay = max(0.5, 0.8-((usr.agility/150)*0.3))
 
 mob
 	var
