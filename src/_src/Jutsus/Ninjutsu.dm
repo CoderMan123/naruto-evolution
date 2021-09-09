@@ -2315,7 +2315,7 @@ obj
 							walk(M,Owner.dir)
 							lol
 							src.loc=locate(0,0,0)
-							M.DealDamage(src.damage,src,"NinBlue")
+							M.DealDamage(src.damage,src.Owner,"NinBlue")
 							spawn(10+Owner.ninjutsu/8)
 								if(M)
 									if(M.dead==0&&!M.swimming)M.icon_state=""
@@ -2342,7 +2342,7 @@ obj
 								M.injutsu=1
 								walk(M,Owner.dir)
 								src.loc=locate(0,0,0)
-								M.DealDamage(src.damage,src,"NinBlue")
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								spawn(10+Owner.ninjutsu/8)
 									if(M)
 										if(M.dead==0&&!M.swimming)M.icon_state=""
