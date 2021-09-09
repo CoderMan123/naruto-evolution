@@ -3,6 +3,10 @@ mob
 		Chakra_Infusion_Training()//chakrainfusionstuff
 			if(infusing == 1)
 				src.infusing = 0
+				src.overlays-=/obj/Overlays/Chakra
+				src.overlays-=/obj/Overlays/Chakra
+				src.overlays-=/obj/Overlays/Chakra
+				src.overlays-=/obj/Overlays/Chakra
 				return
 			for(var/obj/Jutsus/Chakra_Infusion_Training/J in src.jutsus)
 				if(src.PreJutsu(J))

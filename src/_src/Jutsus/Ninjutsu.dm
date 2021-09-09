@@ -48,8 +48,8 @@ obj
 		Move()
 			..()
 			if(candoit)
-				for(var/mob/M in orange(1,src))
-					if(Ownzorz)
+				for(var/mob/M in orange(2,src))
+					if(Ownzorz && M != src.Owner)
 						if(M) M.DealDamage(Ownzorz.ninjutsu/2,src.Owner,"NinBlue")
 						if(M) M.pois=5
 						if(M) M.poisoned(Ownzorz)
@@ -1351,6 +1351,8 @@ obj
 								M.dir = get_dir(M,src)
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								if(src.hits >= 12) del(src)
+								if(src)
+									walk_towards(src, M, 3)
 
 			WaterShark
 				name="Water Shark"
