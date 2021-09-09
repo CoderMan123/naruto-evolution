@@ -548,9 +548,10 @@ mob
 					for(var/obj/Inventory/Clothing/o in src.contents)
 						o.suffix = ""
 						
-					src.ClothingOverlays = null
+					src.ClothingOverlays = list("Vest"=null,"Shirt"=null,"Pants"=null,"Shoes"=null,"Mask"=null,"Headband"=null,"Sword"=null,"Gloves"=null,"Accessories"=null,"Robes"=null)
 					src.ResetBase()
 					src.RestoreOverlays()
+					src.client.UpdateInventoryPanel()
 
 				return 0
 

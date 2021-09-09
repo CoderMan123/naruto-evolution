@@ -1300,6 +1300,7 @@ mob
 					for(var/obj/Inventory/Clothing/o in m.contents)
 						o.suffix = ""
 						
-					m.ClothingOverlays = null
+					m.ClothingOverlays = list("Vest"=null,"Shirt"=null,"Pants"=null,"Shoes"=null,"Mask"=null,"Headband"=null,"Sword"=null,"Gloves"=null,"Accessories"=null,"Robes"=null)
 					m.ResetBase()
 					m.RestoreOverlays()
+					m.client.UpdateInventoryPanel()
