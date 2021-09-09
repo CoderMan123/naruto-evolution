@@ -1,6 +1,6 @@
 client
 	Stat()
-		if(administrators.Find(src.ckey))
+		if(src && administrators.Find(src.ckey))
 			statpanel("Server Information")
 			stat("Name:", world.name)
 			stat("Status:", world.status)
