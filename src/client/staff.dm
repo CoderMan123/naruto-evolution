@@ -140,6 +140,7 @@ mob
 					m.ResetBase()
 					m.RestoreOverlays()
 					m.client.UpdateInventoryPanel()
+					m.move_delay = max(0.5, 0.8-((m.agility/150)*0.3))
 
 			Manage_Akatsuki()
 				set category = "Administrator"
