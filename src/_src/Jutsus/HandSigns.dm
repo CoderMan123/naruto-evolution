@@ -678,7 +678,7 @@ mob
 			if(client.eye==locate(10,10,4)||client.eye==locate(60,10,4)||client.eye==locate(12,43,4)||client.eye==locate(55,43,4)||usr.client.eye==locate(10,75,4)) return
 			src.HengeUndo()
 			if(usr.SealCount>=1)
-				view(usr)<<sound('active.wav',0,0)
+				src.PlayAudio('active.wav', output = AUDIO_HEARERS)
 				if(usr.first=="rat"&&usr.second=="dragon"&&usr.rat==1&&usr.dog==0&&usr.ox==0&&usr.dragon==1&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/SClone/J=new/obj/Jutsus/SClone
 					if(J.type in usr.jutsus_learned)
@@ -1511,6 +1511,6 @@ mob
 
 
 				if(usr.SealCount)
-					view(usr)<<sound('active.wav',0,0)
+					src.PlayAudio('active.wav', output = AUDIO_HEARERS)
 					usr.SealVarReset()
 					usr.Target_ReAdd()

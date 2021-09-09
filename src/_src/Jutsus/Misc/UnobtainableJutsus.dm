@@ -6,7 +6,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,9))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					view()<<sound('Kamehameflash.ogg')
+					src.PlayAudio('Kamehameflash.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0
@@ -129,7 +129,7 @@ mob
 				for(var/obj/Jutsus/CurseSeal/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.underlays+='CS Aura.dmi'
 						src.ninjutsu+=10
 						src.strength+=15
@@ -147,7 +147,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,9))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					view()<<sound('man_fs_r_mt_wat.ogg')
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0
@@ -193,7 +193,7 @@ mob
 					if(J.level==4) J.damage=40
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(1,2); J.Levelup()
 					var/obj/Getsuga/A = new/obj/Getsuga(src.loc)
-					view()<<sound('GetsugaTenshou.wav')
+					src.PlayAudio('GetsugaTenshou.wav', output = AUDIO_HEARERS)
 					A.IsJutsuEffect=src
 					A.Owner=src
 					A.layer=src.layer

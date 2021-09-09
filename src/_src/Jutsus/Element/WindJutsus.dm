@@ -94,7 +94,7 @@ mob
 					src.canattack=0
 					src.move=0
 					flick("jutsuse",src)
-					view(src)<<sound('wirlwind.wav',0,0)
+					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 					var/obj/O=new
 					O.IsJutsuEffect=src
 					O.icon='Tornado.dmi'
@@ -133,7 +133,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))//XPGAIN
 					flick("2fist",src)
-					view(src)<<sound('wirlwind.wav',0,0)
+					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=0.4*((jutsudamage*J.Sprice)/2.5)
@@ -185,7 +185,7 @@ mob
 					src.firing=1
 					src.overlays += 'Blade of Wind.dmi'
 					src.icon_state = "punchrS"
-					view(src) << sound('wind_leaves.ogg')
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					sleep(1)
 					var/mob/Z
 					flick("punchr",src)
@@ -219,7 +219,7 @@ mob
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						src.firing=1
 						src.canattack=0
-						view(src)<<sound('wind_gust.wav')
+						src.PlayAudio('wind_gust.wav', output = AUDIO_HEARERS)
 						spawn(10)
 							src.copy=null
 							src.injutsu=0
@@ -242,19 +242,19 @@ mob
 							for(var/mob/M in orange(2,A))
 								if(M!=A.owner)
 									M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
-									view(src)<<sound('wirlwind.wav')
+									src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 							for(var/mob/M in orange(2,B))
 								if(M!=A.owner)
 									M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
-									view(src)<<sound('wirlwind.wav')
+									src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 							for(var/mob/M in orange(2,C))
 								if(M!=A.owner)
 									M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
-									view(src)<<sound('wirlwind.wav')
+									src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 							for(var/mob/M in orange(2,D))
 								if(M!=A.owner)
 									M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
-									view(src)<<sound('wirlwind.wav')
+									src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 							sleep(8)
 
 
@@ -275,7 +275,7 @@ mob
 					src.firing=1
 					sleep(2)
 					flick("2fist",src)
-					view()<<sound('man_fs_r_mt_wat.ogg')
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					if(c_target)src.dir=get_dir(src,c_target)
 					var/obj/Projectiles/Effects/JinraiBack/Aa=new(get_step(src,src.dir))
 					Aa.icon = 'Wind Dragon Projectile.dmi'
@@ -311,7 +311,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					spawn(10-(J.level*2))

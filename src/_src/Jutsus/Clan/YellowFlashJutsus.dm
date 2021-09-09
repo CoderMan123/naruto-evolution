@@ -17,7 +17,7 @@ mob
 					if(c_target)
 						src.dir=get_dir(src,c_target)
 						flick("throw",src)
-						view(src)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 						var/obj/Projectiles/Effects/FTGkunai/A = new/obj/Projectiles/Effects/FTGkunai(src.loc)
 						A.IsJutsuEffect=src
 						A.Owner=src
@@ -30,7 +30,7 @@ mob
 						src.ftgkunai=A
 					else
 						flick("throw",src)
-						view(src)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 						var/obj/Projectiles/Effects/FTGkunai/A = new/obj/Projectiles/Effects/FTGkunai(src.loc)
 						A.IsJutsuEffect=src
 						A.Owner=src
@@ -98,7 +98,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0

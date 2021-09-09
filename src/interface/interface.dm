@@ -1,5 +1,7 @@
 client
 	var/tmp/exp_lock_verify=0
+	var/sound_level_bgm = 25
+	var/sound_level_sfx = 10
 	verb
 		GetScreenResolution()
 			set hidden = 1
@@ -31,14 +33,14 @@ client
 
 				else
 					src.channel = "Local"
-					
+
 			src<<"Now speaking in channel: [src.channel]"
-		
+
 		CloseBrowser()
 			set hidden=1
 			src.browser_url = BROWSER_NONE
 			winset(src, null, {"Browser.is-visible = "false";"})
-			
+
 		MiniWindow()
 			set hidden=1
 			winset(usr, "Main", "is-minimized=true")
@@ -172,11 +174,34 @@ client
 			if(winget(src, "Settings", "is-visible") == "false")
 				winset(src, null, {"
 					Settings.is-visible = "true";
+					Settings.Child.left = 'Settings-General';
 				"})
 			else
 				winset(src, null, {"
 					Settings.is-visible = "false";
 				"})
+
+		SettingsPanelGeneral()
+			set hidden=1
+			winset(src, null, {"
+				Settings.Child.left = 'Settings-General';
+			"})
+
+		SettingsPanelAudio()
+			set hidden=1
+			winset(src, null, {"
+				Settings.Child.left = 'Settings-Audio';
+			"})
+
+		OnChangeSFX()
+			set hidden=1
+			src.sound_level_sfx = round(text2num(winget(src, "Settings-Audio.SFX", "value")), 1)
+			winset(src, "Settings-Audio.SFX", "value = '[src.sound_level_sfx]'")
+
+		OnChangeBGM()
+			set hidden=1
+			src.sound_level_bgm = round(text2num(winget(src, "Settings-Audio.BGM", "value")), 1)
+			winset(src, "Settings-Audio.BGM", "value = '[src.sound_level_bgm]'")
 
 		ToggleLeaderPanel()
 			set hidden=1
@@ -212,7 +237,7 @@ client
 		Community_Guidelines()
 			set hidden = 1
 			src << link("https://community.narutoevolution.com/t/community-guidelines/26")
-		
+
 		Ninja_Handbook()
 			set hidden = 1
 			src << link("https://community.narutoevolution.com/t/the-ninja-handbook/27")
@@ -477,7 +502,7 @@ client
 			else
 				src.browser_url = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
-		
+
 		View_Description(obj/Jutsu/J in usr.jutsus)
 			set category = null
 			usr.client.Alert(J.Description, J.name)
@@ -495,12 +520,12 @@ client
 			if(src)
 				winset(src, "Navigation.ExpLockButton", "text-color=#C8C8C8")
 				src.mob.overlays -= /obj/Symbols/exp_lock
-		
+
 		UpdateWho()
 			if(src.browser_url == BROWSER_WHO && winget(src, "Browser", "is-visible") == "true")
 				src.Who()
 				src.Who()
-		
+
 		UpdateWhoAll()
 			for(var/client/c in clients_online)
 				if(c) c.UpdateWho()

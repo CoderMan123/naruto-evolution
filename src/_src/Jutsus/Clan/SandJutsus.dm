@@ -11,7 +11,7 @@ mob
 					J.density = 1
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("punchrS",src)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.injutsu=1
@@ -74,7 +74,7 @@ mob
 					flick("groundjutsu",src)
 					if(c_target)
 						for(var/obj/Jutsus/Effects/desertcoffin/O in c_target.loc)
-							view(src)<<sound('knife_hit3.wav',0,0)
+							src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
 							O.icon = 'Sand Funeral.dmi'
 							flick("stab",O)
 							O.icon_state = "blood"
@@ -87,7 +87,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Defence",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.shielded=1
 					src.firing=1
 					src.move=0
@@ -125,7 +125,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("throw",src)
-					view(src)<<sound('Skill_MashHit.wav',0,0)
+					src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/4
@@ -308,7 +308,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("punchl",src)
-					view(src)<<sound('Skill_MashHit.wav',0,0)
+					src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.8

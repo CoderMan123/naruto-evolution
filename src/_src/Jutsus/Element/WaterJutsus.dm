@@ -10,7 +10,7 @@ mob
 						return
 					if(src.PreJutsu(J))
 						src.CloneHandler()
-						view(src)<<sound('flashbang_explode1.wav',0,0)
+						src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 						if(src.loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 						if(src.loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 						for(var/mob/M in oview(src,13))
@@ -92,7 +92,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					var/Timer
@@ -146,7 +146,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("groundjutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
@@ -221,7 +221,7 @@ mob
 					src.firing=1
 					sleep(5)
 					flick("2fist",src)
-					view()<<sound('man_fs_r_mt_wat.ogg')
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					if(c_target)src.dir=get_dir(src,c_target)
 					var/obj/Projectiles/Effects/JinraiBack/Aa=new(get_step(src,src.dir))
 					Aa.icon = 'Water Dragon Projectile.dmi'
@@ -255,7 +255,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('man_fs_r_mt_wat.ogg',0,0)
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					spawn(10-(J.level*2))

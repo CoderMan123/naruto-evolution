@@ -97,3 +97,5 @@ client
 			#endif
 			return 0
 		..()
+		winset(src, "Settings-Audio.BGM", "value = '[src.sound_level_bgm]'")
+		winset(src, "Settings-Audio.SFX", "value = '[src.sound_level_sfx]'")

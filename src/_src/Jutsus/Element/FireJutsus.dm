@@ -6,7 +6,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))//XPGAIN
 					flick("jutsuse",src)
-					view(src)<<sound('fire.wav',0,0)
+					src.PlayAudio('fire.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=0.9*((jutsudamage*J.Sprice)/2.5)
@@ -48,7 +48,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1)J.damage=3
@@ -129,7 +129,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("2fist",src)
-					view(src)<<sound('046.wav',0,0)
+					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=0.9*((jutsudamage*J.Sprice)/2.5)
@@ -315,7 +315,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('fire.wav',0,0)
+					src.PlayAudio('fire.wav', output = AUDIO_HEARERS)
 					src.canattack=0
 					var/I=J.level*2
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
@@ -369,7 +369,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('fire.wav',0,0)
+					src.PlayAudio('fire.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
@@ -482,7 +482,7 @@ mob
 					src.firing=1
 					sleep(5)
 					flick("2fist",src)
-					view()<<sound('fire.wav')
+					src.PlayAudio('fire.wav', output = AUDIO_HEARERS)
 					if(c_target)src.dir=get_dir(src,c_target)
 					var/obj/Projectiles/Effects/JinraiBack/Aa=new(get_step(src,src.dir))
 					Aa.icon = 'FireBallA.dmi'

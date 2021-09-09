@@ -6,7 +6,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					view()<<sound('man_fs_r_mt_wat.ogg')
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0
@@ -46,7 +46,7 @@ mob
 					if(c_target)
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						flick("jutsuse",src)
-						view(src)<<sound('man_fs_l_mt_wat.ogg',0,0)
+						src.PlayAudio('man_fs_l_mt_wat.ogg', output = AUDIO_HEARERS)
 						src.firing=1
 						src.canattack=0
 						src.pixel_x=4
@@ -158,7 +158,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 					flick("jutsuse",src)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1)J.damage=2
@@ -345,7 +345,7 @@ mob
 								c_target.move=0
 								c_target.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 								c_target.Bleed()
-								view(c_target)<<sound('knife_hit1.wav',0,0,volume=50)
+								c_target.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 								spawn(3)
 									c_target.move=1
 							else

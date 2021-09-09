@@ -9,7 +9,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp)) //determines amount of ninjutsu exp gained on use
 					flick("jutsuse",src)
-					view(src)<<sound('wirlwind.wav',0,0)
+					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 					src.Prisoner=c_target
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/9
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/9
@@ -58,7 +58,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("throw",src)
-					view(src)<<sound('083.wav',0,0)
+					src.PlayAudio('083.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.8
@@ -107,7 +107,7 @@ mob
 						src.move=0
 						src.firing=1
 						sleep(10)
-					view(src)<<sound('wirlwind.wav',0,0)
+					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 					flick("2fist",src)
 					if(c_target)src.dir=get_dir(src,c_target)
 					var/obj/Projectiles/Effects/JinraiBack/Aa=new(get_step(src,src.dir))

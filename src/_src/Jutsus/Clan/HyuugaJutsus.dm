@@ -87,7 +87,7 @@ mob
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("punchr",src)
-					view()<<sound('Beam.ogg')
+					src.PlayAudio('Beam.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0
@@ -138,7 +138,7 @@ mob
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					J.Levelup()
@@ -273,10 +273,10 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('Powerup.ogg',0,0)
+					src.PlayAudio('Powerup.ogg', output = AUDIO_HEARERS)
 					spawn(7)
-						view(src)<<sound('Powerup.ogg',0,0)
-						spawn(7)if(src)view(src)<<sound('Powerup.ogg',0,0)
+						src.PlayAudio('Powerup.ogg', output = AUDIO_HEARERS)
+						spawn(7)if(src) src.PlayAudio('Powerup.ogg', output = AUDIO_HEARERS)
 					var/obj/O = new/obj
 					O.IsJutsuEffect=src
 					O.loc = src.loc
@@ -439,7 +439,7 @@ mob
 						if(prob(50))flick("punchl",src)
 						else flick("punchr",src)
 						//src.firing=1
-						view(src,10) << sound('Skill_BigRoketFire.wav',0,0,0,100)
+						src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
 						var/obj/O = new/obj
 						O.loc = src.loc
 						O.dir = src.dir
@@ -467,8 +467,8 @@ mob
 												var/undefendedhit=J.damage+round(((src.ninjutsu / 300)+(src.strength / 300))*2*J.damage)
 												if(undefendedhit<0)undefendedhit=1
 												c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
-												if(src.Hand=="Left")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-												if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+												if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 												c_target.icon_state="push"
 												c_target.injutsu=1
 												c_target.canattack=0
@@ -495,7 +495,7 @@ mob
 														step_to(src,c_target,1)
 													c_target.DealDamage(defendedhit,src,"TaiOrange",0,0,1)
 													flick("defendhit",c_target)
-													view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+													src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 												else
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(10,20))
@@ -508,8 +508,8 @@ mob
 									else LevelStat("Strength",rand(0.2,1))
 									if(T) if(T.Good) src.LevelStat("strength",1)
 									else src.LevelStat("strength",0.2)
-									if(src.Hand=="Left")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-									if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+									if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+									if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 									T.Break(src)
 						del(O) */
 

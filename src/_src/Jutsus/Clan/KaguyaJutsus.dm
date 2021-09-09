@@ -97,7 +97,7 @@ mob
 							if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
 							if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 							flick("groundjutsuse",src)
-							view(src)<<sound('Down_Nornal.wav',0,0)
+							src.PlayAudio('Down_Nornal.wav', output = AUDIO_HEARERS)
 							src.firing=1
 							src.canattack=0
 							if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/2
@@ -118,10 +118,10 @@ mob
 									for(var/mob/M in view(A,0))
 										M.injutsu=1
 										var/random=rand(1,4)
-										if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-										if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-										if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-										if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+										if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+										if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+										if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+										if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 										M.DealDamage(A.damage,src,"NinBlue")
 										if(M.henge==4||M.henge==5)M.HengeUndo()
 								if(J.level==2)
@@ -165,10 +165,10 @@ mob
 										if(M.dead || M.swimming) continue
 										M.injutsu=1
 										var/random=rand(1,4)
-										if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-										if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-										if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-										if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+										if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+										if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+										if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+										if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 										M.DealDamage(A.damage,src,"NinBlue")
 										if(M.henge==4||M.henge==5)M.HengeUndo()
 								if(J.level==2)
@@ -182,10 +182,10 @@ mob
 											if(M.dead || M.swimming) continue
 											M.injutsu=1
 											var/random=rand(1,4)
-											if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-											if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-											if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-											if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+											if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+											if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+											if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 											M.DealDamage(A.damage,src,"NinBlue")
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 								if(J.level==3)
@@ -204,10 +204,10 @@ mob
 											if(M.dead || M.swimming) continue
 											M.injutsu=1
 											var/random=rand(1,4)
-											if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-											if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-											if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-											if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+											if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+											if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+											if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 											M.DealDamage(A.damage,src,"NinBlue")
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 									spawn(3)
@@ -215,10 +215,10 @@ mob
 											if(M.dead || M.swimming) continue
 											M.injutsu=1
 											var/random=rand(1,4)
-											if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-											if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-											if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-											if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+											if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+											if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+											if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 											M.DealDamage(A.damage,src,"NinBlue")
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 								if(J.level==4)
@@ -242,10 +242,10 @@ mob
 											if(M.dead || M.swimming) continue
 											M.injutsu=1
 											var/random=rand(1,4)
-											if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-											if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-											if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-											if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+											if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+											if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+											if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 											M.DealDamage(A.damage,src,"NinBlue")
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 									spawn(3)
@@ -253,10 +253,10 @@ mob
 											if(M.dead || M.swimming) continue
 											M.injutsu=1
 											var/random=rand(1,4)
-											if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-											if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-											if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-											if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+											if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+											if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+											if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 											M.DealDamage(A.damage,src,"NinBlue")
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 									spawn(3)
@@ -264,10 +264,10 @@ mob
 											if(M.dead || M.swimming) continue
 											M.injutsu=1
 											var/random=rand(1,4)
-											if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-											if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-											if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-											if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+											if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+											if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+											if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 											M.DealDamage(A.damage,src,"NinBlue")
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 							spawn(10)if(src)
@@ -289,7 +289,7 @@ mob
 							if(J.level==4) J.damage=(jutsudamage*J.Sprice)/2
 							if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 							flick("2fist",src)
-							view(src)<<sound('we_revolver_silenced_fire.ogg',0,0)
+							src.PlayAudio('we_revolver_silenced_fire.ogg', output = AUDIO_HEARERS)
 							src.firing=1
 							src.canattack=0
 							if(c_target)
@@ -357,7 +357,7 @@ mob
 						if(src.PreJutsu(J))
 							if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,7))
 							flick("jutsuse",src)
-							view(src)<<sound('we_revolver_silenced_fire.ogg',0,0)
+							src.PlayAudio('we_revolver_silenced_fire.ogg', output = AUDIO_HEARERS)
 							src.firing=1
 							src.canattack=0
 							if(J.level==1)J.damage=40
@@ -447,7 +447,7 @@ mob
 						spawn(4)if(src)icon_state = ""
 						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
 						if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.move=0
 						src.firing=1
 						src.canattack=0
@@ -478,10 +478,10 @@ mob
 											if(M.dead || M.swimming) continue
 											M.injutsu=1
 											var/random=rand(1,4)
-											if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-											if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-											if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-											if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+											if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+											if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+											if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 											M.DealDamage(B.damage,src,"NinBlue")
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 						src.copy=null

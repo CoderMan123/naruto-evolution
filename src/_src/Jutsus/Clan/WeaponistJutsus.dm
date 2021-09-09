@@ -82,7 +82,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,4))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					flick("2fist",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=4
@@ -140,7 +140,7 @@ mob
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					J.damage = J.damage/10
-					view(src)<<sound('wirlwind.wav',0,0)
+					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 					//var/turf/T=src.loc
 					var/p_x = src.x
 					var/p_y = src.y
@@ -176,8 +176,8 @@ mob
 							del Ov
 							del Un
 							return
-						if(prob(50)) view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
-						else view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+						if(prob(50)) src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
+						else src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 						switch(spawn_loc)
 							if(1)
 								spawn_loc = 2
@@ -260,7 +260,7 @@ mob
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						J.damage = (J.damage+round(((src.precision / 300)+(src.ninjutsu / 300))*2*J.damage))/6
 						flick("2fist",src)
-						view(src)<<sound('dash.wav',0,0)
+						src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 						src.firing=1
 						src.canattack=0
 						var/num=round(J.level*1.5)
@@ -340,7 +340,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						flick("jutsuse",src)
-						view(src)<<sound('dash.wav',0,0)
+						src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 						src.firing=1
 						src.canattack=0
 						if(J.level==1) J.damage=4

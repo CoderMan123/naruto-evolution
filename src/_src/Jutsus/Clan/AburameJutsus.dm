@@ -7,7 +7,7 @@ mob
 				for(var/obj/Jutsus/Insect_Clone/J in src.jutsus)
 					if(src.PreJutsu(J))
 						src.CloneHandler()
-						view(src)<<sound('bugs.wav',0,0)
+						src.PlayAudio('bugs.wav', output = AUDIO_HEARERS)
 						if(src.loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 						if(src.loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
@@ -61,7 +61,7 @@ mob
 						if(c_target.sbugged)
 							var/obj/O = new/obj
 							O.loc = c_target.loc
-							view(src)<<sound('bugs.wav',0,0)
+							src.PlayAudio('bugs.wav', output = AUDIO_HEARERS)
 							O.icon = 'Neurotoxin Bug.dmi'
 							O.pixel_x=-48
 							O.pixel_y=-32
@@ -104,7 +104,7 @@ mob
 					if(J.level==3) J.damage=0.02*((jutsudamage*J.Sprice)/1.5)
 					if(J.level==4) J.damage=0.02*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					view()<<sound('bugs.wav')
+					src.PlayAudio('bugs.wav', output = AUDIO_HEARERS)
 					var/obj/O = new(c_target.loc)
 					O.IsJutsuEffect=src
 					O.icon='stealth bug.dmi'
@@ -133,7 +133,7 @@ mob
 					if(J.level==3) J.damage=0.1*((jutsudamage*J.Sprice)/1.5)
 					if(J.level==4) J.damage=0.1*(jutsudamage*J.Sprice)
 					flick("throw",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -185,7 +185,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
-					view(src)<<sound('bugs.wav',0,0)
+					src.PlayAudio('bugs.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/10
@@ -222,7 +222,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("throw",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=0.15*((jutsudamage*J.Sprice)/2.5)

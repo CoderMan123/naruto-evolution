@@ -30,7 +30,7 @@ mob
 						if(prob(50))flick("punchl",src)
 						else flick("punchr",src)
 						//src.firing=1
-						view(src,10) << sound('Skill_BigRoketFire.wav',0,0,0,100)
+						src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
 						for(var/mob/c_target in get_step(src,src.dir))
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
@@ -44,8 +44,8 @@ mob
 											if(loc.loc:Safe!=1) LevelStat("Strength",rand(3,9))
 											if(loc.loc:Safe!=1) src.LevelStat("strength",rand(3,9))
 											if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-											if(src.Hand=="Left")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-											if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+											if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+											if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											c_target.icon_state="push"
 											c_target.injutsu=1
 											c_target.canattack=0
@@ -74,7 +74,7 @@ mob
 													step_to(src,c_target,1)
 												c_target.DealDamage(defendedhit,src,"TaiOrange",0,0,1)
 												flick("defendhit",c_target)
-												view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 											else
 												flick("dodge",c_target)
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(1,2))
@@ -86,8 +86,8 @@ mob
 								else LevelStat("Strength",rand(0.2,1))
 								if(T) if(T.Good) src.LevelStat("strength",1)
 								else src.LevelStat("strength",0.2)
-								if(src.Hand=="Left")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-								if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+								if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+								if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 								T.Break(src)*/
 
 		Meteor_Punch()
@@ -116,7 +116,7 @@ mob
 						if(prob(50))flick("punchl",src)
 						else flick("punchr",src)
 						//src.firing=1
-						view(src,10) << sound('Skill_BigRoketFire.wav',0,0,0,100)
+						src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
 						for(var/mob/c_target in get_step(src,src.dir))
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
@@ -128,8 +128,8 @@ mob
 											if(undefendedhit<0)undefendedhit=1
 											c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 											if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,6))
-											if(src.Hand=="Left")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-											if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+											if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+											if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											c_target.icon_state="push"
 											c_target.injutsu=1
 											c_target.canattack=0
@@ -158,7 +158,7 @@ mob
 													step_to(src,c_target,1)
 												c_target.DealDamage(defendedhit,src,"TaiOrange",0,0,1)
 												flick("defendhit",c_target)
-												view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 											else
 												flick("dodge",c_target)
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(5,10))
@@ -171,8 +171,8 @@ mob
 								else LevelStat("Strength",rand(0.2,1))
 								if(T) if(T.Good) src.LevelStat("strength",1)
 								else src.LevelStat("strength",0.2)
-								if(src.Hand=="Left")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-								if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+								if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+								if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 								T.Break(src)*/
 
 		Morning_Peacock()
@@ -214,7 +214,7 @@ mob
 										if(undefendedhit<0)undefendedhit=1
 										c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 										if(c_target.loc.loc:Safe!=1)c_target.LevelStat("Defence",rand(3,6))
-										view(src) << sound('Skill_MashHit.wav',0,0,0,50)
+										src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 										c_target.injutsu=1
 										c_target.canattack=0
 										c_target.firing=1
@@ -237,7 +237,7 @@ mob
 												step_to(src,c_target,1)
 											c_target.DealDamage(defendedhit,src,"TaiOrange")
 											flick("defendhit",c_target)
-											view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+											src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 										else
 											flick("dodge",c_target)
 											if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(5,10))
@@ -249,7 +249,7 @@ mob
 								else LevelStat("Strength",rand(0.2,1))
 								if(T) if(T.Good) src.LevelStat("strength",3)
 								else LevelStat("strength",0.5)
-								view(src) << sound('Skill_MashHit.wav',0,0,0,50)
+								src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 								T.Break(src)*/
 						spawn()PunchFlick(hitamount,J)
 						src.JutsuCoolSlot(J)

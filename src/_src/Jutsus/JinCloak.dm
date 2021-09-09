@@ -16,7 +16,7 @@ mob
 				for(var/obj/Jutsus/Jin_Cloak1/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC1.dmi'
 						src.ninjutsu+=35
 						src.defence+=35
@@ -35,7 +35,7 @@ mob
 				for(var/obj/Jutsus/Jin_Cloak2/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC2.dmi'
 						src.ninjutsu+=35
 						src.agility+=35
@@ -54,7 +54,7 @@ mob
 				for(var/obj/Jutsus/Jin_Cloak3/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC3.dmi'
 						src.defence+=50
 						src.inJC3=1
@@ -71,7 +71,7 @@ mob
 				for(var/obj/Jutsus/Jin_Cloak4/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC4.dmi'
 						src.strength+=50
 						src.inJC4=1
@@ -88,7 +88,7 @@ mob
 				for(var/obj/Jutsus/Jin_Cloak5/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC5.dmi'
 						src.strength+=35
 						src.agility+=35
@@ -107,7 +107,7 @@ mob
 				for(var/obj/Jutsus/Jin_Cloak6/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC6.dmi'
 						src.ninjutsu+=50
 						src.inJC6=1
@@ -124,7 +124,7 @@ mob
 				for(var/obj/Jutsus/Jin_Cloak7/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC7.dmi'
 						src.strength+=35
 						src.agility+=35
@@ -143,7 +143,7 @@ mob
 				for(var/obj/Jutsus/Jin_Cloak8/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC8.dmi'
 						src.strength+=50
 						src.inJC8=1
@@ -160,7 +160,7 @@ mob
 				for(var/obj/Jutsus/Jin_Cloak9/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC9.dmi'
 						src.strength+=35
 						src.ninjutsu+=35

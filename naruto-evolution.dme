@@ -170,6 +170,7 @@
 #include "src\_src\Variables\Variables.dm"
 #include "src\_src\Variables\WorldVariables.dm"
 #include "src\atom\atom.dm"
+#include "src\atom\audio.dm"
 #include "src\client\client.dm"
 #include "src\client\save.dm"
 #include "src\client\staff.dm"

@@ -18,7 +18,7 @@ mob
 							if(get_dist(SC,M)>1) return
 							if(!M||M.dead||M.swimming) return
 							flick("2fist",SC)
-							view(SC) << sound('dash.wav',0,0,0,100)
+							SC.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 							SC.ThrowingMob=null
 							M.BeingThrown=null
 							M.icon_state="push"
@@ -52,7 +52,7 @@ mob
 							if(M.caged==1) return
 							if(M.shielded==1)return
 							flick("2fist",src)
-							view(src) << sound('dash.wav',0,0,0,100)
+							src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 							ThrowingMob=null
 							M.BeingThrown=null
 							M.icon_state="push"
@@ -95,7 +95,7 @@ mob
 						usr.kawarmi=0
 						return
 					for(var/mob/M in oview(usr,13))M.Target_Remove()
-					view(usr)<<sound('flashbang_explode1.wav',0,0)
+					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 					usr.mark2=usr.loc
 					usr.loc=usr.mark
 					usr.move=1
@@ -154,7 +154,7 @@ mob
 				var/mob/Clones/SC=src.likeaclone
 				if(SC.canattack==1&&SC.firing==0)
 					if(SC.dead==0&&SC.dodge==0&&SC.canattack==1&&SC.dashable==1&&SC.health>SC.maxhealth/3)
-						view(SC) << sound('dash.wav',0,0,0,100)
+						SC.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 						if(SC.icon_state<>"blank")flick("dash",SC)
 						SC.move=1
 						SC.dashable=2
@@ -167,7 +167,7 @@ mob
 						for(var/mob/C in orange(SC,1))
 							SC.dir = get_dir(SC,C)
 							break
-						view(SC) << sound('Swing4.ogg',0,0,0,50)
+						SC.PlayAudio('Swing4.ogg', output = AUDIO_HEARERS)
 						if(SC.icon_state<>"blank")SC.icon_state="defend"
 						SC.dodge=1
 						sleep(5)
@@ -184,7 +184,7 @@ mob
 							var/obj/EXPLODE = new/obj/Projectiles/Effects/SmallExplosion(ET.loc)
 							EXPLODE.loc=ET.loc
 							var/damage=ET.damage
-							view(ET)<<sound('Explo_StoneMed2.ogg',0,0)
+							ET.PlayAudio('Explo_StoneMed2.ogg', output = AUDIO_HEARERS)
 							for(var/mob/M in view(ET,3))
 								if(M.dead==0)
 									M.DealDamage(damage-(M.defence/5),src,"TaiOrange")//HERE
@@ -205,7 +205,7 @@ mob
 							spawn(50)if(ET)del(ET)
 				if(src.kawarmi==0 && src.C3bombz==0)
 /*					if(src.dead==0&&src.dodge==0&&src.canattack==1&&src.dashable==1&&src.health>src.maxhealth/3)
-						view(src) << sound('dash.wav',0,0,0,100)
+						src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 						if(src.icon_state<>"blank")flick("dash",src)
 						src.dashable=2
 						step(src,src.dir)
@@ -221,7 +221,7 @@ mob
 							usr.Target_Atom(c_target)
 						usr.dashable=1
 						usr.dodge=1
-						view(usr) << sound('Swing4.ogg',0,0,0,50)
+						src.PlayAudio('Swing4.ogg', output = AUDIO_HEARERS)
 						if(usr.icon_state<>"blank")
 							usr.icon_state="defend"
 						for(var/mob/Clones/C in world)if(C.Owner==src)C.icon_state="defend"

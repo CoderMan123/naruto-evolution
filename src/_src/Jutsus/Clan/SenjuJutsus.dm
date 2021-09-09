@@ -116,7 +116,7 @@ mob
 					if(src.PreJutsu(J))
 						flick("groundjutsu",src)
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.move=0
 						src.firing=1
 						src.canattack=0
@@ -158,7 +158,7 @@ mob
 						flick("punchr",src)
 						sleep(3)
 						src.icon_state="punchrS"
-						view()<<sound('fire.wav')
+						src.PlayAudio('fire.wav', output = AUDIO_HEARERS)
 						if(c_target)src.dir=get_dir(src,c_target)
 						var/obj/Projectiles/Effects/SenjuJinraiHead/A=new(get_step(src,src.dir))
 						A.icon = 'WoodDril.dmi'
@@ -230,7 +230,7 @@ mob
 								c_target.move=0
 								c_target.DealDamage(src.ninjutsu*J.level,src,"NinBlue")
 								c_target.Bleed()
-								view(c_target)<<sound('knife_hit1.wav',0,0,volume=50)
+								c_target.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 								spawn(3)
 									c_target.move=1
 							else

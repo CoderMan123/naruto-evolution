@@ -4,7 +4,7 @@ mob
 			for(var/obj/Jutsus/Snake_Release_Jutsu/J in src.jutsus)
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					view()<<sound('man_fs_r_mt_wat.ogg')
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0
@@ -67,7 +67,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					view()<<sound('man_fs_r_mt_wat.ogg')
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0
@@ -101,7 +101,7 @@ mob
 						src.canattack=1
 
 					flick("Bind",c_target)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
 					var/Time=J.level*1.5
 					c_target.overlays+='Sage_Bind.dmi'
@@ -245,7 +245,7 @@ mob
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.overlays+='Jutsus/Misc/MiscJutIcons/sage.dmi'
 						src.ninjutsu+=20
 						src.insage=1
@@ -303,7 +303,7 @@ mob
 								sleep(2)
 								Z.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/2,src,"NinBlue")
 								Z.Bleed()
-								view(Z)<<sound('knife_hit1.wav',0,0,volume=50)
+								Z.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 								step_away(Z,src,3)
 								Z.dir=get_dir(Z,src)
 						else
@@ -330,7 +330,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
 						SMOKE.loc=usr.loc
-						view(usr)<<sound('flashbang_explode2.wav',0,0)
+						src.PlayAudio('flashbang_explode2.wav', output = AUDIO_HEARERS)
 						var/mob/summonings/SnakeSummoning/B = new/mob/summonings/SnakeSummoning(usr.loc)
 						B.loc=usr.loc
 						B.OWNER=src

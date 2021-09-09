@@ -337,6 +337,7 @@ window "Character"
 		size = 300x589
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -345,6 +346,8 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x603
+		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2212,6 +2215,7 @@ window "Settings"
 		size = 500x400
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2220,6 +2224,8 @@ window "Settings"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 514x414
+		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2230,114 +2236,16 @@ window "Settings"
 		border = line
 		saved-params = ""
 		text = ""
-	elem "Background2"
-		type = LABEL
+	elem "Child"
+		type = CHILD
 		pos = 3,24
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = #414141
-		border = line
-		saved-params = ""
-		text = ""
-	elem "button5"
-		type = BUTTON
-		pos = 6,75
-		size = 243x22
-		anchor1 = 0,100
-		anchor2 = -1,-1
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = "Video"
-		command = ""
-		is-flat = true
-	elem "button4"
-		type = BUTTON
-		pos = 251,75
-		size = 243x22
-		anchor1 = 0,100
-		anchor2 = -1,-1
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = "Audio"
-		command = ""
-		is-flat = true
-	elem "button8"
-		type = BUTTON
-		pos = 251,27
-		size = 243x22
-		anchor1 = 0,100
-		anchor2 = -1,-1
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = "Ninja Handbook"
-		command = "Ninja-Handbook"
-		is-flat = true
-	elem "button3"
-		type = BUTTON
-		pos = 251,51
-		size = 243x22
-		anchor1 = 0,100
-		anchor2 = -1,-1
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = "Macros"
-		command = ".options"
-		is-flat = true
-	elem "LeaveVillageButton"
-		type = BUTTON
-		pos = 6,373
-		size = 488x22
-		anchor1 = 0,100
-		anchor2 = -1,-1
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #822d2d
-		border = line
-		saved-params = "is-checked"
-		text = "Leave Village"
-		command = "LeaveVillage"
-		is-flat = true
-	elem "CommunityGuidelinesButton"
-		type = BUTTON
-		pos = 6,27
-		size = 243x22
-		anchor1 = 0,100
-		anchor2 = -1,-1
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = "Community Guidelines"
-		command = "Community-Guidelines"
-		is-flat = true
-	elem "LogoutButton"
-		type = BUTTON
-		pos = 6,349
-		size = 243x22
-		anchor1 = 0,100
-		anchor2 = -1,-1
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = "Logout"
-		command = ".reconnect"
-		is-flat = true
+		background-color = none
+		saved-params = "splitter"
+		left = "Settings-General"
+		is-vert = false
 	elem "Titlebar"
 		type = LABEL
 		pos = 0,0
@@ -2378,6 +2286,280 @@ window "Settings"
 		saved-params = ""
 		text = ""
 		image = 'assets\\interface\\Taskbar-16.png'
+
+window "Settings-Audio"
+	elem "Settings-Audio"
+		type = MAIN
+		pos = 281,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		macro = "Macro"
+		outer-size = 508x388
+		inner-size = 494x374
+	elem "Background2"
+		type = LABEL
+		pos = 0,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = ""
+	elem "label21"
+		type = LABEL
+		pos = 248,51
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #555555
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
+	elem "SFX"
+		type = BAR
+		pos = 248,51
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #c8c8c8
+		saved-params = ""
+		bar-color = #414141
+		is-slider = true
+		width = 16
+		dir = east
+		on-change = "OnChangeSFX"
+	elem "label12"
+		type = LABEL
+		pos = 248,27
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Sound Effects"
+	elem "label20"
+		type = LABEL
+		pos = 3,51
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #555555
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
+	elem "BGM"
+		type = BAR
+		pos = 3,51
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #c8c8c8
+		saved-params = ""
+		bar-color = #414141
+		is-slider = true
+		width = 16
+		dir = east
+		on-change = "OnChangeBGM"
+	elem "label11"
+		type = LABEL
+		pos = 3,27
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Background Music"
+	elem "Titlebar"
+		type = LABEL
+		pos = 3,3
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Audio Settings"
+	elem "BackButton"
+		type = BUTTON
+		pos = 3,349
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Back to Settings"
+		command = "SettingsPanelGeneral"
+		is-flat = true
+
+window "Settings-General"
+	elem "Settings-General"
+		type = MAIN
+		pos = 281,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		macro = "Macro"
+		outer-size = 508x388
+		inner-size = 494x374
+	elem "Background2"
+		type = LABEL
+		pos = 0,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = ""
+	elem "button5"
+		type = BUTTON
+		pos = 3,51
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Video"
+		command = ""
+		is-flat = true
+	elem "button4"
+		type = BUTTON
+		pos = 248,51
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Audio"
+		command = "SettingsPanelAudio"
+		is-flat = true
+	elem "button8"
+		type = BUTTON
+		pos = 248,3
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Ninja Handbook"
+		command = "Ninja-Handbook"
+		is-flat = true
+	elem "button3"
+		type = BUTTON
+		pos = 248,27
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Macros"
+		command = ".options"
+		is-flat = true
+	elem "LeaveVillageButton"
+		type = BUTTON
+		pos = 3,349
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #822d2d
+		border = line
+		saved-params = "is-checked"
+		text = "Leave Village"
+		command = "LeaveVillage"
+		is-flat = true
+	elem "CommunityGuidelinesButton"
+		type = BUTTON
+		pos = 3,3
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Community Guidelines"
+		command = "Community-Guidelines"
+		is-flat = true
+	elem "LogoutButton"
+		type = BUTTON
+		pos = 3,325
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Logout"
+		command = ".reconnect"
+		is-flat = true
 
 window "SkillTree"
 	elem "SkillTree"

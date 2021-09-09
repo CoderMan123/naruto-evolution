@@ -80,7 +80,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
@@ -118,7 +118,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
@@ -157,7 +157,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
 						SMOKE.loc=usr.loc
-						view(usr)<<sound('flashbang_explode2.wav',0,0)
+						src.PlayAudio('flashbang_explode2.wav', output = AUDIO_HEARERS)
 						var/mob/summonings/DogSummoning/D = new/mob/summonings/DogSummoning(usr.loc)
 						D.loc=usr.loc
 						D.OWNER=src
@@ -177,7 +177,7 @@ mob
 					src.move=0
 					src.canattack=0
 					src.firing=1
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					var/obj/Projectiles/Effects/shinratensei/A=new/obj/Projectiles/Effects/shinratensei(src.loc)
 					A.IsJutsuEffect=src
 					A.Owner=src

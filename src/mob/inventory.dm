@@ -82,7 +82,7 @@ mob
 
 			if(src.maxitems > -1 && src.contents.len >= src.maxitems)
 				src << output("Your satchel is too full to carry anymore.","Action.Output")
-				src << sound('cant.ogg',0,0,7,100)
+				src.PlayAudio('cant.ogg', output = AUDIO_SELF)
 				return
 
 			for(var/obj/Inventory/O in oview(1))

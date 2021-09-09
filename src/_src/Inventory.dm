@@ -87,7 +87,7 @@ obj
 					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="Shurikens"
-					usr<<sound('083.wav',0,0)
+					usr.PlayAudio('083.wav')
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="shuriken"
 
@@ -105,7 +105,7 @@ obj
 					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="Needles"
-					usr<<sound('083.wav',0,0)
+					usr.PlayAudio('083.wav')
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="needle"
 
@@ -123,7 +123,7 @@ obj
 					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="Kunais"
-					usr<<sound('083.wav',0,0)
+					usr.PlayAudio('083.wav')
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="kunai"
 
@@ -139,7 +139,7 @@ obj
 					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="ExplodeKunais"
-					usr<<sound('083.wav',0,0)
+					usr.PlayAudio('083.wav')
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="expl kunai"
 
@@ -157,7 +157,7 @@ obj
 					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="ExplosiveTags"
-					usr<<sound('083.wav',0,0)
+					usr.PlayAudio('083.wav')
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="tag"
 
@@ -173,7 +173,7 @@ obj
 					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="FoodPill"
-					usr<<sound('083.wav',0,0)
+					usr.PlayAudio('083.wav')
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="Blood Pill"
 
@@ -196,7 +196,7 @@ obj
 						del(src)
 						return
 					usr.equipped="ChakraPill"
-					usr<<sound('083.wav',0,0)
+					usr.client.PlayAudio('083.wav')
 					usr.chakra+=round(usr.maxchakra/6)
 					lol=1
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
@@ -220,7 +220,7 @@ obj
 					..()
 					if(!usr.contents.Find(src)) return
 					usr.equipped="SmokeBombs"
-					usr<<sound('083.wav',0,0)
+					usr.PlayAudio('083.wav')
 					for(var/obj/Screen/WeaponSelect/H in usr.client.screen)
 						H.icon_state="SmokeBombs"
 

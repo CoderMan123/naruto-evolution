@@ -25,7 +25,7 @@ obj
 							var/obj/EXPLODE = new/obj/Projectiles/Effects/SmallExplosion(src.loc)
 							EXPLODE.loc=src.loc
 							var/damage=src.damage
-							view(src)<<sound('Explo_StoneMed2.ogg',0,0)
+							src.PlayAudio('Explo_StoneMed2.ogg', output = AUDIO_HEARERS)
 							for(var/mob/X in view(src,3))
 								if(X.dead==0)
 									X.DealDamage(damage-(X.defence/5),src.Owner,"TaiOrange")
@@ -61,7 +61,7 @@ obj
 									var/obj/EXPLODE = new/obj/Projectiles/Effects/SmallExplosion(src.loc)
 									EXPLODE.loc=src.loc
 									var/damage=src.damage
-									view(src)<<sound('Explo_StoneMed2.ogg',0,0)
+									src.PlayAudio('Explo_StoneMed2.ogg', output = AUDIO_HEARERS)
 									for(var/mob/X in view(src,3))
 										if(X.dead==0)
 											X.DealDamage(damage,src.Owner,"TaiOrange")
@@ -98,7 +98,7 @@ obj
 										var/obj/EXPLODE = new/obj/Projectiles/Effects/SmallExplosion(src.loc)
 										EXPLODE.loc=src.loc
 										var/damage=src.damage
-										view(src)<<sound('Explo_StoneMed2.ogg',0,0)
+										src.PlayAudio('Explo_StoneMed2.ogg', output = AUDIO_HEARERS)
 										for(var/mob/X in view(src,3))
 											if(X.dead==0)
 												X.DealDamage(damage,src.Owner,"TaiOrange")
@@ -131,7 +131,7 @@ obj
 									var/obj/EXPLODE = new/obj/Projectiles/Effects/SmallExplosion(src.loc)
 									EXPLODE.loc=src.loc
 									var/damage=src.damage
-									view(src)<<sound('Explo_StoneMed2.ogg',0,0)
+									src.PlayAudio('Explo_StoneMed2.ogg', output = AUDIO_HEARERS)
 									for(var/mob/M in view(src,3))
 										if(M.dead==0)
 											M.DealDamage(damage,src.Owner,"TaiOrange")
@@ -162,7 +162,7 @@ obj
 									var/obj/EXPLODE = new/obj/Projectiles/Effects/SmallExplosion(src.loc)
 									EXPLODE.loc=src.loc
 									var/damage=src.damage
-									view(src)<<sound('Explo_StoneMed2.ogg',0,0)
+									src.PlayAudio('Explo_StoneMed2.ogg', output = AUDIO_HEARERS)
 									for(var/mob/M in view(src,3))
 										if(M.dead==0)
 											M.DealDamage(damage,src.Owner,"TaiOrange")
@@ -208,9 +208,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -243,9 +243,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -290,9 +290,9 @@ obj
 									if(src.fightlayer==T.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 								if(istype(O,/obj))
 									var/obj/OB=O
@@ -301,9 +301,9 @@ obj
 									if(src.fightlayer==OB.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 			Shuriken
 				icon_state="shuri"
@@ -326,8 +326,8 @@ obj
 							if(M.fightlayer==src.fightlayer)
 								if(M.dodge==0)
 									src.density=0
-									if(prob(50))view(src)<<sound('SharpHit_Short2.wav',0,0)
-									else view(src)<<sound('SharpHit_Short.wav',0,0)
+									if(prob(50))src.PlayAudio('SharpHit_Short2.wav', output = AUDIO_HEARERS)
+									else src.PlayAudio('SharpHit_Short.wav', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -397,9 +397,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('SharpHit_Short2.wav',0,0)
+											src.PlayAudio('SharpHit_Short2.wav', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('SharpHit_Short.wav',0,0)
+											src.PlayAudio('SharpHit_Short.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -475,9 +475,9 @@ obj
 								if(src.fightlayer==T.fightlayer)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('sclang.ogg',0,0)
+										src.PlayAudio('sclang.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('sclang2.ogg',0,0)
+										src.PlayAudio('sclang2.ogg', output = AUDIO_HEARERS)
 									walk(src,0)
 									src.loc=locate(T.x,T.y,T.z)
 									src.Hit=1
@@ -538,9 +538,9 @@ obj
 								if(src.fightlayer==OB.fightlayer)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('sclang.ogg',0,0)
+										src.PlayAudio('sclang.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('sclang2.ogg',0,0)
+										src.PlayAudio('sclang2.ogg', output = AUDIO_HEARERS)
 									walk(src,0)
 									src.loc=locate(OB.x,OB.y,OB.z)
 									src.Hit=1
@@ -620,9 +620,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('SharpHit_Short2.wav',0,0)
+										src.PlayAudio('SharpHit_Short2.wav', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('SharpHit_Short.wav',0,0)
+										src.PlayAudio('SharpHit_Short.wav', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -694,9 +694,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('SharpHit_Short2.wav',0,0)
+											src.PlayAudio('SharpHit_Short2.wav', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('SharpHit_Short.wav',0,0)
+											src.PlayAudio('SharpHit_Short.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -772,9 +772,9 @@ obj
 								if(src.fightlayer==T.fightlayer)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('sclang.ogg',0,0)
+										src.PlayAudio('sclang.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('sclang2.ogg',0,0)
+										src.PlayAudio('sclang2.ogg', output = AUDIO_HEARERS)
 									walk(src,0)
 									src.loc=locate(T.x,T.y,T.z)
 									src.Hit=1
@@ -835,9 +835,9 @@ obj
 								if(src.fightlayer==OB.fightlayer)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('sclang.ogg',0,0)
+										src.PlayAudio('sclang.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('sclang2.ogg',0,0)
+										src.PlayAudio('sclang2.ogg', output = AUDIO_HEARERS)
 									walk(src,0)
 									src.loc=locate(OB.x,OB.y,OB.z)
 									src.Hit=1
@@ -917,9 +917,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('SharpHit_Short2.wav',0,0)
+										src.PlayAudio('SharpHit_Short2.wav', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('SharpHit_Short.wav',0,0)
+										src.PlayAudio('SharpHit_Short.wav', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -992,9 +992,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('SharpHit_Short2.wav',0,0)
+											src.PlayAudio('SharpHit_Short2.wav', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('SharpHit_Short.wav',0,0)
+											src.PlayAudio('SharpHit_Short.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -1072,9 +1072,9 @@ obj
 								if(src.fightlayer==T.fightlayer)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('sclang.ogg',0,0)
+										src.PlayAudio('sclang.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('sclang2.ogg',0,0)
+										src.PlayAudio('sclang2.ogg', output = AUDIO_HEARERS)
 									walk(src,0)
 									src.loc=locate(T.x,T.y,T.z)
 									src.Hit=1
@@ -1135,9 +1135,9 @@ obj
 								if(src.fightlayer==OB.fightlayer)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('sclang.ogg',0,0)
+										src.PlayAudio('sclang.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('sclang2.ogg',0,0)
+										src.PlayAudio('sclang2.ogg', output = AUDIO_HEARERS)
 									walk(src,0)
 									src.loc=locate(OB.x,OB.y,OB.z)
 									src.Hit=1
@@ -1216,9 +1216,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -1251,9 +1251,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -1298,9 +1298,9 @@ obj
 									if(src.fightlayer==T.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 								if(istype(O,/obj))
 									var/obj/OB=O
@@ -1309,9 +1309,9 @@ obj
 									if(src.fightlayer==OB.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 
 			ChidoriNeedle
@@ -1339,9 +1339,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -1374,9 +1374,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -1421,9 +1421,9 @@ obj
 									if(src.fightlayer==T.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 								if(istype(O,/obj))
 									var/obj/OB=O
@@ -1432,9 +1432,9 @@ obj
 									if(src.fightlayer==OB.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 			SickleSlash
 				icon='Sickle Weasel slash.dmi'
@@ -1459,9 +1459,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -1491,9 +1491,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -1534,9 +1534,9 @@ obj
 									if(src.fightlayer==T.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										walk(src,0)
 										src.loc=locate(T.x,T.y,T.z)
 										src.Hit=1
@@ -1550,9 +1550,9 @@ obj
 									if(src.fightlayer==OB.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										walk(src,0)
 										src.loc=locate(OB.x,OB.y,OB.z)
 										src.Hit=1
@@ -1583,9 +1583,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -1610,9 +1610,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -1649,9 +1649,9 @@ obj
 									if(src.fightlayer==T.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										walk(src,0)
 										src.loc=locate(T.x,T.y,T.z)
 										src.Hit=1
@@ -1665,9 +1665,9 @@ obj
 									if(src.fightlayer==OB.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										walk(src,0)
 										src.loc=locate(OB.x,OB.y,OB.z)
 										src.Hit=1
@@ -1700,9 +1700,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -1760,9 +1760,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -1831,9 +1831,9 @@ obj
 									if(src.fightlayer==T.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										walk(src,0)
 										src.loc=locate(T.x,T.y,T.z)
 										src.Hit=1
@@ -1875,9 +1875,9 @@ obj
 									if(src.fightlayer==OB.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										walk(src,0)
 										src.loc=locate(OB.x,OB.y,OB.z)
 										src.Hit=1
@@ -1937,9 +1937,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -1974,9 +1974,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -2021,9 +2021,9 @@ obj
 									if(src.fightlayer==T.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 								if(istype(O,/obj))
 									var/obj/OB=O
@@ -2032,9 +2032,9 @@ obj
 									if(src.fightlayer==OB.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 			Sai_Snakes
 				icon='Sai Snakes.dmi'
@@ -2061,9 +2061,9 @@ obj
 								if(M.dodge==0)
 									src.density=0
 									if(prob(50))
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									else
-										view(src)<<sound('KickHit.ogg',0,0,volume=40)
+										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									src.loc=O.loc
@@ -2096,9 +2096,9 @@ obj
 									if(M.dodge==0)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										walk(src,0)
 										src.loc=O.loc
@@ -2143,9 +2143,9 @@ obj
 									if(src.fightlayer==T.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 								if(istype(O,/obj))
 									var/obj/OB=O
@@ -2154,9 +2154,9 @@ obj
 									if(src.fightlayer==OB.fightlayer)
 										src.density=0
 										if(prob(50))
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										else
-											view(src)<<sound('KickHit.ogg',0,0,volume=40)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										del(src)
 			ExplosiveTag
 				icon_state="tag"
@@ -2287,7 +2287,7 @@ mob
 				src.icon_state = ""
 				src.overlays += 'Cherry Blossom Impact.dmi'
 				src.icon_state = "punchrS"
-				view(src) << sound('Skill_MashHit.wav')
+				src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 				sleep(1)
 				flick("punchr",src)
 				src.icon_state = "punchrS"
@@ -2316,7 +2316,7 @@ mob
 				src.firing=1
 				src.icon_state = "punchrS"
 				src.overlays += 'Raikiri.dmi'
-				view(src) << sound('dash.wav')
+				src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 				sleep(2)
 				var/mob/Z
 				flick("punchr",src)
@@ -2351,7 +2351,7 @@ mob
 							HitMe.Bleed()
 							src.DealDamage(src.maxhealth*jashpercent,src,"maroon")
 							src.Bleed()
-							view() << sound('knife_hit1.wav')
+							src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 							src.Death(src,1)
 						return
 			if(usr.equipped=="Shurikens")
@@ -2362,10 +2362,10 @@ mob
 						spawn(usr.attkspeed*3)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
@@ -2404,10 +2404,10 @@ mob
 						spawn(usr.attkspeed*5)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
@@ -2446,10 +2446,10 @@ mob
 						spawn(usr.attkspeed*4)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
@@ -2488,10 +2488,10 @@ mob
 						spawn(usr.attkspeed*2)usr.firing=0
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 							usr.Target_Atom(c_target)
@@ -2533,10 +2533,10 @@ mob
 								usr.tagcd=0
 							if(prob(50))
 								flick("throw",usr)
-								view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+								src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 							else
 								flick("throw",usr)
-								view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+								src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 							if(c_target)
 								src.dir=get_dir(usr,c_target)
 								usr.Target_Atom(c_target)
@@ -2585,7 +2585,7 @@ mob
 								var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
 								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(180, 320))
 								SMOKE.loc=usr.loc
-								view(usr)<<sound('flashbang_explode2.wav',0,0)
+								src.PlayAudio('flashbang_explode2.wav', output = AUDIO_HEARERS)
 								src.overlays=0
 								src.icon_state="blank"
 								for(var/mob/M in oview(usr))

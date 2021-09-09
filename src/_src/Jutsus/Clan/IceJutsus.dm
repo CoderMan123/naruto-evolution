@@ -42,7 +42,7 @@ mob
 						if(M.dead || M.swimming)return
 						M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 						if(M.henge==4||M.henge==5)M.HengeUndo()
-						view(src)<<sound('knife_hit4.wav',0,0)
+						src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 						M.Bleed(M)
 					sleep(4)
 					src.canattack=1
@@ -68,7 +68,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsuse",src)
-						view(src)<<sound('man_fs_l_mt_wat.ogg',0,0)
+						src.PlayAudio('man_fs_l_mt_wat.ogg', output = AUDIO_HEARERS)
 						src.firing=1
 						src.canattack=0
 						src.pixel_x=4
@@ -193,13 +193,13 @@ mob
 					src.canattack=0
 					if(c_target)
 						sleep(3)
-						view(src)<<sound('man_fs_r_mt_con.ogg',0,0)
-						view(src)<<sound('man_fs_r_mt_con.ogg',0,0)
-						view(src)<<sound('man_fs_r_mt_con.ogg',0,0)
-						view(src)<<sound('man_fs_r_mt_con.ogg',0,0)
+						src.PlayAudio('man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
+						src.PlayAudio('man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
+						src.PlayAudio('man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
+						src.PlayAudio('man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 						sleep(7)
 						if(c_target)
-							view(src)<<sound('man_fs_r_mt_wat.ogg',0,0)
+							src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 							for(var/i=1,i<8+1,i++)
 								var/obj/O = new/obj
 								O.IsJutsuEffect=src
@@ -228,10 +228,10 @@ mob
 										if(M.dead || M.swimming) continue
 										M.injutsu=1
 										var/random=rand(1,4)
-										if(random==1) view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-										if(random==2) view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-										if(random==3) view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-										if(random==4) view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+										if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+										if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+										if(random==3)  src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+										if(random==4)  src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 										M.DealDamage(J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage),src,"NinBlue")
 										if(M.henge==4||M.henge==5) M.HengeUndo()
 										M.Bleed(M)
@@ -241,10 +241,10 @@ mob
 											if(M.dead || M.swimming) continue
 											M.injutsu=1
 											var/random=rand(1,4)
-											if(random==1) view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-											if(random==2) view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-											if(random==3) view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-											if(random==4) view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+											if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+											if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+											if(random==3)  src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+											if(random==4)  src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 											M.DealDamage(J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage),src,"NinBlue")
 											if(M.henge==4||M.henge==5) M.HengeUndo()
 											M.Bleed(M)
@@ -254,10 +254,10 @@ mob
 												if(M.dead || M.swimming) continue
 												M.injutsu=1
 												var/random=rand(1,4)
-												if(random==1) view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-												if(random==2) view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-												if(random==3) view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-												if(random==4) view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+												if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+												if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+												if(random==3)  src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+												if(random==4)  src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 												M.DealDamage(J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage),src,"NinBlue")
 												if(M.henge==4||M.henge==5) M.HengeUndo()
 												M.Bleed(M)
@@ -307,7 +307,7 @@ mob
 					spawn() src.UpdateHMB()
 					//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 					flick("2fist",src)
-					view(src)<<sound('046.wav',0,0)
+					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					J.Excluded=1
@@ -358,7 +358,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					view()<<sound('man_fs_r_mt_wat.ogg')
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0

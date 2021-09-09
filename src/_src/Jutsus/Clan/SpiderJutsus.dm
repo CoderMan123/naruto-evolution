@@ -6,7 +6,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("throw",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=15
@@ -39,7 +39,7 @@ mob
 					src.firing=1
 					sleep(3)
 					flick("2fist",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.9
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.9
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.9

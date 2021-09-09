@@ -71,7 +71,7 @@ mob
 									if(SC.Hand=="Kick")
 										flick("kick",SC)
 										SC.Hand="Left"
-						view(SC,10) << sound('Swing5.ogg',0,0,0,100)
+						SC.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
 						spawn(2)
 							for(var/mob/C in orange(SC,1))
 								SC.dir = get_dir(SC,C)
@@ -88,8 +88,8 @@ mob
 													if(SC.loc.loc:Safe!=1) LevelStat("Strength",10*punchstatexp)
 													if(c_target)
 														if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-													if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
-													if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+													if(SC.Hand=="Left") SC.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+													if(SC.Hand=="Right") SC.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 												else
 													if(SC.agility>=c_target.agility)
 														var/defendedhit=SC.strength-c_target.defence
@@ -107,7 +107,7 @@ mob
 														c_target.DealDamage(defendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
 														if(src.Gates>0) src.DealDamage(((src.strength / 150)*8) * src.Gates, src, "maroon")
 														flick("defendhit",c_target)
-														view(SC,10) << sound('Counter_Success.ogg',0,0,0,100)
+														SC.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 													else
 														flick("dodge",c_target)
 														if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(1,2))
@@ -118,8 +118,8 @@ mob
 									T.health-=undefendedhit
 									if(T) if(T.Good) LevelStat("Strength",10*punchstatexp)
 									else LevelStat("Strength",10*punchstatexp)
-									if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
-									if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+									if(SC.Hand=="Left") SC.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+									if(SC.Hand=="Right") SC.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 									T.Break(src)
 
 							//src.move=1
@@ -254,7 +254,7 @@ mob
 								flick("kick",src)
 								src.Hand="Left"
 								for(var/mob/Clones/Bunshin/C in world)if(C.Owner==src)flick("kick",C)
-				view(src,10) << sound('Swing5.ogg',0,0,0,100)
+				src.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
 				if(src.agility<50)
 					spawn(2)
 						for(c_target in get_step(src,src.dir))
@@ -342,11 +342,11 @@ mob
 											if(src.loc.loc:Safe!=1) LevelStat("Strength",10*punchstatexp)
 											if(c_target)
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-											if(src.Hand=="Right")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
+											if(src.Hand=="Right") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Kick")
 												bonus+=2
-												view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
-											if(src.Hand=="Left")view(src,10) << sound('KickHit.ogg',0,0,0,100)
+												src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
+											if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 											if(src.Gates >= 5&&move&&!injutsu)
 												c_target.icon_state="push"
 												c_target.injutsu=1
@@ -394,7 +394,7 @@ mob
 														c_target.move=0
 														spawn(bonesword)if(c_target)c_target.move=1
 												flick("defendhit",c_target)
-												view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 											else
 												flick("dodge",c_target)
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(1,2))
@@ -405,9 +405,9 @@ mob
 								T.health-=undefendedhit
 								if(T) if(T.Good) LevelStat("Strength",10*punchstatexp)
 								else LevelStat("Strength",10*punchstatexp)
-								if(src.Hand=="Right")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-								if(src.Hand=="Kick")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
-								if(src.Hand=="Left")view(src,10) << sound('KickHit.ogg',0,0,0,100)
+								if(src.Hand=="Right") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+								if(src.Hand=="Kick") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
+								if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 								T.Break(src)
 				else
 					if(src.agility>=50)
@@ -498,9 +498,9 @@ mob
 												if(src.loc.loc:Safe!=1) LevelStat("Strength",10*punchstatexp)
 											if(c_target)
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-											if(src.Hand=="Right")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-											if(src.Hand=="Kick")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
-											if(src.Hand=="Left")view(src,10) << sound('KickHit.ogg',0,0,0,100)
+											if(src.Hand=="Right") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+											if(src.Hand=="Kick") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
+											if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 											if(src.Gates >= 5&&move&&!injutsu)
 												c_target.icon_state="push"
 												c_target.injutsu=1
@@ -544,7 +544,7 @@ mob
 													for(var/obj/Jutsus/Byakugan/J in src.jutsus)
 														c_target.DealDamage(defendedhit/3, src, "aliceblue", 0, 1)
 												flick("defendhit",c_target)
-												view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 												if(bonesword)
 													if(c_target.icon_state == "")
 														c_target.move=0
@@ -558,9 +558,9 @@ mob
 								T.health-=undefendedhit//,src,"TaiOrange")
 								if(T) if(T.Good) LevelStat("Strength",10*punchstatexp)
 								else LevelStat("Strength",10*punchstatexp)
-								if(src.Hand=="Right")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-								if(src.Hand=="Kick")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
-								if(src.Hand=="Left")view(src,10) << sound('KickHit.ogg',0,0,0,100)
+								if(src.Hand=="Right") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+								if(src.Hand=="Kick") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
+								if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 								T.Break(src)
 /*				if(Specialist=="strength"||Specialist2=="strength")
 					if(src.combo==3)

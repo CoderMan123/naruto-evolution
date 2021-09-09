@@ -87,16 +87,16 @@ mob
 					RestUp()
 					return
 				if(src.maxchakra<=500)
-					view(src,3) << sound('Skills/Powerup.ogg',0,0,7,100)
+					src.PlayAudio('Skills/Powerup.ogg', output = AUDIO_HEARERS)
 					spawn(13)if(src)src.RestSound()
 				if(src.maxchakra<=1000&&chakra>500)
-					view(src,5) << sound('Skills/Powerup2.ogg',0,0,7,100)
+					src.PlayAudio('Skills/Powerup2.ogg', output = AUDIO_HEARERS)
 					spawn(14)if(src)src.RestSound()
 				if(src.maxchakra<10000&&chakra>1000)
-					view(src,7) << sound('Skills/Powerup3.ogg',0,0,7,100)
+					src.PlayAudio('Skills/Powerup3.ogg', output = AUDIO_HEARERS)
 					spawn(14)if(src)src.RestSound()
 				if(maxchakra>10000)
-					view(src,7) << sound('Skills/Powerup4.ogg',0,0,7,100)
+					src.PlayAudio('Skills/Powerup4.ogg', output = AUDIO_HEARERS)
 					spawn(13)if(src)src.RestSound()
 	verb
 		Rest()
@@ -143,7 +143,7 @@ mob
 		RestUp()
 			set hidden=1
 			if(usr.rest)
-				view(usr,3) << sound('Skills/Blank.ogg',0,0,7,100)
+				src.PlayAudio('Skills/Blank.ogg', output = AUDIO_HEARERS)
 /*				if(src.Gates==null)
 					usr.healthregenmod-=2*/
 				usr.overlays-=/obj/Overlays/Dust

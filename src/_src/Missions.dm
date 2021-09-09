@@ -26,10 +26,10 @@ obj/MissionObj
 	Entered(var/mob/M)
 		if(istype(M,/mob))
 			if(M.foot=="Left")
-				view(M,13) << sound('Walk/man_fs_l_mt_drt.ogg',0,0,0,25)
+				M.PlayAudio('Walk/man_fs_l_mt_drt.ogg', output = AUDIO_HEARERS)
 				M.foot="Right"
 			else
-				view(M,13) << sound('Walk/man_fs_r_mt_drt.ogg',0,0,0,25)
+				M.PlayAudio('Walk/man_fs_r_mt_drt.ogg', output = AUDIO_HEARERS)
 				M.foot="Left"
 	New()
 		..()
@@ -229,7 +229,7 @@ mob
 			move=0
 			proc
 				Attack(mob/M)
-					oview(10) << sound('Swing5.ogg',0,0,0,100)
+					src.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
 					if(src.hited==1) return
 					/*if(istype(M,/mob/White_Zettsu/))
 						return*/
@@ -283,7 +283,7 @@ mob
 					view()<<"\yellow[src] says, \white'You can't kill me [M]!!! You're done for!'"
 				sleep(2)
 				src.dir=get_dir(src,M)
-				view(src)<<sound('dash.wav',0,0)
+				src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 				flick('Shunshin.dmi',src)
 				sleep(2)
 				step(src,src.dir)
