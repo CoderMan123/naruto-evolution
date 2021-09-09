@@ -63,9 +63,9 @@ obj
 			..()
 
 		Weaponry
-			Click(mob/M)
+			Click(var/mob/owner)
 				..()
-				if(M) usr = M
+				if(ismob(owner)) usr = owner
 				var/icon/I = new(src.icon, src.icon_state)
 				var/iconfile = fcopy_rsc(I)
 				winset(usr, "Inventory.EquippedName", "text='[src.name]'")
