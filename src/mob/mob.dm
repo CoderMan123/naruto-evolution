@@ -13,6 +13,9 @@ mob
 		jutsus[0]
 		jutsus_learned[0]
 
+		tmp
+			ninja_tool_selection = 0 // Selected ninja tool from Rotate_Ninja_Tool()
+
 		#ifdef STATE_MANAGER
 		tmp/list/state_manager = list()
 		#endif
@@ -679,6 +682,54 @@ mob
 						src.client.UpdateInventoryPanel()
 					else
 						src << output("You don't have [ryo] Ryo to drop.", "Action.Output")
+		
+		Rotate_Ninja_Tool()
+			set hidden = 1
+			var/list/weaponry = list()
+			for(var/obj/Inventory/Weaponry/o in src.contents)
+				if(istype(o, /obj/Inventory/Weaponry/Kunai))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Exploding_Kunai))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Shuriken))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Needle))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Explosive_Tag))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Smoke_Bomb))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Food_Pill))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+			
+			if(!src.ninja_tool_selection && weaponry.len)
+				src.ninja_tool_selection = 1
+
+			else if(src.ninja_tool_selection < weaponry.len)
+				src.ninja_tool_selection++
+
+			else if(weaponry.len)
+				src.ninja_tool_selection = 1
+
+			else
+				src.ninja_tool_selection = 0
+			
+			if(src.ninja_tool_selection)
+				var/obj/Inventory/Weaponry/o = weaponry[src.ninja_tool_selection]
+				o.Click(src)
 
 mob
 	proc
