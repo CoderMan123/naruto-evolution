@@ -2,6 +2,9 @@ client
 	mouse_pointer_icon='cursors.dmi'
 	fps = 60
 	var/tmp
+		map_resolution_x
+		map_resolution_y
+
 		channel = "Local"
 		logging_in = 0
 		browser_url = BROWSER_NONE
@@ -10,7 +13,7 @@ client
 		skill_tree_objects = list()
 
 	var
-		last_mission
+		last_mission 	
 
 	New()
 		..()
@@ -18,7 +21,7 @@ client
 		clients_connected += src
 
 		winset(src, null, {"
-			Main.is-maximized=true
+			Main.is-maximized=true;
 			Main.Child.right=Titlescreen;
 			Main.OutputChild.is-visible=false;
 			Main.ActionChild.is-visible=false;
@@ -34,6 +37,8 @@ client
 			Leader.is-visible=false;
 			Main.UnlockChild.is-visible = "false";
 		"})
+
+		src.GetScreenResolution()
 
 		world.UpdateClientsMultikeying()
 

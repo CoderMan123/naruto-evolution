@@ -1,6 +1,13 @@
 client
 	var/tmp/exp_lock_verify=0
 	verb
+		GetScreenResolution()
+			set hidden = 1
+			var/resolution = splittext(winget(src, "Map", "size"), "x")
+			src.map_resolution_x = round(text2num(resolution[1]), 32) / 32
+			src.map_resolution_y = round(text2num(resolution[2]), 32) / 32
+			src.view="[src.map_resolution_x]x[src.map_resolution_y]"
+
 		ChangeChannel()
 			set hidden=1
 			switch(src.channel)

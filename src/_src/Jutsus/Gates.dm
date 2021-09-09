@@ -170,7 +170,7 @@ mob
 				//if(7)
 				//if(8)
 			src.Gates = GateNum
-			src.DealDamage((src.maxhealth * 0.02) * src.Gates, src, "maroon")
+			src.DealDamage((src.maxhealth * 0.01) * src.Gates, src, "maroon")
 
 // I commented out the old gate procs instead of deleting them, just in case you want them for something.
 /*		Gate_1()

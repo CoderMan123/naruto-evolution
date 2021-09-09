@@ -17,14 +17,7 @@ mob
 			pois=0
 			Rinnegan=0
 			Intang=0
-mob
-	proc/poisoned(mob/M)
-		if(src.pois<=0) return
-		src.pois-=1
-		if(!M)return
-		if(src.pois>0)
-			src.DealDamage(M.ninjutsu/8,src,"NinBlue")
-			spawn(50)src.poisoned(M)
+
 obj
 	PoisonMist
 		icon = 'Poison Gas Cloud.dmi'
@@ -48,11 +41,14 @@ obj
 		Move()
 			..()
 			if(candoit)
-				for(var/mob/M in orange(1,src))
-					if(Ownzorz)
+				for(var/mob/M in orange(2,src))
+					if(Ownzorz && M != src.Owner)
 						if(M) M.DealDamage(Ownzorz.ninjutsu/2,src.Owner,"NinBlue")
-						if(M) M.pois=5
-						if(M) M.poisoned(Ownzorz)
+						if(!CheckState(M, new/state/poisoned))
+							AddState(M, new/state/poisoned, 100, src.Owner)
+						else
+							RemoveState(M, new/state/poisoned, STATE_REMOVE_ALL)
+							AddState(M, new/state/poisoned, 100, src.Owner)
 	ESDS
 		icon = 'earth style dark swamp.dmi'
 		icon_state = "center"
@@ -1351,6 +1347,8 @@ obj
 								M.dir = get_dir(M,src)
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								if(src.hits >= 12) del(src)
+								if(src)
+									walk_towards(src, M, 3)
 
 			WaterShark
 				name="Water Shark"

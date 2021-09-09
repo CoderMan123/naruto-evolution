@@ -9,13 +9,15 @@ turf
 		New()
 			..()
 			src.icon_state = "Blank"
-		Entered(mob/M)
-			M.Intang = 0
-			var/mob/Void/Void = new()
-			M.DealDamage(100000, Void)
-			Void.loc = null
-			M<<"I ventured too far into the void!"
-			world<<output("[src] was knocked out by [Void]!","Action.Output")
+		Entered(atom/a)
+			if(ismob(a))
+				var/mob/M = a
+				M.Intang = 0
+				var/mob/Void/Void = new()
+				M.DealDamage(100000, Void)
+				Void.loc = null
+				M<<"I ventured too far into the void!"
+				world<<output("[src] was knocked out by [Void]!","Action.Output")
 
 mob
 	proc

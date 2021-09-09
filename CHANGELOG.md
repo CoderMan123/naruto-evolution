@@ -3,6 +3,28 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.14
+
+### Added
+- You can now switch between ninja tools with `Shift + S`
+
+### Fixed
+- Fixed a number of back end issues
+- Fixed Human Bullet Tank (sorry)
+- Fixed animal spawns for good this time
+- Fixed bugs with movement system and walking speed
+- Fixed attackspeed bugs
+- Fixed a bug with insect clones costs (now costs a lot less)
+
+### Changed
+- Improvements to client resolution detection
+- Gates health costs reduced slightly
+- Nara jutsus can't be cast until previous one has finished
+- Chakra infusion can now be toggled off
+- Bug tornado functions better
+- Nerfed insect neurotoxin's duration
+- Poison mist now applies better poison effect
+
 ## 2.0.13
 ### Added
 - Map warpers will now no longer let you pass if you're in combat

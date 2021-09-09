@@ -13,11 +13,14 @@ obj
 		bound_width = 96
 		pixel_x = -32
 
-		Crossed()
-			if(usr.village == VILLAGE_AKATSUKI)
-				usr.loc = locate(51,149,7)
-			else
-				usr<<output("A strange and powerful seal blocks this cave, it could only be the work of the Akatsuki!","Action.Output")
+		Crossed(atom/a)
+			if(ismob(a))
+				var/mob/m = a
+				if(m.village == VILLAGE_AKATSUKI)
+					m.loc = locate(51,149,7)
+				else
+					m<<output("A strange and powerful seal blocks this cave, it could only be the work of the Akatsuki!","Action.Output")
+			else ..()
 
 	desert_objects
 		cactus

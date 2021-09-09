@@ -21,8 +21,7 @@ mob
 						for(var/mob/M in oview(src,13))M.Target_Remove()
 						src.mizubunshin++
 						var/bun=src.mizubunshin+3
-						src.DealDamage((src.health/10),src,"white")
-						src.chakra-=round(src.chakra/bun)
+						src.DealDamage((src.maxhealth/100),src,"white")
 						flick("jutsu",src)
 						var/mob/Clones/BugBunshin/A = new/mob/Clones/BugBunshin(src.loc)
 						A.loc=src.loc
@@ -71,7 +70,7 @@ mob
 							c_target.move=0
 							c_target.injutsu=1
 							c_target.canattack=0
-							spawn(12+(J.level*2))
+							spawn(2+(J.level*2))
 								if(c_target)
 									c_target.move=1
 									c_target.injutsu=0
@@ -241,7 +240,7 @@ mob
 						A.fightlayer=src.fightlayer
 						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.dir = get_dir(A,c_target)
-						walk_towards(A,c_target.loc,3)
+						walk_towards(A,c_target.loc,2)
 					else
 						var/obj/Projectiles/Effects/BugTornado/A = new/obj/Projectiles/Effects/BugTornado(src.loc)
 						A.IsJutsuEffect=src

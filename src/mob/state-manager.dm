@@ -1,6 +1,7 @@
 proc
-	AddState(mob/m, var/state/s, var/duration = 0)
+	AddState(mob/m, var/state/s, var/duration = 0, mob/owner)
 		s.mob = m
+		if(owner) s.owner = owner
 		s.duration = duration
 		s.expiration = world.timeofday + s.duration
 		s.mob.state_manager.Add(s)
@@ -17,13 +18,13 @@ proc
 			if(STATE_REMOVE_ANY)
 				for(var/state/state in m.state_manager)
 					if(state.type == s.type)
-						m.state_manager.Remove(s)
+						m.state_manager.Remove(state)
 						break
 
 			if(STATE_REMOVE_ALL)
 				for(var/state/state in m.state_manager)
 					if(state.type == s.type)
-						m.state_manager.Remove(s)
+						m.state_manager.Remove(state)
 
 	CheckState(mob/m, var/state/s)
 		if(locate(s.type) in m.state_manager) return 1
@@ -31,6 +32,7 @@ proc
 
 /state
 	var/mob/mob
+	var/mob/owner
 	var/duration
 	var/expiration
 
@@ -38,7 +40,7 @@ proc
 		..()
 	
 	proc/Ticker()
-		while(src && src.mob && world.timeofday < src.expiration || src.duration == -1)
+		while(src && src.mob && src.mob.state_manager.Find(src) && world.timeofday < src.expiration || src.duration == -1)
 			sleep(world.tick_lag)
 			src.OnTick()
 		
@@ -81,8 +83,6 @@ proc
 			..()
 
 	punching
-		OnTick()
-			..()
 	
 	blocking
 		OnTick()
@@ -104,6 +104,16 @@ proc
 	
 	in_combat
 
+	nara_attack_delay
+
+	poisoned
+		var/delay
+		OnTick()
+			if(!delay) delay = world.timeofday + 10
+			if(delay < world.timeofday)
+				src.mob.DealDamage(src.mob.maxhealth / 200, src.owner, "NinBlue")
+				delay = world.timeofday + 10
+			..()
 
 #ifdef STATE_MANAGER_DEBUG
 mob

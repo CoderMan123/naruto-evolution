@@ -16,42 +16,42 @@ proc/AnimalPopulater()
 		desert_animal_spawns += s
 	while(world)
 		if(squirrel_count < 10)
-			var/amount_to_spawn = 10 - squirrel_count
+			var/amount_to_spawn = 10 - max(squirrel_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/squirrel(spawn_location.loc)
 		if(chipmonk_count < 10)
-			var/amount_to_spawn = 10 - chipmonk_count
+			var/amount_to_spawn = 10 - max(chipmonk_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/chipmonk(spawn_location.loc)
 		if(hedgehog_count < 4)
-			var/amount_to_spawn = 4 - hedgehog_count
+			var/amount_to_spawn = 4 - max(hedgehog_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/hedgehog(spawn_location.loc)
 		if(hare_count < 10)
-			var/amount_to_spawn = 10 - hare_count
+			var/amount_to_spawn = 10 - max(hare_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/hare(spawn_location.loc)
 		if(rabbit_count < 10)
-			var/amount_to_spawn = 10 - rabbit_count
+			var/amount_to_spawn = 10 - max(rabbit_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/rabbit(spawn_location.loc)
 		if(doe_count < 8)
-			var/amount_to_spawn = 8 - doe_count
+			var/amount_to_spawn = 8 - max(doe_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/doe(spawn_location.loc)
 		if(buck_count < 8)
-			var/amount_to_spawn = 8 - buck_count
+			var/amount_to_spawn = 8 - max(buck_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/buck(spawn_location.loc)
 		if(snake_count < 20)
-			var/amount_to_spawn = 20 - snake_count
+			var/amount_to_spawn = 20 - max(snake_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawndesert/spawn_location = pick(desert_animal_spawns)
 				new/mob/npc/combat/animals/snake(spawn_location.loc)
@@ -581,11 +581,6 @@ mob
 						..()
 						src.FindTarget()
 
-					Death(killer)
-						..()
-						if(src.health <= 0)
-							doe_count--
-
 					proc/Idle()
 						src.idle = 1
 						src.retreating = 0
@@ -640,6 +635,11 @@ mob
 						src.ryo = rand(50,150)
 						snake_count++
 						spawn() src.CombatAI()
+
+					Death(killer)
+						..()
+						if(src.health <= 0)
+							snake_count--
 
 					proc/CombatAI()
 						while(src)

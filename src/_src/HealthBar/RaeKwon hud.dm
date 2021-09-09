@@ -1,17 +1,6 @@
 mob/var/list/HotSlotSave=list("HotSlot1"=null,"HotSlot2"=null,"HotSlot3"=null,"HotSlot4"=null,"HotSlot5"=null,"HotSlot6"=null,"HotSlot7"=null,"HotSlot8"=null,"HotSlot9"=null,"HotSlot10"=null,"HotSlot11"=null,"HotSlot12"=null,"HotSlot13"=null,"HotSlot14"=null,"HotSlot15"=null,"HotSlot16"=null,"HotSlot17"=null,"HotSlot18"=null)
-mob/var/tmp/XView
-mob/var/tmp/YView
 mob
 	var/tmp/BOW
-
-proc/GetScreenResolution(mob/M)
-	var/POS = "[winget(M, "label","pos")]"
-	var/COMA = findtext(POS,",",1,0)
-	var/X = text2num(copytext(POS,1,COMA))
-	var/Y = text2num(copytext(POS,COMA+1,0))
-	M.client.view="[ceil(X/32)]x[ceil(Y/32)]"
-	M.XView=ceil(X/32)
-	M.YView=ceil(Y/32)
 
 obj/Titlescreen/Logo
 	name="Logo"
@@ -34,7 +23,7 @@ obj
 			//screen_loc = "25,5"
 			New(var/mob/M)
 				if(!ismob(M)) return
-				screen_loc = "[round((M.XView/2)-4)],3.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)-4)],3.5"
 				M.client.screen+=src
 				src.loc=locate(0,0,0)
 				src.SetName("Z")
@@ -47,7 +36,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round(M.XView/2)-2],3.5"
+				screen_loc = "[round(M.client.map_resolution_x/2)-2],3.5"
 				src.SetName("X")
 				src.loc=locate(0,0,0)
 				..()
@@ -59,7 +48,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2))],3.5"
+				screen_loc = "[round((M.client.map_resolution_x/2))],3.5"
 				src.SetName("C")
 				src.loc=locate(0,0,0)
 				..()
@@ -71,7 +60,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+2)],3.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)+2)],3.5"
 				src.SetName("V")
 				src.loc=locate(0,0,0)
 				..()
@@ -83,7 +72,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+4)],3.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)+4)],3.5"
 				src.SetName("B")
 				src.loc=locate(0,0,0)
 				..()
@@ -95,7 +84,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+6)],3.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)+6)],3.5"
 				src.SetName("N")
 				src.loc=locate(0,0,0)
 				..()
@@ -107,7 +96,7 @@ obj
 			//screen_loc = "25,5"
 			New(var/mob/M)
 				if(!ismob(M)) return
-				screen_loc = "[round((M.XView/2)-4)],4.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)-4)],4.5"
 				M.client.screen+=src
 				src.loc=locate(0,0,0)
 				src.SetName("F7")
@@ -120,7 +109,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round(M.XView/2)-2],4.5"
+				screen_loc = "[round(M.client.map_resolution_x/2)-2],4.5"
 				src.SetName("F8")
 				src.loc=locate(0,0,0)
 				..()
@@ -132,7 +121,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2))],4.5"
+				screen_loc = "[round((M.client.map_resolution_x/2))],4.5"
 				src.SetName("F9")
 				src.loc=locate(0,0,0)
 				..()
@@ -144,7 +133,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+2)],4.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)+2)],4.5"
 				src.SetName("F10")
 				src.loc=locate(0,0,0)
 				..()
@@ -156,7 +145,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+4)],4.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)+4)],4.5"
 				src.SetName("F11")
 				src.loc=locate(0,0,0)
 				..()
@@ -168,7 +157,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+6)],4.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)+6)],4.5"
 				src.SetName("F12")
 				src.loc=locate(0,0,0)
 				..()
@@ -180,7 +169,7 @@ obj
 			//screen_loc = "25,5"
 			New(var/mob/M)
 				if(!ismob(M)) return
-				screen_loc = "[round((M.XView/2)-4)],5.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)-4)],5.5"
 				M.client.screen+=src
 				src.loc=locate(0,0,0)
 				src.SetName("F1")
@@ -193,7 +182,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round(M.XView/2)-2],5.5"
+				screen_loc = "[round(M.client.map_resolution_x/2)-2],5.5"
 				src.SetName("F2")
 				src.loc=locate(0,0,0)
 				..()
@@ -205,7 +194,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2))],5.5"
+				screen_loc = "[round((M.client.map_resolution_x/2))],5.5"
 				src.SetName("F3")
 				src.loc=locate(0,0,0)
 				..()
@@ -217,7 +206,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+2)],5.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)+2)],5.5"
 				src.SetName("F4")
 				src.loc=locate(0,0,0)
 				..()
@@ -229,7 +218,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+4)],5.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)+4)],5.5"
 				src.SetName("F5")
 				src.loc=locate(0,0,0)
 				..()
@@ -241,7 +230,7 @@ obj
 			New(var/mob/M)
 				if(!ismob(M)) return
 				M.client.screen+=src
-				screen_loc = "[round((M.XView/2)+6)],5.5"
+				screen_loc = "[round((M.client.map_resolution_x/2)+6)],5.5"
 				src.SetName("F6")
 				src.loc=locate(0,0,0)
 				..()

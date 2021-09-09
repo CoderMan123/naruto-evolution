@@ -66,7 +66,8 @@ mob
 						damage = round(damage*0.3)
 					src.health -= damage
 					AddState(src, new/state/in_combat, 100)
-					AddState(Owner, new/state/in_combat, 100)
+					if(Owner)
+						AddState(Owner, new/state/in_combat, 100)
 					if(src.health < 0)
 						src.health = 0
 					src.sleephits++
@@ -155,9 +156,9 @@ obj
 mob
 	proc
 		JutsuCoolSlot(obj/Jutsus/O)
-			if(waitslot >= src.YView) return
+			if(waitslot >= src.client.map_resolution_y) return
 			src.waitslot ++
-			O.screen_loc = "[src.XView-2],[src.YView-1-src.waitslot]"
+			O.screen_loc = "[src.client.map_resolution_x-2],[src.client.map_resolution_y-1-src.waitslot]"
 			src.client.screen += O
 			if(O.Clan == null)
 				for(var/mob/M in range(10, src))

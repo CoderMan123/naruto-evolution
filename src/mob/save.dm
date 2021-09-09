@@ -270,8 +270,6 @@ mob
 			if(src.suffix == "(Equipped)")
 				src.ClothingOverlays["[C.section]"] = C.icon
 
-		GetScreenResolution(src)
-
 		src.density=1
 		src.sight=0
 		src.invisibility=0

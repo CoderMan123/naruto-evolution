@@ -13,6 +13,9 @@ mob
 		jutsus[0]
 		jutsus_learned[0]
 
+		tmp
+			ninja_tool_selection = 0 // Selected ninja tool from Rotate_Ninja_Tool()
+
 		#ifdef STATE_MANAGER
 		tmp/list/state_manager = list()
 		#endif
@@ -36,7 +39,6 @@ mob
 		var/obj/login_eye = new(random_location.loc)
 		src.client.eye = login_eye
 		src.client.perspective = EYE_PERSPECTIVE
-		spawn() GetScreenResolution(src)
 		src.client.screen += new/obj/Logos/Naruto_Evolution
 
 		spawn()
@@ -549,9 +551,11 @@ mob
 					for(var/obj/Inventory/Clothing/o in src.contents)
 						o.suffix = ""
 						
-					src.ClothingOverlays = null
+					src.ClothingOverlays = list("Vest"=null,"Shirt"=null,"Pants"=null,"Shoes"=null,"Mask"=null,"Headband"=null,"Sword"=null,"Gloves"=null,"Accessories"=null,"Robes"=null)
 					src.ResetBase()
 					src.RestoreOverlays()
+					src.client.UpdateInventoryPanel()
+					src.move_delay = max(0.5, 0.8-((src.agility/150)*0.3))
 
 				return 0
 
@@ -678,6 +682,54 @@ mob
 						src.client.UpdateInventoryPanel()
 					else
 						src << output("You don't have [ryo] Ryo to drop.", "Action.Output")
+		
+		Rotate_Ninja_Tool()
+			set hidden = 1
+			var/list/weaponry = list()
+			for(var/obj/Inventory/Weaponry/o in src.contents)
+				if(istype(o, /obj/Inventory/Weaponry/Kunai))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Exploding_Kunai))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Shuriken))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Needle))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Explosive_Tag))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Smoke_Bomb))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+				
+				if(istype(o, /obj/Inventory/Weaponry/Food_Pill))
+					if(!weaponry.Find(o)) weaponry.Add(o)
+					else continue
+			
+			if(!src.ninja_tool_selection && weaponry.len)
+				src.ninja_tool_selection = 1
+
+			else if(src.ninja_tool_selection < weaponry.len)
+				src.ninja_tool_selection++
+
+			else if(weaponry.len)
+				src.ninja_tool_selection = 1
+
+			else
+				src.ninja_tool_selection = 0
+			
+			if(src.ninja_tool_selection)
+				var/obj/Inventory/Weaponry/o = weaponry[src.ninja_tool_selection]
+				o.Click(src)
 
 mob
 	proc

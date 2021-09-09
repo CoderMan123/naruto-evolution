@@ -150,6 +150,9 @@ macro "Macro"
 		name = "CTRL+S"
 		command = "puppetgrab1"
 	elem 
+		name = "SHIFT+S"
+		command = "Rotate-Ninja-Tool"
+	elem 
 		name = "V"
 		command = "HotSlot4"
 	elem 
@@ -1639,13 +1642,12 @@ window "Main"
 		background-color = #1b1b1b
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
+		on-size = "GetScreenResolution"
 		titlebar = false
 		statusbar = false
 		can-resize = false
 		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
-		outer-size = 1294x734
-		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1682,27 +1684,15 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "Navigation"
 		is-vert = false
-	elem "label"
-		type = LABEL
-		pos = 1303,743
-		size = 1x1
-		anchor1 = 100,100
-		anchor2 = 100,100
-		background-color = none
-		is-visible = false
-		saved-params = ""
-		text = ""
 	elem "InputChild"
 		type = CHILD
 		pos = 0,469
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -1738,7 +1728,6 @@ window "Main"
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "Reconnect"
