@@ -884,13 +884,11 @@ client
 						spawn() src.mob.LevelStat("Ninjutsu", rand(1,1))
 
 				if(src.mob.equipped == "Weights")
-					//src.mob.move_delay = 1
 
 					if(prob(50))
 						spawn() src.mob.LevelStat("Agility", round(rand(15, 20) * trainingexp))
 
 				else
-					//src.mob.move_delay = max(0.5, 0.8-((src.mob.agility/150)*0.3))
 
 					if(prob(40))
 						spawn() src.mob.LevelStat("Agility", rand(1,2))

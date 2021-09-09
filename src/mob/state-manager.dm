@@ -81,8 +81,6 @@ proc
 			..()
 
 	punching
-		OnTick()
-			..()
 	
 	blocking
 		OnTick()

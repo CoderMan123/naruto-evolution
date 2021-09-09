@@ -552,6 +552,7 @@ mob
 					src.ResetBase()
 					src.RestoreOverlays()
 					src.client.UpdateInventoryPanel()
+					src.move_delay = max(0.5, 0.8-((src.agility/150)*0.3))
 
 				return 0
 

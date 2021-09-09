@@ -2,9 +2,15 @@ mob
 	verb
 		Basic_Attack()
 			set hidden=1
+			var/attack_speed
+			if(src.Specialist == SPECIALIZATION_TAIJUTSU)
+				attack_speed = src.attkspeed - 0.1
+			else
+				attack_speed = src.attkspeed + 0.05
+
 			if(CheckState(src, new/state/knocked_down)) return 0
 
-			if(src.canattack==0)
+			if(src.canattack==0 || CheckState(src, new/state/punching))
 
 				return
 			if(src.multisized==1)//multisizestuff
@@ -12,9 +18,8 @@ mob
 
 			var/mob/c_target=src.Target_Get(TARGET_MOB)
 			if(src.shielded==1)
-				if(src.Clan == "Sand"&&canattack)
-					canattack=0
-					spawn(15) canattack=1
+				if(src.Clan == "Sand" && canattack && !CheckState(src, new/state/punching))
+					AddState(src, new/state/punching, attack_speed)
 					var/obj/O = new/obj
 					O.loc = src.loc
 					O.icon = 'Sand Shield.dmi'
@@ -50,9 +55,9 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(4,11)*trainingexp))
 			if(src.likeaclone)
 				var/mob/Clones/SC=src.likeaclone
-				if(SC.canattack==1)
-					SC.canattack=0
+				if(SC.canattack==1 || !CheckState(SC, new/state/punching))
 					SC.attkspeed = (src.attkspeed * 0.5)
+					AddState(SC, new/state/punching, SC.attkspeed)
 					if(SC.icon_state<>"blank")
 						if(SC.Hand=="Left")
 							flick("punchl",SC)
@@ -115,10 +120,10 @@ mob
 								if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
 								if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 								T.Break(src)
-					spawn(src.attkspeed)
+
 						//src.move=1
-						if(SC)SC.canattack=1
-			if(src.canattack==1&&!src.likeaclone&&!dead&&!rest)
+
+			if(src.canattack==1 && !src.likeaclone && !dead && !rest && !CheckState(src, new/state/punching))
 				var/mob/c_target2=src.Target_Get(TARGET_MOB)
 				if(c_target2)src.dir = get_dir(src,c_target2)
 				else
@@ -135,7 +140,7 @@ mob
 						spawn(1)step(M,src.dir)
 					var/obj/A = new/obj/MiscEffects/Smoke(M.loc)
 					A.loc=M.loc
-				src.canattack=0
+				AddState(src, new/state/punching, attack_speed)
 				if(src.icon_state<>"blank")
 					if(src.byakugan==1)
 						var/PL = list()
@@ -556,7 +561,7 @@ mob
 								if(src.Hand=="Kick")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 								if(src.Hand=="Left")view(src,10) << sound('KickHit.ogg',0,0,0,100)
 								T.Break(src)
-				if(Specialist=="strength"||Specialist2=="strength")
+/*				if(Specialist=="strength"||Specialist2=="strength")
 					if(src.combo==3)
 						src.combo=0
 						spawn(src.attkspeed)if(src)src.canattack=1
@@ -564,4 +569,4 @@ mob
 						var/wait=src.attkspeed-(src.agility/50)
 						if(wait<=0)wait=1.75
 						spawn(wait)if(src)src.canattack=1
-				else spawn(src.attkspeed)if(src)src.canattack=1
+				else spawn(src.attkspeed)if(src)src.canattack=1*/
