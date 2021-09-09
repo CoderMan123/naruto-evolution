@@ -60,7 +60,6 @@ client
 				src.mob.verbs += typesof(/mob/programmer/verb)
 				src.mob.verbs += typesof(/mob/pixel_artist/verb)
 				src.mob.verbs += typesof(/mob/event/verb/)
-				src.mob.verbs += typesof(/mob/debug/verb/)
 				src.mob.verbs += typesof(/mob/MasterGM/verb)
 				src.mob.verbs += typesof(/mob/Admin/verb)
 				src.mob.verbs += typesof(/mob/Moderator/verb)
@@ -72,7 +71,6 @@ client
 				src.mob.verbs -= typesof(/mob/programmer/verb)
 				src.mob.verbs -= typesof(/mob/pixel_artist/verb)
 				src.mob.verbs -= typesof(/mob/event/verb/)
-				src.mob.verbs -= typesof(/mob/debug/verb/)
 				src.mob.verbs -= typesof(/mob/MasterGM/verb)
 				src.mob.verbs -= typesof(/mob/Admin/verb)
 				src.mob.verbs -= typesof(/mob/Moderator/verb)
@@ -110,6 +108,18 @@ mob
       
 			// UPDATE: This issue only happens when you add these verbs to src.client instead of src.mob.
 			// NOTE: Only add verbs to src.mob from now on.
+
+			Restore_Base()
+				set category = "Administrator"
+				var/mob/m = input("Who's base would you like to restore?", "Reset Icon") as null|anything in mobs_online
+				if(m)
+					for(var/obj/Inventory/Clothing/o in m.contents)
+						o.suffix = ""
+						
+					m.ClothingOverlays = list("Vest"=null,"Shirt"=null,"Pants"=null,"Shoes"=null,"Mask"=null,"Headband"=null,"Sword"=null,"Gloves"=null,"Accessories"=null,"Robes"=null)
+					m.ResetBase()
+					m.RestoreOverlays()
+					m.client.UpdateInventoryPanel()
 
 			Manage_Akatsuki()
 				set category = "Administrator"
@@ -1289,18 +1299,3 @@ mob
 				if(!zetsu_event_active)
 					ZetsuEventStart()
 				else usr << output("<b>There is already a Zetsu event active. Please wait until the current one has finished before starting another.</b>","Action.Output")
-
-mob
-	debug
-		verb
-			Restore_Base()
-				set category = "Debug"
-				var/mob/m = input("Who's base would you like to restore?", "Reset Icon") as null|anything in mobs_online
-				if(m)
-					for(var/obj/Inventory/Clothing/o in m.contents)
-						o.suffix = ""
-						
-					m.ClothingOverlays = list("Vest"=null,"Shirt"=null,"Pants"=null,"Shoes"=null,"Mask"=null,"Headband"=null,"Sword"=null,"Gloves"=null,"Accessories"=null,"Robes"=null)
-					m.ResetBase()
-					m.RestoreOverlays()
-					m.client.UpdateInventoryPanel()
