@@ -55,73 +55,74 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(4,11)*trainingexp))
 			if(src.likeaclone)
 				var/mob/Clones/SC=src.likeaclone
-				if(SC.canattack==1 || !CheckState(SC, new/state/punching))
-					SC.attkspeed = (src.attkspeed * 0.5)
-					AddState(SC, new/state/punching, SC.attkspeed)
-					if(SC.icon_state<>"blank")
-						if(SC.Hand=="Left")
-							flick("punchl",SC)
-							SC.Hand="Right"
-						else
-							if(SC.Hand=="Right")
-								flick("punchr",SC)
-								SC.Hand="Kick"
+				if(SC.canattack)
+					if(!CheckState(SC, new/state/punching))
+						SC.attkspeed = src.attkspeed
+						AddState(SC, new/state/punching, SC.attkspeed)
+						if(SC.icon_state<>"blank")
+							if(SC.Hand=="Left")
+								flick("punchl",SC)
+								SC.Hand="Right"
 							else
-								if(SC.Hand=="Kick")
-									flick("kick",SC)
-									SC.Hand="Left"
-					view(SC,10) << sound('Swing5.ogg',0,0,0,100)
-					spawn(2)
-						for(var/mob/C in orange(SC,1))
-							SC.dir = get_dir(SC,C)
-							for(c_target in get_step(SC,SC.dir))
-								if(c_target in get_step(SC,SC.dir))
-									if(c_target.dead==0&&!istype(c_target,/mob/npc/)&&c_target!=SC.Owner || c_target.dead==0&&istype(c_target,/mob/npc/combat)&&c_target!=SC.Owner)
-										if(c_target.fightlayer==SC.fightlayer)
-											if(c_target.client)spawn()c_target.ScreenShake(1)
-											if(c_target.dodge==0)
-												var/undefendedhit=(60-round(1*((150-src.strength)/3)))-(c_target.defence/4)+rand(0,10)
-												if(undefendedhit<0)undefendedhit=1
-												c_target.DealDamage(undefendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-												if(src.Gates>0) src.DealDamage(((src.strength / 150)*8) * src.Gates, src, "maroon")
-												if(SC.loc.loc:Safe!=1) LevelStat("Strength",10*punchstatexp)
-												if(c_target)
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-												if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
-												if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
-											else
-												if(SC.agility>=c_target.agility)
-													var/defendedhit=SC.strength-c_target.defence
-													if(defendedhit<0)defendedhit=1
-
-													src.Levelup()
+								if(SC.Hand=="Right")
+									flick("punchr",SC)
+									SC.Hand="Kick"
+								else
+									if(SC.Hand=="Kick")
+										flick("kick",SC)
+										SC.Hand="Left"
+						view(SC,10) << sound('Swing5.ogg',0,0,0,100)
+						spawn(2)
+							for(var/mob/C in orange(SC,1))
+								SC.dir = get_dir(SC,C)
+								for(c_target in get_step(SC,SC.dir))
+									if(c_target in get_step(SC,SC.dir))
+										if(c_target.dead==0&&!istype(c_target,/mob/npc/)&&c_target!=SC.Owner || c_target.dead==0&&istype(c_target,/mob/npc/combat)&&c_target!=SC.Owner)
+											if(c_target.fightlayer==SC.fightlayer)
+												if(c_target.client)spawn()c_target.ScreenShake(1)
+												if(c_target.dodge==0)
+													var/undefendedhit=(60-round(1*((150-src.strength)/3)))-(c_target.defence/4)+rand(0,10)
+													if(undefendedhit<0)undefendedhit=1
+													c_target.DealDamage(undefendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+													if(src.Gates>0) src.DealDamage(((src.strength / 150)*8) * src.Gates, src, "maroon")
+													if(SC.loc.loc:Safe!=1) LevelStat("Strength",10*punchstatexp)
 													if(c_target)
 														if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-													if(defence<SC.strength/3)
-														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
-														Drag.dir=c_target.dir
-														step(c_target,SC.dir)
-														c_target.dir = get_dir(c_target,SC)
-														step_to(SC,c_target,1)
-													c_target.DealDamage(defendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-													if(src.Gates>0) src.DealDamage(((src.strength / 150)*8) * src.Gates, src, "maroon")
-													flick("defendhit",c_target)
-													view(SC,10) << sound('Counter_Success.ogg',0,0,0,100)
+													if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
+													if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
 												else
-													flick("dodge",c_target)
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(1,2))
-							break
-						for(var/obj/Training/T in get_step(SC,SC.dir))//This is all punching logs.
-							if(T.health>=1)
-								var/undefendedhit=round(SC.strength)//-T.defence/4)
-								T.health-=undefendedhit
-								if(T) if(T.Good) LevelStat("Strength",10*punchstatexp)
-								else LevelStat("Strength",10*punchstatexp)
-								if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
-								if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
-								T.Break(src)
+													if(SC.agility>=c_target.agility)
+														var/defendedhit=SC.strength-c_target.defence
+														if(defendedhit<0)defendedhit=1
 
-						//src.move=1
+														src.Levelup()
+														if(c_target)
+															if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
+														if(defence<SC.strength/3)
+															var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
+															Drag.dir=c_target.dir
+															step(c_target,SC.dir)
+															c_target.dir = get_dir(c_target,SC)
+															step_to(SC,c_target,1)
+														c_target.DealDamage(defendedhit+ (((src.strength * 0.1)* src.mystical_palms) + ((src.strength * 0.025)* src.bonesword) + ((src.strength * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+														if(src.Gates>0) src.DealDamage(((src.strength / 150)*8) * src.Gates, src, "maroon")
+														flick("defendhit",c_target)
+														view(SC,10) << sound('Counter_Success.ogg',0,0,0,100)
+													else
+														flick("dodge",c_target)
+														if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(1,2))
+								break
+							for(var/obj/Training/T in get_step(SC,SC.dir))//This is all punching logs.
+								if(T.health>=1)
+									var/undefendedhit=round(SC.strength)//-T.defence/4)
+									T.health-=undefendedhit
+									if(T) if(T.Good) LevelStat("Strength",10*punchstatexp)
+									else LevelStat("Strength",10*punchstatexp)
+									if(SC.Hand=="Left")view(SC,10) << sound('LPunchHIt.ogg',0,0,0,100)
+									if(SC.Hand=="Right")view(SC,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+									T.Break(src)
+
+							//src.move=1
 
 			if(src.canattack==1 && !src.likeaclone && !dead && !rest && !CheckState(src, new/state/punching))
 				var/mob/c_target2=src.Target_Get(TARGET_MOB)
