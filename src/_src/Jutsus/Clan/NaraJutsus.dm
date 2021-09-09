@@ -1,6 +1,7 @@
 mob
 	proc
 		Shadow_Stab()
+			if(CheckState(src, new/state/nara_attack_delay)) return
 			for(var/obj/Jutsus/Shadow_Stab/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
@@ -9,6 +10,7 @@ mob
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					AddState(src, new/state/nara_attack_delay, 5)
 					flick("jutsuse",src)
 					view(src)<<sound('dash.wav',0,0)
 					var/mob/M=NaraTarget
@@ -24,6 +26,7 @@ mob
 					spawn(5)if(O)del(O)
 
 		Shadow_Choke()
+			if(CheckState(src, new/state/nara_attack_delay)) return
 			for(var/obj/Jutsus/Shadow_Choke/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
@@ -32,6 +35,7 @@ mob
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					AddState(src, new/state/nara_attack_delay, -1)
 					var/Timer=J.level
 					flick("jutsuse",src)
 					view(src)<<sound('dash.wav',0,0)
@@ -46,9 +50,10 @@ mob
 					M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 					while(Timer&&NaraTarget&&M)
 						Timer--
-						sleep(4)
+						sleep(5)
 						O.icon_state = "choke"
 					del(O)
+					RemoveState(src, new/state/nara_attack_delay, STATE_REMOVE_ALL)
 
 		Shadow_Extension()
 			for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
@@ -66,6 +71,7 @@ mob
 						CreateTrailNara(c_target,J.level*4)
 
 		Shadow_Explosion()
+			if(CheckState(src, new/state/nara_attack_delay)) return
 			for(var/obj/Jutsus/Shadow_Explosion/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
@@ -74,6 +80,7 @@ mob
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/4
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/4
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					AddState(src, new/state/nara_attack_delay, -1)
 					var/Timer=J.level
 					flick("jutsuse",src)
 					view(src)<<sound('dash.wav',0,0)
@@ -91,6 +98,7 @@ mob
 						O.icon_state = "explode"
 						M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 					del(O)
+					RemoveState(src, new/state/nara_attack_delay, STATE_REMOVE_ALL)
 
 		Shadow_Field()
 			for(var/obj/Jutsus/Shadow_Field/J in src.jutsus)
