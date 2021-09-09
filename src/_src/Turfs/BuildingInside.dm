@@ -370,9 +370,13 @@ turf
 			T32	//Cave(Rock)
 			//Anbu Root
 			T33	//Entrance
-				Entered(mob/M)
-					if(M.village != "Anbu Root")
-						return
+				Entered(atom/a)
+					if(ismob(a)) 
+						var/mob/m = a
+						if(m.village != "Anbu Root")
+							return
+						else
+							..()
 					else
 						..()
 			T34	//Secretary
