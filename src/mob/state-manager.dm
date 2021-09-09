@@ -17,13 +17,13 @@ proc
 			if(STATE_REMOVE_ANY)
 				for(var/state/state in m.state_manager)
 					if(state.type == s.type)
-						m.state_manager.Remove(s)
+						m.state_manager.Remove(state)
 						break
 
 			if(STATE_REMOVE_ALL)
 				for(var/state/state in m.state_manager)
 					if(state.type == s.type)
-						m.state_manager.Remove(s)
+						m.state_manager.Remove(state)
 
 	CheckState(mob/m, var/state/s)
 		if(locate(s.type) in m.state_manager) return 1
@@ -101,6 +101,8 @@ proc
 				m.loc = victims_previous_loc
 	
 	in_combat
+
+	nara_attack_delay
 
 
 #ifdef STATE_MANAGER_DEBUG
