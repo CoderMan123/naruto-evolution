@@ -142,6 +142,8 @@ mob
 					var/obj/A = new/obj/MiscEffects/Smoke(M.loc)
 					A.loc=M.loc
 				AddState(src, new/state/punching, attack_speed)
+				if(istype(c_target, /mob/Rotating_Dummy))
+					AddState(c_target, new/state/dummy_was_hit, -1)
 				if(src.icon_state<>"blank")
 					if(src.byakugan==1)
 						var/PL = list()
@@ -399,6 +401,7 @@ mob
 												flick("dodge",c_target)
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(1,2))
 												c_target.Levelup()
+
 						for(var/obj/Training/T in get_step(src,src.dir))
 							if(T.health > 0)//also logs
 								var/undefendedhit=round(src.strength)//-T.defence/4)

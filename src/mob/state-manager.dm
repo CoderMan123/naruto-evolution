@@ -1,5 +1,6 @@
 proc
 	AddState(mob/m, var/state/s, var/duration = 0, mob/owner)
+		// var/duration = -1 for unlimited duration
 		s.mob = m
 		if(owner) s.owner = owner
 		s.duration = duration
@@ -114,6 +115,8 @@ proc
 				src.mob.DealDamage(src.mob.maxhealth / 200, src.owner, "NinBlue")
 				delay = world.timeofday + 10
 			..()
+	
+	dummy_was_hit
 
 #ifdef STATE_MANAGER_DEBUG
 mob

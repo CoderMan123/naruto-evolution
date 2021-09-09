@@ -56,14 +56,16 @@ mob
 
 						src.agility++
 						src.strength++
+				RemoveState(src, new/state/dummy_was_hit, STATE_REMOVE_ALL)
 
 		proc
 			DummyAI()
 				src.dummylocation = src.loc
 				while(src)
 					icon_state="idle"
-					if(prob(30+((src.agility / 150)*70)) && src.health!=src.maxhealth)
-						src.SpinAttack()
+					if(prob(30+((src.agility / 150)*70)) && src.health != src.maxhealth)
+						if(CheckState(src, new/state/dummy_was_hit))
+							src.SpinAttack()
 					src.health=src.maxhealth
 					sleep(10-(round(src.agility / 150)*3))
 
