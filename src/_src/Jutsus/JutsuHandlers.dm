@@ -66,7 +66,8 @@ mob
 						damage = round(damage*0.3)
 					src.health -= damage
 					AddState(src, new/state/in_combat, 100)
-					AddState(Owner, new/state/in_combat, 100)
+					if(Owner)
+						AddState(Owner, new/state/in_combat, 100)
 					if(src.health < 0)
 						src.health = 0
 					src.sleephits++
