@@ -44,7 +44,7 @@ mob
 									if(T.density)moves=10
 									else
 										for(var/mob/M in O.loc)
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											if(M) M.icon_state = "push"
 											if(M) step(M,O.dir)
 											if(M) M.dir = get_dir(M,O)
@@ -348,7 +348,7 @@ mob
 										for(var/obj/Projectiles/Effects/MasterFireNoSound/Fire in O.loc)del(Fire)
 										for(var/obj/Projectiles/Effects/MasterFire/Fire in O.loc)del(Fire)
 										for(var/mob/M in O.loc)
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											if(M) M.icon_state = "push"
 											if(M) step(M,O.dir)
 											if(M) M.dir = get_dir(M,O)

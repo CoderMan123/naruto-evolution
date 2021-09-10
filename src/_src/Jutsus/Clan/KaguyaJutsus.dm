@@ -162,7 +162,7 @@ mob
 								step(A,src.dir)
 								spawn(3)
 									for(var/mob/M in view(A,0))
-										if(M.dead || M.swimming) continue
+										if(M.dead) continue
 										M.injutsu=1
 										var/random=rand(1,4)
 										if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -179,7 +179,7 @@ mob
 									A2.loc = get_step(A,src.dir)
 									spawn(3)
 										for(var/mob/M in view(A2,0))
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											M.injutsu=1
 											var/random=rand(1,4)
 											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -201,7 +201,7 @@ mob
 									A3.level=J.level
 									spawn(3)
 										for(var/mob/M in view(A2,0))
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											M.injutsu=1
 											var/random=rand(1,4)
 											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -212,7 +212,7 @@ mob
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 									spawn(3)
 										for(var/mob/M in view(A3,0))
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											M.injutsu=1
 											var/random=rand(1,4)
 											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -239,7 +239,7 @@ mob
 									A4.level=J.level
 									spawn(3)
 										for(var/mob/M in view(A2,0))
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											M.injutsu=1
 											var/random=rand(1,4)
 											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -250,7 +250,7 @@ mob
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 									spawn(3)
 										for(var/mob/M in view(A3,0))
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											M.injutsu=1
 											var/random=rand(1,4)
 											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -261,7 +261,7 @@ mob
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 									spawn(3)
 										for(var/mob/M in view(A4,0))
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											M.injutsu=1
 											var/random=rand(1,4)
 											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -386,7 +386,7 @@ mob
 													if(I)del(I)
 							if(J.level==2)
 								for(var/mob/M in oview(5,src))
-									if(M.dead || M.swimming) continue
+									if(M.dead) continue
 									if(M.dead==0)
 										for(var/obj/Hits/BoneTips/N in M.SCaught)
 											if(N)
@@ -402,7 +402,7 @@ mob
 													if(I)del(I)
 							if(J.level==3)
 								for(var/mob/M in oview(7,src))
-									if(M.dead || M.swimming) continue
+									if(M.dead) continue
 									if(M.dead==0)
 										for(var/obj/Hits/BoneTips/N in M.SCaught)
 											if(N)
@@ -418,7 +418,7 @@ mob
 													if(I)del(I)
 							if(J.level==4)
 								for(var/mob/M in oview(10,src))
-									if(M.dead || M.swimming) continue
+									if(M.dead) continue
 									if(M.dead==0)
 										for(var/obj/Hits/BoneTips/N in M.SCaught)
 											if(N)
@@ -475,7 +475,7 @@ mob
 								if(B)
 									spawn(3)
 										for(var/mob/M in view(B,0))
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											M.injutsu=1
 											var/random=rand(1,4)
 											if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)

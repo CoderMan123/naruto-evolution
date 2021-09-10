@@ -39,7 +39,7 @@ mob
 					sleep(3)
 					for(var/mob/M in orange(2,src))
 						if(M == src) return
-						if(M.dead || M.swimming)return
+						if(M.dead)return
 						M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 						if(M.henge==4||M.henge==5)M.HengeUndo()
 						src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
@@ -225,7 +225,7 @@ mob
 								spawn(10)
 									step(O,O.dir)
 									for(var/mob/M in O.loc)
-										if(M.dead || M.swimming) continue
+										if(M.dead) continue
 										M.injutsu=1
 										var/random=rand(1,4)
 										if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -238,7 +238,7 @@ mob
 									spawn(1)
 										step(O,O.dir)
 										for(var/mob/M in O.loc)
-											if(M.dead || M.swimming) continue
+											if(M.dead) continue
 											M.injutsu=1
 											var/random=rand(1,4)
 											if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -251,7 +251,7 @@ mob
 										spawn(1)
 											step(O,O.dir)
 											for(var/mob/M in O.loc)
-												if(M.dead || M.swimming) continue
+												if(M.dead) continue
 												M.injutsu=1
 												var/random=rand(1,4)
 												if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)

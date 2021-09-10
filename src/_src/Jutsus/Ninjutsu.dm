@@ -386,7 +386,7 @@ mob/Untargettable
 			flick("Attack",src)
 			src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 			for(var/mob/M in orange(5))
-				if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) continue
+				if(M.dead || M.key==src.name || istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) continue
 				M.injutsu=1
 
 				src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
@@ -442,7 +442,7 @@ mob/Untargettable
 			flick("tail swing",src)
 			if(!Ownzeez) return
 			for(var/mob/M in orange(4))
-				if(M.dead || M.swimming || M.key==src.name) continue
+				if(M.dead || M.key==src.name) continue
 				M.injutsu=1
 				var/random=rand(1,4)
 				if(random==1) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
@@ -603,7 +603,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								M.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
@@ -714,7 +714,7 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M != src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.loc = M.loc
 										if(M in has_damaged) return
@@ -798,7 +798,7 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								M.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
@@ -832,7 +832,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -860,7 +860,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M)
 								src.density=0
 								M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
@@ -893,7 +893,7 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
@@ -926,7 +926,7 @@ obj
 							if(M)
 								if(M != src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
@@ -965,7 +965,7 @@ obj
 							var/mob/M=O
 							if(M)
 								var/mob/Owner=src.Owner
-								if(M.dead || M.swimming || M.key == src.name) return
+								if(M.dead || M.key == src.name) return
 								if(M.fightlayer==src.fightlayer)
 									M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
@@ -995,7 +995,7 @@ obj
 							var/mob/M=O
 							if(M)
 								var/mob/Owner=src.Owner
-								if(M.dead || M.swimming || M.key == src.name) return
+								if(M.dead || M.key == src.name) return
 								if(M.fightlayer==src.fightlayer)
 									M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
@@ -1025,7 +1025,7 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
@@ -1062,7 +1062,7 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
@@ -1095,7 +1095,7 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
@@ -1124,7 +1124,7 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
@@ -1193,7 +1193,7 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.layer=MOB_LAYER+1
 										if(M)
@@ -1224,7 +1224,7 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.layer=MOB_LAYER+1
 										if(M)
@@ -1257,7 +1257,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.PlayAudio('SharpHit_Short2.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
@@ -1283,7 +1283,7 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								M.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
@@ -1310,7 +1310,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								M.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
@@ -1336,7 +1336,7 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								M.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
@@ -1365,7 +1365,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
@@ -1433,7 +1433,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name || M==Owner) return
+							if(M.dead || M.key == src.name || M==Owner) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
@@ -1487,7 +1487,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming) return
+							if(M.dead) return
 							if(M.fightlayer==src.fightlayer)
 								src.icon_state="heady2"
 								src.pixel_x = -16
@@ -1538,7 +1538,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming) return
+							if(M.dead) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
@@ -2077,7 +2077,7 @@ obj
 					if(istype(O,/mob))
 						var/mob/M=O
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.density=0
 							src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
@@ -2215,7 +2215,7 @@ obj
 					if(istype(O,/mob))
 						var/mob/M=O
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming || !M.key) del(src)
+						if(M.dead || !M.key) del(src)
 						if(M.fightlayer==src.fightlayer)
 							src.density=0
 							src.PlayAudio('Beam.ogg', output = AUDIO_HEARERS)
@@ -2293,7 +2293,7 @@ obj
 					if(istype(O,/mob))
 						var/mob/M=O
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming || !M.key) del(src)
+						if(M.dead || !M.key) del(src)
 						if(M.fightlayer==src.fightlayer)
 							src.density=0
 							var/obj/A = new/obj/MiscEffects/MeteorDust(src.loc)
@@ -2743,7 +2743,7 @@ obj
 						if(M)
 							if(M <> src.Owner)
 								var/mob/Owner=src.Owner
-								if(M.dead || M.swimming || M.key == src.name) return
+								if(M.dead || M.key == src.name) return
 								if(M.fightlayer==src.fightlayer)
 									src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
@@ -2793,7 +2793,7 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 									//	src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
@@ -2823,7 +2823,7 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 									//	src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1

@@ -315,7 +315,7 @@ mob
 						//var/mob/M
 						for(var/mob/M in orange(2,src))//maybe?
 							if(M == src) return
-							if(M.dead || M.swimming)return
+							if(M.dead)return
 
 							M.DealDamage(round((src.ninjutsu / 150)*2*J.damage)/9,src,"TaiOrange")
 							if(M.henge==4||M.henge==5)M.HengeUndo()

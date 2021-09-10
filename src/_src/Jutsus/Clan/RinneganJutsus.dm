@@ -193,7 +193,7 @@ mob
 					for(var/atom/S in orange(src,A.level+4))
 						if(istype(S,/mob/))
 							var/mob/M=S
-							if(M.dead || M.swimming) continue
+							if(M.dead) continue
 							M.icon_state="push"
 							M.injutsu=1
 							M.DealDamage(Jdamage,src,"NinBlue")

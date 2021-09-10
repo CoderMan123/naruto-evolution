@@ -704,7 +704,7 @@ obj
 					var/mob/M=O
 					if(M)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)
@@ -760,7 +760,7 @@ obj
 					var/mob/M=O
 					if(M)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)
@@ -785,7 +785,7 @@ obj
 					if(M)
 						src.PlayAudio('GetsugaTenshou.wav', output = AUDIO_HEARERS)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)
@@ -821,7 +821,7 @@ obj
 					var/mob/M=O
 					if(M)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)
@@ -838,7 +838,7 @@ obj
 					var/mob/M=O
 					if(M)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)

@@ -322,7 +322,7 @@ mob
 							step_away(Ok,src)
 							walk(Ok,Ok.dir)
 						for(var/mob/M in orange(2))
-							if(M.dead || M.swimming) continue
+							if(M.dead) continue
 							if(!istype(M,/mob/npc) || !istype(M,/mob/npc/combat))
 								M.icon_state="push"
 								M.injutsu=1
