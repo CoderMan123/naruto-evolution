@@ -1,3 +1,5 @@
+#define STATE_MANAGER_DEBUG
+
 proc
 	AddState(mob/m, var/state/s, var/duration = 0, mob/owner)
 		// var/duration = -1 for unlimited duration
@@ -124,17 +126,24 @@ proc
 #ifdef STATE_MANAGER_DEBUG
 mob
 	verb
+		State_Manager_Stress_Test()
+			set category = "Debug"
+			var/count = input("How many states would you like to add?") as null|num
+			if(count)
+				for(var/i = 0, i < count, i++)
+					AddState(src, new/state/knocked_down, 10)
+
 		Example()
+			set category = "Debug"
+			AddState(src, new/state/burning, 100)
+			RemoveState(src, new/state/burning, STATE_REMOVE_ALL)
 
-			AddState(src, new/state/burn, 100)
-			RemoveState(src, new/state/burn, STATE_REMOVE_ALL)
-
-			AddState(src, new/state/stun, 20)
-			if(CheckState(src, new/state/stun))
+			AddState(src, new/state/stunned, 20)
+			if(CheckState(src, new/state/stunned))
 				src << "I'm stunned!"
 			
-			AddState(src, new/state/knock_down, 600)
-			RemoveState(src, new/state/knock_down, STATE_REMOVE_ANY)
+			AddState(src, new/state/knocked_down, 600)
+			RemoveState(src, new/state/knocked_down, STATE_REMOVE_ANY)
 
 			var/state/knocked_back/e = new()
 			AddState(src, e, 50)
