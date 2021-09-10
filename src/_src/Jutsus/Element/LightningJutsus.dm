@@ -11,7 +11,7 @@ mob
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					icon_state="jutsuuse"
-					view()<<sound('Beam.ogg')
+					src.PlayAudio('Beam.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0
@@ -66,7 +66,7 @@ mob
 						M.overlays-=i
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
-							view()<<sound('Thunder.ogg')
+							c_target.PlayAudio('Thunder.ogg', output = AUDIO_HEARERS)
 							c_target.injutsu=1
 							c_target.move=0
 							if(J.level==4)
@@ -113,7 +113,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))//XPGAIN
 					flick("2fist",src)
-					view(src)<<sound('046.wav',0,0)
+					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
@@ -315,7 +315,7 @@ mob
 						//var/mob/M
 						for(var/mob/M in orange(2,src))//maybe?
 							if(M == src) return
-							if(M.dead || M.swimming)return
+							if(M.dead)return
 
 							M.DealDamage(round((src.ninjutsu / 150)*2*J.damage)/9,src,"TaiOrange")
 							if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -330,13 +330,13 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
-					view(src)<<sound('wirlwind.wav',0,0)//CHANGE
+					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)//CHANGE
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
-					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/num=J.level*2
 					if(c_target)

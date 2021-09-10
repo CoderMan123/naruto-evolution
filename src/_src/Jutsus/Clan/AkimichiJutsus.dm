@@ -71,10 +71,10 @@ mob
 						for(i=0,i<100,i++)
 							lastloc = src.loc
 							step(src,src.dir)
-							sleep(5)
+							sleep(0.5)
 							for(var/mob/M in orange(1,src))
 								if(M == src) continue
-								if(M.dead || M.swimming) continue
+								if(M.dead) continue
 								if(src.loc == lastloc) continue
 								M.DealDamage(round((src.ninjutsu / 300)+(src.strength / 300)*2*J.damage)/12,src,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()

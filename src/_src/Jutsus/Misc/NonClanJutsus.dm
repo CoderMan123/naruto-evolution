@@ -127,7 +127,7 @@ mob
 						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.6
 						if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.6
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-						view(src)<<sound('046.wav',0,0)
+						src.PlayAudio('046.wav', output = AUDIO_HEARERS)
 						flick("jutsu",src)
 						src.move=0
 						var/obj/A = new/obj/MiscEffects/Chakra(usr.loc)
@@ -191,7 +191,7 @@ mob
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsu",src)
 						for(var/mob/M in oview(src,13))M.Target_Remove()
-						view(src)<<sound('wirlwind.wav',0,0)
+						src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 						var/obj/O = new/obj
 						O.loc = src.loc
 						var/BUNLIST = list()
@@ -254,7 +254,7 @@ mob
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsu",src)
 						for(var/mob/M in oview(src,13))M.Target_Remove()
-						view(src)<<sound('flashbang_explode1.wav',0,0)
+						src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 						var/timer = J.level
 						while(timer)
 							sleep(1)
@@ -274,7 +274,7 @@ mob
 				for(var/obj/Jutsus/MSClone/J in src.jutsus)
 					if(src.PreJutsu(J))
 						src.CloneHandler()
-						view(src)<<sound('flashbang_explode1.wav',0,0)
+						src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 						if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						for(var/mob/M in oview(src,13))
@@ -318,7 +318,7 @@ mob
 							if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 							spawn() src.UpdateHMB()
 							flick("jutsu",src)
-							view(src)<<sound('flashbang_explode1.wav',0,0)
+							src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 							var/mob/Clones/Shadow/A = new/mob/Clones/Shadow(src.loc)
 							A.loc=src.loc
 							A.Owner=src
@@ -384,7 +384,7 @@ mob
 						if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.8
 						//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 						flick("jutsuse",src)
-						view(src)<<sound('wind_leaves.ogg',0,0)
+						src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
 						var/Time=J.level
 						var/TreeNearby
@@ -417,7 +417,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					var/TimeAsleep
@@ -443,7 +443,7 @@ mob
 					var/reqhits=rand(1,2)
 					var/jutsuactive=1
 					flick("jutsuse",src)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					spawn(2)
@@ -552,7 +552,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					view(src)<<sound('flashbang_explode1.wav',0,0)
+					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 					var/obj/A = new/obj/MiscEffects/Smoke(src.loc)
 					A.IsJutsuEffect=src
 					A.loc=src.loc
@@ -625,7 +625,7 @@ mob
 					if(copy=="Climb") return
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					src.move=0
@@ -883,8 +883,8 @@ mob
 						src.injutsu=1
 						src.firing=1
 						flick("kick",src)
-						if(J.level==3)view(src) << sound('wirlwind.wav',0,0,0,100)
-						else view(src) << sound('Spin.ogg',0,0,0,100)
+						if(J.level==3) src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
+						else src.PlayAudio('Spin.ogg', output = AUDIO_HEARERS)
 						for(var/mob/c_target in orange(src,J.level))
 							if(c_target in orange(src,J.level))
 								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
@@ -894,7 +894,7 @@ mob
 											if(undefendedhit<0)undefendedhit=1
 											c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 											if(c_target.loc.loc:Safe!=1)c_target.LevelStat("Defence",rand(3,6))
-											view(src,10) << sound('KickHit.ogg',0,0,0,100)
+											src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 											c_target.icon_state="push"
 											c_target.injutsu=1
 											c_target.canattack=0
@@ -923,7 +923,7 @@ mob
 													step_to(src,c_target,1)
 												c_target.DealDamage(defendedhit,src,"TaiOrange",0,0,1)
 												flick("defendhit",c_target)
-												view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 											else
 												flick("dodge",c_target)
 												if(c_target.loc.loc:Safe!=1)c_target.LevelStat("Agility",rand(5,10))
@@ -935,7 +935,7 @@ mob
 								else LevelStat("Strength",rand(0.2,1))
 								if(T) if(T.Good) src.LevelStat("strength",1)
 								else src.LevelStat("strength",0.2)
-								view(src,10) << sound('KickHit.ogg',0,0,0,100)
+								src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 								T.Break(src)*/
 						src.JutsuCoolSlot(J)
 						spawn(5)if(src)src.firing=0

@@ -23,7 +23,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=1.2*((jutsudamage*J.Sprice)/2.5)
@@ -87,7 +87,7 @@ mob
 					src.firing=1
 					sleep(5)
 					flick("2fist",src)
-					view()<<sound('man_fs_r_mt_wat.ogg')
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					if(c_target)src.dir=get_dir(src,c_target)
 					var/obj/Projectiles/Effects/JinraiBack/Aa=new(get_step(src,src.dir))
 					Aa.icon = 'Bubble Trouble.dmi'
@@ -122,7 +122,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=1.1*((jutsudamage*J.Sprice)/2.5)

@@ -83,7 +83,7 @@ mob
 							src.rabbit ++
 						if("ox")
 							src.ox ++
-					view(usr)<<sound('switsh.wav',0,0)
+					src.PlayAudio('switsh.wav', output = AUDIO_HEARERS)
 					flick("jutsu",usr)
 					for(var/mob/Clones/C in src.Clones)
 						flick("jutsu",C)

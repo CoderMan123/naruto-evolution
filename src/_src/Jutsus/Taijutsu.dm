@@ -100,7 +100,7 @@ mob
 							if(prob(35))step(A,src.dir)
 							else ..()
 						flick("punchl",src)
-						view(src) << sound('Skill_BigRoketFire.wav',0,0,0,50)
+						src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
 						sleep(3.5-((src.agility/150)*3))
 						var/obj/B = new/obj/MiscEffects/Morning_Peacock(src.loc)
 						src.DealDamage((src.maxhealth * 0.001) * src.Gates, src, "maroon")
@@ -140,7 +140,7 @@ mob
 							if(prob(35))step(B,src.dir)
 							else ..()
 						flick("punchr",src)
-						view(src) << sound('Skill_BigRoketFire.wav',0,0,0,50)
+						src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
 						PTimes--
 						sleep(3.5-((src.agility/150)*3))
 						continue
@@ -213,7 +213,7 @@ obj
 				flick("start",src)
 				spawn(200)
 					flick("start",src)
-					view(src)<<sound('charge.wav',0,0)
+					src.PlayAudio('charge.wav', output = AUDIO_HEARERS)
 					spawn(100)
 						flick("over",src)
 						spawn(7)if(src)del(src)

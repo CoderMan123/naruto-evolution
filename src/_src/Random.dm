@@ -16,27 +16,6 @@ mob/verb/Countdown()
 	sleep(20)
 	usr.counting=0
 
-/*mob
-	verb
-		HerosComeback()
-			set hidden=1
-			src<<sound(null)
-			src<<sound('preview.ogg')
-		BlueBird()
-			set hidden=1
-			src<<sound(null)
-			src<<sound('BlueBird.ogg')
-		ShaLaLa()
-			set hidden=1
-			src<<sound(null)
-			src<<sound('ShaLaLa.ogg')
-		Lovers()
-			set hidden=1
-			src<<sound(null)
-			src<<sound('Lovers.ogg')
-		MusicStop()
-			set hidden=1
-			src<<sound(null)*/
 turf/signleaf
 	icon='Signs.dmi'
 	icon_state="Leaf"

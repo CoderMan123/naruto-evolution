@@ -101,3 +101,7 @@
 #define STATE_REMOVE_REF 1
 #define STATE_REMOVE_ANY 2
 #define STATE_REMOVE_ALL 3
+
+// Game Audio Manager //
+#define AUDIO_SELF 0
+#define AUDIO_HEARERS 1

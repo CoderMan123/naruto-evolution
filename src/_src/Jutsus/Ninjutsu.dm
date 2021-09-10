@@ -90,7 +90,7 @@ obj
 		layer = MOB_LAYER+10
 		src.icon = 'Epic Explosion.dmi'
 		pixel_x=-175
-		orange(10,src) << sound('Exp_Dirt_01.wav')
+		src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 		for(var/mob/M2 in orange(5,src))
 		//	if(M2 == M)
 		//		continue
@@ -324,7 +324,7 @@ mob/Karasu
 		if(!ismob(c_target)) return
 		if(src.canattack==1)
 			src.canattack=0
-			view(src,10) << sound('Swing5.ogg',0,0,0,100)
+			src.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
 			spawn(2)
 				src.dir = get_dir(src,c_target)
 				if(c_target.dead==0&&!istype(c_target,/mob/npc/)&&c_target!=src.Owner || c_target.dead==0&&istype(c_target,/mob/npc/combat)&&c_target!=src.Owner )
@@ -384,12 +384,12 @@ mob/Untargettable
 		proc/tailswing()
 			src.icon_state = "Idle"
 			flick("Attack",src)
-			view(src)<<sound('wirlwind.wav',0,0,volume=100)
+			src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 			for(var/mob/M in orange(5))
-				if(M.dead || M.swimming || M.key==src.name || istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) continue
+				if(M.dead || M.key==src.name || istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) continue
 				M.injutsu=1
 
-				view(src)<<sound('Skill_BigRoketFire.wav',0,0,volume=100)
+				src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
 				M.DealDamage(src.strength,src.Ownzeez,"TaiOrange")
 				M.Bleed(M)
 				if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -442,13 +442,13 @@ mob/Untargettable
 			flick("tail swing",src)
 			if(!Ownzeez) return
 			for(var/mob/M in orange(4))
-				if(M.dead || M.swimming || M.key==src.name) continue
+				if(M.dead || M.key==src.name) continue
 				M.injutsu=1
 				var/random=rand(1,4)
-				if(random==1)view(src)<<sound('KickHit.ogg',0,0,volume=100)
-				if(random==2)view(src)<<sound('KickHit.ogg',0,0,volume=100)
-				if(random==3)view(src)<<sound('KickHit.ogg',0,0,volume=100)
-				if(random==4)view(src)<<sound('KickHit.ogg',0,0,volume=100)
+				if(random==1) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
+				if(random==2) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
+				if(random==3) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
+				if(random==4) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 				M.DealDamage(jutsudamage+round((src.Ownzeez.ninjutsu / 150)*2*jutsudamage)*2,src.Ownzeez,"TaiOrange")
 				if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(10,15))
 				if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -583,7 +583,7 @@ obj
 					spawn(20)
 						var/mob/Owner=src.Owner
 						src.density=0
-						view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+						Owner.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 						src.layer=MOB_LAYER+1
 						walk(src,0)
 						src.icon = 'SmallExplode.dmi'
@@ -603,10 +603,10 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
-								view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+								M.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -655,7 +655,7 @@ obj
 								if(M <> src.Owner)
 									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										M.DealDamage(src.damage,src.Owner,"NinBlue")
 										M.Bleed()
 										victim = M
@@ -714,11 +714,11 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M != src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.loc = M.loc
 										if(M in has_damaged) return
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										M.DealDamage(src.damage,src.Owner,"NinBlue")
 										M.Bleed()
@@ -746,6 +746,8 @@ obj
 //				var/traveltime=src.level*(30/4)
 				var/hits=0
 				var/mob/target
+				var/has_damaged[0]
+				var/has_damaged2[0]
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
@@ -755,11 +757,14 @@ obj
 								if(M <> src.Owner)
 									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										src.loc = M.loc
-										M.DealDamage(src.damage,src.Owner,"NinBlue")
-										M.Bleed()
+										if(!M in has_damaged2)
+											M.DealDamage(src.damage,src.Owner,"NinBlue")
+											M.Bleed()
+										if(M in has_damaged) has_damaged2 += M
+										else has_damaged += M
 										if(M.henge==4||M.henge==5)M.HengeUndo()
 										if(src.target==M) hits++
 								else if(src) del(src)
@@ -780,7 +785,7 @@ obj
 					spawn(20)
 						var/mob/Owner=src.Owner
 						src.density=0
-						view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+						src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 						src.layer=MOB_LAYER+1
 						walk(src,0)
 						src.icon = 'SmallExplode.dmi'
@@ -798,10 +803,10 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
-								view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+								M.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -832,10 +837,10 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
-								view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+								M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -860,10 +865,10 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M)
 								src.density=0
-								view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+								M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -893,9 +898,9 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
@@ -926,9 +931,9 @@ obj
 							if(M)
 								if(M != src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
@@ -965,9 +970,9 @@ obj
 							var/mob/M=O
 							if(M)
 								var/mob/Owner=src.Owner
-								if(M.dead || M.swimming || M.key == src.name) return
+								if(M.dead || M.key == src.name) return
 								if(M.fightlayer==src.fightlayer)
-									view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+									M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									if(M)
 										src.loc = M.loc
@@ -995,9 +1000,9 @@ obj
 							var/mob/M=O
 							if(M)
 								var/mob/Owner=src.Owner
-								if(M.dead || M.swimming || M.key == src.name) return
+								if(M.dead || M.key == src.name) return
 								if(M.fightlayer==src.fightlayer)
-									view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+									M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									if(M)
 										src.loc = M.loc
@@ -1025,9 +1030,9 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
@@ -1046,7 +1051,7 @@ obj
 					layer = MOB_LAYER+1
 					spawn(20)
 						src.density=0
-						view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+						src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 						src.layer=MOB_LAYER+1
 						walk(src,0)
 						src.icon = 'SmallExplode.dmi'
@@ -1062,10 +1067,10 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
-								view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+								src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -1095,9 +1100,9 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
@@ -1124,9 +1129,9 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-										view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+										src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
@@ -1193,13 +1198,13 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
 											if(M in has_damaged) return
-											view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+											src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 											M.DealDamage(src.damage,src.Owner,"NinBlue")
 											has_damaged += M
 											M.Bleed()
@@ -1224,13 +1229,13 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
 											if(M in has_damaged)return
-											view(src)<<sound('knife_hit1.wav',0,0,volume=50)
+											src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 											M.DealDamage(src.damage,src.Owner,"NinBlue")
 											has_damaged += M
 											M.Bleed()
@@ -1257,9 +1262,9 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
-								view(src)<<sound('SharpHit_Short2.wav',0,0,volume=50)
+								src.PlayAudio('SharpHit_Short2.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								src.loc = M.loc
 								if(Owner.inAngel==1)
@@ -1283,9 +1288,9 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
-								view(src)<<sound('LPunchHIt.ogg',0,0,volume=50)
+								M.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								src.loc = M.loc
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
@@ -1310,9 +1315,9 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
-								view(src)<<sound('LPunchHIt.ogg',0,0,volume=50)
+								M.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								src.loc = M.loc
 								if(M!=src.Owner)
@@ -1336,9 +1341,9 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
-								view(src)<<sound('LPunchHIt.ogg',0,0,volume=50)
+								M.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								src.loc = M.loc
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
@@ -1365,10 +1370,10 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name) return
+							if(M.dead || M.key == src.name) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
-								view(src)<<sound('man_fs_r_mt_wat.ogg',0,0,volume=50)
+								src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -1414,7 +1419,7 @@ obj
 					spawn(20)
 						var/mob/Owner=src.Owner
 						src.density=0
-						view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+						src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 						src.layer=MOB_LAYER+1
 						walk(src,0)
 						src.icon = 'SmallExplode.dmi'
@@ -1433,10 +1438,10 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming || M.key == src.name || M==Owner) return
+							if(M.dead || M.key == src.name || M==Owner) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
-								view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+								src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -1487,13 +1492,13 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming) return
+							if(M.dead) return
 							if(M.fightlayer==src.fightlayer)
 								src.icon_state="heady2"
 								src.pixel_x = -16
 								src.pixel_y = 0
 								src.density=0
-								view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+								src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -1538,10 +1543,10 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.swimming) return
+							if(M.dead) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
-								view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+								src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -1770,7 +1775,7 @@ obj
 						del(src)
 					spawn()AI()
 				proc/AI()
-					view(src,19) << sound('fire/fire_small1.ogg',0,0,0,100)
+					src.PlayAudio('fire/fire_small1.ogg', output = AUDIO_HEARERS)
 					if(src.cooled<=14)
 						var/obj/fire=new/obj/Projectiles/Effects/Fire(src.loc)
 						var/mob/CP=src.Owner
@@ -1836,7 +1841,7 @@ obj
 									src.icon='FireBallAHit.dmi'
 									src.pixel_x=-50
 									src.density=0
-									view(src)<<sound(src.hitsound,0,0,volume=50)
+									src.PlayAudio(src.hitsound, output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									walk(src,0)
 									flick("hit",src)
@@ -1871,7 +1876,7 @@ obj
 						if(M.dead||M.swimming||M.Owner==src.Owner)if(src)del(src)
 						if(M.fightlayer==src.fightlayer)
 							src.density=0
-							view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+							src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 							src.layer=MOB_LAYER+1
 							walk(src,0)
 							src.loc=O.loc
@@ -1898,7 +1903,7 @@ obj
 						else
 							if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
 								src.density=0
-								view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+								src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -1930,7 +1935,7 @@ obj
 								src.Hit=1
 								if(src.damage>OBJ.damage)
 									OBJ.density=0
-									view(OBJ)<<sound(OBJ.hitsound,0,0)
+									OBJ.PlayAudio(OBJ.hitsound, output = AUDIO_HEARERS)
 									walk(OBJ,0)
 									flick("[OBJ.hitstate]",OBJ)
 									spawn(7)if(OBJ)del(OBJ)
@@ -1939,7 +1944,7 @@ obj
 										src.density=0
 										src.icon='FireBallAHit.dmi'
 										src.pixel_x=-50
-										view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+										src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 										walk(src,0)
 										flick("[src.hitstate]",src)
 										var/obj/Projectiles/Effects/MasterFire/F1 = new(src.loc)
@@ -1964,7 +1969,7 @@ obj
 											OBJ.density=0
 											src.icon='FireBallAHit.dmi'
 											src.pixel_x=-50
-											view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+											src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 											walk(src,0)
 											walk(OBJ,0)
 											flick("[src.hitstate]",src)
@@ -1992,7 +1997,7 @@ obj
 								var/obj/OBJ=O
 								if(OBJ.fightlayer==src.fightlayer)
 									src.density=0
-									view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+									src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 									walk(src,0)
 									flick("hit",src)
 									var/obj/Projectiles/Effects/MasterFire/F1 = new(src.loc)
@@ -2014,7 +2019,7 @@ obj
 								else
 									if(OBJ.fightlayer=="Normal"&&src.fightlayer=="HighGround")
 										src.density=0
-										view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+										src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 										walk(src,0)
 										flick("hit",src)
 										var/obj/Projectiles/Effects/MasterFire/F1 = new(src.loc)
@@ -2038,7 +2043,7 @@ obj
 									var/turf/T=O
 									if(T.fightlayer==src.fightlayer)
 										src.density=0
-										view(src)<<sound('Exp_Dirt_01.wav',0,0,volume=50)
+										src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 										walk(src,0)
 										flick("hit",src)
 										var/obj/Projectiles/Effects/MasterFire/F1 = new(src.loc)
@@ -2077,10 +2082,10 @@ obj
 					if(istype(O,/mob))
 						var/mob/M=O
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.density=0
-							view(src)<<sound('boom.wav',0,0)
+							src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
 							src.layer=MOB_LAYER+1
 							walk(src,0)
 							src.loc=O.loc
@@ -2107,7 +2112,7 @@ obj
 						else
 							if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
 								src.density=0
-								view(src)<<sound('boom.wav',0,0)
+								src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
 								src.loc=O.loc
@@ -2139,14 +2144,14 @@ obj
 								src.Hit=1
 								if(src.damage>OBJ.damage)
 									OBJ.density=0
-									view(OBJ)<<sound(OBJ.hitsound,0,0)
+									OBJ.PlayAudio(OBJ.hitsound, output = AUDIO_HEARERS)
 									walk(OBJ,0)
 									flick("[OBJ.hitstate]",OBJ)
 									spawn(7)if(OBJ)del(OBJ)
 								else
 									if(src.damage<OBJ.damage)
 										src.density=0
-										view(src)<<sound(src.hitsound,0,0)
+										src.PlayAudio(src.hitsound, output = AUDIO_HEARERS)
 										walk(src,0)
 										flick("[src.hitstate]",src)
 										spawn(7)if(src)del(src)
@@ -2154,7 +2159,7 @@ obj
 										if(src.damage==OBJ.damage)
 											src.density=0
 											OBJ.density=0
-											view(src)<<sound(src.hitsound,0,0)
+											src.PlayAudio(src.hitsound, output = AUDIO_HEARERS)
 											walk(src,0)
 											walk(OBJ,0)
 											flick("[src.hitstate]",src)
@@ -2166,7 +2171,7 @@ obj
 								if(OBJ.fightlayer=="Normal"&&src.fightlayer=="HighGround")
 									src.Hit=1
 									src.density=0
-									view(src)<<sound('boom.wav',0,0)
+									src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
 									walk(src,0)
 									flick("[src.hitstate]",src)
 									spawn(7)if(src)del(src)
@@ -2177,7 +2182,7 @@ obj
 									src.Hit=1
 									src.loc=O.loc
 									src.density=0
-									view(src)<<sound('boom.wav',0,0)
+									src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
 									walk(src,0)
 									flick("[src.hitstate]",src)
 									spawn(7)if(src)del(src)
@@ -2185,7 +2190,7 @@ obj
 									if(OBJ.fightlayer=="Normal"&&src.fightlayer=="HighGround")
 										src.Hit=1
 										src.density=0
-										view(src)<<sound('boom.wav',0,0)
+										src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
 										walk(src,0)
 										flick("[src.hitstate]",src)
 										spawn(7)if(src)del(src)
@@ -2196,7 +2201,7 @@ obj
 										src.Hit=1
 										src.loc=locate(T.x,T.y,T.z)
 										src.density=0
-										view(src)<<sound('boom.wav',0,0)
+										src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
 										walk(src,0)
 										flick("fireballhit",src)
 										spawn(7)if(src)del(src)
@@ -2215,10 +2220,10 @@ obj
 					if(istype(O,/mob))
 						var/mob/M=O
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming || !M.key) del(src)
+						if(M.dead || !M.key) del(src)
 						if(M.fightlayer==src.fightlayer)
 							src.density=0
-							view(src)<<sound('Beam.ogg',0,0)
+							src.PlayAudio('Beam.ogg', output = AUDIO_HEARERS)
 							walk(src,0)
 							src.loc=locate(0,0,0)
 							src.Hit=1
@@ -2245,7 +2250,7 @@ obj
 						else
 							if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
 								src.density=0
-								view(src)<<sound('Beam.ogg',0,0)
+								src.PlayAudio('Beam.ogg', output = AUDIO_HEARERS)
 								walk(src,0)
 								src.loc=locate(0,0,0)
 								src.Hit=1
@@ -2293,7 +2298,7 @@ obj
 					if(istype(O,/mob))
 						var/mob/M=O
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming || !M.key) del(src)
+						if(M.dead || !M.key) del(src)
 						if(M.fightlayer==src.fightlayer)
 							src.density=0
 							var/obj/A = new/obj/MiscEffects/MeteorDust(src.loc)
@@ -2301,7 +2306,7 @@ obj
 							A.pixel_x=-30
 							A.pixel_y=-10
 							A.dir=src.dir
-							view(src)<<sound('Beam.ogg',0,0)
+							src.PlayAudio('Beam.ogg', output = AUDIO_HEARERS)
 							walk(src,0)
 							src.loc=locate(0,0,0)
 							src.Hit=1
@@ -2315,7 +2320,7 @@ obj
 							walk(M,Owner.dir)
 							lol
 							src.loc=locate(0,0,0)
-							M.DealDamage(src.damage,src,"NinBlue")
+							M.DealDamage(src.damage,src.Owner,"NinBlue")
 							spawn(10+Owner.ninjutsu/8)
 								if(M)
 									if(M.dead==0&&!M.swimming)M.icon_state=""
@@ -2332,7 +2337,7 @@ obj
 								A.pixel_x=-30
 								A.pixel_y=-10
 								A.dir=src.dir
-								view(src)<<sound('Beam.ogg',0,0)
+								src.PlayAudio('Beam.ogg', output = AUDIO_HEARERS)
 								walk(src,0)
 								src.loc=locate(0,0,0)
 								src.Hit=1
@@ -2342,7 +2347,7 @@ obj
 								M.injutsu=1
 								walk(M,Owner.dir)
 								src.loc=locate(0,0,0)
-								M.DealDamage(src.damage,src,"NinBlue")
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								spawn(10+Owner.ninjutsu/8)
 									if(M)
 										if(M.dead==0&&!M.swimming)M.icon_state=""
@@ -2384,7 +2389,7 @@ mob
 				burn--
 				var/damage=3+round(X.ninjutsu/5)
 				src.DealDamage(damage,src.Owner,"NinBlue")
-				view(src)<<sound('boom.wav',0,0)
+				src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
 				spawn(4)if(src)src.BurnEffect(X)
 			else
 				src.overlays-=/obj/Projectiles/Effects/OnFire
@@ -2743,9 +2748,9 @@ obj
 						if(M)
 							if(M <> src.Owner)
 								var/mob/Owner=src.Owner
-								if(M.dead || M.swimming || M.key == src.name) return
+								if(M.dead || M.key == src.name) return
 								if(M.fightlayer==src.fightlayer)
-									view(src)<<sound('knife_hit1.wav',0,0,volume=60)
+									src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									src.layer=MOB_LAYER+1
 									if(M)
 										src.loc = M.loc
@@ -2793,9 +2798,9 @@ obj
 							var/mob/M=O
 							if(M)
 								if(M <> src.Owner)
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-									//	view(src)<<sound('knife_hit1.wav',0,0,volume=60)
+									//	src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
@@ -2823,9 +2828,9 @@ obj
 							if(M)
 								if(M <> src.Owner)
 									var/mob/Owner=src.Owner
-									if(M.dead || M.swimming || M.key == src.name) return
+									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-									//	view(src)<<sound('knife_hit1.wav',0,0,volume=60)
+									//	src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc

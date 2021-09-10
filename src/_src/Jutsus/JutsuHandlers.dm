@@ -1,11 +1,12 @@
 var/jutsudamage=150 //A global variable to serve as the baseline for all jutsu damage forumla.(WIP)Changing this value will change the damage of all jutsu relative to it's value.
 var/jutsustatexp=2 //A global vairable to act as a multiplier for the amount of stat exp gained when using jutsu
-var/jutsumastery=1 //A global variable to act as a multiplier for the amount of uses a jutsu needs before it is hotkeyable
+var/jutsumastery=2 //A global variable to act as a multiplier for the amount of exp a jutsu gains on use
 var/jutsuchakra=50  //A global variable to act as the baseline for the amount of chakra jutsu cost to use
 var/jutsucooldown=1  //A global variable to act as the baseline for the amount of chakra jutsu cost to use
 var/punchstatexp=1.8 //A global vairable to act as a multiplier for the amount of stat exp gained when punching (2.5 once attack speed bug is fixed)
 var/trainingexp=0.5 //A global variable to act as a multiplier for the amount of exp gained when using training methods
 var/weapondamage=1 //A global variable to act as a multiplier for the amount of damage all weaponry deal (including swords)
+var/handsealmastery=2 //A global bariable to act as a multiplier for the amount of uses a jutsu needs before it is hotkeyable
 
 mob
 	var
@@ -39,6 +40,7 @@ mob
 
 		DealDamage(amount = 0, Owner, colortype, heal = 0, chakra = 0, punch = 0)
 		//	world << output("[amount], [Owner], [colortype], [heal], [chakra], [punch]")//DEBUG INFO
+			ASSERT(Owner)
 			if(src.bubbled==0)//bubbleshieldstuff
 				if(src.dead)
 					return

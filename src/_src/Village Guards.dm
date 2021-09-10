@@ -24,7 +24,7 @@ mob/NPCs/Shinobi
 			firing=1
 			//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 			flick("jutsuse",src)
-			view(src)<<sound('dash.wav',0,0)
+			src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 			flick('Shunshin.dmi',src)
 			spawn(1)
 				src.loc = c_target.loc
@@ -42,7 +42,7 @@ mob/NPCs/Shinobi
 			firing=1
 			//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 			flick("2fist",src)
-			view(src)<<sound('wirlwind.wav',0,0)
+			src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 			var/num=rand(2,4)
 			if(c_target)
 				while(num)
@@ -69,7 +69,7 @@ mob/NPCs/Shinobi
 			firing=1
 			//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 			flick("jutsuse",src)
-			view(src)<<sound('man_fs_l_mt_wat.ogg',0,0)
+			src.PlayAudio('man_fs_l_mt_wat.ogg', output = AUDIO_HEARERS)
 			var/TimeAsleep=rand(30,100)
 			new/obj/Jutsus/Effects/mudslide(src.loc)
 			var/mob/M = c_target
@@ -95,7 +95,7 @@ mob/NPCs/Shinobi
 			firing=1
 			//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Phoenix Immortal Fire Technique"
 			flick("jutsuse",src)
-			view(src)<<sound('fire.wav',0,0)
+			src.PlayAudio('fire.wav', output = AUDIO_HEARERS)
 			var/I=rand(3,5)
 			while(I)
 				sleep(2)
@@ -123,7 +123,7 @@ mob/NPCs/Shinobi
 			src.UpdateHMB()
 			firing=1
 			flick("jutsuse",src)
-			view(src)<<sound('fire.wav',0,0)
+			src.PlayAudio('fire.wav', output = AUDIO_HEARERS)
 			src.dir=get_dir(src,c_target)
 			var/obj/Projectiles/FireBall/A = new/obj/Projectiles/FireBall(src.loc)
 			A.IsJutsuEffect=src
@@ -144,10 +144,10 @@ mob/NPCs/Shinobi
 					usr.firing=1
 					if(prob(50))
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 					else
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					if(c_target)
 						src.dir=get_dir(usr,c_target)
 					//	usr.Target_Atom(c_target)
@@ -182,10 +182,10 @@ mob/NPCs/Shinobi
 					usr.firing=1
 					if(prob(50))
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 					else
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					if(c_target)
 						src.dir=get_dir(usr,c_target)
 						//usr.Target_Atom(c_target)
@@ -220,10 +220,10 @@ mob/NPCs/Shinobi
 					usr.firing=1
 					if(prob(50))
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 					else
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					if(c_target)
 						src.dir=get_dir(usr,c_target)
 					//	usr.Target_Atom(c_target)
@@ -258,10 +258,10 @@ mob/NPCs/Shinobi
 					usr.firing=1
 					if(prob(50))
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 					else
 						flick("throw",usr)
-						view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+						src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					if(c_target)
 						src.dir=get_dir(usr,c_target)
 						//usr.Target_Atom(c_target)
@@ -298,10 +298,10 @@ mob/NPCs/Shinobi
 						usr.explosivetag++
 						if(prob(50))
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken2.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
 						else
 							flick("throw",usr)
-							view(usr)<<sound('SkillDam_ThrowSuriken3.wav',0,0)
+							src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 						if(c_target)
 							src.dir=get_dir(usr,c_target)
 						//	usr.Target_Atom(c_target)

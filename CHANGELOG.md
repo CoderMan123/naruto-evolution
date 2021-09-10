@@ -3,6 +3,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.16
+
+### Added
+- Added bonus EXP for jounins who do missions with Academy students
+- You will now automatically become a genin at level 25 or higher
+- Added audio settings! (your ears can cower in fear no longer)
+
+### Fixed
+- Fixed a bug with tsukiyomi taking it's time to hit everyone
+- Fixed the multihit bug with demon wind shuriken
+- Fixed Human Bullet Tank hopefully for the last time
+- Fixed swimming making you immune to all kinds of projectiles
+- Fixed rotating dummies spinning from damage that wasn't a punch from a player
+- Fixed Repulsion not giving kill credit
+- Fixed some back end issues
+
+### Changed
+- Buffed exp gains from killing someone who has a mission to kill you (20 exp)
+- Nerfed Lightning Balls damage
+- Jutsu level up and master at twice the rate as before
+- Improvements to the Rotating Dummy AI
+- Buffed Rotating Dummy exp gains
+
 ## 2.0.15
 
 ### Fixed

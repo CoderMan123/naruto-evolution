@@ -85,11 +85,11 @@ obj
 				return
 			if(src.type in usr.jutsus_learned)
 				if(usr.client.eye==locate(10,10,4)||usr.client.eye==locate(60,10,4)||usr.client.eye==locate(12,43,4)||usr.client.eye==locate(55,43,4)||usr.client.eye==locate(10,75,4)) return//lol tenten
-				if(src.uses >= 80 && !src.IsGate)
+				if(src.uses >= ((80-round(src.maxcooltime/15))/handsealmastery) && !src.IsGate)
 					usr.doslot(src.name)
 				else
 					if(!IsGate)
-						usr << output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
+						usr << output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))/handsealmastery) - src.uses] more times([src.uses]).</Font>","Action.Output")
 					else
 						usr << output("You may not put this technique on a hotslot.","Action.Output")
 			else
@@ -393,7 +393,7 @@ obj
 			if(src.IsGate)
 				usr << output("You may not put this technique on a hotslot.","Action.Output")
 				return
-			if(src.uses>=((80-round(src.maxcooltime/15))*jutsumastery))
+			if(src.uses>=((80-round(src.maxcooltime/15))/handsealmastery))
 				if(istype(H,/obj/HotSlots/HotSlot1))
 					var/image/I = image(src, src.icon_state)
 					I.pixel_x = 12
@@ -630,7 +630,7 @@ obj
 
 
 			else
-				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
+				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))/handsealmastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
 
 
 
@@ -678,7 +678,7 @@ mob
 			if(client.eye==locate(10,10,4)||client.eye==locate(60,10,4)||client.eye==locate(12,43,4)||client.eye==locate(55,43,4)||usr.client.eye==locate(10,75,4)) return
 			src.HengeUndo()
 			if(usr.SealCount>=1)
-				view(usr)<<sound('active.wav',0,0)
+				src.PlayAudio('active.wav', output = AUDIO_HEARERS)
 				if(usr.first=="rat"&&usr.second=="dragon"&&usr.rat==1&&usr.dog==0&&usr.ox==0&&usr.dragon==1&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
 					var/obj/Jutsus/SClone/J=new/obj/Jutsus/SClone
 					if(J.type in usr.jutsus_learned)
@@ -1511,6 +1511,6 @@ mob
 
 
 				if(usr.SealCount)
-					view(usr)<<sound('active.wav',0,0)
+					src.PlayAudio('active.wav', output = AUDIO_HEARERS)
 					usr.SealVarReset()
 					usr.Target_ReAdd()

@@ -19,7 +19,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
@@ -76,7 +76,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
@@ -133,7 +133,7 @@ mob
 						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
 						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
 						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
-						view(src) << sound('Skill_MashHit.wav', 0, 0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						if(J.level < 4)
 							if(loc.loc:Safe != 1)
 								J.exp+=jutsumastery*(J.maxcooltime/20)
@@ -150,7 +150,7 @@ mob
 				for(var/obj/Jutsus/C3/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
-						view(src)<<sound('Skill_MashHit.wav',0,0)
+						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.move=0
 						src.firing=1
 						src.canattack=0

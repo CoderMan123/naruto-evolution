@@ -11,8 +11,8 @@ mob
 	Rotating_Dummy
 		health=20000
 		maxhealth=20000
-		strength=1
-		agility=1
+		strength=0
+		agility=0
 		icon='RotatingDummy.dmi'
 		icon_state="idle"
 
@@ -45,26 +45,30 @@ mob
 
 						step_away(M, src, 3)
 
-						src.agility=1
-						src.strength=1
+						src.agility=0
+						src.strength=0
 
 					else
 						flick("dodge",M)
 
-						if(M.loc.loc:Safe != 1) M.LevelStat("Defence", rand(30,50) + round(src.strength / 2))
-						if(M.loc.loc:Safe != 1) M.LevelStat("Strength", rand(30,50) + round(src.strength / 2))
+						if(M.loc.loc:Safe != 1) M.LevelStat("Defence", (rand(60,70) + round(src.strength / 2) * trainingexp))
+						if(M.loc.loc:Safe != 1) M.LevelStat("Strength", (rand(60,70) + round(src.strength / 2) * trainingexp))
 
-						src.agility++
-						src.strength++
+					if(src.agility < 150)
+						src.agility += 10
+					if(src.strength < 150)
+						src.strength += 10
+				RemoveState(src, new/state/dummy_was_hit, STATE_REMOVE_ALL)
 
 		proc
 			DummyAI()
 				src.dummylocation = src.loc
 				while(src)
 					icon_state="idle"
-					if(prob(30+((src.agility / 150)*70)) && src.health!=src.maxhealth)
-						src.SpinAttack()
+					if(prob(30+((src.agility / 150)*70)) && src.health != src.maxhealth)
+						if(CheckState(src, new/state/dummy_was_hit))
+							src.SpinAttack()
 					src.health=src.maxhealth
-					sleep(10-(round(src.agility / 150)*3))
+					sleep(5-(round(src.agility / 150)*3)+rand(3, 6))
 
 

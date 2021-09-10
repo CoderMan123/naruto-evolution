@@ -88,7 +88,7 @@ mob
 				for(var/mob/M in T)
 					M.move=0
 					M.injutsu=1
-					view(src)<<sound('SkillDam_ThrowSuriken3.wav',0,0,volume=100)
+					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
@@ -111,7 +111,7 @@ mob
 				for(var/mob/M in T)
 					M.move=0
 					M.injutsu=1
-					view(src)<<sound('SkillDam_ThrowSuriken3.wav',0,0,volume=100)
+					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
@@ -134,7 +134,7 @@ mob
 				for(var/mob/M in T)
 					M.move=0
 					M.injutsu=1
-					view(src)<<sound('SkillDam_ThrowSuriken3.wav',0,0,volume=100)
+					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
@@ -157,7 +157,7 @@ mob
 				for(var/mob/M in T)
 					M.injutsu=1
 					M.move=0
-					view(src)<<sound('SkillDam_ThrowSuriken3.wav',0,0,volume=100)
+					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
@@ -204,10 +204,10 @@ mob
 						if(M<>src)
 							M.injutsu=1
 							var/random=rand(1,4)
-							if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-							if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-							if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-							if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+							if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+							if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+							if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+							if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 							M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
 							src.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -218,10 +218,10 @@ mob
 							if(M<>src)
 								M.injutsu=1
 								var/random=rand(1,4)
-								if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-								if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-								if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-								if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+								if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+								if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+								if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+								if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 								M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
 								src.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -232,10 +232,10 @@ mob
 								if(M<>src)
 									M.injutsu=1
 									var/random=rand(1,4)
-									if(random==1)view(src)<<sound('knife_hit1.wav',0,0,volume=100)
-									if(random==2)view(src)<<sound('knife_hit2.wav',0,0,volume=100)
-									if(random==3)view(src)<<sound('knife_hit3.wav',0,0,volume=100)
-									if(random==4)view(src)<<sound('knife_hit4.wav',0,0,volume=100)
+									if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+									if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
+									if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
+									if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 									M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
 									src.Levelup()
 									if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -250,7 +250,7 @@ client
 		if(src.mob.Intang==1 && istype(get_step(src.mob, NORTH), /turf/IntangBlocker)) return
 		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
-			view(src.mob) << sound('dash.wav',0,0,0,100)
+			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,NORTH)
@@ -382,7 +382,7 @@ client
 		if(src.mob.Intang==1 && istype(get_step(src.mob, SOUTH), /turf/IntangBlocker)) return
 		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
-			view(src.mob) << sound('dash.wav',0,0,0,100)
+			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,SOUTH)
@@ -479,7 +479,7 @@ client
 		if(src.mob.Intang==1 && istype(get_step(src.mob, WEST), /turf/IntangBlocker)) return
 		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
-			view(src.mob) << sound('dash.wav',0,0,0,100)
+			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,WEST)
@@ -591,7 +591,7 @@ client
 		if(src.mob.Intang==1 && istype(get_step(src.mob, EAST), /turf/IntangBlocker)) return
 		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
-			view(src.mob) << sound('dash.wav',0,0,0,100)
+			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
 			src.mob.dashable=2
 			step(src.mob,EAST)
@@ -905,7 +905,7 @@ mob
 	proc
 		HengeUndo()
 			if(src.henge)
-				view(src)<<sound('flashbang_explode1.wav',0,0)
+				src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 				var/obj/A = new/obj/MiscEffects/Smoke(src.loc)
 				A.loc=src.loc
 				src.overlays=0

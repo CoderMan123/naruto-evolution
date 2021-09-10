@@ -57,7 +57,7 @@ obj
 				//if(istype(src,/obj/Training/LogB))
 				src.health=0
 				src.dead=1
-				view(src)<<sound(src.hitsound,0,0)
+				src.PlayAudio(src.hitsound, output = AUDIO_HEARERS)
 				src.overlays=0
 				flick("[src.name]break",src)
 				spawn(7)

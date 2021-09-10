@@ -446,21 +446,21 @@ turf
 						if(usr.stepcounter==3&&usr.speeddelay==2)
 							usr.stepcounter=0
 							if(U.foot=="Left")
-								view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Right"
 							else
 								if(U.foot=="Right")
-									view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Left"
 						else
 							if(usr.stepcounter==5&&usr.speeddelay==1.5)
 								usr.stepcounter=0
 								if(U.foot=="Left")
-									view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Right"
 								else
 									if(U.foot=="Right")
-										view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+										U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 										U.foot="Left"
 							else usr.stepcounter++
 				Step
@@ -562,21 +562,21 @@ turf
 					if(usr.stepcounter==3&&usr.speeddelay==2)
 						usr.stepcounter=0
 						if(U.foot=="Left")
-							view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+							U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 							U.foot="Right"
 						else
 							if(U.foot=="Right")
-								view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Left"
 					else
 						if(usr.stepcounter==5&&usr.speeddelay==1.5)
 							usr.stepcounter=0
 							if(U.foot=="Left")
-								view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Right"
 							else
 								if(U.foot=="Right")
-									view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Left"
 						else usr.stepcounter++
 			SideWalk
@@ -709,21 +709,21 @@ turf
 					if(usr.stepcounter==3&&usr.speeddelay==2)
 						usr.stepcounter=0
 						if(U.foot=="Left")
-							view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+							U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 							U.foot="Right"
 						else
 							if(U.foot=="Right")
-								view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Left"
 					else
 						if(usr.stepcounter==5&&usr.speeddelay==1.5)
 							usr.stepcounter=0
 							if(U.foot=="Left")
-								view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Right"
 							else
 								if(U.foot=="Right")
-									view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Left"
 						else usr.stepcounter++
 		EntranceBottom
@@ -879,21 +879,21 @@ turf
 					if(usr.stepcounter==3&&usr.speeddelay==2)
 						usr.stepcounter=0
 						if(U.foot=="Left")
-							view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+							U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 							U.foot="Right"
 						else
 							if(U.foot=="Right")
-								view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Left"
 					else
 						if(usr.stepcounter==5&&usr.speeddelay==1.5)
 							usr.stepcounter=0
 							if(U.foot=="Left")
-								view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Right"
 							else
 								if(U.foot=="Right")
-									view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Left"
 						else usr.stepcounter++
 		WallEdgeTop
@@ -904,21 +904,21 @@ turf
 					if(usr.stepcounter==3&&usr.speeddelay==2)
 						usr.stepcounter=0
 						if(U.foot=="Left")
-							view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+							U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 							U.foot="Right"
 						else
 							if(U.foot=="Right")
-								view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Left"
 					else
 						if(usr.stepcounter==5&&usr.speeddelay==1.5)
 							usr.stepcounter=0
 							if(U.foot=="Left")
-								view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Right"
 							else
 								if(U.foot=="Right")
-									view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Left"
 						else usr.stepcounter++
 			Left
@@ -1021,21 +1021,21 @@ turf
 					if(usr.stepcounter==3&&usr.speeddelay==2)
 						usr.stepcounter=0
 						if(U.foot=="Left")
-							view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+							U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 							U.foot="Right"
 						else
 							if(U.foot=="Right")
-								view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Left"
 					else
 						if(usr.stepcounter==5&&usr.speeddelay==1.5)
 							usr.stepcounter=0
 							if(U.foot=="Left")
-								view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Right"
 							else
 								if(U.foot=="Right")
-									view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Left"
 						else
 							usr.stepcounter++
@@ -1167,21 +1167,21 @@ turf
 					if(usr.stepcounter==3&&usr.speeddelay==2)
 						usr.stepcounter=0
 						if(U.foot=="Left")
-							view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+							U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 							U.foot="Right"
 						else
 							if(U.foot=="Right")
-								view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Left"
 					else
 						if(usr.stepcounter==5&&usr.speeddelay==1.5)
 							usr.stepcounter=0
 							if(U.foot=="Left")
-								view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Right"
 							else
 								if(U.foot=="Right")
-									view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Left"
 						else
 							usr.stepcounter++
@@ -1339,21 +1339,21 @@ turf
 					if(usr.stepcounter==3&&usr.speeddelay==2)
 						usr.stepcounter=0
 						if(U.foot=="Left")
-							view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+							U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 							U.foot="Right"
 						else
 							if(U.foot=="Right")
-								view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Left"
 					else
 						if(usr.stepcounter==5&&usr.speeddelay==1.5)
 							usr.stepcounter=0
 							if(U.foot=="Left")
-								view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Right"
 							else
 								if(U.foot=="Right")
-									view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Left"
 						else
 							usr.stepcounter++
@@ -1365,21 +1365,21 @@ turf
 					if(usr.stepcounter==3&&usr.speeddelay==2)
 						usr.stepcounter=0
 						if(U.foot=="Left")
-							view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+							U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 							U.foot="Right"
 						else
 							if(U.foot=="Right")
-								view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Left"
 					else
 						if(usr.stepcounter==5&&usr.speeddelay==1.5)
 							usr.stepcounter=0
 							if(U.foot=="Left")
-								view(U,6) << sound('Walk/man_fs_l_mt_con.ogg',0,0,0,25)
+								U.PlayAudio('Walk/man_fs_l_mt_con.ogg', output = AUDIO_HEARERS)
 								U.foot="Right"
 							else
 								if(U.foot=="Right")
-									view(U,6) << sound('Walk/man_fs_r_mt_con.ogg',0,0,0,25)
+									U.PlayAudio('Walk/man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
 									U.foot="Left"
 						else
 							usr.stepcounter++

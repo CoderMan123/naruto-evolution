@@ -12,7 +12,7 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					AddState(src, new/state/nara_attack_delay, 5)
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					var/mob/M=NaraTarget
 					var/obj/O=new
 					O.IsJutsuEffect=src
@@ -38,7 +38,7 @@ mob
 					AddState(src, new/state/nara_attack_delay, -1)
 					var/Timer=J.level
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					var/mob/M=NaraTarget
 					var/obj/O=new
 					O.IsJutsuEffect=src
@@ -65,7 +65,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					if(c_target)
 						dir = get_dir(src,c_target)
 						CreateTrailNara(c_target,J.level*4)
@@ -83,7 +83,7 @@ mob
 					AddState(src, new/state/nara_attack_delay, -1)
 					var/Timer=J.level
 					flick("jutsuse",src)
-					view(src)<<sound('dash.wav',0,0)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					var/mob/M=NaraTarget
 					var/obj/O=new
 					O.IsJutsuEffect=src

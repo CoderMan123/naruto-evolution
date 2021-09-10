@@ -9,7 +9,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					flick("jutsuse",src)
-					view(src)<<sound('man_fs_l_mt_wat.ogg',0,0)
+					src.PlayAudio('man_fs_l_mt_wat.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					var/TimeAsleep

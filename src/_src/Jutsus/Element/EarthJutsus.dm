@@ -5,7 +5,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))//XPGAIN
 					flick("groundjutsuse",src)
-					view(src)<<sound('Skill_BigRoketFire.wav',0,0)
+					src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					var/TimeAsleep
@@ -47,7 +47,7 @@ mob
 						return */
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('man_fs_l_mt_wat.ogg',0,0)
+					src.PlayAudio('man_fs_l_mt_wat.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					var/TimeAsleep
@@ -118,7 +118,7 @@ mob
 					src.canattack=0
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/mob/M = c_target
-					view()<<sound('rumble_rocks.wav')
+					src.PlayAudio('rumble_rocks.wav', output = AUDIO_HEARERS)
 					spawn(20)
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
@@ -129,7 +129,7 @@ mob
 							Y.loc=M.loc
 							Y.layer=MOB_LAYER+1
 							flick("dead",M)
-							view()<<sound('rock_blast.wav')
+							src.PlayAudio('rock_blast.wav', output = AUDIO_HEARERS)
 							spawn(25)
 								if(Y)
 									del(Y)
@@ -155,7 +155,7 @@ mob
 					src.firing=1
 					sleep(10)
 					flick("2fist",src)
-					view()<<sound('man_fs_r_mt_wat.ogg')
+					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
 					if(c_target)src.dir=get_dir(src,c_target)
 					var/obj/Projectiles/Effects/JinraiBack/Aa=new(get_step(src,src.dir))
 					Aa.icon = 'Mud Dragon Projectile.dmi'
@@ -220,7 +220,7 @@ mob
 					J.density = 1
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					view(src)<<sound('wind_leaves.ogg',0,0)
+					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
 					if(J.level==1)J.damage=2

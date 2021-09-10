@@ -46,7 +46,7 @@ atom/Click()
 				var/mob/M=src
 				if(!M.henge)
 					usr.henge=4
-					view(usr)<<sound('flashbang_explode1.wav',0,0)
+					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 					var/obj/A = new/obj/MiscEffects/Smoke(usr.loc)
 					A.loc=usr.loc
 					//var/srcname=src.name
@@ -70,7 +70,7 @@ atom/Click()
 	if(istype(src,/obj)&&src.Hengable)
 		if(usr.henge>=2&&usr.henge<4)
 			usr.henge=5
-			view(usr)<<sound('flashbang_explode1.wav',0,0)
+			src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 			var/obj/A = new/obj/MiscEffects/Smoke(usr.loc)
 			A.loc=usr.loc
 			//var/regicon=usr.icon
@@ -81,7 +81,7 @@ atom/Click()
 	if(istype(src,/turf)&&src.Hengable)
 		if(usr.henge==3&&usr.henge<4)
 			usr.henge=6
-			view(usr)<<sound('flashbang_explode1.wav',0,0)
+			src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 			var/obj/A = new/obj/MiscEffects/Smoke(usr.loc)
 			A.loc=usr.loc
 			//var/regicon=usr.icon
@@ -167,7 +167,7 @@ mob
 							if(src.Hand=="Right")
 								flick("punchr",src)
 								src.Hand="Left"
-					view(src,10) << sound('Swing5.ogg',0,0,0,100)
+					src.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
 					if(src.agility<50)
 						spawn(2)
 							for(var/mob/c_target in get_step(src,src.dir))
@@ -182,9 +182,9 @@ mob
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 												if(src.Hand=="Left")
-													view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
+													src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 												if(src.Hand=="Right")
-													view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+													src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											else
 												if(src.agility>=c_target.agility)
 													var/defendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/2)+rand(0,10)
@@ -201,7 +201,7 @@ mob
 														step_to(src,c_target,1)
 													c_target.DealDamage(defendedhit,src,"TaiOrange")
 													flick("defendhit",c_target)
-													view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+													src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 												else
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
@@ -218,8 +218,8 @@ mob
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
 											//	if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-												if(src.Hand=="Left")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-												if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+												if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											else
 												if(src.agility>=c_target.agility)
 													var/defendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/2)+rand(0,10)
@@ -234,7 +234,7 @@ mob
 														step_to(src,c_target,1)
 													c_target.DealDamage(defendedhit,src,"TaiOrange")
 													flick("defendhit",c_target)
-													view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+													src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 												else
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
@@ -456,7 +456,7 @@ mob
 							if(src.Hand=="Right")
 								flick("punchr",src)
 								src.Hand="Left"
-					view(src,10) << sound('Swing5.ogg',0,0,0,100)
+					src.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
 					if(src.agility<50)
 						spawn(2)
 							for(var/mob/c_target in get_step(src,src.dir))
@@ -469,8 +469,8 @@ mob
 												if(undefendedhit<0)undefendedhit=0
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-												if(src.Hand=="Left")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-												if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+												if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											else
 												if(src.agility>=c_target.agility)
 													var/defendedhit=src.strength-c_target.defence
@@ -486,7 +486,7 @@ mob
 														step_to(src,c_target,1)
 													c_target.DealDamage(defendedhit,src,"TaiOrange")
 													flick("defendhit",c_target)
-													view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+													src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 												else
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
@@ -502,8 +502,8 @@ mob
 												if(undefendedhit<0)undefendedhit=0
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-												if(src.Hand=="Left")view(src,10) << sound('LPunchHIt.ogg',0,0,0,100)
-												if(src.Hand=="Right")view(src,10) << sound('HandDam_Normal2.ogg',0,0,0,100)
+												if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											else
 												if(src.agility>=c_target.agility)
 													var/defendedhit=src.strength-c_target.defence
@@ -517,7 +517,7 @@ mob
 														step_to(src,c_target,1)
 													c_target.DealDamage(defendedhit,src,"TaiOrange")
 													flick("defendhit",c_target)
-													view(src,10) << sound('Counter_Success.ogg',0,0,0,100)
+													src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 												else
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
@@ -704,7 +704,7 @@ obj
 					var/mob/M=O
 					if(M)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)
@@ -760,7 +760,7 @@ obj
 					var/mob/M=O
 					if(M)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)
@@ -783,13 +783,13 @@ obj
 				if(istype(O,/mob))
 					var/mob/M=O
 					if(M)
-						view()<<sound('GetsugaTenshou.wav')
+						src.PlayAudio('GetsugaTenshou.wav', output = AUDIO_HEARERS)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)
-								view()<<sound('GetsugaTenshou.wav')
+								src.PlayAudio('GetsugaTenshou.wav', output = AUDIO_HEARERS)
 								src.loc = M.loc
 								if(!Owner) return
 								M.DealDamage(12+src.damage+Owner.ninjutsu*6.5,src.Owner,"NinBlue")
@@ -821,7 +821,7 @@ obj
 					var/mob/M=O
 					if(M)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)
@@ -838,7 +838,7 @@ obj
 					var/mob/M=O
 					if(M)
 						var/mob/Owner=src.Owner
-						if(M.dead || M.swimming) return
+						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.layer=MOB_LAYER+1
 							if(M)
