@@ -11,7 +11,7 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					src.mystical_palms=1
 					src<<output("You activate mystical palms.","Action.Output")
-					while(mystical_palms&&chakra>0)
+					while(src && mystical_palms && chakra>0)
 						DealDamage(5,src,"aliceblue",0,1)
 						sleep(10)
 					src<<output("You deactivate your mystical palms.","Action.Output")
