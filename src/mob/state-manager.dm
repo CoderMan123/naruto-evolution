@@ -1,5 +1,3 @@
-#define STATE_MANAGER_DEBUG
-
 proc
 	AddState(mob/m, var/state/s, var/duration = 0, mob/owner)
 		// var/duration = -1 for unlimited duration
@@ -16,18 +14,21 @@ proc
 				for(var/state/state in m.state_manager)
 					if(state == s)
 						m.state_manager.Remove(s)
+						s.duration = 0
 						break
 
 			if(STATE_REMOVE_ANY)
 				for(var/state/state in m.state_manager)
 					if(state.type == s.type)
 						m.state_manager.Remove(state)
+						state.duration = 0
 						break
 
 			if(STATE_REMOVE_ALL)
 				for(var/state/state in m.state_manager)
 					if(state.type == s.type)
 						m.state_manager.Remove(state)
+						state.duration = 0
 
 	CheckState(mob/m, var/state/s)
 		if(locate(s.type) in m.state_manager) return 1

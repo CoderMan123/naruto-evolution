@@ -12,7 +12,6 @@ client
 			stat("FPS:", world.fps)
 			stat("CPU:", world.cpu)
 			stat("Map CPU:", world.map_cpu)
-			stat("State Manager (Self):", src.mob.state_manager.len)
 		
 		if(src && administrators.Find(src.ckey) && src.stat_display_mobs)
 			statpanel("Mob Information")
