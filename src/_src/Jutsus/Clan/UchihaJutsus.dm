@@ -10,10 +10,10 @@ mob
 					flick("jutsuse",src)
 					src.firing=1
 					src.canattack=0
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/2
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/2
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/2
-					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/2
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/2.5
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/2.5
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/2.5
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/2.5
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					for(var/mob/M in orange(20,src))
 						var/mob/M_target=M.Target_Get(TARGET_MOB)
@@ -29,23 +29,23 @@ mob
 							M.client.eye=locate(161,35,9)
 							M.client.perspective = EYE_PERSPECTIVE
 							var/Timer=J.level+2
-							while(Timer&&M)
-								if(M)
-									M.DealDamage(J.damage+round((src.genjutsu / 150)*2*J.damage)/12, src, "white")
-								Timer--
-								sleep(5)
-							M.client.eye=M
-							M.client.perspective = EYE_PERSPECTIVE
-							M.move=1
-							M.canattack=1
-							M.injutsu=0
-							for(var/obj/TsukuyomiHUD/H in M.client.screen)del H
-							src.Prisoner=null
-							src.firing=0
-							src.injutsu=0
-							src.move=1
-							src.canattack=1
-							src.injutsu=0
+							spawn()
+								while(Timer&&M)
+									if(M)
+										M.DealDamage(J.damage+round((src.genjutsu / 150)*2*J.damage)/12, src, "white")
+									Timer--
+									sleep(5)
+								M.client.eye=M
+								M.client.perspective = EYE_PERSPECTIVE
+								M.move=1
+								M.canattack=1
+								M.injutsu=0
+								for(var/obj/TsukuyomiHUD/H in M.client.screen)del H
+					src.Prisoner=null
+					src.injutsu=0
+					src.move=1
+					src.canattack=1
+					src.injutsu=0
 					src.canattack=1
 					src.firing=0
 
