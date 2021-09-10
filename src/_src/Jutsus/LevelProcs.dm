@@ -691,7 +691,7 @@ mob
 										X << output("You have slain [src] who was on a mission hunting rogue ninja.", "Action.Output")
 										X.exp += 20
 										X.ryo += 250
-										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										X << output("You Recieve 20 exp and 250 ryo as a reward for your effort.", "Action.Output")
 										spawn() X.Levelup()
 //THE WAR EFFORT
 								if(/mission/c_rank/the_war_effort)
@@ -699,13 +699,13 @@ mob
 										X << output("You have slain [src] who was on a mission hunting leaf ninja!.", "Action.Output")
 										X.exp += 20
 										X.ryo += 250
-										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										X << output("You Recieve 20 exp and 250 ryo as a reward for your effort.", "Action.Output")
 										spawn() X.Levelup()
 									if(X.village == VILLAGE_SAND && src.village != VILLAGE_SAND)
 										X << output("You have slain [src] who was on a mission hunting sand ninja!.", "Action.Output")
 										X.exp += 20
 										X.ryo += 250
-										X << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+										X << output("You Recieve 20 exp and 250 ryo as a reward for your effort.", "Action.Output")
 										spawn() X.Levelup()
 
 //CLOUDS OF CRIMSON
