@@ -2257,6 +2257,10 @@ mob
 			if(src.loc.loc:Safe == 1)
 				src<<output("You're indoors, you shouldn't be doing this.","Action.Output")
 				return 1
+
+			if(CheckState(src, new/state/knocked_down) || CheckState(src, new/state/knocked_back) || CheckState(src, new/state/dead))
+				return
+
 			if(src.dead || src.move ==0 || src.canattack ==0 || src.injutsu || src.firing)
 				return
 			src.HengeUndo()
