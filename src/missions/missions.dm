@@ -20,6 +20,7 @@ mission
 	var/B_reward = 50
 	var/A_reward = 62
 	var/S_reward = 76
+	var/jounin_reward_mod = 5
 
 	Read(savefile/F)
 		..()
@@ -101,10 +102,19 @@ mission
 
 					spawn() M.client.UpdateInventoryPanel()
 
+					var/jounin_reward = 0
+					for(var/mob/m in mobs_online)
+						if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+							jounin_reward += jounin_reward_mod
+
 					for(var/mob/m in mobs_online)
 						if(squad.members[m.client.ckey])
 							m.exp += exp_reward
 							m.ryo += ryo_reward
+							if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+								m.exp += jounin_reward
+								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
+
 							m.Levelup()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
