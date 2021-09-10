@@ -85,11 +85,11 @@ obj
 				return
 			if(src.type in usr.jutsus_learned)
 				if(usr.client.eye==locate(10,10,4)||usr.client.eye==locate(60,10,4)||usr.client.eye==locate(12,43,4)||usr.client.eye==locate(55,43,4)||usr.client.eye==locate(10,75,4)) return//lol tenten
-				if(src.uses >= 80 && !src.IsGate)
+				if(src.uses >= ((80-round(src.maxcooltime/15))/handsealmastery) && !src.IsGate)
 					usr.doslot(src.name)
 				else
 					if(!IsGate)
-						usr << output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
+						usr << output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))/handsealmastery) - src.uses] more times([src.uses]).</Font>","Action.Output")
 					else
 						usr << output("You may not put this technique on a hotslot.","Action.Output")
 			else
@@ -393,7 +393,7 @@ obj
 			if(src.IsGate)
 				usr << output("You may not put this technique on a hotslot.","Action.Output")
 				return
-			if(src.uses>=((80-round(src.maxcooltime/15))*jutsumastery))
+			if(src.uses>=((80-round(src.maxcooltime/15))/handsealmastery))
 				if(istype(H,/obj/HotSlots/HotSlot1))
 					var/image/I = image(src, src.icon_state)
 					I.pixel_x = 12
@@ -630,7 +630,7 @@ obj
 
 
 			else
-				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))*jutsumastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
+				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))/handsealmastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
 
 
 
