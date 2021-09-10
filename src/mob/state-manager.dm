@@ -48,6 +48,9 @@ proc
 		if(src && src.mob)
 			src.mob.state_manager.Remove(src)
 			src.mob = null
+		
+		if(src && src.owner)
+			src.owner = null
 
 	proc/OnTick()
 		..()
