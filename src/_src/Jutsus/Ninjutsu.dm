@@ -746,6 +746,8 @@ obj
 //				var/traveltime=src.level*(30/4)
 				var/hits=0
 				var/mob/target
+				var/has_damaged[0]
+				var/has_damaged2[0]
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
@@ -758,8 +760,11 @@ obj
 										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										src.loc = M.loc
-										M.DealDamage(src.damage,src.Owner,"NinBlue")
-										M.Bleed()
+										if(!M in has_damaged2)
+											M.DealDamage(src.damage,src.Owner,"NinBlue")
+											M.Bleed()
+										if(M in has_damaged) has_damaged2 += M
+										else has_damaged += M
 										if(M.henge==4||M.henge==5)M.HengeUndo()
 										if(src.target==M) hits++
 								else if(src) del(src)
