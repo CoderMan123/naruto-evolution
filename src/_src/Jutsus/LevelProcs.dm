@@ -14,6 +14,7 @@ obj
 				src.level++
 				src.exp-=src.maxexp
 				src.maxexp+=30
+
 				if(src.name=="Clone Jutsu")
 					if(src.level==2)Owner.maxbunshin=1
 					if(src.level==3)Owner.maxbunshin=1
@@ -240,6 +241,15 @@ mob
 
 			spawn() src.UpdateHMB()
 			
+			if(src.rank == RANK_ACADEMY_STUDENT && src.level >= 25)
+				src.rank = RANK_GENIN
+				switch(src.village)
+					if(VILLAGE_LEAF)
+						src.RecieveItem(new/obj/Inventory/Clothing/HeadWrap/LeafHeadBand)
+					if(VILLAGE_SAND)
+						src.RecieveItem(new/obj/Inventory/Clothing/HeadWrap/SandHeadBand)
+				src.client.Alert("Your elders have deemed you a true ninja. You've become a Genin!")
+
 			if(level>=25&&!Element2)
 				var/Elements=list("Fire","Water","Earth","Lightning","Wind")
 				src.Element2=src.CustomInput("Element Options","What secondary element would you like?.",Elements-src.Element)
