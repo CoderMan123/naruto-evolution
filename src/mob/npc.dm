@@ -68,6 +68,19 @@ mob/npc
 		name = "Onomari"
 		icon = 'WhiteMBase.dmi'
 		village = "Hidden Leaf"
+	
+	event_npc
+		ballot_secretary
+			New()
+				..()
+				if(src.village == VILLAGE_LEAF) src.icon = src.icon
+				if(src.village == VILLAGE_SAND) src.icon = src.icon
+			
+			leaf_ballot_secretary
+				src.village = VILLAGE_LEAF
+			
+			sand_ballot_secretary
+				src.village = VILLAGE_SAND
 
 	mission_npc
 		mission_secretary
