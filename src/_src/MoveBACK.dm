@@ -2,7 +2,7 @@ mob
 	var/tmp/Sleeping=0
 	var/tmp/JashinConnector
 	proc/Bleed()
-		if(!src.dead)
+		if(!src.dead && !istype(src, /mob/training))
 			var/obj/O = new/obj/bloodeffectz
 			O.Owner=src
 			O.loc = src.loc
