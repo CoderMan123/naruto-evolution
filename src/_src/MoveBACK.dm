@@ -247,7 +247,7 @@ mob
 							spawn(15)if(O)del(O)
 client
 	North()
-		if(src.mob.Intang==1 && istype(get_step(src.mob, NORTH), /turf/IntangBlocker)) return
+		if(src.mob.Intang==1 && istype(get_step(src.mob, NORTH), /obj/IntangBlocker)) return
 		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
 			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
@@ -379,7 +379,7 @@ client
 					return
 		else return ..()
 	South()
-		if(src.mob.Intang==1 && istype(get_step(src.mob, SOUTH), /turf/IntangBlocker)) return
+		if(src.mob.Intang==1 && istype(get_step(src.mob, SOUTH), /obj/IntangBlocker)) return
 		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
 			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
@@ -476,7 +476,7 @@ client
 		else
 			return ..()
 	West()
-		if(src.mob.Intang==1 && istype(get_step(src.mob, WEST), /turf/IntangBlocker)) return
+		if(src.mob.Intang==1 && istype(get_step(src.mob, WEST), /obj/IntangBlocker)) return
 		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
 			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
@@ -588,7 +588,7 @@ client
 		else
 			return ..()
 	East()
-		if(src.mob.Intang==1 && istype(get_step(src.mob, EAST), /turf/IntangBlocker)) return
+		if(src.mob.Intang==1 && istype(get_step(src.mob, EAST), /obj/IntangBlocker)) return
 		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
 			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)

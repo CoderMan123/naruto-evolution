@@ -1,15 +1,14 @@
 mob
 	Void
 		name = "The Void"
-turf
+obj
 	IntangBlocker //A turf which does not allow a player using intangibility to pass through
 		icon = 'Misc Effects.dmi'
 		icon_state = "IntangBlocker"
-		density = 1
 		New()
 			..()
 			src.icon_state = "Blank"
-		Entered(atom/a)
+		Crossed(atom/a)
 			if(ismob(a))
 				var/mob/M = a
 				M.Intang = 0
