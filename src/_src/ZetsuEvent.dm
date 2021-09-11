@@ -4,7 +4,7 @@ var/tmp/zetsu_count = 0
 var/tmp/zetsu_event_active = 0
 var/tmp/sand_points = 0
 var/tmp/leaf_points = 0
-var/zetsu_event_toggle = 0
+var/zetsu_event_toggle = 1
 
 proc/ZetsuEvent()
 	while(world)

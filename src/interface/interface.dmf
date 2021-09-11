@@ -141,9 +141,6 @@ macro "Macro"
 		name = "R+UP"
 		command = "RestUp"
 	elem 
-		name = "S"
-		command = "Throw"
-	elem 
 		name = "ALT+S"
 		command = "puppetgrab2"
 	elem 
@@ -152,6 +149,9 @@ macro "Macro"
 	elem 
 		name = "SHIFT+S"
 		command = "Rotate-Ninja-Tool"
+	elem 
+		name = "S+REP"
+		command = "Throw"
 	elem 
 		name = "V"
 		command = "HotSlot4"
@@ -337,7 +337,6 @@ window "Character"
 		size = 300x589
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -346,8 +345,6 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x603
-		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2215,7 +2212,6 @@ window "Settings"
 		size = 500x400
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2224,8 +2220,6 @@ window "Settings"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2242,7 +2236,6 @@ window "Settings"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		saved-params = "splitter"
 		left = "Settings-General"
 		is-vert = false
@@ -2294,7 +2287,6 @@ window "Settings-Audio"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2304,8 +2296,6 @@ window "Settings-Audio"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
-		outer-size = 508x388
-		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0
@@ -2440,7 +2430,6 @@ window "Settings-General"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2450,8 +2439,6 @@ window "Settings-General"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
-		outer-size = 508x388
-		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0

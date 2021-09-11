@@ -204,11 +204,16 @@ mob
 							src.firing=0
 							src.copy=null
 							src.canattack=1
-						while(src.Sharingan)//?
-							sleep(12)
-							src.DealDamage(10, src, "aliceblue", 0, 1)
+							
+						while(src && src.Sharingan)
+							sleep(1)
+							if(src && src.Sharingan)
+								src.DealDamage(10, src, "aliceblue", 0, 1)
+
 							if(src.chakra<=0)
 								src.chakra=0
 								src.Sharingan=0
 								src << output("<font color=[colour2html("red")]><b>Your sharingan has been deactivated.","Action.Output")
 								//if(src.jutsucopy)src.jutsucopy=0
+							
+							sleep(12)
