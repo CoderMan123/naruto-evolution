@@ -536,7 +536,7 @@ mob/npc
 			proc/FindTarget()
 				if(src)
 					for(var/mob/M in orange(20))
-						if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.village == VILLAGE_AKATSUKI || M.dead) continue
+						if(istype(M,/mob/npc) || istype(M,/mob/training) || M.village == VILLAGE_AKATSUKI || M.dead) continue
 						if(M)
 							src.target = M
 							src.attacking = 1

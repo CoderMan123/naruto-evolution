@@ -98,7 +98,7 @@ mob
 				if(istype(c_target, /mob/npc/combat/white_zetsu))
 					src<<output("Something is preventing me from pulling it into the dimension!","Action.Output")
 					return
-				if(istype(c_target, /mob/Rotating_Dummy))
+				if(istype(c_target, /mob/training))
 					src<<output("I can't do that, it's fastened to the ground!","Action.Output")
 					return
 				if(locate(/obj/Inventory/mission/deliver_intel) in c_target.contents)

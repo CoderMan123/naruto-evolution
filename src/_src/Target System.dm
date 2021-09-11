@@ -88,7 +88,7 @@ turf
 	Click()
 		//if(!istype(src,/obj/HUD))
 		for(var/mob/m in range(0, src))
-			if(m.client || istype(m, /mob/summonings) || istype(m, /mob/jutsus) || istype(m, /mob/Rotating_Dummy))
+			if(m.client || istype(m, /mob/summonings) || istype(m, /mob/jutsus) || istype(m, /mob/training))
 				if(usr.Target_Get()==m)
 					usr.Target_Remove()
 					break
@@ -97,13 +97,13 @@ turf
 
 /*	Entered(atom/movable/a)
 		..()
-		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/Rotating_Dummy))
+		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/training))
 			src.mouse_over_pointer = /obj/cursors/target*/
 
 /*	Exited(atom/movable/a)
 		..()
-		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/Rotating_Dummy))
-			if(!locate(/client) in src.loc && !locate(/mob/summonings) in src.loc && !locate(/mob/jutsus) in src.loc && !locate(/mob/Rotating_Dummy) in src.loc)
+		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/training))
+			if(!locate(/client) in src.loc && !locate(/mob/summonings) in src.loc && !locate(/mob/jutsus) in src.loc && !locate(/mob/training) in src.loc)
 				src.mouse_over_pointer = MOUSE_INACTIVE_POINTER*/
 
 obj/var/mob/owner=null
