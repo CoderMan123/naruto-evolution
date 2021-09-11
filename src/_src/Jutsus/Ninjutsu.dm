@@ -2081,7 +2081,7 @@ obj
 				if(!src.Hit)
 					if(istype(O,/mob))
 						var/mob/M=O
-						var/mob/Owner=src.Owner
+						var/mob/owner=src.Owner
 						if(M.dead) return
 						if(M.fightlayer==src.fightlayer)
 							src.density=0
@@ -2097,16 +2097,16 @@ obj
 								M.overlays+=/obj/Projectiles/Effects/OnFire
 								if(src.level==1)
 									M.burn=4
-									spawn(10)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(owner)
 								if(src.level==2)
 									M.burn=6
-									spawn(10)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(owner)
 								if(src.level==3)
 									M.burn=8
-									spawn(10)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(owner)
 								if(src.level==4)
 									M.burn=10
-									spawn(10)if(M)M.BurnEffect(Owner)
+									spawn(10)if(M)M.BurnEffect(owner)
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							spawn(7)if(src)src.loc=locate(0,0,0)
 						else
@@ -2124,16 +2124,16 @@ obj
 									M.overlays+=/obj/Projectiles/Effects/OnFire
 									if(src.level==1)
 										M.burn=4
-										spawn(10)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(owner)
 									if(src.level==2)
 										M.burn=6
-										spawn(10)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(owner)
 									if(src.level==3)
 										M.burn=8
-										spawn(10)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(owner)
 									if(src.level==4)
 										M.burn=10
-										spawn(10)if(M)M.BurnEffect(Owner)
+										spawn(10)if(M)M.BurnEffect(owner)
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								spawn(7)if(src)src.loc=locate(0,0,0)
 							else src.loc=M.loc
@@ -2388,7 +2388,7 @@ mob
 			if(src.burn>0&&src.health>0&&X)
 				burn--
 				var/damage=3+round(X.ninjutsu/5)
-				src.DealDamage(damage,src.Owner,"NinBlue")
+				src.DealDamage(damage,X,"NinBlue")
 				src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
 				spawn(4)if(src)src.BurnEffect(X)
 			else

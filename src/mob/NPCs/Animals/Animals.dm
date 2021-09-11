@@ -125,7 +125,7 @@ mob
 						proc/FindTarget()
 							if(src)
 								for(var/mob/M in orange(10))
-									if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+									if(istype(M,/mob/npc) || istype(M,/mob/training) || M.dead) continue
 									if(M)
 										src.target = M
 									else src.target = null
@@ -220,7 +220,7 @@ mob
 						proc/FindTarget()
 							if(src)
 								for(var/mob/M in orange(10))
-									if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+									if(istype(M,/mob/npc) || istype(M,/mob/training) || M.dead) continue
 									if(M)
 										src.target = M
 									else src.target = null
@@ -304,7 +304,7 @@ mob
 						proc/FindTarget()
 							if(src)
 								for(var/mob/M in orange(5))
-									if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+									if(istype(M,/mob/npc) || istype(M,/mob/training) || M.dead) continue
 									if(M)
 										src.target = M
 									else src.target = null
@@ -366,7 +366,7 @@ mob
 						proc/FindTarget()
 							if(src)
 								for(var/mob/M in orange(10))
-									if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+									if(istype(M,/mob/npc) || istype(M,/mob/training) || M.dead) continue
 									if(M)
 										src.target = M
 									else src.target = null
@@ -425,7 +425,7 @@ mob
 						proc/FindTarget()
 							if(src)
 								for(var/mob/M in orange(10))
-									if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+									if(istype(M,/mob/npc) || istype(M,/mob/training) || M.dead) continue
 									if(M)
 										src.target = M
 									else src.target = null
@@ -485,7 +485,7 @@ mob
 					proc/FindTarget()
 						if(src)
 							for(var/mob/M in orange(15))
-								if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+								if(istype(M,/mob/npc) || istype(M,/mob/training) || M.dead) continue
 								if(M)
 									src.target = M
 								else src.target = null
@@ -546,7 +546,7 @@ mob
 					proc/FindTarget()
 						if(src)
 							for(var/mob/M in orange(15))
-								if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+								if(istype(M,/mob/npc) || istype(M,/mob/training) || M.dead) continue
 								if(M)
 									src.target = M
 								else src.target = null
@@ -599,7 +599,7 @@ mob
 					proc/FindTarget()
 						if(src)
 							for(var/mob/M in orange(15))
-								if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.dead) continue
+								if(istype(M,/mob/npc) || istype(M,/mob/training) || M.dead) continue
 								if(M)
 									src.target = M
 								else src.target = null
@@ -659,7 +659,7 @@ mob
 					proc/FindTarget()
 						if(src)
 							for(var/mob/M in orange(15))
-								if(istype(M,/mob/npc) || istype(M,/mob/Rotating_Dummy) || M.village == VILLAGE_AKATSUKI || M.dead) continue
+								if(istype(M,/mob/npc) || istype(M,/mob/training) || M.village == VILLAGE_AKATSUKI || M.dead) continue
 								if(M)
 									src.target = M
 									src.attacking = 1

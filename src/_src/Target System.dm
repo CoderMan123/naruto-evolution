@@ -30,6 +30,7 @@ mob/verb/Target_A_Mob()
 		if(target_mob==M) continue
 		if(M==src.puppets[1]) continue
 		if(M.Owner==src) continue
+		if(istype(M, /mob/training/untargetable)) continue
 		src.Target_Atom(M)
 		return
 mob/var/tmp
@@ -51,6 +52,7 @@ mob/proc
 				src.target_mob_image.loc = target_mob
 	Target_Atom(var/atom/movable/A)
 		if(istype(A,/mob/npc/) && !istype(A, /mob/npc/combat))return
+		if(istype(A, /mob/training/untargetable)) return
 		if(istype(A,src.puppets[1]))return
 		if(istype(A,/mob/Untargettable/))return
 		if(src.target_mob==A)return
@@ -88,7 +90,7 @@ turf
 	Click()
 		//if(!istype(src,/obj/HUD))
 		for(var/mob/m in range(0, src))
-			if(m.client || istype(m, /mob/summonings) || istype(m, /mob/jutsus) || istype(m, /mob/Rotating_Dummy))
+			if(m.client || istype(m, /mob/summonings) || istype(m, /mob/jutsus) || istype(m, /mob/training))
 				if(usr.Target_Get()==m)
 					usr.Target_Remove()
 					break
@@ -97,13 +99,13 @@ turf
 
 /*	Entered(atom/movable/a)
 		..()
-		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/Rotating_Dummy))
+		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/training))
 			src.mouse_over_pointer = /obj/cursors/target*/
 
 /*	Exited(atom/movable/a)
 		..()
-		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/Rotating_Dummy))
-			if(!locate(/client) in src.loc && !locate(/mob/summonings) in src.loc && !locate(/mob/jutsus) in src.loc && !locate(/mob/Rotating_Dummy) in src.loc)
+		if(istype(a, /client) || istype(a, /mob/summonings) || istype(a, /mob/jutsus) || istype(a, /mob/training))
+			if(!locate(/client) in src.loc && !locate(/mob/summonings) in src.loc && !locate(/mob/jutsus) in src.loc && !locate(/mob/training) in src.loc)
 				src.mouse_over_pointer = MOUSE_INACTIVE_POINTER*/
 
 obj/var/mob/owner=null

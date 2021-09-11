@@ -705,8 +705,10 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/turf/T=src.loc
 					src<<output("You will be sent to this location the next time your character accumulates damage.","Action.Output")
-					var/X = src.health
-					while(src.health == X)sleep(1)
+					var/lasthp = src.health
+					while(src.health >= lasthp)
+						lasthp = src.health
+						sleep(1)
 					if(get_dist(usr,T)>30||usr.z != T.z)
 						usr<<"\red <b>Your substitution was set too far away. Jutsu failed!"
 						return

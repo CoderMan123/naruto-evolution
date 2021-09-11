@@ -142,7 +142,7 @@ mob
 					var/obj/A = new/obj/MiscEffects/Smoke(M.loc)
 					A.loc=M.loc
 				AddState(src, new/state/punching, attack_speed)
-				if(istype(c_target, /mob/Rotating_Dummy))
+				if(istype(c_target, /mob/training/Rotating_Dummy))
 					AddState(c_target, new/state/dummy_was_hit, -1)
 				if(src.icon_state<>"blank")
 					if(src.byakugan==1)

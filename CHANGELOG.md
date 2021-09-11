@@ -3,6 +3,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.1.18
+
+## Added
+- New train method for precision, Target Range
+
+## Fixed
+- Fixed training logs bleeding from certain attacks
+- Fixed explosive tags lagging behind when stuck to a player
+- Fixed ninja tool speed bug
+- Fixed ninja tools stopping you from performing actions
+- Fixed snake sub an crow sub activating upon regenerating health
+- Fixed morning peacock lasting longer than it should
+- Fixed burn effects
+
+## Changed
+- Nerfed rotating log damage
+- Nerfed the stun from exploding kunai
+- Camelia dance's chakra drain now decreases for each jutsu level
+
 ## 2.0.17
 
 ### Changed

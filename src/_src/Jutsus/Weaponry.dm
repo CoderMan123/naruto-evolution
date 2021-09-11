@@ -34,7 +34,7 @@ obj
 										X.icon_state="push"
 										X.injutsu=1
 										walk_away(X,src,5,0)
-										spawn(10)
+										spawn(5)
 											if(X)
 												walk(X,0)
 												X.injutsu=0
@@ -2173,7 +2173,7 @@ obj
 						if(src.Linkage)
 							var/mob/L=src.Linkage
 							src.loc=L.loc
-							sleep(2)
+							sleep(0.5)
 							continue
 						else
 							break
@@ -2360,10 +2360,10 @@ mob
 						return
 			if(usr.equipped=="Shurikens")
 				for(var/obj/Inventory/Weaponry/Shuriken/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
+					if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+						var/throwdelay = usr.attkspeed*3
 						var/mob/c_target=usr.Target_Get(TARGET_MOB)
-						usr.firing=1
-						spawn(usr.attkspeed*3)usr.firing=0
+						AddState(usr, new/state/throwing, throwdelay)
 						if(prob(50))
 							flick("throw",usr)
 							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
@@ -2402,10 +2402,10 @@ mob
 
 			if(usr.equipped=="ExplodeKunais")
 				for(var/obj/Inventory/Weaponry/Exploding_Kunai/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
+					if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+						var/throwdelay = usr.attkspeed*5
 						var/mob/c_target=usr.Target_Get(TARGET_MOB)
-						usr.firing=1
-						spawn(usr.attkspeed*5)usr.firing=0
+						AddState(usr, new/state/throwing, throwdelay)
 						if(prob(50))
 							flick("throw",usr)
 							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
@@ -2444,10 +2444,10 @@ mob
 
 			if(usr.equipped=="Kunais")
 				for(var/obj/Inventory/Weaponry/Kunai/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
+					if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+						var/throwdelay = usr.attkspeed*4
 						var/mob/c_target=usr.Target_Get(TARGET_MOB)
-						usr.firing=1
-						spawn(usr.attkspeed*4)usr.firing=0
+						AddState(usr, new/state/throwing, throwdelay)
 						if(prob(50))
 							flick("throw",usr)
 							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
@@ -2486,10 +2486,10 @@ mob
 
 			if(usr.equipped=="Needles")
 				for(var/obj/Inventory/Weaponry/Needle/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
+					if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+						var/throwdelay = usr.attkspeed*2
 						var/mob/c_target=usr.Target_Get(TARGET_MOB)
-						usr.firing=1
-						spawn(usr.attkspeed*2)usr.firing=0
+						AddState(usr, new/state/throwing, throwdelay)
 						if(prob(50))
 							flick("throw",usr)
 							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
