@@ -62,12 +62,16 @@ mob
 					if(istype(o, /obj/Projectiles/Weaponry/Kunai))
 						M.LevelStat("Precision", (rand(300, 400)*trainingexp))
 
+				Death()
+					return
+
 				Move()
 					return
 
 				proc
 					TargetAI()
 						while(src)
+							src.health = src.maxhealth
 							sleep(slide_speed)
 							switch(src.dir)
 								if(SOUTH)
