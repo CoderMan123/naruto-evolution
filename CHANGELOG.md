@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 2.1.0
+## [2.1.0] - 2021-09-11
 
 ### Added
 - New train method for precision, Target Range
@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Nerfed the stun from exploding kunai
 - Camelia dance's chakra drain now decreases for each jutsu level
 
-## 2.0.17
+## [2.0.17] - 2021-09-10
 
 ### Changed
 - You can now hold S to keep using ninja tools
@@ -33,7 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Fixed some backend issues
 - Fixed throwing while knocked down in certain instances
 
-## 2.0.16
+## [2.0.16] - 2021-09-09
 
 ### Added
 - Added bonus EXP for jounins who do missions with Academy students
@@ -56,12 +56,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Improvements to the Rotating Dummy AI
 - Buffed Rotating Dummy exp gains
 
-## 2.0.15
+## [2.0.15] - 2021-09-09
 
 ### Fixed
 - Fixed huge problem with shadow clones punching at tick speed.
 
-## 2.0.14
+## [2.0.14] - 2021-09-08
 
 ### Added
 - You can now switch between ninja tools with `Shift + S`
@@ -83,7 +83,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Nerfed insect neurotoxin's duration
 - Poison mist now applies better poison effect
 
-## 2.0.13
+## [2.0.13] - 2021-09-07
 ### Added
 - Map warpers will now no longer let you pass if you're in combat
 
@@ -102,7 +102,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - nerfed shikigami dance damage
 - shadow extension now requires a target to cast
 
-## 2.0.12
+## [2.0.12] - 2021-09-06
 
 ### Added
 - added /restore-base command for players
@@ -120,7 +120,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - increased delays for certain 'auto hit' jutsus so that they're easier to avoid
 - Made some changes to zetsu event in preparation for akat release
 
-## 2.0.11
+## [2.0.11] - 2021-09-05
 
 ### Added
 - Added state manager.
@@ -132,7 +132,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - Fixed rotating dummy to knock down with state manager.
 
-## 2.0.10
+## [2.0.10] - 2021-09-04
 ### Fixed
 - Fixed some backend issues
 - Fixed escort npcs stopping when hit by certain jutsu
@@ -147,11 +147,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Hard nerfed nin gains from water walking
 
 
-## 2.0.9
+## [2.0.9] - 2021-09-04
 ### Fixed
 - Emergancy fix for A rank missions
 
-## 2.0.8
+## [2.0.8] - 2021-09-03
 ### Fixed
 - Fixed experience lock spamming you.
 - Fixed respawning when not dead.
@@ -163,7 +163,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Fixed being sent to the void when killed in sand dojo.
 - Fixed Warp dimension sending you to the wrong place.
 
-## 2.0.7
+## [2.0.7] - 2021-09-03
 ### Added
 - Added damage reduction while in Super Multi-Size Technique
 - Added the ability to view jutsu descriptions by right clicking them in the P menu
@@ -199,7 +199,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Removed
 
 
-## 2.0.6
+## [2.0.6] - 2021-09-02
 ### Added
 - Made a new staff verb to fix peoples visuals.
 - Added village counter to who page.
@@ -218,11 +218,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Staff who.
 
 
-## 2.0.5
+## [2.0.5] - 2021-09-02
 ### Fixed
 - Fixed a bug with the rinnegan skill tree.
 
-## 2.0.4
+## [2.0.4] - 2021-09-02
 ### Fixed
 - Fixed a bug with hidden snake stab.
 - Fixed Rinnegan not appearing in the skill tree.
@@ -230,12 +230,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Nerfed a number of training methods until associated bugs can be addressed.
 
-## 2.0.3
+## [2.0.3] - 2021-09-01
 ### Fixed
 - Fixed chunin exams staff verb
 - Fixed bug with who window
 
-## 2.0.2
+## [2.0.2] - 2021-09-01
 ### Fixed
 - Fixed chunin exams.
 - Fixed genin exams.
@@ -246,7 +246,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Fixed clay jutsus not appearing in skill tree.
 - Fixed bugs with human bullet tank.
 
-## 2.0.1
+## [2.0.1] - 2021-09-01
 ### Fixed
 - Fixed chat box not closing sometimes.
 - Fixed a small with leave village.
@@ -260,7 +260,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 
 
-## 2.0.0
+## [2.0.0] - 2021-09-01
 ### Added
 - Akatsuki Event
 - - New White Zetsu mobs.
