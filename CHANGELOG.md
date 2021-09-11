@@ -5,10 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## 2.1.0
 
-## Added
+### Added
 - New train method for precision, Target Range
 
-## Fixed
+### Fixed
 - Fixed training logs bleeding from certain attacks
 - Fixed explosive tags lagging behind when stuck to a player
 - Fixed ninja tool speed bug
@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Fixed morning peacock lasting longer than it should
 - Fixed burn effects
 
-## Changed
+### Changed
 - Nerfed rotating log damage
 - Nerfed the stun from exploding kunai
 - Camelia dance's chakra drain now decreases for each jutsu level
