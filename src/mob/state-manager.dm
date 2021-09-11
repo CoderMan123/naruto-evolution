@@ -90,6 +90,8 @@ proc
 			..()
 
 	punching
+
+	throwing
 	
 	blocking
 		OnTick()
