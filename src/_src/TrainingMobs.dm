@@ -117,7 +117,7 @@ mob
 
 					for(var/mob/M in orange(1, src))
 						if(!M.dodge)
-							M.DealDamage(src.strength*10,src,"NinBlue")
+							M.DealDamage(src.strength*8,src,"NinBlue")
 							
 							AddState(M, new/state/knocked_down, 50)
 
