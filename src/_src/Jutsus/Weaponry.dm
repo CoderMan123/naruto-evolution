@@ -34,7 +34,7 @@ obj
 										X.icon_state="push"
 										X.injutsu=1
 										walk_away(X,src,5,0)
-										spawn(10)
+										spawn(5)
 											if(X)
 												walk(X,0)
 												X.injutsu=0
