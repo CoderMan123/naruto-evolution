@@ -71,6 +71,7 @@ mob
 							sleep(slide_speed)
 							switch(src.dir)
 								if(SOUTH)
+									if(prob(20)) sleep(25)
 									src.loc = locate(src.x, src.y-1, src.z)
 									step_counter++
 									if(step_counter >= 10)
@@ -78,6 +79,7 @@ mob
 										src.dir = NORTH
 										slide_speed = rand(10, 20)/10
 								if(NORTH)
+									if(prob(20)) sleep(25)
 									src.loc = locate(src.x, src.y+1, src.z)
 									step_counter++
 									if(step_counter >= 10)

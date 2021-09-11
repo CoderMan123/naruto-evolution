@@ -30,6 +30,7 @@ mob/verb/Target_A_Mob()
 		if(target_mob==M) continue
 		if(M==src.puppets[1]) continue
 		if(M.Owner==src) continue
+		if(istype(M, /mob/training/untargetable)) continue
 		src.Target_Atom(M)
 		return
 mob/var/tmp
@@ -51,6 +52,7 @@ mob/proc
 				src.target_mob_image.loc = target_mob
 	Target_Atom(var/atom/movable/A)
 		if(istype(A,/mob/npc/) && !istype(A, /mob/npc/combat))return
+		if(istype(A, /mob/training/untargetable)) return
 		if(istype(A,src.puppets[1]))return
 		if(istype(A,/mob/Untargettable/))return
 		if(src.target_mob==A)return
