@@ -253,7 +253,7 @@ mob
 								T.Break(src)*/
 						spawn()PunchFlick(hitamount,J)
 						src.JutsuCoolSlot(J)
-						var/wait=hitamount*4
+						var/wait=hitamount*((3.5-((src.agility/150)*3))+1)
 						spawn(wait)if(src)
 							src.firing=0
 							src.injutsu=0
