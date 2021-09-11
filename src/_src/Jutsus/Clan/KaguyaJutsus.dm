@@ -18,7 +18,7 @@ mob
 						src.overlays+=image('CamR.dmi',pixel_x=32)
 						src.overlays+=image('CamT.dmi',pixel_y=32)
 						while(src.bonesword)
-							src.DealDamage(20,src,"aliceblue",0,1)
+							src.DealDamage(30 - (5*J.level),src,"aliceblue",0,1)
 							if(src.chakra<=0)
 								src.chakra=0
 								src.bonesword=0
