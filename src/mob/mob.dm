@@ -632,8 +632,8 @@ mob
 							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='yellow'>\[V]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_VILLAGE)
 
 						if("Squad")
-							if(src.GetSquad())
-								var/squad/squad = src.GetSquad()
+							var/squad/squad = src.GetSquad()
+							if(squad)
 								for(var/mob/M in mobs_online)
 									if(squad && squad.leader[M.ckey] || squad.members.Find(M.ckey) || administrators.Find(M.client.ckey))
 										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
