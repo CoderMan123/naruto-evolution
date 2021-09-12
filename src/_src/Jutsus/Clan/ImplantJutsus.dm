@@ -90,31 +90,41 @@ mob
 
 		WarpDim()
 			for(var/obj/Jutsus/WarpDim/J in src.jutsus)
-				var/mob/c_target=src.Target_Get(TARGET_MOB)
-				if(istype(c_target, /mob/npc/combat/political_escort))
-					src<<output("It appears that the Daimyo is protected against spacial inteferance!","Action.Output")
-					return
-				if(istype(c_target, /mob/npc/combat/white_zetsu))
-					src<<output("Something is preventing me from pulling it into the dimension!","Action.Output")
-					return
-				if(istype(c_target, /mob/training))
-					src<<output("I can't do that, it's fastened to the ground!","Action.Output")
-					return
-				if(locate(/obj/Inventory/mission/deliver_intel) in c_target.contents)
-					src<<output("The seal in their scroll is preventing spacial travel!","Action.Output")
-					return
-				if(c_target.jailed == 1)
-					src<<output("Your target is jailed.","Action.Output")
-					return
+			
+				var/mob/c_target = src.Target_Get(TARGET_MOB)
+				if(c_target)
+					if(istype(c_target, /mob/npc/combat/political_escort))
+						src<<output("It appears that the Daimyo is protected against spacial inteferance!","Action.Output")
+						return
+
+					if(istype(c_target, /mob/npc/combat/white_zetsu))
+						src<<output("Something is preventing me from pulling it into the dimension!","Action.Output")
+						return
+
+					if(istype(c_target, /mob/training))
+						src<<output("I can't do that, it's fastened to the ground!","Action.Output")
+						return
+
+					if(locate(/obj/Inventory/mission/deliver_intel) in c_target.contents)
+						src<<output("The seal in their scroll is preventing spacial travel!","Action.Output")
+						return
+
+					if(c_target.jailed == 1)
+						src<<output("Your target is jailed.","Action.Output")
+						return
+
 				if(src.loc.z == 4)
 					src<<output("You can't use this in the chuunin exam!","Action.Output")
 					return
+
 				if(src.dueling == 1)
 					src<<output("You cant use this during a duel!","Action.Output")
 					return
+
 				if(src.jailed == 1)
 					src<<output("You are jailed.","Action.Output")
 					return
+
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=50
