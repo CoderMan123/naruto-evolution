@@ -1391,7 +1391,7 @@ obj
 								if(!M.swimming)M.icon_state=""
 								M.canattack=1
 								M.firing=0
-								M.Death(src)
+								M.Death(src.Owner)
 						else src.invisibility=1
 						spawn(5)if(src)del(src)
 				Move()
@@ -2237,7 +2237,7 @@ obj
 							walk_towards(M,Owner)
 							lol
 							src.loc=locate(0,0,0)
-							M.DealDamage(src.damage,src,"NinBlue")
+							M.DealDamage(src.damage,src.Owner,"NinBlue")
 							spawn(10+Owner.ninjutsu/8)
 								if(M)
 									if(M.dead==0)
@@ -2260,7 +2260,7 @@ obj
 								M.injutsu=1
 								walk_towards(M,Owner)
 								src.loc=locate(0,0,0)
-								M.DealDamage(src.damage,src,"NinBlue")
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								spawn(10+Owner.ninjutsu/8)
 									if(M)
 										if(M.dead==0)
