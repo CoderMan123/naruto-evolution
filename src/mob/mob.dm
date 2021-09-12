@@ -634,8 +634,8 @@ mob
 						if("Squad")
 							if(src.GetSquad())
 								for(var/mob/M in mobs_online)
-									var/squad/squad = M.GetSquad()
-									if(squad && squad.leader[src.ckey] || squad.members.Find(src.ckey) || administrators.Find(M.client.ckey))
+									var/squad/squad = src.GetSquad()
+									if(squad && squad.leader[M.ckey] || squad.members.Find(M.ckey) || administrators.Find(M.client.ckey))
 										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
 
 								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_SQUAD)
