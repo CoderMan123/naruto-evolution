@@ -36,6 +36,12 @@ jobs:
             ${{ github.workspace }}/*
           key: ${{ github.sha }}
       
+      - name: Install Changelog Parser
+        run: |
+          git clone https://git.douglas-parker.com/douglasparker/changelog-parser.git /
+          chmod +x /changelog-parser/changelog-parser.py
+          
+      
       - name: Package
         run: |
           sudo apt-get install zip
@@ -50,10 +56,10 @@ jobs:
       - name: Release
         run: |
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
-          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }}
+          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file <(/changelog-parser/changelog-parser.py "$(cat ${{ github.workspace }}/VERSION)" ${{ github.workspace }}/CHANGELOG.md) --target ${{ github.sha }}
           gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip
           gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz
-          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file ${{ github.workspace }}/CHANGELOG.md --target ${{ github.sha }} --repo IllusiveBIair/Naruto-Evolution-Community
+          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file <(/changelog-parser/changelog-parser.py "$(cat ${{ github.workspace }}/VERSION)" ${{ github.workspace }}/CHANGELOG.md) --target ${{ github.sha }} --repo IllusiveBIair/Naruto-Evolution-Community
   
   Deploy:
     runs-on: ubuntu-20.04
