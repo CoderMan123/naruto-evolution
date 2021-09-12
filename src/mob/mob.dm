@@ -633,8 +633,8 @@ mob
 
 						if("Squad")
 							if(src.GetSquad())
+								var/squad/squad = src.GetSquad()
 								for(var/mob/M in mobs_online)
-									var/squad/squad = src.GetSquad()
 									if(squad && squad.leader[M.ckey] || squad.members.Find(M.ckey) || administrators.Find(M.client.ckey))
 										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
 
