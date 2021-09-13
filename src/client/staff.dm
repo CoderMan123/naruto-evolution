@@ -598,9 +598,10 @@ mob
 
 						if(2)
 							if(M)
-								squad.mission.status = "Failure"
-								squad.mission.complete = world.realtime
-								text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.name] ([src.ckey]) has failed [M.name]'s mission for their entire Squad.<br />", LOG_ADMINISTRATOR)
+								if(squad.mission)
+									squad.mission.status = "Failure"
+									squad.mission.complete = world.realtime
+									text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src.name] ([src.ckey]) has failed [M.name]'s mission for their entire Squad.<br />", LOG_ADMINISTRATOR)
 
 								if(src.client.Alert("Would you like to reset mission cooldown for [M.name]'s Squad?", "Manage Mission", list("Yes", "No")) == 1)
 									for(var/mob/m in mobs_online)
