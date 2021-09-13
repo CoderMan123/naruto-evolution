@@ -1370,7 +1370,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.key == src.name) return
+							if(M.dead || M.key == src.name || M == Owner) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
