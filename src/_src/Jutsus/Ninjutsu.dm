@@ -1378,7 +1378,7 @@ obj
 								walk(src,0)
 								src.loc=O.loc
 								src.Hit=1
-								M.DealDamage(src.damage+(Owner.strength*0.9)+(Owner.ninjutsu*2.5),src.Owner,"NinBlue")
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="push"
 								M.injutsu=1

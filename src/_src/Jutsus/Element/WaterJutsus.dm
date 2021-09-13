@@ -175,7 +175,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=0.6*(J.damage+round((src.ninjutsu / 150)*2*J.damage))
+							A.damage=0.8*(J.damage+round((src.ninjutsu / 150)*2*J.damage))
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 					else
