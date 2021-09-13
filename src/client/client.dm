@@ -69,10 +69,12 @@ client
 						del(src)
 
 	Del()
+		// Temporary squad removal until squads are tied to both ckey AND character
+		
 		var/squad/squad = src.mob.GetSquad()
 		if(squad)
 			if(squad.leader[src.ckey])
-			
+
 				var/mission/mission = squad.mission
 				if(mission)
 					switch(mission.type)
