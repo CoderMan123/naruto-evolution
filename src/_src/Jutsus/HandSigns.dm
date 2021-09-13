@@ -1340,7 +1340,7 @@ mob
 						usr.Iceball()
 				if(usr.first=="dog"&&usr.second=="dog"&&usr.third=="rabbit"&&usr.rat==0&&usr.dog==2&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==1)
 					var/obj/Jutsus/Ice_Explosion/J=new/obj/Jutsus/Ice_Explosion
-					if(J.type in usr.jutsus)
+					if(J.type in usr.jutsus_learned)
 						if(genintesters.Find(src)) SealsDoneGenin++
 						usr.Ice_Explosion()
 				if(usr.first=="dog"&&usr.second=="dog"&&usr.third=="dog"&&usr.fourth=="ox"&&usr.rat==0&&usr.dog==3&&usr.ox==1&&usr.dragon==0&&usr.monkey==0&&usr.snake==0&&usr.horse==0&&usr.rabbit==0)
