@@ -559,7 +559,7 @@ obj
 					src.overlays+=image('GRND.dmi',icon_state = "GDEdgeT",pixel_y=32)
 				var/turf/Td = src.loc
 				if(Td) Td.iswater=1
-				spawn(200)
+				spawn(300)
 					if(Td)Td.iswater=0
 					if(src)del(src)
 	Projectiles
