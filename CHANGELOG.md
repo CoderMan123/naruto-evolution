@@ -3,6 +3,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2021-09-14
+
+### Added
+- New hotsprings building!
+
+### Changed
+- The target range training area distance is now shorter
+- Water created by water collide lasts 10 seconds longer
+- Nerfed Water Shark Damage (due to bugfix)
+- Training objects are no longer tab targetable
+- Buffed exp gains for shuriken and kunai in the target range training area
+
+### Fixed
+- Fixed complete mission messages
+- Fixed bug with water sharks damage
+- Fixed Water shark hitting it's user
+- Fixed bug with Ice Exlposion's handseals
+- Fixed a bug with squads
+
 ## [2.1.1] - 2021-09-13
 
 ### Changed
