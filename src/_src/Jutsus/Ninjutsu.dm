@@ -2702,7 +2702,7 @@ obj
 			density=1
 			layer=MOB_LAYER
 			New()
-				spawn(100)
+				spawn(40)
 				del(src)
 
 	FireStyle
