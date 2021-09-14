@@ -108,7 +108,7 @@ mob
 			src.HengeUndo()
 			if(injutsu) return
 			if(usr.canattack==1&&usr.dead==0&&usr.rest==0&&usr.move)
-				if(hit)
+				if(CheckState(src, new/state/recently_hit))
 					RestUp()
 					return
 /*				if(src.Gates==null)
