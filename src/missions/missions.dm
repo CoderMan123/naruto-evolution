@@ -66,11 +66,11 @@ mission
 					if(VILLAGE_LEAF)
 						for(var/mob/m in mobs_online)
 							if(m.village != VILLAGE_LEAF)
-								spawn(150)m<<output("Word has spread that the Hidden Leaf will be delivering some intel! Intercept them!","Action.Output")
+								spawn(150)m<<output("<b>Word has spread that the Hidden Leaf will be delivering some intel! Intercept them!</b>","Action.Output")
 					if(VILLAGE_SAND)
 						for(var/mob/m in mobs_online)
 							if(m.village != VILLAGE_SAND)
-								spawn(150)m<<output("Word has spread that the Hidden Sand will be delivering some intel! Intercept them!","Action.Output")
+								spawn(150)m<<output("<b>Word has spread that the Hidden Sand will be delivering some intel! Intercept them!</b>","Action.Output")
 
 			if(/mission/a_rank/political_escort)
 
@@ -83,7 +83,7 @@ mission
 						npc.squad_leader_ckey = M.ckey
 						for(var/mob/m in mobs_online)
 							if(m.village != VILLAGE_LEAF)
-								spawn(150)m<<output("Word has spread that the Hidden Leaf are escorting a Daimyo! Nows our chance to assasinate them!","Action.Output")
+								spawn(150)m<<output("<b>Word has spread that the Hidden Leaf are escorting a Daimyo! Nows our chance to assasinate them!</b>","Action.Output")
 						
 					
 					if(VILLAGE_SAND)
@@ -94,7 +94,7 @@ mission
 						npc.squad_leader_ckey = M.ckey
 						for(var/mob/m in mobs_online)
 							if(m.village != VILLAGE_SAND)
-								spawn(150)m<<output("Word has spread that the Hidden Sand are escorting a Daimyo! Nows our chance to assasinate them!","Action.Output")
+								spawn(150)m<<output("<b>Word has spread that the Hidden Sand are escorting a Daimyo! Nows our chance to assasinate them!</b>","Action.Output")
 
 	proc/Complete(mob/M)
 		switch(M.village)
