@@ -60,6 +60,7 @@ world
 		spawn() HTMLlist()
 		spawn() Kage_Inactivity_Check()
 		spawn() Akatsuki_Inactivity_Check()
+		spawn() Hotspring_Loop()
 
 	Del()
 		src.FailMissions()

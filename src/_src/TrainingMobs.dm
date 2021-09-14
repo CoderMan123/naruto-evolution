@@ -58,9 +58,9 @@ mob
 					if(istype(o, /obj/Projectiles/Weaponry/Needle))
 						M.LevelStat("Precision", (rand(150, 200)*trainingexp))
 					if(istype(o, /obj/Projectiles/Weaponry/Shuriken))
-						M.LevelStat("Precision", (rand(200, 300)*trainingexp))
+						M.LevelStat("Precision", (rand(250, 350)*trainingexp))
 					if(istype(o, /obj/Projectiles/Weaponry/Kunai))
-						M.LevelStat("Precision", (rand(300, 400)*trainingexp))
+						M.LevelStat("Precision", (rand(450, 550)*trainingexp))
 
 				Death()
 					return

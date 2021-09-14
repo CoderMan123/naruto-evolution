@@ -104,14 +104,15 @@ mission
 
 					var/jounin_reward = 0
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+						if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 							jounin_reward += jounin_reward_mod
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
-							if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
@@ -120,7 +121,6 @@ mission
 							spawn() squad.RefreshMember(m)
 
 					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
-					M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 
 				else if(src.squad && squad && src.squad == squad && squad.mission && !src.squad.mission.complete && !O)
 					spawn() M.client.Alert("I'm still waiting on that squad intel. Please hurry along and pick it up from [src.required_mobs[1]]", "[src.complete_npc]")
@@ -135,7 +135,7 @@ mission
 					spawn() M.client.UpdateInventoryPanel()
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m.Levelup()
@@ -179,7 +179,7 @@ mission
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey])
+							if(squad == m.GetSquad())
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() m.UpdateHMB()
@@ -191,14 +191,15 @@ mission
 
 					var/jounin_reward = 0
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+						if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 							jounin_reward += jounin_reward_mod
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
-							if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
@@ -215,7 +216,7 @@ mission
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey])
+							if(squad == m.GetSquad())
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() m.UpdateHMB()
@@ -227,14 +228,15 @@ mission
 
 					var/jounin_reward = 0
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+						if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 							jounin_reward += jounin_reward_mod
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
-							if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
@@ -287,14 +289,15 @@ mission
 
 						var/jounin_reward = 0
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+							if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 								jounin_reward += jounin_reward_mod
 
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey])
+							if(squad == m.GetSquad())
 								m.exp += exp_reward
 								m.ryo += ryo_reward
-								if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+								m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+								if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 									m.exp += jounin_reward
 									m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
@@ -311,7 +314,7 @@ mission
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey])
+							if(squad== m.GetSquad())
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() m.UpdateHMB()
@@ -323,14 +326,15 @@ mission
 
 					var/jounin_reward = 0
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+						if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 							jounin_reward += jounin_reward_mod
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
-							if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 

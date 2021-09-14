@@ -210,9 +210,14 @@ squad
 				c.mob.Squad()
 
 mob
+	proc/GetLeader()
+		for(var/squad/squad in squads)
+			if(squad.leader[src.ckey] && squad.leader[src.ckey] == src.character) return squad
+			else continue
+
 	proc/GetSquad()
 		for(var/squad/squad in squads)
-			if(squad.leader[src.ckey] && squad.leader[src.ckey] == src.character || squad.members[src.ckey] && squad.members[src.ckey] == src.character) return squad
+			if(squad == src.GetLeader() || squad.members[src.ckey] && squad.members[src.ckey] == src.character) return squad
 			else continue
 
 	verb/Squad()
@@ -311,7 +316,7 @@ mob
 				var/mission
 				var/mission_management
 
-				if(squad.leader[src.ckey])
+				if(squad == src.GetLeader())
 					squad_management = {"
 						<h2 class="spacer">Squad Management</h1>
 
@@ -319,7 +324,7 @@ mob
 						<span>\[<a href='?src=\ref[src];action=squad-disband;ckey=[ckey]'>Disband</a>]</span>
 					"}
 
-				if(squad.leader[src.ckey] && squad.mission && !squad.mission.complete)
+				if(squad == src.GetLeader() && squad.mission && !squad.mission.complete)
 					mission_management = {"
 						<span>\[<a href='?src=\ref[src];action=mission-abandon;ckey=[ckey]'>Abandon</a>]</span>
 					"}
@@ -370,7 +375,7 @@ mob
 
 				for(var/ckey in squad.members)
 					//You're the Leader, ckey is not
-					if(squad.leader[src.ckey] && !squad.leader[ckey])
+					if(squad == src.GetLeader() && !squad.leader[ckey])
 						squad_members += {"
 							<tr>
 								<td>[squad.members[ckey]]</td>

@@ -559,7 +559,7 @@ obj
 					src.overlays+=image('GRND.dmi',icon_state = "GDEdgeT",pixel_y=32)
 				var/turf/Td = src.loc
 				if(Td) Td.iswater=1
-				spawn(200)
+				spawn(300)
 					if(Td)Td.iswater=0
 					if(src)del(src)
 	Projectiles
@@ -1370,7 +1370,7 @@ obj
 						if(istype(O,/mob))
 							var/mob/M=O
 							var/mob/Owner=src.Owner
-							if(M.dead || M.key == src.name) return
+							if(M.dead || M.key == src.name || M == Owner) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
@@ -1378,7 +1378,7 @@ obj
 								walk(src,0)
 								src.loc=O.loc
 								src.Hit=1
-								M.DealDamage(src.damage+(Owner.strength*0.9)+(Owner.ninjutsu*2.5),src.Owner,"NinBlue")
+								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="push"
 								M.injutsu=1

@@ -94,7 +94,7 @@ mob/npc
 							O.squad.mission.Complete(usr)
 
 						// Request mission (Squad leader only)
-						else if(squad && squad.leader[usr.ckey])
+						else if(squad && squad == usr.GetLeader())
 							// Check for mission cooldown
 							var/mission_delay = ((world.realtime - usr.client.last_mission)/10/60)
 							if(mission_delay < 20)
@@ -121,7 +121,7 @@ mob/npc
 													squad.mission.Start(usr)
 
 													for(var/mob/m in mobs_online)
-														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+														if(squad == m.GetSquad()) m.client.last_mission = squad.mission.start
 
 													for(var/ckey in squad.members)
 														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
@@ -149,7 +149,7 @@ mob/npc
 													squad.mission.Start(usr)
 
 													for(var/mob/m in mobs_online)
-														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+														if(squad == m.GetSquad()) m.client.last_mission = squad.mission.start
 
 													for(var/ckey in squad.members)
 														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
@@ -176,7 +176,7 @@ mob/npc
 													squad.mission.Start(usr)
 
 													for(var/mob/m in mobs_online)
-														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+														if(squad == m.GetSquad()) m.client.last_mission = squad.mission.start
 
 													for(var/ckey in squad.members)
 														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
@@ -203,7 +203,7 @@ mob/npc
 													squad.mission.Start(usr)
 
 													for(var/mob/m in mobs_online)
-														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+														if(squad == m.GetSquad()) m.client.last_mission = squad.mission.start
 
 													for(var/ckey in squad.members)
 														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
@@ -230,7 +230,7 @@ mob/npc
 													squad.mission.Start(usr)
 
 													for(var/mob/m in mobs_online)
-														if(squad.members[m.client.ckey]) m.client.last_mission = squad.mission.start
+														if(squad == m.GetSquad()) m.client.last_mission = squad.mission.start
 
 													for(var/ckey in squad.members)
 														var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(ckey, 1, 2)]/[ckey].sav")
@@ -241,11 +241,11 @@ mob/npc
 											usr.client.Alert("You must be at least ANBU rank to take on S rank missions.", src.name)
 
 						// Mission request denied: active mission
-						else if(squad && squad.members[usr.ckey] && squad.mission && !squad.mission.complete)
+						else if(squad && squad == usr.GetSquad() && squad.mission && !squad.mission.complete)
 							usr.client.Alert("Your squad already has an active mission.", src.name)
 
 						// Mission request denied: leader must request mission
-						else if(squad && squad.members[usr.ckey] && !squad.mission)
+						else if(squad && squad == usr.GetSquad() && !squad.mission)
 							usr.client.Alert("Hey [usr.name], it's nice to see you! Have your squad leader stop by if you're ready to take on a mission.", src.name)
 
 						// Mission request denied: not in a squad
@@ -417,7 +417,7 @@ mob/npc
 				..()
 				if(src.squad && src.health <= 0)
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							squad.mission.status = "Failure"
 							squad.mission.complete = world.realtime
 							m << output("<b>[squad.mission.name]:</b> The Daimyo has been killed! Our mission is a failure.", "Action.Output")
@@ -430,7 +430,7 @@ mob/npc
 							var/exp_reward = round(squad.mission.mission_exp_mod * squad.mission.A_reward)
 							var/ryo_reward = round(squad.mission.mission_ryo_mod * squad.mission.A_reward)
 							for(var/mob/m in mobs_online)
-								if(ksquad.members[m.client.ckey])
+								if(ksquad == m.GetSquad())
 									m.exp += exp_reward
 									m.ryo += ryo_reward
 									m.Levelup()
@@ -822,7 +822,7 @@ obj/escort
 
 				if(political_escort.squad && political_escort.squad.mission)
 					for(var/mob/s_leader in mobs_online)
-						if(political_escort.squad.leader[s_leader.ckey])
+						if(political_escort.squad == s_leader.GetLeader())
 							political_escort.squad.mission.Complete(s_leader)
 							del political_escort
 							break
@@ -941,7 +941,7 @@ obj/escort
 
 				if(political_escort.squad && political_escort.squad.mission)
 					for(var/mob/s_leader in mobs_online)
-						if(political_escort.squad.leader[s_leader.ckey])
+						if(political_escort.squad == s_leader.GetLeader())
 							political_escort.squad.mission.Complete(s_leader)
 							del political_escort
 							break
@@ -991,7 +991,7 @@ obj/escort
 
 				if(political_escort.squad && political_escort.squad.mission)
 					for(var/mob/s_leader in mobs_online)
-						if(political_escort.squad.leader[s_leader.ckey])
+						if(political_escort.squad == s_leader.GetLeader())
 							political_escort.squad.mission.Complete(s_leader)
 							del political_escort
 							break
@@ -1242,7 +1242,7 @@ obj/escort
 
 				if(political_escort.squad && political_escort.squad.mission)
 					for(var/mob/s_leader in mobs_online)
-						if(political_escort.squad.leader[s_leader.ckey])
+						if(political_escort.squad == s_leader.GetLeader())
 							political_escort.squad.mission.Complete(s_leader)
 							del political_escort
 							break
@@ -1361,7 +1361,7 @@ obj/escort
 
 				if(political_escort.squad && political_escort.squad.mission)
 					for(var/mob/s_leader in mobs_online)
-						if(political_escort.squad.leader[s_leader.ckey])
+						if(political_escort.squad == s_leader.GetLeader())
 							political_escort.squad.mission.Complete(s_leader)
 							del political_escort
 							break
@@ -1411,7 +1411,7 @@ obj/escort
 
 				if(political_escort.squad && political_escort.squad.mission)
 					for(var/mob/s_leader in mobs_online)
-						if(political_escort.squad.leader[s_leader.ckey])
+						if(political_escort.squad == s_leader.GetLeader())
 							political_escort.squad.mission.Complete(s_leader)
 							del political_escort
 							break

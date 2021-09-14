@@ -30,7 +30,7 @@ mob/verb/Target_A_Mob()
 		if(target_mob==M) continue
 		if(M==src.puppets[1]) continue
 		if(M.Owner==src) continue
-		if(istype(M, /mob/training/untargetable)) continue
+		if(istype(M, /mob/training)) continue
 		src.Target_Atom(M)
 		return
 mob/var/tmp

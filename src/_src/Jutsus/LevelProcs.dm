@@ -52,19 +52,18 @@ obj
 
 mob
 	proc
-		LevelStat(stat,howmuch,mission)
+		LevelStat(stat, howmuch, var/bypass_exp_lock = 0)
 			var/area/A=loc.loc
 			if(!A) return
-			if(A.Safe&&!mission) return
-			if(src.exp_locked)
-				return
+			if(A.Safe && !bypass_exp_lock) return
+			if(src.exp_locked && !bypass_exp_lock) return
 			switch(stat)
-				if("Defence")defexp += round(howmuch)
-				if("Strength")strengthexp += round(howmuch)
-				if("Ninjutsu")ninexp += round(howmuch)
-				if("Genjutsu")genexp += round(howmuch)
-				if("Agility")agilityexp += round(howmuch)
-				if("Precision")precisionexp += round(howmuch)
+				if("Defence") defexp += round(howmuch)
+				if("Strength") strengthexp += round(howmuch)
+				if("Ninjutsu") ninexp += round(howmuch)
+				if("Genjutsu") genexp += round(howmuch)
+				if("Agility") agilityexp += round(howmuch)
+				if("Precision") precisionexp += round(howmuch)
 			Levelup()
 
 		Levelup()
@@ -553,7 +552,7 @@ mob
 										world << output ("[X.name] has slain a member of the Akatsuki earning the [X.village] village 4 points! (Akatsuki lives remaining: [akat_lives_left])", "Action.Output")
 										if(squad)
 											for(var/mob/m in mobs_online)
-												if(squad.members[m.client.ckey])
+												if(squad == m.GetSquad())
 													m << output ("[X.name] has killed a member of the Akatsuki! You've earned 10 bonus experience for your squad!", "Action.Output")
 													m.exp += 10
 													m.Levelup()
@@ -573,7 +572,7 @@ mob
 										X << output ("It's a slaughter. You've earned 10 bonus experience for your squad!", "Action.Output")
 										if(squad)
 											for(var/mob/m in mobs_online)
-												if(squad.members[m.client.ckey])
+												if(squad == m.GetSquad())
 													m.exp += 10
 													m.Levelup()
 										else
@@ -615,7 +614,7 @@ mob
 									if(src.village == VILLAGE_MISSING_NIN)
 										squad.mission.required_vars["KILLS"]++
 										for(var/mob/m in mobs_online)
-											if(squad.members[m.client.ckey])
+											if(squad == m.GetSquad())
 												m << output("[X] has slain the Missing-Nin [src] while on a mission hunting rogue ninja.", "Action.Output")
 												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] rogue ninja have been eliminated.", "Action.Output")
 										spawn() squad.mission.Complete(X)
@@ -626,7 +625,7 @@ mob
 											if(src.village == VILLAGE_SAND)
 												squad.mission.required_vars["KILLS"]++
 												for(var/mob/m in mobs_online)
-													if(squad.members[m.client.ckey])
+													if(squad == m.GetSquad())
 														m << output("[X] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
 														m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
 												spawn() squad.mission.Complete(X)
@@ -635,7 +634,7 @@ mob
 											if(src.village == VILLAGE_LEAF)
 												squad.mission.required_vars["KILLS"]++
 												for(var/mob/m in mobs_online)
-													if(squad.members[m.client.ckey])
+													if(squad == m.GetSquad())
 														m << output("[X] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
 														m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
 												spawn() squad.mission.Complete(X)
@@ -646,7 +645,7 @@ mob
 									if(src.village == VILLAGE_AKATSUKI)
 										squad.mission.required_vars["KILLS"]++
 										for(var/mob/m in mobs_online)
-											if(squad.members[m.client.ckey])
+											if(squad == m.GetSquad())
 												m << output("[X] has slain the Akatsuki member [src] while on a mission to eliminate them.", "Action.Output")
 												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] Akatsuki members have been eliminated.", "Action.Output")
 										spawn() squad.mission.Complete(X)
@@ -658,7 +657,7 @@ mob
 								if(/mission/b_rank/hunting_rogues)
 									squad.mission.required_vars["DEATHS"]++
 									for(var/mob/m in mobs_online)
-										if(squad.members[m.client.ckey])
+										if(squad == m.GetSquad())
 											m << output("[src] has died to [X] while on a mission hunting rogue ninja.", "Action.Output")
 											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting rogue ninja.", "Action.Output")
 									spawn() squad.mission.Complete(src)
@@ -666,7 +665,7 @@ mob
 								if(/mission/c_rank/the_war_effort)
 									squad.mission.required_vars["DEATHS"]++
 									for(var/mob/m in mobs_online)
-										if(squad.members[m.client.ckey])
+										if(squad == m.GetSquad())
 											m << output("[src] has died to [X] while on a mission hunting enemy ninja.", "Action.Output")
 											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting enemy ninja.", "Action.Output")
 									spawn() squad.mission.Complete(src)
@@ -676,7 +675,7 @@ mob
 								if(/mission/s_rank/clouds_of_crimson)
 									squad.mission.required_vars["DEATHS"]++
 									for(var/mob/m in mobs_online)
-										if(squad.members[m.client.ckey])
+										if(squad == m.GetSquad())
 											m << output("[src] has died to [X] while on a mission to eliminate the Akatsuki.", "Action.Output")
 											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting the Akatsuki.", "Action.Output")
 									spawn() squad.mission.Complete(src)
