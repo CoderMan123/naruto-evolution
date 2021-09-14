@@ -1508,9 +1508,11 @@ obj
 								M.injutsu=1
 								M.firing=1
 								M.canattack=0
+								var/bound_location = M.loc
 								for(var/i=0, i<(src.level*2), i++)
-									sleep(5)
+									if(bound_location != M.loc || !Owner) break
 									M.DealDamage(src.damage/8,Owner,"NinBlue")
+									sleep(3)
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.move=1
 								M.injutsu=0
