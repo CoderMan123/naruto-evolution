@@ -52,7 +52,8 @@ mob
 			if(mobs_online.Find(src))
 				if(character)
 					src.last_online = world.realtime
-					if(kages[src.village] == src.client.ckey) kages_last_online[src.village] = src.last_online
+					if(hokage[src.client.ckey]) kages_last_online[src.village] = src.last_online
+					if(kazekage[src.client.ckey]) kages_last_online[src.village] = src.last_online
 
 					var/list/exclude = list("icon", "icon_state", "overlays", "underlays", "alpha", "layer", "bound_width", "bound_height", "bound_x", "bound_y", "pixel_x", "pixel_y", "appearance_flags", "transform", "vis_contents", "filters", "view")
 					for(var/v in src.vars)
@@ -113,7 +114,8 @@ mob
 			if(!mobs_online.Find(src))
 				if(character)
 					src.last_online = world.realtime
-					if(kages[src.village] == src.client.ckey) kages_last_online[src.village] = src.last_online
+					if(hokage[src.client.ckey]) kages_last_online[src.village] = src.last_online
+					if(kazekage[src.client.ckey]) kages_last_online[src.village] = src.last_online
 
 					for(var/v in src.vars)
 						if(issaved(src.vars[v]))

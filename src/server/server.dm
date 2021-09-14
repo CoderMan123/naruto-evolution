@@ -6,10 +6,11 @@ var/list/moderators = list()
 var/list/programmers = list("douglasparker")
 var/list/pixel_artists = list("illusiveblair")
 
-var/list/kages = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
+var/list/hokage = list()
+var/list/kazekage = list()
 var/list/kages_last_online = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
 
-var/akatsuki
+var/list/akatsuki = list()
 var/akatsuki_last_online
 
 var/list/alpha_testers = list("djinnythedjin", "lavenblade")
@@ -100,27 +101,27 @@ world
 			if(kages_last_online[VILLAGE_LEAF] && kages_last_online[VILLAGE_LEAF] + 864000 * days <= world.realtime)
 				var/online
 				for(var/mob/m in mobs_online)
-					if(kages[VILLAGE_LEAF] == m.client.ckey) online = 1
+					if(hokage[m.client.ckey] == m.character) online = 1
 
 				// Don't demote Kages that are online because kage_last_online[] only updates on mob.Load() and mob.Save().
 				// Otherwise, Kages will be demoted if they do not logout to update their kage_last_online[] timestamp.
 				if(online)
 					world << output("The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
-					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> ([kages[VILLAGE_LEAF]]) was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
-					kages[VILLAGE_LEAF] = null
+					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_HOKAGE] ([global.GetHokage()]) for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
+					hokage = list()
 					kages_last_online[VILLAGE_LEAF] = null
 			
 			if(kages_last_online[VILLAGE_SAND] && kages_last_online[VILLAGE_SAND] + 864000 * days <= world.realtime)
 				var/online
 				for(var/mob/m in mobs_online)
-					if(kages[VILLAGE_SAND] == m.client.ckey) online = 1
+					if(kazekage[m.client.ckey] == m.character) online = 1
 				
 				// Don't demote Kages that are online because kage_last_online[] only updates on mob.Load() and mob.Save().
 				// Otherwise, Kages will be demoted if they do not logout to update their kage_last_online[] timestamp.
 				if(online)
 					world << output("The [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
-					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_KAZEKAGE] ([kages[VILLAGE_SAND]]) for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
-					kages[VILLAGE_SAND] = null
+					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_KAZEKAGE] ([global.GetKazekage()]) for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
+					kazekage = list()
 					kages_last_online[VILLAGE_SAND] = null
 
 			sleep(600)
@@ -133,14 +134,14 @@ world
 			if(akatsuki_last_online && akatsuki_last_online + 864000 * days <= world.realtime)
 				var/online
 				for(var/mob/m in mobs_online)
-					if(akatsuki == m.client.ckey) online = 1
+					if(akatsuki[m.client.ckey] == m.character) online = 1
 
 				// Don't demote Akatsuki that are online because akatsuki_last_online only updates on mob.Load() and mob.Save().
 				// Otherwise, Akatsuki will be demoted if they do not logout to update their akatsuki_last_online timestamp.
 				if(online)
 					world << output("The [RANK_AKATSUKI] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
-					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> ([kages[VILLAGE_AKATSUKI]]) was forced out of office due to inactivity for [days] days.</font><br />", LOG_AKATSUKI)
-					akatsuki = null
+					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI] ([global.GetAkatsuki()]) for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_AKATSUKI)
+					akatsuki = list()
 					akatsuki_last_online = null
 
 			sleep(600)
@@ -218,7 +219,8 @@ world
 		F["names_taken"] << names_taken
 
 		F = new(SAVEFILE_KAGES)
-		F["kages"] << kages
+		F["hokage"] << hokage
+		F["kazekage"] << kazekage
 		F["kages_last_online"] << kages_last_online
 
 		F = new(SAVEFILE_AKATSUKI)
@@ -271,7 +273,8 @@ world
 		if(F["squads"]) F["squads"] >> squads
 
 		F = new(SAVEFILE_KAGES)
-		if(F["kages"]) F["kages"] >> kages
+		if(F["hokage"]) F["hokage"] >> hokage
+		if(F["kazekage"]) F["kazekage"] >> kazekage
 		if(F["kages_last_online"]) F["kages_last_online"] >> kages_last_online
 
 		F = new(SAVEFILE_AKATSUKI)
