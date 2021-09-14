@@ -69,31 +69,6 @@ client
 						del(src)
 
 	Del()
-		// Temporary squad removal until squads are tied to both ckey AND character
-		
-		var/squad/squad = src.mob.GetSquad()
-		if(squad)
-			if(squad == src.mob.GetLeader())
-
-				var/mission/mission = squad.mission
-				if(mission)
-					switch(mission.type)
-						if(/mission/d_rank/deliver_intel)
-							for(var/obj/Inventory/mission/deliver_intel/O)
-								if(O.squad.mission == mission)
-									del(O)
-
-						if(/mission/a_rank/political_escort)
-							del(squad.mission.complete_npc)
-
-				squad.members = null
-				squad.leader = null
-				global.squads -= squad
-
-			else if(squad == src.mob.GetSquad())
-				squad.members -= src.ckey
-				squad.Refresh()
-
 		src.mob.LogoutCharacter()
 		src.mob.Save()
 		mobs_online -= src.mob
