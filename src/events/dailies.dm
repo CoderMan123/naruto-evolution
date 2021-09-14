@@ -4,11 +4,11 @@ var/hotspring_stat_exp = 200
 proc/Hotspring_Loop()
 	while(world)
 		for(var/mob/m in mobs_online)
-			if(istype(m.loc.loc, /area/hotspring))
-				if(CheckNextDay(m, m.last_hotspring_time))
+			if(m && istype(m.loc.loc, /area/hotspring))
+				if(m && CheckNextDay(m, m.last_hotspring_time))
 					m.last_hotspring_time = world.realtime
 					m.hotspring_minutes = 0
-				else if(m.hotspring_minutes < 60)
+				else if(m && m.hotspring_minutes < 60)
 					m.hotspring_minutes++
 					m.LevelStat("Ninjutsu", hotspring_stat_exp, 1)
 					m.LevelStat("Genjutsu", hotspring_stat_exp, 1)
@@ -18,7 +18,7 @@ proc/Hotspring_Loop()
 					m.LevelStat("Agility", hotspring_stat_exp, 1)
 					m.exp += hotspring_exp
 					m<<output("You feel relaxed and have gained [hotspring_exp] exp and [hotspring_stat_exp] exp in each stat! You have spent [m.hotspring_minutes] minutes in the hotspring today.","Action.Output")
-				else
+				else if(m)
 					m<<output("You've already soaked for an hour today, that's enough relaxation for one day. Come back tommorow.","Action.Output")
 		sleep(600)
 
