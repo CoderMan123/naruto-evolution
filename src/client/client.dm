@@ -73,7 +73,7 @@ client
 		
 		var/squad/squad = src.mob.GetSquad()
 		if(squad)
-			if(squad.leader[src.ckey])
+			if(squad == src.mob.GetLeader())
 
 				var/mission/mission = squad.mission
 				if(mission)
@@ -90,7 +90,7 @@ client
 				squad.leader = null
 				global.squads -= squad
 
-			else if(squad.members[src.ckey])
+			else if(squad == src.mob.GetSquad())
 				squad.members -= src.ckey
 				squad.Refresh()
 

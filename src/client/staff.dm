@@ -586,7 +586,7 @@ mob
 								
 								if(src.client.Alert("Would you like to reset mission cooldown for [M.name]'s Squad?", "Manage Mission", list("Yes", "No")) == 1)
 									for(var/mob/m in mobs_online)
-										if(m && squad.members[m.client.ckey])
+										if(m && squad == m.GetSquad())
 											m.client.last_mission = null
 											var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(m.client.ckey, 1, 2)]/[m.client.ckey].sav")
 											F["last_mission"] << null
@@ -605,7 +605,7 @@ mob
 
 								if(src.client.Alert("Would you like to reset mission cooldown for [M.name]'s Squad?", "Manage Mission", list("Yes", "No")) == 1)
 									for(var/mob/m in mobs_online)
-										if(m && squad.members[m.client.ckey])
+										if(m && squad == m.GetSquad())
 											m.client.last_mission = null
 											var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(m.client.ckey, 1, 2)]/[m.client.ckey].sav")
 											F["last_mission"] << null

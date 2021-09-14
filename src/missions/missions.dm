@@ -104,15 +104,15 @@ mission
 
 					var/jounin_reward = 0
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+						if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 							jounin_reward += jounin_reward_mod
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
-							if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
@@ -135,7 +135,7 @@ mission
 					spawn() M.client.UpdateInventoryPanel()
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m.Levelup()
@@ -179,7 +179,7 @@ mission
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey])
+							if(squad == m.GetSquad())
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() m.UpdateHMB()
@@ -191,15 +191,15 @@ mission
 
 					var/jounin_reward = 0
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+						if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 							jounin_reward += jounin_reward_mod
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
-							if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
@@ -216,7 +216,7 @@ mission
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey])
+							if(squad == m.GetSquad())
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() m.UpdateHMB()
@@ -228,15 +228,15 @@ mission
 
 					var/jounin_reward = 0
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+						if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 							jounin_reward += jounin_reward_mod
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
 							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
-							if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
@@ -289,15 +289,15 @@ mission
 
 						var/jounin_reward = 0
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+							if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 								jounin_reward += jounin_reward_mod
 
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey])
+							if(squad == m.GetSquad())
 								m.exp += exp_reward
 								m.ryo += ryo_reward
 								m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
-								if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+								if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 									m.exp += jounin_reward
 									m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
@@ -314,7 +314,7 @@ mission
 						squad.mission.complete = world.realtime
 
 						for(var/mob/m in mobs_online)
-							if(squad.members[m.client.ckey])
+							if(squad== m.GetSquad())
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
 								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() m.UpdateHMB()
@@ -326,15 +326,19 @@ mission
 
 					var/jounin_reward = 0
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey] && m.rank == RANK_ACADEMY_STUDENT)
+						if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
 							jounin_reward += jounin_reward_mod
 
 					for(var/mob/m in mobs_online)
-						if(squad.members[m.client.ckey])
+						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
+<<<<<<< HEAD
 							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
-							if(squad.leader[m.ckey] && m.rank == RANK_JOUNIN)
+							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
+=======
+							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
+>>>>>>> fbe5728 (fix: squads are now tied to ckey and character name)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
