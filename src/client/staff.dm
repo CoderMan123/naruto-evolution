@@ -13,6 +13,15 @@ client
 				stat("CPU:", world.cpu)
 				stat("Map CPU:", world.map_cpu)
 		
+		if(src && administrators.Find(src.ckey) && global.hokage_election || global.kazekage_election)
+			statpanel("Election")
+			stat("Hokage Election:", global.hokage_election ? "Running" : "Ended")
+			stat("Hokage Ballot:", global.hokage_ballot_open ? "Open" : "Closed")
+			stat("Hokage Ballot Counter:", global.hokage_election_ballot.len)
+			stat("Kazekage Election:", global.kazekage_election ? "Running" : "Ended")
+			stat("Kazekage Ballot:", global.kazekage_ballot_open ? "Open" : "Closed")
+			stat("Kazekage Ballot Counter:", global.kazekage_election_ballot.len)
+		
 		if(src && administrators.Find(src.ckey) && src.stat_display_mobs)
 			if(src && statpanel("Mob Information"))
 				stat("Animal Counters", "")

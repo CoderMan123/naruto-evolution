@@ -62,6 +62,7 @@ world
 		spawn() Kage_Inactivity_Check()
 		spawn() Akatsuki_Inactivity_Check()
 		spawn() Hotspring_Loop()
+		spawn() Election()
 
 	Del()
 		src.FailMissions()
