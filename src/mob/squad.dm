@@ -212,7 +212,7 @@ squad
 mob
 	proc/GetLeader()
 		for(var/squad/squad in squads)
-			if(squad == src.GetLeader() && squad == src.GetLeader() == src.character) return squad
+			if(squad.leader[src.ckey] && squad.leader[src.ckey] == src.character) return squad
 			else continue
 
 	proc/GetSquad()
