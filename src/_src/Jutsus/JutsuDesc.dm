@@ -679,7 +679,7 @@ obj
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*0
-				maxcooltime = jutsucooldown*20
+				maxcooltime = jutsucooldown*10
 
 		Opening_Gate
 			icon_state = "Gate 1"
