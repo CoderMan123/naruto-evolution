@@ -408,6 +408,7 @@ turf
 
 			//Tutorial
 			T52 //KH
+			T53 // Hotsprings
 
 
 			T100//Akat
@@ -509,6 +510,7 @@ turf
 			T51 //Hospital
 			//Tutorial
 			T52 //KH
+			T53 //Hotsprings
 
 			T100//Akat
 	Outsides

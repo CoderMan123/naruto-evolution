@@ -52,19 +52,18 @@ obj
 
 mob
 	proc
-		LevelStat(stat,howmuch,mission)
+		LevelStat(stat, howmuch, var/bypass_exp_lock = 0)
 			var/area/A=loc.loc
 			if(!A) return
-			if(A.Safe&&!mission) return
-			if(src.exp_locked)
-				return
+			if(A.Safe && !bypass_exp_lock) return
+			if(src.exp_locked && !bypass_exp_lock) return
 			switch(stat)
-				if("Defence")defexp += round(howmuch)
-				if("Strength")strengthexp += round(howmuch)
-				if("Ninjutsu")ninexp += round(howmuch)
-				if("Genjutsu")genexp += round(howmuch)
-				if("Agility")agilityexp += round(howmuch)
-				if("Precision")precisionexp += round(howmuch)
+				if("Defence") defexp += round(howmuch)
+				if("Strength") strengthexp += round(howmuch)
+				if("Ninjutsu") ninexp += round(howmuch)
+				if("Genjutsu") genexp += round(howmuch)
+				if("Agility") agilityexp += round(howmuch)
+				if("Precision") precisionexp += round(howmuch)
 			Levelup()
 
 		Levelup()

@@ -57,6 +57,8 @@ mob
 		JashinSacrifices=0
 		exp_reward = 0
 		last_damage_taken_time
+		last_hotspring_time
+		hotspring_minutes = 0
 		tmp
 			AFK=0
 			BeingThrown
