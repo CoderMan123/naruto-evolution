@@ -666,9 +666,9 @@ mob
 										squad.members[M.client.ckey] = M.character
 								
 								var/squad/squad = M.GetSquad()
-								if(squad) squad.Refresh()
+								if(squad) spawn() squad.Refresh()
 
-								M.client.UpdateCharacterPanel()
+								spawn() M.client.UpdateCharacterPanel()
 
 								M.Save()
 								M.client.Save()
