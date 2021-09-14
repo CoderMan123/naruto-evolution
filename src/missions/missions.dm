@@ -333,12 +333,8 @@ mission
 						if(squad == m.GetSquad())
 							m.exp += exp_reward
 							m.ryo += ryo_reward
-<<<<<<< HEAD
 							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
-=======
-							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
->>>>>>> fbe5728 (fix: squads are now tied to ckey and character name)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
