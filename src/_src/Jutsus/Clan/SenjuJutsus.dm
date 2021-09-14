@@ -83,7 +83,7 @@ mob
 					flick("groundjutsu",src)
 					src.firing=1
 					src.canattack=0
-					spawn(1)
+					spawn(5)
 						src.firing=0
 						src.canattack=1
 					if(J.level==1) J.damage=0.5*((jutsudamage*J.Sprice)/2.5)
