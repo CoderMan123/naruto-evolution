@@ -395,10 +395,11 @@ mob
 							c_target.move=0
 							c_target.injutsu=1
 							c_target.canattack=0
-							while(Time&&c_target)
+							var/bound_location = c_target.loc
+							while(Time&&c_target&&src&&c_target.loc == bound_location)
+								c_target.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/4,src,"white")
 								sleep(10)
 								Time--
-								c_target.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/4,src,"white")
 							if(c_target)
 								c_target.overlays-='TreeBinding.dmi'
 								if(!c_target.dead)
