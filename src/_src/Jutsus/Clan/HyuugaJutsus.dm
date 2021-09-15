@@ -306,7 +306,7 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(J.level==4)
 						for(var/mob/M in range(4))
-							if(!istype(M,/mob/npc) && M.injutsu==0 && !M.dead && !M.swimming || istype(M,/mob/npc/combat) && M.injutsu==0 && !M.dead && !M.swimming)
+							if(!istype(M,/mob/npc) && M.injutsu==0 && !M.dead && !M.swimming || istype(M,/mob/npc/combat) && M.injutsu==0 && !M.dead)
 								var/ki = get_dist(M,src)
 								for(var/i=0,i<ki,i++) spawn() step_away(M,src); sleep(1.5)
 					for(var/i=0,i<17,i++)
@@ -339,7 +339,7 @@ mob
 							if(SOUTH) src.dir=WEST
 							if(EAST) src.dir=SOUTH
 							if(NORTH) src.dir=EAST
-						sleep(1)
+						sleep(0.5)
 					skiploop
 					O.icon_state = ""
 					O.pixel_x-=32
