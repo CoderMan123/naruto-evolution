@@ -24,6 +24,10 @@ proc/Hotspring_Loop()
 
 
 proc/CheckNextDay(mob/M, var/timestamp)
+	if(!timestamp)
+		M.last_hotspring_time = world.realtime
+		timestamp = M.last_hotspring_time
+
 	var/month = text2num(time2text(timestamp, "MM"))
 	var/day = text2num(time2text(timestamp, "DD"))
 	var/year = text2num(time2text(timestamp, "YYYY"))
