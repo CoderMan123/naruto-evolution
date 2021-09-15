@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.3] - 2021-09-16
+
+### Added
+- New icon for Web Shoot (Courtesy of Jay)
+
+### Changed
+- Cooldown system overhaul!
+- Healing and Chakra drain will no longer interupt rest
+- Ice mirrors now ends the moment the target is free of it
+- Buffed Byakugans chakra drain from punches
+- Buffed Heavenly Spin's tick rate
+- Buffed 64 palms chakra drain
+
+### Fixed
+- fixed bugs with spider clan
+
 ## [2.3.2] - 2021-09-14
 
 ### Fixed

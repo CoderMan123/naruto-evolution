@@ -14,6 +14,7 @@ mob
 		jutsus_learned[0]
 
 		tmp
+			jutsu_cooldowns[0]
 			ninja_tool_selection = 0 // Selected ninja tool from Rotate_Ninja_Tool()
 
 		#ifdef STATE_MANAGER

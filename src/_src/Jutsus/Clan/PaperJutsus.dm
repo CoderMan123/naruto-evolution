@@ -140,7 +140,6 @@ mob
 				for(var/obj/Jutsus/Angel_Wings/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-						J.Excluded=1
 						src.underlays+='Angel Wings.dmi'
 						src.inAngel=1
 						spawn(150)

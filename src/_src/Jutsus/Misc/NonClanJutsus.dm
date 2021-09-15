@@ -190,7 +190,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsu",src)
-						for(var/mob/M in oview(src,13))M.Target_Remove()
+						for(var/mob/M in oview(src,20))M.Target_Remove()
 						src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 						var/obj/O = new/obj
 						O.loc = src.loc
@@ -253,7 +253,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsu",src)
-						for(var/mob/M in oview(src,13))M.Target_Remove()
+						for(var/mob/M in oview(src,20))M.Target_Remove()
 						src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 						var/timer = J.level
 						while(timer)
@@ -560,7 +560,7 @@ mob
 					var/obj/B = new/obj/Training/BDLogB(src.loc)
 					B.IsJutsuEffect=src
 					B.loc=src.loc
-					for(var/mob/M in oview(src,13))M.Target_Remove()
+					for(var/mob/M in oview(src,20))M.Target_Remove()
 					if(J.level<4)
 						if(loc.loc:Safe!=1) J.exp=J.maxexp
 						J.Levelup()
@@ -720,7 +720,7 @@ mob
 						O.pixel_x=-16
 						spawn(1) step_rand(O)
 						spawn(10)if(O)del(O)
-					for(var/mob/M in oview(src,13))M.Target_Remove()
+					for(var/mob/M in oview(src,20))M.Target_Remove()
 					src.loc = T
 
 		Rasengan()

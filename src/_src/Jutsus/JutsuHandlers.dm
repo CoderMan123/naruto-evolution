@@ -19,23 +19,21 @@ mob
 		PreJutsu(var/obj/Jutsus/J)
 			if(CheckState(src, new/state/knocked_down)) return 0
 
-			if(src.multisized==1)//multisizestuff
+			if(src.multisized == 1)
 				return
-			if(J.Excluded)
-			//	src << output("returning 0 Ex","Action.Output")
+
+			if(src.jutsu_cooldowns.Find(J))
 				return 0
+
 			if(ChakraCheck(J.ChakraCost))
-			//	src << output("returning 0 CC","Action.Output")
 				return 0
-			J.Excluded = 1
-			J.uses ++
-			src.UpdateHMB()
+
 			src.JutsuCoolSlot(J)
-			spawn()
-				J.cooltimer = J.maxcooltime
-				J.JutsuCoolDown(src)
-			//	src << output("Cooldown","Action.Output")
-			//src << output("returning 1","Action.Output")
+
+			spawn() J.JutsuCoolDown(src)
+
+			J.uses ++
+			
 			return 1
 
 		DealDamage(amount = 0, Owner, colortype, heal = 0, chakra = 0, punch = 0)
@@ -67,6 +65,7 @@ mob
 					if(src.multisized)
 						damage = round(damage*0.3)
 					src.health -= damage
+					AddState(src, new/state/recently_hit, 60)
 					AddState(src, new/state/in_combat, 100)
 					if(Owner)
 						AddState(Owner, new/state/in_combat, 100)
@@ -126,7 +125,11 @@ mob
 			if(CHAKRA > src.chakra)
 				src << output("<Font color=Aqua>You Need More Chakra([CHAKRA]).</Font>","Action.Output")
 				return 1
+
 			src.chakra -= CHAKRA
+
+			src.UpdateHMB()
+
 
 			// as a note, change "in world" for clones to "in src.Clones"
 		CloneHandler() // add this to the beginning of each clone jutsu
@@ -136,7 +139,7 @@ mob
 
 obj
 	JutsuOverlays
-		layer = 9999
+		layer = 10001
 		icon = 'Misc Effects.dmi'
 		Cool1
 			icon_state = "jutsuwait1"
@@ -146,10 +149,6 @@ obj
 			icon_state = "jutsuwait3"
 		Cool4
 			icon_state = "jutsuwait4"
-mob
-	var
-		tmp
-			waitslot = 0
 obj
 	var
 		tmp
@@ -158,10 +157,27 @@ obj
 mob
 	proc
 		JutsuCoolSlot(obj/Jutsus/O)
-			if(waitslot >= src.client.map_resolution_y) return
-			src.waitslot ++
-			O.screen_loc = "[src.client.map_resolution_x-2],[src.client.map_resolution_y-1-src.waitslot]"
+			src.jutsu_cooldowns.Add(O)
 			src.client.screen += O
+
+			// Reorder Jutsu Cooldown List: Cooldown Timer Descending //
+
+			for(var/i = 1, i <= src.jutsu_cooldowns.len, i++)
+
+				for(var/next_index = 1, next_index <= src.jutsu_cooldowns.len, next_index++)
+
+					var/obj/Jutsus/jutsu = src.jutsu_cooldowns[i]
+					var/obj/Jutsus/jutsu_compare = src.jutsu_cooldowns[next_index]
+
+					if(jutsu.cooltimer > jutsu_compare.cooltimer)
+						src.jutsu_cooldowns.Swap(i, next_index)
+
+			// Reorder Jutsu Cooldown HUD Objects //
+
+			for(var/i = 1, i <= src.jutsu_cooldowns.len, i++)
+				var/obj/Jutsus/jutsu = src.jutsu_cooldowns[i]
+				jutsu.screen_loc = "[src.client.map_resolution_x - 2], [src.client.map_resolution_y - 1 - i]:-[i]"
+
 			if(O.Clan == null)
 				for(var/mob/M in range(10, src))
 					if(M.jutsucopy == 1)
@@ -171,25 +187,62 @@ mob
 						M.jutsucopy = Z
 						M << output("Your sharingan copies [src]'s [O]","Action.Output")
 obj
-	proc
-		JutsuCoolDown(mob/O)
-			while(O && src)
-				sleep(1)
-				if(src.Excluded)
-					src.overlays = 0
-					src.cooltimer --
-					if(src.cooltimer >= round(src.maxcooltime/1.2))
-						src.overlays += /obj/JutsuOverlays/Cool4/
-					if(src.cooltimer > round(src.maxcooltime/2) && src.cooltimer < round(src.maxcooltime/1.2))
-						src.overlays += /obj/JutsuOverlays/Cool3/
-					if(src.cooltimer <= round(src.maxcooltime/2) && src.cooltimer > round(src.maxcooltime/6))
-						src.overlays += /obj/JutsuOverlays/Cool2/
-					if(src.cooltimer <= round(src.maxcooltime/6))
-						src.overlays += /obj/JutsuOverlays/Cool1/
-					if(src.cooltimer <= 0)
-						src.overlays = 0
-						O.client.screen -= src
-						O.waitslot --
-						src.Excluded = 0
-						break
-					continue
+	Jutsus
+		proc
+			JutsuCoolDown(mob/m)
+				src.cooltimer = src.maxcooltime
+
+				src.overlays = null
+
+				src.SetName("[round(src.cooltimer/10, 1)]")
+				src.name = initial(src.name)
+
+				while(src && src.cooltimer && m && m.jutsu_cooldowns.Find(src))
+
+					sleep(1)
+
+					if(src && m)
+						src.cooltimer--
+
+						src.overlays = null
+
+						src.SetName("[round(src.cooltimer/10, 1)]")
+						src.name = initial(src.name)
+
+						// Cooldown Color Indicator //
+						/*
+						if(src.cooltimer / src.maxcooltime >= 0.75)
+							src.overlays += /obj/JutsuOverlays/Cool4
+
+						else if(src.cooltimer / src.maxcooltime >= 0.50)
+							src.overlays += /obj/JutsuOverlays/Cool3
+
+						else if(src.cooltimer / src.maxcooltime >= 0.25)
+							src.overlays += /obj/JutsuOverlays/Cool2
+						
+						else if(src.cooltimer / src.maxcooltime >= 0.10)
+							src.overlays += /obj/JutsuOverlays/Cool1
+						*/
+			
+				if(src && m)
+					src.overlays = null
+
+					m.client.screen -= src
+					m.jutsu_cooldowns.Remove(src)
+
+					// Reorder Jutsu Cooldown List: Cooldown Timer Descending //
+
+					for(var/i = 1, i <= m.jutsu_cooldowns.len, i++)
+						for(var/next_index = 1, next_index <= m.jutsu_cooldowns.len, next_index++)
+
+							var/obj/Jutsus/jutsu = m.jutsu_cooldowns[i]
+							var/obj/Jutsus/jutsu_compare = m.jutsu_cooldowns[next_index]
+
+							if(jutsu.cooltimer > jutsu_compare.cooltimer)
+								m.jutsu_cooldowns.Swap(i, next_index)
+					
+					// Reorder Jutsu Cooldown HUD Objects //
+
+					for(var/i = 1, i <= m.jutsu_cooldowns.len, i++)
+						var/obj/Jutsus/jutsu = m.jutsu_cooldowns[i]
+						jutsu.screen_loc = "[m.client.map_resolution_x - 2], [m.client.map_resolution_y - 1 - i]:-[i]"

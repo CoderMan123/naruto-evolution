@@ -43,7 +43,7 @@ mob
 
 
 		Warp_Rasengan()
-			for(var/obj/Jutsus/Warp_Rasengan/J in src.jutsus) if(J.Excluded==0)
+			for(var/obj/Jutsus/Warp_Rasengan/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||c_target.ftgmarked==0)
 					src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")
@@ -149,6 +149,6 @@ mob
 					if(T)
 						flick('Flyingthunder.dmi',src)
 						sleep(1)
-						for(var/mob/M in oview(src,13))M.Target_Remove()
+						for(var/mob/M in oview(src,20))M.Target_Remove()
 						src.loc = T.loc
 						T.loc = null

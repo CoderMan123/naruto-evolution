@@ -14,13 +14,17 @@ mob
 				ResetBase()
 				//src.icon ='WhiteMBase.dmi'
 				for(var/obj/Jutsus/EightGates/J in src.jutsus)
-					while(J.Excluded)
+					while(src.jutsu_cooldowns.Find(J))
 						sleep(1)
-					J.Excluded = 1
+
+					src.jutsu_cooldowns.Add(J)
+
 					spawn(250)
-						J.Excluded = 0
+						src.jutsu_cooldowns.Remove(J)
 						src.GateStopped = 0
+
 					view(src)<<output("<font color=[colour2html("red")]><b>[src] looks exhausted! They can't use gates for 25 seconds!","Action.Output")
+					
 				for(var/obj/O in LinkFollowers)
 					if(O)
 						del(O)

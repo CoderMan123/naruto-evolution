@@ -94,7 +94,7 @@ mob
 						usr.mark=null
 						usr.kawarmi=0
 						return
-					for(var/mob/M in oview(usr,13))M.Target_Remove()
+					for(var/mob/M in oview(usr,20))M.Target_Remove()
 					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 					usr.mark2=usr.loc
 					usr.loc=usr.mark

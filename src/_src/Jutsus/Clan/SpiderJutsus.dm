@@ -18,7 +18,7 @@ mob
 					S.Owner=src
 					S.damage=J.damage
 					if(c_target)
-						walk_towards(S,c_target.loc)
+						walk_to(S,c_target)
 					else
 						walk(S,S.dir)
 					src.copy=null
@@ -49,7 +49,7 @@ mob
 					S.Owner=src
 					S.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))*0.8
 					if(c_target)
-						walk_towards(S,c_target.loc)
+						walk_to(S,c_target)
 					else
 						walk(S,src.dir)
 					src.copy=null
