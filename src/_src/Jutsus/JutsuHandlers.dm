@@ -21,19 +21,21 @@ mob
 
 			if(src.multisized==1)//multisizestuff
 				return
-			if(J.Excluded)
+			if(src.jutsu_cooldowns.Find(J))
 			//	src << output("returning 0 Ex","Action.Output")
 				return 0
 			if(ChakraCheck(J.ChakraCost))
 			//	src << output("returning 0 CC","Action.Output")
 				return 0
-			J.Excluded = 1
-			J.uses ++
-			src.UpdateHMB()
-			src.JutsuCoolSlot(J)
+
 			spawn()
 				J.cooltimer = J.maxcooltime
 				J.JutsuCoolDown(src)
+
+			J.uses ++
+			src.UpdateHMB()
+			src.JutsuCoolSlot(J)
+			
 			//	src << output("Cooldown","Action.Output")
 			//src << output("returning 1","Action.Output")
 			return 1
@@ -136,7 +138,7 @@ mob
 
 obj
 	JutsuOverlays
-		layer = 9999
+		layer = 10001
 		icon = 'Misc Effects.dmi'
 		Cool1
 			icon_state = "jutsuwait1"
@@ -146,10 +148,6 @@ obj
 			icon_state = "jutsuwait3"
 		Cool4
 			icon_state = "jutsuwait4"
-mob
-	var
-		tmp
-			waitslot = 0
 obj
 	var
 		tmp
@@ -158,10 +156,13 @@ obj
 mob
 	proc
 		JutsuCoolSlot(obj/Jutsus/O)
-			if(waitslot >= src.client.map_resolution_y) return
-			src.waitslot ++
-			O.screen_loc = "[src.client.map_resolution_x-2],[src.client.map_resolution_y-1-src.waitslot]"
+			src.jutsu_cooldowns.Add(O)
 			src.client.screen += O
+
+			for(var/i = 1, i <= src.jutsu_cooldowns.len, i++)
+				var/obj/Jutsus/jutsu = src.jutsu_cooldowns[i]
+				jutsu.screen_loc = "[src.client.map_resolution_x - 2], [src.client.map_resolution_y - 1 - i]"
+
 			if(O.Clan == null)
 				for(var/mob/M in range(10, src))
 					if(M.jutsucopy == 1)
@@ -171,25 +172,48 @@ mob
 						M.jutsucopy = Z
 						M << output("Your sharingan copies [src]'s [O]","Action.Output")
 obj
-	proc
-		JutsuCoolDown(mob/O)
-			while(O && src)
-				sleep(1)
-				if(src.Excluded)
-					src.overlays = 0
-					src.cooltimer --
-					if(src.cooltimer >= round(src.maxcooltime/1.2))
-						src.overlays += /obj/JutsuOverlays/Cool4/
-					if(src.cooltimer > round(src.maxcooltime/2) && src.cooltimer < round(src.maxcooltime/1.2))
-						src.overlays += /obj/JutsuOverlays/Cool3/
-					if(src.cooltimer <= round(src.maxcooltime/2) && src.cooltimer > round(src.maxcooltime/6))
-						src.overlays += /obj/JutsuOverlays/Cool2/
-					if(src.cooltimer <= round(src.maxcooltime/6))
-						src.overlays += /obj/JutsuOverlays/Cool1/
-					if(src.cooltimer <= 0)
-						src.overlays = 0
-						O.client.screen -= src
-						O.waitslot --
-						src.Excluded = 0
-						break
-					continue
+	Jutsus
+		proc
+			JutsuCoolDown(mob/m)
+				src.overlays = null
+				src.underlays = null
+
+				src.underlays += image('HotSlot.dmi', layer = 9998, pixel_x = -13, pixel_y = 1)
+
+				src.SetName("[round(src.cooltimer/10, 1)]")
+				src.name = initial(src.name)
+
+				while(src && src.cooltimer && m && m.jutsu_cooldowns.Find(src))
+
+					sleep(1)
+
+					if(src && m)
+						src.cooltimer--
+
+						src.overlays = null
+
+						src.SetName("[round(src.cooltimer/10, 1)]")
+						src.name = initial(src.name)
+
+						if(src.cooltimer / src.maxcooltime >= 0.75)
+							src.overlays += image('HotSlot.dmi', icon_state = "cooldown-75", layer = 9999, pixel_x = -13, pixel_y = 1)
+
+						else if(src.cooltimer / src.maxcooltime >= 0.50)
+							src.overlays += image('HotSlot.dmi', icon_state = "cooldown-50", layer = 9999, pixel_x = -13, pixel_y = 1)
+
+						else if(src.cooltimer / src.maxcooltime >= 0.25)
+							src.overlays += image('HotSlot.dmi', icon_state = "cooldown-25", layer = 9999, pixel_x = -13, pixel_y = 1)
+						
+						else if(src.cooltimer / src.maxcooltime >= 0.10)
+							src.overlays += image('HotSlot.dmi', icon_state = "cooldown-10", layer = 9999, pixel_x = -13, pixel_y = 1)
+			
+				if(src && m)
+					src.overlays = null
+					src.underlays = null
+
+					m.client.screen -= src
+					m.jutsu_cooldowns.Remove(src)
+
+					for(var/i = 1, i <= m.jutsu_cooldowns.len, i++)
+						var/obj/Jutsus/jutsu = m.jutsu_cooldowns[i]
+						jutsu.screen_loc = "[m.client.map_resolution_x - 2], [m.client.map_resolution_y - 1 - i]"

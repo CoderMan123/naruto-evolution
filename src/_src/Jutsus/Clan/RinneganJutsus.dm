@@ -1,7 +1,7 @@
 mob
 	proc
 		Gedo_Revival()
-			for(var/obj/Jutsus/Gedo_Revival/J in src.jutsus) if(J.Excluded==0)
+			for(var/obj/Jutsus/Gedo_Revival/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					src.move=0

@@ -310,7 +310,6 @@ mob
 					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
 					src.firing=1
 					src.canattack=0
-					J.Excluded=1
 					J.uses++
 					var/num=5
 					if(c_target)

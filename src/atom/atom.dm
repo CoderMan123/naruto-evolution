@@ -47,6 +47,10 @@ atom
 					name.pixel_x = name.pixel_x + 1
 					name.pixel_y += 8
 				
+				if(istype(src, /obj/Jutsus))
+					name.pixel_x += -13
+					name.pixel_y += 7
+					
 				if(istype(src, /obj/HotSlots))
 					name.maptext = "<span style=\"-dm-text-outline: [Outline]px black; color: [Color]; font-family: 'Open Sans'; font-size: 8px; font-weight: bold; text-align: center; vertical-align: bottom;\">[Name]</span>"
 				else

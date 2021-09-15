@@ -43,7 +43,7 @@ mob
 
 
 		Warp_Rasengan()
-			for(var/obj/Jutsus/Warp_Rasengan/J in src.jutsus) if(J.Excluded==0)
+			for(var/obj/Jutsus/Warp_Rasengan/J in src.jutsus)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target||c_target.ftgmarked==0)
 					src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")

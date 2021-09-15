@@ -43,8 +43,6 @@ mob
 			SealCounting = 0
 obj
 	var
-		tmp
-			Excluded=0
 		signs
 		rank
 		uses=0

@@ -136,7 +136,6 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(15,25))
 					src.firing=1
-					J.Excluded=1
 					src.injutsu=1
 					src.canattack=0
 					src.move=0
