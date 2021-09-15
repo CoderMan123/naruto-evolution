@@ -158,7 +158,7 @@ mob
 					M.injutsu=1
 					M.move=0
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/3,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
