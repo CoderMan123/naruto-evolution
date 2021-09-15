@@ -75,6 +75,9 @@ mob/npc
 				..()
 				if(src.village == VILLAGE_LEAF) src.icon = src.icon
 				if(src.village == VILLAGE_SAND) src.icon = src.icon
+				src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
+				src.overlays+='Shirt.dmi'
+				src.overlays+='Sandals.dmi'
 			
 			DblClick()
 				..()
