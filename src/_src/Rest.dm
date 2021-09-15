@@ -59,7 +59,7 @@ mob
 	proc
 		Resting()
 			if(src.canattack==0&&src.dead==0&&src.rest==1)
-				if(hit)
+				if(CheckState(src, new/state/recently_hit))
 					RestUp()
 					return
 				usr.injutsu=1
@@ -86,7 +86,7 @@ mob
 	proc
 		RestSound()
 			if(src.canattack==0&&src.dead==0&&src.rest==1)
-				if(hit)
+				if(CheckState(src, new/state/recently_hit))
 					RestUp()
 					return
 				if(src.maxchakra<=500)
@@ -141,8 +141,9 @@ mob
 				spawn() usr.RestSound()
 				var/turf/T = usr.loc
 				spawn(2)
-					if(usr.loc==T&&!hit)usr.Resting()
+					if(usr.loc==T&&!CheckState(src, new/state/recently_hit))usr.Resting()
 					else usr.RestUp()
+								
 		RestUp()
 			set hidden=1
 			if(usr.rest)

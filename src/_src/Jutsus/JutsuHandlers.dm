@@ -65,6 +65,7 @@ mob
 					if(src.multisized)
 						damage = round(damage*0.3)
 					src.health -= damage
+					AddState(src, new/state/recently_hit, 60)
 					AddState(src, new/state/in_combat, 100)
 					if(Owner)
 						AddState(Owner, new/state/in_combat, 100)

@@ -263,7 +263,7 @@ obj
 				icon='WhiteMBase.dmi'
 				icon_state="deadright"
 				//pixel_x=32
-mob/var/tmp/hit
+
 mob/var/tmp/KillCombo=0
 mob/var/tmp/levelrate=0
 mob/var
@@ -293,9 +293,6 @@ mob
 			src.UpdateHMB()
 			if(loc == null) return //TEST
 			var/area/A=loc.loc
-			AddState(src, new/state/recently_hit, 60)
-			hit=1
-			spawn(100)hit=0
 			src.HengeUndo()
 			if(immortal)
 				if(src.health < 1)
