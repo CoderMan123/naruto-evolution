@@ -127,6 +127,7 @@ mob/npc
 												view(src) << "<font color = '[COLOR_VILLAGE_SAND]'>[src.name]</font><font color='[COLOR_CHAT]'>: I see that you have already nominated yourself for [RANK_KAZEKAGE]. As per policy, a nominee may only nominate themselves once.</font>"
 											else
 												var/election_ballot/ballot = new()
+												ballot.name = "[usr.character] ([usr.ckey])"
 												ballot.ckey = usr.ckey
 												ballot.character = usr.character
 												kazekage_election_ballot.Add(ballot)

@@ -13,7 +13,7 @@ obj
 						if(hokage_election)
 							if(usr.village == VILLAGE_LEAF)
 								if(!hokage_election_votes.Find(usr.ckey) && !hokage_election_votes.Find(usr.client.computer_id) && !hokage_election_votes.Find(usr.client.address))
-									var/election_ballot/ballot = input("Who would you like to vote for this election? You can only vote once.", "Ballot Box") as null|anything in hokage_election_ballot
+									var/election_ballot/ballot = input("Who would you like to vote for this election? <b><font color ='red'>You can only vote once per election.</font><b>", "Ballot Box") as null|anything in hokage_election_ballot
 									if(ballot)
 										if(ballot.ckey != usr.client.ckey)
 
@@ -22,6 +22,7 @@ obj
 												hokage_election_votes.Add(usr.client.computer_id)
 												hokage_election_votes.Add(usr.client.address)
 												ballot.votes++
+												usr.client.Alert("You your vote for [ballot.character] has been accepted.", "Ballot Box")
 											else
 												usr.client.Alert("You have already cast your vote for the current [RANK_HOKAGE] election.", "Ballot Box")
 										else
@@ -44,7 +45,7 @@ obj
 						if(kazekage_election)
 							if(usr.village == VILLAGE_SAND)
 								if(!kazekage_election_votes.Find(usr.ckey) && !kazekage_election_votes.Find(usr.client.computer_id) && !kazekage_election_votes.Find(usr.client.address))
-									var/election_ballot/ballot = input("Who would you like to vote for this election? You can only vote once.", "Ballot Box") as null|anything in kazekage_election_ballot
+									var/election_ballot/ballot = input("Who would you like to vote for this election? <b><font color ='red'>You can only vote once per election.</font><b>", "Ballot Box") as null|anything in kazekage_election_ballot
 									if(ballot)
 										if(ballot.ckey != usr.client.ckey)
 
@@ -53,6 +54,7 @@ obj
 												kazekage_election_votes.Add(usr.client.computer_id)
 												kazekage_election_votes.Add(usr.client.address)
 												ballot.votes++
+												usr.client.Alert("You your vote for [ballot.character] has been accepted.", "Ballot Box")
 											else
 												usr.client.Alert("You have already cast your vote for the current [RANK_KAZEKAGE] election.", "Ballot Box")
 										else
