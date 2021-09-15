@@ -48,7 +48,7 @@ world
 		StartElection(var/village, var/list/ballot, var/open_ballot = 1)
 			switch(village)
 				if(VILLAGE_LEAF)
-					global.hokage_election = world.realtime + 432000 // 12 Hours
+					global.hokage_election = world.realtime + 600 // 12 Hours
 					global.hokage_ballot_open = open_ballot
 					if(ballot) global.hokage_election_ballot = ballot
 					else global.hokage_election_ballot = list()
@@ -90,6 +90,9 @@ world
 					else if(global.hokage_election_ballot.len == 1)
 						var/election_ballot/ballot = global.hokage_election_ballot[1]
 						hokage[ballot.ckey] = ballot.character
+
+						world << output("The election for the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> has ended for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
+						world << output("[ballot.character] has been elected into office as the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
 
 						for(var/mob/m in mobs_online)
 							if(hokage[m.client.ckey] == m.character)
@@ -135,6 +138,9 @@ world
 					else if(global.kazekage_election_ballot.len == 1)
 						var/election_ballot/ballot = global.kazekage_election_ballot[1]
 						kazekage[ballot.ckey] = ballot.character
+
+						world << output("The election for the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> has ended for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
+						world << output("[ballot.character] has been elected into office as the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
 
 						for(var/mob/m in mobs_online)
 							if(kazekage[m.client.ckey] == m.character)
