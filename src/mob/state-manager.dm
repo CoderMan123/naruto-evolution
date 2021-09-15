@@ -126,6 +126,8 @@ proc
 	
 	dummy_was_hit
 
+	recently_hit
+
 #ifdef STATE_MANAGER_DEBUG
 mob
 	verb

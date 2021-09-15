@@ -2292,11 +2292,13 @@ mob
 				src.overlays += 'Cherry Blossom Impact.dmi'
 				src.icon_state = "punchrS"
 				src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
+				src.firing = 1
+				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				sleep(1)
 				flick("punchr",src)
 				src.icon_state = "punchrS"
-				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(c_target)
+					step(src, get_dir(src,c_target))
 					src.dir = get_dir(src,c_target)
 				for(var/mob/M in get_step(src,src.dir))
 					M.DealDamage((src.ninjutsu*1.5),src,"NinBlue")
@@ -2307,13 +2309,15 @@ mob
 						step(M,src.dir)
 						sleep(1)
 					M.icon_state="dead"
-					sleep(2)
+					sleep(1)
 					M.move=1
 					M.canattack=1
 					if(!M.dead)
 						M.icon_state = ""
 				src.overlays -= 'Cherry Blossom Impact.dmi'
 				src.icon_state = ""
+				sleep(2)
+				src.firing = 0
 				return
 			if(src.LOW)
 				src.LOW--

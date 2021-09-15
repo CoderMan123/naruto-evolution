@@ -99,20 +99,27 @@ squad
 			else if(src.members.len > 4)
 				M.client.Alert("Your squad is already at max capacity.", "Invite to Squad")
 			else
-				var/mob/m = input("Who would you like to invite into your squad?", "Invite to Squad") as null|anything in mobs_online
+				var/list/exclude = list(M)
+				for(var/mob/m in mobs_online)
+					if(M.village != m.village) exclude += m
+
+				var/mob/m = input("Who would you like to invite into your squad?", "Invite to Squad") as null|anything in mobs_online - exclude
 				if(src && src.leader[M.client.ckey] && m)
 					if(!m.GetSquad())
 						if(m.client.Alert("Would you like to join [M]'s squad?", "Join Squad", list("Yes", "No")) == 1)
 							if(!m.GetSquad())
 								if(M.GetSquad() == src)
-									var/squad/squad = M.GetSquad()
-									if(squad)
-										squad.members[m.ckey] = m.character
-										squad.levels[m.ckey] = m.level
-										squad.villages[m.ckey] = m.village
-										squad.ranks[m.ckey] = m.rank
-										src.Refresh()
-									else m.client.Alert("You cannot join [M]'s squad because the squad no longer exists.")
+									if(M.village == m.village)
+										var/squad/squad = M.GetSquad()
+										if(squad)
+											squad.members[m.ckey] = m.character
+											squad.levels[m.ckey] = m.level
+											squad.villages[m.ckey] = m.village
+											squad.ranks[m.ckey] = m.rank
+											src.Refresh()
+										else m.client.Alert("You cannot join [M]'s squad because the squad no longer exists.")
+									else
+										m.client.Alert("You cannot join [M]'s squad because you are not in the same village.")
 								else
 									m.client.Alert("You cannot join [M]'s squad because they are no longer the squad leader.", "Join Squad")
 							else

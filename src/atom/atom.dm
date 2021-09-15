@@ -37,7 +37,7 @@ atom
 
 				var/obj/name = new()
 				name.layer = 10001
-				name.maptext_width = 128
+				name.maptext_width = 256
 				name.pixel_x = name.pixel_x - (name.maptext_width / 2) + ((src.pixel_x * 2) * -1)
 
 				if(istype(src, /mob))

@@ -2,7 +2,7 @@ client
 	var/tmp/stat_display_mobs = 0
 	Stat()
 		if(src && administrators.Find(src.ckey))
-			if(statpanel("Server Information"))
+			if(src && statpanel("Server Information"))
 				stat("Name:", world.name)
 				stat("Status:", world.status)
 				stat("Server Time:", "[time2text(world.timeofday, "hh:mm:ss", world.timezone)] (UTC-[world.timezone])")
@@ -13,8 +13,17 @@ client
 				stat("CPU:", world.cpu)
 				stat("Map CPU:", world.map_cpu)
 		
+		if(src && administrators.Find(src.ckey) && global.hokage_election || global.kazekage_election)
+			if(src && statpanel("Election"))
+				stat("Hokage Election:", global.hokage_election ? "Running" : "Ended")
+				stat("Hokage Ballot:", global.hokage_ballot_open ? "Open" : "Closed")
+				stat("Hokage Ballot Counter:", global.hokage_election_ballot.len)
+				stat("Kazekage Election:", global.kazekage_election ? "Running" : "Ended")
+				stat("Kazekage Ballot:", global.kazekage_ballot_open ? "Open" : "Closed")
+				stat("Kazekage Ballot Counter:", global.kazekage_election_ballot.len)
+		
 		if(src && administrators.Find(src.ckey) && src.stat_display_mobs)
-			if(statpanel("Mob Information"))
+			if(src && statpanel("Mob Information"))
 				stat("Animal Counters", "")
 				stat("Buck:", buck_count)
 				stat("Snake:", snake_count)
@@ -35,7 +44,7 @@ client
 
 			// Kage Check //
 
-			if(kages[src.mob.village] == src.ckey)
+			if(hokage[src.ckey] == src.mob.character || kazekage[src.ckey] == src.mob.character)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.verbs += typesof(/mob/kage/verb)
 
@@ -56,7 +65,7 @@ client
 			
 			// Akatsuki Check //
 
-			if(akatsuki == src.ckey)
+			if(akatsuki[src.ckey] == src.mob.character)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.verbs += typesof(/mob/akatsuki/verb)
 
@@ -146,7 +155,7 @@ mob
 				set category = "Administrator"
 				switch(usr.client.Alert("Would you like to promote or demote the [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Promote", "Demote", "Cancel")))
 					if(1)
-						if(akatsuki)
+						if(akatsuki.len)
 							usr.client.Alert("There is already an [RANK_AKATSUKI_LEADER].", "Manage Akatsuki")
 						else
 							var/list/exclude = list()
@@ -174,13 +183,13 @@ mob
 								text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has elected [m.character] ([m.client.ckey]) into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.</font><br />", LOG_AKATSUKI)
 					
 					if(2)
-						if(akatsuki)
+						if(akatsuki.len)
 							switch(usr.client.Alert("Are you sure you want to demote the [VILLAGE_AKATSUKI] [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Demote", "Cancel")))
 								if(1)
 									world << output("The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character].", "Action.Output")
 									text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character] ([usr.client.ckey]).</font><br />", LOG_AKATSUKI)
 									
-									akatsuki = null
+									akatsuki = list()
 									akatsuki_last_online = null
 
 									for(var/mob/m in mobs_online)
@@ -194,7 +203,7 @@ mob
 					if(1)
 						switch(usr.client.Alert("Would you like to promote or demote the [RANK_HOKAGE] for the [VILLAGE_LEAF]?", "Manage Kages", list("Promote", "Demote", "Cancel")))
 							if(1)
-								if(kages[VILLAGE_LEAF])
+								if(hokage.len)
 									usr.client.Alert("There is already a [RANK_HOKAGE] for the [VILLAGE_LEAF].", "Manage Kages")
 								else
 									var/list/exclude = list()
@@ -215,13 +224,13 @@ mob
 										text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has elected [m.character] ([m.client.ckey]) into office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
 							
 							if(2)
-								if(kages[VILLAGE_LEAF])
+								if(hokage.len)
 									switch(usr.client.Alert("Are you sure you want to demote the [VILLAGE_LEAF] [RANK_HOKAGE]?", "Manage Kages", list("Demote", "Cancel")))
 										if(1)
 											world << output("The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office by [usr.character].", "Action.Output")
-											text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office by [usr.character] ([usr.client.ckey]).</font><br />", LOG_KAGE)
+											text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_HOKAGE] ([global.GetHokage()]) for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office by [usr.character] ([usr.client.ckey]).</font><br />", LOG_KAGE)
 											
-											kages[VILLAGE_LEAF] = null
+											hokage = list()
 											kages_last_online[VILLAGE_LEAF] = null
 
 											for(var/mob/m in mobs_online)
@@ -232,7 +241,7 @@ mob
 					if(2)
 						switch(usr.client.Alert("Would you like to promote or demote the [RANK_KAZEKAGE] for the [VILLAGE_SAND]?", "Manage Kages", list("Promote", "Demote", "Cancel")))
 							if(1)
-								if(kages[VILLAGE_SAND])
+								if(kazekage.len)
 									usr.client.Alert("There is already a [RANK_KAZEKAGE] for the [VILLAGE_SAND].", "Manage Kages")
 								else
 									var/list/exclude = list()
@@ -255,13 +264,13 @@ mob
 										world << output("[usr] has elected [m.character] into office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.", "Action.Output")
 										text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] (usr.client.ckey) has elected [m.character] ([m.client.ckey]) into office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.</font><br />", LOG_KAGE)
 							if(2)
-								if(kages[VILLAGE_SAND])
+								if(kazekage.len)
 									switch(usr.client.Alert("Are you sure you want to demote the [VILLAGE_SAND] [RANK_KAZEKAGE]?", "Manage Kages", list("Demote", "Cancel")))
 										if(1)
 											world << output("The elected [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office by [usr.character].", "Action.Output")
-											text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The elected [RANK_KAZEKAGE] ([kages[VILLAGE_SAND]]) for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office by [usr.character] ([usr.client.ckey]).</font><br />", LOG_KAGE)
+											text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The elected [RANK_KAZEKAGE] ([global.GetKazekage()]) for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office by [usr.character] ([usr.client.ckey]).</font><br />", LOG_KAGE)
 
-											kages[VILLAGE_SAND] = null
+											kazekage = list()
 											kages_last_online[VILLAGE_SAND] = null
 
 											for(var/mob/m in mobs_online)
@@ -646,6 +655,35 @@ mob
 
 								M.character = name
 								M.SetName(name)
+
+								if(hokage[M.client.ckey] == old_character)
+									hokage[M.client.ckey] = M.character
+								
+								if(kazekage[M.client.ckey] == old_character)
+									kazekage[M.client.ckey] = M.character
+								
+								if(akatsuki[M.client.ckey] == old_character)
+									akatsuki[M.client.ckey] = M.character
+								
+								for(var/squad/squad in squads)
+									if(squad.leader[M.client.ckey] == old_character)
+										squad.leader[M.client.ckey] = M.character
+
+									if(squad.members[M.client.ckey] == old_character)
+										squad.members[M.client.ckey] = M.character
+								
+								for(var/election_ballot/ballot in hokage_election_ballot)
+									if(ballot.ckey == M.client.ckey && ballot.character == M.character)
+										ballot.character = name
+								
+								for(var/election_ballot/ballot in kazekage_election_ballot)
+									if(ballot.ckey == M.client.ckey && ballot.character == M.character)
+										ballot.character = name
+								
+								var/squad/squad = M.GetSquad()
+								if(squad) spawn() squad.Refresh()
+
+								spawn() M.client.UpdateCharacterPanel()
 
 								M.Save()
 								M.client.Save()
@@ -1038,7 +1076,7 @@ mob
 								world << output("[usr.character] has retired from office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
 								text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.</font><br />", LOG_AKATSUKI)
 																
-								akatsuki = null
+								akatsuki = list()
 								akatsuki_last_online = null
 
 								usr.SetRank(RANK_AKATSUKI)
@@ -1295,11 +1333,13 @@ mob
 									if(RANK_HOKAGE)
 										world << output("[usr.character] has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
 										text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.</font><br />", LOG_KAGE)
+										hokage = list()
+
 									if(RANK_KAZEKAGE)
 										world << output("[usr.character] has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.", "Action.Output")
 										text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [usr.character] ([usr.client.ckey]) has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.</font><br />", LOG_KAGE)
-								
-								kages[usr.village] = null
+										kazekage = list()
+
 								kages_last_online[usr.village] = null
 
 								usr.SetRank(RANK_CHUUNIN)

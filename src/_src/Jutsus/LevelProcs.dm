@@ -293,6 +293,7 @@ mob
 			src.UpdateHMB()
 			if(loc == null) return //TEST
 			var/area/A=loc.loc
+			AddState(src, new/state/recently_hit, 60)
 			hit=1
 			spawn(100)hit=0
 			src.HengeUndo()

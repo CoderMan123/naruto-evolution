@@ -464,6 +464,24 @@ mob
 
 			spawn() src.client.StaffCheck()
 
+			if(global.hokage_election)
+				src << output("A <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> election is currently in-progress.", "Action.Output")
+				
+				if(global.hokage_ballot_open)
+					src << output("The <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> election is currently <u>open ballot</u>.", "Action.Output")
+					src << output("You may nominate yourself at the <font color = '[COLOR_VILLAGE_LEAF]'>Leaf Ballot Secretary</font> in the <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> house.", "Action.Output")
+				
+				src << output("Ninja from the <font color = '[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village may cast their vote at their ballot box in the <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> house.", "Action.Output")
+			
+			if(global.kazekage_election)
+				src << output("A <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> election is currently in-progress.", "Action.Output")
+				
+				if(global.kazekage_ballot_open)
+					src << output("The <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> election is currently <u>open ballot</u>.", "Action.Output")
+					src << output("You may nominate yourself at the <font color = '[COLOR_VILLAGE_SAND]'>Sand Ballot Secretary</font> in the <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> house.", "Action.Output")
+				
+				src << output("Ninja from the <font color = '[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village may cast their vote at their ballot box in the <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> house.", "Action.Output")
+
 			world.UpdateVillageCount()
 
 			spawn() src.client.UpdateWhoAll()
@@ -840,7 +858,7 @@ mob
 				switch(RANK)
 					
 					if(RANK_AKATSUKI_LEADER)
-						akatsuki = src.ckey
+						akatsuki[src.ckey] = src.character
 						akatsuki_last_online = world.realtime
 
 						new /obj/Inventory/Clothing/Masks/Tobi_Mask(src)
@@ -852,35 +870,32 @@ mob
 						new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
 
 					if(RANK_HOKAGE)
-						kages[VILLAGE_LEAF] = src.ckey
+						hokage[src.ckey] = src.character
 						kages_last_online[VILLAGE_LEAF] = world.realtime
 
 						new /obj/Inventory/Clothing/HeadWrap/HokageHat(src)
 						new /obj/Inventory/Clothing/Robes/HokageRobe(src)
 
 					if(RANK_KAZEKAGE)
-						kages[VILLAGE_SAND] = src.ckey
+						kazekage[src.ckey] = src.character
 						kages_last_online[VILLAGE_SAND] = world.realtime
 
 						new /obj/Inventory/Clothing/HeadWrap/KazekageHat(src)
 						new /obj/Inventory/Clothing/Robes/KazekageRobe(src)
 
 					if(RANK_TSUCHIKAGE)
-						kages[VILLAGE_ROCK] = src.ckey
 						kages_last_online[VILLAGE_ROCK] = world.realtime
 
 						new /obj/Inventory/Clothing/HeadWrap/TsuchikageHat(src)
 						new /obj/Inventory/Clothing/Robes/TsuchikageRobe(src)
 
 					if(RANK_MIZUKAGE)
-						kages[VILLAGE_MIST] = src.ckey
 						kages_last_online[VILLAGE_MIST] = world.realtime
 
 						new /obj/Inventory/Clothing/HeadWrap/MizukageHat(src)
 						new /obj/Inventory/Clothing/Robes/MizukageRobe(src)
 
 					if(RANK_OTOKAGE)
-						kages[VILLAGE_SOUND] = src.ckey
 						kages_last_online[VILLAGE_SOUND] = world.realtime
 
 						new /obj/Inventory/Clothing/HeadWrap/OtokageHat(src)

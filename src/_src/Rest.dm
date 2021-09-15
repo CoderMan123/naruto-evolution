@@ -58,7 +58,7 @@ obj
 mob
 	proc
 		Resting()
-			if(src.canattack==0&&src.dead==0&&src.rest==1&& !Gates)
+			if(src.canattack==0&&src.dead==0&&src.rest==1)
 				if(hit)
 					RestUp()
 					return
@@ -66,7 +66,10 @@ mob
 				usr.icon_state="jutsuse"
 				if(src.wait==2)
 					if(src.chakra<>src.maxchakra)
-						src.chakra+=src.maxchakra/20
+						if(!Gates)
+							src.chakra+=src.maxchakra/20
+						else
+							src.chakra+=src.maxchakra/60
 						if(src.chakra>src.maxchakra)src.chakra=src.maxchakra
 						src.UpdateHMB()
 /*						if(src.health<>src.maxhealth)
@@ -82,7 +85,7 @@ mob
 					else usr.RestUp()
 	proc
 		RestSound()
-			if(src.canattack==0&&src.dead==0&&src.rest==1&& !Gates)
+			if(src.canattack==0&&src.dead==0&&src.rest==1)
 				if(hit)
 					RestUp()
 					return
@@ -104,8 +107,8 @@ mob
 			if(CheckState(src, new/state/knocked_down)) return 0
 			src.HengeUndo()
 			if(injutsu) return
-			if(usr.canattack==1&&usr.dead==0&&usr.rest==0&&usr.move&& !Gates)
-				if(hit)
+			if(usr.canattack==1&&usr.dead==0&&usr.rest==0&&usr.move)
+				if(CheckState(src, new/state/recently_hit))
 					RestUp()
 					return
 /*				if(src.Gates==null)

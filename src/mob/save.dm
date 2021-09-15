@@ -52,7 +52,8 @@ mob
 			if(mobs_online.Find(src))
 				if(character)
 					src.last_online = world.realtime
-					if(kages[src.village] == src.client.ckey) kages_last_online[src.village] = src.last_online
+					if(hokage[src.client.ckey]) kages_last_online[src.village] = src.last_online
+					if(kazekage[src.client.ckey]) kages_last_online[src.village] = src.last_online
 
 					var/list/exclude = list("icon", "icon_state", "overlays", "underlays", "alpha", "layer", "bound_width", "bound_height", "bound_x", "bound_y", "pixel_x", "pixel_y", "appearance_flags", "transform", "vis_contents", "filters", "view")
 					for(var/v in src.vars)
@@ -113,7 +114,8 @@ mob
 			if(!mobs_online.Find(src))
 				if(character)
 					src.last_online = world.realtime
-					if(kages[src.village] == src.client.ckey) kages_last_online[src.village] = src.last_online
+					if(hokage[src.client.ckey]) kages_last_online[src.village] = src.last_online
+					if(kazekage[src.client.ckey]) kages_last_online[src.village] = src.last_online
 
 					for(var/v in src.vars)
 						if(issaved(src.vars[v]))
@@ -194,6 +196,24 @@ mob
 
 		src.client.StaffCheck()
 
+		if(global.hokage_election)
+			src << output("A <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> election is currently in-progress.", "Action.Output")
+			
+			if(global.hokage_ballot_open)
+				src << output("The <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> election is currently <u>open ballot</u>.", "Action.Output")
+				src << output("You may nominate yourself at the <font color = '[COLOR_VILLAGE_LEAF]'>Leaf Ballot Secretary</font> in the <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> house.", "Action.Output")
+			
+			src << output("Ninja from the <font color = '[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village may cast their vote at their ballot box in the <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> house.", "Action.Output")
+		
+		if(global.kazekage_election)
+			src << output("A <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> election is currently in-progress.", "Action.Output")
+			
+			if(global.kazekage_ballot_open)
+				src << output("The <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> election is currently <u>open ballot</u>.", "Action.Output")
+				src << output("You may nominate yourself at the <font color = '[COLOR_VILLAGE_SAND]'>Sand Ballot Secretary</font> in the <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> house.", "Action.Output")
+			
+			src << output("Ninja from the <font color = '[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village may cast their vote at their ballot box in the <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> house.", "Action.Output")
+		
 		world.UpdateVillageCount()
 		
 		spawn() src.client.UpdateWhoAll()

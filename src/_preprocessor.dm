@@ -60,6 +60,10 @@
 #define RANK_AKATSUKI_LEADER "Akatsuki Leader"
 #define RANK_SEVEN_SWORDSMEN_LEADER "Seven Swordsmen Leader"
 
+// Return format for GetHokage(), GetKazekage(), and GetAkatsuki()
+#define RETURN_FORMAT_CKEY 0
+#define RETURN_FORMAT_CHARACTER 1
+
 #define CLAN_ABURAME "Aburame"
 #define CLAN_AKIMICHI "Akimichi"
 #define CLAN_BUBBLE "Bubble"

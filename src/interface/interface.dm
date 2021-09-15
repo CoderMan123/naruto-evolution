@@ -478,10 +478,10 @@ client
 								</tr>
 								<tr>
 									<td></td>
-									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">[RANK_HOKAGE]:</span> [kages[VILLAGE_LEAF]]</td>
-									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">[RANK_KAZEKAGE]:</span> [kages[VILLAGE_SAND]]</td>
+									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">[RANK_HOKAGE]:</span> [global.GetHokage(RETURN_FORMAT_CHARACTER)]</td>
+									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">[RANK_KAZEKAGE]:</span> [global.GetKazekage(RETURN_FORMAT_CHARACTER)]</td>
 									<td></td>
-									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">[RANK_AKATSUKI_LEADER]:</span> [akatsuki]</td>
+									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">[RANK_AKATSUKI_LEADER]:</span> [global.GetAkatsuki(RETURN_FORMAT_CHARACTER)]</td>
 								</tr>
 							</tbody>
 						</table>
