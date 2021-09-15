@@ -18,7 +18,7 @@ mob
 							if(loc.loc:Safe!=1)
 								J.exp+=jutsumastery*(J.maxcooltime/20)
 								J.Levelup()
-						for(var/mob/M in oview(src,13))M.Target_Remove()
+						for(var/mob/M in oview(src,20))M.Target_Remove()
 						src.mizubunshin++
 						var/bun=src.mizubunshin+3
 						src.DealDamage((src.maxhealth/100),src,"white")

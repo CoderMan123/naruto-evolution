@@ -2786,12 +2786,14 @@ obj
 	Projectiles
 		Effects
 			webshoot
-				icon='SpiderJutsus.dmi'
-				icon_state="webshoot"
+				icon='Spider_Web.dmi'
+				icon_state="throw"
 				density=1
 				layer=MOB_LAYER+2
 				New()
 					..()
+					spawn(4)
+						walk(src, src.dir)
 					spawn(90)
 						if(src) del(src)
 				Bump(atom/O)
@@ -2805,6 +2807,10 @@ obj
 									//	src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										if(M)
+											walk(src, 0)
+											src.icon_state = "stuck"
+											flick("stuck",src)
+											src.pixel_x -= 9
 											src.loc = M.loc
 											src.density=0
 											M.move=0
@@ -2821,6 +2827,8 @@ obj
 				layer=MOB_LAYER+2
 				New()
 					..()
+					spawn(4)
+						walk(src, src.dir)
 					spawn(40)
 						if(src) del(src)
 				Bump(atom/O)
