@@ -83,38 +83,16 @@ world
 		EndElection(var/village)
 			switch(village)
 				if(VILLAGE_LEAF)
-					if(global.hokage_election_ballot.len < 1)
-						global.hokage_election = 0
-						spawn() StartElection(village)
-
-					else if(global.hokage_election_ballot.len == 1)
-						var/election_ballot/ballot = global.hokage_election_ballot[1]
-						hokage[ballot.ckey] = ballot.character
-
+					if(hokage.len)
 						world << output("The election for the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> has ended for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
-						world << output("[ballot.character] has been elected into office as the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
-
-						for(var/mob/m in mobs_online)
-							if(hokage[m.client.ckey] == m.character)
-								m.client.StaffCheck()
-
+						world << output("A higher power has elected [GetHokage(RETURN_FORMAT_CHARACTER)] into office as the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
+						global.hokage_election = 0
 					else
-						for(var/election_ballot/ballot in global.hokage_election_ballot)
-							
-							for(var/election_ballot/ballot_compare in global.hokage_election_ballot - ballot)
+						if(global.hokage_election_ballot.len < 1)
+							global.hokage_election = 0
+							spawn() StartElection(village)
 
-								if(ballot.votes > ballot_compare.votes)
-									global.hokage_election_ballot.Remove(ballot_compare)
-									break
-
-								else if(ballot.votes < ballot_compare.votes)
-									global.hokage_election_ballot.Remove(ballot)
-									break
-								
-								else if(ballot.votes == ballot_compare.votes)
-									break
-						
-						if(global.hokage_election_ballot.len == 1)
+						else if(global.hokage_election_ballot.len == 1)
 							var/election_ballot/ballot = global.hokage_election_ballot[1]
 							hokage[ballot.ckey] = ballot.character
 
@@ -124,45 +102,50 @@ world
 							for(var/mob/m in mobs_online)
 								if(hokage[m.client.ckey] == m.character)
 									m.client.StaffCheck()
-						
-						else if(global.hokage_election_ballot > 1)
-							global.hokage_election = 0
-							world << output("The election for the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> has ended in a <u>tie</u> for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
-							spawn() world.StartElection(village, global.hokage_election_ballot, open_ballot = 0)
+
+						else
+							for(var/election_ballot/ballot in global.hokage_election_ballot)
+								
+								for(var/election_ballot/ballot_compare in global.hokage_election_ballot - ballot)
+
+									if(ballot.votes > ballot_compare.votes)
+										global.hokage_election_ballot.Remove(ballot_compare)
+										break
+
+									else if(ballot.votes < ballot_compare.votes)
+										global.hokage_election_ballot.Remove(ballot)
+										break
+									
+									else if(ballot.votes == ballot_compare.votes)
+										break
+							
+							if(global.hokage_election_ballot.len == 1)
+								var/election_ballot/ballot = global.hokage_election_ballot[1]
+								hokage[ballot.ckey] = ballot.character
+
+								world << output("The election for the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> has ended for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
+								world << output("[ballot.character] has been elected into office as the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
+
+								for(var/mob/m in mobs_online)
+									if(hokage[m.client.ckey] == m.character)
+										m.client.StaffCheck()
+							
+							else if(global.hokage_election_ballot > 1)
+								global.hokage_election = 0
+								world << output("The election for the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> has ended in a <u>tie</u> for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
+								spawn() world.StartElection(village, global.hokage_election_ballot, open_ballot = 0)
 
 				if(VILLAGE_SAND)
-					if(global.kazekage_election_ballot.len < 1)
-						global.kazekage_election = 0
-						spawn() StartElection(village)
-
-					else if(global.kazekage_election_ballot.len == 1)
-						var/election_ballot/ballot = global.kazekage_election_ballot[1]
-						kazekage[ballot.ckey] = ballot.character
-
+					if(kazekage.len)
 						world << output("The election for the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> has ended for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
-						world << output("[ballot.character] has been elected into office as the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
-
-						for(var/mob/m in mobs_online)
-							if(kazekage[m.client.ckey] == m.character)
-								m.client.StaffCheck()
-
+						world << output("A higher power has elected [GetKazekage(RETURN_FORMAT_CHARACTER)] into office as the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
+						global.kazekage_election = 0
 					else
-						for(var/election_ballot/ballot in global.kazekage_election_ballot)
-							
-							for(var/election_ballot/ballot_compare in global.kazekage_election_ballot - ballot)
+						if(global.kazekage_election_ballot.len < 1)
+							global.kazekage_election = 0
+							spawn() StartElection(village)
 
-								if(ballot.votes > ballot_compare.votes)
-									global.kazekage_election_ballot.Remove(ballot_compare)
-									break
-
-								else if(ballot.votes < ballot_compare.votes)
-									global.kazekage_election_ballot.Remove(ballot)
-									break
-								
-								else if(ballot.votes == ballot_compare.votes)
-									break
-						
-						if(global.kazekage_election_ballot.len == 1)
+						else if(global.kazekage_election_ballot.len == 1)
 							var/election_ballot/ballot = global.kazekage_election_ballot[1]
 							kazekage[ballot.ckey] = ballot.character
 
@@ -172,8 +155,35 @@ world
 							for(var/mob/m in mobs_online)
 								if(kazekage[m.client.ckey] == m.character)
 									m.client.StaffCheck()
-						
-						else if(global.kazekage_election_ballot > 1)
-							global.kazekage_election = 0
-							world << output("The election for the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> has ended in a <u>tie</u> for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
-							spawn() world.StartElection(village, global.kazekage_election_ballot, open_ballot = 0)
+
+						else
+							for(var/election_ballot/ballot in global.kazekage_election_ballot)
+								
+								for(var/election_ballot/ballot_compare in global.kazekage_election_ballot - ballot)
+
+									if(ballot.votes > ballot_compare.votes)
+										global.kazekage_election_ballot.Remove(ballot_compare)
+										break
+
+									else if(ballot.votes < ballot_compare.votes)
+										global.kazekage_election_ballot.Remove(ballot)
+										break
+									
+									else if(ballot.votes == ballot_compare.votes)
+										break
+							
+							if(global.kazekage_election_ballot.len == 1)
+								var/election_ballot/ballot = global.kazekage_election_ballot[1]
+								kazekage[ballot.ckey] = ballot.character
+
+								world << output("The election for the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> has ended for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
+								world << output("[ballot.character] has been elected into office as the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
+
+								for(var/mob/m in mobs_online)
+									if(kazekage[m.client.ckey] == m.character)
+										m.client.StaffCheck()
+							
+							else if(global.kazekage_election_ballot > 1)
+								global.kazekage_election = 0
+								world << output("The election for the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> has ended in a <u>tie</u> for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
+								spawn() world.StartElection(village, global.kazekage_election_ballot, open_ballot = 0)
