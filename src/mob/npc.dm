@@ -88,7 +88,7 @@ mob/npc
 								if(global.hokage_election)
 									if(global.hokage_ballot_open)
 										view(src) << "<font color = '[COLOR_VILLAGE_LEAF]'>[src.name]</font><font color='[COLOR_CHAT]'>: I see that you're at least a [RANK_CHUUNIN], would you like to nominate yourself for [RANK_HOKAGE]?</font>"
-										if(usr.client.Alert("Would you like to nominate yourself as Hokage?", "Hokage Election", list("Yes", "No")) == 1)
+										if(usr.client.Alert("Would you like to nominate yourself as [RANK_HOKAGE]?", "Election", list("Yes", "No")) == 1)
 											view(usr) << "<font color='[src.name_color]'>[usr.name]</font><font color='[COLOR_CHAT]'>: Yes, please accept my ballot.</font>"
 											sleep(10)
 											if(GetBallot(usr))
@@ -117,10 +117,10 @@ mob/npc
 					if(VILLAGE_SAND)
 						if(src.village == usr.village)
 							if(usr.checkRank() >= 2)
-								if(global.hokage_election)
-									if(global.hokage_ballot_open)
+								if(global.kazekage_election)
+									if(global.kazekage_ballot_open)
 										view(src) << "<font color = '[COLOR_VILLAGE_SAND]'>[src.name]</font><font color='[COLOR_CHAT]'>: I see that you're at least a [RANK_CHUUNIN], would you like to nominate yourself for [RANK_KAZEKAGE]?</font>"
-										if(usr.client.Alert("Would you like to nominate yourself as Hokage?", "Hokage Election", list("Yes", "No")) == 1)
+										if(usr.client.Alert("Would you like to nominate yourself as [RANK_KAZEKAGE]?", "Election", list("Yes", "No")) == 1)
 											view(usr) << "<font color='[src.name_color]'>[usr.name]</font><font color='[COLOR_CHAT]'>: Yes, please accept my ballot.</font>"
 											sleep(10)
 											if(GetBallot(usr))
@@ -129,7 +129,7 @@ mob/npc
 												var/election_ballot/ballot = new()
 												ballot.ckey = usr.ckey
 												ballot.character = usr.character
-												hokage_election_ballot.Add(ballot)
+												kazekage_election_ballot.Add(ballot)
 												view(src) << "<font color = '[COLOR_VILLAGE_SAND]'>[src.name]</font><font color='[COLOR_CHAT]'>: Thank you for your submission, [usr.character]. Your ballot has been accepted.</font>"
 												world << "<font color='red'>\[G]</font> <font color = '[COLOR_VILLAGE_SAND]'>[src.name]</font><font color='[COLOR_CHAT]'>: [usr.character] has submitted their ballot as a nominee for the on-going [RANK_KAZEKAGE] election.</font>"
 										else

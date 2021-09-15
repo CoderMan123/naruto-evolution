@@ -6,6 +6,7 @@ obj
 					icon = 'ballot_box.dmi'
 					icon_state = "ballot_box"
 					name = "Ballot Box"
+					density = 1
 
 					DblClick()
 						..()
@@ -36,7 +37,8 @@ obj
 					icon = 'ballot_box.dmi'
 					icon_state = "ballot_box"
 					name = "Ballot Box"
-					
+					density = 1
+
 					DblClick()
 						..()
 						if(kazekage_election)
