@@ -48,7 +48,7 @@ world
 		StartElection(var/village, var/list/ballot, var/open_ballot = 1)
 			switch(village)
 				if(VILLAGE_LEAF)
-					global.hokage_election = world.realtime + 600 // 12 Hours
+					global.hokage_election = world.realtime + 432000 // 12 Hours
 					global.hokage_ballot_open = open_ballot
 					if(ballot) global.hokage_election_ballot = ballot
 					else global.hokage_election_ballot = list()

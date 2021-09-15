@@ -36,8 +36,6 @@ client
 				stat("Spawn Counters", "")
 				stat("Forest Spawns:", animal_spawns.len)
 				stat("Desert Spawns:", desert_animal_spawns.len)
-				
-		sleep(10)
 
 client
 	proc
