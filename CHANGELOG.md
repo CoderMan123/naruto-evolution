@@ -3,6 +3,34 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2021-09-14
+
+### Added
+- New Automated Kage Elections!
+- Added an annocement to the world when starting Political Escort or Deliver Intel missions
+
+### Changed
+- Nerfed Wood Fortress' duration
+- Increased the delay after casting Tree Summoning
+- Cherry Blossom Impact now lunges on use
+- You can now rest during 8 Gates but at a much lower rate
+- The amount of time before you can rest after being hit reduced
+- Reduced cooldown on opening each gate when using 8 Gates
+- 8 Gates now takes percent current health instead of percent max health when activating
+- Each punch while in 8 Gates now takes both a small flat amount and a percent amount of current health
+- Automatic Kage demotion deadline decreased to 24 hours
+
+### Fixed
+- Fixed some backend issues
+- Fixed some issues with leaders
+- Made some optimizations to the interface
+- Fixed some bugs with Root Strangle
+- Fixed a bug with hotsprings loop
+- Fixed a bug with cherry blossom impact
+- Fixed interupting rest
+- Being able to rest when you're not meant to is now fixed
+- Fixed being able to invite people who aren't in your village into your squad
+
 ## [2.2.0] - 2021-09-14
 
 ### Added
