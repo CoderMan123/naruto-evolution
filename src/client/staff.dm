@@ -672,6 +672,14 @@ mob
 									if(squad.members[M.client.ckey] == old_character)
 										squad.members[M.client.ckey] = M.character
 								
+								for(var/election_ballots/ballot in hokage_election_ballot)
+									if(ballot.ckey == M.client.ckey && ballot.character == M.character)
+										ballot.character = name
+								
+								for(var/election_ballots/ballot in kazekage_election_ballot)
+									if(ballot.ckey == M.client.ckey && ballot.character == M.character)
+										ballot.character = name
+								
 								var/squad/squad = M.GetSquad()
 								if(squad) spawn() squad.Refresh()
 
