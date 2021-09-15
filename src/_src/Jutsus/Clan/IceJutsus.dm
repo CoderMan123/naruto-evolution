@@ -76,6 +76,7 @@ mob
 						c_target.injutsu=1
 						c_target.canattack=0
 						c_target.firing=1
+						var/last_loc = c_target.loc
 						J.damage += J.damage*1.5
 						for(var/i=1,i<8+1,i++)
 							var/obj/O = new/obj
@@ -123,6 +124,7 @@ mob
 						for(var/obj/Ouu in NS)if(Ouu.owner == src)src.loc = NS
 						src.dir=SOUTH
 						for(var/ivc=0,ivc<22*J.level,ivc++)
+							if(c_target.loc != last_loc) break
 							if(src.ArrowTasked==null)
 								var/olist = list()
 								for(var/obj/Osd in view())if(Osd.owner == src)olist+=Osd
@@ -155,7 +157,7 @@ mob
 							if(Ohh)if(Ohh.name == "GUI [src.key]")	del(Ohh)
 						src.pixel_x=-16
 						src.copy = "Cant move"
-						spawn(10-(J.level*2))if(src)
+						spawn(1)if(src)
 							src.invisibility=0
 							src.copy = null
 							src.firing=0
