@@ -32,9 +32,6 @@ proc/CheckNextDay(mob/M, var/timestamp)
 	var/day = text2num(time2text(timestamp, "DD"))
 	var/year = text2num(time2text(timestamp, "YYYY"))
 
-	world << "M.last_hotspring_time: [year]-[month]-[day]"
-	world << "realtime: [text2num(time2text(world.realtime, "YYYY"))]-[text2num(time2text(world.realtime, "MM"))]-[text2num(time2text(world.realtime, "DD"))]"
-	
 	if(year == text2num(time2text(world.realtime, "YYYY")))
 		if(month == text2num(time2text(world.realtime, "MM")))
 			if(day == text2num(time2text(world.realtime, "DD")))
