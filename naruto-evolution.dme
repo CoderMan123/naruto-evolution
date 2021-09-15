@@ -190,6 +190,7 @@
 #include "src\mob\squad.dm"
 #include "src\mob\state-manager.dm"
 #include "src\mob\NPCs\Animals\Animals.dm"
+#include "src\obj\events.dm"
 #include "src\obj\map-objects.dm"
 #include "src\obj\mission-objects.dm"
 #include "src\server\global.dm"
