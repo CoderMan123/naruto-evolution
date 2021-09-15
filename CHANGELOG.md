@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Fixed some bugs with Root Strangle
 - Fixed a bug with hotsprings loop
 - Fixed a bug with cherry blossom impact
+- Fixed a bug with Tree Bind
 - Fixed interupting rest
 - Being able to rest when you're not meant to is now fixed
 - Fixed being able to invite people who aren't in your village into your squad
