@@ -24,13 +24,13 @@ proc/Hotspring_Loop()
 
 
 proc/CheckNextDay(mob/M, var/timestamp)
-	var/month = num2text(time2text(timestamp, "MM"))
-	var/day = num2text(time2text(timestamp, "DD"))
-	var/year = num2text(time2text(timestamp, "YYYY"))
+	var/month = text2num(time2text(timestamp, "MM"))
+	var/day = text2num(time2text(timestamp, "DD"))
+	var/year = text2num(time2text(timestamp, "YYYY"))
 
-	if(year == num2text(time2text(world.realtime, "YYYY")))
-		if(month == num2text(time2text(world.realtime, "MM")))
-			if(day == num2text(time2text(world.realtime, "DD")))
+	if(year == text2num(time2text(world.realtime, "YYYY")))
+		if(month == text2num(time2text(world.realtime, "MM")))
+			if(day == text2num(time2text(world.realtime, "DD")))
 				return 0
 	return 1
 
