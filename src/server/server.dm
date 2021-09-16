@@ -106,7 +106,7 @@ world
 
 				// Don't demote Kages that are online because kage_last_online[] only updates on mob.Load() and mob.Save().
 				// Otherwise, Kages will be demoted if they do not logout to update their kage_last_online[] timestamp.
-				if(online)
+				if(!online)
 					world << output("The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
 					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_HOKAGE] ([global.GetHokage()]) for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
 					hokage = list()
@@ -119,7 +119,7 @@ world
 				
 				// Don't demote Kages that are online because kage_last_online[] only updates on mob.Load() and mob.Save().
 				// Otherwise, Kages will be demoted if they do not logout to update their kage_last_online[] timestamp.
-				if(online)
+				if(!online)
 					world << output("The [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
 					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_KAZEKAGE] ([global.GetKazekage()]) for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
 					kazekage = list()
@@ -139,7 +139,7 @@ world
 
 				// Don't demote Akatsuki that are online because akatsuki_last_online only updates on mob.Load() and mob.Save().
 				// Otherwise, Akatsuki will be demoted if they do not logout to update their akatsuki_last_online timestamp.
-				if(online)
+				if(!online)
 					world << output("The [RANK_AKATSUKI] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
 					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI] ([global.GetAkatsuki()]) for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_AKATSUKI)
 					akatsuki = list()
