@@ -62,6 +62,14 @@ jobs:
 
           gh auth login --with-token <<< ${{ secrets.DEPLOY_TOKEN }}
           gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file <(/changelog-parser/changelog-parser.py "$(cat ${{ github.workspace }}/VERSION)" ${{ github.workspace }}/CHANGELOG.md) --repo IllusiveBIair/Naruto-Evolution-Community
+
+          curl -X POST "https://community.narutoevolution.com/posts.json" \
+            -H "Content-Type: multipart/form-data;" \
+            -H "Api-Username: system" \
+            -H "Api-Key: ${{ secrets.DISCOURSE_RELEASE }}" \
+            -F "title=Naruto Evolotion $(cat ${{ github.workspace }}/VERSION)" \
+            -F "category=13" \
+            -F "raw=<(/changelog-parser/changelog-parser.py $(cat ${{ github.workspace }}/VERSION)"
   
   Deploy:
     runs-on: ubuntu-20.04
