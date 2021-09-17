@@ -28,9 +28,7 @@ mob
 			if(ChakraCheck(J.ChakraCost))
 				return 0
 
-			src.JutsuCoolSlot(J)
-
-			spawn() J.JutsuCoolDown(src)
+			J.JutsuCoolDown(src)
 
 			J.uses ++
 			
@@ -190,59 +188,62 @@ obj
 	Jutsus
 		proc
 			JutsuCoolDown(mob/m)
-				src.cooltimer = src.maxcooltime
+				spawn()
+					src.cooltimer = src.maxcooltime
 
-				src.overlays = null
+					m.JutsuCoolSlot(src)
 
-				src.SetName("[round(src.cooltimer/10, 1)]")
-				src.name = initial(src.name)
-
-				while(src && src.cooltimer && m && m.jutsu_cooldowns.Find(src))
-
-					sleep(1)
-
-					if(src && m)
-						src.cooltimer--
-
-						src.overlays = null
-
-						src.SetName("[round(src.cooltimer/10, 1)]")
-						src.name = initial(src.name)
-
-						// Cooldown Color Indicator //
-						/*
-						if(src.cooltimer / src.maxcooltime >= 0.75)
-							src.overlays += /obj/JutsuOverlays/Cool4
-
-						else if(src.cooltimer / src.maxcooltime >= 0.50)
-							src.overlays += /obj/JutsuOverlays/Cool3
-
-						else if(src.cooltimer / src.maxcooltime >= 0.25)
-							src.overlays += /obj/JutsuOverlays/Cool2
-						
-						else if(src.cooltimer / src.maxcooltime >= 0.10)
-							src.overlays += /obj/JutsuOverlays/Cool1
-						*/
-			
-				if(src && m)
 					src.overlays = null
 
-					m.client.screen -= src
-					m.jutsu_cooldowns.Remove(src)
+					src.SetName("[round(src.cooltimer/10, 1)]")
+					src.name = initial(src.name)
 
-					// Reorder Jutsu Cooldown List: Cooldown Timer Descending //
+					while(src && src.cooltimer && m && m.jutsu_cooldowns.Find(src))
 
-					for(var/i = 1, i <= m.jutsu_cooldowns.len, i++)
-						for(var/next_index = 1, next_index <= m.jutsu_cooldowns.len, next_index++)
+						sleep(1)
 
+						if(src && m)
+							src.cooltimer--
+
+							src.overlays = null
+
+							src.SetName("[round(src.cooltimer/10, 1)]")
+							src.name = initial(src.name)
+
+							// Cooldown Color Indicator //
+							/*
+							if(src.cooltimer / src.maxcooltime >= 0.75)
+								src.overlays += /obj/JutsuOverlays/Cool4
+
+							else if(src.cooltimer / src.maxcooltime >= 0.50)
+								src.overlays += /obj/JutsuOverlays/Cool3
+
+							else if(src.cooltimer / src.maxcooltime >= 0.25)
+								src.overlays += /obj/JutsuOverlays/Cool2
+							
+							else if(src.cooltimer / src.maxcooltime >= 0.10)
+								src.overlays += /obj/JutsuOverlays/Cool1
+							*/
+				
+					if(src && m)
+						src.overlays = null
+
+						m.client.screen -= src
+						m.jutsu_cooldowns.Remove(src)
+
+						// Reorder Jutsu Cooldown List: Cooldown Timer Descending //
+
+						for(var/i = 1, i <= m.jutsu_cooldowns.len, i++)
+							for(var/next_index = 1, next_index <= m.jutsu_cooldowns.len, next_index++)
+
+								var/obj/Jutsus/jutsu = m.jutsu_cooldowns[i]
+								var/obj/Jutsus/jutsu_compare = m.jutsu_cooldowns[next_index]
+
+								if(jutsu.cooltimer > jutsu_compare.cooltimer)
+									m.jutsu_cooldowns.Swap(i, next_index)
+						
+						// Reorder Jutsu Cooldown HUD Objects //
+
+						for(var/i = 1, i <= m.jutsu_cooldowns.len, i++)
 							var/obj/Jutsus/jutsu = m.jutsu_cooldowns[i]
-							var/obj/Jutsus/jutsu_compare = m.jutsu_cooldowns[next_index]
-
-							if(jutsu.cooltimer > jutsu_compare.cooltimer)
-								m.jutsu_cooldowns.Swap(i, next_index)
-					
-					// Reorder Jutsu Cooldown HUD Objects //
-
-					for(var/i = 1, i <= m.jutsu_cooldowns.len, i++)
-						var/obj/Jutsus/jutsu = m.jutsu_cooldowns[i]
-						jutsu.screen_loc = "[m.client.map_resolution_x - 2], [m.client.map_resolution_y - 1 - i]:-[i]"
+							jutsu.screen_loc = "[m.client.map_resolution_x - 2], [m.client.map_resolution_y - 1 - i]:-[i]"
