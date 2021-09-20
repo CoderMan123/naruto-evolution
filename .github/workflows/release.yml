@@ -69,7 +69,7 @@ jobs:
             -H "Api-Key: ${{ secrets.DISCOURSE_RELEASE }}" \
             -F "title=Naruto Evolotion $(cat ${{ github.workspace }}/VERSION)" \
             -F "category=13" \
-            -F "raw=$(/changelog-parser/changelog-parser.py $(cat ${{ github.workspace }}/VERSION))"
+            -F "raw=$(/changelog-parser/changelog-parser.py $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/CHANGELOG.md)"
   
   Deploy:
     runs-on: ubuntu-20.04
