@@ -273,17 +273,17 @@ mob
 	proc
 		Death(mob/X,JashinFix)
 			set waitfor = 0
-			if(!X.key)
+			if(X && !X.key)
 				goto trol
 			if(!src.key)
 				goto trol
 			if(src.level<=4&&X.level>4)
 				src.health=src.maxhealth
 				return
-			if(X.level<=4)
+			if(X && X.level<=4)
 				X<<"<font color=red><b>WARNING:</b><font color=white>You cannnot kill anyone while under level 5."
 				return
-			if(X.jailed==1)
+			if(X && X.jailed==1)
 				X.health=X.maxhealth
 				return
 			if(src.jailed==1)
@@ -921,7 +921,7 @@ mob
 
 				if(istype(src,/mob/Clones))
 					var/mob/O=src.Owner
-					if(O.likeaclone)
+					if(O && O.likeaclone)
 						O.likeaclone=null
 						O.client:perspective = EDGE_PERSPECTIVE
 						O.client:eye=O
