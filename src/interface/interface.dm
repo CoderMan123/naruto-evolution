@@ -391,7 +391,7 @@ client
 						else
 							players += {"
 								<tr>
-									<td>[C.mob.name]</td>
+									<td>[C.mob.name] ([C.ckey])</td>
 									<td><i>Hidden</i></td>
 									<td>\icon[V] [C.mob.village]</td>
 									<td>\icon[R] [C.mob.rank]</td>

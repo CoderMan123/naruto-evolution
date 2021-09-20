@@ -130,7 +130,7 @@ world
 									if(hokage[m.client.ckey] == m.character)
 										m.client.StaffCheck()
 							
-							else if(global.hokage_election_ballot > 1)
+							else if(global.hokage_election_ballot.len > 1)
 								global.hokage_election = 0
 								world << output("The election for the <font color='[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> has ended in a <u>tie</u> for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village.", "Action.Output")
 								spawn() world.StartElection(village, global.hokage_election_ballot, open_ballot = 0)
@@ -183,7 +183,7 @@ world
 									if(kazekage[m.client.ckey] == m.character)
 										m.client.StaffCheck()
 							
-							else if(global.kazekage_election_ballot > 1)
+							else if(global.kazekage_election_ballot.len > 1)
 								global.kazekage_election = 0
 								world << output("The election for the <font color='[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> has ended in a <u>tie</u> for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village.", "Action.Output")
 								spawn() world.StartElection(village, global.kazekage_election_ballot, open_ballot = 0)

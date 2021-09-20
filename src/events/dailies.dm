@@ -6,6 +6,7 @@ proc/Hotspring_Loop()
 		for(var/mob/m in mobs_online)
 			if(m && istype(m.loc.loc, /area/hotspring))
 				if(m && CheckNextDay(m, m.last_hotspring_time))
+					m<<output("It is a new day. Prepare your buttocks.","Action.Output")
 					m.last_hotspring_time = world.realtime
 					m.hotspring_minutes = 0
 				else if(m && m.hotspring_minutes < 60)

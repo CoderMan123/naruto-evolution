@@ -940,6 +940,5 @@ mob
 								else src.LevelStat("strength",0.2)
 								src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 								T.Break(src)*/
-						src.JutsuCoolSlot(J)
 						spawn(5)if(src)src.firing=0
 					spawn(10)src.injutsu=0

@@ -19,7 +19,7 @@ jobs:
           lfs: true
 
       - name: Build
-        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} tgstation/byond:514.1566 DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:514.1566 DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
         
       - name: Cache
         uses: actions/cache@v2

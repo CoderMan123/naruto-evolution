@@ -57,7 +57,7 @@ atom/Click()
 					usr.underlays=src.underlays
 			for(var/mob/Clones/Shadow/S in view(usr,20))
 				spawn()
-					if(S.Owner==usr)
+					if(S && S.Owner==usr)
 						S.target_mob=src
 						S.FollowTarget()
 		else
