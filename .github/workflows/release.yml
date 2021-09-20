@@ -38,7 +38,7 @@ jobs:
       
       - name: Install Changelog Parser
         run: |
-          sudo git clone https://git.douglas-parker.com/douglasparker/changelog-parser.git /changelog-parser
+          sudo git clone https://github.com/douglasparker/changelog-parser.git /changelog-parser
           sudo chmod +x /changelog-parser/changelog-parser.py
           
       
