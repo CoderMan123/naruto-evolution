@@ -258,10 +258,11 @@ window "Action"
 window "Browser"
 	elem "Browser"
 		type = MAIN
-		pos = 281,0
-		size = 940x600
+		pos = 0,0
+		size = 1000x600
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -270,10 +271,12 @@ window "Browser"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 1014x614
+		inner-size = 1000x600
 	elem "Background"
 		type = LABEL
 		pos = 0,21
-		size = 940x579
+		size = 1000x579
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = #191919
@@ -283,7 +286,7 @@ window "Browser"
 	elem "Titlebar"
 		type = LABEL
 		pos = 0,0
-		size = 940x22
+		size = 1000x22
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
@@ -296,7 +299,7 @@ window "Browser"
 		text = "Web Browser"
 	elem "Close"
 		type = BUTTON
-		pos = 912,0
+		pos = 972,0
 		size = 25x19
 		anchor1 = 100,0
 		anchor2 = -1,-1
@@ -323,7 +326,7 @@ window "Browser"
 	elem "Output"
 		type = BROWSER
 		pos = 3,24
-		size = 934x573
+		size = 994x573
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = #414141
