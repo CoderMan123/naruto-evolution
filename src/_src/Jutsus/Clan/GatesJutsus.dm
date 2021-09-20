@@ -252,7 +252,6 @@ mob
 								src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 								T.Break(src)*/
 						spawn()PunchFlick(hitamount,J)
-						src.JutsuCoolSlot(J)
 						var/wait=hitamount*((3.5-((src.agility/150)*3))+1)
 						spawn(wait)if(src)
 							src.firing=0
