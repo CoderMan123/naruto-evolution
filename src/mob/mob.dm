@@ -198,7 +198,7 @@ mob
 					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 					del(O)
 
-			if(src.rank != RANK_AKATSUKI || src.rank != RANK_AKATSUKI_LEADER)
+			if(src.rank != RANK_AKATSUKI && src.rank != RANK_AKATSUKI_LEADER)
 				for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in src.contents)
 					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 					del(O)

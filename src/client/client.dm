@@ -19,8 +19,8 @@ client
 		..()
 		src.mob.loc = null
 		clients_connected += src
-
 		winset(src, null, {"
+			reset = true;
 			Main.is-maximized=true;
 			Main.Child.right=Titlescreen;
 			Main.OutputChild.is-visible=false;
