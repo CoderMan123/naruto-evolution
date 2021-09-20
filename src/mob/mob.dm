@@ -857,67 +857,86 @@ mob
 						o.loc = null
 
 				switch(RANK)
-					
 					if(RANK_AKATSUKI_LEADER)
 						akatsuki[src.ckey] = src.character
 						akatsuki_last_online = world.realtime
 
-						new /obj/Inventory/Clothing/Masks/Tobi_Mask(src)
-						new /obj/Inventory/Clothing/HeadWrap/AkatsukiHat(src)
-						new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
+						if(!locate(/obj/Inventory/Clothing/Masks/Tobi_Mask) in src.contents)
+							new /obj/Inventory/Clothing/Masks/Tobi_Mask(src)
+						if(!locate(/obj/Inventory/Clothing/HeadWrap/AkatsukiHat) in src.contents)
+							new /obj/Inventory/Clothing/HeadWrap/AkatsukiHat(src)
+						if(!locate(/obj/Inventory/Clothing/Robes/Akatsuki_Robe) in src.contents)
+							new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
 					
 					if(RANK_AKATSUKI)
-						new /obj/Inventory/Clothing/HeadWrap/AkatsukiHat(src)
-						new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
+						if(!locate(/obj/Inventory/Clothing/HeadWrap/AkatsukiHat) in src.contents)
+							new /obj/Inventory/Clothing/HeadWrap/AkatsukiHat(src)
+						if(!locate(/obj/Inventory/Clothing/Robes/Akatsuki_Robe) in src.contents)
+							new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
 
 					if(RANK_HOKAGE)
 						hokage[src.ckey] = src.character
 						kages_last_online[VILLAGE_LEAF] = world.realtime
 
-						new /obj/Inventory/Clothing/HeadWrap/HokageHat(src)
-						new /obj/Inventory/Clothing/Robes/HokageRobe(src)
+						if(!locate(/obj/Inventory/Clothing/HeadWrap/HokageHat) in src.contents)
+							new /obj/Inventory/Clothing/HeadWrap/HokageHat(src)
+						if(!locate(/obj/Inventory/Clothing/Robes/HokageRobe) in src.contents)
+							new /obj/Inventory/Clothing/Robes/HokageRobe(src)
 
 					if(RANK_KAZEKAGE)
 						kazekage[src.ckey] = src.character
 						kages_last_online[VILLAGE_SAND] = world.realtime
 
-						new /obj/Inventory/Clothing/HeadWrap/KazekageHat(src)
-						new /obj/Inventory/Clothing/Robes/KazekageRobe(src)
+						if(!locate(/obj/Inventory/Clothing/HeadWrap/KazekageHat) in src.contents)
+							new /obj/Inventory/Clothing/HeadWrap/KazekageHat(src)
+						if(!locate(/obj/Inventory/Clothing/Robes/KazekageRobe) in src.contents)
+							new /obj/Inventory/Clothing/Robes/KazekageRobe(src)
 
 					if(RANK_TSUCHIKAGE)
 						kages_last_online[VILLAGE_ROCK] = world.realtime
 
-						new /obj/Inventory/Clothing/HeadWrap/TsuchikageHat(src)
-						new /obj/Inventory/Clothing/Robes/TsuchikageRobe(src)
+						if(!locate(/obj/Inventory/Clothing/HeadWrap/TsuchikageHat) in src.contents)
+							new /obj/Inventory/Clothing/HeadWrap/TsuchikageHat(src)
+						if(!locate(/obj/Inventory/Clothing/Robes/TsuchikageRobe) in src.contents)
+							new /obj/Inventory/Clothing/Robes/TsuchikageRobe(src)
 
 					if(RANK_MIZUKAGE)
 						kages_last_online[VILLAGE_MIST] = world.realtime
 
-						new /obj/Inventory/Clothing/HeadWrap/MizukageHat(src)
-						new /obj/Inventory/Clothing/Robes/MizukageRobe(src)
+						if(!locate(/obj/Inventory/Clothing/HeadWrap/MizukageHat) in src.contents)
+							new /obj/Inventory/Clothing/HeadWrap/MizukageHat(src)
+						if(!locate(/obj/Inventory/Clothing/Robes/MizukageRobe) in src.contents)
+							new /obj/Inventory/Clothing/Robes/MizukageRobe(src)
 
 					if(RANK_OTOKAGE)
 						kages_last_online[VILLAGE_SOUND] = world.realtime
 
-						new /obj/Inventory/Clothing/HeadWrap/OtokageHat(src)
-						new /obj/Inventory/Clothing/Robes/OtokageRobe(src)
+						if(!locate(/obj/Inventory/Clothing/HeadWrap/OtokageHat) in src.contents)
+							new /obj/Inventory/Clothing/HeadWrap/OtokageHat(src)
+						if(!locate(/obj/Inventory/Clothing/Robes/OtokageRobe) in src.contents)
+							new /obj/Inventory/Clothing/Robes/OtokageRobe(src)
 					
 					if(RANK_ANBU)
 						switch(src.village)
 							if(VILLAGE_LEAF)
-								new /obj/Inventory/Clothing/Masks/Anbu(src)
+								if(!locate(/obj/Inventory/Clothing/Masks/Anbu) in src.contents)
+									new /obj/Inventory/Clothing/Masks/Anbu(src)
 
 							if(VILLAGE_SAND)
-								new /obj/Inventory/Clothing/Masks/Anbu_Black(src)
+								if(!locate(/obj/Inventory/Clothing/Masks/Anbu_Black) in src.contents)
+									new /obj/Inventory/Clothing/Masks/Anbu_Black(src)
 
 							if(VILLAGE_ROCK)
-								new /obj/Inventory/Clothing/Masks/Anbu_Brown(src)
+								if(!locate(/obj/Inventory/Clothing/Masks/Anbu_Brown) in src.contents)
+									new /obj/Inventory/Clothing/Masks/Anbu_Brown(src)
 
 							if(VILLAGE_MIST)
-								new /obj/Inventory/Clothing/Masks/Anbu_Blue(src)
+								if(!locate(/obj/Inventory/Clothing/Masks/Anbu_Blue) in src.contents)
+									new /obj/Inventory/Clothing/Masks/Anbu_Blue(src)
 
 							if(VILLAGE_SOUND)
-								new /obj/Inventory/Clothing/Masks/Anbu_Purple(src)
+								if(!locate(/obj/Inventory/Clothing/Masks/Anbu_Purple) in src.contents)
+									new /obj/Inventory/Clothing/Masks/Anbu_Purple(src)
 
 				src.rank = RANK
 
