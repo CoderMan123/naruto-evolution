@@ -48,6 +48,12 @@ client
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.verbs += typesof(/mob/kage/verb)
 
+				if(hokage[src.ckey] == src.mob.character)
+					src.mob.SetRank(RANK_HOKAGE)
+
+				else if(kazekage[src.ckey] == src.mob.character)
+					src.mob.SetRank(RANK_HOKAGE)
+
 			else
 				src.verbs -= typesof(/mob/kage/verb)
 
@@ -68,6 +74,7 @@ client
 			if(akatsuki[src.ckey] == src.mob.character)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.verbs += typesof(/mob/akatsuki/verb)
+				src.mob.SetRank(RANK_AKATSUKI_LEADER)
 
 			else
 				src.verbs -= typesof(/mob/akatsuki/verb)
