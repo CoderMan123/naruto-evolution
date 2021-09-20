@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.5] - 2021-09-20
+
+### Changed
+- Allow players to see ckey in Who Browser.
+- Increase the width of the browser window.
+
+### Fixed
+- Fixed the cooldown of last jutsu used not being sorted based on duration.
+- Fixed elected Kages not having their rank updated.
+- Fixed a bug where Akatsuki and Akatsuki Leaders were losing their robes.
+- Fixed a bug where Morning Peacock and Leaf Whirlwind would go on infinite cooldown.
+- Fixed a bug where old alert prompts were stuck on the screen after a reboot.
+- Fixed a lot of backend bugs.
+
 ## [2.3.4] - 2021-09-17
 
 ### Fixed
