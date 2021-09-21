@@ -430,16 +430,11 @@ mob
 					var/U = get_dist(Z,src)
 					U-=1
 					for(var/turf/T in orange(U,Z))
-						var/obj/O = new/obj
+						var/obj/ash/O = new(T)
 						O.IsJutsuEffect=src
-						O.icon = 'Smoke.dmi'
-						O.icon_state = "still"
-						O.loc = T
 						O.owner=src
-						//spawn(150) if(O) del(O)
 						spawn(150)
-							if(O)
-								O.loc = null
+							if(O) O.loc = null
 					src.copy = "Ashes"
 					var/obj/A = new/obj
 					A.IsJutsuEffect=src
@@ -516,3 +511,8 @@ mob
 					spawn(15)
 						src.firing=0
 						src.canattack=1
+
+obj
+	ash
+		icon = 'Smoke.dmi'
+		icon_state = "still"

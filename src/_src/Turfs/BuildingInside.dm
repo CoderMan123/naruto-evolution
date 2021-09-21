@@ -14,22 +14,21 @@ var
 
 world
 	proc
-		LinkWarps() // Reformist's warp link optimization
-			Link:
-				for(var/turf/Warpz/Senders/S in SWarps)
-					for(var/turf/Warpz/Receivers/R in RWarps)
-						if(S.name == R.name)
-							S.ToWhere = R
-							R.ToWhere = S
-							//RWarps -= R
-							//SWarps -= S
-							continue Link
+		LinkWarps()
+			for(var/turf/Warpz/Senders/S in SWarps)
 				for(var/turf/Warpz/Receivers/R in RWarps)
-					if(!R.ToWhere)
-						for(var/turf/Warpz/Senders/S in SWarps)
-							if(R.name == S.name)
-								R.ToWhere = S
-								break
+					if(S.name == R.name)
+						S.ToWhere = R
+						R.ToWhere = S
+						break
+
+			for(var/turf/Warpz/Receivers/R in RWarps)
+				if(!R.ToWhere)
+					for(var/turf/Warpz/Senders/S in SWarps)
+						if(R.name == S.name)
+							R.ToWhere = S
+							break
+
 			SWarps = null
 			RWarps = null
 
