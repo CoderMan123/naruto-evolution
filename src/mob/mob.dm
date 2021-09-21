@@ -577,8 +577,244 @@ mob
 					src.move_delay = max(0.5, 0.8-((src.agility/150)*0.3))
 
 				return 0
+			
+			var/command = "/level "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.level = value
+				src.UpdateHMB()
+				return
+			
+			command = "/experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.exp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/max-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.maxexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/health "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.health = value
+				src.UpdateHMB()
+				return
+			
+			command = "/max-health "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.maxhealth = value
+				src.UpdateHMB()
+				return
+			
+			command = "/chakra "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.chakra = value
+				src.UpdateHMB()
+				return
+			
+			command = "/max-chakra "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.maxchakra = value
+				src.UpdateHMB()
+				return
+			
+			command = "/ninjutsu "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.ninjutsu = value
+				src.UpdateHMB()
+				return
+			
+			command = "/genjutsu "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.genjutsu = value
+				src.UpdateHMB()
+				return
+			
+			command = "/taijutsu "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.strength = value
+				src.UpdateHMB()
+				return
+			
+			command = "/precision "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.precision = value
+				src.UpdateHMB()
+				return
+			
+			command = "/defense "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.defence = value
+				src.UpdateHMB()
+				return
 
-			if(findtext(msg, "/stuck"))
+			command = "/agility "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.agility = value
+				src.UpdateHMB()
+				return
+			
+			command = "/ninjutsu-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.ninexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/ninjutsu-max-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.maxninexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/genjutsu-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.genexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/genjutsu-max-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.maxgenexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/taijutsu-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.strengthexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/taijutsu-max-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.maxstrengthexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/precision-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.precisionexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/precision-max-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.maxprecisionexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/defense-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.defexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/defense-max-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.maxdefexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/agility-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.agilityexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/agility-max-experience "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.maxagilityexp = value
+				src.UpdateHMB()
+				return
+			
+			command = "/statpoints "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.statpoints = value
+				src.UpdateHMB()
+				return
+			
+			command = "/skillpoints "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.skillpoints = value
+				src.UpdateHMB()
+				return
+			
+			command = "/density"
+			if(msg == command && administrators.Find(src.client.ckey))
+
+				src.density = src.density ? 0 : 1
+				return
+			
+			command = "/invisibility "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.invisibility = value
+				return
+			
+			command = "/see-invisibility "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.see_invisible = value
+				return
+
+			else if(findtext(msg, "/stuck"))
 				src.Stuck()
 				return
 

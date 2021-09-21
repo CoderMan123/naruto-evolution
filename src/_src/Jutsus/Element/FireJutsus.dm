@@ -450,6 +450,12 @@ mob
 					A.dir = SOUTH
 					A.layer=100
 					src.ArrowTasked = A
+					if(istype(src, /mob/npc))
+						spawn(10)
+							var/k = src.ArrowTasked
+							del(k)
+							src.ArrowTasked = null
+							src.ashbomb()
 					spawn(150)
 						if(ArrowTasked==A) ArrowTasked=null; src.copy=null; del(A)
 					src << output("<Font color=[colour2html("orange")]>Press down to ignite the ashes.</Font>","Action.Output")

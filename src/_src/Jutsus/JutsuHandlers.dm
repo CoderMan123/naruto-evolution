@@ -19,14 +19,13 @@ mob
 		PreJutsu(var/obj/Jutsus/J)
 			if(CheckState(src, new/state/knocked_down)) return 0
 
-			if(src.multisized == 1)
-				return
+			if(!src.canattack) return 0
 
-			if(src.jutsu_cooldowns.Find(J))
-				return 0
+			if(src.multisized == 1) return 0
 
-			if(ChakraCheck(J.ChakraCost))
-				return 0
+			if(src.jutsu_cooldowns.Find(J)) return 0
+
+			if(ChakraCheck(J.ChakraCost)) return 0
 
 			J.JutsuCoolDown(src)
 
@@ -34,12 +33,13 @@ mob
 			
 			return 1
 
-		DealDamage(amount = 0, Owner, colortype, heal = 0, chakra = 0, punch = 0)
+		DealDamage(amount = 0, var/mob/Owner, colortype, heal = 0, chakra = 0, punch = 0)
 		//	world << output("[amount], [Owner], [colortype], [heal], [chakra], [punch]")//DEBUG INFO
 			ASSERT(Owner)
 			if(src.bubbled==0)//bubbleshieldstuff
 				if(src.dead)
 					return
+				if(istype(Owner, /mob/npc) && istype(src, /mob/npc)) return
 				var/damage = round(amount) + round(rand(amount/15, amount/5))
 				/*if(punch && bonesword)
 					damage += round(src.strength * 0.1) // adds 10 dmg at 100 str and bonesword on
@@ -71,6 +71,11 @@ mob
 						src.health = 0
 					src.sleephits++
 					src.last_damage_taken_time = world.timeofday
+					if(Owner.village != VILLAGE_LEAF && src.village == VILLAGE_LEAF && src.z == 1)//infamy system
+						if(!Owner.infamy_points) Owner.infamy_points++
+
+					if(Owner.village != VILLAGE_SAND && src.village == VILLAGE_SAND && src.z == 2)//infamy system
+						if(!Owner.infamy_points) Owner.infamy_points++
 				src.UpdateHMB()
 				spawn()
 					var/colour = colour2html(colortype)
@@ -156,7 +161,8 @@ mob
 	proc
 		JutsuCoolSlot(obj/Jutsus/O)
 			src.jutsu_cooldowns.Add(O)
-			src.client.screen += O
+			if(src.client)
+				src.client.screen += O
 
 			// Reorder Jutsu Cooldown List: Cooldown Timer Descending //
 
@@ -174,7 +180,8 @@ mob
 
 			for(var/i = 1, i <= src.jutsu_cooldowns.len, i++)
 				var/obj/Jutsus/jutsu = src.jutsu_cooldowns[i]
-				jutsu.screen_loc = "[src.client.map_resolution_x - 2], [src.client.map_resolution_y - 1 - i]:-[i]"
+				if(src.client)
+					jutsu.screen_loc = "[src.client.map_resolution_x - 2], [src.client.map_resolution_y - 1 - i]:-[i]"
 
 			if(O.Clan == null)
 				for(var/mob/M in range(10, src))
@@ -227,8 +234,9 @@ obj
 				
 					if(src && m)
 						src.overlays = null
-
-						m.client.screen -= src
+						
+						if(m.client)
+							m.client.screen -= src
 						m.jutsu_cooldowns.Remove(src)
 
 						// Reorder Jutsu Cooldown List: Cooldown Timer Descending //
@@ -246,4 +254,5 @@ obj
 
 						for(var/i = 1, i <= m.jutsu_cooldowns.len, i++)
 							var/obj/Jutsus/jutsu = m.jutsu_cooldowns[i]
-							jutsu.screen_loc = "[m.client.map_resolution_x - 2], [m.client.map_resolution_y - 1 - i]:-[i]"
+							if(m.client)
+								jutsu.screen_loc = "[m.client.map_resolution_x - 2], [m.client.map_resolution_y - 1 - i]:-[i]"

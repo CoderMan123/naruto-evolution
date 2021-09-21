@@ -59,6 +59,7 @@ mob
 		last_damage_taken_time
 		last_hotspring_time
 		hotspring_minutes = 0
+		infamy_points = 0
 		tmp
 			AFK=0
 			BeingThrown
@@ -87,7 +88,7 @@ mob
 			rest=0
 			fightlayer="Normal"
 			respawntime=0
-			Owner
+			mob/Owner
 			controller
 			defend=0
 			dodge=0

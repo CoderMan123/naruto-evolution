@@ -590,7 +590,8 @@ mob
 						B.overlays=0
 						B.overlays=src.overlays
 						B.dir=src.dir
-						src.overlays=0
+						if(!istype(src, /mob/npc))
+							src.overlays=0
 						src.SetName(src.name)
 						src.RestoreOverlays()
 						src.injutsu=1

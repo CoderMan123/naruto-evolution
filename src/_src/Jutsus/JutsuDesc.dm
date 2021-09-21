@@ -1,6 +1,7 @@
 obj
 	Jutsus
 		layer = 10000
+		var/give_to_guards = 0
 
 //NonClan
 		Chakra_Infusion_Training//chakrainfusionstuff
@@ -23,6 +24,7 @@ obj
 			signs="<font color=green>Rat</font><br>(macro(Q))"
 			Sprice=1
 			starterjutsu=1
+			give_to_guards = 1
 			Description="This technique allows the user to create illusive clones of themselves. It makes it difficult to target you amongst the clones."
 			New()
 				..()
@@ -40,6 +42,7 @@ obj
 			ChakraCost = 0
 			reqs=list("Clone Jutsu")
 			starterjutsu = 1
+			give_to_guards = 1
 			Description="This technique destroys the clones you have out on the field."
 
 		Transformation
@@ -63,6 +66,7 @@ obj
 			rank="E"
 			signs="<font color=green>Dog</font><br>(macro(E))"
 			Sprice=1
+			give_to_guards = 1
 			Description="Body replacement technique. Substitute your body with a log, allowing you to escape from battle. It allows you to slip out of someones targeting breifly or avoid attacks with good timing."
 			New()
 				..()
@@ -77,6 +81,7 @@ obj
 			rank="E"
 			signs="<font color=green>Dog,Dog</font><br>(macro(E,E))"
 			Sprice=1
+			give_to_guards = 1
 			Description="Set a location to escape to in an emergancy. You can then substitute your body with a log by pressing D, allowing you to escape dangerous situations providing you're close enough to your escape location. So long as a location is set this jutsu can be used while bound, freeing you from it's restraints."
 			New()
 				..()
@@ -92,6 +97,7 @@ obj
 			Sprice=1
 			uses=100
 			starterjutsu=1
+			give_to_guards = 1
 			Description="Utilizing chakra control, you converge chakra to your feet, allowing you to move forwards or to a target extremely fast."
 			New()
 				..()
@@ -2987,6 +2993,7 @@ obj
 			signs="<font color=green>Rabbit,Snake,Monkey,Rabbit</font><br>(macro(1,2,4,1))"
 			Sprice=2
 			uses=0
+			Element="Lightning"
 			reqs = list("Chidori Needles")
 			Description="Focus chakra mixed with Lightning style to create a shield of lightning dealing damage over time (Nin) to anyone nearby."
 			New()

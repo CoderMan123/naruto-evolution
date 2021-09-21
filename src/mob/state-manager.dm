@@ -128,6 +128,8 @@ proc
 
 	recently_hit
 
+	AI_is_punching
+
 #ifdef STATE_MANAGER_DEBUG
 mob
 	verb

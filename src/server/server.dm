@@ -63,6 +63,7 @@ world
 		spawn() Akatsuki_Inactivity_Check()
 		spawn() Hotspring_Loop()
 		spawn() Election()
+		spawn() InfamyLoop()
 
 	Del()
 		src.FailMissions()
