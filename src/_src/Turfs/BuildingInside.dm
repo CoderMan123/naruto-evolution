@@ -24,7 +24,6 @@ world
 
 			for(var/turf/Warpz/Receivers/R in RWarps)
 				if(!R.ToWhere)
-					world << "!R.ToWhere"
 					for(var/turf/Warpz/Senders/S in SWarps)
 						if(R.name == S.name)
 							R.ToWhere = S
