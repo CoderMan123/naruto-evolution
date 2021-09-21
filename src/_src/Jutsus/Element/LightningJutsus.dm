@@ -408,7 +408,9 @@ mob
 					I.pixel_x-=16
 					if(dir!=SOUTH) I.layer=MOB_LAYER+1
 					var/timer
-					Effects["Chidori"] = J.level
+					if(!istype(src, /mob/npc))
+						Effects["Chidori"] = J.level
+					else Effects["Chidori"] = 5
 
 					//if(J.level==4) Effects["Chidori"] = 5
 					while(timer<20&&Effects["Chidori"]<5&&!Prisoned)

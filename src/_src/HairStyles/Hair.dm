@@ -13,7 +13,7 @@ mob
 
 mob/proc
 	RestoreOverlays()
-
+		if(istype(src, /mob/npc)) return
 		src.overlays=null
 		src.overlays+=/obj/MaleParts/UnderShade
 	//	var/n = input("Color?")as color

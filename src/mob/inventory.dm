@@ -169,7 +169,8 @@ mob
 			else
 				src.contents += O
 
-			src.client.UpdateInventoryPanel()
+			if(src.client)
+				src.client.UpdateInventoryPanel()
 
 		DropItem(obj/Inventory/O, var/quantity=1)
 			//TODO: make dropping more than 1 quantity work with non stackables
@@ -238,5 +239,5 @@ mob
 				if(istype(O, /obj/Inventory/mission/deliver_intel))
 					var/obj/Inventory/mission/deliver_intel/o = O
 					o.squad = null
-
-			src.client.UpdateInventoryPanel()
+			
+			if(src.client) src.client.UpdateInventoryPanel()

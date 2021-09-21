@@ -447,6 +447,7 @@ mob
 					src.overlays=0
 					src.RestoreOverlays()
 					src.UpdateHMB()
+					src.infamy_points = 0
 					if(ismob(X)) if(X&&X.key&&src!=X)
 						if(X&&ismob(X)&&X.KillCombo<5+round(X.agility/5))
 							X.KillCombo++
@@ -513,6 +514,12 @@ mob
 							src.Bounty=0
 						else if(!istype(src, /mob/npc/combat/animals) && !istype(src, /mob/npc/combat/white_zetsu))
 							X.Bounty+=rand(5,10)
+						
+						if(X.village != VILLAGE_LEAF && src.village == VILLAGE_LEAF && src.z == 1)//infamy system
+							if(!X.infamy_points) src.infamy_points++
+
+						if(X.village != VILLAGE_SAND && src.village == VILLAGE_SAND && src.z == 2)//infamy system
+							if(!X.infamy_points) src.infamy_points++
 
 //ZETSU EVENT XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	//Zetsu Killed
