@@ -14,7 +14,7 @@ var
 
 world
 	proc
-		LinkWarps() // Reformist's warp link optimization
+		LinkWarps()
 			for(var/turf/Warpz/Senders/S in SWarps)
 				for(var/turf/Warpz/Receivers/R in RWarps)
 					if(S.name == R.name)
@@ -29,7 +29,7 @@ world
 						if(R.name == S.name)
 							R.ToWhere = S
 							break
-							
+
 			SWarps = null
 			RWarps = null
 
