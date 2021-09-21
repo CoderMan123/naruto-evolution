@@ -57,19 +57,19 @@ obj
 obj
 	proc
 		objburn()
-			spawn(1)
+			while(src && src.loc)
 				var/turf/T = src.loc
 				for(var/mob/M in T)
 					if(!M.burn)
 						if(!M.injutsu)
 							M.injutsu=1
-							spawn(3)if(M)M.injutsu=0
+							spawn(3) if(M) M.injutsu=0
 						if(M)
 							for(var/obj/Jutsus/Fire_Release_Ash_Pile_Burning/J in src.owner.jutsus)
 								M.burn=(1.3*(J.damage+round((src.owner.ninjutsu / 150)*2*J.damage))/35)//burn
 								M.BurnEffect(src.owner)
-				src.pixel_x=-21
-				src.objburn()
+				src.pixel_x = -21
+				sleep(1)
 mob
 	proc
 		ChidoriUp()Effects["Chidori"]++
@@ -171,18 +171,17 @@ mob
 
 		ashbomb()
 			src.copy = "waiting"
-			for(var/obj/O in view())
+			for(var/obj/ash/O in view())
 				if(O.owner == src && O.icon == 'Smoke.dmi' && O.icon_state == "still")
 					O.icon = 'FireBallA.dmi'
 					O.icon_state = "dir"
-					O.objburn()
 					O.pixel_x=-16
 					O.pixel_y-=16
-					//spawn(50)if(O)del(O)
+					spawn() O.objburn()
 					spawn(50)
-						if(O)
-							O.loc = null
-			for(var/obj/A in get_step(src,src.dir))A.layer=OBJ_LAYER
+						if(O) O.loc = null
+
+			for(var/obj/A in get_step(src,src.dir)) A.layer=OBJ_LAYER
 
 		HealUp()
 			src.health += 25
