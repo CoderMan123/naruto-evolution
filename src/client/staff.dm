@@ -1,5 +1,5 @@
 client
-	var/tmp/stat_display_mobs = 0
+	var/tmp/stat_display_world = 0
 	Stat()
 		if(src && administrators.Find(src.ckey))
 			if(src && statpanel("Server Information"))
@@ -13,17 +13,12 @@ client
 				stat("CPU:", world.cpu)
 				stat("Map CPU:", world.map_cpu)
 		
-		if(src && administrators.Find(src.ckey) && global.hokage_election || global.kazekage_election)
-			if(src && statpanel("Election"))
-				stat("Hokage Election:", global.hokage_election ? "Running" : "Ended")
-				stat("Hokage Ballot:", global.hokage_ballot_open ? "Open" : "Closed")
-				stat("Hokage Ballot Counter:", global.hokage_election_ballot.len)
-				stat("Kazekage Election:", global.kazekage_election ? "Running" : "Ended")
-				stat("Kazekage Ballot:", global.kazekage_ballot_open ? "Open" : "Closed")
-				stat("Kazekage Ballot Counter:", global.kazekage_election_ballot.len)
-		
-		if(src && administrators.Find(src.ckey) && src.stat_display_mobs)
-			if(src && statpanel("Mob Information"))
+		if(src && administrators.Find(src.ckey) && src.stat_display_world)
+			if(src && statpanel("World Information"))
+				stat("Area Counter", debug_area_counter)
+				stat("Turf Counter", debug_turf_counter)
+				stat("Mob Counter", debug_mob_counter)
+				stat("Object Counter", debug_obj_counter)
 				stat("Animal Counters", "")
 				stat("Buck:", buck_count)
 				stat("Snake:", snake_count)
@@ -36,6 +31,15 @@ client
 				stat("Spawn Counters", "")
 				stat("Forest Spawns:", animal_spawns.len)
 				stat("Desert Spawns:", desert_animal_spawns.len)
+		
+		if(src && administrators.Find(src.ckey) && global.hokage_election || global.kazekage_election)
+			if(src && statpanel("Election"))
+				stat("Hokage Election:", global.hokage_election ? "Running" : "Ended")
+				stat("Hokage Ballot:", global.hokage_ballot_open ? "Open" : "Closed")
+				stat("Hokage Ballot Counter:", global.hokage_election_ballot.len)
+				stat("Kazekage Election:", global.kazekage_election ? "Running" : "Ended")
+				stat("Kazekage Ballot:", global.kazekage_ballot_open ? "Open" : "Closed")
+				stat("Kazekage Ballot Counter:", global.kazekage_election_ballot.len)
 
 client
 	proc
@@ -141,9 +145,9 @@ mob
 			// UPDATE: This issue only happens when you add these verbs to src.client instead of src.mob.
 			// NOTE: Only add verbs to src.mob from now on.
 
-			Toggle_Mob_Information()
+			Toggle_World_Information()
 				set category = "Administrator"
-				src.client.stat_display_mobs = src.client.stat_display_mobs ? 0 : 1
+				src.client.stat_display_world = src.client.stat_display_world ? 0 : 1
 
 			Restore_Base()
 				set category = "Administrator"
