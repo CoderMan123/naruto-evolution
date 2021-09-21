@@ -60,6 +60,9 @@ mob/npc/combat
 			Death(mob/killer)
 				..()
 				killer.infamy_points++
+				for(var/mob/Clones/C in src.Clones)
+					C.health=0
+					C.Death(src)
 				spawn(50) del(src)
 
 			proc/Idle()
@@ -67,7 +70,7 @@ mob/npc/combat
 				src.retreating = 0
 				src.Target_Remove()
 				src.FindTarget()
-				if(src.no_target_counter > 20) src.ResetAI()
+				if(src.no_target_counter > 30) src.ResetAI()
 
 			proc/ResetAI()
 				if(src.spawned)
