@@ -70,9 +70,12 @@ mob/npc/combat
 				src.retreating = 0
 				src.Target_Remove()
 				src.FindTarget()
-				if(src.no_target_counter > 30) src.ResetAI()
+				if(src.no_target_counter > 40) src.ResetAI()
 
 			proc/ResetAI()
+				for(var/mob/Clones/C in src.Clones)
+					C.health=0
+					C.Death(src)
 				if(src.spawned)
 					src.Clone_Jutsu_Destroy()
 					del(src)
@@ -85,7 +88,7 @@ mob/npc/combat
 			proc/FindTarget()
 				if(!c_target) sleep(10)
 				if(src)
-					for(var/mob/M in orange(20))
+					for(var/mob/M in orange(30))
 						if(istype(M,/mob/npc) || istype(M,/mob/training) || M.village == src.village || M.dead || M.infamy_points < 1) continue
 						if(M)
 							src.no_target_counter = 0
