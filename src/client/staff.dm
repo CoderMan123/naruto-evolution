@@ -56,7 +56,7 @@ client
 					src.mob.SetRank(RANK_HOKAGE)
 
 				else if(kazekage[src.ckey] == src.mob.character)
-					src.mob.SetRank(RANK_HOKAGE)
+					src.mob.SetRank(RANK_KAZEKAGE)
 
 			else
 				src.verbs -= typesof(/mob/kage/verb)
