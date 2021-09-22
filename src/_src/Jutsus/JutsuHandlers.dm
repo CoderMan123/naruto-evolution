@@ -231,13 +231,14 @@ obj
 							else if(src.cooltimer / src.maxcooltime >= 0.10)
 								src.overlays += /obj/JutsuOverlays/Cool1
 							*/
-				
-					if(src && m)
+					if(src)
 						src.overlays = null
-						
-						if(m.client)
-							m.client.screen -= src
+						src.name_overlays = null
+
+					if(m)
 						m.jutsu_cooldowns.Remove(src)
+
+						if(m.client) m.client.screen -= src
 
 						// Reorder Jutsu Cooldown List: Cooldown Timer Descending //
 
