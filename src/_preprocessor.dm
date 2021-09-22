@@ -11,6 +11,7 @@
 #define SAVEFILE_SQUADS "saves/squads.sav"
 #define SAVEFILE_KAGES "saves/kages.sav"
 #define SAVEFILE_AKATSUKI "saves/akatsuki.sav"
+#define SAVEFILE_ELECTIONS "saves/elections.sav"
 
 #define LOG_ERROR "logs/error.html"
 #define LOG_BUGS "logs/bugs.html"

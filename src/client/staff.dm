@@ -1,8 +1,8 @@
 client
-	var/tmp/stat_display_world = 0
+	var/tmp/stat_display_world = 1
 	Stat()
 		if(src && administrators.Find(src.ckey))
-			if(src && statpanel("Server Information"))
+			if(src && statpanel("Server"))
 				stat("Name:", world.name)
 				stat("Status:", world.status)
 				stat("Server Time:", "[time2text(world.timeofday, "hh:mm:ss", world.timezone)] (UTC-[world.timezone])")
@@ -14,23 +14,48 @@ client
 				stat("Map CPU:", world.map_cpu)
 		
 		if(src && administrators.Find(src.ckey) && src.stat_display_world)
-			if(src && statpanel("World Information"))
-				stat("Area Counter", debug_area_counter)
-				stat("Turf Counter", debug_turf_counter)
-				stat("Mob Counter", debug_mob_counter)
-				stat("Object Counter", debug_obj_counter)
-				stat("Animal Counters", "")
-				stat("Buck:", buck_count)
-				stat("Snake:", snake_count)
-				stat("Doe:", doe_count)
-				stat("Rabbit:", rabbit_count)
-				stat("Hare:", hare_count)
-				stat("Hedgehog:", hedgehog_count)
-				stat("Chipmonk:", chipmonk_count)
-				stat("Squirrel:", squirrel_count)
-				stat("Spawn Counters", "")
-				stat("Forest Spawns:", animal_spawns.len)
-				stat("Desert Spawns:", desert_animal_spawns.len)
+			if(src && statpanel("World"))
+				var/counter = 0
+				for(var/area/a in world)
+					counter++
+				stat("Area Counter", counter)
+
+				counter = 0
+				for(var/turf/t in world)
+					counter++
+				stat("Turf Counter", counter)
+
+				counter = 0
+				for(var/mob/m in world)
+					counter++
+				stat("Mob Counter", counter)
+
+				counter = 0
+				for(var/obj/o in world)
+					counter++
+				stat("Object Counter", counter)
+
+				counter = 0
+				for(var/obj/Projectiles/o in world)
+					counter++
+				stat("Projectiles Counter", counter)
+
+				counter = 0
+				for(var/mob/m in mobs_online)
+					for(var/state/s in m.state_manager)
+						counter++
+				stat("State Counter (World)", counter)
+
+				counter = 0
+				for(var/state/s in src.mob.state_manager)
+					counter++
+				stat("State Counter (Self)", counter)
+
+				counter = 0
+				for(var/obj/name/name in src.mob.state_manager)
+					counter++
+				stat("Name Counter", counter)
+				sleep(world.tick_lag)
 		
 		if(src && administrators.Find(src.ckey) && global.hokage_election || global.kazekage_election)
 			if(src && statpanel("Election"))

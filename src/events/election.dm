@@ -1,12 +1,12 @@
-var/tmp/hokage_election = 0
-var/tmp/hokage_ballot_open = 0
-var/tmp/list/hokage_election_ballot = list()
-var/tmp/list/hokage_election_votes = list()
+var/hokage_election = 0
+var/hokage_ballot_open = 0
+var/list/hokage_election_ballot = list()
+var/list/hokage_election_votes = list()
 
-var/tmp/kazekage_election = 0
-var/tmp/kazekage_ballot_open = 0
-var/tmp/list/kazekage_election_ballot = list()
-var/tmp/list/kazekage_election_votes = list()
+var/kazekage_election = 0
+var/kazekage_ballot_open = 0
+var/list/kazekage_election_ballot = list()
+var/list/kazekage_election_votes = list()
 
 election_ballot
 	parent_type = /obj

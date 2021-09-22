@@ -232,6 +232,16 @@ world
 		F = new(SAVEFILE_SQUADS)
 		F["squads"] << squads
 
+		F = new(SAVEFILE_ELECTIONS)
+		F["hokage_election"] << hokage_election
+		F["hokage_ballot_open"] << hokage_ballot_open
+		F["hokage_election_ballot"] << hokage_election_ballot
+		F["hokage_election_votes"] << hokage_election_votes
+		F["kazekage_election"] << kazekage_election
+		F["kazekage_ballot_open"] << kazekage_ballot_open
+		F["kazekage_election_ballot"] << kazekage_election_ballot
+		F["kazekage_election_votes"] << kazekage_election_votes
+
 		F = new(SAVEFILE_WORLD)
 		Factionnames = new/list()
 		for(var/Faction/c in Factions)
@@ -282,6 +292,16 @@ world
 		F = new(SAVEFILE_AKATSUKI)
 		if(F["akatsuki"]) F["akatsuki"] >> akatsuki
 		if(F["akatsuki_last_online"]) F["akatsuki_last_online"] >> akatsuki_last_online
+
+		F = new(SAVEFILE_ELECTIONS)
+		if(F["hokage_election"]) F["hokage_election"] >> hokage_election
+		if(F["hokage_ballot_open"]) F["hokage_ballot_open"] >> hokage_ballot_open
+		if(F["hokage_election_ballot"]) F["hokage_election_ballot"] >> hokage_election_ballot
+		if(F["hokage_election_votes"]) F["hokage_election_votes"] >> hokage_election_votes
+		if(F["kazekage_election"]) F["kazekage_election"] >> kazekage_election
+		if(F["kazekage_ballot_open"]) F["kazekage_ballot_open"] >> kazekage_ballot_open
+		if(F["kazekage_election_ballot"]) F["kazekage_election_ballot"] >> kazekage_election_ballot
+		if(F["kazekage_election_votes"]) F["kazekage_election_votes"] >> kazekage_election_votes
 
 		F = new(SAVEFILE_WORLD)
 		if(!isnull(F["Factions"])) F["Factions"] >> Factionnames

@@ -21,7 +21,7 @@ mob/npc/combat
 			var/original_loc
 			move = 1
 			health=2500
-			maxhealth=2500
+			maxhealth=3000
 			chakra=1000000000
 			maxchakra=1000000000
 			maxninexp=1000000000
@@ -30,12 +30,12 @@ mob/npc/combat
 			maxdefexp=1000000000
 			maxagilityexp=1000000000
 			maxprecisionexp=1000000000
-			ninjutsu=80
-			genjutsu=80
-			strength=80
-			defence=80
-			agility=80
-			precision=80
+			ninjutsu=100
+			genjutsu=100
+			strength=100
+			defence=100
+			agility=100
+			precision=100
 
 
 			SetName()
@@ -63,13 +63,17 @@ mob/npc/combat
 				for(var/mob/Clones/C in src.Clones)
 					C.health=0
 					C.Death(src)
-				spawn(50) del(src)
+				spawn(300) del(src)
 
 			proc/Idle()
 				src.attacking = 0
 				src.retreating = 0
 				src.Target_Remove()
+				for(var/mob/Clones/C in src.Clones)
+					C.health=0
+					C.Death(src)
 				src.FindTarget()
+				src.no_target_counter++
 				if(src.no_target_counter > 40) src.ResetAI()
 
 			proc/ResetAI()
@@ -77,10 +81,8 @@ mob/npc/combat
 					C.health=0
 					C.Death(src)
 				if(src.spawned)
-					src.Clone_Jutsu_Destroy()
 					del(src)
 				else
-					src.Clone_Jutsu_Destroy()
 					src.health = src.maxhealth
 					src.chakra = src.maxchakra
 					src.loc = src.original_loc
@@ -91,19 +93,22 @@ mob/npc/combat
 					for(var/mob/M in orange(30))
 						if(istype(M,/mob/npc) || istype(M,/mob/training) || M.village == src.village || M.dead || M.infamy_points < 1) continue
 						if(M)
-							src.no_target_counter = 0
 							src.Target_Remove()
 							src.Target_Atom(M)
 							src.attacking = 1
 							src.last_target = M
 						else
 							src.Target_Remove()
-					if(!c_target) src.no_target_counter++
 
 			proc/CastDefensive()
 				walk(src, 0)
-				if(prob(50)) src.Clone_Jutsu()
-				else src.Body_Replacement_Technique()
+				if(prob(30)) 
+					src.Clone_Jutsu()
+					spawn(50)
+						for(var/mob/Clones/C in src.Clones)
+							C.health=0
+							C.Death(src)
+				else if(prob(30))src.Body_Replacement_Technique()
 
 				if(prob(50))
 					src.Advanced_Body_Replacement_Technique()
@@ -117,6 +122,7 @@ mob/npc/combat
 						c_target = src.Target_Get(TARGET_MOB)
 						if(istype(c_target, /mob/npc)) c_target = null
 						if(src.c_target && src.attacking && !src.dead && !c_target.dead)
+							src.no_target_counter = 0
 							if(prob(50))
 								src.CombatIdle()
 							else if(prob(10)) src.CastDefensive()
