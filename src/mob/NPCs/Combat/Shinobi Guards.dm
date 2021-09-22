@@ -102,8 +102,13 @@ mob/npc/combat
 
 			proc/CastDefensive()
 				walk(src, 0)
-				if(prob(50)) world<<("used clones")//src.Clone_Jutsu() debug
-				else src.Body_Replacement_Technique()
+				if(prob(30)) 
+					src.Clone_Jutsu()
+					spawn(50)
+						for(var/mob/Clones/C in src.Clones)
+							C.health=0
+							C.Death(src)
+				else if(prob(30))src.Body_Replacement_Technique()
 
 				if(prob(50))
 					src.Advanced_Body_Replacement_Technique()
