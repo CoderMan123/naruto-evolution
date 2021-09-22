@@ -2,6 +2,8 @@ var/debug_area_counter = 0
 var/debug_turf_counter = 0
 var/debug_mob_counter = 0
 var/debug_obj_counter = 0
+var/debug_state_counter = 0
+var/debug_name_counter = 0
 
 area
     New()
@@ -31,6 +33,15 @@ mob
         debug_mob_counter--
 
 obj
+    name
+        New()
+            ..()
+            debug_name_counter++
+        
+        Del()
+            ..()
+            debug_name_counter--
+            
     New()
         ..()
         debug_obj_counter++
@@ -38,3 +49,12 @@ obj
     Del()
         ..()
         debug_obj_counter--
+
+/state
+    New()
+        ..()
+        debug_state_counter++
+    
+    Del()
+        ..()
+        debug_state_counter--

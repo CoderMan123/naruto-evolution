@@ -35,7 +35,7 @@ atom
 					else
 						Color = "white"
 
-				var/obj/name = new()
+				var/obj/name/name = new()
 				name.layer = 10001
 				name.maptext_width = 256
 				name.pixel_x = name.pixel_x - (name.maptext_width / 2) + ((src.pixel_x * 2) * -1)

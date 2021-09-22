@@ -1,8 +1,8 @@
 client
-	var/tmp/stat_display_world = 0
+	var/tmp/stat_display_world = 1
 	Stat()
 		if(src && administrators.Find(src.ckey))
-			if(src && statpanel("Server Information"))
+			if(src && statpanel("Server"))
 				stat("Name:", world.name)
 				stat("Status:", world.status)
 				stat("Server Time:", "[time2text(world.timeofday, "hh:mm:ss", world.timezone)] (UTC-[world.timezone])")
@@ -14,11 +14,13 @@ client
 				stat("Map CPU:", world.map_cpu)
 		
 		if(src && administrators.Find(src.ckey) && src.stat_display_world)
-			if(src && statpanel("World Information"))
+			if(src && statpanel("World"))
 				stat("Area Counter", debug_area_counter)
 				stat("Turf Counter", debug_turf_counter)
 				stat("Mob Counter", debug_mob_counter)
 				stat("Object Counter", debug_obj_counter)
+				stat("State Counter", debug_state_counter)
+				stat("Name Counter", debug_name_counter)
 				stat("Animal Counters", "")
 				stat("Buck:", buck_count)
 				stat("Snake:", snake_count)
