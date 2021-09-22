@@ -21,7 +21,7 @@ mob/npc/combat
 			var/original_loc
 			move = 1
 			health=2500
-			maxhealth=2500
+			maxhealth=3000
 			chakra=1000000000
 			maxchakra=1000000000
 			maxninexp=1000000000
@@ -30,12 +30,12 @@ mob/npc/combat
 			maxdefexp=1000000000
 			maxagilityexp=1000000000
 			maxprecisionexp=1000000000
-			ninjutsu=80
-			genjutsu=80
-			strength=80
-			defence=80
-			agility=80
-			precision=80
+			ninjutsu=100
+			genjutsu=100
+			strength=100
+			defence=100
+			agility=100
+			precision=100
 
 
 			SetName()
