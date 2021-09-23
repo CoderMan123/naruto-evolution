@@ -1187,7 +1187,6 @@ mob
 
 				src.rank = RANK
 
-				src.client.StaffCheck()
 				spawn() src.client.UpdateCharacterPanel()
 				spawn() src.client.UpdateInventoryPanel()
 
