@@ -12,7 +12,7 @@ obj/Symbols
 	Village
 		New(mob/M)
 			src.loc=null
-			if(M && M.client)
+			if(M)
 				switch(M.village)
 					if(VILLAGE_LEAF) src.icon = 'Leaf.png'
 					if(VILLAGE_SAND) src.icon = 'Sand.png'
@@ -27,7 +27,7 @@ obj/Symbols
 	Rank
 		New(mob/M)
 			src.loc=null
-			if(M && M.client && M.rank)
+			if(M && M.rank)
 				switch(M.rank)
 					if(RANK_ACADEMY_STUDENT) src.icon = 'Academy-Student.png'
 					if(RANK_GENIN) src.icon = 'Genin.png'

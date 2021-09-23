@@ -178,6 +178,7 @@
 #include "src\events\dailies.dm"
 #include "src\events\election.dm"
 #include "src\events\infamy.dm"
+#include "src\html\html.dm"
 #include "src\interface\cursors.dm"
 #include "src\interface\interface.dm"
 #include "src\interface\logos.dm"
