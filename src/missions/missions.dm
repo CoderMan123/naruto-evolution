@@ -99,11 +99,11 @@ mission
 	proc/Complete(mob/M)
 		switch(M.village)
 			if(VILLAGE_LEAF)
-				if(sand_online > leaf_online) mission_exp_mod = initial(mission_exp_mod) + (0.05 * (sand_online - leaf_online))
+				if(sand_online > leaf_online) mission_exp_mod = initial(mission_exp_mod) + (0.1 * (sand_online - leaf_online))
 				else mission_exp_mod = initial(mission_exp_mod)
 
 			if(VILLAGE_SAND)
-				if(leaf_online > sand_online) mission_exp_mod = initial(mission_exp_mod) + (0.05 * (leaf_online - sand_online))
+				if(leaf_online > sand_online) mission_exp_mod = initial(mission_exp_mod) + (0.1 * (leaf_online - sand_online))
 				else mission_exp_mod = initial(mission_exp_mod)
 
 		switch(src.type)
