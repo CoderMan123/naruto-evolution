@@ -257,6 +257,17 @@ mob
 		src.hbar.Add(Mana)
 		for(var/obj/Screen/healthbar/HB in src.hbar) src.overlays+=HB
 		for(var/obj/Screen/manabar/HB in src.hbar) src.overlays+=HB
+
+		for(var/obj/Screen/WeaponSelect/H in src.client.screen)
+			switch(src.equipped)
+				if("Kunais") H.icon_state="kunai"
+				if("ExplodeKunais") H.icon_state="expl kunai"
+				if("Shurikens") H.icon_state="shuriken"
+				if("Needles") H.icon_state="needle"
+				if("ExplosiveTags") H.icon_state="tag"
+				if("SmokeBombs") H.icon_state="SmokeBombs"
+				if("FoodPill") H.icon_state="Blood Pill"
+				
 		spawn() src.UpdateHMB()
 		spawn() src.UpdateSlots()
 		spawn() src.client.FlashExperienceLock()
