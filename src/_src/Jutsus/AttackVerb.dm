@@ -48,10 +48,10 @@ mob
 					step(src, get_dir(src, c_target))
 					src.lungecounter=1
 					if(src.equipped=="Weights")
-						spawn(40/((src.agility/150)*3))lungecounter=0
+						spawn(40/((src.agility/150)*4))lungecounter=0
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(8,20)*trainingexp))
 					else
-						spawn(20/((src.agility/150)*3))lungecounter=0
+						spawn(20/((src.agility/150)*4))lungecounter=0
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(4,11)*trainingexp))
 			if(src.likeaclone)
 				var/mob/Clones/SC=src.likeaclone
