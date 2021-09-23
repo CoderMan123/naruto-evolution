@@ -97,6 +97,10 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/10)*jutsustatexp))
 						var/damage
 						var/obj/A = new/obj/MiscEffects/MeteorDust(src.loc)
+						var/mob/c_target2=src.Target_Get(TARGET_MOB)
+						if(c_target2)
+							step_towards(src, c_target2)
+							src.dir = get_dir(src.loc, c_target2.loc)
 						A.pixel_x=-30
 						A.pixel_y=-10
 						A.dir=src.dir

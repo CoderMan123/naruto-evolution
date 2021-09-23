@@ -187,6 +187,10 @@ mob
 					src.icon_state = "punchrS"
 					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					sleep(1)
+					var/mob/c_target2=src.Target_Get(TARGET_MOB)
+					if(c_target2)
+						step_towards(src, c_target2)
+						src.dir = get_dir(src.loc, c_target2.loc)
 					var/mob/Z
 					flick("punchr",src)
 					for(var/i=0,i<5,i++)

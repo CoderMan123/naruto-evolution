@@ -667,6 +667,10 @@ mob
 					var/reqhits=rand(1,2)
 					var/jutsuactive=1
 					flick("punchr",src)
+					var/mob/c_target2=src.Target_Get(TARGET_MOB)
+					if(c_target2)
+						step_towards(src, c_target2)
+						src.dir = get_dir(src.loc, c_target2.loc)
 					var/mob/Z
 					for(var/mob/M in get_step(src,src.dir))Z=M
 					if(Z)

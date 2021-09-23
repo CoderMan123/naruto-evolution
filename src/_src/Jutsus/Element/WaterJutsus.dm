@@ -102,6 +102,10 @@ mob
 					if(J.level==4) Timer=10
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/obj/PrisonOb
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					if(c_target)
+						step_towards(src, c_target)
+						src.dir = get_dir(src.loc, c_target.loc)
 					var/turf/T
 					for(var/mob/M in get_step(src,src.dir))
 						if(istype(M)&&!M.dead)

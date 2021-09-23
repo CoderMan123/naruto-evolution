@@ -10,6 +10,10 @@ mob
 							J.exp+=rand(2,5)
 							J.Levelup()
 					flick("jutsu",src)
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					if(c_target)
+						step_towards(src, c_target)
+						src.dir = get_dir(src.loc, c_target.loc)
 					if(src.bonesword==0)
 						src.bonesword = J.level
 						src.overlays+='Camellia.dmi'
@@ -54,6 +58,10 @@ mob
 					src.firing=1
 					src.canattack=0
 					var/mob/Z
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					if(c_target)
+						step_towards(src, c_target)
+						src.dir = get_dir(src.loc, c_target.loc)
 					for(var/mob/M in get_step(src,src.dir))
 						M.move=0
 						M.injutsu=1

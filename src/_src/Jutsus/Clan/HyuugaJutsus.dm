@@ -19,6 +19,10 @@ mob
 					src.injutsu=1
 					src.firing=1
 					src.canattack=0
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					if(c_target)
+						step_towards(src, c_target)
+						src.dir = get_dir(src.loc, c_target.loc)
 					var/mob/Z
 					for(var/mob/M in get_step(src,src.dir))
 						M.move=0
@@ -436,6 +440,10 @@ mob
 						if(J.level==4)
 							A.icon_state="max"
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+						var/mob/c_target2=src.Target_Get(TARGET_MOB)
+						if(c_target2)
+							step_towards(src, c_target2)
+							src.dir = get_dir(src.loc, c_target2.loc)
 						if(prob(50))flick("punchl",src)
 						else flick("punchr",src)
 						//src.firing=1
