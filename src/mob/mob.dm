@@ -526,6 +526,17 @@ mob
 			src.hbar.Add(Mana)
 			for(var/obj/Screen/healthbar/HB in src.hbar) src.overlays+=HB
 			for(var/obj/Screen/manabar/HB in src.hbar) src.overlays+=HB
+
+			for(var/obj/Screen/WeaponSelect/H in src.client.screen)
+				switch(src.equipped)
+					if("Kunais") H.icon_state="kunai"
+					if("ExplodeKunais") H.icon_state="expl kunai"
+					if("Shurikens") H.icon_state="shuriken"
+					if("Needles") H.icon_state="needle"
+					if("ExplosiveTags") H.icon_state="tag"
+					if("SmokeBombs") H.icon_state="SmokeBombs"
+					if("FoodPill") H.icon_state="Blood Pill"
+					
 			spawn() src.UpdateHMB()
 
 			if(src.client.Alert("Do you wish to skip the tutorial? Only do this if you are familiar with the game. If you skip this you can't come back without making a new account.", "Skip Tutorial?", list("Yes", "No")) == 1)
@@ -1176,7 +1187,6 @@ mob
 
 				src.rank = RANK
 
-				src.client.StaffCheck()
 				spawn() src.client.UpdateCharacterPanel()
 				spawn() src.client.UpdateInventoryPanel()
 

@@ -288,9 +288,6 @@ mob
 									if(m)
 										m.SetRank(RANK_KAZEKAGE)
 
-										new/obj/Inventory/Clothing/HeadWrap/KazekageHat(m)
-										new/obj/Inventory/Clothing/Robes/KazekageRobe(m)
-
 										var/squad/squad = m.GetSquad()
 										if(squad)
 											spawn() squad.Refresh()
