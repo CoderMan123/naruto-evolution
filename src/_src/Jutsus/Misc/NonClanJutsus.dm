@@ -202,7 +202,7 @@ mob
 							A.icon=src.icon
 							A.overlays=src.overlays
 							A.invisibility=1
-							if(i<5)BUNLIST+=A
+							BUNLIST+=A
 							step_rand(A)
 							step_rand(A)
 							step_rand(A)
