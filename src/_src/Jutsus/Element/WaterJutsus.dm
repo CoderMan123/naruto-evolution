@@ -73,6 +73,9 @@ mob
 					src.firing=1
 					src.canattack=0
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					if(c_target)
+						src.dir = get_dir(src.loc, c_target.loc)
 					var/obj/suijinheki/A = new/obj/suijinheki(src.loc)
 					A.IsJutsuEffect=src
 					A.Owner=src
