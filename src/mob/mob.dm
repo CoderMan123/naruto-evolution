@@ -344,7 +344,7 @@ mob
 					src.client.Alert("\"[src.name]\" contains an invalid character.  Allowed characters are:\n[allowed_characters_name]")
 					src.character = null
 
-				else if(names_taken.Find(src.character))
+				else if(names_taken.Find(lowertext(src.character)))
 					src.client.Alert("The character name <b>[src.character]</b> is already taken.")
 					src.character = null
 
