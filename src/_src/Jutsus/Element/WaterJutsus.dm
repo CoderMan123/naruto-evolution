@@ -278,13 +278,13 @@ mob
 					O.overlays+=image('Wave.dmi',icon_state = "bottom",pixel_y=-32)
 					O.overlays+=image('Wave.dmi',icon_state = "left",pixel_x=-32)
 					O.overlays+=image('Wave.dmi',icon_state = "right",pixel_x=32)
-					spawn(5)
+					spawn()
 						if(src)
 							if(O)O.dir = src.dir
 							var/moves=0
 							while(moves<>(10+J.level))
 								moves+=1
-								sleep(1)
+								sleep(0.5)
 								if(O) step(O,O.dir)
 								if(O)
 									var/turf/T = O.loc
@@ -345,7 +345,6 @@ mob
 												W2.IsJutsuEffect=src
 												W2.loc=O.loc
 												W2.x+=1
-								sleep(1)
 						if(O)del(O)
 					src.copy = "Cant move"
 					spawn(10-(J.level*2))
