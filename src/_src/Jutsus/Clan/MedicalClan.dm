@@ -99,7 +99,7 @@ mob
 						loc = c_target.loc
 						step(src,c_target.dir)
 						dir = get_dir(src,c_target)
-						sleep(2)
+						sleep(0.5)
 					for(var/mob/M in get_step(src,src.dir))
 						Z=M
 						check=1
