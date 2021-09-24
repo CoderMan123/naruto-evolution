@@ -271,6 +271,10 @@ mob
 						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
 						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
 						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+						var/mob/c_target2=src.Target_Get(TARGET_MOB)
+						if(c_target2)
+							step_towards(src, c_target2)
+							src.dir = get_dir(src.loc, c_target2.loc)
 						var/mob/Z
 						var/i
 						src.move=0

@@ -3,6 +3,9 @@ macro "Macro"
 		name = "Tab"
 		command = "Target-A-Mob"
 	elem 
+		name = "CTRL+Tab"
+		command = "Target-An-Ally"
+	elem 
 		name = "SHIFT+Tab"
 		command = "Untarget-pplz"
 	elem 
@@ -262,7 +265,6 @@ window "Browser"
 		size = 1000x600
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -271,8 +273,6 @@ window "Browser"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 1014x614
-		inner-size = 1000x600
 	elem "Background"
 		type = LABEL
 		pos = 0,21

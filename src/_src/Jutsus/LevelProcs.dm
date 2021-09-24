@@ -9,7 +9,7 @@ obj
 						return
 
 				var/mob/Owner=getOwner(src.owner)
-				Owner.PlayAudio('level.wav', output = AUDIO_HEARERS)
+				Owner.PlayAudio('level.wav', output = AUDIO_SELF)
 				Owner<<output("<font color= #dda0dd>Your [src] skill has advanced a level</Font>.","Action.Output")
 				src.level++
 				src.exp-=src.maxexp
@@ -78,7 +78,7 @@ mob
 				O.icon_state = "3x"
 				O.layer=200
 				src.overlays+=O
-				src.PlayAudio('levelup.wav', output = AUDIO_HEARERS)
+				src.PlayAudio('levelup.wav', output = AUDIO_SELF)
 				src<<output("<font color= #bc8f8f>You leveled up!</Font>.","Action.Output")
 				src.level+=1
 				src.exp-=src.maxexp
@@ -111,7 +111,7 @@ mob
 			if(src.strengthexp>=src.maxstrengthexp)
 				if(src.strength>=150)
 					goto next
-				src.PlayAudio('level.wav', output = AUDIO_HEARERS)
+				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=TaiOrange>You leveled up Strength</Font>.","Action.Output")
 				src.exp+=1
 				src.strength+=1
@@ -132,7 +132,7 @@ mob
 			if(src.ninexp>=src.maxninexp)
 				if(src.ninjutsu>=150)
 					goto next
-				src.PlayAudio('level.wav', output = AUDIO_HEARERS)
+				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=NinBlue>You leveled up Ninjutsu</Font>.","Action.Output")
 				src.exp+=1
 				src.ninjutsu+=1
@@ -152,7 +152,7 @@ mob
 			if(src.genexp>=src.maxgenexp)
 				if(src.genjutsu>=150)
 					goto next
-				src.PlayAudio('level.wav', output = AUDIO_HEARERS)
+				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=blueviolet>You leveled up Genjutsu</Font>.","Action.Output")
 				src.exp+=1
 				src.genjutsu+=1
@@ -172,7 +172,7 @@ mob
 			if(src.defexp>=src.maxdefexp)
 				if(src.defence>=150)
 					goto next
-				src.PlayAudio('level.wav', output = AUDIO_HEARERS)
+				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=maroon>You leveled up Defence</Font>.","Action.Output")
 				src.exp+=1
 				src.defence++
@@ -192,7 +192,7 @@ mob
 			if(src.agilityexp>=src.maxagilityexp)
 				if(src.agility>=150)
 					goto next
-				src.PlayAudio('level.wav', output = AUDIO_HEARERS)
+				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=cornsilk>You leveled up Agility</Font>.","Action.Output")
 				src.exp+=1
 				src.agility++
@@ -220,7 +220,7 @@ mob
 			if(src.precisionexp>=src.maxprecisionexp)
 				if(src.precision>=150)
 					goto next
-				src.PlayAudio('level.wav', output = AUDIO_HEARERS)
+				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=azure>You leveled up Precision</Font>.","Action.Output")
 				src.exp+=1
 				src.precision++
@@ -314,10 +314,10 @@ mob
 					var/mob/HitMe=O.JashinConnected
 					if(!HitMe.dead)
 						if(!HitMe||!ismob(HitMe)) continue
-						var/jashpercent = (jutsudamage / 100)/15
+						var/jashpercent = (jutsudamage / 150)*1.5
 						HitMe.DealDamage(src.maxhealth*(jashpercent/10),src,"maroon")
 						HitMe.Bleed()
-						src.health-=src.maxhealth*(jashpercent/20)
+						src.health-=src.maxhealth*(jashpercent/30)
 						src.Bleed()
 						HitMe.UpdateHMB()
 						src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)

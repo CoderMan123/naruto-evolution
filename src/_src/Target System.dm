@@ -31,8 +31,31 @@ mob/verb/Target_A_Mob()
 		if(M==src.puppets[1]) continue
 		if(M.Owner==src) continue
 		if(istype(M, /mob/training)) continue
+		if(M.village == src.village) continue
 		src.Target_Atom(M)
 		return
+
+mob/verb/Target_An_Ally()
+	set hidden=1
+	var/Train=0
+	for(var/obj/Training/T in orange(1))Train=1
+	if(Train)return
+	//for(var/mob/M in oview(src))if(M.Attacked==src&&!target_mob==M)src.Target_Atom(M)
+	for(var/mob/M in oview(src))
+
+		if(istype(loc,/turf/Arena))//If you're in the arena, and your trying to tab target a person, it will only target your opponent.
+			if(M.key)//This makes it so clones are still targettable.
+				if(M!=opponent)
+					continue
+
+		if(target_mob==M) continue
+		if(M==src.puppets[1]) continue
+		if(M.Owner==src) continue
+		if(istype(M, /mob/training)) continue
+		if(M.village != src.village) continue
+		src.Target_Atom(M)
+		return
+
 mob/var/tmp
 	mob/target_mob
 	image/Target/target_mob_image

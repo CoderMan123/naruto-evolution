@@ -73,6 +73,9 @@ mob
 					src.firing=1
 					src.canattack=0
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					if(c_target)
+						src.dir = get_dir(src.loc, c_target.loc)
 					var/obj/suijinheki/A = new/obj/suijinheki(src.loc)
 					A.IsJutsuEffect=src
 					A.Owner=src
@@ -102,6 +105,10 @@ mob
 					if(J.level==4) Timer=10
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/obj/PrisonOb
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					if(c_target)
+						step_towards(src, c_target)
+						src.dir = get_dir(src.loc, c_target.loc)
 					var/turf/T
 					for(var/mob/M in get_step(src,src.dir))
 						if(istype(M)&&!M.dead)
@@ -278,13 +285,13 @@ mob
 					O.overlays+=image('Wave.dmi',icon_state = "bottom",pixel_y=-32)
 					O.overlays+=image('Wave.dmi',icon_state = "left",pixel_x=-32)
 					O.overlays+=image('Wave.dmi',icon_state = "right",pixel_x=32)
-					spawn(5)
+					spawn()
 						if(src)
 							if(O)O.dir = src.dir
 							var/moves=0
 							while(moves<>(10+J.level))
 								moves+=1
-								sleep(1)
+								sleep(0.5)
 								if(O) step(O,O.dir)
 								if(O)
 									var/turf/T = O.loc
@@ -345,7 +352,6 @@ mob
 												W2.IsJutsuEffect=src
 												W2.loc=O.loc
 												W2.x+=1
-								sleep(1)
 						if(O)del(O)
 					src.copy = "Cant move"
 					spawn(10-(J.level*2))

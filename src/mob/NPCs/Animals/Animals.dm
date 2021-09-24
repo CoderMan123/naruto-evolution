@@ -613,7 +613,7 @@ mob
 
 				snake
 					icon='Snake.dmi'
-					exp_reward = 3
+					exp_reward = 2
 					var/punch_cd=0
 					var/attacking = 0
 					var/tmp/mob/target

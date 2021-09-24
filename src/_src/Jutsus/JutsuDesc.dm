@@ -926,7 +926,7 @@ obj
 			Description="You manefest a giant warrior incarnation which protects you from death for a duration. You can cause the incarnation to attack enemies around you by pressing the S key."
 			New()
 				..()
-				ChakraCost = (Sprice*jutsuchakra)*4
+				ChakraCost = (Sprice*jutsuchakra)*3
 				maxcooltime = jutsucooldown*600
 
 //Implanted
@@ -2437,7 +2437,7 @@ obj
 			Description="Use someones blood to perform a deadly ritual turning yourself into a voodoo doll that will deal damage to that person when you yourself take damage. To perform the jutsu stand on top of someones blood and use to jutsu to create a circle. Providing you remain in the circle you can press S to deal damage to yourself and that player. Additionally any instance of damage taken will trigger additional hits to both yourself and the victim. Unlike other jutsu this jutsus damage scales from your maximum health."
 			New()
 				..()
-				ChakraCost = (Sprice*jutsuchakra)*2
+				ChakraCost = (Sprice*jutsuchakra)*1
 				maxcooltime = jutsucooldown*600
 
 		Immortality
@@ -2453,7 +2453,7 @@ obj
 			Description="Pray to jashin and kill someone within the time limit to offer a sacrifice to Lord Jashin causing you to become immortal for a duration. During this time your health cannot be dropped below 1."
 			New()
 				..()
-				ChakraCost = (Sprice*jutsuchakra)*1.5
+				ChakraCost = (Sprice*jutsuchakra)*1
 				maxcooltime = jutsucooldown*450
 
 		Immortal
@@ -2469,7 +2469,7 @@ obj
 			Description="If Lord Jashin is pleased with you service you can become immortal on demand for a duration. During this time your health cannot drop below 1. Use the jutsu to see how many more sacrifices must be offered to achieve Lord Jashin's favor."
 			New()
 				..()
-				ChakraCost = (Sprice*jutsuchakra)*2
+				ChakraCost = (Sprice*jutsuchakra)*1
 				maxcooltime = jutsucooldown*600
 
 //Spider

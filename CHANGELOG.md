@@ -3,6 +3,36 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.7] - 2021-09-24
+
+### Added
+- You can now target nearby villagers by pressing ``CTRL+TAB``
+
+### Changes
+- Improvements to the banker npc
+- Nerfed snake exp reward to 2 exp
+- Buffed exp gained from the population handicap system
+- Buffed water collides velocity
+- Suijinheki is now cast towards your target
+- Shorter time between lunges when punching
+- Most 'Melee' jutsu now lunge towards your target first
+- Heal s now easier to land on a target
+- Reduced chakra cost of Susano'o
+- Reduced chakra cost of Jashin jutsus
+- Nerfed Crystal Needles damage
+- Buffed the speed that nagashi ticks happen
+- Buffed nagashi's TOTAL damage slightly but each tick now deals less
+
+### Fixed
+- Fixed a bug with character names
+- Fixed sleep effects lingering after advanced sub
+- Fixed invisible Crow Clones
+- Fixed level up sound playing for people who didn't level up
+
+### Removed
+- You can no longer target fellow villagers with ``TAB``
+
+
 ## [2.4.6] - 2021-09-23
 
 ### Fixed

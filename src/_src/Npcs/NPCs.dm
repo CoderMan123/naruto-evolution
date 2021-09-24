@@ -149,9 +149,16 @@ mob/npc
 				usr.move=1
 				return
 	Banker
-		icon='WhiteMBase.dmi'
-		pixel_x=-15
-		density=0
+		icon = 'WhiteMBase.dmi'
+		village = VILLAGE_LEAF
+		rank = null
+		density = 1
+		pixel_x = -15
+
+		New()
+			..()
+			src.SetName(src.name)
+
 		NewStuff()
 			src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
 			src.overlays+='Shirt.dmi'
@@ -160,47 +167,146 @@ mob/npc
 			src.SetName(src.name)
 			spawn() Stuff()
 			..()
+
 		DblClick()
+			if(src.conversations.Find(usr)) return 0
+			if(get_dist(src,usr) > 2) return
 			if(usr.dead) return
-			if(get_dist(src,usr)>2) return
-			if(!usr.move) return
-			usr.move=0
-			switch(usr.client.Alert("You have [usr.ryo] Ryo on you and [usr.RyoBanked] banked here.","Bank",list("Deposit","Withdraw","Cancel")))
+
+			src.conversations.Add(usr)
+
+			view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Greetings [usr.name], would you like to make a deposit or a withdrawal from your bank?</font>"
+
+			switch(usr.client.Alert("You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br /><br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank", list("Deposit","Withdraw","Cancel")))
 				if(1)
+					
+					view(usr) << "[HTML_GetName(usr)]<font color='[COLOR_CHAT]'>: I'd like to make a deposit to my bank account.</font>"
+					
 					if(!usr.ryo)
-						usr << output("[src] says, You don't have any Ryo to deposit","Action.Output")
+						sleep(10)
+						view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I'm sorry, but your broke ass doesn't have any Ryo to deposit.</font>"
 					else
-						var/list/AlertInput=usr.client.AlertInput("How much would you like to deposit?","Ryo Deposit")
-						if(!isnum(AlertInput[2]))
-							usr.move=1
-							return
-						if(usr.ryo<AlertInput[2]||AlertInput[2]<=0)
-							usr.move=1
-							return
-						usr.RyoBanked+=AlertInput[2]
-						usr.ryo-=AlertInput[2]
-						usr << output("[src] says,  Thank you for your deposit.","Action.Output")
-					usr.move=1
-					return
+						sleep(10)
+						view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Very well, how much would you like to deposit?</font>"
+
+						switch(usr.client.Alert("Would you like to deposit all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
+							if(1)
+								var/value = usr.ryo
+
+								if(value)
+									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I'd like to deposit [value] Ryo into my bank account.</font>"
+
+									usr.ryo -= value
+									usr.RyoBanked += value
+
+									spawn() usr.client.UpdateInventoryPanel()
+
+									usr << output("You have deposited <u>[value]</u> Ryo into your bank.", "Action.Output")
+									usr << output("You now have <u>[usr.ryo]</u> Ryo into your satchel and <u>[usr.RyoBanked]</u> in your bank.", "Action.Output")
+
+									sleep(10)
+									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Your transaction has been completed. Please come back again soon!</font>"
+
+								else
+									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
+									sleep(10)
+									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
+
+							if(2)
+								var/list/AlertInput = usr.client.AlertInput("How much Ryo would you like to deposit into your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
+								
+								var/value = AlertInput[2]
+
+								if(isnum(value) && value > 0 && usr.ryo >= value)
+									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I'd like to deposit [value] Ryo into my bank account.</font>"
+								
+									usr.ryo -= value
+									usr.RyoBanked += value
+
+									spawn() usr.client.UpdateInventoryPanel()
+
+									usr << output("You have deposited <u>[value]</u> Ryo into your bank.", "Action.Output")
+									usr << output("You now have <u>[usr.ryo]</u> Ryo into your satchel and <u>[usr.RyoBanked]</u> in your bank.", "Action.Output")
+
+									sleep(10)
+									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Your transaction has been completed. Please come back again soon!</font>"
+
+								else
+									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
+									sleep(10)
+									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
+							
+							if(3)
+								view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
+								sleep(10)
+								view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 
 				if(2)
-					if(!usr.RyoBanked)
-						usr << output("[src] says, You do not have any Ryo to withdraw","Action.Output")
-					else
-						var/list/AlertInput=usr.client.AlertInput("How much would you like to withdraw?","Ryo Withdraw")
-						if(!isnum(AlertInput[2]))
-							usr.move=1
-							return
-						if(usr.RyoBanked<AlertInput[2]||AlertInput[2]<=0)
-							usr.move=1
-							return
-						usr.ryo+=AlertInput[2]
-						usr.RyoBanked-=AlertInput[2]
-						usr << output("[src] says, Thanks, here's your Ryo.","Action.Output")
-					usr.move=1
-					return
 
+					view(usr) << "[HTML_GetName(usr)]<font color='[COLOR_CHAT]'>: I'd like to make a withdrawal from my bank account.</font>"
+
+					if(!usr.RyoBanked)
+						sleep(10)
+						view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I'm sorry, but your broke ass doesn't have any Ryo to withdrawal.</font>"
+					else
+						sleep(10)
+						view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Very well, how much would you like to withdrawal?</font>"
+
+						switch(usr.client.Alert("Would you like to withdrawal all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
+							if(1)
+								var/value = usr.RyoBanked
+
+								if(value)
+									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I'd like to withdrawal [value] Ryo into my bank account.</font>"
+
+									usr.RyoBanked -= value
+									usr.ryo += value
+									
+									spawn() usr.client.UpdateInventoryPanel()
+
+									usr << output("You withdraw <u>[value]</u> Ryo into from your bank.", "Action.Output")
+									usr << output("You now have <u>[usr.ryo]</u> Ryo into your satchel and <u>[usr.RyoBanked]</u> in your bank.", "Action.Output")
+
+									sleep(10)
+									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Your transaction has been completed. Please come back again soon!</font>"
+
+								else
+									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
+									sleep(10)
+									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
+
+							if(2)
+								var/list/AlertInput = usr.client.AlertInput("How much Ryo would you like to withdraw from your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
+								
+								var/value = AlertInput[2]
+
+								if(isnum(value) && value > 0 && usr.RyoBanked >= value)
+									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I'd like to withdraw [value] Ryo from my bank account.</font>"
+
+									usr.RyoBanked -= value
+									usr.ryo += value
+									
+									spawn() usr.client.UpdateInventoryPanel()
+
+									usr << output("You withdraw <u>[value]</u> Ryo into from your bank.", "Action.Output")
+									usr << output("You now have <u>[usr.ryo]</u> Ryo into your satchel and <u>[usr.RyoBanked]</u> in your bank.", "Action.Output")
+
+									sleep(10)
+									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Your transaction has been completed. Please come back again soon!</font>"
+
+								else
+									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
+									sleep(10)
+									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
+							
+							if(3)
+								view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
+								sleep(10)
+								view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 				if(3)
-					usr.move=1
-					return
+					view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: No, thank you.</font>"
+					sleep(10)
+					view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
+
+			src.conversations.Remove(usr)
 

@@ -202,7 +202,7 @@ mob
 							A.icon=src.icon
 							A.overlays=src.overlays
 							A.invisibility=1
-							if(i<5)BUNLIST+=A
+							BUNLIST+=A
 							step_rand(A)
 							step_rand(A)
 							step_rand(A)
@@ -468,7 +468,6 @@ mob
 						M.icon_state="dead"
 						M.move=0
 						M.injutsu=1
-						M.firing=1
 						M.canattack=0
 						spawn(TimeAsleep)
 							if(jutsuactive==1)
@@ -478,7 +477,6 @@ mob
 								M.injutsu=0
 								M.canattack=1
 								M.Sleeping=0
-								M.firing=0
 								jutsuactive=0
 						spawn()
 							while(jutsuactive==1)
@@ -490,7 +488,6 @@ mob
 									M.injutsu=0
 									M.canattack=1
 									M.Sleeping=0
-									M.firing=0
 
 					src.firing=0
 					src.canattack=1
@@ -667,6 +664,10 @@ mob
 					var/reqhits=rand(1,2)
 					var/jutsuactive=1
 					flick("punchr",src)
+					var/mob/c_target2=src.Target_Get(TARGET_MOB)
+					if(c_target2)
+						step_towards(src, c_target2)
+						src.dir = get_dir(src.loc, c_target2.loc)
 					var/mob/Z
 					for(var/mob/M in get_step(src,src.dir))Z=M
 					if(Z)
@@ -676,7 +677,6 @@ mob
 						Z.move=0
 						Z.Sleeping=1
 						Z.injutsu=1
-						Z.firing=1
 						Z.canattack=0
 						var/TimeAsleep = J.level*10 + src.precision*0.5
 						spawn(TimeAsleep)
@@ -687,7 +687,6 @@ mob
 								Z.injutsu=0
 								Z.canattack=1
 								Z.Sleeping=0
-								Z.firing=0
 								jutsuactive=0
 						while(jutsuactive==1)
 							sleep(1)
@@ -698,7 +697,6 @@ mob
 								Z.injutsu=0
 								Z.canattack=1
 								Z.Sleeping=0
-								Z.firing=0
 
 		Crow_Substitution()
 			for(var/obj/Jutsus/Crow_Substitution/J in src.jutsus)
