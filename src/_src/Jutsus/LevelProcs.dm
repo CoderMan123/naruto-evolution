@@ -315,9 +315,9 @@ mob
 					if(!HitMe.dead)
 						if(!HitMe||!ismob(HitMe)) continue
 						var/jashpercent = (jutsudamage / 150)*1.5
-						HitMe.DealDamage(src.maxhealth*(jashpercent/10),src,"maroon")
+						HitMe.DealDamage(src.maxhealth*(jashpercent/20),src,"maroon")
 						HitMe.Bleed()
-						src.health-=src.maxhealth*(jashpercent/30)
+						src.DealDamage(src.maxhealth*(jashpercent/40),src,"maroon")
 						src.Bleed()
 						HitMe.UpdateHMB()
 						src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
