@@ -20,13 +20,15 @@ mob/npc
 		density=1
 		Move()return
 		Death()return
-		NewStuff()
+		New()
 			src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
 			src.overlays+='Shirt.dmi'
 			src.overlays+='Sandals.dmi'
 			src.overlays+='Chunin Vest.dmi'
-			spawn() Stuff()
+			spawn() src.RestoreOverlays()
 			density=1
+			..()
+			
 		Starting_Jounin
 			icon='WhiteMBase.dmi'
 			//var/message

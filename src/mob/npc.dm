@@ -6,6 +6,20 @@ mob/npc
 	var/tmp/bark
 	move=0
 
+	New()
+		..()
+		npcs_online.Add(src)
+
+		if(!istype(src, /mob/npc/combat/animals/small))
+			src.overlays += /obj/MaleParts/UnderShade
+
+		src.SetName(src.name)
+
+		OriginalOverlays = overlays.Copy()
+		spawn() src.RestoreOverlays()
+		
+		src.NewStuff()
+
 	RestoreOverlays()
 		while(src)
 			if(OriginalOverlays.len) overlays = OriginalOverlays.Copy()
@@ -19,13 +33,6 @@ mob/npc
 	Death(killer)
 		if(istype(src, /mob/npc/combat)) ..()
 		else return
-
-	New()
-		..()
-		npcs_online.Add(src)
-		if(!istype(src, /mob/npc/combat/animals/small))
-			src.overlays+=/obj/MaleParts/UnderShade
-		src.SetName(src.name)
 	
 	banker
 		name = "Banker"
@@ -46,13 +53,10 @@ mob/npc
 			village = VILLAGE_AKATSUKI
 
 		New()
-			..()
-			src.SetName(src.name)
 			src.overlays += pick('Short.dmi', 'Short2.dmi', 'Short3.dmi')
 			src.overlays += 'Shirt.dmi'
 			src.overlays += 'Sandals.dmi'
-			OriginalOverlays = overlays.Copy()
-			spawn() src.RestoreOverlays()
+			..()
 			
 
 		DblClick()
@@ -207,11 +211,12 @@ mob/npc
 		icon = 'WhiteMBase.dmi'
 		village = VILLAGE_MISSING_NIN
 		New()
-			..()
 			src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
 			src.overlays += 'Shade.dmi'
 			src.overlays+='Shirt.dmi'
 			src.overlays+='Sandals.dmi'
+			..()
+			
 		DblClick()
 			if(usr.dead)return
 			if(get_dist(src,usr)>2)return
@@ -642,6 +647,7 @@ mob/npc
 			src.mouse_over_pointer = /obj/cursors/target
 			src.hbar.Add(hbar)
 			src.hbar.Add(mbar)
+
 		Death(killer)
 			if(src.health <= 0)
 				walk(src,0)
@@ -758,6 +764,7 @@ mob/npc
 					bark = "Hmph. That meeting was a waste of time. Oh well, so you'll be my bodyguards then?"
 
 		white_zetsu
+			name = "White Zetsu"
 			icon='zettsu.dmi'
 			var/punch_cd=0
 			var/attacking = 0
@@ -767,9 +774,7 @@ mob/npc
 			health=2500
 			maxhealth=2500
 
-
-			SetName()
-				return
+			SetName() return
 
 			Move()
 				..()

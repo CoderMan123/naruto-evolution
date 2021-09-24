@@ -1,8 +1,5 @@
 obj/var/Colorable=1
 mob/npc
-	New()
-		NewStuff()
-		..()
 	layer=MOB_LAYER
 	move=0
 	var/list/OriginalOverlays=list()
@@ -14,25 +11,21 @@ mob/npc
 //		OriginalOverlays=overlays
 //		..()
 
-	proc/Stuff()
-		spawn(20)
-			while(src)
-				if(OriginalOverlays.len) overlays=OriginalOverlays.Copy()
-				icon_state=""
-				sleep(10)
 	Hair_Stylist
 		name="Barber"
-		density=0
-		NewStuff()
-			src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
-			src.overlays+='Shirt.dmi'
-			src.overlays+='Sandals.dmi'
-			OriginalOverlays=overlays.Copy()
-			src.SetName(src.name)
-			spawn() Stuff()
-			..()
 		icon='WhiteMBase.dmi'
+		density=0
 		pixel_x=-15
+		New()
+			src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
+			src.overlays += 'Shirt.dmi'
+			src.overlays += 'Sandals.dmi'
+
+			OriginalOverlays = overlays.Copy()
+
+			spawn() RestoreOverlays()
+			..()
+		
 		DblClick()
 			if(usr.dead) return
 			if(get_dist(src,usr)>2) return
@@ -52,18 +45,21 @@ mob/npc
 			*/
 			usr.HairColorStyle=null
 			usr.RestoreOverlays()
+
 	Clothier
 		icon='WhiteMBase.dmi'
 		pixel_x=-15
 		density=0
-		NewStuff()
+		New()
 			src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
-			src.overlays+='Shirt.dmi'
-			src.overlays+='Sandals.dmi'
+			src.overlays += 'Shirt.dmi'
+			src.overlays += 'Sandals.dmi'
+
 			OriginalOverlays=overlays.Copy()
-			src.SetName(src.name)
-			spawn() Stuff()
+			
+			spawn() src.RestoreOverlays()
 			..()
+
 		DblClick()
 			if(usr.dead) return
 			if(get_dist(src,usr)>2) return
@@ -97,18 +93,19 @@ mob/npc
 				usr<<output("You need [S.Cost] Ryo to purchase this.","Action.Output")
 				return
 				//obj/Inventory/Clothing/Vests/Robe
+
 	Weapons_Dealer
 		icon='WhiteMBase.dmi'
 		pixel_x=-15
 		density=0
-		NewStuff()
+		New()
 			src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
 			src.overlays+='Shirt.dmi'
 			src.overlays+='Sandals.dmi'
 			OriginalOverlays=overlays.Copy()
-			src.SetName(src.name)
-			spawn() Stuff()
+			spawn() src.RestoreOverlays()
 			..()
+
 		DblClick()
 			if(usr.dead) return
 			if(get_dist(src,usr)>2) return
