@@ -1122,6 +1122,7 @@ mob
 							new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
 
 					if(RANK_HOKAGE)
+						hokage = list()
 						hokage[src.ckey] = src.character
 						kages_last_online[VILLAGE_LEAF] = world.realtime
 
@@ -1131,6 +1132,7 @@ mob
 							new /obj/Inventory/Clothing/Robes/HokageRobe(src)
 
 					if(RANK_KAZEKAGE)
+						kazekage = list()
 						kazekage[src.ckey] = src.character
 						kages_last_online[VILLAGE_SAND] = world.realtime
 
