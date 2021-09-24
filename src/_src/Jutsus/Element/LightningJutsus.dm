@@ -317,9 +317,9 @@ mob
 							if(M == src) return
 							if(M.dead)return
 
-							M.DealDamage(round((src.ninjutsu / 150)*2*J.damage)/9,src,"TaiOrange")
+							M.DealDamage(round((src.ninjutsu / 150)*2*J.damage)/15,src,"TaiOrange")
 							if(M.henge==4||M.henge==5)M.HengeUndo()
-						sleep(10)
+						sleep(5)
 						continue
 
 
