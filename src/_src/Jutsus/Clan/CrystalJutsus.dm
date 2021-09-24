@@ -273,10 +273,10 @@ mob
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
-						if(J.level==1) J.damage=0.5*((jutsudamage*J.Sprice)/2.5)
-						if(J.level==2) J.damage=0.5*((jutsudamage*J.Sprice)/2)
-						if(J.level==3) J.damage=0.5*((jutsudamage*J.Sprice)/1.5)
-						if(J.level==4) J.damage=0.5*(jutsudamage*J.Sprice)
+						if(J.level==1) J.damage=0.4*((jutsudamage*J.Sprice)/2.5)
+						if(J.level==2) J.damage=0.4*((jutsudamage*J.Sprice)/2)
+						if(J.level==3) J.damage=0.4*((jutsudamage*J.Sprice)/1.5)
+						if(J.level==4) J.damage=0.4*(jutsudamage*J.Sprice)
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						src.firing=1
 						src.canattack=0
