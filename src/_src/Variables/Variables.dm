@@ -32,7 +32,7 @@ mob
 		skillpoints=1
 		kills=0
 		village = ""
-		rank = RANK_ACADEMY_STUDENT
+		rank = ""
 		dead=0
 		swimming
 		walkingonwater
