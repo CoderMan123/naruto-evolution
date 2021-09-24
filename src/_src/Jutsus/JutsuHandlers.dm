@@ -33,7 +33,7 @@ mob
 			
 			return 1
 
-		DealDamage(amount = 0, var/mob/Owner, colortype, heal = 0, chakra = 0, punch = 0)
+		DealDamage(amount = 0, var/mob/Owner, colortype, heal = 0, chakra = 0, punch = 0, jashin_damage = 0)
 		//	world << output("[amount], [Owner], [colortype], [heal], [chakra], [punch]")//DEBUG INFO
 			ASSERT(Owner)
 			if(src.bubbled==0)//bubbleshieldstuff
@@ -81,7 +81,7 @@ mob
 					var/colour = colour2html(colortype)
 					DamageOverlay(src, damage, colour)
 				spawn()
-					src.Death(Owner)
+					src.Death(Owner, jashin_damage)
 			if(src.bubbled==1&&!heal&&!chakra)//bubbleshieldstuff
 				src.bubbled=0
 
