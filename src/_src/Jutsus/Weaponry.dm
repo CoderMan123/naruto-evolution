@@ -2363,182 +2363,16 @@ mob
 							src.Death(src,1)
 						return
 			if(usr.equipped=="Shurikens")
-				for(var/obj/Inventory/Weaponry/Shuriken/C in usr.contents)
-					if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
-						var/throwdelay = usr.attkspeed*3
-						var/mob/c_target=usr.Target_Get(TARGET_MOB)
-						AddState(usr, new/state/throwing, throwdelay)
-						if(prob(50))
-							flick("throw",usr)
-							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
-						else
-							flick("throw",usr)
-							src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-						if(c_target)
-							src.dir=get_dir(usr,c_target)
-							usr.Target_Atom(c_target)
-							var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 60))
-							if(prob(50))A.pixel_y+=rand(5,10)
-							else A.pixel_y-=rand(5,10)
-							if(prob(50))A.pixel_x+=rand(1,8)
-							else A.pixel_x-=rand(1,8)
-							A.Owner=usr
-							A.layer=usr.layer
-							A.fightlayer=usr.fightlayer
-							A.damage=(C.damage+(100-round(1*((150-((usr.precision)/1))/3)))+rand(0,10)*weapondamage)*0.6
-							walk_towards(A,c_target.loc,0)
-							spawn(4)if(A)walk(A,A.dir)
-						else if(!c_target)
-							var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 60))
-							if(prob(50))A.pixel_y+=rand(5,10)
-							else A.pixel_y-=rand(5,10)
-							if(prob(50))A.pixel_x+=rand(1,8)
-							else A.pixel_x-=rand(1,8)
-							A.Owner=usr
-							A.layer=usr.layer
-							A.fightlayer=usr.fightlayer
-							A.damage=(C.damage+(100-round(1*((150-((usr.precision)/1))/3)))+rand(0,10)*weapondamage)*0.6
-							walk(A,usr.dir)
-						usr.DestroyItem(C)
-						break
-
-			if(usr.equipped=="ExplodeKunais")
-				for(var/obj/Inventory/Weaponry/Exploding_Kunai/C in usr.contents)
-					if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
-						var/throwdelay = usr.attkspeed*5
-						var/mob/c_target=usr.Target_Get(TARGET_MOB)
-						AddState(usr, new/state/throwing, throwdelay)
-						if(prob(50))
-							flick("throw",usr)
-							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
-						else
-							flick("throw",usr)
-							src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-						if(c_target)
-							src.dir=get_dir(usr,c_target)
-							usr.Target_Atom(c_target)
-							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(80, 110))
-							if(prob(50))A.pixel_y+=rand(5,10)
-							else A.pixel_y-=rand(5,10)
-							if(prob(50))A.pixel_x+=rand(1,8)
-							else A.pixel_x-=rand(1,8)
-							A.Owner=usr
-							A.layer=usr.layer
-							A.fightlayer=usr.fightlayer
-							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.ninjutsu+usr.strength)/3))/3)))+rand(0,10)*weapondamage)*1
-							walk_towards(A,c_target.loc,0)
-							spawn(4)if(A)walk(A,A.dir)
-						else
-							var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(80, 110))
-							if(prob(50))A.pixel_y+=rand(5,10)
-							else A.pixel_y-=rand(5,10)
-							if(prob(50))A.pixel_x+=rand(1,8)
-							else A.pixel_x-=rand(1,8)
-							A.Owner=usr
-							A.layer=usr.layer
-							A.fightlayer=usr.fightlayer
-							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.ninjutsu+usr.strength)/3))/3)))+rand(0,10)*weapondamage)*1
-							walk(A,usr.dir)
-						usr.DestroyItem(C)
-						break
-
-			if(usr.equipped=="Kunais")
-				for(var/obj/Inventory/Weaponry/Kunai/C in usr.contents)
-					if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
-						var/throwdelay = usr.attkspeed*4
-						var/mob/c_target=usr.Target_Get(TARGET_MOB)
-						AddState(usr, new/state/throwing, throwdelay)
-						if(prob(50))
-							flick("throw",usr)
-							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
-						else
-							flick("throw",usr)
-							src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-						if(c_target)
-							src.dir=get_dir(usr,c_target)
-							usr.Target_Atom(c_target)
-							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 78))
-							if(prob(50))A.pixel_y+=rand(5,10)
-							else A.pixel_y-=rand(5,10)
-							if(prob(50))A.pixel_x+=rand(1,8)
-							else A.pixel_x-=rand(1,8)
-							A.Owner=usr
-							A.layer=usr.layer
-							A.fightlayer=usr.fightlayer
-							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.strength)/2))/3)))+rand(0,10)*weapondamage)*0.9
-							walk_towards(A,c_target.loc,0)
-							spawn(4)if(A)walk(A,A.dir)
-						else
-							var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 78))
-							if(prob(50))A.pixel_y+=rand(5,10)
-							else A.pixel_y-=rand(5,10)
-							if(prob(50))A.pixel_x+=rand(1,8)
-							else A.pixel_x-=rand(1,8)
-							A.Owner=usr
-							A.layer=usr.layer
-							A.fightlayer=usr.fightlayer
-							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.strength)/2))/3)))+rand(0,10)*weapondamage)*0.9
-							walk(A,usr.dir)
-						usr.DestroyItem(C)
-						break
-
-			if(usr.equipped=="Needles")
-				for(var/obj/Inventory/Weaponry/Needle/C in usr.contents)
-					if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
-						var/throwdelay = usr.attkspeed*2
-						var/mob/c_target=usr.Target_Get(TARGET_MOB)
-						AddState(usr, new/state/throwing, throwdelay)
-						if(prob(50))
-							flick("throw",usr)
-							src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
-						else
-							flick("throw",usr)
-							src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-						if(c_target)
-							src.dir=get_dir(usr,c_target)
-							usr.Target_Atom(c_target)
-							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(24, 48))
-							if(prob(50))A.pixel_y+=rand(5,10)
-							else A.pixel_y-=rand(5,10)
-							if(prob(50))A.pixel_x+=rand(1,8)
-							else A.pixel_x-=rand(1,8)
-							A.Owner=usr
-							A.layer=usr.layer
-							A.fightlayer=usr.fightlayer
-							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.agility)/2))/3)))+rand(0,10)*weapondamage)*0.3
-							walk_towards(A,c_target.loc,0)
-							spawn(4)if(A)walk(A,A.dir)
-						else
-							var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
-							if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(24, 48))
-							if(prob(50))A.pixel_y+=rand(5,10)
-							else A.pixel_y-=rand(5,10)
-							if(prob(50))A.pixel_x+=rand(1,8)
-							else A.pixel_x-=rand(1,8)
-							A.Owner=usr
-							A.layer=usr.layer
-							A.fightlayer=usr.fightlayer
-							A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.agility)/2))/3)))+rand(0,10)*weapondamage)*0.3
-							walk(A,usr.dir)
-						usr.DestroyItem(C)
-						break
-
-			if(usr.equipped=="ExplosiveTags")
-				if(usr.explosivetag<6)
-					for(var/obj/Inventory/Weaponry/Explosive_Tag/C in usr.contents)
-						if(usr.firing==0&&usr.tagcd==0&&usr.dead==0)
+				if(!locate(/obj/Inventory/Weaponry/Shuriken) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Shuriken/C in usr.contents)
+						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+							var/throwdelay = usr.attkspeed*3
 							var/mob/c_target=usr.Target_Get(TARGET_MOB)
-							usr.tagcd=1
-							usr.explosivetag++
-							spawn(usr.attkspeed*6)
-								usr.tagcd=0
+							AddState(usr, new/state/throwing, throwdelay)
 							if(prob(50))
 								flick("throw",usr)
 								src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
@@ -2548,8 +2382,8 @@ mob
 							if(c_target)
 								src.dir=get_dir(usr,c_target)
 								usr.Target_Atom(c_target)
-								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(72, 102))
+								var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 60))
 								if(prob(50))A.pixel_y+=rand(5,10)
 								else A.pixel_y-=rand(5,10)
 								if(prob(50))A.pixel_x+=rand(1,8)
@@ -2557,180 +2391,421 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.ninjutsu)/1))/3)))+rand(0,10)*weapondamage)*1.2
-								if(c_target in get_step(usr,usr.dir))
-									A.Linkage=c_target
-									A.pixel_y+=rand(8,10)
-									A.layer=MOB_LAYER+1
-								step(A,usr.dir)
-							else
-								var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(72, 102))
-								if(prob(50))A.pixel_y+=rand(1,8)
-								else A.pixel_y-=rand(1,8)
+								A.damage=(C.damage+(100-round(1*((150-((usr.precision)/1))/3)))+rand(0,10)*weapondamage)*0.6
+								walk_towards(A,c_target.loc,0)
+								spawn(4)if(A)walk(A,A.dir)
+							else if(!c_target)
+								var/obj/Projectiles/Weaponry/Shuriken/A = new/obj/Projectiles/Weaponry/Shuriken(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(36, 60))
+								if(prob(50))A.pixel_y+=rand(5,10)
+								else A.pixel_y-=rand(5,10)
 								if(prob(50))A.pixel_x+=rand(1,8)
 								else A.pixel_x-=rand(1,8)
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.ninjutsu)/1))/3)))+rand(0,10)*weapondamage)*1.2
-								for(var/mob/M in get_step(usr,usr.dir))
-									A.Linkage=M
-									A.pixel_y+=rand(8,10)
-									A.layer=MOB_LAYER+1
-								step(A,usr.dir)
+								A.damage=(C.damage+(100-round(1*((150-((usr.precision)/1))/3)))+rand(0,10)*weapondamage)*0.6
+								walk(A,usr.dir)
 							usr.DestroyItem(C)
 							break
 
-			if(usr.equipped=="SmokeBombs")
-				if(!usr.smokebomb)
-					for(var/obj/Inventory/Weaponry/Smoke_Bomb/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
-							usr.firing=1
-							flick("throw",usr)
-							spawn(3)
-								usr.smokebomb=1
-								var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(180, 320))
-								SMOKE.loc=usr.loc
-								src.PlayAudio('flashbang_explode2.wav', output = AUDIO_HEARERS)
-								src.overlays=0
-								src.icon_state="blank"
-								for(var/mob/M in oview(usr))
-									M.Target_Remove()
-								usr.Step_Back()
+			if(usr.equipped=="ExplodeKunais")
+				if(!locate(/obj/Inventory/Weaponry/Exploding_Kunai) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Exploding_Kunai/C in usr.contents)
+						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+							var/throwdelay = usr.attkspeed*5
+							var/mob/c_target=usr.Target_Get(TARGET_MOB)
+							AddState(usr, new/state/throwing, throwdelay)
+							if(prob(50))
+								flick("throw",usr)
+								src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
+							else
+								flick("throw",usr)
+								src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
+							if(c_target)
+								src.dir=get_dir(usr,c_target)
+								usr.Target_Atom(c_target)
+								var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(80, 110))
+								if(prob(50))A.pixel_y+=rand(5,10)
+								else A.pixel_y-=rand(5,10)
+								if(prob(50))A.pixel_x+=rand(1,8)
+								else A.pixel_x-=rand(1,8)
+								A.Owner=usr
+								A.layer=usr.layer
+								A.fightlayer=usr.fightlayer
+								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.ninjutsu+usr.strength)/3))/3)))+rand(0,10)*weapondamage)*1
+								walk_towards(A,c_target.loc,0)
+								spawn(4)if(A)walk(A,A.dir)
+							else
+								var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(80, 110))
+								if(prob(50))A.pixel_y+=rand(5,10)
+								else A.pixel_y-=rand(5,10)
+								if(prob(50))A.pixel_x+=rand(1,8)
+								else A.pixel_x-=rand(1,8)
+								A.Owner=usr
+								A.layer=usr.layer
+								A.fightlayer=usr.fightlayer
+								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.ninjutsu+usr.strength)/3))/3)))+rand(0,10)*weapondamage)*1
+								walk(A,usr.dir)
+							usr.DestroyItem(C)
+							break
+
+			if(usr.equipped=="Kunais")
+				if(!locate(/obj/Inventory/Weaponry/Kunai) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Kunai/C in usr.contents)
+						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+							var/throwdelay = usr.attkspeed*4
+							var/mob/c_target=usr.Target_Get(TARGET_MOB)
+							AddState(usr, new/state/throwing, throwdelay)
+							if(prob(50))
+								flick("throw",usr)
+								src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
+							else
+								flick("throw",usr)
+								src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
+							if(c_target)
+								src.dir=get_dir(usr,c_target)
+								usr.Target_Atom(c_target)
+								var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 78))
+								if(prob(50))A.pixel_y+=rand(5,10)
+								else A.pixel_y-=rand(5,10)
+								if(prob(50))A.pixel_x+=rand(1,8)
+								else A.pixel_x-=rand(1,8)
+								A.Owner=usr
+								A.layer=usr.layer
+								A.fightlayer=usr.fightlayer
+								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.strength)/2))/3)))+rand(0,10)*weapondamage)*0.9
+								walk_towards(A,c_target.loc,0)
+								spawn(4)if(A)walk(A,A.dir)
+							else
+								var/obj/Projectiles/Weaponry/Kunai/A = new/obj/Projectiles/Weaponry/Kunai(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(40, 78))
+								if(prob(50))A.pixel_y+=rand(5,10)
+								else A.pixel_y-=rand(5,10)
+								if(prob(50))A.pixel_x+=rand(1,8)
+								else A.pixel_x-=rand(1,8)
+								A.Owner=usr
+								A.layer=usr.layer
+								A.fightlayer=usr.fightlayer
+								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.strength)/2))/3)))+rand(0,10)*weapondamage)*0.9
+								walk(A,usr.dir)
+							usr.DestroyItem(C)
+							break
+
+			if(usr.equipped=="Needles")
+				if(!locate(/obj/Inventory/Weaponry/Needle) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Needle/C in usr.contents)
+						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+							var/throwdelay = usr.attkspeed*2
+							var/mob/c_target=usr.Target_Get(TARGET_MOB)
+							AddState(usr, new/state/throwing, throwdelay)
+							if(prob(50))
+								flick("throw",usr)
+								src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
+							else
+								flick("throw",usr)
+								src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
+							if(c_target)
+								src.dir=get_dir(usr,c_target)
+								usr.Target_Atom(c_target)
+								var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(24, 48))
+								if(prob(50))A.pixel_y+=rand(5,10)
+								else A.pixel_y-=rand(5,10)
+								if(prob(50))A.pixel_x+=rand(1,8)
+								else A.pixel_x-=rand(1,8)
+								A.Owner=usr
+								A.layer=usr.layer
+								A.fightlayer=usr.fightlayer
+								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.agility)/2))/3)))+rand(0,10)*weapondamage)*0.3
+								walk_towards(A,c_target.loc,0)
+								spawn(4)if(A)walk(A,A.dir)
+							else
+								var/obj/Projectiles/Weaponry/Needle/A = new/obj/Projectiles/Weaponry/Needle(usr.loc)
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(24, 48))
+								if(prob(50))A.pixel_y+=rand(5,10)
+								else A.pixel_y-=rand(5,10)
+								if(prob(50))A.pixel_x+=rand(1,8)
+								else A.pixel_x-=rand(1,8)
+								A.Owner=usr
+								A.layer=usr.layer
+								A.fightlayer=usr.fightlayer
+								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.agility)/2))/3)))+rand(0,10)*weapondamage)*0.3
+								walk(A,usr.dir)
+							usr.DestroyItem(C)
+							break
+
+			if(usr.equipped=="ExplosiveTags")
+				if(!locate(/obj/Inventory/Weaponry/Explosive_Tag) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					if(usr.explosivetag<6)
+						for(var/obj/Inventory/Weaponry/Explosive_Tag/C in usr.contents)
+							if(usr.firing==0&&usr.tagcd==0&&usr.dead==0)
+								var/mob/c_target=usr.Target_Get(TARGET_MOB)
+								usr.tagcd=1
+								usr.explosivetag++
+								spawn(usr.attkspeed*6)
+									usr.tagcd=0
+								if(prob(50))
+									flick("throw",usr)
+									src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
+								else
+									flick("throw",usr)
+									src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
+								if(c_target)
+									src.dir=get_dir(usr,c_target)
+									usr.Target_Atom(c_target)
+									var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
+									if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(72, 102))
+									if(prob(50))A.pixel_y+=rand(5,10)
+									else A.pixel_y-=rand(5,10)
+									if(prob(50))A.pixel_x+=rand(1,8)
+									else A.pixel_x-=rand(1,8)
+									A.Owner=usr
+									A.layer=usr.layer
+									A.fightlayer=usr.fightlayer
+									A.damage=(C.damage+(100-round(1*((150-((usr.ninjutsu)/1))/3)))+rand(0,10)*weapondamage)*1.2
+									if(c_target in get_step(usr,usr.dir))
+										A.Linkage=c_target
+										A.pixel_y+=rand(8,10)
+										A.layer=MOB_LAYER+1
+									step(A,usr.dir)
+								else
+									var/obj/Projectiles/Weaponry/ExplosiveTag/A = new/obj/Projectiles/Weaponry/ExplosiveTag(usr.loc)
+									if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(72, 102))
+									if(prob(50))A.pixel_y+=rand(1,8)
+									else A.pixel_y-=rand(1,8)
+									if(prob(50))A.pixel_x+=rand(1,8)
+									else A.pixel_x-=rand(1,8)
+									A.Owner=usr
+									A.layer=usr.layer
+									A.fightlayer=usr.fightlayer
+									A.damage=(C.damage+(100-round(1*((150-((usr.ninjutsu)/1))/3)))+rand(0,10)*weapondamage)*1.2
+									for(var/mob/M in get_step(usr,usr.dir))
+										A.Linkage=M
+										A.pixel_y+=rand(8,10)
+										A.layer=MOB_LAYER+1
+									step(A,usr.dir)
 								usr.DestroyItem(C)
-								spawn(5)if(usr)usr.firing=0
-								spawn(40)if(src)
-									src.UpdateHMB()
-									src.SetName(src.name)
-									src.icon_state=""
-									src.RestoreOverlays()
-								spawn(600)if(usr)usr.smokebomb=0
 								break
 
+			if(usr.equipped=="SmokeBombs")
+				if(!locate(/obj/Inventory/Weaponry/Smoke_Bomb) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					if(!usr.smokebomb)
+						for(var/obj/Inventory/Weaponry/Smoke_Bomb/C in usr.contents)
+							if(usr.firing==0&&usr.dead==0)
+								usr.firing=1
+								flick("throw",usr)
+								spawn(3)
+									usr.smokebomb=1
+									var/obj/SMOKE = new/obj/MiscEffects/SmokeBomb(usr.loc)
+									if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(180, 320))
+									SMOKE.loc=usr.loc
+									src.PlayAudio('flashbang_explode2.wav', output = AUDIO_HEARERS)
+									src.overlays=0
+									src.icon_state="blank"
+									for(var/mob/M in oview(usr))
+										M.Target_Remove()
+									usr.Step_Back()
+									usr.DestroyItem(C)
+									spawn(5)if(usr)usr.firing=0
+									spawn(40)if(src)
+										src.UpdateHMB()
+										src.SetName(src.name)
+										src.icon_state=""
+										src.RestoreOverlays()
+									spawn(600)if(usr)usr.smokebomb=0
+									break
+
 			if(usr.equipped=="FoodPill")
-				if(!usr.foodpillcd)
-					for(var/obj/Inventory/Weaponry/Food_Pill/C in usr.contents)
-						src.foodpillcd=1
-						src.healthregenmod++
-						src.DestroyItem(C)
-						spawn(200)
-							src.foodpillcd=0
-							src.healthregenmod--
-						break
+				if(!locate(/obj/Inventory/Weaponry/Food_Pill) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					if(!usr.foodpillcd)
+						for(var/obj/Inventory/Weaponry/Food_Pill/C in usr.contents)
+							src.foodpillcd=1
+							src.healthregenmod++
+							src.DestroyItem(C)
+							spawn(200)
+								src.foodpillcd=0
+								src.healthregenmod--
+							break
 
 
 			if(usr.equipped=="Kubikiribocho")
-				for(var/obj/Inventory/Weaponry/Zabuza_Sword/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
-						usr.firing=1
-						flick("throw",usr)
-						for(var/mob/M in get_step(usr,usr.dir))
-							if(M)
-								M.DealDamage(usr.strength*3,src,"TaiOrange")
-							//	usr.health+=usr.strength
-								M.Bleed()
-						spawn(usr.attkspeed*6)
-							usr.firing=0
-						break
+				if(!locate(/obj/Inventory/Weaponry/Zabuza_Sword) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Zabuza_Sword/C in usr.contents)
+						if(usr.firing==0&&usr.dead==0)
+							usr.firing=1
+							flick("throw",usr)
+							for(var/mob/M in get_step(usr,usr.dir))
+								if(M)
+									M.DealDamage(usr.strength*3,src,"TaiOrange")
+								//	usr.health+=usr.strength
+									M.Bleed()
+							spawn(usr.attkspeed*6)
+								usr.firing=0
+							break
 
 			if(usr.equipped=="Samehada")
-				for(var/obj/Inventory/Weaponry/Samehada/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
-						usr.firing=1
-						flick("throw",usr)
-						for(var/mob/M in get_step(usr,usr.dir))
-							if(M)
-								M.DealDamage(usr.strength*3,src,"TaiOrange")
-							//	usr.chakra+=usr.strength*1.5
-								M.Bleed()
-						spawn(usr.attkspeed*6)
-							usr.firing=0
-						break
+				if(!locate(/obj/Inventory/Weaponry/Samehada) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Samehada/C in usr.contents)
+						if(usr.firing==0&&usr.dead==0)
+							usr.firing=1
+							flick("throw",usr)
+							for(var/mob/M in get_step(usr,usr.dir))
+								if(M)
+									M.DealDamage(usr.strength*3,src,"TaiOrange")
+								//	usr.chakra+=usr.strength*1.5
+									M.Bleed()
+							spawn(usr.attkspeed*6)
+								usr.firing=0
+							break
 
 			if(usr.equipped=="Hiramekarei")
-				for(var/obj/Inventory/Weaponry/Hiramekarei/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
-						usr.firing=1
-						flick("throw",usr)
-						for(var/mob/M in get_step(usr,usr.dir))
-							if(M)
-								M.DealDamage(usr.strength*3,src,"TaiOrange")
-							//	usr.chakra+=usr.strength*1.5
-								M.Bleed()
-						spawn(usr.attkspeed*6)
-							usr.firing=0
-						break
+				if(!locate(/obj/Inventory/Weaponry/Hiramekarei) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Hiramekarei/C in usr.contents)
+						if(usr.firing==0&&usr.dead==0)
+							usr.firing=1
+							flick("throw",usr)
+							for(var/mob/M in get_step(usr,usr.dir))
+								if(M)
+									M.DealDamage(usr.strength*3,src,"TaiOrange")
+								//	usr.chakra+=usr.strength*1.5
+									M.Bleed()
+							spawn(usr.attkspeed*6)
+								usr.firing=0
+							break
 
 			if(usr.equipped=="Kabuto Wari")
-				for(var/obj/Inventory/Weaponry/Kabutowari/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
-						usr.firing=1
-						flick("throw",usr)
-						for(var/mob/M in get_step(usr,usr.dir))
-							if(M)
-								M.DealDamage(usr.strength*3,src,"TaiOrange")
-							//	usr.chakra+=usr.strength*1.5
-								M.Bleed()
-						spawn(usr.attkspeed*6)
-							usr.firing=0
-						break
+				if(!locate(/obj/Inventory/Weaponry/Kabutowari) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Kabutowari/C in usr.contents)
+						if(usr.firing==0&&usr.dead==0)
+							usr.firing=1
+							flick("throw",usr)
+							for(var/mob/M in get_step(usr,usr.dir))
+								if(M)
+									M.DealDamage(usr.strength*3,src,"TaiOrange")
+								//	usr.chakra+=usr.strength*1.5
+									M.Bleed()
+							spawn(usr.attkspeed*6)
+								usr.firing=0
+							break
 
 			if(usr.equipped=="Kiba")
-				for(var/obj/Inventory/Weaponry/Kiba/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
-						usr.firing=1
-						flick("throw",usr)
-						for(var/mob/M in get_step(usr,usr.dir))
-							if(M)
-								M.DealDamage(usr.strength*3,src,"TaiOrange")
-							//	usr.chakra+=usr.strength*1.5
-								M.Bleed()
-						spawn(usr.attkspeed*6)
-							usr.firing=0
-						break
+				if(!locate(/obj/Inventory/Weaponry/Kiba) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Kiba/C in usr.contents)
+						if(usr.firing==0&&usr.dead==0)
+							usr.firing=1
+							flick("throw",usr)
+							for(var/mob/M in get_step(usr,usr.dir))
+								if(M)
+									M.DealDamage(usr.strength*3,src,"TaiOrange")
+								//	usr.chakra+=usr.strength*1.5
+									M.Bleed()
+							spawn(usr.attkspeed*6)
+								usr.firing=0
+							break
 
 			if(usr.equipped=="Nuibari")
-				for(var/obj/Inventory/Weaponry/Nuibari/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
-						usr.firing=1
-						flick("throw",usr)
-						for(var/mob/M in get_step(usr,usr.dir))
-							if(M)
-								M.DealDamage(usr.strength*3,src,"TaiOrange")
-							//	usr.chakra+=usr.strength*1.5
-								M.Bleed()
-						spawn(usr.attkspeed*6)
-							usr.firing=0
-						break
+				if(!locate(/obj/Inventory/Weaponry/Nuibari) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Nuibari/C in usr.contents)
+						if(usr.firing==0&&usr.dead==0)
+							usr.firing=1
+							flick("throw",usr)
+							for(var/mob/M in get_step(usr,usr.dir))
+								if(M)
+									M.DealDamage(usr.strength*3,src,"TaiOrange")
+								//	usr.chakra+=usr.strength*1.5
+									M.Bleed()
+							spawn(usr.attkspeed*6)
+								usr.firing=0
+							break
 
 			if(usr.equipped=="Shibuki")
-				for(var/obj/Inventory/Weaponry/Shibuki/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
-						usr.firing=1
-						flick("throw",usr)
-						for(var/mob/M in get_step(usr,usr.dir))
-							if(M)
-								M.DealDamage(usr.strength*3,src,"TaiOrange")
-							//	usr.chakra+=usr.strength*1.5
-								M.Bleed()
-						spawn(usr.attkspeed*6)
-							usr.firing=0
-						break
+				if(!locate(/obj/Inventory/Weaponry/Shibuki) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/Shibuki/C in usr.contents)
+						if(usr.firing==0&&usr.dead==0)
+							usr.firing=1
+							flick("throw",usr)
+							for(var/mob/M in get_step(usr,usr.dir))
+								if(M)
+									M.DealDamage(usr.strength*3,src,"TaiOrange")
+								//	usr.chakra+=usr.strength*1.5
+									M.Bleed()
+							spawn(usr.attkspeed*6)
+								usr.firing=0
+							break
 
 			if(usr.equipped=="Dark Sword")
-				for(var/obj/Inventory/Weaponry/DarkSword/C in usr.contents)
-					if(usr.firing==0&&usr.dead==0)
-						usr.firing=1
-						flick("throw",usr)
-						for(var/mob/M in get_step(usr,usr.dir))
-							if(M)
-								M.DealDamage(usr.strength,src,"TaiOrange")
-								M.Bleed()
-						spawn(usr.attkspeed*6)
-							usr.firing=0
-						break
+				if(!locate(/obj/Inventory/Weaponry/DarkSword) in usr.contents)
+					usr.equipped = ""
+					usr.Rotate_Ninja_Tool()
+					
+				else
+					for(var/obj/Inventory/Weaponry/DarkSword/C in usr.contents)
+						if(usr.firing==0&&usr.dead==0)
+							usr.firing=1
+							flick("throw",usr)
+							for(var/mob/M in get_step(usr,usr.dir))
+								if(M)
+									M.DealDamage(usr.strength,src,"TaiOrange")
+									M.Bleed()
+							spawn(usr.attkspeed*6)
+								usr.firing=0
+							break
 
 /*			if(usr.equipped=="Weights")
 				for(var/obj/Inventory/Weaponry/Weights/C in usr.contents)
