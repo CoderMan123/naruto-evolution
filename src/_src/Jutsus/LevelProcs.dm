@@ -271,7 +271,7 @@ mob/var
 	overlvl=0
 mob
 	proc
-		Death(mob/X,JashinFix)
+		Death(mob/X, jashin_damage = 0)
 			set waitfor = 0
 			if(X && !X.key)
 				goto trol
@@ -307,22 +307,22 @@ mob
 				src.health=maxhealth
 				UpdateHMB()
 				return
-			if(JashinFix)if(prob(50))return
-			for(var/obj/JashinSymbol/O in src.loc)
-				sleep(1)
-				if(O&&O.Owner==src&&O.JashinConnected)
-					var/mob/HitMe=O.JashinConnected
-					if(!HitMe.dead)
-						if(!HitMe||!ismob(HitMe)) continue
-						var/jashpercent = (jutsudamage / 150)*1.5
-						HitMe.DealDamage(src.maxhealth*(jashpercent/20),src,"maroon")
-						HitMe.Bleed()
-						src.DealDamage(src.maxhealth*(jashpercent/40),src,"maroon")
-						src.Bleed()
-						HitMe.UpdateHMB()
-						src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
-						src.UpdateHMB()
-						HitMe.Death(src)
+			if(!jashin_damage)
+				for(var/obj/JashinSymbol/O in src.loc)
+					sleep(1)
+					if(O&&O.Owner==src&&O.JashinConnected)
+						var/mob/HitMe=O.JashinConnected
+						if(!HitMe.dead)
+							if(!HitMe||!ismob(HitMe)) continue
+							var/jashpercent = (jutsudamage / 150)*1.5
+							HitMe.DealDamage(src.maxhealth*(jashpercent/20),src,"maroon")
+							HitMe.Bleed()
+							src.DealDamage(src.maxhealth*(jashpercent/40),src,"maroon", jashin_damage = 1)
+							src.Bleed()
+							HitMe.UpdateHMB()
+							src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+							src.UpdateHMB()
+							HitMe.Death(src)
 			if(ismob(X))
 				if(istype(X,/mob/Karasu))X=X.Owner
 				if(icon_state=="push"&&X==src)

@@ -2357,7 +2357,7 @@ mob
 						if(src.health>0)
 							HitMe.DealDamage(src.maxhealth*jashpercent,src,"maroon")
 							HitMe.Bleed()
-							src.DealDamage(src.maxhealth*jashpercent,src,"maroon")
+							src.DealDamage(src.maxhealth*jashpercent,src,"maroon", jashin_damage = 1)
 							src.Bleed()
 							src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 							src.Death(src,1)
