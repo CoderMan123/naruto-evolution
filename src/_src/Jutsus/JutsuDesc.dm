@@ -926,7 +926,7 @@ obj
 			Description="You manefest a giant warrior incarnation which protects you from death for a duration. You can cause the incarnation to attack enemies around you by pressing the S key."
 			New()
 				..()
-				ChakraCost = (Sprice*jutsuchakra)*4
+				ChakraCost = (Sprice*jutsuchakra)*3
 				maxcooltime = jutsucooldown*600
 
 //Implanted
