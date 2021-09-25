@@ -115,6 +115,10 @@ proc/ZetsuEventEnd(mob/M)
 			del m
 
 		zetsu_count = 0
+		sand_points = 0
+		leaf_points = 0
+		vill_lives_left = 5
+		akat_lives_left = 0
 
 obj
 	zetsuspawn
