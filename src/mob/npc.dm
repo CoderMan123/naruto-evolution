@@ -692,6 +692,7 @@ mob/npc
 						sleep(10)
 
 			Death(mob/killer)
+				if(killer.village == src.village) return
 				..()
 				if(src.squad && src.health <= 0)
 					for(var/mob/m in mobs_online)
