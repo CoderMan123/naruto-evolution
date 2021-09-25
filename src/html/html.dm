@@ -24,3 +24,20 @@ proc/HTML_GetName(mob/m)
 
             if(VILLAGE_AKATSUKI)
                 return "[badges] <font color='[COLOR_VILLAGE_AKATSUKI]'>[m.name]</font>"
+
+proc/HTML_GetVillage(mob/m)
+    if(!m.village)
+        return ""
+    else
+        switch(m.village)
+            if(VILLAGE_LEAF)
+                return "<font color='[COLOR_VILLAGE_LEAF]'>[m.village]</font>"
+
+            if(VILLAGE_SAND)
+                return "<font color='[COLOR_VILLAGE_SAND]'>[m.village]</font>"
+
+            if(VILLAGE_MISSING_NIN)
+                return "<font color='[COLOR_VILLAGE_MISSING_NIN]'>[m.village]</font>"
+
+            if(VILLAGE_AKATSUKI)
+                return "<font color='[COLOR_VILLAGE_AKATSUKI]'>[m.village]</font>"

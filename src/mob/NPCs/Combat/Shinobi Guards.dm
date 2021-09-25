@@ -37,10 +37,6 @@ mob/npc/combat
 			agility=100
 			precision=100
 
-
-			SetName()
-				return
-
 			Move()
 				..()
 				if(!src.attacking && !c_target)
@@ -496,25 +492,25 @@ mob/npc/combat
 				if(chosen_style == "melee") src.Specialist = SPECIALIZATION_TAIJUTSU
 
 			Leaf
-				name = "Leaf Genin Guard"
+				name = "Genin Guard"
 				village = VILLAGE_LEAF
 
 				New()
-					..()
 					src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
 					src.overlays += 'Shade.dmi'
-					src.overlays+='Shirt.dmi'
-					src.overlays+='Sandals.dmi'
+					src.overlays += 'Shirt.dmi'
+					src.overlays += 'Sandals.dmi'
 					src.overlays += 'HeadBandLeaf.dmi'
+					..()
 
 			Sand
-				name = "Sand Genin Guard"
+				name = "Genin Guard"
 				village = VILLAGE_SAND
 
 				New()
-					..()
 					src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
 					src.overlays += 'Shade.dmi'
 					src.overlays+='Shirt.dmi'
 					src.overlays+='Sandals.dmi'
 					src.overlays += 'HeadBandSand.dmi'
+					..()

@@ -31,7 +31,7 @@ mob/verb/Target_A_Mob()
 		if(M==src.puppets[1]) continue
 		if(M.Owner==src) continue
 		if(istype(M, /mob/training)) continue
-		if(M.village == src.village) continue
+		if(M.village == src.village && !istype(src.loc, /turf/Arena)) continue
 		src.Target_Atom(M)
 		return
 
