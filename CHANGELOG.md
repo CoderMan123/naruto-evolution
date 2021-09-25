@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.10] - 2021-09-25
+
+### Added
+- Ninja tools now rotate to the next tool when you run out of your currently equipped one
+- Certain npcs now display their names
+
+### Fixed
+- Fixed not being able to tab target your opponent in arena if both are in the same village
+- Fixed Zetsu events sometimes giving the reward to the wrong village
+- Players can no longer kill their Daimyo's to stop the enemy getting the exp
+
+### Changed
+- Made some backend changes
+
 ## [2.4.9] - 2021-09-24
 
 ### Fixed
