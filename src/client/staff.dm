@@ -71,7 +71,7 @@ client
 		StaffCheck()
 			winset(src, null, {"
 				Navigation.LeaderButton.is-disabled = 'true';
-				General-Settings.Administration.is-visible = 'false';
+				Settings-General.Administration.is-visible = 'false';
 			"})
 
 			// Kage Check //
@@ -120,9 +120,9 @@ client
 			if(administrators.Find(src.ckey))
 				winset(src, null, {"
 					Navigation.LeaderButton.is-disabled = 'false';
-					General-Settings.Administration.is-visible = 'true';
+					Settings-General.Administration.is-visible = 'true';
 				"})
-				
+
 				src.mob.verbs += typesof(/mob/administrator/verb)
 				src.mob.verbs += typesof(/mob/moderator/verb)
 				src.mob.verbs += typesof(/mob/programmer/verb)
