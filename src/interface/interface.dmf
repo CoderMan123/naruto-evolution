@@ -2290,7 +2290,6 @@ window "Settings-Account"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2300,8 +2299,6 @@ window "Settings-Account"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
-		outer-size = 508x388
-		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0
@@ -2334,7 +2331,6 @@ window "Settings-Administrator"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2344,8 +2340,6 @@ window "Settings-Administrator"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
-		outer-size = 508x388
-		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0
@@ -2746,6 +2740,7 @@ window "Settings-WebsiteInformation"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2755,6 +2750,8 @@ window "Settings-WebsiteInformation"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
+		outer-size = 508x388
+		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0
@@ -2793,6 +2790,20 @@ window "Settings-WebsiteInformation"
 		text = "Feature Request"
 		command = ""
 		is-flat = true
+	elem "label35"
+		type = LABEL
+		pos = 248,123
+		size = 6x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 18
+		text-color = #c8c8c8
+		background-color = #dd5800
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
 	elem "button18"
 		type = BUTTON
 		pos = 3,99
@@ -2807,6 +2818,34 @@ window "Settings-WebsiteInformation"
 		text = "Community Repository"
 		command = ""
 		is-flat = true
+	elem "label30"
+		type = LABEL
+		pos = 3,123
+		size = 6x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 18
+		text-color = #c8c8c8
+		background-color = #dd5800
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
+	elem "label26"
+		type = LABEL
+		pos = 3,99
+		size = 6x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 18
+		text-color = #c8c8c8
+		background-color = #dd5800
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
 	elem "button17"
 		type = BUTTON
 		pos = 3,75
@@ -2821,6 +2860,20 @@ window "Settings-WebsiteInformation"
 		text = "Discord Community"
 		command = ""
 		is-flat = true
+	elem "label24"
+		type = LABEL
+		pos = 3,75
+		size = 6x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 18
+		text-color = #c8c8c8
+		background-color = #dd5800
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
 	elem "button16"
 		type = BUTTON
 		pos = 3,51
@@ -2835,6 +2888,20 @@ window "Settings-WebsiteInformation"
 		text = "Community Wiki"
 		command = ""
 		is-flat = true
+	elem "label22"
+		type = LABEL
+		pos = 3,51
+		size = 6x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 18
+		text-color = #c8c8c8
+		background-color = #dd5800
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
 	elem "button15"
 		type = BUTTON
 		pos = 3,3
@@ -2863,6 +2930,20 @@ window "Settings-WebsiteInformation"
 		text = "Ninja Handbook"
 		command = "Ninja-Handbook"
 		is-flat = true
+	elem "label32"
+		type = LABEL
+		pos = 248,27
+		size = 6x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 18
+		text-color = #c8c8c8
+		background-color = #dd5800
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
 	elem "CommunityGuidelinesButton"
 		type = BUTTON
 		pos = 3,27
@@ -2877,6 +2958,20 @@ window "Settings-WebsiteInformation"
 		text = "Community Guidelines"
 		command = "Community-Guidelines"
 		is-flat = true
+	elem "label28"
+		type = LABEL
+		pos = 3,27
+		size = 6x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 18
+		text-color = #c8c8c8
+		background-color = #dd5800
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
 	elem "BackButton"
 		type = BUTTON
 		pos = 3,349
@@ -2891,6 +2986,20 @@ window "Settings-WebsiteInformation"
 		text = "Back to Settings"
 		command = "SettingsPanelGeneral"
 		is-flat = true
+	elem "label4"
+		type = LABEL
+		pos = 3,3
+		size = 6x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 18
+		text-color = #c8c8c8
+		background-color = #dd5800
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
 
 window "SkillTree"
 	elem "SkillTree"
