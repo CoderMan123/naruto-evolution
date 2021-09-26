@@ -2283,6 +2283,102 @@ window "Settings"
 		text = ""
 		image = 'assets\\interface\\Taskbar-16.png'
 
+window "Settings-Account"
+	elem "Settings-Account"
+		type = MAIN
+		pos = 281,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		macro = "Macro"
+	elem "Background2"
+		type = LABEL
+		pos = 0,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = ""
+	elem "BackButton"
+		type = BUTTON
+		pos = 3,349
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Back to Settings"
+		command = "SettingsPanelGeneral"
+		is-flat = true
+
+window "Settings-Administrator"
+	elem "Settings-Administrator"
+		type = MAIN
+		pos = 281,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		macro = "Macro"
+	elem "Background2"
+		type = LABEL
+		pos = 0,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = ""
+	elem "button13"
+		type = BUTTON
+		pos = 248,3
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "BYOND Resource Profiler"
+		command = ".profile"
+		is-flat = true
+	elem "Macros"
+		type = BUTTON
+		pos = 3,3
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "BYOND Options"
+		command = ".options"
+		is-flat = true
+
 window "Settings-Audio"
 	elem "Settings-Audio"
 		type = MAIN
@@ -2311,7 +2407,7 @@ window "Settings-Audio"
 		text = ""
 	elem "label21"
 		type = LABEL
-		pos = 248,51
+		pos = 248,27
 		size = 243x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -2325,7 +2421,7 @@ window "Settings-Audio"
 		text = ""
 	elem "SFX"
 		type = BAR
-		pos = 248,51
+		pos = 248,27
 		size = 243x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -2341,7 +2437,7 @@ window "Settings-Audio"
 		on-change = "OnChangeSFX"
 	elem "label12"
 		type = LABEL
-		pos = 248,27
+		pos = 248,3
 		size = 243x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -2355,7 +2451,7 @@ window "Settings-Audio"
 		text = "Sound Effects"
 	elem "label20"
 		type = LABEL
-		pos = 3,51
+		pos = 3,27
 		size = 243x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -2369,7 +2465,7 @@ window "Settings-Audio"
 		text = ""
 	elem "BGM"
 		type = BAR
-		pos = 3,51
+		pos = 3,27
 		size = 243x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -2385,7 +2481,7 @@ window "Settings-Audio"
 		on-change = "OnChangeBGM"
 	elem "label11"
 		type = LABEL
-		pos = 3,27
+		pos = 3,3
 		size = 243x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -2397,20 +2493,76 @@ window "Settings-Audio"
 		border = line
 		saved-params = ""
 		text = "Background Music"
-	elem "Titlebar"
-		type = LABEL
-		pos = 3,3
+	elem "BackButton"
+		type = BUTTON
+		pos = 3,349
 		size = 488x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
-		font-size = 10
 		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Back to Settings"
+		command = "SettingsPanelGeneral"
+		is-flat = true
+
+window "Settings-Character"
+	elem "Settings-Character"
+		type = MAIN
+		pos = 281,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		macro = "Macro"
+	elem "Background2"
+		type = LABEL
+		pos = 0,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #414141
 		border = line
 		saved-params = ""
-		text = "Audio Settings"
+		text = ""
+	elem "button10"
+		type = BUTTON
+		pos = 248,325
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #822d2d
+		border = line
+		saved-params = "is-checked"
+		text = "Delete Character"
+		command = "DeleteCharacter"
+		is-flat = true
+	elem "button7"
+		type = BUTTON
+		pos = 3,325
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		is-disabled = true
+		border = line
+		saved-params = "is-checked"
+		text = "Change Password"
+		command = ""
+		is-flat = true
 	elem "BackButton"
 		type = BUTTON
 		pos = 3,349
@@ -2452,10 +2604,10 @@ window "Settings-General"
 		border = line
 		saved-params = ""
 		text = ""
-	elem "button5"
+	elem "button14"
 		type = BUTTON
 		pos = 3,51
-		size = 243x22
+		size = 488x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -2463,24 +2615,25 @@ window "Settings-General"
 		background-color = #555555
 		border = line
 		saved-params = "is-checked"
-		text = "Video"
-		command = ""
+		text = "Website Information"
+		command = "SettingsPanelWebsiteInformation"
 		is-flat = true
-	elem "button4"
+	elem "Administration"
 		type = BUTTON
-		pos = 248,51
-		size = 243x22
+		pos = 3,75
+		size = 488x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
 		text-color = #c8c8c8
 		background-color = #555555
+		is-visible = false
 		border = line
 		saved-params = "is-checked"
-		text = "Audio"
-		command = "SettingsPanelAudio"
+		text = "Administration"
+		command = "SettingsPanelAdministrator"
 		is-flat = true
-	elem "button8"
+	elem "button12"
 		type = BUTTON
 		pos = 248,3
 		size = 243x22
@@ -2491,10 +2644,39 @@ window "Settings-General"
 		background-color = #555555
 		border = line
 		saved-params = "is-checked"
-		text = "Ninja Handbook"
-		command = "Ninja-Handbook"
+		text = "Character"
+		command = "SettingsPanelCharacter"
 		is-flat = true
-	elem "button3"
+	elem "button11"
+		type = BUTTON
+		pos = 3,3
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Account"
+		command = "SettingsPanelAccount"
+		is-flat = true
+	elem "button5"
+		type = BUTTON
+		pos = 3,27
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		is-disabled = true
+		border = line
+		saved-params = "is-checked"
+		text = "Video"
+		command = ""
+		is-flat = true
+	elem "button4"
 		type = BUTTON
 		pos = 248,27
 		size = 243x22
@@ -2505,8 +2687,8 @@ window "Settings-General"
 		background-color = #555555
 		border = line
 		saved-params = "is-checked"
-		text = "Macros"
-		command = ".options"
+		text = "Audio"
+		command = "SettingsPanelAudio"
 		is-flat = true
 	elem "LeaveVillageButton"
 		type = BUTTON
@@ -2522,9 +2704,151 @@ window "Settings-General"
 		text = "Leave Village"
 		command = "LeaveVillage"
 		is-flat = true
-	elem "CommunityGuidelinesButton"
+	elem "LogoutButton"
+		type = BUTTON
+		pos = 3,325
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Logout"
+		command = ".reconnect"
+		is-flat = true
+
+window "Settings-WebsiteInformation"
+	elem "Settings-WebsiteInformation"
+		type = MAIN
+		pos = 281,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		macro = "Macro"
+		outer-size = 508x388
+		inner-size = 494x374
+	elem "Background2"
+		type = LABEL
+		pos = 0,0
+		size = 494x374
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = ""
+	elem "button20"
+		type = BUTTON
+		pos = 248,123
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Bug Reports"
+		command = ""
+		is-flat = true
+	elem "button19"
+		type = BUTTON
+		pos = 3,123
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Feature Request"
+		command = ""
+		is-flat = true
+	elem "button18"
+		type = BUTTON
+		pos = 3,99
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Community Repository"
+		command = ""
+		is-flat = true
+	elem "button17"
+		type = BUTTON
+		pos = 3,75
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Discord Community"
+		command = ""
+		is-flat = true
+	elem "button16"
+		type = BUTTON
+		pos = 3,51
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Community Wiki"
+		command = ""
+		is-flat = true
+	elem "button15"
 		type = BUTTON
 		pos = 3,3
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Community Forums"
+		command = ""
+		is-flat = true
+	elem "button8"
+		type = BUTTON
+		pos = 248,27
+		size = 243x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Ninja Handbook"
+		command = "Ninja-Handbook"
+		is-flat = true
+	elem "CommunityGuidelinesButton"
+		type = BUTTON
+		pos = 3,27
 		size = 243x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -2536,10 +2860,10 @@ window "Settings-General"
 		text = "Community Guidelines"
 		command = "Community-Guidelines"
 		is-flat = true
-	elem "LogoutButton"
+	elem "BackButton"
 		type = BUTTON
-		pos = 3,325
-		size = 243x22
+		pos = 3,349
+		size = 488x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -2547,8 +2871,8 @@ window "Settings-General"
 		background-color = #555555
 		border = line
 		saved-params = "is-checked"
-		text = "Logout"
-		command = ".reconnect"
+		text = "Back to Settings"
+		command = "SettingsPanelGeneral"
 		is-flat = true
 
 window "SkillTree"

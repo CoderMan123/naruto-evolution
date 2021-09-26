@@ -34,6 +34,7 @@ client
 			Settings.is-visible=false;
 			Browser.is-visible=false;
 			Leader.is-visible=false;
+			General-Settings.Administration.is-visible = 'false';
 			Main.UnlockChild.is-visible = "false";
 		"})
 
