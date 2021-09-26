@@ -3,13 +3,6 @@ mob/npc
 	layer=MOB_LAYER
 	move=0
 	var/list/OriginalOverlays=list()
-//	New()
-//		spawn() Stuff()
-//		src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
-//		src.overlays+='Shirt.dmi'
-//		src.overlays+='Sandals.dmi'
-//		OriginalOverlays=overlays
-//		..()
 
 	Hair_Stylist
 		name="Barber"

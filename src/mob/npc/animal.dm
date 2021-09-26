@@ -1,3 +1,6 @@
+var/list/animal_spawns = list()
+var/list/desert_animal_spawns = list()
+
 var/tmp/squirrel_count = 0
 var/tmp/chipmonk_count = 0
 var/tmp/hedgehog_count = 0
@@ -6,66 +9,70 @@ var/tmp/rabbit_count = 0
 var/tmp/doe_count = 0
 var/tmp/buck_count = 0
 var/tmp/snake_count = 0
-var/list/animal_spawns = list()
-var/list/desert_animal_spawns = list()
 
 proc/AnimalPopulater()
 	for(var/obj/animalspawn/s)
 		animal_spawns += s
+
 	for(var/obj/animalspawndesert/s)
 		desert_animal_spawns += s
+
 	while(world)
 		if(squirrel_count < 10)
 			var/amount_to_spawn = 10 - max(squirrel_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/squirrel(spawn_location.loc)
+
 		if(chipmonk_count < 10)
 			var/amount_to_spawn = 10 - max(chipmonk_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/chipmonk(spawn_location.loc)
+
 		if(hedgehog_count < 4)
 			var/amount_to_spawn = 4 - max(hedgehog_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/hedgehog(spawn_location.loc)
+
 		if(hare_count < 10)
 			var/amount_to_spawn = 10 - max(hare_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/hare(spawn_location.loc)
+
 		if(rabbit_count < 10)
 			var/amount_to_spawn = 10 - max(rabbit_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/small/rabbit(spawn_location.loc)
+
 		if(doe_count < 8)
 			var/amount_to_spawn = 8 - max(doe_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/doe(spawn_location.loc)
+
 		if(buck_count < 8)
 			var/amount_to_spawn = 8 - max(buck_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawn/spawn_location = pick(animal_spawns)
 				new/mob/npc/combat/animals/buck(spawn_location.loc)
+
 		if(snake_count < 20)
 			var/amount_to_spawn = 20 - max(snake_count, 0)
 			for(amount_to_spawn, amount_to_spawn > 0, amount_to_spawn--)
 				var/obj/animalspawndesert/spawn_location = pick(desert_animal_spawns)
 				new/mob/npc/combat/animals/snake(spawn_location.loc)
+
 		sleep(600*3)
-
-
-
-
+		
 mob
 	npc
 		combat
 			animals
 				small
-
 					squirrel
 						icon = 'Squirrel.dmi'
 						health = 20
@@ -78,9 +85,6 @@ mob
 						var/tmp/scarred = 0
 						var/tmp/idle = 0
 
-						SetName()
-							return
-
 						New()
 							..()
 							src.overlays-=/obj/MaleParts/UnderShade
@@ -89,6 +93,8 @@ mob
 							squirrel_count++
 							src.ryo = rand(10,30)
 							spawn() src.CombatAI()
+
+						SetName() return
 
 						Move()
 							..()
@@ -173,9 +179,6 @@ mob
 						var/tmp/scarred = 0
 						var/tmp/idle = 0
 
-						SetName()
-							return
-
 						New()
 							..()
 							src.overlays-=/obj/MaleParts/UnderShade
@@ -184,6 +187,8 @@ mob
 							chipmonk_count++
 							src.ryo = rand(10,30)
 							spawn() src.CombatAI()
+
+						SetName() return
 
 						Move()
 							..()
@@ -265,9 +270,6 @@ mob
 						var/tmp/retreating = 0
 						var/tmp/idle = 0
 
-						SetName()
-							return
-
 						New()
 							..()
 							src.overlays-=/obj/MaleParts/UnderShade
@@ -276,6 +278,8 @@ mob
 							hedgehog_count++
 							src.ryo = rand(10,30)
 							spawn() src.CombatAI()
+
+						SetName() return
 
 						Move()
 							..()
@@ -328,9 +332,6 @@ mob
 						var/retreating = 0
 						var/tmp/idle = 0
 
-						SetName()
-							return
-
 						New()
 							..()
 							src.overlays-=/obj/MaleParts/UnderShade
@@ -339,6 +340,8 @@ mob
 							hare_count++
 							src.ryo = rand(10,30)
 							spawn() src.CombatAI()
+						
+						SetName() return
 
 						Move()
 							..()
@@ -387,9 +390,6 @@ mob
 						var/retreating = 0
 						var/tmp/idle = 0
 
-						SetName()
-							return
-
 						New()
 							..()
 							src.overlays-=/obj/MaleParts/UnderShade
@@ -398,6 +398,8 @@ mob
 							rabbit_count++
 							src.ryo = rand(10,30)
 							spawn() src.CombatAI()
+
+						SetName() return
 
 						Move()
 							..()
@@ -450,14 +452,13 @@ mob
 					var/retreating = 0
 					var/tmp/idle = 0
 
-					SetName()
-						return
-
 					New()
 						..()
 						buck_count++
 						src.ryo = rand(10,30)
 						spawn() src.CombatAI()
+
+					SetName() return
 
 					Move()
 						..()
@@ -507,9 +508,6 @@ mob
 					var/tmp/idle = 0
 					var/tmp/childfawn
 
-					SetName()
-						return
-
 					New()
 						..()
 						doe_count++
@@ -519,6 +517,8 @@ mob
 							child.mother = src
 							src.childfawn = child
 						spawn() src.CombatAI()
+					
+					SetName() return
 
 					Move()
 						..()
@@ -568,14 +568,13 @@ mob
 					var/tmp/idle = 0
 					var/tmp/mother
 
-					SetName()
-						return
-
 					New()
 						..()
 						src.ryo = rand(10,30)
 						walk_to(src,mother,2,3)
 						spawn() src.CombatAI()
+					
+					SetName() return
 
 					Move()
 						..()
@@ -621,20 +620,18 @@ mob
 					health=200
 					maxhealth=200
 
-
-					SetName()
-						return
-
-					Move()
-						..()
-						if(!src.attacking)
-							src.FindTarget()
-
 					New()
 						..()
 						src.ryo = rand(50,150)
 						snake_count++
 						spawn() src.CombatAI()
+					
+					SetName() return
+
+					Move()
+						..()
+						if(!src.attacking)
+							src.FindTarget()
 
 					Death(killer)
 						..()
@@ -692,6 +689,7 @@ obj
 	animalspawn
 		icon = 'placeholdertiles.dmi'
 		icon_state = "animalspawn"
+
 		New()
 			..()
 			src.icon_state = "blank"
@@ -699,6 +697,7 @@ obj
 	animalspawndesert
 		icon = 'placeholdertiles.dmi'
 		icon_state = "animalspawndesert"
+
 		New()
 			..()
 			src.icon_state = "blank"
@@ -708,9 +707,11 @@ obj
 		icon = 'placeholdertiles.dmi'
 		icon_state = "animalblocker"
 		layer = TURF_LAYER+1
+
 		New()
 			..()
 			src.icon_state = "blank"
+
 		Cross(mob/M)
 			if(istype(M, /mob/npc/combat/animals))
 				return 0
