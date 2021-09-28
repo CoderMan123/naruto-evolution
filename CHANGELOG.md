@@ -3,6 +3,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.12] - 2021-09-28
+
+### Added
+- Added character deletion option to in game settings
+- Needles will now apply a slowing effect on hit (dispellable with chakra release)
+- Shuriken now apply a small bleed effect on hit
+
+### Fixed
+- Fixed strength exp not being gained at the hotsprings
+
+### Changed
+- Buffed health and chakra at level 1 but you no longer gain health and chakra passively when leveling. (You will need to reallocate your stat points on first log in)
+- Kunai are now affected by defence far less than before
+- Increased cooldown for explosive kunai
+- Buffed exp gained from using explosive kunai
+- Buffed stat gains from the hotsprings
+- Nerfed Mud River bind duration
+- Improvements to the interface
+- Made some backend changes
+
 ## [2.4.11] - 2021-09-26
 
 ### Fixed
