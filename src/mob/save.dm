@@ -1,4 +1,6 @@
-var/savefile_version = 1
+#define DEBUG_SAVEFILE
+
+mob/var/savefile_version = 2
 
 mob
 	proc/Save()
@@ -69,6 +71,20 @@ mob
 
 								del(src)
 
+	proc/SavefileMigration()
+		if(src.savefile_version < 2)
+			src.health = 2500
+			src.maxhealth = 2500
+			src.chakra = 1800
+			src.maxchakra = 1800
+			src.statpoints = 0
+			src.statpoints = 3*(src.level-1)
+			src.savefile_version = 2
+		
+/*		if(src.savefile_version < 3)
+			do stuff
+			src.savefile_version = 3*/
+
 	Write(savefile/F, var/character)
 		if(src.client)
 			if(mobs_online.Find(src))
@@ -105,7 +121,6 @@ mob
 					F["x"] << src.x
 					F["y"] << src.y
 					F["z"] << src.z
-					F["savefile_version"] << savefile_version
 					#ifdef DEBUG_SAVEFILE
 					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
 					#endif
@@ -156,6 +171,7 @@ mob
 					#ifdef DEBUG_SAVEFILE
 					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
 					#endif
+					
 				else
 					#ifdef DEBUG_SAVEFILE
 					text2file("\[E]: \[R]: null character name when attempting to read from savefile.<br />", LOG_SAVES)
@@ -175,6 +191,8 @@ mob
 			#endif
 			return 0
 		..()
+
+		src.SavefileMigration()
 
 		src.pixel_x=-16
 
