@@ -2417,7 +2417,7 @@ mob
 				else
 					for(var/obj/Inventory/Weaponry/Exploding_Kunai/C in usr.contents)
 						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
-							var/throwdelay = usr.attkspeed*5
+							var/throwdelay = usr.attkspeed*7
 							var/mob/c_target=usr.Target_Get(TARGET_MOB)
 							AddState(usr, new/state/throwing, throwdelay)
 							if(prob(50))
