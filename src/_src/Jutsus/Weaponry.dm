@@ -2430,7 +2430,7 @@ mob
 								src.dir=get_dir(usr,c_target)
 								usr.Target_Atom(c_target)
 								var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(80, 110))
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(110, 140))
 								if(prob(50))A.pixel_y+=rand(5,10)
 								else A.pixel_y-=rand(5,10)
 								if(prob(50))A.pixel_x+=rand(1,8)
