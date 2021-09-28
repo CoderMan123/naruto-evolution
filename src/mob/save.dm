@@ -69,7 +69,9 @@ mob
 
 								spawn(-1) src.client.Alert("Your character has been deleted successfully.")
 
-								del(src)
+								mobs_online -= src // Prevent character save on disconnect.
+
+								del(src.client)
 
 	proc/SavefileMigration()
 		if(src.savefile_version < 2)
