@@ -62,7 +62,7 @@ mob
 						if(fcopy("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]).sav", "[SAVEFILE_CHARACTERS_ARCHIVE]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]) - [time2text(world.realtime, "YYYY-MM-DD_hh-mm-ss")].sav"))
 
 							if(fdel("[SAVEFILE_CHARACTERS]/[copytext(src.client.ckey, 1, 2)]/[src.client.ckey] ([lowertext(src.character)]).sav"))
-								names_taken.Remove(src.character)
+								names_taken.Remove(lowertext(src.character))
 
 								spawn(-1) src.client.Alert("Your character has been deleted successfully.")
 
