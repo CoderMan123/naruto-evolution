@@ -7,6 +7,7 @@
 #define SAVEFILE_BANS "saves/bans.sav"
 #define SAVEFILE_NAMES "saves/names.sav"
 #define SAVEFILE_CHARACTERS "saves/characters"
+#define SAVEFILE_CHARACTERS_ARCHIVE "saves/characters/archive"
 #define SAVEFILE_CLIENT "saves/clients"
 #define SAVEFILE_SQUADS "saves/squads.sav"
 #define SAVEFILE_KAGES "saves/kages.sav"

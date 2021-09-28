@@ -1,4 +1,6 @@
-var/savefile_version = 1
+#define DEBUG_SAVEFILE
+
+mob/var/savefile_version = 2
 
 mob
 	proc/Save()
@@ -45,7 +47,43 @@ mob
 
 				src.client.logging_in = 0
 				return 0
+	
+	verb/DeleteCharacter()
+		set category = null
+		if(src.client && mobs_online.Find(src))
+			if(src.client.Alert("<font color = '[COLOR_VILLAGE_AKATSUKI]'>Character deletion is a permanent action!</font><br /><br />Are you sure you would like to delete your character: <u>[HTML_GetCharacter(src)]</u>?", "Character Deletion", list("Yes", "No")) == 1)
+				var/list/prompt = src.client.AlertInput("Please enter your character password to confirm character deletion.", "Character Deletion", list("Delete", "Cancel"))
+				if(prompt[1] == 1)
+					var/verify_password = prompt[2]
+					if(src.password == sha1("[verify_password][src.password_salt]"))
 
+						src.Save()
+
+						if(fcopy("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]).sav", "[SAVEFILE_CHARACTERS_ARCHIVE]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]) - [time2text(world.realtime, "YYYY-MM-DD_hh-mm-ss")].sav"))
+							
+							var/ckey = src.client.ckey
+							var/character = src.character
+
+							if(fdel("[SAVEFILE_CHARACTERS]/[copytext(ckey, 1, 2)]/[ckey] ([lowertext(character)]).sav"))
+								names_taken.Remove(character)
+
+								spawn(-1) src.client.Alert("Your character has been deleted successfully.")
+
+								del(src)
+
+	proc/SavefileMigration()
+		if(src.savefile_version < 2)
+			src.health = 2500
+			src.maxhealth = 2500
+			src.chakra = 1800
+			src.maxchakra = 1800
+			src.statpoints = 0
+			src.statpoints = 3*(src.level-1)
+			src.savefile_version = 2
+		
+/*		if(src.savefile_version < 3)
+			do stuff
+			src.savefile_version = 3*/
 
 	Write(savefile/F, var/character)
 		if(src.client)
@@ -83,7 +121,6 @@ mob
 					F["x"] << src.x
 					F["y"] << src.y
 					F["z"] << src.z
-					F["savefile_version"] << savefile_version
 					#ifdef DEBUG_SAVEFILE
 					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
 					#endif
@@ -134,6 +171,7 @@ mob
 					#ifdef DEBUG_SAVEFILE
 					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
 					#endif
+					
 				else
 					#ifdef DEBUG_SAVEFILE
 					text2file("\[E]: \[R]: null character name when attempting to read from savefile.<br />", LOG_SAVES)
@@ -153,6 +191,8 @@ mob
 			#endif
 			return 0
 		..()
+
+		src.SavefileMigration()
 
 		src.pixel_x=-16
 

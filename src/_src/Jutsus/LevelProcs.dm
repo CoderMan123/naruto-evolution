@@ -84,8 +84,6 @@ mob
 				src.exp-=src.maxexp
 				src.statpoints+=3
 				src.skillpoints++
-				src.maxchakra+=10
-				src.maxhealth+=15
 				if(src.level<=20)
 					src.maxexp+=1
 				if(src.level>20&&src.level<=40)

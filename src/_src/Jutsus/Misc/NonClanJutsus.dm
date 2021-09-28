@@ -175,6 +175,7 @@ mob
 								S.loc=src.loc
 								del(N)
 						src.amounthits=0
+						if(CheckState(src, new/state/slowed)) RemoveState(src, new/state/slowed, STATE_REMOVE_ALL)
 						spawn(6)if(src)
 							src.move=1
 							src.firing=0

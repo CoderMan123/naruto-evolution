@@ -2,10 +2,10 @@ mob/var/tmp/list/Effects=list()
 mob
 	var
 		exp_locked=0
-		health=1000
-		maxhealth=1000
-		chakra=800
-		maxchakra=800
+		health=2500
+		maxhealth=2500
+		chakra=1800
+		maxchakra=1800
 		level=1
 		exp=0
 		maxexp=10

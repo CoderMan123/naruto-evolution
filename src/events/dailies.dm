@@ -1,5 +1,5 @@
 var/hotspring_exp = 3
-var/hotspring_stat_exp = 200
+var/hotspring_stat_exp = 300
 
 proc/Hotspring_Loop()
 	while(world)
@@ -14,7 +14,7 @@ proc/Hotspring_Loop()
 					m.LevelStat("Ninjutsu", hotspring_stat_exp, 1)
 					m.LevelStat("Genjutsu", hotspring_stat_exp, 1)
 					m.LevelStat("Precision", hotspring_stat_exp,1)
-					m.LevelStat("strength", hotspring_stat_exp, 1)
+					m.LevelStat("Strength", hotspring_stat_exp, 1)
 					m.LevelStat("Defence", hotspring_stat_exp, 1)
 					m.LevelStat("Agility", hotspring_stat_exp, 1)
 					m.exp += hotspring_exp

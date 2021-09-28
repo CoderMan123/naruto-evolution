@@ -37,6 +37,7 @@ proc
 /state
 	var/mob/mob
 	var/mob/owner
+	var/mob/Owner
 	var/duration
 	var/expiration
 
@@ -123,7 +124,19 @@ proc
 				src.mob.DealDamage(src.mob.maxhealth / 200, src.owner, "NinBlue")
 				delay = world.timeofday + 10
 			..()
-	
+
+	bleeding
+		var/delay
+		OnTick()
+			if(!delay) delay = world.timeofday + 10
+			if(delay < world.timeofday)
+				src.mob.DealDamage(src.mob.maxhealth / 800, src.owner, "NinBlue")
+				src.mob.Bleed()
+				delay = world.timeofday + 10
+			..()
+
+	slowed
+
 	dummy_was_hit
 
 	recently_hit

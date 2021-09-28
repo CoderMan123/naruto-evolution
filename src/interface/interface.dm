@@ -174,6 +174,7 @@ client
 			if(winget(src, "Settings", "is-visible") == "false")
 				winset(src, null, {"
 					Settings.is-visible = "true";
+					Settings.Titlebar.text = 'General Settings';
 					Settings.Child.left = 'Settings-General';
 				"})
 			else
@@ -184,13 +185,43 @@ client
 		SettingsPanelGeneral()
 			set hidden=1
 			winset(src, null, {"
+				Settings.Titlebar.text = 'General Settings';
 				Settings.Child.left = 'Settings-General';
+			"})
+		
+		SettingsPanelAccount()
+			set hidden=1
+			winset(src, null, {"
+				Settings.Titlebar.text = 'Account Settings';
+				Settings.Child.left = 'Settings-Account';
+			"})
+		
+		SettingsPanelCharacter()
+			set hidden=1
+			winset(src, null, {"
+				Settings.Titlebar.text = 'Character Settings';
+				Settings.Child.left = 'Settings-Character';
 			"})
 
 		SettingsPanelAudio()
 			set hidden=1
 			winset(src, null, {"
+				Settings.Titlebar.text = 'Audio Settings';
 				Settings.Child.left = 'Settings-Audio';
+			"})
+
+		SettingsPanelWebsiteInformation()
+			set hidden=1
+			winset(src, null, {"
+				Settings.Titlebar.text = 'Website Information';
+				Settings.Child.left = 'Settings-WebsiteInformation';
+			"})
+		
+		SettingsPanelAdministrator()
+			set hidden=1
+			winset(src, null, {"
+				Settings.Titlebar.text = 'Administrator Settings';
+				Settings.Child.left = 'Settings-Administrator';
 			"})
 
 		OnChangeSFX()

@@ -28,7 +28,7 @@ obj
 							src.PlayAudio('Explo_StoneMed2.ogg', output = AUDIO_HEARERS)
 							for(var/mob/X in view(src,3))
 								if(X.dead==0)
-									X.DealDamage(damage-(X.defence/5),src.Owner,"TaiOrange")
+									X.DealDamage(damage-(X.defence/4),src.Owner,"TaiOrange")
 									if(istype(X,/mob/npc) && !istype(X,/mob/npc/combat))..()
 									else
 										X.icon_state="push"
@@ -335,6 +335,7 @@ obj
 									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+									AddState(M, new/state/bleeding, 30, src.Owner)
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(45))M.speeding=0
@@ -407,6 +408,7 @@ obj
 										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+										AddState(M, new/state/bleeding, 30, src.Owner)
 										spawn() if(M) M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(45))
@@ -629,7 +631,7 @@ obj
 									src.Hit=1
 									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
-									M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+									M.DealDamage(undefendedhit-(M.defence/8),src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(75))
@@ -703,7 +705,7 @@ obj
 										src.Hit=1
 										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
-										M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+										M.DealDamage(undefendedhit-(M.defence/8),src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
@@ -927,6 +929,7 @@ obj
 									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+									if(M.client) AddState(M, new/state/slowed, 50)
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 									if(prob(30))
@@ -1002,6 +1005,7 @@ obj
 										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+										if(M.client) AddState(M, new/state/slowed, 50)
 										spawn() if(M) M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",rand(2,4))
 										if(prob(75))
@@ -2417,7 +2421,7 @@ mob
 				else
 					for(var/obj/Inventory/Weaponry/Exploding_Kunai/C in usr.contents)
 						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
-							var/throwdelay = usr.attkspeed*5
+							var/throwdelay = usr.attkspeed*7
 							var/mob/c_target=usr.Target_Get(TARGET_MOB)
 							AddState(usr, new/state/throwing, throwdelay)
 							if(prob(50))
@@ -2430,7 +2434,7 @@ mob
 								src.dir=get_dir(usr,c_target)
 								usr.Target_Atom(c_target)
 								var/obj/Projectiles/Weaponry/Exploding_Kunai/A = new/obj/Projectiles/Weaponry/Exploding_Kunai(usr.loc)
-								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(80, 110))
+								if(loc.loc:Safe!=1) src.LevelStat("Precision",rand(110, 140))
 								if(prob(50))A.pixel_y+=rand(5,10)
 								else A.pixel_y-=rand(5,10)
 								if(prob(50))A.pixel_x+=rand(1,8)

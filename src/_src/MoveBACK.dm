@@ -817,7 +817,8 @@ client
 			step(SC, get_dir(src.mob, Loc))
 
 			src.mob.moving = 1
-			sleep(src.mob.move_delay)
+			if(CheckState(src.mob, new/state/slowed)) sleep(src.mob.move_delay*2)
+			else sleep(src.mob.move_delay)
 			src.mob.moving=0
 
 
@@ -893,7 +894,8 @@ client
 						spawn() src.mob.LevelStat("Agility", rand(1,2))
 
 
-				sleep(src.mob.move_delay)
+				if(CheckState(src.mob, new/state/slowed)) sleep(src.mob.move_delay*2)
+				else sleep(src.mob.move_delay)
 				src.mob.moving=0
 
 				spawn(2) if(src.mob.dashable != 2) src.mob.dashable = 0

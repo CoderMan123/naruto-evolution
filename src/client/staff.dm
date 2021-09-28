@@ -69,7 +69,10 @@ client
 client
 	proc
 		StaffCheck()
-			winset(src, "Navigation.LeaderButton", "is-disabled = 'true'")
+			winset(src, null, {"
+				Navigation.LeaderButton.is-disabled = 'true';
+				Settings-General.Administration.is-visible = 'false';
+			"})
 
 			// Kage Check //
 
@@ -115,7 +118,11 @@ client
 					src.mob.SetRank(RANK_AKATSUKI)
 			
 			if(administrators.Find(src.ckey))
-				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
+				winset(src, null, {"
+					Navigation.LeaderButton.is-disabled = 'false';
+					Settings-General.Administration.is-visible = 'true';
+				"})
+
 				src.mob.verbs += typesof(/mob/administrator/verb)
 				src.mob.verbs += typesof(/mob/moderator/verb)
 				src.mob.verbs += typesof(/mob/programmer/verb)
