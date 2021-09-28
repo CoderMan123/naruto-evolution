@@ -60,12 +60,9 @@ mob
 						src.Save()
 
 						if(fcopy("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]).sav", "[SAVEFILE_CHARACTERS_ARCHIVE]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]) - [time2text(world.realtime, "YYYY-MM-DD_hh-mm-ss")].sav"))
-							
-							var/ckey = src.client.ckey
-							var/character = src.character
 
-							if(fdel("[SAVEFILE_CHARACTERS]/[copytext(ckey, 1, 2)]/[ckey] ([lowertext(character)]).sav"))
-								names_taken.Remove(character)
+							if(fdel("[SAVEFILE_CHARACTERS]/[copytext(src.client.ckey, 1, 2)]/[src.client.ckey] ([lowertext(src.character)]).sav"))
+								names_taken.Remove(src.character)
 
 								spawn(-1) src.client.Alert("Your character has been deleted successfully.")
 
