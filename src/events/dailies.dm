@@ -1,5 +1,5 @@
 var/hotspring_exp = 3
-var/hotspring_stat_exp = 200
+var/hotspring_stat_exp = 300
 
 proc/Hotspring_Loop()
 	while(world)
