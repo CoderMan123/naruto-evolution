@@ -51,10 +51,10 @@ mob
 					src.firing=1
 					src.canattack=0
 					var/TimeAsleep
-					if(J.level==1) TimeAsleep=10
+					if(J.level==1) TimeAsleep=15
 					if(J.level==2) TimeAsleep=20
-					if(J.level==3) TimeAsleep=30
-					if(J.level==4) TimeAsleep=40
+					if(J.level==3) TimeAsleep=25
+					if(J.level==4) TimeAsleep=30
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					new/obj/Jutsus/Effects/mudslide(src.loc)
 					var/mob/M = c_target
