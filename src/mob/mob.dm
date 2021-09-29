@@ -590,6 +590,10 @@ mob
 
 				return 0
 			
+			else if(msg == "/version")
+				spawn() src.client.Alert("<b>Naruto Evolution:</b> v[global.build]<br /><b>BYOND Server:</b> v[world.byond_version].[world.byond_build]<br /><b>BYOND Client:</b> v[src.client.byond_version].[src.client.byond_build]", "Version Information")
+				return
+			
 			var/command = "/level "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 			
