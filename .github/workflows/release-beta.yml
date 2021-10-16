@@ -66,5 +66,8 @@ jobs:
             mv --force /opt/naruto-evolution/beta/naruto-evolution.dmb /opt/naruto-evolution/beta/beta.dmb
             mv --force /opt/naruto-evolution/beta/naruto-evolution.rsc /opt/naruto-evolution/beta/beta.rsc
             echo "-beta" >> /opt/naruto-evolution/beta/VERSION
-            systemctl restart naruto-evolution-beta
+
+            docker stop naruto-evolution-beta
+            docker container rm naruto-evolution-beta
+            docker run --name naruto-evolution-beta --volume /opt/naruto-evolution/beta:/opt/naruto-evolution/beta --publish 1338:1338 --detach douglasparker/byond:514.1568 DreamDaemon /opt/naruto-evolution/beta/beta.dmb -ports 1338
           EOF

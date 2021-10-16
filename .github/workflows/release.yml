@@ -111,5 +111,8 @@ jobs:
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
             mv --force /opt/naruto-evolution/production/naruto-evolution.dmb /opt/naruto-evolution/production/production.dmb
             mv --force /opt/naruto-evolution/production/naruto-evolution.rsc /opt/naruto-evolution/production/production.rsc
-            systemctl restart naruto-evolution
+
+            docker stop naruto-evolution
+            docker container rm naruto-evolution
+            docker run --name naruto-evolution --volume /opt/naruto-evolution/production:/opt/naruto-evolution/production --publish 1337:1337 --detach douglasparker/byond:514.1568 DreamDaemon /opt/naruto-evolution/production/production.dmb -ports 1337
           EOF

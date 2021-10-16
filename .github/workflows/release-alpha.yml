@@ -66,5 +66,8 @@ jobs:
             mv --force /opt/naruto-evolution/alpha/naruto-evolution.dmb /opt/naruto-evolution/alpha/alpha.dmb
             mv --force /opt/naruto-evolution/alpha/naruto-evolution.rsc /opt/naruto-evolution/alpha/alpha.rsc
             echo "-alpha" >> /opt/naruto-evolution/alpha/VERSION
-            systemctl restart naruto-evolution-alpha
+
+            docker stop naruto-evolution-alpha
+            docker container rm naruto-evolution-alpha
+            docker run --name naruto-evolution-alpha --volume /opt/naruto-evolution/alpha:/opt/naruto-evolution/alpha --publish 1339:1339 --detach douglasparker/byond:514.1568 DreamDaemon /opt/naruto-evolution/alpha/alpha.dmb -ports 1339
           EOF
