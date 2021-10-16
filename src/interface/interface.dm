@@ -272,6 +272,381 @@ client
 		Ninja_Handbook()
 			set hidden = 1
 			src << link("https://community.narutoevolution.com/t/the-ninja-handbook/27")
+		
+		Server_Information()
+			set hidden=1
+			if(administrators.Find(src.ckey) && src.browser_url != BROWSER_SERVER_INFORMATION)
+
+				var/html = {"
+					<!doctype html>
+					<html lang="en">
+					<head>
+						<title>Server Information</title>
+
+						<!-- Required meta tags -->
+						<meta charset="utf-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+						<!-- Bootstrap CSS -->
+						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+						<!-- Google Fonts -->
+						<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+						<style>
+							body {
+								padding-top: 19px;
+								padding-left: 10px;
+								background-color: #414141;
+								color: #C8C8C8;
+								font-family: 'Open Sans', sans-serif;
+							}
+
+							a {
+								color: #007bff;
+								text-decoration: none;
+							}
+
+							a:hover {
+								color: #0056b3;
+								text-decoration: underline;
+							}
+
+							a:visited {
+								color: #007bff;
+								text-decoration: none;
+							}
+							table {
+								border-color: #dee2e6 !important;
+							}
+							th {
+								color: #C8C8C8;
+								border-width: 1px !important;
+								border-color: #646464 !important;
+							}
+							td {
+								color: #C8C8C8;
+								border-color: #646464 !important;
+							}
+						</style>
+					</head>
+
+					<body>
+						<h1>Server Information</h1>
+
+						<table class="table table-sm table-hover">
+							<tr>
+								<th scope="col">Name</th>
+								<td>[world.name]</td>
+							</tr>
+							<tr>
+								<th scope="col">Status</th>
+								<td>[world.status]</td>
+							</tr>
+							<tr>
+								<th scope="col">Server Time</th>
+								<td>[time2text(world.timeofday, "hh:mm:ss", world.timezone)] (UTC-[world.timezone])</td>
+							</tr>
+							<tr>
+								<th scope="col">Local Time</th>
+								<td>[time2text(world.timeofday, "hh:mm:ss", src.timezone)] (UTC[src.timezone])</td>
+							</tr>
+							<tr>
+								<th scope="col">Address</th>
+								<td>[world.address]:[world.port]</td>
+							</tr>
+							<tr>
+								<th scope="col">BYOND Version</th>
+								<td>[world.byond_version].[world.byond_build]</td>
+							</tr>
+							<tr>
+								<th scope="col">FPS</th>
+								<td>[world.fps]</td>
+							</tr>
+							<tr>
+								<th scope="col">CPU</th>
+								<td>[world.cpu]</td>
+							</tr>
+							<tr>
+								<th scope="col">Map CPU</th>
+								<td>[world.map_cpu]</td>
+							</tr>
+						</table>
+
+						<!-- Optional JavaScript -->
+						<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+						<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+					</body>
+					</html>
+				"}
+
+				src << output(null, "Browser.Output")
+				src << browse("[html]")
+				src.browser_url = BROWSER_SERVER_INFORMATION
+				winset(src, "Browser", "is-visible = true")
+			else
+				src.browser_url = BROWSER_NONE
+				winset(src, "Browser", "is-visible = false")
+		
+		World_Information()
+			set hidden=1
+			if(administrators.Find(src.ckey) && src.browser_url != BROWSER_WORLD_INFORMATION)
+
+				var/area_counter = 0
+				for(var/area/a in world)
+					area_counter++
+
+				var/turf_counter = 0
+				for(var/turf/t in world)
+					turf_counter++
+
+				var/mob_counter = 0
+				for(var/mob/m in world)
+					mob_counter++
+
+				var/obj_counter = 0
+				for(var/obj/o in world)
+					obj_counter++
+
+				var/projectile_counter = 0
+				for(var/obj/Projectiles/o in world)
+					projectile_counter++
+
+				var/state_counter = 0
+				for(var/mob/m in mobs_online)
+					for(var/state/s in m.state_manager)
+						state_counter++
+
+				var/state_counter_self = 0
+				for(var/state/s in src.mob.state_manager)
+					state_counter_self++
+
+				var/name_counter = 0
+				for(var/obj/name/name in src.mob.state_manager)
+					name_counter++
+
+				var/html = {"
+					<!doctype html>
+					<html lang="en">
+					<head>
+						<title>World Information</title>
+
+						<!-- Required meta tags -->
+						<meta charset="utf-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+						<!-- Bootstrap CSS -->
+						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+						<!-- Google Fonts -->
+						<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+						<style>
+							body {
+								padding-top: 19px;
+								padding-left: 10px;
+								background-color: #414141;
+								color: #C8C8C8;
+								font-family: 'Open Sans', sans-serif;
+							}
+
+							a {
+								color: #007bff;
+								text-decoration: none;
+							}
+
+							a:hover {
+								color: #0056b3;
+								text-decoration: underline;
+							}
+
+							a:visited {
+								color: #007bff;
+								text-decoration: none;
+							}
+							table {
+								border-color: #dee2e6 !important;
+							}
+							th {
+								color: #C8C8C8;
+								border-width: 1px !important;
+								border-color: #646464 !important;
+							}
+							td {
+								color: #C8C8C8;
+								border-color: #646464 !important;
+							}
+						</style>
+					</head>
+
+					<body>
+						<h1>World Information</h1>
+
+						<table class="table table-sm table-hover">
+							<tr>
+								<th scope="col">Area Counter</th>
+								<td>[area_counter]</td>
+							</tr>
+							
+							<tr>
+								<th scope="col">Turf Counter</th>
+								<td>[turf_counter]</td>
+							</tr>
+							
+							<tr>
+								<th scope="col">Mob Counter</th>
+								<td>[mob_counter]</td>
+							</tr>
+
+							<tr>
+								<th scope="col">Object Counter</th>
+								<td>[obj_counter]</td>
+							</tr>
+
+							<tr>
+								<th scope="col">Projectiles Counter</th>
+								<td>[projectile_counter]</td>
+							</tr>
+
+							<tr>
+								<th scope="col">State Counter (World)</th>
+								<td>[state_counter]</td>
+							</tr>
+
+							<tr>
+								<th scope="col">State Counter (Self)</th>
+								<td>[state_counter_self]</td>
+							</tr>
+
+							<tr>
+								<th scope="col">Name Counter</th>
+								<td>[name_counter]</td>
+							</tr>
+						</table>
+
+						<!-- Optional JavaScript -->
+						<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+						<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+					</body>
+					</html>
+				"}
+
+				src << output(null, "Browser.Output")
+				src << browse("[html]")
+				src.browser_url = BROWSER_WORLD_INFORMATION
+				winset(src, "Browser", "is-visible = true")
+			else
+				src.browser_url = BROWSER_NONE
+				winset(src, "Browser", "is-visible = false")
+		
+		Election_Information()
+			set hidden=1
+			if(administrators.Find(src.ckey) && src.browser_url != BROWSER_ELECTION_INFORMATION)
+
+				var/html = {"
+					<!doctype html>
+					<html lang="en">
+					<head>
+						<title>Election Information</title>
+
+						<!-- Required meta tags -->
+						<meta charset="utf-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+						<!-- Bootstrap CSS -->
+						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+						<!-- Google Fonts -->
+						<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+						<style>
+							body {
+								padding-top: 19px;
+								padding-left: 10px;
+								background-color: #414141;
+								color: #C8C8C8;
+								font-family: 'Open Sans', sans-serif;
+							}
+
+							a {
+								color: #007bff;
+								text-decoration: none;
+							}
+
+							a:hover {
+								color: #0056b3;
+								text-decoration: underline;
+							}
+
+							a:visited {
+								color: #007bff;
+								text-decoration: none;
+							}
+							table {
+								border-color: #dee2e6 !important;
+							}
+							th {
+								color: #C8C8C8;
+								border-width: 1px !important;
+								border-color: #646464 !important;
+							}
+							td {
+								color: #C8C8C8;
+								border-color: #646464 !important;
+							}
+						</style>
+					</head>
+
+					<body>
+						<h1>Election Information</h1>
+
+						<table class="table table-sm table-hover">
+							<tr>
+								<th scope="col">Hokage Election</th>
+								<td>[global.hokage_election ? "Running" : "Ended"]</td>
+							</tr>
+							<tr>
+								<th scope="col">Hokage Ballot</th>
+								<td>[global.hokage_ballot_open ? "Open" : "Closed"]</td>
+							</tr>
+							<tr>
+								<th scope="col">Hokage Ballot Counter</th>
+								<td>[global.hokage_election_ballot.len]</td>
+							</tr>
+							<tr>
+								<th scope="col">Kazekage Election</th>
+								<td>[global.kazekage_election ? "Running" : "Ended"]</td>
+							</tr>
+							<tr>
+								<th scope="col">Kazekage Ballot</th>
+								<td>[global.kazekage_ballot_open ? "Open" : "Closed"]</td>
+							</tr>
+							<tr>
+								<th scope="col">Kazekage Ballot Counter</th>
+								<td>[global.kazekage_election_ballot.len]</td>
+							</tr>
+						</table>
+
+						<!-- Optional JavaScript -->
+						<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+						<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+					</body>
+					</html>
+				"}
+
+				src << output(null, "Browser.Output")
+				src << browse("[html]")
+				src.browser_url = BROWSER_ELECTION_INFORMATION
+				winset(src, "Browser", "is-visible = true")
+			else
+				src.browser_url = BROWSER_NONE
+				winset(src, "Browser", "is-visible = false")
 
 		JutsuReference()
 			set hidden=1
