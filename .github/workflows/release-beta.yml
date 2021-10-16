@@ -7,6 +7,8 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-20.04
+    env:
+      BYOND_VERSION: "514.1568"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -15,7 +17,7 @@ jobs:
           lfs: true
 
       - name: Build
-        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:514.1568 DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
 
       - name: Cache
         uses: actions/cache@v2
@@ -28,6 +30,8 @@ jobs:
   Deploy:
     runs-on: ubuntu-20.04
     needs: [Build]
+    env:
+      BYOND_VERSION: "514.1568"
     steps:
       - name: Restore build
         uses: actions/cache@v2
@@ -69,5 +73,5 @@ jobs:
 
             docker stop naruto-evolution-beta
             docker container rm naruto-evolution-beta
-            docker run --name naruto-evolution-beta --volume /opt/naruto-evolution/beta:/opt/naruto-evolution/beta --publish 1338:1338 --detach douglasparker/byond:514.1568 DreamDaemon /opt/naruto-evolution/beta/beta.dmb -ports 1338
+            docker run --name naruto-evolution-beta --volume /opt/naruto-evolution/beta:/opt/naruto-evolution/beta --publish 1338:1338 --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/beta/beta.dmb -ports 1338
           EOF

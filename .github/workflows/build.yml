@@ -9,6 +9,8 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-20.04
+    env:
+      BYOND_VERSION: "514.1568"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -17,4 +19,4 @@ jobs:
           lfs: true
 
       - name: Build
-        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:514.1568 DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
