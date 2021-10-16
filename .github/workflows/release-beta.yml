@@ -73,5 +73,5 @@ jobs:
 
             docker stop naruto-evolution-beta
             docker container rm naruto-evolution-beta
-            docker run --name naruto-evolution-beta --volume /opt/naruto-evolution/beta:/opt/naruto-evolution/beta --publish 1338:1338 --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/beta/beta.dmb -ports 1338 -invisible
+            docker run --name naruto-evolution-beta --volume /opt/naruto-evolution/beta:/opt/naruto-evolution/beta --publish 1338:1338 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/beta/beta.dmb -ports 1338 -invisible
           EOF

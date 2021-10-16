@@ -79,18 +79,18 @@ jobs:
 
               docker stop naruto-evolution-alpha
               docker container rm naruto-evolution-alpha
-              docker run --name naruto-evolution-alpha --volume /opt/naruto-evolution/alpha:/opt/naruto-evolution/alpha --publish 1339:1339 --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/alpha/alpha.dmb -ports 1339 -invisible
+              docker run --name naruto-evolution-alpha --volume /opt/naruto-evolution/alpha:/opt/naruto-evolution/alpha --publish 1339:1339 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/alpha/alpha.dmb -ports 1339 -invisible
 
             elif if [[ ${{ github.event.inputs.server }} == "beta" ]]; then
               echo "-${{ github.event.inputs.server }}" >> /opt/naruto-evolution/${{ github.event.inputs.server }}/VERSION
 
               docker stop naruto-evolution-beta
               docker container rm naruto-evolution-beta
-              docker run --name naruto-evolution-beta --volume /opt/naruto-evolution/beta:/opt/naruto-evolution/beta --publish 1338:1338 --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/beta/beta.dmb -ports 1338 -invisible
+              docker run --name naruto-evolution-beta --volume /opt/naruto-evolution/beta:/opt/naruto-evolution/beta --publish 1338:1338 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/beta/beta.dmb -ports 1338 -invisible
 
             else
               docker stop naruto-evolution
               docker container rm naruto-evolution
-              docker run --name naruto-evolution --volume /opt/naruto-evolution/production:/opt/naruto-evolution/production --publish 1337:1337 --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/production/production.dmb -ports 1337
+              docker run --name naruto-evolution --volume /opt/naruto-evolution/production:/opt/naruto-evolution/production --publish 1337:1337 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/production/production.dmb -ports 1337
             fi
           EOF

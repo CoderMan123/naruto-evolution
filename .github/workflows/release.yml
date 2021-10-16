@@ -118,5 +118,5 @@ jobs:
 
             docker stop naruto-evolution
             docker container rm naruto-evolution
-            docker run --name naruto-evolution --volume /opt/naruto-evolution/production:/opt/naruto-evolution/production --publish 1337:1337 --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/production/production.dmb -ports 1337
+            docker run --name naruto-evolution --volume /opt/naruto-evolution/production:/opt/naruto-evolution/production --publish 1337:1337 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/production/production.dmb -ports 1337
           EOF

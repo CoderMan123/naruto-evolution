@@ -73,5 +73,5 @@ jobs:
 
             docker stop naruto-evolution-alpha
             docker container rm naruto-evolution-alpha
-            docker run --name naruto-evolution-alpha --volume /opt/naruto-evolution/alpha:/opt/naruto-evolution/alpha --publish 1339:1339 --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/alpha/alpha.dmb -ports 1339 -invisible
+            docker run --name naruto-evolution-alpha --volume /opt/naruto-evolution/alpha:/opt/naruto-evolution/alpha --publish 1339:1339 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/alpha/alpha.dmb -ports 1339 -invisible
           EOF
