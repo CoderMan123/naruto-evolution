@@ -914,6 +914,23 @@ client
 			usr.client.Alert(J.Description, J.name)
 
 	proc
+		BrowserRefresh()
+			while(src)
+				switch(src.browser_url)
+					if(BROWSER_SERVER_INFORMATION)
+						src.CloseBrowser()
+						src.Server_Information()
+
+					if(BROWSER_WORLD_INFORMATION)
+						src.CloseBrowser()
+						src.World_Information()
+
+					if(BROWSER_ELECTION_INFORMATION)
+						src.CloseBrowser()
+						src.Election_Information()
+				
+				sleep(100)
+
 		FlashExperienceLock()
 			src.mob.overlays += /obj/Symbols/exp_lock
 

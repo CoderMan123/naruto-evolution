@@ -47,6 +47,8 @@ client
 		src.Load()
 		spawn() src.mob.Playtime()
 
+		spawn() src.BrowserRefresh()
+
 		if(findtext(lowertext(build), "alpha"))
 			if(!administrators.Find(src.ckey) && !alpha_testers.Find(src.ckey))
 				spawn() src.Alert("You do not have authorization to access the alpha server. If this is in error, please contact support.<br /><br />support@narutoevolution.com", "Alpha Server: Access Authorization")
