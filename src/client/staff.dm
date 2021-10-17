@@ -1,72 +1,4 @@
 client
-	var/tmp/stat_display_world = 1
-	Stat()
-		if(src && administrators.Find(src.ckey))
-			if(src && statpanel("Server"))
-				stat("Name:", world.name)
-				stat("Status:", world.status)
-				stat("Server Time:", "[time2text(world.timeofday, "hh:mm:ss", world.timezone)] (UTC-[world.timezone])")
-				stat("Local Time:", "[time2text(world.timeofday, "hh:mm:ss", src.timezone)] (UTC[src.timezone])")
-				stat("Address:", "[world.address]:[world.port]")
-				stat("BYOND Version:", "[world.byond_version].[world.byond_build]")
-				stat("FPS:", world.fps)
-				stat("CPU:", world.cpu)
-				stat("Map CPU:", world.map_cpu)
-		
-		if(src && administrators.Find(src.ckey) && src.stat_display_world)
-			if(src && statpanel("World"))
-				var/counter = 0
-				for(var/area/a in world)
-					counter++
-				stat("Area Counter", counter)
-
-				counter = 0
-				for(var/turf/t in world)
-					counter++
-				stat("Turf Counter", counter)
-
-				counter = 0
-				for(var/mob/m in world)
-					counter++
-				stat("Mob Counter", counter)
-
-				counter = 0
-				for(var/obj/o in world)
-					counter++
-				stat("Object Counter", counter)
-
-				counter = 0
-				for(var/obj/Projectiles/o in world)
-					counter++
-				stat("Projectiles Counter", counter)
-
-				counter = 0
-				for(var/mob/m in mobs_online)
-					for(var/state/s in m.state_manager)
-						counter++
-				stat("State Counter (World)", counter)
-
-				counter = 0
-				for(var/state/s in src.mob.state_manager)
-					counter++
-				stat("State Counter (Self)", counter)
-
-				counter = 0
-				for(var/obj/name/name in src.mob.state_manager)
-					counter++
-				stat("Name Counter", counter)
-				sleep(world.tick_lag)
-		
-		if(src && administrators.Find(src.ckey) && global.hokage_election || global.kazekage_election)
-			if(src && statpanel("Election"))
-				stat("Hokage Election:", global.hokage_election ? "Running" : "Ended")
-				stat("Hokage Ballot:", global.hokage_ballot_open ? "Open" : "Closed")
-				stat("Hokage Ballot Counter:", global.hokage_election_ballot.len)
-				stat("Kazekage Election:", global.kazekage_election ? "Running" : "Ended")
-				stat("Kazekage Ballot:", global.kazekage_ballot_open ? "Open" : "Closed")
-				stat("Kazekage Ballot Counter:", global.kazekage_election_ballot.len)
-
-client
 	proc
 		StaffCheck()
 			winset(src, null, {"
@@ -176,10 +108,6 @@ mob
       
 			// UPDATE: This issue only happens when you add these verbs to src.client instead of src.mob.
 			// NOTE: Only add verbs to src.mob from now on.
-
-			Toggle_World_Information()
-				set category = "Administrator"
-				src.client.stat_display_world = src.client.stat_display_world ? 0 : 1
 
 			Restore_Base()
 				set category = "Administrator"

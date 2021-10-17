@@ -7,6 +7,8 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-20.04
+    env:
+      BYOND_VERSION: "latest"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -15,7 +17,7 @@ jobs:
           lfs: true
 
       - name: Build
-        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:514.1566 DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
 
       - name: Cache
         uses: actions/cache@v2
@@ -28,6 +30,8 @@ jobs:
   Deploy:
     runs-on: ubuntu-20.04
     needs: [Build]
+    env:
+      BYOND_VERSION: "latest"
     steps:
       - name: Restore build
         uses: actions/cache@v2
@@ -66,5 +70,8 @@ jobs:
             mv --force /opt/naruto-evolution/alpha/naruto-evolution.dmb /opt/naruto-evolution/alpha/alpha.dmb
             mv --force /opt/naruto-evolution/alpha/naruto-evolution.rsc /opt/naruto-evolution/alpha/alpha.rsc
             echo "-alpha" >> /opt/naruto-evolution/alpha/VERSION
-            systemctl restart naruto-evolution-alpha
+
+            docker stop naruto-evolution-alpha
+            docker container rm naruto-evolution-alpha
+            docker run --name naruto-evolution-alpha --volume /opt/naruto-evolution/alpha:/opt/naruto-evolution/alpha --publish 1339:1339 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/alpha/alpha.dmb -ports 1339 -invisible
           EOF

@@ -6,6 +6,8 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-20.04
+    env:
+      BYOND_VERSION: "latest"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -14,7 +16,7 @@ jobs:
           lfs: true
 
       - name: Build
-        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:514.1566 DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
 
       - name: Cache
         uses: actions/cache@v2
@@ -74,6 +76,8 @@ jobs:
   Deploy:
     runs-on: ubuntu-20.04
     needs: [Release]
+    env:
+      BYOND_VERSION: "latest"
     steps:
       - name: Restore build
         uses: actions/cache@v2
@@ -111,5 +115,8 @@ jobs:
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
             mv --force /opt/naruto-evolution/production/naruto-evolution.dmb /opt/naruto-evolution/production/production.dmb
             mv --force /opt/naruto-evolution/production/naruto-evolution.rsc /opt/naruto-evolution/production/production.rsc
-            systemctl restart naruto-evolution
+
+            docker stop naruto-evolution
+            docker container rm naruto-evolution
+            docker run --name naruto-evolution --volume /opt/naruto-evolution/production:/opt/naruto-evolution/production --publish 1337:1337 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/production/production.dmb -ports 1337
           EOF

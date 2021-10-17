@@ -38,6 +38,9 @@
 #define BROWSER_JUTSU_REFERENCE "browse://jutsu-reference"
 #define BROWSER_SQUAD "browse://squad"
 #define BROWSER_LOGS "browse://logs"
+#define BROWSER_SERVER_INFORMATION "browse://server-information"
+#define BROWSER_WORLD_INFORMATION "browse://world-information"
+#define BROWSER_ELECTION_INFORMATION "browse://election-information"
 
 #define VILLAGE_MISSING_NIN "Missing-Nin"
 #define VILLAGE_LEAF "Hidden Leaf"
