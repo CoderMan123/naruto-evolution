@@ -4,8 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       server:
-        description: Server (production, beta, alpha)
         required: true
+        description: Select the server you want to target for deployment.
+        type: choice
+        options:
+          - production
+          - beta
+          - alpha
         default: production
 
 jobs:
