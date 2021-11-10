@@ -5,12 +5,12 @@ on:
     inputs:
       server:
         required: true
-        description: Select the server you want to target for deployment.
+        description: Server
         type: choice
         options:
-          - production
-          - beta
-          - alpha
+          - Production
+          - Beta
+          - Alpha
         default: production
 
 jobs:
@@ -79,14 +79,14 @@ jobs:
             mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.dmb /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.dmb
             mv --force /opt/naruto-evolution/${{ github.event.inputs.server }}/naruto-evolution.rsc /opt/naruto-evolution/${{ github.event.inputs.server }}/${{ github.event.inputs.server }}.rsc
             
-            if [[ ${{ github.event.inputs.server }} == "alpha" ]]; then
+            if [[ ${{ github.event.inputs.server }} == "Alpha" ]]; then
               echo "-${{ github.event.inputs.server }}" >> /opt/naruto-evolution/${{ github.event.inputs.server }}/VERSION
 
               docker stop naruto-evolution-alpha
               docker container rm naruto-evolution-alpha
               docker run --name naruto-evolution-alpha --volume /opt/naruto-evolution/alpha:/opt/naruto-evolution/alpha --publish 1339:1339 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/alpha/alpha.dmb -ports 1339 -invisible
 
-            elif if [[ ${{ github.event.inputs.server }} == "beta" ]]; then
+            elif if [[ ${{ github.event.inputs.server }} == "Beta" ]]; then
               echo "-${{ github.event.inputs.server }}" >> /opt/naruto-evolution/${{ github.event.inputs.server }}/VERSION
 
               docker stop naruto-evolution-beta
