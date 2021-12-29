@@ -25,6 +25,7 @@ Install using the Windows package manager.
 ```powershell
 winget install git
 winget install git-lfs
+git lfs install
 ```
 
 **Linux Installation**
@@ -32,13 +33,22 @@ winget install git-lfs
 Install using your distributions package manager.
 
 - **Debian / Ubuntu:**
-`sudo apt install git git-lfs`
+```sh
+sudo apt install git git-lfs
+git lfs install
+```
 
 - **CentOS / Fedora:**
-`yum install git git-lfs`
+```
+yum install git git-lfs
+git lfs install
+```
 
 - **Arch / Manjaro:**
-`pacman -Syu git git-lfs`
+```
+pacman -Syu git git-lfs
+git lfs install
+```
 
 ### Clone Project
 
