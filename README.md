@@ -28,14 +28,6 @@ winget install GitHub.GitLFS
 git lfs install
 ```
 
-Configure Git
-
-```powershell
-git config --global user.name "Full Name"
-git config --global user.email "email@address.com"
-git config --global pull.rebase true
-```
-
 **Linux Installation**
 
 Install using your distributions package manager.
@@ -56,6 +48,14 @@ git lfs install
 ```
 pacman -Syu git git-lfs
 git lfs install
+```
+
+**Configure Git**
+
+```powershell
+git config --global user.name "Full Name"
+git config --global user.email "email@address.com"
+git config --global pull.rebase true
 ```
 
 ### Clone Project
