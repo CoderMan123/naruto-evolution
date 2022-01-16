@@ -23,9 +23,17 @@ Before you can setup a development environment, you need to make sure that you h
 Install using the Windows package manager.
 
 ```powershell
-winget install git
-winget install git-lfs
+winget install Git.Git
+winget install GitHub.GitLFS
 git lfs install
+```
+
+Configure Git
+
+```powershell
+git config --global user.name "Full Name"
+git config --global user.email "email@address.com"
+git config --global pull.rebase true
 ```
 
 **Linux Installation**
