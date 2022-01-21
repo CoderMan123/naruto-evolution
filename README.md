@@ -32,21 +32,8 @@ git lfs install
 
 Install using your distributions package manager.
 
-- **Debian / Ubuntu:**
 ```sh
 sudo apt install git git-lfs
-git lfs install
-```
-
-- **CentOS / Fedora:**
-```
-yum install git git-lfs
-git lfs install
-```
-
-- **Arch / Manjaro:**
-```
-pacman -Syu git git-lfs
 git lfs install
 ```
 
@@ -58,7 +45,7 @@ git config --global user.email "email@address.com"
 git config --global pull.rebase true
 ```
 
-### Clone Project
+### Project Setup
 
 1) **Clone the repository:**
 
@@ -68,13 +55,13 @@ git clone https://github.com/IllusiveBIair/Naruto-Evolution.git
 
 2) **Switch to preferred branch:**
 
-```sh
-git checkout develop
-```
-
 - **release**: This is the current release branch and automatically deploys to the beta testing environment.
 
 - **develop**: This is the current development branch and automatically deploys to the alpha testing environment.
+
+```sh
+git checkout develop
+```
 
 3) **Initialize and checkout submodules:**
 
