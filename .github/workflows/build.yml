@@ -10,7 +10,7 @@ jobs:
   Build:
     runs-on: ubuntu-20.04
     env:
-      BYOND_VERSION: "514.1567"
+      BYOND_VERSION: "514.1573"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
