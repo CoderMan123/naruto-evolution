@@ -17,7 +17,7 @@ jobs:
   Build:
     runs-on: ubuntu-20.04
     env:
-      BYOND_VERSION: "514.1573"
+      BYOND_VERSION: "514.1574"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-20.04
     needs: [Build]
     env:
-      BYOND_VERSION: "514.1573"
+      BYOND_VERSION: "514.1574"
     steps:
       - name: Restore build
         uses: actions/cache@v2
