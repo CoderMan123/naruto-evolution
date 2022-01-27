@@ -66,6 +66,5 @@ git checkout develop
 3) **Initialize and checkout submodules:**
 
 ```sh
-git submodule init
-git submodule update --recursive
+git submodule update --init --recursive
 ```
