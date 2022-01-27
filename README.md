@@ -43,6 +43,7 @@ git lfs install
 git config --global user.name "Full Name"
 git config --global user.email "email@address.com"
 git config --global pull.rebase true
+git config --global diff.submodule log
 ```
 
 ### Project Setup
