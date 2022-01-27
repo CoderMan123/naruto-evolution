@@ -1,0 +1,3 @@
+[submodule "lib/lavenblade/interface-input"]
+	path = lib/lavenblade/interface-input
+	url = https://git.douglas-parker.com/lavenblade/interface-input.git
