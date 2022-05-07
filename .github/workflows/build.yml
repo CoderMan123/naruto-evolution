@@ -1,22 +1,24 @@
 name: Build
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
-    branches: [ release, develop ]
+    branches: [ main ]
 
-  workflow_dispatch:
+env:
+  BYOND_VERSION: "514.1578"
 
 jobs:
-  Build:
+  build:
+    name: Build
     runs-on: ubuntu-20.04
-    env:
-      BYOND_VERSION: "514.1578"
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout the repository
+        uses: actions/checkout@v3
         with:
           submodules: 'recursive'
           lfs: true
 
-      - name: Build
+      - name: Build application
         run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"

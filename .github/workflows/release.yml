@@ -1,122 +1,49 @@
-name: Release (Production Server)
+name: Release
 
 on:
-  workflow_dispatch:
+  release:
+    types: [published]
+
+env:
+  BYOND_VERSION: "514.1578"
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  Build:
+  release:
+    name: Release
     runs-on: ubuntu-20.04
-    env:
-      BYOND_VERSION: "514.1578"
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          submodules: 'recursive'
-          lfs: true
-
-      - name: Build
-        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
-
-      - name: Cache
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: |
-            ${{ github.workspace }}/*
-          key: ${{ github.sha }}
-
-  Release:
-    runs-on: ubuntu-20.04
-    needs: [Build]
-    steps:
-      - name: Restore cache
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: |
-            ${{ github.workspace }}/*
-          key: ${{ github.sha }}
+      - name: Checkout the repository
+        uses: actions/checkout@v3
       
-      - name: Install Changelog Parser
+      - name: Build application
         run: |
-          sudo git clone https://github.com/douglasparker/changelog-parser.git /changelog-parser
-          sudo chmod +x /changelog-parser/changelog-parser.py
-          
-      
-      - name: Package
-        run: |
-          sudo apt-get install zip
-          sudo mkdir -p /naruto-evolution
-          sudo cp -p ${{ github.workspace }}/naruto-evolution.dmb /naruto-evolution/naruto-evolution.dmb
-          sudo cp -p ${{ github.workspace }}/naruto-evolution.rsc /naruto-evolution/naruto-evolution.rsc
-          sudo cp -p ${{ github.workspace }}/VERSION /naruto-evolution/VERSION
-          sudo cp -p ${{ github.workspace }}/CHANGELOG.md /naruto-evolution/CHANGELOG.md
-          sudo zip -r ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip /naruto-evolution
-          sudo tar -czf ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz /naruto-evolution
-      
-      - name: Release
-        run: |
-          gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
-          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file <(/changelog-parser/changelog-parser.py "$(cat ${{ github.workspace }}/VERSION)" ${{ github.workspace }}/CHANGELOG.md) --target ${{ github.sha }}
-          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).zip
-          gh release upload $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/naruto-evolution-$(cat ${{ github.workspace }}/VERSION).tar.gz
+          docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+          echo "${{ github.event.release.tag_name }}" > "${{ github.workspace }}/VERSION"
 
-          gh auth login --with-token <<< ${{ secrets.DEPLOY_TOKEN }}
-          gh release create $(cat ${{ github.workspace }}/VERSION) --title $(cat ${{ github.workspace }}/VERSION) --notes-file <(/changelog-parser/changelog-parser.py "$(cat ${{ github.workspace }}/VERSION)" ${{ github.workspace }}/CHANGELOG.md) --repo IllusiveBIair/Naruto-Evolution-Community
-
-          curl -X POST "https://community.narutoevolution.com/posts.json" \
-            -H "Content-Type: multipart/form-data;" \
-            -H "Api-Username: system" \
-            -H "Api-Key: ${{ secrets.DISCOURSE_RELEASE }}" \
-            -F "title=Naruto Evolotion $(cat ${{ github.workspace }}/VERSION)" \
-            -F "category=13" \
-            -F "raw=$(/changelog-parser/changelog-parser.py $(cat ${{ github.workspace }}/VERSION) ${{ github.workspace }}/CHANGELOG.md)"
-  
-  Deploy:
-    runs-on: ubuntu-20.04
-    needs: [Release]
-    env:
-      BYOND_VERSION: "latest"
-    steps:
-      - name: Restore build
-        uses: actions/cache@v2
-        id: cache
+      - name: Login to the Docker Registry
+        uses: docker/login-action@v2
         with:
-          path: |
-            ${{ github.workspace }}/*
-          key: ${{ github.sha }}
-
-      - name: Deploy project
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/naruto-evolution
-          chmod 600 ~/.ssh/naruto-evolution
-
-          cat > ~/.ssh/config <<EOF
-          Host naruto-evolution
-          HostName $SSH_HOST
-          User $SSH_USER
-          Port 22
-          IdentityFile ~/.ssh/naruto-evolution
-          EOF
-
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.dmb" naruto-evolution:/opt/naruto-evolution/production/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/naruto-evolution.rsc" naruto-evolution:/opt/naruto-evolution/production/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/VERSION" naruto-evolution:/opt/naruto-evolution/production/
-          rsync -e "ssh -o StrictHostKeyChecking=no" --archive --verbose --progress --human-readable "$GITHUB_WORKSPACE/CHANGELOG.md" naruto-evolution:/opt/naruto-evolution/production/
-          
-          ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            mv --force /opt/naruto-evolution/production/naruto-evolution.dmb /opt/naruto-evolution/production/production.dmb
-            mv --force /opt/naruto-evolution/production/naruto-evolution.rsc /opt/naruto-evolution/production/production.rsc
-
-            docker stop naruto-evolution
-            docker container rm naruto-evolution
-            docker run --name naruto-evolution --volume /opt/naruto-evolution/production:/opt/naruto-evolution/production --publish 1337:1337 --restart unless-stopped --detach douglasparker/byond:$BYOND_VERSION DreamDaemon /opt/naruto-evolution/production/production.dmb -ports 1337
-          EOF
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract repository metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+      
+      - name: Build the Docker image and publish to the Docker Registry
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
