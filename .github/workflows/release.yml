@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          lfs: true
       
       - name: Build application
         run: |
