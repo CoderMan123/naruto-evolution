@@ -320,7 +320,7 @@ world
 			Factions += Faction
 
 	proc/GetAdvert()
-		return "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='https://www.byond.com/games/IllusiveBlair/NarutoEvolution'>Hub</a>] \[<a href='https://community.narutoevolution.com/'>Forums</a>] \[<a href='https://wiki.narutoevolution.com/'>Wiki</a>] \[<a href='https://discord.gg/pweBQzuJnZ'>Discord</a>]<br />\[<a href='https://github.com/IllusiveBIair/Naruto-Evolution-Community/issues/new?assignees=&labels=Type%3A+Feature+Request&template=feature-request.md&title='>Feature Requests</a>] \[<a href='https://github.com/IllusiveBIair/Naruto-Evolution-Community/issues/new?assignees=&labels=Type%3A+Bug&template=bug-report.md&title='>Bug Reports</a>]</b></center>"
+		return "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='https://www.byond.com/games/IllusiveBlair/NarutoEvolution'>Hub</a>] \[<a href='https://community.narutoevolution.com/'>Forums</a>] \[<a href='https://wiki.narutoevolution.com/'>Wiki</a>] \[<a href='https://discord.gg/UW77xAhcTM'>Discord</a>]<br />\[<a href='https://github.com/douglasparker/naruto-evolution-community/issues/new?assignees=&labels=Type%3A+Feature+Request&template=feature-request.md&title='>Feature Requests</a>] \[<a href='https://github.com/douglasparker/naruto-evolution-community/issues/new?assignees=&labels=Type%3A+Bug&template=bug-report.md&title='>Bug Reports</a>]</b></center>"
 
 	proc/Advert()
 		set background = 1
