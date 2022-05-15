@@ -60,3 +60,25 @@ jobs:
         run: |
           gh auth login --with-token <<< ${{ secrets.ACTIONS }}
           gh release create ${{ github.event.release.tag_name }} --title ${{ github.event.release.tag_name }} --notes-file <(/changelog-parser/changelog-parser.py "${{ github.event.release.tag_name }}" ${{ github.workspace }}/CHANGELOG.md) --repo douglasparker/naruto-evolution-community
+      
+      - name: Deploy docker image to server
+        run: |
+          cat > ~/.ssh/config <<EOF
+          Host naruto-evolution
+          HostName $SSH_HOST
+          User $SSH_USER
+          Port 22
+          EOF
+
+          ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
+            docker stop naruto-evolution
+            docker rm naruto-evolution
+            docker run --detach \
+              --name naruto-evolution \
+              --volume /opt/naruto-evolution/cfg:/opt/naruto-evolution/cfg \
+              --volume /opt/naruto-evolution/saves:/opt/naruto-evolution/saves \
+              --volume /opt/naruto-evolution/logs:/opt/naruto-evolution/logs \
+              --publish 1337:1337 \
+              --restart unless-stopped \
+              ghcr.io/douglasparker/naruto-evolution:latest DreamDaemon /opt/naruto-evolution/naruto-evolution.dmb -ports 1337
+          EOF
