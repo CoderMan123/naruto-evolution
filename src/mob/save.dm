@@ -52,7 +52,7 @@ mob
 		set category = null
 		if(src.client && mobs_online.Find(src))
 			if(src.client.Alert("<font color = '[COLOR_VILLAGE_AKATSUKI]'>Character deletion is a permanent action!</font><br /><br />Are you sure you would like to delete your character: <u>[HTML_GetCharacter(src)]</u>?", "Character Deletion", list("Yes", "No")) == 1)
-				var/list/prompt = src.client.AlertInput("Please enter your character password to confirm character deletion.", "Character Deletion", list("Delete", "Cancel"))
+				var/list/prompt = src.client.AlertInput("Please enter your character password to confirm character deletion.", "Character Deletion", list("Delete", "Cancel"), mask=1)
 				if(prompt[1] == 1)
 					var/verify_password = prompt[2]
 					if(src.password == sha1("[verify_password][src.password_salt]"))
