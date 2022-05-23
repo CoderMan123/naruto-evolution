@@ -51,13 +51,13 @@ client
 
 		if(findtext(lowertext(build), "alpha"))
 			if(!administrators.Find(src.ckey) && !alpha_testers.Find(src.ckey))
-				spawn() src.Alert("You do not have authorization to access the alpha server. If this is in error, please contact support.<br /><br />support@narutoevolution.com", "Alpha Server: Access Authorization")
+				spawn() src.prompt("You do not have authorization to access the alpha server. If this is in error, please contact support.<br /><br />support@narutoevolution.com", "Alpha Server: Access Authorization")
 				sleep(10)
 				del(src)
 
 		else if(findtext(lowertext(build), "beta"))
 			if(!administrators.Find(src.ckey) && !beta_testers.Find(src.ckey))
-				spawn() src.Alert("You do not have authorization to access the beta server. If this is in error, please contact support.<br /><br />support@narutoevolution.com", "Beta Server: Access Authorization")
+				spawn() src.prompt("You do not have authorization to access the beta server. If this is in error, please contact support.<br /><br />support@narutoevolution.com", "Beta Server: Access Authorization")
 				sleep(10)
 				del(src)
 
@@ -66,7 +66,7 @@ client
 				if(source != target)
 					if(administrators.Find(source.ckey) || administrators.Find(target.ckey)) continue
 					if(source.computer_id == target.computer_id)
-						spawn() src.Alert("Running multiple clients isn't allowed on this server. Please logout of your other character before proceeding to login. Your connection to the server has been terminated.")
+						spawn() src.prompt("Running multiple clients isn't allowed on this server. Please logout of your other character before proceeding to login. Your connection to the server has been terminated.")
 						sleep(10)
 						del(src)
 

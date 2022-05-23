@@ -52,7 +52,7 @@ mob
 mob
 	proc
 		Accept(mob/M)
-			if(M.client.Alert("Fight [src]?","Duel",list("Yes","No")) == 1)
+			if(M.client.prompt("Fight [src]?","Duel",list("Yes","No")) == "Yes")
 				src.opponent=M
 				M.opponent=src
 				M.loc=locate(172,149,8)
@@ -74,14 +74,14 @@ mob
 
 			var/squad/squad = src.GetSquad()
 			if(squad)
-				src.client.Alert("You cannot leave your village while in a Squad.", "Naruto Evolution")
+				src.client.prompt("You cannot leave your village while in a Squad.", "Naruto Evolution")
 				return
 
 			if(Tutorial < 7)
 				usr<<"You can't leave your village while you're in the tutorial!"
 				return
 
-			if(client.Alert("Are you sure you want to leave your village?","Confirmation",list("Yes","No"))==1)
+			if(client.prompt("Are you sure you want to leave your village?","Confirmation",list("Yes","No"))=="Yes")
 				world<<output("[src.name] has defected from the [src.village] village.","Action.Output")
 
 				if(village == VILLAGE_AKATSUKI)

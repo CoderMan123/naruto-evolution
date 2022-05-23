@@ -60,7 +60,7 @@ mob
                                 squad.mission.status = "Failure"
                                 squad.mission.complete = world.realtime
                                 m << output("<b>[squad.mission.name]:</b> The Daimyo has been killed! Our mission is a failure.", "Action.Output")
-                                spawn() m.client.Alert("The Daimyo has been killed! Our mission is a failure.", "Mission Failed")
+                                spawn() m.client.prompt("The Daimyo has been killed! Our mission is a failure.", "Mission Failed")
                                 spawn() squad.RefreshMember(m)
 
                         if(killer && killer.village != src.village)

@@ -11,8 +11,8 @@ mob/AnbuLeader/verb/
 			src<<"You cannot invite players under level 30 to Anbu Root."
 			return
 		if(M.village!="Missing-Nin") return
-		if(client.Alert("Are you sure you want to invite [M] to be in the Anbu Root?","Confirm",list("No","Yes"))==1) return
-		if(M.client.Alert("You have been invited to join the Anbu Root. Accept, decline?","Confirm",list("Accept","Decline"))==2) return
+		if(client.prompt("Are you sure you want to invite [M] to be in the Anbu Root?","Confirm",list("No","Yes"))=="No") return
+		if(M.client.prompt("You have been invited to join the Anbu Root. Accept, decline?","Confirm",list("Accept","Decline"))=="Decline") return
 		for(var/mob/Z in world) if(Z.village=="Anbu Root") Z<<"[M] has joined your ranks."
 		M.village="Anbu Root"
 		M.rank="Sibling"
@@ -33,7 +33,7 @@ mob/AnbuLeader/verb/
 		var/mob/M = X["[P]"]
 		if(M==src)return
 		if(M.village!="Anbu Root") return
-		if(client.Alert("Are you sure you want to boot [M] from the [village]?","Confirm",list("No","Yes"))==1) return
+		if(client.prompt("Are you sure you want to boot [M] from the [village]?","Confirm",list("No","Yes"))=="No") return
 		M.village="Missing-Nin"
 		M.rank="Missing-Nin"
 		var/squad/squad = M.GetSquad()
@@ -53,7 +53,7 @@ mob/AnbuLeader/verb/
 	Retire()
 		set category="Anbu Root"
 		var/list/X=list()
-		if(client.Alert("Are you sure you would like to retire as Anbu Root Leader?","Confirmation",list("No","Yes"))==1) return
+		if(client.prompt("Are you sure you would like to retire as Anbu Root Leader?","Confirmation",list("No","Yes"))=="No") return
 		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
 		if(P=="Cancel")return
@@ -89,8 +89,8 @@ mob/AkatsukiLeader/verb/
 /*		if(AkatInvites>6)
 			src<<"You cannot invite any more Akatsukis."
 			return*/
-		if(client.Alert("Are you sure you want to invite [M] to be a Akatsuki?","Confirm",list("No","Yes"))==1) return
-		if(M.client.Alert("You have been invited to join the Akatsuki. Accept, decline?","Confirm",list("Accept","Decline"))==2) return
+		if(client.prompt("Are you sure you want to invite [M] to be a Akatsuki?","Confirm",list("No","Yes"))=="No") return
+		if(M.client.prompt("You have been invited to join the Akatsuki. Accept, decline?","Confirm",list("Accept","Decline"))=="Decline") return
 		for(var/mob/Z in world) if(Z.village=="Akatsuki") Z<<"[M] has joined your ranks."
 		M.village="Akatsuki"
 		M.rank = RANK_AKATSUKI
@@ -113,7 +113,7 @@ mob/AkatsukiLeader/verb/
 		if(M==src)return
 		//if(Positions["Akatsuki Leader"]!=src.ckey) return
 		if(M.village!="Akatsuki") return
-		if(client.Alert("Are you sure you want to boot [M] from the [village]?","Confirm",list("No","Yes"))==1) return
+		if(client.prompt("Are you sure you want to boot [M] from the [village]?","Confirm",list("No","Yes"))=="No") return
 		M.village="Missing-Nin"
 		M.rank="Missing-Nin"
 		var/squad/squad = M.GetSquad()
@@ -134,7 +134,7 @@ mob/AkatsukiLeader/verb/
 	Retire()
 		set category="Akatsuki"
 		var/list/X=list()
-		if(client.Alert("Are you sure you would like to retire as Akatsuki Leader?","Confirmation",list("No","Yes"))==1) return
+		if(client.prompt("Are you sure you would like to retire as Akatsuki Leader?","Confirmation",list("No","Yes"))=="No") return
 		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
 		if(P=="Cancel")return
@@ -174,8 +174,8 @@ mob/SevenSwordsmenLeader/verb/
 		if(M.level < 40)
 			src<<"You cannot invite players under level 40 to Seven Swordsmen."
 			return
-		if(client.Alert("Are you sure you want to invite [M] to the Seven Swordsmen Organization?","Confirm",list("No","Yes"))==1) return
-		if(M.client.Alert("You have been invited to join the Seven Swordsmen. Accept, decline?","Confirm",list("Accept","Decline"))==2) return
+		if(client.prompt("Are you sure you want to invite [M] to the Seven Swordsmen Organization?","Confirm",list("No","Yes"))=="No") return
+		if(M.client.prompt("You have been invited to join the Seven Swordsmen. Accept, decline?","Confirm",list("Accept","Decline"))=="Decline") return
 		for(var/mob/Z in world) if(Z.village=="Seven Swordsmen") Z<<"[M] has joined your ranks."
 		M.village="Seven Swordsmen"
 		M.rank="Member"
@@ -195,7 +195,7 @@ mob/SevenSwordsmenLeader/verb/
 		if(M==src)return
 		//if(Positions["7SM"]!=src.ckey) return
 		if(M.village!="Seven Swordsmen") return
-		if(client.Alert("Are you sure you want to boot [M] from the [village]?","Confirm",list("No","Yes"))==1) return
+		if(client.prompt("Are you sure you want to boot [M] from the [village]?","Confirm",list("No","Yes"))=="No") return
 		M.village="Missing-Nin"
 		M.rank="Missing-Nin"
 		var/squad/squad = M.GetSquad()
@@ -244,7 +244,7 @@ mob/SevenSwordsmenLeader/verb/
 	Retire()
 		set category="Seven Swordsmen"
 		var/list/X=list()
-		if(client.Alert("Are you sure you would like to retire as Seven Swordsmen Leader?","Confirmation",list("No","Yes"))==1) return
+		if(client.prompt("Are you sure you would like to retire as Seven Swordsmen Leader?","Confirmation",list("No","Yes"))=="No") return
 		for(var/mob/e in world) if(e.ckey) X["[e.name] ([e.key])"]=e
 		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
 		if(P=="Cancel")return
@@ -283,8 +283,8 @@ mob/SevenSwordsmenLeader/verb/
 		if(M==src)return
 		//if(Positions["7SM"]!=src.ckey) return
 		if(M.village!="Seven Swordsmen") return
-		if(client.Alert("Are you sure you want to give [M] to the Kubikiibocho?","Confirm",list("No","Yes"))==1) return
-		if(M.client.Alert("You have been given the Kubikiribocho. Accept, decline?","Confirm",list("Accept","Decline"))==2)	givenkubi=0
+		if(client.prompt("Are you sure you want to give [M] to the Kubikiibocho?","Confirm",list("No","Yes"))=="No") return
+		if(M.client.prompt("You have been given the Kubikiribocho. Accept, decline?","Confirm",list("Accept","Decline"))=="Decline")	givenkubi=0
 		if("Accept")
 			for(var/mob/Z in world) if(Z.village=="Seven Swordsmen") Z<<"[M] has been given the Kubikiribocho!"
 			M.rank="Zabuza Momochi"
@@ -309,8 +309,8 @@ mob/SevenSwordsmenLeader/verb/
 		if(M==src)return
 		//if(Positions["7SM"]!=src.ckey) return
 		if(M.village!="Seven Swordsmen") return
-		if(client.Alert("Are you sure you want to give [M] to the Samehada?","Confirm",list("No","Yes"))==1) return
-		if(M.client.Alert("You have been given the Samehada. Accept, decline?","Confirm",list("Accept","Decline"))==2)	givensame=0
+		if(client.prompt("Are you sure you want to give [M] to the Samehada?","Confirm",list("No","Yes"))=="No") return
+		if(M.client.prompt("You have been given the Samehada. Accept, decline?","Confirm",list("Accept","Decline"))=="Decline")	givensame=0
 		if("Accept")
 			for(var/mob/Z in world) if(Z.village=="Seven Swordsmen") Z<<"[M] been given the Samehada!"
 			M.rank="Kisame Hoshigaki"
@@ -335,8 +335,8 @@ mob/SevenSwordsmenLeader/verb/
 		if(M==src)return
 		//if(Positions["7SM"]!=src.ckey) return
 		if(M.village!="Seven Swordsmen") return
-		if(client.Alert("Are you sure you want to give [M] to the Nuibari?","Confirm",list("No","Yes"))==1) return
-		if(M.client.Alert("You have been given the Nuibari. Accept, decline?","Confirm",list("Accept","Decline"))==2)	givennui=0
+		if(client.prompt("Are you sure you want to give [M] to the Nuibari?","Confirm",list("No","Yes"))=="No") return
+		if(M.client.prompt("You have been given the Nuibari. Accept, decline?","Confirm",list("Accept","Decline"))=="Decline")	givennui=0
 		if("Accept")
 			for(var/mob/Z in world) if(Z.village=="Seven Swordsmen") Z<<"[M] been given the Nuibari!"
 			M.rank="Kushimaru Kuriarare"
@@ -361,8 +361,8 @@ mob/SevenSwordsmenLeader/verb/
 		if(M==src)return
 		//if(Positions["7SM"]!=src.ckey) return
 		if(M.village!="Seven Swordsmen") return
-		if(client.Alert("Are you sure you want to give [M] to the Shibuki?","Confirm",list("No","Yes"))==1) return
-		if(M.client.Alert("You have been given the Shibuki. Accept, decline?","Confirm",list("Accept","Decline"))==2)	givenshibu=0
+		if(client.prompt("Are you sure you want to give [M] to the Shibuki?","Confirm",list("No","Yes"))=="No") return
+		if(M.client.prompt("You have been given the Shibuki. Accept, decline?","Confirm",list("Accept","Decline"))=="Decline")	givenshibu=0
 		if("Accept")
 			for(var/mob/Z in world) if(Z.village=="Seven Swordsmen") Z<<"[M] been given the Shibuki!"
 			M.rank="Jinpachi Munashi"
@@ -387,8 +387,8 @@ mob/SevenSwordsmenLeader/verb/
 		if(M==src)return
 		//if(Positions["7SM"]!=src.ckey) return
 		if(M.village!="Seven Swordsmen") return
-		if(client.Alert("Are you sure you want to give [M] to the Kabuto Wari?","Confirm",list("No","Yes"))==1) return
-		if(M.client.Alert("You have been given the Kabuto Wari. Accept, decline?","Confirm",list("Accept","Decline"))==2)	givenkabu=0
+		if(client.prompt("Are you sure you want to give [M] to the Kabuto Wari?","Confirm",list("No","Yes"))=="No") return
+		if(M.client.prompt("You have been given the Kabuto Wari. Accept, decline?","Confirm",list("Accept","Decline"))=="Decline")	givenkabu=0
 		if("Accept")
 			for(var/mob/Z in world) if(Z.village=="Seven Swordsmen") Z<<"[M] been given the Kabuto Wari!"
 			M.rank="Jinin Akebino"
@@ -413,8 +413,8 @@ mob/SevenSwordsmenLeader/verb/
 		if(M==src)return
 		//if(Positions["7SM"]!=src.ckey) return
 		if(M.village!="Seven Swordsmen") return
-		if(client.Alert("Are you sure you want to give [M] to the Kiba?","Confirm",list("No","Yes"))==1) return
-		if(M.client.Alert("You have been given the Kiba. Accept, decline?","Confirm",list("Accept","Decline"))==2)	givenkiba=0
+		if(client.prompt("Are you sure you want to give [M] to the Kiba?","Confirm",list("No","Yes"))=="No") return
+		if(M.client.prompt("You have been given the Kiba. Accept, decline?","Confirm",list("Accept","Decline"))=="Decline")	givenkiba=0
 		if("Accept")
 			for(var/mob/Z in world) if(Z.village=="Seven Swordsmen") Z<<"[M] been given the Kiba!"
 			M.rank="Ameyuri Ringo"

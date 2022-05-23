@@ -70,15 +70,15 @@ mob
 			var/password = winget(src.client, "Titlescreen.Password", "text")
 
 			if(!character && !password)
-				src.client.Alert("Please enter your character name and password.")
+				src.client.prompt("Please enter your character name and password.")
 				src.client.logging_in = 0
 				return 0
 			else if(!character)
-				src.client.Alert("Please enter your character name.")
+				src.client.prompt("Please enter your character name.")
 				src.client.logging_in = 0
 				return 0
 			else if(!password)
-				src.client.Alert("Please enter your password.")
+				src.client.prompt("Please enter your password.")
 				src.client.logging_in = 0
 				return 0
 
@@ -192,7 +192,7 @@ mob
 				for(var/obj/Inventory/Clothing/Masks/Absolute_Zero_Mask/O in src.contents)
 					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 					del(O)
-			
+
 			if(src.rank != RANK_AKATSUKI_LEADER)
 				for(var/obj/Inventory/Clothing/Masks/Tobi_Mask/O in src.contents)
 					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
@@ -207,7 +207,7 @@ mob
 					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 					del(O)
 
-				
+
 
 			/*if(src.rank != "ANBU")
 				for(var/obj/Inventory/Clothing/Masks/Anbu/O in src.contents)
@@ -329,37 +329,37 @@ mob
 			var/list/prompt
 
 			while(src && !src.character)
-				prompt = src.client.AlertInput("Please choose a character name...")
+				prompt = src.client.iprompt("Please choose a character name...")
 				src.character = prompt[2]
 
 				if(length(src.character) < 3 || length(src.character) > 20)
-					src.client.Alert("Your character name must be between 3 and 20 characters.")
+					src.client.prompt("Your character name must be between 3 and 20 characters.")
 					src.character = null
 
 				else if(uppertext(src.character) == src.character)
-					src.client.Alert("Your character name must not consist entirely of capital letters.")
+					src.client.prompt("Your character name must not consist entirely of capital letters.")
 					src.character = null
 
 				else if(ffilter_characters(src.character) != src.character)
-					src.client.Alert("\"[src.name]\" contains an invalid character.  Allowed characters are:\n[allowed_characters_name]")
+					src.client.prompt("\"[src.name]\" contains an invalid character.  Allowed characters are:\n[allowed_characters_name]")
 					src.character = null
 
 				else if(names_taken.Find(lowertext(src.character)))
-					src.client.Alert("The character name <b>[src.character]</b> is already taken.")
+					src.client.prompt("The character name <b>[src.character]</b> is already taken.")
 					src.character = null
 
 				sleep(1)
 
 			while(src && !src.password)
-				prompt = src.client.AlertInput("Please select a password for this account.","Password", mask=1)
+				prompt = src.client.iprompt("Please select a password for this account.","Password", mask=1)
 				src.password = prompt[2]
 				if(length(src.password) < 3)
-					src.client.Alert("Password must have atleast 3 characters.")
+					src.client.prompt("Password must have atleast 3 characters.")
 					src.password = null
 				else
-					var/list/password_confirmation = src.client.AlertInput("Please confirm your password for this account.","Password", mask=1)
+					var/list/password_confirmation = src.client.iprompt("Please confirm your password for this account.","Password", mask=1)
 					if(src.password != password_confirmation[2])
-						src.client.Alert("Your passwords do not match. Please try setting your password again.")
+						src.client.prompt("Your passwords do not match. Please try setting your password again.")
 						src.password = null
 					else
 						src.password_salt = sha1(src.ckey)
@@ -367,31 +367,24 @@ mob
 
 				sleep(1)
 
-			prompt = src.client.AlertList("Skin Color Options","Please choose a Skin Tone.",list("Pale","White","Dark","Blue"))
-			switch(prompt)
-				if(1)
-					src.SkinTone="Pale"
-				if(2)
-					src.SkinTone="White"
-				if(3)
-					src.SkinTone="Dark"
-				if(4)
-					src.SkinTone="Blue"
+			src.SkinTone = src.client.prompt("Please choose a skin tone.", "Skin Tone", list("Pale", "White", "Dark", "Blue"))
+
+			while(!src.SkinTone)
+				src.SkinTone = src.client.prompt("Please choose a skin tone.", "Skin Tone", list("Pale", "White", "Dark", "Blue"))
+				sleep(10)
+
 			src.ResetBase()
 
-			src.HairStyle = src.CustomInput("Hair Options","Please choose a hair.",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","srcohawk","Neji Hair","Distance")).name
+			src.HairStyle = src.client.prompt("Please choose a hairstyle","Hairstyle",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","srcohawk","Neji Hair","Distance"))
 			if(src.HairStyle != "Bald")
-				var/list/Colors=src.ColorInput("Please select a hair color.")
-				src.HairColorRed=text2num(Colors[1])
-				src.HairColorGreen=text2num(Colors[2])
-				src.HairColorBlue=text2num(Colors[3])
+				src.HairColor = src.client.cprompt("Please select a hairstyle dye.", "Hairstyle Dye", luminosity_max = 20)
 
-			src.Element = src.CustomInput("Element Options","Please choose your primary elemental affinity.",list("Fire","Water","Wind","Earth","Lightning")).name
-			src.Specialist = src.CustomInput("Specialist Options","What area of skills would you like to specialize in? Some nonclans and nonclan jutsus require a specific speciality. \n Gates requires strength. \n Each speciality also has it's own nonclan tree.", list("Ninjutsu", "Genjutsu", "strength")).name
-			src.Clan = src.CustomInput("Clan Options","What clan would you like to be born in?. \n Nonclan has many options that are similar to clans.",list("Senjuu","Crystal","Akimichi","Weaponist","Aburame","Hyuuga","Nara","Kaguya","Uchiha","Ink","Bubble","Medical","No Clan")).name
-			src.village=src.CustomInput("Village Options","What village would you like to be born in?.",list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/)).name
+			src.Element = src.client.prompt("Element Options","Please choose your primary elemental affinity.",list("Fire","Water","Wind","Earth","Lightning"))
+			src.Specialist = src.client.prompt("Specialist Options","What area of skills would you like to specialize in? Some nonclans and nonclan jutsus require a specific speciality. \n Gates requires strength. \n Each speciality also has it's own nonclan tree.", list("Ninjutsu", "Genjutsu", "strength"))
+			src.Clan = src.client.prompt("Clan Options","What clan would you like to be born in?. \n Nonclan has many options that are similar to clans.",list("Senjuu","Crystal","Akimichi","Weaponist","Aburame","Hyuuga","Nara","Kaguya","Uchiha","Ink","Bubble","Medical","No Clan"))
+			src.village=src.client.prompt("Village Options","What village would you like to be born in?.",list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/))
 			src.rank = RANK_ACADEMY_STUDENT
-			
+
 			switch(src.Specialist)
 				if("strength")
 					src.strength+=6
@@ -468,20 +461,20 @@ mob
 
 			if(global.hokage_election)
 				src << output("A <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> election is currently in-progress.", "Action.Output")
-				
+
 				if(global.hokage_ballot_open)
 					src << output("The <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> election is currently <u>open ballot</u>.", "Action.Output")
 					src << output("You may nominate yourself at the <font color = '[COLOR_VILLAGE_LEAF]'>Leaf Ballot Secretary</font> in the <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> house.", "Action.Output")
-				
+
 				src << output("Ninja from the <font color = '[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village may cast their vote at their ballot box in the <font color = '[COLOR_VILLAGE_LEAF]'>[RANK_HOKAGE]</font> house.", "Action.Output")
-			
+
 			if(global.kazekage_election)
 				src << output("A <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> election is currently in-progress.", "Action.Output")
-				
+
 				if(global.kazekage_ballot_open)
 					src << output("The <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> election is currently <u>open ballot</u>.", "Action.Output")
 					src << output("You may nominate yourself at the <font color = '[COLOR_VILLAGE_SAND]'>Sand Ballot Secretary</font> in the <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> house.", "Action.Output")
-				
+
 				src << output("Ninja from the <font color = '[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village may cast their vote at their ballot box in the <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> house.", "Action.Output")
 
 			world.UpdateVillageCount()
@@ -537,10 +530,10 @@ mob
 					if("ExplosiveTags") H.icon_state="tag"
 					if("SmokeBombs") H.icon_state="SmokeBombs"
 					if("FoodPill") H.icon_state="Blood Pill"
-					
+
 			spawn() src.UpdateHMB()
 
-			if(src.client.Alert("Do you wish to skip the tutorial? Only do this if you are familiar with the game. If you skip this you can't come back without making a new account.", "Skip Tutorial?", list("Yes", "No")) == 1)
+			if(src.client.prompt("Do you wish to skip the tutorial? Only do this if you are familiar with the game. If you skip this you can't come back without making a new account.", "Skip Tutorial?", list("Yes", "No")) == "Yes")
 				src.Tutorial = 7
 				var/obj/Jutsus/jutsu = new/obj/Jutsus/BodyReplace
 				src.sbought += jutsu.name
@@ -574,14 +567,14 @@ mob
 			else if(length(msg) > 600)
 				message_trim = copytext(msg, 600)
 				msg = copytext(msg, 1, 600)
-			
+
 			if(msg == "/restore-base")
-				spawn() src.client.Alert("Your character base and overlays will be restored in 60 seconds.", "Naruto Evolution")
+				spawn() src.client.prompt("Your character base and overlays will be restored in 60 seconds.", "Naruto Evolution")
 				sleep(600)
 				if(src)
 					for(var/obj/Inventory/Clothing/o in src.contents)
 						o.suffix = ""
-						
+
 					src.ClothingOverlays = list("Vest"=null,"Shirt"=null,"Pants"=null,"Shoes"=null,"Mask"=null,"Headband"=null,"Sword"=null,"Gloves"=null,"Accessories"=null,"Robes"=null)
 					src.ResetBase()
 					src.RestoreOverlays()
@@ -589,102 +582,102 @@ mob
 					src.move_delay = max(0.5, 0.8-((src.agility/150)*0.3))
 
 				return 0
-			
+
 			else if(msg == "/version")
-				spawn() src.client.Alert("<b>Naruto Evolution:</b> v[global.build]<br /><b>BYOND Server:</b> v[world.byond_version].[world.byond_build]<br /><b>BYOND Client:</b> v[src.client.byond_version].[src.client.byond_build]", "Version Information")
+				spawn() src.client.prompt("<b>Naruto Evolution:</b> v[global.build]<br /><b>BYOND Server:</b> v[world.byond_version].[world.byond_build]<br /><b>BYOND Client:</b> v[src.client.byond_version].[src.client.byond_build]", "Version Information")
 				return
-			
+
 			var/command = "/level "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.level = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.exp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/max-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.maxexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/health "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.health = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/max-health "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.maxhealth = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/chakra "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.chakra = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/max-chakra "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.maxchakra = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/ninjutsu "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.ninjutsu = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/genjutsu "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.genjutsu = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/taijutsu "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.strength = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/precision "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.precision = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/defense "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.defence = value
 				src.UpdateHMB()
@@ -692,140 +685,140 @@ mob
 
 			command = "/agility "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.agility = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/ninjutsu-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.ninexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/ninjutsu-max-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.maxninexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/genjutsu-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.genexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/genjutsu-max-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.maxgenexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/taijutsu-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.strengthexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/taijutsu-max-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.maxstrengthexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/precision-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.precisionexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/precision-max-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.maxprecisionexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/defense-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.defexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/defense-max-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.maxdefexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/agility-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.agilityexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/agility-max-experience "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.maxagilityexp = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/statpoints "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.statpoints = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/skillpoints "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.skillpoints = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/density"
 			if(msg == command && administrators.Find(src.client.ckey))
 
 				src.density = src.density ? 0 : 1
 				return
-			
+
 			command = "/invisibility "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.invisibility = value
 				return
-			
+
 			command = "/see-invisibility "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
-			
+
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.see_invisible = value
 				return
@@ -943,7 +936,7 @@ mob
 			if(!src.ryo)
 				src << output("You don't have any Ryo to create a Ryo Pouch.", "Action.Output")
 			else
-				var/list/prompt=src.client.AlertInput("How much Ryo would you like to bundle in a Ryo Pouch?","Create Ryo Pouch")
+				var/list/prompt=src.client.iprompt("How much Ryo would you like to bundle in a Ryo Pouch?","Create Ryo Pouch")
 				var/ryo = prompt[2]
 				if(ryo && isnum(ryo))
 					if(src.ryo >= ryo)
@@ -953,7 +946,7 @@ mob
 						src.client.UpdateInventoryPanel()
 					else
 						src << output("You don't have [ryo] Ryo to drop.", "Action.Output")
-		
+
 		Rotate_Ninja_Tool()
 			set hidden = 1
 			var/list/weaponry = list()
@@ -961,31 +954,31 @@ mob
 				if(istype(o, /obj/Inventory/Weaponry/Kunai))
 					if(!weaponry.Find(o)) weaponry.Add(o)
 					else continue
-				
+
 				if(istype(o, /obj/Inventory/Weaponry/Exploding_Kunai))
 					if(!weaponry.Find(o)) weaponry.Add(o)
 					else continue
-				
+
 				if(istype(o, /obj/Inventory/Weaponry/Shuriken))
 					if(!weaponry.Find(o)) weaponry.Add(o)
 					else continue
-				
+
 				if(istype(o, /obj/Inventory/Weaponry/Needle))
 					if(!weaponry.Find(o)) weaponry.Add(o)
 					else continue
-				
+
 				if(istype(o, /obj/Inventory/Weaponry/Explosive_Tag))
 					if(!weaponry.Find(o)) weaponry.Add(o)
 					else continue
-				
+
 				if(istype(o, /obj/Inventory/Weaponry/Smoke_Bomb))
 					if(!weaponry.Find(o)) weaponry.Add(o)
 					else continue
-				
+
 				if(istype(o, /obj/Inventory/Weaponry/Food_Pill))
 					if(!weaponry.Find(o)) weaponry.Add(o)
 					else continue
-			
+
 			if(!src.ninja_tool_selection && weaponry.len)
 				src.ninja_tool_selection = 1
 
@@ -997,7 +990,7 @@ mob
 
 			else
 				src.ninja_tool_selection = 0
-			
+
 			if(src.ninja_tool_selection)
 				var/obj/Inventory/Weaponry/o = weaponry[src.ninja_tool_selection]
 				o.Click(src)
@@ -1101,7 +1094,7 @@ mob
 						if(src.ClothingOverlays[o.section] == o.icon)
 							RemoveSection(o.section)
 						o.loc = null
-				
+
 				if(RANK != RANK_ANBU)
 					for(var/obj/Inventory/Clothing/Masks/o in src.contents)
 						if(src.ClothingOverlays[o.section] == o.icon)
@@ -1119,7 +1112,7 @@ mob
 							new /obj/Inventory/Clothing/HeadWrap/AkatsukiHat(src)
 						if(!locate(/obj/Inventory/Clothing/Robes/Akatsuki_Robe) in src.contents)
 							new /obj/Inventory/Clothing/Robes/Akatsuki_Robe(src)
-					
+
 					if(RANK_AKATSUKI)
 						if(!locate(/obj/Inventory/Clothing/HeadWrap/AkatsukiHat) in src.contents)
 							new /obj/Inventory/Clothing/HeadWrap/AkatsukiHat(src)
@@ -1169,7 +1162,7 @@ mob
 							new /obj/Inventory/Clothing/HeadWrap/OtokageHat(src)
 						if(!locate(/obj/Inventory/Clothing/Robes/OtokageRobe) in src.contents)
 							new /obj/Inventory/Clothing/Robes/OtokageRobe(src)
-					
+
 					if(RANK_ANBU)
 						switch(src.village)
 							if(VILLAGE_LEAF)

@@ -20,12 +20,13 @@ mob/proc
 		if(src.HairStyle)
 			//world.log << "has hair"
 			var/obj/HAIR/H=new
-			if(!HairColorStyle)
-				var/icon/I = icon(Hairstyles["[HairStyle]"])
-				I.Blend(rgb(HairColorRed,HairColorGreen,HairColorBlue),ICON_ADD)
-				H.icon=I
-				HairColorStyle=I
-			H.icon=HairColorStyle
+
+			H.icon=icon(Hairstyles["[HairStyle]"])
+			HairColorStyle=icon(Hairstyles["[HairStyle]"])
+
+			var/list/rgb = rgb2num(src.HairColor)
+			H.icon += rgb(rgb[1], rgb[2], rgb[3])
+
 			H.layer=src.layer
 			src.overlays+=H
 		AddSection("Shoes", src.ClothingOverlays["Shoes"])
@@ -115,14 +116,14 @@ obj
 				if(!usr.contents.Find(src))
 					take(usr)
 					return
-				
+
 				var/icon/I = new(src.icon, src.icon_state)
 				var/iconfile = fcopy_rsc(I)
 				winset(usr, "Inventory.EquippedName", "text='[src.name]'")
 				winset(usr, "Inventory.EquippedImage", "image=\ref[iconfile]")
 				usr<<output(null, "Inventory.EquippedItemInfo")
 				usr<<output("<center>[Description]", "Inventory.EquippedItemInfo")
-				
+
 				if(src in usr)
 					if(!usr.ClothingOverlays[section])
 						Wear()

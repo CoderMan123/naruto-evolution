@@ -67,11 +67,11 @@ obj/Special/ChuuninExam
 				NewQuestions-=Question
 				QuestionNum++
 				
-				switch(usr.client.Alert("Question #[QuestionNum]: [Question]", "Question [QuestionNum]", list("True", "False")))
-					if(1)
+				switch(usr.client.prompt("Question #[QuestionNum]: [Question]", "Question [QuestionNum]", list("True", "False")))
+					if("True")
 						if(Questions[Question] == 1) CorrectAnswer++
 
-					if(2)
+					if("False")
 						if(Questions[Question] == 0) CorrectAnswer++
 
 		else

@@ -61,7 +61,7 @@ squad
 
 	proc/Create(mob/M)
 		if(!M.GetSquad())
-			if(M.client.Alert("Would you like to create a Squad?", "Squad", list("Yes", "No")) == 1)
+			if(M.client.prompt("Would you like to create a Squad?", "Squad", list("Yes", "No")) == "Yes")
 				src.leader[M.ckey] = M.character
 				src.members[M.ckey] = M.character
 				src.levels[M.ckey] = M.level
@@ -70,12 +70,12 @@ squad
 				squads += src
 				src.Refresh()
 		else
-			M.client.Alert("Please leave or disband the Squad you are already in before you try and create a new one.", "Squad")
+			M.client.prompt("Please leave or disband the Squad you are already in before you try and create a new one.", "Squad")
 
 	proc/Disband(mob/M)
 		if(src.leader[M.ckey])
 			if(src.mission && !src.mission.complete)
-				M.client.Alert("You can't disband your squad while on a mission.")
+				M.client.prompt("You can't disband your squad while on a mission.")
 			else
 				for(var/ckey in src.members)
 					for(var/mob/m in mobs_online)
@@ -89,15 +89,15 @@ squad
 				src.Refresh()
 				squads -= src
 		else
-			M.client.Alert("Only the Squad Leader can disband the Squad.", "Squad")
+			M.client.prompt("Only the Squad Leader can disband the Squad.", "Squad")
 
 	proc/Invite(mob/M)
 		if(src.leader[M.ckey])
 			if(src.mission && !src.mission.complete)
-				M.client.Alert("You can't invite anyone to your squad while on a mission.")
+				M.client.prompt("You can't invite anyone to your squad while on a mission.")
 
 			else if(src.members.len > 4)
-				M.client.Alert("Your squad is already at max capacity.", "Invite to Squad")
+				M.client.prompt("Your squad is already at max capacity.", "Invite to Squad")
 			else
 				var/list/exclude = list(M)
 				for(var/mob/m in mobs_online)
@@ -106,7 +106,7 @@ squad
 				var/mob/m = input("Who would you like to invite into your squad?", "Invite to Squad") as null|anything in mobs_online - exclude
 				if(src && src.leader[M.client.ckey] && m)
 					if(!m.GetSquad())
-						if(m.client.Alert("Would you like to join [M]'s squad?", "Join Squad", list("Yes", "No")) == 1)
+						if(m.client.prompt("Would you like to join [M]'s squad?", "Join Squad", list("Yes", "No")) == "Yes")
 							if(!m.GetSquad())
 								if(M.GetSquad() == src)
 									if(M.village == m.village)
@@ -117,39 +117,39 @@ squad
 											squad.villages[m.ckey] = m.village
 											squad.ranks[m.ckey] = m.rank
 											src.Refresh()
-										else m.client.Alert("You cannot join [M]'s squad because the squad no longer exists.")
+										else m.client.prompt("You cannot join [M]'s squad because the squad no longer exists.")
 									else
-										m.client.Alert("You cannot join [M]'s squad because you are not in the same village.")
+										m.client.prompt("You cannot join [M]'s squad because you are not in the same village.")
 								else
-									m.client.Alert("You cannot join [M]'s squad because they are no longer the squad leader.", "Join Squad")
+									m.client.prompt("You cannot join [M]'s squad because they are no longer the squad leader.", "Join Squad")
 							else
-								m.client.Alert("You cannot join [M]'s squad because you've already joined another squad.")
+								m.client.prompt("You cannot join [M]'s squad because you've already joined another squad.")
 					else
-						M.client.Alert("[m] is already in a squad.", "Invite to Squad")
+						M.client.prompt("[m] is already in a squad.", "Invite to Squad")
 		else
-			M.client.Alert("Only the Squad Leader can invite someone to the Squad.", "Squad")
+			M.client.prompt("Only the Squad Leader can invite someone to the Squad.", "Squad")
 
 	proc/Leave(mob/M)
 		if(src.mission && !src.mission.complete)
-			M.client.Alert("You can't leave your squad while on a mission.")
+			M.client.prompt("You can't leave your squad while on a mission.")
 		else
-			switch(M.client.Alert("Are you sure you want to leave your squad?", "Leave Squad", list("Yes", "No")))
-				if(1)
+			switch(M.client.prompt("Are you sure you want to leave your squad?", "Leave Squad", list("Yes", "No")))
+				if("Yes")
 					if(src.leader[M.ckey])
 						for(var/client/C in clients_online) if(C.ckey in src.members - M.ckey)
-							spawn() C.Alert("[M] has disbanded the squad.", "Disband Squad")
+							spawn() C.prompt("[M] has disbanded the squad.", "Disband Squad")
 
 						src.Disband(M)
-						M.client.Alert("You have disbanded the squad.", "Disband Squad")
+						M.client.prompt("You have disbanded the squad.", "Disband Squad")
 					else
 						src.members -= M.ckey
 						src.Refresh()
-						M.client.Alert("You have left the squad.", "Leave Squad")
+						M.client.prompt("You have left the squad.", "Leave Squad")
 
 	proc/Kick(mob/M, var/ckey)
 		if(src.leader[M.ckey])
 			if(src.mission && !src.mission.complete)
-				M.client.Alert("You can't kick someone from your squad while on a mission.")
+				M.client.prompt("You can't kick someone from your squad while on a mission.")
 
 			else
 				if(ckey in src.members)
@@ -168,7 +168,7 @@ squad
 					src.Refresh()
 
 		else
-			M.client.Alert("Only the Squad Leader can kick someone from the Squad.", "Squad")
+			M.client.prompt("Only the Squad Leader can kick someone from the Squad.", "Squad")
 
 	proc/ChangeLeader(mob/M)
 		if(src.leader[M.ckey])
@@ -176,10 +176,10 @@ squad
 			if(member)
 				if(member in src.members)
 					if(M.ckey == member)
-						M.client.Alert("You are already the Squad Leader.", "Squad")
+						M.client.prompt("You are already the Squad Leader.", "Squad")
 					else
-						switch(M.client.Alert("Are you sure you want to promote [src.members[member]] to Squad Leader?", "Leave Squad", list("Yes", "No")))
-							if(1)
+						switch(M.client.prompt("Are you sure you want to promote [src.members[member]] to Squad Leader?", "Leave Squad", list("Yes", "No")))
+							if("Yes")
 								if(src.leader[M.ckey])
 									if(member in src.members)
 										if(M.ckey != member)
@@ -187,16 +187,16 @@ squad
 											src.leader[member] = src.members[member]
 											src.Refresh()
 										else
-											M.client.Alert("You are already the Squad Leader.", "Squad")
+											M.client.prompt("You are already the Squad Leader.", "Squad")
 									else
-										M.client.Alert("[member] is no longer in the Squad.", "Squad")
+										M.client.prompt("[member] is no longer in the Squad.", "Squad")
 								else
-									M.client.Alert("Only the Squad Leader can promote someone to the Squad Leader.", "Squad")
+									M.client.prompt("Only the Squad Leader can promote someone to the Squad Leader.", "Squad")
 				else
 					src.Refresh()
-					M.client.Alert("[member] is no longer in the Squad.", "Squad")
+					M.client.prompt("[member] is no longer in the Squad.", "Squad")
 		else
-			M.client.Alert("Only the Squad Leader can promote someone to the Squad Leader.", "Squad")
+			M.client.prompt("Only the Squad Leader can promote someone to the Squad Leader.", "Squad")
 
 	proc/RefreshMember(mob/M)
 		if(src && M && src.members[M.client.ckey] && src.members[M.ckey] == M.character && M.client.browser_url == BROWSER_SQUAD)

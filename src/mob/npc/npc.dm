@@ -65,8 +65,8 @@ mob
 
                     view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Greetings [usr.name], would you like to make a deposit or a withdrawal from your bank?</font>"
 
-                    switch(usr.client.Alert("You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br /><br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank", list("Deposit","Withdraw","Cancel")))
-                        if(1)
+                    switch(usr.client.prompt("You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br /><br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank", list("Deposit","Withdraw","Cancel")))
+                        if("Deposit")
                             
                             view(usr) << "[HTML_GetName(usr)]<font color='[COLOR_CHAT]'>: I'd like to make a deposit to my bank account.</font>"
                             
@@ -77,8 +77,8 @@ mob
                                 sleep(10)
                                 view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Very well, how much would you like to deposit?</font>"
 
-                                switch(usr.client.Alert("Would you like to deposit all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
-                                    if(1)
+                                switch(usr.client.prompt("Would you like to deposit all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
+                                    if("Yes")
                                         var/value = usr.ryo
 
                                         if(value)
@@ -100,8 +100,8 @@ mob
                                             sleep(10)
                                             view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 
-                                    if(2)
-                                        var/list/AlertInput = usr.client.AlertInput("How much Ryo would you like to deposit into your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
+                                    if("No")
+                                        var/list/AlertInput = usr.client.iprompt("How much Ryo would you like to deposit into your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
                                         
                                         var/value = AlertInput[2]
 
@@ -124,12 +124,12 @@ mob
                                             sleep(10)
                                             view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
                                     
-                                    if(3)
+                                    if("Cancel")
                                         view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
                                         sleep(10)
                                         view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 
-                        if(2)
+                        if("Withdraw")
 
                             view(usr) << "[HTML_GetName(usr)]<font color='[COLOR_CHAT]'>: I'd like to make a withdrawal from my bank account.</font>"
 
@@ -140,8 +140,8 @@ mob
                                 sleep(10)
                                 view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Very well, how much would you like to withdrawal?</font>"
 
-                                switch(usr.client.Alert("Would you like to withdrawal all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
-                                    if(1)
+                                switch(usr.client.prompt("Would you like to withdrawal all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
+                                    if("Yes")
                                         var/value = usr.RyoBanked
 
                                         if(value)
@@ -163,8 +163,8 @@ mob
                                             sleep(10)
                                             view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 
-                                    if(2)
-                                        var/list/AlertInput = usr.client.AlertInput("How much Ryo would you like to withdraw from your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
+                                    if("No")
+                                        var/list/AlertInput = usr.client.iprompt("How much Ryo would you like to withdraw from your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
                                         
                                         var/value = AlertInput[2]
 
@@ -187,11 +187,11 @@ mob
                                             sleep(10)
                                             view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
                                     
-                                    if(3)
+                                    if("Cancel")
                                         view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
                                         sleep(10)
                                         view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
-                        if(3)
+                        if("Cancel")
                             view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: No, thank you.</font>"
                             sleep(10)
                             view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
@@ -221,9 +221,9 @@ mob
                     if(O && O.squad.mission)
                         O.squad.mission.Complete(usr)
                     else
-                        usr.client.Alert("Psst, hey you there. If you can get me some intel on the shinobi villages I'll pay you handsomely.", src.name)
+                        usr.client.prompt("Psst, hey you there. If you can get me some intel on the shinobi villages I'll pay you handsomely.", src.name)
                 else
-                    usr.client.Alert("Buzz off, I don't speak with the likes of you.", src.name)
+                    usr.client.prompt("Buzz off, I don't speak with the likes of you.", src.name)
                 usr.move=1
 
         zetsu //not to be confused with white zetsu
@@ -239,7 +239,7 @@ mob
                 var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
                 if(O && O.squad.mission)
                     O.squad.mission.Complete(usr)
-                else if(usr.client.Alert("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == 1)
+                else if(usr.client.prompt("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == "Yes")
                     usr.loc = locate(100,32,4)
                 usr.move=1
                 

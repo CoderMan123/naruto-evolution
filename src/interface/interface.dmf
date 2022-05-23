@@ -1233,6 +1233,292 @@ window "ColorWindow"
 		dir = east
 		on-change = "OutputColor"
 
+window "GeninExam"
+	elem "GeninExam"
+		type = MAIN
+		pos = 0,0
+		size = 700x265
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		macro = "Macro"
+	elem "Background"
+		type = LABEL
+		pos = 0,21
+		size = 700x244
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = ""
+	elem "button32"
+		type = BUTTON
+		pos = 351,240
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "False"
+		command = ""
+		button-type = radio
+	elem "button31"
+		type = BUTTON
+		pos = 3,240
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "True"
+		command = ""
+		button-type = radio
+	elem "label40"
+		type = LABEL
+		pos = 3,216
+		size = 694x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "This exam requires you to be level 5 or higher"
+	elem "button30"
+		type = BUTTON
+		pos = 351,192
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "False"
+		command = ""
+		button-type = radio
+	elem "button29"
+		type = BUTTON
+		pos = 3,192
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "True"
+		command = ""
+		button-type = radio
+	elem "label39"
+		type = LABEL
+		pos = 3,168
+		size = 694x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "This exam requires you to be level 5 or higher"
+	elem "button28"
+		type = BUTTON
+		pos = 351,144
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "False"
+		command = ""
+		button-type = radio
+	elem "button27"
+		type = BUTTON
+		pos = 3,144
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "True"
+		command = ""
+		button-type = radio
+	elem "label38"
+		type = LABEL
+		pos = 3,120
+		size = 694x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "This exam requires you to be level 5 or higher"
+	elem "button26"
+		type = BUTTON
+		pos = 351,96
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "False"
+		command = ""
+		button-type = radio
+	elem "button25"
+		type = BUTTON
+		pos = 3,96
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "True"
+		command = ""
+		button-type = radio
+	elem "label36"
+		type = LABEL
+		pos = 3,72
+		size = 694x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "This exam requires you to be level 5 or higher"
+	elem "button24"
+		type = BUTTON
+		pos = 351,48
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "False"
+		command = ""
+		button-type = radio
+	elem "button23"
+		type = BUTTON
+		pos = 3,48
+		size = 346x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "True"
+		command = ""
+		button-type = radio
+	elem "label4"
+		type = LABEL
+		pos = 3,24
+		size = 694x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "This exam requires you to be level 5 or higher"
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 700x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Genin Exam"
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
+	elem "Close"
+		type = BUTTON
+		pos = 672,0
+		size = 25x19
+		anchor1 = 100,0
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = ""
+		image = 'assets\\interface\\buttons\\Close.png'
+		command = "ToggleInventoryPanel"
+		is-flat = true
+
 window "InputPanel"
 	elem "InputPanel"
 		type = MAIN
@@ -1651,6 +1937,8 @@ window "Main"
 		can-resize = false
 		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
+		outer-size = 1294x734
+		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1687,6 +1975,7 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		left = "Navigation"
 		is-vert = false
@@ -1696,6 +1985,7 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -1731,6 +2021,7 @@ window "Main"
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "Reconnect"
@@ -2331,7 +2622,6 @@ window "Settings-Administrator"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2341,8 +2631,6 @@ window "Settings-Administrator"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
-		outer-size = 508x388
-		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0
@@ -3684,8 +3972,90 @@ window "yutput"
 		saved-params = ""
 		text = "Title here"
 
-window "AlertBox1"
-	elem "AlertBox1"
+window "Alert"
+	elem "Alert"
+		type = MAIN
+		pos = 281,0
+		size = 300x228
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		outer-size = 314x242
+		inner-size = 300x228
+	elem "Background"
+		type = LABEL
+		pos = 0,0
+		size = 300x228
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		is-disabled = true
+		saved-params = ""
+		text = ""
+	elem "Grid"
+		type = GRID
+		pos = 2,126
+		size = 296x100
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,0
+		show-lines = horizontal
+		small-icons = true
+		line-color = #414141
+		highlight-color = #c8c8c8
+	elem "Message"
+		type = OUTPUT
+		pos = 2,24
+		size = 296x100
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "max-lines"
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 300x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
+
+window "Alert1"
+	elem "Alert1"
 		type = MAIN
 		pos = 281,0
 		size = 300x155
@@ -3700,6 +4070,8 @@ window "AlertBox1"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x169
+		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3732,7 +4104,7 @@ window "AlertBox1"
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
-		font-size = 8
+		font-size = 10
 		text-color = #c8c8c8
 		background-color = #414141
 		border = line
@@ -3761,15 +4133,25 @@ window "AlertBox1"
 		background-color = #191919
 		saved-params = ""
 		text = ""
+	elem "label41"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
 		image = 'assets\\interface\\Taskbar-16.png'
 
-window "AlertBox2"
-	elem "AlertBox2"
+window "Alert2"
+	elem "Alert2"
 		type = MAIN
 		pos = 281,0
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3778,6 +4160,8 @@ window "AlertBox2"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x169
+		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3826,7 +4210,6 @@ window "AlertBox2"
 		background-color = #191919
 		saved-params = ""
 		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Button1"
 		type = BUTTON
 		pos = 3,130
@@ -3841,6 +4224,16 @@ window "AlertBox2"
 		text = ""
 		command = ""
 		is-flat = true
+	elem "label42"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
 		pos = 3,24
@@ -3848,20 +4241,21 @@ window "AlertBox2"
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
-		font-size = 8
+		font-size = 10
 		text-color = #c8c8c8
 		background-color = #414141
 		border = line
 		saved-params = "max-lines"
 		legacy-size = false
 
-window "AlertBox3"
-	elem "AlertBox3"
+window "Alert3"
+	elem "Alert3"
 		type = MAIN
 		pos = 281,0
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3870,6 +4264,8 @@ window "AlertBox3"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x169
+		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -3916,7 +4312,7 @@ window "AlertBox3"
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
-		font-size = 8
+		font-size = 10
 		text-color = #c8c8c8
 		background-color = #414141
 		border = line
@@ -3959,15 +4355,420 @@ window "AlertBox3"
 		background-color = #191919
 		saved-params = ""
 		text = ""
+	elem "label43"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
 		image = 'assets\\interface\\Taskbar-16.png'
 
-window "AlertBox_Input1"
-	elem "AlertBox_Input1"
+window "Color"
+	elem "Color"
+		type = MAIN
+		pos = 281,0
+		size = 300x290
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		outer-size = 314x304
+		inner-size = 300x290
+	elem "label7"
+		type = LABEL
+		pos = 78,192
+		size = 71x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = "Red"
+	elem "Background"
+		type = LABEL
+		pos = 0,0
+		size = 300x290
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		is-disabled = true
+		saved-params = ""
+		text = ""
+	elem "label2"
+		type = LABEL
+		pos = 2,126
+		size = 296x162
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = ""
+	elem "SubmitButton"
+		type = BUTTON
+		pos = 5,263
+		size = 290x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Submit"
+		command = ""
+		is-flat = true
+	elem "Button1"
+		type = BUTTON
+		pos = 5,239
+		size = 290x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Color Picker"
+		command = "OnChangeColorPicker [[parent.id as string]]"
+		is-flat = true
+	elem "Blue"
+		type = INPUT
+		pos = 224,217
+		size = 71x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = ""
+	elem "label6"
+		type = LABEL
+		pos = 224,195
+		size = 71x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = "Blue"
+	elem "Green"
+		type = INPUT
+		pos = 151,217
+		size = 71x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = ""
+	elem "label5"
+		type = LABEL
+		pos = 151,195
+		size = 71x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = "Green"
+	elem "Red"
+		type = INPUT
+		pos = 78,217
+		size = 71x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = ""
+	elem "label3"
+		type = LABEL
+		pos = 78,195
+		size = 71x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = "Red"
+	elem "Hex"
+		type = INPUT
+		pos = 5,217
+		size = 71x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = ""
+	elem "label4"
+		type = LABEL
+		pos = 5,195
+		size = 71x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = "Hex"
+	elem "GreenSlider"
+		type = BAR
+		pos = 92,149
+		size = 206x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		saved-params = ""
+		is-slider = true
+		width = 12
+		dir = east
+		on-change = "OnChangeColorSliderGreen [[parent.id as string]]"
+	elem "BlueSlider"
+		type = BAR
+		pos = 92,171
+		size = 206x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		saved-params = ""
+		is-slider = true
+		width = 12
+		dir = east
+		on-change = "OnChangeColorSliderBlue [[parent.id as string]]"
+	elem "label8"
+		type = LABEL
+		pos = 71,151
+		size = 20x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = "G"
+	elem "label9"
+		type = LABEL
+		pos = 71,173
+		size = 20x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = "B"
+	elem "RedSlider"
+		type = BAR
+		pos = 92,127
+		size = 206x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		saved-params = ""
+		is-slider = true
+		width = 12
+		dir = east
+		on-change = "OnChangeColorSliderRed [[parent.id as string]]"
+	elem "Color"
+		type = LABEL
+		pos = 5,129
+		size = 64x64
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #000000
+		border = line
+		saved-params = ""
+		text = ""
+	elem "Message"
+		type = OUTPUT
+		pos = 2,24
+		size = 296x100
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "max-lines"
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 300x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
+	elem "label1"
+		type = LABEL
+		pos = 71,129
+		size = 20x20
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		border = line
+		saved-params = ""
+		text = "R"
+
+window "Input"
+	elem "Input"
+		type = MAIN
+		pos = 281,0
+		size = 300x252
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		outer-size = 314x266
+		inner-size = 300x252
+	elem "Background"
+		type = LABEL
+		pos = 0,0
+		size = 300x252
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #191919
+		is-disabled = true
+		saved-params = ""
+		text = ""
+	elem "Grid"
+		type = GRID
+		pos = 2,150
+		size = 296x100
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,0
+		show-lines = horizontal
+		small-icons = true
+		line-color = #414141
+		highlight-color = #c8c8c8
+	elem "Input"
+		type = INPUT
+		pos = 2,126
+		size = 296x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 8
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = ""
+		no-command = true
+	elem "Message"
+		type = OUTPUT
+		pos = 2,24
+		size = 296x100
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "max-lines"
+	elem "Titlebar"
+		type = LABEL
+		pos = 0,0
+		size = 300x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = ""
+	elem "label18"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
+
+window "Input1"
+	elem "Input1"
 		type = MAIN
 		pos = 281,0
 		size = 300x179
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3976,6 +4777,8 @@ window "AlertBox_Input1"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x193
+		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4024,7 +4827,6 @@ window "AlertBox_Input1"
 		background-color = #191919
 		saved-params = ""
 		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
 		pos = 3,24
@@ -4038,6 +4840,16 @@ window "AlertBox_Input1"
 		border = line
 		saved-params = "max-lines"
 		legacy-size = false
+	elem "label44"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Input"
 		type = INPUT
 		pos = 3,130
@@ -4052,13 +4864,14 @@ window "AlertBox_Input1"
 		saved-params = ""
 		no-command = true
 
-window "AlertBox_Input2"
-	elem "AlertBox_Input2"
+window "Input2"
+	elem "Input2"
 		type = MAIN
 		pos = 281,0
 		size = 300x179
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4067,6 +4880,8 @@ window "AlertBox_Input2"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x193
+		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4129,7 +4944,6 @@ window "AlertBox_Input2"
 		background-color = #191919
 		saved-params = ""
 		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
 		pos = 3,24
@@ -4143,6 +4957,16 @@ window "AlertBox_Input2"
 		border = line
 		saved-params = "max-lines"
 		legacy-size = false
+	elem "label45"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
+		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Input"
 		type = INPUT
 		pos = 3,130
@@ -4157,13 +4981,14 @@ window "AlertBox_Input2"
 		saved-params = ""
 		no-command = true
 
-window "AlertBox_Input3"
-	elem "AlertBox_Input3"
+window "Input3"
+	elem "Input3"
 		type = MAIN
 		pos = 281,0
 		size = 300x183
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4172,6 +4997,8 @@ window "AlertBox_Input3"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x197
+		inner-size = 300x183
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4248,6 +5075,15 @@ window "AlertBox_Input3"
 		background-color = #191919
 		saved-params = ""
 		text = ""
+	elem "label46"
+		type = LABEL
+		pos = 3,3
+		size = 16x16
+		anchor1 = 0,0
+		anchor2 = -1,-1
+		background-color = #191919
+		saved-params = ""
+		text = ""
 		image = 'assets\\interface\\Taskbar-16.png'
 	elem "Message"
 		type = OUTPUT
@@ -4275,1020 +5111,4 @@ window "AlertBox_Input3"
 		border = line
 		saved-params = ""
 		no-command = true
-
-window "AlertBox_List1"
-	elem "AlertBox_List1"
-		type = MAIN
-		pos = 281,0
-		size = 300x155
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		macro = "Macro"
-	elem "Background"
-		type = LABEL
-		pos = 0,0
-		size = 300x155
-		anchor1 = 0,0
-		anchor2 = 100,0
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List1"
-		type = BUTTON
-		pos = 3,130
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Message"
-		type = OUTPUT
-		pos = 3,24
-		size = 294x104
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 8
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = "max-lines"
-		legacy-size = false
-	elem "Titlebar"
-		type = LABEL
-		pos = 0,0
-		size = 300x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "label18"
-		type = LABEL
-		pos = 2,3
-		size = 16x16
-		anchor1 = 0,0
-		anchor2 = -1,-1
-		background-color = #191919
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
-
-window "AlertBox_List2"
-	elem "AlertBox_List2"
-		type = MAIN
-		pos = 281,0
-		size = 300x179
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		macro = "Macro"
-	elem "Background"
-		type = LABEL
-		pos = 0,0
-		size = 300x179
-		anchor1 = 0,0
-		anchor2 = 100,0
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List2"
-		type = BUTTON
-		pos = 3,154
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List1"
-		type = BUTTON
-		pos = 3,130
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Message"
-		type = OUTPUT
-		pos = 3,24
-		size = 294x104
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 8
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = "max-lines"
-		legacy-size = false
-	elem "Titlebar"
-		type = LABEL
-		pos = 0,0
-		size = 300x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "label18"
-		type = LABEL
-		pos = 2,3
-		size = 16x16
-		anchor1 = 0,0
-		anchor2 = -1,-1
-		background-color = #191919
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
-
-window "AlertBox_List3"
-	elem "AlertBox_List3"
-		type = MAIN
-		pos = 281,0
-		size = 300x203
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		macro = "Macro"
-	elem "Background"
-		type = LABEL
-		pos = 0,0
-		size = 300x203
-		anchor1 = 0,0
-		anchor2 = 100,0
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List3"
-		type = BUTTON
-		pos = 3,178
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Titlebar"
-		type = LABEL
-		pos = 0,0
-		size = 300x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List2"
-		type = BUTTON
-		pos = 3,154
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "label18"
-		type = LABEL
-		pos = 2,3
-		size = 16x16
-		anchor1 = 0,0
-		anchor2 = -1,-1
-		background-color = #191919
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
-	elem "List1"
-		type = BUTTON
-		pos = 3,130
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Message"
-		type = OUTPUT
-		pos = 3,24
-		size = 294x104
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 8
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = "max-lines"
-		legacy-size = false
-
-window "AlertBox_List4"
-	elem "AlertBox_List4"
-		type = MAIN
-		pos = 281,0
-		size = 300x227
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		macro = "Macro"
-	elem "Background"
-		type = LABEL
-		pos = 0,0
-		size = 300x227
-		anchor1 = 0,0
-		anchor2 = 100,0
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List4"
-		type = BUTTON
-		pos = 3,202
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Message"
-		type = OUTPUT
-		pos = 3,24
-		size = 294x104
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 8
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = "max-lines"
-		legacy-size = false
-	elem "List3"
-		type = BUTTON
-		pos = 3,178
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Titlebar"
-		type = LABEL
-		pos = 0,0
-		size = 300x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List2"
-		type = BUTTON
-		pos = 3,154
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "label18"
-		type = LABEL
-		pos = 2,3
-		size = 16x16
-		anchor1 = 0,0
-		anchor2 = -1,-1
-		background-color = #191919
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
-	elem "List1"
-		type = BUTTON
-		pos = 3,130
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-
-window "AlertBox_List5"
-	elem "AlertBox_List5"
-		type = MAIN
-		pos = 281,0
-		size = 300x251
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		macro = "Macro"
-	elem "Background"
-		type = LABEL
-		pos = 0,0
-		size = 300x251
-		anchor1 = 0,0
-		anchor2 = 100,0
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List5"
-		type = BUTTON
-		pos = 3,226
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List1"
-		type = BUTTON
-		pos = 3,130
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List4"
-		type = BUTTON
-		pos = 3,202
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Message"
-		type = OUTPUT
-		pos = 3,24
-		size = 294x104
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 8
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = "max-lines"
-		legacy-size = false
-	elem "List3"
-		type = BUTTON
-		pos = 3,178
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Titlebar"
-		type = LABEL
-		pos = 0,0
-		size = 300x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "label18"
-		type = LABEL
-		pos = 2,3
-		size = 16x16
-		anchor1 = 0,0
-		anchor2 = -1,-1
-		background-color = #191919
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
-	elem "List2"
-		type = BUTTON
-		pos = 3,154
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-
-window "AlertBox_List6"
-	elem "AlertBox_List6"
-		type = MAIN
-		pos = 281,0
-		size = 300x275
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		macro = "Macro"
-	elem "Background"
-		type = LABEL
-		pos = 0,0
-		size = 300x275
-		anchor1 = 0,0
-		anchor2 = 100,0
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List6"
-		type = BUTTON
-		pos = 3,250
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List2"
-		type = BUTTON
-		pos = 3,154
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List5"
-		type = BUTTON
-		pos = 3,226
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List1"
-		type = BUTTON
-		pos = 3,130
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List4"
-		type = BUTTON
-		pos = 3,202
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Message"
-		type = OUTPUT
-		pos = 3,24
-		size = 294x104
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 8
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = "max-lines"
-		legacy-size = false
-	elem "List3"
-		type = BUTTON
-		pos = 3,178
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Titlebar"
-		type = LABEL
-		pos = 0,0
-		size = 300x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "label18"
-		type = LABEL
-		pos = 2,3
-		size = 16x16
-		anchor1 = 0,0
-		anchor2 = -1,-1
-		background-color = #191919
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
-
-window "AlertBox_List7"
-	elem "AlertBox_List7"
-		type = MAIN
-		pos = 281,0
-		size = 300x299
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		macro = "Macro"
-	elem "Background"
-		type = LABEL
-		pos = 0,0
-		size = 300x299
-		anchor1 = 0,0
-		anchor2 = 100,0
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List7"
-		type = BUTTON
-		pos = 3,274
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List6"
-		type = BUTTON
-		pos = 3,250
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List2"
-		type = BUTTON
-		pos = 3,154
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List5"
-		type = BUTTON
-		pos = 3,226
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List1"
-		type = BUTTON
-		pos = 3,130
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List4"
-		type = BUTTON
-		pos = 3,202
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Message"
-		type = OUTPUT
-		pos = 3,24
-		size = 294x104
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 8
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = "max-lines"
-		legacy-size = false
-	elem "List3"
-		type = BUTTON
-		pos = 3,178
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Titlebar"
-		type = LABEL
-		pos = 0,0
-		size = 300x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "label18"
-		type = LABEL
-		pos = 2,3
-		size = 16x16
-		anchor1 = 0,0
-		anchor2 = -1,-1
-		background-color = #191919
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
-
-window "AlertBox_List8"
-	elem "AlertBox_List8"
-		type = MAIN
-		pos = 281,0
-		size = 300x323
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		macro = "Macro"
-	elem "Background"
-		type = LABEL
-		pos = 0,0
-		size = 300x323
-		anchor1 = 0,0
-		anchor2 = 100,0
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "List8"
-		type = BUTTON
-		pos = 3,298
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List7"
-		type = BUTTON
-		pos = 3,274
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List6"
-		type = BUTTON
-		pos = 3,250
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List2"
-		type = BUTTON
-		pos = 3,154
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List5"
-		type = BUTTON
-		pos = 3,226
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List1"
-		type = BUTTON
-		pos = 3,130
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "List4"
-		type = BUTTON
-		pos = 3,202
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Message"
-		type = OUTPUT
-		pos = 3,24
-		size = 294x104
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 8
-		text-color = #c8c8c8
-		background-color = #414141
-		border = line
-		saved-params = "max-lines"
-		legacy-size = false
-	elem "List3"
-		type = BUTTON
-		pos = 3,178
-		size = 294x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		text-color = #c8c8c8
-		background-color = #555555
-		border = line
-		saved-params = "is-checked"
-		text = ""
-		command = ""
-		is-flat = true
-	elem "Titlebar"
-		type = LABEL
-		pos = 0,0
-		size = 300x22
-		anchor1 = 0,0
-		anchor2 = 100,0
-		font-family = "Open Sans"
-		font-size = 10
-		text-color = #c8c8c8
-		background-color = #191919
-		is-disabled = true
-		border = line
-		saved-params = ""
-		text = ""
-	elem "label18"
-		type = LABEL
-		pos = 2,3
-		size = 16x16
-		anchor1 = 0,0
-		anchor2 = -1,-1
-		background-color = #191919
-		saved-params = ""
-		text = ""
-		image = 'assets\\interface\\Taskbar-16.png'
 

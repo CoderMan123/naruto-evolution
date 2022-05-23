@@ -22,17 +22,17 @@ obj
 												hokage_election_votes.Add(usr.client.computer_id)
 												hokage_election_votes.Add(usr.client.address)
 												ballot.votes++
-												usr.client.Alert("You your vote for [ballot.character] has been accepted.", "Ballot Box")
+												usr.client.prompt("You your vote for [ballot.character] has been accepted.", "Ballot Box")
 											else
-												usr.client.Alert("You have already cast your vote for the current [RANK_HOKAGE] election.", "Ballot Box")
+												usr.client.prompt("You have already cast your vote for the current [RANK_HOKAGE] election.", "Ballot Box")
 										else
-											usr.client.Alert("You cannot cast a vote for yourself in the [RANK_HOKAGE] election.", "Ballot Box")
+											usr.client.prompt("You cannot cast a vote for yourself in the [RANK_HOKAGE] election.", "Ballot Box")
 								else
-									usr.client.Alert("You have already cast your vote for the current [RANK_HOKAGE] election.", "Ballot Box")
+									usr.client.prompt("You have already cast your vote for the current [RANK_HOKAGE] election.", "Ballot Box")
 							else
-								usr.client.Alert("This ballot box is for the [VILLAGE_LEAF] elections.", "Ballot Box")
+								usr.client.prompt("This ballot box is for the [VILLAGE_LEAF] elections.", "Ballot Box")
 						else
-							usr.client.Alert("There is not currently an on-going election for [RANK_HOKAGE].", "Ballot Box")
+							usr.client.prompt("There is not currently an on-going election for [RANK_HOKAGE].", "Ballot Box")
 
 				sand_ballot_box
 					icon = 'ballot_box.dmi'
@@ -54,15 +54,15 @@ obj
 												kazekage_election_votes.Add(usr.client.computer_id)
 												kazekage_election_votes.Add(usr.client.address)
 												ballot.votes++
-												usr.client.Alert("You your vote for [ballot.character] has been accepted.", "Ballot Box")
+												usr.client.prompt("You your vote for [ballot.character] has been accepted.", "Ballot Box")
 											else
-												usr.client.Alert("You have already cast your vote for the current [RANK_KAZEKAGE] election.", "Ballot Box")
+												usr.client.prompt("You have already cast your vote for the current [RANK_KAZEKAGE] election.", "Ballot Box")
 										else
-											usr.client.Alert("You cannot cast a vote for yourself in the [RANK_KAZEKAGE] election.", "Ballot Box")
+											usr.client.prompt("You cannot cast a vote for yourself in the [RANK_KAZEKAGE] election.", "Ballot Box")
 								else
-									usr.client.Alert("You have already cast your vote for the current [RANK_KAZEKAGE] election.", "Ballot Box")
+									usr.client.prompt("You have already cast your vote for the current [RANK_KAZEKAGE] election.", "Ballot Box")
 							else
-								usr.client.Alert("This ballot box is for the [VILLAGE_SAND] elections.", "Ballot Box")
+								usr.client.prompt("This ballot box is for the [VILLAGE_SAND] elections.", "Ballot Box")
 						else
-							usr.client.Alert("There is not currently an on-going election for [RANK_KAZEKAGE].", "Ballot Box")
+							usr.client.prompt("There is not currently an on-going election for [RANK_KAZEKAGE].", "Ballot Box")
 				

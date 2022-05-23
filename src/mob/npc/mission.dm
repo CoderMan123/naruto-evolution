@@ -29,25 +29,25 @@ mob
                                 // Check for mission cooldown
                                 var/mission_delay = ((world.realtime - usr.client.last_mission)/10/60)
                                 if(mission_delay < 20)
-                                    usr.client.Alert("You must wait [round((mission_delay-20)*-1, 1)+1] more minutes until you can accept another mission.", src.name)
+                                    usr.client.prompt("You must wait [round((mission_delay-20)*-1, 1)+1] more minutes until you can accept another mission.", src.name)
 
                                 // Select mission
-                                else if(usr.client.Alert("Hey [usr.name], are you here to pickup a mission for your squad?", src.name, list("Yes", "No")) == 1)
+                                else if(usr.client.prompt("Hey [usr.name], are you here to pickup a mission for your squad?", src.name, list("Yes", "No")) == "Yes")
                                     var/list/excluded_missions = list()
-                                    switch(usr.client.AlertList("What rank mission are you interested in?", src.name, list("D Rank", "C Rank", "B Rank", "A Rank", "S Rank")))
-                                        if(1)
+                                    switch(usr.client.prompt("What rank mission are you interested in?", src.name, list("D Rank", "C Rank", "B Rank", "A Rank", "S Rank")))
+                                        if("D Rank")
                                             if(usr.checkRank() >= 1)
                                                 var/mission/d_rank/mission
 
                                                 try
                                                     mission = pick(typesof(/mission/d_rank) - /mission/d_rank - excluded_missions)
                                                 catch
-                                                    usr.client.Alert("There are currently no D rank missions avaliable.", src.name)
+                                                    usr.client.prompt("There are currently no D rank missions avaliable.", src.name)
 
                                                 if(mission)
                                                     mission = new mission(usr)
 
-                                                    if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+                                                    if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
                                                         squad.mission = mission
                                                         squad.mission.Start(usr)
 
@@ -60,9 +60,9 @@ mob
 
                                                         spawn() squad.Refresh()
                                             else
-                                                usr.client.Alert("You must be at least Genin rank to take on D rank missions.", src.name)
+                                                usr.client.prompt("You must be at least Genin rank to take on D rank missions.", src.name)
 
-                                        if(2)
+                                        if("C Rank")
                                             if(usr.checkRank() >= 2)
                                                 if(!(VillageDefenders.Find(usr.village)) && !(VillageAttackers.Find(usr.village))) excluded_missions += /mission/c_rank/the_war_effort
                                                 var/mission/c_rank/mission
@@ -70,12 +70,12 @@ mob
                                                 try
                                                     mission = pick(typesof(/mission/c_rank) - /mission/c_rank - excluded_missions)
                                                 catch
-                                                    usr.client.Alert("There are currently no C rank missions avaliable.", src.name)
+                                                    usr.client.prompt("There are currently no C rank missions avaliable.", src.name)
 
                                                 if(mission)
                                                     mission = new mission(usr)
 
-                                                    if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+                                                    if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
                                                         squad.mission = mission
                                                         squad.mission.Start(usr)
 
@@ -88,21 +88,21 @@ mob
 
                                                         spawn() squad.Refresh()
                                             else
-                                                usr.client.Alert("You must be at least Chunin rank to take on C rank missions.", src.name)
+                                                usr.client.prompt("You must be at least Chunin rank to take on C rank missions.", src.name)
 
-                                        if(3)
+                                        if("B Rank")
                                             if(usr.checkRank() >= 3)
                                                 var/mission/b_rank/mission
 
                                                 try
                                                     mission = pick(typesof(/mission/b_rank) - /mission/b_rank - excluded_missions)
                                                 catch
-                                                    usr.client.Alert("There are currently no B rank missions avaliable.", src.name)
+                                                    usr.client.prompt("There are currently no B rank missions avaliable.", src.name)
 
                                                 if(mission)
                                                     mission = new mission(usr)
 
-                                                    if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+                                                    if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
                                                         squad.mission = mission
                                                         squad.mission.Start(usr)
 
@@ -115,21 +115,21 @@ mob
 
                                                         spawn() squad.Refresh()
                                             else
-                                                usr.client.Alert("You must be at least Jonin rank to take on B rank missions.", src.name)
+                                                usr.client.prompt("You must be at least Jonin rank to take on B rank missions.", src.name)
 
-                                        if(4)
+                                        if("A Rank")
                                             if(usr.checkRank() >= 3)
                                                 var/mission/a_rank/mission
 
                                                 try
                                                     mission = pick(typesof(/mission/a_rank) - /mission/a_rank - excluded_missions)
                                                 catch
-                                                    usr.client.Alert("There are currently no A rank missions avaliable.", src.name)
+                                                    usr.client.prompt("There are currently no A rank missions avaliable.", src.name)
 
                                                 if(mission)
                                                     mission = new mission(usr)
 
-                                                    if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+                                                    if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
                                                         squad.mission = mission
                                                         squad.mission.Start(usr)
 
@@ -142,21 +142,21 @@ mob
 
                                                         spawn() squad.Refresh()
                                             else
-                                                usr.client.Alert("You must be at least Jonin rank to take on A rank missions.", src.name)
+                                                usr.client.prompt("You must be at least Jonin rank to take on A rank missions.", src.name)
 
-                                        if(5)
+                                        if("S Rank")
                                             if(usr.checkRank() >= 4)
                                                 var/mission/s_rank/mission
 
                                                 try
                                                     mission = pick(typesof(/mission/s_rank) - /mission/s_rank - excluded_missions)
                                                 catch
-                                                    usr.client.Alert("There are currently no S rank missions avaliable.", src.name)
+                                                    usr.client.prompt("There are currently no S rank missions avaliable.", src.name)
 
                                                 if(mission)
                                                     mission = new mission(usr)
 
-                                                    if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+                                                    if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
                                                         squad.mission = mission
                                                         squad.mission.Start(usr)
 
@@ -169,23 +169,23 @@ mob
 
                                                         spawn() squad.Refresh()
                                             else
-                                                usr.client.Alert("You must be at least ANBU rank to take on S rank missions.", src.name)
+                                                usr.client.prompt("You must be at least ANBU rank to take on S rank missions.", src.name)
 
                             // Mission request denied: active mission
                             else if(squad && squad == usr.GetSquad() && squad.mission && !squad.mission.complete)
-                                usr.client.Alert("Your squad already has an active mission.", src.name)
+                                usr.client.prompt("Your squad already has an active mission.", src.name)
 
                             // Mission request denied: leader must request mission
                             else if(squad && squad == usr.GetSquad() && !squad.mission)
-                                usr.client.Alert("Hey [usr.name], it's nice to see you! Have your squad leader stop by if you're ready to take on a mission.", src.name)
+                                usr.client.prompt("Hey [usr.name], it's nice to see you! Have your squad leader stop by if you're ready to take on a mission.", src.name)
 
                             // Mission request denied: not in a squad
                             else if(!squad)
-                                usr.client.Alert("I can't send you out on missions until you form a squad.", src.name)
+                                usr.client.prompt("I can't send you out on missions until you form a squad.", src.name)
 
                     // Rejection
                     else
-                        usr.client.Alert("We don't work with your kind here.", src.name)
+                        usr.client.prompt("We don't work with your kind here.", src.name)
 
                     src.conversations.Remove(usr)
 
@@ -229,19 +229,19 @@ mob
                                             var/obj/Inventory/mission/deliver_intel/leaf_intel/o = new(usr)
                                             usr.RecieveItem(o)
                                             spawn() usr.client.UpdateInventoryPanel()
-                                            usr.client.Alert("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
+                                            usr.client.prompt("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 
                                         if("Hidden Sand")
                                             var/obj/Inventory/mission/deliver_intel/sand_intel/o = new(usr)
                                             usr.RecieveItem(o)
                                             spawn() usr.client.UpdateInventoryPanel()
-                                            usr.client.Alert("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
+                                            usr.client.prompt("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 
                                 else
-                                    usr.client.Alert("I've already given your squad the intel. Quickly, on your way before the enemy show up.", src.name)
+                                    usr.client.prompt("I've already given your squad the intel. Quickly, on your way before the enemy show up.", src.name)
 
                     else
-                        usr.client.Alert("Got a problem?", src.name)
+                        usr.client.prompt("Got a problem?", src.name)
 
                     src.conversations.Remove(usr)
 
@@ -293,7 +293,7 @@ mob
                         icon = 'DarkMBase.dmi'
                         village="Hidden Leaf"
 
-        
+
 
 
 obj/escort

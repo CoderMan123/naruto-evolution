@@ -9,10 +9,10 @@ obj/Squad
 		list/Members =  list() //ckey Oriented
 	proc/Menu()
 		if(usr.ckey != Leader)
-			var/setting = usr.client.AlertList("Select an option","Squad",list("View Squad","Check mission","Leave Squad", "Cancel"))
+			var/setting = usr.client.prompt("Select an option","Squad",list("View Squad","Check mission","Leave Squad", "Cancel"))
 			switch(setting)
-				if(4) return
-				if(1)
+				if("Cancel") return
+				if("View Squad")
 					var/html={"
 <head>
 <title>[getOwner(Leader)]'s Squad</title>
@@ -27,7 +27,7 @@ obj/Squad
 					winset(usr, null, {"
 						Browser.is-visible = "true";
 					"})
-				if(2)
+				if("Check mission")
 					if(usr.Mission == null)
 						if(usr.LastMissionTime>0)
 							usr << output("You must wait [round(usr.LastMissionTime/600)] minutes before taking another mission.","Action.Output")
@@ -36,7 +36,7 @@ obj/Squad
 					else
 						usr<<output("Your mission is: [usr.Mission]","Action.Output")
 
-				if(3)
+				if("Leave Squad")
 					Members -= usr.ckey
 					usr.Squad = null
 					usr.client.channel ="Local"
@@ -48,9 +48,9 @@ obj/Squad
 					L<<output("[usr] has left your squad","Action.Output")
 					winset(L, "Navigation.SquadButton", "is-disabled = 'false'")
 			return
-		var/setting = usr.client.AlertList("Select an option","Squad",list("View Squad","Invite Member", "Remove Member","Check Mission","Leave Squad", "Cancel"))
+		var/setting = usr.client.prompt("Select an option","Squad",list("View Squad","Invite Member", "Remove Member","Check Mission","Leave Squad", "Cancel"))
 		switch(setting)
-			if(1)
+			if("View Squad")
 				var/html={"
 <head>
 <title>[getOwner(Leader)]'s Squad</title>
@@ -65,7 +65,7 @@ obj/Squad
 				winset(usr, null, {"
 						Browser.is-visible = "true";
 					"})
-			if(2)
+			if("Invite Member")
 				if(usr.rank=="Genin"||usr.rank=="Academy Student")
 					usr<<output("You must be Chuunin+ to lead a squad with other ninjas in it.","Action.Output")
 					return
@@ -95,7 +95,7 @@ obj/Squad
 						winset(M, "Navigation.SquadButton", "is-disabled = 'false'")
 						usr<<output("[M] is now a part of your Squad.","Action.Output")
 						M<<output("You are now a part of [usr]'s Squad.","Action.Output")
-			if(3)
+			if("Remove Member")
 				var/list/Players = list()
 				for(var/i in Members)
 					if(getOwner(i))
@@ -114,7 +114,7 @@ obj/Squad
 				else
 					Members -= choice
 				usr<<output("[choice] has been removed","Action.Output")
-			if(4)
+			if("Check Mission")
 				if(usr.Mission == null)
 					if(usr.LastMissionTime>0)
 						usr << output("You must wait [round(usr.LastMissionTime/600)] minutes before taking another mission.","Action.Output")
@@ -123,8 +123,8 @@ obj/Squad
 				else
 					usr<<output("Your mission is: [usr.Mission]","Action.Output")
 
-			if(5)
-				if(usr.client.Alert("Are you sure?","Disband Squad","Yes","No") == 1)
+			if("Leave Squad")
+				if(usr.client.prompt("Are you sure?","Disband Squad","Yes","No") == "Yes")
 					if(usr.ckey != Leader) return
 					usr.Squad = null // The previous Leader no long has control over this.
 					Members -= Leader // The leader's key isn't stored in the member list.
@@ -140,7 +140,7 @@ mob/verb/
 	SquadMenu()
 		set hidden=1
 		if(!Squad)
-			if(src.client.Alert("Would you like to create a squad?", "Alert", list("Yes", "No")) == 1)
+			if(src.client.prompt("Would you like to create a squad?", "Alert", list("Yes", "No")) == "Yes")
 				Create_Squad()
 			return
 		usr.Squad.Menu()
@@ -149,7 +149,7 @@ mob/verb/
 		set hidden=1
 		if(!getFaction(src.Faction)&&Squad&&!Faction)
 			if(Squad.Members.len>=4&&Squad.Leader==ckey)
-				if(src.client.Alert("You have the ability to create a Faction. You have five members in your party. It costs 3000 Ryo to create, continue?", "Alert", list("Create Faction", "Cancel") == 1))
+				if(src.client.prompt("You have the ability to create a Faction. You have five members in your party. It costs 3000 Ryo to create, continue?", "Alert", list("Create Faction", "Cancel") == "Create Faction"))
 					Create_Faction()
 			else
 				src<<"You need five members in your party, including yourself, and be the leader of your party to form a faction."

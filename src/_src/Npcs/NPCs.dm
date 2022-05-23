@@ -18,24 +18,15 @@ mob/npc
 
 			spawn() RestoreOverlays()
 			..()
-		
+
 		DblClick()
 			if(usr.dead) return
 			if(get_dist(src,usr)>2) return
-			usr.HairStyle = usr.CustomInput("Hair Options","Please choose a hair.",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","Mohawk","Neji Hair","Distance")).name
+			usr.HairStyle = usr.client.prompt("Hair Options","Please choose a hair.",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","Mohawk","Neji Hair","Distance"))
 
 			if(usr.HairStyle != "Bald")
-				var/list/Colors=usr.ColorInput("Please select a hair color.")
-				usr.HairColorRed=text2num(Colors[1])
-				usr.HairColorGreen=text2num(Colors[2])
-				usr.HairColorBlue=text2num(Colors[3])
+				usr.HairColor = usr.client.cprompt("Please select a hairstyle dye.", "Hairstyle Dye", luminosity_max = 20)
 
-			/*
-			var/list/Colors=usr.ColorInput("Please select a hair color.")
-			usr.HairColorRed=text2num(Colors[1])
-			usr.HairColorGreen=text2num(Colors[2])
-			usr.HairColorBlue=text2num(Colors[3])
-			*/
 			usr.HairColorStyle=null
 			usr.RestoreOverlays()
 
@@ -49,7 +40,7 @@ mob/npc
 			src.overlays += 'Sandals.dmi'
 
 			OriginalOverlays=overlays.Copy()
-			
+
 			spawn() src.RestoreOverlays()
 			..()
 
@@ -111,7 +102,7 @@ mob/npc
 				usr.move=1
 				return
 			var/obj/S = Options["[Choice]"]
-			var/list/AlertInput=usr.client.AlertInput("How many would you like to buy?","Purchase")
+			var/list/AlertInput=usr.client.iprompt("How many would you like to buy?","Purchase")
 			if(!isnum(AlertInput[2]))
 				usr.move=1
 				return

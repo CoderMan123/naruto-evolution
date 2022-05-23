@@ -139,10 +139,10 @@ mission
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
 
-					spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
+					spawn() M.client.prompt("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 
 				else if(src.squad && squad && src.squad == squad && squad.mission && !src.squad.mission.complete && !O)
-					spawn() M.client.Alert("I'm still waiting on that squad intel. Please hurry along and pick it up from [src.required_mobs[1]]", "[src.complete_npc]")
+					spawn() M.client.prompt("I'm still waiting on that squad intel. Please hurry along and pick it up from [src.required_mobs[1]]", "[src.complete_npc]")
 
 				// This mission belongs to another Squad
 				else if(squad && O && !O.squad.mission.complete)
@@ -161,13 +161,13 @@ mission
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
 							if(M.village == VILLAGE_AKATSUKI)
-								M.client.Alert("Excellent work. We'll make good use of this.", "Zetsu")
+								M.client.prompt("Excellent work. We'll make good use of this.", "Zetsu")
 								M << output("You have successfully stolen intel and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 							else if(M.village == VILLAGE_MISSING_NIN)
-								M.client.Alert("Ah wonderful. Here's your money now get lost before someone sees us.", "Shady Looking Figure")
+								M.client.prompt("Ah wonderful. Here's your money now get lost before someone sees us.", "Shady Looking Figure")
 								M << output("You have successfully stolen intel and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 							else
-								spawn() M.client.Alert("Well done. That'll teach them not to spy on us.", "[src.complete_npc]")
+								spawn() M.client.prompt("Well done. That'll teach them not to spy on us.", "[src.complete_npc]")
 								M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 
 				// Solo ninja turning in the mission
@@ -180,13 +180,13 @@ mission
 					M.Levelup()
 					spawn() M.UpdateHMB()
 					if(M.village == VILLAGE_AKATSUKI)
-						M.client.Alert("Excellent work. We'll make good use of this.", "Zetsu")
+						M.client.prompt("Excellent work. We'll make good use of this.", "Zetsu")
 						M << output("You have successfully stolen intel and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 					else if(M.village == VILLAGE_MISSING_NIN)
-						M.client.Alert("Ah wonderful. Here's your money now get lost before someone sees us.", "Shady Looking Figure")
+						M.client.prompt("Ah wonderful. Here's your money now get lost before someone sees us.", "Shady Looking Figure")
 						M << output("You have successfully stolen intel and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 					else
-						spawn() M.client.Alert("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
+						spawn() M.client.prompt("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 						M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
 
 			if(/mission/c_rank/the_war_effort)
@@ -200,7 +200,7 @@ mission
 						for(var/mob/m in mobs_online)
 							if(squad == m.GetSquad())
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
-								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
+								spawn() m.client.prompt("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
@@ -237,7 +237,7 @@ mission
 						for(var/mob/m in mobs_online)
 							if(squad == m.GetSquad())
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
-								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
+								spawn() m.client.prompt("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 
@@ -335,7 +335,7 @@ mission
 						for(var/mob/m in mobs_online)
 							if(squad== m.GetSquad())
 								m << output("<b>[squad.mission]:</b> You've suffered too many losses, and your orders are to retreat.", "Action.Output")
-								spawn() m.client.Alert("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
+								spawn() m.client.prompt("You've suffered too many losses, and your orders are to retreat.", "Mission Failed")
 								spawn() m.UpdateHMB()
 								spawn() squad.RefreshMember(m)
 

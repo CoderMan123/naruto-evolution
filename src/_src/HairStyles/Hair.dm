@@ -4,9 +4,7 @@ var
 mob
 	var
 		HairStyle
-		HairColorRed
-		HairColorBlue
-		HairColorGreen
+		HairColor
 		Genderswag
 		skintoneswag
 

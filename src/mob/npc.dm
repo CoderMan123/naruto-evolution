@@ -70,8 +70,8 @@ mob/npc
 
 				view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Greetings [usr.name], would you like to make a deposit or a withdrawal from your bank?</font>"
 
-				switch(usr.client.Alert("You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br /><br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank", list("Deposit","Withdraw","Cancel")))
-					if(1)
+				switch(usr.client.prompt("You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br /><br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank", list("Deposit","Withdraw","Cancel")))
+					if("Deposit")
 						
 						view(usr) << "[HTML_GetName(usr)]<font color='[COLOR_CHAT]'>: I'd like to make a deposit to my bank account.</font>"
 						
@@ -82,8 +82,8 @@ mob/npc
 							sleep(10)
 							view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Very well, how much would you like to deposit?</font>"
 
-							switch(usr.client.Alert("Would you like to deposit all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
-								if(1)
+							switch(usr.client.prompt("Would you like to deposit all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
+								if("Yes")
 									var/value = usr.ryo
 
 									if(value)
@@ -105,8 +105,8 @@ mob/npc
 										sleep(10)
 										view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 
-								if(2)
-									var/list/AlertInput = usr.client.AlertInput("How much Ryo would you like to deposit into your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
+								if("No")
+									var/list/AlertInput = usr.client.iprompt("How much Ryo would you like to deposit into your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
 									
 									var/value = AlertInput[2]
 
@@ -129,12 +129,12 @@ mob/npc
 										sleep(10)
 										view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 								
-								if(3)
+								if("Cancel")
 									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
 									sleep(10)
 									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 
-					if(2)
+					if("Withdraw")
 
 						view(usr) << "[HTML_GetName(usr)]<font color='[COLOR_CHAT]'>: I'd like to make a withdrawal from my bank account.</font>"
 
@@ -145,8 +145,8 @@ mob/npc
 							sleep(10)
 							view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Very well, how much would you like to withdrawal?</font>"
 
-							switch(usr.client.Alert("Would you like to withdrawal all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
-								if(1)
+							switch(usr.client.prompt("Would you like to withdrawal all of your Ryo?", "Bank", list("Yes", "No", "Cancel")))
+								if("Yes")
 									var/value = usr.RyoBanked
 
 									if(value)
@@ -168,8 +168,8 @@ mob/npc
 										sleep(10)
 										view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 
-								if(2)
-									var/list/AlertInput = usr.client.AlertInput("How much Ryo would you like to withdraw from your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
+								if("No")
+									var/list/AlertInput = usr.client.iprompt("How much Ryo would you like to withdraw from your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
 									
 									var/value = AlertInput[2]
 
@@ -192,11 +192,11 @@ mob/npc
 										sleep(10)
 										view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
 								
-								if(3)
+								if("Cancel")
 									view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
 									sleep(10)
 									view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
-					if(3)
+					if("Cancel")
 						view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: No, thank you.</font>"
 						sleep(10)
 						view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
@@ -226,9 +226,9 @@ mob/npc
 				if(O && O.squad.mission)
 					O.squad.mission.Complete(usr)
 				else
-					usr.client.Alert("Psst, hey you there. If you can get me some intel on the shinobi villages I'll pay you handsomely.", src.name)
+					usr.client.prompt("Psst, hey you there. If you can get me some intel on the shinobi villages I'll pay you handsomely.", src.name)
 			else
-				usr.client.Alert("Buzz off, I don't speak with the likes of you.", src.name)
+				usr.client.prompt("Buzz off, I don't speak with the likes of you.", src.name)
 			usr.move=1
 
 	zetsu //not to be confused with white zetsu
@@ -244,7 +244,7 @@ mob/npc
 			var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
 			if(O && O.squad.mission)
 				O.squad.mission.Complete(usr)
-			else if(usr.client.Alert("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == 1)
+			else if(usr.client.prompt("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == "Yes")
 				usr.loc = locate(100,32,4)
 			usr.move=1
 
@@ -276,7 +276,7 @@ mob/npc
 								if(global.hokage_election)
 									if(global.hokage_ballot_open)
 										view(src) << "<font color = '[COLOR_VILLAGE_LEAF]'>[src.name]</font><font color='[COLOR_CHAT]'>: I see that you're at least a [RANK_CHUUNIN], would you like to nominate yourself for [RANK_HOKAGE]?</font>"
-										if(usr.client.Alert("Would you like to nominate yourself as [RANK_HOKAGE]?", "Election", list("Yes", "No")) == 1)
+										if(usr.client.prompt("Would you like to nominate yourself as [RANK_HOKAGE]?", "Election", list("Yes", "No")) == "Yes")
 											view(usr) << "<font color='[src.name_color]'>[usr.name]</font><font color='[COLOR_CHAT]'>: Yes, please accept my ballot.</font>"
 											sleep(10)
 											if(GetBallot(usr))
@@ -308,7 +308,7 @@ mob/npc
 								if(global.kazekage_election)
 									if(global.kazekage_ballot_open)
 										view(src) << "<font color = '[COLOR_VILLAGE_SAND]'>[src.name]</font><font color='[COLOR_CHAT]'>: I see that you're at least a [RANK_CHUUNIN], would you like to nominate yourself for [RANK_KAZEKAGE]?</font>"
-										if(usr.client.Alert("Would you like to nominate yourself as [RANK_KAZEKAGE]?", "Election", list("Yes", "No")) == 1)
+										if(usr.client.prompt("Would you like to nominate yourself as [RANK_KAZEKAGE]?", "Election", list("Yes", "No")) == "Yes")
 											view(usr) << "<font color='[src.name_color]'>[usr.name]</font><font color='[COLOR_CHAT]'>: Yes, please accept my ballot.</font>"
 											sleep(10)
 											if(GetBallot(usr))
@@ -375,10 +375,10 @@ mob/npc
 							// Check for mission cooldown
 							var/mission_delay = ((world.realtime - usr.client.last_mission)/10/60)
 							if(mission_delay < 20)
-								usr.client.Alert("You must wait [round((mission_delay-20)*-1, 1)+1] more minutes until you can accept another mission.", src.name)
+								usr.client.prompt("You must wait [round((mission_delay-20)*-1, 1)+1] more minutes until you can accept another mission.", src.name)
 
 							// Select mission
-							else if(usr.client.Alert("Hey [usr.name], are you here to pickup a mission for your squad?", src.name, list("Yes", "No")) == 1)
+							else if(usr.client.prompt("Hey [usr.name], are you here to pickup a mission for your squad?", src.name, list("Yes", "No")) == "Yes")
 								var/list/excluded_missions = list()
 								switch(usr.client.AlertList("What rank mission are you interested in?", src.name, list("D Rank", "C Rank", "B Rank", "A Rank", "S Rank")))
 									if(1)
@@ -388,12 +388,12 @@ mob/npc
 											try
 												mission = pick(typesof(/mission/d_rank) - /mission/d_rank - excluded_missions)
 											catch
-												usr.client.Alert("There are currently no D rank missions avaliable.", src.name)
+												usr.client.prompt("There are currently no D rank missions avaliable.", src.name)
 
 											if(mission)
 												mission = new mission(usr)
 
-												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+												if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
 													squad.mission = mission
 													squad.mission.Start(usr)
 
@@ -406,7 +406,7 @@ mob/npc
 
 													spawn() squad.Refresh()
 										else
-											usr.client.Alert("You must be at least Genin rank to take on D rank missions.", src.name)
+											usr.client.prompt("You must be at least Genin rank to take on D rank missions.", src.name)
 
 									if(2)
 										if(usr.checkRank() >= 2)
@@ -416,12 +416,12 @@ mob/npc
 											try
 												mission = pick(typesof(/mission/c_rank) - /mission/c_rank - excluded_missions)
 											catch
-												usr.client.Alert("There are currently no C rank missions avaliable.", src.name)
+												usr.client.prompt("There are currently no C rank missions avaliable.", src.name)
 
 											if(mission)
 												mission = new mission(usr)
 
-												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+												if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
 													squad.mission = mission
 													squad.mission.Start(usr)
 
@@ -434,7 +434,7 @@ mob/npc
 
 													spawn() squad.Refresh()
 										else
-											usr.client.Alert("You must be at least Chunin rank to take on C rank missions.", src.name)
+											usr.client.prompt("You must be at least Chunin rank to take on C rank missions.", src.name)
 
 									if(3)
 										if(usr.checkRank() >= 3)
@@ -443,12 +443,12 @@ mob/npc
 											try
 												mission = pick(typesof(/mission/b_rank) - /mission/b_rank - excluded_missions)
 											catch
-												usr.client.Alert("There are currently no B rank missions avaliable.", src.name)
+												usr.client.prompt("There are currently no B rank missions avaliable.", src.name)
 
 											if(mission)
 												mission = new mission(usr)
 
-												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+												if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
 													squad.mission = mission
 													squad.mission.Start(usr)
 
@@ -461,7 +461,7 @@ mob/npc
 
 													spawn() squad.Refresh()
 										else
-											usr.client.Alert("You must be at least Jonin rank to take on B rank missions.", src.name)
+											usr.client.prompt("You must be at least Jonin rank to take on B rank missions.", src.name)
 
 									if(4)
 										if(usr.checkRank() >= 3)
@@ -470,12 +470,12 @@ mob/npc
 											try
 												mission = pick(typesof(/mission/a_rank) - /mission/a_rank - excluded_missions)
 											catch
-												usr.client.Alert("There are currently no A rank missions avaliable.", src.name)
+												usr.client.prompt("There are currently no A rank missions avaliable.", src.name)
 
 											if(mission)
 												mission = new mission(usr)
 
-												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+												if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
 													squad.mission = mission
 													squad.mission.Start(usr)
 
@@ -488,7 +488,7 @@ mob/npc
 
 													spawn() squad.Refresh()
 										else
-											usr.client.Alert("You must be at least Jonin rank to take on A rank missions.", src.name)
+											usr.client.prompt("You must be at least Jonin rank to take on A rank missions.", src.name)
 
 									if(5)
 										if(usr.checkRank() >= 4)
@@ -497,12 +497,12 @@ mob/npc
 											try
 												mission = pick(typesof(/mission/s_rank) - /mission/s_rank - excluded_missions)
 											catch
-												usr.client.Alert("There are currently no S rank missions avaliable.", src.name)
+												usr.client.prompt("There are currently no S rank missions avaliable.", src.name)
 
 											if(mission)
 												mission = new mission(usr)
 
-												if(usr.client.Alert(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+												if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
 													squad.mission = mission
 													squad.mission.Start(usr)
 
@@ -515,23 +515,23 @@ mob/npc
 
 													spawn() squad.Refresh()
 										else
-											usr.client.Alert("You must be at least ANBU rank to take on S rank missions.", src.name)
+											usr.client.prompt("You must be at least ANBU rank to take on S rank missions.", src.name)
 
 						// Mission request denied: active mission
 						else if(squad && squad == usr.GetSquad() && squad.mission && !squad.mission.complete)
-							usr.client.Alert("Your squad already has an active mission.", src.name)
+							usr.client.prompt("Your squad already has an active mission.", src.name)
 
 						// Mission request denied: leader must request mission
 						else if(squad && squad == usr.GetSquad() && !squad.mission)
-							usr.client.Alert("Hey [usr.name], it's nice to see you! Have your squad leader stop by if you're ready to take on a mission.", src.name)
+							usr.client.prompt("Hey [usr.name], it's nice to see you! Have your squad leader stop by if you're ready to take on a mission.", src.name)
 
 						// Mission request denied: not in a squad
 						else if(!squad)
-							usr.client.Alert("I can't send you out on missions until you form a squad.", src.name)
+							usr.client.prompt("I can't send you out on missions until you form a squad.", src.name)
 
 				// Rejection
 				else
-					usr.client.Alert("We don't work with your kind here.", src.name)
+					usr.client.prompt("We don't work with your kind here.", src.name)
 
 				src.conversations.Remove(usr)
 
@@ -575,19 +575,19 @@ mob/npc
 										var/obj/Inventory/mission/deliver_intel/leaf_intel/o = new(usr)
 										usr.RecieveItem(o)
 										spawn() usr.client.UpdateInventoryPanel()
-										usr.client.Alert("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
+										usr.client.prompt("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 
 									if("Hidden Sand")
 										var/obj/Inventory/mission/deliver_intel/sand_intel/o = new(usr)
 										usr.RecieveItem(o)
 										spawn() usr.client.UpdateInventoryPanel()
-										usr.client.Alert("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
+										usr.client.prompt("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 
 							else
-								usr.client.Alert("I've already given your squad the intel. Quickly, on your way before the enemy show up.", src.name)
+								usr.client.prompt("I've already given your squad the intel. Quickly, on your way before the enemy show up.", src.name)
 
 				else
-					usr.client.Alert("Got a problem?", src.name)
+					usr.client.prompt("Got a problem?", src.name)
 
 				src.conversations.Remove(usr)
 
@@ -700,7 +700,7 @@ mob/npc
 							squad.mission.status = "Failure"
 							squad.mission.complete = world.realtime
 							m << output("<b>[squad.mission.name]:</b> The Daimyo has been killed! Our mission is a failure.", "Action.Output")
-							spawn() m.client.Alert("The Daimyo has been killed! Our mission is a failure.", "Mission Failed")
+							spawn() m.client.prompt("The Daimyo has been killed! Our mission is a failure.", "Mission Failed")
 							spawn() squad.RefreshMember(m)
 
 					if(killer && killer.village != src.village)

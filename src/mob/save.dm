@@ -16,7 +16,7 @@ mob
 
 	proc/Load(var/character, var/password)
 		if(fexists("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav.lk"))
-			src.client.Alert("You cannot load this character because it is currently in use.")
+			src.client.prompt("You cannot load this character because it is currently in use.")
 			src.client.logging_in = 0
 			return 0
 
@@ -25,7 +25,7 @@ mob
 				var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav")
 				var/password_hash = sha1("[password][F["password_salt"]]")
 				if(password_hash != F["password"])
-					spawn() src.client.Alert("The character name or password you entered is incorrect.")
+					spawn() src.client.prompt("The character name or password you entered is incorrect.")
 					src.client.logging_in = 0
 					return 0
 				else
@@ -42,8 +42,8 @@ mob
 						if(findtext(savefile, character))
 							character_found = 1
 
-				if(character_found)spawn() src.client.Alert("The character you are trying access to not linked to your current BYOND account. Please login with the BYOND account that created this character.")
-				else spawn() src.client.Alert("The character name or password you entered is incorrect.")
+				if(character_found)spawn() src.client.prompt("The character you are trying access to not linked to your current BYOND account. Please login with the BYOND account that created this character.")
+				else spawn() src.client.prompt("The character name or password you entered is incorrect.")
 
 				src.client.logging_in = 0
 				return 0
@@ -51,8 +51,8 @@ mob
 	verb/DeleteCharacter()
 		set category = null
 		if(src.client && mobs_online.Find(src))
-			if(src.client.Alert("<font color = '[COLOR_VILLAGE_AKATSUKI]'>Character deletion is a permanent action!</font><br /><br />Are you sure you would like to delete your character: <u>[HTML_GetCharacter(src)]</u>?", "Character Deletion", list("Yes", "No")) == 1)
-				var/list/prompt = src.client.AlertInput("Please enter your character password to confirm character deletion.", "Character Deletion", list("Delete", "Cancel"), mask=1)
+			if(src.client.prompt("<font color = '[COLOR_VILLAGE_AKATSUKI]'>Character deletion is a permanent action!</font><br /><br />Are you sure you would like to delete your character: <u>[HTML_GetCharacter(src)]</u>?", "Character Deletion", list("Yes", "No")) == "Yes")
+				var/list/prompt = src.client.iprompt("Please enter your character password to confirm character deletion.", "Character Deletion", list("Delete", "Cancel"), mask=1)
 				if(prompt[1] == 1)
 					var/verify_password = prompt[2]
 					if(src.password == sha1("[verify_password][src.password_salt]"))
@@ -64,7 +64,7 @@ mob
 							if(fdel("[SAVEFILE_CHARACTERS]/[copytext(src.client.ckey, 1, 2)]/[src.client.ckey] ([lowertext(src.character)]).sav"))
 								names_taken.Remove(lowertext(src.character))
 
-								spawn(-1) src.client.Alert("Your character has been deleted successfully.")
+								spawn(-1) src.client.prompt("Your character has been deleted successfully.")
 
 								mobs_online -= src // Prevent character save on disconnect.
 

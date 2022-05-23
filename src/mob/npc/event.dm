@@ -22,7 +22,7 @@ mob
                                     if(global.hokage_election)
                                         if(global.hokage_ballot_open)
                                             view(src) << "<font color = '[COLOR_VILLAGE_LEAF]'>[src.name]</font><font color='[COLOR_CHAT]'>: I see that you're at least a [RANK_CHUUNIN], would you like to nominate yourself for [RANK_HOKAGE]?</font>"
-                                            if(usr.client.Alert("Would you like to nominate yourself as [RANK_HOKAGE]?", "Election", list("Yes", "No")) == 1)
+                                            if(usr.client.prompt("Would you like to nominate yourself as [RANK_HOKAGE]?", "Election", list("Yes", "No")) == "Yes")
                                                 view(usr) << "<font color='[src.name_color]'>[usr.name]</font><font color='[COLOR_CHAT]'>: Yes, please accept my ballot.</font>"
                                                 sleep(10)
                                                 if(GetBallot(usr))
@@ -54,7 +54,7 @@ mob
                                     if(global.kazekage_election)
                                         if(global.kazekage_ballot_open)
                                             view(src) << "<font color = '[COLOR_VILLAGE_SAND]'>[src.name]</font><font color='[COLOR_CHAT]'>: I see that you're at least a [RANK_CHUUNIN], would you like to nominate yourself for [RANK_KAZEKAGE]?</font>"
-                                            if(usr.client.Alert("Would you like to nominate yourself as [RANK_KAZEKAGE]?", "Election", list("Yes", "No")) == 1)
+                                            if(usr.client.prompt("Would you like to nominate yourself as [RANK_KAZEKAGE]?", "Election", list("Yes", "No")) == "Yes")
                                                 view(usr) << "<font color='[src.name_color]'>[usr.name]</font><font color='[COLOR_CHAT]'>: Yes, please accept my ballot.</font>"
                                                 sleep(10)
                                                 if(GetBallot(usr))

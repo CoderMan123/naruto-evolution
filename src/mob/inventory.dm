@@ -18,11 +18,11 @@ obj
 					return
 
 				if(src.stacks > 1)
-					var/result = usr.client.AlertInput("How many [src]'s would you like to drop?", "Satchel")
+					var/result = usr.client.iprompt("How many [src]'s would you like to drop?", "Satchel")
 					if(!result[2]) return
 					if(isnum(result[2]))
 						if(src.stacks < result[2])
-							usr.client.Alert("You don't have [result[2]] [src]'s to drop.")
+							usr.client.prompt("You don't have [result[2]] [src]'s to drop.")
 							return
 
 						else if(src.stacks == result[2])
@@ -37,7 +37,7 @@ obj
 						hearers() << output("[usr] drops [src].","Action.Output")
 						usr.client.UpdateInventoryPanel()
 					else
-						usr.client.Alert("That is not a number!", "Satchel")
+						usr.client.prompt("That is not a number!", "Satchel")
 
 				else
 					src.loc=usr.loc
@@ -186,7 +186,7 @@ mob
 				//if(quantity == -1)
 				if(quantity)
 					if(O.stacks < quantity)
-						src.client.Alert("You don't have [quantity] [O]'s to drop.")
+						src.client.prompt("You don't have [quantity] [O]'s to drop.")
 						return
 
 					else if(O.stacks == quantity)

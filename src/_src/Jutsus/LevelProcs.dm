@@ -245,7 +245,7 @@ mob
 						src.RecieveItem(new/obj/Inventory/Clothing/HeadWrap/LeafHeadBand)
 					if(VILLAGE_SAND)
 						src.RecieveItem(new/obj/Inventory/Clothing/HeadWrap/SandHeadBand)
-				src.client.Alert("Your elders have deemed you a true ninja. You've become a Genin!")
+				src.client.prompt("Your elders have deemed you a true ninja. You've become a Genin!")
 
 			if(level>=25&&!Element2)
 				var/Elements=list("Fire","Water","Earth","Lightning","Wind")
@@ -919,7 +919,7 @@ mob
 
 					spawn(3000) if(!respawned && src.dead) src.Respawn()
 
-					if(src.client && src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
+					if(src.client && src.client.prompt("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
 						if(src.dead)
 							respawned = 1
 							src.Respawn()

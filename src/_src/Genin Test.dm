@@ -95,11 +95,11 @@ obj/Special/GeninExam
 			NewQuestions-=Question
 			QuestionNum++
 			
-			switch(usr.client.Alert("Question #[QuestionNum]: [Question]", "Question [QuestionNum]", list("True", "False")))
-				if(1)
+			switch(usr.client.prompt("Question #[QuestionNum]: [Question]", "Question [QuestionNum]", list("True", "False")))
+				if("True")
 					if(Questions[Question] == 1) CorrectAnswer++
 
-				if(2)
+				if("False")
 					if(Questions[Question] == 0) CorrectAnswer++
 
 		usr<<output("You have completed the test, please wait for the result.","Action.Output")
