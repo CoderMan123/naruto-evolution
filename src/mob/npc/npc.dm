@@ -18,7 +18,7 @@ mob
 
             OriginalOverlays = overlays.Copy()
             //spawn() src.RestoreOverlays()
-            
+
             src.NewStuff()
 
         Move()
@@ -28,7 +28,7 @@ mob
         Death(killer)
             if(istype(src, /mob/npc/combat)) ..()
             else return
-        
+
         banker
             name = "Banker"
             icon = 'WhiteMBase.dmi'
@@ -37,13 +37,13 @@ mob
 
             leaf_banker
                 village = VILLAGE_LEAF
-            
+
             sand_banker
                 village = VILLAGE_SAND
-            
+
             missing_nin_banker
                 village = VILLAGE_AKATSUKI
-            
+
             akatsuki_banker
                 village = VILLAGE_AKATSUKI
 
@@ -52,7 +52,7 @@ mob
                 src.overlays += 'Shirt.dmi'
                 src.overlays += 'Sandals.dmi'
                 ..()
-                
+
 
             DblClick()
                 if(src.conversations.Find(usr)) return 0
@@ -67,9 +67,9 @@ mob
 
                     switch(usr.client.prompt("You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br /><br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank", list("Deposit","Withdraw","Cancel")))
                         if("Deposit")
-                            
+
                             view(usr) << "[HTML_GetName(usr)]<font color='[COLOR_CHAT]'>: I'd like to make a deposit to my bank account.</font>"
-                            
+
                             if(!usr.ryo)
                                 sleep(10)
                                 view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I'm sorry, but your broke ass doesn't have any Ryo to deposit.</font>"
@@ -102,12 +102,12 @@ mob
 
                                     if("No")
                                         var/list/AlertInput = usr.client.iprompt("How much Ryo would you like to deposit into your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
-                                        
+
                                         var/value = AlertInput[2]
 
                                         if(isnum(value) && value > 0 && usr.ryo >= value)
                                             view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I'd like to deposit [value] Ryo into my bank account.</font>"
-                                        
+
                                             usr.ryo -= value
                                             usr.RyoBanked += value
 
@@ -123,7 +123,7 @@ mob
                                             view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
                                             sleep(10)
                                             view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
-                                    
+
                                     if("Cancel")
                                         view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
                                         sleep(10)
@@ -149,7 +149,7 @@ mob
 
                                             usr.RyoBanked -= value
                                             usr.ryo += value
-                                            
+
                                             spawn() usr.client.UpdateInventoryPanel()
 
                                             usr << output("You withdraw <u>[value]</u> Ryo into from your bank.", "Action.Output")
@@ -165,7 +165,7 @@ mob
 
                                     if("No")
                                         var/list/AlertInput = usr.client.iprompt("How much Ryo would you like to withdraw from your bank?<br /><br />You currently have <u>[usr.ryo]</u> Ryo in your satchel.<br />You currently have <u>[usr.RyoBanked]</u> in your bank.", "Bank")
-                                        
+
                                         var/value = AlertInput[2]
 
                                         if(isnum(value) && value > 0 && usr.RyoBanked >= value)
@@ -173,7 +173,7 @@ mob
 
                                             usr.RyoBanked -= value
                                             usr.ryo += value
-                                            
+
                                             spawn() usr.client.UpdateInventoryPanel()
 
                                             usr << output("You withdraw <u>[value]</u> Ryo into from your bank.", "Action.Output")
@@ -186,7 +186,7 @@ mob
                                             view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
                                             sleep(10)
                                             view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
-                                    
+
                                     if("Cancel")
                                         view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Actually, I've changed my mind.</font>"
                                         sleep(10)
@@ -195,7 +195,7 @@ mob
                             view(usr) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: No, thank you.</font>"
                             sleep(10)
                             view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Please come back again soon!</font>"
-                
+
                 else
                     view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I only manage accounts for members of the [HTML_GetVillage(src)].</font>"
 
@@ -211,7 +211,7 @@ mob
                 src.overlays+='Shirt.dmi'
                 src.overlays+='Sandals.dmi'
                 ..()
-                
+
             DblClick()
                 if(usr.dead)return
                 if(get_dist(src,usr)>2)return
@@ -242,7 +242,7 @@ mob
                 else if(usr.client.prompt("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == "Yes")
                     usr.loc = locate(100,32,4)
                 usr.move=1
-                
+
         onomari //reserved for prestige system
             name = "Onomari"
             icon = 'WhiteMBase.dmi'
