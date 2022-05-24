@@ -1,6 +1,3 @@
-#define TARGET_MOB 0
-
-
 image
 	Target
 		var/mob/owner

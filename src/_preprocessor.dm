@@ -114,3 +114,7 @@
 // Game Audio Manager //
 #define AUDIO_SELF 0
 #define AUDIO_HEARERS 1
+
+
+//OLD, REPLACE WITH NEW IMPLEMENTATION LATER
+#define TARGET_MOB 0
