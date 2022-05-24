@@ -9,7 +9,7 @@ mob
                     src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
                     src.overlays+='Shirt.dmi'
                     src.overlays+='Sandals.dmi'
-                
+
                 DblClick()
                     ..()
                     if(src.conversations.Find(usr)) return 0
@@ -81,12 +81,12 @@ mob
                                 view(src) << "<font color = '[COLOR_VILLAGE_SAND]'>[src.name]</font><font color='[COLOR_CHAT]'>: You can't nominate yourself for [RANK_KAZEKAGE]. You're from the Hidden Sand village, get out of here!</font>"
 
                     src.conversations.Remove(usr)
-                
+
                 leaf_ballot_secretary
                     icon = 'DarkMBase.dmi'
                     name = "Leaf Ballot Secretary"
                     village = VILLAGE_LEAF
-                
+
                 sand_ballot_secretary
                     icon = 'PaleMBase.dmi'
                     name = "Sand Ballot Secretary"
