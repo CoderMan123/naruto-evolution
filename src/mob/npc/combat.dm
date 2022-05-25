@@ -212,6 +212,7 @@ mob
 							src.health = src.maxhealth
 							src.chakra = src.maxchakra
 							src.loc = src.original_loc
+							src.dir = SOUTH
 
 					proc/FindTarget()
 						if(!c_target) sleep(10)
