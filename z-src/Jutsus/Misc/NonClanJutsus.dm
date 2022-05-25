@@ -875,7 +875,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 						var/damage
-						if(J.level==3)
+						if(J.level>=3)
 							var/obj/A = new/obj/MiscEffects/LeafWhirl(src.loc)
 							A.dir=src.dir
 						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.6
@@ -886,7 +886,7 @@ mob
 						src.injutsu=1
 						src.firing=1
 						flick("kick",src)
-						if(J.level==3) src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
+						if(J.level>=3) src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 						else src.PlayAudio('Spin.ogg', output = AUDIO_HEARERS)
 						for(var/mob/c_target in orange(src,J.level))
 							if(c_target in orange(src,J.level))
