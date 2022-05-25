@@ -73,6 +73,7 @@ jobs:
           ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
             docker stop naruto-evolution
             docker rm naruto-evolution
+            docker pull ghcr.io/douglasparker/naruto-evolution:latest
             docker run --detach \
               --name naruto-evolution \
               --volume /opt/naruto-evolution/cfg:/opt/naruto-evolution/cfg \
