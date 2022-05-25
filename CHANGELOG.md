@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.16] 2022-05-25
+
+### Fixed
+- Prevent the _Hunting Rogues_ mission from being turned in an infinite number of times.
+- Prevent the _The War Effort_ mission from being turned in an infinite number of times.
+
 ## [2.4.15] 2022-05-15
 
 ### Changed
