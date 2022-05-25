@@ -208,23 +208,23 @@ mission
 						squad.mission.status = "Success"
 						squad.mission.complete = world.realtime
 
-					var/jounin_reward = 0
-					for(var/mob/m in mobs_online)
-						if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
-							jounin_reward += jounin_reward_mod
+						var/jounin_reward = 0
+						for(var/mob/m in mobs_online)
+							if(squad == m.GetSquad() && m.rank == RANK_ACADEMY_STUDENT)
+								jounin_reward += jounin_reward_mod
 
-					for(var/mob/m in mobs_online)
-						if(squad == m.GetSquad())
-							m.exp += exp_reward
-							m.ryo += ryo_reward
-							m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
-							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
-								m.exp += jounin_reward
-								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
+						for(var/mob/m in mobs_online)
+							if(squad == m.GetSquad())
+								m.exp += exp_reward
+								m.ryo += ryo_reward
+								m << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+								if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
+									m.exp += jounin_reward
+									m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
-								m.Levelup()
-								spawn() m.UpdateHMB()
-								spawn() squad.RefreshMember(m)
+									m.Levelup()
+									spawn() m.UpdateHMB()
+									spawn() squad.RefreshMember(m)
 
 			if(/mission/b_rank/hunting_rogues)
 				if(squad && !squad.mission.complete)
