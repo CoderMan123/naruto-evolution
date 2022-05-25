@@ -338,6 +338,7 @@ mob/MasterGM/verb
 		set category = "Staff"
 		set name = "Enter Admin Hideout"
 		usr.loc = locate(152,162,9)
+		
 	Reboot()
 		set category="Staff"
 		world<<output("World is rebooting.","Action.Output")
@@ -366,15 +367,6 @@ mob/MasterGM/verb
 				text2file("[usr] deleted [O.name]: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 				del(M)
 		else del(O)
-
-	Add_Admin(mob/M in mobs_online)
-		set category="Staff"
-		world<<output("[M] is now an admin.","Action.Output")
-		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Admin.: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
-		administrators.Find(M.ckey)
-		M.client.StaffCheck()
-		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
-
 
 	Admin_Shield()
 		set category = "Staff"
@@ -413,92 +405,6 @@ mob/MasterGM/verb
 		winset(src, null, {"
 						Browser.is-visible = "true";
 					"})
-
-	Get_GMLog()
-		set category = "Staff"
-		var/gmlog = file(LOG_STAFF)
-		usr << browse(gmlog)
-		winset(src, null, {"
-						Browser.is-visible = "true";
-					"})
-
-	Level_Boost()
-		set category = "Staff"
-		if(administrators.Find(src.ckey))
-			var/mob/M=input("Add levels to who?") in mobs_online + "Cancel"
-			if(M=="Cancel")
-				return
-			var/A=input("How many levels?") as num
-			var/check=input("Just to make sure -> [A] levels to [M]?") in list("Yes","No")
-			if(check=="No")
-				return
-			usr<<"Adding [A] lvls to [M]!"
-			M<<"[usr] is giving you [A] free levels !!! Congrats!"
-			text2file("[usr]([usr.key]) gave [A] levels to [M]([M.key]): [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
-			if(M == usr)
-				world<<"[M] has givin them self Levels."
-			while(A<>0)
-				A--
-				M.exp=M.maxexp
-				sleep(10)
-				M.Levelup()
-		else
-			usr<<"Developer Only."
-
-	Stat_Boost()
-		set category = "Staff"
-		if(administrators.Find(src.ckey))
-			var/mob/M=input("Add stats to who?") in mobs_online + "Cancel"
-			if(M=="Cancel")
-				return
-			var/A=input("What stat?") in list("Taijutsu","Ninjutsu","Genjutsu","Defence","Agility")
-			var/asd=input("How much [A]?") as num
-			var/check=input("Just to make sure -> [asd] [A] to [M]?") in list("Yes","No")
-			if(check=="No")
-				return
-			usr<<"Adding [asd] [A] to [M]!"
-			text2file("[usr]([usr.key]) gave [asd] [A] to [M]([M.key]): [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
-			if(M == usr)
-				world<<"[M] has givin them self stats."
-			while(asd<>0)
-				asd--
-				if(A=="Ninjutsu")
-					M.ninexp=M.maxninexp
-				if(A=="Genjutsu")
-					M.genexp=M.maxgenexp
-				if(A=="Taijutsu")
-					M.strengthexp=M.maxstrengthexp
-				if(A=="Defence")
-					M.defexp=M.maxdefexp
-				if(A=="Agility")
-					M.agilityexp=M.maxagilityexp
-				sleep(10)
-				M.Levelup()
-		else
-			usr<<"Developers Only."
-			return
-
-	XPBOOST()
-		set category = "Staff"
-		set name = "Change World XP"
-		if(administrators.Find(src.ckey))
-			if(WorldXp !=0)
-				switch(input("Do you wish to reset world XP?") in list("Yes","No"))
-					if("Yes")
-						WorldXp=0
-						world<<"<font color = red><font size=3>Exp Boost reset to [WorldXp]."
-						return
-					else
-						return
-			if(WorldXp ==0)
-				var/howmuch=input("Please enter the ammount of EXP you wish to boost by.") as num
-				WorldXp+=howmuch
-				world<<"<font color = red><font size=5>Boosted +[WorldXp] EXP from missions!"
-		else
-			usr<<"Currently being fixed."
-
-
-
 
 atom/Topic(href,href_list[])
 	switch(href_list["action"])
