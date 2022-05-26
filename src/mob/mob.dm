@@ -822,6 +822,13 @@ mob
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.see_invisible = value
 				return
+			
+			command = "/infamy "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.infamy_points = value
+				return
 
 			else if(findtext(msg, "/stuck"))
 				src.Stuck()
