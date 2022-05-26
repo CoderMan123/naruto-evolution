@@ -1937,13 +1937,15 @@ window "Main"
 		can-resize = false
 		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
+		outer-size = 1294x734
+		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
 		size = 1280x720
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = #a6d799
+		background-color = #191919
 		saved-params = "splitter"
 		is-vert = false
 	elem "ActionChild"
@@ -1973,6 +1975,7 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		left = "Navigation"
 		is-vert = false
@@ -1982,20 +1985,10 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
-		is-vert = false
-	elem "UnlockChild"
-		type = CHILD
-		pos = 370,307
-		size = 540x107
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		background-color = #808080
-		border = line
-		saved-params = "splitter"
-		left = "MedalUnlock"
 		is-vert = false
 	elem "Titlebar"
 		type = LABEL
@@ -2017,6 +2010,7 @@ window "Main"
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "Reconnect"
@@ -2100,6 +2094,7 @@ window "Map"
 		size = 1010x675
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -2109,6 +2104,8 @@ window "Map"
 		is-pane = true
 		macro = "macro"
 		menu = "menu"
+		outer-size = 1024x689
+		inner-size = 1010x675
 	elem "Main"
 		type = MAP
 		pos = 0,0
@@ -2120,47 +2117,6 @@ window "Map"
 		is-default = true
 		saved-params = "icon-size"
 		zoom = 1
-
-window "MedalUnlock"
-	elem "MedalUnlock"
-		type = MAIN
-		pos = 281,0
-		size = 498x59
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		is-pane = true
-	elem "Medal"
-		type = LABEL
-		pos = 245,0
-		size = 253x78
-		anchor1 = 49,0
-		anchor2 = 100,100
-		font-family = "@Adobe Ming Std L"
-		font-size = 20
-		text-color = #ffffff
-		background-color = #232323
-		is-visible = false
-		saved-params = ""
-		text = ""
-	elem "label3"
-		type = LABEL
-		pos = 0,0
-		size = 253x78
-		anchor1 = 0,0
-		anchor2 = 51,100
-		font-family = "@Adobe Ming Std L"
-		font-size = 20
-		text-color = #ffffff
-		background-color = #232323
-		saved-params = ""
-		text = "Medal Unlocked:"
 
 window "Navigation"
 	elem "Navigation"
@@ -3974,7 +3930,6 @@ window "Alert"
 		size = 300x228
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -3982,8 +3937,6 @@ window "Alert"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		outer-size = 314x242
-		inner-size = 300x228
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4654,7 +4607,6 @@ window "Input"
 		size = 300x252
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4662,8 +4614,6 @@ window "Input"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		outer-size = 314x266
-		inner-size = 300x252
 	elem "Background"
 		type = LABEL
 		pos = 0,0
