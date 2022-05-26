@@ -97,7 +97,7 @@ mob
 				else
 					m << "[src.name] has logged out."
 
-			for(var/obj/Inventory/mission/deliver_intel/o in src.contents) src.DropItem(o)
+			for(var/obj/Inventory/mission/deliver_intel/o in src.contents) src.DropItem(o, 1, src.loc)
 
 			for(var/obj/O in world) if(O.IsJutsuEffect == src) del(O)
 

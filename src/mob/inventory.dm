@@ -26,32 +26,10 @@ obj
 						usr.client.prompt("You don't have [response[2]] [src]'s to drop.")
 						return
 
-					else if(src.stacks == response[2])
-						src.loc = usr.loc
-
-					else if(src.stacks > response[2])
-						src.stacks -= response[2]
-						if(src.max_stacks > 1) src.suffix = "x[src.stacks]"
-						var/obj/Inventory/O = new src.type(usr.loc)
-						O.stacks = response[2]
-
-					if(response[2] > 1)
-						hearers() << "<i>[usr] drops x[response[2]] [src] on the ground.</i>"
-					else
-						hearers() << "<i>[usr] drops a [src] on the ground.</i>"
-						
-					usr.client.UpdateInventoryPanel()
+					usr.DropItem(src, response[2], usr.loc)
 
 				else
-					src.loc=usr.loc
-					hearers() << "<i>[usr] drops a [src] on the ground.</i>"
-					usr.client.UpdateInventoryPanel()
-
-				if(istype(src, /obj/Inventory/mission/deliver_intel/leaf_intel))
-					usr.overlays-= /obj/Symbols/missions/intel_scroll/leaf
-
-				else if(istype(src, /obj/Inventory/mission/deliver_intel/sand_intel))
-					usr.overlays-= /obj/Symbols/missions/intel_scroll/sand
+					usr.DropItem(src, 1, usr.loc)
 
 		ryo_pouch
 			icon='Ryo_Pouch.dmi'
@@ -89,51 +67,12 @@ mob
 				return
 
 			for(var/obj/Inventory/O in oview(1))
-
-				if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
-					src.overlays+= /obj/Symbols/missions/intel_scroll/leaf
-					var/obj/Inventory/mission/deliver_intel/leaf_intel/o = O
-
-					var/squad/squad = src.GetSquad()
-					// The intel scroll can only be picked up by the originating squad or by another village.
-					if(!squad && src.village == "Hidden Leaf" || (squad && o.squad && squad != o.squad && src.village == "Hidden Leaf")) continue
-
-				else if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel))
-					src.overlays+= /obj/Symbols/missions/intel_scroll/sand
-					var/obj/Inventory/mission/deliver_intel/sand_intel/o = O
-
-					var/squad/squad = src.GetSquad()
-					// The intel scroll can only be picked up by the originating squad or by another village.
-					if(!squad && src.village == "Hidden Sand" || (squad && o.squad && squad != o.squad && src.village == "Hidden Sand")) continue
-
-				if(O.max_stacks > 1)
-					var/obj/Inventory/I
-					for(I in src.contents)
-						if(I.type == O.type)
-							if(I.stacks >= I.max_stacks) continue
-							else break
-					if(I)
-						var/convert = min(O.stacks, I.max_stacks - I.stacks)
-						O.stacks -= convert
-						I.stacks += convert
-						I.suffix = "x[I.stacks]"
-						if(O.stacks <= 0) O.loc=null
-						else src.Pickup()
-
-					else
-						src.contents += new O.type
-						O.stacks--
-						O.suffix = "x[O.stacks]"
-						src.Pickup()
-				else
-					src.contents += O
-
-				src.client.UpdateInventoryPanel()
+				src.RecieveItem(O, src.loc)
 				break
 
 
 	proc
-		RecieveItem(var/obj/Inventory/O)
+		RecieveItem(var/obj/Inventory/O, var/atom/atom)
 			if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
 				src.overlays+= /obj/Symbols/missions/intel_scroll/leaf
 				var/obj/Inventory/mission/deliver_intel/leaf_intel/o = O
@@ -151,31 +90,48 @@ mob
 				if(!squad && src.village == "Hidden Sand" || (squad && o.squad && squad != o.squad && src.village == "Hidden Sand")) return
 
 			if(O.max_stacks > 1)
-				var/obj/Inventory/I
-				for(I in src.contents)
-					if(I.type == O.type)
-						if(I.stacks >= I.max_stacks) continue
-						else break
-				if(I)
-					var/convert = min(O.stacks, I.max_stacks - I.stacks)
-					O.stacks -= convert
-					I.stacks += convert
-					I.suffix = "x[I.stacks]"
-					if(O.stacks <= 0) O.loc=null
-					else src.RecieveItem(O)
-
+				if(atom)
+					if(ismob(atom))
+						hearers() << "<i>[src] takes x[O.stacks] [O] from [atom].</i>"
+					else
+						hearers() << "<i>[src] picks up x[O.stacks] [O] from the [lowertext(atom.name)].</i>"
 				else
-					src.contents += new O.type
-					O.stacks--
-					O.suffix = "x[O.stacks]"
-					src.RecieveItem(O)
+					hearers() << "<i>[src] picks up x[O.stacks] [O] from the ground.</i>"
+
+				while(O && O.stacks > 0)
+					var/obj/Inventory/I
+					for(I in src.contents)
+						if(I.type == O.type)
+							if(I.stacks >= I.max_stacks) continue
+							else break
+					if(I)
+						var/convert = min(O.stacks, I.max_stacks - I.stacks)
+						O.stacks -= convert
+						I.stacks += convert
+						I.suffix = "x[I.stacks]"
+						if(O.stacks <= 0) O.loc = null
+
+					else
+						src.contents += new O.type
+						O.stacks--
+						O.suffix = "x[O.stacks]"
+						if(O.stacks <= 0) O.loc = null
+
 			else
 				src.contents += O
+
+				if(atom)
+					if(ismob(atom))
+						hearers() << "<i>[src] takes [O] from [atom].</i>"
+					else
+						hearers() << "<i>[src] picks up [O] from the [lowertext(atom.name)].</i>"
+				else
+					hearers() << "<i>[src] picks up [O] from the ground.</i>"
 
 			if(src.client)
 				src.client.UpdateInventoryPanel()
 
-		DropItem(obj/Inventory/O, var/quantity=1)
+		DropItem(obj/Inventory/O, var/quantity=1, var/atom/atom)
 			//TODO: make dropping more than 1 quantity work with non stackables
 			//TODO: quantity = -1 means drop maximum, stacking and non stacking included.
 			if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
@@ -201,12 +157,27 @@ mob
 						var/obj/Inventory/o = new O.type(src.loc)
 						o.stacks = quantity
 
-					hearers() << output("[src] drops [O].","Action.Output")
+					if(atom)
+						if(ismob(atom))
+							hearers() << "<i>[src] gives x[O.stacks] [O] to [atom].</i>"
+						else
+							hearers() << "<i>[src] drops x[O.stacks] [O] on the [lowertext(atom.name)].</i>"
+					else
+						hearers() << "<i>[src] drops x[quantity] [O] on the ground.</i>"
+						
 					src.client.UpdateInventoryPanel()
 
 			else
-				O.loc=src.loc
-				hearers() << output("[src] drops [O].","Action.Output")
+				O.loc = src.loc
+
+				if(atom)
+					if(ismob(atom))
+						hearers() << "<i>[src] gives a [O] to [atom].</i>"
+					else
+						hearers() << "<i>[src] drops a [O] on the [lowertext(atom.name)].</i>"
+				else
+					hearers() << "<i>[src] drops a [O] on the ground.</i>"
+
 				src.client.UpdateInventoryPanel()
 
 		DestroyItem(obj/Inventory/O, var/destroy_quantity=1)

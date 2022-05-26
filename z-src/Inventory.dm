@@ -57,7 +57,7 @@ obj
 					//	usr.Clothes.Add(src)
 					//	usr.Clothes.Add(src.type)
 					//else
-				usr.RecieveItem(src)
+				usr.RecieveItem(src, usr.loc)
 				usr.client.UpdateInventoryPanel()
 				return
 			..()

@@ -227,13 +227,13 @@ mob
                                     switch(usr.village)
                                         if("Hidden Leaf")
                                             var/obj/Inventory/mission/deliver_intel/leaf_intel/o = new(usr)
-                                            usr.RecieveItem(o)
+                                            usr.RecieveItem(o, src)
                                             spawn() usr.client.UpdateInventoryPanel()
                                             usr.client.prompt("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 
                                         if("Hidden Sand")
                                             var/obj/Inventory/mission/deliver_intel/sand_intel/o = new(usr)
-                                            usr.RecieveItem(o)
+                                            usr.RecieveItem(o, src)
                                             spawn() usr.client.UpdateInventoryPanel()
                                             usr.client.prompt("I need you to deliver this intel to [squad.mission.complete_npc].", src.name)
 

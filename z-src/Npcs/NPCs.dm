@@ -67,7 +67,7 @@ mob/npc
 					X.Blend(rgb(text2num(Colors[1]),text2num(Colors[2]),text2num(Colors[3])),ICON_ADD)
 					I.icon=X
 					I.cColor = rgb(text2num(Colors[1]),text2num(Colors[2]),text2num(Colors[3]))
-				usr.RecieveItem(I)
+				usr.RecieveItem(I, src)
 				usr.client.UpdateInventoryPanel()
 				usr<<output("You bought the [S.name] for [S.Cost] Ryo.","Action.Output")
 				usr.ryo-=S.Cost
@@ -118,7 +118,7 @@ mob/npc
 			if(usr.ryo>=RealPrice)
 				var/obj/Inventory/I=new S.type()
 				I.stacks = response[2]
-				usr.RecieveItem(I)
+				usr.RecieveItem(I, src)
 				usr.client.UpdateInventoryPanel()
 				usr<<output("You bought [response[2]] [S.name](s) for [RealPrice] Ryo.","Action.Output")
 				usr.ryo-=RealPrice

@@ -431,7 +431,7 @@ mob
 					src.injutsu=1
 					src.icon_state="dead"
 					for(var/obj/ChuuninExam/Scrolls/S in src)S.Move(src.loc)
-					for(var/obj/Inventory/mission/deliver_intel/o in src.contents) src.DropItem(o)
+					for(var/obj/Inventory/mission/deliver_intel/o in src.contents) src.DropItem(o, 1, src.loc)
 					spawn()
 						while(dead)
 							loc=DeadLocation
