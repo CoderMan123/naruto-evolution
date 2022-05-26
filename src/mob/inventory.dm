@@ -18,30 +18,33 @@ obj
 					return
 
 				if(src.stacks > 1)
-					var/result = usr.client.iprompt("How many [src]'s would you like to drop?", "Satchel")
-					if(!result[2]) return
-					if(isnum(result[2]))
-						if(src.stacks < result[2])
-							usr.client.prompt("You don't have [result[2]] [src]'s to drop.")
-							return
+					var/list/response = usr.client.iprompt("How many [src]'s would you like to drop?", "Satchel")
+					response[2] = text2num(response[2])
+					if(!response[2]) return
 
-						else if(src.stacks == result[2])
-							src.loc=usr.loc
+					if(src.stacks < response[2])
+						usr.client.prompt("You don't have [response[2]] [src]'s to drop.")
+						return
 
-						else if(src.stacks > result[2])
-							src.stacks -= result[2]
-							if(src.max_stacks > 1) src.suffix = "x[src.stacks]"
-							var/obj/Inventory/O = new src.type(usr.loc)
-							O.stacks = result[2]
+					else if(src.stacks == response[2])
+						src.loc = usr.loc
 
-						hearers() << output("[usr] drops [src].","Action.Output")
-						usr.client.UpdateInventoryPanel()
+					else if(src.stacks > response[2])
+						src.stacks -= response[2]
+						if(src.max_stacks > 1) src.suffix = "x[src.stacks]"
+						var/obj/Inventory/O = new src.type(usr.loc)
+						O.stacks = response[2]
+
+					if(response[2] > 1)
+						hearers() << "<i>[usr] drops x[response[2]] [src] on the ground.</i>"
 					else
-						usr.client.prompt("That is not a number!", "Satchel")
+						hearers() << "<i>[usr] drops a [src] on the ground.</i>"
+						
+					usr.client.UpdateInventoryPanel()
 
 				else
 					src.loc=usr.loc
-					hearers() << output("[usr] drops [src].","Action.Output")
+					hearers() << "<i>[usr] drops a [src] on the ground.</i>"
 					usr.client.UpdateInventoryPanel()
 
 				if(istype(src, /obj/Inventory/mission/deliver_intel/leaf_intel))
