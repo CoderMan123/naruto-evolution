@@ -19,7 +19,7 @@ obj
 					if(src.level==2)Owner.maxbunshin=1
 					if(src.level==3)Owner.maxbunshin=1
 					if(src.level==4)Owner.maxbunshin=1
-					Owner<<output("<font color= #bc8f8f>Your [src]'s clones now have more strength</Font>.","Action.Output")
+					Owner<<output("<font color= #bc8f8f>Your [src]'s clones now have more SPECIALIZATION_TAIJUTSU</Font>.","Action.Output")
 				if(src.name=="Fire Release: Fire Ball")
 					Owner<<output("<font color= #bc8f8f>Your [src] skill's base damage has increased</Font>.","Action.Output")
 				if(src.name=="Meteor Punch")
@@ -59,7 +59,7 @@ mob
 			if(src.exp_locked && !bypass_exp_lock) return
 			switch(stat)
 				if("Defence") defexp += round(howmuch)
-				if("Strength") strengthexp += round(howmuch)
+				if(SPECIALIZATION_TAIJUTSU) taijutsuexp += round(howmuch)
 				if("Ninjutsu") ninexp += round(howmuch)
 				if("Genjutsu") genexp += round(howmuch)
 				if("Agility") agilityexp += round(howmuch)
@@ -106,24 +106,24 @@ mob
 					src.overlays-=O
 					O.loc = null
 				next
-			if(src.strengthexp>=src.maxstrengthexp)
-				if(src.strength>=150)
+			if(src.taijutsuexp>=src.maxtaijutsuexp)
+				if(src.taijutsu>=150)
 					goto next
 				src.PlayAudio('level.wav', output = AUDIO_SELF)
-				src<<output("<font color=TaiOrange>You leveled up Strength</Font>.","Action.Output")
+				src<<output("<font color=TaiOrange>You leveled up [SPECIALIZATION_TAIJUTSU]</Font>.","Action.Output")
 				src.exp+=1
-				src.strength+=1
-				src.strengthexp-=src.maxstrengthexp
-				if(src.strength<=30)
-					src.maxstrengthexp+=10+round(src.strength/2)
-				if(src.strength>30&&src.strength<=60)
-					src.maxstrengthexp+=30+round(src.strength/2)
-				if(src.strength>60&&src.strength<=90)
-					src.maxstrengthexp+=60+round(src.strength/2)
-				if(src.strength>90&&src.strength<=120)
-					src.maxstrengthexp+=100+round(src.strength/2)
-				if(src.strength>120&&src.strength<=150)
-					src.maxstrengthexp+=150+round(src.strength/2)
+				src.taijutsu+=1
+				src.taijutsuexp-=src.maxtaijutsuexp
+				if(src.taijutsu<=30)
+					src.maxtaijutsuexp+=10+round(src.taijutsu/2)
+				if(src.taijutsu>30&&src.taijutsu<=60)
+					src.maxtaijutsuexp+=30+round(src.taijutsu/2)
+				if(src.taijutsu>60&&src.taijutsu<=90)
+					src.maxtaijutsuexp+=60+round(src.taijutsu/2)
+				if(src.taijutsu>90&&src.taijutsu<=120)
+					src.maxtaijutsuexp+=100+round(src.taijutsu/2)
+				if(src.taijutsu>120&&src.taijutsu<=150)
+					src.maxtaijutsuexp+=150+round(src.taijutsu/2)
 				src.Levelup()
 				next
 
@@ -739,7 +739,7 @@ mob
 											M.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M.LevelStat("strength",rand(10,25),1)
+											M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
 
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
@@ -757,7 +757,7 @@ mob
 													M.LevelStat("Ninjutsu",rand(10,25),1)
 
 												if(2)
-													M.LevelStat("strength",rand(10,25),1)
+													M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
 
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
@@ -776,7 +776,7 @@ mob
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M2.LevelStat("strength",rand(10,25),1)
+											M2.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
 
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
@@ -800,7 +800,7 @@ mob
 											M.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M.LevelStat("strength",rand(10,25),1)
+											M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
 
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
@@ -818,7 +818,7 @@ mob
 													M.LevelStat("Ninjutsu",rand(10,25),1)
 
 												if(2)
-													M.LevelStat("strength",rand(10,25),1)
+													M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
 
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
@@ -837,7 +837,7 @@ mob
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M2.LevelStat("strength",rand(10,25),1)
+											M2.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
 
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
@@ -859,7 +859,7 @@ mob
 											M.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M.LevelStat("strength",rand(10,25),1)
+											M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
 
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
@@ -877,7 +877,7 @@ mob
 													M.LevelStat("Ninjutsu",rand(10,25),1)
 
 												if(2)
-													M.LevelStat("strength",rand(10,25),1)
+													M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
 
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
@@ -896,7 +896,7 @@ mob
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M2.LevelStat("strength",rand(10,25),1)
+											M2.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
 
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)

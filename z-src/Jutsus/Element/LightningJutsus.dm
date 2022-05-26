@@ -286,7 +286,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=J.damage+round(src.ninjutsu*1.5+src.strength*0.8)
+								A.damage=J.damage+round(src.ninjutsu*1.5+src.taijutsu*0.8)
 							spawn() walk(A,src.dir)
 					src.firing=0
 					src.canattack=1
@@ -372,7 +372,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/5+src.strength/10)
+							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
 							walk(A,src.dir)
 					spawn(5)if(src)
 						src.firing=0

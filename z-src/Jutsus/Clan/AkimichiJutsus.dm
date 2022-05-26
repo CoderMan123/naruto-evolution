@@ -6,14 +6,14 @@ mob
 				for(var/obj/Jutsus/GreenPill/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.ingpill==1) return
-						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/10)*jutsustatexp))
-						src.strength+=15
+						if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/10)*jutsustatexp))
+						src.taijutsu+=15
 						src.DealDamage(src.maxhealth/5,src,"black")
 						src.ingpill=1
 						spawn(200)
 							src.ingpill=0
 							src<<"\green Your Green Pill Effect wears off..."
-							src.strength-=15
+							src.taijutsu-=15
 
 		YellowPill()
 			if(firing)return
@@ -21,14 +21,14 @@ mob
 				for(var/obj/Jutsus/YellowPill/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.inypill==1) return
-						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/10)*jutsustatexp))
-						src.strength+=25
+						if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/10)*jutsustatexp))
+						src.taijutsu+=25
 						src.DealDamage(src.maxhealth/3.5,src,"black")
 						src.inypill=1
 						spawn(200)
 							src.inypill=0
 							src<<"\yellow Your Yellow Pill Effect wears off..."
-							src.strength-=25
+							src.taijutsu-=25
 
 		RedPill()
 			if(firing)return
@@ -36,15 +36,15 @@ mob
 				for(var/obj/Jutsus/RedPill/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.inrpill==1) return
-						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/10)*jutsustatexp))
-						src.strength+=40
+						if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/10)*jutsustatexp))
+						src.taijutsu+=40
 						src.DealDamage(src.maxhealth/2.4,src,"black")
 						src.inrpill=1
 						src.JutsuCoolSlot(J)
 						spawn(200)
 							src.inrpill=0
 							src<<"\red Your Red Pill Effect wears off..."
-							src.strength-=40
+							src.taijutsu-=40
 
 		HumanBulletTank()
 			if(firing)return
@@ -52,7 +52,7 @@ mob
 				for(var/obj/Jutsus/HumanBulletTank/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.inboulder==1) return
-						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
+						if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*1.3
 						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*1.3
@@ -76,7 +76,7 @@ mob
 								if(M == src) continue
 								if(M.dead) continue
 								if(src.loc == lastloc) continue
-								M.DealDamage(round((src.ninjutsu / 300)+(src.strength / 300)*2*J.damage)/12,src,"NinBlue")
+								M.DealDamage(round((src.ninjutsu / 300)+(src.taijutsu / 300)*2*J.damage)/12,src,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="dead"
 								M.move=0
@@ -101,18 +101,18 @@ mob
 				for(var/obj/Jutsus/CalorieControl/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(src.incalorie==1) return
-						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/10)*jutsustatexp))
+						if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/10)*jutsustatexp))
 						flick("jutsu",src)
 						if(J.level==1) J.damage=10
 						if(J.level==2) J.damage=20
 						if(J.level==3) J.damage=30
 						if(J.level==4) J.damage=40
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-						src.strength+=J.damage
+						src.taijutsu+=J.damage
 						src.underlays+='AkimichiWings.dmi'
 						src.incalorie=1
 						spawn(300)
-							src.strength-=J.damage
+							src.taijutsu-=J.damage
 							src.incalorie=0
 							src.underlays-='AkimichiWings.dmi'
 
@@ -122,7 +122,7 @@ mob
 				for(var/obj/Jutsus/SuperMultiSizeTechnique/J in src.jutsus)
 					if(src.inrpill==1 || src.incalorie==1)
 						if(src.PreJutsu(J))
-							if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/10)*jutsustatexp))
+							if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/10)*jutsustatexp))
 							if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 							var/matrix/m = matrix()
 							src.appearance_flags = PIXEL_SCALE | KEEP_TOGETHER

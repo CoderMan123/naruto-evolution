@@ -116,13 +116,13 @@ mob
 				src.layer = initial(src.layer)
 
 			if(src.ingpill)
-				src.strength -= 15
+				src.taijutsu -= 15
 
 			if(src.inypill)
-				src.strength -= 25
+				src.taijutsu -= 25
 
 			if(src.inrpill)
-				src.strength -= 40
+				src.taijutsu -= 40
 
 			if(src.dueling)
 				src.loc = MapLoadSpawn()
@@ -133,14 +133,14 @@ mob
 
 			if(src.incalorie)
 				for(var/obj/Jutsus/CalorieControl/J in src.jutsus)
-					src.strength -= J.damage
+					src.taijutsu -= J.damage
 
 			if(src.incurse)
-				src.strength -= 15
+				src.taijutsu -= 15
 				src.ninjutsu -= 10
 
 			if(src.insage)
-				src.strength -= 10
+				src.taijutsu -= 10
 				src.ninjutsu -= 20
 
 			if(src.inJC1)
@@ -155,24 +155,24 @@ mob
 				src.defence -= 50
 
 			if(src.inJC4)
-				src.strength -= 50
+				src.taijutsu -= 50
 
 			if(src.inJC5)
-				src.strength -= 35
+				src.taijutsu -= 35
 				src.agility -= 35
 
 			if(src.inJC6)
 				src.ninjutsu -= 50
 
 			if(src.inJC7)
-				src.strength -= 35
+				src.taijutsu -= 35
 				src.agility -= 35
 
 			if(src.inJC8)
-				src.strength -= 50
+				src.taijutsu -= 50
 
 			if(src.inJC9)
-				src.strength -= 35
+				src.taijutsu -= 35
 				src.ninjutsu -= 35
 
 			if(src in global.genintesters)
@@ -380,15 +380,15 @@ mob
 				src.HairColor = src.client.cprompt("Please select a hairstyle dye.", "Hairstyle Dye", luminosity_max = 20)
 
 			src.Element = src.client.prompt("Element Options","Please choose your primary elemental affinity.",list("Fire","Water","Wind","Earth","Lightning"))
-			src.Specialist = src.client.prompt("Specialist Options","What area of skills would you like to specialize in? Some nonclans and nonclan jutsus require a specific speciality. \n Gates requires strength. \n Each speciality also has it's own nonclan tree.", list("Ninjutsu", "Genjutsu", "strength"))
+			src.Specialist = src.client.prompt("Specialist Options","What area of skills would you like to specialize in? Some nonclans and nonclan jutsus require a specific speciality. \n Gates requires [SPECIALIZATION_TAIJUTSU]. \n Each speciality also has it's own nonclan tree.", list("[SPECIALIZATION_NINJUTSU]", "[SPECIALIZATION_GENJUTSU]", "[SPECIALIZATION_TAIJUTSU]"))
 			src.Clan = src.client.prompt("Clan Options","What clan would you like to be born in?. \n Nonclan has many options that are similar to clans.",list("Senjuu","Crystal","Akimichi","Weaponist","Aburame","Hyuuga","Nara","Kaguya","Uchiha","Ink","Bubble","Medical","No Clan"))
 			src.village=src.client.prompt("Village Options","What village would you like to be born in?.",list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/))
 			src.rank = RANK_ACADEMY_STUDENT
 
 			switch(src.Specialist)
-				if("strength")
-					src.strength+=6
-					src.maxstrengthexp+=6
+				if(SPECIALIZATION_TAIJUTSU)
+					src.taijutsu+=6
+					src.maxtaijutsuexp+=6
 
 				if("Ninjutsu")
 					src.ninjutsu+=6
@@ -399,10 +399,10 @@ mob
 					src.maxgenexp+=6
 
 				if("Balanced")
-					src.strength+=2
+					src.taijutsu+=2
 					src.genjutsu+=2
 					src.ninjutsu+=2
-					src.maxstrengthexp+=2
+					src.maxtaijutsuexp+=2
 					src.maxninexp+=2
 					src.maxgenexp+=2
 
@@ -664,7 +664,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.strength = value
+				if(value) src.taijutsu = value
 				src.UpdateHMB()
 				return
 
@@ -728,7 +728,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.strengthexp = value
+				if(value) src.taijutsuexp = value
 				src.UpdateHMB()
 				return
 
@@ -736,7 +736,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxstrengthexp = value
+				if(value) src.maxtaijutsuexp = value
 				src.UpdateHMB()
 				return
 

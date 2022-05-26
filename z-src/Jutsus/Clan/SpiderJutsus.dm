@@ -71,7 +71,7 @@ mob
 						var/mob/jutsus/Summon_Spider/A=new/mob/jutsus/Summon_Spider(src.loc)
 						A.OWNER=src
 						A.dir=src.dir
-						A.strength=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						A.taijutsu=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						var/mob/c_target=src.Target_Get(TARGET_MOB)
 						if(c_target)
 							walk_to(A,c_target)

@@ -887,7 +887,7 @@ mob
 									C.mob.chakra = C.mob.maxchakra
 									C.mob.maxhealth = 10000
 									C.mob.health = C.mob.maxhealth
-									C.mob.strength = 150
+									C.mob.taijutsu = 150
 									C.mob.ninjutsu = 150
 									C.mob.genjutsu = 150
 									C.mob.defence = 150

@@ -132,11 +132,11 @@ mob
 						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.underlays+='CS Aura.dmi'
 						src.ninjutsu+=10
-						src.strength+=15
+						src.taijutsu+=15
 						src.incurse=1
 						spawn(200)
 							src.ninjutsu-=10
-							src.strength-=15
+							src.taijutsu-=15
 							src.incurse=0
 							src.underlays-='CS Aura.dmi'
 							src<<"Curse Seal wears off..."

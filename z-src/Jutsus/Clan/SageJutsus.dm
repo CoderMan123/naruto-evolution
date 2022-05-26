@@ -251,10 +251,10 @@ mob
 						src.overlays+='Jutsus/Misc/MiscJutIcons/sage.dmi'
 						src.ninjutsu+=20
 						src.insage=1
-						src.strength+=10
+						src.taijutsu+=10
 						spawn(200)
 							src.ninjutsu-=20
-							src.strength-=10
+							src.taijutsu-=10
 							src.insage=0
 							src.overlays=0
 							src.RestoreOverlays()

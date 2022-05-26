@@ -290,7 +290,7 @@ mob
 							A.Owner=src
 							A.icon=src.icon
 							A.overlays=src.overlays
-							A.strength=round(src.strength/bun)
+							A.taijutsu=round(src.taijutsu/bun)
 							A.defence=round(src.defence/bun)
 							A.health=round(src.health/10)
 							A.maxhealth=round(src.maxhealth/10)
@@ -325,7 +325,7 @@ mob
 							A.Owner=src
 							A.icon=src.icon
 							A.overlays=src.overlays
-							A.strength=round(src.strength/bun)
+							A.taijutsu=round(src.taijutsu/bun)
 							A.defence=round(src.defence/bun)
 							A.health=round(src.health/10)
 							A.maxhealth=round(src.maxhealth/10)
@@ -496,7 +496,7 @@ mob
 		One_Thousand_Years_of_Death()
 			for(var/obj/Jutsus/One_Thousand_Years_of_Death/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
+					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
@@ -527,7 +527,7 @@ mob
 							spawn(7)if(O)del(O)
 							if(M) step(M,src.dir)
 							if(M) M.dir = get_dir(M,src)
-							if(M) M.DealDamage((J.damage+round(((src.strength / 300)+(src.precision / 300))*2*J.damage))/4,src,"TaiOrange")
+							if(M) M.DealDamage((J.damage+round(((src.taijutsu / 300)+(src.precision / 300))*2*J.damage))/4,src,"TaiOrange")
 							sleep(1)
 					src.icon_state = ""
 					src.move=1
@@ -655,7 +655,7 @@ mob
 		Body_Pathway_Derangement()
 			for(var/obj/Jutsus/Body_Pathway_Derangement/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
+					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.4
@@ -672,7 +672,7 @@ mob
 					var/mob/Z
 					for(var/mob/M in get_step(src,src.dir))Z=M
 					if(Z)
-						Z.DealDamage(J.damage + round((src.strength / 300)+(src.precision / 300)*2*J.damage)*1.5,src,"NinBlue")
+						Z.DealDamage(J.damage + round((src.taijutsu / 300)+(src.precision / 300)*2*J.damage)*1.5,src,"NinBlue")
 						Z.sleephits=0
 						Z.icon_state="dead"
 						Z.move=0
@@ -826,7 +826,7 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(!c_target){src<<output("<font color=yellow>You need to have a Target to perform ShiShi Rendan","Action.Output");return}
-					if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
+					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2.5)
 					if(J.level==2) J.damage=0.7*((jutsudamage*J.Sprice)/2)
@@ -864,7 +864,7 @@ mob
 															src.injutsu=0
 															src.canattack=1
 															c_target.move=1
-															c_target.DealDamage(J.damage+round(((src.strength / 300)+(src.agility / 300))*2*J.damage),src,"TaiOrange")
+															c_target.DealDamage(J.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*J.damage),src,"TaiOrange")
 															if(c_target)c_target.Bleed()
 															src.move=1
 
@@ -872,7 +872,7 @@ mob
 			if(src.firing==0&&!src.likeaclone)
 				for(var/obj/Jutsus/Leaf_Whirlwind/J in src.jutsus)
 					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
+						if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 						var/damage
 						if(J.level>=3)
@@ -893,7 +893,7 @@ mob
 								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 									if(c_target.fightlayer==src.fightlayer)
 										if(c_target.dodge==0)
-											var/undefendedhit=round(J.damage+round(((src.strength / 300)+(src.agility / 300))*2*J.damage)-(c_target.defence/10))
+											var/undefendedhit=round(J.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*J.damage)-(c_target.defence/10))
 											if(undefendedhit<0)undefendedhit=1
 											c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 											if(c_target.loc.loc:Safe!=1)c_target.LevelStat("Defence",rand(3,6))
@@ -913,12 +913,12 @@ mob
 													c_target.firing=0
 										else
 											if(src.agility>=c_target.agility)
-												var/defendedhit=round(J.damage+round(((src.strength / 300)+(src.agility / 300))*2*J.damage)-(c_target.defence/10))
+												var/defendedhit=round(J.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*J.damage)-(c_target.defence/10))
 												if(defendedhit<0)defendedhit=1
 												//if(loc.loc:Safe!=1)src.
-												if(loc.loc:Safe!=1)src.LevelStat("strength",1)
+												if(loc.loc:Safe!=1)src.LevelStat(SPECIALIZATION_TAIJUTSU,1)
 												if(c_target.loc.loc:Safe!=1)c_target.LevelStat("Defence",rand(5,10))
-												if(defence<src.strength/3)
+												if(defence<src.taijutsu/3)
 													var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 													Drag.dir=c_target.dir
 													step(c_target,src.dir)
@@ -932,12 +932,12 @@ mob
 												if(c_target.loc.loc:Safe!=1)c_target.LevelStat("Agility",rand(5,10))
 					/*	for(var/obj/Training/T in orange(src,J.level))
 							if(T.health>=1)
-								var/undefendedhit=round(((damage+src.strength+src.strength)/3))//-c_target.defence/4)
+								var/undefendedhit=round(((damage+src.taijutsu+src.taijutsu)/3))//-c_target.defence/4)
 								T.DealDamage(undefendedhit,src,"TaiOrange")
-								if(T) if(T.Good) LevelStat("Strength",rand(1,2))
-								else LevelStat("Strength",rand(0.2,1))
-								if(T) if(T.Good) src.LevelStat("strength",1)
-								else src.LevelStat("strength",0.2)
+								if(T) if(T.Good) LevelStat(SPECIALIZATION_TAIJUTSU,rand(1,2))
+								else LevelStat(SPECIALIZATION_TAIJUTSU,rand(0.2,1))
+								if(T) if(T.Good) src.LevelStat(SPECIALIZATION_TAIJUTSU,1)
+								else src.LevelStat(SPECIALIZATION_TAIJUTSU,0.2)
 								src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 								T.Break(src)*/
 						spawn(5)if(src)src.firing=0

@@ -15,10 +15,10 @@ mob
 		genjutsu=1
 		genexp=0
 		maxgenexp=100
-		strength=1
+		taijutsu=1
 		editing=0
-		strengthexp=0
-		maxstrengthexp=100
+		taijutsuexp=0
+		maxtaijutsuexp=100
 		defence=1
 		defexp=0
 		maxdefexp=100
@@ -45,7 +45,7 @@ mob
 		Element2
 		Kekkai
 		Clan=null
-		Specialist="strength"
+		Specialist
 		Specialist2
 		ryo=0
 		RyoBanked=0

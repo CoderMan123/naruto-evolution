@@ -65,7 +65,7 @@ mob
 						var/obj/A = new/obj/MiscEffects/Morning_Peacock(src.loc)
 						src.DealDamage((src.maxhealth * 0.001) * src.Gates, src, "maroon")
 						A.Owner=src
-						A.damage=((Jutsu.damage+round(((src.strength / 300)+(src.agility / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
+						A.damage=((Jutsu.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
 						A.dir=src.dir
 						if(prob(50))
 							if(src.dir==NORTH)
@@ -105,7 +105,7 @@ mob
 						var/obj/B = new/obj/MiscEffects/Morning_Peacock(src.loc)
 						src.DealDamage((src.maxhealth * 0.001) * src.Gates, src, "maroon")
 						B.Owner=src
-						B.damage=((Jutsu.damage+round(((src.strength / 300)+(src.agility / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
+						B.damage=((Jutsu.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
 						B.dir=src.dir
 						if(prob(50))
 							if(src.dir==NORTH)
@@ -300,7 +300,7 @@ obj
 /*						for(var/obj/Training/T in range(src,1))
 							if(T.health>=1)
 								src.Hit=1
-								var/undefendedhit=round((src.damage+Owner.strength+Owner.strength)/3.5)
+								var/undefendedhit=round((src.damage+Owner.taijutsu+Owner.taijutsu)/3.5)
 								T.DealDamage(undefendedhit,src,"TaiOrange")
 								T.Break(Owner)
 								break*/

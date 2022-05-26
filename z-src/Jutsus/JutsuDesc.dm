@@ -182,7 +182,7 @@ obj
 			mouse_drag_pointer = "Achiever of Nirvana Fist"
 			name="Body Pathway Derangement"
 			rank="A"
-			Specialist = "strength"
+			Specialist = SPECIALIZATION_TAIJUTSU
 			signs="<font color=green>Horse,Horse,Snake</font><br>(macro(3,3,2))"
 			Sprice=3
 			reqs=list("ShiShi Rendan")
@@ -198,7 +198,7 @@ obj
 			name="Leaf Hidden Finger Jutsu: One Thousand Years of Death"
 			rank="D"
 			signs="<font color=green>Monkey</font><br>(macro(4))"
-			Specialist = "strength"
+			Specialist = SPECIALIZATION_TAIJUTSU
 			Sprice=1
 			uses=100
 			Description="After a short delay you flick to your opponent and hit them with a precise strike in a.. certain place.. dealing damage (Str|Prc) and launching them a few squares."
@@ -213,7 +213,7 @@ obj
 			name="ShiShi Rendan"
 			rank="D"
 			signs="<font color=green>None"
-			Specialist = "strength"
+			Specialist = SPECIALIZATION_TAIJUTSU
 			Sprice=1
 			reqs = list("Leaf Hidden Finger Jutsu: One Thousand Years of Death")
 			uses=100
@@ -229,7 +229,7 @@ obj
 			name="Leaf Whirlwind"
 			rank="C"
 			signs="<font color=green>None"
-			Specialist = "strength"
+			Specialist = SPECIALIZATION_TAIJUTSU
 			reqs=list("ShiShi Rendan")
 			uses=100
 			Sprice=2
@@ -356,7 +356,7 @@ obj
 			Sprice=4
 			uses=100
 			signs="<font color=green>None</font><br>"
-			Description="You activate sage mode gaining a boost to strength and ninjutsu provided by powers of nature and grants access to a powerul connection to snakes. You will become a snake sage! (You will no longer be a Non Clan ninja and will be dedicated to the way of the Snake Sage)"
+			Description="You activate sage mode gaining a boost to Taijutsu and ninjutsu provided by powers of nature and grants access to a powerul connection to snakes. You will become a snake sage! (You will no longer be a Non Clan ninja and will be dedicated to the way of the Snake Sage)"
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*2
@@ -551,7 +551,7 @@ obj
 			Clan= "Medical"
 			Sprice=2
 			reqs=list("Mystical Palms")
-			Description="Use a precise injection of chakra from your hand on an opponent to simulate immense strength blasting them away, dealing damage (Nin) and briefly binding them. Also effective at shocking someone out of certain binds."
+			Description="Use a precise injection of chakra from your hand on an opponent to simulate immense Taijutsu blasting them away, dealing damage (Nin) and briefly binding them. Also effective at shocking someone out of certain binds."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*0.5
@@ -681,7 +681,7 @@ obj
 			maxcooltime = 5
 			uses = 100
 			level = 0
-			Description="Opens the chakra gates, increasing your strength and causing damage to yourself with every punch. The benefits and downsides increase with each level of gates you use."
+			Description="Opens the chakra gates, increasing your Taijutsu and causing damage to yourself with every punch. The benefits and downsides increase with each level of gates you use."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*0
@@ -695,11 +695,11 @@ obj
 			Sprice = 1
 			signs = "<font color=green>None</font><br>"
 			Clan="No Clan"
-			Specialist="strength"
+			Specialist=SPECIALIZATION_TAIJUTSU
 			maxcooltime = 200
 			uses = 100
 			IsGate = 1
-			Description="Opens the first chakra gate, increasing your strength and causing damage to yourself."
+			Description="Opens the first chakra gate, increasing your Taijutsu and causing damage to yourself."
 
 		Energy_Gate
 			icon_state="Gate 2"
@@ -713,7 +713,7 @@ obj
 			uses=100
 			IsGate = 1
 			reqs=list("Opening Gate")
-			Description="Opens the second chakra gate, increasing your strength further."
+			Description="Opens the second chakra gate, increasing your Taijutsu further."
 
 		Life_Gate
 			icon_state="Gate 3"
@@ -727,7 +727,7 @@ obj
 			uses=100
 			IsGate = 1
 			reqs=list("Opening Gate","Energy Gate")
-			Description="Opens the third chakra gate, allowing you to dramatically increase your strength and cause more damage to yourself."
+			Description="Opens the third chakra gate, allowing you to dramatically increase your Taijutsu and cause more damage to yourself."
 
 		Pain_Gate
 			icon_state="Gate 4"
@@ -741,7 +741,7 @@ obj
 			uses=100
 			IsGate = 1
 			reqs=list("Opening Gate","Energy Gate","Life Gate")
-			Description="Opens the fourth chakra gate, increasing your strength, giving you blinding speed, and causing damage to yourself."
+			Description="Opens the fourth chakra gate, increasing your Taijutsu, giving you blinding speed, and causing damage to yourself."
 
 		Limiter_Gate
 			icon_state="Gate 5"
@@ -755,7 +755,7 @@ obj
 			uses=100
 			IsGate = 1
 			reqs=list("Opening Gate","Energy Gate","Life Gate","Pain Gate")
-			Description="Opens the fifth chakra gate, increasing your strength unbeleivably and causing damage to yourself."
+			Description="Opens the fifth chakra gate, increasing your Taijutsu unbeleivably and causing damage to yourself."
 
 		Meteor_Punch
 			icon_state="mpunch"
@@ -767,7 +767,7 @@ obj
 			Sprice=2
 			uses=100
 			reqs = list("Opening Gate")
-			Description="Summoning up monsterous strength, channel this strength into a single punch launching someone back and dealing damage (Str)."
+			Description="Summoning up monsterous Taijutsu, channel this Taijutsu into a single punch launching someone back and dealing damage (Str)."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*0.7
@@ -2053,7 +2053,7 @@ obj
 			Clan="Akimichi"
 			uses=100
 			signs="<font color=green>None</font><br>"
-			Description="Take a green pill which infuses your body with chakra increasing your strength but burns calories causing a loss in health."
+			Description="Take a green pill which infuses your body with chakra increasing your Taijutsu but burns calories causing a loss in health."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)
@@ -2069,7 +2069,7 @@ obj
 			uses=100
 			signs="<font color=green>None</font><br>"
 			reqs=list("GreenPill")
-			Description="Take a yellow pill which infuses your body with chakra increasing your strength but burning calories causing a loss in health. Both the positive and negative effects are stronger than the green pill."
+			Description="Take a yellow pill which infuses your body with chakra increasing your Taijutsu but burning calories causing a loss in health. Both the positive and negative effects are stronger than the green pill."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)
@@ -2085,7 +2085,7 @@ obj
 			Clan="Akimichi"
 			signs="<font color=green>None</font><br>"
 			reqs=list("YellowPill")
-			Description="Take a red pill which infuses your body with chakra increasing your strength but burning calories causing a loss in health. Both the positive and negative effects are stronger than the yellow pill"
+			Description="Take a red pill which infuses your body with chakra increasing your Taijutsu but burning calories causing a loss in health. Both the positive and negative effects are stronger than the yellow pill"
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)
@@ -2116,7 +2116,7 @@ obj
 			Sprice=3
 			Clan="Akimichi"
 			reqs=list("RedPill")
-			Description="Control the calories in your body and convert them into chakra which greatly enhances your strength and forms as bright blue butterfly wings. It can be just as powerful as your pills but without the downsides."
+			Description="Control the calories in your body and convert them into chakra which greatly enhances your Taijutsu and forms as bright blue butterfly wings. It can be just as powerful as your pills but without the downsides."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*2.5
@@ -3302,7 +3302,7 @@ obj
 			ChakraCost = 0 //Change
 			uses=100
 			Sprice=0
-			Description="Summoning up monsterous strength, this strength ability allows one to put all that strength into one punch!"
+			Description="Summoning up monsterous Taijutsu, this Taijutsu ability allows one to put all that Taijutsu into one punch!"
 
 //Curse
 		CurseSeal
@@ -3310,13 +3310,13 @@ obj
 			mouse_drag_pointer = "Curse Seal"
 			name="Curse Seal"
 			rank="S"
-			Specialist = "strength"
+			Specialist = SPECIALIZATION_TAIJUTSU
 			maxcooltime = 0
 			ChakraCost = 0
 			Sprice=5
 			uses=100
 			signs="<font color=green>None</font><br>"
-			Description="Grants powerful boost to strength and ninjutsu to the user provided by powers of darkness."
+			Description="Grants powerful boost to Taijutsu and ninjutsu to the user provided by powers of darkness."
 
 /*		Curse_Seal_of_Heaven		I don't think this one is used.
 			icon_state="Curse Seal"

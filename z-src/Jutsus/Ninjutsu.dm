@@ -390,7 +390,7 @@ mob/Untargettable
 				M.injutsu=1
 
 				src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
-				M.DealDamage(src.strength,src.Ownzeez,"TaiOrange")
+				M.DealDamage(src.taijutsu,src.Ownzeez,"TaiOrange")
 				M.Bleed(M)
 				if(M.henge==4||M.henge==5)M.HengeUndo()
 				M.icon_state="push"
@@ -2692,7 +2692,7 @@ obj
 				if(istype(A,/mob/))
 					var/mob/M=A
 					if(M==ooowner) del(src)
-					M.DealDamage((ooowner.strength+dmg+ooowner.ninjutsu),src.Owner,"NinBlue")
+					M.DealDamage((ooowner.taijutsu+dmg+ooowner.ninjutsu),src.Owner,"NinBlue")
 					src.density=0
 					step(src,src.dir)
 				else
@@ -2876,7 +2876,7 @@ mob
 				step(src,src.dir)
 				step(src,src.dir)
 				src.density=1
-				M:DealDamage(round((src.ninjutsu / 300)+(src.strength / 300)*2*300)/6,src,"TaiOrange")
+				M:DealDamage(round((src.ninjutsu / 300)+(src.taijutsu / 300)*2*300)/6,src,"TaiOrange")
 		else
 			..()
 
@@ -2899,10 +2899,10 @@ mob
 			genjutsu=1
 			genexp=0
 			maxgenexp=10
-			strength=1
+			taijutsu=1
 			editing=0
-			strengthexp=0
-			maxstrengthexp=10
+			taijutsuexp=0
+			maxtaijutsuexp=10
 			defence=1
 			defexp=0
 			maxdefexp=10

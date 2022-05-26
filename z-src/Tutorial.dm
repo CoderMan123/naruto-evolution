@@ -87,14 +87,14 @@ mob/npc
 			Tutorial=1
 			density=1
 			DblClick()
-				if(!usr.TutorialStrength) usr.TutorialStrength=usr.strength
+				if(!usr.TutorialStrength) usr.TutorialStrength=usr.taijutsu
 				if(usr.Tutorial < Tutorial)
 					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
 					return
 				if(usr.Tutorial > Tutorial)
 					usr<<output("I've done my part. Go ahead and move on to the next room.","Action.Output")
 					return
-				if(usr.strength<=usr.TutorialStrength)
+				if(usr.taijutsu<=usr.TutorialStrength)
 					if(usr)
 						usr.client.prompt(
 							{"[src]: Hey you're looking pretty weak for a Ninja. Why don't you go hit some of those dummies over there and get some meat on your bones."}, "[src]")

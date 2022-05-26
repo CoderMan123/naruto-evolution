@@ -190,10 +190,10 @@ mob
 													var/defendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/2)+rand(0,10)
 													if(defendedhit<0)
 														defendedhit=0
-												//	if(Owner.loc.loc:Safe!=1) Owner.strength++
+												//	if(Owner.loc.loc:Safe!=1) Owner.taijutsu++
 													Owner.Levelup()
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,5))
-													if(defence<src.strength/3)
+													if(defence<src.taijutsu/3)
 														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 														Drag.dir=c_target.dir
 														step(c_target,src.dir)
@@ -216,7 +216,7 @@ mob
 												var/undefendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/4)+rand(0,10)
 												if(undefendedhit<0)undefendedhit=0
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
-											//	if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Strength",1)
+											//	if(Owner.loc.loc:Safe!=1) Owner.LevelStat(SPECIALIZATION_TAIJUTSU,1)
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 												if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
@@ -226,7 +226,7 @@ mob
 													if(defendedhit<0)
 														defendedhit=0
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,5))
-													if(defence<src.strength/3)
+													if(defence<src.taijutsu/3)
 														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 														Drag.dir=c_target.dir
 														step(c_target,src.dir)
@@ -465,7 +465,7 @@ mob
 									if(c_target.dead==0&&c_target!=Owner)
 										if(c_target.fightlayer==src.fightlayer)
 											if(c_target.dodge==0)
-												var/undefendedhit=round(src.strength-c_target.defence/4)
+												var/undefendedhit=round(src.taijutsu-c_target.defence/4)
 												if(undefendedhit<0)undefendedhit=0
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
@@ -473,12 +473,12 @@ mob
 												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											else
 												if(src.agility>=c_target.agility)
-													var/defendedhit=src.strength-c_target.defence
+													var/defendedhit=src.taijutsu-c_target.defence
 													if(defendedhit<0)defendedhit=0
-													//if(Owner.loc.loc:Safe!=1) Owner.strength++
+													//if(Owner.loc.loc:Safe!=1) Owner.taijutsu++
 													Owner.Levelup()
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,5))
-													if(defence<src.strength/3)
+													if(defence<src.taijutsu/3)
 														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 														Drag.dir=c_target.dir
 														step(c_target,src.dir)
@@ -498,7 +498,7 @@ mob
 									if(c_target.dead==0&&c_target!=Owner)
 										if(c_target.fightlayer==src.fightlayer)
 											if(c_target.dodge==0)
-												var/undefendedhit=round(src.strength-c_target.defence/4)
+												var/undefendedhit=round(src.taijutsu-c_target.defence/4)
 												if(undefendedhit<0)undefendedhit=0
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
@@ -506,10 +506,10 @@ mob
 												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											else
 												if(src.agility>=c_target.agility)
-													var/defendedhit=src.strength-c_target.defence
+													var/defendedhit=src.taijutsu-c_target.defence
 													if(defendedhit<0)defendedhit=0
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,5))
-													if(defence<src.strength/3)
+													if(defence<src.taijutsu/3)
 														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 														Drag.dir=c_target.dir
 														step(c_target,src.dir)
@@ -827,7 +827,7 @@ obj
 							if(M)
 								src.loc = M.loc
 								if(!Owner) return
-								M.DealDamage(12+src.damage+Owner.strength/5,src.Owner,"TaiOrange")
+								M.DealDamage(12+src.damage+Owner.taijutsu/5,src.Owner,"TaiOrange")
 								spawn() if(M) M.Bleed()
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(3,5))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -844,7 +844,7 @@ obj
 							if(M)
 								src.loc = M.loc
 								if(!Owner) return
-								M.DealDamage(2+Owner.strength*4,src.Owner,"TaiOrange")
+								M.DealDamage(2+Owner.taijutsu*4,src.Owner,"TaiOrange")
 								spawn() if(M) M.Bleed()
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(3,5))
 								if(M.henge==4||M.henge==5)M.HengeUndo()

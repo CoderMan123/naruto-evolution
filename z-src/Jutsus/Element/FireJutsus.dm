@@ -212,7 +212,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=(J.damage+round((src.ninjutsu / 300)*2*J.damage)+round((src.strength / 300)*2*J.damage))/5
+							A.damage=(J.damage+round((src.ninjutsu / 300)*2*J.damage)+round((src.taijutsu / 300)*2*J.damage))/5
 							var/turf/Tg
 							Tg = get_step(c_target,pick(NORTH,SOUTH,EAST,WEST))
 							var/k = rand(1,5)
@@ -302,7 +302,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=(J.damage+round((src.ninjutsu / 300)*2*J.damage)+round((src.strength / 300)*2*J.damage))/5
+								A.damage=(J.damage+round((src.ninjutsu / 300)*2*J.damage)+round((src.taijutsu / 300)*2*J.damage))/5
 							spawn() walk(A,src.dir)
 					src.firing=0
 					src.canattack=1

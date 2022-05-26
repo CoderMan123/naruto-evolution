@@ -51,7 +51,7 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 
 								if(2)
-									M.LevelStat("strength",0.2,1)
+									M.LevelStat(SPECIALIZATION_TAIJUTSU,0.2,1)
 
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
@@ -71,7 +71,7 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 
 								if(2)
-									M.LevelStat("strength",0.2,1)
+									M.LevelStat(SPECIALIZATION_TAIJUTSU,0.2,1)
 
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
@@ -91,7 +91,7 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 
 								if(2)
-									M.LevelStat("strength",0.2,1)
+									M.LevelStat(SPECIALIZATION_TAIJUTSU,0.2,1)
 
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
@@ -111,7 +111,7 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 
 								if(2)
-									M.LevelStat("strength",0.2,1)
+									M.LevelStat(SPECIALIZATION_TAIJUTSU,0.2,1)
 
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
@@ -131,7 +131,7 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 
 								if(2)
-									M.LevelStat("strength",0.2,1)
+									M.LevelStat(SPECIALIZATION_TAIJUTSU,0.2,1)
 
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
@@ -158,7 +158,7 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 
 								if(2)
-									M.LevelStat("strength",0.2,1)
+									M.LevelStat(SPECIALIZATION_TAIJUTSU,0.2,1)
 
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)
@@ -180,7 +180,7 @@ world
 									M.LevelStat("Ninjutsu",0.2,1)
 
 								if(2)
-									M.LevelStat("strength",0.2,1)
+									M.LevelStat(SPECIALIZATION_TAIJUTSU,0.2,1)
 
 								if(3)
 									M.LevelStat("Genjutsu",0.2,1)

@@ -8,7 +8,7 @@ obj/Special/ChuuninExam
 	icon='building insides.dmi'
 	icon_state="paper"
 	mouse_opacity=2
-	var/list/Questions=list("Morning Peacock is a strength technique"=1,
+	var/list/Questions=list("Morning Peacock is a Taijutsu technique"=1,
 	"Eight Trigrams 64 Palms requires no reaction commands."=0,
 "Anbu are the right hand men and women of the akatsuki."=0,
 "Ash Pile Burning is triggered with the down arrow."=1,

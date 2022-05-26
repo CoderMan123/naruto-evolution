@@ -49,13 +49,13 @@ obj
 		IsGate = 0
 //mob
 //	proc
-//		Quake_Effect(mob/M,duration,strength=1)
+//		Quake_Effect(mob/M,duration,taijutsu=1)
 //			if(!M.client)return
 //			spawn(1)
 //				var/oldeye=M.client.eye
 //				var/x
 //				for(x=0;x<duration,x++)
-//					M.client.eye = get_steps(M,pick(NORTH,SOUTH,EAST,WEST),strength)
+//					M.client.eye = get_steps(M,pick(NORTH,SOUTH,EAST,WEST),SPECIALIZATION_TAIJUTSU)
 //					sleep(1)
 //				M.client.eye=oldeye
 //Rat,Ox,Dog,Dragon,Snake,Horse,Rabbit,Monkey

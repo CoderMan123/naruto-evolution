@@ -97,7 +97,7 @@ mob
 					spawn(7) del(O2)
 					M.Owner=src
 					M.health=J.level*400
-					M.strength=src.strength
+					M.taijutsu=src.taijutsu
 					M.name = src.key
 					M.Owner=src
 					src.puppets[1] = M
@@ -124,7 +124,7 @@ mob
 					var/mob/M = new/mob/Karasu(get_step(src,src.dir))
 					M.Owner=src
 					M.health=J.level*400
-					M.strength=src.strength
+					M.taijutsu=src.taijutsu
 					var/obj/O2 = new/obj
 					O2.IsJutsuEffect=src
 					O2.loc = M.loc

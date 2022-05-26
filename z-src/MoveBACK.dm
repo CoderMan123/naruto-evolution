@@ -89,8 +89,8 @@ mob
 					M.move=0
 					M.injutsu=1
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
@@ -112,8 +112,8 @@ mob
 					M.move=0
 					M.injutsu=1
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
@@ -135,8 +135,8 @@ mob
 					M.move=0
 					M.injutsu=1
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"cyan",0,1)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
@@ -158,8 +158,8 @@ mob
 					M.injutsu=1
 					M.move=0
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/3,src,"cyan",0,1)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*jutsudamage))/10,src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/3,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
@@ -286,7 +286,7 @@ client
 						src<<WArrow
 						src.mob.arrow="L"
 						flick("climb",src.mob)
-						if(mob.loc.loc:Safe!=1) src.mob.LevelStat("Strength",rand(1,4))
+						if(mob.loc.loc:Safe!=1) src.mob.LevelStat(SPECIALIZATION_TAIJUTSU,rand(1,4))
 						..()
 						//step(src,NORTH)
 						//return
@@ -515,7 +515,7 @@ client
 						src<<WArrow
 						src.mob.arrow="L"
 						flick("climb",src.mob)
-						src.mob.LevelStat("Strength",rand(1,2))
+						src.mob.LevelStat(SPECIALIZATION_TAIJUTSU,rand(1,2))
 						..()
 				if(src.mob.arrow=="L")
 					spawn()
@@ -627,7 +627,7 @@ client
 						src<<WArrow
 						src.mob.arrow="L"
 						flick("climb",src.mob)
-						src.mob.LevelStat("Strength",rand(1,2))
+						src.mob.LevelStat(SPECIALIZATION_TAIJUTSU,rand(1,2))
 						..()
 				if(src.mob.arrow=="R")
 					spawn()
@@ -744,7 +744,7 @@ mob
 //		if(src.Owner)
 //			var/mob/O=src.Owner
 //			if(src.stepped==0)
-//				if(O.strength>=1&&O.strength<25)
+//				if(O.SPECIALIZATION_TAIJUTSU>=1&&O.SPECIALIZATION_TAIJUTSU<25)
 //					step(src,src.dir)
 //					src.stepped=1
 	//M.ResetBase()

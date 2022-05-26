@@ -23,7 +23,7 @@ mob
 						var/mob/Clones/MizuBunshin/A = new/mob/Clones/MizuBunshin(src.loc)
 						A.loc=src.loc
 						A.Owner=src
-						A.strength=round(src.strength/bun)
+						A.taijutsu=round(src.taijutsu/bun)
 						A.defence=round(src.defence/bun)
 						A.health=100//round(src.health/bun)
 						A.maxhealth=100//round(src.health/bun)

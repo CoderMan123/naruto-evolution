@@ -40,7 +40,7 @@ mob
 			Sliding_Target
 				health=20000
 				maxhealth=20000
-				strength=0
+				taijutsu=0
 				agility=0
 				icon='Sliding_Target.dmi'
 				icon_state="idle"
@@ -95,7 +95,7 @@ mob
 		Rotating_Dummy
 			health=20000
 			maxhealth=20000
-			strength=0
+			taijutsu=0
 			agility=0
 			icon='RotatingDummy.dmi'
 			icon_state="idle"
@@ -123,25 +123,25 @@ mob
 
 					for(var/mob/M in orange(1, src))
 						if(!M.dodge)
-							M.DealDamage(src.strength*8,src,"NinBlue")
+							M.DealDamage(src.taijutsu*8,src,"NinBlue")
 							
 							AddState(M, new/state/knocked_down, 50)
 
 							step_away(M, src, 3)
 
 							src.agility=0
-							src.strength=0
+							src.taijutsu=0
 
 						else
 							flick("dodge",M)
 
-							if(M.loc.loc:Safe != 1) M.LevelStat("Defence", (rand(60,70) + round(src.strength / 2) * trainingexp))
-							if(M.loc.loc:Safe != 1) M.LevelStat("Strength", (rand(60,70) + round(src.strength / 2) * trainingexp))
+							if(M.loc.loc:Safe != 1) M.LevelStat("Defence", (rand(60,70) + round(src.taijutsu / 2) * trainingexp))
+							if(M.loc.loc:Safe != 1) M.LevelStat(SPECIALIZATION_TAIJUTSU, (rand(60,70) + round(src.taijutsu / 2) * trainingexp))
 
 						if(src.agility < 150)
 							src.agility += 10
-						if(src.strength < 150)
-							src.strength += 10
+						if(src.taijutsu < 150)
+							src.taijutsu += 10
 					RemoveState(src, new/state/dummy_was_hit, STATE_REMOVE_ALL)
 
 			proc

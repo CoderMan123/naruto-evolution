@@ -234,7 +234,7 @@ obj
 						usr.equipped="MadaraFan"
 						usr.usedwepboost=1
 						usr.agility+=60
-						usr.strength+=30
+						usr.taijutsu+=30
 						usr.overlays+='MadaraFan.dmi'
 						if(usr.agility<120)
 							usr.attkspeed--
@@ -244,7 +244,7 @@ obj
 						usr.equipped=null
 						usr.usedwepboost=0
 						usr.agility-=60
-						usr.strength-=30
+						usr.taijutsu-=30
 						usr.overlays-='MadaraFan.dmi'
 						if(usr.agility<120)
 							usr.attkspeed++

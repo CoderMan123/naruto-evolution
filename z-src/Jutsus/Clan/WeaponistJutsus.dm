@@ -104,7 +104,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/5+src.strength/10)
+							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
 							A.density=0
 							spawn(1)if(A)A.density=1
 							walk_towards(A,c_target,0)
@@ -122,7 +122,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/5+src.strength/10)
+							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
 							A.density=0
 							spawn(1) if(A) A.density=1
 							walk(A,src.dir)
@@ -311,7 +311,7 @@ mob
 									A.Owner=src
 									A.layer=src.layer
 									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu+src.strength)
+									A.damage=J.damage+round(src.ninjutsu+src.taijutsu)
 									A.density=0
 									spawn(1) if(A) A.density=1
 									walk(A,src.dir)
@@ -325,7 +325,7 @@ mob
 									A.Owner=src
 									A.layer=src.layer
 									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu+src.strength)
+									A.damage=J.damage+round(src.ninjutsu+src.taijutsu)
 									A.density=0
 									spawn(1) if(A) A.density=1
 									walk(A,src.dir)
@@ -363,7 +363,7 @@ mob
 									A.Owner=src
 									A.layer=src.layer
 									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu*2+src.strength*2)
+									A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
 									A.density=0
 									spawn(1)if(A)A.density=1
 									spawn(1)if(A)walk_rand(A)
@@ -378,7 +378,7 @@ mob
 									A.Owner=src
 									A.layer=src.layer
 									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu*2+src.strength*2)
+									A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
 									A.density=0
 									spawn(1)if(A)A.density=1
 									spawn(1)if(A)walk_rand(A)
@@ -398,7 +398,7 @@ mob
 									A.Owner=src
 									A.layer=src.layer
 									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu*2+src.strength*2)
+									A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
 									A.density=0
 									spawn(1) if(A) A.density=1
 									walk_rand(A)
@@ -414,7 +414,7 @@ mob
 									A.Owner=src
 									A.layer=src.layer
 									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu*2+src.strength*2)
+									A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
 									A.density=0
 									spawn(1) if(A) A.density=1
 									walk_rand(A)

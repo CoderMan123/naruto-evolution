@@ -119,7 +119,7 @@ mob
 						c_target.canattack=1
 						c_target.move=1
 						c_target.injutsu=0
-						c_target.DealDamage(J.damage + src.strength*2 + src.ninjutsu*2 + src.genjutsu*2,src,"NinBlue",0,1)
+						c_target.DealDamage(J.damage + src.taijutsu*2 + src.ninjutsu*2 + src.genjutsu*2,src,"NinBlue",0,1)
 
 		Reaper_Death_Seal()
 			for(var/obj/Jutsus/Reaper_Death_Seal/J in src.jutsus)
@@ -145,8 +145,8 @@ mob
 					c_target.canattack=0
 					src.overlays+='Shiki Fuujin.dmi'
 					spawn(30)
-						src.DealDamage(round(src.ninjutsu*5+src.strength*5+src.genjutsu*5),src,"black")
-						c_target.DealDamage(round(src.ninjutsu*7.5+src.genjutsu*7.5 +src.strength*7.5),src,"NinBlue")
+						src.DealDamage(round(src.ninjutsu*5+src.taijutsu*5+src.genjutsu*5),src,"black")
+						c_target.DealDamage(round(src.ninjutsu*7.5+src.genjutsu*7.5 +src.taijutsu*7.5),src,"NinBlue")
 						c_target.move=1
 						c_target.firing=0
 						c_target.injutsu=0

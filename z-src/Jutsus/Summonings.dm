@@ -45,7 +45,7 @@ mob
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
 					flick("punch",src)
-					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu / 450)+(OWNER.strength / 450)+(OWNER.genjutsu / 450))*2*jutsudamage))/3,src.OWNER,"NinBlue")
+					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu / 450)+(Owner.taijutsu / 450)+(OWNER.genjutsu / 450))*2*jutsudamage))/3,src.OWNER,"NinBlue")
 					//if(M.health >= 0) M.Death()
 					//M.Death(src)
 
@@ -119,7 +119,7 @@ mob
 			Names="Huge Spider"
 			health=1200
 			maxhealth=1200
-			strength=0
+			taijutsu=0
 			var/hited=0
 			pixel_y=-40
 			pixel_x=-40
@@ -128,7 +128,7 @@ mob
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
 					//flick("punch",src)
-					M.DealDamage(src.strength,src.OWNER,"TaiOrange")
+					M.DealDamage(src.taijutsu,src.OWNER,"TaiOrange")
 					src.hited=1
 					sleep(7)
 					src.hited=0

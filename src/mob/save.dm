@@ -80,9 +80,14 @@ mob
 			src.statpoints = 3*(src.level-1)
 			src.savefile_version = 2
 		
-/*		if(src.savefile_version < 3)
+		if(src.savefile_version < 3)
+			if(src.Specialist == "strength") src.Specialist = SPECIALIZATION_TAIJUTSU
+			if(src.Specialist2 == "strength") src.Specialist2 = SPECIALIZATION_TAIJUTSU
+			src.savefile_version = 3
+		
+/*		if(src.savefile_version < 4)
 			do stuff
-			src.savefile_version = 3*/
+			src.savefile_version = 4*/
 
 	Write(savefile/F, var/character)
 		if(src.client)

@@ -219,7 +219,7 @@ mob
 			maxhealth=1500
 			chakra=1500
 			maxchakra=1500
-			strength=80
+			taijutsu=80
 			ninjutsu=80
 			genjutsu=80
 			dead=0
@@ -240,7 +240,7 @@ mob
 					if(ppunch=="right")
 						ppunch="left"
 						flick("punchr",src)
-					M.DealDamage(src.strength*rand(3,6)-M.defence*2,src,"TaiOrange")
+					M.DealDamage(src.taijutsu*rand(3,6)-M.defence*2,src,"TaiOrange")
 					M.UpdateHMB()
 					//M.Death(src)
 					src.hited=1

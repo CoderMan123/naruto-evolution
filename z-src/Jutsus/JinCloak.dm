@@ -73,11 +73,11 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC4.dmi'
-						src.strength+=50
+						src.taijutsu+=50
 						src.inJC4=1
 						src.DealDamage(1000, src, "HealGreen", 1)
 						spawn(400)
-							src.strength-=50
+							src.taijutsu-=50
 							src.DealDamage(2000,src,"black")
 							src.inJC4=0
 							ResetBase()
@@ -90,12 +90,12 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC5.dmi'
-						src.strength+=35
+						src.taijutsu+=35
 						src.agility+=35
 						src.inJC5=1
 						src.DealDamage(1000, src, "HealGreen", 1)
 						spawn(400)
-							src.strength-=35
+							src.taijutsu-=35
 							src.agility-=35
 							src.DealDamage(2000,src,"black")
 							src.inJC5=0
@@ -126,12 +126,12 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC7.dmi'
-						src.strength+=35
+						src.taijutsu+=35
 						src.agility+=35
 						src.inJC7=1
 						src.DealDamage(1000, src, "HealGreen", 1)
 						spawn(400)
-							src.strength-=35
+							src.taijutsu-=35
 							src.agility-=35
 							src.DealDamage(2000,src,"black")
 							src.inJC7=0
@@ -145,11 +145,11 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC8.dmi'
-						src.strength+=50
+						src.taijutsu+=50
 						src.inJC8=1
 						src.DealDamage(1000, src, "HealGreen", 1)
 						spawn(400)
-							src.strength-=50
+							src.taijutsu-=50
 							src.DealDamage(2000,src,"black")
 							src.inJC8=0
 							ResetBase()
@@ -162,12 +162,12 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(5,10))
 						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 						src.icon='JC9.dmi'
-						src.strength+=35
+						src.taijutsu+=35
 						src.ninjutsu+=35
 						src.inJC9=1
 						src.DealDamage(1000, src, "HealGreen", 1)
 						spawn(400)
-							src.strength-=35
+							src.taijutsu-=35
 							src.ninjutsu-=35
 							src.DealDamage(2000,src,"black")
 							src.inJC9=0

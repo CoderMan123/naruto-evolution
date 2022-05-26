@@ -151,13 +151,13 @@ mob
 					maxchakra=1000000000
 					maxninexp=1000000000
 					maxgenexp=1000000000
-					maxstrengthexp=1000000000
+					maxtaijutsuexp=1000000000
 					maxdefexp=1000000000
 					maxagilityexp=1000000000
 					maxprecisionexp=1000000000
 					ninjutsu=100
 					genjutsu=100
-					strength=100
+					taijutsu=100
 					defence=100
 					agility=100
 					precision=100

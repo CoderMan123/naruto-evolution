@@ -42,9 +42,9 @@ mob
 				if(istype(Owner, /mob/npc) && istype(src, /mob/npc)) return
 				var/damage = round(amount) + round(rand(amount/15, amount/5))
 				/*if(punch && bonesword)
-					damage += round(src.strength * 0.1) // adds 10 dmg at 100 str and bonesword on
+					damage += round(src.taijutsu * 0.1) // adds 10 dmg at 100 str and bonesword on
 				if(punch && src.Gates>0)
-					damage += round((src.strength * 0.1) * src.Gates)*/ // adds 50 damage at 100 str and gates 5
+					damage += round((src.taijutsu * 0.1) * src.Gates)*/ // adds 50 damage at 100 str and gates 5
 				if(heal)
 					if(src.Intang)
 						return

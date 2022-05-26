@@ -98,7 +98,7 @@
 
 #define SPECIALIZATION_NINJUTSU "Ninjutsu"
 #define SPECIALIZATION_GENJUTSU "Genjutsu"
-#define SPECIALIZATION_TAIJUTSU "strength"
+#define SPECIALIZATION_TAIJUTSU "Taijutsu"
 
 #define COLOR_CHAT "#C8C8C8"
 #define COLOR_VILLAGE_LEAF "#2b7154"

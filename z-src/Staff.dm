@@ -56,7 +56,7 @@ mob/Moderator/verb/
 		usr<<"Chakra:[M.maxchakra]"
 		usr<<"Ninjutsu:[M.ninjutsu]"
 		usr<<"Genjutsu:[M.genjutsu]"
-		usr<<"Strength:[M.strength]"
+		usr<<"Taijutsu:[M.taijutsu]"
 		usr<<"Agility:[M.agility]"
 		usr<<"Defence:[M.defence]"
 

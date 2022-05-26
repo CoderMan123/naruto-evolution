@@ -66,8 +66,8 @@ mob
 							O.pixel_x+=rand(-5,5)
 							flick('EightGatesAssault.dmi',O)
 							spawn(4)if(O)del(O)
-							Z.DealDamage((J.damage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*J.damage))/3,src,"cyan",0,1)
-							Z.DealDamage(J.damage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.strength / 450))*2*J.damage),src,"NinBlue")
+							Z.DealDamage((J.damage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*J.damage))/3,src,"cyan",0,1)
+							Z.DealDamage(J.damage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*J.damage),src,"NinBlue")
 						if(Z)
 							Z.move=1
 							Z.injutsu=0
@@ -84,7 +84,7 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-					if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
+					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
@@ -109,7 +109,7 @@ mob
 					A.pixel_y=32
 					A.layer=src.layer
 					A.fightlayer=src.fightlayer
-					A.damage=J.damage+round(((src.ninjutsu / 300)+(src.strength / 300))*2*J.damage)
+					A.damage=J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage)
 					A.level=J.level
 					walk(A,dir,0)
 					src.firing=0
@@ -421,7 +421,7 @@ mob
 				for(var/obj/Jutsus/Eight_Trigrams_Empty_Palm/J in src.jutsus)
 					if(src.PreJutsu(J))
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-						if(loc.loc:Safe!=1) src.LevelStat("Strength",((J.maxcooltime*3/20)*jutsustatexp))
+						if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 						var/damage
 						var/obj/A = new/obj/MiscEffects/MeteorDust(src.loc)
 						A.pixel_x=-30
@@ -472,7 +472,7 @@ mob
 									if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 										if(c_target.fightlayer==src.fightlayer)
 											if(c_target.dodge==0)
-												var/undefendedhit=J.damage+round(((src.ninjutsu / 300)+(src.strength / 300))*2*J.damage)
+												var/undefendedhit=J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage)
 												if(undefendedhit<0)undefendedhit=1
 												c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 												if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
@@ -492,10 +492,10 @@ mob
 														c_target.firing=0
 											else
 												if(src.agility>=c_target.agility)
-													var/defendedhit=(J.damage+round(((src.ninjutsu / 300)+(src.strength / 300))*2*J.damage))/2
+													var/defendedhit=(J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage))/2
 													if(defendedhit<0)
 														defendedhit=1
-													if(defence<src.strength/3)
+													if(defence<src.taijutsu/3)
 														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 														Drag.dir=c_target.dir
 														step(c_target,src.dir)
@@ -510,12 +510,12 @@ mob
 						del(O)
 			/*				for(var/obj/Training/T in view(O,0))
 								if(T.health>=1)
-									var/undefendedhit=round(((damage+src.strength+src.strength)/3))//-c_target.defence/4)
+									var/undefendedhit=round(((damage+src.taijutsu+src.taijutsu)/3))//-c_target.defence/4)
 									T.DealDamage(undefendedhit,src,"TaiOrange")
-									if(T) if(T.Good) LevelStat("Strength",rand(1,2))
-									else LevelStat("Strength",rand(0.2,1))
-									if(T) if(T.Good) src.LevelStat("strength",1)
-									else src.LevelStat("strength",0.2)
+									if(T) if(T.Good) LevelStat(SPECIALIZATION_TAIJUTSU,rand(1,2))
+									else LevelStat(SPECIALIZATION_TAIJUTSU,rand(0.2,1))
+									if(T) if(T.Good) src.LevelStat(SPECIALIZATION_TAIJUTSU,1)
+									else src.LevelStat(SPECIALIZATION_TAIJUTSU,0.2)
 									if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 									if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 									T.Break(src)
