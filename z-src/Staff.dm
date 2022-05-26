@@ -2,7 +2,6 @@
 var/HostKey = file(CFG_HOST)
 
 mob/var/
-	canteleport = 1
 	jailed=0
 
 mob/PixelArtist/verb/
@@ -289,13 +288,6 @@ mob/Admin/verb
 		Positions["[Position]"]=null
 		M.client.StaffCheck()
 
-	Teleport_To_XYZ()
-		set category="Staff"
-		var/xloc=input("What x? (max 200)","X") as num
-		var/yloc=input("What y? (max 200)","Y") as num
-		var/zloc=input("What z? (max 20)","Z") as num
-		src.loc=locate(xloc,yloc,zloc)
-
 	Edit(atom/O in world)
 		set category = "Staff"
 		Edited(O)
@@ -338,17 +330,12 @@ mob/MasterGM/verb
 		set category = "Staff"
 		set name = "Enter Admin Hideout"
 		usr.loc = locate(152,162,9)
-		
+
 	Reboot()
 		set category="Staff"
 		world<<output("World is rebooting.","Action.Output")
 		text2file("[usr]([src.key]) rebooted.: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 		world.Reboot()
-
-	Teleport(mob/M in world)
-		set category="Staff"
-		if(M.canteleport == 0) return
-		src.loc=M.loc
 
 	Summon(mob/M in mobs_online)
 		set category="Staff"

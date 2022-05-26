@@ -1937,8 +1937,6 @@ window "Main"
 		can-resize = false
 		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
-		outer-size = 1294x734
-		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1975,7 +1973,6 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "Navigation"
 		is-vert = false
@@ -1985,7 +1982,6 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -2021,7 +2017,6 @@ window "Main"
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "Reconnect"
@@ -4070,8 +4065,6 @@ window "Alert1"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x169
-		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4151,7 +4144,6 @@ window "Alert2"
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4160,8 +4152,6 @@ window "Alert2"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x169
-		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4255,7 +4245,6 @@ window "Alert3"
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4264,8 +4253,6 @@ window "Alert3"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x169
-		inner-size = 300x155
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4373,7 +4360,6 @@ window "Color"
 		size = 300x290
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4381,8 +4367,6 @@ window "Color"
 		can-close = false
 		can-minimize = false
 		can-resize = false
-		outer-size = 314x304
-		inner-size = 300x290
 	elem "label7"
 		type = LABEL
 		pos = 78,192
@@ -4550,7 +4534,6 @@ window "Color"
 		size = 206x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		saved-params = ""
 		is-slider = true
 		width = 12
@@ -4562,7 +4545,6 @@ window "Color"
 		size = 206x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		saved-params = ""
 		is-slider = true
 		width = 12
@@ -4600,7 +4582,6 @@ window "Color"
 		size = 206x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		saved-params = ""
 		is-slider = true
 		width = 12
@@ -4768,7 +4749,6 @@ window "Input1"
 		size = 300x179
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4777,8 +4757,6 @@ window "Input1"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x193
-		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4871,7 +4849,6 @@ window "Input2"
 		size = 300x179
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4880,8 +4857,6 @@ window "Input2"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x193
-		inner-size = 300x179
 	elem "Background"
 		type = LABEL
 		pos = 0,0
@@ -4988,7 +4963,6 @@ window "Input3"
 		size = 300x183
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -4997,8 +4971,6 @@ window "Input3"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x197
-		inner-size = 300x183
 	elem "Background"
 		type = LABEL
 		pos = 0,0

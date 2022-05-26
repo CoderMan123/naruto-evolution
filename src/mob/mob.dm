@@ -588,6 +588,7 @@ mob
 				return
 
 			var/command = "/level "
+			var/command_alias = ""
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
@@ -802,6 +803,13 @@ mob
 				if(value) src.skillpoints = value
 				src.UpdateHMB()
 				return
+			
+			command = "/infamy "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+
+				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
+				if(value) src.infamy_points = value
+				return
 
 			command = "/density"
 			if(msg == command && administrators.Find(src.client.ckey))
@@ -823,12 +831,40 @@ mob
 				if(value) src.see_invisible = value
 				return
 			
-			command = "/infamy "
-			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+			command = "/teleport "
+			command_alias = "/tp "
+			if(findtext(msg, command) || findtext(msg, command_alias) && administrators.Find(src.client.ckey) || moderators.Find(src.client.ckey))
 
-				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.infamy_points = value
+				var/value = copytext(msg, findtext(msg, command) + length(command))
+				if(findtext(msg, command_alias)) value = copytext(msg, findtext(msg, command_alias) + length(command_alias))
+				if(value)
+					for(var/mob/m in mobs_online)
+						if(lowertext(m.character) == lowertext(value))
+							src.loc = m.loc
+							return
+					
+					for(var/mob/m in mobs_online)
+						if(findtext(lowertext(m.character), lowertext(value)))
+							src.loc = m.loc
+							return
+
+					for(var/mob/m in npcs_online)
+						if(lowertext(m.name) == lowertext(value))
+							src.loc = m.loc
+							return
+					
+					for(var/mob/m in npcs_online)
+						if(findtext(lowertext(m.name), lowertext(value)))
+							src.loc = m.loc
+							return
+					
+				src << "/teleport: A mob was not found for the case insensitive string \"[value]\"."
 				return
+			
+			command = "/teleport"
+			command_alias = "/tp"
+			if(findtext(msg, command) || findtext(msg, command_alias) && administrators.Find(src.client.ckey) || moderators.Find(src.client.ckey))
+				return src.TeleportCommand()
 
 			else if(findtext(msg, "/stuck"))
 				src.Stuck()
