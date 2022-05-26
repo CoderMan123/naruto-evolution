@@ -102,24 +102,25 @@ mob/npc
 				usr.move=1
 				return
 			var/obj/S = Options["[Choice]"]
-			var/list/AlertInput=usr.client.iprompt("How many would you like to buy?","Purchase")
-			if(!isnum(AlertInput[2]))
+			var/list/response=usr.client.iprompt("How many would you like to buy?","Purchase")
+			response[2] = text2num(response[2])
+			if(!isnum(response[2]))
 				usr.move=1
 				return
-			var/RealPrice=S.Cost*AlertInput[2]
+			var/RealPrice=S.Cost*response[2]
 			if(usr.maxitems > -1 && usr.contents.len >= usr.maxitems)
 				usr<<output("This would exceed your amount of avaliable items.","Action.Output")
 				usr.move=1
 				return
-			if(AlertInput[2]<=0)
+			if(response[2]<=0)
 				usr.move=1
 				return
 			if(usr.ryo>=RealPrice)
 				var/obj/Inventory/I=new S.type()
-				I.stacks = AlertInput[2]
+				I.stacks = response[2]
 				usr.RecieveItem(I)
 				usr.client.UpdateInventoryPanel()
-				usr<<output("You bought [AlertInput[2]] [S.name](s) for [RealPrice] Ryo.","Action.Output")
+				usr<<output("You bought [response[2]] [S.name](s) for [RealPrice] Ryo.","Action.Output")
 				usr.ryo-=RealPrice
 				usr.move=1
 			else
