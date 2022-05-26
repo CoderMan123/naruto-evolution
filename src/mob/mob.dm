@@ -979,9 +979,9 @@ mob
 			if(!src.ryo)
 				src << output("You don't have any Ryo to create a Ryo Pouch.", "Action.Output")
 			else
-				var/list/prompt=src.client.iprompt("How much Ryo would you like to bundle in a Ryo Pouch?","Create Ryo Pouch")
-				var/ryo = prompt[2]
-				if(ryo && isnum(ryo))
+				var/list/response = src.client.iprompt("How much Ryo would you like to bundle in a Ryo Pouch?","Create Ryo Pouch")
+				var/ryo = text2num(response[2])
+				if(ryo)
 					if(src.ryo >= ryo)
 						src.ryo -= ryo
 						new/obj/Inventory/ryo_pouch(src, ryo)
