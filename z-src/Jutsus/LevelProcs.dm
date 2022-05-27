@@ -19,7 +19,7 @@ obj
 					if(src.level==2)Owner.maxbunshin=1
 					if(src.level==3)Owner.maxbunshin=1
 					if(src.level==4)Owner.maxbunshin=1
-					Owner<<output("<font color= #bc8f8f>Your [src]'s clones now have more SPECIALIZATION_TAIJUTSU</Font>.","Action.Output")
+					Owner<<output("<font color= #bc8f8f>Your [src]'s clones now have more strength</Font>.","Action.Output")
 				if(src.name=="Fire Release: Fire Ball")
 					Owner<<output("<font color= #bc8f8f>Your [src] skill's base damage has increased</Font>.","Action.Output")
 				if(src.name=="Meteor Punch")
@@ -59,7 +59,7 @@ mob
 			if(src.exp_locked && !bypass_exp_lock) return
 			switch(stat)
 				if("Defence") defexp += round(howmuch)
-				if(SPECIALIZATION_TAIJUTSU) taijutsuexp += round(howmuch)
+				if("Strength") strengthexp += round(howmuch)
 				if("Ninjutsu") ninexp += round(howmuch)
 				if("Genjutsu") genexp += round(howmuch)
 				if("Agility") agilityexp += round(howmuch)
@@ -106,24 +106,24 @@ mob
 					src.overlays-=O
 					O.loc = null
 				next
-			if(src.taijutsuexp>=src.maxtaijutsuexp)
-				if(src.taijutsu>=150)
+			if(src.strengthexp>=src.maxstrengthexp)
+				if(src.strength>=150)
 					goto next
 				src.PlayAudio('level.wav', output = AUDIO_SELF)
-				src<<output("<font color=TaiOrange>You leveled up [SPECIALIZATION_TAIJUTSU]</Font>.","Action.Output")
+				src<<output("<font color=TaiOrange>You leveled up Strength</Font>.","Action.Output")
 				src.exp+=1
-				src.taijutsu+=1
-				src.taijutsuexp-=src.maxtaijutsuexp
-				if(src.taijutsu<=30)
-					src.maxtaijutsuexp+=10+round(src.taijutsu/2)
-				if(src.taijutsu>30&&src.taijutsu<=60)
-					src.maxtaijutsuexp+=30+round(src.taijutsu/2)
-				if(src.taijutsu>60&&src.taijutsu<=90)
-					src.maxtaijutsuexp+=60+round(src.taijutsu/2)
-				if(src.taijutsu>90&&src.taijutsu<=120)
-					src.maxtaijutsuexp+=100+round(src.taijutsu/2)
-				if(src.taijutsu>120&&src.taijutsu<=150)
-					src.maxtaijutsuexp+=150+round(src.taijutsu/2)
+				src.strength+=1
+				src.strengthexp-=src.maxstrengthexp
+				if(src.strength<=30)
+					src.maxstrengthexp+=10+round(src.strength/2)
+				if(src.strength>30&&src.strength<=60)
+					src.maxstrengthexp+=30+round(src.strength/2)
+				if(src.strength>60&&src.strength<=90)
+					src.maxstrengthexp+=60+round(src.strength/2)
+				if(src.strength>90&&src.strength<=120)
+					src.maxstrengthexp+=100+round(src.strength/2)
+				if(src.strength>120&&src.strength<=150)
+					src.maxstrengthexp+=150+round(src.strength/2)
 				src.Levelup()
 				next
 
@@ -237,7 +237,7 @@ mob
 				next
 
 			spawn() src.UpdateHMB()
-			
+
 			if(src.rank == RANK_ACADEMY_STUDENT && src.level >= 25)
 				src.rank = RANK_GENIN
 				switch(src.village)
@@ -245,11 +245,12 @@ mob
 						src.RecieveItem(new/obj/Inventory/Clothing/HeadWrap/LeafHeadBand)
 					if(VILLAGE_SAND)
 						src.RecieveItem(new/obj/Inventory/Clothing/HeadWrap/SandHeadBand)
-				src.client.prompt("Your elders have deemed you a true ninja. You've become a Genin!")
+				src.client.Alert("Your elders have deemed you a true ninja. You've become a Genin!")
 
-			if(level>=25&&!Element2)
+			if(level>=25 && !Element2 && !prestigelevel)//prestige system
 				var/Elements=list("Fire","Water","Earth","Lightning","Wind")
-				src.Element2=src.CustomInput("Element Options","What secondary element would you like?.",Elements-src.Element)
+				var/PlayerElements=list("[src.Element]","[src.Element2]","[src.Element3]","[src.Element4]","[src.Element5]")
+				src.Element2=src.CustomInput("Element Options","What secondary element would you like?.",Elements-PlayerElements)
 				if(src.Element2) src.Element2=src.Element2:name
 				if(src.Element=="Water"|src.Element2=="Wind")
 					if(src.Element=="Wind"|src.Element2=="Water")
@@ -431,7 +432,7 @@ mob
 					src.injutsu=1
 					src.icon_state="dead"
 					for(var/obj/ChuuninExam/Scrolls/S in src)S.Move(src.loc)
-					for(var/obj/Inventory/mission/deliver_intel/o in src.contents) src.DropItem(o, 1, src.loc)
+					for(var/obj/Inventory/mission/deliver_intel/o in src.contents) src.DropItem(o)
 					spawn()
 						while(dead)
 							loc=DeadLocation
@@ -512,7 +513,7 @@ mob
 							src.Bounty=0
 						else if(!istype(src, /mob/npc/combat/animals) && !istype(src, /mob/npc/combat/white_zetsu))
 							X.Bounty+=rand(5,10)
-						
+
 						if(X.village != VILLAGE_LEAF && src.village == VILLAGE_LEAF && src.z == 1)//infamy system
 							if(!X.infamy_points) src.infamy_points++
 
@@ -534,7 +535,7 @@ mob
 										world<<output("A white Zetsu has been slain by [X.name] earning the [X.village] village 1 point! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
 									if(zetsu_count < 1)
 										ZetsuEventEnd(X)
-								else	
+								else
 									if(zetsu_count > 0)
 										world<<output("A white Zetsu has been slain by [X.name]! There are still [zetsu_count] Zetsu somewhere!]","Action.Output")
 									if(zetsu_count < 1)
@@ -739,7 +740,7 @@ mob
 											M.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
+											M.LevelStat("strength",rand(10,25),1)
 
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
@@ -757,7 +758,7 @@ mob
 													M.LevelStat("Ninjutsu",rand(10,25),1)
 
 												if(2)
-													M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
+													M.LevelStat("strength",rand(10,25),1)
 
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
@@ -776,7 +777,7 @@ mob
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M2.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
+											M2.LevelStat("strength",rand(10,25),1)
 
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
@@ -800,7 +801,7 @@ mob
 											M.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
+											M.LevelStat("strength",rand(10,25),1)
 
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
@@ -818,7 +819,7 @@ mob
 													M.LevelStat("Ninjutsu",rand(10,25),1)
 
 												if(2)
-													M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
+													M.LevelStat("strength",rand(10,25),1)
 
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
@@ -837,7 +838,7 @@ mob
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M2.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
+											M2.LevelStat("strength",rand(10,25),1)
 
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
@@ -859,7 +860,7 @@ mob
 											M.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
+											M.LevelStat("strength",rand(10,25),1)
 
 										if(3)
 											M.LevelStat("Genjutsu",rand(10,25),1)
@@ -877,7 +878,7 @@ mob
 													M.LevelStat("Ninjutsu",rand(10,25),1)
 
 												if(2)
-													M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
+													M.LevelStat("strength",rand(10,25),1)
 
 												if(3)
 													M.LevelStat("Genjutsu",rand(10,25),1)
@@ -896,11 +897,11 @@ mob
 											M2.LevelStat("Ninjutsu",rand(10,25),1)
 
 										if(2)
-											M2.LevelStat(SPECIALIZATION_TAIJUTSU,rand(10,25),1)
+											M2.LevelStat("strength",rand(10,25),1)
 
 										if(3)
 											M2.LevelStat("Genjutsu",rand(10,25),1)
-											
+
 					if(!Chuunins.Find(src))
 						if(X&&X.key&&src!=X)
 							if(X.z in global.warmaps && src.z in global.warmaps)
@@ -919,7 +920,7 @@ mob
 
 					spawn(3000) if(!respawned && src.dead) src.Respawn()
 
-					if(src.client && src.client.prompt("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
+					if(src.client && src.client.Alert("Please wait for a medic or respawn in the hospital", "Reaper", list("Respawn")))
 						if(src.dead)
 							respawned = 1
 							src.Respawn()

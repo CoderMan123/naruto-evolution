@@ -49,13 +49,13 @@ obj
 		IsGate = 0
 //mob
 //	proc
-//		Quake_Effect(mob/M,duration,taijutsu=1)
+//		Quake_Effect(mob/M,duration,strength=1)
 //			if(!M.client)return
 //			spawn(1)
 //				var/oldeye=M.client.eye
 //				var/x
 //				for(x=0;x<duration,x++)
-//					M.client.eye = get_steps(M,pick(NORTH,SOUTH,EAST,WEST),SPECIALIZATION_TAIJUTSU)
+//					M.client.eye = get_steps(M,pick(NORTH,SOUTH,EAST,WEST),strength)
 //					sleep(1)
 //				M.client.eye=oldeye
 //Rat,Ox,Dog,Dragon,Snake,Horse,Rabbit,Monkey
@@ -132,8 +132,8 @@ obj
 					if(Clan!=usr.Clan)
 						usr<<output("You are not the appropriate clan to learn this technique. ([Clan]).","Action.Output")
 						return
-				if(src.Element)if(src.Element!=usr.Element&&src.Element!=usr.Element2)Element1=1
-				if(src.Element2)if(src.Element2!=usr.Element&&src.Element2!=usr.Element2)Element2z=1
+				if(src.Element) if(src.Element != usr.Element && src.Element != usr.Element2 && src.Element != usr.Element3 && src.Element != usr.Element4 && src.Element != usr.Element5) Element1=1 //prestige system
+				if(src.Element2) if(src.Element2 != usr.Element && src.Element2 != usr.Element2 && src.Element2 != usr.Element3 && src.Element2 != usr.Element4 && src.Element2 != usr.Element5) Element2z=1
 				if(src.Kekkai)if(src.Kekkai!=usr.Kekkai)KekkaiC=1
 				if(src.Specialist)if(src.Specialist!=usr.Specialist)SpecialistZ=1
 				if(Element1)
@@ -672,7 +672,7 @@ mob
 		HandSealActivate()
 			set hidden=1
 			if(CheckState(src, new/state/knocked_down)) return 0
-			
+
 			if(client.eye==locate(10,10,4)||client.eye==locate(60,10,4)||client.eye==locate(12,43,4)||client.eye==locate(55,43,4)||usr.client.eye==locate(10,75,4)) return
 			src.HengeUndo()
 			if(usr.SealCount>=1)

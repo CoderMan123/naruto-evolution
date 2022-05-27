@@ -126,7 +126,7 @@ mob
 
 			guard
 				var/list/element_pool = list("Fire","Water","Wind","Earth","Lightning")
-				var/list/tool_pool = list("Shuriken", "Throwing Needle", "Kunai", "Exploding Kunai", "Explosive Tag")
+				var/list/tool_pool = list("Shuriken", "Throwing Needle", "Kunai", "Exploding Tag"/*, "Explosive Kunai"*/)
 				var/list/style_pool = list("ranger", "melee", "binder")
 
 				genin
@@ -169,6 +169,8 @@ mob
 
 					New()
 						..()
+						src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
+						new/obj/MiscEffects/Smoke(src.loc)
 						src.icon = pick('WhiteMBase.dmi', 'DarkMBase.dmi')
 						src.overlays += pick(null, 'Deidara.dmi', 'Distance.dmi', 'Long.dmi', 'Mohawk.dmi', 'Neji Hair.dmi', 'Short.dmi','Short2.dmi','Short3.dmi', 'Spikey.dmi')
 						src.overlays += 'Shirt.dmi'
@@ -184,12 +186,8 @@ mob
 						spawn() src.CombatAI()
 
 					Death(mob/killer)
-						..()
 						killer.infamy_points++
-						for(var/mob/Clones/C in src.Clones)
-							C.health=0
-							C.Death(src)
-						spawn(300) del(src)
+						..()
 
 					proc/Idle()
 						src.attacking = 0
@@ -199,20 +197,25 @@ mob
 							C.health=0
 							C.Death(src)
 						src.FindTarget()
-						src.no_target_counter++
-						if(src.no_target_counter > 40) src.ResetAI()
+						if(!CheckState(src, new/state/in_combat) && src.loc != src.original_loc) src.ResetAI()
 
 					proc/ResetAI()
 						for(var/mob/Clones/C in src.Clones)
 							C.health=0
 							C.Death(src)
 						if(src.spawned)
+							src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
+							new/obj/MiscEffects/Smoke(src.loc)
 							del(src)
 						else
 							src.health = src.maxhealth
 							src.chakra = src.maxchakra
+							src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
+							new/obj/MiscEffects/Smoke(src.loc)
 							src.loc = src.original_loc
 							src.dir = SOUTH
+							src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
+							new/obj/MiscEffects/Smoke(src.loc)
 
 					proc/FindTarget()
 						if(!c_target) sleep(10)
@@ -222,6 +225,7 @@ mob
 								if(M)
 									src.Target_Remove()
 									src.Target_Atom(M)
+									AddState(src, new/state/in_combat, 150)
 									src.attacking = 1
 									src.last_target = M
 								else
@@ -229,7 +233,7 @@ mob
 
 					proc/CastDefensive()
 						walk(src, 0)
-						if(prob(30))
+						if(prob(0)) // set higher than zero to activate clones
 							src.Clone_Jutsu()
 							spawn(50)
 								for(var/mob/Clones/C in src.Clones)
@@ -249,8 +253,7 @@ mob
 								c_target = src.Target_Get(TARGET_MOB)
 								if(istype(c_target, /mob/npc)) c_target = null
 								if(src.c_target && src.attacking && !src.dead && !c_target.dead)
-									src.no_target_counter = 0
-									if(prob(50))
+									if(prob(80))
 										src.CombatIdle()
 									else if(prob(10)) src.CastDefensive()
 									else

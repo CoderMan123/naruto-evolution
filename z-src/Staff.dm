@@ -350,9 +350,10 @@ mob/MasterGM/verb
 		if(ismob(O))
 			var/mob/M=O
 			if(!M.client) del(M)
-			if(alert("Are you sure you want to delete the Atom [O.name]?","Confirm!","No","Yes")=="Yes")
-				text2file("[usr] deleted [O.name]: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
-				del(M)
+			if(M)
+				if(alert("Are you sure you want to delete the Atom [O.name]?","Confirm!","No","Yes")=="Yes")
+					text2file("[usr] deleted [O.name]: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
+					del(M)
 		else del(O)
 
 	Admin_Shield()

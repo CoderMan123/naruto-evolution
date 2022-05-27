@@ -48,7 +48,7 @@ client
 		ToggleChatInputPanel()
 			set hidden=1
 			if(src.mob.Muted)
-				src.prompt("You can't chat while muted.")
+				src.Alert("You can't chat while muted.")
 				return
 
 			else if(winget(src, "Main.InputChild", "is-visible") == "false")
@@ -188,14 +188,14 @@ client
 				Settings.Titlebar.text = 'General Settings';
 				Settings.Child.left = 'Settings-General';
 			"})
-		
+
 		SettingsPanelAccount()
 			set hidden=1
 			winset(src, null, {"
 				Settings.Titlebar.text = 'Account Settings';
 				Settings.Child.left = 'Settings-Account';
 			"})
-		
+
 		SettingsPanelCharacter()
 			set hidden=1
 			winset(src, null, {"
@@ -216,7 +216,7 @@ client
 				Settings.Titlebar.text = 'Website Information';
 				Settings.Child.left = 'Settings-WebsiteInformation';
 			"})
-		
+
 		SettingsPanelAdministrator()
 			set hidden=1
 			winset(src, null, {"
@@ -251,19 +251,19 @@ client
 			if(src.mob.exp_locked)
 				src.exp_lock_verify=1
 				var/verification_code = rand(1000,9999)
-				var/verification_response = src.iprompt("Please enter the following verification code to resume gaining experience: [verification_code]", "Experience Lock", list("Submit", "Cancel"))
-				if(verification_response[1] == "Submit" && text2num(verification_response[2]) == verification_code)
+				var/verification_response = src.AlertInput("Please enter the following verification code to resume gaining experience: [verification_code]", "Experience Lock", list("Submit", "Cancel"))
+				if(verification_response[1] == 1 && text2num(verification_response[2]) == verification_code)
 					src << output("You will now resume gaining experience normally.", "Action.Output")
 					winset(src, "Navigation.ExpLockButton", "is-disabled = 'true'")
 					src.mob.exp_locked=0
 					src.exp_lock_verify=0
-				else if(verification_response[1] == "Submit")
-					src.prompt("You did not enter the correct verification code.", "Experience Lock")
+				else if(verification_response[1] == 1)
+					src.Alert("You did not enter the correct verification code.", "Experience Lock")
 					src.exp_lock_verify=0
 				else
 					src.exp_lock_verify=0
 			else
-				src.prompt("You are not currently experience locked.", "Experience Lock")
+				src.Alert("You are not currently experience locked.", "Experience Lock")
 
 		Community_Guidelines()
 			set hidden = 1
@@ -272,7 +272,7 @@ client
 		Ninja_Handbook()
 			set hidden = 1
 			src << link("https://community.narutoevolution.com/t/the-ninja-handbook/27")
-		
+
 		Server_Information()
 			set hidden=1
 			if(administrators.Find(src.ckey) && src.browser_url != BROWSER_SERVER_INFORMATION)
@@ -389,7 +389,7 @@ client
 			else
 				src.browser_url = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
-		
+
 		World_Information()
 			set hidden=1
 			if(administrators.Find(src.ckey) && src.browser_url != BROWSER_WORLD_INFORMATION)
@@ -489,12 +489,12 @@ client
 								<th scope="col">Area Counter</th>
 								<td>[area_counter]</td>
 							</tr>
-							
+
 							<tr>
 								<th scope="col">Turf Counter</th>
 								<td>[turf_counter]</td>
 							</tr>
-							
+
 							<tr>
 								<th scope="col">Mob Counter</th>
 								<td>[mob_counter]</td>
@@ -542,7 +542,7 @@ client
 			else
 				src.browser_url = BROWSER_NONE
 				winset(src, "Browser", "is-visible = false")
-		
+
 		Election_Information()
 			set hidden=1
 			if(administrators.Find(src.ckey) && src.browser_url != BROWSER_ELECTION_INFORMATION)
@@ -911,7 +911,7 @@ client
 
 		View_Description(obj/Jutsu/J in usr.jutsus)
 			set category = null
-			usr.client.prompt(J.Description, J.name)
+			usr.client.Alert(J.Description, J.name)
 
 	proc
 		BrowserRefresh()
@@ -928,7 +928,7 @@ client
 					if(BROWSER_ELECTION_INFORMATION)
 						src.CloseBrowser()
 						src.Election_Information()
-				
+
 				sleep(100)
 
 		FlashExperienceLock()
@@ -1052,10 +1052,10 @@ client
 					else if(jutsu.Clan && jutsu.Clan != src.mob.Clan) jutsu.overlays += image('Misc Effects.dmi', "X")
 
 					else if(jutsu.Element)
-						if(jutsu.Element != src.mob.Element && jutsu.Element != src.mob.Element2) jutsu.overlays += image('Misc Effects.dmi', "X")
+						if(jutsu.Element != src.mob.Element && jutsu.Element != src.mob.Element2 && jutsu.Element != src.mob.Element3 && jutsu.Element != src.mob.Element4 && jutsu.Element != src.mob.Element5) jutsu.overlays += image('Misc Effects.dmi', "X")
 
 					else if(jutsu.Element2)
-						if(jutsu.Element2 != src.mob.Element && jutsu.Element2 != src.mob.Element2) jutsu.overlays += image('Misc Effects.dmi',"X")
+						if(jutsu.Element2 != src.mob.Element && jutsu.Element2 != src.mob.Element2 && jutsu.Element2 != src.mob.Element3 && jutsu.Element2 != src.mob.Element4 && jutsu.Element2 != src.mob.Element5) jutsu.overlays += image('Misc Effects.dmi',"X")
 
 					else if(jutsu.Specialist && jutsu.Specialist != src.mob.Specialist) jutsu.overlays += image('Misc Effects.dmi',"X")
 
@@ -1115,10 +1115,10 @@ client
 									else if(jutsu.Clan && jutsu.Clan != src.mob.Clan) jutsu.overlays += image('Misc Effects.dmi', "X")
 
 									else if(jutsu.Element)
-										if(jutsu.Element != src.mob.Element && jutsu.Element != src.mob.Element2) jutsu.overlays += image('Misc Effects.dmi', "X")
+										if(jutsu.Element != src.mob.Element && jutsu.Element != src.mob.Element2 && jutsu.Element != src.mob.Element3 && jutsu.Element != src.mob.Element4 && jutsu.Element != src.mob.Element5) jutsu.overlays += image('Misc Effects.dmi', "X")
 
 									else if(jutsu.Element2)
-										if(jutsu.Element2 != src.mob.Element && jutsu.Element2 != src.mob.Element2) jutsu.overlays += image('Misc Effects.dmi',"X")
+										if(jutsu.Element2 != src.mob.Element && jutsu.Element2 != src.mob.Element2 && jutsu.Element2 != src.mob.Element3 && jutsu.Element2 != src.mob.Element4 && jutsu.Element2 != src.mob.Element5) jutsu.overlays += image('Misc Effects.dmi',"X")
 
 									else if(jutsu.Specialist && jutsu.Specialist != src.mob.Specialist) jutsu.overlays += image('Misc Effects.dmi',"X")
 

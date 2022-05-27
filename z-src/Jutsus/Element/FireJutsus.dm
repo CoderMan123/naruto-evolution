@@ -357,7 +357,6 @@ mob
 								A.damage=(J.damage+((src.ninjutsu / 150)*2*J.damage))/7
 								A.level=J.level
 								walk(A,src.dir)
-					src.client.eye=src
 					src.copy=null
 					spawn(6)if(src)
 						src.firing=0

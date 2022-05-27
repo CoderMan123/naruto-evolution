@@ -6,6 +6,7 @@ mob
 		maxhealth=2500
 		chakra=1800
 		maxchakra=1800
+		prestigelevel
 		level=1
 		exp=0
 		maxexp=10
@@ -43,9 +44,12 @@ mob
 		weaponattk
 		Element
 		Element2
+		Element3
+		Element4
+		Element5
 		Kekkai
 		Clan=null
-		Specialist
+		Specialist="strength"
 		Specialist2
 		ryo=0
 		RyoBanked=0

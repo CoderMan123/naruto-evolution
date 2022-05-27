@@ -1138,14 +1138,13 @@ turf
 					var/check=0
 					if(M.waterwalk)
 						check=1
-					if(M.Element == "Wind" || M.Element == "Water")
-						if(M.Element2 == "Water" || M.Element2 == "Wind")
-							var/obj/O = new/obj(src)
-							O.loc = src
-							O.icon = 'GRND.dmi'
-							O.icon_state = "Icywater"
-							check=1
-							spawn(5) del(O)
+					if(M.Clan == "Ice")
+						var/obj/O = new/obj(src)
+						O.loc = src
+						O.icon = 'GRND.dmi'
+						O.icon_state = "Icywater"
+						check=1
+						spawn(5) del(O)
 					if(!check)
 						if(!M.swimming)
 							M.firing=1

@@ -43,16 +43,16 @@ proc
 
 	New()
 		..()
-	
+
 	proc/Ticker()
 		while(src && src.mob && src.mob.state_manager.Find(src) && world.timeofday < src.expiration || src.duration == -1)
 			sleep(world.tick_lag)
 			src.OnTick()
-		
+
 		if(src && src.mob)
 			src.mob.state_manager.Remove(src)
 			src.mob = null
-		
+
 		if(src && src.owner)
 			src.owner = null
 
@@ -93,7 +93,7 @@ proc
 	punching
 
 	throwing
-	
+
 	blocking
 		OnTick()
 			..()
@@ -101,7 +101,7 @@ proc
 	walking
 		OnTick()
 			..()
-	
+
 	in_warp_dimension
 		Ticker()
 			var/mob/m = src.mob
@@ -111,7 +111,7 @@ proc
 			if(m)
 				m<<output("The warp dimension couldn't hold you any longer!","Action.Output")
 				m.loc = victims_previous_loc
-	
+
 	in_combat
 
 	nara_attack_delay
@@ -161,7 +161,7 @@ mob
 			AddState(src, new/state/stunned, 20)
 			if(CheckState(src, new/state/stunned))
 				src << "I'm stunned!"
-			
+
 			AddState(src, new/state/knocked_down, 600)
 			RemoveState(src, new/state/knocked_down, STATE_REMOVE_ANY)
 
