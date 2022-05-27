@@ -68,7 +68,7 @@ obj/MissionObj
 									M.LevelStat("Ninjutsu",rand(25,45),1)
 									M.Levelup()
 								if(2)
-									M.LevelStat("strength",rand(25,45),1)
+									M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(25,45),1)
 									M.Levelup()
 								if(3)
 									M.LevelStat("Genjutsu",rand(25,45),1)
@@ -86,7 +86,7 @@ obj/MissionObj
 											M.LevelStat("Ninjutsu",rand(25,45),1)
 											M.Levelup()
 										if(2)
-											M.LevelStat("strength",rand(25,45),1)
+											M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(25,45),1)
 											M.Levelup()
 										if(3)
 											M.LevelStat("Genjutsu",rand(25,45),1)
@@ -106,7 +106,7 @@ obj/MissionObj
 									M.LevelStat("Ninjutsu",rand(25,45),1)
 									M.Levelup()
 								if(2)
-									M.LevelStat("strength",rand(25,45),1)
+									M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(25,45),1)
 									M.Levelup()
 								if(3)
 									M.LevelStat("Genjutsu",rand(25,45),1)
@@ -152,7 +152,7 @@ obj/MissionObj
 							if(1)
 								M.LevelStat("Ninjutsu",rand(25,45),1)
 							if(2)
-								M.LevelStat("strength",rand(25,45),1)
+								M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(25,45),1)
 							if(3)
 								M.LevelStat("Genjutsu",rand(25,45),1)
 
@@ -169,7 +169,7 @@ obj/MissionObj
 										M.LevelStat("Ninjutsu",rand(25,45),1)
 
 									if(2)
-										M.LevelStat("strength",rand(25,45),1)
+										M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(25,45),1)
 
 									if(3)
 										M.LevelStat("Genjutsu",rand(25,45),1)
@@ -189,7 +189,7 @@ obj/MissionObj
 								M.LevelStat("Ninjutsu",rand(25,45),1)
 
 							if(2)
-								M.LevelStat("strength",rand(25,45),1)
+								M.LevelStat(SPECIALIZATION_TAIJUTSU,rand(25,45),1)
 
 							if(3)
 								M.LevelStat("Genjutsu",rand(25,45),1)

@@ -48,7 +48,7 @@ client
 		ToggleChatInputPanel()
 			set hidden=1
 			if(src.mob.Muted)
-				src.Alert("You can't chat while muted.")
+				src.prompt("You can't chat while muted.")
 				return
 
 			else if(winget(src, "Main.InputChild", "is-visible") == "false")
@@ -251,19 +251,19 @@ client
 			if(src.mob.exp_locked)
 				src.exp_lock_verify=1
 				var/verification_code = rand(1000,9999)
-				var/verification_response = src.AlertInput("Please enter the following verification code to resume gaining experience: [verification_code]", "Experience Lock", list("Submit", "Cancel"))
-				if(verification_response[1] == 1 && text2num(verification_response[2]) == verification_code)
+				var/verification_response = src.iprompt("Please enter the following verification code to resume gaining experience: [verification_code]", "Experience Lock", list("Submit", "Cancel"))
+				if(verification_response[1] == "Submit" && text2num(verification_response[2]) == verification_code)
 					src << output("You will now resume gaining experience normally.", "Action.Output")
 					winset(src, "Navigation.ExpLockButton", "is-disabled = 'true'")
 					src.mob.exp_locked=0
 					src.exp_lock_verify=0
-				else if(verification_response[1] == 1)
-					src.Alert("You did not enter the correct verification code.", "Experience Lock")
+				else if(verification_response[1] == "Submit")
+					src.prompt("You did not enter the correct verification code.", "Experience Lock")
 					src.exp_lock_verify=0
 				else
 					src.exp_lock_verify=0
 			else
-				src.Alert("You are not currently experience locked.", "Experience Lock")
+				src.prompt("You are not currently experience locked.", "Experience Lock")
 
 		Community_Guidelines()
 			set hidden = 1
@@ -911,7 +911,7 @@ client
 
 		View_Description(obj/Jutsu/J in usr.jutsus)
 			set category = null
-			usr.client.Alert(J.Description, J.name)
+			usr.client.prompt(J.Description, J.name)
 
 	proc
 		BrowserRefresh()

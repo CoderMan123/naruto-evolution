@@ -254,30 +254,30 @@ mob
 				if(get_dist(src,usr)>2)return
 				if(usr)usr.move=0
 				if(usr.rank == RANK_ANBU_LEADER || usr.rank == RANK_HOKAGE || usr.rank == RANK_KAZEKAGE || usr.rank == RANK_MIZUKAGE || usr.rank == RANK_OTOKAGE || usr.rank == RANK_TSUCHIKAGE || usr.rank == RANK_AKATSUKI || usr.rank == RANK_AKATSUKI_LEADER || usr.rank == RANK_SEVEN_SWORDSMEN_LEADER)
-					usr.client.Alert("Don't mind me. I'm just an old veteran looking to enjoy his retirement. (Leaders cannot prestige. Retire first and try again.)", src.name)
+					usr.client.prompt("Don't mind me. I'm just an old veteran looking to enjoy his retirement. (Leaders cannot prestige. Retire first and try again.)", src.name)
 					return
 				if(usr.level < 100)//insert prestige prereqs here
-					usr.client.Alert("I used to be a shinobi like you but I took a kunai to the leg. You still seem a bit green for my teachings though. Come back when you think you've learned all you can learn about being a shinobi.", src.name)
-				else if(usr.client.Alert("Well well well.. you look to be pretty strong. But it looks like you've reached the peak of your potential. If you want to get stronger you'll have to start your training over from the beginning. I can show you the way if you think you have what it takes. Would you like to prestige? (WARNING: You will lose all levels, stats and jutsu effectively starting as a fresh character.)", src.name, list("Yes", "No")) == 1)
-					switch(usr.client.AlertList("What do you want to learn?", src.name, list("A New Element","Nevermind")))
-						if(1)
+					usr.client.prompt("I used to be a shinobi like you but I took a kunai to the leg. You still seem a bit green for my teachings though. Come back when you think you've learned all you can learn about being a shinobi.", src.name)
+				else if(usr.client.prompt("Well well well.. you look to be pretty strong. But it looks like you've reached the peak of your potential. If you want to get stronger you'll have to start your training over from the beginning. I can show you the way if you think you have what it takes. Would you like to prestige? (WARNING: You will lose all levels, stats and jutsu effectively starting as a fresh character.)", src.name, list("Yes", "No")) == "Yes")
+					switch(usr.client.prompt("What do you want to learn?", src.name, list("A New Element","Nevermind")))
+						if("A New Element")
 							if(usr.Element5)
-								usr.client.Alert("You already have all five elements, you're a master of the elements!", src.name)
+								usr.client.prompt("You already have all five elements, you're a master of the elements!", src.name)
 								usr.move=1
 								return
 							var/PlayerElements = list("[usr.Element]","[usr.Element2]","[usr.Element3]","[usr.Element4]","[usr.Element5]")
 							var/ElementChoice = list("Fire","Water","Earth","Lightning","Wind")
 							ElementChoice -= PlayerElements
 							var/ChosenElement
-							ChosenElement = usr.client.AlertList("What do you want to learn?", src.name, ElementChoice)
+							ChosenElement = usr.client.prompt("What do you want to learn?", src.name, ElementChoice)
 							if(!usr.Element3) usr.Element3 = ElementChoice[ChosenElement]
 							else if(!usr.Element4) usr.Element4 = ElementChoice[ChosenElement]
 							else if(!usr.Element5) usr.Element5 = ElementChoice[ChosenElement]
 							usr.prestige_reset()
 							//usr.level = initial(usr.level)
 
-						if(2)
-							usr.client.Alert("You know where to find me if you change your mind.", src.name)
+						if("Nevermind")
+							usr.client.prompt("You know where to find me if you change your mind.", src.name)
 							usr.move=1
 							return
 				usr.move=1
@@ -313,9 +313,9 @@ mob
 			usr.genjutsu = initial(usr.genjutsu)
 			usr.genexp = initial(usr.genexp)
 			usr.maxgenexp = initial(usr.maxgenexp)
-			usr.strength = initial(usr.strength)
-			usr.strengthexp = initial(usr.strengthexp)
-			usr.maxstrengthexp = initial(usr.maxstrengthexp)
+			usr.taijutsu = initial(usr.taijutsu)
+			usr.taijutsuexp = initial(usr.taijutsuexp)
+			usr.maxtaijutsuexp = initial(usr.maxtaijutsuexp)
 			usr.defence = initial(usr.defence)
 			usr.defexp = initial(usr.defexp)
 			usr.maxdefexp = initial(usr.maxdefexp)
