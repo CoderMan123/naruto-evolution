@@ -826,10 +826,10 @@ mob
 					Effects["Rasengan"]=null
 
 		ShishiRendan()
+			var/mob/c_target=src.Target_Get(TARGET_MOB)
+			if(!c_target){src<<output("<font color=yellow>You need to have a Target to perform ShiShi Rendan","Action.Output");return}
 			for(var/obj/Jutsus/Shishi/J in src.jutsus)
 				if(src.PreJutsu(J))
-					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(!c_target){src<<output("<font color=yellow>You need to have a Target to perform ShiShi Rendan","Action.Output");return}
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2.5)
