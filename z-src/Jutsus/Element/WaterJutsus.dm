@@ -1,6 +1,8 @@
 mob
 	proc
 		MizuClone_Jutsu()
+			var/mob/c_target=src.Target_Get(TARGET_MOB)
+			if(!c_target){src<<output("You need a target to use this jutsu.","Action.Output");return}
 			if(clonesturned==1)
 				return
 			if(src.firing==0&&src.canattack==1)
@@ -21,6 +23,7 @@ mob
 						src.chakra-=round(src.chakra/bun)
 						flick("jutsu",src)
 						var/mob/Clones/MizuBunshin/A = new/mob/Clones/MizuBunshin(src.loc)
+						A.attack_target = c_target
 						A.loc=src.loc
 						A.Owner=src
 						A.taijutsu=round(src.taijutsu/bun)

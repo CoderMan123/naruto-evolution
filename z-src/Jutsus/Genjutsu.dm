@@ -245,6 +245,7 @@ mob
 			chakra=400
 			maxchakra=400
 			density=1
+			var/attack_target
 			var/obj/PrisonOb
 			var/TrapTimes=2
 			icon='Water Bunshin.dmi'
@@ -296,51 +297,48 @@ mob
 					if(TrapTimes<=0)
 						src.health=0
 						Death(src)
-					for(var/mob/X in oview(src))
-						if(X <> Owner)
-							if(X&&istype(X)&&!X.dead&&X.move)
-								while(get_dist(X,src)>1)
-									sleep(2)
-									step_towards(src,X)
-								dir=get_dir(src,X)
-								for(var/mob/M in get_step(src,src.dir))
-									var/Timer=25
-									if(istype(M)&&!M.dead)
-										M.move=0
-										M.canattack=0
-										M.injutsu=1
-										M.firing=1
-										M.Prisoned=1
-										move=0
-										firing=1
-										canattack=0
-										var/obj/Jutsu/Effects/WaterPrison/W=new
-										W.layer=M.layer+2
-										W.pixel_x-=45
-										W.loc=M.loc
-										icon_state="punchrS"
-										PrisonOb=W
-										Prisoner=M
-										while(Timer&&M.loc==W.loc&&M)
-											sleep(2)
-											Timer--
-											M.Prisoned=1
-											M.move=0
-											M.canattack=0
-											M.injutsu=1
-											M.firing=1
-									M.move=1
-									M.canattack=1
-									M.firing=0
-									M.Prisoned=0
-									M.injutsu=0
-									move=1
-									firing=0
-									canattack=1
-									icon_state=""
-									del(PrisonOb)
-									Prisoner=null
-									TrapTimes--
+					while(get_dist(attack_target,src)>1)
+						sleep(2)
+						step_towards(src,attack_target)
+					dir=get_dir(src,attack_target)
+					for(var/mob/M in get_step(src,src.dir))
+						var/Timer=25
+						if(istype(M)&&!M.dead)
+							M.move=0
+							M.canattack=0
+							M.injutsu=1
+							M.firing=1
+							M.Prisoned=1
+							move=0
+							firing=1
+							canattack=0
+							var/obj/Jutsu/Effects/WaterPrison/W=new
+							W.layer=M.layer+2
+							W.pixel_x-=45
+							W.loc=M.loc
+							icon_state="punchrS"
+							PrisonOb=W
+							Prisoner=M
+							while(Timer&&M.loc==W.loc&&M)
+								sleep(2)
+								Timer--
+								M.Prisoned=1
+								M.move=0
+								M.canattack=0
+								M.injutsu=1
+								M.firing=1
+						M.move=1
+						M.canattack=1
+						M.firing=0
+						M.Prisoned=0
+						M.injutsu=0
+						move=1
+						firing=0
+						canattack=1
+						icon_state=""
+						del(PrisonOb)
+						Prisoner=null
+						TrapTimes--
 		Bunshin
 			health=1
 			maxhealth=1
