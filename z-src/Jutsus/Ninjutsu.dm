@@ -2527,6 +2527,7 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 	E.Owner=src
 	B.Owner=src
 	var/turf/T=Who.loc
+
 	spawn((Timer)+10)
 		if(src)
 			move=1
@@ -2549,6 +2550,8 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 			Who=null
 		if(E)del(E)
 		if(B)del(B)
+
+
 	while(E.loc!=T&&!E.bumped&&Who)
 		sleep(1)
 		if(src)

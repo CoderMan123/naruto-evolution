@@ -3,14 +3,17 @@ mob
 		Shadow_Stab()
 			if(CheckState(src, new/state/nara_attack_delay)) return
 			for(var/obj/Jutsus/Shadow_Stab/J in src.jutsus)
+				src.canattack=1
 				if(src.PreJutsu(J))
+					src.canattack=0
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					AddState(src, new/state/nara_attack_delay, 5)
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					AddState(src, new/state/nara_attack_delay, -1)
 					flick("jutsuse",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					var/mob/M=NaraTarget
@@ -20,15 +23,18 @@ mob
 					O.loc=M.loc
 					O.layer=MOB_LAYER+1
 					O.pixel_x=-16
-					M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
+					c_target.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
 					flick("stab",O)
 					if(!M) M.Bleed()
 					spawn(5)if(O)del(O)
+					RemoveState(src, new/state/nara_attack_delay, STATE_REMOVE_ALL)
 
 		Shadow_Choke()
 			if(CheckState(src, new/state/nara_attack_delay)) return
 			for(var/obj/Jutsus/Shadow_Choke/J in src.jutsus)
+				src.canattack=1
 				if(src.PreJutsu(J))
+					src.canattack=0
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
@@ -73,7 +79,9 @@ mob
 		Shadow_Explosion()
 			if(CheckState(src, new/state/nara_attack_delay)) return
 			for(var/obj/Jutsus/Shadow_Explosion/J in src.jutsus)
+				src.canattack=1
 				if(src.PreJutsu(J))
+					src.canattack=0
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
