@@ -1,5 +1,14 @@
 obj
 	events
+		genin_exam
+			genin_exam
+				icon = 'building insides.dmi'
+				icon_state = "paper"
+				mouse_opacity = 2
+				DblClick()
+					. = ..()
+					world.GeninExamWritten(usr)
+
 		election
 			ballot_box
 				leaf_ballot_box
@@ -65,4 +74,3 @@ obj
 								usr.client.prompt("This ballot box is for the [VILLAGE_SAND] elections.", "Ballot Box")
 						else
 							usr.client.prompt("There is not currently an on-going election for [RANK_KAZEKAGE].", "Ballot Box")
-				

@@ -175,10 +175,6 @@ mob
 				src.taijutsu -= 35
 				src.ninjutsu -= 35
 
-			if(src in global.genintesters)
-				global.genintesters -= src
-				src.loc = MapLoadSpawn()
-
 			if(Chuunins.Find(src))
 				Chuunins -= src
 				src.loc = MapLoadSpawn()
@@ -803,7 +799,7 @@ mob
 				if(value) src.skillpoints = value
 				src.UpdateHMB()
 				return
-			
+
 			command = "/infamy "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
@@ -830,7 +826,7 @@ mob
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
 				if(value) src.see_invisible = value
 				return
-			
+
 			command = "/teleport "
 			command_alias = "/tp "
 			if(findtext(msg, command) || findtext(msg, command_alias) && administrators.Find(src.client.ckey) || moderators.Find(src.client.ckey))
@@ -842,7 +838,7 @@ mob
 						if(lowertext(m.character) == lowertext(value))
 							src.loc = m.loc
 							return
-					
+
 					for(var/mob/m in mobs_online)
 						if(findtext(lowertext(m.character), lowertext(value)))
 							src.loc = m.loc
@@ -852,15 +848,15 @@ mob
 						if(lowertext(m.name) == lowertext(value))
 							src.loc = m.loc
 							return
-					
+
 					for(var/mob/m in npcs_online)
 						if(findtext(lowertext(m.name), lowertext(value)))
 							src.loc = m.loc
 							return
-					
+
 				src << "/teleport: A mob was not found for the case insensitive string \"[value]\"."
 				return
-			
+
 			command = "/teleport"
 			command_alias = "/tp"
 			if(findtext(msg, command) || findtext(msg, command_alias) && administrators.Find(src.client.ckey) || moderators.Find(src.client.ckey))
@@ -1227,6 +1223,29 @@ mob
 							if(VILLAGE_SOUND)
 								if(!locate(/obj/Inventory/Clothing/Masks/Anbu_Purple) in src.contents)
 									new /obj/Inventory/Clothing/Masks/Anbu_Purple(src)
+
+					if(RANK_GENIN)
+						switch(src.village)
+							if(VILLAGE_LEAF)
+								if(!locate(/obj/Inventory/Clothing/HeadWrap/LeafHeadBand) in src.contents)
+									new/obj/Inventory/Clothing/HeadWrap/LeafHeadBand(src)
+
+							if(VILLAGE_SAND)
+								if(!locate(/obj/Inventory/Clothing/HeadWrap/SandHeadBand) in src.contents)
+									new/obj/Inventory/Clothing/HeadWrap/SandHeadBand(src)
+
+							if(VILLAGE_ROCK)
+								if(!locate(/obj/Inventory/Clothing/HeadWrap/RockHeadBand) in src.contents)
+									new/obj/Inventory/Clothing/HeadWrap/RockHeadBand(src)
+
+							if(VILLAGE_MIST)
+								if(!locate(/obj/Inventory/Clothing/HeadWrap/LeafHeadBand) in src.contents)
+									new/obj/Inventory/Clothing/HeadWrap/MistHeadBand(src)
+
+							if(VILLAGE_SOUND)
+								if(!locate(/obj/Inventory/Clothing/HeadWrap/SoundHeadBand) in src.contents)
+									new/obj/Inventory/Clothing/HeadWrap/SoundHeadBand(src)
+
 
 				src.rank = RANK
 

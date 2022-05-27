@@ -69,10 +69,10 @@ world
 		src.FailMissions()
 		src.Save()
 		..()
-	
+
 	Error(exception/ex)
 		text2file("<b>Timestamp:</b> [time2text(world.realtime , "YYYY-MM-DD hh:mm:ss")]<br /><b>Runtime Error:</b> [ex.name]<br /><b>File:</b> [ex.file]<br /><b>Line:</b> [ex.line]<br /><b><u>Description:</u></b><br />[ex.desc]<br /><br />", LOG_ERROR)
-	
+
 	proc/UpdateVillageCount()
 		leaf_online = 0
 		sand_online = 0
@@ -94,12 +94,12 @@ world
 					if(source.address == target.address || source.computer_id == target.computer_id)
 						clients_multikeying.Add(source)
 						clients_multikeying.Add(target)
-	
+
 	proc/Kage_Inactivity_Check()
 		set background = 1
 		while(src)
 			var/days = 1
-			
+
 			if(kages_last_online[VILLAGE_LEAF] && kages_last_online[VILLAGE_LEAF] + 864000 * days <= world.realtime)
 				var/online
 				for(var/mob/m in mobs_online)
@@ -112,12 +112,12 @@ world
 					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_HOKAGE] ([global.GetHokage()]) for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
 					hokage = list()
 					kages_last_online[VILLAGE_LEAF] = null
-			
+
 			if(kages_last_online[VILLAGE_SAND] && kages_last_online[VILLAGE_SAND] + 864000 * days <= world.realtime)
 				var/online
 				for(var/mob/m in mobs_online)
 					if(kazekage[m.client.ckey] == m.character) online = 1
-				
+
 				// Don't demote Kages that are online because kage_last_online[] only updates on mob.Load() and mob.Save().
 				// Otherwise, Kages will be demoted if they do not logout to update their kage_last_online[] timestamp.
 				if(!online)
@@ -127,12 +127,12 @@ world
 					kages_last_online[VILLAGE_SAND] = null
 
 			sleep(600)
-	
+
 	proc/Akatsuki_Inactivity_Check()
 		set background = 1
 		while(src)
 			var/days = 5
-			
+
 			if(akatsuki_last_online && akatsuki_last_online + 864000 * days <= world.realtime)
 				var/online
 				for(var/mob/m in mobs_online)
@@ -153,60 +153,60 @@ world
 		while(world)
 			status = "Naruto Evolution v[build] | Ninjas Online ([mobs_online.len]/[server_capacity])"
 			sleep(600)
-	
+
 	proc/CreateLogs()
 
 		if(!fexists(LOG_ERROR))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_ERROR)
-		
+
 		if(!fexists(LOG_BUGS))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_BUGS)
-		
+
 		if(!fexists(LOG_SAVES))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_SAVES)
-		
+
 		if(!fexists(LOG_CLIENT_SAVES))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_CLIENT_SAVES)
-		
+
 		if(!fexists(LOG_KILLS))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_KILLS)
-		
+
 		if(!fexists(LOG_STAFF))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_STAFF)
-		
+
 		if(!fexists(LOG_ADMINISTRATOR))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_ADMINISTRATOR)
-		
+
 		if(!fexists(LOG_MODERATOR))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_MODERATOR)
-		
+
 		if(!fexists(LOG_KAGE))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_KAGE)
-		
+
 		if(!fexists(LOG_AKATSUKI))
 			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_AKATSUKI)
-		
+
 		if(!fexists(LOG_CHAT_LOCAL))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_LOCAL)
-		
+
 		if(!fexists(LOG_CHAT_VILLAGE))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_VILLAGE)
-		
+
 		if(!fexists(LOG_CHAT_SQUAD))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_SQUAD)
-		
+
 		if(!fexists(LOG_CHAT_FACTION))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_FACTION)
-		
+
 		if(!fexists(LOG_CHAT_GLOBAL))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_GLOBAL)
-		
+
 		if(!fexists(LOG_CHAT_WHISPER))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_WHISPER)
-		
+
 		if(!fexists(LOG_CHAT_STAFF))
 			text2file("<body bgcolor = '#414141'>", LOG_CHAT_STAFF)
-		
+
 		if(!fexists(LOG_KAGE))
 			text2file("<body bgcolor = '#414141'>", LOG_KAGE)
 
@@ -327,7 +327,7 @@ world
 		while(world)
 			world << src.GetAdvert()
 			sleep(600*30)
-	
+
 	proc/FailMissions()
 		for(var/squad/squad in squads)
 			if(squad.mission)
@@ -335,7 +335,7 @@ world
 					if(/mission/d_rank/deliver_intel)
 						squad.mission.status = "Failure"
 						squad.mission.complete = world.realtime
-					
+
 					if(/mission/a_rank/political_escort)
 						squad.mission.status = "Failure"
 						squad.mission.complete = world.realtime
