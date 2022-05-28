@@ -39,6 +39,7 @@ git lfs install
 git config --global user.name "Full Name"
 git config --global user.email "email@address.com"
 git config --global pull.rebase true
+git config --global submodule.recurse true
 git config --global diff.submodule log
 ```
 
@@ -47,20 +48,10 @@ git config --global diff.submodule log
 1) **Clone the repository:**
 
 ```sh
-git clone https://github.com/IllusiveBIair/Naruto-Evolution.git
+git clone https://github.com/douglasparker/naruto-evolution.git
 ```
 
-2) **Switch to preferred branch:**
-
-- **release**: This is the current release branch and automatically deploys to the beta testing environment.
-
-- **develop**: This is the current development branch and automatically deploys to the alpha testing environment.
-
-```sh
-git checkout develop
-```
-
-3) **Initialize and checkout submodules:**
+2) **Initialize and checkout submodules:**
 
 ```sh
 git submodule update --init --recursive
