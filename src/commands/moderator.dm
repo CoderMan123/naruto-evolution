@@ -16,7 +16,15 @@ mob/proc/TeleportCommand()
 				src << "/teleport: A player mob was not found."
 
 		if("NPC")
-			var/mob/mob = src.client.prompt("Which NPC would you like to teleport to?", "Teleport", npcs_online)
+			// Filter out NPCs with duplicate names from the teleport.
+			var/filter[0]
+			for(var/mob/m in npcs_online)
+				filter.Add(m)
+				for(var/mob/f in filter)
+					if(m != f && m.name == f.name)
+						filter.Remove(m)
+
+			var/mob/mob = src.client.prompt("Which NPC would you like to teleport to?", "Teleport", filter)
 			if(mob)
 				if(src.client.prompt("Are you sure you want to teleport to [mob]?", "Teleport", list("Yes", "No")) == "Yes")
 					src.loc = mob.loc
