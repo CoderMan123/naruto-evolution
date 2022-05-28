@@ -83,8 +83,9 @@ world
 							m << output("You have passed the practical examination!", "Action.Output")
 						else
 							m << output("You have failed the practical examination!", "Action.Output")
-
-						m.loc = m.MapLoadSpawn()
+						
+						if(genin_exam_written_pass.Find(m))
+							m.loc = m.MapLoadSpawn()
 
 					genin_exam_practical = 0
 
