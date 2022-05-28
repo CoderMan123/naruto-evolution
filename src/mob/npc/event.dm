@@ -2,6 +2,7 @@ mob
 	npc
 		event_npc
 			genin_examiner
+				icon = 'WhiteMBase.dmi'
 				New()
 					..()
 					src.icon = pick('WhiteMBase.dmi', 'DarkMBase.dmi')
