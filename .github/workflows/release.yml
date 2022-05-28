@@ -5,7 +5,7 @@ on:
     types: [published]
 
 env:
-  BYOND_VERSION: "514.1578"
+  BYOND_VERSION: "514.1584"
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
