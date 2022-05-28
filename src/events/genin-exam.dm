@@ -74,6 +74,7 @@ world
 					for(var/mob/m in mobs_online)
 						if(m.village == VILLAGE_LEAF || m.village == VILLAGE_SAND)
 							m << output("The practical examination has begun! Please execute 3 Ninjutsu or Genjutsu within 30 seconds to pass the practical examination.", "Action.Output")
+							m.loc = locate(/area/genin_exam/practical_exam)
 
 					sleep(300)
 
@@ -82,6 +83,8 @@ world
 							m << output("You have passed the practical examination!", "Action.Output")
 						else
 							m << output("You have failed the practical examination!", "Action.Output")
+
+						m.loc = m.MapLoadSpawn()
 
 					genin_exam_practical = 0
 
