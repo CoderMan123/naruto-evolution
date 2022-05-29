@@ -848,30 +848,70 @@ mob
 					for(var/mob/m in mobs_online)
 						if(lowertext(m.character) == lowertext(value))
 							src.loc = m.loc
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in mobs_online)
 						if(findtext(lowertext(m.character), lowertext(value)))
 							src.loc = m.loc
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(lowertext(m.name) == lowertext(value))
 							src.loc = m.loc
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob].<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(findtext(lowertext(m.name), lowertext(value)))
 							src.loc = m.loc
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob].<br />", LOG_MODERATOR)
 							return
 
-				src << "/teleport: A mob was not found for the case insensitive string \"[value]\"."
+				src << "/teleport: A mob was not found matching the string \"[value]\"."
 				return
 
 			command = "/teleport"
 			command_alias = "/tp"
 			if(findtext(msg, command) || findtext(msg, command_alias) && administrators.Find(src.client.ckey) || moderators.Find(src.client.ckey))
 				return src.TeleportCommand()
+			
+			command = "/summon "
+			if(findtext(msg, command) && administrators.Find(src.client.ckey) || moderators.Find(src.client.ckey))
+
+				var/value = copytext(msg, findtext(msg, command) + length(command))
+				if(value)
+					for(var/mob/m in mobs_online)
+						if(lowertext(m.character) == lowertext(value))
+							m.loc = src.loc
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
+							return
+
+					for(var/mob/m in mobs_online)
+						if(findtext(lowertext(m.character), lowertext(value)))
+							m.loc = src.loc
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
+							return
+
+					for(var/mob/m in npcs_online)
+						if(lowertext(m.name) == lowertext(value))
+							m.loc = src.loc
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob].<br />", LOG_MODERATOR)
+							return
+
+					for(var/mob/m in npcs_online)
+						if(findtext(lowertext(m.name), lowertext(value)))
+							m.loc = src.loc
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob].<br />", LOG_MODERATOR)
+							return
+
+				src << "/summon: A mob was not found matching the string \"[value]\"."
+				return
+
+			command = "/summon"
+			if(findtext(msg, command) && administrators.Find(src.client.ckey) || moderators.Find(src.client.ckey))
+				return src.SummonCommand()
 
 			else if(findtext(msg, "/stuck"))
 				src.Stuck()
