@@ -246,7 +246,7 @@ mob
 		onomari //prestige system
 			name = "Onomari"
 			icon = 'WhiteMBase.dmi'
-			village = "Hidden Leaf"
+			village = VILLAGE_MISSING_NIN
 
 
 			DblClick()
