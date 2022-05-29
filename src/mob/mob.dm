@@ -363,22 +363,33 @@ mob
 
 				sleep(1)
 
-			src.SkinTone = src.client.prompt("Please choose a skin tone.", "Skin Tone", list("Pale", "White", "Dark", "Blue"))
+			src.SkinTone = src.client.prompt("Select a skin tone.", "Skin Tone", list("Pale", "White", "Dark", "Blue"))
 
 			while(!src.SkinTone)
-				src.SkinTone = src.client.prompt("Please choose a skin tone.", "Skin Tone", list("Pale", "White", "Dark", "Blue"))
+				src.SkinTone = src.client.prompt("Select a skin tone.", "Skin Tone", list("Pale", "White", "Dark", "Blue"))
 				sleep(10)
 
 			src.ResetBase()
 
-			src.HairStyle = src.client.prompt("Please choose a hairstyle","Hairstyle",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","srcohawk","Neji Hair","Distance"))
-			if(src.HairStyle != "Bald")
-				src.HairColor = src.client.cprompt("Please select a hairstyle dye.", "Hairstyle Dye", luminosity_max = 20)
+			src.HairStyle = src.client.prompt("Select a hair style.", "Hairstyle", list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","srcohawk","Neji Hair","Distance"))
 
-			src.Element = src.client.prompt("Element Options","Please choose your primary elemental affinity.",list("Fire","Water","Wind","Earth","Lightning"))
-			src.Specialist = src.client.prompt("Specialist Options","What area of skills would you like to specialize in? Some nonclans and nonclan jutsus require a specific speciality. \n Gates requires [SPECIALIZATION_TAIJUTSU]. \n Each speciality also has it's own nonclan tree.", list("[SPECIALIZATION_NINJUTSU]", "[SPECIALIZATION_GENJUTSU]", "[SPECIALIZATION_TAIJUTSU]"))
-			src.Clan = src.client.prompt("Clan Options","What clan would you like to be born in?. \n Nonclan has many options that are similar to clans.",list("Senjuu","Crystal","Akimichi","Weaponist","Aburame","Hyuuga","Nara","Kaguya","Uchiha","Ink","Bubble","Medical","No Clan"))
-			src.village=src.client.prompt("Village Options","What village would you like to be born in?.",list("Hidden Leaf","Hidden Sand"/*,"Hidden Mist","Hidden Sound","Hidden Rock"*/))
+			if(src.HairStyle != "Bald")
+				src.HairColor = src.client.cprompt("What color hair would you like?", "Hair Dye", luminosity_max = 20)
+
+			src.Element = src.client.prompt("Please choose your primary elemental affinity.", "Elemental Affinity", list("Fire","Water","Wind","Earth","Lightning"))
+
+			src.Specialist = src.client.prompt({"
+				What area of skills would you like to specialize in? Some Non-Clans and Non-Clan jutsu require a specific speciality.<br /><br />
+				Gates require [SPECIALIZATION_TAIJUTSU].<br /><br />
+				Each speciality also has it's own Non-Clan skilltree."},
+				"Combat Specialization", list("[SPECIALIZATION_NINJUTSU]", "[SPECIALIZATION_GENJUTSU]", "[SPECIALIZATION_TAIJUTSU]"))
+
+			src.Clan = src.client.prompt({"
+				What clan would you like to be born in?<br /><br/>
+				Non-Clan has many options that are similar to clans."},
+				"Clan Selection", list("Senjuu", "Crystal", "Akimichi", "Weaponist", "Aburame", "Hyuuga", "Nara", "Kaguya", "Uchiha", "Ink", "Bubble", "Medical", "No Clan"))
+
+			src.village = src.client.prompt("What village would you like to be born in?", "Village Selection", list(VILLAGE_LEAF, VILLAGE_SAND /*, VILLAGE_MIST, VILLAGE_SOUND, VILLAGE_ROCK*/))
 			src.rank = RANK_ACADEMY_STUDENT
 
 			switch(src.Specialist)
