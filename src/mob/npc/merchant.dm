@@ -8,10 +8,12 @@ mob
 				pixel_x = -15
 
 				New()
-					src.overlays += pick('Short.dmi', 'Short2.dmi', 'Short3.dmi')
+					..()
+					src.icon = pick('WhiteMBase.dmi', 'DarkMBase.dmi')
+					src.overlays += pick(null, 'Deidara.dmi', 'Distance.dmi', 'Long.dmi', 'Mohawk.dmi', 'Neji Hair.dmi', 'Short.dmi','Short2.dmi','Short3.dmi', 'Spikey.dmi')
 					src.overlays += 'Shirt.dmi'
 					src.overlays += 'Sandals.dmi'
-					..()
+					src.overlays += 'Shade.dmi'
 
 				DblClick()
 					..()
@@ -65,10 +67,12 @@ mob
 				pixel_x = -15
 
 				New()
-					src.overlays += pick('Short.dmi', 'Short2.dmi', 'Short3.dmi')
+					..()
+					src.icon = pick('WhiteMBase.dmi', 'DarkMBase.dmi')
+					src.overlays += pick(null, 'Deidara.dmi', 'Distance.dmi', 'Long.dmi', 'Mohawk.dmi', 'Neji Hair.dmi', 'Short.dmi','Short2.dmi','Short3.dmi', 'Spikey.dmi')
 					src.overlays += 'Shirt.dmi'
 					src.overlays += 'Sandals.dmi'
-					..()
+					src.overlays += 'Shade.dmi'
 
 				DblClick()
 					..()
