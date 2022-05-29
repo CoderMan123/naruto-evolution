@@ -4,7 +4,7 @@ var/hotspring_stat_exp = 300
 proc/Hotspring_Loop()
 	while(world)
 		for(var/mob/m in mobs_online)
-			if(m && istype(m.loc.loc, /area/hotspring))
+			if(m && m.loc && istype(m.loc.loc, /area/hotspring))
 				if(m && CheckNextDay(m, m.last_hotspring_time))
 					m<<output("It is a new day. Prepare your buttocks.","Action.Output")
 					m.last_hotspring_time = world.realtime
@@ -21,7 +21,7 @@ proc/Hotspring_Loop()
 					m<<output("You feel relaxed and have gained [hotspring_exp] exp and [hotspring_stat_exp] exp in each stat! You have spent [m.hotspring_minutes] minutes in the hotspring today.","Action.Output")
 				else if(m)
 					m<<output("You've already soaked for an hour today, that's enough relaxation for one day. Come back tommorow.","Action.Output")
-		sleep(600)
+		sleep(10)
 
 
 proc/CheckNextDay(mob/M, var/timestamp)
