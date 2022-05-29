@@ -2,12 +2,12 @@ var/genin_exam = 0
 var/genin_exam_registration = 0
 var/genin_exam_participants[0]
 
-var/genin_exam_start_timer = 0.5 // delay in minutes before the Genin exam begins after the initial announcement.
+var/genin_exam_start_timer = 5 // delay in minutes before the Genin exam begins after the initial announcement.
 var/genin_exam_frequency = 60 // how often the Genin exam should run.
 
 var/genin_exam_written = 0
 var/genin_exam_written_participants[0]
-var/genin_exam_written_timer = 1 // this is how long players have to answer all of the questions in the written exam.
+var/genin_exam_written_timer = 3 // this is how long players have to answer all of the questions in the written exam.
 var/genin_exam_max_questions = 10 // max amount of questions that a player must answer for the written exam.
 var/genin_exam_written_pass[0]
 
@@ -72,7 +72,7 @@ world
 					genin_exam_practical = 1
 
 					for(var/mob/m in mobs_online)
-						if(m.village == VILLAGE_LEAF || m.village == VILLAGE_SAND)
+						if(genin_exam_written_pass.Find(m) && m.village == VILLAGE_LEAF || m.village == VILLAGE_SAND)
 							m << output("The practical examination has begun! Please execute 3 Ninjutsu or Genjutsu within 30 seconds to pass the practical examination.", "Action.Output")
 							m.loc = locate(/area/genin_exam/practical_exam)
 
