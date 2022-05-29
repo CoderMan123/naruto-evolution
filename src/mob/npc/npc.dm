@@ -248,6 +248,12 @@ mob
 			icon = 'WhiteMBase.dmi'
 			village = VILLAGE_MISSING_NIN
 
+			New()
+				src.overlays += pick('Short.dmi','Short2.dmi','Short3.dmi')
+				src.overlays += 'Shade.dmi'
+				src.overlays+='Shirt.dmi'
+				src.overlays+='Sandals.dmi'
+				..()
 
 			DblClick()
 				if(usr.dead)return
