@@ -21,7 +21,7 @@ proc/Hotspring_Loop()
 					m<<output("You feel relaxed and have gained [hotspring_exp] exp and [hotspring_stat_exp] exp in each stat! You have spent [m.hotspring_minutes] minutes in the hotspring today.","Action.Output")
 				else if(m)
 					m<<output("You've already soaked for an hour today, that's enough relaxation for one day. Come back tommorow.","Action.Output")
-		sleep(10)
+		sleep(600)
 
 
 proc/CheckNextDay(mob/M, var/timestamp)
