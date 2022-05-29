@@ -848,25 +848,25 @@ mob
 					for(var/mob/m in mobs_online)
 						if(lowertext(m.character) == lowertext(value))
 							src.loc = m.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [m] ([m.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in mobs_online)
 						if(findtext(lowertext(m.character), lowertext(value)))
 							src.loc = m.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [m] ([m.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(lowertext(m.name) == lowertext(value))
 							src.loc = m.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob].<br />", LOG_MODERATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [m].<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(findtext(lowertext(m.name), lowertext(value)))
 							src.loc = m.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob].<br />", LOG_MODERATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [m].<br />", LOG_MODERATOR)
 							return
 
 				src << "/teleport: A mob was not found matching the string \"[value]\"."
@@ -885,25 +885,25 @@ mob
 					for(var/mob/m in mobs_online)
 						if(lowertext(m.character) == lowertext(value))
 							m.loc = src.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [m] ([m.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in mobs_online)
 						if(findtext(lowertext(m.character), lowertext(value)))
 							m.loc = src.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [m] ([m.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(lowertext(m.name) == lowertext(value))
 							m.loc = src.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob].<br />", LOG_MODERATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [m].<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(findtext(lowertext(m.name), lowertext(value)))
 							m.loc = src.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob].<br />", LOG_MODERATOR)
+							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [m].<br />", LOG_MODERATOR)
 							return
 
 				src << "/summon: A mob was not found matching the string \"[value]\"."
