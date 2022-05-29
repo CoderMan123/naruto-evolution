@@ -83,6 +83,7 @@ obj
 				Description="It's a sharp pointed throwing star made of a hard steel. It could be deadly if thrown. It looks as though it's worth about 5 Ryo if you were to sell it to a common merchant."
 				damage=0
 				Cost=5
+				can_purchase = 1
 				Click()
 					..()
 					if(!usr.contents.Find(src)) return
@@ -101,6 +102,7 @@ obj
 				Description="A sharp medical precise needle. The tip appears to be extremely sharp, and could cause severe damage to precise points on the human body if thrown, or even applied. It looks as though it's only worth 3 Ryo."
 				damage=0
 				Cost=3
+				can_purchase = 1
 				Click()
 					..()
 					if(!usr.contents.Find(src)) return
@@ -119,6 +121,7 @@ obj
 				Description="A hard steel field knife. The tip is sharp enough to peirce flesh, as well as many other practical uses in the field. There is a loop at the end for auxillary use, or as a finger grip. It looks to be worth about 7 Ryo."
 				damage=0
 				Cost=7
+				can_purchase = 1
 				Click()
 					..()
 					if(!usr.contents.Find(src)) return
@@ -135,6 +138,7 @@ obj
 				density=1
 				max_stacks=10000
 				Cost=10
+				can_purchase = 1
 				Click()
 					..()
 					if(!usr.contents.Find(src)) return
@@ -153,6 +157,7 @@ obj
 				Description="A paper-like material embued with kanji markings on the front. It is made with explosive paper, and if one were to embue their chakra into it, they could detonate it at will. It seems to be worth about 5 Ryo."
 				damage=0
 				Cost=8
+				can_purchase = 1
 				Click()
 					..()
 					if(!usr.contents.Find(src)) return
@@ -169,6 +174,7 @@ obj
 				max_stacks=10000
 				Cost=500
 				Description="A small pill that tastes pretty gross. When consumed it energizes your body increasing your health regeneration for 20 seconds."
+				can_purchase = 1
 				Click()
 					..()
 					if(!usr.contents.Find(src)) return
@@ -216,6 +222,7 @@ obj
 				max_stacks=10000
 				Description="A darkened sphere, containing large condensed amounts of gas. It is wired to a pressure activation system, and could be useful to make a quick escape if thrown. It seems to be worth about 5 Ryo."
 				Cost=5
+				can_purchase = 1
 				Click()
 					..()
 					if(!usr.contents.Find(src)) return
@@ -414,6 +421,7 @@ obj
 				density=0
 				Description="Weights. Training weights used to raise ones own Agi."
 				Cost = 1000
+				can_purchase = 1
 				Click()
 					..()
 					if(!usr.contents.Find(src)) return

@@ -2370,7 +2370,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Shuriken) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Shuriken/C in usr.contents)
 						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
@@ -2417,7 +2417,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Exploding_Kunai) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Exploding_Kunai/C in usr.contents)
 						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
@@ -2464,7 +2464,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Kunai) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Kunai/C in usr.contents)
 						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
@@ -2511,7 +2511,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Needle) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Needle/C in usr.contents)
 						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
@@ -2558,7 +2558,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Explosive_Tag) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					if(usr.explosivetag<6)
 						for(var/obj/Inventory/Weaponry/Explosive_Tag/C in usr.contents)
@@ -2615,7 +2615,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Smoke_Bomb) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					if(!usr.smokebomb)
 						for(var/obj/Inventory/Weaponry/Smoke_Bomb/C in usr.contents)
@@ -2647,7 +2647,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Food_Pill) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					if(!usr.foodpillcd)
 						for(var/obj/Inventory/Weaponry/Food_Pill/C in usr.contents)
@@ -2664,7 +2664,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Zabuza_Sword) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Zabuza_Sword/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)
@@ -2683,7 +2683,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Samehada) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Samehada/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)
@@ -2702,7 +2702,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Hiramekarei) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Hiramekarei/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)
@@ -2721,7 +2721,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Kabutowari) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Kabutowari/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)
@@ -2740,7 +2740,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Kiba) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Kiba/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)
@@ -2759,7 +2759,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Nuibari) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Nuibari/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)
@@ -2778,7 +2778,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/Shibuki) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/Shibuki/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)
@@ -2797,7 +2797,7 @@ mob
 				if(!locate(/obj/Inventory/Weaponry/DarkSword) in usr.contents)
 					usr.equipped = ""
 					usr.Rotate_Ninja_Tool()
-					
+
 				else
 					for(var/obj/Inventory/Weaponry/DarkSword/C in usr.contents)
 						if(usr.firing==0&&usr.dead==0)

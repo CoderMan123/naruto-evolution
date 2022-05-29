@@ -91,6 +91,7 @@ obj
 			C
 		Cost=0
 	Inventory
+		var/tmp/can_purchase = 0
 		Clothing
 			Colorable=1
 			Hengable=1
@@ -440,6 +441,7 @@ obj
 					Boosts="+ 2 Defence"
 					Cost=75
 					Def=2
+					can_purchase = 1
 				Muscles
 					icon='Muscles.dmi'
 					icon_state=""
@@ -506,6 +508,8 @@ obj
 					Boosts="+ 2 Defence"
 					Def=2
 					Cost=75
+					can_purchase = 1
+
 				LongPants
 					icon='LongPants.dmi'
 					icon_state=""
@@ -514,6 +518,7 @@ obj
 					Boosts="+ 4 Defence"
 					Def=4
 					Cost=100
+					can_purchase = 1
 			Shoes
 				section="Shoes"
 				Sandals

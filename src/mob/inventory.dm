@@ -164,7 +164,7 @@ mob
 							hearers() << "<i>[src] drops x[O.stacks] [O] on the [lowertext(atom.name)].</i>"
 					else
 						hearers() << "<i>[src] drops x[quantity] [O] on the ground.</i>"
-						
+
 					src.client.UpdateInventoryPanel()
 
 			else
@@ -213,5 +213,5 @@ mob
 				if(istype(O, /obj/Inventory/mission/deliver_intel))
 					var/obj/Inventory/mission/deliver_intel/o = O
 					o.squad = null
-			
+
 			if(src.client) src.client.UpdateInventoryPanel()

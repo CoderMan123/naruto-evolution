@@ -23,7 +23,8 @@ mob
 
 					var/merchant_inventory[0]
 					for(var/item in typesof(/obj/Inventory/Weaponry) - /obj/Inventory/Weaponry)
-						merchant_inventory.Add(new item)
+						var/obj/Inventory/i = new item
+						if(i.can_purchase) merchant_inventory.Add(i)
 
 					var/obj/Inventory/Weaponry/purchase = usr.client.prompt("What would you like to purchase?", "Weapons Merchant", merchant_inventory + "Cancel")
 					if(purchase != "Cancel")
@@ -55,4 +56,67 @@ mob
 					village = VILLAGE_SAND
 
 				akatsuki_weapons_merchant
+					village = VILLAGE_AKATSUKI
+
+			clothing_merchant
+				name = "Clothing Merchant"
+				icon = 'WhiteMBase.dmi'
+				density = 1
+				pixel_x = -15
+
+				New()
+					src.overlays += pick('Short.dmi', 'Short2.dmi', 'Short3.dmi')
+					src.overlays += 'Shirt.dmi'
+					src.overlays += 'Sandals.dmi'
+					..()
+
+				DblClick()
+					..()
+					if(src.conversations.Find(usr)) return 0
+					if(get_dist(src,usr) > 2) return
+					if(usr.dead) return
+
+					src.conversations.Add(usr)
+
+					var/merchant_inventory[0]
+					for(var/item in typesof(/obj/Inventory/Clothing) - /obj/Inventory/Clothing)
+						var/obj/Inventory/i = new item
+						if(i.can_purchase) merchant_inventory.Add(i)
+
+					var/obj/Inventory/Weaponry/purchase = usr.client.prompt("What would you like to purchase?", "Clothing Merchant", merchant_inventory + "Cancel")
+
+					if(purchase != "Cancel")
+						var/purchase_price = purchase.Cost
+						var/color
+						var/list/rgb = list()
+
+						if(purchase.Colorable)
+							if(usr.client.prompt("Would you like to dye your [purchase]?", "Clothing Merchant", list("Yes", "No")) == "Yes")
+								color = usr.client.cprompt("What color would you like to dye your [purchase]?", "Clothing Merchant", luminosity_max = 40)
+								if(color)
+									rgb = rgb2num(color)
+									purchase.icon += rgb(rgb[1], rgb[2], rgb[3])
+
+						if(usr.client.prompt("Are you sure you want to purchase a [color ? "<font color='[color]'>[purchase]</font>" : "[purchase]"] for [purchase_price] ryo?", "Clothing Merchant", list("Purchase", "Cancel")) == "Purchase")
+							if(usr.maxitems == -1 || usr.maxitems > -1 && usr.contents.len < usr.maxitems)
+								if(usr.ryo >= purchase_price)
+									purchase.stacks = 1
+									usr.ryo -= purchase_price
+									usr.RecieveItem(purchase, src)
+									usr.client.UpdateInventoryPanel()
+									usr.client.prompt("You bought [purchase] for [purchase_price] ryo.")
+								else
+									usr.client.prompt("You need [purchase_price] ryo to purchase a [purchase].", "Clothing Merchant")
+							else
+								usr.client.prompt("Your backback only has room for [usr.maxitems - usr.contents.len] more items.","Clothing Merchant")
+
+					src.conversations.Remove(usr)
+
+				leaf_clothing_merchant
+					village = VILLAGE_LEAF
+
+				sand_clothing_merchant
+					village = VILLAGE_SAND
+
+				akatsuki_clothing_merchant
 					village = VILLAGE_AKATSUKI
