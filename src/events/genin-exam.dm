@@ -129,19 +129,18 @@ world
 				genin_exam_written_participants.Add(m)
 
 				var/list/exam_questions = list(
-					"This exam requires you to be level 5 or higher"=1,
-					"Pheonix flower technique is a fire element technique"=1,
-					"Tsukuyomi is a technique utilized by the hyuga clan"=0,
-					"Senju clan majors in the use of puppets"=0,
-					"The Hokage's job is to take care of the leaf village"=1,
+					"Jounin players get rewarded for helping students with missions."=1,
+					"You can't clear your current target by pressing SHIFT+TAB."=0,
+					"Mastering a jutsu increases it damage or effects."=1,
+					"It's fine being cruel to other ninja and slinging personal insults."=0,
+					"The Kage's job is to take care of their village."=1,
 					"If you are stuck in a location you shouldn't be, you can type in /stuck to teleport out"=1,
-					"You move with the arrow keys"=1,
-					"You can retake this exam if you fail it"=1,
-					"Chidori is a wind element technique"=0,
-					"To receive a mission, you talk to the banker of your village"=0,
-					"You started this game with Clone jutsu and Transformation jutsu"=1,
-					"You recieve a headband from passing this exam"=1,
-					"This exam is too easy"=1
+					"There's a mysterious hotspring in the woods which can grant the rester it's energy."=1,
+					"You'll be able to learn a new element at level 25."= 1,
+					"Attacking the enemy village will upset the guards."=1,
+					"When you are defeated in the dojo you don't die."=1,
+					"There's no such thing as red pills that increase health regeneration."=0,
+					"You can't use advanced body replacement jutsu while you're bound."=0
 				)
 
 				genin_exam_max_questions = min(genin_exam_max_questions, exam_questions.len)
