@@ -6,24 +6,6 @@ mob/npc/SensoryNin//sensory
 	density=1
 	Move()return
 	Death()return
-	NewStuff()
-		if(src.village=="Hidden Leaf")
-			src.icon='Leaf Sensory.dmi'
-			src.name="Reevo"
-		if(src.village=="Hidden Sand")
-			src.icon='Sand Sensory.dmi'
-			src.name="Shiza"
-		if(src.village=="Hidden Mist")
-			src.icon='Teshou-Mist Sensory.dmi'
-			src.name="Teshou"
-		if(src.village=="Hidden Sound")
-			src.icon='Miya-Sound Sensory.dmi'
-			src.name="Miya"
-		if(src.village=="Hidden Rock")
-			src.icon='Akatsuchi-Rock Sensory.dmi'
-			src.name="Akatsuchi"
-		src.SetName(src.name)
-		OriginalOverlays=overlays.Copy()
 	DblClick()
 		if(usr.dead) return
 		if(get_dist(src,usr)>2) return

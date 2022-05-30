@@ -19,7 +19,6 @@ mob
 			OriginalOverlays = overlays.Copy()
 			//spawn() src.RestoreOverlays()
 
-			src.NewStuff()
 
 		Move()
 			if(istype(src, /mob/npc/combat)) ..()

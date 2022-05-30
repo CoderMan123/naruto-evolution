@@ -124,7 +124,6 @@
 #include "z-src\Missions.dm"
 #include "z-src\MoveBACK.dm"
 #include "z-src\Naruto.dm"
-#include "z-src\NewVillageGuards.dm"
 #include "z-src\Options.dm"
 #include "z-src\Random.dm"
 #include "z-src\Rest.dm"
