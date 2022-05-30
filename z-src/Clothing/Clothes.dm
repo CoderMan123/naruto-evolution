@@ -200,6 +200,7 @@ obj
 					Boosts="+5 Taijutsu"
 					Tai=5
 					Cost=100000
+					can_purchase = 1
 				Half_Mask_Black
 					Colorable=0
 					icon='Half Mask Black.dmi'
@@ -209,6 +210,7 @@ obj
 					Boosts="+5 Taijutsu"
 					Tai=5
 					Cost=100000
+					can_purchase = 1
 				Obito_Goggles
 					Colorable=0
 					icon='ObitoGoggles.dmi'
@@ -306,6 +308,7 @@ obj
 					Boosts="+ 5 Defence"
 					Cost=500
 					Def=5
+					can_purchase = 1
 				Straw_Hat
 					icon='Straw Hat.dmi'
 					Cost=1000
@@ -431,6 +434,7 @@ obj
 					Boosts="+ 8 Defence"
 					Cost=100
 					Def=8
+					can_purchase = 1
 			Shirt
 				section="Shirt"
 				Shirt
@@ -458,6 +462,7 @@ obj
 					Boosts="+2 Defence"
 					Cost=100
 					Def=2
+					can_purchase = 1
 				Long_Shirt
 					icon='Long Sleeved Shirt.dmi'
 					icon_state=""
@@ -529,6 +534,7 @@ obj
 					Boosts="+ 2 Agility"
 					Agil=2
 					Cost=50
+					can_purchase = 1
 			Robes
 				section="Robes"
 				Jacket
@@ -540,6 +546,7 @@ obj
 					Boosts="+5 Defence"
 					Cost = 100
 					Def=5
+					can_purchase = 1
 				Goku_Suit
 					Colorable=0
 					icon='Goku.dmi'
@@ -646,6 +653,7 @@ obj
 					Boosts="+ 4 Defence"
 					Cost = 1000
 					Def = 4
+					can_purchase = 1
 				HokageRobe
 					Colorable=0
 					icon='Hokage Robe.dmi'
@@ -904,6 +912,7 @@ obj
 					Boosts="+10 Taijutsu"
 					Tai=10
 					Cost = 100
+					can_purchase = 1
 				Weights
 					Colorable=0
 					icon='Weights.dmi'
@@ -913,6 +922,7 @@ obj
 					Boosts="+7 Taijutsu"
 					Tai=7
 					Cost = 1000
+					can_purchase = 1
 				Wings
 					icon='Wings.dmi'
 					icon_state=""
@@ -941,6 +951,7 @@ obj
 					Boosts="+3 Taijutsu"
 					Tai=10
 					Cost = 200
+					can_purchase = 1
 
 
 
