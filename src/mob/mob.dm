@@ -599,7 +599,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.level = value
+				if(value != null) src.level = value
 				src.UpdateHMB()
 				return
 
@@ -607,7 +607,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.exp = value
+				if(value != null) src.exp = value
 				src.UpdateHMB()
 				return
 
@@ -615,7 +615,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxexp = value
+				if(value != null) src.maxexp = value
 				src.UpdateHMB()
 				return
 
@@ -623,7 +623,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.health = value
+				if(value != null) src.health = value
 				src.UpdateHMB()
 				return
 
@@ -631,7 +631,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxhealth = value
+				if(value != null) src.maxhealth = value
 				src.UpdateHMB()
 				return
 
@@ -639,7 +639,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.chakra = value
+				if(value != null) src.chakra = value
 				src.UpdateHMB()
 				return
 
@@ -647,7 +647,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxchakra = value
+				if(value != null) src.maxchakra = value
 				src.UpdateHMB()
 				return
 
@@ -655,7 +655,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.ninjutsu = value
+				if(value != null) src.ninjutsu = value
 				src.UpdateHMB()
 				return
 
@@ -663,7 +663,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.genjutsu = value
+				if(value != null) src.genjutsu = value
 				src.UpdateHMB()
 				return
 
@@ -671,7 +671,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.taijutsu = value
+				if(value != null) src.taijutsu = value
 				src.UpdateHMB()
 				return
 
@@ -679,7 +679,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.precision = value
+				if(value != null) src.precision = value
 				src.UpdateHMB()
 				return
 
@@ -687,7 +687,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.defence = value
+				if(value != null) src.defence = value
 				src.UpdateHMB()
 				return
 
@@ -695,7 +695,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.agility = value
+				if(value != null) src.agility = value
 				src.UpdateHMB()
 				return
 
@@ -703,7 +703,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.ninexp = value
+				if(value != null) src.ninexp = value
 				src.UpdateHMB()
 				return
 
@@ -711,7 +711,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxninexp = value
+				if(value != null) src.maxninexp = value
 				src.UpdateHMB()
 				return
 
@@ -719,7 +719,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.genexp = value
+				if(value != null) src.genexp = value
 				src.UpdateHMB()
 				return
 
@@ -727,7 +727,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxgenexp = value
+				if(value != null) src.maxgenexp = value
 				src.UpdateHMB()
 				return
 
@@ -735,7 +735,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.taijutsuexp = value
+				if(value != null) src.taijutsuexp = value
 				src.UpdateHMB()
 				return
 
@@ -743,7 +743,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxtaijutsuexp = value
+				if(value != null) src.maxtaijutsuexp = value
 				src.UpdateHMB()
 				return
 
@@ -751,7 +751,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.precisionexp = value
+				if(value != null) src.precisionexp = value
 				src.UpdateHMB()
 				return
 
@@ -759,7 +759,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxprecisionexp = value
+				if(value != null) src.maxprecisionexp = value
 				src.UpdateHMB()
 				return
 
@@ -767,7 +767,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.defexp = value
+				if(value != null) src.defexp = value
 				src.UpdateHMB()
 				return
 
@@ -775,7 +775,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxdefexp = value
+				if(value != null) src.maxdefexp = value
 				src.UpdateHMB()
 				return
 
@@ -783,7 +783,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.agilityexp = value
+				if(value != null) src.agilityexp = value
 				src.UpdateHMB()
 				return
 
@@ -791,7 +791,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.maxagilityexp = value
+				if(value != null) src.maxagilityexp = value
 				src.UpdateHMB()
 				return
 
@@ -799,7 +799,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.statpoints = value
+				if(value != null) src.statpoints = value
 				src.UpdateHMB()
 				return
 
@@ -807,7 +807,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.skillpoints = value
+				if(value != null) src.skillpoints = value
 				src.UpdateHMB()
 				return
 
@@ -815,7 +815,7 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.infamy_points = value
+				if(value != null) src.infamy_points = value
 				return
 
 			command = "/density"
@@ -828,14 +828,14 @@ mob
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.invisibility = value
+				if(value != null) src.invisibility = value
 				return
 
 			command = "/see-invisibility "
 			if(findtext(msg, command) && administrators.Find(src.client.ckey))
 
 				var/value = text2num(copytext(msg, findtext(msg, command) + length(command)))
-				if(value) src.see_invisible = value
+				if(value != null) src.see_invisible = value
 				return
 
 			command = "/teleport "
