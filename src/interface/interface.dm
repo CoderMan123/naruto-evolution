@@ -755,7 +755,7 @@ client
 
 		Changelog()
 			set hidden=1
-			src << link("https://github.com/IllusiveBIair/Naruto-Evolution-Community/releases")
+			src << link("https://github.com/douglasparker/naruto-evolution-community/releases")
 
 		Who()
 			set hidden = 1
