@@ -98,7 +98,7 @@ world
 	proc/Kage_Inactivity_Check()
 		set background = 1
 		while(src)
-			var/days = 1
+			var/days = 3
 
 			if(kages_last_online[VILLAGE_LEAF] && kages_last_online[VILLAGE_LEAF] + 864000 * days <= world.realtime)
 				var/online
@@ -131,7 +131,7 @@ world
 	proc/Akatsuki_Inactivity_Check()
 		set background = 1
 		while(src)
-			var/days = 5
+			var/days = 3
 
 			if(akatsuki_last_online && akatsuki_last_online + 864000 * days <= world.realtime)
 				var/online
