@@ -936,20 +936,20 @@ mob
 					/*if(O.likeaclone)
 						O.client:perspective = EDGE_PERSPECTIVE
 						O.client.eye=O*/
-					if(istype(src,/mob/Clones/Bunshin))O.bunshin--
-					if(istype(src,/mob/Clones/Shadow))O.sbunshin=0
-					if(istype(src,/mob/Clones/MShadow))	O.msbunshin--
-					if(istype(src,/mob/Clones/MizuBunshin))
-						O.mizubunshin--
+						if(istype(src,/mob/Clones/Bunshin))O.bunshin--
+						if(istype(src,/mob/Clones/Shadow))O.sbunshin=0
+						if(istype(src,/mob/Clones/MShadow))	O.msbunshin--
+						if(istype(src,/mob/Clones/MizuBunshin))
+							O.mizubunshin--
+							src.PlayAudio('sg_explode.wav', output = AUDIO_HEARERS)
+							icon='Water Bunshin.dmi'
+							flick("form",src)
 						src.PlayAudio('sg_explode.wav', output = AUDIO_HEARERS)
-						icon='Water Bunshin.dmi'
-						flick("form",src)
-					src.PlayAudio('sg_explode.wav', output = AUDIO_HEARERS)
-					var/obj/S = new/obj/MiscEffects/Smoke(src.loc)
-					S.loc=src.loc
-					spawn(1)
-						if(src)
-							src.loc = null
+						var/obj/S = new/obj/MiscEffects/Smoke(src.loc)
+						S.loc=src.loc
+						spawn(1)
+							if(src)
+								src.loc = null
 				if(istype(src,/mob/Untargettable/C2))
 					flick("destroy",src)
 					spawn(3)del(src)
