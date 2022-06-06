@@ -629,23 +629,24 @@ obj
 				var/obj/ftgkunai
 				var/mob/victim
 				New()
-					P=src.Owner
-					ftgkunai=P.ftgkunai
-					pixel_y+=32
-					layer = MOB_LAYER+1
-					spawn(50)
-						if(src)
-							src.density=0
-							walk(src,0)
-							src.icon_state="ground"
-							src.pixel_y=0
-							spawn(80)
-								if(src)
-									ftgkunai.loc=null
-									P.ftgkunai=null
-									if(victim)
-										victim.ftgmarked = 0
-										victim = null
+					if(src.Owner)
+						P=src.Owner
+						ftgkunai=P.ftgkunai
+						pixel_y+=32
+						layer = MOB_LAYER+1
+						spawn(50)
+							if(src)
+								src.density=0
+								walk(src,0)
+								src.icon_state="ground"
+								src.pixel_y=0
+								spawn(80)
+									if(src)
+										ftgkunai.loc=null
+										P.ftgkunai=null
+										if(victim)
+											victim.ftgmarked = 0
+											victim = null
 				Bump(atom/O)
 					if(!src.Hit)
 						if(istype(O,/mob))
