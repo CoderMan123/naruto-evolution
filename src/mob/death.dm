@@ -570,10 +570,10 @@ mob
 										spawn() squad.mission.Complete(src)
 
 						/////////////////////////////////////////////////
-						// Search and Destroy Mission Rewards (Killer) //
+						// Search and Destroy Mission Rewards (Attacker) //
 						/////////////////////////////////////////////////
 
-						// Reward player (Killer) for killing someone who is on a search and destroy type mission which targets you.
+						// Reward player (attacker) for killing someone who is on a search and destroy type mission which targets you.
 						if(src != attacker)
 							squad = src.GetSquad()
 							if(squad && squad.mission)
