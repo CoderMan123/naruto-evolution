@@ -15,8 +15,8 @@ obj
 				var/mob/Void/Void = new()
 				M.DealDamage(100000, Void)
 				Void.loc = null
-				M<<"I ventured too far into the void!"
-				world<<output("[src] was knocked out by [Void]!","Action.Output")
+				M << "I ventured too far into the void!"
+				world << output("[M] was knocked out by [Void]!","Action.Output")
 
 mob
 	proc
