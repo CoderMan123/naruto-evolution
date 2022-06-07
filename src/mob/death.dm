@@ -468,152 +468,155 @@ mob
 						///////////////////////////////////////////////////
 
 						// Reward Squad (attacker) for killing a mob during search and destroy type missions.
-						var/squad/squad = attacker.GetSquad()
-						if(squad && squad.mission)
-							switch(squad.mission.type)
+						if(src != attacker)
+							var/squad/squad = attacker.GetSquad()
+							if(squad && squad.mission)
+								switch(squad.mission.type)
 
-								////////////////////////////////////
-								// Hunting Rogues Mission Rewards //
-								////////////////////////////////////
-								
-								if(/mission/b_rank/hunting_rogues)
-									if(src.village == VILLAGE_MISSING_NIN)
-										squad.mission.required_vars["KILLS"]++
-										for(var/mob/m in mobs_online)
-											if(squad == m.GetSquad())
-												m << output("[attacker] has slain the Missing-Nin [src] while on a mission hunting rogue ninja.", "Action.Output")
-												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] rogue ninja have been eliminated.", "Action.Output")
-										spawn() squad.mission.Complete(attacker)
-								
-								////////////////////////////////////
-								// The War Effort Mission Rewards //
-								////////////////////////////////////
+									////////////////////////////////////
+									// Hunting Rogues Mission Rewards //
+									////////////////////////////////////
+									
+									if(/mission/b_rank/hunting_rogues)
+										if(src.village == VILLAGE_MISSING_NIN)
+											squad.mission.required_vars["KILLS"]++
+											for(var/mob/m in mobs_online)
+												if(squad == m.GetSquad())
+													m << output("[attacker] has slain the Missing-Nin [src] while on a mission hunting rogue ninja.", "Action.Output")
+													m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] rogue ninja have been eliminated.", "Action.Output")
+											spawn() squad.mission.Complete(attacker)
+									
+									////////////////////////////////////
+									// The War Effort Mission Rewards //
+									////////////////////////////////////
 
-								if(/mission/c_rank/the_war_effort)
-									switch(attacker.village)
-										if(VILLAGE_LEAF)
-											if(src.village == VILLAGE_SAND)
-												squad.mission.required_vars["KILLS"]++
-												for(var/mob/m in mobs_online)
-													if(squad == m.GetSquad())
-														m << output("[attacker] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
-														m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
-												spawn() squad.mission.Complete(attacker)
+									if(/mission/c_rank/the_war_effort)
+										switch(attacker.village)
+											if(VILLAGE_LEAF)
+												if(src.village == VILLAGE_SAND)
+													squad.mission.required_vars["KILLS"]++
+													for(var/mob/m in mobs_online)
+														if(squad == m.GetSquad())
+															m << output("[attacker] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
+															m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
+													spawn() squad.mission.Complete(attacker)
 
-										if(VILLAGE_SAND)
-											if(src.village == VILLAGE_LEAF)
-												squad.mission.required_vars["KILLS"]++
-												for(var/mob/m in mobs_online)
-													if(squad == m.GetSquad())
-														m << output("[attacker] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
-														m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
-												spawn() squad.mission.Complete(attacker)
+											if(VILLAGE_SAND)
+												if(src.village == VILLAGE_LEAF)
+													squad.mission.required_vars["KILLS"]++
+													for(var/mob/m in mobs_online)
+														if(squad == m.GetSquad())
+															m << output("[attacker] has slain the enemy villager [src] as part of the war effort.", "Action.Output")
+															m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] enemy ninja have been eliminated.", "Action.Output")
+													spawn() squad.mission.Complete(attacker)
 
-								///////////////////////////////////////
-								// Clouds of Crimson Mission Rewards //
-								///////////////////////////////////////
+									///////////////////////////////////////
+									// Clouds of Crimson Mission Rewards //
+									///////////////////////////////////////
 
-								if(/mission/s_rank/clouds_of_crimson)
-									if(src.village == VILLAGE_AKATSUKI)
-										squad.mission.required_vars["KILLS"]++
-										for(var/mob/m in mobs_online)
-											if(squad == m.GetSquad())
-												m << output("[attacker] has slain the Akatsuki member [src] while on a mission to eliminate them.", "Action.Output")
-												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] Akatsuki members have been eliminated.", "Action.Output")
-										spawn() squad.mission.Complete(attacker)
+									if(/mission/s_rank/clouds_of_crimson)
+										if(src.village == VILLAGE_AKATSUKI)
+											squad.mission.required_vars["KILLS"]++
+											for(var/mob/m in mobs_online)
+												if(squad == m.GetSquad())
+													m << output("[attacker] has slain the Akatsuki member [src] while on a mission to eliminate them.", "Action.Output")
+													m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["KILLS"]]/[squad.mission.required_vars["REQUIRED_KILLS"]] Akatsuki members have been eliminated.", "Action.Output")
+											spawn() squad.mission.Complete(attacker)
 						
 						////////////////////////////////////////
 						// Search and Destroy Mission Penalty //
 						////////////////////////////////////////
 
 						// Penalize Squad for dying while on a search and destroy mission
-						squad = src.GetSquad()
-						if(squad && squad.mission)
-							switch(squad.mission.type)
+						if(src != attacker)
+							squad = src.GetSquad()
+							if(squad && squad.mission)
+								switch(squad.mission.type)
 
-								////////////////////////////////////
-								// Hunting Rogues Mission Penalty //
-								////////////////////////////////////
+									////////////////////////////////////
+									// Hunting Rogues Mission Penalty //
+									////////////////////////////////////
 
-								if(/mission/b_rank/hunting_rogues)
-									squad.mission.required_vars["DEATHS"]++
-									for(var/mob/m in mobs_online)
-										if(squad == m.GetSquad())
-											m << output("[src] has died to [attacker] while on a mission hunting rogue ninja.", "Action.Output")
-											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting rogue ninja.", "Action.Output")
-									spawn() squad.mission.Complete(src)
-								
-								////////////////////////////////////
-								// The War Effort Mission Penalty //
-								////////////////////////////////////
-								
-								if(/mission/c_rank/the_war_effort)
-									squad.mission.required_vars["DEATHS"]++
-									for(var/mob/m in mobs_online)
-										if(squad == m.GetSquad())
-											m << output("[src] has died to [attacker] while on a mission hunting enemy ninja.", "Action.Output")
-											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting enemy ninja.", "Action.Output")
-									spawn() squad.mission.Complete(src)
+									if(/mission/b_rank/hunting_rogues)
+										squad.mission.required_vars["DEATHS"]++
+										for(var/mob/m in mobs_online)
+											if(squad == m.GetSquad())
+												m << output("[src] has died to [attacker] while on a mission hunting rogue ninja.", "Action.Output")
+												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting rogue ninja.", "Action.Output")
+										spawn() squad.mission.Complete(src)
+									
+									////////////////////////////////////
+									// The War Effort Mission Penalty //
+									////////////////////////////////////
+									
+									if(/mission/c_rank/the_war_effort)
+										squad.mission.required_vars["DEATHS"]++
+										for(var/mob/m in mobs_online)
+											if(squad == m.GetSquad())
+												m << output("[src] has died to [attacker] while on a mission hunting enemy ninja.", "Action.Output")
+												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting enemy ninja.", "Action.Output")
+										spawn() squad.mission.Complete(src)
 
-								///////////////////////////////////////
-								// Clouds of Crimson Mission Penalty //
-								///////////////////////////////////////
+									///////////////////////////////////////
+									// Clouds of Crimson Mission Penalty //
+									///////////////////////////////////////
 
-								if(/mission/s_rank/clouds_of_crimson)
-									squad.mission.required_vars["DEATHS"]++
-									for(var/mob/m in mobs_online)
-										if(squad == m.GetSquad())
-											m << output("[src] has died to [attacker] while on a mission to eliminate the Akatsuki.", "Action.Output")
-											m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting the Akatsuki.", "Action.Output")
-									spawn() squad.mission.Complete(src)
+									if(/mission/s_rank/clouds_of_crimson)
+										squad.mission.required_vars["DEATHS"]++
+										for(var/mob/m in mobs_online)
+											if(squad == m.GetSquad())
+												m << output("[src] has died to [attacker] while on a mission to eliminate the Akatsuki.", "Action.Output")
+												m << output("<b>[squad.mission]:</b> [squad.mission.required_vars["DEATHS"]]/[squad.members.len] fatalities while hunting the Akatsuki.", "Action.Output")
+										spawn() squad.mission.Complete(src)
 
 						/////////////////////////////////////////////////
 						// Search and Destroy Mission Rewards (Killer) //
 						/////////////////////////////////////////////////
 
 						// Reward player (Killer) for killing someone who is on a search and destroy type mission which targets you.
-						squad = src.GetSquad()
-						if(squad && squad.mission)
-							switch(squad.mission.type)
+						if(src != attacker)
+							squad = src.GetSquad()
+							if(squad && squad.mission)
+								switch(squad.mission.type)
 
-								////////////////////////////////////
-								// Hunting Rogues Mission Rewards //
-								////////////////////////////////////
+									////////////////////////////////////
+									// Hunting Rogues Mission Rewards //
+									////////////////////////////////////
 
-								if(/mission/b_rank/hunting_rogues)
-									if(attacker.village == VILLAGE_MISSING_NIN)
-										attacker << output("You have slain [src] who was on a mission hunting rogue ninja.", "Action.Output")
-										attacker.exp += 20
-										attacker.ryo += 250
-										attacker << output("You Recieve 20 exp and 250 ryo as a reward for your effort.", "Action.Output")
-										spawn() attacker.Levelup()
+									if(/mission/b_rank/hunting_rogues)
+										if(attacker.village == VILLAGE_MISSING_NIN)
+											attacker << output("You have slain [src] who was on a mission hunting rogue ninja.", "Action.Output")
+											attacker.exp += 20
+											attacker.ryo += 250
+											attacker << output("You Recieve 20 exp and 250 ryo as a reward for your effort.", "Action.Output")
+											spawn() attacker.Levelup()
 
-								////////////////////////////////////
-								// The War Effort Mission Rewards //
-								////////////////////////////////////
+									////////////////////////////////////
+									// The War Effort Mission Rewards //
+									////////////////////////////////////
 
-								if(/mission/c_rank/the_war_effort)
-									if(attacker.village == VILLAGE_LEAF && src.village != VILLAGE_LEAF)
-										attacker << output("You have slain [src] who was on a mission hunting leaf ninja!.", "Action.Output")
-										attacker.exp += 20
-										attacker.ryo += 250
-										attacker << output("You Recieve 20 exp and 250 ryo as a reward for your effort.", "Action.Output")
-										spawn() attacker.Levelup()
-									if(attacker.village == VILLAGE_SAND && src.village != VILLAGE_SAND)
-										attacker << output("You have slain [src] who was on a mission hunting sand ninja!.", "Action.Output")
-										attacker.exp += 20
-										attacker.ryo += 250
-										attacker << output("You Recieve 20 exp and 250 ryo as a reward for your effort.", "Action.Output")
-										spawn() attacker.Levelup()
+									if(/mission/c_rank/the_war_effort)
+										if(attacker.village == VILLAGE_LEAF && src.village != VILLAGE_LEAF)
+											attacker << output("You have slain [src] who was on a mission hunting leaf ninja!.", "Action.Output")
+											attacker.exp += 20
+											attacker.ryo += 250
+											attacker << output("You Recieve 20 exp and 250 ryo as a reward for your effort.", "Action.Output")
+											spawn() attacker.Levelup()
+										if(attacker.village == VILLAGE_SAND && src.village != VILLAGE_SAND)
+											attacker << output("You have slain [src] who was on a mission hunting sand ninja!.", "Action.Output")
+											attacker.exp += 20
+											attacker.ryo += 250
+											attacker << output("You Recieve 20 exp and 250 ryo as a reward for your effort.", "Action.Output")
+											spawn() attacker.Levelup()
 
-								///////////////////////////////////////
-								// Clouds of Crimson Mission Rewards //
-								///////////////////////////////////////
+									///////////////////////////////////////
+									// Clouds of Crimson Mission Rewards //
+									///////////////////////////////////////
 
-								if(/mission/s_rank/clouds_of_crimson)
-									if(attacker.village == VILLAGE_AKATSUKI)
-										attacker << output("You have slain [src] who was on a mission to kill the Akatsuki.", "Action.Output")
-										attacker.exp += 20
-										attacker.ryo += 250
-										attacker << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
-										spawn() attacker.Levelup()
+									if(/mission/s_rank/clouds_of_crimson)
+										if(attacker.village == VILLAGE_AKATSUKI)
+											attacker << output("You have slain [src] who was on a mission to kill the Akatsuki.", "Action.Output")
+											attacker.exp += 20
+											attacker.ryo += 250
+											attacker << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
+											spawn() attacker.Levelup()
