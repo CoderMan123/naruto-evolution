@@ -3,9 +3,7 @@ mob
 		Shadow_Stab()
 			if(CheckState(src, new/state/nara_attack_delay)) return
 			for(var/obj/Jutsus/Shadow_Stab/J in src.jutsus)
-				src.canattack=1
 				if(src.PreJutsu(J))
-					src.canattack=0
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
@@ -32,9 +30,7 @@ mob
 		Shadow_Choke()
 			if(CheckState(src, new/state/nara_attack_delay)) return
 			for(var/obj/Jutsus/Shadow_Choke/J in src.jutsus)
-				src.canattack=1
 				if(src.PreJutsu(J))
-					src.canattack=0
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
@@ -79,9 +75,7 @@ mob
 		Shadow_Explosion()
 			if(CheckState(src, new/state/nara_attack_delay)) return
 			for(var/obj/Jutsus/Shadow_Explosion/J in src.jutsus)
-				src.canattack=1
 				if(src.PreJutsu(J))
-					src.canattack=0
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
@@ -114,7 +108,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					src.inshadowfield=1
-					src.canattack=0
+
+					AddState(src, new/state/cant_attack, (5*J.level)+(src.genjutsu/3))
+
 					var/obj/A = new/obj(usr.loc)
 					A.icon='shadowfield.dmi'
 					A.icon_state="field"
@@ -128,6 +124,8 @@ mob
 					spawn((5*J.level)+(src.genjutsu/3)) del A
 					var/list/caught = new()
 					var/mob/M
+					var/state/cant_move/f = new()
+					var/state/cant_attack/e = new()
 					while(A)
 						sleep(1)
 						if(src.inshadowfield==0)
@@ -135,10 +133,11 @@ mob
 						for(M in orange(3,src))
 							caught+= M
 							if(!M.likeaclone)
-								M.move=0
-								M.canattack=0
+								AddState(src, e, -1)
+								AddState(src, f, -1)
+
 					for(M in caught)
-						M.move=1
-						M.canattack=1
+						RemoveState(src, e, STATE_REMOVE_REF)
+						RemoveState(src, f, STATE_REMOVE_REF)
+
 					src.inshadowfield=0
-					src.canattack=1

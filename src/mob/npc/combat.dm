@@ -32,9 +32,6 @@ mob
 					src.overlays += 'Shade.dmi'
 					src.overlays+='Shirt.dmi'
 					src.overlays+='Sandals.dmi'
-					src.move=1
-					src.injutsu=0
-					src.canattack=1
 					spawn(5) view() << ffilter("<font color='[src.name_color]'>[src.name]</font>: <font color='[COLOR_CHAT]'>[bark]</font>")
 					spawn()
 						while(src && !src.dead)
@@ -47,7 +44,7 @@ mob
 								step_away(src, src.last_node)
 								walk_to(src, src.last_node, 0, 5)
 
-							else if(src.move)
+							else if(!CheckState(src, new/state/cant_move))
 								walk_to(src, src.next_node, 0, 5)
 
 							sleep(10)
@@ -144,7 +141,6 @@ mob
 					var/spawned = 0
 					var/no_target_counter = 0
 					var/original_loc
-					move = 1
 					health=2500
 					maxhealth=3000
 					chakra=1000000000
@@ -246,13 +242,13 @@ mob
 
 					proc/CombatAI()
 						while(src)
-							if(src.kawarmi && !src.move)
+							if(src.kawarmi && CheckState(src, new/state/cant_move))
 								if(prob(40)) src.Dodge()
-							if(src.move)
+							if(!CheckState(src, new/state/cant_move))
 								src.icon_state = "run"
 								c_target = src.Target_Get(TARGET_MOB)
 								if(istype(c_target, /mob/npc)) c_target = null
-								if(src.c_target && src.attacking && !src.dead && !c_target.dead)
+								if(src.c_target && src.attacking && !src.dead && !c_target.dead && !CheckState(src, new/state/cant_attack))
 									if(prob(80))
 										src.CombatIdle()
 									else if(prob(10)) src.CastDefensive()
@@ -300,20 +296,20 @@ mob
 
 
 					proc/PunchTarget(mob/M)
-						if(c_target.loc != get_step(src, src.dir) && get_dist(src.loc, c_target.loc) > 5 && src.canattack)
+						if(c_target.loc != get_step(src, src.dir) && get_dist(src.loc, c_target.loc) > 5 && !CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
 							src.UseFlicker()
 						else if(prob(20)) src.UseFlicker()
 						AddState(src, new/state/AI_is_punching, 20)
 						while(CheckState(src, new/state/AI_is_punching))
 							if(prob(10))
-								if(src.move) step_rand(src)
-							else if(src.move) walk_towards(src, c_target, src.movementspeed)
+								if(!CheckState(src, new/state/cant_move)) step_rand(src)
+							else if(!CheckState(src, new/state/cant_move)) walk_towards(src, c_target, src.movementspeed)
 							src.Basic_Attack()
 							sleep(0.1)
 
 					proc/Retreat(var/dist)
 						if(c_target && get_dist(src.loc, c_target.loc) < dist)
-							if(src.move) walk_away(src, c_target, dist, src.movementspeed)
+							if(!CheckState(src, new/state/cant_move)) walk_away(src, c_target, dist, src.movementspeed)
 						sleep(7)
 						walk(src, 0)
 
@@ -333,7 +329,7 @@ mob
 										src.PunchTarget()
 									if(3)
 										src.UseFlicker()
-										if(src.move) step_away(src, c_target)
+										if(!CheckState(src, new/state/cant_move)) step_away(src, c_target)
 										src.Mud_Dragon_Projectile()
 										sleep(5)
 

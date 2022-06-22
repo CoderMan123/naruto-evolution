@@ -40,6 +40,92 @@ mob
 							sleep(1)
 						if(A) walk_towards(A, src)
 
+		Weapon_Manipulation_Jutsu()
+			for(var/obj/Jutsus/Weapon_Manipulation_Jutsu/J in src.jutsus)
+				if(src.PreJutsu(J))
+					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					J.damage = (J.damage+round(((src.precision / 300)+(src.ninjutsu / 300))*2*J.damage))/6
+					flick("2fist",src)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
+
+					var/state/cant_attack/e = new()
+					AddState(src, e, -1)
+
+					var/num=round(J.level*1.5)
+					if(c_target)
+						while(num)
+							sleep(1)
+							num--
+							src.dir=get_dir(src,c_target)
+							if(prob(50))
+								var/obj/Projectiles/Effects/Maniper2/A = new/obj/Projectiles/Effects/Maniper2(src.loc)
+								A.IsJutsuEffect=src
+								A.x+=rand(-1,1)
+								A.y+=rand(-1,1)
+								A.level=J.level
+								A.Owner=src
+								A.layer=src.layer
+								A.fightlayer=src.fightlayer
+								A.damage=J.damage
+								A.density=0
+								spawn(1)if(A)A.density=1
+								walk_towards(A,c_target,0)
+								spawn(7)if(A)walk(A,A.dir)
+							else
+								var/obj/Projectiles/Effects/Maniper3/A = new/obj/Projectiles/Effects/Maniper3(src.loc)
+								A.IsJutsuEffect=src
+								A.x+=rand(-1,1)
+								A.y+=rand(-1,1)
+								A.level=J.level
+								A.Owner=src
+								A.layer=src.layer
+								A.fightlayer=src.fightlayer
+								A.damage=J.damage
+								A.density=0
+								spawn(1)if(A)A.density=1
+								walk_towards(A,c_target,0)
+								spawn(7)if(A)walk(A,A.dir)
+					else
+						while(num)
+							sleep(1)
+							num--
+							if(prob(50))
+								var/obj/Projectiles/Effects/Maniper2/A = new/obj/Projectiles/Effects/Maniper2(src.loc)
+								A.IsJutsuEffect=src
+								A.x+=rand(-1,1)
+								A.y+=rand(-1,1)
+								if(A.loc == src.loc)A.loc = get_step(src,src.dir)
+								A.level=J.level
+								A.Owner=src
+								A.layer=src.layer
+								A.fightlayer=src.fightlayer
+								A.damage=J.damage+round(src.ninjutsu+src.taijutsu)
+								A.density=0
+								spawn(1) if(A) A.density=1
+								walk(A,src.dir)
+							else
+								var/obj/Projectiles/Effects/Maniper3/A = new/obj/Projectiles/Effects/Maniper3(src.loc)
+								A.IsJutsuEffect=src
+								A.x+=rand(-1,1)
+								A.y+=rand(-1,1)
+								if(A.loc == src.loc)A.loc = get_step(src,src.dir)
+								A.level=J.level
+								A.Owner=src
+								A.layer=src.layer
+								A.fightlayer=src.fightlayer
+								A.damage=J.damage+round(src.ninjutsu+src.taijutsu)
+								A.density=0
+								spawn(1) if(A) A.density=1
+								walk(A,src.dir)
+					RemoveState(src, e, STATE_REMOVE_REF)
+
 		Blade_Hurricane()//spiral jutsu
 			for(var/obj/Jutsus/Blade_Hurricane/J in src.jutsus)
 				if(src.PreJutsu(J))
@@ -76,59 +162,6 @@ mob
 							sleep(0.1)
 							flick("punchl",src)
 
-		Blade_Manipulation_Jutsu()
-			for(var/obj/Jutsus/Blade_Manipulation_Jutsu/J in src.jutsus)
-				if(src.PreJutsu(J))
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,4))
-					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					flick("2fist",src)
-					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
-					if(J.level==1) J.damage=4
-					if(J.level==2) J.damage=5
-					if(J.level==3) J.damage=6
-					if(J.level==4) J.damage=7
-					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-					var/num=round(J.level*1.5)
-					if(c_target)
-						while(num)
-							sleep(1)
-							num--
-							src.dir=get_dir(src,c_target)
-							var/obj/Projectiles/Effects/Maniper/A = new/obj/Projectiles/Effects/Maniper(src.loc)
-							A.IsJutsuEffect=src
-							A.x+=rand(-1,1)
-							A.y+=rand(-1,1)
-							A.level=J.level
-							A.Owner=src
-							A.layer=src.layer
-							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
-							A.density=0
-							spawn(1)if(A)A.density=1
-							walk_towards(A,c_target,0)
-							spawn(7)if(A)walk(A,A.dir)
-					else
-						while(num)
-							sleep(1)
-							num--
-							var/obj/Projectiles/Effects/Maniper/A = new/obj/Projectiles/Effects/Maniper(src.loc)
-							A.IsJutsuEffect=src
-							A.x+=rand(-1,1)
-							A.y+=rand(-1,1)
-							if(A.loc == src.loc)A.loc = get_step(src,src.dir)
-							A.level=J.level
-							A.Owner=src
-							A.layer=src.layer
-							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
-							A.density=0
-							spawn(1) if(A) A.density=1
-							walk(A,src.dir)
-					src.firing=0
-					src.canattack=1
-
 		Rising_Dragon()
 			for(var/obj/Jutsus/Rising_Dragon/J in src.jutsus)
 				if(src.PreJutsu(J))
@@ -146,9 +179,13 @@ mob
 					var/p_y = src.y
 					var/p_z = src.z
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					src.canattack=0
-					src.move=0
-					src.firing=1
+
+					var/state/cant_attack/e = new()
+					AddState(src, e, -1)
+
+					var/state/cant_move/f = new()
+					AddState(src, f, -1)
+
 					var/matrix/m = matrix()
 					m.Translate(-16,-4)
 					var/obj/Ov = new/obj(usr.loc)
@@ -170,9 +207,8 @@ mob
 						if(c_target)
 							src.dir=get_dir(src, c_target)
 						if(/*src.loc!=T*/src.x != p_x || src.y != p_y || src.z != p_z)
-							src.canattack=1
-							src.move=1
-							src.firing=0
+							RemoveState(src, e, STATE_REMOVE_REF)
+							RemoveState(src, f, STATE_REMOVE_REF)
 							del Ov
 							del Un
 							return
@@ -238,187 +274,148 @@ mob
 						step(A, src.dir)
 						if(A) walk_away(A,src)
 						if(A) walk(A,A.dir)
-					src.canattack=1
-					src.move=1
-					src.firing=0
+					RemoveState(src, e, STATE_REMOVE_REF)
+					RemoveState(src, f, STATE_REMOVE_REF)
 					del Ov
 					del Un
 
+//----------------------------------------------------------------------------------------------------------------------------
 
-		Weapon_Manipulation_Jutsu()
-			if(firing)return
-			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Weapon_Manipulation_Jutsu/J in src.jutsus)
-					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
-						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-						var/mob/c_target=src.Target_Get(TARGET_MOB)
-						J.damage = (J.damage+round(((src.precision / 300)+(src.ninjutsu / 300))*2*J.damage))/6
-						flick("2fist",src)
-						src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-						src.firing=1
-						src.canattack=0
-						var/num=round(J.level*1.5)
-						if(c_target)
-							while(num)
-								sleep(1)
-								num--
-								src.dir=get_dir(src,c_target)
-								if(prob(50))
-									var/obj/Projectiles/Effects/Maniper2/A = new/obj/Projectiles/Effects/Maniper2(src.loc)
-									A.IsJutsuEffect=src
-									A.x+=rand(-1,1)
-									A.y+=rand(-1,1)
-									A.level=J.level
-									A.Owner=src
-									A.layer=src.layer
-									A.fightlayer=src.fightlayer
-									A.damage=J.damage
-									A.density=0
-									spawn(1)if(A)A.density=1
-									walk_towards(A,c_target,0)
-									spawn(7)if(A)walk(A,A.dir)
-								else
-									var/obj/Projectiles/Effects/Maniper3/A = new/obj/Projectiles/Effects/Maniper3(src.loc)
-									A.IsJutsuEffect=src
-									A.x+=rand(-1,1)
-									A.y+=rand(-1,1)
-									A.level=J.level
-									A.Owner=src
-									A.layer=src.layer
-									A.fightlayer=src.fightlayer
-									A.damage=J.damage
-									A.density=0
-									spawn(1)if(A)A.density=1
-									walk_towards(A,c_target,0)
-									spawn(7)if(A)walk(A,A.dir)
-						else
-							while(num)
-								sleep(1)
-								num--
-								if(prob(50))
-									var/obj/Projectiles/Effects/Maniper2/A = new/obj/Projectiles/Effects/Maniper2(src.loc)
-									A.IsJutsuEffect=src
-									A.x+=rand(-1,1)
-									A.y+=rand(-1,1)
-									if(A.loc == src.loc)A.loc = get_step(src,src.dir)
-									A.level=J.level
-									A.Owner=src
-									A.layer=src.layer
-									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu+src.taijutsu)
-									A.density=0
-									spawn(1) if(A) A.density=1
-									walk(A,src.dir)
-								else
-									var/obj/Projectiles/Effects/Maniper3/A = new/obj/Projectiles/Effects/Maniper3(src.loc)
-									A.IsJutsuEffect=src
-									A.x+=rand(-1,1)
-									A.y+=rand(-1,1)
-									if(A.loc == src.loc)A.loc = get_step(src,src.dir)
-									A.level=J.level
-									A.Owner=src
-									A.layer=src.layer
-									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu+src.taijutsu)
-									A.density=0
-									spawn(1) if(A) A.density=1
-									walk(A,src.dir)
-						src.firing=0
-						src.canattack=1
+		Blade_Manipulation_Jutsu()
+			for(var/obj/Jutsus/Blade_Manipulation_Jutsu/J in src.jutsus)
+				if(src.PreJutsu(J))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(2,4))
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					flick("2fist",src)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
+					
+					var/state/cant_attack/e = new()
+					AddState(src, e, -1)
+
+					if(J.level==1) J.damage=4
+					if(J.level==2) J.damage=5
+					if(J.level==3) J.damage=6
+					if(J.level==4) J.damage=7
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					var/num=round(J.level*1.5)
+					if(c_target)
+						while(num)
+							sleep(1)
+							num--
+							src.dir=get_dir(src,c_target)
+							var/obj/Projectiles/Effects/Maniper/A = new/obj/Projectiles/Effects/Maniper(src.loc)
+							A.IsJutsuEffect=src
+							A.x+=rand(-1,1)
+							A.y+=rand(-1,1)
+							A.level=J.level
+							A.Owner=src
+							A.layer=src.layer
+							A.fightlayer=src.fightlayer
+							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
+							A.density=0
+							spawn(1)if(A)A.density=1
+							walk_towards(A,c_target,0)
+							spawn(7)if(A)walk(A,A.dir)
+					else
+						while(num)
+							sleep(1)
+							num--
+							var/obj/Projectiles/Effects/Maniper/A = new/obj/Projectiles/Effects/Maniper(src.loc)
+							A.IsJutsuEffect=src
+							A.x+=rand(-1,1)
+							A.y+=rand(-1,1)
+							if(A.loc == src.loc)A.loc = get_step(src,src.dir)
+							A.level=J.level
+							A.Owner=src
+							A.layer=src.layer
+							A.fightlayer=src.fightlayer
+							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
+							A.density=0
+							spawn(1) if(A) A.density=1
+							walk(A,src.dir)
+					RemoveState(src, e, STATE_REMOVE_REF)
 
 		TwinDragons()
-			if(firing)return
-			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/TwinDragons/J in src.jutsus)
-					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
-						var/mob/c_target=src.Target_Get(TARGET_MOB)
-						flick("jutsuse",src)
-						src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-						src.firing=1
-						src.canattack=0
-						if(J.level==1) J.damage=4
-						if(J.level==2) J.damage=5
-						if(J.level==3) J.damage=6
-						if(J.level==4) J.damage=7
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
-						var/num=round(J.level*3)
-						if(c_target)
-							while(num)
-								sleep(1)
-								num--
-								src.dir=get_dir(src,c_target)
-								if(prob(50))
-									var/obj/Projectiles/Effects/Maniper2/A = new/obj/Projectiles/Effects/Maniper2(src.loc)
-									A.IsJutsuEffect=src
-									A.x+=rand(-1,1)
-									A.y+=rand(-1,1)
-									A.level=J.level
-									A.Owner=src
-									A.layer=src.layer
-									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
-									A.density=0
-									spawn(1)if(A)A.density=1
-									spawn(1)if(A)walk_rand(A)
-									spawn(4)
-										walk_towards(A,c_target.loc)
-								else
-									var/obj/Projectiles/Effects/Maniper3/A = new/obj/Projectiles/Effects/Maniper3(src.loc)
-									A.IsJutsuEffect=src
-									A.x+=rand(-1,1)
-									A.y+=rand(-1,1)
-									A.level=J.level
-									A.Owner=src
-									A.layer=src.layer
-									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
-									A.density=0
-									spawn(1)if(A)A.density=1
-									spawn(1)if(A)walk_rand(A)
-									spawn(4)
-										walk_towards(A,c_target.loc)
-						else
-							while(num)
-								sleep(1)
-								num--
-								if(prob(50))
-									var/obj/Projectiles/Effects/Maniper2/A = new/obj/Projectiles/Effects/Maniper2(src.loc)
-									A.IsJutsuEffect=src
-									A.x+=rand(-1,1)
-									A.y+=rand(-1,1)
-									if(A.loc == src.loc)A.loc = get_step(src,src.dir)
-									A.level=J.level
-									A.Owner=src
-									A.layer=src.layer
-									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
-									A.density=0
-									spawn(1) if(A) A.density=1
-									walk_rand(A)
-									spawn(10)
-										del(A)
-								else
-									var/obj/Projectiles/Effects/Maniper3/A = new/obj/Projectiles/Effects/Maniper3(src.loc)
-									A.IsJutsuEffect=src
-									A.x+=rand(-1,1)
-									A.y+=rand(-1,1)
-									if(A.loc == src.loc)A.loc = get_step(src,src.dir)
-									A.level=J.level
-									A.Owner=src
-									A.layer=src.layer
-									A.fightlayer=src.fightlayer
-									A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
-									A.density=0
-									spawn(1) if(A) A.density=1
-									walk_rand(A)
-									spawn(10)
-										del(A)
-						src.firing=0
-						src.canattack=1
+			for(var/obj/Jutsus/TwinDragons/J in src.jutsus)
+				if(src.PreJutsu(J))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					flick("jutsuse",src)
+					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
+					if(J.level==1) J.damage=4
+					if(J.level==2) J.damage=5
+					if(J.level==3) J.damage=6
+					if(J.level==4) J.damage=7
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
+					var/num=round(J.level*3)
+					if(c_target)
+						while(num)
+							sleep(1)
+							num--
+							src.dir=get_dir(src,c_target)
+							if(prob(50))
+								var/obj/Projectiles/Effects/Maniper2/A = new/obj/Projectiles/Effects/Maniper2(src.loc)
+								A.IsJutsuEffect=src
+								A.x+=rand(-1,1)
+								A.y+=rand(-1,1)
+								A.level=J.level
+								A.Owner=src
+								A.layer=src.layer
+								A.fightlayer=src.fightlayer
+								A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
+								A.density=0
+								spawn(1)if(A)A.density=1
+								spawn(1)if(A)walk_rand(A)
+								spawn(4)
+									walk_towards(A,c_target.loc)
+							else
+								var/obj/Projectiles/Effects/Maniper3/A = new/obj/Projectiles/Effects/Maniper3(src.loc)
+								A.IsJutsuEffect=src
+								A.x+=rand(-1,1)
+								A.y+=rand(-1,1)
+								A.level=J.level
+								A.Owner=src
+								A.layer=src.layer
+								A.fightlayer=src.fightlayer
+								A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
+								A.density=0
+								spawn(1)if(A)A.density=1
+								spawn(1)if(A)walk_rand(A)
+								spawn(4)
+									walk_towards(A,c_target.loc)
+					else
+						while(num)
+							sleep(1)
+							num--
+							if(prob(50))
+								var/obj/Projectiles/Effects/Maniper2/A = new/obj/Projectiles/Effects/Maniper2(src.loc)
+								A.IsJutsuEffect=src
+								A.x+=rand(-1,1)
+								A.y+=rand(-1,1)
+								if(A.loc == src.loc)A.loc = get_step(src,src.dir)
+								A.level=J.level
+								A.Owner=src
+								A.layer=src.layer
+								A.fightlayer=src.fightlayer
+								A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
+								A.density=0
+								spawn(1) if(A) A.density=1
+								walk_rand(A)
+								spawn(10)
+									del(A)
+							else
+								var/obj/Projectiles/Effects/Maniper3/A = new/obj/Projectiles/Effects/Maniper3(src.loc)
+								A.IsJutsuEffect=src
+								A.x+=rand(-1,1)
+								A.y+=rand(-1,1)
+								if(A.loc == src.loc)A.loc = get_step(src,src.dir)
+								A.level=J.level
+								A.Owner=src
+								A.layer=src.layer
+								A.fightlayer=src.fightlayer
+								A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
+								A.density=0
+								spawn(1) if(A) A.density=1
+								walk_rand(A)
+								spawn(10)
+									del(A)

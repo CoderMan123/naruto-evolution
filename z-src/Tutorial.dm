@@ -35,6 +35,7 @@ mob/npc
 			Tutorial=0
 			density=1
 			DblClick()
+				if(src.conversations.Find(usr)) return 0
 				if(usr.Tutorial < Tutorial)
 					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
 					return
@@ -43,7 +44,7 @@ mob/npc
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
-				if(usr)usr.move=0
+				src.conversations.Add(usr)
 				if(usr)
 					usr.client.prompt(
 						{"Hey there, welcome to Naruto Evolution. Please take a moment to complete the tutorial."}, "[src]")
@@ -80,13 +81,14 @@ mob/npc
 
 				if(usr)
 					usr.Tutorial=1
-					usr.move=1
+					src.conversations.Remove(usr)
 		JouninOne
 			icon='WhiteMBase.dmi'
 			//var/message
 			Tutorial=1
 			density=1
 			DblClick()
+				if(src.conversations.Find(usr)) return 0
 				if(!usr.TutorialStrength) usr.TutorialStrength=usr.taijutsu
 				if(usr.Tutorial < Tutorial)
 					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
@@ -95,6 +97,9 @@ mob/npc
 					usr<<output("I've done my part. Go ahead and move on to the next room.","Action.Output")
 					return
 				if(usr.taijutsu<=usr.TutorialStrength)
+					if(usr.dead) return
+					if(get_dist(src,usr)>2) return
+					src.conversations.Add(usr)
 					if(usr)
 						usr.client.prompt(
 							{"[src]: Hey you're looking pretty weak for a Ninja. Why don't you go hit some of those dummies over there and get some meat on your bones."}, "[src]")
@@ -110,11 +115,12 @@ mob/npc
 					if(usr)
 						usr.client.prompt(
 							{"Speak to me again when your Taijutsu has leveled up."}, "[src]")
+						src.conversations.Remove(usr)
 						return
 
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
-				if(usr)usr.move=0
+				src.conversations.Add(usr)
 				if(usr) usr.client.prompt(
 					{"[src]: Welcome back. I see you look a bit out of breath. That's good, it means your hard work is making you stronger."}, "[src]")
 				
@@ -148,13 +154,14 @@ mob/npc
 
 				if(usr)
 					usr.Tutorial=2
-					usr.move=1
+					src.conversations.Remove(usr)
 		JouninTwo
 			icon='WhiteMBase.dmi'
 		//	var/message
 			Tutorial=2
 			density=1
 			DblClick()
+				if(src.conversations.Find(usr)) return 0
 				if(usr.Tutorial < Tutorial)
 					usr<<output("You're not supposed to talk to this Jounin yet.","Action.Output")
 					return
@@ -163,7 +170,7 @@ mob/npc
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
-				if(usr)usr.move=0
+				src.conversations.Add(usr)
 				if(usr) usr.client.prompt({"Hey there, I am the Ninjutsu trainer. I'll teach you how to learn new jutsu as well as some basic techniques that even the strongest of ninja use!"},"[src]")
 
 				if(usr)
@@ -249,7 +256,7 @@ mob/npc
 
 				if(usr)
 					usr.Tutorial=4
-					usr.move=1
+					src.conversations.Remove(usr)
 					usr<<"Please open up your skill tree before continuing and purchase the Substitution Technique, under Non Clan Skills."
 
 		Ending_Jounin
@@ -258,6 +265,7 @@ mob/npc
 			density=1
 		//	var/message
 			DblClick()
+				if(src.conversations.Find(usr)) return 0
 				if(!usr.tutorialskilltree)
 					usr<<"Open up your skill tree first, and purchase the Substitution Technique under Non Clan Skills."
 					return
@@ -272,7 +280,7 @@ mob/npc
 					return
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
-				if(usr)usr.move=0//Tell to do a mission.
+				if(usr) src.conversations.Add(usr)//Tell to do a mission.
 				if(usr)
 					usr.client.prompt(
 						{"Hi there, so I bet you've been wondering about Precision and Genjutsu right? Well I'm here to tell you all about them."},"[src]")
@@ -323,4 +331,4 @@ mob/npc
 
 				if(usr)
 					usr.Tutorial=6
-					usr.move=1
+					src.conversations.Remove(usr)

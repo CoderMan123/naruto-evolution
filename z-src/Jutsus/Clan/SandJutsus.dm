@@ -12,10 +12,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("punchrS",src)
 					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
-					src.injutsu=1
-					src.move=0
+					Bind(src, 3)
 					var/TimeAsleep
 					if(J.level==1)TimeAsleep=20
 					if(J.level==2)TimeAsleep=30
@@ -38,25 +35,14 @@ mob
 							m2.Translate(-1,-3)
 							O.transform = m2
 							M.icon_state=""
-							M.move=0
 							M.dir = SOUTH
-							M.injutsu=1
-							M.Sleeping=1
-							M.canattack=0
+							Bind(M, TimeAsleep)
 							spawn(TimeAsleep)
-								if(!M||M.dead)continue
-								M.Sleeping=0
-								M.icon_state=""
-								M.move=1
-								M.injutsu=0
-								M.canattack=1
 								if(O)del(O)
+								if(!M||M.dead)continue
+								M.icon_state=""
 						else src<<output("The jutsu did not connect.","Action.Output")
 						if(A) del(A)
-					src.firing=0
-					src.canattack=1
-					src.injutsu=0
-					src.move=1
 
 		Sand_Funeral()
 			for(var/obj/Jutsus/Sand_Funeral/J in src.jutsus)
@@ -88,10 +74,12 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-					src.shielded=1
-					src.firing=1
-					src.move=0
-					src.injutsu=1
+
+					var/duration = J.level*20
+
+					AddState(src, new/state/sand_shield, duration)
+					Bind(src, duration)
+
 					var/obj/O = new/obj
 					O.loc = src.loc
 					O.icon = 'Sand Shield.dmi'
@@ -100,31 +88,19 @@ mob
 					O.pixel_y=-8
 					O.layer=10
 					flick("form",O)
-					var/X = J.level*40
-					var/Z = src.health
-					while(X && src)
-						sleep(0.4)
-						src.health = Z
-						src.shielded=1
-						src.loc = O.loc
-						X--
-					if(src)
-						if(O)del(O)
-						src.firing=0
-						src.move=1
-						src.injutsu=0
-						src.shielded=0
-					else if(O)del(O)
+
+					spawn(duration) if(O) del(O)
+
+					
 
 		Sand_Shuriken()
 			for(var/obj/Jutsus/Sand_Shuriken/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(!canattack)return
-					canattack=0
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("throw",src)
+					AddState(src, new/state/cant_attack, 3)
 					src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
@@ -298,8 +274,6 @@ mob
 								A.fightlayer=src.fightlayer
 								A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
 							spawn() walk(A,src.dir)
-					src.firing=0
-					src.canattack=1
 
 		Shukakku_Spear()
 			for(var/obj/Jutsus/Shukakku_Spear/J in src.jutsus)
@@ -309,8 +283,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("punchl",src)
 					src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					AddState(src, new/state/cant_attack, 3)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.8
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.8
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.8
@@ -337,6 +310,3 @@ mob
 						A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)
-					spawn(10)if(src)
-						src.firing=0
-						src.canattack=1

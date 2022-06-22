@@ -10,15 +10,15 @@ mob
 
 			if(CheckState(src, new/state/knocked_down)) return 0
 
-			if(src.canattack==0 || CheckState(src, new/state/punching))
+			if(CheckState(src, new/state/cant_attack) || CheckState(src, new/state/punching))
 
 				return
 			if(src.multisized==1)//multisizestuff
 				return
 
 			var/mob/c_target=src.Target_Get(TARGET_MOB)
-			if(src.shielded==1)
-				if(src.Clan == "Sand" && canattack && !CheckState(src, new/state/punching))
+			if(CheckState(src, new/state/sand_shield))
+				if(src.Clan == "Sand" && !CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/punching) && !CheckState(src, new/state/swimming))
 					AddState(src, new/state/punching, attack_speed)
 					var/obj/O = new/obj
 					O.loc = src.loc
@@ -55,7 +55,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(4,11)*trainingexp))
 			if(src.likeaclone)
 				var/mob/Clones/SC=src.likeaclone
-				if(SC.canattack)
+				if(!CheckState(SC, new/state/cant_attack))
 					if(!CheckState(SC, new/state/punching))
 						SC.attkspeed = src.attkspeed
 						AddState(SC, new/state/punching, SC.attkspeed)
@@ -122,9 +122,8 @@ mob
 									if(SC.Hand=="Right") SC.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 									T.Break(src)
 
-							//src.move=1
 
-			if(src.canattack==1 && !src.likeaclone && !dead && !rest && !CheckState(src, new/state/punching))
+			if(!CheckState(src, new/state/cant_attack) && !src.likeaclone && !dead && !rest && !CheckState(src, new/state/punching) && !CheckState(src, new/state/swimming))
 				var/mob/c_target2=src.Target_Get(TARGET_MOB)
 				if(c_target2)src.dir = get_dir(src,c_target2)
 				else
@@ -349,25 +348,19 @@ mob
 												bonus+=2
 												src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
-											if(src.Gates >= 5&&move&&!injutsu)
+											if(src.Gates >= 5 && !CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/cant_move))
 												c_target.icon_state="push"
-												c_target.injutsu=1
-												c_target.canattack=0
-												c_target.firing=1
+												AddState(c_target, new/state/cant_move, 2)
 												step_away(c_target,src)
 												walk(c_target,c_target.dir)
 												if(c_target.client)spawn() c_target.ScreenShake(3)
 												spawn(3)
 													if(c_target)
 														walk(c_target,0)
-														c_target.injutsu=0
-														if(!c_target.swimming)c_target.icon_state=""
-														c_target.canattack=1
-														c_target.firing=0
+														if(!CheckState(c_target, new/state/swimming))c_target.icon_state=""
 											if(bonesword)
 												if(c_target.icon_state == "")
-													c_target.move=0
-													spawn(bonesword)if(c_target)c_target.move=1
+													AddState(c_target, new/state/cant_move, bonesword)
 										else
 											if(src.agility>=c_target.agility || src.Gates >= 3)
 												var/bonus=0
@@ -393,8 +386,7 @@ mob
 														c_target.DealDamage(defendedhit/2, src, "aliceblue", 0, 1)
 												if(bonesword)
 													if(c_target.icon_state == "")
-														c_target.move=0
-														spawn(bonesword)if(c_target)c_target.move=1
+														AddState(c_target, new/state/cant_move, bonesword)
 												flick("defendhit",c_target)
 												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 											else
@@ -504,25 +496,19 @@ mob
 											if(src.Hand=="Right") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Kick") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
-											if(src.Gates >= 5&&move&&!injutsu)
+											if(src.Gates >= 5 && !CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/cant_move))
 												c_target.icon_state="push"
-												c_target.injutsu=1
-												c_target.canattack=0
-												c_target.firing=1
+												AddState(c_target, new/state/cant_move, 2)
 												step_away(c_target,src)
 												walk(c_target,c_target.dir)
 												if(c_target.client)spawn() c_target.ScreenShake(3)
 												spawn(3)
 													if(c_target)
 														walk(c_target,0)
-														c_target.injutsu=0
-														if(!c_target.swimming)c_target.icon_state=""
-														c_target.canattack=1
-														c_target.firing=0
+														if(!CheckState(c_target, new/state/swimming))c_target.icon_state=""
 											if(bonesword)
 												if(c_target.icon_state == "")
-													c_target.move=0
-													spawn(bonesword)if(c_target)c_target.move=1
+													AddState(c_target, new/state/cant_move, bonesword)
 										else
 											if(src.agility>=c_target.agility || src.Gates >= 3)
 												var/bonus=0
@@ -550,8 +536,7 @@ mob
 												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 												if(bonesword)
 													if(c_target.icon_state == "")
-														c_target.move=0
-														spawn(bonesword)if(c_target)c_target.move=1
+														AddState(c_target, new/state/cant_move, bonesword)
 											else
 												flick("dodge",c_target)
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(1,2))
@@ -565,12 +550,3 @@ mob
 								if(src.Hand=="Kick") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 								if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 								T.Break(src)
-/*				if(Specialist==SPECIALIZATION_TAIJUTSU||Specialist2==SPECIALIZATION_TAIJUTSU)
-					if(src.combo==3)
-						src.combo=0
-						spawn(src.attkspeed)if(src)src.canattack=1
-					else
-						var/wait=src.attkspeed-(src.agility/50)
-						if(wait<=0)wait=1.75
-						spawn(wait)if(src)src.canattack=1
-				else spawn(src.attkspeed)if(src)src.canattack=1*/

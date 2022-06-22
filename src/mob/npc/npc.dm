@@ -5,7 +5,6 @@ mob
 		var/npcowner
 		var/ownersquad
 		var/tmp/bark
-		move=0
 
 		New()
 			..()
@@ -214,9 +213,10 @@ mob
 				..()
 
 			DblClick()
+				if(src.conversations.Find(usr)) return 0
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
-				if(usr)usr.move=0
+				src.conversations.Add(usr)
 				if(usr.village == VILLAGE_MISSING_NIN)
 					var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
 					if(O && O.squad.mission)
@@ -225,7 +225,7 @@ mob
 						usr.client.prompt("Psst, hey you there. If you can get me some intel on the shinobi villages I'll pay you handsomely.", src.name)
 				else
 					usr.client.prompt("Buzz off, I don't speak with the likes of you.", src.name)
-				usr.move=1
+				src.conversations.Remove(usr)
 
 		zetsu //not to be confused with white zetsu
 			name = "Zetsu"
@@ -234,15 +234,16 @@ mob
 			//100,161,5
 
 			DblClick()
+				if(src.conversations.Find(usr)) return 0
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
-				if(usr)usr.move=0
+				src.conversations.Add(usr)
 				var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
 				if(O && O.squad.mission)
 					O.squad.mission.Complete(usr)
 				else if(usr.client.prompt("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == "Yes")
 					usr.loc = locate(100,32,4)
-				usr.move=1
+				src.conversations.Remove(usr)
 
 		onomari //prestige system
 			name = "Onomari"
@@ -257,9 +258,10 @@ mob
 				..()
 
 			DblClick()
+				if(src.conversations.Find(usr)) return 0
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
-				if(usr)usr.move=0
+				src.conversations.Add(usr)
 				if(usr.rank == RANK_ANBU_LEADER || usr.rank == RANK_HOKAGE || usr.rank == RANK_KAZEKAGE || usr.rank == RANK_MIZUKAGE || usr.rank == RANK_OTOKAGE || usr.rank == RANK_TSUCHIKAGE || usr.rank == RANK_AKATSUKI || usr.rank == RANK_AKATSUKI_LEADER || usr.rank == RANK_SEVEN_SWORDSMEN_LEADER)
 					usr.client.prompt("Don't mind me. I'm just an old veteran looking to enjoy his retirement. (Leaders cannot prestige. Retire first and try again.)", src.name)
 					return
@@ -270,7 +272,7 @@ mob
 						if("A New Element")
 							if(usr.Element5)
 								usr.client.prompt("You already have all five elements, you're a master of the elements!", src.name)
-								usr.move=1
+								src.conversations.Remove(usr)
 								return
 							var/PlayerElements = list("[usr.Element]","[usr.Element2]","[usr.Element3]","[usr.Element4]","[usr.Element5]")
 							var/ElementChoice = list("Fire","Water","Earth","Lightning","Wind")
@@ -285,9 +287,9 @@ mob
 
 						if("Nevermind")
 							usr.client.prompt("You know where to find me if you change your mind.", src.name)
-							usr.move=1
+							src.conversations.Remove(usr)
 							return
-				usr.move=1
+				src.conversations.Remove(usr)
 
 
 

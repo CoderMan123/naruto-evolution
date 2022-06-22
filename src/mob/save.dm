@@ -357,15 +357,9 @@ mob
 			src.density=1
 			src.health=src.maxhealth
 			src.chakra=src.maxchakra
-			src.injutsu=0
 			src.dead=0
-			src.canattack=1
-			src.firing=0
 			src.icon_state=""
 			src.wait=0
 			src.rest=0
 			src.dodge=0
-			src.move=1
-			src.swimming=0
-			src.walkingonwater=0
 			src.overlays=0

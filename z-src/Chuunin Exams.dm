@@ -182,15 +182,19 @@ proc/ChuuninExamGo()
 		world<<output("<i><center>Match Beginning: [ChuuninOpponentOne] vs. [ChuuninOpponentTwo].</center></i>","Action.Output")
 		for(var/obj/ChuuninExam/Barrier/O in world)O.invisibility=0 // Barriers up!
 		var/timer=5
+		
+		var/state/cant_move/op1 = new()
+		var/state/cant_move/op2 = new()
+		
 		while(timer)
 			for(var/mob/M in Chuunins)M<<output("[timer]","Action.Output")
-			ChuuninOpponentOne.move=0
-			ChuuninOpponentTwo.move=0
+			AddState(ChuuninOpponentOne, op1, -1)
+			AddState(ChuuninOpponentTwo, op2, -1)
 			timer--
 			sleep(10)
 		for(var/mob/M in Chuunins)M<<output("GO!","Action.Output")
-		ChuuninOpponentOne.move=1
-		ChuuninOpponentTwo.move=1
+		RemoveState(ChuuninOpponentOne, op1, STATE_REMOVE_REF)
+		RemoveState(ChuuninOpponentTwo, op2, STATE_REMOVE_REF)
 		while(!ChuuninDuelWinner&&ChuuninOpponentOne&&ChuuninOpponentTwo)sleep(10)
 		world<<output("<i><center>[ChuuninDuelWinner] has defeated [ChuuninDuelLoser] in the chuunin exams.</center></i>","Action.Output")
 		world<<output("<i>[ChuuninDuelWinner.name] is now a Chuunin.</i>","Action.Output")

@@ -38,7 +38,7 @@ mob
 		SealHandler(sign)
 			set hidden = 1
 			if(CheckState(src, new/state/knocked_down)) return 0
-			if(src.canattack && !src.firing && !src.dead && !src.multisized)
+			if(!src.dead && !src.multisized && !CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
 				if(src.SealCount < 12)
 					src.SealCount ++
 					switch(src.SealCount)

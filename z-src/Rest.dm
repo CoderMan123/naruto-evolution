@@ -58,11 +58,10 @@ obj
 mob
 	proc
 		Resting()
-			if(src.canattack==0&&src.dead==0&&src.rest==1)
-				if(CheckState(src, new/state/recently_hit))
+			if(src.dead==0&&src.rest==1)
+				if(CheckState(src, new/state/recently_hit) && CheckState(src, new/state/cant_attack))
 					RestUp()
 					return
-				usr.injutsu=1
 				usr.icon_state="jutsuse"
 				if(src.wait==2)
 					if(src.chakra<>src.maxchakra)
@@ -79,13 +78,12 @@ mob
 				var/turf/T = usr.loc
 				spawn(2)
 					if(src.wait<2)src.wait+=1
-					src.injutsu=0
 					src.icon_state=""
 					if(usr.loc==T)usr.Resting()
 					else usr.RestUp()
 	proc
 		RestSound()
-			if(src.canattack==0&&src.dead==0&&src.rest==1)
+			if(CheckState(src, new/state/cant_attack) &&src.dead==0&&src.rest==1)
 				if(CheckState(src, new/state/recently_hit))
 					RestUp()
 					return
@@ -104,17 +102,15 @@ mob
 	verb
 		Rest()
 			set hidden=1
-			if(CheckState(src, new/state/knocked_down)) return 0
+			if(CheckState(usr, new/state/knocked_down)) return 0
 			src.HengeUndo()
-			if(injutsu) return
-			if(usr.canattack==1&&usr.dead==0&&usr.rest==0&&usr.move)
-				if(CheckState(src, new/state/recently_hit))
+			if(!CheckState(usr, new/state/cant_attack) && !CheckState(usr, new/state/cant_move) && !CheckState(usr, new/state/swimming) && usr.dead==0 && usr.rest==0)
+				if(CheckState(usr, new/state/recently_hit))
 					RestUp()
 					return
 /*				if(src.Gates==null)
 					usr.healthregenmod+=*/
 				usr.wait=0
-				usr.canattack=0
 				if(usr.rest==0)
 					if(usr.maxchakra<=500)
 						usr.overlays+=/obj/Overlays/Dust
@@ -161,10 +157,7 @@ mob
 				usr.RestOverlays=0
 				usr.wait=0
 				usr.rest=2
-				usr.canattack=2
-				usr.injutsu=0
 				spawn(2)
 				usr.rest=0
-				usr.canattack=1
 mob/var/RestOverlays=0
 

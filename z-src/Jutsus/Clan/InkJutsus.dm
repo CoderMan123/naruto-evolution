@@ -12,8 +12,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("jutsuse",src)
 					src.PlayAudio('man_fs_l_mt_wat.ogg', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					AddState(src, new/state/cant_attack, 10)
 					var/TimeAsleep
 					if(J.level==1) TimeAsleep=10
 					if(J.level==2) TimeAsleep=20
@@ -27,20 +26,12 @@ mob
 						if(M)
 							new/obj/Jutsus/Effects/rustle(M.loc)
 							M.icon_state="dead"
-							M.move=0
-							M.injutsu=1
-							M.canattack=0
-							M.Sleeping=1
+							Bind(M, TimeAsleep)
 							spawn(TimeAsleep)
 								if(!M||M.dead)continue
 								M.icon_state=""
-								M.move=1
-								M.injutsu=0
-								M.canattack=1
-								M.Sleeping=0
 						else src<<output("The jutsu did not connect.","Action.Output")
-					src.firing=0
-					src.canattack=1
+
 		SaiRat()
 			for(var/obj/Jutsus/Sai_Rat/J in src.jutsus)
 				if(src.PreJutsu(J))
@@ -49,8 +40,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("2fist",src)
 					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					Bind(src, 3)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/6
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/6
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/6
@@ -223,8 +213,6 @@ mob
 								A.fightlayer=src.fightlayer
 								A.damage=J.damage+round(src.ninjutsu*1.5+src.taijutsu*0.8)
 							spawn() walk(A,src.dir)
-					src.firing=0
-					src.canattack=1
 
 		Sai_Snakes()
 			for(var/obj/Jutsus/Sai_Snakes/J in src.jutsus)
@@ -234,8 +222,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("2fist",src)
 					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					Bind(src, 3)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/5
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/5
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/5
@@ -408,8 +395,6 @@ mob
 								A.fightlayer=src.fightlayer
 								A.damage=J.damage+round(src.ninjutsu*1.5+src.taijutsu*0.8)
 							spawn() walk(A,src.dir)
-					src.firing=0
-					src.canattack=1
 
 		InkLions()
 			for(var/obj/Jutsus/Ink_Lions/J in src.jutsus)
@@ -419,8 +404,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					flick("2fist",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					Bind(src, 5)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/8
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/8
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/8
@@ -444,9 +428,6 @@ mob
 						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						if(c_target) walk_towards(A,c_target.loc,0)
 						spawn(4)if(A)walk(A,A.dir)
-					spawn(5)
-						src.firing=0
-						src.canattack=1
 
 		Ultimate_Ink_Bird()
 			for(var/obj/Jutsus/Ultimate_Ink_Bird/J in src.jutsus)
@@ -460,9 +441,7 @@ mob
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
-					src.canattack=0
-					src.move=0
-					src.firing=1
+					Bind(src, 8)
 					sleep(8)
 					flick("2fist",src)
 					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
@@ -496,11 +475,5 @@ mob
 					A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 					A.level=J.level
 					walk(A,dir,0)
-					src.firing=0
-					src.canattack=1
-					src.move=1
 					icon_state=""
 					Aa.dir = src.dir
-					spawn(15)
-						src.firing=0
-						src.canattack=1

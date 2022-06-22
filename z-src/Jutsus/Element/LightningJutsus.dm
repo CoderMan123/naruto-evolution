@@ -12,9 +12,6 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					icon_state="jutsuuse"
 					src.PlayAudio('Beam.ogg', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
-					src.move=0
 					if(c_target)src.dir=get_dir(src,c_target)
 					var/obj/Projectiles/Effects/JinraiBack/Aa=new(src.loc)
 					Aa.IsJutsuEffect=src
@@ -29,14 +26,8 @@ mob
 					A.damage=0.6*(J.damage+round((src.ninjutsu / 150)*2*J.damage))
 					A.level=J.level
 					walk(A,dir,0)
-					src.firing=0
-					src.canattack=1
-					src.move=1
 					icon_state=""
 					Aa.dir = src.dir
-					spawn(15)
-						src.firing=0
-						src.canattack=1
 
 		Kirin()
 			for(var/obj/Jutsus/Kirin/J in src.jutsus)
@@ -47,9 +38,13 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					icon_state="jutsuuse"
-					src.firing=1
-					src.canattack=0
-					src.move=0
+
+					var/state/cant_attack/e = new()
+					AddState(src, e, -1)
+
+					var/state/cant_move/f = new()
+					AddState(src, f, -1)
+
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
@@ -67,8 +62,7 @@ mob
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
 							c_target.PlayAudio('Thunder.ogg', output = AUDIO_HEARERS)
-							c_target.injutsu=1
-							c_target.move=0
+							Bind(c_target, 6*Jutsu)
 							if(J.level==4)
 								var/obj/Z=new
 								Z.IsJutsuEffect=src
@@ -90,21 +84,13 @@ mob
 								c_target.DealDamage(Damage,src,"NinBlue")
 								sleep(6)
 							del(O)
-							if(c_target)
-								c_target.move=1
-								c_target.injutsu=0
-							move=1
-							canattack=1
-							firing=0
+							RemoveState(src, e, STATE_REMOVE_REF)
+							RemoveState(src, f, STATE_REMOVE_REF)
 						else
 							src<<output("The jutsu did not connect.","Action.Output")
-							move=1
-							canattack=1
-							firing=0
+							RemoveState(src, e, STATE_REMOVE_REF)
+							RemoveState(src, f, STATE_REMOVE_REF)
 					icon_state=""
-					spawn(5)
-						src.firing=0
-						src.canattack=1
 
 		Chidori_Needles()
 			for(var/obj/Jutsus/Chidori_Needles/J in src.jutsus)
@@ -114,8 +100,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))//XPGAIN
 					flick("2fist",src)
 					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					Bind(src, 2)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
@@ -288,18 +273,13 @@ mob
 								A.fightlayer=src.fightlayer
 								A.damage=J.damage+round(src.ninjutsu*1.5+src.taijutsu*0.8)
 							spawn() walk(A,src.dir)
-					src.firing=0
-					src.canattack=1
+
 		Chidori_Nagashi()
 			for(var/obj/Jutsus/Chidori_Nagashi/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					src.firing=1
-					src.canattack=0
-					spawn(2)
-						src.firing=0
-						src.canattack=1
+					Bind(src, 2)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
@@ -326,13 +306,14 @@ mob
 		LightningBalls()
 			for(var/obj/Jutsus/Lightning_Balls/J in src.jutsus)
 				if(src.PreJutsu(J))
-					if(firing)return
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
 					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)//CHANGE
-					src.firing=1
-					src.canattack=0
+
+					var/state/cant_attack/e = new()
+					AddState(src, e, -1)
+
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
@@ -374,9 +355,7 @@ mob
 							A.fightlayer=src.fightlayer
 							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
 							walk(A,src.dir)
-					spawn(5)if(src)
-						src.firing=0
-						src.canattack=1
+					RemoveState(src, e, STATE_REMOVE_REF)
 		Chidori()
 			for(var/obj/Jutsus/Chidori/J in src.jutsus)
 				if(src.PreJutsu(J))
@@ -394,10 +373,13 @@ mob
 						if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20)
 						J.Levelup()
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					src.move=0
-					src.injutsu=1
-					src.canattack=0
-					src.firing=1
+
+					var/state/cant_attack/e = new()
+					AddState(src, e, -1)
+
+					var/state/cant_move/f = new()
+					AddState(src, f, -1)
+
 					src.icon_state="groundjutsuse"
 					var/obj/I = new/obj
 					I.IsJutsuEffect=src
@@ -433,21 +415,14 @@ mob
 						src.copy=null
 						Effects["Chidori"]=null
 						ArrowTasked=null
-						src.move=1
-						src.injutsu=0
-						src.canattack=1
-						src.firing=0
+						RemoveState(src, e, STATE_REMOVE_REF)
+						RemoveState(src, f, STATE_REMOVE_REF)
 						return
 					ArrowTasked=null
 					src.copy=null
 					src.icon_state=""
-					src.move=1
-					src.injutsu=0
-					src.canattack=1
-					src.firing=0
 					Effects["Chidori"]=round(J.level*2)
 					src.overlays+=image('Chidori.dmi',"hold")
-					src.move=0
 					if(I)del(I)
 					spawn()
 						if(src)
@@ -456,11 +431,9 @@ mob
 							var/rashit=0
 							var/rcount=0
 							while(rashit==0 && rcount <> 15)
-								move=1
 								rcount+=1
 								if(c_target)step_towards(src,c_target)
 								else step(src,src.dir)
-								move=0
 								var/obj/Drag/Dirt/D=new(src.loc)
 								D.dir=src.dir
 								for(var/mob/M in get_step(src,src.dir))
@@ -475,8 +448,9 @@ mob
 							if(src)
 								Effects["Chidori"]=null
 								src.overlays-=image('Chidori.dmi',"hold")
-								src.move=1
 								src.icon_state = ""
+						RemoveState(src, e, STATE_REMOVE_REF)
+						RemoveState(src, f, STATE_REMOVE_REF)
 
 		Raikiri()
 			for(var/obj/Jutsus/Raikiri/J in src.jutsus)
@@ -496,10 +470,13 @@ mob
 						if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20)
 						J.Levelup()
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					src.move=0
-					src.injutsu=1
-					src.canattack=0
-					src.firing=1
+
+					var/state/cant_attack/e = new()
+					AddState(src, e, -1)
+
+					var/state/cant_move/f = new()
+					AddState(src, f, -1)
+
 					src.icon_state="groundjutsuse"
 					var/obj/I = new/obj
 					I.IsJutsuEffect=src
@@ -532,21 +509,14 @@ mob
 						src.copy=null
 						Effects["Chidori"]=null
 						ArrowTasked=null
-						src.move=1
-						src.injutsu=0
-						src.canattack=1
-						src.firing=0
+						RemoveState(src, e, STATE_REMOVE_REF)
+						RemoveState(src, f, STATE_REMOVE_REF)
 						return
 					ArrowTasked=null
 					src.copy=null
 					src.icon_state=""
-					src.move=1
-					src.injutsu=0
-					src.canattack=1
-					src.firing=0
 					Effects["Chidori"]=round(J.level*3)
 					src.overlays+=image('Chidori.dmi',"hold")
-					src.move=0
 					del(I)
 					spawn()
 						if(src)
@@ -555,11 +525,9 @@ mob
 							var/rashit=0
 							var/rcount=0
 							while(rashit==0 && rcount <> 15)
-								move=1
 								rcount+=1
 								if(c_target)step_towards(src,c_target)
 								else step(src,src.dir)
-								move=0
 								var/obj/Drag/Dirt/D=new(src.loc)
 								D.dir=src.dir
 								for(var/mob/M in get_step(src,src.dir))
@@ -574,5 +542,7 @@ mob
 							if(src)
 								Effects["Chidori"]=null
 								src.overlays-=image('Chidori.dmi',"hold")
-								src.move=1
 								src.icon_state = ""
+						
+							RemoveState(src, e, STATE_REMOVE_REF)
+							RemoveState(src, f, STATE_REMOVE_REF)

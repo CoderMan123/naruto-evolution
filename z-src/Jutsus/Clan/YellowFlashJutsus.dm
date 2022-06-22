@@ -2,6 +2,7 @@ mob
 	proc
 		Flying_Thunder_God_Kunai()
 			for(var/obj/Jutsus/Flying_Thunder_God_Kunai/J in src.jutsus)
+				if(CheckState(src, new/state/cant_move)) return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
@@ -10,9 +11,6 @@ mob
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.6
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.6
-					if(!move) return
-					if(injutsu) return
-					if(copy=="Climb") return
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(c_target)
 						src.dir=get_dir(src,c_target)
@@ -55,11 +53,8 @@ mob
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
-					src.move=0
-					src.injutsu=1
-					src.firing=1
-					src.canattack=0
 					src.icon_state = "jutsuse"
+					Bind(src, 3)
 					sleep(2)
 					flick('Flyingthunder.dmi',src)
 					if(c_target)
@@ -82,10 +77,6 @@ mob
 								sleep(1)
 							M.ftgmarked = 0
 					src.icon_state = ""
-					src.move=1
-					src.injutsu=0
-					src.firing=0
-					src.canattack=1
 
 		Flying_Thunder_God()
 			for(var/obj/Jutsus/Flying_Thunder_God/J in src.jutsus)
@@ -99,9 +90,7 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
-					src.move=0
+					Bind(src, 3)
 					if(J.level==1) J.damage=2
 					if(J.level==2) J.damage=4
 					if(J.level==3) J.damage=6
@@ -122,11 +111,6 @@ mob
 						ftgkunai.loc=null
 						src.ftgkunai=null
 
-					src.move=0
-					spawn(3)
-						src.firing=0
-						src.move=1
-						src.canattack=1
 
 		Flying_Thunder_God_Great_Escape()
 			for(var/obj/Jutsus/Flying_Thunder_God_Great_Escape/J in src.jutsus)

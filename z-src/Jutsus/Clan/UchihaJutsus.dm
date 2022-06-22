@@ -8,8 +8,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
-					src.firing=1
-					src.canattack=0
+					Bind(src, 3)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/2.5
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/2.5
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/2.5
@@ -18,13 +17,13 @@ mob
 					for(var/mob/M in orange(20,src))
 						var/mob/M_target=M.Target_Get(TARGET_MOB)
 						if(M_target == src)
-							M.move=0
-							M.canattack=0
-							M.injutsu=1
-							src.move = 0
-							src.canattack = 0
-							src.injutsu = 1
-							src.Prisoner=M
+
+							var/state/cant_attack/e = new()
+							AddState(M, e, -1)
+
+							var/state/cant_move/f = new()
+							AddState(M, f, -1)
+
 							new/obj/TsukuyomiHUD(M.client)
 							M.client.eye=locate(161,35,9)
 							M.client.perspective = EYE_PERSPECTIVE
@@ -37,17 +36,9 @@ mob
 									sleep(5)
 								M.client.eye=M
 								M.client.perspective = EYE_PERSPECTIVE
-								M.move=1
-								M.canattack=1
-								M.injutsu=0
+								RemoveState(M, e, STATE_REMOVE_REF)
+								RemoveState(M, f, STATE_REMOVE_REF)
 								for(var/obj/TsukuyomiHUD/H in M.client.screen)del H
-					src.Prisoner=null
-					src.injutsu=0
-					src.move=1
-					src.canattack=1
-					src.injutsu=0
-					src.canattack=1
-					src.firing=0
 
 		Amaterasu()
 			for(var/obj/Jutsus/Amaterasu/J in src.jutsus)
@@ -196,14 +187,10 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						view(src)<<output("<font color=[colour2html("red")]><b>[src] says: Sharingan!","Action.Output")
 						view(src)<<output("<font color=[colour2html("red")]><b>[src]'s eyes swirl to form [Text] Sharingan.","Action.Output")
-						src.firing=1
-						src.canattack=0
+
+						AddState(src, new/state/cant_attack, 2)
+
 						src.Sharingan=J.level
-						src.copy = "Cant move"
-						spawn(2)if(src)
-							src.firing=0
-							src.copy=null
-							src.canattack=1
 
 						while(src && src.Sharingan)
 							sleep(1)

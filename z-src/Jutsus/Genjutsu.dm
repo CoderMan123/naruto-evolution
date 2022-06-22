@@ -113,16 +113,10 @@ mob
 				spawn() Imprison()
 				icon_state = ""
 			Del()
-				if(Prisoner)
-					for(var/mob/M in mobs_online) if(Prisoner==M)
-						M.move=1
-						M.canattack=1
-						M.firing=0
-						M.injutsu=0
 				if(PrisonOb) del(PrisonOb)
 				..()
 			Move()
-				if(!move||injutsu) return
+				if(CheckState(src, new/state/cant_move)) return
 				..()
 			proc/BAi()
 				if(src)
@@ -135,11 +129,11 @@ mob
 			proc/Imprison()
 				while(src)
 					sleep(4)
-					if(move==0) continue
+					if(CheckState(src, new/state/cant_move)) continue
 					if(src.takeova) continue
 					for(var/mob/X in oview(src))
 						if(X <> Owner)
-							if(X && !X.dead && X.move)
+							if(X && !X.dead && !CheckState(X, new/state/cant_move))
 								while(get_dist(X,src)<>1 && X && src)
 									sleep(1)
 									if(src)
@@ -154,9 +148,8 @@ mob
 													src.Attack()
 													sleep(2)
 			proc/Attack()
-				if(src.canattack==1)
+				if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
 					var/mob/Owner=src.Owner
-					src.canattack=0
 				/*	for(var/mob/c_target in get_step(src,src.dir))
 						if(istype(c_target,/mob/NPCs/Shinobi/)) return*/
 					if(src.icon_state<>"blank")
@@ -238,7 +231,7 @@ mob
 												else
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
-					spawn(12)if(src)src.canattack=1
+
 		MizuBunshin
 			health=1
 			maxhealth=1
@@ -248,6 +241,10 @@ mob
 			var/attack_target
 			var/obj/PrisonOb
 			var/TrapTimes=2
+
+			var/state/cant_attack/e = new()
+			var/state/cant_move/f = new()
+
 			icon='Water Bunshin.dmi'
 			New()
 				..()
@@ -261,11 +258,8 @@ mob
 			Del()
 				if(Prisoner)
 					for(var/mob/M in mobs_online) if(Prisoner==M)
-						M.move=1
-						M.canattack=1
-						M.firing=0
-						M.Prisoned=0
-						M.injutsu=0
+						RemoveState(src, e, STATE_REMOVE_REF)
+						RemoveState(src, f, STATE_REMOVE_REF)
 				if(PrisonOb)del(PrisonOb)
 				..()
 			proc/BAi()
@@ -292,7 +286,7 @@ mob
 			proc/Imprison()
 				while(src)
 					sleep(4)
-					if(!move) continue
+					if(CheckState(src, new/state/cant_move)) continue
 					if(src.takeova) continue
 					if(TrapTimes<=0)
 						src.health=0
@@ -303,15 +297,8 @@ mob
 					dir=get_dir(src,attack_target)
 					for(var/mob/M in get_step(src,src.dir))
 						var/Timer=25
+
 						if(istype(M)&&!M.dead)
-							M.move=0
-							M.canattack=0
-							M.injutsu=1
-							M.firing=1
-							M.Prisoned=1
-							move=0
-							firing=1
-							canattack=0
 							var/obj/Jutsu/Effects/WaterPrison/W=new
 							W.layer=M.layer+2
 							W.pixel_x-=45
@@ -319,26 +306,21 @@ mob
 							icon_state="punchrS"
 							PrisonOb=W
 							Prisoner=M
+							
+							
+							AddState(src, e, -1)
+							AddState(src, f, -1)
+
 							while(Timer&&M.loc==W.loc&&M)
 								sleep(2)
 								Timer--
-								M.Prisoned=1
-								M.move=0
-								M.canattack=0
-								M.injutsu=1
-								M.firing=1
-						M.move=1
-						M.canattack=1
-						M.firing=0
-						M.Prisoned=0
-						M.injutsu=0
-						move=1
-						firing=0
-						canattack=1
+								RemoveState(src, e, STATE_REMOVE_REF)
+								RemoveState(src, f, STATE_REMOVE_REF)
 						icon_state=""
 						del(PrisonOb)
 						Prisoner=null
 						TrapTimes--
+		
 		Bunshin
 			health=1
 			maxhealth=1
@@ -430,11 +412,11 @@ mob
 								if(T)
 									if(get_dist(Owner,T)>=17)
 										src.target_mob=null
-										if(!src.injutsu)
+										if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/cant_move) && !CheckState(src, new/state/swimming))
 											if(!Owner.likeaclone)walk_towards(src,Owner,3)
 									else
 										if(get_dist(src,T)>1)
-											if(!src.injutsu)walk_towards(src,T,3)
+											if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/cant_move) && !CheckState(src, new/state/swimming))walk_towards(src,T,3)
 									if(get_dist(src,T)<=1)
 										if(T<>src.Owner && T.Owner <> src.Owner)
 											if(!Owner.likeaclone)src.Attack()
@@ -443,9 +425,8 @@ mob
 							walk(src,0)
 							break
 			proc/Attack()
-				if(src.canattack==1)
+				if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
 					var/mob/Owner=src.Owner
-					//src.canattack=0
 					if(src.icon_state<>"blank")
 						if(src.Hand=="Left")
 							flick("punchl",src)
@@ -520,7 +501,6 @@ mob
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
 					sleep(10)
-					//spawn(12)if(src)src.canattack=1
 			Bump(atom/O)
 				if(istype(O,/mob))
 					var/mob/M=O

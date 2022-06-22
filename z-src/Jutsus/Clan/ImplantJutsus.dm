@@ -146,14 +146,7 @@ mob
 						if(c_target)
 							RemoveState(c_target, new/state/in_warp_dimension, STATE_REMOVE_ALL)
 							c_target.loc=PrevLoc
-							c_target.canattack=1
-							c_target.injutsu=0
-							c_target.move=1
 						src.loc=PrevLoc
-						src.move=1
-						src.canattack=1
-						src.injutsu=0
-						src.firing=0
 						flick("jutsuse",src)
 						src.icon_state = "jutsuse"
 						del O
@@ -174,16 +167,10 @@ mob
 							if(M)
 								AddState(M, new/state/in_warp_dimension, 200)
 								src.loc=locate(175,183,8)
-								c_target.canattack=1
-								c_target.injutsu=0
-								c_target.move=1
 								del O
 							else
 								src<<output("You failed to pull them in with you!","Action.Output")
 								src.loc=locate(175,183,8)
-								move=1
-								canattack=1
-								firing=0
 								del O
 
 
@@ -193,10 +180,7 @@ mob
 					src << output("You're no longer intangible.","Action.Output")
 					src.Intang=0
 					src.density=1
-					spawn(4)
-						src.firing=0
-						src.injutsu=0
-						src.canattack=1
+					RemoveState(src, new/state/intangible, STATE_REMOVE_ALL)
 					return
 				else
 					if(jailed==1)
@@ -210,17 +194,12 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 						if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 						src << output("You become intangible.","Action.Output")
+						AddState(src, new/state/intangible, -1)
 						src.Intang=1
-						src.canattack=0
-						src.injutsu=0
-						src.firing=0
 						src.density=0
 						//spawn()
 						while(src.Intang)
 							src.DealDamage(50, src, "aliceblue", 0 , 1)
-							src.canattack=0
-							src.injutsu=0
-							src.firing=0
 							src.density=0
 							sleep(10)
 							if(src.chakra<=0)
@@ -228,8 +207,5 @@ mob
 								src << output("You're no longer intangible.","Action.Output")
 								src.Intang=0
 								src.density=1
-								spawn(4)
-									src.firing=0
-									src.injutsu=0
-									src.canattack=1
+								RemoveState(src, new/state/intangible, STATE_REMOVE_ALL)
 

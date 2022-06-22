@@ -8,7 +8,6 @@ mob
 			maxhealth=1500
 			icon_state="2"
 			var/hited=0
-			move=0
 			Bump(mob/M)
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
@@ -24,7 +23,7 @@ mob
 					return
 			Move()
 				//sleep(3)
-				if(src.move==1)
+				if(!CheckState(src, new/state/cant_move))
 					return
 				..()
 			New()
@@ -40,7 +39,6 @@ mob
 			maxhealth=1500
 			icon_state="1"
 			var/hited=0
-			move=0
 			Bump(mob/M)
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
@@ -56,7 +54,7 @@ mob
 					return
 			Move()
 				//sleep(3)
-				if(src.move==1)
+				if(!CheckState(src, new/state/cant_move))
 					return
 				..()
 			New()
@@ -90,7 +88,6 @@ mob
 			health=2300
 			maxhealth=2300
 			var/hited=0
-			move=0
 			Bump(mob/M)
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
@@ -105,8 +102,7 @@ mob
 				else
 					return
 			Move()
-				//sleep(3)
-				if(src.move==1)
+				if(!CheckState(src, new/state/cant_move))
 					return
 				..()
 			New()
@@ -123,7 +119,6 @@ mob
 			var/hited=0
 			pixel_y=-40
 			pixel_x=-40
-			move=0
 			Bump(mob/M)
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
@@ -135,7 +130,7 @@ mob
 				else
 					return
 			Move()
-				if(src.move==1)
+				if(!CheckState(src, new/state/cant_move))
 					return
 				..()
 			New()

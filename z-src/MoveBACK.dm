@@ -1,5 +1,4 @@
 mob
-	var/tmp/Sleeping=0
 	var/tmp/JashinConnector
 	proc/Bleed()
 		if(!src.dead && !istype(src, /mob/training))
@@ -61,9 +60,6 @@ obj
 				var/turf/T = src.loc
 				for(var/mob/M in T)
 					if(!M.burn)
-						if(!M.injutsu)
-							M.injutsu=1
-							spawn(3) if(M) M.injutsu=0
 						if(M)
 							for(var/obj/Jutsus/Fire_Release_Ash_Pile_Burning/J in src.owner.jutsus)
 								M.burn=(1.3*(J.damage+round((src.owner.ninjutsu / 150)*2*J.damage))/35)//burn
@@ -86,16 +82,12 @@ mob
 				src.icon_state = "punchrS"
 				var/turf/T = get_step(src,src.dir)
 				for(var/mob/M in T)
-					M.move=0
-					M.injutsu=1
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
-					//spawn(3)if(M) M.injutsu=0
-					//M.move=1
 			src.icon_state = ""
 		do16palms()
 			src.copy = "waiting"
@@ -109,16 +101,12 @@ mob
 				src.icon_state = "punchrS"
 				var/turf/T = get_step(src,src.dir)
 				for(var/mob/M in T)
-					M.move=0
-					M.injutsu=1
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
-					//spawn(3) if(M) M.injutsu=0
-					//M.move=1
 			src.icon_state = ""
 		do32palms()
 			src.copy = "waiting"
@@ -132,16 +120,12 @@ mob
 				src.icon_state = "punchrS"
 				var/turf/T = get_step(src,src.dir)
 				for(var/mob/M in T)
-					M.move=0
-					M.injutsu=1
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
-					//spawn(4) if(M) M.injutsu=0
-					//M.move=1
 			src.icon_state = ""
 		do64palms()
 			src.copy = "waiting"
@@ -155,16 +139,12 @@ mob
 				src.icon_state = "punchrS"
 				var/turf/T = get_step(src,src.dir)
 				for(var/mob/M in T)
-					M.injutsu=1
-					M.move=0
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/3,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
-					//spawn(5)if(M)M.injutsu=0
-					//M.move=1
 			src.icon_state = ""
 
 
@@ -201,7 +181,6 @@ mob
 					step(O,O.dir)
 					for(var/mob/M in O.loc)
 						if(M<>src)
-							M.injutsu=1
 							var/random=rand(1,4)
 							if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 							if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -210,12 +189,10 @@ mob
 							M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
 							src.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
-							spawn(2) M.injutsu=0
 					spawn(1)
 						step(O,O.dir)
 						for(var/mob/M in O.loc)
 							if(M<>src)
-								M.injutsu=1
 								var/random=rand(1,4)
 								if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 								if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -224,12 +201,10 @@ mob
 								M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
 								src.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
-								spawn(2) M.injutsu=0
 						spawn(1)
 							step(O,O.dir)
 							for(var/mob/M in O.loc)
 								if(M<>src)
-									M.injutsu=1
 									var/random=rand(1,4)
 									if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -238,7 +213,6 @@ mob
 									M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
 									src.Levelup()
 									if(M.henge==4||M.henge==5)M.HengeUndo()
-									spawn(2) M.injutsu=0
 									walk_to(O,M)
 									O.icon_state = "nhit"
 									O.pixel_x+=rand(1,5)
@@ -247,7 +221,7 @@ mob
 client
 	North()
 		if(src.mob.Intang==1 && istype(get_step(src.mob, NORTH), /obj/IntangBlocker)) return
-		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
+		if(!CheckState(src.mob, new/state/cant_move) && src.mob.dead==0&&src.mob.dodge==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
 			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
@@ -266,7 +240,7 @@ client
 				if(src.mob)src.mob.dashable=0
 			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
 		if(src.mob.inshadowfield==1)
-			if(src.mob.move==1)
+			if(!CheckState(src.mob, new/state/cant_move))
 				for(var/mob/M in orange(3,src))
 					step(M,NORTH)
 		if(src.mob.inboulder==1&&src.mob.dir!=SOUTH)//boulderstuff
@@ -379,7 +353,7 @@ client
 		else return ..()
 	South()
 		if(src.mob.Intang==1 && istype(get_step(src.mob, SOUTH), /obj/IntangBlocker)) return
-		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
+		if(!CheckState(src.mob, new/state/cant_move)&& src.mob.dead==0&&src.mob.dodge==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
 			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
@@ -398,7 +372,7 @@ client
 				if(src.mob)src.mob.dashable=0
 			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
 		if(src.mob.inshadowfield==1)
-			if(src.mob.move==1)
+			if(!CheckState(src.mob, new/state/cant_move))
 				for(var/mob/M in orange(3,src))
 					step(M,SOUTH)
 		if(src.mob.inboulder==1&&src.mob.dir!=NORTH)
@@ -476,7 +450,7 @@ client
 			return ..()
 	West()
 		if(src.mob.Intang==1 && istype(get_step(src.mob, WEST), /obj/IntangBlocker)) return
-		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
+		if(!CheckState(src.mob, new/state/cant_move)&& src.mob.dead==0&&src.mob.dodge==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
 			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
@@ -495,7 +469,7 @@ client
 				if(src.mob)src.mob.dashable=0
 			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
 		if(src.mob.inshadowfield==1)
-			if(src.mob.move==1)
+			if(!CheckState(src.mob, new/state/cant_move))
 				for(var/mob/M in orange(3,src))
 					step(M,WEST)
 		if(src.mob.inboulder==1&&src.mob.dir!=EAST)
@@ -588,7 +562,7 @@ client
 			return ..()
 	East()
 		if(src.mob.Intang==1 && istype(get_step(src.mob, EAST), /obj/IntangBlocker)) return
-		if(src.mob.move && src.mob.dead==0&&src.mob.dodge==1&&src.mob.canattack==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
+		if(!CheckState(src.mob, new/state/cant_move)&& src.mob.dead==0&&src.mob.dodge==1&&src.mob.dashable==1&&src.mob.health>src.mob.maxhealth/3&&src.mob.dashcd==0)
 			src.mob.dashcd=1
 			src.mob.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 			if(src.mob.icon_state<>"blank")flick("dash",src.mob)
@@ -607,7 +581,7 @@ client
 				if(src.mob)src.mob.dashable=0
 			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
 		if(src.mob.inshadowfield==1)
-			if(src.mob.move==1)
+			if(!CheckState(src.mob, new/state/cant_move))
 				for(var/mob/M in orange(3,src))
 					step(M,EAST)
 		if(src.mob.inboulder==1&&src.mob.dir!=WEST)
@@ -717,20 +691,20 @@ mob
 							else
 								if(src.speeding>=100)src.speeding-=6
 					if(src.speeding<= 40)
-						if(!src.swimming)
+						if(!CheckState(src, new/state/swimming))
 							if(src.health<=src.maxhealth/4)src.speeddelay=4
 							if(src.health<=src.maxhealth/3&&src.health>src.maxhealth/4)src.speeddelay=3
 							if(src.health<=src.maxhealth/2&&src.health>src.maxhealth/3)src.speeddelay=2
 							if(src.health>src.maxhealth/2)src.speeddelay=1.5
 						else
-							if(src.swimming)
+							if(CheckState(src, new/state/swimming))
 								if(src.health<=src.maxhealth/3)src.speeddelay=6
 								if(src.health>src.maxhealth/3)src.speeddelay=4
 					else
 						if(src.speeding>= 16&&src.health>=src.maxhealth/2)
-							if(!src.swimming)src.speeddelay=1//.5
+							if(!CheckState(src, new/state/swimming))src.speeddelay=1//.5
 							else
-								if(src.swimming)src.speeddelay=4
+								if(CheckState(src, new/state/swimming))src.speeddelay=4
 					sleep(10)
 					continue
 				else
@@ -794,6 +768,8 @@ mob
 client
 	Move(Loc)
 		if(src.mob.moving) return 0
+
+		if(CheckState(src.mob, new/state/cant_move)) return 0
 		
 		if(CheckState(src.mob, new/state/knocked_down)) return 0
 
@@ -827,9 +803,9 @@ client
 		
 		else
 
-			if(!src.mob.move) return 0
+			if(CheckState(src.mob, new/state/cant_move)) return 0
 			if(src.mob.dashable == 2) return 0
-			if(src.mob.injutsu || src.mob.rest || src.mob.dead || src.mob.shielded || src.mob.Sleeping) return 0
+			if(src.mob.rest || src.mob.dead) return 0
 			
 			. = ..()
 
@@ -877,10 +853,10 @@ client
 				src.mob.lastloc = src.mob.loc
 
 				if(istype(src.mob.loc, /turf/Ground/Water))
-					if(src.mob.swimming)
+					if(CheckState(src.mob, new/state/swimming))
 						spawn() src.mob.LevelStat("Agility", rand(1,2))
 
-					if(src.mob.walkingonwater)
+					if(CheckState(src.mob, new/state/water_walking))
 						spawn() src.mob.LevelStat("Ninjutsu", rand(1,1))
 
 				if(src.mob.equipped == "Weights")
@@ -917,4 +893,3 @@ mob
 				//src.icon='WhiteMBase.dmi'
 				src.icon_state=""
 				src.RestoreOverlays()
-				if(!jutsuaffect)src.move=1

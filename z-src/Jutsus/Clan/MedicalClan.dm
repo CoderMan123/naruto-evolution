@@ -22,10 +22,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					src.move=0
-					src.canattack=0
-					src.injutsu=1
-					src.firing=1
+					Bind(src, 5)
 					flick("groundjutsu",src)
 					src.icon_state = "groundjutsuse"
 					for(var/mob/M in src.loc)
@@ -35,16 +32,10 @@ mob
 							M.density=1
 							M.health=M.maxhealth
 							M.chakra=M.maxchakra
-							M.injutsu=0
-							M.canattack=1
-							M.firing=0
 							M.icon_state=""
 							M.wait=0
 							M.rest=0
 							M.dodge=0
-							M.move=1
-							M.swimming=0
-							M.walkingonwater=0
 							M.overlays=0
 							M.RestoreOverlays()
 							M.UpdateHMB()
@@ -55,10 +46,6 @@ mob
 							spawn(600)if(M)if(M.revived)M.revived=0
 					spawn(5)if(src)
 						src.icon_state = ""
-						src.move=1
-						src.canattack=1
-						src.injutsu=0
-						src.firing=0
 
 		Poison_Mist()
 			for(var/obj/Jutsus/Poison_Mist/J in src.jutsus)
@@ -87,10 +74,7 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					var/mob/Z
 					var/check=0
-					src.move=0
-					src.injutsu=1
-					src.firing=1
-					src.canattack=0
+					Bind(src, 5)
 					src.icon_state = "jutsuse"
 					sleep(5)
 					if(c_target)
@@ -118,10 +102,6 @@ mob
 						spawn(5)
 							Z.overlays -= 'Healing.dmi'
 							src.icon_state = ""
-					src.move=1
-					src.injutsu=0
-					src.firing=0
-					src.canattack=1
 
 		Cherry_Blossom_Impact()
 			for(var/obj/Jutsus/Cherry_Blossom_Impact/J in src.jutsus)

@@ -1,7 +1,6 @@
 obj/var/Colorable=1
 mob/npc
 	layer=MOB_LAYER
-	move=0
 	var/list/OriginalOverlays=list()
 
 	Hair_Stylist

@@ -102,6 +102,19 @@ proc
 		OnTick()
 			..()
 
+	swimming
+
+	water_walking
+	
+	intangible
+		var/delay
+		OnTick()
+			if(!delay) delay = world.timeofday + 10
+			if(delay < world.timeofday)
+				AddState(src.mob, new/state/cant_attack, 20)
+				delay = world.timeofday + 10
+			..()
+
 	in_warp_dimension
 		Ticker()
 			var/mob/m = src.mob
@@ -124,6 +137,16 @@ proc
 				src.mob.DealDamage(src.mob.maxhealth / 200, src.owner, "NinBlue")
 				delay = world.timeofday + 10
 			..()
+
+	cant_move
+
+	cant_attack
+
+	knockback_immune
+
+	sand_shield
+
+	sleeping
 
 	bleeding
 		var/delay

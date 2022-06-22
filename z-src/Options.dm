@@ -22,10 +22,8 @@ mob
 			sleep(200)
 			if(src.client.inactivity >= 200)
 				src.loc = MapLoadSpawn()
-				src.move=1
-				src.injutsu=0
-				src.canattack=1
-				src.firing=0
+				RemoveState(src, new/state/cant_attack, STATE_REMOVE_ANY)
+				RemoveState(src, new/state/cant_move, STATE_REMOVE_ANY)
 			else src<<"Results show that you have moved or touched a button within the last 20 seconds."
 	var/accepted
 var/arenaprogress=0

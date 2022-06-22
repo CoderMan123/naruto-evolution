@@ -134,18 +134,16 @@ mob
 					M.name = src.key
 					src.puppets[2] = M
 		Summon_Kazekage_Puppet()
-			if(firing)return
-			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Summon_Kazekage_Puppet/J in src.jutsus)
-					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-						if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
-						var/mob/jutsus/KazekagePuppet/A=new/mob/jutsus/KazekagePuppet(src.loc)
-						A.OWNER=src
-						A.dir=src.dir
-						var/mob/c_target=src.Target_Get(TARGET_MOB)
-						if(c_target)
-							walk_to(A,c_target)
-						spawn(100)
-							del(A)
+			for(var/obj/Jutsus/Summon_Kazekage_Puppet/J in src.jutsus)
+				if(src.PreJutsu(J))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
+					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
+					var/mob/jutsus/KazekagePuppet/A=new/mob/jutsus/KazekagePuppet(src.loc)
+					A.OWNER=src
+					A.dir=src.dir
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					if(c_target)
+						walk_to(A,c_target)
+					spawn(100)
+						del(A)
 

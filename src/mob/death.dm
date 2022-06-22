@@ -166,15 +166,13 @@ mob
 
 						src.health = src.maxhealth / 2
 						src.chakra = src.maxchakra / 2
-						src.injutsu = 0//Anti stuck after dojo.
-						src.canattack = 1
-						src.firing = 0
 						src.icon_state = ""
 						src.wait = 0
 						src.rest = 0
 						src.dodge = 0
-						src.move = 1
 						src.UpdateHMB()
+						RemoveState(src, new/state/cant_attack, STATE_REMOVE_ALL)
+						RemoveState(src, new/state/cant_move, STATE_REMOVE_ALL)
 
 						view(src) << output("[src] has been KO'd and removed from the Dojo.", "Action.Output")
 
@@ -217,22 +215,20 @@ mob
 						src.UpdateHMB()
 					
 					/////////////////////////////
-					// Mob Death: General Only //
+					// Mob Death: Standard //
 					/////////////////////////////
 
 					else
 						var/death_location = src.loc
 						src.health = 0
 						src.chakra = 0
-						src.move = 0
 						src.dead = 1
-						src.canattack = 0
-						src.firing = 1
 						src.density = 0
 						src.dodge = 0
-						src.Sleeping = 0
+						AddState(src, new/state/cant_attack, -1)
+						AddState(src, new/state/cant_move, -1)
+						RemoveState(src, new/state/sleeping, STATE_REMOVE_ALL)
 						src.levelrate = 0
-						src.injutsu = 1
 						src.wait = 0
 						src.rest = 0
 						src.overlays = null
@@ -250,9 +246,6 @@ mob
 								while(src && src.dead)
 									src.loc = death_location
 									src.icon_state = "dead"
-									src.move = 0
-									src.injutsu = 1
-									src.canattack = 0
 									sleep(1)
 						
 						if(src.client)

@@ -24,8 +24,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					AddState(src, new/state/cant_attack, 5)
 					if(J.level==1) J.damage=1.2*((jutsudamage*J.Sprice)/2.5)
 					if(J.level==2) J.damage=1.2*((jutsudamage*J.Sprice)/2)
 					if(J.level==3) J.damage=1.2*((jutsudamage*J.Sprice)/1.5)
@@ -67,9 +66,6 @@ mob
 							A.fightlayer=src.fightlayer
 							A.damage=J.damage
 							walk(A,src.dir)
-					spawn(5)
-						src.firing=0
-						src.canattack=1
 
 		Bubble_Trouble()
 			for(var/obj/Jutsus/Bubble_Trouble/J in src.jutsus)
@@ -82,9 +78,7 @@ mob
 					if(J.level==4) J.damage=0.7*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
-					src.canattack=0
-					src.move=0
-					src.firing=1
+					Bind(src, 5)
 					sleep(5)
 					flick("2fist",src)
 					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
@@ -107,14 +101,8 @@ mob
 					A.damage=0.7*(J.damage+round((src.ninjutsu / 150)*2*J.damage))
 					A.level=J.level
 					walk(A,dir,0)
-					src.firing=0
-					src.canattack=1
-					src.move=1
 					icon_state=""
 					Aa.dir = src.dir
-					spawn(15)
-						src.firing=0
-						src.canattack=1
 
 		BubbleSpreader()
 			for(var/obj/Jutsus/Bubble_Spreader/J in src.jutsus)
@@ -123,8 +111,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					AddState(src, new/state/cant_attack, 5)
 					if(J.level==1) J.damage=1.1*((jutsudamage*J.Sprice)/2.5)
 					if(J.level==2) J.damage=1.1*((jutsudamage*J.Sprice)/2)
 					if(J.level==3) J.damage=1.1*((jutsudamage*J.Sprice)/1.5)
@@ -169,7 +156,3 @@ mob
 							A.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))/3
 							walk_away(A,src)
 							spawn(1)if(A)walk_rand(A,3)
-
-					spawn(5)
-						src.firing=0
-						src.canattack=1

@@ -272,24 +272,6 @@ mob
 					if(ClothingOverlays[O.section] == O.icon) RemoveSection(O.section)
 					del(O)
 
-			if(NaraTarget)
-				var/mob/M = NaraTarget
-				if(M)
-					M.move = 1
-					M.injutsu = 0
-					M.canattack = 1
-
-			if(Prisoner)
-				var/mob/M = Prisoner
-				if(M)
-					M.move = 1
-					M.canattack = 1
-					M.injutsu = 0
-
-					if(M.client)
-						M.client.eye = M
-						M.client.perspective = EYE_PERSPECTIVE
-
 			for(var/mob/Clones/C in src.Clones)
 				del(C)
 
@@ -1335,18 +1317,18 @@ mob
 			src.density=1
 			src.health=src.maxhealth
 			src.chakra=src.maxchakra
-			src.injutsu=0
-			src.canattack=1
-			src.firing=0
 			src.icon_state=""
 			src.wait=0
 			src.rest=0
 			src.dodge=0
-			src.move=1
-			src.swimming=0
-			src.walkingonwater=0
 			src.overlays=0
 			src.RestoreOverlays()
+
+			RemoveState(src, new/state/water_walking, STATE_REMOVE_ALL)
+			RemoveState(src, new/state/swimming, STATE_REMOVE_ALL)
+			RemoveState(src, new/state/cant_attack, STATE_REMOVE_ALL)
+			RemoveState(src, new/state/cant_move, STATE_REMOVE_ALL)
+			
 			spawn() src.UpdateHMB()
 			spawn() src.Run()
 			revived=0

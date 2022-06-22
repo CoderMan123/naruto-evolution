@@ -61,9 +61,7 @@ obj
 			if(src)
 				src.invisibility=0
 				for(var/mob/M in src.loc)
-					if(M.move)
-						M.move=0
-						spawn(10)if(M)M.move=1
+					AddState(M, new/state/cant_move, 10)
 				spawn(rand(10,20))if(src)del(src)
 	C3bomb
 		layer = MOB_LAYER
@@ -139,7 +137,7 @@ mob/verb
 		var/mob/M  = src.puppets[1]
 		if(M && src.pgrab)
 			for(var/mob/K in get_step(M,M.dir))
-				if(K <> src && K.move==1 && K.firing==0 && K.canattack==1)
+				if(K <> src)
 					M.loc = K.loc
 					M.dir=SOUTH
 					if(!M.henged) M.icon = 'Karasu.dmi'
@@ -154,25 +152,21 @@ mob/verb
 						O.IsJutsuEffect=src
 						O.layer = MOB_LAYER+1
 					src.pgrab=0
-					K.move=0
-					K.canattack=0
-					K.firing=1
+					Bind(K, 10+round(src.ninjutsu/3))
 					var/counter=10+round(src.ninjutsu/3)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
 					if(!M.henged)if(O)del(O)
 					M.layer = MOB_LAYER
-					K.move=1
-					K.canattack=1
-					K.firing=0
 					M.icon_state = ""
+
 	puppetgrab2()
 		set hidden=1
 		var/mob/M  = src.puppets[2]
 		if(M && src.pgrab)
 			for(var/mob/K in get_step(M,M.dir))
-				if(K <> src && K.move==1 && K.firing==0 && K.canattack==1)
+				if(K <> src)
 					M.loc = K.loc
 					M.dir=SOUTH
 					if(!M.henged) M.icon = 'Karasu.dmi'
@@ -186,20 +180,16 @@ mob/verb
 						O.IsJutsuEffect=src
 						O.icon_state = "Grab top"
 						O.layer = MOB_LAYER+1
-					K.move=0
 					src.pgrab=0
-					K.canattack=0
-					K.firing=1
+					Bind(K, 10+round(src.ninjutsu/3))
 					var/counter=10+round(src.ninjutsu/3)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
 					if(!M.henged)if(O)del(O)
 					M.layer = MOB_LAYER
-					K.move=1
-					K.canattack=1
-					K.firing=0
 					M.icon_state = ""
+
 	puppetshoot1()
 		set hidden=1
 		var/mob/M  = src.puppets[1]
@@ -322,8 +312,9 @@ mob/Karasu
 			icon_state=OriginalIconState
 	Bump(mob/c_target)
 		if(!ismob(c_target)) return
-		if(src.canattack==1)
-			src.canattack=0
+		if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
+			var/timer = src.attkspeed + 3
+			AddState(src, new/state/cant_attack, timer)
 			src.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
 			spawn(2)
 				src.dir = get_dir(src,c_target)
@@ -335,9 +326,7 @@ mob/Karasu
 					if(undefendedhit<0)
 						undefendedhit=1
 					c_target.DealDamage(undefendedhit,src.Owner,"TaiOrange")
-					spawn(2) c_target.move=1
-					c_target.move=0
-			spawn(src.attkspeed)if(src)src.canattack=1
+
 	Click()
 		if(usr.puppets[1]==src||usr.puppets[2]==src)
 			if(usr.client.eye==src)
@@ -387,23 +376,16 @@ mob/Untargettable
 			src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 			for(var/mob/M in orange(5))
 				if(M.dead || M.key==src.name || istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) continue
-				M.injutsu=1
-
 				src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
 				M.DealDamage(src.taijutsu,src.Ownzeez,"TaiOrange")
 				M.Bleed(M)
 				if(M.henge==4||M.henge==5)M.HengeUndo()
 				M.icon_state="push"
-				M.injutsu=1
-				M.canattack=0
-				M.firing=1
 				walk(M,pick(EAST,SOUTH,WEST,SOUTHEAST,SOUTHWEST))
 				if(M.client)spawn() M.ScreenShake(8)
 				walk(M,0)
-				M.injutsu=0
-				if(!M.swimming)M.icon_state=""
-				M.canattack=1
-				M.firing=0
+				if(!CheckState(M, new/state/swimming))M.icon_state=""
+
 		proc/bec2()
 			while(src)
 				sleep(25)
@@ -437,13 +419,13 @@ mob/Untargettable
 			spawn(600)if(src)
 				flick("destroy",src)
 				spawn(3)if(src)del(src)
+
 		proc/tailswing()
 			src.icon_state = "Idle"
 			flick("tail swing",src)
 			if(!Ownzeez) return
 			for(var/mob/M in orange(4))
 				if(M.dead || M.key==src.name) continue
-				M.injutsu=1
 				var/random=rand(1,4)
 				if(random==1) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 				if(random==2) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
@@ -453,18 +435,13 @@ mob/Untargettable
 				if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(10,15))
 				if(M.henge==4||M.henge==5)M.HengeUndo()
 				M.icon_state="push"
-				M.injutsu=1
-				M.canattack=0
-				M.firing=1
 				walk(M,pick(EAST,SOUTH,WEST,SOUTHEAST,SOUTHWEST))
 				if(M.client)spawn() M.ScreenShake(5)
 				spawn(4)
 					if(M)
 						walk(M,0)
-						M.injutsu=0
-						if(!M.swimming)M.icon_state=""
-						M.canattack=1
-						M.firing=0
+						if(!CheckState(M, new/state/swimming))M.icon_state=""
+
 		proc/landminemake()
 			var/obj/O = new/obj/Projectiles/Effects/ClayBird
 			O.icon = 'C2_landmines.dmi'
@@ -1381,16 +1358,10 @@ obj
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="push"
-								M.injutsu=1
-								M.canattack=0
-								M.firing=1
 								walk(M,pick(EAST,SOUTH,WEST,SOUTHEAST,SOUTHWEST))
 								if(M.client) spawn() M.ScreenShake(5)
 								walk(M,0)
-								M.injutsu=0
-								if(!M.swimming)M.icon_state=""
-								M.canattack=1
-								M.firing=0
+								if(!CheckState(M, new/state/swimming))M.icon_state=""
 								M.Death(src.Owner)
 						else src.invisibility=1
 						spawn(5)if(src)del(src)
@@ -1504,21 +1475,25 @@ obj
 								src.loc=O.loc
 								flick("[src.hitstate]",src)
 								src.Hit=1
-								M.move=0
-								M.injutsu=1
-								M.firing=1
-								M.canattack=0
+
+								var/state/cant_attack/senjujinrai1 = new()
+								var/state/cant_move/senjujinrai2 = new()
+								AddState(M, senjujinrai1, -1)
+								AddState(M, senjujinrai2, -1)
+
 								var/bound_location = M.loc
 								for(var/i=0, i<(src.level*2), i++)
 									if(bound_location != M.loc || !Owner) break
 									M.DealDamage(src.damage/8,Owner,"NinBlue")
 									sleep(3)
+
 								if(M.henge==4||M.henge==5)M.HengeUndo()
-								M.move=1
-								M.injutsu=0
-								M.firing=0
-								M.canattack=1
+
+								RemoveState(M, senjujinrai1, STATE_REMOVE_REF)
+								RemoveState(M, senjujinrai2, STATE_REMOVE_REF)
+
 						src.loc=locate(0,0,0)
+
 			SenjuJinraiCore
 				name="Jinrai"
 				icon='flashy beamy.dmi'
@@ -1637,19 +1612,15 @@ obj
 					Top.icon_state="[src.icon_state]T"
 					Top.dir=src.dir
 					src.overlays+=Top
+					var/time=text2num(src.level*10)
 					for(var/mob/M in view(src,0))
-						if(M.client)M.injutsu=1
-						else M.move=0
-					spawn(2)
-						var/time=text2num(src.level*10)
+						AddState(M, new/state/cant_move, time)
+					spawn(2)	
 						src.density=1
 						spawn(time)
 							src.overlays=null
 							Top.loc = null
 							spawn(1)flick("[src.icon_state]S",src)
-							for(var/mob/M in view(src,0))
-								if(M.client)M.injutsu=0
-								else M.move=1
 							spawn(3)
 								if(src)
 									src.loc = null
@@ -1707,11 +1678,8 @@ obj
 					src.pixel_y-=rand(1,20)
 					spawn(rand(50,100))
 						if(src.Linkage)
-							var/mob/Link=src.Linkage
-							Link.injutsu=0
 							flick("firesmall",src)
 							sleep(5)
-							Link.injutsu=0
 							del(src)
 						else
 							flick("firesmall",src)
@@ -1738,16 +1706,14 @@ obj
 							var/mob/Owner=src.Owner
 							if(!Owner) break
 							for(var/mob/U in view(src,0))
-								if(U.dead || U.swimming) continue
+								if(U.dead || CheckState(U, new/state/swimming)) continue
 								if(U.dead==0)
 									var/damage=10+round(Owner.ninjutsu/4)
 									U.DealDamage(damage,src.Owner,"NinBlue")
 									if(U.henge==4||U.henge==5)
 										U.HengeUndo()
 									src.Linkage=U
-									U.injutsu=1
 									spawn(2)
-										if(U)U.injutsu=0
 										if(src)src.Linkage=0
 							sleep(5)
 							continue
@@ -1837,7 +1803,7 @@ obj
 					if(!src.Hit)
 						for(var/mob/M in range(src,1))
 							if(M<>Owner)
-								if(M.dead||M.swimming||M.Owner==src.Owner)continue
+								if(M.dead||CheckState(M, new/state/swimming)||M.Owner==src.Owner)continue
 								if(M.fightlayer==src.fightlayer||M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
 									src.Hit=1
 									src.icon='FireBallAHit.dmi'
@@ -1875,7 +1841,7 @@ obj
 					if(istype(O,/mob))
 						var/mob/M=O
 						var/mob/Owner=src.Owner
-						if(M.dead||M.swimming||M.Owner==src.Owner)if(src)del(src)
+						if(M.dead||CheckState(M, new/state/swimming)||M.Owner==src.Owner)if(src)del(src)
 						if(M.fightlayer==src.fightlayer)
 							src.density=0
 							src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
@@ -2232,9 +2198,7 @@ obj
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="pull"
-							M.injutsu=1
-							M.canattack=0
-							M.firing=1
+							M.Bind(M, 10+Owner.ninjutsu/8)
 							if(!M.key) goto lol
 							walk_towards(M,Owner)
 							lol
@@ -2244,9 +2208,6 @@ obj
 								if(M)
 									if(M.dead==0)
 										M.icon_state=""
-										M.injutsu=0
-									M.canattack=1
-									M.firing=0
 									walk(M,0)
 								if(src)del(src)
 						else
@@ -2259,7 +2220,7 @@ obj
 								Owner.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="pull"
-								M.injutsu=1
+								M.Bind(M, 10+Owner.ninjutsu/8)
 								walk_towards(M,Owner)
 								src.loc=locate(0,0,0)
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
@@ -2267,7 +2228,6 @@ obj
 									if(M)
 										if(M.dead==0)
 											M.icon_state=""
-											M.injutsu=0
 										walk(M,0)
 									if(src)del(src)
 							else src.loc=M.loc
@@ -2315,9 +2275,7 @@ obj
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="push"
-							M.injutsu=1
-							M.canattack=0
-							M.firing=1
+							M.Bind(M, 10+Owner.ninjutsu/8)
 							if(!M.key) goto lol
 							walk(M,Owner.dir)
 							lol
@@ -2325,11 +2283,8 @@ obj
 							M.DealDamage(src.damage,src.Owner,"NinBlue")
 							spawn(10+Owner.ninjutsu/8)
 								if(M)
-									if(M.dead==0&&!M.swimming)M.icon_state=""
-									if(M.dead==0)M.injutsu=0
+									if(M.dead==0&&!CheckState(M, new/state/swimming))M.icon_state=""
 									walk(M,0)
-									M.canattack=1
-									M.firing=0
 								if(src)del(src)
 						else
 							if(M.fightlayer=="Normal"&&src.fightlayer=="HighGround")
@@ -2346,14 +2301,13 @@ obj
 								Owner.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="push"
-								M.injutsu=1
+								AddState(M, new/state/cant_move, 10+Owner.ninjutsu/8)
 								walk(M,Owner.dir)
 								src.loc=locate(0,0,0)
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
 								spawn(10+Owner.ninjutsu/8)
 									if(M)
-										if(M.dead==0&&!M.swimming)M.icon_state=""
-										if(M.dead==0)M.injutsu=0
+										if(M.dead==0&&!CheckState(M, new/state/swimming))M.icon_state=""
 										walk(M,0)
 									if(src)del(src)
 							else src.loc=M.loc
@@ -2451,10 +2405,9 @@ obj/Jutsu/Effects
 			..()
 			flick("create",src)
 
-
-
 	Nara
 		layer=MOB_LAYER-1
+
 		ShadowBase
 			icon='Shadow_Bind.dmi'
 			icon_state="base"
@@ -2486,9 +2439,9 @@ obj/Jutsu/Effects
 			pixel_x=-2
 			var/list/Stuffz=list()
 			var/bumped
-			New()
+			New(loc, var/state/cant_attack/a, var/state/cant_move/b)
 				..()
-				spawn(1200)if(src)del(src)
+				spawn(1200)if(src)src.Del(a, b)
 			Move()
 				..()
 				if(bumped) return
@@ -2496,32 +2449,36 @@ obj/Jutsu/Effects
 				T.IsJutsuEffect=src
 				Stuffz.Add(T)
 				T.dir=src.dir
-			Del()
+			Del(var/state/cant_attack/a, var/state/cant_move/b)
 				for(var/obj/O in Stuffz) del(O)
 				for(var/mob/Who in src.loc)
 					if(!Who.dead)
-						Who.move=1
-						Who.injutsu=0
-						Who.canattack=1
+						RemoveState(Who, a, STATE_REMOVE_REF)
+						RemoveState(Who, b, STATE_REMOVE_REF)
 						Who.NaraTarget=null
 						Who.icon_state=""
-						Who.firing=0
 				..()
 mob/var/tmp/mob/NaraTarget
 mob/proc/CreateTrailNara(mob/Who,Timer)
 	if(!Who)return
 	//if(!Who in oview()) return
 	icon_state="jutsuse"
-	move=0
-	injutsu=1
-	canattack=0
-	firing=1
+
+	var/state/cant_attack/e = new()
+	var/state/cant_move/f = new()
+
+	var/state/cant_attack/a = new()
+	var/state/cant_move/b = new()
+
+	AddState(src, e, -1)
+	AddState(src, f, -1)
+
 	Timer = Timer*10
 	if(Timer>=50)Timer=50
 	var/obj/Jutsu/Effects/Nara/ShadowBase/B=new(src.loc)
 	B.IsJutsuEffect=src
 	B.dir=src.dir
-	var/obj/Jutsu/Effects/Nara/ShadowExtension/E=new(src.loc)
+	var/obj/Jutsu/Effects/Nara/ShadowExtension/E=new(src.loc, a, b)
 	E.IsJutsuEffect=src
 	E.dir=src.dir
 	E.Owner=src
@@ -2530,22 +2487,18 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 
 	spawn((Timer)+10)
 		if(src)
-			move=1
-			injutsu=0
-			canattack=1
+			RemoveState(src, e, STATE_REMOVE_REF)
+			RemoveState(src, f, STATE_REMOVE_REF)
 			icon_state=""
-			firing=0
 			NaraTarget=null
 			/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
 				src.JutsuCoolSlot(J)
 				J.cooltimer=J.maxcooltime
 				J.JutsuCoolDown(src)*/
 		if(Who)
-			Who.injutsu=0
-			Who.move=1
-			Who.canattack=1
+			RemoveState(Who, a, STATE_REMOVE_REF)
+			RemoveState(Who, b, STATE_REMOVE_REF)
 			Who.icon_state = ""
-			Who.firing=0
 			NaraTarget=null
 			Who=null
 		if(E)del(E)
@@ -2566,9 +2519,8 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 	T = Who.loc
 	if(Who&&T)
 		if(Who.loc==T&&E.loc==T)
-			Who.move=0
-			Who.injutsu=1
-			Who.canattack=0
+			AddState(Who, a, -1)
+			AddState(Who, b, -1)
 			NaraTarget=Who
 			while(Timer && Who && src && NaraTarget==Who)
 				Timer--
@@ -2580,16 +2532,14 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 			if(B)del(B)
 			if(Who)
 				if(!Who.dead)
-					Who.move=1
-					Who.injutsu=0
-					Who.canattack=1
+					RemoveState(Who, a, -1)
+					RemoveState(Who, b, -1)
 					NaraTarget=null
 
 			if(src)
 				if(!src.dead)
-					src.move=1
-					src.injutsu=0
-					src.canattack=1
+					RemoveState(src, e, -1)
+					RemoveState(src, f, -1)
 					src.NaraTarget=null
 					/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
 						src.JutsuCoolSlot(J)
@@ -2599,24 +2549,20 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 	if(B)del(B)
 	if(src)
 		if(!src.dead)
-			move=1
-			injutsu=0
-			canattack=1
+			RemoveState(src, e, -1)
+			RemoveState(src, f, -1)
 			NaraTarget=null
 			icon_state=""
-			firing=0
 			/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
 				src.JutsuCoolSlot(J)
 				J.cooltimer=J.maxcooltime
 				J.JutsuCoolDown(src)*/
 	if(Who)
 		if(!Who.dead)
-			Who.move=1
-			Who.injutsu=0
-			Who.canattack=1
+			RemoveState(Who, a, -1)
+			RemoveState(Who, b, -1)
 			Who.NaraTarget=null
 			Who.icon_state=""
-			Who.firing=0
 
 
 mob
@@ -2634,15 +2580,6 @@ obj/Dust
 		pixel_x=-13
 		pixel_y=-12
 		layer=999
-mob
-	proc
-		kreleasehimnigga()
-			spawn(20)
-				if(src.dead!=1)
-					src.move=1
-					src.injutsu=0
-					src.canattack=1
-					src.firing=0
 
 obj
 	forwind
@@ -2759,13 +2696,13 @@ obj
 									src.layer=MOB_LAYER+1
 									if(M)
 										src.loc = M.loc
-										M.move=0
+										AddState(M, new/state/cant_move, 15)
 										M.DealDamage(src.damage,src.Owner,"NinBlue")
 										spawn(15)
 										if(M)M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
 										if(M.henge==4||M.henge==5)M.HengeUndo()
-										M.move=1
+
 obj
 	proc
 		Dup(mob/M)
@@ -2807,7 +2744,6 @@ obj
 								if(M <> src.Owner)
 									if(M.dead || M.key == src.name) return
 									if(M.fightlayer==src.fightlayer)
-									//	src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										src.layer=MOB_LAYER+1
 										if(M)
 											walk(src, 0)
@@ -2816,12 +2752,10 @@ obj
 											src.pixel_x -= 9
 											src.loc = M.loc
 											src.density=0
-											M.move=0
-											M.injutsu=1
+											AddState(M, new/state/cant_move, src.damage)
+											AddState(M, new/state/cant_attack, src.damage)
 											if(M.henge==4||M.henge==5)M.HengeUndo()
-											spawn(src.damage)//well
-												M.move=1
-												M.injutsu=0
+											spawn(src.damage)
 												del(src)
 			arrowshoot
 				icon='SpiderJutsus.dmi'
@@ -2847,13 +2781,11 @@ obj
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
-											M.move=0
+											AddState(M, new/state/cant_move, 5)
 											M.DealDamage(src.damage,src.Owner,"NinBlue")
 											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 											walk(src,src.dir)
-											spawn(10)
-											M.move=1
 
 
 
@@ -2915,14 +2847,4 @@ mob
 			New()
 				spawn(100)
 					del(src)
-mob
-	proc
-		Bind(A)
-			spawn(A)
-				usr.move=1
-				usr.injutsu=0
-				usr.firing=0
-				usr.canattack=1
-				usr.icon_state=""
-				usr.overlays=0
-				usr.RestoreOverlays()
+

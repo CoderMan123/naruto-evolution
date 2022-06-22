@@ -35,8 +35,6 @@ mob
 		village = ""
 		rank = ""
 		dead=0
-		swimming
-		walkingonwater
 		waterwalk
 		mountainwalk
 		mountainkit=1
@@ -68,7 +66,6 @@ mob
 			AFK=0
 			BeingThrown
 			ThrowingMob
-			move=1
 			Bugreported=0
 			combo=0
 			turfover
@@ -84,9 +81,7 @@ mob
 			byakugan=0
 			burn=0
 			laststep
-			jutsuaffect=0
 			henge=0
-			injutsu=0
 			stepcounter=0
 			wait
 			rest=0
@@ -107,8 +102,6 @@ mob
 			waterlow=0
 			waterhigh=0
 			snowlow=0
-			canattack=1
-			firing=0
 			infusing=0//chakrainfusionstuff
 			bubbled=0//bubbleshieldstuff
 			multisized=0//multisizestuff

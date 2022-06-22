@@ -32,13 +32,12 @@ obj
 									if(istype(X,/mob/npc) && !istype(X,/mob/npc/combat))..()
 									else
 										X.icon_state="push"
-										X.injutsu=1
+										AddState(X, new/state/cant_move, 5)
 										walk_away(X,src,5,0)
 										spawn(5)
 											if(X)
 												walk(X,0)
-												X.injutsu=0
-												if(X.dead==0&&!X.swimming)X.icon_state=""
+												if(X.dead==0&&!CheckState(X, new/state/swimming))X.icon_state=""
 							src.damage=null
 							src.icon_state="blank"
 							src.loc=locate(0,0,0)
@@ -69,13 +68,12 @@ obj
 												..()
 											else
 												X.icon_state="push"
-												X.injutsu=1
+												AddState(X, new/state/cant_move, 10)
 												walk_away(X,src,5,0)
 												spawn(10)
 													if(X)
 														walk(X,0)
-														X.injutsu=0
-														if(X.dead==0&&!X.swimming)
+														if(X.dead==0&&!CheckState(X, new/state/swimming))
 															X.icon_state=""
 									src.damage=null
 									src.icon_state="blank"
@@ -105,13 +103,12 @@ obj
 												if(istype(X,/mob/npc) && !istype(X,/mob/npc/combat)) ..()
 												else
 													X.icon_state="push"
-													X.injutsu=1
+													AddState(X, new/state/cant_move, 10)
 													walk_away(X,src,5,0)
 													spawn(10)
 														if(X)
 															walk(X,0)
-															X.injutsu=0
-															if(X.dead==0&&!X.swimming)X.icon_state=""
+															if(X.dead==0&&!CheckState(X, new/state/swimming))X.icon_state=""
 										src.damage=null
 										src.icon_state="blank"
 										if(M.henge==4||M.henge==5)
@@ -138,13 +135,12 @@ obj
 											if(istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) ..()
 											else
 												M.icon_state="push"
-												M.injutsu=1
+												AddState(M, new/state/cant_move, 10)
 												walk_away(M,src,5,0)
 												spawn(10)
 													if(M)
 														walk(M,0)
-														M.injutsu=0
-														if(M.dead==0&&!M.swimming)M.icon_state=""
+														if(M.dead==0&&!CheckState(M, new/state/swimming))M.icon_state=""
 									src.damage=null
 									src.icon_state="blank"
 									walk(src,0)
@@ -169,13 +165,12 @@ obj
 											if(istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) ..()
 											else
 												M.icon_state="push"
-												M.injutsu=1
+												AddState(M, new/state/cant_move, 10)
 												walk_away(M,src,5,0)
 												spawn(10)
 													if(M)
 														walk(M,0)
-														M.injutsu=0
-														if(M.dead==0&&!M.swimming)M.icon_state=""
+														if(M.dead==0&&!CheckState(M, new/state/swimming))M.icon_state=""
 									src.damage=null
 									src.icon_state="blank"
 									walk(src,0)
@@ -2265,7 +2260,7 @@ mob
 			if(CheckState(src, new/state/knocked_down) || CheckState(src, new/state/knocked_back) || CheckState(src, new/state/dead))
 				return
 
-			if(src.dead || src.move ==0 || src.canattack ==0 || src.injutsu || src.firing)
+			if(src.dead || CheckState(src, new/state/cant_attack))
 				return
 			src.HengeUndo()
 			if(multisized==1 && multisizestomp==0)//multisizestuff
@@ -2279,15 +2274,10 @@ mob
 					M.DealDamage(jutsudamage+round((src.taijutsu / 150)*2*jutsudamage*1.2),src,"TaiOrange")
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					M.icon_state="dead"
-					M.move=0
-					M.injutsu=1
-					M.canattack=0
+					Bind(M, 5)
 					spawn(5)
 						if(!M||M.dead)continue
 						M.icon_state=""
-						M.move=1
-						M.injutsu=0
-						M.canattack=1
 					return
 
 			if(src.COW)
@@ -2296,7 +2286,7 @@ mob
 				src.overlays += 'Cherry Blossom Impact.dmi'
 				src.icon_state = "punchrS"
 				src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
-				src.firing = 1
+				AddState(src, new/state/cant_attack, 3)
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				sleep(1)
 				flick("punchr",src)
@@ -2306,26 +2296,22 @@ mob
 					src.dir = get_dir(src,c_target)
 				for(var/mob/M in get_step(src,src.dir))
 					M.DealDamage((src.ninjutsu*1.5),src,"NinBlue")
-					M.move=0
-					M.canattack=0
+					Bind(M, 3)
 					for(var/i=0,i<2,i++)
 						M.icon_state = "push"
 						step(M,src.dir)
 						sleep(1)
 					M.icon_state="dead"
 					sleep(1)
-					M.move=1
-					M.canattack=1
 					if(!M.dead)
 						M.icon_state = ""
 				src.overlays -= 'Cherry Blossom Impact.dmi'
 				src.icon_state = ""
 				sleep(2)
-				src.firing = 0
 				return
 			if(src.LOW)
 				src.LOW--
-				src.firing=1
+				AddState(src, new/state/cant_attack, 6)
 				src.icon_state = "punchrS"
 				src.overlays += 'Raikiri.dmi'
 				src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
@@ -2347,7 +2333,6 @@ mob
 					src.dir = get_dir(src,Z)
 				src.overlays -= 'Raikiri.dmi'
 				src.icon_state = ""
-				src.firing=0
 				return
 			for(var/obj/JashinSymbol/O in src.loc)
 				sleep(1)
@@ -2373,7 +2358,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Shuriken/C in usr.contents)
-						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+						if(!CheckState(usr, new/state/throwing) && usr.dead==0)
 							var/throwdelay = usr.attkspeed*3
 							var/mob/c_target=usr.Target_Get(TARGET_MOB)
 							AddState(usr, new/state/throwing, throwdelay)
@@ -2420,7 +2405,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Exploding_Kunai/C in usr.contents)
-						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+						if(!CheckState(usr, new/state/throwing) && usr.dead==0)
 							var/throwdelay = usr.attkspeed*7
 							var/mob/c_target=usr.Target_Get(TARGET_MOB)
 							AddState(usr, new/state/throwing, throwdelay)
@@ -2467,7 +2452,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Kunai/C in usr.contents)
-						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+						if(!CheckState(usr, new/state/throwing) && usr.dead==0)
 							var/throwdelay = usr.attkspeed*4
 							var/mob/c_target=usr.Target_Get(TARGET_MOB)
 							AddState(usr, new/state/throwing, throwdelay)
@@ -2514,7 +2499,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Needle/C in usr.contents)
-						if(usr.firing == 0 && !CheckState(usr, new/state/throwing) && usr.dead==0)
+						if(!CheckState(usr, new/state/throwing) && usr.dead==0)
 							var/throwdelay = usr.attkspeed*2
 							var/mob/c_target=usr.Target_Get(TARGET_MOB)
 							AddState(usr, new/state/throwing, throwdelay)
@@ -2562,7 +2547,7 @@ mob
 				else
 					if(usr.explosivetag<6)
 						for(var/obj/Inventory/Weaponry/Explosive_Tag/C in usr.contents)
-							if(usr.firing==0&&usr.tagcd==0&&usr.dead==0)
+							if(usr.tagcd==0&&usr.dead==0)
 								var/mob/c_target=usr.Target_Get(TARGET_MOB)
 								usr.tagcd=1
 								usr.explosivetag++
@@ -2619,8 +2604,8 @@ mob
 				else
 					if(!usr.smokebomb)
 						for(var/obj/Inventory/Weaponry/Smoke_Bomb/C in usr.contents)
-							if(usr.firing==0&&usr.dead==0)
-								usr.firing=1
+							if(!CheckState(usr, new/state/throwing) && usr.dead==0)
+								AddState(usr, new/state/throwing, usr.attkspeed*20)
 								flick("throw",usr)
 								spawn(3)
 									usr.smokebomb=1
@@ -2634,7 +2619,6 @@ mob
 										M.Target_Remove()
 									usr.Step_Back()
 									usr.DestroyItem(C)
-									spawn(5)if(usr)usr.firing=0
 									spawn(40)if(src)
 										src.UpdateHMB()
 										src.SetName(src.name)
@@ -2667,8 +2651,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Zabuza_Sword/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
-							usr.firing=1
+						if(usr.dead==0)
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
@@ -2676,7 +2659,6 @@ mob
 								//	usr.health+=usr.taijutsu
 									M.Bleed()
 							spawn(usr.attkspeed*6)
-								usr.firing=0
 							break
 
 			if(usr.equipped=="Samehada")
@@ -2686,8 +2668,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Samehada/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
-							usr.firing=1
+						if(usr.dead==0)
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
@@ -2695,7 +2676,6 @@ mob
 								//	usr.chakra+=usr.taijutsu*1.5
 									M.Bleed()
 							spawn(usr.attkspeed*6)
-								usr.firing=0
 							break
 
 			if(usr.equipped=="Hiramekarei")
@@ -2705,8 +2685,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Hiramekarei/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
-							usr.firing=1
+						if(usr.dead==0)
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
@@ -2714,7 +2693,6 @@ mob
 								//	usr.chakra+=usr.taijutsu*1.5
 									M.Bleed()
 							spawn(usr.attkspeed*6)
-								usr.firing=0
 							break
 
 			if(usr.equipped=="Kabuto Wari")
@@ -2724,8 +2702,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Kabutowari/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
-							usr.firing=1
+						if(usr.dead==0)
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
@@ -2733,7 +2710,6 @@ mob
 								//	usr.chakra+=usr.taijutsu*1.5
 									M.Bleed()
 							spawn(usr.attkspeed*6)
-								usr.firing=0
 							break
 
 			if(usr.equipped=="Kiba")
@@ -2743,8 +2719,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Kiba/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
-							usr.firing=1
+						if(usr.dead==0)
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
@@ -2752,7 +2727,6 @@ mob
 								//	usr.chakra+=usr.taijutsu*1.5
 									M.Bleed()
 							spawn(usr.attkspeed*6)
-								usr.firing=0
 							break
 
 			if(usr.equipped=="Nuibari")
@@ -2762,8 +2736,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Nuibari/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
-							usr.firing=1
+						if(usr.dead==0)
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
@@ -2771,7 +2744,6 @@ mob
 								//	usr.chakra+=usr.taijutsu*1.5
 									M.Bleed()
 							spawn(usr.attkspeed*6)
-								usr.firing=0
 							break
 
 			if(usr.equipped=="Shibuki")
@@ -2781,8 +2753,7 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/Shibuki/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
-							usr.firing=1
+						if(usr.dead==0)
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
@@ -2790,7 +2761,6 @@ mob
 								//	usr.chakra+=usr.taijutsu*1.5
 									M.Bleed()
 							spawn(usr.attkspeed*6)
-								usr.firing=0
 							break
 
 			if(usr.equipped=="Dark Sword")
@@ -2800,29 +2770,25 @@ mob
 
 				else
 					for(var/obj/Inventory/Weaponry/DarkSword/C in usr.contents)
-						if(usr.firing==0&&usr.dead==0)
-							usr.firing=1
+						if(usr.dead==0)
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
 									M.DealDamage(usr.taijutsu,src,"TaiOrange")
 									M.Bleed()
 							spawn(usr.attkspeed*6)
-								usr.firing=0
 							break
 
 /*			if(usr.equipped=="Weights")
 				for(var/obj/Inventory/Weaponry/Weights/C in usr.contents)
-					if(usr.firing==0 && usr.dead==0)
+					if(usr.dead==0)
 						if(usr.agility < 80)
-							usr.firing=1
 							flick("punchr",usr)
 							usr.LevelStat("Agility",rand(4,7))
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
 									M.DealDamage(usr.taijutsu*0.1,src,"TaiOrange")
 							spawn(usr.attkspeed*2)
-								usr.firing=0
 						else
 							usr << output("You're too experienced in agility to gain anymore experience from these.","Action.Output")
 							return*/

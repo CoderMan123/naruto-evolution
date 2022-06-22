@@ -33,10 +33,10 @@ mob
 
 
 		CS()
-			if(move&&src.CS)
+			if(!CheckState(src, new/state/cant_attack) && src.CS)
 				src.CSstop()
 				return
-			if(src.move==1)
+			if(!CheckState(src, new/state/cant_move))
 				if(!src.CS)
 					DealDamage(health/2,src,"black")
 					src.CS=1
@@ -281,19 +281,13 @@ obj
 										var/undefendedhit=round(src.damage-(c_target.defence/10))
 										if(undefendedhit<0)undefendedhit=1
 										c_target.DealDamage(undefendedhit,src.Owner,"TaiOrange")
-										c_target.injutsu=1
-										c_target.canattack=0
-										c_target.firing=1
+										c_target.Bind(c_target, 1)
 										if(c_target.client)spawn(1)c_target.ScreenShake(1)
 										if(c_target.health<=0)
 											if(src)
 												src.loc=null
 										else
 											spawn(11)
-												if(c_target)
-													c_target.injutsu=0
-													c_target.canattack=1
-													c_target.firing=0
 												if(src)
 													src.loc=null
 										break

@@ -10,7 +10,6 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp)) //determines amount of ninjutsu exp gained on use
 					flick("jutsuse",src)
 					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
-					src.Prisoner=c_target
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/9
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/9
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/9
@@ -32,19 +31,12 @@ mob
 					spawn(10)
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
-							c_target.move=0
-							c_target.canattack=0
-							c_target.injutsu=1
+							Bind(c_target, Timer*5)
 							var/bound_location = c_target.loc
 							while(Timer&&c_target&&src&&c_target.loc == bound_location)
 								sleep(5)
 								Timer--
 								c_target.DealDamage(J.damage,src,"NinBlue")
-							if(c_target)
-								c_target.move=1
-								c_target.canattack=1
-								c_target.injutsu=0
-								c_target.firing=0
 							del A
 						else
 							src<<output("The jutsu did not connect.","Action.Output")
@@ -59,8 +51,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("throw",src)
 					src.PlayAudio('083.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					Bind(src, 2)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.8
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.8
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.8
@@ -87,9 +78,6 @@ mob
 						A.damage=J.damage
 						A.level=J.level
 						walk(A,src.dir)
-					spawn(1)
-						src.firing=0
-						src.canattack=1
 
 		Shikigami_Spear()
 			for(var/obj/Jutsus/Shikigami_Spear/J in src.jutsus)
@@ -103,9 +91,7 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(src.inAngel==0)
 						flick("jutsuse",src)
-						src.canattack=0
-						src.move=0
-						src.firing=1
+						Bind(src, 10)
 						sleep(10)
 					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 					flick("2fist",src)
@@ -130,20 +116,15 @@ mob
 					walk(A,dir,0)
 					icon_state=""
 					Aa.dir = src.dir
-					src.canattack=1
-					src.move=1
-					src.firing=0
 
 		Angel_Wings()
-			if(firing)return
-			if(src.firing==0 && src.canattack==1)
-				for(var/obj/Jutsus/Angel_Wings/J in src.jutsus)
-					if(src.PreJutsu(J))
-						if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-						src.underlays+='Angel Wings.dmi'
-						src.inAngel=1
-						spawn(150)
-							src.inAngel=0
-							src.underlays-='Angel Wings.dmi'
-							src<<"Angel mode goes off."
+			for(var/obj/Jutsus/Angel_Wings/J in src.jutsus)
+				if(src.PreJutsu(J))
+					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					src.underlays+='Angel Wings.dmi'
+					src.inAngel=1
+					spawn(150)
+						src.inAngel=0
+						src.underlays-='Angel Wings.dmi'
+						src<<"Angel mode goes off."
 

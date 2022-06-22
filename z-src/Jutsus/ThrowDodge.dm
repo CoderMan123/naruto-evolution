@@ -7,73 +7,34 @@ mob
 			if(ChakraCheck(0)) return
 			src.HengeUndo()
 			if(src.likeaclone) return
-				/*var/mob/Clones/SC=src.likeaclone
-				if(SC.ThrowingMob)
-					if(SC.canattack==1&&SC.firing==0)
-						if(SC.dead==0&&SC.dodge==0&&SC.canattack==1)
-							var/mob/M=ThrowingMob
-							if(!M.key)
-								//src<<"You can't push non player mobs."
-								return
-							if(get_dist(SC,M)>1) return
-							if(!M||M.dead||M.swimming) return
-							flick("2fist",SC)
-							SC.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-							SC.ThrowingMob=null
-							M.BeingThrown=null
-							M.icon_state="push"
-							M.injutsu=1
-							M.canattack=0
-							M.firing=1
-							walk(M,SC.dir)
-							spawn(4)
-								if(M)
-									M.icon_state=""
-									M.injutsu=0
-									M.canattack=1
-									M.firing=0
-									walk(M,0)
-							return
-				if(SC.canattack==1&&SC.firing==0)
-					if(SC.dead==0&&SC.dodge==0&&SC.canattack==1)
-						for(var/mob/M in get_step(SC,SC.dir))
-							if(M.dead||M.swimming) continue
-							flick("punchrS",SC)
-							SC.ThrowingMob=M
-							M.BeingThrown=1*/
 			else
 				if(ThrowingMob)
-					if(src.canattack==1&&src.firing==0)
-						if(src.dead==0&&src.dodge==0&&src.canattack==1)
+					if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
+						if(src.dead==0&&src.dodge==0)
 							var/mob/M=ThrowingMob
 							if(!M.key) return
 							if(get_dist(src,M)>1) return
-							if(!M||M.dead||M.swimming) return
+							if(!M||M.dead||CheckState(M, new/state/swimming)) return
 							if(M.caged==1) return
-							if(M.shielded==1)return
+							if(CheckState(M, new/state/knockback_immune))return
 							flick("2fist",src)
 							src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 							ThrowingMob=null
 							M.BeingThrown=null
 							M.icon_state="push"
-							M.injutsu=1
-							M.canattack=0
-							M.firing=1
+							AddState(M, new/state/cant_move, 4)
 							walk(M,src.dir)
 							spawn(4)
 								if(M)
 									M.icon_state=""
-									M.injutsu=0
-									M.canattack=1
-									M.firing=0
 									walk(M,0)
 							return
-				if(src.canattack==1&&src.firing==0)
-					if(src.dead==0&&src.dodge==0&&src.canattack==1)
+				if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
+					if(src.dead==0&&src.dodge==0)
 						for(var/mob/M in get_step(src,src.dir))
-							if(M.dead||M.swimming) continue
+							if(M.dead||CheckState(M, new/state/swimming)) continue
 							if(M.caged==1) return
-							if(M.shielded==1)return
+							if(CheckState(M, new/state/knockback_immune))return
 
 							flick("punchrS",src)
 							src.ThrowingMob=M
@@ -98,11 +59,10 @@ mob
 					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 					usr.mark2=usr.loc
 					usr.loc=usr.mark
-					usr.move=1
-					usr.injutsu=0
-					usr.canattack=1
-					usr.caged=0
-					usr.Sleeping=0
+
+					RemoveState(usr, new/state/cant_attack, STATE_REMOVE_ALL)
+					RemoveState(usr, new/state/cant_move, STATE_REMOVE_ALL)
+					
 					usr.kawarmi=0
 					usr.inshadowfield=0
 					var/obj/A = new/obj/MiscEffects/Smoke(usr.loc)
@@ -110,32 +70,27 @@ mob
 
 					if(istype(loc,/turf/Ground/Water))
 						if(!usr.waterwalk)
-							usr.firing=1
-							usr.canattack=0
+							AddState(usr, new/state/swimming, -1)
 							usr.stepcounter=0
 							usr.icon_state="swim"
-							usr.swimming=1
 							usr.overlays-=/obj/MaleParts/UnderShade
 							usr.overlays+=/obj/MiscEffects/WaterRing
 							usr.overlays+=/obj/MiscEffects/WaterRing
 						if(usr.waterwalk)
-							usr.walkingonwater=1
+							AddState(usr, new/state/water_walking, -1)
 							usr.overlays+=/obj/MiscEffects/WaterRing
 							usr.overlays+=/obj/MiscEffects/WaterRing
 
 					if(!istype(loc,/turf/Ground/Water))
-						if(usr.swimming)
-							if(!usr.injutsu)
-								usr.firing=0
-								usr.canattack=1
+						if(CheckState(usr, new/state/swimming))
+							RemoveState(src, new/state/swimming, STATE_REMOVE_ALL)
 							usr.stepcounter=0
 							usr.icon_state=""
-							usr.swimming=null
 							usr.overlays+=/obj/MaleParts/UnderShade
 							usr.overlays-=/obj/MiscEffects/WaterRing
 							usr.overlays-=/obj/MiscEffects/WaterRing
-						if(usr.walkingonwater)
-							usr.walkingonwater=0
+						if(CheckState(usr, new/state/water_walking))
+							RemoveState(src, new/state/water_walking, STATE_REMOVE_ALL)
 							usr.overlays-=/obj/MiscEffects/WaterRing
 							usr.overlays-=/obj/MiscEffects/WaterRing
 
@@ -152,11 +107,10 @@ mob
 			if(ChakraCheck(0)) return
 			if(src.likeaclone)
 				var/mob/Clones/SC=src.likeaclone
-				if(SC.canattack==1&&SC.firing==0)
-					if(SC.dead==0&&SC.dodge==0&&SC.canattack==1&&SC.dashable==1&&SC.health>SC.maxhealth/3)
+				if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
+					if(SC.dead==0&&SC.dodge==0&&SC.dashable==1&&SC.health>SC.maxhealth/3)
 						SC.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 						if(SC.icon_state<>"blank")flick("dash",SC)
-						SC.move=1
 						SC.dashable=2
 						step(SC,SC.dir)
 						spawn(1)if(SC)step(SC,SC.dir)
@@ -174,7 +128,7 @@ mob
 						if(SC.dead==0)
 							if(SC.icon_state<>"blank")SC.icon_state=""
 							SC.dodge=0
-			if(src.canattack==1&&src.firing==0&&!Effects["Rasengan"]&&!Effects["Chidori"])
+			if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming) && !Effects["Rasengan"] && !Effects["Chidori"])
 				if(src.explosivetag)
 					src.explosivetag=0
 					for(var/obj/Projectiles/Weaponry/ExplosiveTag/ET in view(src,50))
@@ -191,20 +145,19 @@ mob
 									if(istype(M,/mob/npc) && !istype(M,/mob/npc/combat))..()
 									else
 										M.icon_state="push"
-										M.injutsu=1
+										AddState(M, new/state/cant_move, 10)
 										walk_away(M,ET,5,0)
 										spawn(10)
 											if(M)
 												walk(M,0)
-												M.injutsu=0
-												if(M.dead==0&&!M.swimming)
+												if(M.dead==0&&!CheckState(M, new/state/swimming))
 													M.icon_state=""
 												M.Death(src)
 							ET.damage=null
 							ET.icon_state="blank"
 							spawn(50)if(ET)del(ET)
 				if(src.kawarmi==0 && src.C3bombz==0)
-/*					if(src.dead==0&&src.dodge==0&&src.canattack==1&&src.dashable==1&&src.health>src.maxhealth/3)
+/*					if(src.dead==0&&src.dodge==0&&src.dashable==1&&src.health>src.maxhealth/3)
 						src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 						if(src.icon_state<>"blank")flick("dash",src)
 						src.dashable=2

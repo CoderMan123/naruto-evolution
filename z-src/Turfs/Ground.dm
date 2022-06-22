@@ -943,7 +943,7 @@ turf
 					if(istype(M,/mob))
 						src.layer=MOB_LAYER+1
 						M.overlays+=src
-						if(M.injutsu==0&&M.dashable<>2)
+						if(!CheckState(M, new/state/cant_move) && M.dashable<>2)
 							if(M.stepcounter==3&&M.speeddelay==2)
 								M.stepcounter=0
 								if(M.foot=="Left")
@@ -984,7 +984,7 @@ turf
 				..()
 			Entered(var/mob/M)
 				if(istype(M,/mob))
-					if(M.injutsu==0&&M.dashable<>2)
+					if(!CheckState(M, new/state/cant_move) && M.dashable<>2)
 						if(M.stepcounter==3&&M.speeddelay==2)
 							M.stepcounter=0
 							if(M.foot=="Left")
@@ -1016,7 +1016,7 @@ turf
 				..()
 			Entered(var/mob/M)
 				if(istype(M,/mob))
-					if(M.injutsu==0&&M.dashable<>2)
+					if(!CheckState(M, new/state/cant_move) && M.dashable<>2)
 						if(M.stepcounter==3&&M.speeddelay==2)
 							M.stepcounter=0
 							if(M.foot=="Left")
@@ -1059,7 +1059,7 @@ turf
 				..()
 			Entered(var/mob/M)
 				if(istype(M,/mob))
-					if(M.injutsu==0&&M.dashable<>2)
+					if(!CheckState(M, new/state/cant_move) && M.dashable<>2)
 						if(M.stepcounter==3&&M.speeddelay==2)
 							M.stepcounter=0
 							if(M.foot=="Left")
@@ -1098,7 +1098,7 @@ turf
 			iswater=1
 			Entered(var/mob/M)
 				if(istype(M,/mob))
-					if(M.injutsu==0&&M.dashable<>2)
+					if(M.dashable<>2)
 						if(M.stepcounter==5)
 							M.stepcounter=0
 							if(M.foot=="Left")
@@ -1146,19 +1146,17 @@ turf
 						check=1
 						spawn(5) del(O)
 					if(!check)
-						if(!M.swimming)
-							M.firing=1
-							M.canattack=0
+						if(!CheckState(M, new/state/swimming))
+							AddState(M, new/state/swimming, -1)
 							M.stepcounter=0
 							M.icon_state="swim"
-							M.swimming=1
 							M.overlays-=/obj/MaleParts/UnderShade
 							M.overlays+=/obj/MiscEffects/WaterRing
 							M.overlays+=/obj/MiscEffects/WaterRing
 
-					if(check)//SWIM
-						if(!M.walkingonwater)
-							M.walkingonwater=1
+					if(check)
+						if(!CheckState(M, new/state/water_walking))
+							AddState(M, new/state/water_walking, -1)
 							M.overlays+=/obj/MiscEffects/WaterRing
 							M.overlays+=/obj/MiscEffects/WaterRing
 
@@ -1184,20 +1182,17 @@ turf
 							check=1
 							spawn(5) del(O)
 					if(!check)
-						if(M.swimming)
-							if(!M.injutsu)
-								M.firing=0
-								M.canattack=1
+						if(CheckState(M, new/state/swimming))
+							RemoveState(M, new/state/swimming, STATE_REMOVE_ALL)
 							M.stepcounter=0
 							M.icon_state=""
-							M.swimming=null
 							M.overlays+=/obj/MaleParts/UnderShade
 							M.overlays-=/obj/MiscEffects/WaterRing
 							M.overlays-=/obj/MiscEffects/WaterRing
 
 					if(check)//SWIM
-						if(M.walkingonwater)
-							M.walkingonwater=0
+						if(CheckState(M, new/state/water_walking))
+							RemoveState(M, new/state/water_walking, STATE_REMOVE_ALL)
 							M.overlays-=/obj/MiscEffects/WaterRing
 							M.overlays-=/obj/MiscEffects/WaterRing
 
@@ -1220,8 +1215,6 @@ turf
 					if(M.client)
 						if(M.copy=="Climb")
 							M.icon_state=""
-							M.canattack=1
-							M.firing=0
 							M.arrow=null
 							M.client.images-=M.ArrowTasked
 							var/AT=M.ArrowTasked
@@ -1252,7 +1245,7 @@ turf
 				..()
 			Entered(var/mob/M)
 				if(istype(M,/mob))
-					if(M.injutsu==0&&M.dashable<>2)
+					if(!CheckState(M, new/state/cant_move) && M.dashable<>2)
 						if(M.stepcounter==3&&M.speeddelay==2)
 							M.stepcounter=0
 							if(M.foot=="Left")
@@ -1310,8 +1303,6 @@ turf
 						if(M.dashable==2)
 							if(M.mountainkit)
 								M.loc=locate(src.x,src.y,src.z)
-								M.canattack=0
-								M.firing=1
 								M.icon_state="climbS"
 								M.copy="Climb"
 								M.arrow="L"
@@ -1394,13 +1385,11 @@ turf
 				if(istype(M,/mob))
 					if(src.icon_state=="rock1")
 						if(M.dashable<>2)
-							M.injutsu=1
-						spawn(4)M.injutsu=0
+							AddState(M, new/state/cant_move, 3)
 					if(src.icon_state=="rock2")
 						if(M.dashable<>2)
-							M.injutsu=1
-						spawn(8) if(M) M.injutsu=0
-					if(M.injutsu==0&&M.dashable<>2)
+							AddState(M, new/state/cant_move, 6)
+					if(!CheckState(M, new/state/cant_move) && M.dashable<>2)
 						if(M.stepcounter==3&&M.speeddelay==2)
 							M.stepcounter=0
 							if(M.foot=="Left")

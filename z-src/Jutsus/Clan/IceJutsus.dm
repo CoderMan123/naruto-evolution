@@ -32,10 +32,7 @@ mob
 					step(C,EAST)
 					C.transform = m
 					flick("groundjutsu",src)
-					src.canattack=0
-					src.firing=1
-					src.move=0
-					src.injutsu=1
+					Bind(src, 7)
 					sleep(3)
 					for(var/mob/M in orange(2,src))
 						if(M == src) return
@@ -44,12 +41,7 @@ mob
 						if(M.henge==4||M.henge==5)M.HengeUndo()
 						src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 						M.Bleed(M)
-					sleep(4)
-					src.canattack=1
-					src.firing=0
-					src.move=1
-					src.injutsu=0
-					sleep(3)
+					sleep(7)
 					del A
 					del B
 					del C
@@ -69,13 +61,19 @@ mob
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 						flick("jutsuse",src)
 						src.PlayAudio('man_fs_l_mt_wat.ogg', output = AUDIO_HEARERS)
-						src.firing=1
-						src.canattack=0
+
+						var/state/cant_attack/e = new()
+						var/state/cant_move/f = new()
+						AddState(src, e, -1)
+						AddState(src, f, -1)
+
 						src.pixel_x=4
-						c_target.move=0
-						c_target.injutsu=1
-						c_target.canattack=0
-						c_target.firing=1
+
+						var/state/cant_attack/a = new()
+						var/state/cant_move/b = new()
+						AddState(c_target, a, -1)
+						AddState(c_target, b, -1)
+
 						var/last_loc = c_target.loc
 						J.damage += J.damage*1.5
 						for(var/i=1,i<8+1,i++)
@@ -100,7 +98,6 @@ mob
 									src.loc = O.loc
 									src.dir=SOUTH
 									O.layer = OBJ_LAYER
-									src.injutsu=1
 							for(var/ifd=0,ifd<3,ifd++)
 								var/IOU = O.dir
 								switch(O.dir)
@@ -116,7 +113,6 @@ mob
 							O.damage = J.damage
 							O.name = "[i]"
 						src.invisibility=1
-						src.injutsu=1
 						src.loc = c_target.loc
 						step(src,NORTH)
 						step(src,NORTH)
@@ -156,21 +152,17 @@ mob
 								spawn(20)if(Ohh)del(Ohh)
 							if(Ohh)if(Ohh.name == "GUI [src.key]")	del(Ohh)
 						src.pixel_x=-16
-						src.copy = "Cant move"
-						spawn(1)if(src)
-							src.invisibility=0
-							src.copy = null
-							src.firing=0
-							src.injutsu=0
-							src.copy=null
-							src.canattack=1
+
+						RemoveState(src, e, STATE_REMOVE_REF)
+						RemoveState(src, f, STATE_REMOVE_REF)
+
 						if(c_target)
-							c_target.move=1
-							c_target.injutsu=0
-							c_target.canattack=1
-							c_target.firing=0
+							RemoveState(c_target, a, STATE_REMOVE_REF)
+							RemoveState(c_target, b, STATE_REMOVE_REF)
 							//J.JutsuCoolDown(src)
+						
 					else src << output("<Font color=Aqua>You need a target to use this.</Font>","Action.Output")
+
 		Sensatsu_Suisho()
 			for(var/obj/Jutsus/Sensatsu_Suishou/J in src.jutsus)
 				if(!has_water())
@@ -190,9 +182,7 @@ mob
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/8
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
-					src.injutsu=1
-					src.firing=1
-					src.canattack=0
+					Bind(src, 3)
 					if(c_target)
 						sleep(3)
 						src.PlayAudio('man_fs_r_mt_con.ogg', output = AUDIO_HEARERS)
@@ -228,7 +218,7 @@ mob
 									step(O,O.dir)
 									for(var/mob/M in O.loc)
 										if(M.dead) continue
-										M.injutsu=1
+										AddState(M, new/state/cant_move, 20)
 										var/random=rand(1,4)
 										if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -241,7 +231,7 @@ mob
 										step(O,O.dir)
 										for(var/mob/M in O.loc)
 											if(M.dead) continue
-											M.injutsu=1
+											AddState(M, new/state/cant_move, 20)
 											var/random=rand(1,4)
 											if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 											if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -254,7 +244,7 @@ mob
 											step(O,O.dir)
 											for(var/mob/M in O.loc)
 												if(M.dead) continue
-												M.injutsu=1
+												AddState(M, new/state/cant_move, 20)
 												var/random=rand(1,4)
 												if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 												if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -270,32 +260,12 @@ mob
 
 
 							src << output("<Font color=Aqua>You need a target to use this.</Font>","Action.Output")
-							src.firing=0
-							src.injutsu=0
-							src.copy=null
-							src.canattack=1
-							src.move=1
 							return
 					else
 						src << output("<Font color=Aqua>You need a target to use this.</Font>","Action.Output")
-						src.firing=0
-						src.injutsu=0
-						src.copy=null
-						src.canattack=1
-						src.move=1
 						return
-					src.copy = "Cant move"
-					spawn(10-(J.level*2))if(src)
-						src.firing=0
-						src.injutsu=0
-						src.copy=null
-						src.canattack=1
-						src.move=1
-					c_target.firing=0
-					c_target.injutsu=0
-					c_target.copy=null
-					c_target.canattack=1
-					c_target.move=1
+
+
 		Iceball()
 			for(var/obj/Jutsus/Iceball/J in src.jutsus)
 				if(src.PreJutsu(J))
@@ -310,8 +280,7 @@ mob
 					//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 					flick("2fist",src)
 					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					AddState(src, new/state/cant_attack, 5)
 					J.uses++
 					var/num=5
 					if(c_target)
@@ -349,9 +318,6 @@ mob
 							A.fightlayer=src.fightlayer
 							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							walk(A,src.dir)
-					spawn(5)if(src)
-						src.firing=0
-						src.canattack=1
 
 		Omega_Ice_Ball()
 			for(var/obj/Jutsus/Omega_Ice_Ball/J in src.jutsus)
@@ -360,9 +326,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(1,2))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
 					src.PlayAudio('man_fs_r_mt_wat.ogg', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
-					src.move=0
+					Bind(src, 5)
 					if(c_target)src.dir=get_dir(src,c_target)
 					var/obj/Projectiles/Effects/JinraiBack/Aa=new(get_step(src,src.dir))
 					Aa.icon = 'GiantIceBall.dmi'
@@ -382,11 +346,5 @@ mob
 					A.damage=(J.level*100)+round(src.agility*1.5)+round(src.ninjutsu*2.5)
 					A.level=J.level
 					walk(A,dir,0)
-					src.firing=0
-					src.canattack=1
-					src.move=1
 					icon_state=""
 					Aa.dir = src.dir
-					spawn(15)
-						src.firing=0
-						src.canattack=1

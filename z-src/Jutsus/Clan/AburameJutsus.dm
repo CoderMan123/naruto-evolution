@@ -3,49 +3,48 @@ mob
 		InsectClone()
 			if(clonesturned==1)
 				return
-			if(src.firing==0&&src.canattack==1)
-				for(var/obj/Jutsus/Insect_Clone/J in src.jutsus)
-					if(src.PreJutsu(J))
-						src.CloneHandler()
-						src.PlayAudio('bugs.wav', output = AUDIO_HEARERS)
-						if(src.loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-						if(src.loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
-						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
-						if(J.level<4)
-							if(loc.loc:Safe!=1)
-								J.exp+=jutsumastery*(J.maxcooltime/20)
-								J.Levelup()
-						for(var/mob/M in oview(src,20))M.Target_Remove()
-						src.mizubunshin++
-						var/bun=src.mizubunshin+3
-						src.DealDamage((src.maxhealth/100),src,"white")
-						flick("jutsu",src)
-						var/mob/Clones/BugBunshin/A = new/mob/Clones/BugBunshin(src.loc)
-						A.loc=src.loc
-						A.Owner=src
-						A.icon='Insect clone.dmi'
-						A.ninjutsu=round((src.ninjutsu / 300)*2*J.damage)
-						A.genjutsu=round((src.genjutsu / 300)*2*J.damage)
-						A.defence=round(src.defence/bun)
-						A.health=round(src.health/10)
-						A.maxhealth=round(src.maxhealth/10)
-						A.agility=round(src.agility/bun)
-						var/obj/O=new /obj/Screen/healthbar/
-						var/obj/M=new /obj/Screen/manabar/
-						A.hbar.Add(O)
-						A.hbar.Add(M)
-						spawn(3)if(src)if(A)A.icon ='Insect clone.dmi'
-						A.overlays-=/obj/Screen/healthbar
-						A.overlays-=/obj/Screen/manabar
-						for(var/obj/Screen/healthbar/HB in A.hbar)A.overlays+=HB
-						for(var/obj/Screen/manabar/HB in A.hbar)A.overlays+=HB
-						A.UpdateHMB()
+			for(var/obj/Jutsus/Insect_Clone/J in src.jutsus)
+				if(src.PreJutsu(J))
+					src.CloneHandler()
+					src.PlayAudio('bugs.wav', output = AUDIO_HEARERS)
+					if(src.loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
+					if(src.loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/20)*jutsustatexp))
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
+					if(J.level<4)
+						if(loc.loc:Safe!=1)
+							J.exp+=jutsumastery*(J.maxcooltime/20)
+							J.Levelup()
+					for(var/mob/M in oview(src,20))M.Target_Remove()
+					src.mizubunshin++
+					var/bun=src.mizubunshin+3
+					src.DealDamage((src.maxhealth/100),src,"white")
+					flick("jutsu",src)
+					var/mob/Clones/BugBunshin/A = new/mob/Clones/BugBunshin(src.loc)
+					A.loc=src.loc
+					A.Owner=src
+					A.icon='Insect clone.dmi'
+					A.ninjutsu=round((src.ninjutsu / 300)*2*J.damage)
+					A.genjutsu=round((src.genjutsu / 300)*2*J.damage)
+					A.defence=round(src.defence/bun)
+					A.health=round(src.health/10)
+					A.maxhealth=round(src.maxhealth/10)
+					A.agility=round(src.agility/bun)
+					var/obj/O=new /obj/Screen/healthbar/
+					var/obj/M=new /obj/Screen/manabar/
+					A.hbar.Add(O)
+					A.hbar.Add(M)
+					spawn(3)if(src)if(A)A.icon ='Insect clone.dmi'
+					A.overlays-=/obj/Screen/healthbar
+					A.overlays-=/obj/Screen/manabar
+					for(var/obj/Screen/healthbar/HB in A.hbar)A.overlays+=HB
+					for(var/obj/Screen/manabar/HB in A.hbar)A.overlays+=HB
+					A.UpdateHMB()
+
 		Bug_Neurotoxin()
 			for(var/obj/Jutsus/Bug_Neurotoxin/J in src.jutsus)
-				if(src.firing)return
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target || c_target.sbugged==0)
 					src << output("This jutsu requires a target that is under the effect of stealth bug.","Action.Output")
@@ -67,15 +66,10 @@ mob
 							O.pixel_y=-32
 							flick("grab",O)
 							O.icon_state = "grabbed"
-							c_target.move=0
-							c_target.injutsu=1
-							c_target.canattack=0
+							Bind(c_target, 2+(J.level*2))
 							spawn(2+(J.level*2))
-								if(c_target)
-									c_target.move=1
-									c_target.injutsu=0
-									c_target.canattack=1
 								if(O)del(O)
+
 		Insect_Cocoon()
 			for(var/obj/Jutsus/Insect_Cocoon/J in src.jutsus)
 				if(bugpass)
@@ -134,8 +128,7 @@ mob
 					if(J.level==4) J.damage=0.1*(jutsudamage*J.Sprice)
 					flick("throw",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					AddState(src, new/state/cant_attack, 5)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/num=J.level*2+round(src.ninjutsu/30)
 					if(c_target)
@@ -175,9 +168,6 @@ mob
 							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 							A.dir = src.dir
 							if(A)walk(A,A.dir,3)
-					spawn(5)
-						src.firing=0
-						src.canattack=1
 
 		Destruction_Bug_Swarm()
 			for(var/obj/Jutsus/Destruction_Bug_Swarm/J in src.jutsus)
@@ -186,8 +176,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
 					src.PlayAudio('bugs.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					AddState(src, new/state/cant_attack, 15)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/10
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/10
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/10
@@ -213,9 +202,7 @@ mob
 						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)
-					spawn(20)if(src)
-						src.firing=0
-						src.canattack=1
+
 		BugTornado()
 			for(var/obj/Jutsus/BugTornado/J in src.jutsus)
 				if(src.PreJutsu(J))
@@ -223,8 +210,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("throw",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-					src.firing=1
-					src.canattack=0
+					Bind(src, 5)
 					if(J.level==1) J.damage=0.15*((jutsudamage*J.Sprice)/2.5)
 					if(J.level==2) J.damage=0.15*((jutsudamage*J.Sprice)/2)
 					if(J.level==3) J.damage=0.15*((jutsudamage*J.Sprice)/1.5)
@@ -252,6 +238,3 @@ mob
 						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
 						A.dir = src.dir
 						spawn(20)if(A)walk(A,A.dir,3)
-					spawn(5)
-						src.firing=0
-						src.canattack=1

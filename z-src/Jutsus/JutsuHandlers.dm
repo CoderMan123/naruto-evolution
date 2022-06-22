@@ -19,7 +19,7 @@ mob
 		PreJutsu(var/obj/Jutsus/J)
 			if(CheckState(src, new/state/knocked_down)) return 0
 
-			if(!src.canattack) return 0
+			if(CheckState(src, new/state/cant_attack)) return 0
 
 			if(src.multisized == 1) return 0
 
@@ -58,10 +58,9 @@ mob
 					if(src.chakra < 0)
 						src.chakra = 0
 				if(!heal && !chakra)
-					if(src.Intang)
-						return
-					if(src.multisized)
-						damage = round(damage*0.3)
+					if(src.Intang) return
+					if(CheckState(src, new/state/sand_shield)) return
+					if(src.multisized) damage = round(damage*0.3)
 					src.health -= damage
 					AddState(src, new/state/recently_hit, 60)
 					AddState(src, new/state/in_combat, 100)
@@ -85,26 +84,13 @@ mob
 			if(src.bubbled==1&&!heal&&!chakra)//bubbleshieldstuff
 				src.bubbled=0
 
-
-		BindStuck(time)
-			src.Stuck ++
-			src.move = 0
-			src.firing = 1
-			src.injutsu = 1
-			src.canattack = 0
-			sleep(time)
-			src.Stuck --
-			if(!src.Stuck)
-				src.move = 1
-				src.firing = 0
-				src.injutsu = 0
-				src.canattack = 1
+		Bind(target, time)
+			AddState(target, new/state/cant_move, time)
+			AddState(target, new/state/cant_attack, time)
 
 		ChakraCheck(var/CHAKRA)
 			var/area/T = loc.loc
 			src.HengeUndo()
-			if(Sleeping)
-				return 1
 			if(T)
 				if(T.Safe)
 					src<<output("You're indoors, you shouldn't be doing this.","Action.Output")
@@ -118,11 +104,8 @@ mob
 			if(Chuunins.Find(src)&&ChuuninOpponentOne!=src&&ChuuninOpponentTwo!=src)
 				src<<output("Your jutsus have been disabled right now.","Action.Output")
 				return
-			if(!NaraTarget)
-				if(src.firing == 1)
-					return 1
-				if(src.canattack == 0)
-					return 1
+			if(CheckState(src, new/state/cant_attack)) return 1
+
 			if(dead)
 				return 1
 			if(CHAKRA > src.chakra)
