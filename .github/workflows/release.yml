@@ -56,7 +56,7 @@ jobs:
           sudo git clone https://github.com/douglasparker/changelog-parser.git /changelog-parser
           sudo chmod +x /changelog-parser/changelog-parser.py
       
-      - name: Create a public pre-release with the changelog
+      - name: Create a public pre-release without the changelog
         if: github.event.release.action == 'prereleased'
         run: |
           gh auth login --with-token <<< ${{ secrets.ACTIONS }}
