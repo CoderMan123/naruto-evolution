@@ -124,20 +124,19 @@ mob
 					spawn((5*J.level)+(src.genjutsu/3)) del A
 					var/list/caught = new()
 					var/mob/M
-					var/state/cant_move/f = new()
 					var/state/cant_attack/e = new()
+					var/state/cant_move/f = new()
 					while(A)
 						sleep(1)
 						if(src.inshadowfield==0)
 							del A
 						for(M in orange(3,src))
 							caught+= M
-							if(!M.likeaclone)
-								AddState(src, e, -1)
-								AddState(src, f, -1)
+							AddState(M, e, -1)
+							AddState(M, f, -1)
 
 					for(M in caught)
-						RemoveState(src, e, STATE_REMOVE_REF)
-						RemoveState(src, f, STATE_REMOVE_REF)
+						RemoveState(M, e, STATE_REMOVE_REF)
+						RemoveState(M, f, STATE_REMOVE_REF)
 
 					src.inshadowfield=0
