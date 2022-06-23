@@ -8,7 +8,8 @@ mob
 
 			src.HengeUndo()
 
-			var/area/area = src.loc.loc
+			var/area/area
+			if(src.loc) area = src.loc.loc
 
 			// Ensure kills from clones are acredited to the player
 			if(istype(attacker, /mob/Karasu)) attacker = attacker.Owner
@@ -18,7 +19,7 @@ mob
 				src << output("You are protected from death by other players while under level 5.", "Action.Output")
 				attacker << output("[src] is protected from death by other players while under level 5.", "Action.Output")
 			
-			else if(area.Safe && src.health < 1)
+			else if(area && area.Safe && src.health < 1)
 				src.health = 1
 				src << output("You are protected from death because you are in a safezone.", "Action.Output")
 				attacker << output("[src] is protected from death because they are in a safezone.", "Action.Output")
@@ -177,7 +178,7 @@ mob
 						view(src) << output("[src] has been KO'd and removed from the Dojo.", "Action.Output")
 
 						var/area/Dojo/dojo = area
-						if(istype(locate(dojo.DojoX, dojo.DojoY, dojo.DojoZ), /turf/)) src.loc = locate(dojo.DojoX, dojo.DojoY, dojo.DojoZ)
+						if(dojo && istype(locate(dojo.DojoX, dojo.DojoY, dojo.DojoZ), /turf/)) src.loc = locate(dojo.DojoX, dojo.DojoY, dojo.DojoZ)
 						else src.loc = MapLoadSpawn()
 
 						if(src != attacker)
