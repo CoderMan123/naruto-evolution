@@ -66,7 +66,7 @@ jobs:
         if: github.event.release.action == 'released'
         run: |
           gh auth login --with-token <<< ${{ secrets.ACTIONS }}
-          gh release create ${{ github.event.release.tag_name }} --title ${{ github.event.release.tag_name }} --notes-file <(/changelog-parser/changelog-parser.py "${{ github.event.release.tag_name }}" ${{ github.workspace }}/CHANGELOG.md) --repo douglasparker/naruto-evolution-community
+          gh release create ${{ github.event.release.tag_name }} --title ${{ github.event.release.tag_name }} --notes "${{ github.event.release.body }}" --repo douglasparker/naruto-evolution-community
       
       - name: Deploy the Docker image to the server
         if: github.event.release.action == 'released'
