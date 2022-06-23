@@ -1,4 +1,5 @@
 var/build
+var/pre_release = 0
 var/server_capacity = 100
 
 var/list/administrators = list("douglasparker", "illusiveblair")
@@ -45,7 +46,9 @@ world
 		log = file(LOG_ERROR)
 
 		build = file2text("VERSION")
-		if(!build) text2file("", "VERSION")
+		if(!build) text2file("0.0.0", "VERSION")
+
+		if(file2text("PRERELEASE")) pre_release = 1
 
 		src.Load()
 

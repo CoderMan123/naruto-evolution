@@ -60,6 +60,12 @@ client
 				spawn() src.prompt("You do not have authorization to access the beta server. If this is in error, please contact support.<br /><br />support@narutoevolution.com", "Beta Server: Access Authorization")
 				sleep(10)
 				del(src)
+		
+		else if(pre_release)
+			if(!administrators.Find(src.ckey))
+				spawn() src.prompt("You do not have authorization to access the pre-release server. If this is in error, please contact support.<br /><br />support@narutoevolution.com", "Pre-release Server: Access Authorization")
+				sleep(10)
+				del(src)
 
 		for(var/client/source in clients_connected)
 			for(var/client/target in clients_connected)
