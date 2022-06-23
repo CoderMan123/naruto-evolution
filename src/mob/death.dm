@@ -464,7 +464,7 @@ mob
 						// Reward Squad (attacker) for killing a mob during search and destroy type missions.
 						if(src != attacker)
 							var/squad/squad = attacker.GetSquad()
-							if(squad && squad.mission)
+							if(squad && squad.mission && !squad.mission.complete)
 								switch(squad.mission.type)
 
 									////////////////////////////////////
@@ -524,7 +524,7 @@ mob
 						// Penalize Squad for dying while on a search and destroy mission
 						if(src != attacker)
 							var/squad/squad = src.GetSquad()
-							if(squad && squad.mission)
+							if(squad && squad.mission && !squad.mission.complete)
 								switch(squad.mission.type)
 
 									////////////////////////////////////
@@ -570,7 +570,7 @@ mob
 						// Reward player (attacker) for killing someone who is on a search and destroy type mission which targets you.
 						if(src != attacker)
 							var/squad/squad = src.GetSquad()
-							if(squad && squad.mission)
+							if(squad && squad.mission && !squad.mission.complete)
 								switch(squad.mission.type)
 
 									////////////////////////////////////
