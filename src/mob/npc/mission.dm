@@ -47,7 +47,7 @@ mob
 												if(mission)
 													mission = new mission(usr)
 
-													if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == 1)
+													if(usr.client.prompt(mission.html, src.name, list("Accept Mission", "Decline Mission")) == "Accept Mission")
 														squad.mission = mission
 														squad.mission.Start(usr)
 
