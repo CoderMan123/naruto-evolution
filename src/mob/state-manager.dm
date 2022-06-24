@@ -129,6 +129,8 @@ proc
 
 	nara_attack_delay
 
+	casting_shadow_extension
+
 	poisoned
 		var/delay
 		OnTick()

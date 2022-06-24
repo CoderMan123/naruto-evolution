@@ -17,18 +17,25 @@ mob
 mob
 	proc
 		PreJutsu(var/obj/Jutsus/J)
+			if(CheckState(src, new/state/casting_shadow_extension) && J.type == /obj/Jutsus/Shadow_Explosion || J.type ==/obj/Jutsus/Shadow_Stab || J.type == /obj/Jutsus/Shadow_Choke)
+				var/count = 0
+				for(var/state/cant_attack/s in src.state_manager)
+					count++
+				if(count > 1) return 0
+			else
+				if(CheckState(src, new/state/cant_attack)) return 0
+
+			world << 1 //debug
 			if(CheckState(src, new/state/knocked_down)) return 0
-
-			if(CheckState(src, new/state/cant_attack)) return 0
-
+			world << 2
 			if(src.multisized == 1) return 0
-
+			world << 3
 			if(src.jutsu_cooldowns.Find(J)) return 0
-
+			world << 4
 			if(ChakraCheck(J.ChakraCost)) return 0
-
+			world << 5
 			J.JutsuCoolDown(src)
-
+			world << 6
 			J.uses ++
 			
 			return 1
@@ -104,7 +111,6 @@ mob
 			if(Chuunins.Find(src)&&ChuuninOpponentOne!=src&&ChuuninOpponentTwo!=src)
 				src<<output("Your jutsus have been disabled right now.","Action.Output")
 				return
-			if(CheckState(src, new/state/cant_attack)) return 1
 
 			if(dead)
 				return 1

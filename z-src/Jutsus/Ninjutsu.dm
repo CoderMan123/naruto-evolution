@@ -2466,12 +2466,14 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 
 	var/state/cant_attack/e = new()
 	var/state/cant_move/f = new()
+	var/state/casting_shadow_extension/shadow_extension = new()
 
 	var/state/cant_attack/a = new()
 	var/state/cant_move/b = new()
 
 	AddState(src, e, -1)
 	AddState(src, f, -1)
+	AddState(src, shadow_extension, -1)
 
 	Timer = Timer*10
 	if(Timer>=50)Timer=50
@@ -2489,6 +2491,7 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 		if(src)
 			RemoveState(src, e, STATE_REMOVE_REF)
 			RemoveState(src, f, STATE_REMOVE_REF)
+			RemoveState(src, shadow_extension, STATE_REMOVE_REF)
 			icon_state=""
 			NaraTarget=null
 			/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
@@ -2540,6 +2543,7 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 				if(!src.dead)
 					RemoveState(src, e, -1)
 					RemoveState(src, f, -1)
+					RemoveState(src, shadow_extension, -1)
 					src.NaraTarget=null
 					/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
 						src.JutsuCoolSlot(J)
@@ -2551,6 +2555,7 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 		if(!src.dead)
 			RemoveState(src, e, -1)
 			RemoveState(src, f, -1)
+			RemoveState(src, shadow_extension, -1)
 			NaraTarget=null
 			icon_state=""
 			/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
