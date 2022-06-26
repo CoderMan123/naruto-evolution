@@ -25,17 +25,15 @@ mob
 			else
 				if(CheckState(src, new/state/cant_attack)) return 0
 
-			world << 1 //debug
 			if(CheckState(src, new/state/knocked_down)) return 0
-			world << 2
+			
 			if(src.multisized == 1) return 0
-			world << 3
+
 			if(src.jutsu_cooldowns.Find(J)) return 0
-			world << 4
+
 			if(ChakraCheck(J.ChakraCost)) return 0
-			world << 5
+
 			J.JutsuCoolDown(src)
-			world << 6
 			J.uses ++
 			
 			return 1

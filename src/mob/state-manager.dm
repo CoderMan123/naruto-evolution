@@ -131,6 +131,21 @@ proc
 
 	casting_shadow_extension
 
+	FTG_Kunai_Mark
+		Ticker()
+			var/mob/m = src.mob
+			var/obj/mark = new()
+			mark.icon = 'YellowFlashKunai.dmi'
+			mark.icon_state = "marked"
+			mark.pixel_y=88
+			mark.pixel_x=16
+			m.overlays += mark
+			..()
+			if(m && mark)
+				m.overlays -= mark
+				del mark
+				
+
 	poisoned
 		var/delay
 		OnTick()

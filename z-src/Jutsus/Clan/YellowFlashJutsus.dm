@@ -24,8 +24,8 @@ mob
 						A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
 						A.level=J.level
 						walk_towards(A,c_target.loc,0)
-						spawn(4)if(A.icon_state=="thrown")walk(A,A.dir)
-						src.ftgkunai=A
+						spawn(4)if(A && A.icon_state=="thrown")walk(A,A.dir)
+						
 					else
 						flick("throw",src)
 						src.PlayAudio('SkillDam_ThrowSuriken2.wav', output = AUDIO_HEARERS)
@@ -37,15 +37,19 @@ mob
 						A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)
-						src.ftgkunai=A
 
 
 		Warp_Rasengan()
-			for(var/obj/Jutsus/Warp_Rasengan/J in src.jutsus)
-				var/mob/c_target=src.Target_Get(TARGET_MOB)
-				if(!c_target||c_target.ftgmarked==0)
+			var/mob/c_target=src.Target_Get(TARGET_MOB)
+			if(!c_target || !CheckState(c_target, new/state/FTG_Kunai_Mark))
+				src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")
+				return
+			for(var/state/FTG_Kunai_Mark/s in c_target.state_manager)
+				if(s.owner != src)
 					src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")
 					return
+
+			for(var/obj/Jutsus/Warp_Rasengan/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -75,42 +79,56 @@ mob
 								if(M) M.dir = get_dir(M,src)
 								if(M) M.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/4,src,"NinBlue")
 								sleep(1)
-							M.ftgmarked = 0
+							for(var/state/FTG_Kunai_Mark/s in M.state_manager)
+								if(s == src) RemoveState(c_target, s, STATE_REMOVE_REF)
 					src.icon_state = ""
 
 		Flying_Thunder_God()
-			for(var/obj/Jutsus/Flying_Thunder_God/J in src.jutsus)
-				var/mob/c_target=src.Target_Get(TARGET_MOB)
-				var/obj/ftgkunai= src.ftgkunai
-				if(!ftgkunai)
-					src<<output("You can only teleport to your kunai!","Action.Output")
+			var/mob/c_target=src.Target_Get(TARGET_MOB)
+			var/kunai_count
+			if(c_target)
+				for(var/state/FTG_Kunai_Mark/s in c_target.state_manager)
+					if(s.owner != src)
+						src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")
+						return
+
+			else 
+				for(var/obj/Projectiles/Effects/FTGkunai/A in orange(40, src))
+					kunai_count++
+					if(A.Owner != src)
+						src<<output("There are no flying thunder god kunai in range.","Action.Output")
+						return
+
+				if(!kunai_count)
+					src<<output("There are no flying thunder god kunai in range.","Action.Output")
 					return
+			
+			for(var/obj/Jutsus/Flying_Thunder_God/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
-					Bind(src, 3)
 					if(J.level==1) J.damage=2
 					if(J.level==2) J.damage=4
 					if(J.level==3) J.damage=6
 					if(J.level==4) J.damage=8
-					if(c_target&&c_target.ftgmarked==1)
-						//if(c_target.opponent) return
+					if(c_target)
 						flick('Flyingthunder.dmi',src)
 						spawn(1)
 							src.loc = c_target.loc
 							step(src,c_target.dir)
 							src.dir = get_dir(src,c_target)
-							c_target.ftgmarked=0
-							ftgkunai.linkfollow(null)
-							src.ftgkunai=null
-					else if(ftgkunai)
-						flick('Flyingthunder.dmi',src)
-						src.loc = ftgkunai.loc
-						ftgkunai.loc=null
-						src.ftgkunai=null
 
+							for(var/state/FTG_Kunai_Mark/s in c_target.state_manager)
+								if(s.owner == src) RemoveState(c_target, s, STATE_REMOVE_REF)
+
+					else
+						for(var/obj/Projectiles/Effects/FTGkunai/A in orange(40, src))
+							if(A.Owner == src)
+								flick('Flyingthunder.dmi',src)
+								src.loc = A.loc
+								del A
 
 		Flying_Thunder_God_Great_Escape()
 			for(var/obj/Jutsus/Flying_Thunder_God_Great_Escape/J in src.jutsus)

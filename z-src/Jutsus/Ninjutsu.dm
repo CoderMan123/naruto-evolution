@@ -602,75 +602,46 @@ obj
 				icon='YellowFlashKunai.dmi'
 				icon_state="thrown"
 				density=1
-				var/mob/P
-				var/obj/ftgkunai
-				var/mob/victim
+				var/in_flight = 1
+				var/uptime = 80
 				New()
 					if(src.Owner)
-						P=src.Owner
-						ftgkunai=P.ftgkunai
 						pixel_y+=32
 						layer = MOB_LAYER+1
-						spawn(50)
-							if(src)
+						spawn(uptime)
+							if(src && src.in_flight)
+								src.in_flight = 0
 								src.density=0
 								walk(src,0)
 								src.icon_state="ground"
 								src.pixel_y=0
-								spawn(80)
+								spawn(uptime)
 									if(src)
-										ftgkunai.loc=null
-										P.ftgkunai=null
-										if(victim)
-											victim.ftgmarked = 0
-											victim = null
+										del src
+
 				Bump(atom/O)
-					if(!src.Hit)
-						if(istype(O,/mob))
-							var/mob/M=O
-							P=src.Owner
-							if(M)
-								if(M <> src.Owner)
-									if(M.dead || M.key == src.name) return
-									if(M.fightlayer==src.fightlayer)
-										M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
-										M.DealDamage(src.damage,src.Owner,"NinBlue")
-										M.Bleed()
-										victim = M
-										if(M.henge==4||M.henge==5)M.HengeUndo()
-										if(M&&!M.dead)
-											M.ftgmarked=1
-											src.density=0
-											src.icon_state="marked"
-											src.linkfollow(M)
-											src.pixel_y=88
-											spawn(80)
-												if(src)
-													src.loc=null
-													P.ftgkunai=null
-													if(M)
-														M.ftgmarked = 0
-														victim = null
-										else
-											if(src)
-												src.density=0
-												walk(src,0)
-												src.icon_state="ground"
-												src.pixel_y=0
-												spawn(80)
-													if(src)
-														ftgkunai.loc=null
-														P.ftgkunai=null
-						else
+					if(istype(O,/mob))
+						var/mob/M=O
+						if(M.dead) return
+						if(M && M.fightlayer == src.fightlayer)
+							M.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+							M.DealDamage(src.damage,src.Owner,"NinBlue")
+							M.Bleed()
+							if(M.henge==4||M.henge==5)M.HengeUndo()
+							if(M != src.Owner) AddState(M, new/state/FTG_Kunai_Mark, uptime, Owner)
 							if(src)
-								src.density=0
-								walk(src,0)
-								src.icon_state="ground"
-								src.pixel_y=0
-								spawn(80)
-									if(src)
-										ftgkunai.loc=null
-										P.ftgkunai=null
+								del src
+								world << 1
+					else
+						if(src && src.in_flight)
+							src.in_flight = 0
+							src.density=0
+							walk(src,0)
+							src.icon_state="ground"
+							src.pixel_y=0
+							spawn(uptime)
+								if(src)
+									del src
 
 			RTD
 				name="RTD"
