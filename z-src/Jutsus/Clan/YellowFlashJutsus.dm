@@ -41,13 +41,17 @@ mob
 
 		Warp_Rasengan()
 			var/mob/c_target=src.Target_Get(TARGET_MOB)
-			if(!c_target || !CheckState(c_target, new/state/FTG_Kunai_Mark))
+			var/kunai_found
+			if(c_target)
+				for(var/state/FTG_Kunai_Mark/s in c_target.state_manager)
+					if(s.owner != src) continue
+					else 
+						kunai_found = 1
+						break
+				
+			if(!kunai_found)
 				src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")
 				return
-			for(var/state/FTG_Kunai_Mark/s in c_target.state_manager)
-				if(s.owner != src)
-					src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")
-					return
 
 			for(var/obj/Jutsus/Warp_Rasengan/J in src.jutsus)
 				if(src.PreJutsu(J))
@@ -80,26 +84,31 @@ mob
 								if(M) M.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/4,src,"NinBlue")
 								sleep(1)
 							for(var/state/FTG_Kunai_Mark/s in M.state_manager)
-								if(s == src) RemoveState(c_target, s, STATE_REMOVE_REF)
+								if(s.owner != src) RemoveState(c_target, s, STATE_REMOVE_REF)
 					src.icon_state = ""
 
 		Flying_Thunder_God()
 			var/mob/c_target=src.Target_Get(TARGET_MOB)
-			var/kunai_count
+			var/kunai_found
 			if(c_target)
 				for(var/state/FTG_Kunai_Mark/s in c_target.state_manager)
-					if(s.owner != src)
-						src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")
-						return
+					if(s.owner != src) continue
+					else 
+						kunai_found = 1
+						break
+				
+				if(!kunai_found)
+					src<<output("You can only use this on targets you've marked with your kunai!","Action.Output")
+					return
 
 			else 
 				for(var/obj/Projectiles/Effects/FTGkunai/A in orange(40, src))
-					kunai_count++
-					if(A.Owner != src)
-						src<<output("There are no flying thunder god kunai in range.","Action.Output")
-						return
+					if(A.Owner != src)	continue
+					else
+						kunai_found = 1
+						break
 
-				if(!kunai_count)
+				if(!kunai_found)
 					src<<output("There are no flying thunder god kunai in range.","Action.Output")
 					return
 			
