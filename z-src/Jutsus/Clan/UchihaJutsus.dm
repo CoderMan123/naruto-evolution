@@ -23,10 +23,10 @@ mob
 
 							var/state/cant_move/f = new()
 							AddState(M, f, -1)
-
-							new/obj/TsukuyomiHUD(M.client)
-							M.client.eye=locate(161,35,9)
-							M.client.perspective = EYE_PERSPECTIVE
+							if(M.client)
+								new/obj/TsukuyomiHUD(M.client)
+								M.client.eye=locate(161,35,9)
+								M.client.perspective = EYE_PERSPECTIVE
 							var/Timer=J.level+2
 							spawn()
 								while(Timer&&M)
@@ -34,11 +34,13 @@ mob
 										M.DealDamage(J.damage+round((src.genjutsu / 150)*2*J.damage)/12, src, "white")
 									Timer--
 									sleep(5)
-								M.client.eye=M
-								M.client.perspective = EYE_PERSPECTIVE
+								if(M.client)
+									M.client.eye=M
+									M.client.perspective = EYE_PERSPECTIVE
+									for(var/obj/TsukuyomiHUD/H in M.client.screen)del H
 								RemoveState(M, e, STATE_REMOVE_REF)
 								RemoveState(M, f, STATE_REMOVE_REF)
-								for(var/obj/TsukuyomiHUD/H in M.client.screen)del H
+
 
 		Amaterasu()
 			for(var/obj/Jutsus/Amaterasu/J in src.jutsus)
