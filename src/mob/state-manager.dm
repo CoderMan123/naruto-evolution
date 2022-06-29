@@ -156,6 +156,9 @@ proc
 			..()
 
 	cant_move
+		Ticker()
+			walk(c_target, 0)
+			..()
 
 	cant_attack
 
