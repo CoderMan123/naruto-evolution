@@ -65,13 +65,10 @@ mob
 						step_towards(src, c_target)
 						src.dir = get_dir(src.loc, c_target.loc)
 
-					var/state/cant_attack/a = new()
-					var/state/cant_move/b = new()
-
 					for(var/mob/M in get_step(src,src.dir))
 						
-						AddState(M, a, -1)
-						AddState(M, b, -1)
+						AddState(M, new/state/cant_attack, 5)
+						AddState(M, new/state/cant_move, 5)
 
 						Z = M
 					if(Z)
@@ -89,9 +86,6 @@ mob
 								step(Z,src.dir)
 								Z.dir = get_dir(Z,src)
 								sleep(1)
-
-							RemoveState(src, a, STATE_REMOVE_REF)
-							RemoveState(src, b, STATE_REMOVE_REF)
 						
 							Z.icon_state = ""
 							Z.Death(src)
