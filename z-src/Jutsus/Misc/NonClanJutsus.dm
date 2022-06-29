@@ -608,6 +608,10 @@ mob
 						spawn(1)
 							src.loc = c_target.loc
 							step(src,c_target.dir)
+							if(src.loc == c_target.loc)
+								for(var/turf/tile in orange(1,src))
+									if(!tile.density)
+										src.loc = tile
 							src.dir = get_dir(src,c_target)
 					else
 						flick('Shunshin.dmi',src)
