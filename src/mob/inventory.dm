@@ -90,7 +90,7 @@ mob
 				if(!squad && src.village == "Hidden Sand" || (squad && o.squad && squad != o.squad && src.village == "Hidden Sand")) return
 
 			if(O.max_stacks > 1)
-				if(atom)
+				if(atom && !istype(src, /mob/npc))
 					if(ismob(atom))
 						hearers() << "<i>[src] takes x[O.stacks] [O] from [atom].</i>"
 					else
@@ -119,14 +119,14 @@ mob
 
 			else
 				src.contents += O
-
-				if(atom)
-					if(ismob(atom))
-						hearers() << "<i>[src] takes [O] from [atom].</i>"
+				if(!istype(src, /mob/npc))
+					if(atom)
+						if(ismob(atom))
+							hearers() << "<i>[src] takes [O] from [atom].</i>"
+						else
+							hearers() << "<i>[src] picks up [O] from the [lowertext(atom.name)].</i>"
 					else
-						hearers() << "<i>[src] picks up [O] from the [lowertext(atom.name)].</i>"
-				else
-					hearers() << "<i>[src] picks up [O] from the ground.</i>"
+						hearers() << "<i>[src] picks up [O] from the ground.</i>"
 
 			if(src.client)
 				src.client.UpdateInventoryPanel()
@@ -170,13 +170,14 @@ mob
 			else
 				O.loc = src.loc
 
-				if(atom)
-					if(ismob(atom))
-						hearers() << "<i>[src] gives a [O] to [atom].</i>"
+				if(!istype(src, /mob/npc))
+					if(atom)
+						if(ismob(atom))
+							hearers() << "<i>[src] gives a [O] to [atom].</i>"
+						else
+							hearers() << "<i>[src] drops a [O] on the [lowertext(atom.name)].</i>"
 					else
-						hearers() << "<i>[src] drops a [O] on the [lowertext(atom.name)].</i>"
-				else
-					hearers() << "<i>[src] drops a [O] on the ground.</i>"
+						hearers() << "<i>[src] drops a [O] on the ground.</i>"
 
 				src.client.UpdateInventoryPanel()
 
