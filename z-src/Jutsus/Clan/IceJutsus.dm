@@ -69,6 +69,7 @@ mob
 
 						src.pixel_x=4
 
+						walk(c_target, 0)
 						var/state/cant_attack/a = new()
 						var/state/cant_move/b = new()
 						AddState(c_target, a, -1)
@@ -155,6 +156,8 @@ mob
 
 						RemoveState(src, e, STATE_REMOVE_REF)
 						RemoveState(src, f, STATE_REMOVE_REF)
+						src.invisibility = 0
+						src.copy = null
 
 						if(c_target)
 							RemoveState(c_target, a, STATE_REMOVE_REF)
