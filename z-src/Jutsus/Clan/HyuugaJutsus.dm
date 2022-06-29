@@ -440,10 +440,8 @@ mob
 											var/undefendedhit=J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage)
 											if(undefendedhit<0)undefendedhit=1
 											c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
-											world << 1
 											AddState(c_target, new/state/knockback, 10)
 											AddState(c_target, new/state/cant_move, 10)
-											world << 2
 											if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 										else
@@ -459,11 +457,9 @@ mob
 													step_to(src,c_target,1)
 
 												c_target.DealDamage(defendedhit,src,"TaiOrange",0,0,1)
-												world << 3
 
 												AddState(c_target, new/state/knockback, 3)
 												AddState(c_target, new/state/cant_move, 3)
-												world << 4
 
 												flick("defendhit",c_target)
 												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
