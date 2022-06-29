@@ -110,6 +110,7 @@ mob
 					src.inshadowfield=1
 
 					AddState(src, new/state/cant_attack, (5*J.level)+(src.genjutsu/3))
+					AddState(src, new/state/slowed, (5*J.level)+(src.genjutsu/3))
 
 					var/obj/A = new/obj(usr.loc)
 					A.icon='shadowfield.dmi'
@@ -122,21 +123,17 @@ mob
 					flick("grow", A)
 					sleep(5)
 					spawn((5*J.level)+(src.genjutsu/3)) del A
-					var/list/caught = new()
-					var/mob/M
-					var/state/cant_attack/e = new()
-					var/state/cant_move/f = new()
+					var/duration = (5*J.level)+(src.genjutsu/3)
+					var/timer
 					while(A)
 						sleep(1)
+						timer++
 						if(src.inshadowfield==0)
 							del A
-						for(M in orange(3,src))
-							caught+= M
-							AddState(M, e, -1)
-							AddState(M, f, -1)
-
-					for(M in caught)
-						RemoveState(M, e, STATE_REMOVE_REF)
-						RemoveState(M, f, STATE_REMOVE_REF)
+						if(A)
+							for(var/mob/M in orange(3, src))
+								AddState(M, new/state/cant_attack, (duration - timer))
+								AddState(M, new/state/cant_move, (duration - timer))
+								AddState(M, new/state/slowed, (duration - timer))
 
 					src.inshadowfield=0
