@@ -2564,7 +2564,7 @@ obj
 			layer=MOB_LAYER+1
 			pixel_x=-90
 			pixel_y=12
-			density=1
+			density=0
 			//var/mob/ownerrr=null
 			New()
 				spawn(80)
