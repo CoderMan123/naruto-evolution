@@ -389,7 +389,6 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
-					var/damage
 					var/obj/A = new/obj/MiscEffects/MeteorDust(src.loc)
 					A.pixel_x=-30
 					A.pixel_y=-10
@@ -407,10 +406,10 @@ mob
 					if(J.level==4)
 						A.icon_state="max"
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					var/mob/c_target2=src.Target_Get(TARGET_MOB)
-					if(c_target2)
-						step_towards(src, c_target2)
-						src.dir = get_dir(src.loc, c_target2.loc)
+					var/mob/c_target=src.Target_Get(TARGET_MOB)
+					if(c_target)
+						step_towards(src, c_target)
+						src.dir = get_dir(src.loc, c_target.loc)
 					if(prob(50))flick("punchl",src)
 					else flick("punchr",src)
 					src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
@@ -431,7 +430,7 @@ mob
 							K.animate_movement = SYNC_STEPS
 							spawn(4)if(K)del(K)
 						step(O,O.dir)
-						for(var/mob/c_target in view(O,0))
+						for(c_target in view(O,0))
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
 							if(c_target in view(O,0))
@@ -441,15 +440,12 @@ mob
 											var/undefendedhit=J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage)
 											if(undefendedhit<0)undefendedhit=1
 											c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
+											world << 1
+											AddState(c_target, new/state/knockback, 10)
+											AddState(c_target, new/state/cant_move, 10)
+											world << 2
 											if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
-											c_target.icon_state="push"
-											walk(c_target,src.dir)
-											if(c_target.client)spawn()c_target.ScreenShake(damage)
-											spawn(round(damage/2))
-												if(c_target)
-													walk(c_target,0)
-													if(!CheckState(c_target, new/state/swimming))c_target.icon_state=""
 										else
 											if(src.agility>=c_target.agility)
 												var/defendedhit=(J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage))/2
@@ -461,7 +457,14 @@ mob
 													step(c_target,src.dir)
 													c_target.dir = get_dir(c_target,src)
 													step_to(src,c_target,1)
+
 												c_target.DealDamage(defendedhit,src,"TaiOrange",0,0,1)
+												world << 3
+
+												AddState(c_target, new/state/knockback, 3)
+												AddState(c_target, new/state/cant_move, 3)
+												world << 4
+
 												flick("defendhit",c_target)
 												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 											else

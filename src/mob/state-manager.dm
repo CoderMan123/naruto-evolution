@@ -159,6 +159,16 @@ proc
 
 	cant_attack
 
+	knockback
+		Ticker()
+			var/mob/m = src.mob
+			m.icon_state="push"
+			walk(m, owner.dir)
+			if(m.client)spawn()m.ScreenShake(duration)
+			..()
+			walk(m, 0)
+			if(!CheckState(m, new/state/swimming))m.icon_state=""
+
 	knockback_immune
 
 	sand_shield
