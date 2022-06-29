@@ -165,10 +165,6 @@ mob
 					var/state/cant_attack/a = new()
 					var/state/cant_move/b = new()
 
-					for(var/mob/m in get_step(src,src.dir))
-						AddState(m, a, 80)
-						AddState(m, b, 80)
-
 					while(check<>1)
 						sleep(1)
 						src.copy = "Hakke"
@@ -247,6 +243,7 @@ mob
 							RemoveState(m, b, STATE_REMOVE_REF)
 						flick("over",O)
 						spawn(7) del(O)
+						src.copy = null
 						RemoveState(src, e, STATE_REMOVE_REF)
 						RemoveState(src, f, STATE_REMOVE_REF)
 		Kaiten()

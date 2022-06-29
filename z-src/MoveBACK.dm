@@ -85,7 +85,8 @@ mob
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
+					AddState(M, new/state/cant_attack, 10)
+					AddState(M, new/state/cant_move, 10)
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
 			src.icon_state = ""
@@ -104,7 +105,8 @@ mob
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
+					AddState(M, new/state/cant_attack, 10)
+					AddState(M, new/state/cant_move, 10)
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
 			src.icon_state = ""
@@ -123,7 +125,8 @@ mob
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
+					AddState(M, new/state/cant_attack, 10)
+					AddState(M, new/state/cant_move, 10)
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
 			src.icon_state = ""
@@ -142,7 +145,8 @@ mob
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/3,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
-					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(6,10))
+					AddState(M, new/state/cant_attack, 10)
+					AddState(M, new/state/cant_move, 10)
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(2)step_towards(src,M)
 			src.icon_state = ""
