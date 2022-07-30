@@ -46,7 +46,8 @@ mob
 		Element4
 		Element5
 		Kekkai
-		Clan=null
+		Clan
+		Clan2
 		Specialist="strength"
 		Specialist2
 		ryo=0
