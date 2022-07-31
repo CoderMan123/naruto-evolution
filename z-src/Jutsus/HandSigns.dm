@@ -144,49 +144,6 @@ obj
 									usr.sbought.Add(J.name)
 								for(var/obj/Jutsus/EightGates/J in usr.jutsus)
 									J.level ++
-							if(src.name == "Dust Particle" ||src.name == "Spider" || src.name == "Deidara" || src.name == "Puppeteer" || src.name == "Sand" || src.name == "Paper Control" || src.name == "Jashin Religion" || src.name == "Kakuzu"||src.name == "Ice"||src.name=="Opening Gate"||src.name=="Rinnegan"||src.name=="Sharingan Copy" ||src.name == "Sage Mode"||src.name == "Flying Thunder God: Kunai")
-								usr.sbought+=src.name
-								if(src.name == "Sand")usr.Clan = "Sand"
-								if(src.name == "Deidara")usr.Clan = "Deidara"
-								if(src.name == "Puppeteer")usr.Clan = "Puppeteer"
-								if(src.name == "Paper Control")usr.Clan = "Paper"
-								if(src.name == "Jashin Religion")usr.Clan = "Jashin"
-								if(src.name == "Kakuzu")usr.Clan = "Kakuzu"
-								if(src.name == "Spider")usr.Clan = "Spider"
-								if(src.name == "Ice")usr.Clan = "Ice"
-								if(src.name == "Dust Particle")usr.Clan = "Dust Particle"
-								if(src.name == "Opening Gate")
-									usr.Clan = "Gates"
-									var/obj/Jutsus/jutsu=new src.type
-									usr.jutsus += jutsu
-									usr.jutsus_learned += jutsu.type
-									jutsu.owner=usr.ckey
-
-								if(src.name == "Rinnegan")
-									usr.Clan = "Rinnegan"
-									var/obj/Jutsus/jutsu=new src.type
-									usr.jutsus += jutsu
-									usr.jutsus_learned += jutsu.type
-									jutsu.owner=usr.ckey
-								if(src.name == "Sharingan Copy")
-									usr.Clan = "Implanted"
-									var/obj/Jutsus/jutsu=new src.type
-									usr.jutsus += jutsu
-									usr.jutsus_learned += jutsu.type
-									jutsu.owner=usr.ckey
-								if(src.name == "Sage Mode")
-									usr.Clan = "SnakeSage"
-									var/obj/Jutsus/jutsu=new src.type
-									usr.jutsus += jutsu
-									usr.jutsus_learned += jutsu.type
-									jutsu.owner=usr.ckey
-								if(src.name == "Flying Thunder God: Kunai")
-									usr.Clan = "Yellow Flash"
-									var/obj/Jutsus/jutsu=new src.type
-									usr.jutsus += jutsu
-									usr.jutsus_learned += jutsu.type
-									jutsu.owner=usr.ckey
-
 
 							else
 							/*	if(src.name=="Tsukuyomi"||src.name=="Amaterasu"||src.name=="Kamui"||src.name=="Susanoo"||src.name=="Eternal Mangekyou Sharingan")
