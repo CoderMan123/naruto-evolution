@@ -129,7 +129,7 @@ obj
 				if(check == length(src.reqs))has_reqs=1
 				else has_reqs=0
 				if(Clan)
-					if(Clan!=usr.Clan)
+					if(Clan != usr.Clan && Clan != usr.Clan2)
 						usr<<output("You are not the appropriate clan to learn this technique. ([Clan]).","Action.Output")
 						return
 				if(src.Element) if(src.Element != usr.Element && src.Element != usr.Element2 && src.Element != usr.Element3 && src.Element != usr.Element4 && src.Element != usr.Element5) Element1=1 //prestige system

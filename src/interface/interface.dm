@@ -1081,7 +1081,7 @@ client
 
 					if(requirement_counter != jutsu.reqs.len) jutsu.overlays += image('Misc Effects.dmi', "X")
 
-					else if(jutsu.Clan && jutsu.Clan != src.mob.Clan) jutsu.overlays += image('Misc Effects.dmi', "X")
+					else if(jutsu.Clan && jutsu.Clan != src.mob.Clan && jutsu.Clan != src.mob.Clan2) jutsu.overlays += image('Misc Effects.dmi', "X")
 
 					else if(jutsu.Element)
 						if(jutsu.Element != src.mob.Element && jutsu.Element != src.mob.Element2 && jutsu.Element != src.mob.Element3 && jutsu.Element != src.mob.Element4 && jutsu.Element != src.mob.Element5) jutsu.overlays += image('Misc Effects.dmi', "X")
@@ -1144,7 +1144,7 @@ client
 
 									if(requirement_counter != jutsu.reqs.len) jutsu.overlays += image('Misc Effects.dmi', "X")
 
-									else if(jutsu.Clan && jutsu.Clan != src.mob.Clan) jutsu.overlays += image('Misc Effects.dmi', "X")
+									else if(jutsu.Clan && jutsu.Clan != src.mob.Clan && jutsu.Clan != src.mob.Clan2) jutsu.overlays += image('Misc Effects.dmi', "X")
 
 									else if(jutsu.Element)
 										if(jutsu.Element != src.mob.Element && jutsu.Element != src.mob.Element2 && jutsu.Element != src.mob.Element3 && jutsu.Element != src.mob.Element4 && jutsu.Element != src.mob.Element5) jutsu.overlays += image('Misc Effects.dmi', "X")
