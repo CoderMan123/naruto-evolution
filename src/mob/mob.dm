@@ -358,42 +358,87 @@ mob
 			if(src.HairStyle != "Bald")
 				src.HairColor = src.client.cprompt("What color hair would you like?", "Hair Dye", luminosity_max = 20)
 
-			src.Element = src.client.prompt("Please choose your primary elemental affinity.", "Elemental Affinity", list("Fire","Water","Wind","Earth","Lightning"))
-
-			src.Specialist = src.client.prompt({"
-				What area of skills would you like to specialize in? Some Non-Clans and Non-Clan jutsu require a specific speciality.<br /><br />
-				Gates require [SPECIALIZATION_TAIJUTSU].<br /><br />
-				Each speciality also has it's own Non-Clan skilltree."},
-				"Combat Specialization", list("[SPECIALIZATION_NINJUTSU]", "[SPECIALIZATION_GENJUTSU]", "[SPECIALIZATION_TAIJUTSU]"))
-
-			src.Clan = src.client.prompt({"
-				What clan would you like to be born in?<br /><br/>
-				Non-Clan has many options that are similar to clans."},
-				"Clan Selection", list("Senjuu", "Crystal", "Akimichi", "Weaponist", "Aburame", "Hyuuga", "Nara", "Kaguya", "Uchiha", "Ink", "Bubble", "Medical", "No Clan"))
-
 			src.village = src.client.prompt("What village would you like to be born in?", "Village Selection", list(VILLAGE_LEAF, VILLAGE_SAND /*, VILLAGE_MIST, VILLAGE_SOUND, VILLAGE_ROCK*/))
 			src.rank = RANK_ACADEMY_STUDENT
 
+			_choosebloodline
+			switch(src.village)
+				if(VILLAGE_LEAF)
+					src.Clan = src.client.prompt({"What bloodline clan would you like to be born into?"}, "Clan Selection", list("[CLAN_ABURAME]", "[CLAN_AKIMICHI]", "[CLAN_HYUUGA]", "[CLAN_NARA]", "[CLAN_UCHIHA]", "No Clan"))
+
+				if(VILLAGE_SAND)
+					src.Clan = src.client.prompt({"What bloodline clan would you like to be born into?"}, "Clan Selection", list("[CLAN_PUPPET]", "[CLAN_SAND]", "No Clan"))
+
+			var/clan_description
+			switch(src.Clan)
+				if(CLAN_ABURAME)
+					clan_description = "At birth a member of the Aburame clan is made host to chakra sensitive insects which reside under the skins surface. It's a symbiotic relationship where you the host provide chakra and the insects will respond as a weapon and tool for your personal use.<br /><br />It's a versatile bloodline with average binds, damage and utility however it is a master of none."
+				if(CLAN_AKIMICHI)
+					clan_description = "From a young age the Akimichi clan learn to utilize yang chakra to manipulate their bodyweight and size. A fledgeling can enhance their physical prowess but a master can grow to the size of mountains.<br /><br />Akimichi is a bloodline that boasts great defense and utility but with the option to buff their damage at the cost of their own health."
+				if(CLAN_HYUUGA)
+					clan_description = "The Hyuuga clan utilize the visual powers of the Byakugan which allows them to see the chakra networks of others. This in combination with their long history of precise martial arts makes them a serious threat in close range.<br /><br />Their damage is a bit on the low side but they have great defense and specialise in disabling their opponents chakra points."
+				if(CLAN_NARA)
+					clan_description = "Masters of shadows, Nara are able to control their own shadow to bind and assault their opponent. Members of this clan are known for their highly intellectual and strategic minds.<br /><br />They specialize in binding a single target to deal huge damage to them but they can provide some utility against groups as well."
+				if(CLAN_UCHIHA)
+					clan_description = "Members of the Uchiha clan are born with the ability to unlock the Sharingan. The clan has a dark history as to unlock it's full potential requires commiting grievious taboos.<br /><br />Uchiha are masters of all but have high chakra and health costs for their jutsu.<br /><br /><font color= #971e1e>ALL UCHIHA START WITH FIRE AS THEIR FIRST ELEMENT</Font>"
+				if(CLAN_PUPPET)
+					clan_description = "Master craftsmen capable of weaving their chakra into strings. They use these strings to manipulate puppets in combat.<br /><br />Puppet users boast strong jutsu all-round but require high technical skill to master their use."
+				if(CLAN_SAND)
+					clan_description = "Users of sand are capable of infusing sand particles with their chakra. They can manipulate this sand to entomb their opponents and protect themselves.<br /><br /> They deal high damage to single targets as well as having great defensive techniques.<br /><br /><font color= #971e1e>ALL SAND USERS START WITH EARTH AS THEIR FIRST ELEMENT</Font>"
+				if("No Clan")
+					clan_description = "Not everyone is born into a powerful bloodline. Some must cultivate their own strength through various methods.<br /><br />With no bloodline you will start out with less jutsu than others but you will achieve combinations of jutsu that are otherwise impossible to achieve."
+
+			switch(src.client.prompt({"[clan_description]"}, "[src.Clan]", list("I want this Bloodline.", "Go Back")))
+				if("I want this Bloodline.")
+					if(src.Clan == CLAN_UCHIHA) src.Element = "Fire"
+					if(src.Clan == CLAN_SAND) src.Element = "Earth"
+				if("Go Back")
+					goto _choosebloodline
+
+			_chooseelement
+			if(!Element)
+				src.Element = src.client.prompt("Please choose your primary elemental affinity.<br /><br />You will be able to obtain more elements later in the game.", "Elemental Affinity", list("Fire","Water","Wind","Earth","Lightning"))
+			
+				var/element_description
+				switch(src.Element)
+					if("Fire")
+						element_description = "An offensive element with a primary focus on setting opponents on fire to deal damage over time."
+					if("Water")
+						element_description = "A balanced element with less focus on damage but good binds and ultility"
+					if("Wind")
+						element_description = "An offensive element focusing on long range attacks and mobility."
+					if("Earth")
+						element_description = "A defensive element which has many binds but virtually no damage at all"
+					if("Lightning")
+						element_description = "An offensive element with fast and difficult to avoid techniques."
+				
+				switch(src.client.prompt({"[element_description]"}, "[src.Element]", list("I want this Element", "Go Back")))
+					if("Go Back")
+						goto _chooseelement
+
+			_choosespec
+			src.Specialist = src.client.prompt({"What type of techniques do you want to specialize in?"<br /><br />Some jutsu will require a certain specialization to learn them. It will also decrease the total exp required to level the relevant stat to it's maximum value."}, "Combat Specialization", list("[SPECIALIZATION_NINJUTSU]", "[SPECIALIZATION_GENJUTSU]", "[SPECIALIZATION_TAIJUTSU]"))
+
+			var/spec_description
 			switch(src.Specialist)
 				if(SPECIALIZATION_TAIJUTSU)
-					src.taijutsu+=6
-					src.maxtaijutsuexp+=6
+					spec_description = "Taijutsu is the mastery of physical strength and martial arts. Taking this will add a kick to your basic attacks increasing your overall hits per second."
+				if(SPECIALIZATION_NINJUTSU)
+					spec_description = "Ninjutsu is the mastery of chakra control and the elements. Taking this will reduce chakra costs by 15%."
+				if(SPECIALIZATION_GENJUTSU)
+					spec_description = "Genjutsu is the mastery of disrupting someones chakra to create illusion and discord within their mind. (WIP)Taking this will increase how many simple clones you can create with clone jutsu and decrease it's cooldown(WIP)."
 
-				if("Ninjutsu")
-					src.ninjutsu+=6
-					src.maxninexp+=6
+			switch(src.Specialist)
+				if(SPECIALIZATION_TAIJUTSU)
+					src.taijutsu+=10
+				if(SPECIALIZATION_NINJUTSU)
+					src.ninjutsu+=10
+				if(SPECIALIZATION_GENJUTSU)
+					src.genjutsu+=10
 
-				if("Genjutsu")
-					src.genjutsu+=6
-					src.maxgenexp+=6
-
-				if("Balanced")
-					src.taijutsu+=2
-					src.genjutsu+=2
-					src.ninjutsu+=2
-					src.maxtaijutsuexp+=2
-					src.maxninexp+=2
-					src.maxgenexp+=2
+			switch(src.client.prompt({"[spec_description]"}, "[src.Specialist]", list("I want this Specialism", "Go Back")))
+				if("Go Back")
+					goto _choosespec
 
 			for(var/jutsu in typesof(/obj/Jutsus))
 				var/obj/Jutsus/j = new jutsu
@@ -402,6 +447,7 @@ mob
 					src.jutsus += j
 					src.jutsus_learned += j.type
 					src.sbought += j.name
+
 
 			src.creation_date = world.realtime
 			names_taken += lowertext(src.character)

@@ -94,6 +94,10 @@ mob
 			AddState(target, new/state/cant_attack, time)
 
 		ChakraCheck(var/CHAKRA)
+
+			if(src.Specialist == SPECIALIZATION_NINJUTSU)
+				CHAKRA -= CHAKRA * 0.85
+
 			var/area/T = loc.loc
 			src.HengeUndo()
 			if(T)
