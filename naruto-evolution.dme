@@ -88,6 +88,7 @@
 #include "src\interface\logos.dm"
 #include "src\interface\symbols.dm"
 #include "src\interface\interface.dmf"
+#include "src\items\clan_items.dm"
 #include "src\missions\missions.dm"
 #include "src\mob\death.dm"
 #include "src\mob\inventory.dm"

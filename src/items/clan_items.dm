@@ -1,0 +1,1 @@
+//items for obtaining clans in the game
