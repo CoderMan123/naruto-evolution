@@ -92,27 +92,6 @@ obj
 						usr << output("You may not put this technique on a hotslot.","Action.Output")
 			else
 				if(src.name in usr.sbought)return
-				if(src.name=="Sage Mode"&&"Curse Seal" in usr.sbought)
-					usr<<output("You already have Curse Seal!","Action.Output")
-					return
-				if(src.name=="Sage Mode"&& "Rinnegan" in usr.sbought)
-					usr<<output("The Rinnegan prohibits you from tainting your body.","Action.Output")
-					return
-				if(src.name=="Curse Seal"&& "Sage Mode"in usr.sbought)
-					usr<<output("You already have Curse Mark!","Action.Output")
-					return
-				if(src.name=="Curse Seal"&&"Rinnegan" in usr.sbought)
-					usr<<output("The Rinnegan prohibits you from tainting your body.","Action.Output")
-					return
-				if(src.name=="Rinnegan"&& "Curse Seal"in usr.sbought)
-					usr<<output("The Rinnegan rejects your Curse Seal.","Action.Output")
-					return
-				if(src.name=="Rinnegan"&& "Sage Mode"in usr.sbought)
-					usr<<output("The Rinnegan rejects your Sage Mode.","Action.Output")
-					return
-				if((src.name=="Sage Mode" || src.name=="Curse Seal")&&usr.Clan == "Gates")
-					usr<<output("Gates require a pure body to work!","Action.Output")
-					return
 
 			/*	if(usr.UchihaJ>=3)
 					usr<<" You can not learn any more clan jutsu."
