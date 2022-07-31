@@ -356,7 +356,7 @@ obj
 			Sprice=4
 			uses=100
 			signs="<font color=green>None</font><br>"
-			Description="You activate sage mode gaining a boost to Taijutsu and ninjutsu provided by powers of nature and grants access to a powerul connection to snakes. You will become a snake sage! (You will no longer be a Non Clan ninja and will be dedicated to the way of the Snake Sage)"
+			Description="You activate sage mode gaining a boost to Taijutsu and ninjutsu provided by powers of nature and grants access to a powerul connection to snakes."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*2
@@ -570,7 +570,7 @@ obj
 			signs="<font color=green>None"
 			ChakraCost = 0
 			Clan="No Clan"
-			Description="The Legendary Doujutsu, the Rinnegan. The forefather of all doujutsu, capable of mastering the Yin and Yang elements. Grants immunity to certain genjutsu. (You will no longer be a Non Clan ninja commiting yourself to the power of the Rinnegan!)"
+			Description="The Legendary Doujutsu, the Rinnegan. The forefather of all doujutsu, capable of mastering the Yin and Yang elements. Grants immunity to certain genjutsu."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*0
@@ -940,7 +940,7 @@ obj
 			signs="<font color=green>None</font><br>"
 			Sprice=3
 			uses=100
-			Description="Implant yourself with a Sharingan! By using it you can copy the next jutsu used by a player. (You will no longer be a Non Clan ninja commiting yourself to the implanted sharingan!)"
+			Description="Implant yourself with a Sharingan! By using it you can copy the next jutsu used by a player."
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)
@@ -1399,7 +1399,7 @@ obj
 			ChakraCost = 0
 			Clan="No Clan"
 			Element="Earth"
-			Description="By using the forbidden Kinjutsu of the Iwagakure along with exploding clay, you gain the ability to create dolls which attack the opponent and explode.(You will no longer be a non clan ninja commiting yourself to the art of explosions.)"
+			Description="By using the forbidden Kinjutsu of the Iwagakure along with exploding clay, you gain the ability to create dolls which attack the opponent and explode."
 
 		C1_Birds
 			icon_state="C1 bird"
@@ -1485,7 +1485,7 @@ obj
 			maxcooltime = 170
 			ChakraCost = 0
 			Clan="No Clan"
-			Description="Allows user to gain powers of the Ice Kekkei Genkai. (You will no longer be a non clan ninja you'll be commited to Ice)"
+			Description="Allows user to gain powers of the Ice Kekkei Genkai."
 
 		Demonic_Ice_Mirrors
 			icon_state="Demonic Ice Mirrors"
@@ -1573,7 +1573,7 @@ obj
 			ChakraCost= 0
 			Sprice = 4
 			Clan="No Clan"
-			Description="Gain powers of Kakuzu that allow you to use elemental jutsus without affinity towards that element! (You will no longer be non clan and instead will be commited to Kakuzu)"
+			Description="Gain powers of Kakuzu that allow you to use elemental jutsus without affinity towards that element!"
 
 		FireMask
 			icon_state="FireMask"
@@ -1643,7 +1643,7 @@ obj
 			ChakraCost = 0
 			Sprice=1
 			Clan="No Clan"
-			Description="Train yourself to learn to control a puppet through chakra strings that come from your fingers.(You will no longer be a non clan ninja by commiting to the puppet technique)"
+			Description="Train yourself to learn to control a puppet through chakra strings that come from your fingers."
 
 		First_Puppet_Summoning
 			icon_state="puppet 1"
@@ -2150,7 +2150,7 @@ obj
 			Sprice=1
 			Clan="No Clan"
 			Element="Earth"
-			Description="Gain the ability to infuse your chakra into sand.(You will no longer be a non clan ninja by commiting to sand control)"
+			Description="Gain the ability to infuse your chakra into sand."
 
 		Shukakku_Spear
 			icon_state="Shukakku Spear"
@@ -2345,7 +2345,7 @@ obj
 			maxcooltime = 0
 			ChakraCost = 0
 			Clan="No Clan"
-			Description="Gain the ability to convert chakra into paper.(You will no longer be a non clan ninja by commiting to paper)"
+			Description="Gain the ability to convert chakra into paper."
 
 		Paper_Chakram
 			icon_state="Paper Chakram"
@@ -2481,7 +2481,7 @@ obj
 			rank="B"
 			signs="<font color=green>None</font><br>"
 			Clan="No Clan"
-			Description="Develop mutations and become more like a spider!(You will no longer be a non clan ninja by commiting to your new arachnid form)"
+			Description="Develop mutations and become more like a spider!"
 			maxcooltime = 0
 			ChakraCost = 0
 
