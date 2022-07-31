@@ -18,27 +18,28 @@ mob
 
 			var/mob/c_target=src.Target_Get(TARGET_MOB)
 			if(CheckState(src, new/state/sand_shield))
-				if(src.Clan == "Sand" && !CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/punching) && !CheckState(src, new/state/swimming))
-					AddState(src, new/state/punching, attack_speed)
-					var/obj/O = new/obj
-					O.loc = src.loc
-					O.icon = 'Sand Shield.dmi'
-					O.icon_state = "spike"
-					O.pixel_x=-32
-					O.layer=12
-					O.layer=MOB_LAYER+100
-					var/PL = list()
-					for(var/mob/PO in orange(1))PL+=PO
-					if(length(PL)<>0)
-						var/mob/W = pick(PL)
-						src.Target_Atom(W)
-						src.dir = get_dir(src,W)
-					step(O,src.dir)
-					if(O.dir == NORTH)O.layer = OBJ_LAYER
-					spawn(2)if(O)del(O)
-					for(var/mob/M in orange(1,O))
-						if(M <> src)
-							M.DealDamage(src.ninjutsu/2,src,"NinBlue",0,0,1)
+				if(src.Clan == CLAN_SAND || src.Clan2 == CLAN_SAND)
+					if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/punching) && !CheckState(src, new/state/swimming))
+						AddState(src, new/state/punching, attack_speed)
+						var/obj/O = new/obj
+						O.loc = src.loc
+						O.icon = 'Sand Shield.dmi'
+						O.icon_state = "spike"
+						O.pixel_x=-32
+						O.layer=12
+						O.layer=MOB_LAYER+100
+						var/PL = list()
+						for(var/mob/PO in orange(1))PL+=PO
+						if(length(PL)<>0)
+							var/mob/W = pick(PL)
+							src.Target_Atom(W)
+							src.dir = get_dir(src,W)
+						step(O,src.dir)
+						if(O.dir == NORTH)O.layer = OBJ_LAYER
+						spawn(2)if(O)del(O)
+						for(var/mob/M in orange(1,O))
+							if(M <> src)
+								M.DealDamage(src.ninjutsu/2,src,"NinBlue",0,0,1)
 				return
 			if(src.incalorie==1&&usr.Clan=="Akimichi")
 				src.Meteor_Punch()
@@ -165,7 +166,7 @@ mob
 							spawn(3)if(SH)del(SH)
 					if(src.Hand=="Left")
 						if(Specialist==SPECIALIZATION_TAIJUTSU||Specialist2==SPECIALIZATION_TAIJUTSU)combo++
-						if(src.Clan <> "Sand")
+						if(src.Clan == CLAN_SAND || src.Clan2 == CLAN_SAND)
 							flick("punchl",src)
 							if(src.bugpass)
 								src.DealDamage(50,src,"aliceblue",0,1)
@@ -185,7 +186,7 @@ mob
 									if(O)del(O)
 									if(O2)del(O2)
 						src.Hand="Right"
-						if(src.Clan == "Sand")
+						if(src.Clan == CLAN_SAND || src.Clan2 == CLAN_SAND)
 							var/obj/SAND = new/obj
 							SAND.loc = src.loc
 							SAND.layer = src.layer+1
@@ -196,7 +197,7 @@ mob
 						for(var/mob/Clones/Bunshin/C in world)if(C.Owner==src)flick("punchl",C)
 					else
 						if(src.Hand=="Right")
-							if(src.Clan <> "Sand")
+							if(src.Clan == CLAN_SAND || src.Clan2 == CLAN_SAND)
 								flick("punchr",src)
 								if(src.bugpass)
 									var/obj/O = new/obj
@@ -218,7 +219,7 @@ mob
 								src.Hand="Kick"
 								combo++
 							else src.Hand="Left"
-							if(src.Clan == "Sand")
+							if(src.Clan == CLAN_SAND == src.Clan2 == CLAN_SAND)
 								var/obj/SAND = new/obj
 								SAND.loc = src.loc
 								SAND.layer = src.layer-1
@@ -264,7 +265,7 @@ mob
 							if(c_target in get_step(src,src.dir))
 								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 									var/canhityou=1
-									if(c_target.Clan == "Sand")
+									if(c_target.Clan == CLAN_SAND || c_target.Clan2 == CLAN_SAND)
 										var/blockchance = rand(1,2)
 										if(c_target.dir == get_dir(c_target,src))blockchance = 1
 										if(blockchance==1)
@@ -412,7 +413,7 @@ mob
 							if(c_target in get_step(src,src.dir))
 								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 									var/canhityou=1
-									if(c_target.Clan == "Sand")
+									if(c_target.Clan == CLAN_SAND || c_target.Clan2 == CLAN_SAND)
 										var/blockchance = rand(1,3)
 										if(c_target.dir == get_dir(c_target,src))blockchance = rand(1,2)
 										if(blockchance==1)
