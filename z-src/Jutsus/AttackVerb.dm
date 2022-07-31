@@ -166,7 +166,7 @@ mob
 							spawn(3)if(SH)del(SH)
 					if(src.Hand=="Left")
 						if(Specialist==SPECIALIZATION_TAIJUTSU||Specialist2==SPECIALIZATION_TAIJUTSU)combo++
-						if(src.Clan == CLAN_SAND || src.Clan2 == CLAN_SAND)
+						if(src.Clan != CLAN_SAND || src.Clan2 != CLAN_SAND)
 							flick("punchl",src)
 							if(src.bugpass)
 								src.DealDamage(50,src,"aliceblue",0,1)
@@ -197,7 +197,7 @@ mob
 						for(var/mob/Clones/Bunshin/C in world)if(C.Owner==src)flick("punchl",C)
 					else
 						if(src.Hand=="Right")
-							if(src.Clan == CLAN_SAND || src.Clan2 == CLAN_SAND)
+							if(src.Clan != CLAN_SAND || src.Clan2 != CLAN_SAND)
 								flick("punchr",src)
 								if(src.bugpass)
 									var/obj/O = new/obj
