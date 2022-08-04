@@ -41,8 +41,6 @@ mob
 							if(M <> src)
 								M.DealDamage(src.ninjutsu/2,src,"NinBlue",0,0,1)
 				return
-			if(src.incalorie==1&&usr.Clan=="Akimichi")
-				src.Meteor_Punch()
 			if(ChakraCheck(0)) return
 			if(c_target&&!src.likeaclone)
 				if(src.lungecounter==0)
