@@ -96,7 +96,7 @@ mob
 		ChakraCheck(var/CHAKRA)
 
 			if(src.Specialist == SPECIALIZATION_NINJUTSU)
-				CHAKRA -= CHAKRA * 0.85
+				CHAKRA = CHAKRA * 0.85
 
 			var/area/T = loc.loc
 			src.HengeUndo()
