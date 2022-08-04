@@ -127,6 +127,7 @@ obj
 		level=1
 		exp=0
 		maxexp=100
+		clan
 		Owner
 		tmp
 			fightlayer="Normal"
