@@ -1,5 +1,5 @@
-[![Build](https://github.com/douglasparker/naruto-evolution/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/douglasparker/naruto-evolution/actions/workflows/build.yml)
-[![Release](https://github.com/douglasparker/naruto-evolution/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/douglasparker/naruto-evolution/actions/workflows/release.yml)
+[![Build](https://github.com/douglasparker/naruto-evolution/actions/workflows/build.yml/badge.svg)](https://github.com/douglasparker/naruto-evolution/actions/workflows/build.yml)
+[![Release](https://github.com/douglasparker/naruto-evolution/actions/workflows/release.yml/badge.svg)](https://github.com/douglasparker/naruto-evolution/actions/workflows/release.yml)
 
 
 # Naruto Evolution
