@@ -78,6 +78,10 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            docker pull douglasparker/naruto-evolution:latest
-            docker restart naruto-evolution
-            
+            docker run --rm \
+              -v /var/run/docker.sock:/var/run/docker.sock \
+              -v /root/.docker/config.json:/config.json:ro \
+              -e WATCHTOWER_NOTIFICATIONS=slack \
+              -e WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER="Watchtower" \
+              -e WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL="${{ secrets.WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL }}" \
+              containrrr/watchtower naruto-evolution --run-once --cleanup --include-restarting
