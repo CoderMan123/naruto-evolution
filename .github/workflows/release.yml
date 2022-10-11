@@ -72,24 +72,12 @@ jobs:
       
       - name: Deploy the Docker image to the server
         if: github.event.release.action == 'released'
-        run: |
-          cat > ~/.ssh/config <<EOF
-          Host naruto-evolution
-          HostName $SSH_HOST
-          User $SSH_USER
-          Port 22
-          EOF
-
-          ssh naruto-evolution -o StrictHostKeyChecking=no <<EOF
-            docker stop naruto-evolution
-            docker rm naruto-evolution
-            docker pull ghcr.io/douglasparker/naruto-evolution:latest
-            docker run --detach \
-              --name naruto-evolution \
-              --volume /opt/naruto-evolution/cfg:/opt/naruto-evolution/cfg \
-              --volume /opt/naruto-evolution/saves:/opt/naruto-evolution/saves \
-              --volume /opt/naruto-evolution/logs:/opt/naruto-evolution/logs \
-              --publish 1337:1337 \
-              --restart unless-stopped \
-              ghcr.io/douglasparker/naruto-evolution:latest DreamDaemon /opt/naruto-evolution/naruto-evolution.dmb -ports 1337
-          EOF
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            docker pull douglasparker/naruto-evolution:latest
+            docker restart naruto-evolution
+            
