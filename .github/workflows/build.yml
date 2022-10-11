@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  BYOND_VERSION: "514.1584"
+  BYOND_VERSION: "514.1589"
 
 jobs:
   build:
