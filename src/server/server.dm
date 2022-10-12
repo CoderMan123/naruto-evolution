@@ -330,25 +330,25 @@ world
 		while(world)
 			switch(time2text(world.timeofday, "hh:mm"))
 				if("11:50")
-					world << "The server will be going down for maintenance in 10 minutes."
+					world << "<center><font color='#BE1A0E'><b><u>The server will be going down for maintenance in 10 minutes.</u></b></font></center>"
 				
 				if("11:55")
-					world << "The server will be going down for maintenance in 5 minutes."
+					world << "<center><font color='#BE1A0E'><b><u>The server will be going down for maintenance in 5 minutes.</u></b></font></center>"
 				
 				if("11:56")
-					world << "The server will be going down for maintenance in 4 minutes."
+					world << "<center><font color='#BE1A0E'><b><u>The server will be going down for maintenance in 4 minutes.</u></b></font></center>"
 				
 				if("11:57")
-					world << "The server will be going down for maintenance in 3 minutes."
+					world << "<center><font color='#BE1A0E'><b><u>The server will be going down for maintenance in 3 minutes.</u></b></font></center>"
 				
 				if("11:58")
-					world << "The server will be going down for maintenance in 2 minutes."
+					world << "<center><font color='#BE1A0E'><b><u>The server will be going down for maintenance in 2 minutes.</u></b></font></center>"
 				
 				if("11:59")
-					world << "The server will be going down for maintenance in 1 minutes."
+					world << "<center><font color='#BE1A0E'><b><u>The server will be going down for maintenance in 1 minutes.</u></b></font></center>"
 				
 				if("12:00")
-					world << "The server is now going down for maintenance. The server should be back online in a couple of minutes."
+					world << "<center><font color='#BE1A0E'><b><u>The server is now going down for maintenance. The server should be back online in a couple of minutes.</u></b></font></center>"
 			
 			sleep(600)
 
