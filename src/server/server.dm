@@ -67,6 +67,7 @@ world
 		spawn() Hotspring_Loop()
 		spawn() Election()
 		spawn() InfamyLoop()
+		spawn() Maintenance()
 
 	Del()
 		src.FailMissions()
@@ -324,6 +325,32 @@ world
 
 	proc/GetAdvert()
 		return "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='https://www.byond.com/games/IllusiveBlair/NarutoEvolution'>Hub</a>] \[<a href='https://wiki.narutoevolution.com'>Wiki</a>] \[<a href='https://discord.gg/UW77xAhcTM'>Discord</a>]<br />\[<a href='https://github.com/douglasparker/naruto-evolution-community/issues/new?assignees=&labels=Type%3A+Feature+Request&template=feature-request.md&title='>Feature Requests</a>] \[<a href='https://github.com/douglasparker/naruto-evolution-community/issues/new?assignees=&labels=Type%3A+Bug&template=bug-report.md&title='>Bug Reports</a>]</b></center>"
+	
+	proc/Maintenance()
+		while(world)
+			switch(time2text(world.timeofday, "hh:mm"))
+				if("11:50")
+					world << "The server will be going down for maintenance in 10 minutes."
+				
+				if("11:55")
+					world << "The server will be going down for maintenance in 5 minutes."
+				
+				if("11:56")
+					world << "The server will be going down for maintenance in 4 minutes."
+				
+				if("11:57")
+					world << "The server will be going down for maintenance in 3 minutes."
+				
+				if("11:58")
+					world << "The server will be going down for maintenance in 2 minutes."
+				
+				if("11:59")
+					world << "The server will be going down for maintenance in 1 minutes."
+				
+				if("12:00")
+					world << "The server is now going down for maintenance. The server should be back online in a couple of minutes."
+			
+			sleep(600)
 
 	proc/Advert()
 		set background = 1
