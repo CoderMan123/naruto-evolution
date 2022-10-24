@@ -181,5 +181,5 @@ release:
   script:
     - |
       if [ $PROJECT_PRERELEASE -eq 0 ]; then
-        sshpass -p "$SSH_PASSWORD" ssh $SSH_USERNAME@$SSH_HOST "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /root/.docker/config.json:/config.json:ro -e WATCHTOWER_NOTIFICATIONS=slack -e WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER="Watchtower" -e WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL="$WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL" containrrr/watchtower naruto-evolution --run-once --cleanup --include-restarting"
+        sshpass -p "$SSH_PASSWORD" ssh ${SSH_USERNAME}@${SSH_HOST} "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /root/.docker/config.json:/config.json:ro -e WATCHTOWER_NOTIFICATIONS=slack -e WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER="Watchtower" -e WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL="$WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL" containrrr/watchtower naruto-evolution --run-once --cleanup --include-restarting"
       fi
