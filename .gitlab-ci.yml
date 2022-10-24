@@ -42,8 +42,10 @@ build:
       ls .
       echo "checking docker volume files..."
       docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls .
-      echo "checking for /builds"
-      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls /builds
+      echo "checking for /builds/douglasparker"
+      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls /builds/douglasparker
+      echo "checking for /builds/douglasparker/naruto-evolution"
+      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls /builds/douglasparker/naruto-evolution
 
       echo "Building $CI_PROJECT_NAME..."
       docker run -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
