@@ -1,4 +1,4 @@
-image: docker:latest
+image: docker:dind
 
 variables:
   PROJECT_DME: "naruto-evolution.dme"
@@ -24,8 +24,6 @@ build:
     - tags
     - merge_requests
     - triggers
-  services:
-    - docker:dind
   artifacts:
     reports:
       dotenv: build.env
