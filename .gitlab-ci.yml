@@ -32,9 +32,8 @@ build:
       - "$CI_PROJECT_DIR/docker.tar"
   before_script:
     - |
-      apk update
-      apk add curl
-      apk add sshpass
+      apt-get update
+      apt-get install curl sshpass -y
   script:
     - |
       echo "Building $CI_PROJECT_NAME..."
