@@ -160,10 +160,16 @@ publish:
 
         if [ $PROJECT_PRERELEASE -eq 0 ]; then
           echo "Publishing the Docker images to the Docker Registry..."
-          docker push "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
+          docker push "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest"
+          docker push "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION"
+          docker push "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION"
+          docker push "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
 
           echo "Publishing the Docker images to the GitLab Container Registry..."
-          docker push "$CI_REGISTRY_IMAGE:latest" "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
+          docker push "$CI_REGISTRY_IMAGE:latest"
+          docker push "$CI_REGISTRY_IMAGE:$PROJECT_VERSION"
+          docker push "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION"
+          docker push "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
         else
           echo "Publishing the Docker images to the Docker Registry..."
           docker push "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION"
