@@ -35,6 +35,12 @@ build:
       apk add sshpass
   script:
     - |
+      echo "Outputting debugging information..."
+      echo "$CI_PROJECT_DIR:"
+      ls $CI_PROJECT_DIR
+      echo "."
+      ls .
+      
       echo "Building $CI_PROJECT_NAME..."
       docker run -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
       PROJECT_VERSION="$CI_COMMIT_TAG"
