@@ -1,5 +1,3 @@
-image: docker:20
-
 variables:
   PROJECT_DME: "naruto-evolution.dme"
   PROJECT_VERSION: ""
@@ -13,10 +11,9 @@ variables:
   BYOND_MAJOR_VERSION: ""
   BYOND_MINOR_VERSION: ""
   GIT_SUBMODULE_STRATEGY: recursive
-  DOCKER_DRIVER: overlay2 # not sure if this is needed
-  DOCKER_TLS_CERTDIR: "/certs"
 
 build:
+  image: i386/ubuntu:18.04
   stage: build
   only:
     - main
@@ -31,15 +28,50 @@ build:
     key: "$CI_PIPELINE_ID"
     policy: push
     paths:
+      - "$CI_PROJECT_DIR/naruto-evolution.dmb"
+      - "$CI_PROJECT_DIR/naruto-evolution.rsc"
+  before_script:
+    - |
+      BYOND_MAJOR_VERSION="$(echo "$(cut -d '.' -f 1 <(echo "$BYOND_VERSION"))")"
+      echo "BYOND_MAJOR_VERSION=$BYOND_MAJOR_VERSION" >> build.env
+      BYOND_MINOR_VERSION="$(echo "$(cut -d '.' -f 2 <(echo "$BYOND_VERSION"))")"
+      echo "BYOND_MINOR_VERSION=$BYOND_MINOR_VERSION" >> build.env
+
+      apt-get update
+      apt-get install -y curl unzip make libstdc++6
+      curl "http://www.byond.com/download/build/${BYOND_MAJOR_VERSION}/${BYOND_VERSION}_byond_linux.zip" -o byond.zip
+      unzip byond.zip
+      cd byond
+      sed -i 's|install:|&\n\tmkdir -p $(MAN_DIR)/man6|' Makefile
+      make install
+      apt-get purge -y --auto-remove curl unzip make
+      cd ..
+      rm -rf byond byond.zip /var/lib/apt/lists/*
+
+  script:
+    - |
+      echo "Building $CI_PROJECT_NAME..."
+      DreamMaker "$CI_PROJECT_DIR/naruto-evolution.dme"
+
+docker-build:
+  image: docker:20
+  stage: build
+  needs: ["build"]
+  only:
+    - tags
+  cache:
+    key: "$CI_PIPELINE_ID"
+    policy: pull-push
+    paths:
+      - "$CI_PROJECT_DIR/naruto-evolution.dmb"
+      - "$CI_PROJECT_DIR/naruto-evolution.rsc"
       - "$CI_PROJECT_DIR/docker.tar"
   before_script:
     - |
       apk update
-      apk add curl sshpass
+      apk add curl
   script:
     - |
-      echo "Building $CI_PROJECT_NAME..."
-      docker run --rm -v "$CI_PROJECT_DIR:$CI_PROJECT_DIR" "$BYOND_IMAGE:$BYOND_VERSION" DreamMaker "$CI_PROJECT_DIR/naruto-evolution.dme"
       PROJECT_VERSION="$CI_COMMIT_TAG"
       echo "$PROJECT_VERSION" > "$CI_PROJECT_DIR/VERSION"
       (echo "$PROJECT_VERSION" | grep -q "-") && [ $? -eq 0 ] && echo "PRERELEASE" > "$CI_PROJECT_DIR/PRERELEASE"; PROJECT_PRERELEASE=1
@@ -51,71 +83,64 @@ build:
       echo "PROJECT_MINOR_VERSION=$PROJECT_MINOR_VERSION" >> build.env
       echo "PROJECT_PATCH_VERSION=$PROJECT_PATCH_VERSION" >> build.env
 
-      if [ $CI_COMMIT_TAG ]; then
-        echo "Logging into the DockerHub Registry..."
-        docker login --username "$DOCKER_USERNAME" --password "$DOCKER_TOKEN"
-      fi
+      echo "Logging into the DockerHub Registry..."
+      docker login --username "$DOCKER_USERNAME" --password "$DOCKER_TOKEN"
 
-      if [ $CI_COMMIT_TAG ]; then
-        echo "Logging into the GitLab Container Registry..."
-        docker login "$CI_REGISTRY" --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD"
-      fi
+      echo "Logging into the GitLab Container Registry..."
+      docker login "$CI_REGISTRY" --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD"
 
-      if [ $CI_COMMIT_TAG ]; then
-        echo "Checking if this release was already published to the DockerHub Registry..."
-        # Disable exit on error (non-zero exit code) to ensure pipelines don't fail when `docker manifest inspect` returns 0
-        echo "Disabling exit on error (non-zero exit code)..."
-        set +e
-        docker manifest inspect "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION"
-        echo "Enabling exit on error (non-zero exit code)..."
-        set -e
-        if [ $? -eq 0 ]; then
-          echo "An existing tag was found!"
-          PROJECT_DOCKER_MANIFEST_EXISTS=1
-          echo "PROJECT_DOCKER_MANIFEST_EXISTS=$PROJECT_DOCKER_MANIFEST_EXISTS" >> build.env
-        fi
+      echo "Checking if this release was already published to the DockerHub Registry..."
+      # Disable exit on error (non-zero exit code) to ensure pipelines don't fail when `docker manifest inspect` returns 0
+      echo "Disabling exit on error (non-zero exit code)..."
+      set +e
+      docker manifest inspect "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION"
+      if [ $? -eq 0 ]; then
+        echo "An existing tag was found!"
+        PROJECT_DOCKER_MANIFEST_EXISTS=1
+        echo "PROJECT_DOCKER_MANIFEST_EXISTS=$PROJECT_DOCKER_MANIFEST_EXISTS" >> build.env
       fi
+      echo "Enabling exit on error (non-zero exit code)..."
+      set -e
 
-      if [ $CI_COMMIT_TAG ]; then
-        echo "Building the Docker images..."
-        if [ $PROJECT_PRERELEASE -eq 0 ]; then
-          docker build \
-            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
-            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
-            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
-            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
-            -t "$CI_REGISTRY_IMAGE:latest" \
-            -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
-            -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
-            -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
-            .
-          
-          echo "Saving the Docker images..."
-          docker save --output "$CI_PROJECT_DIR/docker.tar" \
-            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
-            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
-            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
-            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
-            "$CI_REGISTRY_IMAGE:latest" \
-            "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
-            "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
-            "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
-        else
-          docker build \
-            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
-            -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
-            .
-          
-          echo "Saving the Docker images..."
-          docker save --output "$CI_PROJECT_DIR/docker.tar" \
-            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
-            "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
-        fi
+      echo "Building the Docker images..."
+      if [ $PROJECT_PRERELEASE -eq 0 ]; then
+        docker build \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
+          -t "$CI_REGISTRY_IMAGE:latest" \
+          -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+          -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
+          -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
+          .
+        
+        echo "Saving the Docker images..."
+        docker save --output "$CI_PROJECT_DIR/docker.tar" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
+          "$CI_REGISTRY_IMAGE:latest" \
+          "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+          "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
+          "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
+      else
+        docker build \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+          -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+          .
+        
+        echo "Saving the Docker images..."
+        docker save --output "$CI_PROJECT_DIR/docker.tar" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+          "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
       fi
 
 publish:
+  image: docker:20
   stage: build
-  needs: ["build"]
+  needs: ["docker-build"]
   only:
     - tags
   cache:
@@ -146,17 +171,22 @@ publish:
       fi
 
 release:
-    stage: deploy
-    needs: ["publish"]
-    only:
-      - tags
-    script:
-      - |
-        sshpass -p "$SSH_PASSWORD" ssh $SSH_USERNAME@$SSH_HOST \
-          "docker run --rm \
-            -v /var/run/docker.sock:/var/run/docker.sock \
-            -v /root/.docker/config.json:/config.json:ro \
-            -e WATCHTOWER_NOTIFICATIONS=slack \
-            -e WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER="Watchtower" \
-            -e WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL="${{ secrets.WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL }}" \
-            containrrr/watchtower naruto-evolution --run-once --cleanup --include-restarting"
+  image: ubuntu:22.04
+  stage: deploy
+  needs: ["publish"]
+  only:
+    - tags
+  before_script:
+    - |
+      apt-get update
+      apt-get install sshpass -y
+  script:
+    - |
+      sshpass -p "$SSH_PASSWORD" ssh $SSH_USERNAME@$SSH_HOST \
+        "docker run --rm \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          -v /root/.docker/config.json:/config.json:ro \
+          -e WATCHTOWER_NOTIFICATIONS=slack \
+          -e WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER="Watchtower" \
+          -e WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL="${{ secrets.WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL }}" \
+          containrrr/watchtower naruto-evolution --run-once --cleanup --include-restarting"
