@@ -45,7 +45,7 @@ build:
   script:
     - |
       echo "Building $CI_PROJECT_NAME..."
-      docker run --rm -v "$CI_PROJECT_DIR:$CI_PROJECT_DIR" "BYOND_IMAGE:$BYOND_VERSION" DreamMaker "$CI_PROJECT_DIR/naruto-evolution.dme"
+      docker run --rm -v "$CI_PROJECT_DIR:$CI_PROJECT_DIR" "$BYOND_IMAGE:$BYOND_VERSION" DreamMaker "$CI_PROJECT_DIR/naruto-evolution.dme"
       PROJECT_VERSION="$CI_COMMIT_TAG"
       echo "$PROJECT_VERSION" > "$CI_PROJECT_DIR/VERSION"
       (echo "$PROJECT_VERSION" | grep -q "-") && [ $? -eq 0 ] && echo "PRERELEASE" > "$CI_PROJECT_DIR/PRERELEASE"; PROJECT_PRERELEASE=1
