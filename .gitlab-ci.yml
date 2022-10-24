@@ -1,4 +1,4 @@
-image: 20-dind
+image: docker:20-dind
 
 variables:
   PROJECT_DME: "naruto-evolution.dme"
