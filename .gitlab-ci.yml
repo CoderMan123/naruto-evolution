@@ -40,6 +40,9 @@ build:
       ls $CI_PROJECT_DIR
       echo "."
       ls .
+      echo "checking docker volume files..."
+      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls .
+      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls $CI_PROJECT_DIR
 
       echo "Building $CI_PROJECT_NAME..."
       docker run -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
