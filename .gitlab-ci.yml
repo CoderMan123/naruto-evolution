@@ -45,11 +45,12 @@ build:
       cd byond
       sed -i 's|install:|&\n\tmkdir -p $(MAN_DIR)/man6|' Makefile
       make install
+      cd ..
   script:
     - |
       ls -lh .
       echo "Building $CI_PROJECT_NAME..."
-      /usr/local/byond/bin/DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
+      ./byond/bin/DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
       PROJECT_VERSION="$CI_COMMIT_TAG"
       echo "$PROJECT_VERSION" > "$CI_PROJECT_DIR/VERSION"
       (echo "$PROJECT_VERSION" | grep -q "-") && [ $? -eq 0 ] && echo "PRERELEASE" > "$CI_PROJECT_DIR/PRERELEASE"; PROJECT_PRERELEASE=1
