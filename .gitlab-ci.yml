@@ -114,7 +114,6 @@ docker-build:
           -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
           -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
           .
-        
         echo "Saving the Docker images..."
         docker save --output "$CI_PROJECT_DIR/docker.tar" \
           "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
@@ -130,11 +129,10 @@ docker-build:
           -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
           -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
           .
-        
         echo "Saving the Docker images..."
         docker save --output "$CI_PROJECT_DIR/docker.tar" \
           "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
-          "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+          "$CI_REGISTRY_IMAGE:$PROJECT_VERSION"
       fi
 
 publish:
