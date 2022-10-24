@@ -33,7 +33,7 @@ build:
   before_script:
     - |
       apk update
-      apk install curl sshpass
+      apk add curl sshpass
   script:
     - |
       echo "Building $CI_PROJECT_NAME..."
