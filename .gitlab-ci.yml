@@ -46,8 +46,8 @@ build:
       sed -i 's|install:|&\n\tmkdir -p $(MAN_DIR)/man6|' Makefile
       make install
       cd ..
-      ls -la /usr/local/byond/bin
-      find / -name "DreamMaker"
+      /usr/local/bin/DreamMaker
+      /usr/local/byond/bin/DreamMaker
   script:
     - |
       ls -lh .
