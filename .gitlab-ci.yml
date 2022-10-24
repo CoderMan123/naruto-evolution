@@ -35,20 +35,8 @@ build:
       apk add sshpass
   script:
     - |
-      echo "Outputting debugging information..."
-      echo "$CI_PROJECT_DIR:"
-      ls $CI_PROJECT_DIR
-      echo "."
-      ls .
-      echo "checking docker volume files..."
-      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls .
-      echo "checking for /builds/douglasparker"
-      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls /builds/douglasparker
-      echo "checking for /builds/douglasparker/naruto-evolution"
-      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls /builds/douglasparker/naruto-evolution
-
       echo "Building $CI_PROJECT_NAME..."
-      docker run -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
+      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
       PROJECT_VERSION="$CI_COMMIT_TAG"
       echo "$PROJECT_VERSION" > "$CI_PROJECT_DIR/VERSION"
       (echo "$PROJECT_VERSION" | grep -q "-") && [ $? -eq 0 ] && echo "PRERELEASE" > "$CI_PROJECT_DIR/PRERELEASE"; PROJECT_PRERELEASE=1
