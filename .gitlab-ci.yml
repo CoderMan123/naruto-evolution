@@ -46,6 +46,8 @@ build:
       sed -i 's|install:|&\n\tmkdir -p $(MAN_DIR)/man6|' Makefile
       make install
       cd ..
+      man DreamDaemon
+      ls -la /usr/local/byond/bin
   script:
     - |
       ls -lh .
