@@ -158,11 +158,19 @@ publish:
         echo "Loading the Docker images..."
         docker load --input "$CI_PROJECT_DIR/docker.tar"
 
-        echo "Publishing the Docker images to the Docker Registry..."
-        docker push --all-tags "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME"
+        if [ $PROJECT_PRERELEASE -eq 0 ]; then
+          echo "Publishing the Docker images to the Docker Registry..."
+          docker push "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
 
-        echo "Publishing the Docker images to the GitLab Container Registry..."
-        docker push --all-tags "$CI_REGISTRY_IMAGE"
+          echo "Publishing the Docker images to the GitLab Container Registry..."
+          docker push "$CI_REGISTRY_IMAGE:latest" "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
+        else
+          echo "Publishing the Docker images to the Docker Registry..."
+          docker push ""$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION"
+
+          echo "Publishing the Docker images to the GitLab Container Registry..."
+          docker push "$CI_REGISTRY_IMAGE:$PROJECT_VERSION"
+        fi
       else
         echo "This docker image already exists in the Docker Registry..."
         echo "The publish job has been skipped."
