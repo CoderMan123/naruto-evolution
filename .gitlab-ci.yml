@@ -141,7 +141,7 @@ release:
       - tags
     script:
       - |
-        sshpass -p "$SSH_PASSWORD" ssh $SSH_HOST@$SSH_PASSWORD \
+        sshpass -p "$SSH_PASSWORD" ssh $SSH_HOST@$SSH_USERNAME \
           "docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v /root/.docker/config.json:/config.json:ro \
