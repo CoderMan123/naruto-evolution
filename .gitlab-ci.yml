@@ -39,6 +39,7 @@ build:
       apk add curl unzip make libstdc++6
       BYOND_MAJOR_VERSION="$(echo "$(cut -d '.' -f 1 <(echo "$BYOND_VERSION"))")" && echo "BYOND_MAJOR_VERSION=$BYOND_MAJOR_VERSION" >> build.env
       BYOND_MINOR_VERSION="$(echo "$(cut -d '.' -f 2 <(echo "$BYOND_VERSION"))")" && echo "BYOND_MINOR_VERSION=$BYOND_MINOR_VERSION" >> build.env
+      echo "Downloading: http://www.byond.com/download/build/$BYOND_MAJOR_VERSION/$BYOND_VERSION_byond_linux.zip..."
       curl "http://www.byond.com/download/build/$BYOND_MAJOR_VERSION/$BYOND_VERSION_byond_linux.zip" -o byond.zip
       ls -lh .
       unzip byond.zip
