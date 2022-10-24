@@ -48,58 +48,66 @@ build:
       echo "PROJECT_MINOR_VERSION=$PROJECT_MINOR_VERSION" >> build.env
       echo "PROJECT_PATCH_VERSION=$PROJECT_PATCH_VERSION" >> build.env
 
-      echo "Logging into the DockerHub Registry..."
-      docker login --username "$DOCKER_USERNAME" --password "$DOCKER_TOKEN"
-
-      echo "Logging into the GitLab Container Registry..."
-      docker login "$CI_REGISTRY" --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD"
-
-      echo "Checking if this release was already published to the DockerHub Registry..."
-      # Disable exit on error (non-zero exit code) to ensure pipelines don't fail when `docker manifest inspect` returns 0
-      echo "Disabling exit on error (non-zero exit code)..."
-      set +e
-      docker manifest inspect "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION"
-      echo "Enabling exit on error (non-zero exit code)..."
-      set -e
-      if [ $? -eq 0 ]; then
-        echo "An existing tag was found!"
-        PROJECT_DOCKER_MANIFEST_EXISTS=1
-        echo "PROJECT_DOCKER_MANIFEST_EXISTS=$PROJECT_DOCKER_MANIFEST_EXISTS" >> build.env
+      if [ $CI_COMMIT_TAG ]; then
+        echo "Logging into the DockerHub Registry..."
+        docker login --username "$DOCKER_USERNAME" --password "$DOCKER_TOKEN"
       fi
 
-      echo "Building the Docker images..."
-      if [ $PROJECT_PRERELEASE -eq 0 ]; then
-        docker build \
-          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
-          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
-          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
-          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
-          -t "$CI_REGISTRY_IMAGE:latest" \
-          -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
-          -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
-          -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
-          .
-        
-        echo "Saving the Docker images..."
-        docker save --output "$CI_PROJECT_DIR/docker.tar" \
-          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
-          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
-          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
-          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
-          "$CI_REGISTRY_IMAGE:latest" \
-          "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
-          "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
-          "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
-      else
-        docker build \
-          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
-          -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
-          .
-        
-        echo "Saving the Docker images..."
-        docker save --output "$CI_PROJECT_DIR/docker.tar" \
-          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
-          "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+      if [ $CI_COMMIT_TAG ]; then
+        echo "Logging into the GitLab Container Registry..."
+        docker login "$CI_REGISTRY" --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD"
+      fi
+
+      if [ $CI_COMMIT_TAG ]; then
+        echo "Checking if this release was already published to the DockerHub Registry..."
+        # Disable exit on error (non-zero exit code) to ensure pipelines don't fail when `docker manifest inspect` returns 0
+        echo "Disabling exit on error (non-zero exit code)..."
+        set +e
+        docker manifest inspect "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION"
+        echo "Enabling exit on error (non-zero exit code)..."
+        set -e
+        if [ $? -eq 0 ]; then
+          echo "An existing tag was found!"
+          PROJECT_DOCKER_MANIFEST_EXISTS=1
+          echo "PROJECT_DOCKER_MANIFEST_EXISTS=$PROJECT_DOCKER_MANIFEST_EXISTS" >> build.env
+        fi
+      fi
+
+      if [ $CI_COMMIT_TAG ]; then
+        echo "Building the Docker images..."
+        if [ $PROJECT_PRERELEASE -eq 0 ]; then
+          docker build \
+            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
+            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
+            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
+            -t "$CI_REGISTRY_IMAGE:latest" \
+            -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+            -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
+            -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
+            .
+          
+          echo "Saving the Docker images..."
+          docker save --output "$CI_PROJECT_DIR/docker.tar" \
+            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
+            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
+            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
+            "$CI_REGISTRY_IMAGE:latest" \
+            "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+            "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
+            "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
+        else
+          docker build \
+            -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+            -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+            .
+          
+          echo "Saving the Docker images..."
+          docker save --output "$CI_PROJECT_DIR/docker.tar" \
+            "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+            "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+        fi
       fi
 
 publish:
