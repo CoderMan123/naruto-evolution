@@ -1,18 +1,151 @@
-image: douglasparker/byond:514.1566
+image: docker:20-dind
 
 variables:
-    BYOND_DME: "Project-Evolution.dme"
-    GIT_SUBMODULE_STRATEGY: recursive
-
-stages:
-    - build
+  PROJECT_DME: "naruto-evolution.dme"
+  PROJECT_VERSION: ""
+  PROJECT_MAJOR_VERSION: ""
+  PROJECT_MINOR_VERSION: ""
+  PROJECT_PATCH_VERSION: ""
+  PROJECT_PRERELEASE: 0
+  PROJECT_DOCKER_MANIFEST_EXISTS: 0
+  BYOND_IMAGE: "douglasparker/byond"
+  BYOND_VERSION: "514.1589"
+  GIT_SUBMODULE_STRATEGY: recursive
 
 build:
-    stage: build
-    script:
-        - DreamMaker "$CI_PROJECT_DIR/$BYOND_DME"
+  stage: build
+  only:
+    - main
+    - dev
+    - tags
+    - merge_requests
+    - triggers
+  artifacts:
+    reports:
+      dotenv: build.env
+  cache:
+    key: "$CI_PIPELINE_ID"
+    policy: push
+    paths:
+      - "$CI_PROJECT_DIR/docker.tar"
+  before_script:
+    - |
+      apk update
+      apk add curl
+      apk add sshpass
+  script:
+    - |
+      echo "Building $CI_PROJECT_NAME..."
+      docker run -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
+      PROJECT_VERSION="$CI_COMMIT_TAG"
+      echo "$PROJECT_VERSION" > "$CI_PROJECT_DIR/VERSION"
+      (echo "$PROJECT_VERSION" | grep -q "-") && [ $? -eq 0 ] && echo "PRERELEASE" > "$CI_PROJECT_DIR/PRERELEASE"; PROJECT_PRERELEASE=1
+      PROJECT_MAJOR_VERSION="$(echo "$(cut -d '.' -f 1 <(echo "$PROJECT_VERSION"))")"
+      PROJECT_MINOR_VERSION="$(echo "$(cut -d '.' -f 2 <(echo "$PROJECT_VERSION"))")"
+      PROJECT_PATCH_VERSION="$(echo "$(cut -d '.' -f 3 <(echo "$PROJECT_VERSION"))")"
+      echo "PROJECT_VERSION=$PROJECT_VERSION" >> build.env
+      echo "PROJECT_MAJOR_VERSION=$PROJECT_MAJOR_VERSION" >> build.env
+      echo "PROJECT_MINOR_VERSION=$PROJECT_MINOR_VERSION" >> build.env
+      echo "PROJECT_PATCH_VERSION=$PROJECT_PATCH_VERSION" >> build.env
+
+      echo "Logging into the DockerHub Registry..."
+      docker login --username "$DOCKER_USERNAME" --password "$DOCKER_TOKEN"
+
+      echo "Logging into the GitLab Container Registry..."
+      docker login "$CI_REGISTRY" --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD"
+
+      echo "Checking if this release was already published to the DockerHub Registry..."
+      # Disable exit on error (non-zero exit code) to ensure pipelines don't fail when `docker manifest inspect` returns 0
+      echo "Disabling exit on error (non-zero exit code)..."
+      set +e
+      docker manifest inspect "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION"
+      echo "Enabling exit on error (non-zero exit code)..."
+      set -e
+      if [ $? -eq 0 ]; then
+        echo "An existing tag was found!"
+        PROJECT_DOCKER_MANIFEST_EXISTS=1
+        echo "PROJECT_DOCKER_MANIFEST_EXISTS=$PROJECT_DOCKER_MANIFEST_EXISTS" >> build.env
+      fi
+
+      echo "Building the Docker images..."
+      if [ $PROJECT_PRERELEASE -eq 0 ]; then
+        docker build \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
+          -t "$CI_REGISTRY_IMAGE:latest" \
+          -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+          -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
+          -t "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
+          .
+        
+        echo "Saving the Docker images..."
+        docker save --output "$CI_PROJECT_DIR/docker.tar" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION" \
+          "$CI_REGISTRY_IMAGE:latest" \
+          "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+          "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION" \
+          "$CI_REGISTRY_IMAGE:$PROJECT_MAJOR_VERSION.$PROJECT_MINOR_VERSION"
+      else
+        docker build \
+          -t "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+          -t "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+          .
+        
+        echo "Saving the Docker images..."
+        docker save --output "$CI_PROJECT_DIR/docker.tar" \
+          "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$PROJECT_VERSION" \
+          "$CI_REGISTRY_IMAGE:$PROJECT_VERSION" \
+      fi
+
+publish:
+  stage: build
+  needs: ["build"]
+  only:
+    - tags
+  cache:
+    key: "$CI_PIPELINE_ID"
+    policy: pull
+    paths:
+      - "$CI_PROJECT_DIR/docker.tar"
+  script:
+    - |
+      if [ "$PROJECT_DOCKER_MANIFEST_EXISTS" -eq 0 ]; then
+        echo "Logging into the DockerHub Registry..."
+        docker login --username "$DOCKER_USERNAME" --password "$DOCKER_TOKEN"
+
+        echo "Logging into the GitLab Container Registry..."
+        docker login "$CI_REGISTRY" --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD"
+
+        echo "Loading the Docker images..."
+        docker load --input "$CI_PROJECT_DIR/docker.tar"
+
+        echo "Publishing the Docker images to the Docker Registry..."
+        docker push --all-tags "$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME"
+
+        echo "Publishing the Docker images to the GitLab Container Registry..."
+        docker push --all-tags "$CI_REGISTRY_IMAGE"
+      else
+        echo "This docker image already exists in the Docker Registry..."
+        echo "The publish job has been skipped."
+      fi
+
+release:
+    stage: deploy
+    needs: ["publish"]
     only:
-        - master
-        - develop
-        - master-v1
-        - develop-v1
+      - tags
+    script:
+      - |
+        sshpass -p "$SSH_PASSWORD" ssh $SSH_HOST@$SSH_PASSWORD \
+          "docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v /root/.docker/config.json:/config.json:ro \
+            -e WATCHTOWER_NOTIFICATIONS=slack \
+            -e WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER="Watchtower" \
+            -e WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL="${{ secrets.WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL }}" \
+            containrrr/watchtower naruto-evolution --run-once --cleanup --include-restarting"
