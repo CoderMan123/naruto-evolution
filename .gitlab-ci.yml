@@ -13,6 +13,8 @@ variables:
   BYOND_MAJOR_VERSION: ""
   BYOND_MINOR_VERSION: ""
   GIT_SUBMODULE_STRATEGY: recursive
+  DOCKER_DRIVER: overlay2 # not sure if this is needed
+  DOCKER_TLS_CERTDIR: "/certs"
 
 build:
   stage: build
