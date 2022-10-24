@@ -41,15 +41,15 @@ build:
       BYOND_MINOR_VERSION="$(echo "$(cut -d '.' -f 2 <(echo "$BYOND_VERSION"))")" && echo "BYOND_MINOR_VERSION=$BYOND_MINOR_VERSION" >> build.env
       echo "Downloading: http://www.byond.com/download/build/${BYOND_MAJOR_VERSION}/${BYOND_VERSION}_byond_linux.zip..."
       curl "http://www.byond.com/download/build/${BYOND_MAJOR_VERSION}/${BYOND_VERSION}_byond_linux.zip" -o byond.zip
-      ls -lh .
       unzip byond.zip
       cd byond
       sed -i 's|install:|&\n\tmkdir -p $(MAN_DIR)/man6|' Makefile
       make install
   script:
     - |
+      ls -lh .
       echo "Building $CI_PROJECT_NAME..."
-      ./byond/bin/DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
+      /usr/local/byond/bin/DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
       PROJECT_VERSION="$CI_COMMIT_TAG"
       echo "$PROJECT_VERSION" > "$CI_PROJECT_DIR/VERSION"
       (echo "$PROJECT_VERSION" | grep -q "-") && [ $? -eq 0 ] && echo "PRERELEASE" > "$CI_PROJECT_DIR/PRERELEASE"; PROJECT_PRERELEASE=1
