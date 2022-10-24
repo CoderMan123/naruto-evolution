@@ -42,10 +42,11 @@ build:
       ls .
       echo "checking docker volume files..."
       docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls .
-      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls /builds/douglasparker/naruto-evolution
+      echo "checking for /builds"
+      docker run --rm -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION ls /builds
 
       echo "Building $CI_PROJECT_NAME..."
-      docker run -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION DreamMaker "/builds/douglasparker/naruto-evolution/$PROJECT_DME"
+      docker run -v "$CI_PROJECT_DIR":"$CI_PROJECT_DIR" $BYOND_IMAGE:$BYOND_VERSION DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
       PROJECT_VERSION="$CI_COMMIT_TAG"
       echo "$PROJECT_VERSION" > "$CI_PROJECT_DIR/VERSION"
       (echo "$PROJECT_VERSION" | grep -q "-") && [ $? -eq 0 ] && echo "PRERELEASE" > "$CI_PROJECT_DIR/PRERELEASE"; PROJECT_PRERELEASE=1
