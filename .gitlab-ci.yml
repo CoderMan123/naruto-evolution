@@ -1,4 +1,4 @@
-image: docker:20-dind
+image: ubuntu:22.04
 
 variables:
   PROJECT_DME: "naruto-evolution.dme"
@@ -35,23 +35,10 @@ build:
       apk update
       apk add curl
       apk add sshpass
-      echo "Installing BYOND v$BYOND_VERSION..."
-      apk add curl unzip make libstdc++6
-      BYOND_MAJOR_VERSION="$(echo "$(cut -d '.' -f 1 <(echo "$BYOND_VERSION"))")" && echo "BYOND_MAJOR_VERSION=$BYOND_MAJOR_VERSION" >> build.env
-      BYOND_MINOR_VERSION="$(echo "$(cut -d '.' -f 2 <(echo "$BYOND_VERSION"))")" && echo "BYOND_MINOR_VERSION=$BYOND_MINOR_VERSION" >> build.env
-      echo "Downloading: http://www.byond.com/download/build/${BYOND_MAJOR_VERSION}/${BYOND_VERSION}_byond_linux.zip..."
-      curl "http://www.byond.com/download/build/${BYOND_MAJOR_VERSION}/${BYOND_VERSION}_byond_linux.zip" -o byond.zip
-      unzip byond.zip
-      cd byond
-      sed -i 's|install:|&\n\tmkdir -p $(MAN_DIR)/man6|' Makefile
-      make install
-      cd ..
-      /usr/local/byond/bin/DreamMaker
   script:
     - |
-      ls -lh .
       echo "Building $CI_PROJECT_NAME..."
-      byond/bin/DreamMaker "$CI_PROJECT_DIR/$PROJECT_DME"
+      docker run --rm -v "$CI_PROJECT_DIR:$CI_PROJECT_DIR" "BYOND_IMAGE:$BYOND_VERSION" DreamMaker "$CI_PROJECT_DIR/naruto-evolution.dme"
       PROJECT_VERSION="$CI_COMMIT_TAG"
       echo "$PROJECT_VERSION" > "$CI_PROJECT_DIR/VERSION"
       (echo "$PROJECT_VERSION" | grep -q "-") && [ $? -eq 0 ] && echo "PRERELEASE" > "$CI_PROJECT_DIR/PRERELEASE"; PROJECT_PRERELEASE=1
