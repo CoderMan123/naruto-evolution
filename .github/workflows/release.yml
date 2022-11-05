@@ -6,6 +6,7 @@ on:
 
 env:
   BYOND_VERSION: "514.1589"
+  REGISTRY: docker.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
