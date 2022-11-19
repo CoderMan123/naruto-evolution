@@ -340,6 +340,7 @@ window "Character"
 		size = 300x589
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -348,6 +349,8 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 314x603
+		inner-size = 300x589
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -358,6 +361,33 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = ""
+	elem "Clan2"
+		type = LABEL
+		pos = 187,96
+		size = 110x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = ""
+		text = "Hyuuga"
+	elem "label47"
+		type = LABEL
+		pos = 187,72
+		size = 110x22
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Open Sans"
+		font-size = 10
+		text-color = #c8c8c8
+		background-color = #191919
+		is-disabled = true
+		border = line
+		saved-params = ""
+		text = "Clan 2"
 	elem "Precision"
 		type = LABEL
 		pos = 151,504
@@ -1030,7 +1060,7 @@ window "Character"
 	elem "Clan"
 		type = LABEL
 		pos = 75,96
-		size = 222x22
+		size = 110x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -1073,7 +1103,7 @@ window "Character"
 	elem "label2"
 		type = LABEL
 		pos = 75,72
-		size = 222x22
+		size = 110x22
 		anchor1 = 0,0
 		anchor2 = 100,0
 		font-family = "Open Sans"
@@ -1526,6 +1556,7 @@ window "InputPanel"
 		size = 500x28
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1533,6 +1564,8 @@ window "InputPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 514x42
+		inner-size = 500x28
 	elem "ChatBackground"
 		type = LABEL
 		pos = 0,0
@@ -1937,8 +1970,6 @@ window "Main"
 		can-resize = false
 		icon = 'assets\\interface\\Taskbar-32.png'
 		macro = "Macro"
-		outer-size = 1294x734
-		inner-size = 1280x720
 	elem "Child"
 		type = CHILD
 		pos = 0,0
@@ -1975,7 +2006,6 @@ window "Main"
 		size = 1280x25
 		anchor1 = 0,100
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		left = "Navigation"
 		is-vert = false
@@ -1985,7 +2015,6 @@ window "Main"
 		size = 500x28
 		anchor1 = 0,100
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "InputPanel"
@@ -2010,7 +2039,6 @@ window "Main"
 		size = 300x155
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "splitter"
 		left = "Reconnect"
@@ -2094,7 +2122,6 @@ window "Map"
 		size = 1010x675
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -2104,8 +2131,6 @@ window "Map"
 		is-pane = true
 		macro = "macro"
 		menu = "menu"
-		outer-size = 1024x689
-		inner-size = 1010x675
 	elem "Main"
 		type = MAP
 		pos = 0,0

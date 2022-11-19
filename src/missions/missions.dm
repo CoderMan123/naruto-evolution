@@ -134,7 +134,11 @@ mission
 							if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 								m.exp += jounin_reward
 								m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
-
+							if(m.village == VILLAGE_LEAF)
+								Lootdrop("LeafMissions", m, 5)
+							else
+								Lootdrop("SandMissions", m, 5)
+							Lootdrop("StandardClans", m, 10)
 							m.Levelup()
 							spawn() m.UpdateHMB()
 							spawn() squad.RefreshMember(m)
@@ -149,6 +153,9 @@ mission
 					O.squad.mission.status = "Failure"
 					O.squad.mission.complete = world.realtime
 
+					var/scrolltype //1 = leaf 2 = sand
+					if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel)) scrolltype = 1
+					if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel)) scrolltype = 2
 					M.DestroyItem(O)
 
 					spawn() M.client.UpdateInventoryPanel()
@@ -163,15 +170,33 @@ mission
 							if(M.village == VILLAGE_AKATSUKI)
 								M.client.prompt("Excellent work. We'll make good use of this.", "Zetsu")
 								M << output("You have successfully stolen intel and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+								Lootdrop("AkatsukiClans", m, 3)
+								if(scrolltype == 1)
+									Lootdrop("LeafMissions", m, 3)
+								else if(scrolltype == 2)
+									Lootdrop("SandMissions", m, 3)
 							else if(M.village == VILLAGE_MISSING_NIN)
 								M.client.prompt("Ah wonderful. Here's your money now get lost before someone sees us.", "Shady Looking Figure")
 								M << output("You have successfully stolen intel and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+								Lootdrop("MissingNin", m, 3)
+								if(scrolltype == 1)
+									Lootdrop("LeafMissions", m, 3)
+								else if(scrolltype == 2)
+									Lootdrop("SandMissions", m, 3)
 							else
 								spawn() M.client.prompt("Well done. That'll teach them not to spy on us.", "[src.complete_npc]")
 								M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+								if(m.village == VILLAGE_LEAF)
+									Lootdrop("SandMissions", m, 3)
+								else
+									Lootdrop("LeafMissions", m, 3)
+								Lootdrop("StandardClans", m, 3)
 
 				// Solo ninja turning in the mission
 				else if(O && !O.squad.mission.complete)
+					var/scrolltype //1 = leaf 2 = sand
+					if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel)) scrolltype = 1
+					if(istype(O, /obj/Inventory/mission/deliver_intel/sand_intel)) scrolltype = 2
 					M.DestroyItem(O)
 
 					spawn() M.client.UpdateInventoryPanel()
@@ -182,12 +207,27 @@ mission
 					if(M.village == VILLAGE_AKATSUKI)
 						M.client.prompt("Excellent work. We'll make good use of this.", "Zetsu")
 						M << output("You have successfully stolen intel and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+						Lootdrop("AkatsukiClans", M, 5)
+						if(scrolltype == 1)
+							Lootdrop("LeafMissions", M, 5)
+						else if(scrolltype == 2)
+							Lootdrop("SandMissions", M , 5)
 					else if(M.village == VILLAGE_MISSING_NIN)
 						M.client.prompt("Ah wonderful. Here's your money now get lost before someone sees us.", "Shady Looking Figure")
 						M << output("You have successfully stolen intel and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+						Lootdrop("MissingNin", M, 5)
+						if(scrolltype == 1)
+							Lootdrop("LeafMissions", M, 5)
+						else if(scrolltype == 2)
+							Lootdrop("SandMissions", M, 5)
 					else
 						spawn() M.client.prompt("I've been waiting for this. Thank you for your service.", "[src.complete_npc]")
 						M << output("You have completed your mission and you have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!.", "Action.Output")
+						if(M.village == VILLAGE_LEAF)
+							Lootdrop("SandMissions", M, 5)
+						else
+							Lootdrop("LeafMissions", M, 5)
+						Lootdrop("StandardClans", M, 5)
 
 			if(/mission/c_rank/the_war_effort)
 				if(squad && !squad.mission.complete)
@@ -258,10 +298,14 @@ mission
 								if(squad == m.GetLeader() && m.rank == RANK_JOUNIN)
 									m.exp += jounin_reward
 									m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
-
-									m.Levelup()
-									spawn() m.UpdateHMB()
-									spawn() squad.RefreshMember(m)
+								Lootdrop("MissingNin", m, 2)
+								if(m.village == VILLAGE_LEAF)
+									Lootdrop("LeafMissions", m, 5)
+								else
+									Lootdrop("SandMissions", m, 5)
+								m.Levelup()
+								spawn() m.UpdateHMB()
+								spawn() squad.RefreshMember(m)
 
 			if(/mission/a_rank/political_escort)
 				if(squad && !squad.mission.complete)
@@ -320,9 +364,14 @@ mission
 									m.exp += jounin_reward
 									m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
-									m.Levelup()
-									spawn() m.UpdateHMB()
-									spawn() squad.RefreshMember(m)
+								if(m.village == VILLAGE_LEAF)
+									Lootdrop("LeafMissions", m, 5)
+								else
+									Lootdrop("SandMissions", m, 5)
+
+								m.Levelup()
+								spawn() m.UpdateHMB()
+								spawn() squad.RefreshMember(m)
 
 			if(/mission/s_rank/clouds_of_crimson)
 				if(squad && !squad.mission.complete)
@@ -357,9 +406,15 @@ mission
 									m.exp += jounin_reward
 									m << output("You have recieved an additional [jounin_reward] exp for fulfilling your role as a teacher!", "Action.Output")
 
-									m.Levelup()
-									spawn() m.UpdateHMB()
-									spawn() squad.RefreshMember(m)
+								if(m.village == VILLAGE_LEAF)
+									Lootdrop("LeafMissions", m, 5)
+								else
+									Lootdrop("SandMissions", m, 5)
+								Lootdrop("AkatsukiClans", m, 5)
+
+								m.Levelup()
+								spawn() m.UpdateHMB()
+								spawn() squad.RefreshMember(m)
 
 	New(mob/M)
 		..()

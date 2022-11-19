@@ -127,7 +127,9 @@ client
 						src.UpdateSkillTreePanel(/obj/skill_tree_locations/elemental)
 
 					if("Clan Jutsu")
-						winset(src, "SkillTree", "is-visible=true")
+						if(src.mob.Clan2 == CLAN_NOCLAN)
+							src.mob.client.prompt("You don't have a second clan yet.", src.mob.name)
+						else winset(src, "SkillTree", "is-visible=true")
 						switch(src.mob.Clan)
 							if(CLAN_ABURAME) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_aburame)
 							if(CLAN_AKIMICHI) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_akimichi)
@@ -157,7 +159,7 @@ client
 							if(CLAN_YELLOWFLASH) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_yellowflash)
 
 					if("Clan Jutsu II")
-						if(!src.mob.Clan2)
+						if(src.mob.Clan2 == CLAN_NOCLAN)
 							src.mob.client.prompt("You don't have a second clan yet.", src.mob.name)
 						else winset(src, "SkillTree", "is-visible=true")
 						switch(src.mob.Clan2)
@@ -1002,6 +1004,7 @@ client
 					Character.Avatar.keep-aspect			= "true"
 					Character.Name.text        				= "[src.mob.name]"
 					Character.Clan.text        				= "[src.mob.Clan]"
+					Character.Clan2.text        			= "[src.mob.Clan2]"
 					Character.Village.text     				= "[src.mob.village] ≡ [src.mob.rank]"
 					Character.VillageImage.image     		= "\ref[fcopy_rsc(village_image)]"
 					Character.RankImage.image     			= "\ref[fcopy_rsc(rank_image)]"

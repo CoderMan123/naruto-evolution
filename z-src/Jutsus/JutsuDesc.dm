@@ -321,7 +321,7 @@ obj
 			name="Hidden Snake Stab"
 			rank="S"
 			signs="<font color=green>Rat,Snake,Dog</font><br>(macro(Q,2,E))"
-			Clan= "SnakeSage"
+			Clan= CLAN_SAGE
 			Sprice=2
 			reqs=list("Sage Mode")
 			Description="You turn your arm into deadly snakes to stab and bite an enemy in it's way dealing damage (Nin) and breifly binding yourself and the target for the duration."
@@ -336,7 +336,7 @@ obj
 			name="Snake Skin Replacement"
 			rank="C"
 			signs="<font color=green>Ox,Rat,Rat,Ox</font><br>(macro(W,Q,Q,W))"
-			Clan= "SnakeSage"
+			Clan= CLAN_SAGE
 			uses=0
 			reqs=list("Hidden Snake Stab")
 			Sprice = 3
@@ -351,7 +351,7 @@ obj
 			mouse_drag_pointer = "Sage Mode"
 			name="Sage Mode"
 			rank="S"
-			Clan= "No Clan"
+			Clan= CLAN_SAGE
 			Specialist="Ninjutsu"
 			Sprice=4
 			uses=100
@@ -368,7 +368,7 @@ obj
 			name="Sage Style Giant Rasengan"
 			rank="S"
 			signs="<font color=green>Rabbit,Ox,Rabbit,Ox,Rabbit,Ox</font><br>(macro(1,W,1,W,1,W))"
-			Clan= "SnakeSage"
+			Clan= CLAN_SAGE
 			Sprice=4
 			reqs=list("Summoning Jutsu: Snake","Rasengan")
 			Description="Channel your Sage Mode energy by aligning your chakra to create a giant ball of spinning energy. Upon the jutsu being fully charged you run towards a direction or your target at starling speeds dealing damage (Nin|Prc) to your target if you get into melee range."
@@ -383,7 +383,7 @@ obj
 			name="Sage Style: Giant Snake"
 			rank="A"
 			signs="<font color=green>Dog,Rat,Rat,Dragon,Dog</font><br>(macro(E,Q,Q,5,E))"
-			Clan= "SnakeSage"
+			Clan= CLAN_SAGE
 			maxcooltime = 0
 			ChakraCost = 0
 			reqs=list("Sage Mode")
@@ -393,7 +393,7 @@ obj
 			icon_state="SnakeSummoning"
 			mouse_drag_pointer = "SnakeSummoning"
 			name="Summoning Jutsu: Snake"
-			Clan="SnakeSage"
+			Clan= CLAN_SAGE
 			rank="B"
 			Sprice=3
 			reqs=list("Snake Skin Replacement")
@@ -412,6 +412,7 @@ obj
 			name="Sage Style: Toad Bind"
 			rank="S"
 			signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			Clan= CLAN_SAGE
 			maxcooltime = 0
 			ChakraCost = 0
 			Sprice=5
@@ -425,7 +426,7 @@ obj
 			name="Warp Rasengan"
 			rank="S"
 			signs="<font color=green>Rabbit,Monkey,Monkey,Rabbit,Monkey</font><br>(macro(1,4,4,1,4))"
-			Clan= "Yellow Flash"
+			Clan= CLAN_YELLOWFLASH
 			Sprice=4
 			reqs=list("Flying Thunder God: Great Escape","Rasengan")
 			Description="Instantly warp to an opponent marked with a spacial seal sending them flying with a Rasengan to deal damage (Nin)."
@@ -440,7 +441,7 @@ obj
 			name="Flying Thunder God"
 			rank="A"
 			signs="<font color=green>Rabbit</font><br>(macro(1))"
-			Clan= "Yellow Flash"
+			Clan= CLAN_YELLOWFLASH
 			Sprice=2
 			reqs=list("Flying Thunder God: Kunai")
 			Description="The ultimate spacial jutsu allowing the user to instantly transport themselves through space to their spacial kunai seal. You can also teleport to a target marked with your seal."
@@ -456,7 +457,7 @@ obj
 			rank="A"
 			signs="<font color=green>Dog,Rat,Rabbit</font><br>(macro(E, Q, 1))"//needs setting
 			Specialist="Ninjutsu"
-			Clan= "No Clan"
+			Clan= CLAN_YELLOWFLASH
 			Sprice=2
 			Description="Learn to throw a kunai infused with a spacial seal. If the kunai hits someone it will mark them with a spacial seal and deal damage (Nin|Prc). Otherwise the kunai will fall harmlessly onto the ground."
 			New()
@@ -470,7 +471,7 @@ obj
 			name="Flying Thunder God: Great Escape"
 			rank="A"
 			signs="<font color=green>Rabbit,Dog,Dog</font><br>(macro(1, E, E))"//needs setting
-			Clan= "Yellow Flash"
+			Clan= CLAN_YELLOWFLASH
 			Sprice=4
 			reqs=list("Flying Thunder God")
 			Description="Drop down a spacial seal kunai to return to upon taking damage providing you are within range."
@@ -486,7 +487,7 @@ obj
 			name="Poison Mist"
 			rank="B"
 			signs="<font color=green>Dragon,Horse,Snake</font><br>(macro(5,3,2))"
-			Clan= "Medical"
+			Clan= CLAN_MEDICAL
 			reqs=list("Heal")
 			Sprice=3
 			Description="Convert your chakra into poison gas and breath it out forwards or towards a target through your mouth dealing damage (Nin) and repeating it's damage after a delay."
@@ -501,7 +502,7 @@ obj
 			name="Heal"
 			rank="C"
 			signs="<font color=green>Dog,Snake,Rat</font><br>(macro(E,2,Q))"
-			Clan= "Medical"
+			Clan= CLAN_MEDICAL
 			Sprice=2
 			Description="Channel your chakra into life force significantly healing (Nin) yourself or a target."
 			New()
@@ -515,7 +516,7 @@ obj
 			name="One's Own Life Reincarnation"
 			rank="A"
 			signs="<font color=green>Horse,Horse,Horse</font><br>(macro(3,3,3))"
-			Clan= "Medical"
+			Clan= CLAN_MEDICAL
 			Sprice=4
 			maxcooltime = 600
 			ChakraCost = 10
@@ -533,7 +534,7 @@ obj
 			rank="A"
 			uses=100
 			signs="<font color=green>None</font><br>"
-			Clan= "Medical"
+			Clan= CLAN_MEDICAL
 			Sprice=3
 			reqs = list("Heal")
 			Description="Form blades of chakra around your hands increasing the damage of your punches."
@@ -548,7 +549,7 @@ obj
 			name="Cherry Blossom Impact"
 			rank="C"
 			signs="<font color=green>Horse,Horse,Rabbit</font><br>(macro(3,3,1))"
-			Clan= "Medical"
+			Clan= CLAN_MEDICAL
 			Sprice=2
 			reqs=list("Mystical Palms")
 			Description="Use a precise injection of chakra from your hand on an opponent to simulate immense Taijutsu blasting them away, dealing damage (Nin) and briefly binding them. Also effective at shocking someone out of certain binds."
@@ -569,7 +570,7 @@ obj
 			maxcooltime = 50
 			signs="<font color=green>None"
 			ChakraCost = 0
-			Clan="No Clan"
+			Clan= CLAN_RINNEGAN
 			Description="The Legendary Doujutsu, the Rinnegan. The forefather of all doujutsu, capable of mastering the Yin and Yang elements. Grants immunity to certain genjutsu."
 			New()
 				..()
@@ -582,7 +583,7 @@ obj
 			name="Gravity Divergence: Induction"
 			rank="A"
 			signs="<font color=green>Snake,Rabbit</font><br>(macro(2,1))"
-			Clan="Rinnegan"
+			Clan= CLAN_RINNEGAN
 			reqs=list("Rinnegan")
 			Sprice=2
 			Description="Control the force of gravity itself, dealing damage (Nin) and forcing your target towards you."
@@ -598,7 +599,7 @@ obj
 			rank="A"
 			signs="<font color=green>Rabbit,Snake</font><br>(macro(1,2))"
 			Sprice=2
-			Clan="Rinnegan"
+			Clan= CLAN_RINNEGAN
 			reqs=list("Gravity Divergence: Induction")
 			Description="Control the force of gravity itself, dealing damage (Nin) and forcing your target away from you."
 			New()
@@ -610,7 +611,7 @@ obj
 			icon_state="Chakra Leech"
 			mouse_drag_pointer = "Chakra Leech"
 			name="Chakra Leech"
-			Clan="Rinnegan"
+			Clan= CLAN_RINNEGAN
 			rank="C"
 			Sprice=2
 			reqs=list("Gravity Divergence: Repulsion")
@@ -625,7 +626,7 @@ obj
 			icon_state="Gedo Revival"
 			mouse_drag_pointer = "Gedo Revival"
 			name="Gedo Revival"
-			Clan="Rinnegan"
+			Clan= CLAN_RINNEGAN
 			rank="S"
 			signs="<font color=green>Horse,Rabbit,Horse</font><br>(macro(3,1,3))"
 			reqs=list("Chakra Leech")
@@ -641,7 +642,7 @@ obj
 			mouse_drag_pointer = "Apush"
 			name="Gravity Divergence: Almighty Push"
 			rank="S"
-			Clan="Rinnegan"
+			Clan= CLAN_RINNEGAN
 			signs="<font color=green>Rabbit,Rabbit,Snake,Snake,Rabbit,Snake</font><br>(macro(1,1,2,2,1,2))"
 			Sprice=4
 			reqs=list("Summoning Jutsu: Dog")
@@ -655,7 +656,7 @@ obj
 			icon_state="cerberus"
 			mouse_drag_pointer = "cerberus"
 			name="Summoning Jutsu: Dog"
-			Clan="Rinnegan"
+			Clan= CLAN_RINNEGAN
 			rank="B"
 			Sprice=3
 			reqs=list("Gedo Revival")
@@ -679,6 +680,7 @@ obj
 			Sprice = 0
 			signs = "<font color=green>None</font><br>"
 			maxcooltime = 5
+			Clan= CLAN_GATES
 			uses = 100
 			level = 0
 			Description="Opens the chakra gates, increasing your Taijutsu and causing damage to yourself with every punch. The benefits and downsides increase with each level of gates you use."
@@ -694,7 +696,7 @@ obj
 			rank = "B"
 			Sprice = 1
 			signs = "<font color=green>None</font><br>"
-			Clan="No Clan"
+			Clan= CLAN_GATES
 			Specialist=SPECIALIZATION_TAIJUTSU
 			maxcooltime = 200
 			uses = 100
@@ -707,7 +709,7 @@ obj
 			name="Energy Gate"
 			rank="B"
 			signs="<font color=green>None</font><br>"
-			Clan="Gates"
+			Clan= CLAN_GATES
 			maxcooltime=200
 			Sprice=2
 			uses=100
@@ -721,7 +723,7 @@ obj
 			name="Life Gate"
 			rank="B"
 			signs="<font color=green>None</font><br>"
-			Clan="Gates"
+			Clan= CLAN_GATES
 			maxcooltime=200
 			Sprice=2
 			uses=100
@@ -735,7 +737,7 @@ obj
 			name="Pain Gate"
 			rank="B"
 			signs="<font color=green>None</font><br>"
-			Clan="Gates"
+			Clan= CLAN_GATES
 			maxcooltime=200
 			Sprice=3
 			uses=100
@@ -749,7 +751,7 @@ obj
 			name="Limiter Gate"
 			rank="B"
 			signs="<font color=green>None</font><br>"
-			Clan="Gates"
+			Clan= CLAN_GATES
 			maxcooltime=200
 			Sprice=3
 			uses=100
@@ -763,7 +765,7 @@ obj
 			name="Meteor Punch"
 			rank="C"
 			signs="<font color=green>None"
-			Clan="Gates"
+			Clan= CLAN_GATES
 			Sprice=2
 			uses=100
 			reqs = list("Opening Gate")
@@ -779,7 +781,7 @@ obj
 			name="Morning Peacock"
 			rank="C"
 			signs="<font color=green>None"
-			Clan="Gates"
+			Clan= CLAN_GATES
 			Sprice=3
 			uses=100
 			reqs=list("Limiter Gate")
@@ -796,7 +798,7 @@ obj
 			mouse_drag_pointer = "Sharingan 1 tomoe"
 			name="Sharingan 1 tomoe"
 			rank="B"
-			Clan="Uchiha"
+			Clan= CLAN_UCHIHA
 			signs="<font color=green>None</font><br>"
 			maxcooltime=55
 			ChakraCost = 25
@@ -813,7 +815,7 @@ obj
 			mouse_drag_pointer = "Sharingan 2 tomoe"
 			name="Sharingan 2 tomoe"
 			rank="B"
-			Clan="Uchiha"
+			Clan= CLAN_UCHIHA
 			signs="<font color=green>None</font><br>"
 			maxcooltime=45
 			ChakraCost = 20
@@ -832,7 +834,7 @@ obj
 			mouse_drag_pointer = "Sharingan 3 tomoe"
 			name="Sharingan 3 tomoe"
 			rank="B"
-			Clan="Uchiha"
+			Clan= CLAN_UCHIHA
 			signs="<font color=green>None</font><br>"
 			maxcooltime=35
 			ChakraCost = 15
@@ -851,7 +853,7 @@ obj
 			mouse_drag_pointer = "Mangekyou Sharingan"
 			name="Mangekyou Sharingan"
 			rank="A"
-			Clan="Uchiha"
+			Clan= CLAN_UCHIHA
 			signs="<font color=green>None</font><br>"
 			maxcooltime=25
 			ChakraCost = 10
@@ -870,7 +872,7 @@ obj
 			mouse_drag_pointer = "Eternal Mangekyou"
 			name="Eternal Mangekyou Sharingan"
 			rank="S"
-			Clan="Uchiha"
+			Clan= CLAN_UCHIHA
 			signs="<font color=green>None</font><br>"
 			maxcooltime=15
 			ChakraCost = 5
@@ -891,6 +893,7 @@ obj
 			rank="S"
 			uses=100
 			signs="<font color=green>None</font><br>"
+			Clan= CLAN_UCHIHA
 			Sprice=3
 			reqs=list("Mangekyou Sharingan")
 			Description="Cause anyone looking into your eyes (targeting you) to fall into a cruel genjutsu forcing them to live out years of torture in their own mind. Victims are bound for the duration and take damage (Gen) as their will is broken."
@@ -906,6 +909,7 @@ obj
 			rank="S"
 			signs="<font color=green>None</font><br>"
 			uses=100
+			Clan= CLAN_UCHIHA
 			Sprice=3
 			reqs=list("Mangekyou Sharingan")
 			Description="Summon an unextinguishable fire onto a target. After a delay, providing you are still targeting your victim they will be flooded with a raging black flame causing them to burn for a long duration dealing damage over time (Nin)."
@@ -920,7 +924,7 @@ obj
 			name="Susanoo"
 			Sprice=5
 			rank="S"
-			Clan= "Uchiha"
+			Clan= CLAN_UCHIHA
 			signs="<font color=green>Dog,Ox,Dragon,Ox,Dog</font><br>(macro(E,W,5,W,E))"
 			reqs = list("Mangekyou Sharingan")
 			Description="You manefest a giant warrior incarnation which protects you from death for a duration. You can cause the incarnation to attack enemies around you by pressing the S key."
@@ -936,7 +940,7 @@ obj
 			mouse_drag_pointer = "Sharingan Copy"
 			name="Sharingan Copy"
 			rank="B"
-			Clan="No Clan"
+			Clan= CLAN_IMPLANT
 			signs="<font color=green>None</font><br>"
 			Sprice=3
 			uses=100
@@ -954,7 +958,7 @@ obj
 			uses=100
 			signs="<font color=green>None</font><br>"
 			Sprice=4
-			Clan="Implanted"
+			Clan= CLAN_IMPLANT
 			reqs=list("Sharingan Copy")
 			Description="Cause a rip in space time pulling a section of someones body into the warp dimension. After a delay, providing you are still targeting your victim they will begin to quickly take damage (Nin) over time."
 			New()
@@ -969,7 +973,7 @@ obj
 			rank="A"
 			//Clan="Uchiha"
 			signs="<font color=green>None</font><br>"
-			Clan="Implanted"
+			Clan= CLAN_IMPLANT
 			reqs=list("Intangible")
 			Sprice=5
 			uses=100
@@ -986,7 +990,7 @@ obj
 			rank="S"
 			//Clan="Uchiha"
 			signs="<font color=green>None</font><br>"
-			Clan="Implanted"
+			Clan= CLAN_IMPLANT
 			reqs=list("Kamui")
 			Sprice=4
 			uses=100
@@ -1003,7 +1007,7 @@ obj
 			mouse_drag_pointer = "Shadow Bind"
 			name="Shadow Bind"
 			rank="B"
-			Clan="Nara"
+			Clan= CLAN_NARA
 			signs="<font color=green>Monkey, Snake, Ox</font><br>(macro(4,2,W))"
 			Sprice=2
 			Description="Reach out with your shadow towards a target and attempt to possess their shadow with your own. If the jutsu succeeds the target will be bound in place and helpless."
@@ -1017,7 +1021,7 @@ obj
 			mouse_drag_pointer = "Shadow Stab"
 			name="Shadow Stab"
 			rank="A"
-			Clan="Nara"
+			Clan= CLAN_NARA
 			reqs=list("Shadow Bind")
 			signs="<font color=green>None</font><br>"
 			Sprice=2
@@ -1033,7 +1037,7 @@ obj
 			mouse_drag_pointer = "Shadow Choke"
 			name="Shadow Choke"
 			rank="A"
-			Clan="Nara"
+			Clan= CLAN_NARA
 			reqs=list("Shadow Stab")
 			signs="<font color=green>None</font><br>"
 			Sprice=3
@@ -1049,7 +1053,7 @@ obj
 			mouse_drag_pointer = "Shadow Field"
 			name="Shadow Field"
 			rank="S"
-			Clan="Nara"
+			Clan= CLAN_NARA
 			signs="<font color=green>Monkey,Snake,Ox,Monkey</font><br>(macro(4,2,W,4))"
 			Sprice=3
 			reqs=list("Shadow Bind")
@@ -1064,7 +1068,7 @@ obj
 			mouse_drag_pointer = "Shadow Explosion"
 			name="Shadow Explosion"
 			rank="S"
-			Clan="Nara"
+			Clan= CLAN_NARA
 			reqs=list("Shadow Choke")
 			signs="<font color=green>None</font><br>"
 			Sprice=4
@@ -1086,7 +1090,7 @@ obj
 			uses=0
 			signs="<font color=green>Snake,Dragon,Snake</font><br>(macro(2,5,2))"
 			Sprice=2
-			Clan="Aburame"
+			Clan= CLAN_ABURAME
 			Description="Uses the destruction bugs to make a clone that battles alongside you running around and punching anyone and everyone indscriminately."
 			New()
 				..()
@@ -1101,7 +1105,7 @@ obj
 			uses=0
 			signs="<font color=green>Dragon,Snake,Snake</font><br>(macro(5,2,2))"
 			Sprice=2
-			Clan="Aburame"
+			Clan= CLAN_ABURAME
 			reqs = list("Stealth Bug")
 			Description="Command stealth bugs to bind the effected target breifly"
 			New()
@@ -1117,7 +1121,7 @@ obj
 			uses=0
 			signs="<font color=green>Dragon,Snake,Snake,Dragon</font><br>(macro(5,2,2,5))"
 			Sprice=3
-			Clan="Aburame"
+			Clan= CLAN_ABURAME
 			reqs = list("Destruction Bug Neurotoxin")
 			Description="Use insects smaller than the eye can see and spread them across the battlefield. With every punch you expend chakra to pull everyone towards you slightly, creating chaos."
 			New()
@@ -1133,7 +1137,7 @@ obj
 			uses=0
 			signs="<font color=green>Dragon,Snake</font><br>(macro(5,2))"
 			Sprice=2
-			Clan="Aburame"
+			Clan= CLAN_ABURAME
 			reqs = list("Destruction Bug Swarm")
 			Description="Summon Destruction Bugs all around or towards a target that crawl slowly on the ground dealing damage (Nin) and shoving anyone they hit."
 			New()
@@ -1149,7 +1153,7 @@ obj
 			uses=0
 			signs="<font color=green>Snake,Dragon,Dragon</font><br>(macro(2,5,5))"
 			Sprice=2
-			Clan="Aburame"
+			Clan= CLAN_ABURAME
 			reqs = list("Insect Clone")
 			Description="Launch a swarm of insects from your body carrying someone away from you and drilling into them to deal damage(Nin)."
 			New()
@@ -1165,7 +1169,7 @@ obj
 			uses=0
 			signs="<font color=green>Dragon,Dragon,Snake</font><br>(macro(5,5,2))"
 			Sprice=2
-			Clan="Aburame"
+			Clan= CLAN_ABURAME
 			reqs = list("Insect Clone")
 			Description="Infect your target with a swarm of tiny insects slowly biting at them to deal damage over time (Nin)"
 			New()
@@ -1181,7 +1185,7 @@ obj
 			uses=0
 			signs="<font color=green>Dragon,Snake,Snake,Dragon,Dragon</font><br>(macro(5,2,2,5,5))"
 			Sprice=3
-			Clan="Aburame"
+			Clan= CLAN_ABURAME
 			reqs = list("Destruction Bug Swarm")
 			Description="Summon a tempest of insects which move towards a target or wander the battlefield dealing damage (Nin) to anyone who gets in it's way."
 			New()
@@ -1198,7 +1202,7 @@ obj
 			rank="D"
 			signs="<font color=green>Snake</font><br>(macro(2))"
 			Sprice=1
-			Clan="Hyuuga"
+			Clan= CLAN_HYUUGA
 			Description="The Hyuuga clan's Doujutsu. This technique allows the user to temporarily extend their vision as well as use the power of the gentle fist. While Byakugan is active your punches will deal damage to the victims chakra aswell."
 			New()
 				..()
@@ -1212,7 +1216,7 @@ obj
 			rank="B"
 			signs="<font color=green>Snake,Rat,Snake,Dragon</font><br>(macro(2,Q,2,5))"
 			Sprice=2
-			Clan="Hyuuga"
+			Clan= CLAN_HYUUGA
 			reqs=list("Byakugan")
 			Description="Spin rapidly while forming chakra all around you deflecting most projectiles, pushing targets away from you and dealing damage (Nin|Agi) to anyone in a radius around you."
 			New()
@@ -1227,7 +1231,7 @@ obj
 			rank="S"
 			signs="<font color=green>Snake,Rat</font><br>(macro(2,Q))"
 			Sprice=2
-			Clan="Hyuuga"
+			Clan= CLAN_HYUUGA
 			reqs=list("Byakugan")
 			Description="Infuse chakra in your palm and strike out with enough force to create a short range blast of compressed air dealing damage (Nin|Str) and knocking back anyone you hit. They will not be knocked back if their stats are too high."
 			New()
@@ -1244,7 +1248,7 @@ obj
 			Sprice=2
 			Description="Create a long range blast of air more powerful and precise than emtpy palm dealing damage (Nin|Str) to the first target hit in a line."
 			reqs = list("Eight Trigrams: Empty Palm")
-			Clan="Hyuuga"
+			Clan= CLAN_HYUUGA
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*1.5
@@ -1257,7 +1261,7 @@ obj
 			rank="A"
 			signs="<font color=green>Snake,Rat,Dragon,Rat,Dragon</font><br>(macro(2,Q,5,Q,5))"
 			Sprice=3
-			Clan="Hyuuga"
+			Clan= CLAN_HYUUGA
 			reqs=list("Eight Trigrams: Empty Palm")
 			Description="Using Byakugan and Gentle fist you gain increased perception for a short time and attack your opponents chakra points. You flicker to your target and begin a combination attack against them until you've hit all 64 chakra points dealing damage (Nin|Agi|Prc) and additional chakra damage. Both you and your target are helpless for the duration."
 			New()
@@ -1272,7 +1276,7 @@ obj
 			rank="S"
 			signs="<font color=green>Snake,Rat,Dragon,Rat,Dragon,Dragon</font><br>(macro(2,Q,5,Q,5,5))"
 			Sprice=4
-			Clan="Hyuuga"
+			Clan= CLAN_HYUUGA
 			reqs=list("Eight Trigrams: 64 Palms")
 			Description="Attack the enemy in front of you with the full force of your Byakugan and Gentle Fist, devistating their 8 chakra gates to deal damage (Nin|Agi|Prc) and seriously harm their chakra reserves."
 			New()
@@ -1290,7 +1294,7 @@ obj
 			signs="<font color=green>Ox</font><br>(macro(W))"
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="Kaguya"
+			Clan= CLAN_KAGUYA
 			Description="Blast the tips of your finger bones as a projectile that will fire towards your target or in a straight line dealing damage (Str|Prc) to the first target hit."
 			New()
 				..()
@@ -1306,7 +1310,7 @@ obj
 			maxcooltime = 0
 			ChakraCost = 0
 			Sprice=2
-			Clan="Kaguya"
+			Clan= CLAN_KAGUYA
 			reqs=list("Bone Tip")
 			Description="After using the finger-tip like bones that have been implanted into your opponent, you can follow it up with this deadly technique which forces the bone-tips to expel outwards from the target's body.."
 
@@ -1317,7 +1321,7 @@ obj
 			rank="C"
 			signs="<font color=green>Rat,Rat,Ox</font><br>(macro(Q,Q,W))"
 			Sprice=3
-			Clan="Kaguya"
+			Clan= CLAN_KAGUYA
 			reqs=list("Bone Tip")
 			Description="Harden your bones to form a sword which makes your physical attacks deal more damage."
 			New()
@@ -1332,7 +1336,7 @@ obj
 			rank="C"
 			signs="<font color=green>Rat,Rat,Rat</font><br>(macro(Q,Q,Q))"
 			Sprice=2
-			Clan="Kaguya"
+			Clan= CLAN_KAGUYA
 			reqs=list("Camellia Dance")
 			Description="Harden your bones to form a drill and drive it into an opponent directly in front of you dealing damage (Str|Prc) and knocking them away from you."
 			New()
@@ -1347,7 +1351,7 @@ obj
 			rank="C"
 			signs="<font color=green>Rat,Dog,Ox</font><br>(macro(Q,E,W))"
 			Sprice=2
-			Clan="Kaguya"
+			Clan= CLAN_KAGUYA
 			reqs=list("Bone Tip")
 			Description="Release your bones into large sharp bone fangs that erupt from the ground before you or from underneath a target dealing damage and holding them in place. A victim of this jutsu can still use jutsu and will only be bound as long as they remain where the spikes errupt."
 			New()
@@ -1362,7 +1366,7 @@ obj
 			rank="C"
 			signs="<font color=green>Rat,Dog,Ox,Ox</font><br>(macro(Q,E,W,W))"
 			Sprice=3
-			Clan="Kaguya"
+			Clan= CLAN_KAGUYA
 			reqs=list("Bone Pulse")
 			Description="Unleash your bones from their body into large sharp bone fangs that erupt from the ground all around you dealing damage (Str|Prc) and restricting victims movement. The spikes will also block most projectiles."
 			New()
@@ -1377,7 +1381,7 @@ obj
 			rank="A"
 			signs="<font color=green>Rat,Dog,Ox,Rat</font><br>(macro(Q,E,W,Q))"
 			Sprice=3
-			Clan="Kaguya"
+			Clan= CLAN_KAGUYA
 			reqs=list("Bone Drill")
 			Description="Perform a deadly dance attacking someone directly in front of you with a flurry of strikes, injecting your bones into them as you do. Each hit will deal damage (Str|Prc|Agi) and knock them back slightly while you follow them continuing the onslaught."
 			New()
@@ -1397,7 +1401,7 @@ obj
 			Sprice=1
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="No Clan"
+			Clan= CLAN_CLAY
 			Element="Earth"
 			Description="By using the forbidden Kinjutsu of the Iwagakure along with exploding clay, you gain the ability to create dolls which attack the opponent and explode."
 
@@ -1409,6 +1413,7 @@ obj
 			signs="<font color=green>Dragon,Rabbit,Dragon</font><br>(macro(5,1,5))"
 			Sprice=2
 			Element="Earth"
+			Clan= CLAN_CLAY
 			reqs = list("Deidara")
 			Description="Use special mouths on the palms of your hands to create a swarm of clay tracking birds, which fly towards a target and explode on impact dealing damage (Nin)."
 			New()
@@ -1424,6 +1429,7 @@ obj
 			signs="<font color=green>Dragon,Dog,Dragon</font><br>(macro(5,E,5))"
 			Sprice=3
 			Element="Earth"
+			Clan= CLAN_CLAY
 			reqs = list("C1: Tracking Birds")
 			Description="Use special mouths on the palms of your hands to create a swarm of clay spiders, which slowly stalk a target or spread out all around you and explode dealing damage (Nin) in a small radius."
 			New()
@@ -1439,6 +1445,7 @@ obj
 			signs="<font color=green>Dragon,Snake,Dragon</font><br>(macro(5,2,5))"
 			Sprice=3
 			Element="Earth"
+			Clan= CLAN_CLAY
 			reqs = list("C1: Spider Swarm")
 			Description="Use special mouths on the palms of your hands to create a deadly exploding snake that slithers towards your target and explodes dealing damage (Nin)."
 			New()
@@ -1454,6 +1461,7 @@ obj
 			signs="<font color=green>Dragon,Dragon,Dragon,Dragon,Dragon</font><br>(macro(5,5,5,5,5))"
 			Sprice=3
 			maxcooltime = 0
+			Clan= CLAN_CLAY
 			ChakraCost = 0
 			reqs = list("C1: Tracking Birds","C1: Spider Swarm")
 			Description="This technique allows one to use special mouths on the palms of your hands to create a large clay dragon, which can use the clay it consists of to fire a managerie of explosives at it's oppoenents."
@@ -1466,6 +1474,7 @@ obj
 			signs="<font color=green>Dragon,Dragon,Dragon,Dragon,Dog</font><br>(macro(5,5,5,5,E))"
 			Sprice=4
 			Element="Earth"
+			Clan = CLAN_CLAY
 			reqs = list("C1: Exploding Snake")
 			Description="Use special mouths on the palms of your hands to create a large clay doll slightly in the shape of a human, when activated with 'D' it will explode dealing damage (Nin) in a large radius."
 			New()
@@ -1484,7 +1493,7 @@ obj
 			Sprice=1
 			maxcooltime = 170
 			ChakraCost = 0
-			Clan="No Clan"
+			Clan= CLAN_ICE
 			Description="Allows user to gain powers of the Ice Kekkei Genkai."
 
 		Demonic_Ice_Mirrors
@@ -1494,7 +1503,7 @@ obj
 			rank="B"
 			signs="<font color=green>Rabbit,Dog,Dog,Ox,Rabbit</font><br>(macro(1,E,E,W,1))"
 			Sprice=3
-			Clan = "Ice"
+			Clan = CLAN_ICE
 			reqs = list("Sensatsu Suishou")
 			Description="Create multiple ice-like mirrors around the selected target, and throw needles from the mirrors towards the target from different angles by warping to the different mirrors at high speeds. Deals more damage (Nin|Prc) the faster you can press the commands.)"
 			New()
@@ -1509,7 +1518,7 @@ obj
 			rank="A"
 			signs="<font color=green>Rabbit,Dog,Rabbit</font><br>(macro(1,E,1))"
 			Sprice=3
-			Clan = "Ice"
+			Clan = CLAN_ICE
 			reqs = list("Ice Explosion")
 			Description="This technique forms deadly ice needles that attempt to impale your target and anyone nearby them dealing damage (Nin|Prc) and holding them in place. They can escape by moving from the location the jutsu hits them and they can still use jutsu."
 			New()
@@ -1524,7 +1533,7 @@ obj
 			rank="B"
 			signs="<font color=green>Rabbit,Dog,Dog,Rabbit</font><br>(macro(1,E,E,1))"
 			Sprice=2
-			Clan = "Ice"
+			Clan = CLAN_ICE
 			reqs=list("Demonic Ice Mirrors")
 			Description="Create balls of ice that launch towards a target dealing damage (Nin)."
 			New()
@@ -1543,7 +1552,7 @@ obj
 			ChakraCost = 0
 			reqs=list("Iceball")
 			uses=100
-			Clan = "Ice"
+			Clan = CLAN_ICE
 			Description="Omega Ice Ball: An Giant Iceball streaming with only power of ice & destroying all in it's path."
 
 		Ice_Explosion
@@ -1553,7 +1562,7 @@ obj
 			rank="B"
 			signs="<font color=green>Dog,Dog,Rabbit</font><br>(macro(E,E,1))"
 			Sprice=3
-			Clan = "Ice"
+			Clan = CLAN_ICE
 			reqs=list("Ice")
 			Description="Use nearby water to explode and freeze, impaling enemies and dealing damage (Nin) in a radius around you."
 			New()
@@ -1572,7 +1581,7 @@ obj
 			maxcooltime = 0
 			ChakraCost= 0
 			Sprice = 4
-			Clan="No Clan"
+			Clan= CLAN_KAKUZU
 			Description="Gain powers of Kakuzu that allow you to use elemental jutsus without affinity towards that element!"
 
 		FireMask
@@ -1582,6 +1591,7 @@ obj
 			rank="A"
 			signs="<font color=green>Dog,Snake</font><br>(macro(E,2))"
 			Sprice=2
+			Clan= CLAN_KAKUZU
 			reqs = list("Kakuzu")
 			Description="Allows the user to summon a Fire Heart that uses a single Fire jutsu."
 			New()
@@ -1596,6 +1606,7 @@ obj
 			rank="A"
 			signs="<font color=green>Ox,Snake</font><br>(macro(W,2))"
 			Sprice=2
+			Clan= CLAN_KAKUZU
 			reqs = list("Kakuzu")
 			Description="Allows the user to summon a Wind Heart that uses a single Wind jutsu."
 			New()
@@ -1610,6 +1621,7 @@ obj
 			rank="A"
 			signs="<font color=green>Dragon,Rabbit</font><br>(macro(5,1))"
 			Sprice=2
+			Clan= CLAN_KAKUZU
 			reqs = list("Kakuzu")
 			Description="Allows the user to summon a Earth Heart that uses a single Earth jutsu."
 			New()
@@ -1624,6 +1636,7 @@ obj
 			rank="A"
 			signs="<font color=green>Dog,Rabbit</font><br>(macro(E,1))"
 			Sprice=2
+			Clan= CLAN_KAKUZU
 			reqs = list("Kakuzu")
 			Description="Allows the user to summon a Lightning Heart that uses a single Lightning jutsu."
 			New()
@@ -1642,7 +1655,7 @@ obj
 			maxcooltime = 0
 			ChakraCost = 0
 			Sprice=1
-			Clan="No Clan"
+			Clan= CLAN_PUPPET
 			Description="Train yourself to learn to control a puppet through chakra strings that come from your fingers."
 
 		First_Puppet_Summoning
@@ -1653,6 +1666,7 @@ obj
 			signs="<font color=green>Rabbit,Rabbit,Snake</font><br>(macro(1,1,2))"
 			uses=100
 			Sprice=2
+			Clan= CLAN_PUPPET
 			reqs = list("Puppeteer")
 			Description="You summon a puppet which can uses its hidden weapons to attack opponents by walking into them, dealing damage (Nin|Prc). Hold 'ctrl' to move it. Your first puppet will also come to your aid with every attack."
 			New()
@@ -1668,6 +1682,7 @@ obj
 			signs="<font color=green>None</font><br>"
 			uses=100
 			Sprice=1
+			Clan= CLAN_PUPPET
 			reqs = list("First Puppet Summoning")
 			Description="Imbue more chakra into the strands that bind your puppet to you than normal and enable the ability to move your puppets at greater speeds than ever before."
 			New()
@@ -1683,6 +1698,7 @@ obj
 			signs="<font color=green>None</font><br>"
 			uses=100
 			Sprice=2
+			Clan= CLAN_PUPPET
 			reqs = list("First Puppet Summoning")
 			Description="Make your puppets load one of their hidden weapons for use. When activated the puppet will fire it dealing damage (Nin|Prc) to the first target it hits."
 			New()
@@ -1698,6 +1714,7 @@ obj
 			signs="<font color=green>None</font><br>"
 			uses=100
 			Sprice=1
+			Clan= CLAN_PUPPET
 			reqs = list("Second Puppet Summoning")
 			Description="Make your puppets transform to look identical to you."
 			New()
@@ -1713,6 +1730,7 @@ obj
 			signs="<font color=green>None</font><br>"
 			uses=100
 			Sprice=3
+			Clan= CLAN_PUPPET
 			reqs = list("Puppet Transform")
 			Description="Make your puppets loosen their arms' joints, ready to grab a foe and bind them for a duration. Moving the puppet will cancel the bind."
 			New()
@@ -1728,6 +1746,7 @@ obj
 			signs="<font color=green>Rabbit,Snake,Snake</font><br>(macro(1,2,2))"
 			uses=100
 			Sprice=2
+			Clan= CLAN_PUPPET
 			reqs = list("First Puppet Summoning")
 			Description="You summon a second puppet which can uses its hidden weapons to attack opponents by walking into them, dealing damage (Nin|Prc). Hold 'alt' to move it."
 			New()
@@ -1743,7 +1762,7 @@ obj
 			signs="<font color=green>Snake,Rabbit,Rat,Rabbit,Snake,Ox</font><br>(macro(2,1,Q,1,2,W))"
 			uses=100
 			Sprice=2
-			Clan="Puppeteer"
+			Clan= CLAN_PUPPET
 			reqs = list("Second Puppet Summoning")
 			Description="Summon a Puppet made from body of a Kazekage to pursue and attack your enemy dealing damage (Nin|Prc) provided you remain targeting the victim."
 			New()
@@ -1775,7 +1794,7 @@ obj
 			uses=0
 			signs="<font color=green>Dog,Ox,Ox,Ox</font><br>(macro(E,Q,Q,Q))"
 			Sprice=4
-			Clan="Senjuu"
+			Clan= CLAN_SENJU
 			reqs=list("Wood Release: Wood Fortress")
 			Description="Summon a collection of trees around the target restricting where they can move and dealing damage (Nin) to anyone unfortunate enough to be stood where a tree grows."
 			New()
@@ -1791,7 +1810,7 @@ obj
 			uses=0
 			signs="<font color=green>Dog,Rabbit,Ox</font><br>(macro(E,1,W))"
 			Sprice=4
-			Clan="Senjuu"
+			Clan= CLAN_SENJU
 			reqs=list("Wood Release: Wooden Balvan")
 			Description="Grow branches from your arm and send them forth in a straight line to strangle the first target hit dealing damage over time (Nin) and binding them for the duration."
 			New()
@@ -1807,7 +1826,7 @@ obj
 			uses=0
 			signs="<font color=green>Dog,Rabbit,Ox,Dog</font><br>(macro(E,1,W,E))"
 			Sprice=1
-			Clan="Senjuu"
+			Clan= CLAN_SENJU
 			Description="Produce a balvan and sling it at your target to deal damage (Nin|Prc)"
 			New()
 				..()
@@ -1821,6 +1840,7 @@ obj
 			rank="B"
 			signs="<font color=green>Dog,Dog,Dog,Ox</font><br>(macro(E,E,E,W))"
 			Sprice=3
+			Clan= CLAN_SENJU
 			reqs=list("Wood Release: Root Strangle")
 			Description="Create a wooden boundry around you to protect yourself at the cost of restricting your movement for the duration."
 			New()
@@ -1838,7 +1858,7 @@ obj
 			Sprice=3
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="Senjuu"
+			Clan= CLAN_SENJU
 			reqs=list("Wood Release: Wood Fortress")
 			Description="Summons deadly spikes made out of wood to severely damage ."
 
@@ -1851,7 +1871,7 @@ obj
 			Sprice=4
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="Senjuu"
+			Clan= CLAN_SENJU
 			reqs=list("Wood Drill")
 			reqs = list("Mokuton - Jubaku Eisou")
 			Description=" Jukai Koutan: User creates a forest that will damage everyone in it"
@@ -1864,7 +1884,7 @@ obj
 			signs="<font color=green>Rat,Snake,Snake,Rabbit</font><br>(macro(Q,2,2,1))"
 			Sprice= 0
 			maxcooltime= 0
-			Clan="Senjuu"
+			Clan= CLAN_SENJU
 			reqs=list("Wood Drill")
 			Description="Jubaku Eisou: User creates a prison made of wood around his target to paralyze him"
 
@@ -1878,7 +1898,7 @@ obj
 			maxcooltime= 0
 			ChakraCost = 0
 			reqs=list("Wood Release: Wooden Balvan")
-			Clan="Senjuu"
+			Clan= CLAN_SENJU
 			Description="Daijurin: User stretchs is arm creating wood from it that wood arm will damage anyone he touches"
 
 //Ink
@@ -1890,7 +1910,7 @@ obj
 			rank="S"
 			signs="<font color=green>Dragon,Rabbit,Monkey,Dog,Rabbit,Dog,Dog</font><br>(macro(5,1,4,E,5,1,E,E))"
 			Sprice=5
-			Clan="Ink"
+			Clan= CLAN_INK
 			reqs=list("Ink Style: Snake Rustle Jutsu")
 			Description="Bring to life a giant bird of ink to divebomb in a line dealing damage (Nin|Agi) to the first enemy it hits."
 			New()
@@ -1906,7 +1926,7 @@ obj
 			signs="<font color=green>Rabbit,Dragon,Dog,Rabbit,Dragon,Dog</font><br>(macro(1,5,E,1,5,E))"
 			Sprice=2
 			reqs=list("Ink Style: Snake Rustle Jutsu")
-			Clan="Ink"
+			Clan= CLAN_INK
 			Description="Create a number of lions that dash towards your target with their full might and explode dealing damage (Nin|Agi)."
 			New()
 				..()
@@ -1920,7 +1940,7 @@ obj
 			rank="B"
 			signs="<font color=green>Rabbit,Horse,Monkey,Dragon</font><br>(macro(1,3,4,5))"
 			Sprice=2
-			Clan="Ink"
+			Clan= CLAN_INK
 			reqs=list("Ink Style: Rats")
 			Description="Convert your chakra into drawings of snakes and make them come into motion beneath your target. After a delay, providing you are still targeting your victim, they will lose their footing binding them for a duration."
 			New()
@@ -1935,7 +1955,7 @@ obj
 			rank="A"
 			signs="<font color=green>Rabbit,Dragon,Dog,Monkey,Rabbit</font><br>(macro(1,5,E,4,1))"
 			Sprice=2
-			Clan="Ink"
+			Clan= CLAN_INK
 			reqs=list("Ink Style: Snake Rustle Jutsu")
 			Description="Send forth snakes of ink to bite into the first enemy they hit dealing damage (Nin|Prc)."
 			New()
@@ -1950,7 +1970,7 @@ obj
 			rank="B"
 			signs="<font color=green>Rabbit,Dog,Monkey,Rabbit</font><br>(macro(1,E,4,1))"
 			Sprice=2
-			Clan="Ink"
+			Clan= CLAN_INK
 			Description="Draw rats and cast them out onto the battlefield peircing through anyone in their path dealing damage (Nin|Prc)."
 			New()
 				..()
@@ -1964,7 +1984,7 @@ obj
 			name="Rising Dragon"
 			rank="B"
 			signs="<font color=green>Dragon,Horse,Dragon,Horse,Snake</font><br>(macro(5,3,5,3,2))"
-			Clan="Weaponist"
+			Clan= CLAN_WEAPONIST
 			reqs = list("Blade Hurricane")
 			Sprice=5
 			Description="Summon a relentless barrage of weaponry throwing them in a large wave towards a target or in an area of effect in front of you dealing damage (Nin|Prc) with every hit."
@@ -1980,7 +2000,7 @@ obj
 			rank="A"
 			signs="<font color=green>Dragon,Horse,Dragon,Horse</font><br>(macro(5,3,5,3))"
 			Sprice=3
-			Clan="Weaponist"
+			Clan= CLAN_WEAPONIST
 			reqs = list("Demon Wind Shuriken")
 			Description="Throw a number of weapons tied together with a chakra string causing them to home in and pierce through anyone in their way dealing damage (Nin|Prc) with each hit."
 			New()
@@ -1995,7 +2015,7 @@ obj
 			rank="A"
 			signs="<font color=green>Dragon,Horse,Dragon,Horse,Rabbit</font><br>(macro(5,3,5,3,1))"
 			Sprice=3
-			Clan="Weaponist"
+			Clan= CLAN_WEAPONIST
 			reqs=list("Weapon Manipulation Jutsu")
 			Description="Move around irratically and throw out weaponry all around you dealing damage (Nin|Prc) to anyone hit."
 			New()
@@ -2009,7 +2029,7 @@ obj
 			name="Demon Wind Shuriken"
 			rank="A"
 			signs="<font color=green>Dragon,Horse,Horse,Dragon,Dragon</font><br>(macro(5,3,3,5,5))"
-			Clan="Weaponist"
+			Clan= CLAN_WEAPONIST
 			Sprice=3
 			Description="Throw a large demon wind shuriken connected to you with a chakra thread at your target or in a line in front of you dealing damage (Nin|Prc) to the first target it hits. Once it reaches it's full range or hits a target you pull back on the thread causing it to return to you and deal damage (Nin|Prc) to anyone in it's path."
 			New()
@@ -2026,7 +2046,7 @@ obj
 			Sprice=5
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="Weaponist"
+			Clan= CLAN_WEAPONIST
 			reqs = list("Weapon Manipulation Jutsu")
 			Description="Tie several kunai along a chakra string and throw to home in on a target."
 
@@ -2035,7 +2055,7 @@ obj
 			mouse_drag_pointer = "Blade Manipulation Jutsu"
 			name="Blade Manipulation Jutsu"
 			rank="B"
-			Clan="Weaponist"
+			Clan= CLAN_WEAPONIST
 			signs="<font color=green>Dragon,Horse,Dragon</font><br>(macro(5,3,5))"
 			Sprice=2
 			maxcooltime = 0
@@ -2050,7 +2070,7 @@ obj
 			name="GreenPill"
 			rank="D"
 			Sprice=1
-			Clan="Akimichi"
+			Clan= CLAN_AKIMICHI
 			uses=100
 			signs="<font color=green>None</font><br>"
 			Description="Take a green pill which infuses your body with chakra increasing your Taijutsu but burns calories causing a loss in health."
@@ -2065,7 +2085,7 @@ obj
 			name="YellowPill"
 			rank="C"
 			Sprice=1
-			Clan="Akimichi"
+			Clan= CLAN_AKIMICHI
 			uses=100
 			signs="<font color=green>None</font><br>"
 			reqs=list("GreenPill")
@@ -2082,7 +2102,7 @@ obj
 			rank="B"
 			uses=100
 			Sprice=1
-			Clan="Akimichi"
+			Clan= CLAN_AKIMICHI
 			signs="<font color=green>None</font><br>"
 			reqs=list("YellowPill")
 			Description="Take a red pill which infuses your body with chakra increasing your Taijutsu but burning calories causing a loss in health. Both the positive and negative effects are stronger than the yellow pill"
@@ -2096,7 +2116,7 @@ obj
 			mouse_drag_pointer = "Human Bullet Tank"
 			name="Human Bullet Tank"
 			rank="A"
-			Clan="Akimichi"
+			Clan= CLAN_AKIMICHI
 			signs="<font color=green>None</font><br>"
 			Sprice=5
 			uses=100
@@ -2114,7 +2134,7 @@ obj
 			rank="S"
 			signs="<font color=green>Ox,Ox,Dragon,Ox</font><br>(macro(W,W,5,W))"
 			Sprice=3
-			Clan="Akimichi"
+			Clan= CLAN_AKIMICHI
 			reqs=list("RedPill")
 			Description="Control the calories in your body and convert them into chakra which greatly enhances your Taijutsu and forms as bright blue butterfly wings. It can be just as powerful as your pills but without the downsides."
 			New()
@@ -2128,7 +2148,7 @@ obj
 			name="Super Multi-Size Technique"
 			rank="D"
 			signs="<font color=green>None</font><br>"
-			Clan="Akimichi"
+			Clan= CLAN_AKIMICHI
 			reqs=list("RedPill")
 			Sprice=4
 			uses=100
@@ -2148,7 +2168,7 @@ obj
 			maxcooltime = 0
 			ChakraCost = 0
 			Sprice=1
-			Clan="No Clan"
+			Clan= CLAN_SAND
 			Element="Earth"
 			Description="Gain the ability to infuse your chakra into sand."
 
@@ -2160,7 +2180,7 @@ obj
 			uses=0
 			signs="<font color=green>Dog,Dog,Ox,Dog</font><br>(macro(E,E,W,E))"
 			Sprice=3
-			Clan="Sand"
+			Clan= CLAN_SAND
 			reqs=list("Sand Shuriken")
 			Description="Summon sand from the earth and use it to form a powerful spear for hurling towards your foes dealing damage (Nin|Prc) and piercing through enemies."
 			New()
@@ -2176,7 +2196,7 @@ obj
 			uses=0
 			signs="<font color=green>Dog,Ox,Ox,Dog</font><br>(macro(E,W,W,E))"
 			Sprice=3
-			Clan="Sand"
+			Clan= CLAN_SAND
 			reqs=list("Desert Coffin")
 			Description="Use the sand wrapped around your foe from Desert Coffin to crush the person trapped inside dealing damage (Nin)."
 			New()
@@ -2192,7 +2212,7 @@ obj
 			uses=0
 			signs="<font color=green>Dog,Dog,Ox</font><br>(macro(E,E,W))"
 			Sprice=2
-			Clan="Sand"
+			Clan= CLAN_SAND
 			reqs=list("Sand")
 			Description="Summon sand from the earth and use it to form multiple shurikens for hurling towards your foes dealing damage (Nin|Prc) and piercing through enemies."
 			New()
@@ -2208,7 +2228,7 @@ obj
 			uses=0
 			signs="<font color=green>Dog,Dog,Ox,Ox</font><br>(macro(E,E,W,W))"
 			Sprice=2
-			Clan="Sand"
+			Clan= CLAN_SAND
 			reqs=list("Sand")
 			Description="Summon sand from the earth and use it to trap your opponent. After a delay your target will be bound for a duration providing you are still targeting them."
 			New()
@@ -2223,6 +2243,7 @@ obj
 			rank="B"
 			signs="<font color=green>Dog,Ox,Dog,Ox</font><br>(macro(E,W,E,W))"
 			Sprice=3
+			Clan= CLAN_SAND
 			uses=0
 			reqs=list("Desert Coffin")
 			Description="Creates a shield of sand around you which protects you from damage for a duration however you are unable to perform any actions during this time."
@@ -2241,7 +2262,7 @@ obj
 			uses=0
 			signs="<font color=green>Ox,Rabbit,Dog</font><br>(macro(W,1,E))"
 			Sprice=2
-			Clan="Crystal"
+			Clan= CLAN_CRYSTAL
 			Description="Focuses chakra in order to create a shard to strike the enemy dealing damage (Nin)."
 			New()
 				..()
@@ -2256,7 +2277,7 @@ obj
 			uses=0
 			signs="<font color=green>Dog,Rabbit,Rabbit,Dog</font><br>(macro(E,1,1,E))"
 			Sprice=3
-			Clan="Crystal"
+			Clan= CLAN_CRYSTAL
 			reqs=list("Crystal Release: Crystal Shards")
 			Description="Focuses chakra in order to create a some crystal needles that pierce through the enemy dealing damage (Nin)."
 			New()
@@ -2271,6 +2292,7 @@ obj
 			rank="B"
 			signs="<font color=green>Rabbit,Dog,Dog,Ox</font><br>(macro(1,E,E,W))"
 			Sprice=2
+			Clan= CLAN_CRYSTAL
 			reqs=list("Crystal Release: Crystal Needles")
 			Description="Deadly spikes made out of crystal that come out of ground to stab users target dealing damage (Nin)."
 			New()
@@ -2286,7 +2308,7 @@ obj
 			uses=0
 			signs="<font color=green>Rabbit,Rabbit,Ox,Dog,Dog</font><br>(macro(1,1,W,E,E))"
 			Sprice=4
-			Clan="Crystal"
+			Clan= CLAN_CRYSTAL
 			reqs=list("Crystal Release: Crystal Spikes")
 			Description="Pump your chakra into the ground and create a wave of deadly crystal spikes that explode out of the ground in a line in front of you dealing damage (Nin) to anyone in it's way."
 			New()
@@ -2303,7 +2325,7 @@ obj
 			Sprice=3
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="Crystal"
+			Clan= CLAN_CRYSTAL
 			reqs=list("Crystal Pillar")
 			Description="Crystal Mirrors: This technique creates solid mirrors of the hardest iron in the world, Crystal. Allowing you to attack from each & every mirror."
 
@@ -2316,7 +2338,7 @@ obj
 			Sprice=3
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="Crystal"
+			Clan= CLAN_CRYSTAL
 			reqs=list("Crystal Mirrors")
 			Description="Crystal Arrow: An Giant Arrow shot by the will & the determination of the user."
 
@@ -2330,7 +2352,7 @@ obj
 			Sprice=3
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="Crystal"
+			Clan= CLAN_CRYSTAL
 			Description="Crystal Pillar: An Giant Arrow shot by the will & the determination of the user."
 
 //Paper
@@ -2344,7 +2366,7 @@ obj
 			Sprice=1
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="No Clan"
+			Clan= CLAN_PAPER
 			Description="Gain the ability to convert chakra into paper."
 
 		Paper_Chakram
@@ -2354,7 +2376,7 @@ obj
 			rank="B"
 			signs="<font color=green>Ox,Rat</font><br>(macro(W,Q))"
 			uses=100
-			Clan = "Paper"
+			Clan= CLAN_PAPER
 			reqs = list("Paper Control")
 			Sprice=2
 			Description="Bring sheets of paper together into a sharp chakram and send it at your foe dealing damage (Nin)."
@@ -2370,7 +2392,7 @@ obj
 			rank="A"
 			signs="<font color=green>Ox,Rat,Ox</font><br>(macro(W,Q,W))"
 			uses=0
-			Clan = "Paper"
+			Clan= CLAN_PAPER
 			reqs = list("Paper Control")
 			Sprice=4
 			Description="Channel your chakra through paper and fire a deadly spear created from it dealing damage to the first target it hits (Nin)."
@@ -2386,7 +2408,7 @@ obj
 			rank="A"
 			signs="<font color=green>Ox,Rat,Rat,Rat</font><br>(macro(W,Q,Q,Q))"
 			uses=0
-			Clan = "Paper"
+			Clan= CLAN_PAPER
 			reqs = list("Paper Chakram")
 			Sprice=4
 			Description="Send sheets of paper to stick to your target holding them in place. After a delay, providing you're still targeting them the victim will be bound for a duration."
@@ -2402,7 +2424,7 @@ obj
 			rank="S"
 			signs="<font color=green>Rat,Ox,Ox,Rat</font><br>(macro(Q,W,W,Q))"
 			uses=100
-			Clan = "Paper"
+			Clan= CLAN_PAPER
 			reqs = list("Paper Chakram")
 			Sprice=3
 			Description="Creates huge Paper Wings which boost your paper jutsus power. The following jutsu gain an additional effect: Shikigami Dance lasts longer and Shikigami Spear activates faster."
@@ -2422,7 +2444,7 @@ obj
 			Sprice=1
 			maxcooltime = 0
 			ChakraCost = 0
-			Clan="No Clan"
+			Clan= CLAN_JASHIN
 			Description="Learn to worship the god, Lord Jashin, and harness the powers of death and immortality.(You will no long be a non clan ninja by commiting to Lord Jashin)"
 
 		Death_Ruling_Possesion_Blood
@@ -2433,7 +2455,7 @@ obj
 			signs="<font color=green>None</font><br>"
 			Sprice=4
 			uses=100
-			Clan="Jashin"
+			Clan= CLAN_JASHIN
 			Description="Use someones blood to perform a deadly ritual turning yourself into a voodoo doll that will deal damage to that person when you yourself take damage. To perform the jutsu stand on top of someones blood and use to jutsu to create a circle. Providing you remain in the circle you can press S to deal damage to yourself and that player. Additionally any instance of damage taken will trigger additional hits to both yourself and the victim. Unlike other jutsu this jutsus damage scales from your maximum health."
 			New()
 				..()
@@ -2449,7 +2471,7 @@ obj
 			Sprice=4
 			uses=100
 			reqs = list("Sorcery: Death Ruling Possesion Blood")
-			Clan="Jashin"
+			Clan= CLAN_JASHIN
 			Description="Pray to jashin and kill someone within the time limit to offer a sacrifice to Lord Jashin causing you to become immortal for a duration. During this time your health cannot be dropped below 1."
 			New()
 				..()
@@ -2465,7 +2487,7 @@ obj
 			Sprice=4
 			uses=100
 			reqs = list("Sacrifice to Jashin")
-			Clan="Jashin"
+			Clan= CLAN_JASHIN
 			Description="If Lord Jashin is pleased with you service you can become immortal on demand for a duration. During this time your health cannot drop below 1. Use the jutsu to see how many more sacrifices must be offered to achieve Lord Jashin's favor."
 			New()
 				..()
@@ -2480,7 +2502,7 @@ obj
 			name="Spider"
 			rank="B"
 			signs="<font color=green>None</font><br>"
-			Clan="No Clan"
+			Clan= CLAN_SPIDER
 			Description="Develop mutations and become more like a spider!"
 			maxcooltime = 0
 			ChakraCost = 0
@@ -2493,7 +2515,7 @@ obj
 			signs="<font color=green>None</font><br>"
 			uses=100
 			Sprice=3
-			Clan="Spider"
+			Clan= CLAN_SPIDER
 			Description="Fires off a spider web that can bind the target on hit."
 			New()
 				..()
@@ -2508,6 +2530,7 @@ obj
 			signs="<font color=green>None</font><br>"
 			uses=100
 			Sprice=3
+			Clan= CLAN_SPIDER
 			reqs = list("Spider Web Shoot")
 			Description="Fires off a deadly arrow that pierces through anythingin it's path dealing damage (Nin|Prc)"
 			New()
@@ -2523,7 +2546,7 @@ obj
 			Sprice = 5
 			signs="<font color=green>Ox,Horse,Horse,Dog,Ox,Horse</font><br>(macro(W,3,3,E,W,3))"
 			//uses=100
-			Clan="Spider"
+			Clan= CLAN_SPIDER
 			reqs = list("Spider Arrow Shoot")
 			Description="Summon a huge spider to fight for your cause in combat! It will chase your target dealing damage (Nin) to them providing you maintain your target."
 			New()
@@ -2605,7 +2628,7 @@ obj
 			signs="<font color=green>Rabbit,Rabbit,Dragon,Rabbit,Dragon,Rabbit,Dragon,Dragon</font><br>(macro(1,1,5,1,5,1,5,5))"
 			Sprice=4
 			reqs=list("Bubble Barrage")
-			Clan="Bubble"
+			Clan= CLAN_BUBBLE
 			Description="Create tempest of bubbles in a straight line dealing damage (Nin) to the first person it hits."
 			New()
 				..()
@@ -2619,7 +2642,7 @@ obj
 			rank="B"
 			signs="<font color=green>Dog,Dog,Dragon,Dog</font><br>(macro(E,E,5,E))"
 			Sprice=4
-			Clan="Bubble"
+			Clan= CLAN_BUBBLE
 			Description="Creates bubbles and spreads them in every direction. The bubbles will float around and explode dealing damage (Nin) to anyone nearby. If you have a target they will home in however at the cost of dealing significantly less damage."
 			New()
 				..()
@@ -2634,7 +2657,7 @@ obj
 			signs="<font color=green>Rabbit,Rabbit,Dragon,Rabbit</font><br>(macro(1,1,5,1))"
 			Sprice=3
 			reqs=list("Bubble Spreader")
-			Clan="Bubble"
+			Clan= CLAN_BUBBLE
 			Description="Blow bubbles towards your target which explode on contact dealing damage (Nin)."
 			New()
 				..()
@@ -2647,7 +2670,7 @@ obj
 			name="Bubble Shield"
 			rank="D"
 			signs="<font color=green>Dog,Dog,Dog,Dog</font><br>(macro(E,E,E,E))"
-			Clan="Bubble"
+			Clan= CLAN_BUBBLE
 			Sprice=2
 			Description="Protect yourself with a large bubble blocking the next single instance of damage you would take."
 			New()

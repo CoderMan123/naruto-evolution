@@ -362,12 +362,15 @@ mob
 			src.rank = RANK_ACADEMY_STUDENT
 
 			_choosebloodline
+			src.known_clans = list()
 			switch(src.village)
 				if(VILLAGE_LEAF)
 					src.Clan = src.client.prompt({"What bloodline clan would you like to be born into?"}, "Clan Selection", list("[CLAN_ABURAME]", "[CLAN_AKIMICHI]", "[CLAN_HYUUGA]", "[CLAN_NARA]", "[CLAN_UCHIHA]", "No Clan"))
+					src.known_clans.Add(src.Clan)
 
 				if(VILLAGE_SAND)
 					src.Clan = src.client.prompt({"What bloodline clan would you like to be born into?"}, "Clan Selection", list("[CLAN_PUPPET]", "[CLAN_SAND]", "No Clan"))
+					src.known_clans.Add(src.Clan)
 
 			var/clan_description
 			switch(src.Clan)

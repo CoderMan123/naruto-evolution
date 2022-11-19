@@ -1,4 +1,5 @@
 mob/var/tmp/list/Effects=list()
+mob/var/list/known_clans = list()
 mob
 	var
 		exp_locked=0
@@ -47,7 +48,7 @@ mob
 		Element5
 		Kekkai
 		Clan
-		Clan2
+		Clan2 = "No Clan"
 		Specialist="strength"
 		Specialist2
 		ryo=0

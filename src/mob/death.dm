@@ -386,6 +386,8 @@ mob
 
 								if(zetsu_count < 1)
 									ZetsuEventEnd(attacker)
+								
+									Lootdrop("AkatsukiClans", attacker, 10)
 							else
 								if(zetsu_count > 0)
 									world << output("A white Zetsu has been slain by [attacker.name]! There are still [zetsu_count] Zetsu somewhere!]", "Action.Output")
@@ -394,10 +396,12 @@ mob
 									ZetsuEventEnd(attacker)
 
 
+
 						// Akatsuki Death
 						if(src != attacker && src.village == VILLAGE_AKATSUKI && zetsu_event_active)
 							var/squad/squad = attacker.GetSquad()
 							if(attacker.village == VILLAGE_LEAF || attacker.village == VILLAGE_SAND)
+								Lootdrop("AkatsukiClans", attacker, 3)
 								akat_lives_left--
 								switch(attacker.village)
 									if(VILLAGE_LEAF)

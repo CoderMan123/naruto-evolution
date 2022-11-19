@@ -92,6 +92,7 @@
 #include "src\missions\missions.dm"
 #include "src\mob\death.dm"
 #include "src\mob\inventory.dm"
+#include "src\mob\loot.dm"
 #include "src\mob\mob.dm"
 #include "src\mob\save.dm"
 #include "src\mob\squad.dm"

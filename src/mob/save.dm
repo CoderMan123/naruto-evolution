@@ -317,7 +317,7 @@ mob
 		spawn() src.client.FlashExperienceLock()
 
 		for(var/jutsu in src.jutsus) if(isnull(jutsu)) src.jutsus -= jutsu
-		for(var/jutsu in src.jutsus_learned) if(isnull(jutsu)) src.jutsus -= jutsu
+		for(var/jutsu in src.jutsus_learned) if(isnull(jutsu)) src.jutsus_learned -= jutsu
 		for(var/jutsu in src.sbought) if(isnull(jutsu)) src.sbought -= jutsu
 
 		var/Faction/c = getFaction(src.Faction)

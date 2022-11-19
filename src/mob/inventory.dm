@@ -72,7 +72,7 @@ mob
 
 
 	proc
-		RecieveItem(var/obj/Inventory/O, var/atom/atom)
+		RecieveItem(var/obj/Inventory/O, var/atom/atom, var/silent = 0)
 			if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel))
 				src.overlays+= /obj/Symbols/missions/intel_scroll/leaf
 				var/obj/Inventory/mission/deliver_intel/leaf_intel/o = O
@@ -90,13 +90,14 @@ mob
 				if(!squad && src.village == "Hidden Sand" || (squad && o.squad && squad != o.squad && src.village == "Hidden Sand")) return
 
 			if(O.max_stacks > 1)
-				if(atom && !istype(src, /mob/npc))
-					if(ismob(atom))
-						hearers() << "<i>[src] takes x[O.stacks] [O] from [atom].</i>"
+				if(!silent)
+					if(atom && !istype(src, /mob/npc))
+						if(ismob(atom))
+							hearers() << "<i>[src] takes x[O.stacks] [O] from [atom].</i>"
+						else
+							hearers() << "<i>[src] picks up x[O.stacks] [O] from the [lowertext(atom.name)].</i>"
 					else
-						hearers() << "<i>[src] picks up x[O.stacks] [O] from the [lowertext(atom.name)].</i>"
-				else
-					hearers() << "<i>[src] picks up x[O.stacks] [O] from the ground.</i>"
+						hearers() << "<i>[src] picks up x[O.stacks] [O] from the ground.</i>"
 
 				while(O && O.stacks > 0)
 					var/obj/Inventory/I
@@ -119,14 +120,15 @@ mob
 
 			else
 				src.contents += O
-				if(!istype(src, /mob/npc))
-					if(atom)
-						if(ismob(atom))
-							hearers() << "<i>[src] takes [O] from [atom].</i>"
+				if(!silent)
+					if(!istype(src, /mob/npc))
+						if(atom)
+							if(ismob(atom))
+								hearers() << "<i>[src] takes [O] from [atom].</i>"
+							else
+								hearers() << "<i>[src] picks up [O] from the [lowertext(atom.name)].</i>"
 						else
-							hearers() << "<i>[src] picks up [O] from the [lowertext(atom.name)].</i>"
-					else
-						hearers() << "<i>[src] picks up [O] from the ground.</i>"
+							hearers() << "<i>[src] picks up [O] from the ground.</i>"
 
 			if(src.client)
 				src.client.UpdateInventoryPanel()

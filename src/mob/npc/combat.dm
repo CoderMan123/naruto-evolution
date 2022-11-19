@@ -71,7 +71,10 @@ mob
 										m.ryo += ryo_reward
 										m.Levelup()
 										m << output("<b>[squad.mission.name]:</b> [killer.name] killed an enemy Daimyo and have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!", "Action.Output")
-
+										if(src.village == VILLAGE_LEAF)
+											Lootdrop("LeafMissions", m, 5)
+										else if(src.village == VILLAGE_SAND)
+											Lootdrop("SandMissions", m, 5)
 							else
 								var/exp_reward = round(squad.mission.mission_exp_mod * squad.mission.A_reward)
 								var/ryo_reward = round(squad.mission.mission_ryo_mod * squad.mission.A_reward)
@@ -79,6 +82,10 @@ mob
 								killer.ryo += ryo_reward
 								killer.Levelup()
 								killer << output("<b>[squad.mission.name]:</b> You've killed an enemy Daimyo and have recieved [exp_reward] exp and [ryo_reward] ryo for your effort!", "Action.Output")
+								if(src.village == VILLAGE_LEAF)
+									Lootdrop("LeafMissions", killer, 5)
+								else if(src.village == VILLAGE_SAND)
+									Lootdrop("SandMissions", killer, 5)
 
 				leaf
 					New()
