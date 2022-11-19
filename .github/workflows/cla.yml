@@ -1,0 +1,27 @@
+name: "CLA Assistant"
+on:
+  issue_comment:
+    types: [created]
+  pull_request_target:
+    types: [opened,closed,synchronize]
+
+jobs:
+  CLA_Assistant:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Run CLA Assistant"
+        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I acknowledge that I have read and understand the Contributor License Agreement and I hereby agree to the terms set forth.') || github.event_name == 'pull_request_target'
+        uses: cla-assistant/github-action@v2.2.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.CLA_ASSISTANT }} # This token is required for consuming the Actions re-run API to automatically re-run the last failed workflow and also for storing the signatures in a remote repository if required.
+        with:
+          path-to-signatures: "signatures.json"
+          path-to-document: "https://github.com/douglasparker/project-aikido-wushu/blob/main/CLA.md"
+          branch: "cla-signatures" # This branch should not be protected.
+          allowlist: bot*
+          create-file-commit-message: "legal(cla): create file for storing cla signatures"
+          signed-commit-message: "legal(signature): $contributorName has signed the cla in #$pullRequestNo"
+          custom-notsigned-prcomment: "All contributors are required to read and sign the Contributor License Agreement."
+          custom-pr-sign-comment: "I acknowledge that I have read and understand the Contributor License Agreement and I hereby agree to the terms set forth."
+          custom-allsigned-prcomment: "All contributors have signed the Contributor License Agreement."
