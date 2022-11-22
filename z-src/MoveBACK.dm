@@ -62,7 +62,7 @@ obj
 					if(!M.burn)
 						if(M)
 							for(var/obj/Jutsus/Fire_Release_Ash_Pile_Burning/J in src.owner.jutsus)
-								M.burn=(1.3*(J.damage+round((src.owner.ninjutsu / 150)*2*J.damage))/35)//burn
+								M.burn=(1.3*(J.damage+round((src.owner.ninjutsu_total / 200)*2*J.damage))/35)//burn
 								M.BurnEffect(src.owner)
 				src.pixel_x = -21
 				sleep(1)
@@ -83,8 +83,8 @@ mob
 				var/turf/T = get_step(src,src.dir)
 				for(var/mob/M in T)
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					AddState(M, new/state/cant_attack, 10)
 					AddState(M, new/state/cant_move, 10)
 					if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -103,8 +103,8 @@ mob
 				var/turf/T = get_step(src,src.dir)
 				for(var/mob/M in T)
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					AddState(M, new/state/cant_attack, 10)
 					AddState(M, new/state/cant_move, 10)
 					if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -123,8 +123,8 @@ mob
 				var/turf/T = get_step(src,src.dir)
 				for(var/mob/M in T)
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"cyan",0,1)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/10,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					AddState(M, new/state/cant_attack, 10)
 					AddState(M, new/state/cant_move, 10)
 					if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -143,8 +143,8 @@ mob
 				var/turf/T = get_step(src,src.dir)
 				for(var/mob/M in T)
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/3,src,"cyan",0,1)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*jutsudamage))/10,src,"TaiOrange")
+					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/3,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					AddState(M, new/state/cant_attack, 10)
 					AddState(M, new/state/cant_move, 10)
 					if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -190,7 +190,7 @@ mob
 							if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
 							if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
 							if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
-							M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
+							M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*jutsudamage))/25,src,"NinBlue")
 							src.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 					spawn(1)
@@ -202,7 +202,7 @@ mob
 								if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
 								if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
 								if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
-								M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
+								M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*jutsudamage))/25,src,"NinBlue")
 								src.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 						spawn(1)
@@ -214,7 +214,7 @@ mob
 									if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
 									if(random==3) src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
 									if(random==4) src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
-									M.DealDamage((jutsudamage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*jutsudamage))/25,src,"NinBlue")
+									M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*jutsudamage))/25,src,"NinBlue")
 									src.Levelup()
 									if(M.henge==4||M.henge==5)M.HengeUndo()
 									walk_to(O,M)
@@ -242,7 +242,7 @@ client
 			spawn(1.5)
 				if(src.mob)step(src.mob,NORTH)
 				if(src.mob)src.mob.dashable=0
-			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
+			spawn(30-round((src.mob.ninjutsu_total / 200)*20))src.mob.dashcd=0
 		if(src.mob.inshadowfield==1)
 			if(!CheckState(src.mob, new/state/cant_move))
 				for(var/mob/M in orange(3,src))
@@ -374,7 +374,7 @@ client
 			spawn(1.5)
 				if(src.mob)step(src.mob,SOUTH)
 				if(src.mob)src.mob.dashable=0
-			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
+			spawn(30-round((src.mob.ninjutsu_total / 200)*20))src.mob.dashcd=0
 		if(src.mob.inshadowfield==1)
 			if(!CheckState(src.mob, new/state/cant_move))
 				for(var/mob/M in orange(3,src))
@@ -471,7 +471,7 @@ client
 			spawn(1.5)
 				if(src.mob)step(src.mob,WEST)
 				if(src.mob)src.mob.dashable=0
-			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
+			spawn(30-round((src.mob.ninjutsu_total / 200)*20))src.mob.dashcd=0
 		if(src.mob.inshadowfield==1)
 			if(!CheckState(src.mob, new/state/cant_move))
 				for(var/mob/M in orange(3,src))
@@ -583,7 +583,7 @@ client
 			spawn(1.5)
 				if(src.mob)step(src.mob,EAST)
 				if(src.mob)src.mob.dashable=0
-			spawn(30-round((src.mob.ninjutsu / 150)*20))src.mob.dashcd=0
+			spawn(30-round((src.mob.ninjutsu_total / 200)*20))src.mob.dashcd=0
 		if(src.mob.inshadowfield==1)
 			if(!CheckState(src.mob, new/state/cant_move))
 				for(var/mob/M in orange(3,src))
@@ -716,7 +716,7 @@ mob
 mob
 	proc
 		AgilityBoost()
-			if(src.agility>=1&&src.agility<25)step(src,src.dir)
+			if(src.agility_total>=1&&src.agility_total<25)step(src,src.dir)
 //	Move()
 //		..()
 //		if(src.Owner)
@@ -747,6 +747,9 @@ mob
 		if(istype(O,/mob))
 			var/mob/M=O
 			if(M.fightlayer==src.fightlayer)
+				if(istype(M, /mob/Clones/Bunshin))
+					M.health=0
+					M.Death(src)
 				if(src.henge==4||src.henge==5)src.HengeUndo()
 			if(istype(O,/turf))
 				src.HengeUndo()
@@ -764,7 +767,7 @@ mob
 mob
 	New()
 		..()
-		src.move_delay = max(0.5, 0.8 - ( (src.agility / 150) * 0.3) )
+		src.move_delay = max(0.5, 0.8 - ( (src.agility_total / 200) * 0.3) )
 
 	var/tmp/move_delay=0.8
 	var/tmp/moving=0
@@ -826,10 +829,10 @@ client
 								M.ThrowingMob = null
 								src.mob.BeingThrown = 0
 
-				if(src.mob.bunshin)
+				if(src.mob.Clones.len)
 					spawn()
 						for(var/mob/Clones/C2 in src.mob.Clones)
-							if(C2.Owner == src.mob && !C2.target_mob)
+							if(C2.Owner == src.mob && !C2.target_mob && istype(C2, /mob/Clones/Bunshin))
 								step(C2, src.mob.dir)
 								if(C2) C2.icon_state="[src.mob.icon_state]"
 

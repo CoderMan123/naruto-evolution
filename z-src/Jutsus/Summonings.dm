@@ -12,7 +12,7 @@ mob
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
 					flick("punch",src)
-					M.DealDamage((jutsudamage+round((OWNER.ninjutsu / 150)*2*jutsudamage))/3,src.OWNER,"NinBlue")
+					M.DealDamage((jutsudamage+round((OWNER.ninjutsu_total / 200)*2*jutsudamage))/3,src.OWNER,"NinBlue")
 					//if(M.health >= 0) M.Death()
 					//M.Death(src)
 
@@ -43,7 +43,7 @@ mob
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
 					flick("punch",src)
-					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu / 450)+(Owner.taijutsu / 450)+(OWNER.genjutsu / 450))*2*jutsudamage))/3,src.OWNER,"NinBlue")
+					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu_total / 450)+(Owner.taijutsu_total / 450)+(OWNER.genjutsu_total / 450))*2*jutsudamage))/3,src.OWNER,"NinBlue")
 					//if(M.health >= 0) M.Death()
 					//M.Death(src)
 
@@ -92,7 +92,7 @@ mob
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
 					flick("punch",src)
-					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu / 300)+(OWNER.precision / 300))*2*jutsudamage))/3,src.OWNER,"NinBlue")
+					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu_total / 300)+(OWNER.precision_total / 300))*2*jutsudamage))/3,src.OWNER,"NinBlue")
 					//if(M.health >= 0) M.Death()
 					//M.Death(src)
 
@@ -123,7 +123,7 @@ mob
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
 					//flick("punch",src)
-					M.DealDamage(src.taijutsu,src.OWNER,"TaiOrange")
+					M.DealDamage(src.taijutsu_total,src.OWNER,"TaiOrange")
 					src.hited=1
 					sleep(7)
 					src.hited=0

@@ -12,15 +12,15 @@ mob
 					if(J.level==2) TimeAsleep=10
 					if(J.level==3) TimeAsleep=15
 					if(J.level==4) TimeAsleep=20
-					if(J.level==1) J.damage=0.4*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.4*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.4*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.4*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.4*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.4*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.4*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					for(var/mob/M in oview(J.level))
 						if(!istype(M,M)||!M) continue
 						M.icon_state="dead"
-						M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
+						M.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 						Bind(M, TimeAsleep)
 						spawn(TimeAsleep)
 							M.icon_state = ""
@@ -81,9 +81,9 @@ mob
 					src << output("This jutsu requires a target","Action.Output")
 					return
 				if(src.PreJutsu(J))
-					if(J.level==1) J.damage=0.6*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.6*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.6*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.6*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.6*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.6*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.6*(jutsudamage*J.Sprice)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("groundjutsu",src)
@@ -105,7 +105,7 @@ mob
 							spawn(25)
 								if(Y)
 									del(Y)
-							M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
+							M.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 							spawn() if(M) M.Bleed()
 						else src<<output("The jutsu did not connect.","Action.Output")
 
@@ -114,9 +114,9 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
@@ -140,7 +140,7 @@ mob
 					A.fightlayer=src.fightlayer
 					A.pixel_y=16
 					A.pixel_x=-16
-					A.damage=0.9*(J.damage+round((src.ninjutsu / 150)*2*J.damage))
+					A.damage=0.9*(J.damage+round((src.ninjutsu_total / 200)*2*J.damage))
 					A.level=J.level
 					walk(A,dir,0)
 					icon_state=""
@@ -200,7 +200,7 @@ mob
 							A.pixel_x=-48
 							A.pixel_y=-16
 							flick("create",A)
-							I = I+round(src.ninjutsu/16)
+							I = I+round(src.ninjutsu_total/16)
 							var/oldhealth=c_target.health
 							var/I2=1
 							while(I)

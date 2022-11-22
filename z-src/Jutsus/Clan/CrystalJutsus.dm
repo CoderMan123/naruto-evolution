@@ -24,7 +24,7 @@ mob
 					A.fightlayer=src.fightlayer
 					A.pixel_y=16
 					A.pixel_x=-16
-					A.damage=J.damage+round(src.agility*2)+round(src.ninjutsu*5)
+					A.damage=J.damage+round(src.agility_total*2)+round(src.ninjutsu_total*5)
 					A.level=J.level
 					walk(A,dir,0)
 					icon_state=""
@@ -43,7 +43,7 @@ mob
 						if(J.level==2) J.damage=15
 						if(J.level==3) J.damage=25
 						if(J.level==4) J.damage=35
-						J.damage=J.damage+(src.ninjutsu/3.5)
+						J.damage=J.damage+(src.ninjutsu_total/3.5)
 						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(5,15); J.Levelup()
 						for(var/i=1,i<8+1,i++)
 							var/obj/O = new/obj
@@ -155,7 +155,7 @@ mob
 							A.pixel_x=-48
 							A.pixel_y=-16
 							flick("create",A)
-							I = I+round(src.ninjutsu/16)
+							I = I+round(src.ninjutsu_total/16)
 							var/oldhealth=c_target.health
 							var/I2=1
 							while(I)
@@ -185,9 +185,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(J.level==1) J.damage=1*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=1*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=1*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=1*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=1*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=1*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=1*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					AddState(src, new/state/cant_attack, 10)
@@ -196,7 +196,7 @@ mob
 						var/obj/Projectiles/Effects/CrystalShards/A = new/obj/Projectiles/Effects/CrystalShards(src.loc)
 						A.Owner=src
 						A.dir=src.dir
-						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						A.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						A.layer=src.layer
 						walk_towards(A,c_target.loc)
 						spawn(50)
@@ -206,7 +206,7 @@ mob
 						A.Owner=src
 						A.dir=src.dir
 						A.layer=src.layer
-						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						A.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						walk(A,A.dir)
 						spawn(50)
 							del(A)
@@ -216,9 +216,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(J.level==1) J.damage=0.4*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.4*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.4*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.4*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.4*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.4*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.4*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					AddState(src, new/state/cant_attack, 10)
@@ -227,14 +227,14 @@ mob
 						var/obj/Projectiles/Effects/CrystalNeedles/A = new/obj/Projectiles/Effects/CrystalNeedles(src.loc)
 						A.Owner=src
 						A.dir=src.dir
-						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						A.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						A.layer=src.layer
 						walk_towards(A,c_target.loc)
 						sleep(1)
 						var/obj/Projectiles/Effects/CrystalNeedles/B = new/obj/Projectiles/Effects/CrystalNeedles(src.loc)
 						B.Owner=src
 						B.dir=src.dir
-						B.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						B.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						B.layer=src.layer
 						walk_towards(B,c_target.loc)
 						spawn(50)
@@ -245,14 +245,14 @@ mob
 						A.Owner=src
 						A.dir=src.dir
 						A.layer=src.layer
-						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						A.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						walk(A,A.dir)
 						sleep(1)
 						var/obj/Projectiles/Effects/CrystalNeedles/B = new/obj/Projectiles/Effects/CrystalNeedles(src.loc)
 						B.Owner=src
 						B.dir=src.dir
 						B.layer=src.layer
-						B.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						B.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						walk(B,B.dir)
 						spawn(50)
 							del(A)
@@ -266,9 +266,9 @@ mob
 						src << output("You need a target to use this.","Action.Output")
 						return
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.7*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.7*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.7*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.7*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.7*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					Bind(src, 3)
@@ -277,7 +277,7 @@ mob
 					spawn(1)
 						if(c_target.loc==s.loc)
 							AddState(c_target, new/state/cant_move, 3)
-							c_target.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
+							c_target.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 							c_target.Bleed()
 							c_target.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 						else
@@ -288,9 +288,9 @@ mob
 			for(var/obj/Jutsus/Crystal_Explosion/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=0.8*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.8*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.8*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.8*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.8*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.8*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.8*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					Bind(src, 25)
@@ -299,7 +299,7 @@ mob
 					A.icon_state = "blank"
 					A.dir = src.dir
 					A.Owner = src
-					A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+					A.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 					spawn(25)
 						src.icon_state=""
 					walk(A,src.dir,2)

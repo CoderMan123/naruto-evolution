@@ -115,65 +115,12 @@ mob
 				src.bound_x = initial(src.bound_x)
 				src.layer = initial(src.layer)
 
-			if(src.ingpill)
-				src.taijutsu -= 15
-
-			if(src.inypill)
-				src.taijutsu -= 25
-
-			if(src.inrpill)
-				src.taijutsu -= 40
-
 			if(src.dueling)
 				src.loc = MapLoadSpawn()
 				src.opponent.loc = MapLoadSpawn()
 				src.opponent.dueling = 0
 				arenaprogress = 0
 				world<<"[src] has logged out during an Arena challenge. Match has become Null."
-
-			if(src.incalorie)
-				for(var/obj/Jutsus/CalorieControl/J in src.jutsus)
-					src.taijutsu -= J.damage
-
-			if(src.incurse)
-				src.taijutsu -= 15
-				src.ninjutsu -= 10
-
-			if(src.insage)
-				src.taijutsu -= 10
-				src.ninjutsu -= 20
-
-			if(src.inJC1)
-				src.ninjutsu -= 35
-				src.defence -= 35
-
-			if(src.inJC2)
-				src.ninjutsu -= 35
-				src.agility -= 35
-
-			if(src.inJC3)
-				src.defence -= 50
-
-			if(src.inJC4)
-				src.taijutsu -= 50
-
-			if(src.inJC5)
-				src.taijutsu -= 35
-				src.agility -= 35
-
-			if(src.inJC6)
-				src.ninjutsu -= 50
-
-			if(src.inJC7)
-				src.taijutsu -= 35
-				src.agility -= 35
-
-			if(src.inJC8)
-				src.taijutsu -= 50
-
-			if(src.inJC9)
-				src.taijutsu -= 35
-				src.ninjutsu -= 35
 
 			if(Chuunins.Find(src))
 				Chuunins -= src
@@ -429,7 +376,7 @@ mob
 				if(SPECIALIZATION_NINJUTSU)
 					spec_description = "Ninjutsu is the mastery of chakra control and the elements. Taking this will reduce chakra costs by 15%."
 				if(SPECIALIZATION_GENJUTSU)
-					spec_description = "Genjutsu is the mastery of disrupting someones chakra to create illusion and discord within their mind. (WIP)Taking this will increase how many simple clones you can create with clone jutsu and decrease it's cooldown(WIP)."
+					spec_description = "Genjutsu is the mastery of disrupting someones chakra to create illusion and discord within their mind. Taking these will also increase how many clones you can create with clone jutsu."
 
 			switch(src.Specialist)
 				if(SPECIALIZATION_TAIJUTSU)
@@ -617,7 +564,7 @@ mob
 					src.ResetBase()
 					src.RestoreOverlays()
 					src.client.UpdateInventoryPanel()
-					src.move_delay = max(0.5, 0.8-((src.agility/150)*0.3))
+					src.move_delay = max(0.5, 0.8-((src.agility_total/200)*0.3))
 
 				return 0
 
@@ -1353,6 +1300,7 @@ mob
 					src.health = min(src.health, src.maxhealth)
 					if(src.rest) src.healthregenmod -= 2
 					spawn() src.UpdateHMB()
+					spawn() src.client.UpdateStatTotals()
 				sleep(10)
 
 		Respawn()

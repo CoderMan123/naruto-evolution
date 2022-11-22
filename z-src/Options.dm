@@ -174,6 +174,9 @@ mob
 			if(statpoints<1)
 				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
 				return
+			if(maxhealth >= 10000)
+				src<<output("<font color=red>You've reached the cap for maximum health.</Font>","Action.Output")
+				return
 			statpoints--
 			maxhealth+=30
 			src<<output("<font color=yellow>You leveled up Health!</Font>","Action.Output")
@@ -184,7 +187,88 @@ mob
 			if(statpoints<1)
 				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
 				return
+			if(maxchakra >= 8000)
+				src<<output("<font color=red>You've reached the cap for maximum health.</Font>","Action.Output")
+				return
 			statpoints--
 			maxchakra+=25
 			src<<output("<font color=yellow>You leveled up Chakra!</Font>","Action.Output")
+			src.UpdateHMB()
+
+		NinjutsuUp()
+			set hidden=1
+			if(statpoints<1)
+				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
+				return
+			if(ninjutsu_stated >= 100)
+				src<<output("<font color=red>You've reached the cap for ninjutsu.</Font>","Action.Output")
+				return
+			statpoints--
+			ninjutsu_stated++
+			src<<output("<font color=yellow>You leveled up Ninjutsu!</Font>","Action.Output")
+			src.UpdateHMB()
+
+		GenjutsuUp()
+			set hidden=1
+			if(statpoints<1)
+				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
+				return
+			if(genjutsu_stated >= 100)
+				src<<output("<font color=red>You've reached the cap for genjutsu.</Font>","Action.Output")
+				return
+			statpoints--
+			genjutsu_stated++
+			src<<output("<font color=yellow>You leveled up Genjutsu!</Font>","Action.Output")
+			src.UpdateHMB()
+
+		TaijutsuUp()
+			set hidden=1
+			if(statpoints<1)
+				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
+				return
+			if(taijutsu_stated >= 100)
+				src<<output("<font color=red>You've reached the cap for taijutsu.</Font>","Action.Output")
+				return
+			statpoints--
+			taijutsu_stated++
+			src<<output("<font color=yellow>You leveled up Taijutsu!</Font>","Action.Output")
+			src.UpdateHMB()
+
+		DefenceUp()
+			set hidden=1
+			if(statpoints<1)
+				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
+				return
+			if(defence_stated >= 100)
+				src<<output("<font color=red>You've reached the cap for defence.</Font>","Action.Output")
+				return
+			statpoints--
+			defence_stated++
+			src<<output("<font color=yellow>You leveled up Defence!</Font>","Action.Output")
+			src.UpdateHMB()
+
+		AgilityUp()
+			set hidden=1
+			if(statpoints<1)
+				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
+				return
+			if(agility_stated >= 100)
+				src<<output("<font color=red>You've reached the cap for agility.</Font>","Action.Output")
+				return
+			statpoints--
+			agility_stated++
+			src<<output("<font color=yellow>You leveled up Agility!</Font>","Action.Output")
+			src.UpdateHMB()
+
+		PrecisionUp()
+			set hidden=1
+			if(statpoints<1)
+				src<<output("<font color=red>Insufficent statpoints.</Font>","Action.Output")
+				return
+			if(precision_stated >= 100)
+				src<<output("<font color=red>You've reached the cap for precision.</Font>","Action.Output")
+				return
+			statpoints--
+			precision_stated++
+			src<<output("<font color=yellow>You leveled up Precision!</Font>","Action.Output")
 			src.UpdateHMB()

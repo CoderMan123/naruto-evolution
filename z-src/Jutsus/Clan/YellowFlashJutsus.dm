@@ -7,9 +7,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.6
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.6
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.6
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.6
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.6
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(c_target)
@@ -21,7 +21,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
 						A.level=J.level
 						walk_towards(A,c_target.loc,0)
 						spawn(4)if(A && A.icon_state=="thrown")walk(A,A.dir)
@@ -34,7 +34,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)
 
@@ -57,9 +57,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					src.icon_state = "jutsuse"
 					Bind(src, 3)
@@ -81,7 +81,7 @@ mob
 								spawn(7)if(O)del(O)
 								if(M) step(M,src.dir)
 								if(M) M.dir = get_dir(M,src)
-								if(M) M.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/4,src,"NinBlue")
+								if(M) M.DealDamage((J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/4,src,"NinBlue")
 								sleep(1)
 							for(var/state/FTG_Kunai_Mark/s in M.state_manager)
 								if(s.owner != src) RemoveState(c_target, s, STATE_REMOVE_REF)

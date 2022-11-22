@@ -11,25 +11,51 @@ mob
 		level=1
 		exp=0
 		maxexp=10
-		ninjutsu=1
+
+		ninjutsu = 1 						//NINJUTSU STATS
+		ninjutsu_stated = 0
 		ninexp=0
 		maxninexp=100
-		genjutsu=1
+		tmp/ninjutsu_total = 0
+		tmp/ninjutsu_buffed = 0
+
+
+		genjutsu = 1						//GENJUTSU STATS
+		genjutsu_stated = 0
+		tmp/genjutsu_total = 0
+		tmp/genjutsu_buffed = 0
 		genexp=0
 		maxgenexp=100
-		taijutsu=1
-		editing=0
+
+		taijutsu = 1						//TAIJUTSU STATS
+		taijutsu_stated = 0
+		tmp/taijutsu_total = 0
+		tmp/taijutsu_buffed = 0
 		taijutsuexp=0
 		maxtaijutsuexp=100
-		defence=1
+
+		defence=1							//DEFENCE STATS
+		defence_stated = 0
+		tmp/defence_total = 0
+		tmp/defence_buffed = 0
 		defexp=0
 		maxdefexp=100
-		agility=1
+
+		agility=1							//AGILITY STATS
+		agility_stated = 0
 		agilityexp=0
 		maxagilityexp=100
-		precision=1
+		tmp/agility_total = 0
+		tmp/agility_buffed = 0
+
+		precision=1							//PRECISION STATS
+		precision_stated = 0
 		precisionexp=0
 		maxprecisionexp=100
+		tmp/precision_total = 0
+		tmp/precision_buffed = 0
+
+		editing=0
 		statpoints=0
 		skillpoints=1
 		kills=0

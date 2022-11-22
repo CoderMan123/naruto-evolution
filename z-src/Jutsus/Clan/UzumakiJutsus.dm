@@ -41,10 +41,10 @@ mob
 					return
 				if(src.PreJutsu(J))
 					flick("jutsuse",src)
-					if(J.level==1) J.damage=1*src.ninjutsu
-					if(J.level==2) J.damage=1.5*src.ninjutsu
-					if(J.level==3) J.damage=2*src.ninjutsu
-					if(J.level==4) J.damage=2.5*src.ninjutsu
+					if(J.level==1) J.damage=1*src.ninjutsu_total
+					if(J.level==2) J.damage=1.5*src.ninjutsu_total
+					if(J.level==3) J.damage=2*src.ninjutsu_total
+					if(J.level==4) J.damage=2.5*src.ninjutsu_total
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(3,6); J.Levelup()
 					c_target.overlays+='Seal of Terror.dmi'
 					spawn(J.level*8)if(src)
@@ -72,7 +72,7 @@ mob
 					c_target.overlays+='SoulDevestator.dmi'
 					spawn(J.damage)if(src)
 						c_target.RestoreOverlays()
-						c_target.DealDamage(J.damage + src.taijutsu*2 + src.ninjutsu*2 + src.genjutsu*2,src,"NinBlue",0,1)
+						c_target.DealDamage(J.damage + src.taijutsu_total*2 + src.ninjutsu_total*2 + src.genjutsu_total*2,src,"NinBlue",0,1)
 
 		Reaper_Death_Seal()
 			for(var/obj/Jutsus/Reaper_Death_Seal/J in src.jutsus)
@@ -92,8 +92,8 @@ mob
 					Bind(src, 30)
 					Bind(c_target, 30)
 					spawn(30)
-						src.DealDamage(round(src.ninjutsu*5+src.taijutsu*5+src.genjutsu*5),src,"black")
-						c_target.DealDamage(round(src.ninjutsu*7.5+src.genjutsu*7.5 +src.taijutsu*7.5),src,"NinBlue")
+						src.DealDamage(round(src.ninjutsu_total*5+src.taijutsu_total*5+src.genjutsu_total*5),src,"black")
+						c_target.DealDamage(round(src.ninjutsu_total*7.5+src.genjutsu_total*7.5 +src.taijutsu_total*7.5),src,"NinBlue")
 						spawn(10)
 							src.overlays-='Shiki Fuujin.dmi'
 							src.RestoreOverlays()

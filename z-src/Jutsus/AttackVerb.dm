@@ -39,7 +39,7 @@ mob
 						spawn(2)if(O)del(O)
 						for(var/mob/M in orange(1,O))
 							if(M <> src)
-								M.DealDamage(src.ninjutsu/2,src,"NinBlue",0,0,1)
+								M.DealDamage(src.ninjutsu_total/2,src,"NinBlue",0,0,1)
 				return
 			if(ChakraCheck(0)) return
 			if(c_target&&!src.likeaclone)
@@ -47,10 +47,10 @@ mob
 					step(src, get_dir(src, c_target))
 					src.lungecounter=1
 					if(src.equipped=="Weights")
-						spawn(40/((src.agility/150)*4))lungecounter=0
+						spawn(40-((src.agility_total/200)*30))lungecounter=0
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(8,20)*trainingexp))
 					else
-						spawn(20/((src.agility/150)*4))lungecounter=0
+						spawn(20-((src.agility_total/200)*15))lungecounter=0
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(4,11)*trainingexp))
 			if(src.likeaclone)
 				var/mob/Clones/SC=src.likeaclone
@@ -80,31 +80,26 @@ mob
 											if(c_target.fightlayer==SC.fightlayer)
 												if(c_target.client)spawn()c_target.ScreenShake(1)
 												if(c_target.dodge==0)
-													var/undefendedhit=(60-round(1*((150-src.taijutsu)/3)))-(c_target.defence/4)+rand(0,10)
+													var/undefendedhit=src.taijutsu_total
 													if(undefendedhit<0)undefendedhit=1
-													c_target.DealDamage(undefendedhit+ (((src.taijutsu * 0.1)* src.mystical_palms) + ((src.taijutsu * 0.025)* src.bonesword) + ((src.taijutsu * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-													if(src.Gates>0) src.DealDamage((((src.taijutsu / 150)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
+													c_target.DealDamage(undefendedhit+ (((src.taijutsu_total * 0.1)* src.mystical_palms) + ((src.taijutsu_total * 0.025)* src.bonesword) + ((src.taijutsu_total * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+													if(src.Gates>0) src.DealDamage((((src.taijutsu_total / 200)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
 													if(SC.loc.loc:Safe!=1) LevelStat(SPECIALIZATION_TAIJUTSU,10*punchstatexp)
-													if(c_target)
-														if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 													if(SC.Hand=="Left") SC.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 													if(SC.Hand=="Right") SC.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 												else
-													if(SC.agility>=c_target.agility)
-														var/defendedhit=SC.taijutsu-c_target.defence
+													if(SC.agility>=c_target.agility_total)
+														var/defendedhit=SC.taijutsu_total
 														if(defendedhit<0)defendedhit=1
-
 														src.Levelup()
-														if(c_target)
-															if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-														if(defence<SC.taijutsu/3)
+														if(defence_total<SC.taijutsu_total/2)
 															var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 															Drag.dir=c_target.dir
 															step(c_target,SC.dir)
 															c_target.dir = get_dir(c_target,SC)
 															step_to(SC,c_target,1)
-														c_target.DealDamage(defendedhit+ (((src.taijutsu * 0.1)* src.mystical_palms) + ((src.taijutsu * 0.025)* src.bonesword) + ((src.taijutsu * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-														if(src.Gates>0) src.DealDamage((((src.taijutsu / 150)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
+														c_target.DealDamage(defendedhit+ (((src.taijutsu_total * 0.1)* src.mystical_palms) + ((src.taijutsu_total * 0.025)* src.bonesword) + ((src.taijutsu_total * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+														if(src.Gates>0) src.DealDamage((((src.taijutsu_total / 200)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
 														flick("defendhit",c_target)
 														SC.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 													else
@@ -113,7 +108,7 @@ mob
 								break
 							for(var/obj/Training/T in get_step(SC,SC.dir))//This is all punching logs.
 								if(T.health>=1)
-									var/undefendedhit=round(SC.taijutsu)//-T.defence/4)
+									var/undefendedhit=round(SC.taijutsu_total)
 									T.health-=undefendedhit
 									if(T) if(T.Good) LevelStat(SPECIALIZATION_TAIJUTSU,10*punchstatexp)
 									else LevelStat(SPECIALIZATION_TAIJUTSU,10*punchstatexp)
@@ -255,7 +250,7 @@ mob
 								src.Hand="Left"
 								for(var/mob/Clones/Bunshin/C in world)if(C.Owner==src)flick("kick",C)
 				src.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
-				if(src.agility<50)
+				if(src.agility_total<50)
 					spawn(2)
 						for(c_target in get_step(src,src.dir))
 							src.dir = get_dir(src,c_target)
@@ -324,24 +319,22 @@ mob
 											if(Sharingan)bonus+=Sharingan
 											if(src.mystical_palms)bonus+=5
 											bonus+=src.bonesword
-											var/undefendedhit=(60-round(1*((150-src.taijutsu)/3)))-(c_target.defence/4)+rand(0,10)//finditlel
+											var/undefendedhit=src.taijutsu_total
 											if(undefendedhit<0)undefendedhit=1
 											if(c_target.Sharingan)
-												if(prob((c_target.agility*2)-(undefendedhit)+(c_target.Sharingan*5)))
+												if(prob((c_target.Sharingan*10)))
 													undefendedhit=1
 													flick("dodge",c_target)
 												else
-													undefendedhit-=(c_target.Sharingan+c_target.agility)
+													undefendedhit=(c_target.taijutsu_total*0.5)
 													if(undefendedhit<0) undefendedhit=1
 													flick("defend",c_target)
-											c_target.DealDamage(undefendedhit+ (((src.taijutsu * 0.1)* src.mystical_palms) + ((src.taijutsu * 0.025)* src.bonesword) + ((src.taijutsu * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-											if(src.Gates>0) src.DealDamage((((src.taijutsu / 150)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
+											c_target.DealDamage(undefendedhit + (((src.taijutsu_total * 0.1) * src.mystical_palms) + ((src.taijutsu_total * 0.025) * src.bonesword) + ((src.taijutsu_total * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+											if(src.Gates>0) src.DealDamage((((src.taijutsu_total / 200)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
 											if(src.byakugan==1)
 												for(var/obj/Jutsus/Byakugan/J in src.jutsus)
 													c_target.DealDamage(undefendedhit/2, src, "aliceblue", 0, 1)
 											if(src.loc.loc:Safe!=1) LevelStat(SPECIALIZATION_TAIJUTSU,10*punchstatexp)
-											if(c_target)
-												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 											if(src.Hand=="Right") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Kick")
 												bonus+=2
@@ -361,25 +354,22 @@ mob
 												if(c_target.icon_state == "")
 													AddState(c_target, new/state/cant_move, bonesword)
 										else
-											if(src.agility>=c_target.agility || src.Gates >= 3)
+											if(src.agility_total>=c_target.agility_total || src.Gates >= 3)
 												var/bonus=0
 												if(src.mystical_palms)bonus+=5
 												if(bugpass)bonus+=3
 												bonus+=src.bonesword
-												var/defendedhit=(60-round(1*((150-src.taijutsu)/3)))-(c_target.defence/2)+rand(0,10)
+												var/defendedhit=src.taijutsu_total
 												if(defendedhit<0)defendedhit=1
-												// WHY WHY WHY ? if(src.loc.loc:Safe!=1) src.taijutsu++
 												src.Levelup()
-												if(c_target)
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-												if(defence<src.taijutsu/3)
+												if(defence_total<src.taijutsu_total/2)
 													var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 													Drag.dir=c_target.dir
 													step(c_target,src.dir)
 													c_target.dir = get_dir(c_target,src)
 													step_to(src,c_target,1)
-												c_target.DealDamage(defendedhit+ (((src.taijutsu * 0.1)* src.mystical_palms) + ((src.taijutsu * 0.025)* src.bonesword) + ((src.taijutsu * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-												if(src.Gates>0) src.DealDamage((((src.taijutsu / 150)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
+												c_target.DealDamage(defendedhit + (((src.taijutsu_total * 0.1)* src.mystical_palms) + ((src.taijutsu_total * 0.025)* src.bonesword) + ((src.taijutsu_total * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+												if(src.Gates>0) src.DealDamage((((src.taijutsu_total / 200)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
 												if(src.byakugan==1)
 													for(var/obj/Jutsus/Byakugan/J in src.jutsus)
 														c_target.DealDamage(defendedhit/2, src, "aliceblue", 0, 1)
@@ -395,7 +385,7 @@ mob
 
 						for(var/obj/Training/T in get_step(src,src.dir))
 							if(T.health > 0)//also logs
-								var/undefendedhit=round(src.taijutsu)//-T.defence/4)
+								var/undefendedhit=round(src.taijutsu_total)
 								T.health-=undefendedhit
 								if(T) if(T.Good) LevelStat(SPECIALIZATION_TAIJUTSU,10*punchstatexp)
 								else LevelStat(SPECIALIZATION_TAIJUTSU,10*punchstatexp)
@@ -404,7 +394,7 @@ mob
 								if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 								T.Break(src)
 				else
-					if(src.agility>=50)
+					if(src.agility_total>=50)
 						for(c_target in get_step(src,src.dir))
 							src.dir = get_dir(src,c_target)
 							src.Target_Atom(c_target)
@@ -473,25 +463,23 @@ mob
 											if(Sharingan)bonus+=Sharingan
 											if(src.mystical_palms)bonus+=5
 											if(src.Hand=="Kick")bonus+=2
-											var/undefendedhit=(60-round(1*((150-src.taijutsu)/3)))-(c_target.defence/4)+rand(0,10)
+											var/undefendedhit=src.taijutsu_total
 											if(undefendedhit<0)undefendedhit=1
 											if(c_target.Sharingan)
-												if(prob((c_target.agility)-(undefendedhit)+(c_target.Sharingan*5)))
+												if(prob(c_target.Sharingan*10))
 													undefendedhit=1
 													flick("dodge",c_target)
 												else
-													undefendedhit-=(c_target.Sharingan+round(c_target.agility/2))
+													undefendedhit=(c_target.taijutsu_total/2)
 													if(undefendedhit<0) undefendedhit=1
 													flick("defend",c_target)
 											if(c_target.Owner!=src)
-												c_target.DealDamage(undefendedhit+ (((src.taijutsu * 0.1)* src.mystical_palms) + ((src.taijutsu * 0.025)* src.bonesword) + ((src.taijutsu * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-												if(src.Gates>0) src.DealDamage((((src.taijutsu / 150)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
+												c_target.DealDamage(undefendedhit + (((src.taijutsu_total * 0.1)* src.mystical_palms) + ((src.taijutsu_total * 0.025)* src.bonesword) + ((src.taijutsu_total * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+												if(src.Gates>0) src.DealDamage((((src.taijutsu_total / 200)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
 												if(src.byakugan==1)
 													for(var/obj/Jutsus/Byakugan/J in src.jutsus)
 														c_target.DealDamage(undefendedhit/2, src, "aliceblue", 0, 1)
 												if(src.loc.loc:Safe!=1) LevelStat(SPECIALIZATION_TAIJUTSU,10*punchstatexp)
-											if(c_target)
-												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 											if(src.Hand=="Right") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Kick") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
@@ -509,25 +497,22 @@ mob
 												if(c_target.icon_state == "")
 													AddState(c_target, new/state/cant_move, bonesword)
 										else
-											if(src.agility>=c_target.agility || src.Gates >= 3)
+											if(src.agility_total>=c_target.agility_total || src.Gates >= 3)
 												var/bonus=0
 												if(src.mystical_palms)bonus+=5
 												if(bugpass)bonus+=3
 												bonus+=src.bonesword
-												var/defendedhit=(60-round(1*((150-src.taijutsu)/3)))-(c_target.defence/2)+rand(0,10)
+												var/defendedhit=src.taijutsu_total
 												if(defendedhit<0)defendedhit=1
-												//if(src.loc.loc:Safe!=1) src.taijutsu++
 												src.Levelup()
-												if(c_target)
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-												if(defence<src.taijutsu/3)
+												if(defence_total<src.taijutsu_total/2)
 													var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 													Drag.dir=c_target.dir
 													step(c_target,src.dir)
 													c_target.dir = get_dir(c_target,src)
 													step_to(src,c_target,1)
-												c_target.DealDamage(defendedhit+ (((src.taijutsu * 0.1)* src.mystical_palms) + ((src.taijutsu * 0.025)* src.bonesword) + ((src.taijutsu * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
-												if(src.Gates>0) src.DealDamage((((src.taijutsu / 150)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
+												c_target.DealDamage(defendedhit + (((src.taijutsu_total * 0.1)* src.mystical_palms) + ((src.taijutsu_total * 0.025)* src.bonesword) + ((src.taijutsu_total * 0.05) * src.Gates)),src,"TaiOrange",0,0,1)
+												if(src.Gates>0) src.DealDamage((((src.taijutsu_total / 200)*3) + (src.health * 0.001))* src.Gates, src, "maroon")
 												if(src.byakugan==1)
 													for(var/obj/Jutsus/Byakugan/J in src.jutsus)
 														c_target.DealDamage(defendedhit/2, src, "aliceblue", 0, 1)
@@ -541,7 +526,7 @@ mob
 												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(1,2))
 						for(var/obj/Training/T in get_step(src,src.dir))
 							if(T.health>0)
-								var/undefendedhit=round(src.taijutsu)//-T.defence/4)
+								var/undefendedhit=round(src.taijutsu_total)
 								T.health-=undefendedhit//,src,"TaiOrange")
 								if(T) if(T.Good) LevelStat(SPECIALIZATION_TAIJUTSU,10*punchstatexp)
 								else LevelStat(SPECIALIZATION_TAIJUTSU,10*punchstatexp)

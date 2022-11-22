@@ -148,7 +148,7 @@ mob
 					var/spawned = 0
 					var/no_target_counter = 0
 					var/original_loc
-					health=2500
+					health=3000
 					maxhealth=3000
 					chakra=1000000000
 					maxchakra=1000000000
@@ -158,12 +158,12 @@ mob
 					maxdefexp=1000000000
 					maxagilityexp=1000000000
 					maxprecisionexp=1000000000
-					ninjutsu=100
-					genjutsu=100
-					taijutsu=100
-					defence=100
-					agility=100
-					precision=100
+					ninjutsu_total=100
+					genjutsu_total=100
+					taijutsu_total=100
+					defence_total=100
+					agility_total=100
+					precision_total=100
 
 					Move()
 						..()
@@ -180,7 +180,7 @@ mob
 						src.overlays += 'Sandals.dmi'
 						src.overlays += 'Shade.dmi'
 						src.original_loc = src.loc
-						src.attkspeed=(8-(0.04*src.agility))
+						src.attkspeed=(8-(0.03*src.agility_total))
 						src.PickElement()
 						src.PickTools()
 						src.PickStyle()

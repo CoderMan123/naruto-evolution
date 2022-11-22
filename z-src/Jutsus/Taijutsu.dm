@@ -60,12 +60,12 @@ mob
 		PunchFlick(var/PTimes,var/obj/Jutsu)
 			if(src.client)
 				while(src)
-					sleep(3.5-((src.agility/150)*3))
+					sleep(3.5-((src.agility_total/200)*3))
 					if(PTimes)
 						var/obj/A = new/obj/MiscEffects/Morning_Peacock(src.loc)
 						src.DealDamage((src.maxhealth * 0.001) * src.Gates, src, "maroon")
 						A.Owner=src
-						A.damage=((Jutsu.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
+						A.damage=((Jutsu.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
 						A.dir=src.dir
 						if(prob(50))
 							if(src.dir==NORTH)
@@ -101,11 +101,11 @@ mob
 							else ..()
 						flick("punchl",src)
 						src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
-						sleep(3.5-((src.agility/150)*3))
+						sleep(3.5-((src.agility_total/200)*3))
 						var/obj/B = new/obj/MiscEffects/Morning_Peacock(src.loc)
 						src.DealDamage((src.maxhealth * 0.001) * src.Gates, src, "maroon")
 						B.Owner=src
-						B.damage=((Jutsu.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
+						B.damage=((Jutsu.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
 						B.dir=src.dir
 						if(prob(50))
 							if(src.dir==NORTH)
@@ -142,7 +142,7 @@ mob
 						flick("punchr",src)
 						src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
 						PTimes--
-						sleep(3.5-((src.agility/150)*3))
+						sleep(3.5-((src.agility_total/200)*3))
 						continue
 					else break
 obj
@@ -278,7 +278,7 @@ obj
 										//		spawn(50)
 										//			if(c_target)
 										//				c_target.BurnEffect(Owner)
-										var/undefendedhit=round(src.damage-(c_target.defence/10))
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<0)undefendedhit=1
 										c_target.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										c_target.Bind(c_target, 1)
@@ -291,13 +291,6 @@ obj
 												if(src)
 													src.loc=null
 										break
-/*						for(var/obj/Training/T in range(src,1))
-							if(T.health>=1)
-								src.Hit=1
-								var/undefendedhit=round((src.damage+Owner.taijutsu+Owner.taijutsu)/3.5)
-								T.DealDamage(undefendedhit,src,"TaiOrange")
-								T.Break(Owner)
-								break*/
 						sleep(2)
 						continue
 					else break

@@ -51,7 +51,7 @@ mob
 					if(jashin_symbol && jashin_symbol.Owner == src && jashin_symbol.JashinConnected)
 						var/mob/jashin_target = jashin_symbol.JashinConnected
 						if(jashin_target && !jashin_target.dead)
-							var/jashpercent = (jutsudamage / 150) * 1.5
+							var/jashpercent = (jutsudamage / 200) * 1.5
 							jashin_target.DealDamage(src.maxhealth * (jashpercent / 20), src, "maroon")
 							jashin_target.Bleed()
 							jashin_target.UpdateHMB()
@@ -84,14 +84,10 @@ mob
 					
 					if(owner)
 						if(istype(src, /mob/Clones/MizuBunshin))
-							owner.mizubunshin--
 							src.PlayAudio('sg_explode.wav', output = AUDIO_HEARERS)
 							src.icon = 'Water Bunshin.dmi'
 							flick("form", src)
 						else
-							if(istype(src, /mob/Clones/Bunshin)) owner.bunshin --
-							if(istype(src, /mob/Clones/Shadow)) owner.sbunshin = 0
-							if(istype(src, /mob/Clones/MShadow)) owner.msbunshin --
 							src.PlayAudio('sg_explode.wav', output = AUDIO_HEARERS)
 							new /obj/MiscEffects/Smoke(src.loc)
 
@@ -123,7 +119,7 @@ mob
 					if(attacker.needkill == 1) attacker.needkill = 2
 
 					// Reset dojo exp multiplier
-					src.KillCombo = 0
+
 					src.likeaclone = null
 
 					// Reset unknown variables
@@ -149,10 +145,6 @@ mob
 						C.health = 0
 						C.Death(src)
 					
-					src.bunshin = 0
-					src.sbunshin = 0
-					src.msbunshin = 0
-					src.mizubunshin = 0
 
 					//////////////////////////
 					// Mob Death: Dojo Only //
@@ -180,12 +172,6 @@ mob
 						var/area/Dojo/dojo = area
 						if(dojo && istype(locate(dojo.DojoX, dojo.DojoY, dojo.DojoZ), /turf/)) src.loc = locate(dojo.DojoX, dojo.DojoY, dojo.DojoZ)
 						else src.loc = MapLoadSpawn()
-
-						if(src != attacker)
-							attacker.exp += ((0.1 * attacker.KillCombo) + 0.1)
-
-						if(attacker && src != attacker && attacker.KillCombo < 5 + round(attacker.agility / 5))
-							attacker.KillCombo++
 					
 					//////////////////////////
 					// Mob Death: Duel Only //
@@ -257,9 +243,6 @@ mob
 								if(src.dead)
 									respawned = 1
 									src.Respawn()
-
-						if(attacker.KillCombo < 5 + round(attacker.agility / 5))
-							attacker.KillCombo++
 						
 						///////////////////////////////////
 						// Friendly Village Kill Penalty //
@@ -269,7 +252,6 @@ mob
 							attacker.exp -= round(attacker.exp*0.5)
 							if(attacker.exp < 0) attacker.exp = 0
 							attacker.Vkill++
-							attacker.KillCombo = 0
 							attacker << output("You have lost 50% of your EXP for killing a fellow villager.", "Action.Output")
 							world << output("[src] was knocked out by [attacker], and they were both from the [src.village]!", "Action.Output")
 							//text2file("[src]([src.key]) was ko'd by [attacker]([attacker.key]) at [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_KILLS)
@@ -383,14 +365,16 @@ mob
 							if(attacker.village != VILLAGE_MISSING_NIN && attacker.village != VILLAGE_AKATSUKI)
 								if(zetsu_count > 0)
 									world << output("A white Zetsu has been slain by [attacker.name] earning the [attacker.village] village 1 point! There are still [zetsu_count] Zetsu somewhere!]", "Action.Output")
-
+									Lootdrop("AkatsukiClans", attacker, 1)
+								
 								if(zetsu_count < 1)
 									ZetsuEventEnd(attacker)
 								
-									Lootdrop("AkatsukiClans", attacker, 10)
+									Lootdrop("AkatsukiClans", attacker, 15)
 							else
 								if(zetsu_count > 0)
 									world << output("A white Zetsu has been slain by [attacker.name]! There are still [zetsu_count] Zetsu somewhere!]", "Action.Output")
+									if(attacker.village == VILLAGE_MISSING_NIN) Lootdrop("AkatsukiClans", attacker, 1)
 
 								if(zetsu_count < 1)
 									ZetsuEventEnd(attacker)

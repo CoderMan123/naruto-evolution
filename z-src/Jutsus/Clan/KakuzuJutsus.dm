@@ -24,7 +24,7 @@ mob
 					var/obj/Jutsus/Sickle_Weasel_Technique/la=new/obj/Jutsus/Sickle_Weasel_Technique()
 					A.Owner=src
 					src.jutsus+=la
-					la.damage=la.damage+round((src.precision / 300)+(src.ninjutsu / 300)*2*J.damage)
+					la.damage=la.damage+round((src.precision_total / 300)+(src.ninjutsu_total / 300)*2*J.damage)
 					src.Sickle_Weasel_Technique()
 					del(la)
 					spawn(150)
@@ -39,7 +39,7 @@ mob
 					A.dir=src.dir
 					var/obj/Jutsus/Kirin/la=new/obj/Jutsus/Kirin()
 					src.jutsus+=la
-					la.damage=la.damage+round((src.ninjutsu / 150)*2*J.damage)
+					la.damage=la.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 					src.Kirin()
 					del(la)
 					spawn(150)
@@ -54,7 +54,7 @@ mob
 					var/obj/Jutsus/Mud_Dragon_Projectile/la//=new/obj/Jutsus/Mud_Dragon_Projectile()
 					A.Owner=src
 					src.jutsus+=la
-					la.damage=la.damage+round((src.ninjutsu / 150)*2*J.damage)
+					la.damage=la.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 					src.Mud_Dragon_Projectile()
 					del(la)
 					spawn(150)

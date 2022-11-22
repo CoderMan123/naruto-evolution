@@ -5,9 +5,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.8
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.8
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.8
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.8
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.8
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.8
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -18,7 +18,7 @@ mob
 						A.Owner=src
 						A.target = c_target
 						A.level=J.level
-						A.damage=(J.damage+round(((src.precision / 300)+(src.ninjutsu / 300))*2*J.damage))/2
+						A.damage=(J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage))/2
 						var/timer=J.level*4
 						while(A && A.hits<=1 && timer > 0)
 							timer--
@@ -32,7 +32,7 @@ mob
 						A.dir=src.dir
 						A.Owner=src
 						A.level=J.level
-						A.damage=(J.damage+round(((src.precision / 300)+(src.ninjutsu / 300))*2*J.damage))/2
+						A.damage=(J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage))/2
 						var/timer=J.level*4
 						while(A && A.hits<=1 && timer > 0)
 							timer--
@@ -45,13 +45,13 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					J.damage = (J.damage+round(((src.precision / 300)+(src.ninjutsu / 300))*2*J.damage))/6
+					J.damage = (J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage))/6
 					flick("2fist",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 
@@ -106,7 +106,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=J.damage+round(src.ninjutsu+src.taijutsu)
+								A.damage=J.damage+round(src.ninjutsu_total+src.taijutsu_total)
 								A.density=0
 								spawn(1) if(A) A.density=1
 								walk(A,src.dir)
@@ -120,7 +120,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=J.damage+round(src.ninjutsu+src.taijutsu)
+								A.damage=J.damage+round(src.ninjutsu_total+src.taijutsu_total)
 								A.density=0
 								spawn(1) if(A) A.density=1
 								walk(A,src.dir)
@@ -131,9 +131,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.7*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.7*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.7*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.7*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.7*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					for(var/s=0,s<(5*J.level),s++)
@@ -151,7 +151,7 @@ mob
 						if(prob(25*J.level))
 							var/obj/Projectiles/Effects/Windmill/A = new/obj/Projectiles/Effects/RTD(get_step(src, src.dir))
 							A.Owner=src
-							A.damage=J.damage+round(((src.precision / 300)+(src.ninjutsu / 300))*2*J.damage)/3
+							A.damage=J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage)/3
 							A.icon = 'risingdragonprojectiles.dmi'
 							A.icon_state="[rand(1,4)]"
 							step(A, src.dir)
@@ -167,9 +167,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					J.damage = J.damage/10
@@ -234,7 +234,7 @@ mob
 						timer--
 						var/obj/Projectiles/Effects/Windmill/A = new/obj/Projectiles/Effects/RTD(src.loc)
 						A.Owner=src
-						A.damage=J.damage+round(((src.precision / 300)+(src.ninjutsu / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage)
 						switch(src.dir)
 							if(NORTH)
 								switch(spawn_loc)
@@ -311,7 +311,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
+							A.damage=J.damage+round(src.ninjutsu_total/5+src.taijutsu_total/10)
 							A.density=0
 							spawn(1)if(A)A.density=1
 							walk_towards(A,c_target,0)
@@ -329,7 +329,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(src.ninjutsu/5+src.taijutsu/10)
+							A.damage=J.damage+round(src.ninjutsu_total/5+src.taijutsu_total/10)
 							A.density=0
 							spawn(1) if(A) A.density=1
 							walk(A,src.dir)
@@ -362,7 +362,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
+								A.damage=J.damage+round(src.ninjutsu_total*2+src.taijutsu_total*2)
 								A.density=0
 								spawn(1)if(A)A.density=1
 								spawn(1)if(A)walk_rand(A)
@@ -377,7 +377,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
+								A.damage=J.damage+round(src.ninjutsu_total*2+src.taijutsu_total*2)
 								A.density=0
 								spawn(1)if(A)A.density=1
 								spawn(1)if(A)walk_rand(A)
@@ -397,7 +397,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
+								A.damage=J.damage+round(src.ninjutsu_total*2+src.taijutsu_total*2)
 								A.density=0
 								spawn(1) if(A) A.density=1
 								walk_rand(A)
@@ -413,7 +413,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=J.damage+round(src.ninjutsu*2+src.taijutsu*2)
+								A.damage=J.damage+round(src.ninjutsu_total*2+src.taijutsu_total*2)
 								A.density=0
 								spawn(1) if(A) A.density=1
 								walk_rand(A)

@@ -11,9 +11,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("groundjutsu",src)
 					Bind(src, 5)
-					if(J.level==1) J.damage=0.5*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.5*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.5*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.5*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.5*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.5*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.5*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					for(var/turf/T in view(c_target,5))
@@ -32,7 +32,7 @@ mob
 								flick("create",A)
 								for(var/mob/M in T)
 									if(M!=src)
-										M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
+										M.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 										spawn() if(M) M.Bleed()
 		WoodStyleFortress()
 			for(var/obj/Jutsus/WoodStyleFortress/J in src.jutsus)
@@ -60,9 +60,9 @@ mob
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=0.8*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.8*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.8*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.8*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.8*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.8*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.8*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
@@ -80,7 +80,7 @@ mob
 					A.pixel_x=-24
 					A.layer=src.layer+2
 					A.fightlayer=src.fightlayer
-					A.damage=(J.damage+round((src.ninjutsu / 150)*2*J.damage))
+					A.damage=(J.damage+round((src.ninjutsu_total / 200)*2*J.damage))
 					A.level=J.level
 					walk(A,dir,0)
 
@@ -89,9 +89,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/2
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/2
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/2
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/2
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/2
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/2
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
@@ -104,7 +104,7 @@ mob
 					O.loc = src.loc
 					O.dir = src.dir
 					O.Owner = src
-					O.damage = (J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage))
+					O.damage = (J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage))
 					if(c_target)
 						walk_towards(O,c_target)
 						spawn(5)if(src)
@@ -128,7 +128,7 @@ mob
 					var/obj/senjuu/stab/s=new/obj/senjuu/stab(c_target.loc)
 					spawn(1)
 						if(c_target.loc==s.loc)
-							c_target.DealDamage(src.ninjutsu*J.level,src,"NinBlue")
+							c_target.DealDamage(src.ninjutsu_total*J.level,src,"NinBlue")
 							c_target.Bleed()
 							c_target.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 						else

@@ -149,10 +149,10 @@ mob
 					src.dummylocation = src.loc
 					while(src)
 						icon_state="idle"
-						if(prob(30+((src.agility / 150)*70)) && src.health != src.maxhealth)
+						if(prob(30+((src.agility / 200)*70)) && src.health != src.maxhealth)
 							if(CheckState(src, new/state/dummy_was_hit))
 								src.SpinAttack()
 						src.health = src.maxhealth
-						sleep(5-(round(src.agility / 150)*3)+rand(3, 6))
+						sleep(5-(round(src.agility / 200)*3)+rand(3, 6))
 
 

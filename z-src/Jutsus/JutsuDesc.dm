@@ -29,7 +29,7 @@ obj
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*0.6
-				maxcooltime = jutsucooldown*120
+				maxcooltime = jutsucooldown*180
 
 		BCloneD
 			icon_state="cloneD"

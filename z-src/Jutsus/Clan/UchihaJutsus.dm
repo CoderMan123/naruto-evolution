@@ -9,9 +9,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
 					Bind(src, 3)
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/2.5
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/2.5
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/2.5
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/2.5
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/2.5
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/2.5
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					for(var/mob/M in orange(20,src))
@@ -31,7 +31,7 @@ mob
 							spawn()
 								while(Timer&&M)
 									if(M)
-										M.DealDamage(J.damage+round((src.genjutsu / 150)*2*J.damage)/12, src, "white")
+										M.DealDamage(J.damage+round((src.genjutsu_total / 200)*2*J.damage)/12, src, "white")
 									Timer--
 									sleep(5)
 								if(M.client)
@@ -53,9 +53,9 @@ mob
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/mob/M = c_target
@@ -80,7 +80,7 @@ mob
 								Timer--
 								var/area/A=M.loc.loc
 								if(A.Safe) break
-								M.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/20,src,"NinBlue")
+								M.DealDamage((J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/20,src,"NinBlue")
 								sleep(5)
 							if(O)del(O)
 						else
@@ -94,16 +94,16 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/mob/M = new/mob/Untargettable/Susanoo(src)
 					M.Follow(src)
 					M.name = src.key
 					M.level = J.level
-					M.taijutsu = (J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage))/4
+					M.taijutsu = (J.damage+round(((src.ninjutsu_total / 300)+(src.taijutsu_total / 300))*2*J.damage))/4
 					src.Susanoo=1
 					spawn(100) src.Susanoo=0 //requires changing in ninjutsu.dm line 389
 

@@ -1,4 +1,4 @@
-var/jutsudamage=150 //A global variable to serve as the baseline for all jutsu damage forumla.(WIP)Changing this value will change the damage of all jutsu relative to it's value.
+var/jutsudamage=250 //A global variable to serve as the baseline for all jutsu damage forumla.(WIP)Changing this value will change the damage of all jutsu relative to it's value.
 var/jutsustatexp=2 //A global vairable to act as a multiplier for the amount of stat exp gained when using jutsu
 var/jutsumastery=2 //A global variable to act as a multiplier for the amount of exp a jutsu gains on use
 var/jutsuchakra=50  //A global variable to act as the baseline for the amount of chakra jutsu cost to use
@@ -48,10 +48,6 @@ mob
 					return
 				if(istype(Owner, /mob/npc) && istype(src, /mob/npc)) return
 				var/damage = round(amount) + round(rand(amount/15, amount/5))
-				/*if(punch && bonesword)
-					damage += round(src.taijutsu * 0.1) // adds 10 dmg at 100 str and bonesword on
-				if(punch && src.Gates>0)
-					damage += round((src.taijutsu * 0.1) * src.Gates)*/ // adds 50 damage at 100 str and gates 5
 				if(heal)
 					if(src.Intang)
 						return
@@ -67,7 +63,17 @@ mob
 				if(!heal && !chakra)
 					if(src.Intang) return
 					if(CheckState(src, new/state/sand_shield)) return
-					if(src.multisized) damage = round(damage*0.3)
+					if(src.multisized) damage = round(damage*0.8)
+
+					if(src.dodge == 0)
+						damage = round(damage-(((src.defence_total / 200)*0.25)*damage))
+						if(loc.loc:Safe!=1) src.LevelStat("Defence",(((damage/10) * 2)*jutsustatexp))
+					else 
+						damage = round(damage-(((src.defence_total / 200)*0.50)*damage))
+						if(loc.loc:Safe!=1) src.LevelStat("Defence",(((damage/10) * 4)*jutsustatexp))
+						flick("defendhit", src)
+						src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
+
 					src.health -= damage
 					AddState(src, new/state/recently_hit, 60)
 					AddState(src, new/state/in_combat, 100)

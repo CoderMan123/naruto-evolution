@@ -127,8 +127,8 @@ client
 						src.UpdateSkillTreePanel(/obj/skill_tree_locations/elemental)
 
 					if("Clan Jutsu")
-						if(src.mob.Clan2 == CLAN_NOCLAN)
-							src.mob.client.prompt("You don't have a second clan yet.", src.mob.name)
+						if(src.mob.Clan == CLAN_NOCLAN)
+							src.mob.client.prompt("You don't have a clan in this slot.", src.mob.name)
 						else winset(src, "SkillTree", "is-visible=true")
 						switch(src.mob.Clan)
 							if(CLAN_ABURAME) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_aburame)
@@ -160,7 +160,7 @@ client
 
 					if("Clan Jutsu II")
 						if(src.mob.Clan2 == CLAN_NOCLAN)
-							src.mob.client.prompt("You don't have a second clan yet.", src.mob.name)
+							src.mob.client.prompt("You don't have a clan in this slot.", src.mob.name)
 						else winset(src, "SkillTree", "is-visible=true")
 						switch(src.mob.Clan2)
 							if(CLAN_ABURAME) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_aburame)
@@ -987,6 +987,15 @@ client
 			for(var/client/c in clients_online)
 				if(c) c.UpdateWho()
 
+		UpdateStatTotals()
+			src.mob.ninjutsu_total = src.mob.ninjutsu + src.mob.ninjutsu_stated + src.mob.ninjutsu_buffed
+			src.mob.genjutsu_total = src.mob.genjutsu + src.mob.genjutsu_stated + src.mob.genjutsu_buffed
+			src.mob.taijutsu_total = src.mob.taijutsu + src.mob.taijutsu_stated + src.mob.taijutsu_buffed
+			src.mob.defence_total = src.mob.defence + src.mob.defence_stated + src.mob.defence_buffed
+			src.mob.agility_total = src.mob.agility + src.mob.agility_stated + src.mob.agility_buffed
+			src.mob.precision_total = src.mob.precision + src.mob.precision_stated + src.mob.precision_buffed
+			src.mob.attkspeed = (8-(0.03*src.mob.agility_total))
+
 		UpdateCharacterPanel()
 			if(!src) return
 			if(winget(src, "Character", "is-visible") == "true")
@@ -997,6 +1006,8 @@ client
 
 				var/obj/Symbols/Rank/rank = new(src.mob)
 				var/icon/rank_image = new(rank.icon, icon_state = rank.icon_state)
+
+				src.UpdateStatTotals()
 
 				winset(src, null, {"
 					Character.Avatar.image     				= "\ref[fcopy_rsc(mob_image)]"
@@ -1015,22 +1026,22 @@ client
 					Character.HealthBar.value  				= "[round(src.mob.health/src.mob.maxhealth*100)]"
 					Character.Chakra.text      				= "[src.mob.chakra]/[src.mob.maxchakra]"
 					Character.ChakraBar.value  				= "[round(src.mob.chakra/src.mob.maxchakra*100)]"
-					Character.Def.text         				= "[src.mob.defence]"
+					Character.Def.text         				= "[src.mob.defence_total] ([src.mob.defence]+[src.mob.defence_stated])"
 					Character.DefEXP.text      				= "[src.mob.defexp]/[src.mob.maxdefexp]"
 					Character.DefEXPBar.value  				= "[round(src.mob.defexp/src.mob.maxdefexp*100)]"
-					Character.Agi.text         				= "[src.mob.agility]"
+					Character.Agi.text         				= "[src.mob.agility_total] ([src.mob.agility]+[src.mob.agility_stated])"
 					Character.AgiEXP.text      				= "[src.mob.agilityexp]/[src.mob.maxagilityexp]"
 					Character.AgiEXPBar.value  				= "[round(src.mob.agilityexp/src.mob.maxagilityexp*100)]"
-					Character.Tai.text         				= "[src.mob.taijutsu]"
+					Character.Tai.text         				= "[src.mob.taijutsu_total] ([src.mob.taijutsu]+[src.mob.taijutsu_stated])"
 					Character.TaiEXP.text      				= "[src.mob.taijutsuexp]/[src.mob.maxtaijutsuexp]"
 					Character.TaiEXPBar.value  				= "[round(src.mob.taijutsuexp/src.mob.maxtaijutsuexp*100)]"
-					Character.Nin.text         				= "[src.mob.ninjutsu]"
+					Character.Nin.text         				= "[src.mob.ninjutsu_total] ([src.mob.ninjutsu]+[src.mob.ninjutsu_stated])"
 					Character.NinEXP.text     				= "[src.mob.ninexp]/[src.mob.maxninexp]"
 					Character.NinEXPBar.value 				= "[round(src.mob.ninexp/src.mob.maxninexp*100)]"
-					Character.Gen.text         				= "[src.mob.genjutsu]"
+					Character.Gen.text         				= "[src.mob.genjutsu_total] ([src.mob.genjutsu]+[src.mob.genjutsu_stated])"
 					Character.GenEXP.text      				= "[src.mob.genexp]/[src.mob.maxgenexp]"
 					Character.GenEXPBar.value  				= "[round(src.mob.genexp/src.mob.maxgenexp*100)]"
-					Character.Precision.text         		= "[src.mob.precision]"
+					Character.Precision.text         		= "[src.mob.precision_total] ([src.mob.precision]+[src.mob.precision_stated])"
 					Character.PrecisionExperience.text      = "[src.mob.precisionexp]/[src.mob.maxprecisionexp]"
 					Character.PrecisionExperienceBar.value  = "[round(src.mob.precisionexp/src.mob.maxprecisionexp*100)]"
 					Character.StatPoints.text  				= "[src.mob.statpoints]"

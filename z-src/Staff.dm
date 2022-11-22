@@ -54,11 +54,11 @@ mob/Moderator/verb/
 		usr<<"Level:[M.level]"
 		usr<<"Health:[M.maxhealth]"
 		usr<<"Chakra:[M.maxchakra]"
-		usr<<"Ninjutsu:[M.ninjutsu]"
-		usr<<"Genjutsu:[M.genjutsu]"
-		usr<<"Taijutsu:[M.taijutsu]"
-		usr<<"Agility:[M.agility]"
-		usr<<"Defence:[M.defence]"
+		usr<<"Ninjutsu:[M.ninjutsu] + [M.ninjutsu_stated]"
+		usr<<"Genjutsu:[M.genjutsu] + [M.genjutsu_stated]"
+		usr<<"Taijutsu:[M.taijutsu] + [M.taijutsu_stated]"
+		usr<<"Agility:[M.agility] + [M.agility_stated]"
+		usr<<"Defence:[M.defence] + [M.agility_stated]"
 
 	World_Chat_Admin()
 		set category = "Staff"

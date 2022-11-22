@@ -120,7 +120,7 @@ mob
 					m.ResetBase()
 					m.RestoreOverlays()
 					m.client.UpdateInventoryPanel()
-					m.move_delay = max(0.5, 0.8-((m.agility/150)*0.3))
+					m.move_delay = max(0.5, 0.8-((m.agility_total/200)*0.3))
 
 			Manage_Akatsuki()
 				set category = "Administrator"
@@ -887,11 +887,18 @@ mob
 									C.mob.chakra = C.mob.maxchakra
 									C.mob.maxhealth = 10000
 									C.mob.health = C.mob.maxhealth
-									C.mob.taijutsu = 150
-									C.mob.ninjutsu = 150
-									C.mob.genjutsu = 150
-									C.mob.defence = 150
-									C.mob.agility = 150
+									C.mob.taijutsu = 100
+									C.mob.taijutsu_stated = 100
+									C.mob.ninjutsu = 100
+									C.mob.ninjutsu_stated = 100
+									C.mob.genjutsu = 100
+									C.mob.genjutsu_stated = 100
+									C.mob.defence = 100
+									C.mob.defence_stated = 100
+									C.mob.agility = 100
+									C.mob.agility_stated = 100
+									C.mob.precision = 100
+									C.mob.precision_stated = 100
 									C.mob.level = 100
 
 								C.UpdateJutsuPanel()

@@ -121,9 +121,9 @@ mob
 			for(var/obj/Jutsus/ChakraRelease/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.6
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.6
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.6
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.6
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.6
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
@@ -139,7 +139,7 @@ mob
 						src.overlays-=N
 						var/obj/Projectiles/Weaponry/Shuriken/S = new/obj/Projectiles/Weaponry/Shuriken(src.loc)
 						S.Owner=src
-						S.damage+=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						S.damage+=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						step_rand(S)
 						walk(S,S.dir)
 						src.SCaught-=N
@@ -147,7 +147,7 @@ mob
 						src.overlays-=N
 						var/obj/Projectiles/Weaponry/Kunai/S = new/obj/Projectiles/Weaponry/Kunai(src.loc)
 						S.Owner=src
-						S.damage+=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						S.damage+=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						step_rand(S)
 						walk(S,S.dir)
 						src.SCaught-=N
@@ -155,7 +155,7 @@ mob
 						src.overlays-=N
 						var/obj/Projectiles/Weaponry/Needle/S = new/obj/Projectiles/Weaponry/Needle(src.loc)
 						S.Owner=src
-						S.damage+=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						S.damage+=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						step_rand(S)
 						walk(S,S.dir)
 						src.SCaught-=N
@@ -163,7 +163,7 @@ mob
 						src.overlays-=N
 						var/obj/Projectiles/Weaponry/BoneTip/S = new/obj/Projectiles/Weaponry/BoneTip(src.loc)
 						S.Owner=src
-						S.damage+=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						S.damage+=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						step_rand(S)
 						walk(S,S.dir)
 						src.SCaught-=N
@@ -191,7 +191,10 @@ mob
 					O.loc = src.loc
 					var/BUNLIST = list()
 					Bind(src, 6)
-					for(var/i=0,i<J.level*3,i++)
+					var/number_of_clones = J.level + round((src.genjutsu_total / 40))
+					if(src.Specialist == SPECIALIZATION_GENJUTSU) number_of_clones += 2
+					var/i
+					for(i=0, i<number_of_clones, i++)
 						var/mob/Clones/Bunshin2/A = new/mob/Clones/Bunshin2(src.loc)
 						A.loc=src.loc
 						A.Owner=src
@@ -243,27 +246,22 @@ mob
 			for(var/obj/Jutsus/BClone/J in src.jutsus)
 				if(src.PreJutsu(J))
 					src.CloneHandler()
-					if(src.bunshin<maxbunshin)
-						src.bunshin++
-						if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-						flick("jutsu",src)
-						for(var/mob/M in oview(src,20))
-							if(istype(src, /mob/npc/combat/guard) && istype(M, /mob/npc/combat/guard)) continue
-							M.Target_Remove()
-						src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
-						var/timer = J.level
-						while(timer)
-							sleep(1)
-							timer--
-							var/mob/Clones/Bunshin/A = new/mob/Clones/Bunshin(src.loc)
-							A.loc=src.loc
-							A.Owner=src
-							A.icon=src.icon
-							A.overlays=src.overlays
-						//src.multishadow=1
-						/*spawn(80)
-							src.multishadow=0*/
+					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					flick("jutsu",src)
+					for(var/mob/M in oview(src,20))
+						if(istype(src, /mob/npc/combat/guard) && istype(M, /mob/npc/combat/guard)) continue
+						M.Target_Remove()
+					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
+					var/number_of_clones = round((J.level/2) + (src.genjutsu_total / 25))
+					if(src.Specialist == SPECIALIZATION_GENJUTSU) number_of_clones += 2
+					var/i
+					for(i=0, i<number_of_clones, i++)
+						var/mob/Clones/Bunshin/A = new/mob/Clones/Bunshin(src.loc)
+						A.Owner=src
+						A.icon=src.icon
+						A.overlays=src.overlays
+
 		MultipleShadowClone_Jutsu()
 			if(clonesturned==1)
 				return
@@ -275,21 +273,23 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					for(var/mob/M in oview(src,13))
 						M.Target_Remove()
-					while(src.sbunshin<>5)
+					var/number_of_clones = round((J.level) + (src.genjutsu_total / 66.6))
+					if(src.Specialist == SPECIALIZATION_GENJUTSU) number_of_clones++
+					var/i
+					for(i=0, i<number_of_clones, i++)
 						sleep(1)
-						src.sbunshin++
-						var/bun=src.sbunshin+1
 						flick("jutsu",src)
 						var/mob/Clones/Shadow/A = new/mob/Clones/Shadow(src.loc)
 						A.loc=src.loc
 						A.Owner=src
 						A.icon=src.icon
 						A.overlays=src.overlays
-						A.taijutsu=round(src.taijutsu/bun)
-						A.defence=round(src.defence/bun)
-						A.health=round(src.health/10)
-						A.maxhealth=round(src.maxhealth/10)
-						A.agility=round(src.agility/bun)
+						A.taijutsu=round(src.genjutsu_total)
+						A.defence=round(src.genjutsu_total)
+						A.health=round(src.genjutsu_total*5)
+						A.maxhealth=round(src.genjutsu_total*5)
+						A.agility=round(src.genjutsu_total)
+						A.genjutsu_total=round(src.genjutsu_total)
 						var/obj/O=new /obj/Screen/healthbar/
 						var/obj/M=new /obj/Screen/manabar/
 						A.hbar.Add(O)
@@ -305,36 +305,33 @@ mob
 			for(var/obj/Jutsus/SClone/J in src.jutsus)
 				if(src.PreJutsu(J))
 					src.CloneHandler()
-					if(!src.sbunshin)
-						src.sbunshin++
-						var/bun=src.sbunshin+1
-						src.chakra-=round(src.chakra*0.35/bun)
-						if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-						if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-						spawn() src.UpdateHMB()
-						flick("jutsu",src)
-						src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
-						var/mob/Clones/Shadow/A = new/mob/Clones/Shadow(src.loc)
-						A.loc=src.loc
-						A.Owner=src
-						A.icon=src.icon
-						A.overlays=src.overlays
-						A.taijutsu=round(src.taijutsu/bun)
-						A.defence=round(src.defence/bun)
-						A.health=round(src.health/10)
-						A.maxhealth=round(src.maxhealth/10)
-						A.agility=round(src.agility/bun)
-						var/obj/O=new /obj/Screen/healthbar/
-						var/obj/M=new /obj/Screen/manabar/
-						A.hbar.Add(O)
-						A.hbar.Add(M)
-						A.overlays-=/obj/Screen/healthbar
-						A.overlays-=/obj/Screen/manabar
-						for(var/obj/Screen/healthbar/HB in A.hbar)A.overlays+=HB
-						for(var/obj/Screen/manabar/HB in A.hbar)A.overlays+=HB
-						if(J.level<4&&src.loc.loc:Safe!=1)
-							J.exp+=rand(5,15)
-							J.Levelup()
+					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
+					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					spawn() src.UpdateHMB()
+					flick("jutsu",src)
+					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
+					var/mob/Clones/Shadow/A = new/mob/Clones/Shadow(src.loc)
+					A.loc=src.loc
+					A.Owner=src
+					A.icon=src.icon
+					A.overlays=src.overlays
+					A.taijutsu=round(src.genjutsu_total)
+					A.defence=round(src.genjutsu_total)
+					A.health=round(src.genjutsu_total*10)
+					A.maxhealth=round(src.genjutsu_total*10)
+					A.agility=round(src.genjutsu_total)
+					A.genjutsu=round(src.genjutsu_total)
+					var/obj/O=new /obj/Screen/healthbar/
+					var/obj/M=new /obj/Screen/manabar/
+					A.hbar.Add(O)
+					A.hbar.Add(M)
+					A.overlays-=/obj/Screen/healthbar
+					A.overlays-=/obj/Screen/manabar
+					for(var/obj/Screen/healthbar/HB in A.hbar)A.overlays+=HB
+					for(var/obj/Screen/manabar/HB in A.hbar)A.overlays+=HB
+					if(J.level<4&&src.loc.loc:Safe!=1)
+						J.exp+=rand(5,15)
+						J.Levelup()
 
 		Clone_Jutsu_Destroy()
 			for(var/obj/Jutsus/BCloneD/J in src.jutsus)
@@ -344,8 +341,6 @@ mob
 						for(var/mob/Clones/C in src.Clones)
 							C.health=0
 							C.Death(src)
-						src.bunshin=0
-						src.sbunshin=0
 						if(usr.likeaclone)
 							usr.likeaclone=null
 							usr.client:perspective = EDGE_PERSPECTIVE
@@ -370,9 +365,9 @@ mob
 					var/mob/c_target=usr.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.8
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.8
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.8
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.8
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.8
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.8
 					//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
 					flick("jutsuse",src)
@@ -387,7 +382,7 @@ mob
 						Bind(c_target, Time*10)
 						var/bound_location = c_target.loc
 						while(Time&&c_target&&src&&c_target.loc == bound_location)
-							c_target.DealDamage((J.damage+round((src.ninjutsu / 150)*2*J.damage))/4,src,"white")
+							c_target.DealDamage((J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/4,src,"white")
 							sleep(10)
 							Time--
 						if(c_target)
@@ -411,7 +406,7 @@ mob
 					if(J.level==2)TimeAsleep=10
 					if(J.level==3)TimeAsleep=15
 					if(J.level==4)TimeAsleep=20
-					TimeAsleep+=(src.genjutsu*(20/150))
+					TimeAsleep+=(src.genjutsu_total*(20/200))
 					if(src.Sharingan>0) TimeAsleep+=10
 					if(c_target.client)
 						if(c_target.Rinnegan==1) goto skip
@@ -430,10 +425,10 @@ mob
 					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					Bind(src, 2)
 					var/TimeAsleep
-					if(J.level==1) TimeAsleep=30+(src.genjutsu*(60/150))
-					if(J.level==2) TimeAsleep=40+(src.genjutsu*(60/150))
-					if(J.level==3) TimeAsleep=50+(src.genjutsu*(60/150))
-					if(J.level==4) TimeAsleep=60+(src.genjutsu*(60/150))
+					if(J.level==1) TimeAsleep=30+(src.genjutsu_total*(60/200))
+					if(J.level==2) TimeAsleep=40+(src.genjutsu_total*(60/200))
+					if(J.level==3) TimeAsleep=50+(src.genjutsu_total*(60/200))
+					if(J.level==4) TimeAsleep=60+(src.genjutsu_total*(60/200))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=rand(2,5); J.Levelup()
 					new/obj/Jutsus/Effects/TempleNirvana(src.loc)
 					for(var/mob/M in oview(J.level))
@@ -475,9 +470,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
@@ -501,7 +496,7 @@ mob
 							spawn(7)if(O)del(O)
 							if(M) step(M,src.dir)
 							if(M) M.dir = get_dir(M,src)
-							if(M) M.DealDamage((J.damage+round(((src.taijutsu / 300)+(src.precision / 300))*2*J.damage))/4,src,"TaiOrange")
+							if(M) M.DealDamage((J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage))/4,src,"TaiOrange")
 							sleep(1)
 					src.icon_state = ""
 		Chakra_Control()
@@ -623,9 +618,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.4
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.4
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.4
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.4
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.4
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.4
 					var/reqhits=rand(1,2)
 					var/jutsuactive=1
@@ -637,7 +632,7 @@ mob
 					var/mob/Z
 					for(var/mob/M in get_step(src,src.dir))Z=M
 					if(Z)
-						Z.DealDamage(J.damage + round((src.taijutsu / 300)+(src.precision / 300)*2*J.damage)*1.5,src,"NinBlue")
+						Z.DealDamage(J.damage + round((src.taijutsu_total / 300)+(src.precision_total / 300)*2*J.damage)*1.5,src,"NinBlue")
 						Z.sleephits=0
 						Z.icon_state="dead"
 						var/TimeAsleep = J.level*10 + src.precision*0.5
@@ -698,9 +693,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*2/30)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*2/30)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 
@@ -779,7 +774,7 @@ mob
 									I.pixel_x=-16
 									walk_to(I,0)
 									walk_to(I,I.loc)
-									M.DealDamage(round((src.ninjutsu / 300)+(src.agility / 300)*2*J.damage)*1.5,src,"NinBlue")
+									M.DealDamage(round((src.ninjutsu_total / 300)+(src.agility_total / 300)*2*J.damage)*1.5,src,"NinBlue")
 							sleep(0.5)
 						del(I)
 					Effects["Rasengan"]=null
@@ -792,9 +787,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.7*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.7*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.7*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.7*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.7*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.7*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()				
 					view(src) << output("<b><font color = #C0C0C0>[usr] says: Shishi Rendan!!!","Action.Output")
@@ -819,7 +814,7 @@ mob
 													spawn(2)
 														if(src)
 															step(c_target,SOUTH)
-															c_target.DealDamage(J.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*J.damage),src,"TaiOrange")
+															c_target.DealDamage(J.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*J.damage),src,"TaiOrange")
 															if(c_target)c_target.Bleed()
 
 		Leaf_Whirlwind()
@@ -830,9 +825,9 @@ mob
 					if(J.level>=3)
 						var/obj/A = new/obj/MiscEffects/LeafWhirl(src.loc)
 						A.dir=src.dir
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.6
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.6
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.6
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.6
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.6
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					AddState(src, new/state/cant_attack, 4)
@@ -845,10 +840,9 @@ mob
 							if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 								if(c_target.fightlayer==src.fightlayer)
 									if(c_target.dodge==0)
-										var/undefendedhit=round(J.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*J.damage)-(c_target.defence/10))
+										var/undefendedhit=round(J.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*J.damage))
 										if(undefendedhit<0)undefendedhit=1
 										c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
-										if(c_target.loc.loc:Safe!=1)c_target.LevelStat("Defence",rand(3,6))
 										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 										c_target.icon_state="push"
 										AddState(c_target, new/state/cant_attack, damage)
@@ -859,13 +853,12 @@ mob
 												walk(c_target,0)
 												if(!CheckState(c_target, new/state/swimming))c_target.icon_state=""
 									else
-										if(src.agility>=c_target.agility)
-											var/defendedhit=round(J.damage+round(((src.taijutsu / 300)+(src.agility / 300))*2*J.damage)-(c_target.defence/10))
+										if(src.agility_total>=c_target.agility_total)
+											var/defendedhit=round(J.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*J.damage))
 											if(defendedhit<0)defendedhit=1
 											//if(loc.loc:Safe!=1)src.
 											if(loc.loc:Safe!=1)src.LevelStat(SPECIALIZATION_TAIJUTSU,1)
-											if(c_target.loc.loc:Safe!=1)c_target.LevelStat("Defence",rand(5,10))
-											if(defence<src.taijutsu/3)
+											if(defence_total<src.taijutsu_total/2)
 												var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 												Drag.dir=c_target.dir
 												step(c_target,src.dir)
@@ -879,7 +872,7 @@ mob
 											if(c_target.loc.loc:Safe!=1)c_target.LevelStat("Agility",rand(5,10))
 				/*	for(var/obj/Training/T in orange(src,J.level))
 						if(T.health>=1)
-							var/undefendedhit=round(((damage+src.taijutsu+src.taijutsu)/3))//-c_target.defence/4)
+							var/undefendedhit=round(((damage+src.taijutsu_total+src.taijutsu_total)/3))//-c_target.defence/4)
 							T.DealDamage(undefendedhit,src,"TaiOrange")
 							if(T) if(T.Good) LevelStat(SPECIALIZATION_TAIJUTSU,rand(1,2))
 							else LevelStat(SPECIALIZATION_TAIJUTSU,rand(0.2,1))

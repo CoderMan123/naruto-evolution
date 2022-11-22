@@ -7,9 +7,9 @@ mob
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=0.6*((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=0.6*((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=0.6*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=0.6*((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=0.6*((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=0.6*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.6*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/matrix/m = matrix()
@@ -37,7 +37,7 @@ mob
 					for(var/mob/M in orange(2,src))
 						if(M == src) return
 						if(M.dead)return
-						M.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
+						M.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 						if(M.henge==4||M.henge==5)M.HengeUndo()
 						src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
 						M.Bleed(M)
@@ -178,9 +178,9 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/8
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/8
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/8
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/8
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/8
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/8
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
@@ -226,7 +226,7 @@ mob
 										if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
 										if(random==3)  src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
 										if(random==4)  src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
-										M.DealDamage(J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage),src,"NinBlue")
+										M.DealDamage(J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage),src,"NinBlue")
 										if(M.henge==4||M.henge==5) M.HengeUndo()
 										M.Bleed(M)
 									spawn(1)
@@ -239,7 +239,7 @@ mob
 											if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
 											if(random==3)  src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
 											if(random==4)  src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
-											M.DealDamage(J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage),src,"NinBlue")
+											M.DealDamage(J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage),src,"NinBlue")
 											if(M.henge==4||M.henge==5) M.HengeUndo()
 											M.Bleed(M)
 										spawn(1)
@@ -252,7 +252,7 @@ mob
 												if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
 												if(random==3)  src.PlayAudio('knife_hit3.wav', output = AUDIO_HEARERS)
 												if(random==4)  src.PlayAudio('knife_hit4.wav', output = AUDIO_HEARERS)
-												M.DealDamage(J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage),src,"NinBlue")
+												M.DealDamage(J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage),src,"NinBlue")
 												if(M.henge==4||M.henge==5) M.HengeUndo()
 												M.Bleed(M)
 												walk_to(O,M)
@@ -273,9 +273,9 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/6
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/6
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/6
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/6
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/6
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					spawn() src.UpdateHMB()
@@ -300,7 +300,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+							A.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 							walk_towards(A,c_target.loc,0)
 							spawn(4)if(A)walk(A,A.dir)
 					else
@@ -318,7 +318,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+							A.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 							walk(A,src.dir)
 
 		Omega_Ice_Ball()
@@ -345,7 +345,7 @@ mob
 					A.fightlayer=src.fightlayer
 					A.pixel_y=16
 					A.pixel_x=-16
-					A.damage=(J.level*100)+round(src.agility*1.5)+round(src.ninjutsu*2.5)
+					A.damage=(J.level*100)+round(src.agility_total*1.5)+round(src.ninjutsu_total*2.5)
 					A.level=J.level
 					walk(A,dir,0)
 					icon_state=""

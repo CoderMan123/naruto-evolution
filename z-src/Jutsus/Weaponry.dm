@@ -28,7 +28,7 @@ obj
 							src.PlayAudio('Explo_StoneMed2.ogg', output = AUDIO_HEARERS)
 							for(var/mob/X in view(src,3))
 								if(X.dead==0)
-									X.DealDamage(damage-(X.defence/4),src.Owner,"TaiOrange")
+									X.DealDamage(damage,src.Owner,"TaiOrange")
 									if(istype(X,/mob/npc) && !istype(X,/mob/npc/combat))..()
 									else
 										X.icon_state="push"
@@ -210,7 +210,7 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
@@ -245,7 +245,7 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
@@ -329,7 +329,7 @@ obj
 									src.Hit=1
 									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
-									M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									AddState(M, new/state/bleeding, 30, src.Owner)
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat(SPECIALIZATION_TAIJUTSU,rand(2,4))
@@ -402,7 +402,7 @@ obj
 										src.Hit=1
 										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
-										M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										AddState(M, new/state/bleeding, 30, src.Owner)
 										spawn() if(M) M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat(SPECIALIZATION_TAIJUTSU,rand(2,4))
@@ -626,7 +626,7 @@ obj
 									src.Hit=1
 									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
-									M.DealDamage(undefendedhit-(M.defence/8),src.Owner,"TaiOrange")
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat(SPECIALIZATION_TAIJUTSU,rand(2,4))
 									if(prob(75))
@@ -700,7 +700,7 @@ obj
 										src.Hit=1
 										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
-										M.DealDamage(undefendedhit-(M.defence/8),src.Owner,"TaiOrange")
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat(SPECIALIZATION_TAIJUTSU,rand(2,4))
 										if(prob(75))
@@ -923,7 +923,7 @@ obj
 									src.Hit=1
 									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
-									M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									if(M.client) AddState(M, new/state/slowed, 50)
 									spawn() if(M) M.Bleed()
 									if(Owner.loc.loc:Safe!=1) Owner.LevelStat(SPECIALIZATION_TAIJUTSU,rand(2,4))
@@ -999,7 +999,7 @@ obj
 										src.Hit=1
 										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
-										M.DealDamage(undefendedhit-(M.defence/5),src.Owner,"TaiOrange")
+										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										if(M.client) AddState(M, new/state/slowed, 50)
 										spawn() if(M) M.Bleed()
 										if(Owner.loc.loc:Safe!=1) Owner.LevelStat(SPECIALIZATION_TAIJUTSU,rand(2,4))
@@ -1222,7 +1222,7 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
@@ -1257,7 +1257,7 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
@@ -1345,7 +1345,7 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit,src.Owner,"NinBlue")
 									spawn() if(M) M.Bleed()
@@ -1380,7 +1380,7 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit,src.Owner,"NinBlue")
 										spawn() if(M) M.Bleed()
@@ -1465,7 +1465,7 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit,src.Owner,"NinBlue")
 									spawn() if(M) M.Bleed()
@@ -1497,7 +1497,7 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
@@ -1589,7 +1589,7 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit,src.Owner,"NinBlue")
 									spawn() if(M) M.Bleed()
@@ -1616,7 +1616,7 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit,src.Owner,"NinBlue")
 										spawn() if(M) M.Bleed()
@@ -1706,7 +1706,7 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
@@ -1766,7 +1766,7 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
@@ -1943,7 +1943,7 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
@@ -1980,7 +1980,7 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
@@ -2067,7 +2067,7 @@ obj
 									walk(src,0)
 									src.loc=O.loc
 									src.Hit=1
-									var/undefendedhit=round(src.damage+M.defence/6)
+									var/undefendedhit=round(src.damage)
 									if(undefendedhit<=0) undefendedhit=1
 									M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 									spawn() if(M) M.Bleed()
@@ -2102,7 +2102,7 @@ obj
 										walk(src,0)
 										src.loc=O.loc
 										src.Hit=1
-										var/undefendedhit=round(src.damage+M.defence/6)
+										var/undefendedhit=round(src.damage)
 										if(undefendedhit<=0) undefendedhit=1
 										M.DealDamage(undefendedhit,src.Owner,"TaiOrange")
 										spawn() if(M) M.Bleed()
@@ -2271,7 +2271,7 @@ mob
 				flick("groundjutsu",src)
 				for(var/mob/M in orange(7))
 					if(M.dead || M.key==src.name || istype(M,/mob/npc)) continue
-					M.DealDamage(jutsudamage+round((src.taijutsu / 150)*2*jutsudamage*1.2),src,"TaiOrange")
+					M.DealDamage(jutsudamage+round((src.taijutsu_total / 200)*2*jutsudamage*1.2),src,"TaiOrange")
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					M.icon_state="dead"
 					Bind(M, 5)
@@ -2295,7 +2295,7 @@ mob
 					step(src, get_dir(src,c_target))
 					src.dir = get_dir(src,c_target)
 				for(var/mob/M in get_step(src,src.dir))
-					M.DealDamage((src.ninjutsu*1.5),src,"NinBlue")
+					M.DealDamage((src.ninjutsu_total*1.5),src,"NinBlue")
 					Bind(M, 3)
 					for(var/i=0,i<2,i++)
 						M.icon_state = "push"
@@ -2321,7 +2321,7 @@ mob
 				for(var/i=0,i<4,i++)
 					var/check=0
 					for(var/mob/M in get_step(src,src.dir))
-						M.DealDamage(src.ninjutsu/2,src,"NinBlue")
+						M.DealDamage(src.ninjutsu_total/2,src,"NinBlue")
 						M.Bleed()
 						src.loc = M.loc
 						Z = M
@@ -2380,7 +2380,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.precision)/1))/3)))+rand(0,10)*weapondamage)*0.6
+								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total)/1))/3)))+rand(0,10)*weapondamage)*0.6
 								walk_towards(A,c_target.loc,0)
 								spawn(4)if(A)walk(A,A.dir)
 							else if(!c_target)
@@ -2393,7 +2393,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.precision)/1))/3)))+rand(0,10)*weapondamage)*0.6
+								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total)/1))/3)))+rand(0,10)*weapondamage)*0.6
 								walk(A,usr.dir)
 							usr.DestroyItem(C)
 							break
@@ -2427,7 +2427,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.ninjutsu+usr.taijutsu)/3))/3)))+rand(0,10)*weapondamage)*1
+								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.ninjutsu_total+usr.taijutsu_total)/3))/3)))+rand(0,10)*weapondamage)*1
 								walk_towards(A,c_target.loc,0)
 								spawn(4)if(A)walk(A,A.dir)
 							else
@@ -2440,7 +2440,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.ninjutsu+usr.taijutsu)/3))/3)))+rand(0,10)*weapondamage)*1
+								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.ninjutsu_total+usr.taijutsu_total)/3))/3)))+rand(0,10)*weapondamage)*1
 								walk(A,usr.dir)
 							usr.DestroyItem(C)
 							break
@@ -2474,7 +2474,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.taijutsu)/2))/3)))+rand(0,10)*weapondamage)*0.9
+								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.taijutsu_total)/2))/3)))+rand(0,10)*weapondamage)*0.9
 								walk_towards(A,c_target.loc,0)
 								spawn(4)if(A)walk(A,A.dir)
 							else
@@ -2487,7 +2487,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.taijutsu)/2))/3)))+rand(0,10)*weapondamage)*0.9
+								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.taijutsu_total)/2))/3)))+rand(0,10)*weapondamage)*0.9
 								walk(A,usr.dir)
 							usr.DestroyItem(C)
 							break
@@ -2521,7 +2521,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.agility)/2))/3)))+rand(0,10)*weapondamage)*0.3
+								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.agility_total)/2))/3)))+rand(0,10)*weapondamage)*0.3
 								walk_towards(A,c_target.loc,0)
 								spawn(4)if(A)walk(A,A.dir)
 							else
@@ -2534,7 +2534,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((150-((usr.precision+usr.agility)/2))/3)))+rand(0,10)*weapondamage)*0.3
+								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.agility_total)/2))/3)))+rand(0,10)*weapondamage)*0.3
 								walk(A,usr.dir)
 							usr.DestroyItem(C)
 							break
@@ -2571,7 +2571,7 @@ mob
 									A.Owner=usr
 									A.layer=usr.layer
 									A.fightlayer=usr.fightlayer
-									A.damage=(C.damage+(100-round(1*((150-((usr.ninjutsu)/1))/3)))+rand(0,10)*weapondamage)*1.2
+									A.damage=(C.damage+(100-round(1*((200-((usr.ninjutsu_total)/1))/3)))+rand(0,10)*weapondamage)*1.2
 									if(c_target in get_step(usr,usr.dir))
 										A.Linkage=c_target
 										A.pixel_y+=rand(8,10)
@@ -2587,7 +2587,7 @@ mob
 									A.Owner=usr
 									A.layer=usr.layer
 									A.fightlayer=usr.fightlayer
-									A.damage=(C.damage+(100-round(1*((150-((usr.ninjutsu)/1))/3)))+rand(0,10)*weapondamage)*1.2
+									A.damage=(C.damage+(100-round(1*((200-((usr.ninjutsu_total)/1))/3)))+rand(0,10)*weapondamage)*1.2
 									for(var/mob/M in get_step(usr,usr.dir))
 										A.Linkage=M
 										A.pixel_y+=rand(8,10)
@@ -2655,8 +2655,7 @@ mob
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
-									M.DealDamage(usr.taijutsu*3,src,"TaiOrange")
-								//	usr.health+=usr.taijutsu
+									M.DealDamage(usr.taijutsu_total*3,src,"TaiOrange")
 									M.Bleed()
 							spawn(usr.attkspeed*6)
 							break
@@ -2672,8 +2671,7 @@ mob
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
-									M.DealDamage(usr.taijutsu*3,src,"TaiOrange")
-								//	usr.chakra+=usr.taijutsu*1.5
+									M.DealDamage(usr.taijutsu_total*3,src,"TaiOrange")
 									M.Bleed()
 							spawn(usr.attkspeed*6)
 							break
@@ -2689,8 +2687,7 @@ mob
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
-									M.DealDamage(usr.taijutsu*3,src,"TaiOrange")
-								//	usr.chakra+=usr.taijutsu*1.5
+									M.DealDamage(usr.taijutsu_total*3,src,"TaiOrange")
 									M.Bleed()
 							spawn(usr.attkspeed*6)
 							break
@@ -2706,8 +2703,7 @@ mob
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
-									M.DealDamage(usr.taijutsu*3,src,"TaiOrange")
-								//	usr.chakra+=usr.taijutsu*1.5
+									M.DealDamage(usr.taijutsu_total*3,src,"TaiOrange")
 									M.Bleed()
 							spawn(usr.attkspeed*6)
 							break
@@ -2723,8 +2719,7 @@ mob
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
-									M.DealDamage(usr.taijutsu*3,src,"TaiOrange")
-								//	usr.chakra+=usr.taijutsu*1.5
+									M.DealDamage(usr.taijutsu_total*3,src,"TaiOrange")
 									M.Bleed()
 							spawn(usr.attkspeed*6)
 							break
@@ -2740,8 +2735,7 @@ mob
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
-									M.DealDamage(usr.taijutsu*3,src,"TaiOrange")
-								//	usr.chakra+=usr.taijutsu*1.5
+									M.DealDamage(usr.taijutsu_total*3,src,"TaiOrange")
 									M.Bleed()
 							spawn(usr.attkspeed*6)
 							break
@@ -2757,8 +2751,7 @@ mob
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
-									M.DealDamage(usr.taijutsu*3,src,"TaiOrange")
-								//	usr.chakra+=usr.taijutsu*1.5
+									M.DealDamage(usr.taijutsu_total*3,src,"TaiOrange")
 									M.Bleed()
 							spawn(usr.attkspeed*6)
 							break
@@ -2774,7 +2767,7 @@ mob
 							flick("throw",usr)
 							for(var/mob/M in get_step(usr,usr.dir))
 								if(M)
-									M.DealDamage(usr.taijutsu,src,"TaiOrange")
+									M.DealDamage(usr.taijutsu_total,src,"TaiOrange")
 									M.Bleed()
 							spawn(usr.attkspeed*6)
 							break
@@ -2782,7 +2775,7 @@ mob
 /*			if(usr.equipped=="Weights")
 				for(var/obj/Inventory/Weaponry/Weights/C in usr.contents)
 					if(usr.dead==0)
-						if(usr.agility < 80)
+						if(usr.agility_total < 80)
 							flick("punchr",usr)
 							usr.LevelStat("Agility",rand(4,7))
 							for(var/mob/M in get_step(usr,usr.dir))

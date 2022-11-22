@@ -6,16 +6,10 @@ mob
 	var
 		list2
 		crecord
-		maxbunshin=1
-		maxmsbunshin=2
-		maxmizubunshin=2
 		katon=2
 	//	UchihaJ=0
 		tmp
 			copy
-			bunshin=0
-			sbunshin=0
-			msbunshin=0
 			first
 			second
 			third

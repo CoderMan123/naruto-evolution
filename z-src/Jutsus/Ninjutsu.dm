@@ -43,7 +43,7 @@ obj
 			if(candoit)
 				for(var/mob/M in orange(2,src))
 					if(Ownzorz && M != src.Owner)
-						if(M) M.DealDamage(Ownzorz.ninjutsu/2,src.Owner,"NinBlue")
+						if(M) M.DealDamage(Ownzorz.ninjutsu_total/2,src.Owner,"NinBlue")
 						if(!CheckState(M, new/state/poisoned))
 							AddState(M, new/state/poisoned, 100, src.Owner)
 						else
@@ -152,8 +152,8 @@ mob/verb
 						O.IsJutsuEffect=src
 						O.layer = MOB_LAYER+1
 					src.pgrab=0
-					Bind(K, 10+round(src.ninjutsu/3))
-					var/counter=10+round(src.ninjutsu/3)
+					Bind(K, 10+round(src.ninjutsu_total/3))
+					var/counter=10+round(src.ninjutsu_total/3)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
@@ -181,8 +181,8 @@ mob/verb
 						O.icon_state = "Grab top"
 						O.layer = MOB_LAYER+1
 					src.pgrab=0
-					Bind(K, 10+round(src.ninjutsu/3))
-					var/counter=10+round(src.ninjutsu/3)
+					Bind(K, 10+round(src.ninjutsu_total/3))
+					var/counter=10+round(src.ninjutsu_total/3)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
@@ -322,7 +322,7 @@ mob/Karasu
 					if(!src.henged) flick("arm shooters",src)
 					if(src.henged) flick("punchr",src)
 					if(c_target.client)spawn()c_target.ScreenShake(1)
-					var/undefendedhit=(180-round(1*((300-(src.ninjutsu+src.precision))/3)))-(c_target.defence/4)+rand(0,10)
+					var/undefendedhit=(180-round(1*((300-(src.ninjutsu_total+src.precision_total))/3)))+rand(0,10)
 					if(undefendedhit<0)
 						undefendedhit=1
 					c_target.DealDamage(undefendedhit,src.Owner,"TaiOrange")
@@ -377,7 +377,7 @@ mob/Untargettable
 			for(var/mob/M in orange(5))
 				if(M.dead || M.key==src.name || istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) continue
 				src.PlayAudio('Skill_BigRoketFire.wav', output = AUDIO_HEARERS)
-				M.DealDamage(src.taijutsu,src.Ownzeez,"TaiOrange")
+				M.DealDamage(src.taijutsu_total,src.Ownzeez,"TaiOrange")
 				M.Bleed(M)
 				if(M.henge==4||M.henge==5)M.HengeUndo()
 				M.icon_state="push"
@@ -431,7 +431,7 @@ mob/Untargettable
 				if(random==2) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 				if(random==3) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 				if(random==4) src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
-				M.DealDamage(jutsudamage+round((src.Ownzeez.ninjutsu / 150)*2*jutsudamage)*2,src.Ownzeez,"TaiOrange")
+				M.DealDamage(jutsudamage+round((src.Ownzeez.ninjutsu_total / 200)*2*jutsudamage)*2,src.Ownzeez,"TaiOrange")
 				if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(10,15))
 				if(M.henge==4||M.henge==5)M.HengeUndo()
 				M.icon_state="push"
@@ -794,7 +794,7 @@ obj
 								src.loc=O.loc
 								src.icon_state = "NUUUUU"
 								src.Hit=1
-								M.DealDamage((jutsudamage+round(((Owner.ninjutsu / 300)+(Owner.precision / 300))*2*jutsudamage))*2,src.Owner,"NinBlue")
+								M.DealDamage((jutsudamage+round(((Owner.ninjutsu_total / 300)+(Owner.precision_total / 300))*2*jutsudamage))*2,src.Owner,"NinBlue")
 								spawn() M.Bleed()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 						else src.invisibility=1
@@ -1269,7 +1269,7 @@ obj
 								src.layer=MOB_LAYER+1
 								src.loc = M.loc
 								if(M!=src.Owner)
-									M.DealDamage(2+src.damage+(Owner.ninjutsu/10),src.Owner,"NinBlue")
+									M.DealDamage(2+src.damage+(Owner.ninjutsu_total/10),src.Owner,"NinBlue")
 									src.hits++
 								step(M,src.dir)
 								M.dir = get_dir(M,src)
@@ -1679,7 +1679,7 @@ obj
 							for(var/mob/U in view(src,0))
 								if(U.dead || CheckState(U, new/state/swimming)) continue
 								if(U.dead==0)
-									var/damage=10+round(Owner.ninjutsu/4)
+									var/damage=10+round(Owner.ninjutsu_total/4)
 									U.DealDamage(damage,src.Owner,"NinBlue")
 									if(U.henge==4||U.henge==5)
 										U.HengeUndo()
@@ -2169,13 +2169,13 @@ obj
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="pull"
-							M.Bind(M, 10+Owner.ninjutsu/8)
+							M.Bind(M, 10+Owner.ninjutsu_total/8)
 							if(!M.key) goto lol
 							walk_towards(M,Owner)
 							lol
 							src.loc=locate(0,0,0)
 							M.DealDamage(src.damage,src.Owner,"NinBlue")
-							spawn(10+Owner.ninjutsu/8)
+							spawn(10+Owner.ninjutsu_total/8)
 								if(M)
 									if(M.dead==0)
 										M.icon_state=""
@@ -2191,11 +2191,11 @@ obj
 								Owner.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="pull"
-								M.Bind(M, 10+Owner.ninjutsu/8)
+								M.Bind(M, 10+Owner.ninjutsu_total/8)
 								walk_towards(M,Owner)
 								src.loc=locate(0,0,0)
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
-								spawn(10+Owner.ninjutsu/8)
+								spawn(10+Owner.ninjutsu_total/8)
 									if(M)
 										if(M.dead==0)
 											M.icon_state=""
@@ -2246,13 +2246,13 @@ obj
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="push"
-							M.Bind(M, 10+Owner.ninjutsu/8)
+							M.Bind(M, 10+Owner.ninjutsu_total/8)
 							if(!M.key) goto lol
 							walk(M,Owner.dir)
 							lol
 							src.loc=locate(0,0,0)
 							M.DealDamage(src.damage,src.Owner,"NinBlue")
-							spawn(10+Owner.ninjutsu/8)
+							spawn(10+Owner.ninjutsu_total/8)
 								if(M)
 									if(M.dead==0&&!CheckState(M, new/state/swimming))M.icon_state=""
 									walk(M,0)
@@ -2272,11 +2272,11 @@ obj
 								Owner.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="push"
-								AddState(M, new/state/cant_move, 10+Owner.ninjutsu/8)
+								AddState(M, new/state/cant_move, 10+Owner.ninjutsu_total/8)
 								walk(M,Owner.dir)
 								src.loc=locate(0,0,0)
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
-								spawn(10+Owner.ninjutsu/8)
+								spawn(10+Owner.ninjutsu_total/8)
 									if(M)
 										if(M.dead==0&&!CheckState(M, new/state/swimming))M.icon_state=""
 										walk(M,0)
@@ -2314,7 +2314,7 @@ mob
 		BurnEffect(mob/X)
 			if(src.burn>0&&src.health>0&&X)
 				burn--
-				var/damage=3+round(X.ninjutsu/5)
+				var/damage=3+round(X.ninjutsu_total/5)
 				src.DealDamage(damage,X,"NinBlue")
 				src.PlayAudio('boom.wav', output = AUDIO_HEARERS)
 				spawn(4)if(src)src.BurnEffect(X)
@@ -2608,7 +2608,7 @@ obj
 				if(istype(A,/mob/))
 					var/mob/M=A
 					if(M==ooowner) del(src)
-					M.DealDamage((ooowner.taijutsu+dmg+ooowner.ninjutsu),src.Owner,"NinBlue")
+					M.DealDamage((ooowner.taijutsu_total+dmg+ooowner.ninjutsu_total),src.Owner,"NinBlue")
 					src.density=0
 					step(src,src.dir)
 				else
@@ -2787,7 +2787,7 @@ mob
 				step(src,src.dir)
 				step(src,src.dir)
 				src.density=1
-				M:DealDamage(round((src.ninjutsu / 300)+(src.taijutsu / 300)*2*300)/6,src,"TaiOrange")
+				M:DealDamage(round((src.ninjutsu_total / 300)+(src.taijutsu_total / 300)*2*300)/6,src,"TaiOrange")
 		else
 			..()
 

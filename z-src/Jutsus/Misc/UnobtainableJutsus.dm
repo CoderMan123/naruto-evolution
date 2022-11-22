@@ -24,7 +24,7 @@ mob
 					A.fightlayer=src.fightlayer
 					A.pixel_y=16
 					A.pixel_x=-16
-					A.damage=J.damage+round(src.agility*2)+round(src.ninjutsu*5)
+					A.damage=J.damage+round(src.agility_total*2)+round(src.ninjutsu_total*5)
 					A.level=J.level
 					walk(A,dir,0)
 					icon_state=""
@@ -52,7 +52,7 @@ mob
 							var/obj/Dust/Prison/a=new/obj/Dust/Prison(c_target.loc)
 							a.icon_state="Beam"
 							spawn(35)
-								c_target.DealDamage(src.ninjutsu*20+J.damage,src,"NinBlue")
+								c_target.DealDamage(src.ninjutsu_total*20+J.damage,src,"NinBlue")
 								del(a)
 
 
@@ -88,12 +88,12 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",rand(7,11))
 					src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 					src.underlays+='CS Aura.dmi'
-					src.ninjutsu+=10
-					src.taijutsu+=15
+					src.ninjutsu_buffed+=10
+					src.taijutsu_buffed+=15
 					src.incurse=1
-					spawn(200)
-						src.ninjutsu-=10
-						src.taijutsu-=15
+					spawn(150)
+						src.ninjutsu_buffed-=10
+						src.taijutsu_buffed-=15
 						src.incurse=0
 						src.underlays-='CS Aura.dmi'
 						src<<"Curse Seal wears off..."
@@ -122,7 +122,7 @@ mob
 					A.fightlayer=src.fightlayer
 					A.pixel_y=16
 					A.pixel_x=-16
-					A.damage=J.damage+round(src.agility*2)+round(src.ninjutsu*5)
+					A.damage=J.damage+round(src.agility_total*2)+round(src.ninjutsu_total*5)
 					A.level=J.level
 					walk(A,dir,0)
 					icon_state=""

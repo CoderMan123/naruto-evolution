@@ -337,7 +337,7 @@ window "Character"
 	elem "Character"
 		type = MAIN
 		pos = 281,0
-		size = 300x589
+		size = 300x661
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		background-color = none
@@ -349,12 +349,12 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x603
-		inner-size = 300x589
+		outer-size = 314x675
+		inner-size = 300x661
 	elem "Background"
 		type = LABEL
 		pos = 0,21
-		size = 300x568
+		size = 300x640
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = #191919
@@ -390,8 +390,8 @@ window "Character"
 		text = "Clan 2"
 	elem "Precision"
 		type = LABEL
-		pos = 151,504
-		size = 46x22
+		pos = 151,552
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -403,7 +403,7 @@ window "Character"
 		text = "10"
 	elem "PrecisionExperienceBar"
 		type = BAR
-		pos = 151,528
+		pos = 151,600
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -418,8 +418,8 @@ window "Character"
 		value = 10
 	elem "PrecisionExperience"
 		type = LABEL
-		pos = 199,504
-		size = 98x22
+		pos = 151,576
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -431,7 +431,7 @@ window "Character"
 		text = "1/10"
 	elem "label10"
 		type = LABEL
-		pos = 151,480
+		pos = 151,528
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -443,9 +443,23 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "Precision"
+	elem "button38"
+		type = BUTTON
+		pos = 275,552
+		size = 22x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "+"
+		command = "PrecisionUp"
+		is-flat = true
 	elem "SkillPoints"
 		type = LABEL
-		pos = 151,564
+		pos = 151,636
 		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -458,7 +472,7 @@ window "Character"
 		text = "0"
 	elem "label9"
 		type = LABEL
-		pos = 151,540
+		pos = 151,612
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -472,8 +486,8 @@ window "Character"
 		text = "Skill Points"
 	elem "Gen"
 		type = LABEL
-		pos = 3,504
-		size = 46x22
+		pos = 3,552
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -485,7 +499,7 @@ window "Character"
 		text = "10"
 	elem "GenEXPBar"
 		type = BAR
-		pos = 3,528
+		pos = 3,600
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -498,10 +512,24 @@ window "Character"
 		is-slider = false
 		dir = east
 		value = 10
+	elem "button37"
+		type = BUTTON
+		pos = 127,552
+		size = 22x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "+"
+		command = "GenjutsuUp"
+		is-flat = true
 	elem "GenEXP"
 		type = LABEL
-		pos = 51,504
-		size = 98x22
+		pos = 3,576
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -513,7 +541,7 @@ window "Character"
 		text = "1/10"
 	elem "label37"
 		type = LABEL
-		pos = 3,480
+		pos = 3,528
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -554,8 +582,8 @@ window "Character"
 		text = "Name"
 	elem "Nin"
 		type = LABEL
-		pos = 151,444
-		size = 46x22
+		pos = 151,468
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -567,8 +595,8 @@ window "Character"
 		text = "10"
 	elem "NinEXP"
 		type = LABEL
-		pos = 199,444
-		size = 98x22
+		pos = 151,492
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -578,10 +606,24 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "1/10"
+	elem "button36"
+		type = BUTTON
+		pos = 275,468
+		size = 22x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "+"
+		command = "NinjutsuUp"
+		is-flat = true
 	elem "Tai"
 		type = LABEL
-		pos = 3,444
-		size = 46x22
+		pos = 3,468
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -593,7 +635,7 @@ window "Character"
 		text = "10"
 	elem "NinEXPBar"
 		type = BAR
-		pos = 151,468
+		pos = 151,516
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -606,9 +648,23 @@ window "Character"
 		is-slider = false
 		dir = east
 		value = 10
+	elem "button35"
+		type = BUTTON
+		pos = 127,468
+		size = 22x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "+"
+		command = "TaijutsuUp"
+		is-flat = true
 	elem "label19"
 		type = LABEL
-		pos = 151,420
+		pos = 151,444
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -622,7 +678,7 @@ window "Character"
 		text = "Ninjutsu"
 	elem "TaiEXPBar"
 		type = BAR
-		pos = 3,468
+		pos = 3,516
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -637,8 +693,8 @@ window "Character"
 		value = 10
 	elem "TaiEXP"
 		type = LABEL
-		pos = 51,444
-		size = 98x22
+		pos = 3,492
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -650,7 +706,7 @@ window "Character"
 		text = "1/10"
 	elem "label17"
 		type = LABEL
-		pos = 3,420
+		pos = 3,444
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -665,7 +721,7 @@ window "Character"
 	elem "Agi"
 		type = LABEL
 		pos = 151,384
-		size = 46x22
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -677,8 +733,8 @@ window "Character"
 		text = "10"
 	elem "AgiEXP"
 		type = LABEL
-		pos = 199,384
-		size = 98x22
+		pos = 151,408
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -688,6 +744,20 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "1/10"
+	elem "button34"
+		type = BUTTON
+		pos = 275,384
+		size = 22x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "+"
+		command = "AgilityUp"
+		is-flat = true
 	elem "label34"
 		type = LABEL
 		pos = 3,336
@@ -719,7 +789,7 @@ window "Character"
 	elem "Def"
 		type = LABEL
 		pos = 3,384
-		size = 46x22
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -731,7 +801,7 @@ window "Character"
 		text = "10"
 	elem "StatPoints"
 		type = LABEL
-		pos = 3,564
+		pos = 3,636
 		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -742,9 +812,23 @@ window "Character"
 		border = line
 		saved-params = ""
 		text = "0"
+	elem "button33"
+		type = BUTTON
+		pos = 127,384
+		size = 22x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #414141
+		border = line
+		saved-params = "is-checked"
+		text = "+"
+		command = "DefenceUp"
+		is-flat = true
 	elem "label31"
 		type = LABEL
-		pos = 3,540
+		pos = 3,612
 		size = 146x22
 		anchor1 = 0,0
 		anchor2 = 100,0
@@ -758,7 +842,7 @@ window "Character"
 		text = "Stat Points"
 	elem "AgiEXPBar"
 		type = BAR
-		pos = 151,408
+		pos = 151,432
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -787,7 +871,7 @@ window "Character"
 		text = "Agility"
 	elem "DefEXPBar"
 		type = BAR
-		pos = 3,408
+		pos = 3,432
 		size = 146x10
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -802,8 +886,8 @@ window "Character"
 		value = 10
 	elem "DefEXP"
 		type = LABEL
-		pos = 51,384
-		size = 98x22
+		pos = 3,408
+		size = 146x22
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		font-family = "Open Sans"
@@ -1556,7 +1640,6 @@ window "InputPanel"
 		size = 500x28
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1564,8 +1647,6 @@ window "InputPanel"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 514x42
-		inner-size = 500x28
 	elem "ChatBackground"
 		type = LABEL
 		pos = 0,0

@@ -5,40 +5,40 @@ mob
 				if(src.PreJutsu(J))
 					if(src.ingpill==1) return
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/10)*jutsustatexp))
-					src.taijutsu+=15
+					src.taijutsu_buffed+=15
 					src.DealDamage(src.maxhealth/5,src,"black")
 					src.ingpill=1
 					spawn(200)
 						src.ingpill=0
 						src<<"\green Your Green Pill Effect wears off..."
-						src.taijutsu-=15
+						src.taijutsu_buffed-=15
 
 		YellowPill()
 			for(var/obj/Jutsus/YellowPill/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(src.inypill==1) return
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/10)*jutsustatexp))
-					src.taijutsu+=25
+					src.taijutsu_buffed+=25
 					src.DealDamage(src.maxhealth/3.5,src,"black")
 					src.inypill=1
 					spawn(200)
 						src.inypill=0
 						src<<"\yellow Your Yellow Pill Effect wears off..."
-						src.taijutsu-=25
+						src.taijutsu_buffed-=25
 
 		RedPill()
 			for(var/obj/Jutsus/RedPill/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(src.inrpill==1) return
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/10)*jutsustatexp))
-					src.taijutsu+=40
+					src.taijutsu_buffed+=40
 					src.DealDamage(src.maxhealth/2.4,src,"black")
 					src.inrpill=1
 					src.JutsuCoolSlot(J)
 					spawn(200)
 						src.inrpill=0
 						src<<"\red Your Red Pill Effect wears off..."
-						src.taijutsu-=40
+						src.taijutsu_buffed-=40
 
 		HumanBulletTank()
 			for(var/obj/Jutsus/HumanBulletTank/J in src.jutsus)
@@ -46,9 +46,9 @@ mob
 					if(src.inboulder==1) return
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*1.3
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*1.3
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*1.3
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*1.3
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*1.3
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*1.3
 					if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsu",src)
@@ -71,7 +71,7 @@ mob
 							if(M == src) continue
 							if(M.dead) continue
 							if(src.loc == lastloc) continue
-							M.DealDamage(round((src.ninjutsu / 300)+(src.taijutsu / 300)*2*J.damage)/12,src,"NinBlue")
+							M.DealDamage(round((src.ninjutsu_total / 300)+(src.taijutsu_total / 300)*2*J.damage)/12,src,"NinBlue")
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="dead"
 							Bind(M, 5)
@@ -95,11 +95,11 @@ mob
 					if(J.level==3) J.damage=30
 					if(J.level==4) J.damage=40
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					src.taijutsu+=J.damage
+					src.taijutsu_total+=J.damage
 					src.underlays+='AkimichiWings.dmi'
 					src.incalorie=1
 					spawn(300)
-						src.taijutsu-=J.damage
+						src.taijutsu_total-=J.damage
 						src.incalorie=0
 						src.underlays-='AkimichiWings.dmi'
 

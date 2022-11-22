@@ -9,9 +9,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/30)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/30)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/30)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/10
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/10
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/10
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/10
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/10
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/10
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					src.icon_state = "punchrS"
@@ -52,8 +52,8 @@ mob
 							O.pixel_x+=rand(-5,5)
 							flick('EightGatesAssault.dmi',O)
 							spawn(4)if(O)del(O)
-							Z.DealDamage((J.damage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.precision / 450))*2*J.damage))/3,src,"cyan",0,1)
-							Z.DealDamage(J.damage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.precision / 450))*2*J.damage),src,"NinBlue")
+							Z.DealDamage((J.damage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.precision_total / 450))*2*J.damage))/3,src,"cyan",0,1)
+							Z.DealDamage(J.damage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.precision_total / 450))*2*J.damage),src,"NinBlue")
 						for(var/i=0,i<3,i++)
 							step(src,src.dir)
 							step(src,src.dir)
@@ -73,8 +73,8 @@ mob
 							O.pixel_x+=rand(-5,5)
 							flick('EightGatesAssault.dmi',O)
 							spawn(4)if(O)del(O)
-							Z.DealDamage((J.damage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*J.damage))/3,src,"cyan",0,1)
-							Z.DealDamage(J.damage+round(((src.ninjutsu / 450)+(src.agility / 450)+(src.taijutsu / 450))*2*J.damage),src,"NinBlue")
+							Z.DealDamage((J.damage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*J.damage))/3,src,"cyan",0,1)
+							Z.DealDamage(J.damage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*J.damage),src,"NinBlue")
 						if(Z)
 							RemoveState(Z, a, STATE_REMOVE_REF)
 							RemoveState(Z, b, STATE_REMOVE_REF)
@@ -89,9 +89,9 @@ mob
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("punchr",src)
@@ -111,7 +111,7 @@ mob
 					A.pixel_y=32
 					A.layer=src.layer
 					A.fightlayer=src.fightlayer
-					A.damage=J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage)
+					A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.taijutsu_total / 300))*2*J.damage)
 					A.level=J.level
 					walk(A,dir,0)
 					icon_state=""
@@ -132,9 +132,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/30)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/30)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/30)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsuse",src)
@@ -281,9 +281,9 @@ mob
 							if(EAST) src.dir=SOUTH
 							if(NORTH) src.dir=EAST
 					O.icon_state = "Loop"
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/5
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/5
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/5
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/5
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/5
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/5
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(J.level==4)
@@ -308,7 +308,7 @@ mob
 							if(!istype(M,/mob/npc) || !istype(M,/mob/npc/combat))
 								M.icon_state="push"
 								AddState(M, new/state/cant_move, 3)
-								M.DealDamage(J.damage+round(((src.ninjutsu / 300)+(src.agility / 300))*2*J.damage),src,"NinBlue")
+								M.DealDamage(J.damage+round(((src.ninjutsu_total / 300)+(src.agility_total / 300))*2*J.damage),src,"NinBlue")
 								var/IA = rand(1,2)
 								if(IA==1)step_away(M,src)
 								if(M.client)spawn() M.ScreenShake(10)
@@ -393,9 +393,9 @@ mob
 					A.pixel_x=-30
 					A.pixel_y=-10
 					A.dir=src.dir
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.3
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.3
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.5
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.3
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.3
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.3
 					if(J.level==1)
 						A.icon_state="0"
@@ -437,7 +437,7 @@ mob
 								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 									if(c_target.fightlayer==src.fightlayer)
 										if(c_target.dodge==0)
-											var/undefendedhit=J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage)
+											var/undefendedhit=J.damage+round(((src.ninjutsu_total / 300)+(src.taijutsu_total / 300))*2*J.damage)
 											if(undefendedhit<0)undefendedhit=1
 											c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 											AddState(c_target, new/state/knockback, 10)
@@ -445,11 +445,11 @@ mob
 											if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 											if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 										else
-											if(src.agility>=c_target.agility)
-												var/defendedhit=(J.damage+round(((src.ninjutsu / 300)+(src.taijutsu / 300))*2*J.damage))/2
+											if(src.agility_total>=c_target.agility_total)
+												var/defendedhit=(J.damage+round(((src.ninjutsu_total / 300)+(src.taijutsu_total / 300))*2*J.damage))/2
 												if(defendedhit<0)
 													defendedhit=1
-												if(defence<src.taijutsu/3)
+												if(defence_total<src.taijutsu_total/2)
 													var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 													Drag.dir=c_target.dir
 													step(c_target,src.dir)
@@ -469,7 +469,7 @@ mob
 					del(O)
 		/*				for(var/obj/Training/T in view(O,0))
 							if(T.health>=1)
-								var/undefendedhit=round(((damage+src.taijutsu+src.taijutsu)/3))//-c_target.defence/4)
+								var/undefendedhit=round(((damage+src.taijutsu_total+src.taijutsu_total)/3))
 								T.DealDamage(undefendedhit,src,"TaiOrange")
 								if(T) if(T.Good) LevelStat(SPECIALIZATION_TAIJUTSU,rand(1,2))
 								else LevelStat(SPECIALIZATION_TAIJUTSU,rand(0.2,1))

@@ -16,10 +16,7 @@ obj
 				src.maxexp+=30
 
 				if(src.name=="Clone Jutsu")
-					if(src.level==2)Owner.maxbunshin=1
-					if(src.level==3)Owner.maxbunshin=1
-					if(src.level==4)Owner.maxbunshin=1
-					Owner<<output("<font color= #bc8f8f>Your [src]'s clones now have more strength</Font>.","Action.Output")
+					Owner<<output("<font color= #bc8f8f>Clone jutsu gained +1 max clones.</Font>.","Action.Output")
 				if(src.name=="Fire Release: Fire Ball")
 					Owner<<output("<font color= #bc8f8f>Your [src] skill's base damage has increased</Font>.","Action.Output")
 				if(src.name=="Meteor Punch")
@@ -82,7 +79,7 @@ mob
 				src<<output("<font color= #bc8f8f>You leveled up!</Font>.","Action.Output")
 				src.level+=1
 				src.exp-=src.maxexp
-				src.statpoints+=3
+				src.statpoints+=4
 				src.skillpoints++
 				if(src.level<=20)
 					src.maxexp+=1
@@ -91,9 +88,9 @@ mob
 				if(src.level>40&&src.level<=60)
 					src.maxexp+=5
 				if(src.level>60&&src.level<=80)
-					src.maxexp+=8
+					src.maxexp+=7
 				if(src.level>80&&src.level<=100)
-					src.maxexp+=11
+					src.maxexp+=10
 
 				if(src.client)
 					spawn()
@@ -107,7 +104,7 @@ mob
 					O.loc = null
 				next
 			if(src.taijutsuexp>=src.maxtaijutsuexp)
-				if(src.taijutsu>=150)
+				if(src.taijutsu>=100)
 					goto next
 				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=TaiOrange>You leveled up Strength</Font>.","Action.Output")
@@ -128,7 +125,7 @@ mob
 				next
 
 			if(src.ninexp>=src.maxninexp)
-				if(src.ninjutsu>=150)
+				if(src.ninjutsu>=100)
 					goto next
 				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=NinBlue>You leveled up Ninjutsu</Font>.","Action.Output")
@@ -148,7 +145,7 @@ mob
 				src.Levelup()
 				next
 			if(src.genexp>=src.maxgenexp)
-				if(src.genjutsu>=150)
+				if(src.genjutsu>=100)
 					goto next
 				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=blueviolet>You leveled up Genjutsu</Font>.","Action.Output")
@@ -168,7 +165,7 @@ mob
 				src.Levelup()
 				next
 			if(src.defexp>=src.maxdefexp)
-				if(src.defence>=150)
+				if(src.defence>=100)
 					goto next
 				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=maroon>You leveled up Defence</Font>.","Action.Output")
@@ -188,7 +185,7 @@ mob
 				src.Levelup()
 				next
 			if(src.agilityexp>=src.maxagilityexp)
-				if(src.agility>=150)
+				if(src.agility>=100)
 					goto next
 				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=cornsilk>You leveled up Agility</Font>.","Action.Output")
@@ -206,17 +203,10 @@ mob
 				if(src.agility>120&&src.agility<=150)
 					src.maxagilityexp+=150+round(src.agility/2)
 				src.Levelup()
-				src.attkspeed=(8-(0.04*src.agility))
-//				if(src.agility==10)src.attkspeed=7
-//				if(src.agility==20)src.attkspeed=6
-//				if(src.agility==30)src.attkspeed=5
-//				if(src.agility==50)src.attkspeed=4
-//				if(src.agility==70)src.attkspeed=3
-//				if(src.agility==90)src.attkspeed=2
-//				if(src.agility==120)src.attkspeed=1
+				src.attkspeed=(8-(0.03*src.agility_total))
 				next
 			if(src.precisionexp>=src.maxprecisionexp)
-				if(src.precision>=150)
+				if(src.precision>=100)
 					goto next
 				src.PlayAudio('level.wav', output = AUDIO_SELF)
 				src<<output("<font color=azure>You leveled up Precision</Font>.","Action.Output")
@@ -263,7 +253,7 @@ obj
 				icon_state="deadright"
 				//pixel_x=32
 
-mob/var/tmp/KillCombo=0
+
 mob/var/tmp/levelrate=0
 mob/var
 	undlvlatck=0

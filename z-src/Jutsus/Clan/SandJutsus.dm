@@ -52,9 +52,9 @@ mob
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.7
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.7
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("groundjutsu",src)
@@ -64,7 +64,7 @@ mob
 							O.icon = 'Sand Funeral.dmi'
 							flick("stab",O)
 							O.icon_state = "blood"
-							c_target.DealDamage(J.damage+round((src.ninjutsu / 150)*2*J.damage),src,"NinBlue")
+							c_target.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 
 		Sand_Shield()
 			for(var/obj/Jutsus/Sand_Shield/J in src.jutsus)
@@ -102,9 +102,9 @@ mob
 					flick("throw",src)
 					AddState(src, new/state/cant_attack, 3)
 					src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/4
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/4
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/4
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/4
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/4
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/num=5
@@ -182,7 +182,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
+							A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
 							var/turf/Tg
 							Tg = get_step(c_target,pick(NORTH,SOUTH,EAST,WEST))
 							var/k = rand(1,5)
@@ -272,7 +272,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
+								A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
 							spawn() walk(A,src.dir)
 
 		Shukakku_Spear()
@@ -284,9 +284,9 @@ mob
 					flick("punchl",src)
 					src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 					AddState(src, new/state/cant_attack, 3)
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.8
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.8
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.8
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.8
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.8
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.8
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(c_target)
@@ -296,7 +296,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
 						A.level=J.level
 						walk_towards(A,c_target.loc,0)
 						spawn(4)
@@ -307,6 +307,6 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.ninjutsu / 300)+(src.precision / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)

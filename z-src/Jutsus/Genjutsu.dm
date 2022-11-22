@@ -4,7 +4,6 @@ atom/var/Hengable=0 // Don't change this.
 //mob/var/multishadow=0
 mob/var/tmp
 	Prisoned=0
-	mizubunshin
 	gatsuga=0
 mob
 	Hengable=1
@@ -63,10 +62,10 @@ atom/Click()
 		else
 			for(var/mob/Clones/Shadow/S in view(usr,20))
 				spawn()
-					var/mob/SC=src
-					if(S.Owner==usr&&SC.Owner<>usr)
+					if(S.Owner==usr&&usr.Owner<>usr)
 						S.target_mob=null
-						walk_towards(S,usr,3)
+						S.target_mob=src
+						S.FollowTarget()
 	if(istype(src,/obj)&&src.Hengable)
 		if(usr.henge>=2&&usr.henge<4)
 			usr.henge=5
@@ -132,7 +131,7 @@ mob
 					if(CheckState(src, new/state/cant_move)) continue
 					if(src.takeova) continue
 					for(var/mob/X in oview(src))
-						if(X <> Owner)
+						if(X <> Owner && X.Owner!=Owner)
 							if(X && !X.dead && !CheckState(X, new/state/cant_move))
 								while(get_dist(X,src)<>1 && X && src)
 									sleep(1)
@@ -143,7 +142,7 @@ mob
 									if(src)
 										dir=get_dir(src,X)
 										for(var/mob/M in get_step(src,src.dir))
-											if(M <> Owner)
+											if(M <> Owner && X.Owner!=Owner)
 												if(src)
 													src.Attack()
 													sleep(2)
@@ -161,65 +160,60 @@ mob
 								flick("punchr",src)
 								src.Hand="Left"
 					src.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
-					if(src.agility<50)
+					if(src.agility_total<50)
 						spawn(2)
 							for(var/mob/c_target in get_step(src,src.dir))
 								src.dir = get_dir(src,c_target)
 								if(c_target in get_step(src,src.dir))
-									if(c_target.dead==0&&c_target!=Owner)
+									if(c_target.dead==0&&c_target!=Owner&&c_target.Owner!=Owner)
 										if(c_target.fightlayer==src.fightlayer)
 											if(c_target.dodge==0)
-												var/undefendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/4)+rand(0,10)
+												var/undefendedhit=(60-round(1*((200-src.ninjutsu_total)/6)+((200-src.taijutsu_total)/6)))+rand(0,10)
 												if(undefendedhit<0)
 													undefendedhit=0
-												c_target.DealDamage(undefendedhit,src,"TaiOrange")
-												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
+												c_target.DealDamage(undefendedhit,Owner,"TaiOrange")
 												if(src.Hand=="Left")
 													src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 												if(src.Hand=="Right")
 													src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											else
-												if(src.agility>=c_target.agility)
-													var/defendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/2)+rand(0,10)
+												if(src.agility_total>=c_target.agility_total)
+													var/defendedhit=(60-round(1*((200-src.ninjutsu_total)/6)+((200-src.taijutsu_total)/6)))+rand(0,10)
 													if(defendedhit<0)
 														defendedhit=0
-												//	if(Owner.loc.loc:Safe!=1) Owner.taijutsu++
 													Owner.Levelup()
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,5))
-													if(defence<src.taijutsu/3)
+													if(defence_total<src.taijutsu_total/2)
 														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 														Drag.dir=c_target.dir
 														step(c_target,src.dir)
 														c_target.dir = get_dir(c_target,src)
 														step_to(src,c_target,1)
-													c_target.DealDamage(defendedhit,src,"TaiOrange")
+													c_target.DealDamage(defendedhit,Owner,"TaiOrange")
 													flick("defendhit",c_target)
 													src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 												else
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
 					else
-						if(src.agility>=50)
+						if(src.agility_total>=50)
 							for(var/mob/c_target in get_step(src,src.dir))
 								src.dir = get_dir(src,c_target)
 								if(c_target in get_step(src,src.dir))
-									if(c_target.dead==0&&c_target!=Owner)
+									if(c_target.dead==0&&c_target!=Owner&&c_target.Owner!=Owner)
 										if(c_target.fightlayer==src.fightlayer)
 											if(c_target.dodge==0)
-												var/undefendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/4)+rand(0,10)
+												var/undefendedhit=(60-round(1*((200-src.ninjutsu_total)/6)+((200-src.genjutsu_total)/6)))+rand(0,10)
 												if(undefendedhit<0)undefendedhit=0
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
 											//	if(Owner.loc.loc:Safe!=1) Owner.LevelStat(SPECIALIZATION_TAIJUTSU,1)
-												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 												if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											else
-												if(src.agility>=c_target.agility)
-													var/defendedhit=(60-round(1*((150-src.ninjutsu)/6)+((150-src.genjutsu)/6)))-(c_target.defence/2)+rand(0,10)
+												if(src.agility_total>=c_target.agility_total)
+													var/defendedhit=(60-round(1*((200-src.ninjutsu_total)/6)+((200-src.genjutsu_total)/6)))+rand(0,10)
 													if(defendedhit<0)
 														defendedhit=0
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,5))
-													if(defence<src.taijutsu/3)
+													if(defence_total<src.taijutsu_total/2)
 														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 														Drag.dir=c_target.dir
 														step(c_target,src.dir)
@@ -326,26 +320,33 @@ mob
 			maxhealth=1
 			chakra=1
 			maxchakra=1
-			density=1
+			density=0
+			invisibility = 1
 			New()
 				..()
 				spawn(1)
 					BAi()
 			proc/BAi()
 				if(src)
+					step(src,pick(NORTH,SOUTH,WEST,EAST,NORTHWEST,NORTHEAST,SOUTHWEST,SOUTHEAST))
+					step_away(src, Owner)
 					for(var/mob/P in oview(src,0))
-						if(P.loc==src.loc)
-							step(src,pick(NORTH,SOUTH,WEST,EAST,NORTHWEST,NORTHEAST,SOUTHWEST,SOUTHEAST))
-							if(prob(50))step_rand(src)
-							var/obj/A = new/obj/MiscEffects/Smoke(src.loc)
-							A.loc=src.loc
+						if(P.loc==src.loc) step(src,pick(NORTH,SOUTH,WEST,EAST,NORTHWEST,NORTHEAST,SOUTHWEST,SOUTHEAST))					
+					if(get_dist(src, Owner)<2)
+						step_away(src, Owner)
+				var/obj/A = new/obj/MiscEffects/Smoke(src.loc)
+				A.loc=src.loc
+				density = 1
+				invisibility = 0
+
 			Bump(atom/O)
 				if(istype(O,/mob))
 					var/mob/M=O
-					if(M.fightlayer==src.fightlayer)
-						src.health=0
-						src.Death(M)
-					else src.loc=M.loc
+					if(!istype(M, /mob/Clones/Bunshin) && M.Owner != src.Owner)
+						if(M.fightlayer==src.fightlayer)
+							src.health=0
+							src.Death(M)
+						else src.loc=M.loc
 				if(istype(O,/obj))
 					var/obj/OO=O
 					if(!OO.Owner) return
@@ -390,6 +391,8 @@ mob
 			chakra=1
 			maxchakra=1
 			density=1
+			genjutsu=1
+			var/attackdelay
 			New()
 				..()
 				spawn(1)BAi()
@@ -404,22 +407,33 @@ mob
 			proc/FollowTarget()
 				if(!src.takeova)
 					while(src)
-						sleep(1)
-						if(src.target_mob)
+						var/walkspeed = 2.5 - ((src.genjutsu / 200))
+						sleep(walkspeed)
+						if(src && src.target_mob)
 							if(src.Owner)
 								var/mob/Owner=src.Owner
 								var/mob/T=usr.target_mob
 								if(T)
 									if(get_dist(Owner,T)>=17)
 										src.target_mob=null
-										if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/cant_move) && !CheckState(src, new/state/swimming))
-											if(!Owner.likeaclone)walk_towards(src,Owner,3)
+										if(!CheckState(src, new/state/cant_move) && !CheckState(src, new/state/swimming))
+											if(!Owner.likeaclone)
+												for(var/mob/P in oview(src,1))
+													if(P && istype(P, /mob/Clones/Shadow) && P.Owner == Owner || P == Owner)
+														walk(src, 0)
+														step_rand(src)
+														sleep(0.5)
+												walk_towards(src,Owner,walkspeed)
 									else
 										if(get_dist(src,T)>1)
-											if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/cant_move) && !CheckState(src, new/state/swimming))walk_towards(src,T,3)
-									if(get_dist(src,T)<=1)
+											if(!CheckState(src, new/state/cant_move) && !CheckState(src, new/state/swimming))
+												walk_towards(src,T,walkspeed)
+		
+									if(!CheckState(src, new/state/cant_attack) && get_dist(src,T)<=1)
 										if(T<>src.Owner && T.Owner <> src.Owner)
-											if(!Owner.likeaclone)src.Attack()
+											if(!Owner.likeaclone)
+												src.Attack()
+												AddState(src, new/state/cant_attack, (10 - (walkspeed*3) + rand(0.1,0.5)))
 								continue
 						else
 							walk(src,0)
@@ -436,59 +450,53 @@ mob
 								flick("punchr",src)
 								src.Hand="Left"
 					src.PlayAudio('Swing5.ogg', output = AUDIO_HEARERS)
-					if(src.agility<50)
-						spawn(2)
-							for(var/mob/c_target in get_step(src,src.dir))
-								src.dir = get_dir(src,c_target)
-								if(c_target in get_step(src,src.dir))
-									if(c_target.dead==0&&c_target!=Owner)
-										if(c_target.fightlayer==src.fightlayer)
-											if(c_target.dodge==0)
-												var/undefendedhit=round(src.taijutsu-c_target.defence/4)
-												if(undefendedhit<0)undefendedhit=0
-												c_target.DealDamage(undefendedhit,src,"TaiOrange")
-												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
-												if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
-												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
+					if(src.agility_total<50)
+						for(var/mob/c_target in get_step(src,src.dir))
+							src.dir = get_dir(src,c_target)
+							if(c_target in get_step(src,src.dir))
+								if(c_target.dead==0&&c_target!=Owner)
+									if(c_target.fightlayer==src.fightlayer)
+										if(c_target.dodge==0)
+											var/undefendedhit=round(src.genjutsu_total*0.6)
+											if(undefendedhit<0)undefendedhit=0
+											c_target.DealDamage(undefendedhit,src,"TaiOrange")
+											if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
+											if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
+										else
+											if(src.agility_total>=c_target.agility_total)
+												var/defendedhit=round(src.genjutsu_total*0.6)
+												if(defendedhit<0)defendedhit=0
+												Owner.Levelup()
+												if(defence_total<src.taijutsu_total/2)
+													var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
+													Drag.dir=c_target.dir
+													step(c_target,src.dir)
+													c_target.dir = get_dir(c_target,src)
+													step_to(src,c_target,1)
+												c_target.DealDamage(defendedhit,src,"TaiOrange")
+												flick("defendhit",c_target)
+												src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 											else
-												if(src.agility>=c_target.agility)
-													var/defendedhit=src.taijutsu-c_target.defence
-													if(defendedhit<0)defendedhit=0
-													//if(Owner.loc.loc:Safe!=1) Owner.taijutsu++
-													Owner.Levelup()
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,5))
-													if(defence<src.taijutsu/3)
-														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
-														Drag.dir=c_target.dir
-														step(c_target,src.dir)
-														c_target.dir = get_dir(c_target,src)
-														step_to(src,c_target,1)
-													c_target.DealDamage(defendedhit,src,"TaiOrange")
-													flick("defendhit",c_target)
-													src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
-												else
-													flick("dodge",c_target)
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
+												flick("dodge",c_target)
+												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
 					else
-						if(src.agility>=50)
+						if(src.agility_total>=50)
 							for(var/mob/c_target in get_step(src,src.dir))
 								src.dir = get_dir(src,c_target)
 								if(c_target in get_step(src,src.dir))
 									if(c_target.dead==0&&c_target!=Owner)
 										if(c_target.fightlayer==src.fightlayer)
 											if(c_target.dodge==0)
-												var/undefendedhit=round(src.taijutsu-c_target.defence/4)
+												var/undefendedhit=round(src.genjutsu_total*0.6)
 												if(undefendedhit<0)undefendedhit=0
 												c_target.DealDamage(undefendedhit,src,"TaiOrange")
-												if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(1,2))
 												if(src.Hand=="Left") src.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 												if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 											else
-												if(src.agility>=c_target.agility)
-													var/defendedhit=src.taijutsu-c_target.defence
+												if(src.agility_total>=c_target.agility_total)
+													var/defendedhit=round(src.genjutsu_total*0.6)
 													if(defendedhit<0)defendedhit=0
-													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Defence",rand(3,5))
-													if(defence<src.taijutsu/3)
+													if(defence_total<src.taijutsu_total/2)
 														var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)
 														Drag.dir=c_target.dir
 														step(c_target,src.dir)
@@ -500,7 +508,7 @@ mob
 												else
 													flick("dodge",c_target)
 													if(c_target.loc.loc:Safe!=1) c_target.LevelStat("Agility",rand(2,5))
-					sleep(10)
+
 			Bump(atom/O)
 				if(istype(O,/mob))
 					var/mob/M=O
@@ -688,7 +696,7 @@ obj
 							if(M)
 								src.loc = M.loc
 								if(!Owner) return
-								M.DealDamage((12+src.damage+Owner.ninjutsu)*8,src.Owner,"NinBlue")
+								M.DealDamage((12+src.damage+Owner.ninjutsu_total)*8,src.Owner,"NinBlue")
 								spawn() if(M) M.Bleed()
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,4))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -770,7 +778,7 @@ obj
 								src.PlayAudio('GetsugaTenshou.wav', output = AUDIO_HEARERS)
 								src.loc = M.loc
 								if(!Owner) return
-								M.DealDamage(12+src.damage+Owner.ninjutsu*6.5,src.Owner,"NinBlue")
+								M.DealDamage(12+src.damage+Owner.ninjutsu_total*6.5,src.Owner,"NinBlue")
 								spawn() if(M) M.Bleed()
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -805,7 +813,7 @@ obj
 							if(M)
 								src.loc = M.loc
 								if(!Owner) return
-								M.DealDamage(12+src.damage+Owner.taijutsu/5,src.Owner,"TaiOrange")
+								M.DealDamage(12+src.damage+Owner.taijutsu_total/5,src.Owner,"TaiOrange")
 								spawn() if(M) M.Bleed()
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(3,5))
 								if(M.henge==4||M.henge==5)M.HengeUndo()
@@ -822,7 +830,7 @@ obj
 							if(M)
 								src.loc = M.loc
 								if(!Owner) return
-								M.DealDamage(2+Owner.taijutsu*4,src.Owner,"TaiOrange")
+								M.DealDamage(2+Owner.taijutsu_total*4,src.Owner,"TaiOrange")
 								spawn() if(M) M.Bleed()
 								if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Taijutsu",rand(3,5))
 								if(M.henge==4||M.henge==5)M.HengeUndo()

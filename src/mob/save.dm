@@ -354,6 +354,7 @@ mob
 			else src.loc=locate(39,158,14)
 
 		if(src.dead)
+			src.loc=src.MapLoadSpawn()
 			src.density=1
 			src.health=src.maxhealth
 			src.chakra=src.maxchakra

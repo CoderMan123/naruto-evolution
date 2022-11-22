@@ -10,12 +10,12 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp)) //determines amount of ninjutsu exp gained on use
 					flick("jutsuse",src)
 					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)/9
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/9
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/9
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)/9
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/9
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/9
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					J.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+					J.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 					var/Timer = J.level * 1.5 //determines how many ticks of damage as well as scaled bind duration
 					if(src.inAngel==1) Timer *= 1.5
 					Timer = round(Timer + 3)
@@ -52,9 +52,9 @@ mob
 					flick("throw",src)
 					src.PlayAudio('083.wav', output = AUDIO_HEARERS)
 					Bind(src, 2)
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.8
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.8
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.8
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.8
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.8
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.8
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(c_target)
@@ -64,7 +64,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+						A.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 						A.level=J.level
 						var/turf/TZ = c_target.loc
 						walk_towards(A,TZ,0)
@@ -84,9 +84,9 @@ mob
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2.5)*0.9
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.9
 					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.9
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.5)*0.9
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.9
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.9
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(src.inAngel==0)
@@ -111,7 +111,7 @@ mob
 					A.fightlayer=src.fightlayer
 					A.pixel_y=16
 					A.pixel_x=-16
-					A.damage=J.damage+round((src.ninjutsu / 150)*2*J.damage)
+					A.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 					A.level=J.level
 					walk(A,dir,0)
 					icon_state=""
