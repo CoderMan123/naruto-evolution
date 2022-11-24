@@ -42,6 +42,7 @@ mob
 											i.stacks = purchase_amount[2]
 											usr.ryo -= purchase_price
 											usr.RecieveItem(i, src)
+											LogTransaction(usr, src, purchase_price, i, LOG_ACTION_TRANSACTION_BUY)
 											usr.client.UpdateInventoryPanel()
 											usr.client.prompt("You bought x[purchase_amount[2]] [purchase] for [purchase_price] ryo.")
 										else
@@ -107,6 +108,7 @@ mob
 									purchase.stacks = 1
 									usr.ryo -= purchase_price
 									usr.RecieveItem(purchase, src)
+									LogTransaction(usr, src, purchase_price, purchase, LOG_ACTION_TRANSACTION_BUY)
 									usr.client.UpdateInventoryPanel()
 									usr.client.prompt("You bought [purchase] for [purchase_price] ryo.")
 								else

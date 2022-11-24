@@ -1,4 +1,5 @@
 /.github/ @douglasparker
+/src/database/ @douglasparker
 .gitattributes @douglasparker
 .gitignore @douglasparker
 .gitmodules @douglasparker

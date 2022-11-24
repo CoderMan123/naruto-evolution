@@ -254,7 +254,6 @@ mob
 							attacker.Vkill++
 							attacker << output("You have lost 50% of your EXP for killing a fellow villager.", "Action.Output")
 							world << output("[src] was knocked out by [attacker], and they were both from the [src.village]!", "Action.Output")
-							//text2file("[src]([src.key]) was ko'd by [attacker]([attacker.key]) at [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_KILLS)
 						
 						///////////////////////////
 						// PvP Rewards & Penalty //
@@ -270,7 +269,6 @@ mob
 							attacker.levelrate = min(attacker.levelrate + 2, 5)
 
 							world<<output("[src] was knocked out by [attacker]!","Action.Output")
-							text2file("[src] ([src.key]) was ko'd by [attacker] ([attacker.key]) at [time2text(world.realtime, "(YYYY-MM-DD hh:mm:ss)")]<br>", LOG_KILLS)
 						
 						/////////////////
 						// PvE Rewards //
@@ -602,3 +600,27 @@ mob
 											attacker.ryo += 250
 											attacker << output("You Recieve 1 exp and 1 ryo as a reward for your effort.", "Action.Output")
 											spawn() attacker.Levelup()
+					
+					////////////////////////
+					// Mob Death: Logging //
+					////////////////////////
+
+					if(src.client && attacker.client)
+
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_character_kills]` (`timestamp`, `environment`, `key`, `character`, `identity`, `village`, `faction`, `victim_key`, `victim_character`, `victim_identity`, `victim_village`, `victim_faction`)
+							VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "pvp", attacker.client.key, attacker.character, attacker.name, attacker.village, attacker.Faction, src.key, src.character, src.name, src.village, src.Faction
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
+
+					else if(attacker.client)
+
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_character_kills]` (`timestamp`, `environment`, `key`, `character`, `identity`, `village`, `faction`, `victim_key`, `victim_character`, `victim_identity`, `victim_village`, `victim_faction`)
+							VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "pve", attacker.client.key, attacker.character, attacker.name, attacker.village, attacker.Faction, "[src.type]", src.character, src.name, src.village, src.Faction
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)

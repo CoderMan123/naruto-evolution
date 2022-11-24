@@ -1,15 +1,9 @@
-#define DEBUG_SAVEFILE
-
 mob/var/savefile_version = 2
 
 mob
 	proc/Save()
 		if(src.client && mobs_online.Find(src))
 			var/savefile/F = new("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(src.character)]).sav")
-			#ifdef DEBUG_SAVEFILE
-			text2file("[time2text(world.realtime, "YYYY/MM/DD hh:mm:ss")] (Write)<br />", LOG_SAVES)
-			text2file("\[O]: [F]...<br />", LOG_SAVES)
-			#endif
 			if(src.Write(F, src.name)) return 1
 			else return 0
 		else return 0
@@ -17,6 +11,15 @@ mob
 	proc/Load(var/character, var/password)
 		if(fexists("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav.lk"))
 			src.client.prompt("You cannot load this character because it is currently in use.")
+
+			var/database/query/query = new({"
+				INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+				VALUES(?, ?, ?, ?, ?, ?)"},
+				time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "character in use"
+			)
+			query.Execute(log_db)
+			LogErrorDb(query)
+
 			src.client.logging_in = 0
 			return 0
 
@@ -26,13 +29,26 @@ mob
 				var/password_hash = sha1("[password][F["password_salt"]]")
 				if(password_hash != F["password"])
 					spawn() src.client.prompt("The character name or password you entered is incorrect.")
+
+					var/database/query/query = new({"
+						INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+						VALUES(?, ?, ?, ?, ?, ?)"},
+						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "incorrect password"
+					)
+					query.Execute(log_db)
+					LogErrorDb(query)
+
 					src.client.logging_in = 0
 					return 0
 				else
-					#ifdef DEBUG_SAVEFILE
-					text2file("[time2text(world.realtime, "YYYY/MM/DD hh:mm:ss")] (Read)<br />", LOG_SAVES)
-					text2file("\[O]: [F]...<br />", LOG_SAVES)
-					#endif
+					var/database/query/query = new({"
+						INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+						VALUES(?, ?, ?, ?, ?, ?)"},
+						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "success", null
+					)
+					query.Execute(log_db)
+					LogErrorDb(query)
+					
 					if(src.Read(F, character, password)) return 1
 					else return 0
 			else
@@ -42,8 +58,27 @@ mob
 						if(findtext(savefile, character))
 							character_found = 1
 
-				if(character_found)spawn() src.client.prompt("The character you are trying access to not linked to your current BYOND account. Please login with the BYOND account that created this character.")
-				else spawn() src.client.prompt("The character name or password you entered is incorrect.")
+				if(character_found)
+					spawn() src.client.prompt("The character you are trying access to not linked to your current BYOND account. Please login with the BYOND account that created this character.")
+					
+					var/database/query/query = new({"
+						INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+						VALUES(?, ?, ?, ?, ?, ?)"},
+						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "key mismatch"
+					)
+					query.Execute(log_db)
+					LogErrorDb(query)
+
+				else
+					spawn() src.client.prompt("The character name or password you entered is incorrect.")
+
+					var/database/query/query = new({"
+						INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+						VALUES(?, ?, ?, ?, ?, ?)"},
+						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "character not found"
+					)
+					query.Execute(log_db)
+					LogErrorDb(query)
 
 				src.client.logging_in = 0
 				return 0
@@ -67,6 +102,14 @@ mob
 								spawn(-1) src.client.prompt("Your character has been deleted successfully.")
 
 								mobs_online -= src // Prevent character save on disconnect.
+
+								var/database/query/query = new({"
+									INSERT INTO `[db_table_character_creation]` (`timestamp`, `key`, `character`, `action`)
+									VALUES(?, ?, ?, ?)"},
+									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "delete"
+								)
+								query.Execute(log_db)
+								LogErrorDb(query)
 
 								del(src.client)
 
@@ -102,51 +145,21 @@ mob
 						if(issaved(src.vars[v]))
 							if(initial(src.vars[v]) == src.vars[v])
 								F.dir.Remove(v)
-								#ifdef DEBUG_SAVEFILE
-								text2file("\[W]: \[RM]: \[initial()]:  [v] = [src.vars[v]]<br />", LOG_SAVES)
-								#endif
 							else if(exclude.Find(v))
 								F.dir.Remove(v)
-								#ifdef DEBUG_SAVEFILE
-								text2file("\[W]: \[RM]: \[exclude.Find()]:  [v] = [src.vars[v]]<br />", LOG_SAVES)
-								#endif
 							else
 								F[v] << src.vars[v]
-								#ifdef DEBUG_SAVEFILE
-								text2file("\[W]: [v] = [src.vars[v]]<br />", LOG_SAVES)
-								#endif
 						else
 							F.dir.Remove(v)
-							#ifdef DEBUG_SAVEFILE
-							text2file("\[W]: \[RM]: \[!issaved()]:  [v] = [src.vars[v]]<br />", LOG_SAVES)
-							#endif
 
 					F["password_hotfix"] << src.password
 					F["x"] << src.x
 					F["y"] << src.y
 					F["z"] << src.z
-					#ifdef DEBUG_SAVEFILE
-					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
-					#endif
 
-				else
-					#ifdef DEBUG_SAVEFILE
-					text2file("\[E]: \[W]: null character when attempting to write to savefile.<br />", LOG_SAVES)
-					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
-					#endif
-					return 0
-			else
-				#ifdef DEBUG_SAVEFILE
-				text2file("\[E]: \[W]: invalid attempt to write savefile while not logged in.<br />", LOG_SAVES)
-				text2file("\[C]: [F]<br /><br />", LOG_SAVES)
-				#endif
-				return 0
-		else
-			#ifdef DEBUG_SAVEFILE
-			text2file("\[E]: \[W]: null client when attempting to write to savefile.<br />", LOG_SAVES)
-			text2file("\[C]: [F]<br /><br />", LOG_SAVES)
-			#endif
-			return 0
+				else return 0
+			else return 0
+		else return 0
 		..()
 
 
@@ -162,38 +175,14 @@ mob
 						if(issaved(src.vars[v]))
 							if(!isnull(F[v]))
 								F[v] >> src.vars[v]
-								#ifdef DEBUG_SAVEFILE
-								text2file("\[R]: [v] = [src.vars[v]]<br />", LOG_SAVES)
-								#endif
 							else
 								F.dir.Remove(v)
-								#ifdef DEBUG_SAVEFILE
-								text2file("\[R]: \[RM]: \[isnull()]:  [v] = [src.vars[v]]<br />", LOG_SAVES)
-								#endif
 
 					F["password_hotfix"] >> src.password
-					#ifdef DEBUG_SAVEFILE
-					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
-					#endif
 					
-				else
-					#ifdef DEBUG_SAVEFILE
-					text2file("\[E]: \[R]: null character name when attempting to read from savefile.<br />", LOG_SAVES)
-					text2file("\[C]: [F]<br /><br />", LOG_SAVES)
-					#endif
-					return 0
-			else
-				#ifdef DEBUG_SAVEFILE
-				text2file("\[E]: \[R]: invalid attempt to read savefile while already logged in.<br />", LOG_SAVES)
-				text2file("\[C]: [F]<br /><br />", LOG_SAVES)
-				#endif
-				return 0
-		else
-			#ifdef DEBUG_SAVEFILE
-			text2file("\[E]: \[R]: null client when attempting to read from savefile.<br />", LOG_SAVES)
-			text2file("\[C]: [F]<br /><br />", LOG_SAVES)
-			#endif
-			return 0
+				else return 0
+			else return 0
+		else return 0
 		..()
 
 		src.SavefileMigration()

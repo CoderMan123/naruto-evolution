@@ -1,13 +1,18 @@
+var/item_id = 1 // Track the next item_id to assign to a newly spawned item
+
 obj
 	var/tmp/Description="No description provided."
 	Inventory
 		mouse_over_pointer = /obj/cursors/pickup
+		var/id
 		var/stacks=1
 		var/tmp/max_stacks=1
 		var/equip=0
 		New()
-			..()
+			id = item_id
+			item_id++
 			if(src.max_stacks > 1) src.suffix = "x[src.stacks]"
+			..()
 
 		verb
 			Drop()
@@ -19,14 +24,14 @@ obj
 
 				if(src.stacks > 1)
 					var/list/response = usr.client.iprompt("How many [src]'s would you like to drop?", "Satchel")
-					response[2] = text2num(response[2])
-					if(!response[2]) return
+					var/value = text2num(response[2])
+					if(!value) return
 
-					if(src.stacks < response[2])
-						usr.client.prompt("You don't have [response[2]] [src]'s to drop.")
+					if(src.stacks < value)
+						usr.client.prompt("You don't have [value] [src]'s to drop.")
 						return
 
-					usr.DropItem(src, response[2], usr.loc)
+					usr.DropItem(src, value, usr.loc)
 
 				else
 					usr.DropItem(src, 1, usr.loc)
@@ -90,14 +95,17 @@ mob
 				if(!squad && src.village == "Hidden Sand" || (squad && o.squad && squad != o.squad && src.village == "Hidden Sand")) return
 
 			if(O.max_stacks > 1)
-				if(!silent)
-					if(atom && !istype(src, /mob/npc))
-						if(ismob(atom))
-							hearers() << "<i>[src] takes x[O.stacks] [O] from [atom].</i>"
-						else
-							hearers() << "<i>[src] picks up x[O.stacks] [O] from the [lowertext(atom.name)].</i>"
+				
+				if(atom && !istype(src, /mob/npc))
+					if(ismob(atom))
+						if(!silent) hearers() << "<i>[src] takes x[O.stacks] [O] from [atom].</i>"
+						LogItem(src, O, atom, "Pick Up")
 					else
-						hearers() << "<i>[src] picks up x[O.stacks] [O] from the ground.</i>"
+						if(!silent) hearers() << "<i>[src] picks up x[O.stacks] [O] from the [lowertext(atom.name)].</i>"
+						LogItem(src, O, null, "Pick Up")
+				else
+					if(!silent) hearers() << "<i>[src] picks up x[O.stacks] [O] from the ground.</i>"
+					LogItem(src, O, null, "Pick Up")
 
 				while(O && O.stacks > 0)
 					var/obj/Inventory/I
@@ -105,6 +113,7 @@ mob
 						if(I.type == O.type)
 							if(I.stacks >= I.max_stacks) continue
 							else break
+
 					if(I)
 						var/convert = min(O.stacks, I.max_stacks - I.stacks)
 						O.stacks -= convert
@@ -119,17 +128,20 @@ mob
 						if(O.stacks <= 0) O.loc = null
 
 			else
-				src.contents += O
-				if(!silent)
-					if(!istype(src, /mob/npc))
-						if(atom)
-							if(ismob(atom))
-								hearers() << "<i>[src] takes [O] from [atom].</i>"
-							else
-								hearers() << "<i>[src] picks up [O] from the [lowertext(atom.name)].</i>"
+				if(!istype(src, /mob/npc))
+					if(atom)
+						if(ismob(atom))
+							if(!silent) hearers() << "<i>[src] takes [O] from [atom].</i>"
+							LogItem(src, O, atom, "Pick Up")
 						else
-							hearers() << "<i>[src] picks up [O] from the ground.</i>"
+							if(!silent) hearers() << "<i>[src] picks up [O] from the [lowertext(atom.name)].</i>"
+							LogItem(src, O, null, "Pick Up")
+					else
+						if(!silent) hearers() << "<i>[src] picks up [O] from the ground.</i>"
+						LogItem(src, O, null, "Pick Up")
 
+				src.contents += O
+				
 			if(src.client)
 				src.client.UpdateInventoryPanel()
 
@@ -151,19 +163,21 @@ mob
 						return
 
 					else if(O.stacks == quantity)
-						O.loc=src.loc
+						O.loc = src.loc
+						LogItem(src, O, null, "Drop")
 
 					else if(O.stacks > quantity)
 						O.stacks -= quantity
 						if(O.max_stacks > 1) O.suffix = "x[O.stacks]"
 						var/obj/Inventory/o = new O.type(src.loc)
 						o.stacks = quantity
+						LogItem(src, o, null, "Drop")
 
 					if(atom)
 						if(ismob(atom))
-							hearers() << "<i>[src] gives x[O.stacks] [O] to [atom].</i>"
+							hearers() << "<i>[src] gives x[quantity] [O] to [atom].</i>"
 						else
-							hearers() << "<i>[src] drops x[O.stacks] [O] on the [lowertext(atom.name)].</i>"
+							hearers() << "<i>[src] drops x[quantity] [O] on the [lowertext(atom.name)].</i>"
 					else
 						hearers() << "<i>[src] drops x[quantity] [O] on the ground.</i>"
 
@@ -171,6 +185,7 @@ mob
 
 			else
 				O.loc = src.loc
+				LogItem(src, O, null, "Drop")
 
 				if(!istype(src, /mob/npc))
 					if(atom)
@@ -197,12 +212,16 @@ mob
 					if(I.type == O.type)
 						if(I.stacks >= destroy_quantity)
 							I.stacks -= destroy_quantity
-							if(I.stacks <= 0) I.loc=null
-							else I.suffix = "x[I.stacks]"
+							LogItem(src, O, null, "Destroy", quantity = destroy_quantity)
+							if(I.stacks <= 0)
+								I.loc = null
+							else
+								I.suffix = "x[I.stacks]"
 
 						else
 							destroy_quantity -= I.stacks
 							I.loc = null
+							LogItem(src, O, null, "Destroy")
 
 							if(istype(O, /obj/Inventory/mission/deliver_intel))
 								var/obj/Inventory/mission/deliver_intel/o = O
@@ -212,6 +231,7 @@ mob
 						break
 			else
 				O.loc = null
+				LogItem(src, O, null, "Destroy")
 
 				if(istype(O, /obj/Inventory/mission/deliver_intel))
 					var/obj/Inventory/mission/deliver_intel/o = O

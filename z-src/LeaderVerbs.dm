@@ -68,7 +68,6 @@ mob/AnbuLeader/verb/
 		squad = M.GetSquad()
 		if(squad)
 			squad.Refresh()
-		text2file("[src] has retired as Anbu Leader, and [M] has been promoted as their successor!: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 
 		M.client.StaffCheck()
 
@@ -139,7 +138,6 @@ mob/AkatsukiLeader/verb/
 		var/mob/P=CustomInput("Who do you want to appoint as your successor?","Appoint Successor",X+"Cancel")
 		if(P=="Cancel")return
 		var/mob/M = X["[P]"]
-		text2file("[src] has retired as Akatsuki, and [M] has been promoted as their successor!: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 
 		rank = RANK_AKATSUKI
 		village="Akatsuki"
@@ -254,7 +252,6 @@ mob/SevenSwordsmenLeader/verb/
 		var/squad/squad = src.GetSquad()
 		if(squad)
 			squad.Refresh()
-		text2file("[src] has retired as Seven Swordsmen, and [M] has been promoted as their successor!: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 
 		for(var/obj/Inventory/Weaponry/Hiramekarei/O in src)
 			if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)

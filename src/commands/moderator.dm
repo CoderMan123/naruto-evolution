@@ -15,7 +15,6 @@ mob/proc/TeleportCommand()
 			if(mob)
 				if(src.client.prompt("Are you sure you want to teleport to [mob] ([mob.ckey])?", "Teleport", list("Yes", "No")) == "Yes")
 					src.loc = mob.loc
-					text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
 			else
 				src << "/teleport: A player mob was not found."
 
@@ -32,7 +31,7 @@ mob/proc/TeleportCommand()
 			if(mob)
 				if(src.client.prompt("Are you sure you want to teleport to [mob]?", "Teleport", list("Yes", "No")) == "Yes")
 					src.loc = mob.loc
-					text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [mob].<br />", LOG_MODERATOR)
+					
 			else
 				src << "/teleport: An NPC mob was not found."
 		
@@ -44,7 +43,7 @@ mob/proc/TeleportCommand()
 					var/y = text2num(copytext(xyz[2], findtext(xyz[2], ",")+1, findlasttext(xyz[2], ",")))
 					var/z = text2num(copytext(xyz[2], findlasttext(xyz[2], ",")+1))
 					src.loc = locate(x, y, z)
-					text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [x],[y],[z].<br />", LOG_MODERATOR)
+					
 
 mob/proc/SummonCommand()
 	switch(src.client.prompt("What kind of mob would you like to summon?", "Summon", list("Player", "NPC")))
@@ -53,7 +52,7 @@ mob/proc/SummonCommand()
 			if(mob)
 				if(src.client.prompt("Are you sure you want to summon [mob] ([mob.ckey])?", "Summon", list("Yes", "No")) == "Yes")
 					mob.loc = src.loc
-					text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob] ([mob.ckey]).<br />", LOG_MODERATOR)
+					
 			else
 				src << "/summon: A player mob was not found."
 
@@ -70,6 +69,5 @@ mob/proc/SummonCommand()
 			if(mob)
 				if(src.client.prompt("Are you sure you want to summon [mob]?", "Summon", list("Yes", "No")) == "Yes")
 					src.loc = mob.loc
-					text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [mob].<br />", LOG_MODERATOR)
 			else
 				src << "/summon: An NPC mob was not found."

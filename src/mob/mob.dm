@@ -428,6 +428,22 @@ mob
 			clients_online += src.client
 			mobs_online += src
 
+			var/database/query/query = new({"
+				INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+				VALUES(?, ?, ?, ?, ?, ?)"},
+				time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "login", "success", null
+			)
+			query.Execute(log_db)
+			LogErrorDb(query)
+
+			query.Add({"
+				INSERT INTO `[db_table_character_creation]` (`timestamp`, `key`, `character`, `action`)
+				VALUES(?, ?, ?, ?)"},
+				time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "create"
+			)
+			query.Execute(log_db)
+			LogErrorDb(query)
+
 			src << world.GetAdvert()
 
 			for(var/mob/m in mobs_online)
@@ -826,25 +842,21 @@ mob
 					for(var/mob/m in mobs_online)
 						if(lowertext(m.character) == lowertext(value))
 							src.loc = m.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [m] ([m.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in mobs_online)
 						if(findtext(lowertext(m.character), lowertext(value)))
 							src.loc = m.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [m] ([m.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(lowertext(m.name) == lowertext(value))
 							src.loc = m.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [m].<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(findtext(lowertext(m.name), lowertext(value)))
 							src.loc = m.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has teleported to [m].<br />", LOG_MODERATOR)
 							return
 
 				src << "/teleport: A mob was not found matching the string \"[value]\"."
@@ -863,25 +875,21 @@ mob
 					for(var/mob/m in mobs_online)
 						if(lowertext(m.character) == lowertext(value))
 							m.loc = src.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [m] ([m.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in mobs_online)
 						if(findtext(lowertext(m.character), lowertext(value)))
 							m.loc = src.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [m] ([m.ckey]).<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(lowertext(m.name) == lowertext(value))
 							m.loc = src.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [m].<br />", LOG_MODERATOR)
 							return
 
 					for(var/mob/m in npcs_online)
 						if(findtext(lowertext(m.name), lowertext(value)))
 							m.loc = src.loc
-							text2file("[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] [src] ([src.ckey]) has summoned [m].<br />", LOG_MODERATOR)
 							return
 
 				src << "/summon: A mob was not found matching the string \"[value]\"."
@@ -932,7 +940,13 @@ mob
 							src << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
 							M << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
 
-							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name] ([src.client.ckey])</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_WHISPER)
+							var/database/query/query = new({"
+								INSERT INTO `[db_table_chat_whisper]` (`timestamp`, `key`, `character`, `identity`, `village`, `faction` `recipient_key`, `recipient_character`, `recipient_identity`, `recipient_village`, `recipient_faction`, `message`)
+								VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
+								time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, M.key, M.character, M.name, M.village, M.Faction, msg
+							)
+							query.Execute(log_db)
+							LogErrorDb(query)
 
 							whisper_target_online = 1
 							break
@@ -945,7 +959,13 @@ mob
 						var/mob/clone = src.likeaclone
 						view(clone) << ffilter("[badges] <font color='[clone.name_color]'>[clone.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
 
-						text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> [badges] <font color='[clone.name_color]'>[clone.name] ([src.client.ckey])</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_LOCAL)
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_chat_local]` (`timestamp`, `key`, `character`, `identity`, `village`, `faction`, `message`)
+							VALUES(?, ?, ?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, msg
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 					else
 						src << "Clones can only speak within the say channel."
 
@@ -954,14 +974,25 @@ mob
 						if("Local")
 							view() << ffilter("[badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
 
-							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_LOCAL)
+							var/database/query/query = new({"
+								INSERT INTO `[db_table_chat_local]` (`timestamp`, `key`, `character`, `identity`, `village`, `faction`, `message`)
+								VALUES(?, ?, ?, ?, ?, ?, ?)"},
+								time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, msg
+							)
+							query.Execute(log_db)
+							LogErrorDb(query)
 
 						if("Village")
 							for(var/mob/M in mobs_online)
 								if(src.village == M.village || administrators.Find(M.client.ckey))
 									M << ffilter("<font color='yellow'>\[V]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-
-							text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='yellow'>\[V]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_VILLAGE)
+							
+							var/database/query/query = new({"
+								INSERT INTO `[db_table_chat_village]` (`timestamp`, `village`, `key`, `character`, `identity`, `village`, `faction`, `message`)
+								VALUES(?, ?, ?, ?, ?, ?, ?, ?)"},
+								time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, msg
+							)
+							query.Execute(log_db)
 
 						if("Squad")
 							var/squad/squad = src.GetSquad()
@@ -969,8 +1000,15 @@ mob
 								for(var/mob/M in mobs_online)
 									if(squad && squad == M.GetLeader() || squad.members.Find(M.ckey) || administrators.Find(M.client.ckey))
 										M << ffilter("<font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-
-								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='white'>\[S]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_SQUAD)
+								
+								var/database/query/query = new({"
+									INSERT INTO `[db_table_chat_squad]` (`timestamp`, `squad`, `key`, `character`, `identity`, `village`, `faction`, `message`)
+									VALUES(?, ?, ?, ?, ?, ?, ?, ?)"},
+									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, msg
+								)
+								query.Execute(log_db)
+								LogErrorDb(query)
+								LogErrorDb(query)
 							else
 								src << "You cannot speak in the squad channel because you are not currently in a squad."
 
@@ -980,8 +1018,14 @@ mob
 								for(var/mob/M in mobs_online)
 									if(src.Faction == M.Faction || administrators.Find(M.client.ckey))
 										M << ffilter("<font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
-
-								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='[F.color]'>\[F] [F.name]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_FACTION)
+								
+								var/database/query/query = new({"
+									INSERT INTO `[db_table_chat_faction]` (`timestamp`, `key`, `character`, `identity`, `village`, `faction`, `message`)
+									VALUES(?, ?, ?, ?, ?, ?, ?)"},
+									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, msg
+								)
+								query.Execute(log_db)
+								LogErrorDb(query)
 
 							else
 								src << "You cannot speak in the faction channel because you are not currently in a faction."
@@ -992,7 +1036,13 @@ mob
 							else
 								world << ffilter("<font color='red'>\[G]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>")
 
-								text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color='red'>\[G]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font><br />", LOG_CHAT_GLOBAL)
+								var/database/query/query = new({"
+									INSERT INTO `[db_table_chat_global]` (`timestamp`, `key`, `character`, `identity`, `village`, `faction`, `message`)
+									VALUES(?, ?, ?, ?, ?, ?, ?)"},
+									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, msg
+								)
+								query.Execute(log_db)
+								LogErrorDb(query)
 
 				if(message_trim)
 					src << "Your message was longer than 1000 characters and has been trimmed."

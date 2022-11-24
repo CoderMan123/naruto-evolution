@@ -28,3 +28,5 @@ mob/npc
 
 			usr.HairColorStyle=null
 			usr.RestoreOverlays()
+
+			LogTransaction(usr, src, 0, override_item = "Change Hairstyle", LOG_ACTION_TRANSACTION_BUY)

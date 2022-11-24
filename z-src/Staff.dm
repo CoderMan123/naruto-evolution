@@ -153,7 +153,14 @@ mob/Moderator/verb/
 			for(var/mob/M in mobs_online)
 				if(administrators.Find(M.ckey) || moderators.Find(M.ckey))
 					M << "<font color=yellow>\[Staff] [src.character]:</font> <font color='[COLOR_CHAT]'>[html_encode(c)]</font>"
-			text2file("<font color='[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]</font> <font color=yellow> \[Staff] [src.character]:</font> <font color='[COLOR_CHAT]'>[html_encode(c)]</font><br />", LOG_CHAT_STAFF)
+			
+			var/database/query/query = new({"
+				INSERT INTO `[db_table_chat_staff]` (`timestamp`, `key`, `character`, `identity`, `village`, `faction`, `message`)
+				VALUES(?, ?, ?, ?, ?, ?, ?)"},
+				time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, c
+			)
+			query.Execute(log_db)
+			LogErrorDb(query)
 		else
 			src << "Please do not use more than 750 characters."
 			src << "Message was <i>[c]</i>"
@@ -165,25 +172,20 @@ mob/Moderator/verb/
 			for(var/mob/m in mobs_online)
 				if(administrators.Find(m.client.ckey))
 					m << "[src] ([src.ckey]) tried to boot an administrator [M] ([M.ckey])."
-
-			text2file("[src] ([src.ckey]) tried to boot an administrator [M] ([M.ckey]).: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>", LOG_STAFF)
 		else
 			M.Save()
 			del(M.client)
 			world<<"[src] has booted [M] from the game."
-			text2file("[src] ([src.ckey]) booted [M] ([M.ckey]).: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 
 	Mute(mob/M in mobs_online)
 		set category="Staff"
 		set name = "Mute/Unmute"
 		if(administrators.Find(M.ckey))
 			world<<"[usr] tried to mute [M]..."
-			text2file("[usr]([src.key]) tried to mute [M]([M.key]): [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 			return
 		if(!M.Muted)
 			var/howlong=input("How long for? (Minutes)","Mute") as num
 			world<<"[M] has been muted by [src] for [howlong] minutes."
-			text2file("[M]([M.key]) was muted by [src]([src.key]) for [howlong]min.: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 			howlong*=600
 			M.Muted=1
 			M.MuteTime=howlong
@@ -202,7 +204,6 @@ mob/Moderator/verb/
 			var/timer = input("How many minutes should they be jailed?") as num
 			var/Offence = input(" What are you jailing [M] for?")as text
 			world<<"[M] has been jailed for [timer] Minutes! Reason:[Offence]"
-			text2file("[usr]([src.key]) jailed [M]([M.key]) for [timer]min for [Offence].: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 			spawn(timer*600)
 				if(M.jailed)
 					M.xplock=0
@@ -222,7 +223,6 @@ mob/Admin/verb
 		world<<"<center><b>---------------------------------</b></center>"
 		world<<"<center><b>Announcement from [src]</b><br><br>[t]</b></font></center></p></br></b></center>"
 		world<<"<center><b>---------------------------------</b></center>"
-		text2file("[src]([src.key]) announced [t].: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 
 	Votation(t as text)
 		set desc = "What Would You like To Create A Votation For?"
@@ -246,7 +246,6 @@ mob/Admin/verb
 		switch(Position)
 			if("Akatsuki Leader")
 				M<<"You now lead the Akatsuki."
-				text2file("[M]([M.key]) was promoted to Akat by [usr]([usr.key]).: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 				new/obj/Inventory/Clothing/Robes/Akatsuki_Robe(M)
 				//new/obj/Inventory/Weaponry/MadaraFan(M) // Fan is bug-able and is also OP.
 				new/obj/Inventory/Clothing/HeadWrap/TobiMask(M)
@@ -255,13 +254,11 @@ mob/Admin/verb
 
 			if("Seven Swordsmen Leader")
 				M<<"You now lead the Seven Swordsmen."
-				text2file("[M]([M.key]) was promoted to 7sm lead by [usr]([usr.key]).: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 				new/obj/Inventory/Weaponry/Hiramekarei(M)
 				M.village="Seven Swordsmen"
 
 			if("Anbu Leader")
 				M<<"You now lead the Anbu Root."
-				text2file("[M]([M.key]) was promoted to Anbu by [usr]([usr.key]).: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 				new/obj/Inventory/Clothing/Robes/Anbu_Suit(M)
 				new/obj/Inventory/Clothing/Masks/Absolute_Zero_Mask(M)
 				M.village="Anbu Root"
@@ -284,19 +281,16 @@ mob/Admin/verb
 		if(squad)
 			squad.Refresh()
 
-		text2file("[usr]([usr.key]) demoted [M]([M.key]) from [Position].: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 		Positions["[Position]"]=null
 		M.client.StaffCheck()
 
 	Edit(atom/O in world)
 		set category = "Staff"
 		Edited(O)
-		text2file("[usr]([usr.key]) edited [O]! [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 
 	Add_Pixel_Artist(mob/M in mobs_online)
 		set category="Staff"
 		world<<output("[M] now has pixel artist verbs.","Action.Output")
-		text2file("[usr]([usr.key]) promoted [M]([M.key]) to PA.: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 		pixel_artists.Add(M.ckey)
 		M.client.StaffCheck()
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
@@ -304,7 +298,6 @@ mob/Admin/verb
 	Add_Moderator(mob/M in mobs_online)
 		set category="Staff"
 		world<<output("[M] is now a moderator.","Action.Output")
-		text2file("[usr]([usr.key]) promoted [M]([M.key]) to Mod.: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 		moderators.Add(M.ckey)
 		M.client.StaffCheck()
 		winset(M, "Navigation.LeaderButton", "is-disabled = 'false'")
@@ -316,7 +309,6 @@ mob/Admin/verb
 			world<<output("[src] ([src.ckey]) tried to remove [M] from staff. Nice try.")
 			return
 		world<<output("[M] is no longer a staff member.","Action.Output")
-		text2file("[usr]([usr.key]) removed [M]([M.key]) from staff.: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 		administrators.Remove(M.ckey)
 		moderators.Remove(M.ckey)
 		programmers.Remove(M.ckey)
@@ -334,7 +326,6 @@ mob/MasterGM/verb
 	Reboot()
 		set category="Staff"
 		world<<output("World is rebooting.","Action.Output")
-		text2file("[usr]([src.key]) rebooted.: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 		world.Reboot()
 
 	Summon(mob/M in mobs_online)
@@ -352,7 +343,6 @@ mob/MasterGM/verb
 			if(!M.client) del(M)
 			if(M)
 				if(alert("Are you sure you want to delete the Atom [O.name]?","Confirm!","No","Yes")=="Yes")
-					text2file("[usr] deleted [O.name]: [time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")]<br>",LOG_STAFF)
 					del(M)
 		else del(O)
 

@@ -31,6 +31,8 @@ var/akatsuki_online = 0
 
 var/squads[0]
 
+
+
 world
 	name = "Naruto Evolution"
 	hub = "IllusiveBlair.NarutoEvolution"
@@ -40,10 +42,17 @@ world
 	view = 16
 	loop_checks = 1
 	New()
+		log_db = new(DATABASE_LOGS)
+		DbMigrations()
 		..()
-		CreateLogs()
 
-		log = file(LOG_ERROR)
+		var/database/query/query = new({"
+			INSERT INTO `[db_table_server_startup]` (`timestamp`, `action`)
+			VALUES(?, ?)"},
+			time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "start"
+		)
+		query.Execute(log_db)
+		LogErrorDb(query)
 
 		build = file2text("VERSION")
 		if(!build) text2file("0.0.0", "VERSION")
@@ -72,10 +81,23 @@ world
 	Del()
 		src.FailMissions()
 		src.Save()
+
+		var/database/query/query = new({"
+			INSERT INTO `[db_table_server_startup]` (`timestamp`, `action`)
+			VALUES(?, ?)"},
+			time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "shutdown"
+		)
+		query.Execute(log_db)
+		LogErrorDb(query)
+
+		log_db.Close()
+
 		..()
 
 	Error(exception/ex)
-		text2file("<b>Timestamp:</b> [time2text(world.realtime , "YYYY-MM-DD hh:mm:ss")]<br /><b>Runtime Error:</b> [ex.name]<br /><b>File:</b> [ex.file]<br /><b>Line:</b> [ex.line]<br /><b><u>Description:</u></b><br />[ex.desc]<br /><br />", LOG_ERROR)
+		var/database/query/query = new("INSERT INTO `[db_table_error]` (`timestamp`, `error`, `description`, `file`, `line`) VALUES(?, ?, ?, ?, ?)", time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), ex.name, ex.desc, ex.file, ex.line)
+		query.Execute(log_db)
+		LogErrorDb(query)
 
 	proc/UpdateVillageCount()
 		leaf_online = 0
@@ -113,7 +135,15 @@ world
 				// Otherwise, Kages will be demoted if they do not logout to update their kage_last_online[] timestamp.
 				if(!online)
 					world << output("The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
-					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_HOKAGE] ([global.GetHokage()]) for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
+
+					var/database/query/query = new({"
+						INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `village`, `log`)
+						VALUES(?, ?, ?, ?, ?)"},
+						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetHokage(), global.GetHokage(RETURN_FORMAT_CHARACTER), VILLAGE_LEAF, "The [RANK_HOKAGE] ([global.GetHokage()]) for the [VILLAGE_LEAF] was forced out of office due to inactivity for [days] days."
+					)
+					query.Execute(log_db)
+					LogErrorDb(query)
+					
 					hokage = list()
 					kages_last_online[VILLAGE_LEAF] = null
 
@@ -126,7 +156,15 @@ world
 				// Otherwise, Kages will be demoted if they do not logout to update their kage_last_online[] timestamp.
 				if(!online)
 					world << output("The [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
-					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_KAZEKAGE] ([global.GetKazekage()]) for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_KAGE)
+					
+					var/database/query/query = new({"
+						INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `village`, `log`)
+						VALUES(?, ?, ?, ?, ?)"},
+						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetKazekage(), global.GetKazekage(RETURN_FORMAT_CHARACTER), RANK_KAZEKAGE, "The [RANK_KAZEKAGE] ([global.GetKazekage()]) for the [VILLAGE_SAND] was forced out of office due to inactivity for [days] days."
+					)
+					query.Execute(log_db)
+					LogErrorDb(query)
+
 					kazekage = list()
 					kages_last_online[VILLAGE_SAND] = null
 
@@ -146,7 +184,15 @@ world
 				// Otherwise, Akatsuki will be demoted if they do not logout to update their akatsuki_last_online timestamp.
 				if(!online)
 					world << output("The [RANK_AKATSUKI] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
-					text2file("<font color = '[COLOR_CHAT]'>[time2text(world.realtime , "(YYYY-MM-DD hh:mm:ss)")] The [RANK_AKATSUKI] ([global.GetAkatsuki()]) for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office due to inactivity for [days] days.</font><br />", LOG_AKATSUKI)
+					
+					var/database/query/query = new({"
+						INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+						VALUES(?, ?, ?, ?, ?)"},
+						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "The [RANK_AKATSUKI] ([global.GetAkatsuki()]) for the [VILLAGE_AKATSUKI] was forced out of office due to inactivity for [days] days."
+					)
+					query.Execute(log_db)
+					LogErrorDb(query)
+
 					akatsuki = list()
 					akatsuki_last_online = null
 
@@ -157,62 +203,6 @@ world
 		while(world)
 			status = "Naruto Evolution v[build] | Ninjas Online ([mobs_online.len]/[server_capacity])"
 			sleep(600)
-
-	proc/CreateLogs()
-
-		if(!fexists(LOG_ERROR))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_ERROR)
-
-		if(!fexists(LOG_BUGS))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_BUGS)
-
-		if(!fexists(LOG_SAVES))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_SAVES)
-
-		if(!fexists(LOG_CLIENT_SAVES))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_CLIENT_SAVES)
-
-		if(!fexists(LOG_KILLS))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_KILLS)
-
-		if(!fexists(LOG_STAFF))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_STAFF)
-
-		if(!fexists(LOG_ADMINISTRATOR))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_ADMINISTRATOR)
-
-		if(!fexists(LOG_MODERATOR))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_MODERATOR)
-
-		if(!fexists(LOG_KAGE))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_KAGE)
-
-		if(!fexists(LOG_AKATSUKI))
-			text2file("<body bgcolor = '#414141'><font color = '[COLOR_CHAT]'>", LOG_AKATSUKI)
-
-		if(!fexists(LOG_CHAT_LOCAL))
-			text2file("<body bgcolor = '#414141'>", LOG_CHAT_LOCAL)
-
-		if(!fexists(LOG_CHAT_VILLAGE))
-			text2file("<body bgcolor = '#414141'>", LOG_CHAT_VILLAGE)
-
-		if(!fexists(LOG_CHAT_SQUAD))
-			text2file("<body bgcolor = '#414141'>", LOG_CHAT_SQUAD)
-
-		if(!fexists(LOG_CHAT_FACTION))
-			text2file("<body bgcolor = '#414141'>", LOG_CHAT_FACTION)
-
-		if(!fexists(LOG_CHAT_GLOBAL))
-			text2file("<body bgcolor = '#414141'>", LOG_CHAT_GLOBAL)
-
-		if(!fexists(LOG_CHAT_WHISPER))
-			text2file("<body bgcolor = '#414141'>", LOG_CHAT_WHISPER)
-
-		if(!fexists(LOG_CHAT_STAFF))
-			text2file("<body bgcolor = '#414141'>", LOG_CHAT_STAFF)
-
-		if(!fexists(LOG_KAGE))
-			text2file("<body bgcolor = '#414141'>", LOG_KAGE)
 
 	proc/Save()
 		var/savefile/F = new(SAVEFILE_STAFF)
@@ -258,6 +248,7 @@ world
 		F["Factions"] << Factionnames
 		F["AkatInvites"] << AkatInvites
 		F["WorldXp"] << WorldXp
+		F["item_id"] << item_id
 
 	proc/Load()
 		var/savefile/F = new(SAVEFILE_STAFF)
@@ -312,6 +303,7 @@ world
 		if(!isnull(F["Maps"])) F["Maps"] >> maps
 		if(!isnull(F["AkatInvites"])) F["AkatInvites"] >> AkatInvites
 		if(!isnull(F["WorldXp"])) F["WorldXp"] >> WorldXp
+		if(!isnull(F["item_id"])) F["item_id"] >> item_id
 
 		for(var/c in Factionnames)
 			var/path = "Factions/[c].sav"

@@ -14,24 +14,11 @@
 #define SAVEFILE_AKATSUKI "saves/akatsuki.sav"
 #define SAVEFILE_ELECTIONS "saves/elections.sav"
 
-#define LOG_ERROR "logs/error.html"
-#define LOG_BUGS "logs/bugs.html"
-#define LOG_SAVES "logs/saves.html"
-#define LOG_CLIENT_SAVES "logs/client-saves.html"
-#define LOG_KILLS "logs/kills.html"
-#define LOG_STAFF "logs/staff.html"
-#define LOG_ADMINISTRATOR "logs/administrator.html"
-#define LOG_MODERATOR "logs/moderator.html"
-#define LOG_KAGE "logs/kage.html"
-#define LOG_AKATSUKI "logs/akatsuki.html"
+#define DATABASE_LOGS "logs/logs.db"
 
-#define LOG_CHAT_LOCAL "logs/chat/local.html"
-#define LOG_CHAT_VILLAGE "logs/chat/village.html"
-#define LOG_CHAT_SQUAD "logs/chat/squad.html"
-#define LOG_CHAT_FACTION "logs/chat/faction.html"
-#define LOG_CHAT_GLOBAL "logs/chat/global.html"
-#define LOG_CHAT_WHISPER "logs/chat/whisper.html"
-#define LOG_CHAT_STAFF "logs/chat/staff.html"
+#define LOG_ACTION_TRANSACTION_BUY "Purchase"
+#define LOG_ACTION_TRANSACTION_SELL "Sell"
+#define LOG_ACTION_TRANSACTION_TRADE "Trade"
 
 #define BROWSER_NONE 0
 #define BROWSER_WHO "browse://who"

@@ -54,6 +54,16 @@ mob
 			if(!A) return
 			if(A.Safe && !bypass_exp_lock) return
 			if(src.exp_locked && !bypass_exp_lock) return
+
+			if(src.client)
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_character_experience]` (`timestamp`, `key`, `character`, `stat`, `[db_table_character_experience]`)
+					VALUES(?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, stat, round(howmuch)
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
+
 			switch(stat)
 				if("Defence") defexp += round(howmuch)
 				if(SPECIALIZATION_TAIJUTSU) taijutsuexp += round(howmuch)
@@ -62,6 +72,7 @@ mob
 				if("Agility") agilityexp += round(howmuch)
 				if("Precision") precisionexp += round(howmuch)
 			Levelup()
+			
 
 		Levelup()
 			if(src.xplock==1)
@@ -78,6 +89,15 @@ mob
 				src.PlayAudio('levelup.wav', output = AUDIO_SELF)
 				src<<output("<font color= #bc8f8f>You leveled up!</Font>.","Action.Output")
 				src.level+=1
+
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_character_level]` (`timestamp`, `key`, `character`, `stat`, `level`)
+					VALUES(?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "base", src.level
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
+				
 				src.exp-=src.maxexp
 				src.statpoints+=4
 				src.skillpoints++
@@ -110,6 +130,15 @@ mob
 				src<<output("<font color=TaiOrange>You leveled up Strength</Font>.","Action.Output")
 				src.exp+=1
 				src.taijutsu+=1
+
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_character_level]` (`timestamp`, `key`, `character`, `stat`, `level`)
+					VALUES(?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "taijutsu", src.taijutsu
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
+
 				src.taijutsuexp-=src.maxtaijutsuexp
 				if(src.taijutsu<=30)
 					src.maxtaijutsuexp+=10+round(src.taijutsu/2)
@@ -131,6 +160,15 @@ mob
 				src<<output("<font color=NinBlue>You leveled up Ninjutsu</Font>.","Action.Output")
 				src.exp+=1
 				src.ninjutsu+=1
+
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_character_level]` (`timestamp`, `key`, `character`, `stat`, `level`)
+					VALUES(?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "ninjutsu", src.ninjutsu
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
+
 				src.ninexp-=src.maxninexp
 				if(src.ninjutsu<=30)
 					src.maxninexp+=10+round(src.ninjutsu/1.5)
@@ -151,6 +189,15 @@ mob
 				src<<output("<font color=blueviolet>You leveled up Genjutsu</Font>.","Action.Output")
 				src.exp+=1
 				src.genjutsu+=1
+
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_character_level]` (`timestamp`, `key`, `character`, `stat`, `level`)
+					VALUES(?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "genjutsu", src.genjutsu
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
+
 				src.genexp-=src.maxgenexp
 				if(src.genjutsu<=30)
 					src.maxgenexp+=10+round(src.genjutsu/3)
@@ -171,6 +218,15 @@ mob
 				src<<output("<font color=maroon>You leveled up Defence</Font>.","Action.Output")
 				src.exp+=1
 				src.defence++
+
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_character_level]` (`timestamp`, `key`, `character`, `stat`, `level`)
+					VALUES(?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "defence", src.defence
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
+
 				src.defexp-=src.maxdefexp
 				if(src.defence<=30)
 					src.maxdefexp+=10+round(src.defence/2)
@@ -191,6 +247,15 @@ mob
 				src<<output("<font color=cornsilk>You leveled up Agility</Font>.","Action.Output")
 				src.exp+=1
 				src.agility++
+
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_character_level]` (`timestamp`, `key`, `character`, `stat`, `level`)
+					VALUES(?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "agility", src.agility
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
+
 				src.agilityexp-=src.maxagilityexp
 				if(src.agility<=30)
 					src.maxagilityexp+=10+round(src.agility/2)
@@ -212,6 +277,15 @@ mob
 				src<<output("<font color=azure>You leveled up Precision</Font>.","Action.Output")
 				src.exp+=1
 				src.precision++
+
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_character_level]` (`timestamp`, `key`, `character`, `stat`, `level`)
+					VALUES(?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "precision", src.precision
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
+
 				src.precisionexp-=src.maxprecisionexp
 				if(src.precision<=30)
 					src.maxprecisionexp+=10+round(src.precision/1.5)

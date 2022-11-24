@@ -12,7 +12,8 @@ mob
 
 			if(!istype(src, /mob/npc/combat/animals/small))
 				src.overlays += /obj/MaleParts/UnderShade
-
+			
+			src.character = src.name
 			src.SetName(src.name)
 
 			OriginalOverlays = overlays.Copy()
@@ -285,6 +286,7 @@ mob
 						var/scenario = 1 // 1 = has 2 clans already and no bloodline    2 = has less than 2 clans or already has a bloodline
 						var/clan_to_replace
 						var/new_clan
+						var/purchase_price = 10000
 
 						for(var/bclan in bloodline_clans)
 							if(usr.Clan == bclan) clan_to_replace = usr.Clan
@@ -310,12 +312,12 @@ mob
 								
 								switch(usr.client.prompt("Are you sure you want to swap the [clan_to_replace] clan with the [new_clan] clan? (This will cost 10,000 ryo)", "Orochimaru", list("Yes", "No")))
 									if("Yes")
-										if(usr.ryo < 10000)
+										if(usr.ryo < purchase_price)
 											usr.client.prompt("You don't have enough ryo! I won't work for free. Come back when you've got enough money.", "Orochimaru")
 											src.conversations.Remove(usr)
 											return
 										else
-											usr.ryo -= 10000
+											usr.ryo -= purchase_price
 											for(var/obj/Jutsus/jutsu in usr.jutsus) 
 												if(jutsu.Clan == clan_to_replace)
 													usr.skillpoints += jutsu.Sprice
@@ -324,7 +326,8 @@ mob
 													usr.sbought -= jutsu.name
 											if(usr.Clan == clan_to_replace) usr.Clan = new_clan
 											else if(usr.Clan2 == clan_to_replace) usr.Clan2 = new_clan
-											usr.client.prompt("The operation was a success. You are no longer of the [clan_to_replace] clan and have obtained the [new_clan] clan!", "Orochimaru")
+											LogTransaction(usr, src, purchase_price, override_item = "Change Bloodline", LOG_ACTION_TRANSACTION_BUY)
+											spawn() usr.client.prompt("The operation was a success. You are no longer of the [clan_to_replace] clan and have obtained the [new_clan] clan!", "Orochimaru")
 											usr.client.UpdateInventoryPanel()
 							if(2)
 
@@ -341,12 +344,12 @@ mob
 								if(clan_to_replace)
 									switch(usr.client.prompt("Are you sure you want to swap the [clan_to_replace] clan with the [new_clan] clan? (This will cost 10,000 ryo)", "Orochimaru", list("Yes", "No")))
 										if("Yes")
-											if(usr.ryo < 10000)
+											if(usr.ryo < purchase_price)
 												usr.client.prompt("You don't have enough ryo! I won't work for free. Come back when you've got enough money.", "Orochimaru")
 												src.conversations.Remove(usr)
 												return
 											else
-												usr.ryo -= 10000
+												usr.ryo -= purchase_price
 												for(var/obj/Jutsus/jutsu in usr.jutsus) 
 													if(jutsu.Clan == clan_to_replace)
 														usr.skillpoints += jutsu.Sprice
@@ -355,25 +358,28 @@ mob
 														usr.sbought -= jutsu.name
 												if(usr.Clan == clan_to_replace) usr.Clan = new_clan
 												else usr.Clan2 = new_clan
-												usr.client.prompt("The operation was a success. You are no longer of the [clan_to_replace] clan and have obtained the [new_clan] clan!", "Orochimaru")
+												LogTransaction(usr, src, purchase_price, override_item = "Change Bloodline", LOG_ACTION_TRANSACTION_BUY)
+												spawn() usr.client.prompt("The operation was a success. You are no longer of the [clan_to_replace] clan and have obtained the [new_clan] clan!", "Orochimaru")
 												usr.client.UpdateInventoryPanel()
 
 								else
 									switch(usr.client.prompt("Are you sure you want to gain the [new_clan] clan? (This will cost 10,000 ryo)", "Orochimaru", list("Yes", "No")))
 										if("Yes")
-											if(usr.ryo < 10000)
+											if(usr.ryo < purchase_price)
 												usr.client.prompt("You don't have enough ryo! I won't work for free. Come back when you've got enough money.", "Orochimaru")
 												src.conversations.Remove(usr)
 												return
 											else
-												usr.ryo -= 10000
+												usr.ryo -= purchase_price
 												if(usr.Clan == "No Clan") usr.Clan = new_clan
 												else if(usr.Clan2 == "No Clan") usr.Clan2 = new_clan
-												usr.client.prompt("The operation was a success. You have obtained the [new_clan] clan!", "Orochimaru")
+												LogTransaction(usr, src, purchase_price, override_item = "Gain Bloodline", LOG_ACTION_TRANSACTION_BUY)
+												spawn() usr.client.prompt("The operation was a success. You have obtained the [new_clan] clan!", "Orochimaru")
 												usr.client.UpdateInventoryPanel()
 
 					if("Remove Clan")
 						var/clan_to_remove
+						var/purchase_price = 5000
 						clan_to_remove = usr.client.prompt("Which clan would you like to remove? (This will cost 5,000 ryo)", "Orochimaru", list("[usr.Clan]", "[usr.Clan2]", "Cancel"))			
 						if(clan_to_remove == "Cancel")
 							src.conversations.Remove(usr)
@@ -386,12 +392,12 @@ mob
 
 						switch(usr.client.prompt("Are you sure you want to remove the [clan_to_remove] clan? (This will cost 5000 ryo and you will lose all associated jutsu. Any skillpoints spent will be refunded.)", "Orochimaru", list("Yes", "No")))
 							if("Yes")
-								if(usr.ryo < 5000)
+								if(usr.ryo < purchase_price)
 									usr.client.prompt("You don't have enough ryo! I won't work for free. Come back when you've got enough money.", "Orochimaru")
 									src.conversations.Remove(usr)
 									return
 								else
-									usr.ryo -= 5000
+									usr.ryo -= purchase_price
 									for(var/obj/Jutsus/jutsu in usr.jutsus) 
 										if(jutsu.Clan == clan_to_remove)
 											usr.skillpoints += jutsu.Sprice
@@ -401,7 +407,7 @@ mob
 
 									if(usr.Clan == clan_to_remove) usr.Clan = "No Clan"
 									else usr.Clan2 = "No Clan"
-
+									LogTransaction(usr, src, purchase_price, override_item = "Remove Clan", LOG_ACTION_TRANSACTION_BUY)
 									usr.client.prompt("The operation was a success. You are no longer of the [clan_to_remove] clan!", "Orochimaru")
 							
 				src.conversations.Remove(usr)
@@ -458,6 +464,15 @@ mob
 							ElementChoice -= PlayerElements
 							var/ChosenElement
 							ChosenElement = usr.client.prompt("What do you want to learn?", src.name, ElementChoice)
+
+							var/database/query/query = new({"
+								INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `level`, `prestige`)
+								VALUES(?, ?, ?, ?, ?)"},
+								time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), usr.client.ckey, usr.character, usr.level, usr.prestigelevel++
+							)
+							query.Execute(log_db)
+							LogErrorDb(query)
+
 							if(!usr.Element3) usr.Element3 = ElementChoice[ChosenElement]
 							else if(!usr.Element4) usr.Element4 = ElementChoice[ChosenElement]
 							else if(!usr.Element5) usr.Element5 = ElementChoice[ChosenElement]
