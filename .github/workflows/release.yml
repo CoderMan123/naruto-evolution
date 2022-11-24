@@ -63,14 +63,18 @@ jobs:
         run: |
           gh auth login --with-token <<< ${{ secrets.ACTIONS }}
           gh release edit ${{ github.event.release.tag_name }} --notes "## [${{ github.event.release.tag_name }}] $(date +"%Y-%m-%d")
-            *Release notes are not provided for pre-releases.*"
+          *Release notes are not provided for pre-releases.*"
       
       - name: Publish release notes to Discord
         run: |
+          # Code Blocks are defined using variables to prevent backticks being interpreted as command substitution.
+
           CODE_START='```markdown\n'
           CODE_END='\n```'
 
-          RELEASE=$(cat << EOF
+          # ${{ github.event.release.body }} does not contain the updated description from running `gh release edit` in a prior job.
+
+          RELEASE_NOTES=$(cat << EOF
           **${{ github.event.release.tag_name }}**
 
           ${CODE_START}
@@ -79,9 +83,7 @@ jobs:
           EOF
           )
 
-          echo "$RELEASE" # release body seems to be empty
-          
-          # curl -H "Content-Type: application/json" -d "{\"username\": \"GitHub\", \"content\": \"${RELEASE}\"}" ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
+          curl -H "Content-Type: application/json" -d "{\"username\": \"GitHub\", \"content\": \"${RELEASE_NOTES}\"}" ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
       
       - name: Deploy the Docker image to the server
         if: github.event.release.prerelease == false
