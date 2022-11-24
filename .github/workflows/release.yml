@@ -58,18 +58,16 @@ jobs:
           sudo git clone https://github.com/douglasparker/changelog-parser.git /changelog-parser
           sudo chmod +x /changelog-parser/changelog-parser.py
       
-      - name: Create a public pre-release without the changelog
+      - name: Edit the pre-release to exclude release notes
         if: github.event.release.action == 'prereleased'
         run: |
           gh auth login --with-token <<< ${{ secrets.ACTIONS }}
-          gh release create ${{ github.event.release.tag_name }} --title ${{ github.event.release.tag_name }} --prerelease --notes "## [${{ github.event.release.tag_name }}] $(date +"%Y-%m-%d")
-            *Release notes are not provided for pre-releases.*" --repo douglasparker/naruto-evolution-community
+          gh release edit ${{ github.event.release.tag_name }} --notes "## [${{ github.event.release.tag_name }}] $(date +"%Y-%m-%d")
+            *Release notes are not provided for pre-releases.*"
       
-      - name: Create a public release with the changelog
-        if: github.event.release.action == 'released'
+      - name: Publish release notes to Discord
         run: |
-          gh auth login --with-token <<< ${{ secrets.ACTIONS }}
-          gh release create ${{ github.event.release.tag_name }} --title ${{ github.event.release.tag_name }} --notes "${{ github.event.release.body }}" --repo douglasparker/naruto-evolution-community
+          curl -H "Content-Type: application/json" -d '{"username": "GitHub", "content": "**${{ github.event.release.tag_name }}**\n\n```md\n${{ github.event.release.body }}\n```"}' ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
       
       - name: Deploy the Docker image to the server
         if: github.event.release.action == 'released'
