@@ -59,7 +59,7 @@ jobs:
           sudo chmod +x /changelog-parser/changelog-parser.py
       
       - name: Edit the pre-release to exclude release notes
-        if: github.event.release.action == 'prereleased'
+        if: github.event.release.prerelease
         run: |
           gh auth login --with-token <<< ${{ secrets.ACTIONS }}
           gh release edit ${{ github.event.release.tag_name }} --notes "## [${{ github.event.release.tag_name }}] $(date +"%Y-%m-%d")
@@ -70,7 +70,7 @@ jobs:
           curl -H "Content-Type: application/json" -d '{"username": "GitHub", "content": "**${{ github.event.release.tag_name }}**\n\n```md\n${{ github.event.release.body }}\n```"}' ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
       
       - name: Deploy the Docker image to the server
-        if: github.event.release.action == 'released'
+        if: github.event.release.prerelease == false
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
