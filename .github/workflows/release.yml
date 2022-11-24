@@ -67,9 +67,8 @@ jobs:
       
       - name: Publish release notes to Discord
         run: |
-          RELEASE_TITLE="${{ github.event.release.tag_name }}"
-          RELEASE_BODY="${{ github.event.release.body }} Z"
-          curl -H "Content-Type: application/json" -d '{"username": "GitHub", "content": "**${RELEASE_TITLE}**\n```markdown\n ${RELEASE_BODY} \n```"}' ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
+          CONTENT="**${{ github.event.release.tag_name }}**\n```markdown\n ${{ github.event.release.body }} \n```"
+          curl -H "Content-Type: application/json" -d '{"username": "GitHub", "content": "$CONTENT"}' ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
       
       - name: Deploy the Docker image to the server
         if: github.event.release.prerelease == false
