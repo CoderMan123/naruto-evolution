@@ -65,8 +65,8 @@ jobs:
           gh release edit ${{ github.event.release.tag_name }} --notes "## [${{ github.event.release.tag_name }}] $(date +"%Y-%m-%d")
           *Release notes are not provided for pre-releases.*"
       
-      - name: Create a public release with the changelog
-        
+      - name: Create an external public release
+        if: github.event.release.prerelease == false
         run: |
           gh auth login --with-token <<< ${{ secrets.ACTIONS }}
           gh release create ${{ github.event.release.tag_name }} --title ${{ github.event.release.tag_name }} --notes "${{ github.event.release.body }}" --repo douglasparker/naruto-evolution-releases
