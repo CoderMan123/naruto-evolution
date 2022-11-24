@@ -67,7 +67,9 @@ jobs:
       
       - name: Publish release notes to Discord
         run: |
-          CONTENT="**${{ github.event.release.tag_name }}**\n```markdown\n ${{ github.event.release.body }} \n```"
+          CODE_START='```markdown\n'
+          CODE_END='\n```'
+          CONTENT="**${{ github.event.release.tag_name }}**\n${CODE_START}${{ github.event.release.body }}${CODE_END}"
           curl -H "Content-Type: application/json" -d '{"username": "GitHub", "content": "$CONTENT"}' ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
       
       - name: Deploy the Docker image to the server
