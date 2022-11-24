@@ -81,7 +81,9 @@ jobs:
           EOF
           )
 
-          curl -H "Content-Type: application/json" -d "{\"username\": \"GitHub\", \"content\": \"**${{ github.event.release.tag_name }}**\n${CODE_START}${{ github.event.release.body }}${CODE_END}\"}" ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
+          echo $RELEASE_NOTES
+
+          curl -H "Content-Type: application/json" -d "{\"username\": \"GitHub\", \"content\": \"$RELEASE_NOTES\"}" ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
       
       - name: Deploy the Docker image to the server
         if: github.event.release.prerelease == false
