@@ -66,13 +66,11 @@ jobs:
           *Release notes are not provided for pre-releases.*"
       
       - name: Publish release notes to Discord
+        # Code Blocks are defined using variables to prevent backticks being interpreted as command substitution.
+        # ${{ github.event.release.body }} does not contain the updated description from running `gh release edit` in a prior job.
         run: |
-          : # Code Blocks are defined using variables to prevent backticks being interpreted as command substitution.
-
           CODE_START='```markdown\n'
           CODE_END='\n```'
-
-          : # ${{ github.event.release.body }} does not contain the updated description from running `gh release edit` in a prior job.
 
           RELEASE_NOTES=$(cat << EOF
           **${{ github.event.release.tag_name }}**
