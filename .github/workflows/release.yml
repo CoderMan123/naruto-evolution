@@ -58,32 +58,18 @@ jobs:
           sudo git clone https://github.com/douglasparker/changelog-parser.git /changelog-parser
           sudo chmod +x /changelog-parser/changelog-parser.py
       
-      - name: Edit the pre-release to exclude release notes
+      - name: Remove release notes from pre-releases
         if: github.event.release.prerelease
         run: |
           gh auth login --with-token <<< ${{ secrets.ACTIONS }}
           gh release edit ${{ github.event.release.tag_name }} --notes "## [${{ github.event.release.tag_name }}] $(date +"%Y-%m-%d")
           *Release notes are not provided for pre-releases.*"
       
-      - name: Publish release notes to Discord
-        # Code Blocks are defined using variables to prevent backticks being interpreted as command substitution.
-        # ${{ github.event.release.body }} does not contain the updated description from running `gh release edit` in a prior job.
+      - name: Create a public release with the changelog
+        
         run: |
-          CODE_START='```markdown\n'
-          CODE_END='\n```'
-
-          RELEASE_NOTES=$(cat << EOF
-          **${{ github.event.release.tag_name }}**
-
-          ${CODE_START}
-          ${{ github.event.release.body }}
-          ${CODE_END}
-          EOF
-          )
-
-          echo $RELEASE_NOTES
-
-          curl -H "Content-Type: application/json" -d "{\"username\": \"GitHub\", \"content\": \"$RELEASE_NOTES\"}" ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
+          gh auth login --with-token <<< ${{ secrets.ACTIONS }}
+          gh release create ${{ github.event.release.tag_name }} --title ${{ github.event.release.tag_name }} --notes "${{ github.event.release.body }}" --repo douglasparker/naruto-evolution-releases
       
       - name: Deploy the Docker image to the server
         if: github.event.release.prerelease == false
