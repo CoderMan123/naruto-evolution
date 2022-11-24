@@ -930,15 +930,15 @@ mob
 
 				var/whisper = winget(src, "InputPanel.WhisperInput", "text")
 				if(whisper)
-					if(src.name == whisper)
+					if(src.character == whisper)
 						src << "You cannot whisper to yourself. Try speaking in global chat to make some new friends."
 						return
 
 					var/whisper_target_online = 0
 					for(var/mob/M in mobs_online)
-						if(whisper == M.name)
-							src << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
-							M << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.name]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
+						if(whisper == M.character)
+							src << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.character]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
+							M << "<font color='[COLOR_CHAT]'>\[W]</font> [badges] <font color='[src.name_color]'>[src.character]</font><font color='[COLOR_CHAT]'>: [html_encode(msg)]</font>"
 
 							var/database/query/query = new({"
 								INSERT INTO `[db_table_chat_whisper]` (`timestamp`, `key`, `character`, `identity`, `village`, `faction` `recipient_key`, `recipient_character`, `recipient_identity`, `recipient_village`, `recipient_faction`, `message`)
