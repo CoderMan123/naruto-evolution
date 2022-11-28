@@ -74,6 +74,20 @@ mob
 						flick("defendhit", src)
 						src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 
+					// Damage taken while on Jashin Circle (Not from same circle)
+					if(jashin_damage == 0)
+						for(var/obj/JashinSymbol/jashin_symbol in src.loc)
+							sleep(1)
+							if(jashin_symbol && jashin_symbol.Owner == src && jashin_symbol.JashinConnected)
+								var/mob/jashin_target = jashin_symbol.JashinConnected
+								if(jashin_target && !jashin_target.dead)
+									var/jashpercent = (jutsudamage / 200) * 1.5
+									jashin_target.DealDamage(damage/1.5, src, "maroon")
+									jashin_target.Bleed()
+									jashin_target.UpdateHMB()
+									src.Bleed()
+									src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+
 					src.health -= damage
 					AddState(src, new/state/recently_hit, 60)
 					AddState(src, new/state/in_combat, 100)
