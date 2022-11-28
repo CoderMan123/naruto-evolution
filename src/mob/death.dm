@@ -30,9 +30,6 @@ mob
 
 			else if(src.immortal)
 				if(src.health < 1) src.health = 1
-			
-			else if(src.Susanoo)
-				if(src.health < 1) src.health = 1
 
 			else if(src.AdminShield)
 				src.health = src.maxhealth
