@@ -650,6 +650,8 @@ mob/Untargettable
 		proc/bec2()
 			while(src)
 				sleep(25)
+				if(src.Ownzeez.dead == 1)
+					del(src)
 				src.icon_state = "Idle"
 				var/Mobs
 				for(var/mob/M in oview(5))if(M.key!=src.name||istype(M,/mob/npc) && !istype(M,/mob/npc/combat))Mobs=1
