@@ -129,6 +129,9 @@ obj
 							if(usr.skillpoints<src.Sprice)
 								usr<<output("Not enough skill points to purchase [src.name]. You need [src.Sprice].","Action.Output")
 								return
+							if(src.Clan == usr.Clan && src.Clan == usr.Clan2)
+								usr<<output("You no longer have this clan!","Action.Output")
+								return
 							usr.skillpoints -= src.Sprice
 							if(src.IsGate)
 								if(!usr.jutsus_learned.Find(/obj/Jutsus/EightGates))

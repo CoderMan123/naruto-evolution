@@ -55,6 +55,11 @@ mob
 		tmp/precision_total = 0
 		tmp/precision_buffed = 0
 
+		tmp/left_iron_fist
+		tmp/right_iron_fist
+		tmp/left_iron_fist_anchor
+		tmp/right_iron_fist_anchor
+
 		editing=0
 		statpoints=0
 		skillpoints=1

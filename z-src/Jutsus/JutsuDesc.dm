@@ -314,6 +314,71 @@ obj
 				ChakraCost = (Sprice*jutsuchakra)*2
 				maxcooltime = jutsucooldown*400
 
+//Iron Sand
+
+		Black_Iron_Fists
+			icon_state="SageBind"
+			mouse_drag_pointer = "SageBind"
+			name="Black Iron Fists"
+			rank="A"
+			//signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			Clan= CLAN_IRON
+			maxcooltime = 0
+			ChakraCost = 0
+			Sprice=2
+			//reqs=list("")
+			Description="Form and control fists of iron sand which will attack alongside you dealing damage (Nin) and knocking back anyone hit."
+			New()
+				..()
+				ChakraCost = (Sprice*jutsuchakra)*1.5
+				maxcooltime = jutsucooldown*50
+
+		Grasp_of_Iron
+			icon_state="SageBind"
+			mouse_drag_pointer = "SageBind"
+			name="Grasp of Iron"
+			rank="A"
+			//signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			Clan= CLAN_IRON
+			Sprice=3
+			reqs=list("Black Iron Fists")
+			Description="Launch one of your fists outwards to attempt to grab someone. If you successfully grab someone they are bound for a duration and that fist will be occupied for the same duration. (An ocupied fist cannot be used for attacks or jutsu.)"
+			New()
+				..()
+				ChakraCost = (Sprice*jutsuchakra)*2
+				maxcooltime = jutsucooldown*300
+			
+		Shield_of_Iron
+			icon_state="SageBind"
+			mouse_drag_pointer = "SageBind"
+			name="Shield of Iron"
+			rank="B"
+			//signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			Clan= CLAN_IRON
+			Sprice=3
+			reqs=list("Black Iron Fists")
+			Description="Your Black Iron Fists rotate around you atempting to hit away anyone who gets too close dealing damage (Nin) and knocking them back."
+			New()
+				..()
+				ChakraCost = (Sprice*jutsuchakra)*1.2
+				maxcooltime = jutsucooldown*100
+
+		Gathering_Assault_Pyramid
+			icon_state="SageBind"
+			mouse_drag_pointer = "SageBind"
+			name="Gathering Assault: Pyramid"
+			rank="S"
+			//signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			Clan= CLAN_IRON
+			Sprice=4
+			reqs=list("Black Iron Fists")
+			Description="You channel your lightning to form a huge inverted pyramid out of iron sand to drop onto anyone unlucky enough to be beneath it. Deals damage in a 3 x 3 area (Nin) or up to twice as much in the center (Nin|Prc)"
+			New()
+				..()
+				ChakraCost = (Sprice*jutsuchakra)*2.5
+				maxcooltime = jutsucooldown*200
+
+
 //Snake Sage
 		HiddenSnakeStab
 			icon_state="HiddenSnakeStab"

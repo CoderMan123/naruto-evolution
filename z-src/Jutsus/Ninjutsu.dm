@@ -19,6 +19,267 @@ mob
 			Intang=0
 
 obj
+	Iron_Fist_Left
+		icon= 'Iron_Fist_Left.dmi'
+		icon_state = "idle"
+		pixel_x=-32
+		layer = MOB_LAYER
+		var/homing_switch = 1
+		var/grab_time
+
+		Bump(mob/m)
+			if(m == src.owner)
+				src.loc = m.loc
+				return
+			..()
+			grab_time = src.level * 10
+			if(m)
+				if(CheckState(src.owner, new/state/Iron_Fist_Punching_Left) || CheckState(src.owner, new/state/Iron_Fist_Spinning))	
+					src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
+				if(istype(m, /mob/) && m != src.owner)
+					if(CheckState(src.owner, new/state/Iron_Fist_Punching_Left))			
+						m.DealDamage(damage, src.owner, "NinBlue")
+						step_away(m, src)
+						m.dir = get_dir(m, src)
+						RemoveState(src.owner, new/state/Iron_Fist_Punching_Left, STATE_REMOVE_ALL)
+					else if(CheckState(src.owner, new/state/Iron_Fist_Grabbing_Left))
+						RemoveState(src.owner, new/state/Iron_Fist_Grabbing_Left, STATE_REMOVE_ALL)
+						AddState(src.owner, new/state/Iron_Fist_Grabbed_Left, grab_time)
+						flick("trans", src)
+						sleep(1)
+						src.loc = m.loc
+						spawn(1)
+							var/obj/grab_overlay = new(m.loc)
+							grab_overlay.icon = 'Iron_Fist_Left.dmi'
+							grab_overlay.icon_state = "grabbed2"
+							grab_overlay.pixel_x=-32
+							grab_overlay.layer = MOB_LAYER+1
+							spawn(grab_time - 2) del(grab_overlay)
+						src.icon_state = "grabbed1"
+						src.layer = MOB_LAYER - 1
+						src.owner.Bind(m, grab_time - 1)
+
+					else if(CheckState(src.owner, new/state/Iron_Fist_Spinning))			
+						if(m)
+							src.loc = m.loc
+						
+						
+			
+
+		New()
+			..()
+			spawn()
+				while(src)
+					sleep(0.5)
+					if(src)
+						if(!owner || !CheckState(src.owner, new/state/Iron_Fists) || src.owner.chakra < 20)
+							RemoveState(src.owner, new/state/Iron_Fists, STATE_REMOVE_ALL)
+							src.owner.left_iron_fist = null
+							src.owner.right_iron_fist = null
+							del(src)
+
+						else if(CheckState(src.owner, new/state/Iron_Fist_Spinning))
+							src.density = 1
+							for(var/mob/m in orange(1, src))
+								if(m != src.owner)
+									src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
+									m.DealDamage(damage, src.owner, "NinBlue")
+									step_away(m, src.owner)
+									m.dir = get_dir(m, src.owner)
+							src.icon_state = "punching"
+							if(get_dist(src.owner.loc, src.loc) > 3)
+								if(prob(50))step_towards(src, src.owner)
+							if(get_dist(src.owner.loc, src.loc) < 2) step_away(src, src.owner)
+							switch(get_dir(src.owner.loc, src.loc))
+								if(NORTH)
+									step(src, EAST)
+								if(NORTHEAST)
+									step(src, SOUTHEAST)
+								if(EAST)
+									step(src, SOUTH)
+								if(SOUTHEAST)
+									step(src, SOUTHWEST)
+								if(SOUTH)
+									step(src, WEST)
+								if(SOUTHWEST)
+									step(src, NORTHWEST)
+								if(WEST)
+									step(src, NORTH)
+								if(NORTHWEST)
+									step(src, NORTHEAST)
+
+						else if(CheckState(src.owner, new/state/Iron_Fist_Punching_Left))
+							if(src.icon_state == "idle")
+								src.icon_state = "punching"
+							src.density = 1
+							var/mob/c_target=src.owner.Target_Get(TARGET_MOB)
+							if(c_target)
+								switch(homing_switch)
+									if(1)
+										homing_switch = 2
+										step_towards(src, c_target)
+									if(2)
+										homing_switch = 1
+										step_towards(src, get_step(src, src.dir))
+
+							else step_towards(src, get_step(src, src.dir))
+
+						else if(CheckState(src.owner, new/state/Iron_Fist_Grabbing_Left))
+							var/mob/c_target=src.owner.Target_Get(TARGET_MOB)
+							src.density = 1
+							if(c_target)
+								switch(homing_switch)
+									if(1)
+										homing_switch = 2
+										step_towards(src, c_target)
+									if(2)
+										homing_switch = 1
+										step_towards(src, get_step(src, src.dir))		
+								src.dir = get_dir(src.loc, c_target.loc)
+
+							else step_towards(src, get_step(src, src.dir))
+							sleep(0.5)
+					
+						else if(src.owner.left_iron_fist_anchor && !CheckState(src.owner, new/state/Iron_Fist_Grabbed_Left))
+							if(src.z != src.owner.z) src.loc = src.owner.loc
+							src.layer = MOB_LAYER
+							src.density = 0
+							step_towards(src, src.owner.left_iron_fist_anchor)
+							src.dir = src.owner.dir
+							src.icon_state = "idle"
+
+	Iron_Fist_Right
+		icon= 'Iron_Fist_Right.dmi'
+		icon_state = "idle"
+		pixel_x=-32
+		layer = MOB_LAYER
+		var/homing_switch = 1
+		var/grab_time
+
+		Bump(mob/m)
+			if(m == src.owner)
+				src.loc = m.loc
+				return
+			..()
+			grab_time = src.level * 10
+			if(m)
+				if(CheckState(src.owner, new/state/Iron_Fist_Punching_Right) || CheckState(src.owner, new/state/Iron_Fist_Spinning))	
+					src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
+
+				if(istype(m, /mob/) && m != src.owner)
+					if(CheckState(src.owner, new/state/Iron_Fist_Punching_Right))					
+						m.DealDamage(damage, src.owner, "NinBlue")
+						step_away(m, src)
+						m.dir = get_dir(m, src)
+						RemoveState(src.owner, new/state/Iron_Fist_Punching_Left, STATE_REMOVE_ALL)
+
+					else if(CheckState(src.owner, new/state/Iron_Fist_Grabbing_Right))
+						RemoveState(src.owner, new/state/Iron_Fist_Grabbing_Right, STATE_REMOVE_ALL)
+						AddState(src.owner, new/state/Iron_Fist_Grabbed_Right, grab_time)
+						flick("trans", src)
+						sleep(1)
+						src.loc = m.loc
+						spawn(1)
+							var/obj/grab_overlay = new(m.loc)
+							grab_overlay.icon = 'Iron_Fist_Right.dmi'
+							grab_overlay.icon_state = "grabbed2"
+							grab_overlay.pixel_x=-32
+							grab_overlay.layer = MOB_LAYER+1
+							spawn(grab_time - 2) del(grab_overlay)
+						src.icon_state = "grabbed1"
+						src.layer = MOB_LAYER - 1
+						src.owner.Bind(m, grab_time - 1)
+					else if(CheckState(src.owner, new/state/Iron_Fist_Spinning))			
+						if(m)
+							src.loc = m.loc
+						
+
+						
+						
+			
+
+		New()
+			..()
+			spawn()
+				while(src)
+					sleep(0.5)
+					if(src)
+						if(!owner || !CheckState(src.owner, new/state/Iron_Fists) || src.owner.chakra < 20)
+							RemoveState(src.owner, new/state/Iron_Fists, STATE_REMOVE_ALL)
+							src.owner.left_iron_fist = null
+							src.owner.right_iron_fist = null
+							del(src)
+
+						else if(CheckState(src.owner, new/state/Iron_Fist_Spinning))
+							src.density = 1
+							src.icon_state = "punching"
+							for(var/mob/m in orange(1, src))
+								if(m != src.owner)
+									m.DealDamage(damage, src.owner, "NinBlue")
+									step_away(m, src.owner)
+									m.dir = get_dir(m, src.owner)
+							if(get_dist(src.owner.loc, src.loc) > 2)
+								if(prob(50))step_towards(src, src.owner)
+							if(get_dist(src.owner.loc, src.loc) < 2) step_away(src, src.owner)
+							switch(get_dir(src.owner.loc, src.loc))
+								if(NORTH)
+									step(src, EAST)
+								if(NORTHEAST)
+									step(src, SOUTHEAST)
+								if(EAST)
+									step(src, SOUTH)
+								if(SOUTHEAST)
+									step(src, SOUTHWEST)
+								if(SOUTH)
+									step(src, WEST)
+								if(SOUTHWEST)
+									step(src, NORTHWEST)
+								if(WEST)
+									step(src, NORTH)
+								if(NORTHWEST)
+									step(src, NORTHEAST)
+
+						else if(CheckState(src.owner, new/state/Iron_Fist_Punching_Right))
+							if(src.icon_state == "idle")
+								src.icon_state = "punching"
+							src.density = 1
+							var/mob/c_target=src.owner.Target_Get(TARGET_MOB)
+							if(c_target)
+								switch(homing_switch)
+									if(1)
+										homing_switch = 2
+										step_towards(src, c_target)
+									if(2)
+										homing_switch = 1
+										step_towards(src, get_step(src, src.dir))
+
+							else step_towards(src, get_step(src, src.dir))
+
+						else if(CheckState(src.owner, new/state/Iron_Fist_Grabbing_Right))
+							var/mob/c_target=src.owner.Target_Get(TARGET_MOB)
+							src.density = 1
+							if(c_target)
+								switch(homing_switch)
+									if(1)
+										homing_switch = 2
+										step_towards(src, c_target)
+									if(2)
+										homing_switch = 1
+										step_towards(src, get_step(src, src.dir))		
+								src.dir = get_dir(src.loc, c_target.loc)
+
+							else step_towards(src, get_step(src, src.dir))
+							sleep(0.5)
+					
+						else if(src.owner.right_iron_fist_anchor && !CheckState(src.owner, new/state/Iron_Fist_Grabbed_Right))
+							if(src.z != src.owner.z) src.loc = src.owner.loc
+							src.layer = MOB_LAYER
+							src.density = 0
+							step_towards(src, src.owner.right_iron_fist_anchor)
+							src.dir = src.owner.dir
+							src.icon_state = "idle"
+
+
 	PoisonMist
 		icon = 'Poison Gas Cloud.dmi'
 		pixel_x=-32

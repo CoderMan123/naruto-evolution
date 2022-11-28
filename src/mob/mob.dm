@@ -316,7 +316,7 @@ mob
 					src.known_clans.Add(src.Clan)
 
 				if(VILLAGE_SAND)
-					src.Clan = src.client.prompt({"What bloodline clan would you like to be born into?"}, "Clan Selection", list("[CLAN_PUPPET]", "[CLAN_SAND]", "No Clan"))
+					src.Clan = src.client.prompt({"What bloodline clan would you like to be born into?"}, "Clan Selection", list("[CLAN_PUPPET]", "[CLAN_SAND]","[CLAN_IRON]", "No Clan"))
 					src.known_clans.Add(src.Clan)
 
 			var/clan_description
@@ -335,6 +335,8 @@ mob
 					clan_description = "Master craftsmen capable of weaving their chakra into strings. They use these strings to manipulate puppets in combat.<br /><br />Puppet users boast strong jutsu all-round but require high technical skill to master their use."
 				if(CLAN_SAND)
 					clan_description = "Users of sand are capable of infusing sand particles with their chakra. They can manipulate this sand to entomb their opponents and protect themselves.<br /><br /> They deal high damage to single targets as well as having great defensive techniques.<br /><br /><font color= #971e1e>ALL SAND USERS START WITH EARTH AS THEIR FIRST ELEMENT</Font>"
+				if(CLAN_IRON)
+					clan_description = "Users of the Iron Sand control fine iron powder using lightning style magnetism. They can mould the sand into fists to attack or subdue. <br /><br /> They deal good damage with both single and multi-target attacks.<br /><br /><font color= #971e1e>ALL IRON SAND USERS START WITH LIGHTNING AS THEIR FIRST ELEMENT</Font>"
 				if("No Clan")
 					clan_description = "Not everyone is born into a powerful bloodline. Some must cultivate their own strength through various methods.<br /><br />With no bloodline you will start out with less jutsu than others but you will achieve combinations of jutsu that are otherwise impossible to achieve."
 
@@ -342,6 +344,7 @@ mob
 				if("I want this Bloodline.")
 					if(src.Clan == CLAN_UCHIHA) src.Element = "Fire"
 					if(src.Clan == CLAN_SAND) src.Element = "Earth"
+					if(src.Clan == CLAN_IRON) src.Element = "Lightning"
 				if("Go Back")
 					goto _choosebloodline
 

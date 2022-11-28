@@ -1,4 +1,4 @@
-var/jutsudamage=250 //A global variable to serve as the baseline for all jutsu damage forumla.(WIP)Changing this value will change the damage of all jutsu relative to it's value.
+var/jutsudamage=200 //A global variable to serve as the baseline for all jutsu damage forumla.(WIP)Changing this value will change the damage of all jutsu relative to it's value.
 var/jutsustatexp=2 //A global vairable to act as a multiplier for the amount of stat exp gained when using jutsu
 var/jutsumastery=2 //A global variable to act as a multiplier for the amount of exp a jutsu gains on use
 var/jutsuchakra=50  //A global variable to act as the baseline for the amount of chakra jutsu cost to use
@@ -8,7 +8,7 @@ var/trainingexp=0.5 //A global variable to act as a multiplier for the amount of
 var/weapondamage=1 //A global variable to act as a multiplier for the amount of damage all weaponry deal (including swords)
 var/handsealmastery=2 //A global bariable to act as a multiplier for the amount of uses a jutsu needs before it is hotkeyable
 
-var/bloodline_clans = list("Aburame", "Akimichi", "Deidara", "Crystal", "Hyuuga", "Ice", "Implanted", "Ink", "Kaguya", "Kakuzu", "Nara", "Rinnegan", "Puppeteer", "SnakeSage", "Sand", "Spider", "Senjuu", "Uchiha")
+var/bloodline_clans = list("Aburame", "Akimichi", "Deidara", "Crystal", "Hyuuga", "Ice", "Implanted", "Ink", "Kaguya", "Kakuzu", "Nara", "Rinnegan", "Puppeteer", "SnakeSage", "Sand", "Spider", "Senjuu", "Uchiha", "Iron Sand")
 
 mob
 	var

@@ -196,6 +196,61 @@ proc
 
 	AI_is_punching
 
+// Iron Fist Clan
+
+	Iron_Fists
+		proc/setanchors()
+			switch(src.mob.dir)
+				if(NORTH)
+					src.mob.left_iron_fist_anchor = locate(src.mob.x - 1, src.mob.y, src.mob.z)
+					src.mob.right_iron_fist_anchor = locate(src.mob.x + 1, src.mob.y, src.mob.z)
+				if(NORTHEAST)
+					src.mob.left_iron_fist_anchor = locate(src.mob.x - 1, src.mob.y + 1, src.mob.z)
+					src.mob.right_iron_fist_anchor = locate(src.mob.x + 1, src.mob.y - 1, src.mob.z)
+				if(EAST)
+					src.mob.left_iron_fist_anchor = locate(src.mob.x, src.mob.y + 1, src.mob.z)
+					src.mob.right_iron_fist_anchor = locate(src.mob.x, src.mob.y - 1, src.mob.z)
+				if(SOUTHEAST)
+					src.mob.left_iron_fist_anchor = locate(src.mob.x + 1, src.mob.y + 1, src.mob.z)
+					src.mob.right_iron_fist_anchor = locate(src.mob.x - 1, src.mob.y - 1, src.mob.z)
+				if(SOUTH)
+					src.mob.left_iron_fist_anchor = locate(src.mob.x + 1, src.mob.y, src.mob.z)
+					src.mob.right_iron_fist_anchor = locate(src.mob.x - 1, src.mob.y, src.mob.z)
+				if(SOUTHWEST)
+					src.mob.left_iron_fist_anchor = locate(src.mob.x + 1, src.mob.y - 1, src.mob.z)
+					src.mob.right_iron_fist_anchor = locate(src.mob.x - 1, src.mob.y + 1, src.mob.z)
+				if(WEST)
+					src.mob.left_iron_fist_anchor = locate(src.mob.x, src.mob.y - 1, src.mob.z)
+					src.mob.right_iron_fist_anchor = locate(src.mob.x, src.mob.y + 1, src.mob.z)
+				if(NORTHWEST)
+					src.mob.left_iron_fist_anchor = locate(src.mob.x - 1, src.mob.y - 1, src.mob.z)
+					src.mob.right_iron_fist_anchor = locate(src.mob.x + 1, src.mob.y - 1, src.mob.z)
+		var/delay
+		Ticker()
+			src.setanchors()
+			..()
+
+		OnTick()
+			if(!delay) delay = world.timeofday + 0.5
+			if(delay < world.timeofday)
+				src.setanchors()
+				delay = world.timeofday + 0.5
+			..()
+	
+	Iron_Fist_Punching_Left
+
+	Iron_Fist_Grabbing_Left
+
+	Iron_Fist_Grabbed_Left
+
+	Iron_Fist_Punching_Right
+
+	Iron_Fist_Grabbing_Right
+
+	Iron_Fist_Grabbed_Right
+
+	Iron_Fist_Spinning
+
 #ifdef STATE_MANAGER_DEBUG
 mob
 	verb

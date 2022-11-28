@@ -673,6 +673,10 @@ mob
 					if("Jinchuriki: Chakra Cloak9")usr.Jin_Cloak9()
 					if("Dust Particle Prison")usr.Dust_Particle_Prison()
 					if("Dust Particle Prison Beam")usr.Dust_Particle_Prison_Beam()
+					if("Black Iron Fists")usr.Black_Iron_Fists()
+					if("Grasp of Iron")usr.Grasp_of_Iron()
+					if("Shield of Iron")usr.Shield_of_Iron()
+					if("Gathering Assault: Pyramid")usr.Gathering_Assault_Pyramid()
 
 
 		HotSlots()

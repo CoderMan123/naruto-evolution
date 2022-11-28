@@ -58,6 +58,9 @@ obj
 		elemental
 			instance_radius = 6
 
+		clan_iron
+			instance_radius = 4
+
 		clan_noclan
 			instance_radius = 5
 

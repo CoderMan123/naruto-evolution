@@ -82,6 +82,7 @@
 #define CLAN_UCHIHA "Uchiha"
 #define CLAN_WEAPONIST "Weaponist"
 #define CLAN_YELLOWFLASH "Yellow Flash"
+#define CLAN_IRON "Iron Sand"
 
 #define SPECIALIZATION_NINJUTSU "Ninjutsu"
 #define SPECIALIZATION_GENJUTSU "Genjutsu"

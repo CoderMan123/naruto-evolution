@@ -161,6 +161,11 @@ mob
 						if(Specialist==SPECIALIZATION_TAIJUTSU||Specialist2==SPECIALIZATION_TAIJUTSU)combo++
 						if(src.Clan != CLAN_SAND || src.Clan2 != CLAN_SAND)
 							flick("punchl",src)
+
+							if(CheckState(src, new/state/Iron_Fists) && !CheckState(src, new/state/Iron_Fist_Punching_Left) && !CheckState(src, new/state/Iron_Fist_Grabbing_Left) && !CheckState(src, new/state/Iron_Fist_Grabbed_Left))
+								flick("trans", src.left_iron_fist)
+								AddState(src, new/state/Iron_Fist_Punching_Left, 2)
+
 							if(src.bugpass)
 								src.DealDamage(50,src,"aliceblue",0,1)
 								var/obj/O = new/obj
@@ -192,6 +197,11 @@ mob
 						if(src.Hand=="Right")
 							if(src.Clan != CLAN_SAND || src.Clan2 != CLAN_SAND)
 								flick("punchr",src)
+
+								if(CheckState(src, new/state/Iron_Fists) && !CheckState(src, new/state/Iron_Fist_Punching_Right) && !CheckState(src, new/state/Iron_Fist_Grabbing_Right) && !CheckState(src, new/state/Iron_Fist_Grabbed_Right))
+									flick("trans", src.right_iron_fist)
+									AddState(src, new/state/Iron_Fist_Punching_Right, 2)
+
 								if(src.bugpass)
 									var/obj/O = new/obj
 									O.loc = src.loc

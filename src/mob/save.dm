@@ -1,4 +1,6 @@
-mob/var/savefile_version = 2
+#define DEBUG_SAVEFILE
+
+mob/var/savefile_version = 1
 
 mob
 	proc/Save()
@@ -114,23 +116,9 @@ mob
 								del(src.client)
 
 	proc/SavefileMigration()
-		if(src.savefile_version < 2)
-			src.health = 2500
-			src.maxhealth = 2500
-			src.chakra = 1800
-			src.maxchakra = 1800
-			src.statpoints = 0
-			src.statpoints = 3*(src.level-1)
-			src.savefile_version = 2
-		
-		if(src.savefile_version < 3)
-			if(src.Specialist == "strength") src.Specialist = SPECIALIZATION_TAIJUTSU
-			if(src.Specialist2 == "strength") src.Specialist2 = SPECIALIZATION_TAIJUTSU
-			src.savefile_version = 3
-		
-/*		if(src.savefile_version < 4)
+/*		if(src.savefile_version < 2)
 			do stuff
-			src.savefile_version = 4*/
+			src.savefile_version = 2*/
 
 	Write(savefile/F, var/character)
 		if(src.client)
