@@ -1181,14 +1181,13 @@ turf
 							O.icon_state = "Icywater"
 							check=1
 							spawn(5) del(O)
-					if(!check)
-						if(CheckState(M, new/state/swimming))
-							RemoveState(M, new/state/swimming, STATE_REMOVE_ALL)
-							M.stepcounter=0
-							M.icon_state=""
-							M.overlays+=/obj/MaleParts/UnderShade
-							M.overlays-=/obj/MiscEffects/WaterRing
-							M.overlays-=/obj/MiscEffects/WaterRing
+					if(CheckState(M, new/state/swimming))
+						RemoveState(M, new/state/swimming, STATE_REMOVE_ALL)
+						M.stepcounter=0
+						M.icon_state=""
+						M.overlays+=/obj/MaleParts/UnderShade
+						M.overlays-=/obj/MiscEffects/WaterRing
+						M.overlays-=/obj/MiscEffects/WaterRing
 
 					if(check)//SWIM
 						if(CheckState(M, new/state/water_walking))
