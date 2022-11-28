@@ -63,7 +63,7 @@ mob
 				if(!heal && !chakra)
 					if(src.Intang) return
 					if(CheckState(src, new/state/sand_shield)) return
-					if(src.multisized) damage = round(damage*0.8)
+					if(src.multisized) damage = round(damage*0.5)
 
 					if(src.dodge == 0)
 						damage = round(damage-(((src.defence_total / 200)*0.25)*damage))
