@@ -2342,7 +2342,7 @@ mob
 						if(!HitMe||!ismob(HitMe)) continue
 						canja=0
 						spawn(60) canja=1
-						var/jashpercent = (jutsudamage / 100)/15
+						var/jashpercent = (jutsudamage / 100)/13
 						if(src.health>0)
 							HitMe.DealDamage(src.maxhealth*jashpercent,src,"maroon")
 							HitMe.Bleed()
