@@ -130,7 +130,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round((src.ninjutsu_total / 300)+(src.precision_total / 300)*2*J.damage)
+						A.damage=J.damage+round((src.ninjutsu_total / 450)+(src.precision_total / 450)*2*J.damage)
 						if(c_target)
 							src.dir=get_dir(src,c_target)
 							if(prob(50))A.pixel_y+=rand(3,5)
@@ -172,7 +172,7 @@ mob
 					for(var/i=0,i<5,i++)
 						var/check=0
 						for(var/mob/M in get_step(src,src.dir))
-							M.DealDamage(J.damage+round((src.ninjutsu_total / 300)+(src.precision_total / 300)*2*J.damage),src, "NinBlue")
+							M.DealDamage(J.damage+round((src.ninjutsu_total / 450)+(src.precision_total / 450)*2*J.damage),src, "NinBlue")
 							M.Bleed()
 							src.loc = M.loc
 							Z = M

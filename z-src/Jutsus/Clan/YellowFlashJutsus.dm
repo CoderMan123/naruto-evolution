@@ -21,7 +21,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.ninjutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 						A.level=J.level
 						walk_towards(A,c_target.loc,0)
 						spawn(4)if(A && A.icon_state=="thrown")walk(A,A.dir)
@@ -34,7 +34,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.ninjutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)
 

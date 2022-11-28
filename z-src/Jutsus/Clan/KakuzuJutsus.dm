@@ -24,7 +24,7 @@ mob
 					var/obj/Jutsus/Sickle_Weasel_Technique/la=new/obj/Jutsus/Sickle_Weasel_Technique()
 					A.Owner=src
 					src.jutsus+=la
-					la.damage=la.damage+round((src.precision_total / 300)+(src.ninjutsu_total / 300)*2*J.damage)
+					la.damage=la.damage+round((src.precision_total / 450)+(src.ninjutsu_total / 450)*2*J.damage)
 					src.Sickle_Weasel_Technique()
 					del(la)
 					spawn(150)

@@ -76,7 +76,7 @@ mob
 							step(Z,src.dir)
 							Z.dir = get_dir(Z,src)
 							step(src,src.dir)
-							Z.DealDamage(J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage),src,"TaiOrange")
+							Z.DealDamage(J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage),src,"TaiOrange")
 							sleep(1)
 						if(Z)
 							Z.icon_state = "push"
@@ -117,7 +117,7 @@ mob
 						A.layer=c_target.layer
 						A.fightlayer=src.fightlayer
 						A.level=J.level
-						A.damage=J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 						spawn(4)
 							for(var/mob/M in view(A,0))
 								AddState(M, new/state/cant_move, J.level*5)
@@ -162,7 +162,7 @@ mob
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
 						A.level=J.level
-						A.damage=J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 						step(A,src.dir)
 						spawn(3)
 							for(var/mob/M in view(A,0))
@@ -314,7 +314,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 						walk_towards(A,c_target.loc,0)
 						spawn(4)if(A)walk(A,A.dir)
 					else
@@ -341,7 +341,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 						walk(A,src.dir)
 
 		Bone_Sensation()
@@ -367,7 +367,7 @@ mob
 									if(N)
 										var/obj/I=new/obj/Projectiles/Effects/BoneSenHit
 										I.IsJutsuEffect=src
-										var/damage=J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+										var/damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 										M.DealDamage(damage,src,"NinBlue")
 										M.overlays+=I
 										M.overlays-=N
@@ -383,7 +383,7 @@ mob
 									if(N)
 										var/obj/I=new/obj/Projectiles/Effects/BoneSenHit
 										I.IsJutsuEffect=src
-										var/damage=J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+										var/damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 										M.DealDamage(damage,src,"NinBlue")
 										M.overlays-=N
 										M.overlays+=I
@@ -399,7 +399,7 @@ mob
 									if(N)
 										var/obj/I=new/obj/Projectiles/Effects/BoneSenHit
 										I.IsJutsuEffect=src
-										var/damage=J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+										var/damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 										M.DealDamage(damage,src,"NinBlue")
 										M.overlays-=N
 										M.overlays+=I
@@ -415,7 +415,7 @@ mob
 									if(N)
 										var/obj/I=new/obj/Projectiles/Effects/BoneSenHit
 										I.IsJutsuEffect=src
-										var/damage=J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+										var/damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 										M.DealDamage(damage,src,"NinBlue")
 										M.overlays-=N
 										M.overlays+=I
@@ -451,7 +451,7 @@ mob
 							B.Owner=src
 							B.loc = O.loc
 							B.level=J.level
-							B.damage=J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+							B.damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 							B.x+=xi
 							B.y+=yi
 							if(B.loc == src.loc) del(B)
@@ -532,7 +532,7 @@ mob
 							O.pixel_x+=rand(-5,5)
 							flick('KaguyaBlow.dmi',O)
 							spawn(4)if(O)del(O)
-							Z.DealDamage(J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage),src,"NinBlue")
+							Z.DealDamage(J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage),src,"NinBlue")
 						if(Z)
 							RemoveState(Z, a, STATE_REMOVE_REF)
 							RemoveState(Z, b, STATE_REMOVE_REF)

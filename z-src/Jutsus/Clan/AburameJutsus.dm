@@ -26,8 +26,8 @@ mob
 						A.loc=src.loc
 						A.Owner=src
 						A.icon='Insect clone.dmi'
-						A.ninjutsu=round((src.ninjutsu_total / 300)*2*J.damage)
-						A.genjutsu=round((src.genjutsu_total / 300)*2*J.damage)
+						A.ninjutsu=round((src.ninjutsu_total / 450)*2*J.damage)
+						A.genjutsu=round((src.genjutsu_total / 450)*2*J.damage)
 						A.defence=round(src.ninjutsu_total)
 						A.health=round(src.ninjutsu_total)
 						A.maxhealth=round(src.ninjutsu_total)

@@ -18,7 +18,7 @@ mob
 						A.Owner=src
 						A.target = c_target
 						A.level=J.level
-						A.damage=(J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage))/2
+						A.damage=(J.damage+round(((src.precision_total / 450)+(src.ninjutsu_total / 450))*2*J.damage))/2
 						var/timer=J.level*4
 						while(A && A.hits<=1 && timer > 0)
 							timer--
@@ -32,7 +32,7 @@ mob
 						A.dir=src.dir
 						A.Owner=src
 						A.level=J.level
-						A.damage=(J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage))/2
+						A.damage=(J.damage+round(((src.precision_total / 450)+(src.ninjutsu_total / 450))*2*J.damage))/2
 						var/timer=J.level*4
 						while(A && A.hits<=1 && timer > 0)
 							timer--
@@ -51,7 +51,7 @@ mob
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					J.damage = (J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage))/6
+					J.damage = (J.damage+round(((src.precision_total / 450)+(src.ninjutsu_total / 450))*2*J.damage))/6
 					flick("2fist",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 
@@ -151,7 +151,7 @@ mob
 						if(prob(25*J.level))
 							var/obj/Projectiles/Effects/Windmill/A = new/obj/Projectiles/Effects/RTD(get_step(src, src.dir))
 							A.Owner=src
-							A.damage=J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage)/3
+							A.damage=J.damage+round(((src.precision_total / 450)+(src.ninjutsu_total / 450))*2*J.damage)/3
 							A.icon = 'risingdragonprojectiles.dmi'
 							A.icon_state="[rand(1,4)]"
 							step(A, src.dir)
@@ -234,7 +234,7 @@ mob
 						timer--
 						var/obj/Projectiles/Effects/Windmill/A = new/obj/Projectiles/Effects/RTD(src.loc)
 						A.Owner=src
-						A.damage=J.damage+round(((src.precision_total / 300)+(src.ninjutsu_total / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.precision_total / 450)+(src.ninjutsu_total / 450))*2*J.damage)
 						switch(src.dir)
 							if(NORTH)
 								switch(spawn_loc)

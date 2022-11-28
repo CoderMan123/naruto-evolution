@@ -92,7 +92,7 @@ mob
 				if(src.hited==1) return
 				if(istype(M,/mob/) || istype(M,/mob/npc/combat))
 					flick("punch",src)
-					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu_total / 300)+(OWNER.precision_total / 300))*2*jutsudamage))/3,src.OWNER,"NinBlue")
+					M.DealDamage((jutsudamage+round(((OWNER.ninjutsu_total / 450)+(OWNER.precision_total / 450))*2*jutsudamage))/3,src.OWNER,"NinBlue")
 					//if(M.health >= 0) M.Death()
 					//M.Death(src)
 

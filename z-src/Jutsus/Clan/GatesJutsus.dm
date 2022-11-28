@@ -196,7 +196,7 @@ mob
 										c_target.overlays+=/obj/Projectiles/Effects/OnFire
 										c_target.burn=3
 										spawn(50)if(c_target)c_target.BurnEffect(src)
-									var/undefendedhit=round(((J.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*J.damage))/40))
+									var/undefendedhit=round(((J.damage+round(((src.taijutsu_total / 450)+(src.agility_total / 450))*2*J.damage))/40))
 									if(undefendedhit<0)undefendedhit=1
 									c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 									src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
@@ -204,7 +204,7 @@ mob
 									if(c_target.client)spawn()c_target.ScreenShake(1)
 								else
 									if(src.agility_total>=c_target.agility_total)
-										var/defendedhit=round(((J.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*J.damage))/40))
+										var/defendedhit=round(((J.damage+round(((src.taijutsu_total / 450)+(src.agility_total / 450))*2*J.damage))/40))
 										if(defendedhit<0)defendedhit=1
 										if(defence_total<src.taijutsu_total/2)
 											var/obj/Drag=new /obj/Drag/Dirt(c_target.loc)

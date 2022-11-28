@@ -205,7 +205,7 @@ mob
 											Ex.pixel_x=-112
 											Ex.loc = M.loc
 											spawn(20)if(Ex)del(Ex)
-											M.DealDamage(round(J.damage+((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage),src,"NinBlue")
+											M.DealDamage(round(J.damage+((src.ninjutsu_total / 450)+(src.precision_total / 450))*2*J.damage),src,"NinBlue")
 							sleep(0.5)
 						if(I)del(I)
 					Effects["Rasengan"]=null

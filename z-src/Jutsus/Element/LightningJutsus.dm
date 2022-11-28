@@ -181,7 +181,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=(J.damage+round((src.ninjutsu_total / 300)+(src.precision_total / 300)*2*J.damage))/5
+							A.damage=(J.damage+round((src.ninjutsu_total / 450)+(src.precision_total / 450)*2*J.damage))/5
 							var/turf/Tg
 							Tg = get_step(c_target,pick(NORTH,SOUTH,EAST,WEST))
 							var/k = rand(1,5)
@@ -442,7 +442,7 @@ mob
 										rashit=1
 										step(src,src.dir)
 										if(M)
-											M.DealDamage(round((src.ninjutsu_total / 300)+(src.agility_total / 300)*2*J.damage)*1.5,src,"NinBlue")
+											M.DealDamage(round((src.ninjutsu_total / 450)+(src.agility_total / 450)*2*J.damage)*1.5,src,"NinBlue")
 											if(M)M.Bleed()
 								sleep(0.5)
 							if(src)

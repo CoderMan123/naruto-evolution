@@ -182,7 +182,7 @@ mob
 							A.Owner=src
 							A.layer=src.layer
 							A.fightlayer=src.fightlayer
-							A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+							A.damage=J.damage+round(((src.ninjutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 							var/turf/Tg
 							Tg = get_step(c_target,pick(NORTH,SOUTH,EAST,WEST))
 							var/k = rand(1,5)
@@ -272,7 +272,7 @@ mob
 								A.Owner=src
 								A.layer=src.layer
 								A.fightlayer=src.fightlayer
-								A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+								A.damage=J.damage+round(((src.ninjutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 							spawn() walk(A,src.dir)
 
 		Shukakku_Spear()
@@ -296,7 +296,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.ninjutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 						A.level=J.level
 						walk_towards(A,c_target.loc,0)
 						spawn(4)
@@ -307,6 +307,6 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage)
+						A.damage=J.damage+round(((src.ninjutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 						A.level=J.level
 						walk(A,src.dir)

@@ -104,7 +104,7 @@ mob
 					O.loc = src.loc
 					O.dir = src.dir
 					O.Owner = src
-					O.damage = (J.damage+round(((src.ninjutsu_total / 300)+(src.precision_total / 300))*2*J.damage))
+					O.damage = (J.damage+round(((src.ninjutsu_total / 450)+(src.precision_total / 450))*2*J.damage))
 					if(c_target)
 						walk_towards(O,c_target)
 						spawn(5)if(src)

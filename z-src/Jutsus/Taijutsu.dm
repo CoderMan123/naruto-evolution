@@ -65,7 +65,7 @@ mob
 						var/obj/A = new/obj/MiscEffects/Morning_Peacock(src.loc)
 						src.DealDamage((src.maxhealth * 0.001) * src.Gates, src, "maroon")
 						A.Owner=src
-						A.damage=((Jutsu.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
+						A.damage=((Jutsu.damage+round(((src.taijutsu_total / 450)+(src.agility_total / 450))*2*Jutsu.damage))/20)+(2*src.Gates)
 						A.dir=src.dir
 						if(prob(50))
 							if(src.dir==NORTH)
@@ -105,7 +105,7 @@ mob
 						var/obj/B = new/obj/MiscEffects/Morning_Peacock(src.loc)
 						src.DealDamage((src.maxhealth * 0.001) * src.Gates, src, "maroon")
 						B.Owner=src
-						B.damage=((Jutsu.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*Jutsu.damage))/20)+(2*src.Gates)
+						B.damage=((Jutsu.damage+round(((src.taijutsu_total / 450)+(src.agility_total / 450))*2*Jutsu.damage))/20)+(2*src.Gates)
 						B.dir=src.dir
 						if(prob(50))
 							if(src.dir==NORTH)

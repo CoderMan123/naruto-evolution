@@ -71,7 +71,7 @@ mob
 							if(M == src) continue
 							if(M.dead) continue
 							if(src.loc == lastloc) continue
-							M.DealDamage(round((src.ninjutsu_total / 300)+(src.taijutsu_total / 300)*2*J.damage)/12,src,"NinBlue")
+							M.DealDamage(round((src.ninjutsu_total / 450)+(src.taijutsu_total / 450)*2*J.damage)/12,src,"NinBlue")
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="dead"
 							Bind(M, 5)

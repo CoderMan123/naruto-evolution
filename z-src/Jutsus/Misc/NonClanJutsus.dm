@@ -496,7 +496,7 @@ mob
 							spawn(7)if(O)del(O)
 							if(M) step(M,src.dir)
 							if(M) M.dir = get_dir(M,src)
-							if(M) M.DealDamage((J.damage+round(((src.taijutsu_total / 300)+(src.precision_total / 300))*2*J.damage))/4,src,"TaiOrange")
+							if(M) M.DealDamage((J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage))/4,src,"TaiOrange")
 							sleep(1)
 					src.icon_state = ""
 		Chakra_Control()
@@ -632,7 +632,7 @@ mob
 					var/mob/Z
 					for(var/mob/M in get_step(src,src.dir))Z=M
 					if(Z)
-						Z.DealDamage(J.damage + round((src.taijutsu_total / 300)+(src.precision_total / 300)*2*J.damage)*1.5,src,"NinBlue")
+						Z.DealDamage(J.damage + round((src.taijutsu_total / 450)+(src.precision_total / 450)*2*J.damage)*1.5,src,"NinBlue")
 						Z.sleephits=0
 						Z.icon_state="dead"
 						var/TimeAsleep = J.level*10 + src.precision*0.5
@@ -774,7 +774,7 @@ mob
 									I.pixel_x=-16
 									walk_to(I,0)
 									walk_to(I,I.loc)
-									M.DealDamage(round((src.ninjutsu_total / 300)+(src.agility_total / 300)*2*J.damage)*1.5,src,"NinBlue")
+									M.DealDamage(round((src.ninjutsu_total / 450)+(src.agility_total / 450)*2*J.damage)*1.5,src,"NinBlue")
 							sleep(0.5)
 						del(I)
 					Effects["Rasengan"]=null
@@ -814,7 +814,7 @@ mob
 													spawn(2)
 														if(src)
 															step(c_target,SOUTH)
-															c_target.DealDamage(J.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*J.damage),src,"TaiOrange")
+															c_target.DealDamage(J.damage+round(((src.taijutsu_total / 450)+(src.agility_total / 450))*2*J.damage),src,"TaiOrange")
 															if(c_target)c_target.Bleed()
 
 		Leaf_Whirlwind()
@@ -840,7 +840,7 @@ mob
 							if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 								if(c_target.fightlayer==src.fightlayer)
 									if(c_target.dodge==0)
-										var/undefendedhit=round(J.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*J.damage))
+										var/undefendedhit=round(J.damage+round(((src.taijutsu_total / 450)+(src.agility_total / 450))*2*J.damage))
 										if(undefendedhit<0)undefendedhit=1
 										c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 										src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
@@ -854,7 +854,7 @@ mob
 												if(!CheckState(c_target, new/state/swimming))c_target.icon_state=""
 									else
 										if(src.agility_total>=c_target.agility_total)
-											var/defendedhit=round(J.damage+round(((src.taijutsu_total / 300)+(src.agility_total / 300))*2*J.damage))
+											var/defendedhit=round(J.damage+round(((src.taijutsu_total / 450)+(src.agility_total / 450))*2*J.damage))
 											if(defendedhit<0)defendedhit=1
 											//if(loc.loc:Safe!=1)src.
 											if(loc.loc:Safe!=1)src.LevelStat(SPECIALIZATION_TAIJUTSU,1)

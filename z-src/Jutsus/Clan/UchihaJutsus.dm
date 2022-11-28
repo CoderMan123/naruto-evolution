@@ -103,7 +103,7 @@ mob
 					M.Follow(src)
 					M.name = src.key
 					M.level = J.level
-					M.taijutsu = (J.damage+round(((src.ninjutsu_total / 300)+(src.taijutsu_total / 300))*2*J.damage))/4
+					M.taijutsu = (J.damage+round(((src.ninjutsu_total / 450)+(src.taijutsu_total / 450))*2*J.damage))/4
 					src.Susanoo=1
 					spawn(100) src.Susanoo=0 //requires changing in ninjutsu.dm line 389
 

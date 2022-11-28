@@ -1057,7 +1057,7 @@ obj
 								src.loc=O.loc
 								src.icon_state = "NUUUUU"
 								src.Hit=1
-								M.DealDamage((jutsudamage+round(((Owner.ninjutsu_total / 300)+(Owner.precision_total / 300))*2*jutsudamage))*2,src.Owner,"NinBlue")
+								M.DealDamage((jutsudamage+round(((Owner.ninjutsu_total / 450)+(Owner.precision_total / 450))*2*jutsudamage))*2,src.Owner,"NinBlue")
 								spawn() M.Bleed()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 						else src.invisibility=1
@@ -3050,7 +3050,7 @@ mob
 				step(src,src.dir)
 				step(src,src.dir)
 				src.density=1
-				M:DealDamage(round((src.ninjutsu_total / 300)+(src.taijutsu_total / 300)*2*300)/6,src,"TaiOrange")
+				M:DealDamage(round((src.ninjutsu_total / 450)+(src.taijutsu_total / 450)*2*300)/6,src,"TaiOrange")
 		else
 			..()
 

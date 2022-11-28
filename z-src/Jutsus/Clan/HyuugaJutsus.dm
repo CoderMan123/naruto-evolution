@@ -111,7 +111,7 @@ mob
 					A.pixel_y=32
 					A.layer=src.layer
 					A.fightlayer=src.fightlayer
-					A.damage=J.damage+round(((src.ninjutsu_total / 300)+(src.taijutsu_total / 300))*2*J.damage)
+					A.damage=J.damage+round(((src.ninjutsu_total / 450)+(src.taijutsu_total / 450))*2*J.damage)
 					A.level=J.level
 					walk(A,dir,0)
 					icon_state=""
@@ -308,7 +308,7 @@ mob
 							if(!istype(M,/mob/npc) || !istype(M,/mob/npc/combat))
 								M.icon_state="push"
 								AddState(M, new/state/cant_move, 3)
-								M.DealDamage(J.damage+round(((src.ninjutsu_total / 300)+(src.agility_total / 300))*2*J.damage),src,"NinBlue")
+								M.DealDamage(J.damage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450))*2*J.damage),src,"NinBlue")
 								var/IA = rand(1,2)
 								if(IA==1)step_away(M,src)
 								if(M.client)spawn() M.ScreenShake(10)
@@ -437,7 +437,7 @@ mob
 								if(c_target.dead==0&&!istype(c_target,/mob/npc/) || c_target.dead==0&&istype(c_target,/mob/npc/combat))
 									if(c_target.fightlayer==src.fightlayer)
 										if(c_target.dodge==0)
-											var/undefendedhit=J.damage+round(((src.ninjutsu_total / 300)+(src.taijutsu_total / 300))*2*J.damage)
+											var/undefendedhit=J.damage+round(((src.ninjutsu_total / 450)+(src.taijutsu_total / 450))*2*J.damage)
 											if(undefendedhit<0)undefendedhit=1
 											c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 											AddState(c_target, new/state/knockback, 10)
@@ -446,7 +446,7 @@ mob
 											if(src.Hand=="Right") src.PlayAudio('HandDam_Normal2.ogg', output = AUDIO_HEARERS)
 										else
 											if(src.agility_total>=c_target.agility_total)
-												var/defendedhit=(J.damage+round(((src.ninjutsu_total / 300)+(src.taijutsu_total / 300))*2*J.damage))/2
+												var/defendedhit=(J.damage+round(((src.ninjutsu_total / 450)+(src.taijutsu_total / 450))*2*J.damage))/2
 												if(defendedhit<0)
 													defendedhit=1
 												if(defence_total<src.taijutsu_total/2)
