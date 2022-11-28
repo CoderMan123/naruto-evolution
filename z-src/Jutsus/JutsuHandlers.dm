@@ -81,7 +81,6 @@ mob
 							if(jashin_symbol && jashin_symbol.Owner == src && jashin_symbol.JashinConnected)
 								var/mob/jashin_target = jashin_symbol.JashinConnected
 								if(jashin_target && !jashin_target.dead)
-									var/jashpercent = (jutsudamage / 200) * 1.5
 									jashin_target.DealDamage(damage/1.5, src, "maroon")
 									jashin_target.Bleed()
 									jashin_target.UpdateHMB()
