@@ -352,7 +352,7 @@ mob
 											if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 											if(src.Gates >= 5 && !CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/cant_move))
 												c_target.icon_state="push"
-												AddState(c_target, new/state/cant_move, 1)
+												AddState(c_target, new/state/cant_move, 0.1)
 												step_away(c_target,src)
 												walk(c_target,c_target.dir)
 												if(c_target.client)spawn() c_target.ScreenShake(3)
@@ -495,7 +495,7 @@ mob
 											if(src.Hand=="Left") src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 											if(src.Gates >= 5 && !CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/cant_move))
 												c_target.icon_state="push"
-												AddState(c_target, new/state/cant_move, 1)
+												AddState(c_target, new/state/cant_move, 0.1)
 												step_away(c_target,src)
 												walk(c_target,c_target.dir)
 												if(c_target.client)spawn() c_target.ScreenShake(3)
