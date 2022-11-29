@@ -91,7 +91,9 @@ mob
 						M.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 						if(M) M.Bleed()
 						M.icon_state="push"
-						AddState(M, new/state/cant_move, 6)
+						var/bind_time = J.damage*2
+						var/visual_time = bind_time - (bind_time/100) * M.tenacity
+						AddState(M, new/state/cant_move, bind_time, src)
 						step_away(M,src)
 						walk(M,M.dir)
 						if(M.client)spawn()M.ScreenShake(5)
