@@ -26,7 +26,8 @@ mob
 						if(M)
 							new/obj/Jutsus/Effects/rustle(M.loc)
 							M.icon_state="dead"
-							Bind(M, TimeAsleep)
+							Bind(M, TimeAsleep, src)
+							TimeAsleep = TimeAsleep - (TimeAsleep/100)*M.tenacity
 							spawn(TimeAsleep)
 								if(!M||M.dead)continue
 								M.icon_state=""
