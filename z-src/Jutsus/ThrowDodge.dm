@@ -22,7 +22,7 @@ mob
 							ThrowingMob=null
 							M.BeingThrown=null
 							M.icon_state="push"
-							AddState(M, new/state/cant_move, 4)
+							AddState(M, new/state/cant_move, 4, src)
 							walk(M,src.dir)
 							spawn(4)
 								if(M)

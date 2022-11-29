@@ -3007,8 +3007,8 @@ obj
 											src.density=0
 											var/bind_time = src.damage
 											var/visual_time = bind_time - (bind_time/100)*M.tenacity
-											AddState(M, new/state/cant_move, src.damage)
-											AddState(M, new/state/cant_attack, src.damage)
+											AddState(M, new/state/cant_move, src.damage, src)
+											AddState(M, new/state/cant_attack, src.damage, src)
 											if(M.henge==4||M.henge==5)M.HengeUndo()
 											spawn(visual_time)
 												del(src)
@@ -3036,7 +3036,7 @@ obj
 										src.layer=MOB_LAYER+1
 										if(M)
 											src.loc = M.loc
-											AddState(M, new/state/cant_move, 5)
+											AddState(M, new/state/cant_move, 5, src)
 											M.DealDamage(src.damage,src.Owner,"NinBlue")
 											if(Owner.loc.loc:Safe!=1) Owner.LevelStat("Ninjutsu",rand(3,5))
 											if(M.henge==4||M.henge==5)M.HengeUndo()
