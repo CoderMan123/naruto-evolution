@@ -67,8 +67,7 @@ mob
 
 					for(var/mob/M in get_step(src,src.dir))
 						
-						AddState(M, new/state/cant_attack, 5)
-						AddState(M, new/state/cant_move, 5)
+						Bind(M, 5, src)
 
 						Z = M
 					if(Z)
