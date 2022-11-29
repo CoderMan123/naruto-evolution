@@ -3005,10 +3005,12 @@ obj
 											src.pixel_x -= 9
 											src.loc = M.loc
 											src.density=0
+											var/bind_time = src.damage
+											var/visual_time = bind_time - (bind_time/100)*M.tenacity
 											AddState(M, new/state/cant_move, src.damage)
 											AddState(M, new/state/cant_attack, src.damage)
 											if(M.henge==4||M.henge==5)M.HengeUndo()
-											spawn(src.damage)
+											spawn(visual_time)
 												del(src)
 			arrowshoot
 				icon='SpiderJutsus.dmi'
