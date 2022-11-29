@@ -16,9 +16,9 @@ mob
 					if(J.level==3) J.damage=0.5*((jutsudamage*J.Sprice)/1.25)
 					if(J.level==4) J.damage=0.5*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					for(var/turf/T in view(c_target,5))
+					for(var/turf/T in view(c_target,8))
 						if(T)
-							if(prob(15))
+							if(prob(8))
 								var/obj/Ground/Trees/MTree1/B2/A=new(c_target.loc)
 								spawn(100) del A
 								A.layer=MOB_LAYER
