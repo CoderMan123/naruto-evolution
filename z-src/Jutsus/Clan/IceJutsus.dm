@@ -119,7 +119,8 @@ mob
 						var/turf/NS = get_step(src,NORTH)
 						for(var/obj/Ouu in NS)if(Ouu.owner == src)src.loc = NS
 						src.dir=SOUTH
-						for(var/ivc=0,ivc<22*J.level,ivc++)
+						var/bind_time = (22*J.level) - ((22*J.level)/100)*c_target.tenacity
+						for(var/ivc=0,ivc<bind_time,ivc++)
 							if(c_target.loc != last_loc) break
 							if(src.ArrowTasked==null)
 								var/olist = list()
