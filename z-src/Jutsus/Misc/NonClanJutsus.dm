@@ -361,8 +361,11 @@ mob
 							src<<output("<Font color=white>Now click the object you wish to transform into.</Font>","Action.Output")
 		TreeBinding()
 			for(var/obj/Jutsus/TreeBinding/J in src.jutsus)
-				if(src.PreJutsu(J))
-					var/mob/c_target=usr.Target_Get(TARGET_MOB)
+				var/mob/c_target=usr.Target_Get(TARGET_MOB)
+				if(!c_target)
+					src<<output("<Font color=white>I need a target to use this jutsu!</Font>","Action.Output")
+					return
+				if(src.PreJutsu(J))	
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.8
@@ -379,12 +382,15 @@ mob
 						TreeNearby=1
 					if(TreeNearby)
 						c_target.overlays+='TreeBinding.dmi'
-						Bind(c_target, Time*10)
+						var/bind_time = Time*10
+						Time -= (Time/100)*c_target.tenacity
+						Bind(c_target, bind_time, src)
 						var/bound_location = c_target.loc
 						while(Time&&c_target&&src&&c_target.loc == bound_location)
-							c_target.DealDamage((J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/4,src,"white")
-							sleep(10)
-							Time--
+							if(c_target)
+								c_target.DealDamage((J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/4,src,"white")
+								sleep(10)
+								Time--
 						if(c_target)
 							c_target.overlays-='TreeBinding.dmi'
 
