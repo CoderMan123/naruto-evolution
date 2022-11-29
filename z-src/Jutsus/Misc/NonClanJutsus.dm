@@ -445,7 +445,7 @@ mob
 						if(M.Sharingan>=2) continue
 						if(M.Rinnegan==1) continue
 						M.icon_state="dead"
-
+						TimeAsleep -= (TimeAsleep/100) * M.tenacity
 						var/state/cant_attack/e = new()
 						AddState(M, e, TimeAsleep)
 
