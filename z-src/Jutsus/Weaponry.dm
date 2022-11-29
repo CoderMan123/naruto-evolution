@@ -2298,13 +2298,20 @@ mob
 					M.DealDamage((src.ninjutsu_total*1.5),src,"NinBlue")
 					Bind(M, 3, src)
 					for(var/i=0,i<2,i++)
-						M.icon_state = "push"
-						step(M,src.dir)
-						sleep(1)
+						if(M)
+							M.icon_state = "push"
+							step(M,src.dir)
+							sleep(1)
 					M.icon_state="dead"
 					sleep(1)
-					if(!M.dead)
-						M.icon_state = ""
+					if(M)
+						if(!M.dead)
+							M.icon_state = ""
+						for(var/state/s in M.state_manager)
+							if(s.owner)
+								if(istype(s, /state/cant_attack) || istype(s, /state/cant_move))
+									M.state_manager.Remove(s)
+									s.duration = 0
 				src.overlays -= 'Cherry Blossom Impact.dmi'
 				src.icon_state = ""
 				sleep(2)
