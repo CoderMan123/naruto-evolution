@@ -97,7 +97,7 @@ mob
 						step_away(M,src)
 						walk(M,M.dir)
 						if(M.client)spawn()M.ScreenShake(5)
-						spawn(6)
+						spawn(visual_time)
 							if(M)
 								walk(M,0)
 								if(!CheckState(M, new/state/swimming))M.icon_state=""
