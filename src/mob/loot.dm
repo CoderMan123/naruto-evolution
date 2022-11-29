@@ -33,7 +33,7 @@ proc
 						m.RecieveItem(bub, silent = 1)
 						m << output("<font color = 9F51B9>You've recieved a rare item! (Bubble Pipe) </font>", "Action.Output")
 					if(prob(dropchance))//1
-						var/obj/Inventory/Useable_Clan_Items/Eyes_of_Legend/rinne = new()
+						var/obj/Inventory/Unuseable_Clan_Items/Eyes_of_Legend/rinne = new()
 						m.RecieveItem(rinne, silent = 1)
 						m << output("<font color = 9F51B9>You've recieved a rare item! (Eyes of Legend) </font>", "Action.Output")
 					if(prob(dropchance))//1
