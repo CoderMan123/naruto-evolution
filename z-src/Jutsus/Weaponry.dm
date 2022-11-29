@@ -32,7 +32,7 @@ obj
 									if(istype(X,/mob/npc) && !istype(X,/mob/npc/combat))..()
 									else
 										X.icon_state="push"
-										AddState(X, new/state/cant_move, 5)
+										AddState(X, new/state/cant_move, 5, src.Owner)
 										walk_away(X,src,5,0)
 										spawn(5)
 											if(X)
@@ -68,7 +68,7 @@ obj
 												..()
 											else
 												X.icon_state="push"
-												AddState(X, new/state/cant_move, 10)
+												AddState(X, new/state/cant_move, 10, src.Owner)
 												walk_away(X,src,5,0)
 												spawn(10)
 													if(X)
@@ -103,7 +103,7 @@ obj
 												if(istype(X,/mob/npc) && !istype(X,/mob/npc/combat)) ..()
 												else
 													X.icon_state="push"
-													AddState(X, new/state/cant_move, 10)
+													AddState(X, new/state/cant_move, 10, src.Owner)
 													walk_away(X,src,5,0)
 													spawn(10)
 														if(X)
@@ -135,7 +135,7 @@ obj
 											if(istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) ..()
 											else
 												M.icon_state="push"
-												AddState(M, new/state/cant_move, 10)
+												AddState(M, new/state/cant_move, 10, src.Owner)
 												walk_away(M,src,5,0)
 												spawn(10)
 													if(M)
@@ -165,7 +165,7 @@ obj
 											if(istype(M,/mob/npc) && !istype(M,/mob/npc/combat)) ..()
 											else
 												M.icon_state="push"
-												AddState(M, new/state/cant_move, 10)
+												AddState(M, new/state/cant_move, 10, src.Owner)
 												walk_away(M,src,5,0)
 												spawn(10)
 													if(M)
