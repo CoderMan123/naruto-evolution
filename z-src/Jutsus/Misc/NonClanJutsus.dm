@@ -642,6 +642,7 @@ mob
 						Z.sleephits=0
 						Z.icon_state="dead"
 						var/TimeAsleep = J.level*10 + src.precision*0.5
+						TimeAsleep -= (TimeAsleep/100) * M.tenacity
 
 						var/state/cant_attack/e = new()
 						AddState(Z, e, TimeAsleep)
