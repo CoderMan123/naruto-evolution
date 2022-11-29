@@ -46,7 +46,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/6
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/6
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/6
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/6
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -105,7 +105,7 @@ mob
 					src.PlayAudio('Down_Nornal.wav', output = AUDIO_HEARERS)
 					Bind(src, 3)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/2
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/2
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/2
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/2
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/2
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -282,7 +282,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/2
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/2
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/2
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/2
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/2
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -435,7 +435,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.6
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.6
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.6
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.6
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -475,7 +475,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/30)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/30)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/10
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/10
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/10
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/10
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/10
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()

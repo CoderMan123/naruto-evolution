@@ -122,7 +122,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.6
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.6
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.6
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.6
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -366,7 +366,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.8
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.8
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.8
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.8
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.8
 					//view()<<"<font size=1><font face=Times New Roman><b><font color=white>[src] Says:<font color=yellow> Fire Release:Fire Ball"
@@ -471,7 +471,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.7
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -619,7 +619,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.4
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.4
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.4
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.4
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.4
 					var/reqhits=rand(1,2)
@@ -826,7 +826,7 @@ mob
 						var/obj/A = new/obj/MiscEffects/LeafWhirl(src.loc)
 						A.dir=src.dir
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.6
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.6
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.6
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.6
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()

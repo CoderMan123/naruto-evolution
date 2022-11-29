@@ -178,7 +178,7 @@ mob
 					src.PlayAudio('bugs.wav', output = AUDIO_HEARERS)
 					AddState(src, new/state/cant_attack, 15)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/10
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/10
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/10
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/10
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/10
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()

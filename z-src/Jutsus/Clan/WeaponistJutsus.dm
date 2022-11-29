@@ -6,7 +6,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.8
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.8
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.8
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.8
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.8
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()

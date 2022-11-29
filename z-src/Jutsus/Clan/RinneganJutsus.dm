@@ -71,7 +71,7 @@ mob
 					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					Bind(src, 3)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/4
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/4
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/4
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/4
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -105,7 +105,7 @@ mob
 					src.PlayAudio('wind_leaves.ogg', output = AUDIO_HEARERS)
 					Bind(src, 3)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/4
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/4
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/4
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/4
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/4
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()

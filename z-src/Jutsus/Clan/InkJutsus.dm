@@ -42,7 +42,7 @@ mob
 					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
 					Bind(src, 3)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/6
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/6
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/6
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/6
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/6
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -224,7 +224,7 @@ mob
 					src.PlayAudio('046.wav', output = AUDIO_HEARERS)
 					Bind(src, 3)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/5
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/5
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/5
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/5
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/5
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -406,7 +406,7 @@ mob
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					Bind(src, 5)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/8
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/8
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/8
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/8
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/8
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -436,7 +436,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.7
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()

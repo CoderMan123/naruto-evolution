@@ -10,7 +10,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/30)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/30)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/10
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/10
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/10
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/10
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/10
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -90,7 +90,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat(SPECIALIZATION_TAIJUTSU,((J.maxcooltime*3/20)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.7
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.7
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -282,7 +282,7 @@ mob
 							if(NORTH) src.dir=EAST
 					O.icon_state = "Loop"
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/5
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/5
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/5
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/5
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/5
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -394,7 +394,7 @@ mob
 					A.pixel_y=-10
 					A.dir=src.dir
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.3
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.5
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.5
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.3
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.3
 					if(J.level==1)

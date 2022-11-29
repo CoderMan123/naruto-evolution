@@ -32,7 +32,7 @@ mob
 					flick("2fist",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.9
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)*0.9
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.9
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.9
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.9
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
@@ -49,7 +49,7 @@ mob
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/7
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)/7
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/7
 					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/7
 					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()

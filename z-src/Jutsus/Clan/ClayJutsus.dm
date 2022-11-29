@@ -123,7 +123,7 @@ mob
 						if(loc.loc:Safe != 1)
 							src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 						if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)
-						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/2)
+						if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)
 						if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)
 						if(J.level==4) J.damage=(jutsudamage*J.Sprice)
 						src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
