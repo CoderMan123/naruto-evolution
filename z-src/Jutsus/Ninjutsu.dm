@@ -32,11 +32,13 @@ obj
 				src.loc = m.loc
 				return
 			..()
-			grab_time = src.level * 10
 			if(m)
 				if(CheckState(src.owner, new/state/Iron_Fist_Punching_Left) || CheckState(src.owner, new/state/Iron_Fist_Spinning))	
 					src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 				if(istype(m, /mob/) && m != src.owner)
+					grab_time = src.level * 10
+					var/bind_time = grab_time
+					grab_time = (grab_time/100) * m.tenacity
 					if(CheckState(src.owner, new/state/Iron_Fist_Punching_Left))			
 						m.DealDamage(damage, src.owner, "NinBlue")
 						step_away(m, src)
@@ -57,7 +59,7 @@ obj
 							spawn(grab_time - 2) del(grab_overlay)
 						src.icon_state = "grabbed1"
 						src.layer = MOB_LAYER - 1
-						src.owner.Bind(m, grab_time - 1)
+						src.owner.Bind(m, bind_time - 1)
 
 					else if(CheckState(src.owner, new/state/Iron_Fist_Spinning))			
 						if(m)
@@ -165,8 +167,10 @@ obj
 			if(m)
 				if(CheckState(src.owner, new/state/Iron_Fist_Punching_Right) || CheckState(src.owner, new/state/Iron_Fist_Spinning))	
 					src.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
-
 				if(istype(m, /mob/) && m != src.owner)
+					grab_time = src.level * 10
+					var/bind_time = grab_time
+					grab_time = (grab_time/100) * m.tenacity
 					if(CheckState(src.owner, new/state/Iron_Fist_Punching_Right))					
 						m.DealDamage(damage, src.owner, "NinBlue")
 						step_away(m, src)
@@ -188,7 +192,7 @@ obj
 							spawn(grab_time - 2) del(grab_overlay)
 						src.icon_state = "grabbed1"
 						src.layer = MOB_LAYER - 1
-						src.owner.Bind(m, grab_time - 1)
+						src.owner.Bind(m, bind_time - 1)
 					else if(CheckState(src.owner, new/state/Iron_Fist_Spinning))			
 						if(m)
 							src.loc = m.loc
