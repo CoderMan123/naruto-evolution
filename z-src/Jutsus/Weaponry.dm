@@ -2296,7 +2296,7 @@ mob
 					src.dir = get_dir(src,c_target)
 				for(var/mob/M in get_step(src,src.dir))
 					M.DealDamage((src.ninjutsu_total*1.5),src,"NinBlue")
-					Bind(M, 3)
+					Bind(M, 3, src)
 					for(var/i=0,i<2,i++)
 						M.icon_state = "push"
 						step(M,src.dir)
