@@ -276,7 +276,7 @@ mob
 					var/obj/senjuu/stab/s=new/obj/crystal/spikes(c_target.loc)
 					spawn(1)
 						if(c_target.loc==s.loc)
-							AddState(c_target, new/state/cant_move, 3)
+							AddState(c_target, new/state/cant_move, 3, src)
 							c_target.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 							c_target.Bleed()
 							c_target.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
