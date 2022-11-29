@@ -67,7 +67,7 @@ mob
 							flick("grab",O)
 							O.icon_state = "grabbed"
 							var/bind_time = 2+(J.level*2)
-							Bind(c_target, bind_time)
+							Bind(c_target, bind_time, src)
 							var/visual_time = bind_time - (bind_time/100)*c_target.tenacity
 							spawn(visual_time)
 								if(O)del(O)
