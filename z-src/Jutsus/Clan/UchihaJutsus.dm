@@ -27,7 +27,7 @@ mob
 								new/obj/TsukuyomiHUD(M.client)
 								M.client.eye=locate(161,35,9)
 								M.client.perspective = EYE_PERSPECTIVE
-							var/Timer=J.level+2
+							var/Timer= round((J.level+2) - (duration/100) * target.tenacity)
 							spawn()
 								while(Timer&&M)
 									if(M)
