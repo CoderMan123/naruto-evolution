@@ -1372,6 +1372,7 @@ turf
 		PebbleStones
 			icon_state="dirtst"
 			Hengable=1
+			density = 1
 			New()
 				var/list/dir_list=list(NORTH,EAST,WEST,SOUTH)
 				src.dir=pick(dir_list)
