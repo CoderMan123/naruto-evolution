@@ -160,7 +160,7 @@ proc
 			if(src.owner && src.owner != src.mob)
 				if(src.duration > 0)
 					src.expiration -= (src.duration/100)*src.mob.tenacity
-					src.mob.tenacity += round(src.duration*1.5)
+					src.mob.tenacity += round(src.duration*0.5)
 					if(src.mob.tenacity > 75) src.mob.tenacity = 75
 					world << src.mob.tenacity //debug
 			walk(src.mob, 0)
@@ -178,7 +178,7 @@ proc
 			if(src.owner && src.owner != src.mob)
 				if(src.duration > 0)
 					src.expiration -= (src.duration/100)*src.mob.tenacity
-					src.mob.tenacity += round(src.duration*1.5)
+					src.mob.tenacity += round(src.duration*0.5)
 					if(src.mob.tenacity > 75) src.mob.tenacity = 75
 					world << src.mob.tenacity //debug
 			walk(src.mob, 0)
