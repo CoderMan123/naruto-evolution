@@ -160,3 +160,10 @@ obj
 				Description = "Rare cells of the first Hokage. They contain the ability to use Wood Release. The cells will reject anyone without both earth and water affinity."
 				icon = 'overhead_icons.dmi'
 				icon_state = "sandintel"
+
+			Eyes_of_Legend
+				name = "Eyes of Legend"
+				clan = CLAN_RINNEGAN
+				Description = "These eyes are that of the legendary Rinnegan! They're preserved well enough for a transplant. High utilty and area of effect damage."
+				icon = 'overhead_icons.dmi'
+				icon_state = "sandintel"
