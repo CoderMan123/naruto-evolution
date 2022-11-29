@@ -119,7 +119,7 @@ mob
 						A.damage=J.damage+round(((src.taijutsu_total / 450)+(src.precision_total / 450))*2*J.damage)
 						spawn(4)
 							for(var/mob/M in view(A,0))
-								AddState(M, new/state/cant_move, J.level*5)
+								AddState(M, new/state/cant_move, J.level*5, src)
 								var/random=rand(1,4)
 								if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 								if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -166,7 +166,7 @@ mob
 						spawn(3)
 							for(var/mob/M in view(A,0))
 								if(M.dead) continue
-								AddState(M, new/state/cant_move, J.level*5)
+								AddState(M, new/state/cant_move, J.level*5, src)
 								var/random=rand(1,4)
 								if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 								if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -183,7 +183,7 @@ mob
 							spawn(3)
 								for(var/mob/M in view(A2,0))
 									if(M.dead) continue
-									AddState(M, new/state/cant_move, J.level*5)
+									AddState(M, new/state/cant_move, J.level*5, src)
 									var/random=rand(1,4)
 									if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -205,7 +205,7 @@ mob
 							spawn(3)
 								for(var/mob/M in view(A2,0))
 									if(M.dead) continue
-									AddState(M, new/state/cant_move, J.level*5)
+									AddState(M, new/state/cant_move, J.level*5,src)
 									var/random=rand(1,4)
 									if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -216,7 +216,7 @@ mob
 							spawn(3)
 								for(var/mob/M in view(A3,0))
 									if(M.dead) continue
-									AddState(M, new/state/cant_move, J.level*5)
+									AddState(M, new/state/cant_move, J.level*5, src)
 									var/random=rand(1,4)
 									if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -243,7 +243,7 @@ mob
 							spawn(3)
 								for(var/mob/M in view(A2,0))
 									if(M.dead) continue
-									AddState(M, new/state/cant_move, J.level*5)
+									AddState(M, new/state/cant_move, J.level*5, src)
 									var/random=rand(1,4)
 									if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -254,7 +254,7 @@ mob
 							spawn(3)
 								for(var/mob/M in view(A3,0))
 									if(M.dead) continue
-									AddState(M, new/state/cant_move, J.level*5)
+									AddState(M, new/state/cant_move, J.level*5, src)
 									var/random=rand(1,4)
 									if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -265,7 +265,7 @@ mob
 							spawn(3)
 								for(var/mob/M in view(A4,0))
 									if(M.dead) continue
-									AddState(M, new/state/cant_move, J.level*5)
+									AddState(M, new/state/cant_move, J.level*5, src)
 									var/random=rand(1,4)
 									if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 									if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -458,7 +458,7 @@ mob
 								spawn(3)
 									for(var/mob/M in view(B,0))
 										if(M.dead) continue
-										AddState(M, new/state/cant_move, J.level*5)
+										AddState(M, new/state/cant_move, J.level*5, src)
 										var/random=rand(1,4)
 										if(random==1) src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										if(random==2) src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
