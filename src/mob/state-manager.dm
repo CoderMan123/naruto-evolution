@@ -162,7 +162,6 @@ proc
 					src.expiration -= (src.duration/100)*src.mob.tenacity
 					src.mob.tenacity += round(src.duration*0.5)
 					if(src.mob.tenacity > 75) src.mob.tenacity = 75
-					world << src.mob.tenacity //debug
 			walk(src.mob, 0)
 			..()
 
@@ -173,7 +172,6 @@ proc
 					src.expiration -= (src.duration/100)*src.mob.tenacity
 					src.mob.tenacity += round(src.duration*0.5)
 					if(src.mob.tenacity > 75) src.mob.tenacity = 75
-					world << src.mob.tenacity //debug
 			walk(src.mob, 0)
 			..()
 
