@@ -2274,7 +2274,7 @@ mob
 					M.DealDamage(jutsudamage+round((src.taijutsu_total / 200)*2*jutsudamage*1.2),src,"TaiOrange")
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					M.icon_state="dead"
-					Bind(M, 5)
+					Bind(M, 5, src)
 					spawn(5)
 						if(!M||M.dead)continue
 						M.icon_state=""
