@@ -38,7 +38,7 @@ obj
 				if(istype(m, /mob/) && m != src.owner)
 					grab_time = src.level * 10
 					var/bind_time = grab_time
-					grab_time = (grab_time/100) * m.tenacity
+					grab_time = bind_time - ((bind_time/100) * m.tenacity)
 					if(CheckState(src.owner, new/state/Iron_Fist_Punching_Left))			
 						m.DealDamage(damage, src.owner, "NinBlue")
 						step_away(m, src)
@@ -60,6 +60,8 @@ obj
 						src.icon_state = "grabbed1"
 						src.layer = MOB_LAYER - 1
 						src.owner.Bind(m, bind_time - 1)
+						world << bind_time //debug
+						world << grab_time //debug
 
 					else if(CheckState(src.owner, new/state/Iron_Fist_Spinning))			
 						if(m)
