@@ -2726,6 +2726,7 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 
 	Timer = Timer*10
 	if(Timer>=50)Timer=50
+	Timer -= (Timer/100)*Who.tenacity
 	var/obj/Jutsu/Effects/Nara/ShadowBase/B=new(src.loc)
 	B.IsJutsuEffect=src
 	B.dir=src.dir
