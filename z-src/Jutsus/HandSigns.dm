@@ -76,14 +76,14 @@ obj
 				usr<<"You shouldn't buy this, you need the Substitution Technique found under Non Clan Skills."
 				return
 			if(src.type in usr.jutsus_learned)
-				if(usr.client.eye==locate(10,10,4)||usr.client.eye==locate(60,10,4)||usr.client.eye==locate(12,43,4)||usr.client.eye==locate(55,43,4)||usr.client.eye==locate(10,75,4)) return//lol tenten
-				if(src.uses >= ((80-round(src.maxcooltime/15))/handsealmastery) && !src.IsGate)
-					usr.doslot(src.name)
-				else
+				var/remaining_uses = ((80-round(src.maxcooltime/15))/handsealmastery) - src.uses
+				if(remaining_uses > 0)
 					if(!IsGate)
-						usr << output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))/handsealmastery) - src.uses] more times([src.uses]).</Font>","Action.Output")
+						usr << output("<Font color=red>You need to use [src.name] [remaining_uses] more times (You've used it [src.uses] times already).</Font>","Action.Output")
 					else
 						usr << output("You may not put this technique on a hotslot.","Action.Output")
+				else
+					usr << output("You have mastered this jutsu! You can now hold left click and drag it to your hotbar to use it without handseals. ","Action.Output")
 			else
 				if(src.name in usr.sbought)return
 
@@ -561,8 +561,8 @@ obj
 
 
 			else
-				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))/handsealmastery)-src.uses] more times([src.uses]).</Font>","Action.Output")
-
+				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))/handsealmastery)-src.uses] more times (You've used it [src.uses] times already).</Font>","Action.Output")
+				
 
 
 obj
