@@ -75,8 +75,8 @@ mob
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="dead"
 							var/bind_time = 5
-							Bind(M, bind_time, src)
 							var/visual_time = bind_time - (bind_time/100)*M.tenacity
+							Bind(M, bind_time, src)
 							spawn(visual_time)
 								if(M||!M.dead)
 									M.icon_state=""

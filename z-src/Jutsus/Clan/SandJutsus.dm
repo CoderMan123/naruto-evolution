@@ -36,8 +36,9 @@ mob
 							O.transform = m2
 							M.icon_state=""
 							M.dir = SOUTH
-							Bind(M, TimeAsleep, src)
+							var/bind_time = TimeAsleep
 							TimeAsleep -= (TimeAsleep/100)*M.tenacity
+							Bind(M, bind_time, src)
 							spawn(TimeAsleep)
 								if(O)del(O)
 								if(!M||M.dead)continue

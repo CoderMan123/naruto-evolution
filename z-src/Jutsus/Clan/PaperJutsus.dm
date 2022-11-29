@@ -31,8 +31,9 @@ mob
 					spawn(10)
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
-							Bind(c_target, Timer*5, src)
+							var/bind_time = Timer*5
 							Timer -= (Timer/100)*c_target.tenacity
+							Bind(c_target, bind_time, src)
 							var/bound_location = c_target.loc
 							while(Timer&&c_target&&src&&c_target.loc == bound_location)
 								sleep(5)

@@ -2274,8 +2274,10 @@ mob
 					M.DealDamage(jutsudamage+round((src.taijutsu_total / 200)*2*jutsudamage*1.2),src,"TaiOrange")
 					if(M.henge==4||M.henge==5)M.HengeUndo()
 					M.icon_state="dead"
-					Bind(M, 5, src)
-					spawn(5)
+					var/bind_time = 5
+					var/visual_time = bind_time - (bind_time/100)*M.tenacity
+					Bind(M, bind_time, src)
+					spawn(visual_time)
 						if(!M||M.dead)continue
 						M.icon_state=""
 					return
@@ -2296,8 +2298,10 @@ mob
 					src.dir = get_dir(src,c_target)
 				for(var/mob/M in get_step(src,src.dir))
 					M.DealDamage((src.ninjutsu_total*1.5),src,"NinBlue")
+					var/bind_time = 3
+					var/visual_time = bind_time - (bind_time/100)*M.tenacity
 					Bind(M, 3, src)
-					for(var/i=0,i<2,i++)
+					for(var/i=0,i<visual_time,i++)
 						if(M)
 							M.icon_state = "push"
 							step(M,src.dir)

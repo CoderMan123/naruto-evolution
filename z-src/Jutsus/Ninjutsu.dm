@@ -60,8 +60,6 @@ obj
 						src.icon_state = "grabbed1"
 						src.layer = MOB_LAYER - 1
 						src.owner.Bind(m, bind_time - 1)
-						world << bind_time //debug
-						world << grab_time //debug
 
 					else if(CheckState(src.owner, new/state/Iron_Fist_Spinning))			
 						if(m)
@@ -419,9 +417,9 @@ mob/verb
 						O.IsJutsuEffect=src
 						O.layer = MOB_LAYER+1
 					src.pgrab=0
-					Bind(K, 10+round(src.ninjutsu_total/3), src)
 					var/counter=10+round(src.ninjutsu_total/3)
-					counter = counter - round((counter/100) * M.tenacity)
+					counter -= round((counter/100) * M.tenacity)
+					Bind(K, 10+round(src.ninjutsu_total/3), src)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
@@ -449,8 +447,9 @@ mob/verb
 						O.icon_state = "Grab top"
 						O.layer = MOB_LAYER+1
 					src.pgrab=0
-					Bind(K, 10+round(src.ninjutsu_total/3), src)
 					var/counter=10+round(src.ninjutsu_total/3)
+					counter -= round((counter/100) * M.tenacity)
+					Bind(K, 10+round(src.ninjutsu_total/3), src)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
@@ -2439,13 +2438,15 @@ obj
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="pull"
-							M.Bind(M, 10+Owner.ninjutsu_total/8, src.Owner)
+							var/bind_time = 10+Owner.ninjutsu_total/8
+							var/visual_time = bind_time - ((bind_time/100)*M.tenacity)
+							M.Bind(M, bind_time, src.Owner)
 							if(!M.key) goto lol
 							walk_towards(M,Owner)
 							lol
 							src.loc=locate(0,0,0)
 							M.DealDamage(src.damage,src.Owner,"NinBlue")
-							spawn(10+Owner.ninjutsu_total/8)
+							spawn(visual_time)
 								if(M)
 									if(M.dead==0)
 										M.icon_state=""
@@ -2461,11 +2462,13 @@ obj
 								Owner.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="pull"
-								M.Bind(M, 10+Owner.ninjutsu_total/8, src.Owner)
+								var/bind_time = 10+Owner.ninjutsu_total/8
+								var/visual_time = bind_time - ((bind_time/100)*M.tenacity)
+								M.Bind(M, bind_time, src.Owner)
 								walk_towards(M,Owner)
 								src.loc=locate(0,0,0)
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
-								spawn(10+Owner.ninjutsu_total/8)
+								spawn(visual_time)
 									if(M)
 										if(M.dead==0)
 											M.icon_state=""
@@ -2516,13 +2519,15 @@ obj
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="push"
-							M.Bind(M, 10+Owner.ninjutsu_total/8, src.Owner)
+							var/bind_time = 10+Owner.ninjutsu_total/8
+							var/visual_time = bind_time - ((bind_time/100)*M.tenacity)
+							M.Bind(M, bind_time, src.Owner)
 							if(!M.key) goto lol
 							walk(M,Owner.dir)
 							lol
 							src.loc=locate(0,0,0)
 							M.DealDamage(src.damage,src.Owner,"NinBlue")
-							spawn(10+Owner.ninjutsu_total/8)
+							spawn(visual_time)
 								if(M)
 									if(M.dead==0&&!CheckState(M, new/state/swimming))M.icon_state=""
 									walk(M,0)

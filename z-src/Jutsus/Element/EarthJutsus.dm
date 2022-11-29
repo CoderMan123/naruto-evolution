@@ -21,8 +21,9 @@ mob
 						if(!istype(M,M)||!M) continue
 						M.icon_state="dead"
 						M.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
-						Bind(M, TimeAsleep, src)
+						var/bind_time = TimeAsleep
 						TimeAsleep -= (TimeAsleep/100)*M.tenacity
+						Bind(M, bind_time, src)
 						spawn(TimeAsleep)
 							M.icon_state = ""
 
