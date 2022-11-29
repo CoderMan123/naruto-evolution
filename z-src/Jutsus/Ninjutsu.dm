@@ -1722,6 +1722,7 @@ obj
 								AddState(M, senjujinrai2, -1)
 
 								var/bound_location = M.loc
+								var/bind_time = ((src.level*2)/100)*M.tenacity
 								for(var/i=0, i<(src.level*2), i++)
 									if(bound_location != M.loc || !Owner) break
 									M.DealDamage(src.damage/8,Owner,"NinBlue")
