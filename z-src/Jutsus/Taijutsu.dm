@@ -281,7 +281,7 @@ obj
 										var/undefendedhit=round(src.damage)
 										if(undefendedhit<0)undefendedhit=1
 										c_target.DealDamage(undefendedhit,src.Owner,"TaiOrange")
-										c_target.Bind(c_target, 1)
+										c_target.Bind(c_target, 1, src.Owner)
 										if(c_target.client)spawn(1)c_target.ScreenShake(1)
 										if(c_target.health<=0)
 											if(src)
