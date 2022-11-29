@@ -2949,7 +2949,7 @@ obj
 									src.layer=MOB_LAYER+1
 									if(M)
 										src.loc = M.loc
-										AddState(M, new/state/cant_move, 15)
+										AddState(M, new/state/cant_move, 15, src)
 										M.DealDamage(src.damage,src.Owner,"NinBlue")
 										spawn(15)
 										if(M)M.Bleed()
