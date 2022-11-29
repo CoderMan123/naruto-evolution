@@ -326,7 +326,7 @@ obj
 			if(src)
 				src.invisibility=0
 				for(var/mob/M in src.loc)
-					AddState(M, new/state/cant_move, 10)
+					AddState(M, new/state/cant_move, 10, src)
 				spawn(rand(10,20))if(src)del(src)
 	C3bomb
 		layer = MOB_LAYER
