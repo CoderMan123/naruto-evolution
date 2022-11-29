@@ -62,7 +62,7 @@ mob
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
 							c_target.PlayAudio('Thunder.ogg', output = AUDIO_HEARERS)
-							Bind(c_target, 6*Jutsu)
+							Bind(c_target, 6*Jutsu, src)
 							if(J.level==4)
 								var/obj/Z=new
 								Z.IsJutsuEffect=src
