@@ -165,13 +165,6 @@ proc
 					world << src.mob.tenacity //debug
 			walk(src.mob, 0)
 			..()
-		var/delay
-		OnTick()
-			if(!delay) delay = world.timeofday + 10
-			if(delay < world.timeofday)
-
-				delay = world.timeofday + 10
-			..()
 
 	cant_attack
 		Ticker()
@@ -182,16 +175,6 @@ proc
 					if(src.mob.tenacity > 75) src.mob.tenacity = 75
 					world << src.mob.tenacity //debug
 			walk(src.mob, 0)
-			..()
-		var/delay
-		OnTick()
-			if(!delay) delay = world.timeofday + 10
-			if(delay < world.timeofday)
-
-				var/mob/m = src.mob
-				m.tenacity += 1
-
-				delay = world.timeofday + 10
 			..()
 
 	knockback
