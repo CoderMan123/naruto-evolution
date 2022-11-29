@@ -66,8 +66,10 @@ mob
 							O.pixel_y=-32
 							flick("grab",O)
 							O.icon_state = "grabbed"
-							Bind(c_target, 2+(J.level*2))
-							spawn(2+(J.level*2))
+							var/bind_time = 2+(J.level*2)
+							Bind(c_target, bind_time)
+							var/visual_time = bind_time - (bind_time/100)*c_target.tenacity
+							spawn(visual_time)
 								if(O)del(O)
 
 		Insect_Cocoon()
