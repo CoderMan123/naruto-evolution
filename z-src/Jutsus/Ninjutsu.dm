@@ -419,8 +419,9 @@ mob/verb
 						O.IsJutsuEffect=src
 						O.layer = MOB_LAYER+1
 					src.pgrab=0
-					Bind(K, 10+round(src.ninjutsu_total/3))
+					Bind(K, 10+round(src.ninjutsu_total/3), src)
 					var/counter=10+round(src.ninjutsu_total/3)
+					counter = counter - round((bind_time/100) * m.tenacity)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
@@ -448,7 +449,7 @@ mob/verb
 						O.icon_state = "Grab top"
 						O.layer = MOB_LAYER+1
 					src.pgrab=0
-					Bind(K, 10+round(src.ninjutsu_total/3))
+					Bind(K, 10+round(src.ninjutsu_total/3), src)
 					var/counter=10+round(src.ninjutsu_total/3)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
