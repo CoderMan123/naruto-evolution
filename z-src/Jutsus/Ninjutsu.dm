@@ -421,7 +421,7 @@ mob/verb
 					src.pgrab=0
 					Bind(K, 10+round(src.ninjutsu_total/3), src)
 					var/counter=10+round(src.ninjutsu_total/3)
-					counter = counter - round((bind_time/100) * m.tenacity)
+					counter = counter - round((counter/100) * M.tenacity)
 					while(counter && M && src && M.loc == K.loc)
 						counter-=1
 						sleep(1)
