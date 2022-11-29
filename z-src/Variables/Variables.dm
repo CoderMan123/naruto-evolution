@@ -97,6 +97,7 @@ mob
 		infamy_points = 0
 		tmp
 			AFK=0
+			tenacity
 			BeingThrown
 			ThrowingMob
 			Bugreported=0

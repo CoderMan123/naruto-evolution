@@ -1346,6 +1346,13 @@ mob
 
 		HealthRegeneration()
 			while(src)
+				if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/cant_attack))
+					if(src.tenacity  > 0)
+						src.tenacity -= 1
+						world << src.tenacity //debug
+					else if(src.tenacity < 0)
+						src.tenacity = 0
+						world << src.tenacity //debug
 				if(src.last_damage_taken_time + 30 < world.timeofday)
 					if(src.Gates == null && src.healthregenmod < 1) src.healthregenmod = 1
 					if(src.rest) src.healthregenmod += 2

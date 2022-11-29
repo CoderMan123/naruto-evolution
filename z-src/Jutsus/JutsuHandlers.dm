@@ -110,9 +110,9 @@ mob
 			if(src.bubbled==1&&!heal&&!chakra)//bubbleshieldstuff
 				src.bubbled=0
 
-		Bind(target, time)
-			AddState(target, new/state/cant_move, time)
-			AddState(target, new/state/cant_attack, time)
+		Bind(target, time, var/mob/owner)
+			AddState(target, new/state/cant_move, time, owner)
+			AddState(target, new/state/cant_attack, time, owner)
 
 		ChakraCheck(var/CHAKRA)
 

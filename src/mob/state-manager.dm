@@ -157,10 +157,42 @@ proc
 
 	cant_move
 		Ticker()
+			if(src.owner && src.owner != src.mob)
+				if(src.duration > 0)
+					src.expiration -= (src.duration/100)*src.mob.tenacity
+					src.mob.tenacity += round(src.duration*1.5)
+					if(src.mob.tenacity > 75) src.mob.tenacity = 75
+					world << src.mob.tenacity //debug
 			walk(src.mob, 0)
+			..()
+		var/delay
+		OnTick()
+			if(!delay) delay = world.timeofday + 10
+			if(delay < world.timeofday)
+
+				delay = world.timeofday + 10
 			..()
 
 	cant_attack
+		Ticker()
+			if(src.owner && src.owner != src.mob)
+				if(src.duration > 0)
+					src.expiration -= (src.duration/100)*src.mob.tenacity
+					src.mob.tenacity += round(src.duration*1.5)
+					if(src.mob.tenacity > 75) src.mob.tenacity = 75
+					world << src.mob.tenacity //debug
+			walk(src.mob, 0)
+			..()
+		var/delay
+		OnTick()
+			if(!delay) delay = world.timeofday + 10
+			if(delay < world.timeofday)
+
+				var/mob/m = src.mob
+				m.tenacity += 1
+
+				delay = world.timeofday + 10
+			..()
 
 	knockback
 		Ticker()
