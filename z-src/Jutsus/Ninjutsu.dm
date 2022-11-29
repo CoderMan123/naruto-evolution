@@ -2547,11 +2547,13 @@ obj
 								Owner.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="push"
-								AddState(M, new/state/cant_move, 10+Owner.ninjutsu_total/8)
+								var/bind_time = 10+Owner.ninjutsu_total/8
+								var/visual_time = bind_time - ((bind_time/100)*M.tenacity)
+								M.Bind(M, bind_time, src.Owner)
 								walk(M,Owner.dir)
 								src.loc=locate(0,0,0)
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
-								spawn(10+Owner.ninjutsu_total/8)
+								spawn(visual_time)
 									if(M)
 										if(M.dead==0&&!CheckState(M, new/state/swimming))M.icon_state=""
 										walk(M,0)
