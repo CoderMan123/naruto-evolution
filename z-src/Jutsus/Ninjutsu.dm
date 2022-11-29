@@ -2439,7 +2439,7 @@ obj
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="pull"
-							M.Bind(M, 10+Owner.ninjutsu_total/8)
+							M.Bind(M, 10+Owner.ninjutsu_total/8, src.Owner)
 							if(!M.key) goto lol
 							walk_towards(M,Owner)
 							lol
@@ -2461,7 +2461,7 @@ obj
 								Owner.Levelup()
 								if(M.henge==4||M.henge==5)M.HengeUndo()
 								M.icon_state="pull"
-								M.Bind(M, 10+Owner.ninjutsu_total/8)
+								M.Bind(M, 10+Owner.ninjutsu_total/8, src.Owner)
 								walk_towards(M,Owner)
 								src.loc=locate(0,0,0)
 								M.DealDamage(src.damage,src.Owner,"NinBlue")
@@ -2516,7 +2516,7 @@ obj
 							Owner.Levelup()
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="push"
-							M.Bind(M, 10+Owner.ninjutsu_total/8)
+							M.Bind(M, 10+Owner.ninjutsu_total/8, src.Owner)
 							if(!M.key) goto lol
 							walk(M,Owner.dir)
 							lol
