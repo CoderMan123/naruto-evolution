@@ -74,8 +74,10 @@ mob
 							M.DealDamage(round((src.ninjutsu_total / 450)+(src.taijutsu_total / 450)*2*J.damage)/12,src,"NinBlue")
 							if(M.henge==4||M.henge==5)M.HengeUndo()
 							M.icon_state="dead"
-							Bind(M, 5)
-							spawn(5)
+							var/bind_time = 5
+							Bind(M, bind_time, src)
+							var/visual_time = bind_time - (bind_time/100)*M.tenacity
+							spawn(visual_time)
 								if(M||!M.dead)
 									M.icon_state=""
 					src.inboulder=0
