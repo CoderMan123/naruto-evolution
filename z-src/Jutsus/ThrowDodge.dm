@@ -145,7 +145,7 @@ mob
 									if(istype(M,/mob/npc) && !istype(M,/mob/npc/combat))..()
 									else
 										M.icon_state="push"
-										AddState(M, new/state/cant_move, 10)
+										AddState(M, new/state/cant_move, 10, src)
 										walk_away(M,ET,5,0)
 										spawn(10)
 											if(M)
