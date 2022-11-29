@@ -51,6 +51,7 @@ mob
 							new/obj/Jutsus/Effects/mudslide(M.loc)
 							M.icon_state="dead"
 							Bind(M, TimeAsleep, src)
+							TimeAsleep -= (TimeAsleep/100)*M.tenacity
 							spawn(TimeAsleep)
 								if(!M||M.dead)continue
 								M.icon_state=""
