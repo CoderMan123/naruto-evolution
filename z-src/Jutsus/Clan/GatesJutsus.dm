@@ -200,7 +200,7 @@ mob
 									if(undefendedhit<0)undefendedhit=1
 									c_target.DealDamage(undefendedhit,src,"TaiOrange",0,0,1)
 									src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
-									Bind(c_target, 10)
+									Bind(c_target, 10, src)
 									if(c_target.client)spawn()c_target.ScreenShake(1)
 								else
 									if(src.agility_total>=c_target.agility_total)
