@@ -220,7 +220,7 @@ mob
 									step(O,O.dir)
 									for(var/mob/M in O.loc)
 										if(M.dead) continue
-										AddState(M, new/state/cant_move, 20)
+										AddState(M, new/state/cant_move, 20, src)
 										var/random=rand(1,4)
 										if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 										if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -233,7 +233,7 @@ mob
 										step(O,O.dir)
 										for(var/mob/M in O.loc)
 											if(M.dead) continue
-											AddState(M, new/state/cant_move, 20)
+											AddState(M, new/state/cant_move, 20, src)
 											var/random=rand(1,4)
 											if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 											if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
@@ -246,7 +246,7 @@ mob
 											step(O,O.dir)
 											for(var/mob/M in O.loc)
 												if(M.dead) continue
-												AddState(M, new/state/cant_move, 20)
+												AddState(M, new/state/cant_move, 20, src)
 												var/random=rand(1,4)
 												if(random==1)  src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 												if(random==2)  src.PlayAudio('knife_hit2.wav', output = AUDIO_HEARERS)
