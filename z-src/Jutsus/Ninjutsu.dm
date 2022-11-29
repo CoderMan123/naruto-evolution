@@ -1854,7 +1854,7 @@ obj
 					src.overlays+=Top
 					var/time=text2num(src.level*10)
 					for(var/mob/M in view(src,0))
-						AddState(M, new/state/cant_move, time)
+						AddState(M, new/state/cant_move, time, src)
 					spawn(2)	
 						src.density=1
 						spawn(time)
