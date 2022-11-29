@@ -69,6 +69,7 @@ mob
 							A.pixel_y=-16
 							flick("create",A)
 							I = I+round(src.ninjutsu_total/16)
+							I -= (I/100)*c_target.tenacity
 							var/oldhealth=c_target.health
 							var/I2=1
 							while(I)
@@ -80,7 +81,7 @@ mob
 										I2=0
 										if(F)
 											F.DealDamage(J.damage,src,"NinBlue")
-											Bind(F, 10)
+											Bind(F, 10, src)
 											oldhealth=(oldhealth-J.damage)
 											F.health=oldhealth
 								sleep(1)
