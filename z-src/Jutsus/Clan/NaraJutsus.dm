@@ -122,9 +122,9 @@ mob
 					A.linkfollow(src)
 					flick("grow", A)
 					sleep(5)
-					spawn((5*J.level)+(src.genjutsu_total/3)) del A
 					var/duration = (5*J.level)+(src.genjutsu_total/3)
 					var/timer
+					spawn(duration) del A
 					while(A)
 						sleep(1)
 						timer++
@@ -132,8 +132,8 @@ mob
 							del A
 						if(A)
 							for(var/mob/M in orange(3, src))
-								AddState(M, new/state/cant_attack, (duration - timer))
-								AddState(M, new/state/cant_move, (duration - timer))
-								AddState(M, new/state/slowed, (duration - timer))
+								AddState(M, new/state/cant_attack, (duration - timer), src)
+								AddState(M, new/state/cant_move, (duration - timer), src)
+								AddState(M, new/state/slowed, (duration - timer), src)
 
 					src.inshadowfield=0
