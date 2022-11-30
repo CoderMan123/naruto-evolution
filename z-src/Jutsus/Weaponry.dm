@@ -2391,7 +2391,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total)/1))/3)))+rand(0,10)*weapondamage)*0.6
+								A.damage= (50 + usr.precision_total * weapondamage) * 0.6
 								walk_towards(A,c_target.loc,0)
 								spawn(4)if(A)walk(A,A.dir)
 							else if(!c_target)
@@ -2404,7 +2404,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total)/1))/3)))+rand(0,10)*weapondamage)*0.6
+								A.damage= (50 + usr.precision_total * weapondamage) * 0.6
 								walk(A,usr.dir)
 							usr.DestroyItem(C)
 							break
@@ -2438,7 +2438,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.ninjutsu_total+usr.taijutsu_total)/3))/3)))+rand(0,10)*weapondamage)*1
+								A.damage= 50 + usr.precision_total * weapondamage
 								walk_towards(A,c_target.loc,0)
 								spawn(4)if(A)walk(A,A.dir)
 							else
@@ -2451,7 +2451,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.ninjutsu_total+usr.taijutsu_total)/3))/3)))+rand(0,10)*weapondamage)*1
+								A.damage= 50 + usr.precision_total * weapondamage
 								walk(A,usr.dir)
 							usr.DestroyItem(C)
 							break
@@ -2485,7 +2485,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.taijutsu_total)/2))/3)))+rand(0,10)*weapondamage)*0.9
+								A.damage= (50 + usr.precision_total * weapondamage) * 0.9
 								walk_towards(A,c_target.loc,0)
 								spawn(4)if(A)walk(A,A.dir)
 							else
@@ -2498,7 +2498,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.taijutsu_total)/2))/3)))+rand(0,10)*weapondamage)*0.9
+								A.damage= (50 + usr.precision_total * weapondamage) * 0.9
 								walk(A,usr.dir)
 							usr.DestroyItem(C)
 							break
@@ -2532,7 +2532,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.agility_total)/2))/3)))+rand(0,10)*weapondamage)*0.3
+								A.damage= (50 + usr.precision_total * weapondamage) * 0.3
 								walk_towards(A,c_target.loc,0)
 								spawn(4)if(A)walk(A,A.dir)
 							else
@@ -2545,7 +2545,7 @@ mob
 								A.Owner=usr
 								A.layer=usr.layer
 								A.fightlayer=usr.fightlayer
-								A.damage=(C.damage+(100-round(1*((200-((usr.precision_total+usr.agility_total)/2))/3)))+rand(0,10)*weapondamage)*0.3
+								A.damage= (50 + usr.precision_total * weapondamage) * 0.3
 								walk(A,usr.dir)
 							usr.DestroyItem(C)
 							break
@@ -2582,7 +2582,7 @@ mob
 									A.Owner=usr
 									A.layer=usr.layer
 									A.fightlayer=usr.fightlayer
-									A.damage=(C.damage+(100-round(1*((200-((usr.ninjutsu_total)/1))/3)))+rand(0,10)*weapondamage)*1.2
+									A.damage= (50 + usr.precision_total * weapondamage) * 1.2
 									if(c_target in get_step(usr,usr.dir))
 										A.Linkage=c_target
 										A.pixel_y+=rand(8,10)
@@ -2598,7 +2598,7 @@ mob
 									A.Owner=usr
 									A.layer=usr.layer
 									A.fightlayer=usr.fightlayer
-									A.damage=(C.damage+(100-round(1*((200-((usr.ninjutsu_total)/1))/3)))+rand(0,10)*weapondamage)*1.2
+									A.damage= (50 + usr.precision_total * weapondamage) * 1.2
 									for(var/mob/M in get_step(usr,usr.dir))
 										A.Linkage=M
 										A.pixel_y+=rand(8,10)
