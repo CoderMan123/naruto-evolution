@@ -157,6 +157,7 @@ client
 							if(CLAN_UCHIHA) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_uchiha)
 							if(CLAN_WEAPONIST) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_weaponist)
 							if(CLAN_YELLOWFLASH) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_yellowflash)
+							if(CLAN_IRON) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_iron)
 
 					if("Clan Jutsu II")
 						if(src.mob.Clan2 == CLAN_NOCLAN)
@@ -189,6 +190,7 @@ client
 							if(CLAN_UCHIHA) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_uchiha)
 							if(CLAN_WEAPONIST) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_weaponist)
 							if(CLAN_YELLOWFLASH) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_yellowflash)
+							if(CLAN_IRON) src.UpdateSkillTreePanel(/obj/skill_tree_locations/clan_iron)
 
 					if("Non-clan Jutsu")
 						winset(src, "SkillTree", "is-visible=true")

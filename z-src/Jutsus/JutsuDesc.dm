@@ -317,7 +317,7 @@ obj
 //Iron Sand
 
 		Black_Iron_Fists
-			icon_state="SageBind"
+			icon_state="IronFists"
 			mouse_drag_pointer = "SageBind"
 			name="Black Iron Fists"
 			rank="A"
@@ -334,7 +334,7 @@ obj
 				maxcooltime = jutsucooldown*50
 
 		Grasp_of_Iron
-			icon_state="SageBind"
+			icon_state="GraspOfIron"
 			mouse_drag_pointer = "SageBind"
 			name="Grasp of Iron"
 			rank="A"
@@ -349,7 +349,7 @@ obj
 				maxcooltime = jutsucooldown*300
 			
 		Shield_of_Iron
-			icon_state="SageBind"
+			icon_state="ShieldOfIron"
 			mouse_drag_pointer = "SageBind"
 			name="Shield of Iron"
 			rank="B"
@@ -364,7 +364,7 @@ obj
 				maxcooltime = jutsucooldown*100
 
 		Gathering_Assault_Pyramid
-			icon_state="SageBind"
+			icon_state="GAPyramid"
 			mouse_drag_pointer = "SageBind"
 			name="Gathering Assault: Pyramid"
 			rank="S"
