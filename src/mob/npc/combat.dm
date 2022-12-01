@@ -230,6 +230,7 @@ mob
 							src.dir = SOUTH
 							src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 							new/obj/MiscEffects/Smoke(src.loc)
+							walk(src, 0)
 
 					proc/FindTarget()
 						if(!c_target) sleep(10)
