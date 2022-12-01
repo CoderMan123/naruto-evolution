@@ -6,9 +6,6 @@ mob
 			if(clonesturned==1)
 				return
 			for(var/obj/Jutsus/MizuClone/J in src.jutsus)
-				if(!has_water())
-					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
-					return
 				if(src.PreJutsu(J))
 					src.CloneHandler()
 					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
@@ -81,9 +78,6 @@ mob
 
 		WaterPrison()
 			for(var/obj/Jutsus/WaterPrison/J in src.jutsus)
-				if(!has_water())
-					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
-					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("jutsuse",src)
@@ -133,9 +127,6 @@ mob
 
 		WaterShark()
 			for(var/obj/Jutsus/WaterShark/J in src.jutsus)
-				if(!has_water())
-					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
-					return
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
@@ -195,9 +186,6 @@ mob
 
 		Water_Dragon_Projectile()
 			for(var/obj/Jutsus/Water_Dragon_Projectile/J in src.jutsus)
-				if(!has_water())
-					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
-					return
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))

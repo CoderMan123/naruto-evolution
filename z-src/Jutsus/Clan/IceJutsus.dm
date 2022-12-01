@@ -2,9 +2,6 @@ mob
 	proc
 		Ice_Explosion()
 			for(var/obj/Jutsus/Ice_Explosion/J in src.jutsus)
-				if(!has_water())
-					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
-					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level==1) J.damage=0.6*((jutsudamage*J.Sprice)/2)
@@ -49,10 +46,6 @@ mob
 
 		Demonic_Ice_Mirrors()
 			for(var/obj/Jutsus/Demonic_Ice_Mirrors/J in src.jutsus)
-				if(!has_water())
-					src << output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
-					return
-
 				if(src.PreJutsu(J))
 					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(c_target)
@@ -168,9 +161,6 @@ mob
 
 		Sensatsu_Suisho()
 			for(var/obj/Jutsus/Sensatsu_Suishou/J in src.jutsus)
-				if(!has_water())
-					src<<output("<Font color=Aqua>You need a nearby water source to use this.</Font>","Action.Output")
-					return
 				var/mob/c_target=src.Target_Get(TARGET_MOB)
 				if(!c_target)
 					src << output("<Font color=Aqua>You need a target to use this.</Font>","Action.Output")
