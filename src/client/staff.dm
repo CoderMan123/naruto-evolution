@@ -158,6 +158,51 @@ mob
 					)
 					query.Execute(log_db)
 					LogErrorDb(query)
+			
+			Manage_Testers()
+				set category = "Administrator"
+				switch(usr.client.prompt("Whould you like to manage alpha or beta testers?", "Manage Testers", list("Alpha Testers", "Beta Testers", "Cancel")))
+					if("Alpha Testers")
+						switch(usr.client.prompt("Would you like to add or remove alpha testers?", "Manage Testers", list("Add", "Remove", "Cancel")))
+							if("Add")
+								var/response = usr.client.iprompt("Please enter the ckey of the user you would like to add as an alpha tester.", "Manage Testers", list("Add", "Cancel"))
+								if(response[1] == "Add")
+									if(!response[2])
+										usr.client.prompt("You cannot enter a blank ckey to the alpha testers list.")
+
+									else if(!alpha_testers.Find(response[2]))
+										alpha_testers.Add(response[2])
+										usr.client.prompt("[response[2]] is now an alpha tester.", "Manage Testers")
+
+									else
+										usr.client.prompt("[response[2]] is already an alpha tester.", "Manage Testers")
+
+							if("Remove")
+								var/response = usr.client.prompt("Please select the ckey of the user you would like to remove from being alpha tester.", "Manage Testers", alpha_testers + list("Cancel"))
+								if(response != "Cancel")
+									alpha_testers.Remove(response)
+									usr.client.prompt("[response] is no longer an alpha tester.", "Manage Testers")
+
+					if("Beta Testers")
+						switch(usr.client.prompt("Would you like to add or remove beta testers?", "Manage Testers", list("Add", "Remove", "Cancel")))
+							if("Add")
+								var/response = usr.client.iprompt("Please enter the ckey of the user you would like to add as an beta tester.", "Manage Testers", list("Add", "Cancel"))
+								if(response[1] == "Add")
+									if(!response[2])
+										usr.client.prompt("You cannot enter a blank ckey to the beta testers list.")
+
+									else if(!beta_testers.Find(response[2]))
+										beta_testers.Add(response[2])
+										usr.client.prompt("[response[2]] is now an beta tester.", "Manage Testers")
+
+									else
+										usr.client.prompt("[response[2]] is already an beta tester.", "Manage Testers")
+
+							if("Remove")
+								var/response = usr.client.prompt("Please select the ckey of the user you would like to remove from being beta tester.", "Manage Testers", beta_testers + list("Cancel"))
+								if(response != "Cancel")
+									beta_testers.Remove(response)
+									usr.client.prompt("[response] is no longer an beta tester.", "Manage Testers")
 
 			Manage_Akatsuki()
 				set category = "Administrator"

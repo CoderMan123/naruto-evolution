@@ -210,6 +210,8 @@ world
 		F["moderators"] << moderators
 		F["programmers"] << programmers
 		F["pixel_artists"] << pixel_artists
+		F["alpha_testers"] << alpha_testers
+		F["beta_testers"] << beta_testers
 
 		F = new(SAVEFILE_NAMES)
 		F["names_taken"] << names_taken
@@ -256,6 +258,8 @@ world
 		if(!isnull(F["moderators"])) F["moderators"] >> moderators
 		if(!isnull(F["programmers"])) F["programmers"] >> programmers
 		if(!isnull(F["pixel_artists"])) F["pixel_artists"] >> pixel_artists
+		if(!isnull(F["alpha_testers"])) F["alpha_testers"] >> alpha_testers
+		if(!isnull(F["beta_testers"])) F["beta_testers"] >> beta_testers
 
 		for(var/ckey in initial(administrators))
 			if(!ckey in administrators) administrators += ckey
@@ -268,6 +272,12 @@ world
 
 		for(var/ckey in initial(pixel_artists))
 			if(!ckey in pixel_artists) pixel_artists += ckey
+		
+		for(var/ckey in initial(alpha_testers))
+			if(!ckey in alpha_testers) alpha_testers += ckey
+		
+		for(var/ckey in initial(beta_testers))
+			if(!ckey in beta_testers) beta_testers += ckey
 
 		if(!fexists(CFG_ADMIN))
 			for(var/ckey in administrators) text2file("[ckey] role=root", CFG_ADMIN)
