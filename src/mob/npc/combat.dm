@@ -691,8 +691,8 @@ mob
 				proc/CombatAI()
 					while(src)
 						if(!CheckState(src, new/state/recently_hit) && src.tenacity > 0)
-								src.tenacity -= 5
-								if(src.tenacity < 0) src.tenacity = 0
+							src.tenacity -= 5
+							if(src.tenacity < 0) src.tenacity = 0
 						if(src.target && src.attacking && !src.dead)
 							if(get_dist(src,src.target) <= 1 && !src.punch_cd) src.AttackTarget(src.target)
 							else if(get_dist(src,src.target) > 20) src.Idle()
