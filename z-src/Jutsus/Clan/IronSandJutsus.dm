@@ -86,6 +86,7 @@ mob
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					AddState(src, new/state/cant_attack, 20, src)
 					AddState(src, new/state/cant_move, 20, src)
+					flick("jutsuse",src)
 					var/obj/pyramid = new/obj(src.loc)
 					pyramid.pixel_x -= 64
 					pyramid.density = 0
@@ -103,17 +104,35 @@ mob
 					sleep(12)
 					pyramid.icon_state = "spin"
 					var/i
+					var/speed_scale = 1
+					flick("groundjutsu",src)
 					for(i=0, i<3, i++)
-						sleep(1)
+						sleep(speed_scale)
+						speed_scale -= 0.4
 						step(pyramid, SOUTH)
+					
+					spawn()
+						for(var/mob/M in range(30, pyramid))
+							M.ScreenShake(2)
+					spawn()
+						for(var/mob/M in range(0, pyramid))
+							M.ScreenShake(5)
+
+					src.PlayAudio('Down_Nornal.wav', output = AUDIO_HEARERS)
+
+					var/obj/dust = new/obj/Overlays/Dust3(pyramid.loc)
+
 					for(i=0, i<4, i++)
 						sleep(1)
 						for(var/mob/m in orange(1, pyramid))
 							m.DealDamage((src.taijutsu_total / 200)*J.damage, src, "NinBlue")
+							m.Bleed()
 							src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
 						for(var/mob/m in range(0, pyramid))
 							m.DealDamage((src.taijutsu_total / 200)+(src.precision_total / 200)*J.damage, src, "NinBlue")
+							m.Bleed()
 							src.PlayAudio('knife_hit1.wav', output = AUDIO_HEARERS)
+					del(dust)
 					del(pyramid)
 					
 					
