@@ -160,6 +160,8 @@ mob
 					if(T)
 						flick('Flyingthunder.dmi',src)
 						sleep(1)
-						for(var/mob/M in oview(src,20))M.Target_Remove()
+						for(var/mob/M in mobs_online)
+							if(M.target_mob == src)
+								M.Target_Remove()
 						src.loc = T.loc
 						T.loc = null

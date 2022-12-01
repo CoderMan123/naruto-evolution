@@ -2626,8 +2626,9 @@ mob
 									src.PlayAudio('flashbang_explode2.wav', output = AUDIO_HEARERS)
 									src.overlays=0
 									src.icon_state="blank"
-									for(var/mob/M in oview(usr))
-										M.Target_Remove()
+									for(var/mob/M in mobs_online)
+										if(M.target_mob == src)
+											M.Target_Remove()
 									usr.Step_Back()
 									usr.DestroyItem(C)
 									spawn(40)if(src)

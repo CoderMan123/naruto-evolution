@@ -49,7 +49,9 @@ mob
 						O.pixel_x=-16
 						spawn(1) step_rand(O)
 						spawn(10)if(O)del(O)
-					for(var/mob/M in oview(src,20))M.Target_Remove()
+					for(var/mob/M in mobs_online)
+						if(M.target_mob == src)
+							M.Target_Remove()
 					src.loc = T
 
 		Sage_Bind()//HERE This just isn't fucking working.

@@ -185,7 +185,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsu",src)
-					for(var/mob/M in oview(src,20))M.Target_Remove()
+					for(var/mob/M in mobs_online)
+						if(M.target_mob == src)
+							M.Target_Remove()
 					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
 					var/obj/O = new/obj
 					O.loc = src.loc
@@ -249,9 +251,9 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					flick("jutsu",src)
-					for(var/mob/M in oview(src,20))
-						if(istype(src, /mob/npc/combat/guard) && istype(M, /mob/npc/combat/guard)) continue
-						M.Target_Remove()
+					for(var/mob/M in mobs_online)
+						if(M.target_mob == src)
+							M.Target_Remove()
 					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 					var/number_of_clones = round((J.level/2) + (src.genjutsu_total / 25))
 					if(src.Specialist == SPECIALIZATION_GENJUTSU) number_of_clones += 2
@@ -271,8 +273,9 @@ mob
 					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
 					if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
-					for(var/mob/M in oview(src,13))
-						M.Target_Remove()
+					for(var/mob/M in mobs_online)
+						if(M.target_mob == src)
+							M.Target_Remove()
 					var/number_of_clones = round((J.level) + (src.genjutsu_total / 66.6))
 					if(src.Specialist == SPECIALIZATION_GENJUTSU) number_of_clones++
 					var/i
@@ -529,9 +532,9 @@ mob
 					var/obj/B = new/obj/Training/BDLogB(src.loc)
 					B.IsJutsuEffect=src
 					B.loc=src.loc
-					for(var/mob/M in oview(src,20))
-						if(istype(src, /mob/npc/combat/guard) && istype(M, /mob/npc/combat/guard)) continue
-						M.Target_Remove()
+					for(var/mob/M in mobs_online)
+						if(M.target_mob == src)
+							M.Target_Remove()
 					if(J.level<4)
 						if(loc.loc:Safe!=1) J.exp=J.maxexp
 						J.Levelup()
@@ -687,7 +690,9 @@ mob
 						O.pixel_x=-16
 						spawn(1) step_rand(O)
 						spawn(10)if(O)del(O)
-					for(var/mob/M in oview(src,20))M.Target_Remove()
+					for(var/mob/M in mobs_online)
+						if(M.target_mob == src)
+							M.Target_Remove()
 					src.loc = T
 
 		Rasengan()
