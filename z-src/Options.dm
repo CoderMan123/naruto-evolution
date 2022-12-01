@@ -178,6 +178,7 @@ mob
 				src<<output("<font color=red>You've reached the cap for maximum health.</Font>","Action.Output")
 				return
 			statpoints--
+			statpoints_spent++
 			maxhealth+=30
 			src<<output("<font color=yellow>You leveled up Health!</Font>","Action.Output")
 			src.UpdateHMB()
@@ -191,6 +192,7 @@ mob
 				src<<output("<font color=red>You've reached the cap for maximum health.</Font>","Action.Output")
 				return
 			statpoints--
+			statpoints_spent++
 			maxchakra+=25
 			src<<output("<font color=yellow>You leveled up Chakra!</Font>","Action.Output")
 			src.UpdateHMB()
@@ -204,6 +206,7 @@ mob
 				src<<output("<font color=red>You've reached the cap for ninjutsu.</Font>","Action.Output")
 				return
 			statpoints--
+			statpoints_spent++
 			ninjutsu_stated++
 			src<<output("<font color=yellow>You leveled up Ninjutsu!</Font>","Action.Output")
 			src.UpdateHMB()
@@ -217,6 +220,7 @@ mob
 				src<<output("<font color=red>You've reached the cap for genjutsu.</Font>","Action.Output")
 				return
 			statpoints--
+			statpoints_spent++
 			genjutsu_stated++
 			src<<output("<font color=yellow>You leveled up Genjutsu!</Font>","Action.Output")
 			src.UpdateHMB()
@@ -230,6 +234,7 @@ mob
 				src<<output("<font color=red>You've reached the cap for taijutsu.</Font>","Action.Output")
 				return
 			statpoints--
+			statpoints_spent++
 			taijutsu_stated++
 			src<<output("<font color=yellow>You leveled up Taijutsu!</Font>","Action.Output")
 			src.UpdateHMB()
@@ -243,6 +248,7 @@ mob
 				src<<output("<font color=red>You've reached the cap for defence.</Font>","Action.Output")
 				return
 			statpoints--
+			statpoints_spent++
 			defence_stated++
 			src<<output("<font color=yellow>You leveled up Defence!</Font>","Action.Output")
 			src.UpdateHMB()
@@ -256,6 +262,7 @@ mob
 				src<<output("<font color=red>You've reached the cap for agility.</Font>","Action.Output")
 				return
 			statpoints--
+			statpoints_spent++
 			agility_stated++
 			src<<output("<font color=yellow>You leveled up Agility!</Font>","Action.Output")
 			src.UpdateHMB()
@@ -269,6 +276,7 @@ mob
 				src<<output("<font color=red>You've reached the cap for precision.</Font>","Action.Output")
 				return
 			statpoints--
+			statpoints_spent++
 			precision_stated++
 			src<<output("<font color=yellow>You leveled up Precision!</Font>","Action.Output")
 			src.UpdateHMB()

@@ -447,42 +447,78 @@ mob
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
 				src.conversations.Add(usr)
-				if(usr.rank == RANK_ANBU_LEADER || usr.rank == RANK_HOKAGE || usr.rank == RANK_KAZEKAGE || usr.rank == RANK_MIZUKAGE || usr.rank == RANK_OTOKAGE || usr.rank == RANK_TSUCHIKAGE || usr.rank == RANK_AKATSUKI || usr.rank == RANK_AKATSUKI_LEADER || usr.rank == RANK_SEVEN_SWORDSMEN_LEADER)
-					usr.client.prompt("Don't mind me. I'm just an old veteran looking to enjoy his retirement. (Leaders cannot prestige. Retire first and try again.)", src.name)
-					return
-				if(usr.level < 100)//insert prestige prereqs here
-					usr.client.prompt("I used to be a shinobi like you but I took a kunai to the leg. You still seem a bit green for my teachings though. Come back when you think you've learned all you can learn about being a shinobi.", src.name)
-				else if(usr.client.prompt("Well well well.. you look to be pretty strong. But it looks like you've reached the peak of your potential. If you want to get stronger you'll have to start your training over from the beginning. I can show you the way if you think you have what it takes. Would you like to prestige? (WARNING: You will lose all levels, stats and jutsu effectively starting as a fresh character.)", src.name, list("Yes", "No")) == "Yes")
-					switch(usr.client.prompt("What do you want to learn?", src.name, list("A New Element","Nevermind")))
-						if("A New Element")
-							if(usr.Element5)
-								usr.client.prompt("You already have all five elements, you're a master of the elements!", src.name)
+				switch(usr.client.prompt("Don't mind me. I'm just an old veteran looking to enjoy his retirement.", src.name, list("Stat Point Reset", "Prestige", "Cancel")))
+
+					if("Stat Point Reset")
+						switch(usr.client.prompt("Hey don't you worry, we all make mistakes in training. I can teach you to change your ways if you want. (This will cost 8000 ryo. Your statpoints will be returned to you unallocated and returned to you. This will not affect your trained stats.)", src.name, list("Okay", "Cancel")))
+							if("Okay")
+								if(usr.ryo > 8000)
+									usr.maxhealth = initial(usr.maxhealth)
+									usr.health = usr.maxhealth
+									usr.maxchakra = initial(usr.maxchakra)
+									usr.chakra = usr.maxchakra
+									usr.ninjutsu_stated = initial(usr.ninjutsu_stated)
+									usr.taijutsu_stated = initial(usr.taijutsu_stated)
+									usr.genjutsu_stated = initial(usr.genjutsu_stated)
+									usr.defence_stated = initial(usr.defence_stated)
+									usr.agility_stated = initial(usr.agility_stated)
+									usr.precision_stated = initial(usr.precision_stated)
+									usr.statpoints += usr.statpoints_spent
+									usr.statpoints_spent = 0
+									usr.ryo -= 8000
+									usr.client.prompt("Your stats have been successfuly reset.", src.name)
+									src.conversations.Remove(usr)
+									return
+								else
+									usr.client.prompt("Sorry friend, you don't have enough money.", src.name)
+									src.conversations.Remove(usr)
+									return
+							if("Cancel")
+								usr.client.prompt("You know where to find me if you change your mind.", src.name)
 								src.conversations.Remove(usr)
 								return
-							var/PlayerElements = list("[usr.Element]","[usr.Element2]","[usr.Element3]","[usr.Element4]","[usr.Element5]")
-							var/ElementChoice = list("Fire","Water","Earth","Lightning","Wind")
-							ElementChoice -= PlayerElements
-							var/ChosenElement
-							ChosenElement = usr.client.prompt("What do you want to learn?", src.name, ElementChoice)
 
-							var/database/query/query = new({"
-								INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `level`, `prestige`)
-								VALUES(?, ?, ?, ?, ?)"},
-								time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), usr.client.ckey, usr.character, usr.level, usr.prestigelevel++
-							)
-							query.Execute(log_db)
-							LogErrorDb(query)
-
-							if(!usr.Element3) usr.Element3 = ElementChoice[ChosenElement]
-							else if(!usr.Element4) usr.Element4 = ElementChoice[ChosenElement]
-							else if(!usr.Element5) usr.Element5 = ElementChoice[ChosenElement]
-							usr.prestige_reset()
-							//usr.level = initial(usr.level)
-
-						if("Nevermind")
-							usr.client.prompt("You know where to find me if you change your mind.", src.name)
-							src.conversations.Remove(usr)
+					if("Prestige")
+						if(usr.rank == RANK_ANBU_LEADER || usr.rank == RANK_HOKAGE || usr.rank == RANK_KAZEKAGE || usr.rank == RANK_MIZUKAGE || usr.rank == RANK_OTOKAGE || usr.rank == RANK_TSUCHIKAGE || usr.rank == RANK_AKATSUKI || usr.rank == RANK_AKATSUKI_LEADER || usr.rank == RANK_SEVEN_SWORDSMEN_LEADER)
+							usr.client.prompt("Woah there, you can't take this kind of training in your position. Your people need you. (Leaders cannot prestige. Retire first and try again.)", src.name)
 							return
+						if(usr.level < 100)//insert prestige prereqs here
+							usr.client.prompt("I used to be a shinobi like you but I took a kunai to the leg. You still seem a bit green for my teachings though. Come back when you think you've learned all you can learn about being a shinobi. (You must be level 100 to prestige)", src.name)
+						else if(usr.client.prompt("Well well well.. you look to be pretty strong. But it looks like you've reached the peak of your potential. If you want to get stronger you'll have to start your training over from the beginning. I can show you the way if you think you have what it takes. Would you like to prestige? (WARNING: You will lose all levels, stats and jutsu effectively starting as a fresh character.)", src.name, list("Yes", "No")) == "Yes")
+							switch(usr.client.prompt("What do you want to learn?", src.name, list("A New Element","Nevermind")))
+								if("A New Element")
+									if(usr.Element5)
+										usr.client.prompt("You already have all five elements, you're a master of the elements!", src.name)
+										src.conversations.Remove(usr)
+										return
+									var/PlayerElements = list("[usr.Element]","[usr.Element2]","[usr.Element3]","[usr.Element4]","[usr.Element5]")
+									var/ElementChoice = list("Fire","Water","Earth","Lightning","Wind")
+									ElementChoice -= PlayerElements
+									var/ChosenElement
+									ChosenElement = usr.client.prompt("What do you want to learn?", src.name, ElementChoice)
+
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `level`, `prestige`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), usr.client.ckey, usr.character, usr.level, usr.prestigelevel++
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
+
+									if(!usr.Element3) usr.Element3 = ElementChoice[ChosenElement]
+									else if(!usr.Element4) usr.Element4 = ElementChoice[ChosenElement]
+									else if(!usr.Element5) usr.Element5 = ElementChoice[ChosenElement]
+									usr.prestige_reset()
+									//usr.level = initial(usr.level)
+
+								if("Nevermind")
+									usr.client.prompt("You know where to find me if you change your mind.", src.name)
+									src.conversations.Remove(usr)
+									return
+					if("Cancel")
+						usr.client.prompt("You know where to find me if you need me.", src.name)
+						src.conversations.Remove(usr)
+						return
 				src.conversations.Remove(usr)
 
 

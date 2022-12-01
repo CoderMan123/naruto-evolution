@@ -11,6 +11,7 @@ mob
 		level=1
 		exp=0
 		maxexp=10
+		statpoints_spent = 0
 
 		ninjutsu = 1 						//NINJUTSU STATS
 		ninjutsu_stated = 0
