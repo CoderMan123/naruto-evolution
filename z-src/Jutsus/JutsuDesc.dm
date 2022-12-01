@@ -1479,7 +1479,6 @@ obj
 			Sprice=2
 			Element="Earth"
 			Clan= CLAN_CLAY
-			reqs = list("Deidara")
 			Description="Use special mouths on the palms of your hands to create a swarm of clay tracking birds, which fly towards a target and explode on impact dealing damage (Nin)."
 			New()
 				..()
@@ -1628,7 +1627,6 @@ obj
 			signs="<font color=green>Dog,Dog,Rabbit</font><br>(macro(E,E,1))"
 			Sprice=3
 			Clan = CLAN_ICE
-			reqs=list("Ice")
 			Description="Use nearby water to explode and freeze, impaling enemies and dealing damage (Nin) in a radius around you."
 			New()
 				..()
@@ -1657,7 +1655,6 @@ obj
 			signs="<font color=green>Dog,Snake</font><br>(macro(E,2))"
 			Sprice=2
 			Clan= CLAN_KAKUZU
-			reqs = list("Kakuzu")
 			Description="Allows the user to summon a Fire Heart that uses a single Fire jutsu."
 			New()
 				..()
@@ -1672,7 +1669,6 @@ obj
 			signs="<font color=green>Ox,Snake</font><br>(macro(W,2))"
 			Sprice=2
 			Clan= CLAN_KAKUZU
-			reqs = list("Kakuzu")
 			Description="Allows the user to summon a Wind Heart that uses a single Wind jutsu."
 			New()
 				..()
@@ -1687,7 +1683,6 @@ obj
 			signs="<font color=green>Dragon,Rabbit</font><br>(macro(5,1))"
 			Sprice=2
 			Clan= CLAN_KAKUZU
-			reqs = list("Kakuzu")
 			Description="Allows the user to summon a Earth Heart that uses a single Earth jutsu."
 			New()
 				..()
@@ -1702,7 +1697,6 @@ obj
 			signs="<font color=green>Dog,Rabbit</font><br>(macro(E,1))"
 			Sprice=2
 			Clan= CLAN_KAKUZU
-			reqs = list("Kakuzu")
 			Description="Allows the user to summon a Lightning Heart that uses a single Lightning jutsu."
 			New()
 				..()
@@ -2278,7 +2272,6 @@ obj
 			signs="<font color=green>Dog,Dog,Ox</font><br>(macro(E,E,W))"
 			Sprice=2
 			Clan= CLAN_SAND
-			reqs=list("Sand")
 			Description="Summon sand from the earth and use it to form multiple shurikens for hurling towards your foes dealing damage (Nin|Prc) and piercing through enemies."
 			New()
 				..()
@@ -2294,7 +2287,6 @@ obj
 			signs="<font color=green>Dog,Dog,Ox,Ox</font><br>(macro(E,E,W,W))"
 			Sprice=2
 			Clan= CLAN_SAND
-			reqs=list("Sand")
 			Description="Summon sand from the earth and use it to trap your opponent. After a delay your target will be bound for a duration providing you are still targeting them."
 			New()
 				..()
@@ -2442,7 +2434,6 @@ obj
 			signs="<font color=green>Ox,Rat</font><br>(macro(W,Q))"
 			uses=100
 			Clan= CLAN_PAPER
-			reqs = list("Paper Control")
 			Sprice=2
 			Description="Bring sheets of paper together into a sharp chakram and send it at your foe dealing damage (Nin)."
 			New()
@@ -2458,7 +2449,6 @@ obj
 			signs="<font color=green>Ox,Rat,Ox</font><br>(macro(W,Q,W))"
 			uses=0
 			Clan= CLAN_PAPER
-			reqs = list("Paper Control")
 			Sprice=4
 			Description="Channel your chakra through paper and fire a deadly spear created from it dealing damage to the first target it hits (Nin)."
 			New()
