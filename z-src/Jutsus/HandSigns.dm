@@ -2069,6 +2069,24 @@ mob
 							else genin_exam_practical_score[src]++
 
 						usr.Omega_Ice_Ball()
+				
+				if(usr.first=="snake"&&usr.second=="horse"&&usr.third=="dog"&&usr.rat==0&&usr.dog==1&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==1&&usr.horse==1&&usr.rabbit==0)
+					var/obj/Jutsus/Black_Iron_Fists/J=new/obj/Jutsus/Black_Iron_Fists
+					if(J.type in usr.jutsus_learned)
+						if(genin_exam_participants.Find(src))
+							if(!genin_exam_practical_score[src]) genin_exam_practical_score[src] = 1
+							else genin_exam_practical_score[src]++
+
+						usr.Black_Iron_Fists()
+
+				if(usr.first=="snake"&&usr.second=="horse"&&usr.third=="dog"&&usr.fourth=="rabbit"&&usr.fifth=="rabbit"&&usr.sixth=="dog"&&usr.rat==0&&usr.dog==2&&usr.ox==0&&usr.dragon==0&&usr.monkey==0&&usr.snake==1&&usr.horse==1&&usr.rabbit==2)
+					var/obj/Jutsus/Gathering_Assault_Pyramid/J=new/obj/Jutsus/Gathering_Assault_Pyramid
+					if(J.type in usr.jutsus_learned)
+						if(genin_exam_participants.Find(src))
+							if(!genin_exam_practical_score[src]) genin_exam_practical_score[src] = 1
+							else genin_exam_practical_score[src]++
+
+						usr.Gathering_Assault_Pyramid()
 
 				if(usr.SealCount)
 					src.PlayAudio('active.wav', output = AUDIO_HEARERS)
