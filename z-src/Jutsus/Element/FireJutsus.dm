@@ -72,6 +72,11 @@ mob
 							I -= (I/100)*c_target.tenacity
 							var/oldhealth=c_target.health
 							var/I2=1
+							spawn(I+1)
+								if(A)
+									flick("delete",A)
+									sleep(4)
+									del(A)
 							while(I)
 								I--
 								I2+=1

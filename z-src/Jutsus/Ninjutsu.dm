@@ -347,7 +347,8 @@ obj
 					flick("create",src)
 			spawn(600)
 				if(src)
-					M.C3bombz = 0
+					if(M)
+						M.C3bombz = 0
 					del(src)
 	proc/Boomz(mob/M)
 		layer = MOB_LAYER+10
