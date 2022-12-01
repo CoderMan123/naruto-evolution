@@ -39,7 +39,9 @@ obj
 					grab_time = src.level * 10
 					var/bind_time = grab_time
 					grab_time = bind_time - ((bind_time/100) * m.tenacity)
-					if(CheckState(src.owner, new/state/Iron_Fist_Punching_Left))			
+					if(CheckState(src.owner, new/state/Iron_Fist_Punching_Left))
+						var/obj/A = new/obj/MiscEffects/MeteorDust(src.loc)
+						A.dir = get_dir(src.owner.loc, m.loc)
 						m.DealDamage(damage, src.owner, "NinBlue")
 						step_away(m, src)
 						m.dir = get_dir(m, src)
@@ -171,7 +173,9 @@ obj
 					grab_time = src.level * 10
 					var/bind_time = grab_time
 					grab_time = (grab_time/100) * m.tenacity
-					if(CheckState(src.owner, new/state/Iron_Fist_Punching_Right))					
+					if(CheckState(src.owner, new/state/Iron_Fist_Punching_Right))
+						var/obj/A = new/obj/MiscEffects/MeteorDust(src.loc)
+						A.dir = get_dir(src.owner.loc, m.loc)
 						m.DealDamage(damage, src.owner, "NinBlue")
 						step_away(m, src)
 						m.dir = get_dir(m, src)
