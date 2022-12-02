@@ -3,6 +3,11 @@ obj
 		layer = 10000
 		var/give_to_guards = 0
 
+		verb
+			View_Description(obj/Jutsu/J in usr.jutsus)
+				set category = null
+				usr.client.prompt(J.Description, J.name)
+
 //NonClan
 		Chakra_Infusion_Training//chakrainfusionstuff
 			icon_state="chakrainfuse"
