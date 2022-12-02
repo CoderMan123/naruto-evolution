@@ -31,10 +31,17 @@ mob
 	verb
 		Challenge()
 			set hidden = 1
+			
 			if(arenaprogress==1)
 				usr<<"Arena fight is already in progress!"
 				return
 			var/mob/M=input("Pick your opponent") as mob in mobs_online
+			if(usr.level < 5)
+				usr<<"You can't challenge people while below level 5."
+				return
+			if(M.level < 5)
+				usr<<"You can't challenge people who are below level 5."
+				return
 			if(M.key==usr.key)
 				usr<<"You can't challenge yourself."
 				return
