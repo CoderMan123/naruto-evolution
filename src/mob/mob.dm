@@ -546,6 +546,8 @@ mob
 				jutsu.owner = src.ckey
 				src.skillpoints--
 				src.loc=src.MapLoadSpawn()
+			
+			winset(usr , null , "command = .reconnect")
 
 	proc/Playtime()
 		while(src)
