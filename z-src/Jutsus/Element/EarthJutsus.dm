@@ -216,17 +216,18 @@ mob
 							while(I)
 								I--
 								I2+=1
-								for(var/mob/F in A.loc)
-									if(F.health==0) return
-									F.health=oldhealth
-									if(I2==8)
-										I2=0
-										if(F)
-											F.DealDamage(J.damage,src,"NinBlue")
-											Bind(F, 10, src)
-											oldhealth=(oldhealth-J.damage)
-											F.health=oldhealth
-								sleep(1)
+								if(A)
+									for(var/mob/F in A.loc)
+										if(F.health==0) return
+										F.health=oldhealth
+										if(I2==8)
+											I2=0
+											if(F)
+												F.DealDamage(J.damage,src,"NinBlue")
+												Bind(F, 10, src)
+												oldhealth=(oldhealth-J.damage)
+												F.health=oldhealth
+									sleep(1)
 							if(src)
 								flick("delete",A)
 								sleep(4)
