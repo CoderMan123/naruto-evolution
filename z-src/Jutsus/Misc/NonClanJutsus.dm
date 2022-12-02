@@ -323,7 +323,7 @@ mob
 					A.health=round(src.genjutsu_total*10)
 					A.maxhealth=round(src.genjutsu_total*10)
 					A.agility=round(src.genjutsu_total)
-					A.genjutsu=round(src.genjutsu_total)
+					A.genjutsu_total=round(src.genjutsu_total)
 					var/obj/O=new /obj/Screen/healthbar/
 					var/obj/M=new /obj/Screen/manabar/
 					A.hbar.Add(O)
