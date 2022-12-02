@@ -642,10 +642,10 @@ mob
 						while(src)
 							if(src.target && src.attacking && !src.dead)
 								if(get_dist(src,src.target) <= 1 && !src.punch_cd) src.AttackTarget(src.target)
-								else if(get_dist(src,src.target) > 20) src.Idle()
+								else if(get_dist(src,src.target) > 10) src.Idle()
 								else if(!src.punch_cd) src.ChaseTarget(src.target)
 							else if(!src.dead) src.Idle()
-							sleep(1)
+							sleep(3)
 
 					proc/Idle()
 						src.attacking = 0
@@ -655,7 +655,7 @@ mob
 
 					proc/FindTarget()
 						if(src)
-							for(var/mob/M in orange(15))
+							for(var/mob/M in orange(8))
 								if(istype(M,/mob/npc) || istype(M,/mob/training) || M.village == VILLAGE_AKATSUKI || M.dead) continue
 								if(M)
 									src.target = M
