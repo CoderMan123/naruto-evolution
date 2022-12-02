@@ -14,8 +14,8 @@ var/list/kages_last_online = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
 var/list/akatsuki = list()
 var/akatsuki_last_online
 
-var/list/alpha_testers = list("djinnythedjin", "lavenblade")
-var/list/beta_testers = list("djinnythedjin", "lavenblade")
+var/list/alpha_testers = list()
+var/list/beta_testers = list()
 
 var/list/clients_connected = list()
 var/list/clients_online = list()
