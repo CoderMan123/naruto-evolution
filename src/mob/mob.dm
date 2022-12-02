@@ -590,6 +590,10 @@ mob
 			else if(msg == "/version")
 				spawn() src.client.prompt("<b>Naruto Evolution:</b> v[global.build]<br /><b>BYOND Server:</b> v[world.byond_version].[world.byond_build]<br /><b>BYOND Client:</b> v[src.client.byond_version].[src.client.byond_build]", "Version Information")
 				return
+			
+			else if(msg == "/leave-village")
+				src.LeaveVillage()
+				return
 
 			var/command = "/level "
 			var/command_alias = ""
