@@ -26,7 +26,7 @@ jobs:
           docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
           echo "${{ github.event.release.tag_name }}" > "${{ github.workspace }}/VERSION"
 
-          if [ ${{ github.event.release.action == 'prereleased' }} ]; then
+          if [ ${{ github.event.release.prerelease == 'true' }} ]; then
             echo "PRERELEASE" > "${{ github.workspace }}/PRERELEASE"
           fi
 
