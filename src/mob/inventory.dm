@@ -31,6 +31,10 @@ obj
 						usr.client.prompt("You don't have [value] [src]'s to drop.")
 						return
 
+					if(value < 0)
+						usr.client.prompt("The amount you are dropping cannot be in the negative.")
+						return
+
 					usr.DropItem(src, value, usr.loc)
 
 				else
