@@ -47,6 +47,7 @@ obj
 				Description = "The recorded jutsu of 2 legendary hokage utilizing telportation with marked kunai. A highly mobile clan with difficult to avoid attacks."
 				icon = 'overhead_icons.dmi'
 				icon_state = "sandintel"
+				required_spec = SPECIALIZATION_NINJUTSU
 
 			Guide_to_Origami
 				name = "Guide to Origami"
