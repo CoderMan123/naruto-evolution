@@ -321,7 +321,7 @@ obj
 			mouse_drag_pointer = "SageBind"
 			name="Black Iron Fists"
 			rank="A"
-			//signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			signs="<font color=green>Snake, Horse, Dog</font><br>(macro(2,3,E))"
 			Clan= CLAN_IRON
 			maxcooltime = 0
 			ChakraCost = 0
@@ -338,7 +338,7 @@ obj
 			mouse_drag_pointer = "SageBind"
 			name="Grasp of Iron"
 			rank="A"
-			//signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			signs="<font color=green>None</font>"
 			Clan= CLAN_IRON
 			Sprice=3
 			reqs=list("Black Iron Fists")
@@ -353,7 +353,7 @@ obj
 			mouse_drag_pointer = "SageBind"
 			name="Shield of Iron"
 			rank="B"
-			//signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			signs="<font color=green>None</font>"
 			Clan= CLAN_IRON
 			Sprice=3
 			reqs=list("Black Iron Fists")
@@ -368,7 +368,7 @@ obj
 			mouse_drag_pointer = "SageBind"
 			name="Gathering Assault: Pyramid"
 			rank="S"
-			//signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			signs="<font color=green>Snake, Horse, Dog, Rabbit, Rabbit, Dog</font><br>(macro(2,3,E,1,1,E))"
 			Clan= CLAN_IRON
 			Sprice=4
 			reqs=list("Black Iron Fists")
