@@ -35,20 +35,23 @@ mob
 							purchase_amount[2] = text2num(purchase_amount[2])
 							if(purchase_amount[2])
 								var/purchase_price = purchase_amount[2] * purchase.Cost
-								if(usr.client.prompt("Are you sure you want to purchase x[purchase_amount[2]] [purchase] for [purchase_price] ryo?", "Weapons Merchant", list("Purchase", "Cancel")) == "Purchase")
-									if(usr.maxitems == -1 || usr.maxitems > -1 && usr.contents.len < usr.maxitems)
-										if(usr.ryo >= purchase_price)
-											var/obj/Inventory/Weaponry/i = new purchase.type()
-											i.stacks = purchase_amount[2]
-											usr.ryo -= purchase_price
-											usr.RecieveItem(i, src)
-											LogTransaction(usr, src, purchase_price, i, LOG_ACTION_TRANSACTION_BUY)
-											usr.client.UpdateInventoryPanel()
-											usr.client.prompt("You bought x[purchase_amount[2]] [purchase] for [purchase_price] ryo.")
+								if(purchase_price > 0)
+									if(usr.client.prompt("Are you sure you want to purchase x[purchase_amount[2]] [purchase] for [purchase_price] ryo?", "Weapons Merchant", list("Purchase", "Cancel")) == "Purchase")
+										if(usr.maxitems == -1 || usr.maxitems > -1 && usr.contents.len < usr.maxitems)
+											if(usr.ryo >= purchase_price)
+												var/obj/Inventory/Weaponry/i = new purchase.type()
+												i.stacks = purchase_amount[2]
+												usr.ryo -= purchase_price
+												usr.RecieveItem(i, src)
+												LogTransaction(usr, src, purchase_price, i, LOG_ACTION_TRANSACTION_BUY)
+												usr.client.UpdateInventoryPanel()
+												usr.client.prompt("You bought x[purchase_amount[2]] [purchase] for [purchase_price] ryo.")
+											else
+												usr.client.prompt("You need [purchase_price] ryo to purchase x[purchase_amount[2]] [purchase]", "Weapons Merchant")
 										else
-											usr.client.prompt("You need [purchase_price] ryo to purchase x[purchase_amount[2]] [purchase]", "Weapons Merchant")
-									else
-										usr.client.prompt("Your backback only has room for [usr.maxitems - usr.contents.len] more items.","Weapons Merchant")
+											usr.client.prompt("Your backback only has room for [usr.maxitems - usr.contents.len] more items.","Weapons Merchant")
+								else
+									usr.client.prompt("Are you trying to scam me? You can't purchase a negative amount.","Weapons Merchant")
 
 					src.conversations.Remove(usr)
 
