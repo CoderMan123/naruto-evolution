@@ -2,8 +2,8 @@ var/genin_exam = 0
 var/genin_exam_registration = 0
 var/genin_exam_participants[0]
 
-var/genin_exam_start_timer = 5 // delay in minutes before the Genin exam begins after the initial announcement.
-var/genin_exam_frequency = 60 // how often the Genin exam should run.
+var/genin_exam_start_timer = 10 // delay in minutes before the Genin exam begins after the initial announcement.
+var/genin_exam_frequency = 30 // how often the Genin exam should run.
 
 var/genin_exam_written = 0
 var/genin_exam_written_participants[0]
