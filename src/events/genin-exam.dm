@@ -74,7 +74,7 @@ world
 					genin_exam_practical = 1
 
 					for(var/mob/m in mobs_online)
-						if(genin_exam_written_pass.Find(m) && (m.village == VILLAGE_LEAF || m.village == VILLAGE_SAND))
+						if(genin_exam_written_pass.Find(m) && m.village == VILLAGE_LEAF || genin_exam_written_pass.Find(m) && m.village == VILLAGE_SAND)
 							m << output("The practical examination has begun! Please execute 3 Ninjutsu or Genjutsu within 30 seconds to pass the practical examination.", "Action.Output")
 							m.loc = locate(/area/genin_exam/practical_exam)
 
