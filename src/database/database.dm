@@ -304,7 +304,7 @@ proc
                 `squad_member_3` TEXT,
                 `squad_member_4_key` TEXT,
                 `squad_member_4` TEXT,
-                `mission` TEXT NOT NULL
+                `mission` TEXT
             );
         "})
         query.Execute(log_db)
@@ -386,6 +386,15 @@ proc
             INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
             VALUES(?, ?, ?, ?, ?)"},
             time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, log
+        )
+        query.Execute(log_db)
+        LogErrorDb(query)
+
+    LogMission(var/mob/m, var/squad/squad, var/mission_name)
+        var/database/query/query = new({"
+            INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
+            time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), squad && squad.leader.len ? squad.leader[1] : m.key, squad && squad.leader.len ? squad.leader[squad.leader[1]] : m.character, squad && squad.members.len >= 1 ? squad.members[1] : null, squad && squad.members.len >= 1 ? squad.members[squad.members[1]] : null, squad && squad.members.len >= 2 ? squad.members[2] : null, squad && squad.members.len >= 2 ? squad.members[squad.members[2]] : null, squad && squad.members.len >= 3 ? squad.members[3] : null, squad && squad.members.len >= 3 ? squad.members[squad.members[3]] : null, squad && squad.members.len >= 4 ? squad.members[4] : null, squad && squad.members.len >= 4 ? squad.members[squad.members[4]] : null, squad && squad.mission ? squad.mission.name : mission_name
         )
         query.Execute(log_db)
         LogErrorDb(query)

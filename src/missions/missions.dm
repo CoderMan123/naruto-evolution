@@ -115,16 +115,10 @@ mission
 				var/ryo_reward = round(mission_ryo_mod * D_reward)
 				// The mission belongs to the same squad turning it in
 				if(src.squad && squad && src.squad == squad && !src.squad.mission.complete && O)
-					src.squad.mission.status = "Success"
-					src.squad.mission.complete = world.realtime
+					squad.mission.status = "Success"
+					squad.mission.complete = world.realtime
 
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`, `mission_status`)
-						VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), squad.leader[1], squad.leader[squad.leader[1]], squad.members[1], squad.members[squad.members[1]], squad.members[2], squad.members[squad.members[2]], squad.members[3], squad.members[squad.members[3]], squad.members[4], squad.members[squad.members[4]], src.name
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn() LogMission(M, squad, src.name)
 
 					M.DestroyItem(O)
 
@@ -162,13 +156,7 @@ mission
 					O.squad.mission.status = "Failure"
 					O.squad.mission.complete = world.realtime
 
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`, `mission_status`)
-						VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), squad.leader[1], squad.leader[squad.leader[1]], squad.members[1], squad.members[squad.members[1]], squad.members[2], squad.members[squad.members[2]], squad.members[3], squad.members[squad.members[3]], squad.members[4], squad.members[squad.members[4]], src.name
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn() LogMission(M, squad, src.name)
 
 					var/scrolltype //1 = leaf 2 = sand
 					if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel)) scrolltype = 1
@@ -214,13 +202,7 @@ mission
 					O.squad.mission.status = "Failure"
 					O.squad.mission.complete = world.realtime
 
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`)
-						VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), M.ckey, M.character, null, null, null, null, null, null, null, null, src.name
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn() LogMission(M, null, src.name)
 
 					var/scrolltype //1 = leaf 2 = sand
 					if(istype(O, /obj/Inventory/mission/deliver_intel/leaf_intel)) scrolltype = 1
@@ -276,13 +258,7 @@ mission
 						squad.mission.status = "Success"
 						squad.mission.complete = world.realtime
 
-						var/database/query/query = new({"
-							INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`, `mission_status`)
-							VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"},
-							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), squad.leader[1], squad.leader[squad.leader[1]], squad.members[1], squad.members[squad.members[1]], squad.members[2], squad.members[squad.members[2]], squad.members[3], squad.members[squad.members[3]], squad.members[4], squad.members[squad.members[4]], src.name
-						)
-						query.Execute(log_db)
-						LogErrorDb(query)
+						spawn() LogMission(M, squad, src.name)
 
 						var/jounin_reward = 0
 						for(var/mob/m in mobs_online)
@@ -321,13 +297,7 @@ mission
 						squad.mission.status = "Success"
 						squad.mission.complete = world.realtime
 
-						var/database/query/query = new({"
-							INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`, `mission_status`)
-							VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"},
-							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), squad.leader[1], squad.leader[squad.leader[1]], squad.members[1], squad.members[squad.members[1]], squad.members[2], squad.members[squad.members[2]], squad.members[3], squad.members[squad.members[3]], squad.members[4], squad.members[squad.members[4]], src.name
-						)
-						query.Execute(log_db)
-						LogErrorDb(query)
+						spawn() LogMission(M, squad, src.name)
 
 						var/jounin_reward = 0
 						for(var/mob/m in mobs_online)
@@ -394,13 +364,7 @@ mission
 						squad.mission.status = "Success"
 						squad.mission.complete = world.realtime
 
-						var/database/query/query = new({"
-							INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`, `mission_status`)
-							VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"},
-							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), squad.leader[1], squad.leader[squad.leader[1]], squad.members[1], squad.members[squad.members[1]], squad.members[2], squad.members[squad.members[2]], squad.members[3], squad.members[squad.members[3]], squad.members[4], squad.members[squad.members[4]], src.name
-						)
-						query.Execute(log_db)
-						LogErrorDb(query)
+						spawn() LogMission(M, squad, src.name)
 
 						var/jounin_reward = 0
 						for(var/mob/m in mobs_online)
@@ -444,13 +408,7 @@ mission
 						squad.mission.status = "Success"
 						squad.mission.complete = world.realtime
 
-						var/database/query/query = new({"
-							INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`, `mission_status`)
-							VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"},
-							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), squad.leader[1], squad.leader[squad.leader[1]], squad.members[1], squad.members[squad.members[1]], squad.members[2], squad.members[squad.members[2]], squad.members[3], squad.members[squad.members[3]], squad.members[4], squad.members[squad.members[4]], src.name
-						)
-						query.Execute(log_db)
-						LogErrorDb(query)
+						spawn() LogMission(M, squad, src.name)
 
 						var/jounin_reward = 0
 						for(var/mob/m in mobs_online)
