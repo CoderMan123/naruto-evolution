@@ -121,7 +121,7 @@ proc
 			var/victims_previous_loc = m.loc
 			m.loc = locate(165,183,8)
 			..()
-			if(m)
+			if(m && m.z == 8)
 				m<<output("The warp dimension couldn't hold you any longer!","Action.Output")
 				m.loc = victims_previous_loc
 
