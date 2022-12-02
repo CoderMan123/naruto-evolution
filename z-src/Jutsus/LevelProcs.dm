@@ -78,6 +78,8 @@ mob
 			if(src.xplock==1)
 				src<<output("You have an Experience lock on you. This measure is used against the abusers / AFK trainers. Admin decides when this is removed.","Action.Output")
 				return
+			if(istype(src, /mob/training) || istype(src, /mob/npc))
+				return
 			if(src.exp>=src.maxexp)
 				if(src.level>=100)
 					goto next
