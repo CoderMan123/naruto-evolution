@@ -33,3 +33,15 @@ mob/npc
 			usr.RestoreOverlays()
 
 			LogTransaction(usr, src, 0, override_item = "Change Hairstyle", LOG_ACTION_TRANSACTION_BUY)
+
+		missing_barber
+			village = VILLAGE_MISSING_NIN
+
+		leaf_barber
+			village = VILLAGE_LEAF
+
+		sand_barber
+			village = VILLAGE_SAND
+
+		akatsuki_barber
+			village = VILLAGE_AKATSUKI

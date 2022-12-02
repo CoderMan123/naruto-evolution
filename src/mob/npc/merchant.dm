@@ -61,6 +61,9 @@ mob
 				sand_weapons_merchant
 					village = VILLAGE_SAND
 
+				missing_weapons_merchant
+					village = VILLAGE_MISSING_NIN
+
 				akatsuki_weapons_merchant
 					village = VILLAGE_AKATSUKI
 
@@ -129,3 +132,6 @@ mob
 
 				akatsuki_clothing_merchant
 					village = VILLAGE_AKATSUKI
+
+				missing_clothing_merchant
+					village = VILLAGE_MISSING_NIN
