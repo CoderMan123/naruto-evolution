@@ -345,6 +345,7 @@ obj
 			rank="A"
 			signs="<font color=green>None</font>"
 			Clan= CLAN_IRON
+			uses = 100
 			Sprice=3
 			reqs=list("Black Iron Fists")
 			Description="Launch one of your fists outwards to attempt to grab someone. If you successfully grab someone they are bound for a duration and that fist will be occupied for the same duration. (An ocupied fist cannot be used for attacks or jutsu.)"
@@ -360,6 +361,7 @@ obj
 			rank="B"
 			signs="<font color=green>None</font>"
 			Clan= CLAN_IRON
+			uses = 100
 			Sprice=3
 			reqs=list("Black Iron Fists")
 			Description="Your Black Iron Fists rotate around you atempting to hit away anyone who gets too close dealing damage (Nin) and knocking them back."
