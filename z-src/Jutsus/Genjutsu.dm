@@ -404,12 +404,13 @@ mob
 							if(prob(50))step_rand(src)
 							var/obj/A = new/obj/MiscEffects/Smoke(src.loc)
 							A.loc=src.loc
+
 			proc/FollowTarget()
 				if(!src.takeova)
 					while(src)
 						var/walkspeed = 2.5 - ((src.genjutsu / 200))
 						sleep(walkspeed)
-						if(src && src.target_mob)
+						if(src && src.target_mob && src.Owner.target_mob == src.target_mob)
 							if(src.Owner)
 								var/mob/Owner=src.Owner
 								var/mob/T=usr.target_mob
@@ -436,6 +437,7 @@ mob
 												AddState(src, new/state/cant_attack, (10 - (walkspeed*3) + rand(0.1,0.5)))
 								continue
 						else
+							src.target_mob = null
 							walk(src,0)
 							break
 			proc/Attack()
