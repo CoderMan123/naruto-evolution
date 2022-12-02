@@ -22,11 +22,13 @@ world
 				for(var/mob/m in mobs_online)
 					switch(m.village)
 						if(VILLAGE_LEAF)
+							m << output("<center><b><u>Genin Exam</u></b></center>", "Action.Output")
 							m << output("A Genin exam will begin in the <font color = '[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> village in [genin_exam_start_timer] minutes!</font>", "Action.Output")
 							m << output("Please visit the <font color = '[COLOR_VILLAGE_LEAF]'>Genin Examiner</font> to register for the Genin exam.", "Action.Output")
 							m << output("Once you register for the Genin exam, please take your seat and prepare for the written examination.", "Action.Output")
 
 						if(VILLAGE_SAND)
+							m << output("<center><b><u>Genin Exam</u></b></center>", "Action.Output")
 							m << output("A Genin exam will begin in the <font color = '[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village in [genin_exam_start_timer] minutes!</font>", "Action.Output")
 							m << output("Please visit the <font color = '[COLOR_VILLAGE_SAND]'>Genin Examiner</font> to register for the Genin exam.", "Action.Output")
 							m << output("Once you register for the Genin exam, please take your seat and prepare for the written examination.", "Action.Output")
