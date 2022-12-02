@@ -21,10 +21,13 @@ mob/npc
 		DblClick()
 			if(usr.dead) return
 			if(get_dist(src,usr)>2) return
-			usr.HairStyle = usr.client.prompt("Hair Options","Please choose a hair.",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","Mohawk","Neji Hair","Distance"))
+			usr.HairStyle = usr.client.prompt("Hair Options","Please choose a hair.",list("Long","Short","Tied Back","Bald","Bowl Cut","Deidara","Spikey","Mohawk","Neji Hair","Distance","Cancel"))
+
+			if(usr.HairStyle == "Cancel") return
 
 			if(usr.HairStyle != "Bald")
 				usr.HairColor = usr.client.cprompt("Please select a hairstyle dye.", "Hairstyle Dye", luminosity_max = 20)
+			
 
 			usr.HairColorStyle=null
 			usr.RestoreOverlays()
