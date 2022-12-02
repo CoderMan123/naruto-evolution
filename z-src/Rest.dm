@@ -156,8 +156,6 @@ mob
 				usr.overlays-=/obj/Overlays/Chakramax
 				usr.RestOverlays=0
 				usr.wait=0
-				usr.rest=2
-				spawn(2)
 				usr.rest=0
 mob/var/RestOverlays=0
 
