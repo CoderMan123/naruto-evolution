@@ -264,8 +264,8 @@ mob
 						// Loot Ryo
 						if(src != attacker)
 							attacker.ryo += src.ryo
-							src.ryo = 0
 							view(attacker) << output("<i>[attacker] has looted [src.ryo] Ryo from [src].</i>", "Action.Output")
+							src.ryo = 0
 
 						// Loot Ryo pouches
 						if(src != attacker)
