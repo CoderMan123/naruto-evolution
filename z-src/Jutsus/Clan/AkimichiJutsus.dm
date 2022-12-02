@@ -78,7 +78,7 @@ mob
 							var/visual_time = bind_time - (bind_time/100)*M.tenacity
 							Bind(M, bind_time, src)
 							spawn(visual_time)
-								if(M||!M.dead)
+								if(M && !M.dead)
 									M.icon_state=""
 					src.inboulder=0
 					RemoveState(src, humanbullettank1, STATE_REMOVE_REF)
