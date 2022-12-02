@@ -221,13 +221,15 @@ mob
 				src.exp+=1
 				src.defence++
 
-				var/database/query/query = new({"
-					INSERT INTO `[db_table_character_level]` (`timestamp`, `key`, `character`, `stat`, `level`)
-					VALUES(?, ?, ?, ?, ?)"},
-					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "defence", src.defence
-				)
-				query.Execute(log_db)
-				LogErrorDb(query)
+				if(src.client.ckey)
+
+					var/database/query/query = new({"
+						INSERT INTO `[db_table_character_level]` (`timestamp`, `key`, `character`, `stat`, `level`)
+						VALUES(?, ?, ?, ?, ?)"},
+						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "defence", src.defence
+					)
+					query.Execute(log_db)
+					LogErrorDb(query)
 
 				src.defexp-=src.maxdefexp
 				if(src.defence<=20)
