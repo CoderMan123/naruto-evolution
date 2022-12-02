@@ -1733,7 +1733,6 @@ obj
 			uses=100
 			Sprice=2
 			Clan= CLAN_PUPPET
-			reqs = list("Puppeteer")
 			Description="You summon a puppet which can uses its hidden weapons to attack opponents by walking into them, dealing damage (Nin|Prc). Hold 'ctrl' to move it. Your first puppet will also come to your aid with every attack."
 			New()
 				..()
