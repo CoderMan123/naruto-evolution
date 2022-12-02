@@ -41,7 +41,7 @@ mob
 				village = VILLAGE_SAND
 
 			missing_nin_banker
-				village = VILLAGE_AKATSUKI
+				village = VILLAGE_MISSING_NIN
 
 			akatsuki_banker
 				village = VILLAGE_AKATSUKI
