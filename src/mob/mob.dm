@@ -1064,13 +1064,16 @@ mob
 				var/list/response = src.client.iprompt("How much Ryo would you like to bundle in a Ryo Pouch?","Create Ryo Pouch")
 				var/ryo = text2num(response[2])
 				if(ryo)
-					if(src.ryo >= ryo)
-						src.ryo -= ryo
-						new/obj/Inventory/ryo_pouch(src, ryo)
-						view() << "<i>[src] removes [ryo] Ryo from their satchel and bundles it into a Ryo Pouch.</i>"
-						src.client.UpdateInventoryPanel()
-					else
-						src << output("You don't have [ryo] Ryo to drop.", "Action.Output")
+					if(ryo > 0)
+						if(src.ryo >= ryo)
+							src.ryo -= ryo
+							new/obj/Inventory/ryo_pouch(src, ryo)
+							view() << "<i>[src] removes [ryo] Ryo from their satchel and bundles it into a Ryo Pouch.</i>"
+							src.client.UpdateInventoryPanel()
+						else
+							src << output("You don't have [ryo] Ryo to drop.", "Action.Output")
+					else 
+						usr.client.prompt("As you try to put imaginary ryo into a pouch you're very dissapointed as it's still empty. You can't put negative amounts into a ryo pouch.", "Ryo Pouch")
 
 		Rotate_Ninja_Tool()
 			set hidden = 1
