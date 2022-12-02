@@ -199,7 +199,7 @@ mob
 						src.density=0
 						//spawn()
 						while(src.Intang)
-							src.DealDamage(50, src, "aliceblue", 0 , 1)
+							src.DealDamage(80, src, "aliceblue", 0 , 1)
 							src.density=0
 							sleep(10)
 							if(src.chakra<=0)
