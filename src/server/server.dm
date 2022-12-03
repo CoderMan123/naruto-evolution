@@ -77,6 +77,7 @@ world
 		spawn() Election()
 		spawn() InfamyLoop()
 		spawn() Maintenance()
+		spawn() AutoSave()
 
 	Del()
 		src.FailMissions()
@@ -98,6 +99,17 @@ world
 		var/database/query/query = new("INSERT INTO `[db_table_error]` (`timestamp`, `error`, `description`, `file`, `line`) VALUES(?, ?, ?, ?, ?)", time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), ex.name, ex.desc, ex.file, ex.line)
 		query.Execute(log_db)
 		LogErrorDb(query)
+	
+	proc/AutoSave()
+		set background = 1
+		while(src)
+			world.Save()
+
+			for(var/mob/m in mobs_online)
+				if(m) m.Save()
+				sleep(world.tick_lag)
+
+			sleep(600 * 5)
 
 	proc/UpdateVillageCount()
 		leaf_online = 0
