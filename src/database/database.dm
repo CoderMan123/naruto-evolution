@@ -2,7 +2,6 @@ var/database/log_db
 
 var/const/db_table_akatsuki             = "akatsuki"
 var/const/db_table_character_creation   = "character_creation"
-var/const/db_table_character_experience = "character_experience"
 var/const/db_table_character_kills      = "character_kills"
 var/const/db_table_character_level      = "character_level"
 var/const/db_table_character_login      = "character_login"
@@ -53,19 +52,6 @@ proc
         LogErrorDb(query)
 
         query.Add({"
-            CREATE TABLE IF NOT EXISTS `[db_table_character_experience]` (
-                `id` INTEGER PRIMARY KEY,
-                `timestamp` TEXT NOT NULL,
-                `key` TEXT NOT NULL,
-                `character` TEXT NOT NULL,
-                `stat` TEXT NOT NULL,
-                `[db_table_character_experience]` INTEGER NOT NULL
-            );
-        "})
-        query.Execute(log_db)
-        LogErrorDb(query)
-
-        query.Add({"
             CREATE TABLE IF NOT EXISTS `[db_table_character_kills]` (
                 `id` INTEGER PRIMARY KEY,
                 `timestamp` TEXT NOT NULL,
@@ -92,7 +78,8 @@ proc
                 `key` TEXT NOT NULL,
                 `character` TEXT NOT NULL,
                 `stat` TEXT NOT NULL,
-                `level` INTEGER NOT NULL
+                `level` INTEGER NOT NULL,
+                `total_experience` INTEGER NOT NULL
             );
         "})
         query.Execute(log_db)
