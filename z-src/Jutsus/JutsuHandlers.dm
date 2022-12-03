@@ -118,8 +118,9 @@ mob
 
 			if(src.Specialist == SPECIALIZATION_NINJUTSU)
 				CHAKRA = CHAKRA * 0.85
-
-			var/area/T = loc.loc
+			
+			var/area/T
+			if(loc.loc) T = loc.loc
 			src.HengeUndo()
 			if(T)
 				if(T.Safe)
