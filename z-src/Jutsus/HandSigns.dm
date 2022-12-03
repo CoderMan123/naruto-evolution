@@ -141,6 +141,11 @@ obj
 									usr.sbought.Add(J.name)
 								for(var/obj/Jutsus/EightGates/J in usr.jutsus)
 									J.level ++
+								usr.sbought+=src.name
+								var/obj/Jutsus/jutsu=new src.type
+								usr.jutsus += jutsu
+								usr.jutsus_learned += jutsu.type
+								jutsu.owner=usr.ckey
 
 							else
 							/*	if(src.name=="Tsukuyomi"||src.name=="Amaterasu"||src.name=="Kamui"||src.name=="Susanoo"||src.name=="Eternal Mangekyou Sharingan")
