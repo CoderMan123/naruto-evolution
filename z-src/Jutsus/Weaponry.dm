@@ -2253,9 +2253,10 @@ mob
 		Throw()
 			set hidden=1
 			set category=null
-			if(src.loc.loc:Safe == 1)
-				src<<output("You're indoors, you shouldn't be doing this.","Action.Output")
-				return 1
+			if(src.loc)
+				if(src.loc.loc:Safe == 1)
+					src<<output("You're indoors, you shouldn't be doing this.","Action.Output")
+					return 1
 
 			if(CheckState(src, new/state/knocked_down) || CheckState(src, new/state/knocked_back) || CheckState(src, new/state/dead))
 				return
