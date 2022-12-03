@@ -91,7 +91,7 @@ mob
 						M.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 						if(M) M.Bleed()
 						M.icon_state="push"
-						var/bind_time = J.damage*2
+						var/bind_time = J.level*2
 						var/visual_time = bind_time - (bind_time/100) * M.tenacity
 						AddState(M, new/state/cant_move, bind_time, src)
 						step_away(M,src)
