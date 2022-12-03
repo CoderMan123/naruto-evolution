@@ -340,7 +340,6 @@ window "Character"
 		size = 300x661
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -349,8 +348,6 @@ window "Character"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 314x675
-		inner-size = 300x661
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2563,6 +2560,7 @@ window "Settings"
 		size = 500x400
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2571,6 +2569,8 @@ window "Settings"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
+		outer-size = 514x414
+		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2587,6 +2587,7 @@ window "Settings"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		saved-params = "splitter"
 		left = "Settings-General"
 		is-vert = false
@@ -2679,6 +2680,7 @@ window "Settings-Administrator"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2688,6 +2690,8 @@ window "Settings-Administrator"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
+		outer-size = 508x388
+		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0
@@ -2989,7 +2993,7 @@ window "Settings-General"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		is-visible = false
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -2998,6 +3002,8 @@ window "Settings-General"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
+		outer-size = 508x388
+		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0

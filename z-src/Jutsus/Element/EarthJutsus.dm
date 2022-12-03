@@ -213,7 +213,7 @@ mob
 									del(A)
 							var/oldhealth=c_target.health
 							var/I2=1
-							while(I)
+							while(I && A)
 								I--
 								I2+=1
 								if(A)
