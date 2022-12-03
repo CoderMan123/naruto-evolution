@@ -20,11 +20,11 @@ mob
 						A.level=J.level
 						A.damage=(J.damage+round(((src.precision_total / 450)+(src.ninjutsu_total / 450))*2*J.damage))/2
 						var/timer=J.level*4
-						while(A && A.hits<=1 && timer > 0)
+						while(A && A.hits<=1 && timer > 0)	
 							timer--
 							walk_towards(A, c_target)
 							sleep(1)
-							walk(A, A.dir)
+							if(A) walk(A, A.dir)
 							sleep(1)
 						if(A) walk_towards(A, src)
 					else
