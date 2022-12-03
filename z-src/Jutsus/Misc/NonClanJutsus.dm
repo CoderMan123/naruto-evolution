@@ -255,7 +255,7 @@ mob
 						if(M.target_mob == src)
 							M.Target_Remove()
 					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
-					var/number_of_clones = round((J.level/2) + (src.genjutsu_total / 25))
+					var/number_of_clones = 1 + round((J.level/2) + (src.genjutsu_total / 25))
 					if(src.Specialist == SPECIALIZATION_GENJUTSU) number_of_clones += 2
 					var/i
 					for(i=0, i<number_of_clones, i++)
