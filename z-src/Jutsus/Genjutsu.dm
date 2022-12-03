@@ -410,36 +410,37 @@ mob
 					while(src)
 						var/walkspeed = 2.5 - ((src.genjutsu / 200))
 						sleep(walkspeed)
-						if(src && src.target_mob && src.Owner.target_mob == src.target_mob)
-							if(src.Owner)
-								var/mob/Owner=src.Owner
-								var/mob/T=usr.target_mob
-								if(T)
-									if(get_dist(Owner,T)>=17)
-										src.target_mob=null
-										if(!CheckState(src, new/state/cant_move) && !CheckState(src, new/state/swimming))
-											if(!Owner.likeaclone)
-												for(var/mob/P in oview(src,1))
-													if(P && istype(P, /mob/Clones/Shadow) && P.Owner == Owner || P == Owner)
-														walk(src, 0)
-														step_rand(src)
-														sleep(0.5)
-												walk_towards(src,Owner,walkspeed)
-									else
-										if(get_dist(src,T)>1)
+						if(src)
+							if(src.target_mob && src.Owner.target_mob == src.target_mob)
+								if(src.Owner)
+									var/mob/Owner=src.Owner
+									var/mob/T=usr.target_mob
+									if(T)
+										if(get_dist(Owner,T)>=17)
+											src.target_mob=null
 											if(!CheckState(src, new/state/cant_move) && !CheckState(src, new/state/swimming))
-												walk_towards(src,T,walkspeed)
-		
-									if(!CheckState(src, new/state/cant_attack) && get_dist(src,T)<=1)
-										if(T<>src.Owner && T.Owner <> src.Owner)
-											if(!Owner.likeaclone)
-												src.Attack()
-												AddState(src, new/state/cant_attack, (10 - (walkspeed*3) + rand(0.1,0.5)))
-								continue
-						else
-							src.target_mob = null
-							walk(src,0)
-							break
+												if(!Owner.likeaclone)
+													for(var/mob/P in oview(src,1))
+														if(P && istype(P, /mob/Clones/Shadow) && P.Owner == Owner || P == Owner)
+															walk(src, 0)
+															step_rand(src)
+															sleep(0.5)
+													walk_towards(src,Owner,walkspeed)
+										else
+											if(get_dist(src,T)>1)
+												if(!CheckState(src, new/state/cant_move) && !CheckState(src, new/state/swimming))
+													walk_towards(src,T,walkspeed)
+			
+										if(!CheckState(src, new/state/cant_attack) && get_dist(src,T)<=1)
+											if(T<>src.Owner && T.Owner <> src.Owner)
+												if(!Owner.likeaclone)
+													src.Attack()
+													AddState(src, new/state/cant_attack, (10 - (walkspeed*3) + rand(0.1,0.5)))
+									continue
+							else
+								src.target_mob = null
+								walk(src,0)
+								break
 			proc/Attack()
 				if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
 					var/mob/Owner=src.Owner
