@@ -75,7 +75,7 @@ obj
 			spawn()
 				while(src)
 					sleep(0.5)
-					if(src)
+					if(src && owner)
 						if(!owner || !CheckState(src.owner, new/state/Iron_Fists) || src.owner.chakra < 20)
 							RemoveState(src.owner, new/state/Iron_Fists, STATE_REMOVE_ALL)
 							src.owner.left_iron_fist = null
@@ -211,7 +211,7 @@ obj
 			spawn()
 				while(src)
 					sleep(0.5)
-					if(src)
+					if(src && owner)
 						if(!owner || !CheckState(src.owner, new/state/Iron_Fists) || src.owner.chakra < 20)
 							RemoveState(src.owner, new/state/Iron_Fists, STATE_REMOVE_ALL)
 							src.owner.left_iron_fist = null
