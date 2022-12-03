@@ -67,10 +67,10 @@ mob
 
 					if(src.dodge == 0)
 						damage = round(damage-(((src.defence_total / 200)*0.25)*damage))
-						if(loc.loc:Safe!=1) src.LevelStat("Defence",(((damage/40) * 2)*jutsustatexp))
+						src.LevelStat("Defence",(((damage/40) * 2)*jutsustatexp))
 					else 
 						damage = round(damage-(((src.defence_total / 200)*0.50)*damage))
-						if(loc.loc:Safe!=1) src.LevelStat("Defence",(((damage/40) * 4)*jutsustatexp))
+						src.LevelStat("Defence",(((damage/40) * 4)*jutsustatexp))
 						flick("defendhit", src)
 						src.PlayAudio('Counter_Success.ogg', output = AUDIO_HEARERS)
 
