@@ -1,4 +1,3 @@
-area/var/Safe=0
 area
 	Entered()
 		if(Safe) usr<<output("You are now entering a safe zone.","Action.Output")
