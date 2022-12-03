@@ -14,13 +14,14 @@ mob
 		if(fexists("[SAVEFILE_CHARACTERS]/[copytext(src.ckey, 1, 2)]/[src.ckey] ([lowertext(character)]).sav.lk"))
 			src.client.prompt("You cannot load this character because it is currently in use.")
 
-			var/database/query/query = new({"
-				INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
-				VALUES(?, ?, ?, ?, ?, ?)"},
-				time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "character in use"
-			)
-			query.Execute(log_db)
-			LogErrorDb(query)
+			spawn()
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+					VALUES(?, ?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "character in use"
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
 
 			src.client.logging_in = 0
 			return 0
@@ -32,24 +33,26 @@ mob
 				if(password_hash != F["password"])
 					spawn() src.client.prompt("The character name or password you entered is incorrect.")
 
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
-						VALUES(?, ?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "incorrect password"
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+							VALUES(?, ?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "incorrect password"
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 
 					src.client.logging_in = 0
 					return 0
 				else
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
-						VALUES(?, ?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "success", null
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+							VALUES(?, ?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "success", null
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 					
 					if(src.Read(F, character, password)) return 1
 					else return 0
@@ -63,24 +66,26 @@ mob
 				if(character_found)
 					spawn() src.client.prompt("The character you are trying access to not linked to your current BYOND account. Please login with the BYOND account that created this character.")
 					
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
-						VALUES(?, ?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "key mismatch"
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+							VALUES(?, ?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "key mismatch"
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 
 				else
 					spawn() src.client.prompt("The character name or password you entered is incorrect.")
 
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
-						VALUES(?, ?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "character not found"
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_character_login]` (`timestamp`, `key`, `character`, `action`, `result`, `reason`)
+							VALUES(?, ?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, character, "login", "failure", "character not found"
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 
 				src.client.logging_in = 0
 				return 0
@@ -105,13 +110,14 @@ mob
 
 								mobs_online -= src // Prevent character save on disconnect.
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_character_creation]` (`timestamp`, `key`, `character`, `action`)
-									VALUES(?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "delete"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_character_creation]` (`timestamp`, `key`, `character`, `action`)
+										VALUES(?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "delete"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								del(src.client)
 

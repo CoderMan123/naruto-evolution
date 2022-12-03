@@ -240,8 +240,8 @@ proc
                 `id` INTEGER PRIMARY KEY,
                 `timestamp` TEXT NOT NULL,
                 `error` TEXT NOT NULL,
-                `description` TEXT NOT NULL,
-                `file` TEXT NOT NULL,
+                `description` TEXT,
+                `file` TEXT,
                 `line` INTEGER NOT NULL
             );
         "})
@@ -352,58 +352,63 @@ proc
         LogErrorDb(query)
 
     LogErrorDb(var/database/query/query)
-        ASSERT(query)
-        if(query.Error())
-            query.Add({"
-                INSERT INTO `[db_table_error_db]` (`timestamp`, `error`, `message`)
-                VALUES(?, ?, ?)"},
-                time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), query.Error(), query.ErrorMsg()
-            )
-            query.Execute(log_db)
+        spawn()
+            ASSERT(query)
+            if(query.Error())
+                query.Add({"
+                    INSERT INTO `[db_table_error_db]` (`timestamp`, `error`, `message`)
+                    VALUES(?, ?, ?)"},
+                    time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), query.Error(), query.ErrorMsg()
+                )
+                query.Execute(log_db)
     
     LogItem(var/mob/m, var/obj/Inventory/o, var/mob/recipient, var/action, var/quantity = o.stacks)
-        if(!m.client) return 0
+        spawn()
+            if(!m.client) return 0
 
-        if(recipient)
-            var/database/query/query = new({"
-                INSERT INTO `[db_table_item]` (`timestamp`, `item_id`, `type`, `stacks`, `location`, `ckey`, `character`, `recipient_ckey`, `recipient_character`, `action`)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
-                time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), o.id, "[o.type]", quantity, "[o.x], [o.y], [o.z]", m.ckey ? m.ckey : "[m.type]", m.character, recipient.ckey ? recipient.ckey : "[recipient.type]", recipient.character ? recipient.character : recipient.name, action
-            )
-            query.Execute(log_db)
-            LogErrorDb(query)
-        else
-            var/database/query/query = new({"
-                INSERT INTO `[db_table_item]` (`timestamp`, `item_id`, `type`, `stacks`, `location`, `ckey`, `character`, `action`)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)"},
-                time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), o.id, "[o.type]", quantity, "[o.x], [o.y], [o.z]", m.ckey ? m.ckey : "[m.type]", m.character, action
-            )
-            query.Execute(log_db)
-            LogErrorDb(query)
+            if(recipient)
+                var/database/query/query = new({"
+                    INSERT INTO `[db_table_item]` (`timestamp`, `item_id`, `type`, `stacks`, `location`, `ckey`, `character`, `recipient_ckey`, `recipient_character`, `action`)
+                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
+                    time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), o.id, "[o.type]", quantity, "[o.x], [o.y], [o.z]", m.ckey ? m.ckey : "[m.type]", m.character, recipient.ckey ? recipient.ckey : "[recipient.type]", recipient.character ? recipient.character : recipient.name, action
+                )
+                query.Execute(log_db)
+                LogErrorDb(query)
+            else
+                var/database/query/query = new({"
+                    INSERT INTO `[db_table_item]` (`timestamp`, `item_id`, `type`, `stacks`, `location`, `ckey`, `character`, `action`)
+                    VALUES(?, ?, ?, ?, ?, ?, ?, ?)"},
+                    time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), o.id, "[o.type]", quantity, "[o.x], [o.y], [o.z]", m.ckey ? m.ckey : "[m.type]", m.character, action
+                )
+                query.Execute(log_db)
+                LogErrorDb(query)
 
     LogKage(var/mob/m, var/log)
-        var/database/query/query = new({"
-            INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-            VALUES(?, ?, ?, ?, ?)"},
-            time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, log
-        )
-        query.Execute(log_db)
-        LogErrorDb(query)
+        spawn()
+            var/database/query/query = new({"
+                INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+                VALUES(?, ?, ?, ?, ?)"},
+                time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, log
+            )
+            query.Execute(log_db)
+            LogErrorDb(query)
 
     LogMission(var/mob/m, var/squad/squad, var/mission_name)
-        var/database/query/query = new({"
-            INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`)
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
-            time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), squad && squad.leader.len ? squad.leader[1] : m.key, squad && squad.leader.len ? squad.leader[squad.leader[1]] : m.character, squad && squad.members.len >= 1 ? squad.members[1] : null, squad && squad.members.len >= 1 ? squad.members[squad.members[1]] : null, squad && squad.members.len >= 2 ? squad.members[2] : null, squad && squad.members.len >= 2 ? squad.members[squad.members[2]] : null, squad && squad.members.len >= 3 ? squad.members[3] : null, squad && squad.members.len >= 3 ? squad.members[squad.members[3]] : null, squad && squad.members.len >= 4 ? squad.members[4] : null, squad && squad.members.len >= 4 ? squad.members[squad.members[4]] : null, squad && squad.mission ? squad.mission.name : mission_name
-        )
-        query.Execute(log_db)
-        LogErrorDb(query)
+        spawn()
+            var/database/query/query = new({"
+                INSERT INTO `[db_table_missions]` (`timestamp`, `squad_leader_key`, `squad_leader`, `squad_member_1_key`, `squad_member_1`, `squad_member_2_key`, `squad_member_2`, `squad_member_3_key`, `squad_member_3`, `squad_member_4_key`, `squad_member_4`, `mission`)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
+                time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), squad && squad.leader.len ? squad.leader[1] : m.key, squad && squad.leader.len ? squad.leader[squad.leader[1]] : m.character, squad && squad.members.len >= 1 ? squad.members[1] : null, squad && squad.members.len >= 1 ? squad.members[squad.members[1]] : null, squad && squad.members.len >= 2 ? squad.members[2] : null, squad && squad.members.len >= 2 ? squad.members[squad.members[2]] : null, squad && squad.members.len >= 3 ? squad.members[3] : null, squad && squad.members.len >= 3 ? squad.members[squad.members[3]] : null, squad && squad.members.len >= 4 ? squad.members[4] : null, squad && squad.members.len >= 4 ? squad.members[squad.members[4]] : null, squad && squad.mission ? squad.mission.name : mission_name
+            )
+            query.Execute(log_db)
+            LogErrorDb(query)
     
     LogTransaction(var/mob/m, var/mob/npc, var/ryo, var/obj/Inventory/item, var/action, var/override_item = null)
-        var/database/query/query = new({"
-            INSERT INTO `[db_table_transactions]` (`timestamp`, `ckey`, `character`, `npc`, `npc_type`, `item_id`, `item_type`, `stacks`, `ryo`, `action`)
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
-            time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, npc.name, "[npc.type]", item ? item.id : null, item ? "[item.type]" : override_item, item ? item.stacks : null, ryo, action
-        )
-        query.Execute(log_db)
-        LogErrorDb(query)
+        spawn()
+            var/database/query/query = new({"
+                INSERT INTO `[db_table_transactions]` (`timestamp`, `ckey`, `character`, `npc`, `npc_type`, `item_id`, `item_type`, `stacks`, `ryo`, `action`)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
+                time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, npc.name, "[npc.type]", item ? item.id : null, item ? "[item.type]" : override_item, item ? item.stacks : null, ryo, action
+            )
+            query.Execute(log_db)
+            LogErrorDb(query)

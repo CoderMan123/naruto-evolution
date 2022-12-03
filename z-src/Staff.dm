@@ -154,13 +154,14 @@ mob/Moderator/verb/
 				if(administrators.Find(M.ckey) || moderators.Find(M.ckey))
 					M << "<font color=yellow>\[Staff] [src.character]:</font> <font color='[COLOR_CHAT]'>[html_encode(c)]</font>"
 			
-			var/database/query/query = new({"
-				INSERT INTO `[db_table_chat_staff]` (`timestamp`, `key`, `character`, `identity`, `village`, `faction`, `message`)
-				VALUES(?, ?, ?, ?, ?, ?, ?)"},
-				time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, c
-			)
-			query.Execute(log_db)
-			LogErrorDb(query)
+			spawn()
+				var/database/query/query = new({"
+					INSERT INTO `[db_table_chat_staff]` (`timestamp`, `key`, `character`, `identity`, `village`, `faction`, `message`)
+					VALUES(?, ?, ?, ?, ?, ?, ?)"},
+					time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.name, src.village, src.Faction, c
+				)
+				query.Execute(log_db)
+				LogErrorDb(query)
 		else
 			src << "Please do not use more than 750 characters."
 			src << "Message was <i>[c]</i>"

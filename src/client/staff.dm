@@ -24,26 +24,28 @@ client
 				if(src.mob.rank == RANK_HOKAGE)
 					src << output("You were forced out of office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>, and as a result you have been automatically demoted to [RANK_JOUNIN].", "Action.Output")
 					
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-						VALUES(?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.ckey, src.mob.character, src.mob.village, "[src.mob.character] ([src.ckey]) was forced out of office as the [RANK_HOKAGE] for the [VILLAGE_LEAF], and as a result has been automatically demoted to [RANK_JOUNIN]."
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+							VALUES(?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.ckey, src.mob.character, src.mob.village, "[src.mob.character] ([src.ckey]) was forced out of office as the [RANK_HOKAGE] for the [VILLAGE_LEAF], and as a result has been automatically demoted to [RANK_JOUNIN]."
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 					
 					src.mob.SetRank(RANK_CHUUNIN)
 
 				if(src.mob.rank == RANK_KAZEKAGE)
 					src << output("You were forced out of office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>, and as a result you have been automatically demoted to [RANK_JOUNIN].", "Action.Output")
 					
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-						VALUES(?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.ckey, src.mob.character, src.mob.village, "[src.mob.character] ([src.ckey]) was forced out of office as the [RANK_KAZEKAGE] for the [VILLAGE_SAND], and as a result has been automatically demoted to [RANK_JOUNIN]."
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+							VALUES(?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.ckey, src.mob.character, src.mob.village, "[src.mob.character] ([src.ckey]) was forced out of office as the [RANK_KAZEKAGE] for the [VILLAGE_SAND], and as a result has been automatically demoted to [RANK_JOUNIN]."
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 
 					src.mob.SetRank(RANK_CHUUNIN)
 
@@ -60,13 +62,14 @@ client
 				if(src.mob.rank == RANK_AKATSUKI_LEADER)
 					src << output("You were forced out of office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>, and as a result you have been automatically demoted to [RANK_AKATSUKI].", "Action.Output")
 					
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-						VALUES(?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[src.mob.character] ([src.ckey]) was forced out of office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI], and as a result has been automatically demoted to [RANK_AKATSUKI]."
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+							VALUES(?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[src.mob.character] ([src.ckey]) was forced out of office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI], and as a result has been automatically demoted to [RANK_AKATSUKI]."
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 
 					src.mob.SetRank(RANK_AKATSUKI)
 
@@ -151,13 +154,14 @@ mob
 					m.client.UpdateInventoryPanel()
 					m.move_delay = max(0.5, 0.8-((m.agility_total/200)*0.3))
 
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-						VALUES(?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "Restore Base was used on [m.character] ([m.ckey])."
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+							VALUES(?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "Restore Base was used on [m.character] ([m.ckey])."
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 			
 			Manage_Testers()
 				set category = "Administrator"
@@ -234,13 +238,14 @@ mob
 
 								world << output("[usr.character] has elected [m.character] into office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
 								
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, usr.village, "[m.character] ([m.client.ckey]) was elected into office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, usr.village, "[m.character] ([m.client.ckey]) was elected into office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 					if("Demote")
 						if(akatsuki.len)
@@ -248,13 +253,14 @@ mob
 								if("Demote")
 									world << output("The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character].", "Action.Output")
 									
-									var/database/query/query = new({"
-										INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "The [RANK_AKATSUKI_LEADER] [global.GetAkatsuki(RETURN_FORMAT_CHARACTER)] ([global.GetAkatsuki()]) for the [VILLAGE_AKATSUKI] was forced out of office."
-									)
-									query.Execute(log_db)
-									LogErrorDb(query)
+									spawn()
+										var/database/query/query = new({"
+											INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+											VALUES(?, ?, ?, ?, ?)"},
+											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "The [RANK_AKATSUKI_LEADER] [global.GetAkatsuki(RETURN_FORMAT_CHARACTER)] ([global.GetAkatsuki()]) for the [VILLAGE_AKATSUKI] was forced out of office."
+										)
+										query.Execute(log_db)
+										LogErrorDb(query)
 
 									akatsuki = list()
 									akatsuki_last_online = null
@@ -289,13 +295,14 @@ mob
 
 										world << output("[usr.character] has elected [m.character] into office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
 										
-										var/database/query/query = new({"
-											INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-											VALUES(?, ?, ?, ?, ?)"},
-											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.client.ckey]) was elected into office as the [RANK_HOKAGE] for the [VILLAGE_LEAF]."
-										)
-										query.Execute(log_db)
-										LogErrorDb(query)
+										spawn()
+											var/database/query/query = new({"
+												INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+												VALUES(?, ?, ?, ?, ?)"},
+												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.client.ckey]) was elected into office as the [RANK_HOKAGE] for the [VILLAGE_LEAF]."
+											)
+											query.Execute(log_db)
+											LogErrorDb(query)
 
 							if("Demote")
 								if(hokage.len)
@@ -303,13 +310,14 @@ mob
 										if("Demote")
 											world << output("The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office by [usr.character].", "Action.Output")
 
-											var/database/query/query = new({"
-												INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-												VALUES(?, ?, ?, ?, ?)"},
-												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "The [RANK_HOKAGE] [global.GetHokage(RETURN_FORMAT_CHARACTER)] ([global.GetHokage()]) for the [VILLAGE_LEAF] was forced out of office."
-											)
-											query.Execute(log_db)
-											LogErrorDb(query)
+											spawn()
+												var/database/query/query = new({"
+													INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+													VALUES(?, ?, ?, ?, ?)"},
+													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "The [RANK_HOKAGE] [global.GetHokage(RETURN_FORMAT_CHARACTER)] ([global.GetHokage()]) for the [VILLAGE_LEAF] was forced out of office."
+												)
+												query.Execute(log_db)
+												LogErrorDb(query)
 											
 											hokage = list()
 											kages_last_online[VILLAGE_LEAF] = null
@@ -341,13 +349,14 @@ mob
 
 										world << output("[usr] has elected [m.character] into office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.", "Action.Output")
 										
-										var/database/query/query = new({"
-											INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-											VALUES(?, ?, ?, ?, ?)"},
-											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.client.ckey]) was elected into office as the [RANK_KAZEKAGE] for the [VILLAGE_SAND]."
-										)
-										query.Execute(log_db)
-										LogErrorDb(query)
+										spawn()
+											var/database/query/query = new({"
+												INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+												VALUES(?, ?, ?, ?, ?)"},
+												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.client.ckey]) was elected into office as the [RANK_KAZEKAGE] for the [VILLAGE_SAND]."
+											)
+											query.Execute(log_db)
+											LogErrorDb(query)
 										
 							if("Demote")
 								if(kazekage.len)
@@ -355,13 +364,14 @@ mob
 										if("Demote")
 											world << output("The elected [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office by [usr.character].", "Action.Output")
 											
-											var/database/query/query = new({"
-												INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-												VALUES(?, ?, ?, ?, ?)"},
-												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "The elected [RANK_KAZEKAGE] [global.GetKazekage(RETURN_FORMAT_CHARACTER)] ([global.GetKazekage()]) for the [VILLAGE_SAND] was forced out of office."
-											)
-											query.Execute(log_db)
-											LogErrorDb(query)
+											spawn()
+												var/database/query/query = new({"
+													INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+													VALUES(?, ?, ?, ?, ?)"},
+													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "The elected [RANK_KAZEKAGE] [global.GetKazekage(RETURN_FORMAT_CHARACTER)] ([global.GetKazekage()]) for the [VILLAGE_SAND] was forced out of office."
+												)
+												query.Execute(log_db)
+												LogErrorDb(query)
 											
 											kazekage = list()
 											kages_last_online[VILLAGE_SAND] = null
@@ -381,13 +391,14 @@ mob
 							if(M)
 								squad.mission.Complete(M)
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[usr.character] ([usr.ckey]) has completed [M.character]'s mission for their entire Squad."
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[usr.character] ([usr.ckey]) has completed [M.character]'s mission for their entire Squad."
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								if(src.client.prompt("Would you like to reset mission cooldown for [M.character]'s Squad?", "Manage Mission", list("Yes", "No")) == "Yes")
 									for(var/mob/m in mobs_online)
@@ -396,13 +407,14 @@ mob
 											var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(m.client.ckey, 1, 2)]/[m.client.ckey].sav")
 											F["last_mission"] << null
 									
-									query = new({"
-										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[usr.character] ([usr.ckey]) has reset the mission cooldown for [M.character]'s entire Squad."
-									)
-									query.Execute(log_db)
-									LogErrorDb(query)
+									spawn()
+										var/database/query/query = new({"
+											INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+											VALUES(?, ?, ?, ?, ?)"},
+											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[usr.character] ([usr.ckey]) has reset the mission cooldown for [M.character]'s entire Squad."
+										)
+										query.Execute(log_db)
+										LogErrorDb(query)
 
 							else
 								src.client.prompt("[M.character] isn't currently in a Squad.", "Manage Mission")
@@ -413,13 +425,14 @@ mob
 									squad.mission.status = "Failure"
 									squad.mission.complete = world.realtime
 
-									var/database/query/query = new({"
-										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[src.character] ([src.ckey]) has failed [M.character]'s mission for their entire Squad."
-									)
-									query.Execute(log_db)
-									LogErrorDb(query)
+									spawn()
+										var/database/query/query = new({"
+											INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+											VALUES(?, ?, ?, ?, ?)"},
+											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[src.character] ([src.ckey]) has failed [M.character]'s mission for their entire Squad."
+										)
+										query.Execute(log_db)
+										LogErrorDb(query)
 
 								if(src.client.prompt("Would you like to reset mission cooldown for [M.character]'s Squad?", "Manage Mission", list("Yes", "No")) == "Yes")
 									for(var/mob/m in mobs_online)
@@ -428,13 +441,14 @@ mob
 											var/savefile/F = new("[SAVEFILE_CLIENT]/[copytext(m.client.ckey, 1, 2)]/[m.client.ckey].sav")
 											F["last_mission"] << null
 									
-									var/database/query/query = new({"
-										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[src.character] ([src.ckey]) has reset the mission cooldown for [M.character]'s entire Squad."
-									)
-									query.Execute(log_db)
-									LogErrorDb(query)
+									spawn()
+										var/database/query/query = new({"
+											INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+											VALUES(?, ?, ?, ?, ?)"},
+											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[src.character] ([src.ckey]) has reset the mission cooldown for [M.character]'s entire Squad."
+										)
+										query.Execute(log_db)
+										LogErrorDb(query)
 
 							else
 								src.client.prompt("[M.character] isn't currently in a Squad.", "Manage Mission")
@@ -514,13 +528,14 @@ mob
 									<br />
 									You will need to use your updated character name to login."})
 								
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character]'s ([M.ckey]) character name was changed to [name] ([M.ckey])."
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character]'s ([M.ckey]) character name was changed to [name] ([M.ckey])."
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 			Manage_Names()
 				set category = "Administrator"
@@ -531,13 +546,14 @@ mob
 						if(name)
 							names_taken.Add(name)
 
-							var/database/query/query = new({"
-								INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-								VALUES(?, ?, ?, ?, ?)"},
-								time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[name] was added to the list of taken character names."
-							)
-							query.Execute(log_db)
-							LogErrorDb(query)
+							spawn()
+								var/database/query/query = new({"
+									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+									VALUES(?, ?, ?, ?, ?)"},
+									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[name] was added to the list of taken character names."
+								)
+								query.Execute(log_db)
+								LogErrorDb(query)
 
 							alert("The character name, [name], has been added to the list of taken character names.", "Manage Names")
 
@@ -547,13 +563,14 @@ mob
 						if(name)
 							names_taken.Remove(name)
 
-							var/database/query/query = new({"
-								INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-								VALUES(?, ?, ?, ?, ?)"},
-								time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[name] was removed from the list of taken character names."
-							)
-							query.Execute(log_db)
-							LogErrorDb(query)
+							spawn()
+								var/database/query/query = new({"
+									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+									VALUES(?, ?, ?, ?, ?)"},
+									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[name] was removed from the list of taken character names."
+								)
+								query.Execute(log_db)
+								LogErrorDb(query)
 
 							alert("The character name, [name], has been removed from the list of taken character names.", "Manage Names")
 
@@ -589,13 +606,14 @@ mob
 									password = sha1("[password][sha1(ckey(F["key"]))]")
 									F["password_hotfix"] << password
 
-									var/database/query/query = new({"
-										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "The password was changed for the savefile: [savefile]."
-									)
-									query.Execute(log_db)
-									LogErrorDb(query)
+									spawn()
+										var/database/query/query = new({"
+											INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+											VALUES(?, ?, ?, ?, ?)"},
+											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "The password was changed for the savefile: [savefile]."
+										)
+										query.Execute(log_db)
+										LogErrorDb(query)
 									
 									alert("You have updated the password for the savefile: [savefile].", "Change Password")
 
@@ -621,13 +639,14 @@ mob
 								usr.client << output("You have given <b>[ryo]</b> Ryo to [M.character].","Action.Output")
 								M.client << output("[usr] has given you <b>[ryo]</b> Ryo.","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey]) was given [ryo] ryo."
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey]) was given [ryo] ryo."
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 						if("Take")
 							var/ryo = input("How much Ryo would you like to take from [M.character]?", "Change Ryo") as null|num
@@ -638,13 +657,14 @@ mob
 								usr.client << output("You have taken <b>[ryo]</b> Ryo from [M.character].","Action.Output")
 								M.client << output("[usr] has taken <b>[ryo]</b> Ryo from you.","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[ryo] ryo was taken from [M.character] ([M.ckey])."
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[ryo] ryo was taken from [M.character] ([M.ckey])."
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 			Change_Village()
 				set category = "Administrator"
@@ -661,13 +681,14 @@ mob
 								usr.client << output("You have changed [M.character]'s village from [M.village] to [VILLAGE_LEAF].","Action.Output")
 								M.client << output("[usr] has changed your village from [M.village] to [VILLAGE_LEAF].","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s village was changed from [M.village] to [VILLAGE_LEAF].<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s village was changed from [M.village] to [VILLAGE_LEAF].<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								M.SetVillage(VILLAGE_LEAF)
 
@@ -684,13 +705,14 @@ mob
 								usr.client << output("You have changed [M.character]'s village from [M.village] to [VILLAGE_SAND].","Action.Output")
 								M.client << output("[usr] has changed your village from [M.village] to [VILLAGE_SAND].","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s village was changed from [M.village] to [VILLAGE_SAND].<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s village was changed from [M.village] to [VILLAGE_SAND].<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								M.SetVillage(VILLAGE_SAND)
 
@@ -707,13 +729,14 @@ mob
 								usr.client << output("You have changed [M.character]'s village from [M.village] to [VILLAGE_AKATSUKI].","Action.Output")
 								M.client << output("[usr] has changed your village from [M.village] to [VILLAGE_AKATSUKI].","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s village was changed from [M.village] to [VILLAGE_AKATSUKI].<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s village was changed from [M.village] to [VILLAGE_AKATSUKI].<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								M.SetVillage(VILLAGE_AKATSUKI)
 
@@ -730,13 +753,14 @@ mob
 								usr.client << output("You have changed [M.character]'s village from [M.village] to [VILLAGE_MISSING_NIN].","Action.Output")
 								M.client << output("[usr] has changed your village from [M.village] to [VILLAGE_MISSING_NIN].","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s village was changed from [M.village] to [VILLAGE_MISSING_NIN].<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s village was changed from [M.village] to [VILLAGE_MISSING_NIN].<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 								
 								M.SetVillage(VILLAGE_MISSING_NIN)
 
@@ -753,13 +777,14 @@ mob
 								usr.client << output("You have changed [M.character]'s rank from [M.rank] to [RANK_ACADEMY_STUDENT].","Action.Output")
 								M.client << output("[usr] has changed your rank from [M.rank] to [RANK_ACADEMY_STUDENT].","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_ACADEMY_STUDENT].<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_ACADEMY_STUDENT].<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								M.SetRank(RANK_ACADEMY_STUDENT)
 
@@ -768,13 +793,14 @@ mob
 								usr.client << output("You have changed [M.character]'s rank from [M.rank] to [RANK_GENIN].","Action.Output")
 								M.client << output("[usr] has changed your rank from [M.rank] to [RANK_GENIN].","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_GENIN].<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_GENIN].<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								M.SetRank(RANK_GENIN)
 
@@ -783,13 +809,14 @@ mob
 								usr.client << output("You have changed [M.character]'s rank from [M.rank] to [RANK_CHUUNIN].","Action.Output")
 								M.client << output("[usr] has changed your rank from [M.rank] to [RANK_CHUUNIN].","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_CHUUNIN].<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_CHUUNIN].<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								M.SetRank(RANK_CHUUNIN)
 
@@ -798,13 +825,14 @@ mob
 								usr.client << output("You have changed [M.character]'s rank from [M.rank] to [RANK_JOUNIN].","Action.Output")
 								M.client << output("[usr] has changed your rank from [M.rank] to [RANK_JOUNIN].","Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_JOUNIN].<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_JOUNIN].<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								M.SetRank(RANK_JOUNIN)
 
@@ -813,13 +841,14 @@ mob
 								usr.client << output("You have changed [M.character]'s rank from [M.rank] to [RANK_ANBU].","Action.Output")
 								M.client << output("[usr] has changed your rank from [M.rank] to [RANK_ANBU].","Action.Output")
 								
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_ANBU].<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "[M.character] ([M.ckey])'s rank was changed from [M.rank] to [RANK_ANBU].<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								M.SetRank(RANK_ANBU)
 
@@ -871,22 +900,24 @@ mob
 								usr.client << output("You have used <u>Give Everything</u> on [C.mob.character].", "Action.Output")
 								C << output("[usr.character] has used <u>Give Everything</u> on you.", "Action.Output")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "Give Everything was used on [C.mob.character] ([C.key]).<br />"
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "Give Everything was used on [C.mob.character] ([C.key]).<br />"
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 					else
-						var/database/query/query = new({"
-							INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
-							VALUES(?, ?, ?, ?, ?)"},
-							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "Give Everything was attempted to be used on [C.mob.character] ([C.key]).<br />"
-						)
-						query.Execute(log_db)
-						LogErrorDb(query)
+						spawn()
+							var/database/query/query = new({"
+								INSERT INTO `[db_table_staff]` (`timestamp`, `key`, `character`, `role`, `log`)
+								VALUES(?, ?, ?, ?, ?)"},
+								time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, "Administrator", "Give Everything was attempted to be used on [C.mob.character] ([C.key]).<br />"
+							)
+							query.Execute(log_db)
+							LogErrorDb(query)
 
 						usr.client.prompt("You can only use this command on Administrators.")
 				else
@@ -937,13 +968,14 @@ mob
 
 											spawn() usr.client.prompt("[m.character] has accepted your invitation to join the [usr.village].")
 
-											var/database/query/query = new({"
-												INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-												VALUES(?, ?, ?, ?, ?)"},
-												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) has accepted the invitation to join the [VILLAGE_AKATSUKI]."
-											)
-											query.Execute(log_db)
-											LogErrorDb(query)
+											spawn()
+												var/database/query/query = new({"
+													INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+													VALUES(?, ?, ?, ?, ?)"},
+													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) has accepted the invitation to join the [VILLAGE_AKATSUKI]."
+												)
+												query.Execute(log_db)
+												LogErrorDb(query)
 
 											m.SetVillage(usr.village)
 											m.SetRank(RANK_AKATSUKI)
@@ -958,13 +990,14 @@ mob
 									if("No")
 										spawn() usr.client.prompt("[m.character] has rejected your invitation to join the [usr.village].")
 
-										var/database/query/query = new({"
-											INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-											VALUES(?, ?, ?, ?, ?)"},
-											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) has rejected the invitation to join the [VILLAGE_AKATSUKI]."
-										)
-										query.Execute(log_db)
-										LogErrorDb(query)
+										spawn()
+											var/database/query/query = new({"
+												INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+												VALUES(?, ?, ?, ?, ?)"},
+												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) has rejected the invitation to join the [VILLAGE_AKATSUKI]."
+											)
+											query.Execute(log_db)
+											LogErrorDb(query)
 
 							else
 								usr.client.prompt("You can't send a village invitation to [m.character] because they are not a [VILLAGE_MISSING_NIN].", "Manage Members")
@@ -990,13 +1023,14 @@ mob
 								spawn() usr.client.prompt("You have formally exiled [m.character] from the [usr.village].", "Member Exile")
 								spawn() m.client.prompt("The [usr.rank], [usr.character], formally exiles you from the [usr.village].", "Member Exile")
 
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) was exiled from the [VILLAGE_AKATSUKI]."
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) was exiled from the [VILLAGE_AKATSUKI]."
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								m.SetVillage(VILLAGE_MISSING_NIN)
 								world.UpdateVillageCount()
@@ -1027,23 +1061,25 @@ mob
 
 												world << output("[usr.character] has retired from office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
 												
-												var/database/query/query = new({"
-													INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-													VALUES(?, ?, ?, ?, ?)"},
-													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI] for the [VILLAGE_AKATSUKI]."
-												)
-												query.Execute(log_db)
-												LogErrorDb(query)
+												spawn()
+													var/database/query/query = new({"
+														INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+														VALUES(?, ?, ?, ?, ?)"},
+														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI] for the [VILLAGE_AKATSUKI]."
+													)
+													query.Execute(log_db)
+													LogErrorDb(query)
 
 												world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
 												
-												query = new({"
-													INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-													VALUES(?, ?, ?, ?, ?)"},
-													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
-												)
-												query.Execute(log_db)
-												LogErrorDb(query)
+												spawn()
+													var/database/query/query = new({"
+														INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+														VALUES(?, ?, ?, ?, ?)"},
+														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
+													)
+													query.Execute(log_db)
+													LogErrorDb(query)
 
 												m.SetRank(usr.rank)
 												m.client.StaffCheck()
@@ -1068,13 +1104,14 @@ mob
 
 								world << output("[usr.character] has retired from office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
 								
-								var/database/query/query = new({"
-									INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-									VALUES(?, ?, ?, ?, ?)"},
-									time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
-								)
-								query.Execute(log_db)
-								LogErrorDb(query)
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
 
 								akatsuki = list()
 								akatsuki_last_online = null
@@ -1122,13 +1159,15 @@ mob
 
 									if("No")
 										spawn() usr.client.prompt("[m.character] has rejected your invitation to join the [usr.village] village.")
-										var/database/query/query = new({"
-											INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-											VALUES(?, ?, ?, ?, ?)"},
-											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has rejected the invitation to join the [src.village] village."
-										)
-										query.Execute(log_db)
-										LogErrorDb(query)
+
+										spawn()
+											var/database/query/query = new({"
+												INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+												VALUES(?, ?, ?, ?, ?)"},
+												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has rejected the invitation to join the [src.village] village."
+											)
+											query.Execute(log_db)
+											LogErrorDb(query)
 
 							else
 								usr.client.prompt("You can't send a village invitation to [m.character] because they are not a [VILLAGE_MISSING_NIN].", "Manage Village")
@@ -1182,13 +1221,14 @@ mob
 												if(m.rank == RANK_CHUUNIN)
 													spawn() usr.client.prompt("[m.character] has accepted your invitation to join the [RANK_JOUNIN].")
 													
-													var/database/query/query = new({"
-														INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-														VALUES(?, ?, ?, ?, ?)"},
-														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has accepted the invitation to join the [RANK_JOUNIN]."
-													)
-													query.Execute(log_db)
-													LogErrorDb(query)
+													spawn()
+														var/database/query/query = new({"
+															INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+															VALUES(?, ?, ?, ?, ?)"},
+															time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has accepted the invitation to join the [RANK_JOUNIN]."
+														)
+														query.Execute(log_db)
+														LogErrorDb(query)
 													
 													m.SetRank(RANK_JOUNIN)
 
@@ -1204,13 +1244,14 @@ mob
 										if("No")
 											spawn() usr.client.prompt("[m.character] has rejected your invitation to join the [RANK_JOUNIN].")
 
-											var/database/query/query = new({"
-												INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-												VALUES(?, ?, ?, ?, ?)"},
-												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has rejected the invitation to join the [RANK_JOUNIN]."
-											)
-											query.Execute(log_db)
-											LogErrorDb(query)
+											spawn()
+												var/database/query/query = new({"
+													INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+													VALUES(?, ?, ?, ?, ?)"},
+													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has rejected the invitation to join the [RANK_JOUNIN]."
+												)
+												query.Execute(log_db)
+												LogErrorDb(query)
 								else
 									usr.client.prompt("You can't send a [RANK_JOUNIN] invitation to [m.character] because they are no longer a [RANK_CHUUNIN].", "Manage [RANK_JOUNIN]")
 							else
@@ -1230,13 +1271,14 @@ mob
 									spawn() usr.client.prompt("You have formally demoted [m.character] to [RANK_CHUUNIN].", "[RANK_JOUNIN] Demotion")
 									spawn() m.client.prompt("The [usr.village] [usr.rank], [usr.character], formally demotes you to [RANK_CHUUNIN].", "[RANK_JOUNIN] Demotion")
 
-									var/database/query/query = new({"
-										INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) was demoted to rank [RANK_CHUUNIN]."
-									)
-									query.Execute(log_db)
-									LogErrorDb(query)
+									spawn()
+										var/database/query/query = new({"
+											INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+											VALUES(?, ?, ?, ?, ?)"},
+											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) was demoted to rank [RANK_CHUUNIN]."
+										)
+										query.Execute(log_db)
+										LogErrorDb(query)
 									
 									m.SetRank(RANK_CHUUNIN)
 
@@ -1267,13 +1309,14 @@ mob
 												if(m.rank == RANK_CHUUNIN || m.rank == RANK_JOUNIN)
 													spawn() usr.client.prompt("[m.character] has accepted your invitation to join the [RANK_ANBU].")
 
-													var/database/query/query = new({"
-														INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-														VALUES(?, ?, ?, ?, ?)"},
-														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] has accepted the invitation to join the [RANK_ANBU]."
-													)
-													query.Execute(log_db)
-													LogErrorDb(query)
+													spawn()
+														var/database/query/query = new({"
+															INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+															VALUES(?, ?, ?, ?, ?)"},
+															time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] has accepted the invitation to join the [RANK_ANBU]."
+														)
+														query.Execute(log_db)
+														LogErrorDb(query)
 													
 													m.SetRank(RANK_ANBU)
 
@@ -1289,13 +1332,14 @@ mob
 										if("No")
 											spawn() usr.client.prompt("[m.character] has rejected your invitation to join the [RANK_ANBU].")
 
-											var/database/query/query = new({"
-												INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-												VALUES(?, ?, ?, ?, ?)"},
-												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] has rejected the invitation to join the [RANK_ANBU]."
-											)
-											query.Execute(log_db)
-											LogErrorDb(query)
+											spawn()
+												var/database/query/query = new({"
+													INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+													VALUES(?, ?, ?, ?, ?)"},
+													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] has rejected the invitation to join the [RANK_ANBU]."
+												)
+												query.Execute(log_db)
+												LogErrorDb(query)
 								else
 									usr.client.prompt("You can't send a [RANK_ANBU] invitation to [m.character] because they are no longer a [RANK_CHUUNIN] or [RANK_JOUNIN].", "Manage [RANK_ANBU]")
 							else
@@ -1315,13 +1359,14 @@ mob
 									spawn() usr.client.prompt("You have formally demoted [m.character] to [RANK_CHUUNIN].", "[RANK_ANBU] Demotion")
 									spawn() m.client.prompt("The [usr.village] [usr.rank], [usr.character], formally demotes you to [RANK_CHUUNIN].", "[RANK_ANBU] Demotion")
 
-									var/database/query/query = new({"
-										INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) was demoted to rank [RANK_CHUUNIN]."
-									)
-									query.Execute(log_db)
-									LogErrorDb(query)
+									spawn()
+										var/database/query/query = new({"
+											INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+											VALUES(?, ?, ?, ?, ?)"},
+											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) was demoted to rank [RANK_CHUUNIN]."
+										)
+										query.Execute(log_db)
+										LogErrorDb(query)
 
 									m.SetRank(RANK_CHUUNIN)
 
@@ -1352,56 +1397,61 @@ mob
 												if("Yes")
 													spawn() usr.client.prompt("[m.character] has accepted your invitation to succeed you as [usr.rank].")
 
-													var/database/query/query = new({"
-														INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-														VALUES(?, ?, ?, ?, ?)"},
-														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has accepted the invitation be the successor [usr.rank]."
-													)
-													query.Execute(log_db)
-													LogErrorDb(query)
+													spawn()
+														var/database/query/query = new({"
+															INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+															VALUES(?, ?, ?, ?, ?)"},
+															time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has accepted the invitation be the successor [usr.rank]."
+														)
+														query.Execute(log_db)
+														LogErrorDb(query)
 
 													switch(usr.rank)
 														if(RANK_HOKAGE)
 															world << output("[usr.character] has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
 
-															query = new({"
-																INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-																VALUES(?, ?, ?, ?, ?)"},
-																time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the [VILLAGE_LEAF]."
-															)
-															query.Execute(log_db)
-															LogErrorDb(query)
+															spawn()
+																var/database/query/query = new({"
+																	INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+																	VALUES(?, ?, ?, ?, ?)"},
+																	time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the [VILLAGE_LEAF]."
+																)
+																query.Execute(log_db)
+																LogErrorDb(query)
 
 															world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
 															
-															query = new({"
-																INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-																VALUES(?, ?, ?, ?, ?)"},
-																time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, "[usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_HOKAGE] for the [VILLAGE_LEAF]."
-															)
-															query.Execute(log_db)
-															LogErrorDb(query)
+															spawn()
+																var/database/query/query = new({"
+																	INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+																	VALUES(?, ?, ?, ?, ?)"},
+																	time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, "[usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_HOKAGE] for the [VILLAGE_LEAF]."
+																)
+																query.Execute(log_db)
+																LogErrorDb(query)
 															
 														if(RANK_KAZEKAGE)
 															world << output("[usr.character] has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.", "Action.Output")
 															
-															query = new({"
-																INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-																VALUES(?, ?, ?, ?, ?)"},
-																time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_KAZEKAGE] for the [VILLAGE_SAND]."
-															)
-															query.Execute(log_db)
-															LogErrorDb(query)
+															spawn()
+																var/database/query/query = new({"
+																	INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+																	VALUES(?, ?, ?, ?, ?)"},
+																	time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_KAZEKAGE] for the [VILLAGE_SAND]."
+																)
+																query.Execute(log_db)
+																LogErrorDb(query)
 															
 															world << output("[usr.character] has appointed [m.character] as their successor and is now the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.", "Action.Output")
 															
-															query = new({"
-																INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-																VALUES(?, ?, ?, ?, ?)"},
-																time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, "[usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_KAZEKAGE] for the [VILLAGE_SAND]."
-															)
-															query.Execute(log_db)
-															LogErrorDb(query)
+															spawn()
+																var/database/query/query = new({"
+																	INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+																	VALUES(?, ?, ?, ?, ?)"},
+																	time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), m.client.ckey, m.character, m.village, "[usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_KAZEKAGE] for the [VILLAGE_SAND]."
+																)
+																query.Execute(log_db)
+																LogErrorDb(query)
 
 													m.SetRank(usr.rank)
 													m.client.StaffCheck()
@@ -1418,13 +1468,14 @@ mob
 												if("No")
 													spawn() usr.client.prompt("[m.character] has rejected your invitation to succeed you as [usr.rank].")
 
-													var/database/query/query = new({"
-														INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-														VALUES(?, ?, ?, ?, ?)"},
-														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has rejected the invitation be the successor [usr.rank]."
-													)
-													query.Execute(log_db)
-													LogErrorDb(query)
+													spawn()
+														var/database/query/query = new({"
+															INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+															VALUES(?, ?, ?, ?, ?)"},
+															time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "[m.character] ([m.ckey]) has rejected the invitation be the successor [usr.rank]."
+														)
+														query.Execute(log_db)
+														LogErrorDb(query)
 										else
 											usr.client.prompt("You can't send a [usr.rank] invitation to [m.character] because they are no longer a [RANK_CHUUNIN], [RANK_JOUNIN] or [RANK_ANBU].", "Retire [usr.rank]")
 									else
@@ -1437,26 +1488,28 @@ mob
 									if(RANK_HOKAGE)
 										world << output("[usr.character] has retired from office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>.", "Action.Output")
 
-										var/database/query/query = new({"
-											INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-											VALUES(?, ?, ?, ?, ?)"},
-											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, usr.village, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the [VILLAGE_LEAF]."
-										)
-										query.Execute(log_db)
-										LogErrorDb(query)
+										spawn()
+											var/database/query/query = new({"
+												INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+												VALUES(?, ?, ?, ?, ?)"},
+												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, usr.village, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_HOKAGE] for the [VILLAGE_LEAF]."
+											)
+											query.Execute(log_db)
+											LogErrorDb(query)
 
 										hokage = list()
 
 									if(RANK_KAZEKAGE)
 										world << output("[usr.character] has retired from office as the [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font>.", "Action.Output")
 										
-										var/database/query/query = new({"
-											INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
-											VALUES(?, ?, ?, ?, ?)"},
-											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, usr.village, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_KAZEKAGE] for the [VILLAGE_SAND]."
-										)
-										query.Execute(log_db)
-										LogErrorDb(query)
+										spawn()
+											var/database/query/query = new({"
+												INSERT INTO `[db_table_kage]` (`timestamp`, `key`, `character`, `village`, `log`)
+												VALUES(?, ?, ?, ?, ?)"},
+												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, usr.village, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_KAZEKAGE] for the [VILLAGE_SAND]."
+											)
+											query.Execute(log_db)
+											LogErrorDb(query)
 
 										kazekage = list()
 

@@ -46,13 +46,14 @@ world
 		DbMigrations()
 		..()
 
-		var/database/query/query = new({"
-			INSERT INTO `[db_table_server_startup]` (`timestamp`, `action`)
-			VALUES(?, ?)"},
-			time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "start"
-		)
-		query.Execute(log_db)
-		LogErrorDb(query)
+		spawn()
+			var/database/query/query = new({"
+				INSERT INTO `[db_table_server_startup]` (`timestamp`, `action`)
+				VALUES(?, ?)"},
+				time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "start"
+			)
+			query.Execute(log_db)
+			LogErrorDb(query)
 
 		build = file2text("VERSION")
 		if(!build) text2file("0.0.0", "VERSION")
@@ -83,13 +84,14 @@ world
 		src.FailMissions()
 		src.Save()
 
-		var/database/query/query = new({"
-			INSERT INTO `[db_table_server_startup]` (`timestamp`, `action`)
-			VALUES(?, ?)"},
-			time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "shutdown"
-		)
-		query.Execute(log_db)
-		LogErrorDb(query)
+		spawn()
+			var/database/query/query = new({"
+				INSERT INTO `[db_table_server_startup]` (`timestamp`, `action`)
+				VALUES(?, ?)"},
+				time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "shutdown"
+			)
+			query.Execute(log_db)
+			LogErrorDb(query)
 
 		log_db.Close()
 
@@ -148,13 +150,14 @@ world
 				if(!online)
 					world << output("The [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
 
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `village`, `log`)
-						VALUES(?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetHokage(), global.GetHokage(RETURN_FORMAT_CHARACTER), VILLAGE_LEAF, "The [RANK_HOKAGE] ([global.GetHokage()]) for the [VILLAGE_LEAF] was forced out of office due to inactivity for [days] days."
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `village`, `log`)
+							VALUES(?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetHokage(), global.GetHokage(RETURN_FORMAT_CHARACTER), VILLAGE_LEAF, "The [RANK_HOKAGE] ([global.GetHokage()]) for the [VILLAGE_LEAF] was forced out of office due to inactivity for [days] days."
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 					
 					hokage = list()
 					kages_last_online[VILLAGE_LEAF] = null
@@ -169,13 +172,14 @@ world
 				if(!online)
 					world << output("The [RANK_KAZEKAGE] for the <font color='[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
 					
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `village`, `log`)
-						VALUES(?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetKazekage(), global.GetKazekage(RETURN_FORMAT_CHARACTER), RANK_KAZEKAGE, "The [RANK_KAZEKAGE] ([global.GetKazekage()]) for the [VILLAGE_SAND] was forced out of office due to inactivity for [days] days."
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `village`, `log`)
+							VALUES(?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetKazekage(), global.GetKazekage(RETURN_FORMAT_CHARACTER), RANK_KAZEKAGE, "The [RANK_KAZEKAGE] ([global.GetKazekage()]) for the [VILLAGE_SAND] was forced out of office due to inactivity for [days] days."
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 
 					kazekage = list()
 					kages_last_online[VILLAGE_SAND] = null
@@ -197,13 +201,14 @@ world
 				if(!online)
 					world << output("The [RANK_AKATSUKI] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office due to inactivity for [days] days.", "Action.Output")
 					
-					var/database/query/query = new({"
-						INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-						VALUES(?, ?, ?, ?, ?)"},
-						time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "The [RANK_AKATSUKI] ([global.GetAkatsuki()]) for the [VILLAGE_AKATSUKI] was forced out of office due to inactivity for [days] days."
-					)
-					query.Execute(log_db)
-					LogErrorDb(query)
+					spawn()
+						var/database/query/query = new({"
+							INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+							VALUES(?, ?, ?, ?, ?)"},
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "The [RANK_AKATSUKI] ([global.GetAkatsuki()]) for the [VILLAGE_AKATSUKI] was forced out of office due to inactivity for [days] days."
+						)
+						query.Execute(log_db)
+						LogErrorDb(query)
 
 					akatsuki = list()
 					akatsuki_last_online = null

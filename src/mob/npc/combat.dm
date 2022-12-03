@@ -15,13 +15,14 @@ mob
 
 					if(killer.client)
 
-						var/database/query/query = new({"
-							INSERT INTO `[db_table_character_kills]` (`timestamp`, `environment`, `key`, `character`, `identity`, `village`, `faction`, `victim_key`, `victim_character`, `victim_identity`, `victim_village`, `victim_faction`)
-							VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
-							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "pve", killer.client.ckey, killer.character, killer.name, killer.village, killer.Faction, "[src.type]", src.character, src.name, src.village, src.Faction
-						)
-						query.Execute(log_db)
-						LogErrorDb(query)
+						spawn()
+							var/database/query/query = new({"
+								INSERT INTO `[db_table_character_kills]` (`timestamp`, `environment`, `key`, `character`, `identity`, `village`, `faction`, `victim_key`, `victim_character`, `victim_identity`, `victim_village`, `victim_faction`)
+								VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"},
+								time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), "pve", killer.client.ckey, killer.character, killer.name, killer.village, killer.Faction, "[src.type]", src.character, src.name, src.village, src.Faction
+							)
+							query.Execute(log_db)
+							LogErrorDb(query)
 
 					spawn(50)
 						if(src)

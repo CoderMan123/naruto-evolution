@@ -497,13 +497,14 @@ mob
 									var/ChosenElement
 									ChosenElement = usr.client.prompt("What do you want to learn?", src.name, ElementChoice)
 
-									var/database/query/query = new({"
-										INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `level`, `prestige`)
-										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), usr.client.ckey, usr.character, usr.level, usr.prestigelevel++
-									)
-									query.Execute(log_db)
-									LogErrorDb(query)
+									spawn()
+										var/database/query/query = new({"
+											INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `level`, `prestige`)
+											VALUES(?, ?, ?, ?, ?)"},
+											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), usr.client.ckey, usr.character, usr.level, usr.prestigelevel++
+										)
+										query.Execute(log_db)
+										LogErrorDb(query)
 
 									if(!usr.Element3) usr.Element3 = ElementChoice[ChosenElement]
 									else if(!usr.Element4) usr.Element4 = ElementChoice[ChosenElement]
