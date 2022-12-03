@@ -907,6 +907,11 @@ mob
 			command = "/summon"
 			if(findtext(msg, command) && administrators.Find(src.client.ckey) || moderators.Find(src.client.ckey))
 				return src.SummonCommand()
+			
+			command = "/profile"
+			if(findtext(msg, command) && administrators.Find(src.client.ckey))
+				winset(usr , null , "command = .profile")
+				return
 
 			else if(findtext(msg, "/stuck"))
 				src.Stuck()
