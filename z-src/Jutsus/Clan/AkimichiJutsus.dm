@@ -76,7 +76,7 @@ mob
 							M.icon_state="dead"
 							var/bind_time = 2
 							var/visual_time = bind_time - (bind_time/100)*M.tenacity
-							Bind(M, bind_time, src)
+							Bind(M, bind_time, sr)
 							spawn(visual_time)
 								if(M && !M.dead)
 									M.icon_state=""
