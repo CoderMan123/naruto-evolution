@@ -105,6 +105,8 @@ proc
 	swimming
 
 	water_walking
+
+	boulder_delay
 	
 	intangible
 		var/delay

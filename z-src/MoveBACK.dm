@@ -248,7 +248,9 @@ client
 				for(var/mob/M in orange(3,src))
 					step(M,NORTH)
 		if(src.mob.inboulder==1&&src.mob.dir!=SOUTH)//boulderstuff
-			src.mob.dir=NORTH
+			if(!CheckState(src.mob, new/state/boulder_delay))
+				AddState(src.mob, new/state/boulder_delay, 1)
+				src.mob.dir=NORTH
 		if(src.mob.infusing==1)//chakrainfusionstuff
 			src.mob.dir=NORTH
 		if(src.mob.copy)
@@ -380,7 +382,9 @@ client
 				for(var/mob/M in orange(3,src))
 					step(M,SOUTH)
 		if(src.mob.inboulder==1&&src.mob.dir!=NORTH)
-			src.mob.dir=SOUTH
+			if(!CheckState(src.mob, new/state/boulder_delay))
+				AddState(src.mob, new/state/boulder_delay, 1)
+				src.mob.dir=SOUTH
 		if(src.mob.infusing==1)//chakrainfusionstuff
 			src.mob.dir=SOUTH
 		if(src.mob.copy)
@@ -477,7 +481,9 @@ client
 				for(var/mob/M in orange(3,src))
 					step(M,WEST)
 		if(src.mob.inboulder==1&&src.mob.dir!=EAST)
-			src.mob.dir=WEST
+			if(!CheckState(src.mob, new/state/boulder_delay))
+				AddState(src.mob, new/state/boulder_delay, 1)
+				src.mob.dir=WEST
 		if(src.mob.infusing==1)//chakrainfusionstuff
 			src.mob.dir=WEST
 		if(src.mob.copy)
@@ -589,7 +595,9 @@ client
 				for(var/mob/M in orange(3,src))
 					step(M,EAST)
 		if(src.mob.inboulder==1&&src.mob.dir!=WEST)
-			src.mob.dir=EAST
+			if(!CheckState(src.mob, new/state/boulder_delay))
+				AddState(src.mob, new/state/boulder_delay, 1)
+				src.mob.dir=EAST
 		if(src.mob.infusing==1)//chakrainfusionstuff
 			src.mob.dir=EAST
 		if(src.mob.copy)
