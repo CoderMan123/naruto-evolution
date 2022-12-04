@@ -126,6 +126,9 @@ mob
 					var/timer
 					spawn(duration) del A
 					while(A)
+						var/area/area = src.loc.loc
+						if(area.Safe) 
+								del(A)
 						sleep(1)
 						timer++
 						if(src.inshadowfield==0)
