@@ -10,7 +10,7 @@ client
 
 			if(hokage[src.ckey] == src.mob.character || kazekage[src.ckey] == src.mob.character)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-				src.verbs += typesof(/mob/kage/verb)
+				src.mob.verbs += typesof(/mob/kage/verb)
 
 				if(hokage[src.ckey] == src.mob.character)
 					src.mob.SetRank(RANK_HOKAGE)
@@ -19,7 +19,7 @@ client
 					src.mob.SetRank(RANK_KAZEKAGE)
 
 			else
-				src.verbs -= typesof(/mob/kage/verb)
+				src.mob.verbs -= typesof(/mob/kage/verb)
 
 				if(src.mob.rank == RANK_HOKAGE)
 					src << output("You were forced out of office as the [RANK_HOKAGE] for the <font color='[COLOR_VILLAGE_LEAF]'>[VILLAGE_LEAF]</font>, and as a result you have been automatically demoted to [RANK_JOUNIN].", "Action.Output")
@@ -53,11 +53,11 @@ client
 
 			if(akatsuki[src.ckey] == src.mob.character)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
-				src.verbs += typesof(/mob/akatsuki/verb)
+				src.mob.verbs += typesof(/mob/akatsuki/verb)
 				src.mob.SetRank(RANK_AKATSUKI_LEADER)
 
 			else
-				src.verbs -= typesof(/mob/akatsuki/verb)
+				src.mob.verbs -= typesof(/mob/akatsuki/verb)
 
 				if(src.mob.rank == RANK_AKATSUKI_LEADER)
 					src << output("You were forced out of office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>, and as a result you have been automatically demoted to [RANK_AKATSUKI].", "Action.Output")
