@@ -64,10 +64,10 @@ mob
 					m.Translate(-16,16)
 					A.transform = m
 					A.linkfollow(src)
-					spawn(10) del(A)
+					spawn(30) del(A)
 					var/mob/M = c_target
 					var/Timer=J.level*5
-					spawn(10)
+					spawn(30)
 						M=src.Target_Get(TARGET_MOB)
 						if(M)
 							var/obj/O = new(c_target.loc)
