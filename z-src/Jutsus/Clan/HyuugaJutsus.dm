@@ -290,7 +290,7 @@ mob
 						for(var/mob/M in range(4))
 							if(!istype(M,/mob/npc) && !CheckState(M, new/state/knockback_immune) && !M.dead && !CheckState(M, new/state/swimming) || istype(M,/mob/npc/combat) && !CheckState(M, new/state/knockback_immune) && !M.dead)
 								var/ki = get_dist(M,src)
-								for(var/i=0,i<ki,i++) spawn() step_away(M,src); sleep(1.5)
+								for(var/i=0,i<ki,i++) spawn() step_away(M,src)
 					for(var/i=0,i<17,i++)
 						if(O.loc != src.loc)
 							src << output("You left your rotation.","Action.Output")
@@ -367,8 +367,8 @@ mob
 							if(src && src.byakugan)
 								src.DealDamage(10, src, "aliceblue", 0, 1)
 								
-								for(var/atom/movable/ZX in orange())
-									if(!ZX) continue
+								for(var/mob/ZX in orange())
+									if(!ZX || istype(ZX, /mob/Clones/) || istype(ZX, /mob/Karasu/) || istype(ZX, /mob/training/)) continue
 									sleep(1)
 									var/minusx=-16
 									if(ismob(ZX))minusx=0

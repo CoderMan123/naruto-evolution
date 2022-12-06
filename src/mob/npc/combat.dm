@@ -202,6 +202,7 @@ mob
 
 					Death(mob/killer)
 						killer.infamy_points++
+						killer.exp += 4
 						..()
 
 					proc/Idle()

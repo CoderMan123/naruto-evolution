@@ -91,17 +91,19 @@ mob
 						M.DealDamage(J.damage+round((src.ninjutsu_total / 200)*2*J.damage),src,"NinBlue")
 						if(M) M.Bleed()
 						M.icon_state="push"
-						var/bind_time = J.level*2
+						var/bind_time = J.level*3
 						var/visual_time = bind_time - (bind_time/100) * M.tenacity
 						AddState(M, new/state/cant_move, bind_time, src)
-						step_away(M,src)
-						walk(M,M.dir)
 						if(M.client)spawn()M.ScreenShake(5)
-						spawn(visual_time)
-							if(M)
-								walk(M,0)
-								if(!CheckState(M, new/state/swimming))M.icon_state=""
-								if(M) M.Bleed()
+						spawn()
+							var/i = visual_time
+							for(i, i>0, i--)
+								if(M)
+									sleep(0.2)
+									step_away(M, src)
+							if(M && !CheckState(M, new/state/swimming))
+								M.icon_state=""
+								M.dir = get_dir(M.loc, src.loc)
 					spawn(5)
 						del(O)
 

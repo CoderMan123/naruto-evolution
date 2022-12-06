@@ -503,7 +503,7 @@ mission
 					"}
 					src.required_vars["KILLS"] = 0
 					src.required_vars["DEATHS"] = 0
-					src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + rand(1,3)) - 1
+					src.required_vars["REQUIRED_KILLS"] = (src.squad.members.len + 1)
 
 	a_rank
 

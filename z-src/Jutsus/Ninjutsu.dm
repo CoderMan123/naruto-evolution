@@ -560,7 +560,7 @@ mob/verb
 		if(M)step(M,WEST)
 mob/var/henged
 turf
-	Click()
+	DblClick()
 		..()
 		if(usr.byakugan && src.density==0)
 			if(usr.client.eye<>usr)
@@ -2693,6 +2693,7 @@ obj/Jutsu/Effects
 			pixel_x=-2
 			var/list/Stuffz=list()
 			var/bumped
+			var/target
 			New(loc, var/state/cant_attack/a, var/state/cant_move/b)
 				..()
 				spawn(1200)if(src)src.Del(a, b)
@@ -2712,6 +2713,11 @@ obj/Jutsu/Effects
 						Who.NaraTarget=null
 						Who.icon_state=""
 				..()
+
+			Bump()
+
+				..()
+
 mob/var/tmp/mob/NaraTarget
 mob/proc/CreateTrailNara(mob/Who,Timer)
 	if(!Who)return
@@ -2741,6 +2747,7 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 	E.Owner=src
 	B.Owner=src
 	var/turf/T=Who.loc
+	var/turf/U=src.loc
 
 	spawn((Timer)+10)
 		if(src)
@@ -2761,6 +2768,25 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 			Who=null
 		if(E)del(E)
 		if(B)del(B)
+	
+	spawn()
+		while(B)
+			sleep(1)
+			if(src.loc != U)
+				if(src)
+					RemoveState(src, e, STATE_REMOVE_REF)
+					RemoveState(src, f, STATE_REMOVE_REF)
+					RemoveState(src, shadow_extension, STATE_REMOVE_REF)
+					icon_state=""
+					NaraTarget=null
+				if(Who)
+					RemoveState(Who, a, STATE_REMOVE_REF)
+					RemoveState(Who, b, STATE_REMOVE_REF)
+					Who.icon_state = ""
+					NaraTarget=null
+					Who=null
+				if(E)del(E)
+				if(B)del(B)
 
 
 	while(E.loc!=T&&!E.bumped&&Who)
@@ -2769,9 +2795,8 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 			T=Who.loc
 			if(!E) continue
 			for(var/atom/D in get_step(E,E.dir))
-				if(D.density&&!ismob(D))
-					if(isturf(D)||isobj(D))
-						if(E)E.bumped=1
+				if(D.density&&!ismob(D))	
+				else if(E)E.bumped=1
 			E.density=0
 			step_to(E,T,0)
 	T = Who.loc
@@ -2790,14 +2815,14 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 			if(B)del(B)
 			if(Who)
 				if(!Who.dead)
-					RemoveState(Who, a, -1)
-					RemoveState(Who, b, -1)
+					RemoveState(Who, a, STATE_REMOVE_REF)
+					RemoveState(Who, b, STATE_REMOVE_REF)
 					NaraTarget=null
 
 			if(src)
 				if(!src.dead)
-					RemoveState(src, e, -1)
-					RemoveState(src, f, -1)
+					RemoveState(src, e, STATE_REMOVE_REF)
+					RemoveState(src, f, STATE_REMOVE_REF)
 					RemoveState(src, shadow_extension, -1)
 					src.NaraTarget=null
 					/*for(var/obj/Jutsus/Shadow_Extension/J in src.jutsus)
@@ -2808,8 +2833,8 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 	if(B)del(B)
 	if(src)
 		if(!src.dead)
-			RemoveState(src, e, -1)
-			RemoveState(src, f, -1)
+			RemoveState(src, e, STATE_REMOVE_REF)
+			RemoveState(src, f, STATE_REMOVE_REF)
 			RemoveState(src, shadow_extension, -1)
 			NaraTarget=null
 			icon_state=""
@@ -2819,8 +2844,8 @@ mob/proc/CreateTrailNara(mob/Who,Timer)
 				J.JutsuCoolDown(src)*/
 	if(Who)
 		if(!Who.dead)
-			RemoveState(Who, a, -1)
-			RemoveState(Who, b, -1)
+			RemoveState(Who, a, STATE_REMOVE_REF)
+			RemoveState(Who, b, STATE_REMOVE_REF)
 			Who.NaraTarget=null
 			Who.icon_state=""
 

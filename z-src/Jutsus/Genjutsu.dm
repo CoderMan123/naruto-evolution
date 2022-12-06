@@ -239,6 +239,9 @@ mob
 			var/state/cant_attack/e = new()
 			var/state/cant_move/f = new()
 
+			var/state/cant_attack/a = new()
+			var/state/cant_move/b = new()
+
 			icon='Water Bunshin.dmi'
 			New()
 				..()
@@ -254,6 +257,8 @@ mob
 					for(var/mob/M in mobs_online) if(Prisoner==M)
 						RemoveState(src, e, STATE_REMOVE_REF)
 						RemoveState(src, f, STATE_REMOVE_REF)
+						RemoveState(M, a, STATE_REMOVE_REF)
+						RemoveState(M, b, STATE_REMOVE_REF)
 				if(PrisonOb)del(PrisonOb)
 				..()
 			proc/BAi()
@@ -304,12 +309,17 @@ mob
 							
 							AddState(src, e, -1)
 							AddState(src, f, -1)
+							AddState(M, a, -1)
+							AddState(M, b, -1)
 
 							while(Timer&&M.loc==W.loc&&M)
 								sleep(2)
 								Timer--
-								RemoveState(src, e, STATE_REMOVE_REF)
-								RemoveState(src, f, STATE_REMOVE_REF)
+
+							RemoveState(src, e, STATE_REMOVE_REF)
+							RemoveState(src, f, STATE_REMOVE_REF)
+							RemoveState(M, a, STATE_REMOVE_REF)
+							RemoveState(M, b, STATE_REMOVE_REF)
 						icon_state=""
 						del(PrisonOb)
 						Prisoner=null

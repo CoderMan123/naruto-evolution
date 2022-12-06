@@ -1145,7 +1145,8 @@ mob
 
 											spawn() usr.client.prompt("[m.character] has accepted your invitation to join the [usr.village] village.")
 
-											LogKage(src, "[m.character] ([m.ckey]) has accepted the invitation to join the [src.village] village.")
+											spawn()
+												LogKage(src, "[m.character] ([m.ckey]) has accepted the invitation to join the [src.village] village.")
 
 											m.SetVillage(usr.village)
 											m.SetRank(RANK_GENIN)

@@ -2264,24 +2264,31 @@ mob
 			if(src.dead || CheckState(src, new/state/cant_attack))
 				return
 			src.HengeUndo()
-			if(multisized==1 && multisizestomp==0)//multisizestuff
-				spawn(10) multisizestomp=0
-				src.multisizestomp=1
-				spawn(4) src.overlays-=/obj/Overlays/Dustmax
-				src.overlays+=/obj/Overlays/Dustmax
-				flick("groundjutsu",src)
-				for(var/mob/M in orange(7))
-					if(M.dead || M.key==src.name || istype(M,/mob/npc)) continue
-					M.DealDamage(jutsudamage+round((src.taijutsu_total / 200)*2*jutsudamage*1.2),src,"TaiOrange")
-					if(M.henge==4||M.henge==5)M.HengeUndo()
-					M.icon_state="dead"
-					var/bind_time = 5
-					var/visual_time = bind_time - (bind_time/100)*M.tenacity
-					Bind(M, bind_time, src)
-					spawn(visual_time)
-						if(!M||M.dead)continue
-						M.icon_state=""
-					return
+			if(multisized==1) 
+				if(multisizestomp==0)//multisizestuff
+
+					spawn(10) multisizestomp=0
+					src.multisizestomp=1
+					spawn(4) src.overlays-=/obj/Overlays/Dustmax
+					src.overlays+=/obj/Overlays/Dustmax
+					flick("groundjutsu",src)
+
+					for(var/mob/M in range(30))
+						M.ScreenShake(2)
+
+					for(var/mob/M in orange(4))
+						if(M.dead || M.key==src.name || istype(M,/mob/npc)) continue
+						M.DealDamage(jutsudamage+round((src.taijutsu_total / 200)*2*jutsudamage)*0.8,src,"TaiOrange")
+						M.ScreenShake(10)
+						if(M.henge==4||M.henge==5)M.HengeUndo()
+						M.icon_state="dead"
+						var/bind_time = 5
+						var/visual_time = bind_time - (bind_time/100)*M.tenacity
+						Bind(M, bind_time, src)
+						spawn(visual_time)
+							if(!M||M.dead)continue
+							M.icon_state=""
+				return
 
 			if(src.COW)
 				src.COW--
