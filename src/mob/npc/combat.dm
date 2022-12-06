@@ -202,8 +202,9 @@ mob
 
 					Death(mob/killer)
 						killer.infamy_points++
-						killer.exp += 4
 						..()
+						if(src.dead)
+							killer.exp += 4
 
 					proc/Idle()
 						src.attacking = 0
