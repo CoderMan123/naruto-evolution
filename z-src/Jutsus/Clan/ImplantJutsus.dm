@@ -141,7 +141,7 @@ mob
 						O.pixel_x=-35
 						O.name="kamui"
 						O.loc = src.loc
-						sleep(10)
+						sleep(30)
 						if(src.PrevLoc == null) PrevLoc = src.MapLoadSpawn()
 						if(c_target)
 							RemoveState(c_target, new/state/in_warp_dimension, STATE_REMOVE_ALL)
@@ -162,7 +162,7 @@ mob
 						O.pixel_x=-35
 						O.name="kamui"
 						O.loc = src.loc
-						spawn(10)
+						spawn(30)
 							M=src.Target_Get(TARGET_MOB)
 							if(M)
 								AddState(M, new/state/in_warp_dimension, 200)
@@ -199,7 +199,7 @@ mob
 						src.density=0
 						//spawn()
 						while(src.Intang)
-							src.DealDamage(80, src, "aliceblue", 0 , 1)
+							src.DealDamage(150, src, "aliceblue", 0 , 1)
 							src.density=0
 							sleep(10)
 							if(src.chakra<=0)
