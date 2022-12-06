@@ -59,7 +59,7 @@ mob
 	proc
 		Resting()
 			if(src.dead==0&&src.rest==1)
-				if(CheckState(src, new/state/recently_hit) && CheckState(src, new/state/cant_attack))
+				if(CheckState(src, new/state/recently_hit) || CheckState(src, new/state/cant_attack) || src.Intang)
 					RestUp()
 					return
 				usr.icon_state="jutsuse"
@@ -104,7 +104,7 @@ mob
 			set hidden=1
 			if(CheckState(usr, new/state/knocked_down)) return 0
 			src.HengeUndo()
-			if(!CheckState(usr, new/state/cant_attack) && !CheckState(usr, new/state/cant_move) && !CheckState(usr, new/state/swimming) && usr.dead==0 && usr.rest==0)
+			if(!usr.Intang && !CheckState(usr, new/state/cant_attack) && !CheckState(usr, new/state/cant_move) && !CheckState(usr, new/state/swimming) && usr.dead==0 && usr.rest==0)
 				if(CheckState(usr, new/state/recently_hit))
 					RestUp()
 					return
