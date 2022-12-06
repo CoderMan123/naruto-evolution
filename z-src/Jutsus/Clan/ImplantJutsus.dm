@@ -51,10 +51,10 @@ mob
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.8
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.8
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.8
-					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.8
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)*0.7
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)*0.7
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)*0.7
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)*0.7
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/obj/A = new/obj(usr.loc)
 					A.icon='ClanEyes.dmi'
