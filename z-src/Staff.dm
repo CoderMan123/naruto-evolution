@@ -81,31 +81,9 @@ mob/Moderator/verb/
 
 	Start_Chuunin_Exam()
 		set category="Staff"
-		ChuuninExam="Starting"
-		world<<output("<b><center>A Chuunin exam will begin in 3 minutes.</b></center>","Action.Output")
-		sleep(600*1)
-		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","Action.Output")
-		ChuuninExam="Written"
-		sleep(600*2)
-		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","Action.Output")
-		ChuuninExam="Forest of Death"
-		var/count=0
-		for(var/mob/M in mobs_online)
-			if(M.cheww==1)
-				M.cheww=0
-				M.loc = pick(block(locate(73,10,8),locate(198,74,8)))
-				if(count==0)
-					var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
-					O.loc = M
-					count=1
-				else
-					var/obj/O = new/obj/ChuuninExam/Scrolls/HeavenScroll
-					O.loc = M
-					count=0
-		sleep(600*4)
-		world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","Action.Output")
-		ChuuninExam="Tournament"
-		ChuuninExamGo()
+		var/a = input("How long till it starts?") as num
+		var/b = input("How long should the written last?") as num
+		ChuninExamStart(a, b)
 
 	Turn_Clones_Off_On()
 		set category = "Staff"

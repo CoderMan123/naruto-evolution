@@ -133,6 +133,12 @@ mob
 			// UPDATE: This issue only happens when you add these verbs to src.client instead of src.mob.
 			// NOTE: Only add verbs to src.mob from now on.
 
+			Start_Chuunin_Exam()
+				set category="Administrator"
+				var/a = input("How long till it starts?") as num
+				var/b = input("How long should the written last?") as num
+				ChuninExamStart(a, b)
+
 			Manage_Database()
 				set category = "Administrator"
 				switch(src.client.prompt("Which database would you like to manage?", "Manage Database", list("Logs", "Cancel")))
