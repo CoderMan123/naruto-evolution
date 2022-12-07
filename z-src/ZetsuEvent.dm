@@ -5,11 +5,12 @@ var/tmp/zetsu_event_active = 0
 var/tmp/sand_points = 0
 var/tmp/leaf_points = 0
 var/zetsu_event_toggle = 1
+var/last_zetsu_event = 0
 
 proc/ZetsuEvent()
 	while(world)
-		sleep(600*180)
 		ZetsuEventStart()
+		sleep(600*180)
 
 proc/ZetsuEventStart()
 	zetsu_count = 0
