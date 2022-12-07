@@ -83,7 +83,7 @@ mob/Moderator/verb/
 		set category="Staff"
 		ChuuninExam="Starting"
 		world<<output("<b><center>A Chuunin exam will begin in 3 minutes.</b></center>","Action.Output")
-		sleep(600*3)
+		sleep(600*1)
 		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","Action.Output")
 		ChuuninExam="Written"
 		sleep(600*2)
