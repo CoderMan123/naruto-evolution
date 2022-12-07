@@ -207,7 +207,8 @@ mob
 						spawn() src.CombatAI()
 
 					Death(mob/killer)
-						killer.infamy_points++
+						if(!istype(src, /mob/npc/combat/guard/genin/Chunin_Tryout))
+							killer.infamy_points++
 						..()
 						if(src.dead)
 							killer.exp += 4
@@ -220,7 +221,7 @@ mob
 							C.health=0
 							C.Death(src)
 						src.FindTarget()
-						if(!CheckState(src, new/state/in_combat) && src.loc != src.original_loc) src.ResetAI()
+						if(!CheckState(src, new/state/in_combat) && src.loc != src.original_loc && !istype(src, /mob/npc/combat/guard/genin/Chunin_Tryout)) src.ResetAI()
 
 					proc/ResetAI()
 						for(var/mob/Clones/C in src.Clones)
@@ -245,7 +246,8 @@ mob
 						if(!c_target) sleep(10)
 						if(src)
 							for(var/mob/M in orange(30))
-								if(istype(M,/mob/npc) || istype(M,/mob/training) || M.village == src.village || M.dead || M.infamy_points < 1) continue
+								if(istype(M,/mob/npc) || istype(M,/mob/training) || M.village == src.village || M.dead) continue
+								if(M.infamy_points < 1 && !istype(src, /mob/npc/combat/guard/genin/Chunin_Tryout)) continue
 								if(M)
 									src.Target_Remove()
 									src.Target_Atom(M)
@@ -665,6 +667,13 @@ mob
 						New()
 							..()
 							src.overlays += 'HeadBandSand.dmi'
+					
+					Chunin_Tryout
+						name = "Genin Examinee"
+						village = VILLAGE_SOUND
+						New()
+							..()
+							src.overlays += 'HeadBandSound.dmi'
 
 			white_zetsu
 				name = "White Zetsu"

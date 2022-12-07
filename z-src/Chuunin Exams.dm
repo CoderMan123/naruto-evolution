@@ -91,31 +91,54 @@ mob/var/cheww=0
 proc/ChuuninExam()
 	while(world)
 		sleep(600*120)
-		ChuuninExam="Starting"
-		world<<output("<b><center>A Chuunin exam will begin in 5 minutes.</b></center>","Action.Output")
-		sleep(600*5)
-		world<<output("<b><center>The Written Exam of the Chuunin exam has begun!</b></center>","Action.Output")
-		ChuuninExam="Written"
-		sleep(600*3)
-		world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","Action.Output")
-		ChuuninExam="Forest of Death"
-		var/count=0
-		for(var/mob/M in mobs_online)
-			if(M.cheww==1)
-				M.cheww=0
-				M.loc = pick(block(locate(73,10,8),locate(198,74,8)))
-				if(count==0)
-					var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
-					O.loc = M
-					count=1
-				else
-					var/obj/O = new/obj/ChuuninExam/Scrolls/HeavenScroll
-					O.loc = M
-					count=0
-		sleep(600*5)
-		world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","Action.Output")
-		ChuuninExam="Tournament"
-		ChuuninExamGo()
+		ChuninExamStart(5, 3)
+
+
+proc/ChuninExamStart(var/minutes_till_start, var/minutes_till_forest,)
+	ChuuninExam="Starting"
+	world<<output("<b><center>A Chuunin exam will begin in [minutes_till_start] minutes.</b></center>","Action.Output")
+	sleep(600*minutes_till_start)
+	world<<output("<b><center>The Written Exam of the Chuunin exam has begun! You will have [minutes_till_forest] minutes to complete the test.</b></center>","Action.Output")
+	ChuuninExam="Written"
+	sleep(600*minutes_till_forest)
+	world<<output("<b><center>The Written Exam of the Chuunin exam is now over!</b></center>","Action.Output")
+	ChuuninExam="Forest of Death"
+	var/count=0
+	var/participents = 0
+	var/npc_village
+	for(var/mob/M in mobs_online)
+		if(M.cheww==1)
+			participents++
+			npc_village = M.village
+			M.cheww=0
+			M.loc = pick(block(locate(73,10,8),locate(198,74,8)))
+			if(count==0)
+				var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
+				O.loc = M
+				count=1
+			else
+				var/obj/O = new/obj/ChuuninExam/Scrolls/HeavenScroll
+				O.loc = M
+				count=0
+	if(participents < 2)
+		var/mob/npc/combat/guard/genin/Chunin_Tryout/m = new/mob/npc/combat/guard/genin/Chunin_Tryout
+		if(npc_village == VILLAGE_LEAF) m.village = VILLAGE_SAND
+		else if(npc_village == VILLAGE_SAND) m.village = VILLAGE_LEAF
+		m.SetName(m.name)
+		if(count==0)
+			var/obj/O = new/obj/ChuuninExam/Scrolls/EarthScroll
+			O.loc = m
+			count=1
+		else
+			var/obj/O = new/obj/ChuuninExam/Scrolls/HeavenScroll
+			O.loc = m
+			count=0
+		m.loc = pick(block(locate(73,10,8),locate(198,74,8)))
+	
+	sleep(600*5)
+	world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","Action.Output")
+	ChuuninExam="Tournament"
+	ChuuninExamGo()
 
 proc/ChuuninExamGo()
 	//Remember to add a check for people here to see if they were in the FoD when it ended. Proper teleportation.
