@@ -181,6 +181,7 @@ mob
 					src.Intang=0
 					src.density=1
 					RemoveState(src, new/state/intangible, STATE_REMOVE_ALL)
+					RemoveState(src, new/state/slowed, STATE_REMOVE_ALL)
 					return
 				else
 					if(jailed==1)
@@ -195,6 +196,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Genjutsu",((J.maxcooltime*3/20)*jutsustatexp))
 						src << output("You become intangible.","Action.Output")
 						AddState(src, new/state/intangible, -1)
+						AddState(src, new/state/slowed, -1)
 						src.Intang=1
 						src.density=0
 						//spawn()
@@ -208,4 +210,5 @@ mob
 								src.Intang=0
 								src.density=1
 								RemoveState(src, new/state/intangible, STATE_REMOVE_ALL)
+								RemoveState(src, new/state/slowed, STATE_REMOVE_ALL)
 
