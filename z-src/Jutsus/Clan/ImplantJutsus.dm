@@ -166,11 +166,11 @@ mob
 							M=src.Target_Get(TARGET_MOB)
 							if(M)
 								AddState(M, new/state/in_warp_dimension, 200)
-								src.loc=locate(175,183,8)
+								AddState(src, new/state/in_warp_dimension_owner, 200)
 								del O
 							else
 								src<<output("You failed to pull them in with you!","Action.Output")
-								src.loc=locate(175,183,8)
+								AddState(src, new/state/in_warp_dimension_owner, 200)
 								del O
 
 

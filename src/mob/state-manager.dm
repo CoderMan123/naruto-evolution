@@ -127,6 +127,16 @@ proc
 				m<<output("The warp dimension couldn't hold you any longer!","Action.Output")
 				m.loc = victims_previous_loc
 
+	in_warp_dimension_owner
+		Ticker()
+			var/mob/m = src.mob
+			var/victims_previous_loc = m.loc
+			m.loc = locate(175,183,8)
+			..()
+			if(m && m.z == 8)
+				m<<output("The warp dimension couldn't hold you any longer!","Action.Output")
+				m.loc = victims_previous_loc
+
 	in_combat
 
 	nara_attack_delay
