@@ -8,7 +8,7 @@ var/zetsu_event_toggle = 1
 
 proc/ZetsuEvent()
 	while(world)
-		sleep(600*360)
+		sleep(600*180)
 		ZetsuEventStart()
 
 proc/ZetsuEventStart()
