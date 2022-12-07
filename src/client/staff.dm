@@ -139,6 +139,57 @@ mob
 				var/b = input("How long should the written last?") as num
 				ChuninExamStart(a, b)
 
+			Account_Migration()
+				set category = "Administrator"
+
+				var/list/savefile_dirs = flist("[SAVEFILE_CHARACTERS]/")
+				var/list/savefile_list = list()
+
+				for(var/dir in savefile_dirs)
+					savefile_list.Add(flist("[SAVEFILE_CHARACTERS]/[dir]"))
+
+				for(var/sav in savefile_list)
+					if(findlasttext(sav, ".sav.lk")) savefile_list.Remove(sav)
+					if(findlasttext(sav, ".sav.backup")) savefile_list.Remove(sav)
+					if(findlasttext(sav, ".sav.migration")) savefile_list.Remove(sav)
+					if(findlasttext(sav, ".sav") == 0) savefile_list.Remove(sav)
+
+				var/savefile = src.client.prompt("Select which savefile you'd like to migrate.", "Account Migration", savefile_list + list("Cancel"))
+
+				if(savefile != "Cancel")
+					for(var/dir in savefile_dirs)
+
+						if(fexists("[SAVEFILE_CHARACTERS]/[dir]/[savefile].lk"))
+							alert("This savefile is locked and cannot be migrated.", "Account Migration")
+							break
+
+						else if(fexists("[SAVEFILE_CHARACTERS]/[dir]/[savefile]"))
+							var/list/ckey = src.client.iprompt("Please enter the new <b><u>ckey</u></b> this savefile should be migrated to. Savefile: [savefile].", "Account Migration", list("Migrate Account", "Cancel"))
+							if(ckey[2] && ckey[1] != "Cancel")
+								var/timestamp = time2text(world.realtime, "YYYY-MM-DD")
+								if(fcopy("[SAVEFILE_CHARACTERS]/[dir]/[savefile]", "[SAVEFILE_CHARACTERS]/[dir]/[timestamp]_[world.timeofday]-[savefile].migration"))
+									var/savefile/F = new("[SAVEFILE_CHARACTERS]/[dir]/[savefile]")
+
+									if(fcopy("[SAVEFILE_CHARACTERS]/[dir]/[savefile]", "[SAVEFILE_CHARACTERS]/[copytext(ckey[2], 1, 2)]/[replacetext(savefile, ckey(F["key"]), ckey[2])]"))
+										F = new("[SAVEFILE_CHARACTERS]/[copytext(ckey[2], 1, 2)]/[replacetext(savefile, ckey(F["key"]), ckey[2])]")
+										F["key"] << ckey[2]
+
+										fdel("[SAVEFILE_CHARACTERS]/[dir]/[savefile]")
+										
+										alert("You have migrated the account successfully.", "Account Migration")
+									
+									else
+										fdel("[SAVEFILE_CHARACTERS]/migration/[dir]/[timestamp]_[world.timeofday]-[savefile].backup")
+										alert("Savefile migration has failed.", "Account Migration")
+
+								else
+									alert("Savefile backup failed, so the account migration was aborted.", "Account Migration")
+
+							else if(!isnull(ckey[2]) && ckey[1] != "Cancel")
+								alert("You must provide a ckey to migrate this account to.", "Account Migration")
+
+							break
+
 			Manage_Database()
 				set category = "Administrator"
 				switch(src.client.prompt("Which database would you like to manage?", "Manage Database", list("Logs", "Cancel")))
@@ -592,6 +643,7 @@ mob
 				for(var/sav in savefile_list)
 					if(findlasttext(sav, ".sav.lk")) savefile_list.Remove(sav)
 					if(findlasttext(sav, ".sav.backup")) savefile_list.Remove(sav)
+					if(findlasttext(sav, ".sav.migration")) savefile_list.Remove(sav)
 					if(findlasttext(sav, ".sav") == 0) savefile_list.Remove(sav)
 
 				var/savefile = input("Select which savefile you'd like to update the account password to.") as null|anything in savefile_list
