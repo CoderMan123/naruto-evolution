@@ -1053,7 +1053,7 @@ obj
 			New()
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*1.5
-				maxcooltime = jutsucooldown*100
+				maxcooltime = jutsucooldown*600
 
 		Intangible_Jutsu
 			icon_state="In"
