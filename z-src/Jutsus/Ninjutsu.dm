@@ -1000,6 +1000,7 @@ obj
 				icon='Bubble Barrage.dmi'
 				icon_state="bubble"
 				density=1
+				var/mob/target
 				New()
 					..()
 					pixel_y=32

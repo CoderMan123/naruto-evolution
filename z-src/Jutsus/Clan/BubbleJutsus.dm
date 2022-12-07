@@ -107,7 +107,6 @@ mob
 		BubbleSpreader()
 			for(var/obj/Jutsus/Bubble_Spreader/J in src.jutsus)
 				if(src.PreJutsu(J))
-					var/mob/c_target=src.Target_Get(TARGET_MOB)
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					flick("2fist",src)
 					src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
@@ -118,41 +117,29 @@ mob
 					if(J.level==4) J.damage=1.1*(jutsudamage*J.Sprice)
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					var/num=J.level+(round(src.ninjutsu_total/20))
-					if(c_target)
-						while(num)
-							sleep(2)
-							num--
-							src.dir=get_dir(src,c_target)
-							var/obj/Projectiles/Effects/BubbleBarrage/A = new/obj/Projectiles/Effects/BubbleBarrage(src.loc)
-							A.IsJutsuEffect=src
-							if(prob(50))A.y+=1
-							else A.y-=1
-							if(prob(50))A.x+=1
-							else A.x-=1
-							A.icon_state = "bblz"
-							A.level=J.level
-							A.Owner=src
-							A.layer=src.layer
-							A.fightlayer=src.fightlayer
-							A.damage=(J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/10
-							walk_towards(A,c_target.loc,0)
-							spawn(4)if(A)walk(A,A.dir,5)
-					else
-						while(num)
-							sleep(2)
-							num--
-							var/obj/Projectiles/Effects/BubbleBarrage/A = new/obj/Projectiles/Effects/BubbleBarrage(src.loc)
-							A.IsJutsuEffect=src
-							if(prob(50))A.y+=1
-							else A.y-=1
-							if(prob(50))A.x+=1
-							else A.x-=1
-							if(A.loc == src.loc)A.loc = get_step(src,src.dir)
-							A.icon_state = "bblz"
-							A.level=J.level
-							A.Owner=src
-							A.layer=src.layer
-							A.fightlayer=src.fightlayer
-							A.damage=(J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/3
-							walk_away(A,src)
-							spawn(1)if(A)walk_rand(A,3)
+					while(num && src)
+						sleep(2)
+						num--
+						var/obj/Projectiles/Effects/BubbleBarrage/A = new/obj/Projectiles/Effects/BubbleBarrage(src.loc)
+						A.IsJutsuEffect=src
+						if(prob(33))A.y+=1
+						else if(prob(33)) A.y-=1
+						if(prob(33))A.x+=1
+						else if(prob(33)) A.x-=1
+						if(A.loc == src.loc)A.loc = get_step(src,src.dir)
+						A.icon_state = "bblz"
+						A.level=J.level
+						A.Owner=src
+						A.layer=src.layer
+						A.fightlayer=src.fightlayer
+						A.damage=(J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/6
+						walk_away(A,src)
+						spawn(1.5)
+							while(A)
+								var/mob/c_target=src.Target_Get(TARGET_MOB)
+								for(var/obj/Projectiles/Effects/BubbleBarrage/B in orange(1))
+									if(B.Owner != src) step_away(A, B)
+								if(A && !c_target) walk_rand(A,3)
+								else if(prob(20)) walk_towards(A, c_target, 3)
+								else walk_rand(A,3)
+								sleep(3)
