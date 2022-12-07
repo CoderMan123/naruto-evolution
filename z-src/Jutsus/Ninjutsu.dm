@@ -1025,7 +1025,7 @@ obj
 					if(!src.Hit)
 						if(istype(O,/mob))
 							var/mob/M=O
-							if(M.dead || M.key == src.name) return
+							if(M.dead || M==Owner) return
 							if(M.fightlayer==src.fightlayer)
 								src.density=0
 								M.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
@@ -1038,6 +1038,7 @@ obj
 								flick("blow",src)
 								src.Hit=1
 								for(M in orange(3,src))
+									if(M.dead || M==Owner) continue
 									M.DealDamage(src.damage,src.Owner,"NinBlue")
 									if(M.henge==4||M.henge==5)M.HengeUndo()
 						else src.invisibility=1
