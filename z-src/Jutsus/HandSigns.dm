@@ -151,6 +151,8 @@ obj
 							/*	if(src.name=="Tsukuyomi"||src.name=="Amaterasu"||src.name=="Kamui"||src.name=="Susanoo"||src.name=="Eternal Mangekyou Sharingan")
 									usr.UchihaJ++*/
 								if(src.sharin<>0 && src.sharin<>1)
+									var/obj/Jutsus/jutsu=new src.type
+									usr.jutsus_learned += jutsu.type
 									usr.sbought+=src.name
 									for(var/obj/Jutsus/Sharingan/SH in usr.jutsus)
 										var/os = SH.icon_state
