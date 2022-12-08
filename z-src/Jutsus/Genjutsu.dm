@@ -234,7 +234,7 @@ mob
 			density=1
 			var/attack_target
 			var/obj/PrisonOb
-			var/TrapTimes=2
+			var/TrapTimes=1
 
 			var/state/cant_attack/e = new()
 			var/state/cant_move/f = new()
@@ -295,7 +295,7 @@ mob
 						step_towards(src,attack_target)
 					dir=get_dir(src,attack_target)
 					for(var/mob/M in get_step(src,src.dir))
-						var/Timer=25
+						var/Timer= src.level * 3
 
 						if(istype(M)&&!M.dead)
 							var/obj/Jutsu/Effects/WaterPrison/W=new
@@ -306,6 +306,7 @@ mob
 							PrisonOb=W
 							Prisoner=M
 							
+							Timer = (Timer) - (((Timer)/100)*M.tenacity)
 							
 							AddState(src, e, -1)
 							AddState(src, f, -1)
