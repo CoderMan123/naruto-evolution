@@ -1704,14 +1704,17 @@ obj
 					..()
 				Bump(atom/O)
 					if(!src.Hit)
+						world << 1//debug
 						spawn(100) for(var/obj/Projectiles/Effects/JinraiCore/K in world) if(K.link == src) K.loc=locate(0,0,0)
 						spawn(100) for(var/obj/Projectiles/Effects/JinraiBack/K in world) if(K.link == src.link) K.loc=locate(0,0,0)
 						spawn(100) for(var/obj/Projectiles/Effects/JinraiCore/K in world) if(K.link == src) del K
 						if(istype(O,/mob))
+							world << 2//debug
 							var/mob/M=O
 							var/mob/Owner=src.Owner
 							if(M.dead) return
 							if(M.fightlayer==src.fightlayer)
+								world << 3//debug
 								src.icon_state="heady2"
 								src.pixel_x = -16
 								src.pixel_y = 0
@@ -1719,20 +1722,21 @@ obj
 								src.PlayAudio('Exp_Dirt_01.wav', output = AUDIO_HEARERS)
 								src.layer=MOB_LAYER+1
 								walk(src,0)
-								src.loc=O.loc
+								src.loc=M.loc
 								flick("[src.hitstate]",src)
 								src.Hit=1
-
+								world << 4//debug
 								var/state/cant_attack/senjujinrai1 = new()
 								var/state/cant_move/senjujinrai2 = new()
 								AddState(M, senjujinrai1, -1)
 								AddState(M, senjujinrai2, -1)
 
 								var/bound_location = M.loc
-								var/bind_time = ((src.level*2)/100)*M.tenacity
+								var/bind_time = (src.level*2) - (((src.level*2)/100)*M.tenacity)
 								for(var/i=0, i<bind_time, i++)
+									world << 5//debug
 									if(bound_location != M.loc || !Owner) break
-									M.DealDamage(src.damage/8,Owner,"NinBlue")
+									M.DealDamage(src.damage/16,Owner,"NinBlue")
 									sleep(3)
 
 								if(M.henge==4||M.henge==5)M.HengeUndo()
