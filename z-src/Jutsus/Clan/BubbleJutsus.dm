@@ -132,7 +132,7 @@ mob
 						A.Owner=src
 						A.layer=src.layer
 						A.fightlayer=src.fightlayer
-						A.damage=(J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/6
+						A.damage=(J.damage+round((src.ninjutsu_total / 200)*2*J.damage))/8
 						walk_away(A,src)
 						spawn(1.5)
 							while(A)
