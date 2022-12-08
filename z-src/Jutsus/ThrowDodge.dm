@@ -22,12 +22,17 @@ mob
 							ThrowingMob=null
 							M.BeingThrown=null
 							M.icon_state="push"
-							AddState(M, new/state/cant_move, 4, src)
-							walk(M,src.dir)
-							spawn(4)
-								if(M)
-									M.icon_state=""
-									walk(M,0)
+							var/bind_time = 4
+							var/visual_time = bind_time - (bind_time/100) * M.tenacity
+							AddState(M, new/state/cant_move, bind_time, src)
+							if(M.client)spawn()M.ScreenShake(5)
+							spawn()
+								var/i = visual_time
+								for(i, i>0, i--)
+									if(M)
+										sleep(0.2)
+										step_away(M, src)
+								M.icon_state=""
 							return
 				if(!CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
 					if(src.dead==0&&src.dodge==0)
