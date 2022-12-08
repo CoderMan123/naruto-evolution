@@ -86,7 +86,7 @@ mob
 										I2=0
 										if(F)
 											F.DealDamage(J.damage,src,"NinBlue")
-											Bind(F, 10, src)
+											Bind(F, 10)
 											oldhealth=(oldhealth-J.damage)
 											F.health=oldhealth
 								sleep(1)
