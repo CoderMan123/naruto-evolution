@@ -2279,7 +2279,7 @@ mob
 					for(var/mob/M in orange(4))
 						if(M.dead || M.key==src.name || istype(M,/mob/npc)) continue
 						M.DealDamage(jutsudamage+round((src.taijutsu_total / 200)*2*jutsudamage)*0.8,src,"TaiOrange")
-						M.ScreenShake(10)
+						spawn() M.ScreenShake(10)
 						if(M.henge==4||M.henge==5)M.HengeUndo()
 						M.icon_state="dead"
 						var/bind_time = 5
