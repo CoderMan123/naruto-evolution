@@ -923,7 +923,7 @@ client
 									<td><span style="color: [COLOR_VILLAGE_LEAF]; font-weight: bold;">[RANK_HOKAGE]:</span> [global.GetHokage(RETURN_FORMAT_CHARACTER)]</td>
 									<td><span style="color: [COLOR_VILLAGE_SAND]; font-weight: bold;">[RANK_KAZEKAGE]:</span> [global.GetKazekage(RETURN_FORMAT_CHARACTER)]</td>
 									<td></td>
-									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">[RANK_AKATSUKI_LEADER]:</span> [global.GetAkatsuki(RETURN_FORMAT_CHARACTER)]</td>
+									<td><span style="color: [COLOR_VILLAGE_AKATSUKI]; font-weight: bold;">[RANK_AKATSUKI_LEADER]:</span> [global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER)]</td>
 								</tr>
 							</tbody>
 						</table>

@@ -1245,7 +1245,7 @@ mob
 
 				switch(RANK)
 					if(RANK_AKATSUKI_LEADER)
-						akatsuki[src.ckey] = src.character
+						akatsuki_leader[src.ckey] = src.character
 						akatsuki_last_online = world.realtime
 
 						if(!locate(/obj/Inventory/Clothing/Masks/Tobi_Mask) in src.contents)

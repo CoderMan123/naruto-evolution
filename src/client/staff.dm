@@ -51,7 +51,7 @@ client
 
 			// Akatsuki Check //
 
-			if(akatsuki[src.ckey] == src.mob.character)
+			if(akatsuki_leader[src.ckey] == src.mob.character)
 				winset(src, "Navigation.LeaderButton", "is-disabled = 'false'")
 				src.mob.verbs += typesof(/mob/akatsuki/verb)
 				src.mob.SetRank(RANK_AKATSUKI_LEADER)
@@ -66,7 +66,7 @@ client
 						var/database/query/query = new({"
 							INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
 							VALUES(?, ?, ?, ?, ?)"},
-							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[src.mob.character] ([src.ckey]) was forced out of office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI], and as a result has been automatically demoted to [RANK_AKATSUKI]."
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsukiLeader(), global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[src.mob.character] ([src.ckey]) was forced out of office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI], and as a result has been automatically demoted to [RANK_AKATSUKI]."
 						)
 						query.Execute(log_db)
 						LogErrorDb(query)
@@ -265,11 +265,11 @@ mob
 									beta_testers.Remove(response)
 									usr.client.prompt("[response] is no longer an beta tester.", "Manage Testers")
 
-			Manage_Akatsuki()
+			Manage_Akatsuki_Leader()
 				set category = "Administrator"
 				switch(usr.client.prompt("Would you like to promote or demote the [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Promote", "Demote", "Cancel")))
 					if("Promote")
-						if(akatsuki.len)
+						if(akatsuki_leader.len)
 							usr.client.prompt("There is already an [RANK_AKATSUKI_LEADER].", "Manage Akatsuki")
 						else
 							var/list/exclude = list()
@@ -305,7 +305,7 @@ mob
 									LogErrorDb(query)
 
 					if("Demote")
-						if(akatsuki.len)
+						if(akatsuki_leader.len)
 							switch(usr.client.prompt("Are you sure you want to demote the [VILLAGE_AKATSUKI] [RANK_AKATSUKI_LEADER]?", "Manage Akatsuki", list("Demote", "Cancel")))
 								if("Demote")
 									world << output("The [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> was forced out of office by [usr.character].", "Action.Output")
@@ -314,12 +314,12 @@ mob
 										var/database/query/query = new({"
 											INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
 											VALUES(?, ?, ?, ?, ?)"},
-											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "The [RANK_AKATSUKI_LEADER] [global.GetAkatsuki(RETURN_FORMAT_CHARACTER)] ([global.GetAkatsuki()]) for the [VILLAGE_AKATSUKI] was forced out of office."
+											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), src.client.ckey, src.character, src.village, "The [RANK_AKATSUKI_LEADER] [global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER)] ([global.GetAkatsukiLeader()]) for the [VILLAGE_AKATSUKI] was forced out of office."
 										)
 										query.Execute(log_db)
 										LogErrorDb(query)
 
-									akatsuki = list()
+									akatsuki_leader = list()
 									akatsuki_last_online = null
 
 									for(var/mob/m in mobs_online)
@@ -548,8 +548,8 @@ mob
 								if(kazekage[M.client.ckey] == old_character)
 									kazekage[M.client.ckey] = M.character
 
-								if(akatsuki[M.client.ckey] == old_character)
-									akatsuki[M.client.ckey] = M.character
+								if(akatsuki_leader[M.client.ckey] == old_character)
+									akatsuki_leader[M.client.ckey] = M.character
 
 								for(var/squad/squad in squads)
 									if(squad.leader[M.client.ckey] == old_character)
@@ -1005,17 +1005,24 @@ mob
 			Manage_Members()
 				set category = "Akatsuki"
 				switch(usr.client.prompt("Would you like to invite or boot ninja from the [VILLAGE_AKATSUKI]?", "Manage Members", list("Invite", "Exile", "Cancel")))
-					if("Invite")
+					if("Invite")		
 						var/list/exclude = list(usr)
 						for(var/mob/m in mobs_online)
 							if(m.village != VILLAGE_MISSING_NIN) exclude += m
 
 						var/mob/m = input("Who would you like to invite to the [VILLAGE_AKATSUKI]", "Manage Members") as null|anything in mobs_online - exclude
 
+						if(akatsuki_members.len >= 9)
+							usr.client.prompt("The [VILLAGE_AKATSUKI] is already full, you need to boot someone to invite anyone else.", "Manage Members")
+							return
+
 						if(m)
 							if(m.village == VILLAGE_MISSING_NIN)
 								switch(m.client.prompt("The [usr.rank], [usr.character], formally invites you to join the [usr.village]. Do you accept this invitation?", "Akatsuki Invitation", list("Yes", "No")))
 									if("Yes")
+										if(akatsuki_members.len >= 9)
+											usr.client.prompt("The [VILLAGE_AKATSUKI] is already full.", "Manage Members")
+											return
 										if(m.village == VILLAGE_MISSING_NIN)
 
 											var/squad/squad = m.GetSquad()
@@ -1030,7 +1037,7 @@ mob
 												var/database/query/query = new({"
 													INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
 													VALUES(?, ?, ?, ?, ?)"},
-													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) has accepted the invitation to join the [VILLAGE_AKATSUKI]."
+													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsukiLeader(), global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) has accepted the invitation to join the [VILLAGE_AKATSUKI]."
 												)
 												query.Execute(log_db)
 												LogErrorDb(query)
@@ -1038,6 +1045,7 @@ mob
 											m.SetVillage(usr.village)
 											m.SetRank(RANK_AKATSUKI)
 											world.UpdateVillageCount()
+											akatsuki_members += m
 
 											spawn() src.client.UpdateWhoAll()
 
@@ -1052,7 +1060,7 @@ mob
 											var/database/query/query = new({"
 												INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
 												VALUES(?, ?, ?, ?, ?)"},
-												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) has rejected the invitation to join the [VILLAGE_AKATSUKI]."
+												time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsukiLeader(), global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) has rejected the invitation to join the [VILLAGE_AKATSUKI]."
 											)
 											query.Execute(log_db)
 											LogErrorDb(query)
@@ -1068,7 +1076,7 @@ mob
 						for(var/mob/m in mobs_online)
 							if(m.village != usr.village) exclude += m
 
-						var/mob/m = input("Who would you like to boot from the [usr.village]?", "Manage Members") as null|anything in mobs_online - exclude
+						var/mob/m = input("Who would you like to boot from the [usr.village]?", "Manage Members") as null|anything in akatsuki_members
 
 						if(m)
 							if(m.village == usr.village)
@@ -1085,13 +1093,14 @@ mob
 									var/database/query/query = new({"
 										INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
 										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) was exiled from the [VILLAGE_AKATSUKI]."
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsukiLeader(), global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[m.character] ([m.ckey]) was exiled from the [VILLAGE_AKATSUKI]."
 									)
 									query.Execute(log_db)
 									LogErrorDb(query)
 
 								m.SetVillage(VILLAGE_MISSING_NIN)
 								world.UpdateVillageCount()
+								akatsuki_members -= m
 
 								spawn() src.client.UpdateWhoAll()
 
@@ -1123,7 +1132,7 @@ mob
 													var/database/query/query = new({"
 														INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
 														VALUES(?, ?, ?, ?, ?)"},
-														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI] for the [VILLAGE_AKATSUKI]."
+														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsukiLeader(), global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI] for the [VILLAGE_AKATSUKI]."
 													)
 													query.Execute(log_db)
 													LogErrorDb(query)
@@ -1134,7 +1143,7 @@ mob
 													var/database/query/query = new({"
 														INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
 														VALUES(?, ?, ?, ?, ?)"},
-														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
+														time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsukiLeader(), global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has appointed [m.character] ([m.client.ckey]) as their successor and is now the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
 													)
 													query.Execute(log_db)
 													LogErrorDb(query)
@@ -1166,12 +1175,12 @@ mob
 									var/database/query/query = new({"
 										INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
 										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsukiLeader(), global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
 									)
 									query.Execute(log_db)
 									LogErrorDb(query)
 
-								akatsuki = list()
+								akatsuki_leader = list()
 								akatsuki_last_online = null
 
 								usr.SetRank(RANK_AKATSUKI)

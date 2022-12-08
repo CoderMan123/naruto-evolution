@@ -12,7 +12,7 @@ proc/GetKazekage(var/format = RETURN_FORMAT_CKEY)
 		if(RETURN_FORMAT_CKEY) return kazekage.len ? kazekage[1] : null
 		if(RETURN_FORMAT_CHARACTER) return kazekage.len ? kazekage[kazekage[1]] : null
 
-proc/GetAkatsuki(var/format = RETURN_FORMAT_CKEY)
+proc/GetAkatsukiLeader(var/format = RETURN_FORMAT_CKEY)
 	switch(format)
-		if(RETURN_FORMAT_CKEY) return akatsuki.len ? akatsuki[1] : null
-		if(RETURN_FORMAT_CHARACTER) return akatsuki.len ? akatsuki[akatsuki[1]] : null
+		if(RETURN_FORMAT_CKEY) return akatsuki_leader.len ? akatsuki_leader[1] : null
+		if(RETURN_FORMAT_CHARACTER) return akatsuki_leader.len ? akatsuki_leader[akatsuki_leader[1]] : null

@@ -241,6 +241,10 @@ mob
 			
 			src << output("Ninja from the <font color = '[COLOR_VILLAGE_SAND]'>[VILLAGE_SAND]</font> village may cast their vote at their ballot box in the <font color = '[COLOR_VILLAGE_SAND]'>[RANK_KAZEKAGE]</font> house.", "Action.Output")
 		
+		if(!(src in akatsuki_members) && src.rank == RANK_AKATSUKI)
+			src << output("<font color = '[COLOR_VILLAGE_AKATSUKI]'> In your absence you were removed from the [VILLAGE_AKATSUKI] but it's leader.</font>", "Action.Output")
+			src.SetVillage(VILLAGE_MISSING_NIN)
+
 		world.UpdateVillageCount()
 		
 		spawn() src.client.UpdateWhoAll()

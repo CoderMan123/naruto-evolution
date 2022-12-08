@@ -11,7 +11,8 @@ var/list/hokage = list()
 var/list/kazekage = list()
 var/list/kages_last_online = list(VILLAGE_LEAF = null, VILLAGE_SAND = null)
 
-var/list/akatsuki = list()
+var/list/akatsuki_leader = list()
+var/list/akatsuki_members = list()
 var/akatsuki_last_online
 
 var/list/alpha_testers = list()
@@ -194,7 +195,7 @@ world
 			if(akatsuki_last_online && akatsuki_last_online + 864000 * days <= world.realtime)
 				var/online
 				for(var/mob/m in mobs_online)
-					if(akatsuki[m.client.ckey] == m.character) online = 1
+					if(akatsuki_leader[m.client.ckey] == m.character) online = 1
 
 				// Don't demote Akatsuki that are online because akatsuki_last_online only updates on mob.Load() and mob.Save().
 				// Otherwise, Akatsuki will be demoted if they do not logout to update their akatsuki_last_online timestamp.
@@ -205,12 +206,12 @@ world
 						var/database/query/query = new({"
 							INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
 							VALUES(?, ?, ?, ?, ?)"},
-							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsuki(), global.GetAkatsuki(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "The [RANK_AKATSUKI] ([global.GetAkatsuki()]) for the [VILLAGE_AKATSUKI] was forced out of office due to inactivity for [days] days."
+							time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsukiLeader(), global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "The [RANK_AKATSUKI] ([global.GetAkatsukiLeader()]) for the [VILLAGE_AKATSUKI] was forced out of office due to inactivity for [days] days."
 						)
 						query.Execute(log_db)
 						LogErrorDb(query)
 
-					akatsuki = list()
+					akatsuki_leader = list()
 					akatsuki_last_online = null
 
 			sleep(600)
@@ -239,8 +240,9 @@ world
 		F["kages_last_online"] << kages_last_online
 
 		F = new(SAVEFILE_AKATSUKI)
-		F["akatsuki"] << akatsuki
+		F["akatsuki"] << akatsuki_leader
 		F["akatsuki_last_online"] << akatsuki_last_online
+		F["akatsuki_members"] << akatsuki_members
 
 		F = new(SAVEFILE_SQUADS)
 		F["squads"] << squads
@@ -312,8 +314,9 @@ world
 		if(F["kages_last_online"]) F["kages_last_online"] >> kages_last_online
 
 		F = new(SAVEFILE_AKATSUKI)
-		if(F["akatsuki"]) F["akatsuki"] >> akatsuki
+		if(F["akatsuki"]) F["akatsuki"] >> akatsuki_leader
 		if(F["akatsuki_last_online"]) F["akatsuki_last_online"] >> akatsuki_last_online
+		if(F["akatsuki_members"]) F["akatsuki_members"] >> akatsuki_members
 
 		F = new(SAVEFILE_ELECTIONS)
 		if(F["hokage_election"]) F["hokage_election"] >> hokage_election
