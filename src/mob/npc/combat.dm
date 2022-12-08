@@ -44,6 +44,15 @@ mob
 					src.overlays += 'Shade.dmi'
 					src.overlays+='Shirt.dmi'
 					src.overlays+='Sandals.dmi'
+
+					if(VILLAGE_LEAF)
+						if(sand_online > leaf_online) src.maxhealth += (2000 * (sand_online - leaf_online))
+						src.health = src.maxhealth
+
+					if(VILLAGE_SAND)
+						if(leaf_online > sand_online) src.maxhealth += (2000 * (leaf_online - sand_online))
+						src.health = src.maxhealth
+
 					spawn(5) view() << ffilter("<font color='[src.name_color]'>[src.name]</font>: <font color='[COLOR_CHAT]'>[bark]</font>")
 					spawn()
 						while(src && !src.dead)
