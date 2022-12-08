@@ -366,7 +366,6 @@ mob
 							sleep(1)
 							if(src && src.byakugan)
 								src.DealDamage(10, src, "aliceblue", 0, 1)
-								
 								for(var/mob/ZX in orange())
 									if(!ZX || istype(ZX, /mob/Clones/) || istype(ZX, /mob/Karasu/) || istype(ZX, /mob/training/)) continue
 									sleep(1)
