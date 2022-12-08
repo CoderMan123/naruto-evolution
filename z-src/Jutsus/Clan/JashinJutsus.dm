@@ -31,7 +31,7 @@ mob
 						sactimer--
 						if(src)
 							if(src.needkill==2)
-								var/immortime = (75*J.level)/10
+								var/immortime = (40*J.level)/10
 								view(src) << output("<b>Jashin accepted your sacrifice! You're immortal for the next [immortime] seconds! ","Action.Output")
 								src.immortal = 1
 								src.JashinSacrifices++
@@ -53,8 +53,8 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Defence",((J.maxcooltime*3/10)*jutsustatexp))
 					if(src.JashinSacrifices>=50)
 						src.immortal=1
-						src << output("<b>Glory to Jashin! You gain 15 seconds of Immortality!","Action.Output")
-						spawn(150)
+						src << output("<b>Glory to Jashin! You gain 8 seconds of Immortality!","Action.Output")
+						spawn(80)
 							src << output("<b>Your immortality has worn off.","Action.Output")
 							src.immortal=0
 					else
