@@ -2,6 +2,22 @@
 
 obj
 	Inventory
+
+		Akatsuki_Items
+
+			Seal_of_the_Crimson_Cloud
+				name = "Seal of the Crimson Cloud"
+				icon = 'overhead_icons.dmi'
+				icon_state = "sandintel"
+				Description = "A small ring with a red cloud symbol imprinted on the rings seal. There's a small note attached: 'A sealed stone in the center of our world. If you have the power to exact change, find me there.'"
+
+				verb
+					Use()
+						set category = null
+						set src in usr.contents
+						usr.client.prompt({"[src.Description]"}, "[src.name]")
+
+
 		Useable_Clan_Items
 			var/required_element
 			var/required_spec

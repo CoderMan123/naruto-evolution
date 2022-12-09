@@ -423,11 +423,64 @@ mob
 				if(usr.dead)return
 				if(get_dist(src,usr)>2)return
 				src.conversations.Add(usr)
-				var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
-				if(O && O.squad.mission)
-					O.squad.mission.Complete(usr)
-				else if(usr.client.prompt("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == "Yes")
-					usr.loc = locate(100,32,4)
+
+				if(usr.village == VILLAGE_AKATSUKI)
+					var/obj/Inventory/mission/deliver_intel/O = locate(/obj/Inventory/mission/deliver_intel) in usr.contents
+
+					if(O && O.squad.mission)
+						O.squad.mission.Complete(usr)
+
+					else if(usr.client.prompt("Be patient. In time, we'll create a whole new world. Would you like to use the secret exit?", src.name, list("Yes", "No")) == "Yes")
+						usr.loc = locate(100,32,4)
+				else
+					var/obj/required_item
+					for(var/obj/Inventory/Akatsuki_Items/Seal_of_the_Crimson_Cloud/item in usr.contents)
+						if(item)
+							required_item = item
+							break
+
+					if(required_item)
+						switch(usr.client.prompt("I see you have brought the seal. Well done indeed. So then are you ready to join the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> as its <font color='[COLOR_VILLAGE_AKATSUKI]'>leader</font>?", src.name, list("Yes", "No")))
+							if("Yes")
+								var/squad/squad = usr.GetSquad()
+								if(squad)
+									src.client.prompt("You cannot become [RANK_AKATSUKI_LEADER] while in a Squad.", "Naruto Evolution")
+									return 0
+
+								usr.SetVillage(VILLAGE_AKATSUKI)
+								usr.SetRank(RANK_AKATSUKI_LEADER)
+
+								world.UpdateVillageCount()
+								spawn() usr.client.UpdateWhoAll()
+
+								usr.client.StaffCheck()
+
+								world << output("[usr.character] has become the <font color='[COLOR_VILLAGE_AKATSUKI]'>[RANK_AKATSUKI_LEADER]</font>.", "Action.Output")
+								
+								spawn()
+									var/database/query/query = new({"
+										INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
+										VALUES(?, ?, ?, ?, ?)"},
+										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), usr.client.ckey, usr.character, usr.village, "[usr.character] ([usr.client.ckey]) became the [RANK_AKATSUKI_LEADER]."
+									)
+									query.Execute(log_db)
+									LogErrorDb(query)
+
+								usr.client.prompt("Then rise, [usr.name]. Show us the path towards a new era! (You are now the leader of the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>", src.name)
+							
+							if("No")
+								spawn(10)
+								view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: Then you are of no use to me.</font>"
+								usr.DealDamage(999999, src)
+								usr.Bleed()
+								usr.Death()
+					
+					else
+						view(src) << "[HTML_GetName(src)]<font color='[COLOR_CHAT]'>: I don't know how you got past the seal but coming here was your last mistake.</font>"
+						usr.DealDamage(999999, src)
+						usr.Bleed()
+						usr.Death()
+
 				src.conversations.Remove(usr)
 
 		onomari //prestige system

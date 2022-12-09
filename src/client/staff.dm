@@ -779,6 +779,9 @@ mob
 
 						if(VILLAGE_AKATSUKI)
 							if(M)
+								if(akatsuki_members.len >= 9)
+									spawn() src.client.prompt("The [VILLAGE_AKATSUKI] are already full.", "Naruto Evolution")
+									return 0
 								var/squad/squad = M.GetSquad()
 								if(squad)
 									spawn() src.client.prompt("You change [M.character]'s village while they're in a Squad.", "Naruto Evolution")
@@ -1023,6 +1026,16 @@ mob
 										if(akatsuki_members.len >= 9)
 											usr.client.prompt("The [VILLAGE_AKATSUKI] is already full.", "Manage Members")
 											return
+
+										var/obj/required_item
+										for(var/obj/Inventory/Akatsuki_Items/Seal_of_the_Crimson_Cloud/item in m.contents)
+											if(item) required_item = item
+										
+										if(!required_item)
+											spawn() usr.client.prompt("This ninja is unable to present you with a <font color='[COLOR_VILLAGE_AKATSUKI]'>Seal of the Crimson Clouds</font>. They must prove themselves a lamb of the cause like you yourself did once before.", "Manage Members")
+											spawn() m.client.prompt("You are asked to present a <font color='[COLOR_VILLAGE_AKATSUKI]'>Seal of the Crimson Clouds</font> but you don't have such an item. You must prove yourself a lamb of the cause by slaughtering those foolish shinobi villages when they try to prevent the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> from achieving their goal.", "Manage Members")
+											return
+
 										if(m.village == VILLAGE_MISSING_NIN)
 
 											var/squad/squad = m.GetSquad()
@@ -1045,7 +1058,7 @@ mob
 											m.SetVillage(usr.village)
 											m.SetRank(RANK_AKATSUKI)
 											world.UpdateVillageCount()
-											akatsuki_members += m
+											akatsuki_members += m.character
 
 											spawn() src.client.UpdateWhoAll()
 
@@ -1076,7 +1089,12 @@ mob
 						for(var/mob/m in mobs_online)
 							if(m.village != usr.village) exclude += m
 
-						var/mob/m = input("Who would you like to boot from the [usr.village]?", "Manage Members") as null|anything in akatsuki_members
+						var/mem = input("Who would you like to boot from the [usr.village]?", "Manage Members") as null|anything in akatsuki_members
+
+						var/mob/m
+						for(var/mob/check in mobs_online)
+							if(check.character == mem) m = check
+							break
 
 						if(m)
 							if(m.village == usr.village)
@@ -1100,14 +1118,15 @@ mob
 
 								m.SetVillage(VILLAGE_MISSING_NIN)
 								world.UpdateVillageCount()
-								akatsuki_members -= m
+								akatsuki_members -= m.character
 
 								spawn() src.client.UpdateWhoAll()
 
 							else
 								usr.client.prompt("[m.character] is no longer in the [usr.village] village and is therefore unable to be exiled.", "Manage Members")
 						else
-							usr.client.prompt("The ninja you were going to exile is no longer online and is therefore unable to be exiled.", "Manage Members")
+							usr.client.prompt("The ninja [mem] has been successfully exiled from the [VILLAGE_AKATSUKI].", "Manage Members")
+							akatsuki_members -= mem
 
 			Retire()
 				set category = "Akatsuki"
@@ -1168,23 +1187,26 @@ mob
 									usr.client.prompt("The ninja you were going to promote to [usr.rank] is no longer online and is therefore unable to be promoted.", "Retire [usr.rank]")
 
 							if("No")
+								switch(src.client.prompt("Do you wish to disband the [VILLAGE_AKATSUKI]? This will cause you and all [VILLAGE_AKATSUKI] members to become missing nin.", "[usr.rank] Retirement", list("Yes", "No")))
+									if("Yes")
 
-								world << output("[usr.character] has retired from office as the [RANK_AKATSUKI_LEADER] for the <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font>.", "Action.Output")
-								
-								spawn()
-									var/database/query/query = new({"
-										INSERT INTO `[db_table_akatsuki]` (`timestamp`, `key`, `character`, `village`, `log`)
-										VALUES(?, ?, ?, ?, ?)"},
-										time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), global.GetAkatsukiLeader(), global.GetAkatsukiLeader(RETURN_FORMAT_CHARACTER), VILLAGE_AKATSUKI, "[usr.character] ([usr.client.ckey]) has retired from office as the [RANK_AKATSUKI_LEADER] for the [VILLAGE_AKATSUKI]."
-									)
-									query.Execute(log_db)
-									LogErrorDb(query)
+										world << output("[usr.character] has retired as the [RANK_AKATSUKI_LEADER]. The <font color='[COLOR_VILLAGE_AKATSUKI]'>[VILLAGE_AKATSUKI]</font> will be disbanded.", "Action.Output")
 
-								akatsuki_leader = list()
-								akatsuki_last_online = null
+										for(var/mob/m in akatsuki_online)
+											m.SetVillage(VILLAGE_MISSING_NIN)
+											m.SetRank("")
 
-								usr.SetRank(RANK_AKATSUKI)
+										akatsuki_online = list()
+										akatsuki_members = list()
+										akatsuki_leader = list()
+										akatsuki_last_online = null
+										usr.client.StaffCheck()
 
+										usr.SetVillage(VILLAGE_MISSING_NIN)
+										usr.SetRank("")
+
+									if("No")
+										usr.client.prompt("You have decided not to retire as [RANK_AKATSUKI_LEADER].", "Retire [usr.rank]")
 mob
 	kage
 		verb

@@ -22,6 +22,11 @@ proc
 						m.RecieveItem(eg, silent = 1)
 						m << output("<font color = 9F51B9>You've recieved a rare item! (Leaf Scroll: Eight Gates) </font>", "Action.Output")
 
+				if("Akatsuki Join")
+					if(prob(dropchance))//1
+						var/obj/Inventory/Akatsuki_Items/Seal_of_the_Crimson_Cloud/crim = new()
+						m.RecieveItem(crim, silent = 1)
+						m << output("<font color = 9F51B9>You've recieved a rare item! (Seal of the Crimson Cloud) </font>", "Action.Output")
 				
 				if("SandMissions")
 					if(prob(dropchance))

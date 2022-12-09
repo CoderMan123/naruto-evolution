@@ -90,6 +90,15 @@ mob
 				world<<output("[src.name] has defected from the [src.village] village.","Action.Output")
 
 				if(village == VILLAGE_AKATSUKI)
+					if(rank == RANK_AKATSUKI_LEADER)
+						var/retire_verb = /mob/akatsuki/verb/Retire
+						call(src, retire_verb)()
+						if(rank == RANK_AKATSUKI_LEADER)
+							client.prompt("If you want to leave the [src.village], you must retire as their leader first.","Confirmation")
+							return
+
+					else akatsuki_members -= src.character
+
 					for(var/obj/Inventory/Clothing/Robes/Akatsuki_Robe/O in src)
 						if(ClothingOverlays[O.section]==O.icon)RemoveSection(O.section)
 						del(O)

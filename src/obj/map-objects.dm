@@ -16,8 +16,23 @@ obj
 		Crossed(atom/a)
 			if(ismob(a))
 				var/mob/m = a
+				
+				var/obj/required_item
+				for(var/obj/Inventory/Akatsuki_Items/Seal_of_the_Crimson_Cloud/item in m.contents)
+					if(item) 
+						required_item = item
+						break
+
 				if(m.village == VILLAGE_AKATSUKI)
 					m.loc = locate(51,149,7)
+
+				else if(required_item && akatsuki_leader.len < 1)
+					m<<output("The <font color='[COLOR_VILLAGE_AKATSUKI]'>Seal of the Crimson Clouds</font> hums and the boulder moves to allow your passage.","Action.Output")
+					m.loc = locate(51,149,7)
+
+				else if(required_item) m<<output("The <font color='[COLOR_VILLAGE_AKATSUKI]'>Seal of the Crimson Clouds</font> hums but it quickly fades. There must be an <font color='[COLOR_VILLAGE_AKATSUKI]'>[RANK_AKATSUKI_LEADER]</font> already.","Action.Output")
+
+				
 				else
 					m<<output("A strange and powerful seal blocks this cave, it could only be the work of the Akatsuki!","Action.Output")
 			else ..()

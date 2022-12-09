@@ -363,7 +363,7 @@ mob
 						if(src != attacker && src.village == VILLAGE_AKATSUKI && zetsu_event_active)
 							var/squad/squad = attacker.GetSquad()
 							if(attacker.village == VILLAGE_LEAF || attacker.village == VILLAGE_SAND)
-								Lootdrop("AkatsukiClans", attacker, 3)
+								Lootdrop("AkatsukiClans", attacker, 5)
 								akat_lives_left--
 								switch(attacker.village)
 									if(VILLAGE_LEAF)
@@ -386,6 +386,8 @@ mob
 										attacker.Levelup()
 								else
 									ZetsuEventEnd(attacker)
+									
+
 
 						// Villager Death
 						if(src != attacker && src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
@@ -405,17 +407,21 @@ mob
 										attacker.Levelup()
 								else
 									ZetsuEventEnd(attacker)
+									
 
-						// Missing-Nin Death
+
+						// Missing-Nin Kill
 						if(src != attacker && attacker.village == VILLAGE_MISSING_NIN && zetsu_event_active)
 							if(src.village == VILLAGE_AKATSUKI || src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
 								if(src.village == VILLAGE_AKATSUKI)
 									akat_lives_left--
 									world << output("A rogue ninja took advantage of the fray and has killed a member of the Akatuski! (Akatsuki lives remaining: [akat_lives_left])", "Action.Output")
+									Lootdrop("AkatsukiClans", attacker, 3)
 
 								if(src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
 									vill_lives_left--
 									world << output("A rogue ninja took advantage of the fray and has killed a member of the [attacker.village] village! (Shinobi Alliance lives remaining: [vill_lives_left])", "Action.Output")
+									Lootdrop("Akatsuki Join", attacker, 3)
 
 								attacker << output ("With everything going on, they never saw you coming. You've earned 15 bonus experience!", "Action.Output")
 								attacker.exp += 15
