@@ -902,7 +902,16 @@ mob
 							m.loc = src.loc
 							return
 
-				src << "/summon: A mob was not found matching the string \"[value]\"."
+					for(var/obj/Inventory/o in world)
+						if(o && o.id == text2num(value))
+							if(o in src.contents)
+								src << "/summon: [o] is already located in your inventory."
+								return
+
+							src.RecieveItem(o, o.loc)
+							return
+
+				src << "/summon: A mob or item id was not found with the matching the string \"[value]\"."
 				return
 
 			command = "/summon"
