@@ -550,20 +550,26 @@ mob
 									var/ChosenElement
 									ChosenElement = usr.client.prompt("What do you want to learn?", src.name, ElementChoice)
 
-									spawn()
-										var/database/query/query = new({"
-											INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `level`, `prestige`)
-											VALUES(?, ?, ?, ?, ?)"},
-											time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), usr.client.ckey, usr.character, usr.level, usr.prestigelevel++
-										)
-										query.Execute(log_db)
-										LogErrorDb(query)
+									switch(usr.client.prompt("Are you sure you want to prestige your character and learn the [ChosenElement] element permenantly? By choosing to prestige your prestige level will be increased by 1 but your character will lose all it's levels, stats and jutsu.", src.name, list("Yes","No")))
+										if("No")
+											usr.client.prompt("You know where to find me if you change your mind.", src.name)
+											src.conversations.Remove(usr)
+											return
+										if("Yes")
+											spawn()
+												var/database/query/query = new({"
+													INSERT INTO `[db_table_character_prestige]` (`timestamp`, `key`, `character`, `level`, `prestige`)
+													VALUES(?, ?, ?, ?, ?)"},
+													time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"), usr.client.ckey, usr.character, usr.level, usr.prestigelevel
+												)
+												query.Execute(log_db)
+												LogErrorDb(query)
 
-									if(!usr.Element3) usr.Element3 = ElementChoice[ChosenElement]
-									else if(!usr.Element4) usr.Element4 = ElementChoice[ChosenElement]
-									else if(!usr.Element5) usr.Element5 = ElementChoice[ChosenElement]
-									usr.prestige_reset()
-									//usr.level = initial(usr.level)
+											if(!usr.Element3) usr.Element3 = ChosenElement
+											else if(!usr.Element4) usr.Element4 = ChosenElement
+											else if(!usr.Element5) usr.Element5 = ChosenElement
+											usr.prestige_reset()
+											//usr.level = initial(usr.level)
 
 								if("Nevermind")
 									usr.client.prompt("You know where to find me if you change your mind.", src.name)
@@ -629,9 +635,15 @@ mob
 			usr.rank = RANK_ACADEMY_STUDENT
 			usr.last_hotspring_time = initial(usr.last_hotspring_time)
 			usr.hotspring_minutes = initial(usr.hotspring_minutes)
-			usr.jutsus = initial(usr.jutsus)
-			usr.jutsus_learned = initial(usr.jutsus_learned)
-			usr.sbought = initial(usr.sbought)
+			for(var/a in usr.jutsus)
+				usr.jutsus -= a
+			for(var/b in usr.jutsus_learned)
+				usr.jutsus_learned -= b
+			for(var/c in usr.sbought)
+				usr.sbought -= c
 			usr.prestigelevel++
+			src.AddStarterJutsu()
 			usr.loc = MapLoadSpawn()
+			
+
 			winset(usr , null , "command = .reconnect")

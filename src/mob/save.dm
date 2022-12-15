@@ -1,6 +1,6 @@
 #define DEBUG_SAVEFILE
 
-mob/var/savefile_version = 1
+mob/var/savefile_version = 2
 
 mob
 	proc/Save()
@@ -122,9 +122,11 @@ mob
 								del(src.client)
 
 	proc/SavefileMigration()
-/*		if(src.savefile_version < 2)
-			do stuff
-			src.savefile_version = 2*/
+		if(src.savefile_version < 2)
+			if(src.prestigelevel > 0)
+				src.prestigelevel = 1
+				src.AddStarterJutsu()
+			src.savefile_version = 2
 
 	Write(savefile/F, var/character)
 		if(src.client)

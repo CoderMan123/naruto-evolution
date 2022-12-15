@@ -245,6 +245,15 @@ mob
 					del(D)
 
 
+	proc/AddStarterJutsu()
+		for(var/type in typesof(/obj/Jutsus))
+			var/obj/Jutsus/jutsu = new type
+			if(src && jutsu.starterjutsu)
+				jutsu.owner = src.ckey
+				src.jutsus += jutsu
+				src.jutsus_learned += jutsu.type
+				src.sbought += jutsu.name
+
 	verb/CreateCharacter()
 		set hidden = 1
 		if(src.client && !mobs_online.Find(src) && !src.client.logging_in)
