@@ -2,10 +2,10 @@ var/build
 var/pre_release = 0
 var/server_capacity = 100
 
-var/list/administrators = list("douglasparker", "illusiveblair")
+var/list/administrators = list("douglasparker", "reformist")
 var/list/moderators = list()
-var/list/programmers = list("douglasparker")
-var/list/pixel_artists = list("illusiveblair")
+var/list/programmers = list("douglasparker", "reformist")
+var/list/pixel_artists = list()
 
 var/list/hokage = list()
 var/list/kazekage = list()
@@ -36,8 +36,8 @@ var/squads[0]
 
 world
 	name = "Naruto Evolution"
-	hub = "IllusiveBlair.NarutoEvolution"
-	hub_password = "Z3qzsVoh46BuHSNC"
+	hub = "ProjectNE.NarutoEvolution"
+	hub_password = ""
 	status = "Naruto Evolution (Connecting...) | Ninjas Online (Connecting...)"
 	fps = 20
 	view = 16
@@ -346,7 +346,7 @@ world
 			Factions += Faction
 
 	proc/GetAdvert()
-		return "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='https://www.byond.com/games/IllusiveBlair/NarutoEvolution'>Hub</a>] \[<a href='https://wiki.narutoevolution.com'>Wiki</a>] \[<a href='https://discord.gg/UW77xAhcTM'>Discord</a>]<br />\[<a href='https://github.com/douglasparker/naruto-evolution-community/issues/new?assignees=&labels=Type%3A+Feature+Request&template=feature-request.md&title='>Feature Requests</a>] \[<a href='https://github.com/douglasparker/naruto-evolution-community/issues/new?assignees=&labels=Type%3A+Bug&template=bug-report.md&title='>Bug Reports</a>]</b></center>"
+		return "<center><b><font color='#dd5800'>[world.name]</font> v[build] | <font color='#dd5800'>Ninjas Online</font> ([mobs_online.len]/[server_capacity])<br />\[<a href='https://www.byond.com/games/ProjectNE/NarutoEvolution'>Hub</a>] \[<a href='https://discord.gg/UW77xAhcTM'>Discord</a>]<br />\[<a href='https://github.com/Aeiwik/naruto-evolution/issues/new?assignees=&labels=Type%3A+Feature+Request&template=feature-request.md&title='>Feature Requests</a>] \[<a href='https://github.com/Aeiwik/naruto-evolution/issues/new?assignees=&labels=Type%3A+Bug&template=bug-report.md&title='>Bug Reports</a>]</b></center>"
 	
 	proc/Maintenance()
 		while(world)
