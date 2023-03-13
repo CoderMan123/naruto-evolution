@@ -1,6 +1,7 @@
 [![Build](https://github.com/douglasparker/naruto-evolution/actions/workflows/build.yml/badge.svg)](https://github.com/douglasparker/naruto-evolution/actions/workflows/build.yml)
 [![Release](https://github.com/douglasparker/naruto-evolution/actions/workflows/release.yml/badge.svg)](https://github.com/douglasparker/naruto-evolution/actions/workflows/release.yml)
 
+:warning: **This project is no longer maintained. We recommend the following [fork](https://github.com/Aeiwik/naruto-evolution).** :warning:
 
 # Naruto Evolution
 
@@ -48,7 +49,7 @@ git config --global diff.submodule log
 1) **Clone the repository:**
 
 ```sh
-git clone https://github.com/douglasparker/naruto-evolution.git
+git clone https://github.com/lavenblade/naruto-evolution.git
 ```
 
 2) **Initialize and checkout submodules:**
