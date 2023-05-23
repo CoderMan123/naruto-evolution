@@ -62,19 +62,3 @@ jobs:
           gh auth login --with-token <<< ${{ secrets.ACTIONS }}
           gh release edit ${{ github.event.release.tag_name }} --notes "## [${{ github.event.release.tag_name }}] $(date +"%Y-%m-%d")
           *Release notes are not provided for pre-releases.*"
-      
-      - name: Deploy the Docker image to the server
-        if: github.event.release.prerelease == false
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            docker run --rm \
-              -v /var/run/docker.sock:/var/run/docker.sock \
-              -v /root/.docker/config.json:/config.json:ro \
-              -e WATCHTOWER_NOTIFICATIONS=slack \
-              -e WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER="Watchtower" \
-              -e WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL="${{ secrets.WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL }}" \
-              containrrr/watchtower naruto-evolution --run-once --cleanup --include-restarting
