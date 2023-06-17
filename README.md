@@ -1,7 +1,6 @@
-[![Build](https://github.com/douglasparker/naruto-evolution/actions/workflows/build.yml/badge.svg)](https://github.com/douglasparker/naruto-evolution/actions/workflows/build.yml)
-[![Release](https://github.com/douglasparker/naruto-evolution/actions/workflows/release.yml/badge.svg)](https://github.com/douglasparker/naruto-evolution/actions/workflows/release.yml)
+[![Build](https://github.com/illusivebIair/naruto-evolution/actions/workflows/build.yml/badge.svg)](https://github.com/illusivebIair/naruto-evolution/actions/workflows/build.yml)
+[![Release](https://github.com/illusivebIair/naruto-evolution/actions/workflows/release.yml/badge.svg)](https://github.com/illusivebIair/naruto-evolution/actions/workflows/release.yml)
 
-> :warning: This project is no longer maintained. We recommend the following [fork](https://github.com/Aeiwik/naruto-evolution).
 
 # Naruto Evolution
 

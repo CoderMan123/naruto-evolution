@@ -2,10 +2,10 @@ var/build
 var/pre_release = 0
 var/server_capacity = 100
 
-var/list/administrators = list("douglasparker", "reformist")
+var/list/administrators = list("illusiveblair")
 var/list/moderators = list()
-var/list/programmers = list("douglasparker", "reformist")
-var/list/pixel_artists = list()
+var/list/programmers = list("illusiveblair")
+var/list/pixel_artists = list("illusiveblair")
 
 var/list/hokage = list()
 var/list/kazekage = list()
