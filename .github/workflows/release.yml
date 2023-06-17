@@ -23,7 +23,7 @@ jobs:
       
       - name: Build application
         run: |
-          docker run -v ${{ github.workspace }}:${{ github.workspace }} douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+          docker run -v ${{ github.workspace }}:${{ github.workspace }} ghcr.io/douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
           echo "${{ github.event.release.tag_name }}" > "${{ github.workspace }}/VERSION"
 
           if [ ${{ github.event.release.prerelease }} == 'true' ]; then
