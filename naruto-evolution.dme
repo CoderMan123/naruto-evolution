@@ -66,8 +66,8 @@
 // BEGIN_INCLUDE
 #include "assets\fonts\fonts.dm"
 #include "assets\maps\map.dmm"
-#include "lib\lavenblade\interface-input\src\client.dm"
-#include "lib\lavenblade\interface-input\src\input.dm"
+#include "lib\interface-input\demo\demo.dm"
+#include "lib\interface-input\demo\assets\interface\interface.dmf"
 #include "src\_preprocessor.dm"
 #include "src\area\area.dm"
 #include "src\atom\atom.dm"
