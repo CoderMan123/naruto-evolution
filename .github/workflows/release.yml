@@ -6,6 +6,9 @@ on:
 
 env:
   BYOND_VERSION: "514.1589"
+  REGISTRY: docker.io
+  IMAGE_NAME: ${{ github.repository }}
+  LATEST_MAJOR_VERSION: 2
 
 jobs:
   release:
@@ -17,28 +20,46 @@ jobs:
         with:
           submodules: 'recursive'
           lfs: true
-
-      - name: Install sshpass
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
-
+      
       - name: Build application
         run: |
-          docker run -v ${{ github.workspace }}:${{ github.workspace }} ghcr.io/douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+          docker run -v ${{ github.workspace }}:${{ github.workspace }} registry.douglasparker.dev/byond/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
           echo "${{ github.event.release.tag_name }}" > "${{ github.workspace }}/VERSION"
 
           if [ ${{ github.event.release.prerelease }} == 'true' ]; then
             echo "PRERELEASE" > "${{ github.workspace }}/PRERELEASE"
           fi
 
-      - name: Deploy to server
-        if: github.event.release.prerelease == false
-        uses: appleboy/ssh-action@master
+      - name: Login to the Docker Registry
+        uses: docker/login-action@v2
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "pkill DreamDaemon"
-            sshpass -p "${{ secrets.SSH_PASSWORD }}" scp "${{ github.workspace }}/naruto-evolution.dmb" ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/opt/naruto-evolution/
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      
+      - name: Extract repository metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+          flavor: |
+            latest=${{ startsWith(github.ref, 'refs/tags/${{ env.LATEST_MAJOR_VERSION }}') }}
+      
+      - name: Build the Docker image and publish to the Docker Registry
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      
+      - name: Remove release notes from pre-releases
+        if: github.event.release.prerelease
+        run: |
+          gh auth login --with-token <<< ${{ secrets.ACTIONS }}
+          gh release edit ${{ github.event.release.tag_name }} --notes "## [${{ github.event.release.tag_name }}] $(date +"%Y-%m-%d")
+          *Release notes are not provided for pre-releases.*"
