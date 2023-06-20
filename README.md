@@ -48,7 +48,7 @@ git config --global diff.submodule log
 1) **Clone the repository:**
 
 ```sh
-git clone https://github.com/lavenblade/naruto-evolution.git
+git clone https://github.com/illusivebiair/naruto-evolution.git
 ```
 
 2) **Initialize and checkout submodules:**
