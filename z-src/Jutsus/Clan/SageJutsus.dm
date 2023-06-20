@@ -218,7 +218,7 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					src.PlayAudio('Skill_MashHit.wav', output = AUDIO_HEARERS)
-					src.overlays+='Jutsus/Misc/MiscJutIcons/sage.dmi'
+					src.overlays+='sage.dmi'
 					src.ninjutsu_buffed+=20
 					src.insage=1
 					src.taijutsu_buffed+=10

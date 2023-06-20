@@ -1393,7 +1393,7 @@ obj
 						spawn(85)
 							del(src)
 			shinratensei
-				icon='Jutsus/Clan/ClanJutIcons/shinratensei.dmi'
+				icon='shinratensei.dmi'
 				layer=MOB_LAYER+10
 				density=1
 				pixel_x=-310
