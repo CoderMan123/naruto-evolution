@@ -199,7 +199,6 @@
 #include "z-src\Jutsus\Misc\NonClanJutsus.dm"
 #include "z-src\Jutsus\Misc\UnobtainableJutsus.dm"
 #include "z-src\Npcs\Monsters.dm"
-#include "z-src\Npcs\NPCs.dm"
 #include "z-src\Turfs\BuildingInside.dm"
 #include "z-src\Turfs\Ground.dm"
 #include "z-src\Turfs\Leaf\LeafVillage.dm"

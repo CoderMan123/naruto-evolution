@@ -1,5 +1,5 @@
 mob/var/list/ClothingOverlays = list("Vest"=null,"Shirt"=null,"Pants"=null,"Shoes"=null,"Mask"=null,"Headband"=null,"Sword"=null,"Gloves"=null,"Accessories"=null,"Robes"=null)
-
+obj/var/Colorable=1
 
 mob/proc
 	RemoveAllClothing()
