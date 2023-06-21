@@ -87,6 +87,7 @@ obj
 			signs="<font color=green>Dog,Dog</font><br>(macro(E,E))"
 			Sprice=1
 			give_to_guards = 1
+			uses=100
 			Description="Set a location to escape to in an emergancy. You can then substitute your body with a log by pressing D, allowing you to escape dangerous situations providing you're close enough to your escape location. So long as a location is set this jutsu can be used while bound, freeing you from it's restraints."
 			New()
 				..()

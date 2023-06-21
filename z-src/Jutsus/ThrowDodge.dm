@@ -48,66 +48,6 @@ mob
 			set hidden=1
 
 			src.HengeUndo()
-			if(src.kawarmi)
-				/*if(src.Intang)
-					src<<"You can't adv sub while Intang."
-					return*/
-				if(usr.mark.z == usr.z)
-					ChakraCheck(0)
-					if(usr.dead==1) return
-					if(get_dist(usr,usr.mark)>20)
-						usr<<"\red <b>Your substitution was set too far away. Jutsu failed!"
-						usr.mark=null
-						usr.kawarmi=0
-						return
-					for(var/mob/M in mobs_online)
-						if(M.target_mob == src)
-							M.Target_Remove()
-					src.PlayAudio('flashbang_explode1.wav', output = AUDIO_HEARERS)
-					usr.mark2=usr.loc
-					usr.loc=usr.mark
-
-					RemoveState(usr, new/state/cant_attack, STATE_REMOVE_ALL)
-					RemoveState(usr, new/state/cant_move, STATE_REMOVE_ALL)
-					
-					usr.kawarmi=0
-					usr.inshadowfield=0
-					var/obj/A = new/obj/MiscEffects/Smoke(usr.loc)
-					A.loc=usr.mark2
-
-					if(istype(loc,/turf/Ground/Water))
-						if(!usr.waterwalk)
-							AddState(usr, new/state/swimming, -1)
-							usr.stepcounter=0
-							usr.icon_state="swim"
-							usr.overlays-=/obj/MaleParts/UnderShade
-							usr.overlays+=/obj/MiscEffects/WaterRing
-							usr.overlays+=/obj/MiscEffects/WaterRing
-						if(usr.waterwalk)
-							AddState(usr, new/state/water_walking, -1)
-							usr.overlays+=/obj/MiscEffects/WaterRing
-							usr.overlays+=/obj/MiscEffects/WaterRing
-
-					if(!istype(loc,/turf/Ground/Water))
-						if(CheckState(usr, new/state/swimming))
-							RemoveState(src, new/state/swimming, STATE_REMOVE_ALL)
-							usr.stepcounter=0
-							usr.icon_state=""
-							usr.overlays+=/obj/MaleParts/UnderShade
-							usr.overlays-=/obj/MiscEffects/WaterRing
-							usr.overlays-=/obj/MiscEffects/WaterRing
-						if(CheckState(usr, new/state/water_walking))
-							RemoveState(src, new/state/water_walking, STATE_REMOVE_ALL)
-							usr.overlays-=/obj/MiscEffects/WaterRing
-							usr.overlays-=/obj/MiscEffects/WaterRing
-
-					sleep(8)
-					if(src)
-						var/obj/B = new/obj/MiscEffects/LogB(usr.loc)
-						B.loc=usr.mark2
-				else
-					usr.mark=null
-					usr.kawarmi=0
 
 			if(src.icon_state == "dead") return
 
@@ -163,7 +103,7 @@ mob
 							ET.damage=null
 							ET.icon_state="blank"
 							spawn(50)if(ET)del(ET)
-				if(src.kawarmi==0 && src.C3bombz==0)
+				if(src.C3bombz==0)
 /*					if(src.dead==0&&src.dodge==0&&src.dashable==1&&src.health>src.maxhealth/3)
 						src.PlayAudio('dash.wav', output = AUDIO_HEARERS)
 						if(src.icon_state<>"blank")flick("dash",src)
