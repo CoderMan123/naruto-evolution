@@ -1,6 +1,6 @@
 #define DEBUG_SAVEFILE
 
-mob/var/savefile_version = 2
+mob/var/savefile_version = 3
 
 mob
 	proc/Save()
@@ -127,6 +127,10 @@ mob
 				src.prestigelevel = 1
 				src.AddStarterJutsu()
 			src.savefile_version = 2
+		if(src.savefile_version < 3)
+			for(var/obj/Jutsus/AdvancedBodyReplace/J in src.jutsus)
+				if(J.uses < 100) J.uses = 100
+			src.savefile_version = 3
 
 	Write(savefile/F, var/character)
 		if(src.client)
