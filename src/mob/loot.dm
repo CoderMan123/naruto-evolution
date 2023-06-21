@@ -75,10 +75,10 @@ proc
 						var/obj/Inventory/Unuseable_Clan_Items/Sealed_Forbidden_Scroll_Clay/clay = new()
 						m.RecieveItem(clay, silent = 1)
 						m << output("<font color = 9F51B9>You've recieved a rare item! (Sealed Forbidden Scroll: Clay) </font>", "Action.Output")
-					if(prob(dropchance))//1
+					/*if(prob(dropchance))//1
 						var/obj/Inventory/Unuseable_Clan_Items/Sealed_Forbidden__Scroll_Jiongu/jion = new()
 						m.RecieveItem(jion, silent = 1)
-						m << output("<font color = 9F51B9>You've recieved a rare item! (Sealed Forbidden Scroll: Jiongu) </font>", "Action.Output")
+						m << output("<font color = 9F51B9>You've recieved a rare item! (Sealed Forbidden Scroll: Jiongu) </font>", "Action.Output")*/
 					if(prob(dropchance))//1
 						var/obj/Inventory/Unuseable_Clan_Items/Eye_of_Uchiha/eye = new()
 						m.RecieveItem(eye, silent = 1)
