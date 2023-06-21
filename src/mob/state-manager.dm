@@ -82,6 +82,24 @@ proc
 		OnTick()
 			..()
 
+	resting
+		var/delay
+		var/debug = 0
+		OnTick()
+			if(!delay) delay = world.timeofday + 1
+			if(delay < world.timeofday)
+				world << "resting"
+				debug += 1
+				if(src.mob.chakra<>src.mob.maxchakra)
+					if(!src.mob.Gates)
+						src.mob.chakra+=src.mob.maxchakra/20
+					else
+						src.mob.chakra+=src.mob.maxchakra/50
+					if(src.mob.chakra>src.mob.maxchakra)src.mob.chakra=src.mob.maxchakra
+					src.mob.UpdateHMB()
+				delay = world.timeofday + 1
+			..()
+
 	casting_jutsu
 		OnTick()
 			..()

@@ -63,24 +63,14 @@ mob
 					RestUp()
 					return
 				usr.icon_state="jutsuse"
-				if(src.wait==2)
-					if(src.chakra<>src.maxchakra)
-						if(!Gates)
-							src.chakra+=src.maxchakra/20
-						else
-							src.chakra+=src.maxchakra/60
-						if(src.chakra>src.maxchakra)src.chakra=src.maxchakra
-						src.UpdateHMB()
-/*						if(src.health<>src.maxhealth)
-							src.health+=src.maxchakra/20
-							if(src.health>src.maxhealth)src.health=src.maxhealth
-							src.UpdateHMB()*/
+				if(!CheckState(src, new/state/resting))
+					AddState(src, new/state/resting, -1)
 				var/turf/T = usr.loc
-				spawn(2)
-					if(src.wait<2)src.wait+=1
-					src.icon_state=""
-					if(usr.loc==T)usr.Resting()
-					else usr.RestUp()
+				sleep(2)
+				if(src.wait<2)src.wait+=1
+				src.icon_state=""
+				if(usr.loc==T && usr.rest)usr.Resting()
+				else usr.RestUp()
 	proc
 		RestSound()
 			if(CheckState(src, new/state/cant_attack) &&src.dead==0&&src.rest==1)
@@ -136,9 +126,9 @@ mob
 					if(health<=0)health=0
 				spawn() usr.RestSound()
 				var/turf/T = usr.loc
-				spawn(2)
-					if(usr.loc==T&&!CheckState(src, new/state/recently_hit))usr.Resting()
-					else usr.RestUp()
+				sleep(2)
+				if(usr.loc==T&&!CheckState(src, new/state/recently_hit))usr.Resting()
+				else usr.RestUp()
 								
 		RestUp()
 			set hidden=1
@@ -157,5 +147,6 @@ mob
 				usr.RestOverlays=0
 				usr.wait=0
 				usr.rest=0
+				RemoveState(src, new/state/resting, STATE_REMOVE_ALL)
 mob/var/RestOverlays=0
 
