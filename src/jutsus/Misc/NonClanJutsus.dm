@@ -639,13 +639,14 @@ mob
 				else
 					usr.mark=null
 					usr.kawarmi=0
+				return
 			for(var/obj/Jutsus/AdvancedBodyReplace/J in src.jutsus)
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					src.kawarmi=1
 					src.mark=src.loc
-					src<<output("Now to activate use the defend verb.","Action.Output")
+					src<<output("Substitution set. Now to activate use the jutsu again.","Action.Output")
 
 		Shunshin()
 			for(var/obj/Jutsus/Body_Flicker/J in src.jutsus)
