@@ -47,7 +47,7 @@ obj
 								usr.client.prompt({"You have gained [src.clan] as your first clan!"}, "[src.name]")
 							src.loc = null
 							usr.client.UpdateInventoryPanel()
-						else usr.client.prompt({"You already have both of your clans. You've heard rumors of a man who might be able to help. He lives in a small village in the south-west of the map."}, "[src.name]")
+						else usr.client.prompt({"You already have both of your clans. You've heard rumors of a man who might be able to help. He lives in a small village in the south-east of the map."}, "[src.name]")
 
 
 			Scripture_of_Lord_Jashin //Jashin clan
@@ -106,7 +106,7 @@ obj
 			verb
 				Use()
 					set src in usr.contents
-					usr.client.prompt({"You have no idea how to use this. You've heard rumors of a man who might be able to help. He lives in a small village in the south-west of the map."}, "[src.name]")
+					usr.client.prompt({"You have no idea how to use this. You've heard rumors of a man who might be able to help. He lives in a small village in the south-east of the map."}, "[src.name]")
 
 			Yuki_Clan_Cells
 				name = "Frozen Cells"
