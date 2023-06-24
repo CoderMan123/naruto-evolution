@@ -33,7 +33,7 @@ mob
 									if(M)
 										M.DealDamage(J.damage+round((src.genjutsu_total / 200)*2*J.damage)/16, src, "white")
 									Timer--
-									sleep(3)
+									sleep(4)
 								if(M.client)
 									M.client.eye=M
 									M.client.perspective = EYE_PERSPECTIVE
