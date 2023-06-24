@@ -39,6 +39,7 @@ mob
 						Z = M
 					if(Z)
 						for(var/i=0,i<5,i++)
+							if(get_dist(src, Z) > 1) break
 							sleep(1)
 							flick("punchr",src)
 							sleep(1)
@@ -55,6 +56,7 @@ mob
 							Z.DealDamage((J.damage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.precision_total / 450))*2*J.damage))/3,src,"cyan",0,1)
 							Z.DealDamage(J.damage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.precision_total / 450))*2*J.damage),src,"NinBlue")
 						for(var/i=0,i<3,i++)
+							if(get_dist(src, Z) > 1) break
 							step(src,src.dir)
 							step(src,src.dir)
 							sleep(2)
