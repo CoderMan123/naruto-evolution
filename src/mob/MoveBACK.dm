@@ -143,7 +143,7 @@ mob
 				var/turf/T = get_step(src,src.dir)
 				for(var/mob/M in T)
 					src.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
-					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/3,src,"cyan",0,1)
+					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/5,src,"cyan",0,1)
 					M.DealDamage((jutsudamage+round(((src.ninjutsu_total / 450)+(src.agility_total / 450)+(src.taijutsu_total / 450))*2*jutsudamage))/10,src,"TaiOrange")
 					AddState(M, new/state/cant_attack, 10)
 					AddState(M, new/state/cant_move, 10)
