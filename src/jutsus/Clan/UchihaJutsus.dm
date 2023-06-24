@@ -31,9 +31,9 @@ mob
 								var/Timer= round((J.level+2) - ((J.level+2/100) * M.tenacity))
 								while(Timer&&M&&!M.dead)
 									if(M)
-										M.DealDamage(J.damage+round((src.genjutsu_total / 200)*2*J.damage)/14, src, "white")
+										M.DealDamage(J.damage+round((src.genjutsu_total / 200)*2*J.damage)/16, src, "white")
 									Timer--
-									sleep(5)
+									sleep(3)
 								if(M.client)
 									M.client.eye=M
 									M.client.perspective = EYE_PERSPECTIVE
