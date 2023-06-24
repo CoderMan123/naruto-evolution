@@ -4,8 +4,15 @@ client
 			set instant = 1
 			set hidden = 1
 			src.keys_held -= input
-
+			for(var/ky in stored_keys)
+				if(ky == input)
+					stored_keys -= input
 			if(hotkey_restup == input) src.mob.RestUp()
+			if(stored_keys)
+				for(var/k in stored_keys)
+					stored_keys -= k
+					keybind_call(k)
+					break
 
 		keybind_call(input as text)
 			set instant = 1
@@ -35,23 +42,71 @@ client
 			sleep(world.tick_lag)
 
 			if(hotkey_walk_n == input)
-				src.North()
-				if(input in keys_held) src.keybind_call(input)
+				for(var/k in keys_held)
+					if(k == hotkey_walk_e)
+						keys_held -= hotkey_walk_e
+						stored_keys += hotkey_walk_e
+					if(k == hotkey_walk_w)
+						keys_held -= hotkey_walk_w
+						stored_keys += hotkey_walk_w
+					if(k == hotkey_walk_s)
+						keys_held -= hotkey_walk_s
+						stored_keys += hotkey_walk_s
+				while(input in keys_held)
+					sleep(world.tick_lag)
+					src.North()
+					//src.keybind_call(input)
 				return
 
 			else if(hotkey_walk_s == input)
-				src.South()
-				if(input in keys_held) src.keybind_call(input)
+				for(var/k in keys_held)
+					if(k == hotkey_walk_e) 
+						keys_held -= hotkey_walk_e
+						stored_keys += hotkey_walk_e
+					if(k == hotkey_walk_w) 
+						keys_held -= hotkey_walk_w
+						stored_keys += hotkey_walk_w
+					if(k == hotkey_walk_n) 
+						keys_held -= hotkey_walk_n
+						stored_keys += hotkey_walk_n
+				while(input in keys_held)
+					sleep(world.tick_lag)
+					src.South()
+					//src.keybind_call(input)
 				return
 
 			else if(hotkey_walk_e == input)
-				src.East()
-				if(input in keys_held) src.keybind_call(input)
+				for(var/k in keys_held)
+					if(k == hotkey_walk_n) 
+						keys_held -= hotkey_walk_n
+						stored_keys += hotkey_walk_n
+					if(k == hotkey_walk_w) 
+						keys_held -= hotkey_walk_w
+						stored_keys += hotkey_walk_w
+					if(k == hotkey_walk_s) 
+						keys_held -= hotkey_walk_s
+						stored_keys += hotkey_walk_s
+				while(input in keys_held)
+					sleep(world.tick_lag)
+					src.East()
+					//.keybind_call(input)
 				return
 
 			else if(hotkey_walk_w == input)
-				src.West()
-				if(input in keys_held) src.keybind_call(input)
+				for(var/k in keys_held)
+					if(k == hotkey_walk_e) 
+						keys_held -= hotkey_walk_e
+						stored_keys += hotkey_walk_e
+					if(k == hotkey_walk_n) 
+						keys_held -= hotkey_walk_n
+						stored_keys += hotkey_walk_n
+					if(k == hotkey_walk_s)
+						keys_held -= hotkey_walk_s
+						stored_keys += hotkey_walk_s
+				while(input in keys_held)
+					sleep(world.tick_lag)
+					src.West()
+					//src.keybind_call(input)
 				return
 
 			else if(hotkey_basic_attack == input) 
@@ -146,6 +201,7 @@ client
 		tmp/new_key
 
 		tmp/keys_held = list()
+		tmp/stored_keys = list()
 
 		hotkey_panel_chatinput = "Return"
 		hotkey_panel_options = "Escape"
