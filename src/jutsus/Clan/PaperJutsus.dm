@@ -10,10 +10,10 @@ mob
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp)) //determines amount of ninjutsu exp gained on use
 					flick("jutsuse",src)
 					src.PlayAudio('wirlwind.wav', output = AUDIO_HEARERS)
-					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/9
-					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/9
-					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/9
-					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/9
+					if(J.level==1) J.damage=((jutsudamage*J.Sprice)/2)/14
+					if(J.level==2) J.damage=((jutsudamage*J.Sprice)/1.5)/14
+					if(J.level==3) J.damage=((jutsudamage*J.Sprice)/1.25)/14
+					if(J.level==4) J.damage=(jutsudamage*J.Sprice)/14
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
 					J.damage=J.damage+round((src.ninjutsu_total / 200)*2*J.damage)
 					var/Timer = J.level * 1.5 //determines how many ticks of damage as well as scaled bind duration
