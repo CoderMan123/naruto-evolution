@@ -725,7 +725,7 @@ mob
 			usr.HotSlots()
 
 		HotSlot4()
-			set name = "Hotbar Slot 5"
+			set name = "Hotbar Slot 4"
 			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="4"
