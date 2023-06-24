@@ -933,7 +933,6 @@ obj
 							if(M != src.Owner) AddState(M, new/state/FTG_Kunai_Mark, uptime, Owner)
 							if(src)
 								del src
-								world << 1
 					else
 						if(src && src.in_flight)
 							src.in_flight = 0
@@ -1732,7 +1731,6 @@ obj
 					..()
 				Bump(atom/O)
 					if(!src.Hit)
-						world << 1//debug
 						spawn(100) for(var/obj/Projectiles/Effects/JinraiCore/K in world) if(K.link == src) K.loc=locate(0,0,0)
 						spawn(100) for(var/obj/Projectiles/Effects/JinraiBack/K in world) if(K.link == src.link) K.loc=locate(0,0,0)
 						spawn(100) for(var/obj/Projectiles/Effects/JinraiCore/K in world) if(K.link == src) del K
