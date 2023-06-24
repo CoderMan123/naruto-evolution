@@ -489,7 +489,7 @@ mob
 							if("Yes")
 								var/squad/squad = usr.GetSquad()
 								if(squad)
-									src.client.prompt("You cannot become [RANK_AKATSUKI_LEADER] while in a Squad.", "Naruto Evolution")
+									usr.client.prompt("You cannot become [RANK_AKATSUKI_LEADER] while in a Squad.", "Naruto Evolution")
 									return 0
 
 								usr.SetVillage(VILLAGE_AKATSUKI)
