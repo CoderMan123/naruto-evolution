@@ -8,9 +8,13 @@ client
 				src.setting_keybind = 1
 				src.mob << output("<b><font color= #00FF17>PRESS ANY KEY COMBINATION TO SET THE KEYBIND</Font></b>", "Action.Output")
 				winset(src,null,"Map.Main.Focus=true")
+
+
 				while(src.setting_keybind) sleep(1)
+        
+				if(!new_key) return
 				src.vars["[variable]"] = new_key
-				if(variable == hotkey_rest) src.hotkey_restup = new_key
+				src.hotkey_restup = src.hotkey_rest
 				src.mob << output("<b><font color= #00FF17>KEYBIND SUCCESSFULLY SET TO [new_key]</Font></b>", "Action.Output")
 				src.mob.UpdateSlots()
 				src.CloseBrowser()

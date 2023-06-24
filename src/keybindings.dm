@@ -23,6 +23,11 @@ client
 			if("Alt" in keys_held) input = "Alt+[input]"
 
 			if(setting_keybind)
+				for(var/keybind_var in keybind_list)
+					if(src.vars["[keybind_var]"] == input)
+						src.mob << output("<b><font color= #FF0000>[input] IS BOUND TO ANOTHER KEY ALREADY. KEYBIND FAILED.</Font></b>", "Action.Output")
+						setting_keybind = null
+						return
 				new_key = input
 				setting_keybind = null
 				return
@@ -210,3 +215,68 @@ client
 		hotkey_target_a_mob = "Tab"
 		hotkey_target_an_ally = "Shift+Tab"
 		hotkey_untarget_pplz = "Ctrl+Tab"
+
+	var/keybind_list = list(
+		"hotkey_panel_chatinput",
+		"hotkey_panel_options",
+		"hotkey_panel_inventory",
+		"hotkey_panel_stats",
+		"hotkey_panel_jutsu",
+		"hotkey_walk_n",
+		"hotkey_walk_s",
+		"hotkey_walk_e",
+		"hotkey_walk_w",
+		"hotkey_hotslot1",
+		"hotkey_hotslot2",
+		"hotkey_hotslot3",
+		"hotkey_hotslot4",
+		"hotkey_hotslot5",
+		"hotkey_hotslot6",
+		"hotkey_hotslot7",
+		"hotkey_hotslot8",
+		"hotkey_hotslot9",
+		"hotkey_hotslot10",
+		"hotkey_hotslot11",
+		"hotkey_hotslot12",
+		"hotkey_hotslot13",
+		"hotkey_hotslot14",
+		"hotkey_hotslot15",
+		"hotkey_hotslot16",
+		"hotkey_hotslot17",
+		"hotkey_hotslot18",
+		"hotkey_handsealactivate",
+		"hotkey_handseal_rat",
+		"hotkey_handseal_ox",
+		"hotkey_handseal_dog",
+		"hotkey_handseal_rbt",
+		"hotkey_handseal_snk",
+		"hotkey_handseal_hrs",
+		"hotkey_handseal_mky",
+		"hotkey_handseal_drg",
+		"hotkey_puppetgrab1",
+		"hotkey_puppetgrab2",
+		"hotkey_puppetshoot1",
+		"hotkey_puppetshoot2",
+		"hotkey_puppetdash1",
+		"hotkey_puppetdash2",
+		"hotkey_puppet1north",
+		"hotkey_puppet2north",
+		"hotkey_puppet1south",
+		"hotkey_puppet2south",
+		"hotkey_puppet1east",
+		"hotkey_puppet2east",
+		"hotkey_puppet1west",
+		"hotkey_puppet2west",
+		"hotkey_basic_attack",
+		"hotkey_throwmob",
+		"hotkey_dodge",
+		"hotkey_throw",
+		"hotkey_pickup",
+		"hotkey_rotate_ninja_tool",
+		"hotkey_rest",
+		"hotkey_restup",
+		"hotkey_target_a_mob",
+		"hotkey_target_an_ally",
+		"hotkey_untarget_pplz"
+	)
+

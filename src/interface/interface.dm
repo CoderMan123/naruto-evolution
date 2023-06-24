@@ -2,15 +2,10 @@ client
 	var/tmp/exp_lock_verify=0
 	var/sound_level_bgm = 25
 	var/sound_level_sfx = 10
-	
-	proc
-		Setting_Keybind(var/selected_action)
-			src << selected_action
-
 
 	verb	
 		Set_Keybinds()
-			//set hidden = 1
+			set hidden = 1
 			if(src.browser_url != BROWSER_SET_KEYBINDS)
 				var/html_jutsus = ""
 				

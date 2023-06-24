@@ -2439,6 +2439,7 @@ window "Settings-Account"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2448,6 +2449,8 @@ window "Settings-Account"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
+		outer-size = 508x388
+		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0
@@ -2836,6 +2839,20 @@ window "Settings-General"
 		saved-params = "is-checked"
 		text = "Administration"
 		command = "SettingsPanelAdministrator"
+		is-flat = true
+	elem "button39"
+		type = BUTTON
+		pos = 3,99
+		size = 488x22
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		font-family = "Open Sans"
+		text-color = #c8c8c8
+		background-color = #555555
+		border = line
+		saved-params = "is-checked"
+		text = "Keybindings"
+		command = "Set-Keybinds"
 		is-flat = true
 	elem "button12"
 		type = BUTTON
