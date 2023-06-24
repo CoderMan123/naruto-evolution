@@ -65,6 +65,8 @@ obj
 mob
 	verb
 		Pickup()
+			set name = "Pick Up"
+			set category = "keybindable"
 			set hidden=1
 			if(usr.dead)
 				hearers() << output("You can't pickup items while dead.","Action.Output")

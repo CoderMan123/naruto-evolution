@@ -403,6 +403,8 @@ obj/proc/lf2(mob/M)
 	else if(src)del(src)
 mob/verb
 	puppetgrab1()
+		set name = "Puppet Grab 1"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[1]
 		if(M && src.pgrab)
@@ -433,6 +435,8 @@ mob/verb
 					M.icon_state = ""
 
 	puppetgrab2()
+		set name = "Puppet Grab 2"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[2]
 		if(M && src.pgrab)
@@ -463,6 +467,8 @@ mob/verb
 					M.icon_state = ""
 
 	puppetshoot1()
+		set name = "Puppet Shoot 1"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[1]
 		if(M && src.pshoot)
@@ -485,6 +491,8 @@ mob/verb
 			else walk(O,M.dir)
 			if(!M.henged) M.icon_state = ""
 	puppetshoot2()
+		set name = "Puppet Shoot 2"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[2]
 		if(M && src.pshoot)
@@ -508,6 +516,8 @@ mob/verb
 			M.icon_state = ""
 
 	puppetdash1()
+		set name = "Puppet Dash 1"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[1]
 		if(M && src.pdash)
@@ -518,6 +528,8 @@ mob/verb
 			M.icon_state = ""
 
 	puppetdash2()
+		set name = "Puppet Dash 2"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[2]
 		if(M && src.pdash)
@@ -527,34 +539,50 @@ mob/verb
 				sleep(1)
 			M.icon_state = ""
 	puppet1north()
+		set name = "Puppet North 1"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[1]
 		if(M)step(M,NORTH)
 	puppet2north()
+		set name = "Puppet North 2"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[2]
 		if(M)step(M,NORTH)
 	puppet1south()
+		set name = "Puppet South 1"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[1]
 		if(M)step(M,SOUTH)
 	puppet2south()
+		set name = "Puppet South 2"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[2]
 		if(M)step(M,SOUTH)
 	puppet1east()
+		set name = "Puppet East 1"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[1]
 		if(M)step(M,EAST)
 	puppet2east()
+		set name = "Puppet East 2"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[2]
 		if(M)step(M,EAST)
 	puppet1west()
+		set name = "Puppet West 1"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[1]
 		if(M)step(M,WEST)
 	puppet2west()
+		set name = "Puppet West 2"
+		set category = "keybindable"
 		set hidden=1
 		var/mob/M  = src.puppets[2]
 		if(M)step(M,WEST)

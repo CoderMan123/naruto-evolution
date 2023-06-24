@@ -12,6 +12,7 @@ image
 			src.pixel_x=16
 			src.pixel_y=5
 mob/verb/Target_A_Mob()
+	set name = "Cycle Target Enemies"
 	set hidden=1
 	var/Train=0
 	for(var/obj/Training/T in orange(1))Train=1
@@ -33,6 +34,8 @@ mob/verb/Target_A_Mob()
 		return
 
 mob/verb/Target_An_Ally()
+	set name = "Cycle Target Allies"
+	set category = "keybindable"
 	set hidden=1
 	var/Train=0
 	for(var/obj/Training/T in orange(1))Train=1
@@ -57,6 +60,8 @@ mob/var/tmp
 	mob/target_mob
 	image/Target/target_mob_image
 mob/verb/Untarget_pplz()
+	set name = "Clear Target"
+	set category = "keybindable"
 	set hidden=1
 	usr.Target_Remove()
 mob/proc

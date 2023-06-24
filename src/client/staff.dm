@@ -123,6 +123,7 @@ client
 
 			spawn() src.UpdateCharacterPanel()
 
+
 mob
 	administrator
 		verb
@@ -132,6 +133,12 @@ mob
 
 			// UPDATE: This issue only happens when you add these verbs to src.client instead of src.mob.
 			// NOTE: Only add verbs to src.mob from now on.
+
+			List_Verbs()
+				set category="Administrator"
+				for(var/x in typesof(/mob/verb))
+					src << "[x]"
+
 
 			Start_Chuunin_Exam()
 				set category="Administrator"

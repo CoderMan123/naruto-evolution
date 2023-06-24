@@ -1,6 +1,8 @@
 mob
 	verb
 		Basic_Attack()
+			set name = "Melee Attack"
+			set category = "keybindable"
 			set hidden=1
 			var/attack_speed
 			if(src.Specialist == SPECIALIZATION_TAIJUTSU)

@@ -2251,6 +2251,8 @@ mob
 			COW=0
 	verb
 		Throw()
+			set name = "Use Ninja Tool"
+			set category = "keybindable"
 			set hidden=1
 			set category=null
 			if(src.loc)

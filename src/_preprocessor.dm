@@ -31,6 +31,7 @@
 #define BROWSER_NONE 0
 #define BROWSER_WHO "browse://who"
 #define BROWSER_JUTSU_REFERENCE "browse://jutsu-reference"
+#define BROWSER_SET_KEYBINDS "browse://set-keybinds"
 #define BROWSER_SQUAD "browse://squad"
 #define BROWSER_LOGS "browse://logs"
 #define BROWSER_SERVER_INFORMATION "browse://server-information"

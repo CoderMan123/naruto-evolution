@@ -1,6 +1,8 @@
 mob
 	verb
 		ThrowMob()
+			set name = "Push/Pull"
+			set category = "keybindable"
 			set hidden=1
 			for(var/mob/M in get_step(src,src.dir))
 				if(istype(M, /mob/Clones)) return
@@ -45,6 +47,8 @@ mob
 							src.ThrowingMob=M
 							M.BeingThrown=1
 		Dodge()
+			set name = "Block/Dodge/Dash"
+			set category = "keybindable"
 			set hidden=1
 
 			src.HengeUndo()

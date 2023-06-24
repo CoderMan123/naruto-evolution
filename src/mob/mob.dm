@@ -13,6 +13,8 @@ mob
 		jutsus[0]
 		jutsus_learned[0]
 
+		set animate_movement = 2
+
 		tmp
 			jutsu_cooldowns[0]
 			ninja_tool_selection = 0 // Selected ninja tool from Rotate_Ninja_Tool()
@@ -1108,6 +1110,8 @@ mob
 						usr.client.prompt("As you try to put imaginary ryo into a pouch you're very dissapointed as it's still empty. You can't put negative amounts into a ryo pouch.", "Ryo Pouch")
 
 		Rotate_Ninja_Tool()
+			set name = "Rotate Ninja Tools"
+			set category = "keybindable"
 			set hidden = 1
 			var/list/weaponry = list()
 			for(var/obj/Inventory/Weaponry/o in src.contents)

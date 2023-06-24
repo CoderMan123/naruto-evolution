@@ -2,6 +2,22 @@ client
 	Topic(href, href_list)
 		..()
 		switch(href_list["action"])
+			if("set-keybind")
+				if(src.setting_keybind == 1) return
+				var/variable = href_list["var"]
+				src.setting_keybind = 1
+				src.mob << output("<b><font color= #00FF17>PRESS ANY KEY COMBINATION TO SET THE KEYBIND</Font></b>", "Action.Output")
+				winset(src,null,"Map.Main.Focus=true")
+				while(src.setting_keybind) sleep(1)
+				src.vars["[variable]"] = new_key
+				if(variable == hotkey_rest) src.hotkey_restup = new_key
+				src.mob << output("<b><font color= #00FF17>KEYBIND SUCCESSFULLY SET TO [new_key]</Font></b>", "Action.Output")
+				src.mob.UpdateSlots()
+				src.CloseBrowser()
+				src.Set_Keybinds()
+				src.new_key = null
+
+
 			if("squad-create")
 				var/client/c = locate(href_list["src"])
 				for(var/client/client in clients_online)

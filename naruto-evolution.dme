@@ -106,6 +106,7 @@
 #include "src\_preprocessor.dm"
 #include "src\_Updates.dm"
 #include "src\Changelog.dm"
+#include "src\keybindings.dm"
 #include "src\Naruto.dm"
 #include "src\Options.dm"
 #include "src\Random.dm"

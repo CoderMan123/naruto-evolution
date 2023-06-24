@@ -610,6 +610,8 @@ obj
 mob
 	verb
 		HandSealActivate()
+			set name = "Activate Handseals"
+			set category = "keybindable"
 			set hidden=1
 			if(CheckState(src, new/state/knocked_down)) return 0
 

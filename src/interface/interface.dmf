@@ -1,208 +1,12 @@
 macro "Macro"
 	elem 
-		name = "Tab"
-		command = "Target-A-Mob"
+		name = "K"
 	elem 
-		name = "CTRL+Tab"
-		command = "Target-An-Ally"
+		name = "Any"
+		command = "keybind-call [[*]]"
 	elem 
-		name = "SHIFT+Tab"
-		command = "Untarget-pplz"
-	elem 
-		name = "Center+REP"
-		command = ".center"
-	elem 
-		name = "Return"
-		command = "ToggleChatInputPanel"
-	elem 
-		name = "SHIFT+Return"
-		command = "GM-Chat"
-	elem 
-		name = "Escape"
-		command = "ToggleSettingsPanel"
-	elem 
-		name = "Space"
-		command = "HandSealActivate"
-	elem 
-		name = "Northeast+REP"
-		command = ".northeast"
-	elem 
-		name = "Southeast+REP"
-		command = ".southeast"
-	elem 
-		name = "Southwest+REP"
-		command = ".southwest"
-	elem 
-		name = "Northwest+REP"
-		command = ".northwest"
-	elem 
-		name = "West+REP"
-		command = ".west"
-	elem 
-		name = "ALT+West+REP"
-		command = "puppet2west"
-	elem 
-		name = "CTRL+West+REP"
-		command = "puppet1west"
-	elem 
-		name = "North+REP"
-		command = ".north"
-	elem 
-		name = "ALT+North+REP"
-		command = "puppet2north"
-	elem 
-		name = "CTRL+North+REP"
-		command = "puppet1north"
-	elem 
-		name = "East+REP"
-		command = ".east"
-	elem 
-		name = "ALT+East+REP"
-		command = "puppet2east"
-	elem 
-		name = "CTRL+East+REP"
-		command = "puppet1east"
-	elem 
-		name = "South+REP"
-		command = ".south"
-	elem 
-		name = "ALT+South+REP"
-		command = "puppet2south"
-	elem 
-		name = "CTRL+South+REP"
-		command = "puppet1south"
-	elem 
-		name = "1"
-		command = "HandSeal rabbit"
-	elem 
-		name = "2"
-		command = "HandSeal snake"
-	elem 
-		name = "3"
-		command = "HandSeal horse"
-	elem 
-		name = "4"
-		command = "HandSeal monkey"
-	elem 
-		name = "5"
-		command = "HandSeal dragon"
-	elem 
-		name = "ALT+A"
-		command = "puppetshoot2"
-	elem 
-		name = "CTRL+A"
-		command = "puppetshoot1"
-	elem 
-		name = "SHIFT+A"
-		command = "kaguyashoot1"
-	elem 
-		name = "A+REP"
-		command = "Basic-Attack"
-	elem 
-		name = "B"
-		command = "HotSlot5"
-	elem 
-		name = "C"
-		command = "HotSlot3"
-	elem 
-		name = "ALT+D"
-		command = "puppetdash2"
-	elem 
-		name = "CTRL+D"
-		command = "puppetdash1"
-	elem 
-		name = "D+REP"
-		command = "Dodge"
-	elem 
-		name = "E"
-		command = "HandSeal dog"
-	elem 
-		name = "F"
-		command = "ThrowMob"
-	elem 
-		name = "G"
-		command = "Pickup"
-	elem 
-		name = "I"
-		command = "ToggleInventoryPanel"
-	elem 
-		name = "N"
-		command = "HotSlot6"
-	elem 
-		name = "O"
-		command = "ToggleCharacterPanel"
-	elem 
-		name = "P"
-		command = "ToggleJutsuPanel"
-	elem 
-		name = "Q"
-		command = "HandSeal rat"
-	elem 
-		name = "R"
-		command = "Rest"
-	elem 
-		name = "R+UP"
-		command = "RestUp"
-	elem 
-		name = "ALT+S"
-		command = "puppetgrab2"
-	elem 
-		name = "CTRL+S"
-		command = "puppetgrab1"
-	elem 
-		name = "SHIFT+S"
-		command = "Rotate-Ninja-Tool"
-	elem 
-		name = "S+REP"
-		command = "Throw"
-	elem 
-		name = "V"
-		command = "HotSlot4"
-	elem 
-		name = "W"
-		command = "HandSeal ox"
-	elem 
-		name = "X"
-		command = "HotSlot2"
-	elem 
-		name = "Z"
-		command = "HotSlot1"
-	elem 
-		name = "F1"
-		command = "HotSlot13"
-	elem 
-		name = "F2"
-		command = "HotSlot14"
-	elem 
-		name = "F3"
-		command = "HotSlot15"
-	elem 
-		name = "F4"
-		command = "HotSlot16"
-	elem 
-		name = "F5"
-		command = "HotSlot17"
-	elem 
-		name = "F6"
-		command = "HotSlot18"
-	elem 
-		name = "F7"
-		command = "HotSlot7"
-	elem 
-		name = "F8"
-		command = "HotSlot8"
-	elem 
-		name = "F9"
-		command = "HotSlot9"
-	elem 
-		name = "F10"
-		command = "HotSlot10"
-	elem 
-		name = "F11"
-		command = "HotSlot11"
-	elem 
-		name = "F12"
-		command = "HotSlot12"
+		name = "Any+UP"
+		command = "keybind-release [[*]]"
 
 
 menu "menu"
@@ -2560,7 +2364,6 @@ window "Settings"
 		size = 500x400
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2569,8 +2372,6 @@ window "Settings"
 		can-minimize = false
 		can-resize = false
 		macro = "Macro"
-		outer-size = 514x414
-		inner-size = 500x400
 	elem "Background"
 		type = LABEL
 		pos = 0,21
@@ -2587,7 +2388,6 @@ window "Settings"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		saved-params = "splitter"
 		left = "Settings-General"
 		is-vert = false
@@ -2680,7 +2480,6 @@ window "Settings-Administrator"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2690,8 +2489,6 @@ window "Settings-Administrator"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
-		outer-size = 508x388
-		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0
@@ -2993,7 +2790,6 @@ window "Settings-General"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -3002,8 +2798,6 @@ window "Settings-General"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
-		outer-size = 508x388
-		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0

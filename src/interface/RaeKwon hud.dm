@@ -15,6 +15,7 @@ obj/Titlescreen/Logo
 
 obj
 	HotSlots
+		var/hotslot_ref
 		Hengable=0
 		HotSlot1
 			name="1"
@@ -23,6 +24,7 @@ obj
 			//screen_loc = "25,5"
 			New(var/mob/M)
 				if(!ismob(M)) return
+				hotslot_ref = M.client.vars["hotkey_hotslot1"]
 				screen_loc = "[round((M.client.map_resolution_x/2)-4)],3.5"
 				M.client.screen+=src
 				src.loc=locate(0,0,0)
@@ -266,7 +268,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("Z")
+					h.SetName("[src.client.hotkey_hotslot1]")
 
 				if(istype(h,/obj/HotSlots/HotSlot2))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot2"])
@@ -275,7 +277,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("X")
+					h.SetName("[src.client.hotkey_hotslot2]")
 
 				if(istype(h,/obj/HotSlots/HotSlot3))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot3"])
@@ -284,7 +286,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("C")
+					h.SetName("[src.client.hotkey_hotslot3]")
 
 				if(istype(h,/obj/HotSlots/HotSlot4))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot4"])
@@ -293,7 +295,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("V")
+					h.SetName("[src.client.hotkey_hotslot4]")
 
 				if(istype(h,/obj/HotSlots/HotSlot5))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot5"])
@@ -302,7 +304,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("B")
+					h.SetName("[src.client.hotkey_hotslot5]")
 
 				if(istype(h,/obj/HotSlots/HotSlot6))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot6"])
@@ -311,7 +313,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("N")
+					h.SetName("[src.client.hotkey_hotslot6]")
 
 				if(istype(h,/obj/HotSlots/HotSlot7))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot7"])
@@ -320,7 +322,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F7")
+					h.SetName("[src.client.hotkey_hotslot7]")
 
 				if(istype(h,/obj/HotSlots/HotSlot8))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot8"])
@@ -329,7 +331,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F8")
+					h.SetName("[src.client.hotkey_hotslot8]")
 
 				if(istype(h,/obj/HotSlots/HotSlot9))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot9"])
@@ -338,7 +340,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F9")
+					h.SetName("[src.client.hotkey_hotslot9]")
 
 				if(istype(h,/obj/HotSlots/HotSlot10))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot10"])
@@ -347,7 +349,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F10")
+					h.SetName("[src.client.hotkey_hotslot10]")
 
 				if(istype(h,/obj/HotSlots/HotSlot11))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot11"])
@@ -356,7 +358,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F11")
+					h.SetName("[src.client.hotkey_hotslot11]")
 
 				if(istype(h,/obj/HotSlots/HotSlot12))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot12"])
@@ -365,7 +367,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F12")
+					h.SetName("[src.client.hotkey_hotslot12]")
 
 				if(istype(h,/obj/HotSlots/HotSlot13))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot13"])
@@ -374,7 +376,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F1")
+					h.SetName("[src.client.hotkey_hotslot13]")
 
 				if(istype(h,/obj/HotSlots/HotSlot14))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot14"])
@@ -383,7 +385,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F2")
+					h.SetName("[src.client.hotkey_hotslot14]")
 
 				if(istype(h,/obj/HotSlots/HotSlot15))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot15"])
@@ -392,7 +394,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F3")
+					h.SetName("[src.client.hotkey_hotslot15]")
 
 				if(istype(h,/obj/HotSlots/HotSlot16))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot16"])
@@ -401,7 +403,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F4")
+					h.SetName("[src.client.hotkey_hotslot16]")
 
 				if(istype(h,/obj/HotSlots/HotSlot17))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot17"])
@@ -410,7 +412,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F5")
+					h.SetName("[src.client.hotkey_hotslot17]")
 
 				if(istype(h,/obj/HotSlots/HotSlot18))
 					var/image/I=image('Misc Effects.dmi',HotSlotSave["HotSlot18"])
@@ -419,7 +421,7 @@ mob
 
 					h.overlays=null
 					h.overlays+=I
-					h.SetName("F6")
+					h.SetName("[src.client.hotkey_hotslot18]")
 
 			/*for(var/obj/Jutsus/J in world)
 				if(J.name==hotslot1)
@@ -702,91 +704,127 @@ mob
 mob
 	verb
 		HotSlot1()
+			set name = "Hotbar Slot 1"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="1"
 			usr.HotSlots()
 
 		HotSlot2()
+			set name = "Hotbar Slot 2"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="2"
 			usr.HotSlots()
 
 		HotSlot3()
+			set name = "Hotbar Slot 3"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="3"
 			usr.HotSlots()
 
 		HotSlot4()
+			set name = "Hotbar Slot 5"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="4"
 			usr.HotSlots()
 
 		HotSlot5()
+			set name = "Hotbar Slot 5"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="5"
 			usr.HotSlots()
 
 		HotSlot6()
+			set name = "Hotbar Slot 6"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="6"
 			usr.HotSlots()
 
 		HotSlot7()
+			set name = "Hotbar Slot 7"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="7"
 			usr.HotSlots()
 
 		HotSlot8()
+			set name = "Hotbar Slot 8"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="8"
 			usr.HotSlots()
 
 		HotSlot9()
+			set name = "Hotbar Slot 9"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="9"
 			usr.HotSlots()
 
 		HotSlot10()
+			set name = "Hotbar Slot 10"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="10"
 			usr.HotSlots()
 
 		HotSlot11()
+			set name = "Hotbar Slot 11"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="11"
 			usr.HotSlots()
 
 		HotSlot12()
+			set name = "Hotbar Slot 12"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="12"
 			usr.HotSlots()
 
 		HotSlot13()
+			set name = "Hotbar Slot 13"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="13"
 			usr.HotSlots()
 
 		HotSlot14()
+			set name = "Hotbar Slot 14"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="14"
 			usr.HotSlots()
 
 		HotSlot15()
+			set name = "Hotbar Slot 15"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="15"
 			usr.HotSlots()
 
 		HotSlot16()
+			set name = "Hotbar Slot 16"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="16"
 			usr.HotSlots()
 
 		HotSlot17()
+			set name = "Hotbar Slot 17"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="17"
 			usr.HotSlots()
 
 		HotSlot18()
+			set name = "Hotbar Slot 18"
+			set category = "keybindable"
 			set hidden=1
 			usr.hotslot="18"
 			usr.HotSlots()

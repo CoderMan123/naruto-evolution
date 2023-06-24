@@ -101,6 +101,8 @@ mob
 
 	verb
 		HandSeal(Seal as text)
+			set name = "Handseal: "
+			set category = "keybindable"
 			set instant = 1
 			set hidden = 1
 			SealHandler("[Seal]")

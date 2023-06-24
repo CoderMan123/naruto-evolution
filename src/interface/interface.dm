@@ -2,6 +2,174 @@ client
 	var/tmp/exp_lock_verify=0
 	var/sound_level_bgm = 25
 	var/sound_level_sfx = 10
+	
+	proc
+		Setting_Keybind(var/selected_action)
+			src << selected_action
+
+
+	verb	
+		Set_Keybinds()
+			//set hidden = 1
+			if(src.browser_url != BROWSER_SET_KEYBINDS)
+				var/html_jutsus = ""
+				
+				html_jutsus += {"<tr><td>Walk North</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_walk_n>[hotkey_walk_n]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Walk South</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_walk_n>[hotkey_walk_s]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Walk East</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_walk_n>[hotkey_walk_e]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Walk West</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_walk_n>[hotkey_walk_w]</a>]</td></tr>"}
+
+				html_jutsus += {"<tr><td>Melee Attack</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_basic_attack>[hotkey_basic_attack]</a>]</td></tr>"}				
+				html_jutsus += {"<tr><td>Block/Dodge/Dash</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_dodge>[hotkey_dodge]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Rest</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_rest>[hotkey_rest]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Use Ninja Tool</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_throw>[hotkey_throw]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Rotate Equipped Ninja Tool</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_rotate_ninja_tool>[hotkey_rotate_ninja_tool]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Grab/Push</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_throwmob>[hotkey_throwmob]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Target Enemies</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_target_a_mob>[hotkey_target_a_mob]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Target Allies</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_target_an_ally>[hotkey_target_an_ally]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Clear Target</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_untarget_pplz>[hotkey_untarget_pplz]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Pick Up Item</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_pickup>[hotkey_pickup]</a>]</td></tr>"}
+
+				html_jutsus += {"<tr><td>Chat Input</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_panel_chatinput>[hotkey_panel_chatinput]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Settings</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_panel_options>[hotkey_panel_options]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Inventory</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_panel_inventory>[hotkey_panel_inventory]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Player Stats</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_panel_stats>[hotkey_panel_stats]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Jutsu Slots</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_panel_jutsu>[hotkey_panel_jutsu]</a>]</td></tr>"}
+
+				html_jutsus += {"<tr><td>Hotbar Slot 1</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot1>[hotkey_hotslot1]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 2</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot2>[hotkey_hotslot2]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 3</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot3>[hotkey_hotslot3]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 4</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot4>[hotkey_hotslot4]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 5</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot5>[hotkey_hotslot5]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 6</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot6>[hotkey_hotslot6]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 7</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot7>[hotkey_hotslot7]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 8</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot8>[hotkey_hotslot8]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 9</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot9>[hotkey_hotslot9]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 10</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot10>[hotkey_hotslot10]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 11</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot11>[hotkey_hotslot11]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 12</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot12>[hotkey_hotslot12]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 13</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot13>[hotkey_hotslot13]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 14</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot14>[hotkey_hotslot14]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 15</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot15>[hotkey_hotslot15]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 16</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot16>[hotkey_hotslot16]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 17</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot17>[hotkey_hotslot17]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Hotbar Slot 18</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_hotslot18>[hotkey_hotslot18]</a>]</td></tr>"}
+				
+				html_jutsus += {"<tr><td>Activate Handseals</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_handsealactivate>[hotkey_handsealactivate]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Handseal: Rat</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_handseal_rat>[hotkey_handseal_rat]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Handseal: Ox</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_handseal_ox>[hotkey_handseal_ox]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Handseal: Dog</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_handseal_dog>[hotkey_handseal_dog]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Handseal: Rabbit</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_handseal_rbt>[hotkey_handseal_rbt]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Handseal: Snake</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_handseal_snk>[hotkey_handseal_snk]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Handseal: Horse</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_handseal_hrs>[hotkey_handseal_hrs]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Handseal: Monkey</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_handseal_mky>[hotkey_handseal_mky]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Handseal: Dragon</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_handseal_drg>[hotkey_handseal_drg]</a>]</td></tr>"}
+				
+				html_jutsus += {"<tr><td>Puppet 1: Grab</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppetgrab1>[hotkey_puppetgrab1]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 1: Shoot</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppetshoot1>[hotkey_puppetshoot1]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 1: Dash</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppetdash1>[hotkey_puppetdash1]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 1: Walk North</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppet1north>[hotkey_puppet1north]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 1: Walk South</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppet1south>[hotkey_puppet1south]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 1: Walk East</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppet1east>[hotkey_puppet1east]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 1: Walk West</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppet1west>[hotkey_puppet1west]</a>]</td></tr>"}
+
+				html_jutsus += {"<tr><td>Puppet 2: Grab</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppetgrab2>[hotkey_puppetgrab2]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 2: Shoot</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppetshoot2>[hotkey_puppetshoot2]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 2: Dash</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppetdash2>[hotkey_puppetdash2]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 2: Walk North</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppet2north>[hotkey_puppet2north]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 2: Walk South</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppet2south>[hotkey_puppet2south]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 2: Walk East</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppet2east>[hotkey_puppet2east]</a>]</td></tr>"}
+				html_jutsus += {"<tr><td>Puppet 2: Walk West</td><td><span>\[<a href=byond://?src=\ref[src.mob];action=set-keybind;var=hotkey_puppet2west>[hotkey_puppet2west]</a>]</td></tr>"}
+
+				
+				
+				
+				var/html = {"
+					<!doctype html>
+					<html lang="en">
+					<head>
+						<title>Characters Online</title>
+
+						<!-- Required meta tags -->
+						<meta charset="utf-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+						<!-- Bootstrap CSS -->
+						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+						<!-- Google Fonts -->
+						<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+						<style>
+							body {
+								padding-top: 19px;
+								padding-left: 10px;
+								background-color: #414141;
+								color: #C8C8C8;
+								font-family: 'Open Sans', sans-serif;
+							}
+
+							a {
+								color: #007bff;
+								text-decoration: none;
+							}
+
+							a:hover {
+								color: #0056b3;
+								text-decoration: underline;
+							}
+
+							a:visited {
+								color: #007bff;
+								text-decoration: none;
+							}
+							table {
+								border-color: #dee2e6 !important;
+							}
+							th {
+								color: #C8C8C8;
+								border-width: 1px !important;
+								border-color: #646464 !important;
+							}
+							td {
+								color: #C8C8C8;
+								border-color: #646464 !important;
+							}
+						</style>
+					</head>
+
+					<body>
+						<h1>SET KEYBINDS</h1>
+
+						<table class="table table-sm table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Action</th>
+									<th scope="col">Keybind</th>
+								</tr>
+							</thead>
+							<tbody>
+								[html_jutsus]
+							</tbody>
+						</table>
+
+						<!-- Optional JavaScript -->
+						<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+						<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+						<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+					</body>
+					</html>
+				"}
+
+				src << output(null, "Browser.Output")
+				src << browse("[html]")
+				src.browser_url = BROWSER_SET_KEYBINDS
+				winset(src, "Browser", "is-visible = true")
+			else
+				src.browser_url = BROWSER_NONE
+				winset(src, "Browser", "is-visible = false")
+
 	verb
 		GetScreenResolution()
 			set hidden = 1
