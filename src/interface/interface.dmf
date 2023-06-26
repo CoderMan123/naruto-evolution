@@ -1,6 +1,7 @@
 macro "Macro"
 	elem 
-		name = "K"
+		name = "F2"
+		command = "nothing"
 	elem 
 		name = "Any"
 		command = "keybind-call [[*]]"
@@ -2439,7 +2440,6 @@ window "Settings-Account"
 		size = 494x374
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -2449,8 +2449,6 @@ window "Settings-Account"
 		can-resize = false
 		is-pane = true
 		macro = "Macro"
-		outer-size = 508x388
-		inner-size = 494x374
 	elem "Background2"
 		type = LABEL
 		pos = 0,0

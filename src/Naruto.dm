@@ -109,5 +109,9 @@ mob
 			if(SkinTone == "Blue") icon='BlueMBase.dmi'
 			if(SkinTone == "Pale") icon='PaleMBase.dmi'
 
+mob
+	verb
+		nothing()
+			return
 
 //client/control_freak=CONTROL_FREAK_ALL
