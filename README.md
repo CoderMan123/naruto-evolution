@@ -6,6 +6,8 @@
 
 A fan inspired online game based on the Naruto Universe.
 
+(Licensed under AGPL-3.0-or-later)
+
 ## Setup Development Environment
 
 ### Prerequisites
