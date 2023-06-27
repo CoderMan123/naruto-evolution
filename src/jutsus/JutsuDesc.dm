@@ -2,10 +2,11 @@ obj
 	Jutsus
 		layer = 10000
 		var/give_to_guards = 0
+		var/hand_signs = list()
 
 		verb
 			View_Description(obj/Jutsu/J in usr.jutsus)
-				set category = null
+				//set category = null
 				usr.client.prompt(J.Description, J.name)
 
 //NonClan
@@ -27,6 +28,7 @@ obj
 			name="Clone Jutsu"
 			rank="D"
 			signs="<font color=green>Rat</font><br>(macro(Q))"
+			hand_signs = list("rat")
 			Sprice=1
 			starterjutsu=1
 			give_to_guards = 1
@@ -42,6 +44,7 @@ obj
 			name="Clone Destroy"
 			rank="D"
 			signs="<font color=green>Rat,Ox</font><br>(macro(Q,W))"
+			hand_signs = list("rat","ox")
 			uses=100
 			maxcooltime= 0
 			ChakraCost = 0
@@ -56,6 +59,7 @@ obj
 			name="Transformation Jutsu"
 			rank="E"
 			signs="<font color=green>Dog,Rat</font><br>(macro(E,Q))"
+			hand_signs = list("dog","rat")
 			Sprice=1
 			starterjutsu=1
 			Description="This technique transforms the user's appearance into the selected target but if anything touches you the genjusu breaks."
@@ -63,6 +67,7 @@ obj
 				..()
 				ChakraCost = (Sprice*jutsuchakra)*0.6
 				maxcooltime = jutsucooldown*100
+				
 
 		BodyReplace
 			icon_state="bodyreplace"
@@ -70,6 +75,7 @@ obj
 			name="Body Replacement Jutsu"
 			rank="E"
 			signs="<font color=green>Dog</font><br>(macro(E))"
+			hand_signs = list("dog")
 			Sprice=1
 			give_to_guards = 1
 			Description="Body replacement technique. Substitute your body with a log, allowing you to escape from battle. It allows you to slip out of someones targeting breifly or avoid attacks with good timing."
@@ -85,6 +91,7 @@ obj
 			name="Advanced Body Replacement Jutsu"
 			rank="E"
 			signs="<font color=green>Dog,Dog</font><br>(macro(E,E))"
+			hand_signs = list("dog","dog")
 			Sprice=1
 			give_to_guards = 1
 			uses=100
@@ -130,6 +137,7 @@ obj
 			name="Shadow Clone Jutsu"
 			rank="A"
 			signs="<font color=green>Rat,Dragon</font><br>(macro(Q,5))"
+			hand_signs = list("rat","dragon")
 			Sprice=1
 			reqs=list("Clone Destroy")
 			Description="Create a single solid clone of yourself on the battlefield which can attack your target or be more precisely controlled by clicking on the clone."
@@ -144,6 +152,7 @@ obj
 			name="Multiple Shadow Clone Jutsu"
 			rank="A"
 			signs="<font color=green>Rat,Dragon,Dog,Monkey,Monkey</font><br>(macro(Q,5,E,4,4))"
+			hand_signs = list("rat","dragon","dog","monkey","monkey")
 			Sprice=2
 			reqs=list("Shadow Clone Jutsu")
 			Description="Create multiple shadowclones which can attack their target. It also makes you difficult to target amongst the clones."
@@ -159,6 +168,7 @@ obj
 			name="Rasengan"
 			rank="A"
 			signs="<font color=green>Rabbit,Rabbit,Ox</font><br>(macro(1,1,W))"
+			hand_signs = list("rabbit","rabbit","ox")
 			Specialist = "Ninjutsu"
 			Sprice=2
 			Description="Channel your chakra into a ball of spinning air but aligning your chakra. Upon the jutsu being fully charged you run towards a direction or your target at starling speeds dealing damage (Nin|Agi) to your target if you get into melee range."
@@ -173,6 +183,7 @@ obj
 			name="Chakra Release"
 			rank="E"
 			signs="<font color=green>Rat,Rat</font><br>(macro(Q,Q))"
+			hand_signs = list("rat","rat")
 			Specialist = "Ninjutsu"
 			uses=100
 			Sprice=1
@@ -190,6 +201,7 @@ obj
 			rank="A"
 			Specialist = SPECIALIZATION_TAIJUTSU
 			signs="<font color=green>Horse,Horse,Snake</font><br>(macro(3,3,2))"
+			hand_signs = list("horse","horse","snake")
 			Sprice=3
 			reqs=list("ShiShi Rendan")
 			Description="Strike someone in melee with chakra, interupting their nervous system, dealing damage (Str|Prc) and causing them to fall asleep. Hitting a sleeping target might wake them up."
@@ -204,6 +216,7 @@ obj
 			name="Leaf Hidden Finger Jutsu: One Thousand Years of Death"
 			rank="D"
 			signs="<font color=green>Monkey</font><br>(macro(4))"
+			hand_signs = list("monkey")
 			Specialist = SPECIALIZATION_TAIJUTSU
 			Sprice=1
 			uses=100
@@ -252,6 +265,7 @@ obj
 			name="Bringer of Darkness Technique"
 			rank="B"
 			signs="<font color=green>Dog,Ox,Dragon</font><br>(macro(E,W,5))"
+			hand_signs = list("dog","ox","dragon")
 			Sprice=3
 			Specialist = "Genjutsu"
 		//	uses=100
@@ -269,6 +283,7 @@ obj
 			Sprice=2
 			Specialist = "Genjutsu"
 			signs="<font color=green>Rat,Dragon,Dog,Monkey</font><br>(macro(Q,5,E,4))"
+			hand_signs = list("rat","dragon","dog","monkey")
 			Description="Create multiple illusive clones by seperating into multiple crows and scatterring them to hide amongst them. This makes it difficult to be targeted amongst the clones."
 			New()
 				..()
@@ -281,6 +296,7 @@ obj
 			name="Crow Substitution"
 			rank="C"
 			signs="<font color=green>Ox,Rat,Rat</font><br>(macro(W,Q,Q))"
+			hand_signs = list("ox","rat","rat")
 			uses=0
 			Sprice=4
 			Specialist = "Genjutsu"
@@ -297,6 +313,7 @@ obj
 			name="Demonic Illusion: Tree Binding Death"
 			rank="B"
 			signs="<font color=green>Ox,Snake,Rabbit,Dog</font><br>(macro(W,2,1,E))"
+			hand_signs = list("ox","snake","rabbit","dog")
 			Sprice=3
 			Specialist = "Genjutsu"
 			Description="You convince your target's mind that they are locked to a nearby tree, dealing damage (Gen) and binding them for a duration."
@@ -311,6 +328,7 @@ obj
 			name="Temple of Nirvana"
 			rank="B"
 			signs="<font color=green>Dog,Rabbit,Dog,Snake</font><br>(macro(E,1,E,2))"
+			hand_signs = list("dog","rabbit","dog","snake")
 			Sprice=3
 			Specialist = "Genjutsu"
 			reqs=list("Demonic Illusion: Tree Binding Death")
@@ -328,6 +346,7 @@ obj
 			name="Black Iron Fists"
 			rank="A"
 			signs="<font color=green>Snake, Horse, Dog</font><br>(macro(2,3,E))"
+			hand_signs = list("snake","horse","dog")
 			Clan= CLAN_IRON
 			maxcooltime = 0
 			ChakraCost = 0
@@ -377,6 +396,7 @@ obj
 			name="Gathering Assault: Pyramid"
 			rank="S"
 			signs="<font color=green>Snake, Horse, Dog, Rabbit, Rabbit, Dog</font><br>(macro(2,3,E,1,1,E))"
+			hand_signs = list("snake","horse","dog","rabbit","rabbit","dog")
 			Clan= CLAN_IRON
 			Sprice=4
 			reqs=list("Black Iron Fists")
@@ -394,6 +414,7 @@ obj
 			name="Hidden Snake Stab"
 			rank="S"
 			signs="<font color=green>Rat,Snake,Dog</font><br>(macro(Q,2,E))"
+			hand_signs = list("rat","snake","dog")
 			Clan= CLAN_SAGE
 			Sprice=2
 			reqs=list("Sage Mode")
@@ -409,6 +430,7 @@ obj
 			name="Snake Skin Replacement"
 			rank="C"
 			signs="<font color=green>Ox,Rat,Rat,Ox</font><br>(macro(W,Q,Q,W))"
+			hand_signs = list("ox","rat","rat","ox")
 			Clan= CLAN_SAGE
 			uses=0
 			reqs=list("Hidden Snake Stab")
@@ -441,6 +463,7 @@ obj
 			name="Sage Style Giant Rasengan"
 			rank="S"
 			signs="<font color=green>Rabbit,Ox,Rabbit,Ox,Rabbit,Ox</font><br>(macro(1,W,1,W,1,W))"
+			hand_signs = list("rabbit","ox","rabbit","ox","rabbit","ox")
 			Clan= CLAN_SAGE
 			Sprice=4
 			reqs=list("Summoning Jutsu: Snake","Rasengan")
@@ -456,6 +479,7 @@ obj
 			name="Sage Style: Giant Snake"
 			rank="A"
 			signs="<font color=green>Dog,Rat,Rat,Dragon,Dog</font><br>(macro(E,Q,Q,5,E))"
+			hand_signs = list("dog","rat","rat","dragon","dog")
 			Clan= CLAN_SAGE
 			maxcooltime = 0
 			ChakraCost = 0
@@ -472,6 +496,7 @@ obj
 			reqs=list("Snake Skin Replacement")
 			//uses=100
 			signs="<font color=green>Rat,Horse,Rat,Dog,Ox</font><br>(macro(Q,3,Q,E,W))"
+			hand_signs = list("rat","horse","rat","dog","ox")
 			Clan= "SnakeSage"
 			Description="Allows you to summon small snake to aid you in combat! The snake will move towards your initial target and will attack dealing damage (Nin) provided you keep your opponent targeted."
 			New()
@@ -485,6 +510,7 @@ obj
 			name="Sage Style: Toad Bind"
 			rank="S"
 			signs="<font color=green>Dog,Dog,Rat,Dragon,Dragon</font><br>(macro(E,E,Q,5,5))"
+			hand_signs = list("dog","dog","rat","dragon","dragon")
 			Clan= CLAN_SAGE
 			maxcooltime = 0
 			ChakraCost = 0
@@ -499,6 +525,7 @@ obj
 			name="Warp Rasengan"
 			rank="S"
 			signs="<font color=green>Rabbit,Monkey,Monkey,Rabbit,Monkey</font><br>(macro(1,4,4,1,4))"
+			hand_signs = list("rabbit","monkey","monkey","rabbit","monkey")
 			Clan= CLAN_YELLOWFLASH
 			Sprice=4
 			reqs=list("Flying Thunder God: Great Escape","Rasengan")
@@ -514,6 +541,7 @@ obj
 			name="Flying Thunder God"
 			rank="A"
 			signs="<font color=green>Rabbit</font><br>(macro(1))"
+			hand_signs = list("rabbit")
 			Clan= CLAN_YELLOWFLASH
 			Sprice=2
 			reqs=list("Flying Thunder God: Kunai")
@@ -528,7 +556,8 @@ obj
 			mouse_drag_pointer = "Flyingthunderkunai"
 			name="Flying Thunder God: Kunai"
 			rank="A"
-			signs="<font color=green>Dog,Rat,Rabbit</font><br>(macro(E, Q, 1))"//needs setting
+			signs="<font color=green>Dog,Rat,Rabbit</font><br>(macro(E, Q, 1))"
+			hand_signs = list("dog","rat","rabbit")
 			Specialist="Ninjutsu"
 			Clan= CLAN_YELLOWFLASH
 			Sprice=2
@@ -543,7 +572,8 @@ obj
 			mouse_drag_pointer = "Flyingthunderescape"
 			name="Flying Thunder God: Great Escape"
 			rank="A"
-			signs="<font color=green>Rabbit,Dog,Dog</font><br>(macro(1, E, E))"//needs setting
+			signs="<font color=green>Rabbit,Dog,Dog</font><br>(macro(1, E, E))"
+			hand_signs = list("rabbit","dog","dog")
 			Clan= CLAN_YELLOWFLASH
 			Sprice=4
 			reqs=list("Flying Thunder God")
@@ -560,6 +590,7 @@ obj
 			name="Poison Mist"
 			rank="B"
 			signs="<font color=green>Dragon,Horse,Snake</font><br>(macro(5,3,2))"
+			hand_signs = list("dragon","horse","snake")
 			Clan= CLAN_MEDICAL
 			reqs=list("Heal")
 			Sprice=3
@@ -575,6 +606,7 @@ obj
 			name="Heal"
 			rank="C"
 			signs="<font color=green>Dog,Snake,Rat</font><br>(macro(E,2,Q))"
+			hand_signs = list("dog","snake","rat")
 			Clan= CLAN_MEDICAL
 			Sprice=2
 			Description="Channel your chakra into life force significantly healing (Nin) yourself or a target."
@@ -589,6 +621,7 @@ obj
 			name="One's Own Life Reincarnation"
 			rank="A"
 			signs="<font color=green>Horse,Horse,Horse</font><br>(macro(3,3,3))"
+			hand_signs = list("horse","horse","horse")
 			Clan= CLAN_MEDICAL
 			Sprice=4
 			maxcooltime = 600
@@ -622,6 +655,7 @@ obj
 			name="Cherry Blossom Impact"
 			rank="C"
 			signs="<font color=green>Horse,Horse,Rabbit</font><br>(macro(3,3,1))"
+			hand_signs = list("horse","horse","rabbit")
 			Clan= CLAN_MEDICAL
 			Sprice=2
 			reqs=list("Mystical Palms")
@@ -656,6 +690,7 @@ obj
 			name="Gravity Divergence: Induction"
 			rank="A"
 			signs="<font color=green>Snake,Rabbit</font><br>(macro(2,1))"
+			hand_signs = list("snake","rabbit")
 			Clan= CLAN_RINNEGAN
 			reqs=list("Rinnegan")
 			Sprice=2
@@ -671,6 +706,7 @@ obj
 			name="Gravity Divergence: Repulsion"
 			rank="A"
 			signs="<font color=green>Rabbit,Snake</font><br>(macro(1,2))"
+			hand_signs = list("rabbit","snake")
 			Sprice=2
 			Clan= CLAN_RINNEGAN
 			reqs=list("Gravity Divergence: Induction")
@@ -689,6 +725,7 @@ obj
 			Sprice=2
 			reqs=list("Gravity Divergence: Repulsion")
 			signs="<font color=green>Snake,Dragon,Snake,Rat</font><br>(macro(2,5,2,Q))"
+			hand_signs = list("snake","dragon","snake","rat")
 			Description="Reach out and touch someone to draw from their chakra reserves and replenish your own until either they run out of chakra or you reach your maximum. This jutsu renders both the user and the victim helpless for the duration!"
 			New()
 				..()
@@ -702,6 +739,7 @@ obj
 			Clan= CLAN_RINNEGAN
 			rank="S"
 			signs="<font color=green>Horse,Rabbit,Horse</font><br>(macro(3,1,3))"
+			hand_signs = list("horse","rabbit","horse")
 			reqs=list("Chakra Leech")
 			Sprice=3
 			Description="Draw upon the power of the Gedo to revive fallen allies."
@@ -717,6 +755,7 @@ obj
 			rank="S"
 			Clan= CLAN_RINNEGAN
 			signs="<font color=green>Rabbit,Rabbit,Snake,Snake,Rabbit,Snake</font><br>(macro(1,1,2,2,1,2))"
+			hand_signs = list("rabbit","rabbit","snake","snake","rabbit","snake")
 			Sprice=4
 			reqs=list("Summoning Jutsu: Dog")
 			Description="Release the full power of your gravity control repelling anyone in a large radius around you with immense force dealing damage (Nin) and launching them away from you."
@@ -735,6 +774,7 @@ obj
 			reqs=list("Gedo Revival")
 			//uses=100
 			signs="<font color=green>Rat,Horse,Rat,Dog,Dog</font><br>(macro(Q,3,Q,E,E))"
+			hand_signs = list("rat","horse","rat","dog","dog")
 			Clan= "Rinnegan"
 			Description="Allows you to summon a cerberus dog to aid you in combat! The dog will move towards your initial target and will attack dealing damage (Nin) provided you keep your opponent targeted."
 			New()
@@ -999,6 +1039,7 @@ obj
 			rank="S"
 			Clan= CLAN_UCHIHA
 			signs="<font color=green>Dog,Ox,Dragon,Ox,Dog</font><br>(macro(E,W,5,W,E))"
+			hand_signs = list("dog","ox","dragon","ox","dog")
 			reqs = list("Mangekyou Sharingan")
 			Description="You manefest a giant warrior incarnation which protects you from death for a duration. You can cause the incarnation to attack enemies around you by pressing the S key."
 			New()
@@ -1082,6 +1123,7 @@ obj
 			rank="B"
 			Clan= CLAN_NARA
 			signs="<font color=green>Monkey, Snake, Ox</font><br>(macro(4,2,W))"
+			hand_signs = list("monkey","snake","ox")
 			Sprice=2
 			Description="Reach out with your shadow towards a target and attempt to possess their shadow with your own. If the jutsu succeeds the target will be bound in place and helpless."
 			New()
@@ -1128,6 +1170,7 @@ obj
 			rank="S"
 			Clan= CLAN_NARA
 			signs="<font color=green>Monkey,Snake,Ox,Monkey</font><br>(macro(4,2,W,4))"
+			hand_signs = list("monkey","snake","ox","monkey")
 			Sprice=3
 			reqs=list("Shadow Bind")
 			Description="Expand your shadow all around you binding anyone nearby and allowing you to move them around helplessly."
@@ -1162,6 +1205,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Snake,Dragon,Snake</font><br>(macro(2,5,2))"
+			hand_signs = list("snake","dragon","snake")
 			Sprice=2
 			Clan= CLAN_ABURAME
 			Description="Uses the destruction bugs to make a clone that battles alongside you running around and punching anyone and everyone indscriminately."
@@ -1177,6 +1221,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dragon,Snake,Snake</font><br>(macro(5,2,2))"
+			hand_signs = list("dragon","snake","snake")
 			Sprice=2
 			Clan= CLAN_ABURAME
 			reqs = list("Stealth Bug")
@@ -1193,6 +1238,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dragon,Snake,Snake,Dragon</font><br>(macro(5,2,2,5))"
+			hand_signs = list("dragon","snake","snake","dragon")
 			Sprice=3
 			Clan= CLAN_ABURAME
 			reqs = list("Destruction Bug Neurotoxin")
@@ -1209,6 +1255,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dragon,Snake</font><br>(macro(5,2))"
+			hand_signs = list("dragon","snake")
 			Sprice=2
 			Clan= CLAN_ABURAME
 			reqs = list("Destruction Bug Swarm")
@@ -1225,6 +1272,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Snake,Dragon,Dragon</font><br>(macro(2,5,5))"
+			hand_signs = list("snake","dragon","dragon")
 			Sprice=2
 			Clan= CLAN_ABURAME
 			reqs = list("Insect Clone")
@@ -1241,6 +1289,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dragon,Dragon,Snake</font><br>(macro(5,5,2))"
+			hand_signs = list("dragon","dragon","snake")
 			Sprice=2
 			Clan= CLAN_ABURAME
 			reqs = list("Insect Clone")
@@ -1257,6 +1306,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dragon,Snake,Snake,Dragon,Dragon</font><br>(macro(5,2,2,5,5))"
+			hand_signs = list("dragon","snake","snake","dragon","dragon")
 			Sprice=3
 			Clan= CLAN_ABURAME
 			reqs = list("Destruction Bug Swarm")
@@ -1274,6 +1324,7 @@ obj
 			name="Byakugan"
 			rank="D"
 			signs="<font color=green>Snake</font><br>(macro(2))"
+			hand_signs = list("snake")
 			Sprice=1
 			Clan= CLAN_HYUUGA
 			Description="The Hyuuga clan's Doujutsu. This technique allows the user to temporarily extend their vision as well as use the power of the gentle fist. While Byakugan is active your punches will deal damage to the victims chakra aswell."
@@ -1288,6 +1339,7 @@ obj
 			name="Eight Trigrams Palm: Heavenly Spin"
 			rank="B"
 			signs="<font color=green>Snake,Rat,Snake,Dragon</font><br>(macro(2,Q,2,5))"
+			hand_signs = list("snake","rat","snake","dragon")
 			Sprice=2
 			Clan= CLAN_HYUUGA
 			reqs=list("Byakugan")
@@ -1303,6 +1355,7 @@ obj
 			name="Eight Trigrams: Empty Palm"
 			rank="S"
 			signs="<font color=green>Snake,Rat</font><br>(macro(2,Q))"
+			hand_signs = list("snake","rat")
 			Sprice=2
 			Clan= CLAN_HYUUGA
 			reqs=list("Byakugan")
@@ -1318,6 +1371,7 @@ obj
 			name="Eight Trigrams: Mountain Crusher"
 			rank="A"
 			signs="<font color=green>Snake,Snake,Dog</font><br>(macro(2,2,E))"
+			hand_signs = list("snake","snake","dog")
 			Sprice=2
 			Description="Create a long range blast of air more powerful and precise than emtpy palm dealing damage (Nin|Str) to the first target hit in a line."
 			reqs = list("Eight Trigrams: Empty Palm")
@@ -1333,6 +1387,7 @@ obj
 			name="Eight Trigrams: 64 Palms"
 			rank="A"
 			signs="<font color=green>Snake,Rat,Dragon,Rat,Dragon</font><br>(macro(2,Q,5,Q,5))"
+			hand_signs = list("snake","rat","dragon","rat","dragon")
 			Sprice=3
 			Clan= CLAN_HYUUGA
 			reqs=list("Eight Trigrams: Empty Palm")
@@ -1348,6 +1403,7 @@ obj
 			name="Last Resort: Eight Gates Assault"
 			rank="S"
 			signs="<font color=green>Snake,Rat,Dragon,Rat,Dragon,Dragon</font><br>(macro(2,Q,5,Q,5,5))"
+			hand_signs = list("snake","rat","dragon","rat","dragon","dragon")
 			Sprice=4
 			Clan= CLAN_HYUUGA
 			reqs=list("Eight Trigrams: 64 Palms")
@@ -1365,6 +1421,7 @@ obj
 			name="Bone Tip"
 			rank="C"
 			signs="<font color=green>Ox</font><br>(macro(W))"
+			hand_signs = list("ox")
 			maxcooltime = 0
 			ChakraCost = 0
 			Clan= CLAN_KAGUYA
@@ -1380,6 +1437,7 @@ obj
 			name="Bone Sensation"
 			rank="C"
 			signs="<font color=green>Ox,Ox,Rat</font><br>(macro(W,W,Q))"
+			hand_signs = list("ox","ox","rat")
 			maxcooltime = 0
 			ChakraCost = 0
 			Sprice=2
@@ -1393,6 +1451,7 @@ obj
 			name="Camellia Dance"
 			rank="C"
 			signs="<font color=green>Rat,Rat,Ox</font><br>(macro(Q,Q,W))"
+			hand_signs = list("rat","rat","ox")
 			Sprice=3
 			Clan= CLAN_KAGUYA
 			reqs=list("Bone Tip")
@@ -1408,6 +1467,7 @@ obj
 			name="Bone Drill"
 			rank="C"
 			signs="<font color=green>Rat,Rat,Rat</font><br>(macro(Q,Q,Q))"
+			hand_signs = list("rat","rat","rat")
 			Sprice=2
 			Clan= CLAN_KAGUYA
 			reqs=list("Camellia Dance")
@@ -1423,6 +1483,7 @@ obj
 			name="Bone Pulse"
 			rank="C"
 			signs="<font color=green>Rat,Dog,Ox</font><br>(macro(Q,E,W))"
+			hand_signs = list("rat","dog","ox")
 			Sprice=2
 			Clan= CLAN_KAGUYA
 			reqs=list("Bone Tip")
@@ -1438,6 +1499,7 @@ obj
 			name="Young Bracken Dance"
 			rank="C"
 			signs="<font color=green>Rat,Dog,Ox,Ox</font><br>(macro(Q,E,W,W))"
+			hand_signs = list("rat","dog","ox","ox")
 			Sprice=3
 			Clan= CLAN_KAGUYA
 			reqs=list("Bone Pulse")
@@ -1453,6 +1515,7 @@ obj
 			name="Dance Of The Kaguya"
 			rank="A"
 			signs="<font color=green>Rat,Dog,Ox,Rat</font><br>(macro(Q,E,W,Q))"
+			hand_signs = list("rat","dog","ox","rat")
 			Sprice=3
 			Clan= CLAN_KAGUYA
 			reqs=list("Bone Drill")
@@ -1484,6 +1547,7 @@ obj
 			name="C1: Tracking Birds"
 			rank="B"
 			signs="<font color=green>Dragon,Rabbit,Dragon</font><br>(macro(5,1,5))"
+			hand_signs = list("dragon","rabbit","dragon")
 			Sprice=2
 			Element="Earth"
 			Clan= CLAN_CLAY
@@ -1499,6 +1563,7 @@ obj
 			name="C1: Spider Swarm"
 			rank="B"
 			signs="<font color=green>Dragon,Dog,Dragon</font><br>(macro(5,E,5))"
+			hand_signs = list("dragon","dog","dragon")
 			Sprice=3
 			Element="Earth"
 			Clan= CLAN_CLAY
@@ -1515,6 +1580,7 @@ obj
 			name="C1: Exploding Snake"
 			rank="B"
 			signs="<font color=green>Dragon,Snake,Dragon</font><br>(macro(5,2,5))"
+			hand_signs = list("dragon","snake","dragon")
 			Sprice=3
 			Element="Earth"
 			Clan= CLAN_CLAY
@@ -1531,6 +1597,7 @@ obj
 			name="C2"
 			rank="S"
 			signs="<font color=green>Dragon,Dragon,Dragon,Dragon,Dragon</font><br>(macro(5,5,5,5,5))"
+			hand_signs = list("dragon","dragon","dragon","dragon","dragon")
 			Sprice=3
 			maxcooltime = 0
 			Clan= CLAN_CLAY
@@ -1544,6 +1611,7 @@ obj
 			name="C3"
 			rank="S"
 			signs="<font color=green>Dragon,Dragon,Dragon,Dragon,Dog</font><br>(macro(5,5,5,5,E))"
+			hand_signs = list("dragon","dragon","dragon","dragon","dog")
 			Sprice=4
 			Element="Earth"
 			Clan = CLAN_CLAY
@@ -1574,6 +1642,7 @@ obj
 			name="Demonic Ice Mirrors"
 			rank="B"
 			signs="<font color=green>Rabbit,Dog,Dog,Ox,Rabbit</font><br>(macro(1,E,E,W,1))"
+			hand_signs = list("rabbit","dog","dog","ox","rabbit")
 			Sprice=3
 			Clan = CLAN_ICE
 			reqs = list("Sensatsu Suishou")
@@ -1589,6 +1658,7 @@ obj
 			name="Sensatsu Suishou"
 			rank="A"
 			signs="<font color=green>Rabbit,Dog,Rabbit</font><br>(macro(1,E,1))"
+			hand_signs = list("rabbit","dog","rabbit")
 			Sprice=3
 			Clan = CLAN_ICE
 			reqs = list("Ice Explosion")
@@ -1604,6 +1674,7 @@ obj
 			name="Iceball"
 			rank="B"
 			signs="<font color=green>Rabbit,Dog,Dog,Rabbit</font><br>(macro(1,E,E,1))"
+			hand_signs = list("rabbit","dog","dog","rabbit")
 			Sprice=2
 			Clan = CLAN_ICE
 			reqs=list("Demonic Ice Mirrors")
@@ -1619,6 +1690,7 @@ obj
 			name="Omega Ice Ball"
 			rank="S"
 			signs="<font color=green>Rabbit,Dog,Dog,Rabbit,Dog,Dog,Rabbit</font><br>(macro(1,E,E,1,E,E,1))"
+			hand_signs = list("rabbit","dog","dog","rabbit","dog","dog","rabbit")
 			Sprice=5
 			maxcooltime = 0
 			ChakraCost = 0
@@ -1633,6 +1705,7 @@ obj
 			name="Ice Explosion"
 			rank="B"
 			signs="<font color=green>Dog,Dog,Rabbit</font><br>(macro(E,E,1))"
+			hand_signs = list("dog","dog","rabbit")
 			Sprice=3
 			Clan = CLAN_ICE
 			Description="Use nearby water to explode and freeze, impaling enemies and dealing damage (Nin) in a radius around you."
@@ -1661,6 +1734,7 @@ obj
 			name="Fire Mask"
 			rank="A"
 			signs="<font color=green>Dog,Snake</font><br>(macro(E,2))"
+			hand_signs = list("dog","snake")
 			Sprice=2
 			Clan= CLAN_KAKUZU
 			Description="Allows the user to summon a Fire Heart that uses a single Fire jutsu."
@@ -1675,6 +1749,7 @@ obj
 			name="Wind Mask"
 			rank="A"
 			signs="<font color=green>Ox,Snake</font><br>(macro(W,2))"
+			hand_signs = list("ox","snake")
 			Sprice=2
 			Clan= CLAN_KAKUZU
 			Description="Allows the user to summon a Wind Heart that uses a single Wind jutsu."
@@ -1689,6 +1764,7 @@ obj
 			name="Earth Mask"
 			rank="A"
 			signs="<font color=green>Dragon,Rabbit</font><br>(macro(5,1))"
+			hand_signs = list("dragon","rabbit")
 			Sprice=2
 			Clan= CLAN_KAKUZU
 			Description="Allows the user to summon a Earth Heart that uses a single Earth jutsu."
@@ -1703,6 +1779,7 @@ obj
 			name="Lightning Mask"
 			rank="A"
 			signs="<font color=green>Dog,Rabbit</font><br>(macro(E,1))"
+			hand_signs = list("dog","rabbit")
 			Sprice=2
 			Clan= CLAN_KAKUZU
 			Description="Allows the user to summon a Lightning Heart that uses a single Lightning jutsu."
@@ -1731,6 +1808,7 @@ obj
 			name="First Puppet Summoning"
 			rank="C"
 			signs="<font color=green>Rabbit,Rabbit,Snake</font><br>(macro(1,1,2))"
+			hand_signs = list("rabbit","rabbit","snake")
 			uses=100
 			Sprice=2
 			Clan= CLAN_PUPPET
@@ -1810,6 +1888,7 @@ obj
 			name="Second Puppet Summoning"
 			rank="B"
 			signs="<font color=green>Rabbit,Snake,Snake</font><br>(macro(1,2,2))"
+			hand_signs = list("rabbit","snake","snake")
 			uses=100
 			Sprice=2
 			Clan= CLAN_PUPPET
@@ -1826,6 +1905,7 @@ obj
 			name="Forbiden Tehnique: Kazekage Puppet"
 			rank="S"
 			signs="<font color=green>Snake,Rabbit,Rat,Rabbit,Snake,Ox</font><br>(macro(2,1,Q,1,2,W))"
+			hand_signs = list("snake","rabbit","rat","rabbit","snake","ox")
 			uses=100
 			Sprice=2
 			Clan= CLAN_PUPPET
@@ -1858,7 +1938,8 @@ obj
 			name="Wood Style: Tree Summoning"
 			rank="S"
 			uses=0
-			signs="<font color=green>Dog,Ox,Ox,Ox</font><br>(macro(E,Q,Q,Q))"
+			signs="<font color=green>Dog,Rat,Rat,Rat</font><br>(macro(E,Q,Q,Q))"
+			hand_signs = list("dog","rat","rat","rat")
 			Sprice=4
 			Clan= CLAN_SENJU
 			reqs=list("Wood Release: Wood Fortress")
@@ -1875,6 +1956,7 @@ obj
 			rank="B"
 			uses=0
 			signs="<font color=green>Dog,Rabbit,Ox</font><br>(macro(E,1,W))"
+			hand_signs = list("dog","rabbit","ox")
 			Sprice=4
 			Clan= CLAN_SENJU
 			reqs=list("Wood Release: Wooden Balvan")
@@ -1891,6 +1973,7 @@ obj
 			rank="A"
 			uses=0
 			signs="<font color=green>Dog,Rabbit,Ox,Dog</font><br>(macro(E,1,W,E))"
+			hand_signs = list("dog","rabbit","ox","dog")
 			Sprice=1
 			Clan= CLAN_SENJU
 			Description="Produce a balvan and sling it at your target to deal damage (Nin|Prc)"
@@ -1905,6 +1988,7 @@ obj
 			name="Wood Release: Wood Fortress"
 			rank="B"
 			signs="<font color=green>Dog,Dog,Dog,Ox</font><br>(macro(E,E,E,W))"
+			hand_signs = list("dog","dog","dog","ox")
 			Sprice=3
 			Clan= CLAN_SENJU
 			reqs=list("Wood Release: Root Strangle")
@@ -1921,6 +2005,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dog,Rabbit,Ox,Dog,Dog</font><br>(macro(E,1,W,E,E))"
+			hand_signs = list("dog","rabbit","ox","dog","dog")
 			Sprice=3
 			maxcooltime = 0
 			ChakraCost = 0
@@ -1934,6 +2019,7 @@ obj
 			name="Mokuton Hijutsu - Jukai Koutan"
 			rank="S"
 			signs="<font color=green>Snake,Snake,Rabbit,Rat,Rabbit</font><br>(macro(2,2,1,Q,1))"
+			hand_signs = list("snake","snake","rabbit","rat","rabbit")
 			Sprice=4
 			maxcooltime = 0
 			ChakraCost = 0
@@ -1948,6 +2034,7 @@ obj
 			name="Mokuton - Jubaku Eisou"
 			rank="B"
 			signs="<font color=green>Rat,Snake,Snake,Rabbit</font><br>(macro(Q,2,2,1))"
+			hand_signs = list("rat","snake","snake","rabbit")
 			Sprice= 0
 			maxcooltime= 0
 			Clan= CLAN_SENJU
@@ -1960,6 +2047,7 @@ obj
 			name="Mokuton - Daijurin no Jutsu"
 			rank="B"
 			signs="<font color=green>Rat,Rat,Snake,Rabbit,Rabbit</font><br>(macro(Q,Q,2,1,1))"
+			hand_signs = list("rat","rat","snake","rabbit","rabbit")
 			Sprice=1
 			maxcooltime= 0
 			ChakraCost = 0
@@ -1974,7 +2062,8 @@ obj
 			mouse_drag_pointer = "InkBird"
 			name="Ultimate Ink Bird"
 			rank="S"
-			signs="<font color=green>Dragon,Rabbit,Monkey,Dog,Rabbit,Dog,Dog</font><br>(macro(5,1,4,E,5,1,E,E))"
+			signs="<font color=green>Dragon,Rabbit,Monkey,Dog,Rabbit,Dog,Dog</font><br>(macro(5,1,4,E,1,E,E))"
+			hand_signs = list("dragon","rabbit","monkey","dog","rabbit","dog","dog")
 			Sprice=5
 			Clan= CLAN_INK
 			reqs=list("Ink Style: Snake Rustle Jutsu")
@@ -1990,6 +2079,7 @@ obj
 			name="Ultimate Ink Style: Lions"
 			rank="S"
 			signs="<font color=green>Rabbit,Dragon,Dog,Rabbit,Dragon,Dog</font><br>(macro(1,5,E,1,5,E))"
+			hand_signs = list("rabbit","dragon","dog","rabbit","dragon","dog")
 			Sprice=2
 			reqs=list("Ink Style: Snake Rustle Jutsu")
 			Clan= CLAN_INK
@@ -2005,6 +2095,7 @@ obj
 			name="Ink Style: Snake Rustle Jutsu"
 			rank="B"
 			signs="<font color=green>Rabbit,Horse,Monkey,Dragon</font><br>(macro(1,3,4,5))"
+			hand_signs = list("rabbit","horse","monkey","dragon")
 			Sprice=2
 			Clan= CLAN_INK
 			reqs=list("Ink Style: Rats")
@@ -2020,6 +2111,7 @@ obj
 			name="Ink Style: Snakes"
 			rank="A"
 			signs="<font color=green>Rabbit,Dragon,Dog,Monkey,Rabbit</font><br>(macro(1,5,E,4,1))"
+			hand_signs = list("rabbit","dragon","dog","monkey","rabbit")
 			Sprice=2
 			Clan= CLAN_INK
 			reqs=list("Ink Style: Snake Rustle Jutsu")
@@ -2035,6 +2127,7 @@ obj
 			name="Ink Style: Rats"
 			rank="B"
 			signs="<font color=green>Rabbit,Dog,Monkey,Rabbit</font><br>(macro(1,E,4,1))"
+			hand_signs = list("rabbit","dog","monkey","rabbit")
 			Sprice=2
 			Clan= CLAN_INK
 			Description="Draw rats and cast them out onto the battlefield peircing through anyone in their path dealing damage (Nin|Prc)."
@@ -2050,6 +2143,7 @@ obj
 			name="Rising Dragon"
 			rank="B"
 			signs="<font color=green>Dragon,Horse,Dragon,Horse,Snake</font><br>(macro(5,3,5,3,2))"
+			hand_signs = list("dragon","horse","dragon","horse","snake")
 			Clan= CLAN_WEAPONIST
 			reqs = list("Blade Hurricane")
 			Sprice=5
@@ -2065,6 +2159,7 @@ obj
 			name="Weapon Manipulation Jutsu"
 			rank="A"
 			signs="<font color=green>Dragon,Horse,Dragon,Horse</font><br>(macro(5,3,5,3))"
+			hand_signs = list("dragon","horse","dragon","horse")
 			Sprice=3
 			Clan= CLAN_WEAPONIST
 			reqs = list("Demon Wind Shuriken")
@@ -2080,6 +2175,7 @@ obj
 			name="Blade Hurricane"
 			rank="A"
 			signs="<font color=green>Dragon,Horse,Dragon,Horse,Rabbit</font><br>(macro(5,3,5,3,1))"
+			hand_signs = list("dragon","horse","dragon","horse","rabbit")
 			Sprice=3
 			Clan= CLAN_WEAPONIST
 			reqs=list("Weapon Manipulation Jutsu")
@@ -2095,6 +2191,7 @@ obj
 			name="Demon Wind Shuriken"
 			rank="A"
 			signs="<font color=green>Dragon,Horse,Horse,Dragon,Dragon</font><br>(macro(5,3,3,5,5))"
+			hand_signs = list("dragon","horse","horse","dragon","dragon")
 			Clan= CLAN_WEAPONIST
 			Sprice=3
 			Description="Throw a large demon wind shuriken connected to you with a chakra thread at your target or in a line in front of you dealing damage (Nin|Prc) to the first target it hits. Once it reaches it's full range or hits a target you pull back on the thread causing it to return to you and deal damage (Nin|Prc) to anyone in it's path."
@@ -2109,6 +2206,7 @@ obj
 			name="Twin Dragons"
 			rank="S"
 			signs="<font color=green>Dragon,Horse,Dragon,Horse,Dragon,Dragon</font><br>(macro(5,3,5,3,5,5))"
+			hand_signs = list("dragon","horse","dragon","horse","dragon","dragon")
 			Sprice=5
 			maxcooltime = 0
 			ChakraCost = 0
@@ -2123,6 +2221,7 @@ obj
 			rank="B"
 			Clan= CLAN_WEAPONIST
 			signs="<font color=green>Dragon,Horse,Dragon</font><br>(macro(5,3,5))"
+			hand_signs = list("dragon","horse","dragon")
 			Sprice=2
 			maxcooltime = 0
 			ChakraCost = 0
@@ -2199,6 +2298,7 @@ obj
 			name="Calorie Control"
 			rank="S"
 			signs="<font color=green>Ox,Ox,Dragon,Ox</font><br>(macro(W,W,5,W))"
+			hand_signs = list("ox","ox","dragon","ox")
 			Sprice=3
 			Clan= CLAN_AKIMICHI
 			reqs=list("RedPill")
@@ -2245,6 +2345,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dog,Dog,Ox,Dog</font><br>(macro(E,E,W,E))"
+			hand_signs = list("dog","dog","ox","dog")
 			Sprice=3
 			Clan= CLAN_SAND
 			reqs=list("Sand Shuriken")
@@ -2261,6 +2362,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dog,Ox,Ox,Dog</font><br>(macro(E,W,W,E))"
+			hand_signs = list("dog","ox","ox","dog")
 			Sprice=3
 			Clan= CLAN_SAND
 			reqs=list("Desert Coffin")
@@ -2277,6 +2379,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dog,Dog,Ox</font><br>(macro(E,E,W))"
+			hand_signs = list("dog","dog","ox")
 			Sprice=2
 			Clan= CLAN_SAND
 			Description="Summon sand from the earth and use it to form multiple shurikens for hurling towards your foes dealing damage (Nin|Prc) and piercing through enemies."
@@ -2292,6 +2395,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Dog,Dog,Ox,Ox</font><br>(macro(E,E,W,W))"
+			hand_signs = list("dog","dog","ox","ox")
 			Sprice=2
 			Clan= CLAN_SAND
 			Description="Summon sand from the earth and use it to trap your opponent. After a delay your target will be bound for a duration providing you are still targeting them."
@@ -2306,6 +2410,7 @@ obj
 			name="Sand Shield"
 			rank="B"
 			signs="<font color=green>Dog,Ox,Dog,Ox</font><br>(macro(E,W,E,W))"
+			hand_signs = list("dog","ox","dog","ox")
 			Sprice=3
 			Clan= CLAN_SAND
 			uses=0
@@ -2325,6 +2430,7 @@ obj
 			rank="B"
 			uses=0
 			signs="<font color=green>Ox,Rabbit,Dog</font><br>(macro(W,1,E))"
+			hand_signs = list("ox","rabbit","dog")
 			Sprice=2
 			Clan= CLAN_CRYSTAL
 			Description="Focuses chakra in order to create a shard to strike the enemy dealing damage (Nin)."
@@ -2340,6 +2446,7 @@ obj
 			rank="A"
 			uses=0
 			signs="<font color=green>Dog,Rabbit,Rabbit,Dog</font><br>(macro(E,1,1,E))"
+			hand_signs = list("dog","rabbit","rabbit","dog")
 			Sprice=3
 			Clan= CLAN_CRYSTAL
 			reqs=list("Crystal Release: Crystal Shards")
@@ -2355,6 +2462,7 @@ obj
 			name="Crystal Release: Crystal Spikes"
 			rank="B"
 			signs="<font color=green>Rabbit,Dog,Dog,Ox</font><br>(macro(1,E,E,W))"
+			hand_signs = list("rabbit","dog","dog","ox")
 			Sprice=2
 			Clan= CLAN_CRYSTAL
 			reqs=list("Crystal Release: Crystal Needles")
@@ -2371,6 +2479,7 @@ obj
 			rank="S"
 			uses=0
 			signs="<font color=green>Rabbit,Rabbit,Ox,Dog,Dog</font><br>(macro(1,1,W,E,E))"
+			hand_signs = list("rabbit","rabbit","ox","dog","dog")
 			Sprice=4
 			Clan= CLAN_CRYSTAL
 			reqs=list("Crystal Release: Crystal Spikes")
@@ -2386,6 +2495,7 @@ obj
 			name="Crystal Mirrors"
 			rank="B"
 			signs="<font color=green>Ox,Rabbit,Dog,Ox</font><br>(macro(W,1,E,W))"
+			hand_signs = list("ox","rabbit","dog","ox")
 			Sprice=3
 			maxcooltime = 0
 			ChakraCost = 0
@@ -2399,6 +2509,7 @@ obj
 			name="Crystal Arrow"
 			rank="S"
 			signs="<font color=green>Ox,Rabbit,Dog,Ox,Ox,Rabbit,Dog,Ox</font><br>(macro(W,1,E,W,W,1,E,W))"
+			hand_signs = list("ox","rabbit","dog","ox","ox","rabbit","dog","ox")
 			Sprice=3
 			maxcooltime = 0
 			ChakraCost = 0
@@ -2413,6 +2524,7 @@ obj
 			name="Crystal Pillar"
 			rank="S"
 			signs="<font color=green>Ox,Ox,Dog,Rabbit</font><br>(macro(W,W,E,1))"
+			hand_signs = list("ox","ox","dog","rabbit")
 			Sprice=3
 			maxcooltime = 0
 			ChakraCost = 0
@@ -2439,6 +2551,7 @@ obj
 			name="Paper Chakram"
 			rank="B"
 			signs="<font color=green>Ox,Rat</font><br>(macro(W,Q))"
+			hand_signs = list("ox","rat")
 			uses=100
 			Clan= CLAN_PAPER
 			Sprice=2
@@ -2454,6 +2567,7 @@ obj
 			name="Shikigami Spear"
 			rank="A"
 			signs="<font color=green>Ox,Rat,Ox</font><br>(macro(W,Q,W))"
+			hand_signs = list("ox","rat","ox")
 			uses=0
 			Clan= CLAN_PAPER
 			Sprice=4
@@ -2469,6 +2583,7 @@ obj
 			name="Shikigami Dance"
 			rank="A"
 			signs="<font color=green>Ox,Rat,Rat,Rat</font><br>(macro(W,Q,Q,Q))"
+			hand_signs = list("ox","rat","rat","rat")
 			uses=0
 			Clan= CLAN_PAPER
 			reqs = list("Paper Chakram")
@@ -2485,6 +2600,7 @@ obj
 			name="Angel Wings"
 			rank="S"
 			signs="<font color=green>Rat,Ox,Ox,Rat</font><br>(macro(Q,W,W,Q))"
+			hand_signs = list("rat","ox","ox","rat")
 			uses=100
 			Clan= CLAN_PAPER
 			reqs = list("Paper Chakram")
@@ -2607,6 +2723,7 @@ obj
 			rank="S"
 			Sprice = 5
 			signs="<font color=green>Ox,Horse,Horse,Dog,Ox,Horse</font><br>(macro(W,3,3,E,W,3))"
+			hand_signs = list("ox","horse","horse","dog","ox","horse")
 			//uses=100
 			Clan= CLAN_SPIDER
 			reqs = list("Spider Arrow Shoot")
@@ -2626,6 +2743,7 @@ obj
 			Clan="Uzumaki"
 			rank="B"
 			signs="<font color=green>Monkey,Rabbit,Rabbit,Monkey</font><br>(macro(4,1,1,4))"
+			hand_signs = list("monkey","rabbit","rabbit","monkey")
 			Sprice=3
 			Description="A powerful jutsu that creates a strong bind which restricts movement of a person and also damages them for a huge amount."
 			New()
@@ -2639,6 +2757,7 @@ obj
 			name="Soul Devastator Seal"
 			rank="A"
 			signs="<font color=green>Rabbit,Snake,Horse,Rabbit,Rat</font><br>(macro(1,2,3,1,Q))"
+			hand_signs = list("rabbit","snake","horse","rabbit","rat")
 			Sprice=3
 			uses=0
 			Clan="Uzumaki"
@@ -2655,6 +2774,7 @@ obj
 			name="Sealing Jutsu: Limb Paralyzis"
 			rank="B"
 			signs="<font color=green>Rabbit,Rabbit,Monkey,Monkey</font><br>(macro(1,1,4,4))"
+			hand_signs = list("rabbit","rabbit","monkey","monkey")
 			Sprice=4
 			Clan="Uzumaki"
 			reqs = list("Soul Devastator Seal")
@@ -2672,6 +2792,7 @@ obj
 			rank="S"
 			reqs = list("Soul Devastator Seal")
 			signs="<font color=green>Dragon,Rat,Rabbit,Dragon,Rabbit,Rabbit,Rat</font><br>(macro(5,Q,1,5,1,1,Q))"
+			hand_signs = list("dragon","rat","rabbit","dragon","rabbit","rabbit","rat")
 			Sprice=5
 			uses=100
 			Description="An advanced move which cuts the enemies life pool by a large amount. Deals a huge amount of damage to the user himself aswell."
@@ -2688,6 +2809,7 @@ obj
 			name="Bubble Trouble"
 			rank="A"
 			signs="<font color=green>Rabbit,Rabbit,Dragon,Rabbit,Dragon,Rabbit,Dragon,Dragon</font><br>(macro(1,1,5,1,5,1,5,5))"
+			hand_signs = list("rabbit","rabbit","dragon","rabbit","dragon","rabbit","dragon","dragon")
 			Sprice=4
 			reqs=list("Bubble Barrage")
 			Clan= CLAN_BUBBLE
@@ -2703,6 +2825,7 @@ obj
 			name="Bubble Spreader"
 			rank="B"
 			signs="<font color=green>Dog,Dog,Dragon,Dog</font><br>(macro(E,E,5,E))"
+			hand_signs = list("dog","dog","dragon","dog")
 			Sprice=4
 			Clan= CLAN_BUBBLE
 			Description="Creates bubbles and spreads them in every direction. The bubbles will float around and explode dealing damage (Nin) to anyone nearby. If you have a target they will home in however at the cost of dealing significantly less damage."
@@ -2717,6 +2840,7 @@ obj
 			name="Bubble Barrage"
 			rank="B"
 			signs="<font color=green>Rabbit,Rabbit,Dragon,Rabbit</font><br>(macro(1,1,5,1))"
+			hand_signs = list("rabbit","rabbit","dragon","rabbit")
 			Sprice=3
 			reqs=list("Bubble Spreader")
 			Clan= CLAN_BUBBLE
@@ -2732,6 +2856,7 @@ obj
 			name="Bubble Shield"
 			rank="D"
 			signs="<font color=green>Dog,Dog,Dog,Dog</font><br>(macro(E,E,E,E))"
+			hand_signs = list("dog","dog","dog","dog")
 			Clan= CLAN_BUBBLE
 			Sprice=2
 			Description="Protect yourself with a large bubble blocking the next single instance of damage you would take."
@@ -2748,6 +2873,7 @@ obj
 			name="Fire Release: Fire Ball"
 			rank="D"
 			signs="<font color=green>Dog,Dog,Rat</font><br>(macro(E,E,Q))"
+			hand_signs = list("dog","dog","rat")
 			Sprice=1
 			Element="Fire"
 			Description="Unleash a small fireball from your mouth towards a target to deal damage (Nin) and has a chance to set them on fire."
@@ -2762,6 +2888,7 @@ obj
 			name="Fire Release: Blazing Sun"
 			rank="A"
 			signs="<font color=green>Dog,Rat,Dog,Rabbit,Snake</font><br>(macro(E,Q,E,1,2))"
+			hand_signs = list("dog","rat","dog","rabbit","snake")
 			reqs=list("Fire Release: Fire Ball")
 			Sprice=2
 			Element="Fire"
@@ -2778,6 +2905,7 @@ obj
 			name="Fire Release: Ash Pile Burning"
 			rank="B"
 			signs="<font color=green>Dog,Rat,Dog,Rabbit,Dog</font><br>(macro(E,Q,E,1,E))"
+			hand_signs = list("dog","rat","dog","rabbit","dog")
 			Sprice=2
 			Element="Fire"
 			reqs=list("Fire Release: Fire Ball")
@@ -2793,6 +2921,7 @@ obj
 			name="Fire Release: Phoenix Immortal Fire Technique"
 			rank="C"
 			signs="<font color=green>Dog,Rat,Rat,Dog</font><br>(macro(E,Q,Q,E))"
+			hand_signs = list("dog","rat","rat","dog")
 			Sprice=3
 			Element="Fire"
 			reqs=list("Fire Release: Ash Pile Burning")
@@ -2808,6 +2937,7 @@ obj
 			name="Fire Release: Fire Dragon Projectile"
 			rank="C"
 			signs="<font color=green>Dog,Rat,Rat,Dog,Dog,Rat,Dog,Rat</font><br>(macro(E,Q,Q,E,E,Q,E,Q))"
+			hand_signs = list("dog","rat","rat","dog","dog","rat","dog","rat")
 			Sprice=4
 			Element="Fire"
 			reqs=list("Fire Release: Phoenix Immortal Fire Technique")
@@ -2824,6 +2954,7 @@ obj
 			name="Magma Style: Magma Cage"
 			rank="B"
 			signs="<font color=green>Rabbit,Snake,Dog,Rat</font><br>(macro(1,2,E,Q))"
+			hand_signs = list("rabbit","snake","dog","rat")
 			Sprice=2
 			Element="Fire"
 			reqs=list("Fire Release: Fire Dragon Projectile")
@@ -2839,6 +2970,7 @@ obj
 			name="Magma Style: Magma Needles"
 			rank="A"
 			signs="<font color=green>Rabbit,Dog,Snake,Rabbit</font><br>(macro(1,E,2,1))"
+			hand_signs = list("rabbit","dog","snake","rabbit")
 			Sprice=2
 			Element="Fire"
 			reqs=list("Magma Style: Magma Cage")
@@ -2856,6 +2988,7 @@ obj
 			name="Earth Release: Earth Cage"
 			rank="B"
 			signs="<font color=green>Rabbit,Snake,Snake,Dog,Rat</font><br>(macro(1,2,2,E,Q))"
+			hand_signs = list("rabbit","snake","snake","dog","rat")
 			Sprice=2
 			Element="Earth"
 			Description="Channel the forces of the earth into a large cage like structure around your opponent, binding them but also protecting them from damage for the duration."
@@ -2870,6 +3003,7 @@ obj
 			name="Earth Disruption"
 			rank="D"
 			signs="<font color=green>Rabbit,Rabbit,Rabbit</font><br>(macro(1,1,1))"
+			hand_signs = list("rabbit","rabbit","rabbit")
 			Sprice=2
 			uses=0
 			Element = "Earth"
@@ -2886,6 +3020,7 @@ obj
 			name="Earth Release: Dark Swamp"
 			rank="C"
 			signs="<font color=green>Rabbit,Rabbit</font><br>(macro(1,1))"
+			hand_signs = list("rabbit","rabbit")
 			Sprice=3
 			uses=0
 			Element = "Earth"
@@ -2902,6 +3037,7 @@ obj
 			name="Earth Release: Mud River"
 			rank="B"
 			signs="<font color=green>Rabbit,Rabbit,Monkey</font><br>(macro(1,1,4))"
+			hand_signs = list("rabbit","rabbit","monkey")
 			reqs=list("Earth Release: Mud Wall")
 			Sprice=2
 			Element="Earth"
@@ -2917,6 +3053,7 @@ obj
 			name="Earth Release: Mud Wall"
 			rank="A"
 			signs="<font color=green>Rabbit,Rabbit,Rabbit,Rabbit</font><br>(macro(1,1,1,1))"
+			hand_signs = list("rabbit","rabbit","rabbit","rabbit")
 			Sprice=3
 			uses=0
 			Element = "Earth"
@@ -2933,6 +3070,7 @@ obj
 			name="Earth Release: Earth Boulder"
 			rank="B"
 			signs="<font color=green>Rabbit,Rabbit,Rabbit,Snake</font><br>(macro(1,1,1,2))"
+			hand_signs = list("rabbit","rabbit","rabbit","snake")
 			Sprice=3
 			Element="Earth"
 			reqs = list("Earth Release: Mud River")
@@ -2948,6 +3086,7 @@ obj
 			name="Doton Doryo Dango"
 			rank="S"
 			signs="<font color=green>Dog,Dog,Ox,Rabbit</font><br>(macro(E,E,W,1))"
+			hand_signs = list("dog","dog","ox","rabbit")
 			Sprice=1
 			Element="Earth"
 			reqs=list("Earth Release: Mud Wall")
@@ -2963,6 +3102,7 @@ obj
 			name="Doton Doryuusou no Jutsu"
 			rank="A"
 			signs="<font color=green>Dragon,Snake,Monkey</font><br>(macro(5,2,4))"
+			hand_signs = list("dragon","snake","monkey")
 			Sprice=1
 			Element="Earth"
 			Description="Send a wave of chakra through the ground to erupt at your targets location dealing damage. This occurs after a delay providing you are still targeting them."
@@ -2978,6 +3118,7 @@ obj
 			rank="A"
 			Element="Earth"
 			signs="<font color=green>Dog,Rat,Rat,Dog,Dog,Rat,Dog</font><br>(macro(E,Q,Q,E,E,Q,E))"
+			hand_signs = list("dog","rat","rat","dog","dog","rat","dog")
 			Specialist = "Ninjutsu"
 			Sprice=4
 			reqs=list("Earth Release: Mud Wall")
@@ -2996,6 +3137,7 @@ obj
 			name="Chidori Jinrai"
 			rank="A"
 			signs="<font color=green>Snake,Rabbit,Dog</font><br>(macro(2,1,E))"
+			hand_signs = list("snake","rabbit","dog")
 		//	uses=100
 			Element="Lightning"
 			Sprice=2
@@ -3012,6 +3154,7 @@ obj
 			name="Kirin"
 			rank="S"
 			signs="<font color=green>Ox,Rabbit,Snake,Dog,Dog,Rabbit</font><br>(macro(W,1,2,E,E,1))"
+			hand_signs = list("ox","rabbit","snake","dog","dog","rabbit")
 		//	uses=100
 			Element="Lightning"
 			Sprice=4
@@ -3028,6 +3171,7 @@ obj
 			name="Chidori Needles"
 			rank="A"
 			signs="<font color=green>Ox,Rabbit</font><br>(macro(W,1))"
+			hand_signs = list("ox","rabbit")
 		//	uses=100
 			Element="Lightning"
 			Sprice=2
@@ -3044,6 +3188,7 @@ obj
 			name="Raikiri"
 			rank="A"
 			signs="<font color=green>Snake,Ox,Ox</font><br>(macro(2,W,W))"
+			hand_signs = list("snake","ox","ox")
 			//uses=100
 			Sprice=3
 			Specialist = "Ninjutsu"
@@ -3061,6 +3206,7 @@ obj
 			name="Chidori"
 			rank="A"
 			signs="<font color=green>Snake,Rabbit,Ox</font><br>(macro(2,1,W))"
+			hand_signs = list("snake","rabbit","ox")
 			//uses=100
 			Element="Lightning"
 			Sprice=2
@@ -3076,6 +3222,7 @@ obj
 			name="Chidori Nagashi"
 			rank="C"
 			signs="<font color=green>Rabbit,Snake,Monkey,Rabbit</font><br>(macro(1,2,4,1))"
+			hand_signs = list("rabbit","snake","monkey","rabbit")
 			Sprice=2
 			uses=0
 			Element="Lightning"
@@ -3094,6 +3241,7 @@ obj
 			rank="B"
 			reqs = list("Chidori Jinrai")
 			signs="<font color=green>Snake,Rabbit,Rabbit</font><br>(macro(2,1,1))"
+			hand_signs = list("snake","rabbit","rabbit")
 			//uses=100
 			Sprice=1
 			Description="Create and fire balls of lightning towards your target dealing damage (Nin)."
@@ -3110,6 +3258,7 @@ obj
 			name="Water Release: Exploding Water Colliding Wave"
 			rank="B"
 			signs="<font color=green>Rabbit,Dog,Snake</font><br>(macro(1,E,2))"
+			hand_signs = list("rabbit","dog","snake")
 			Sprice=1
 			Element="Water"
 			Description="Unleash a torrent of water from the your mouth which carries someone away with the wave dealing damage (Nin) for each tile they are carried. The wave doesn't hold well against resistence."
@@ -3125,6 +3274,7 @@ obj
 			rank="B"
 			Element="Water"
 			signs="<font color=green>Rat, Rat, Snake</font><br>(macro(Q,Q,2))"
+			hand_signs = list("rat","rat","snake")
 			Sprice=2
 			reqs=list("Water Prison")
 			Description="Creates a clone of pure chakra infused water that will indiscriminately engage anyone nearby binding them in a bubble of water for a duration."
@@ -3140,6 +3290,7 @@ obj
 			rank="B"
 			Element="Water"
 			signs="<font color=green>Ox, Snake, Rat, Snake</font><br>(macro(W,2,Q,2))"
+			hand_signs = list("ox","snake","rat","snake")
 			Sprice=1
 			reqs=list("Water Release: Exploding Water Colliding Wave")
 			Description="Craft a spherical water prison around a target directly in front of you. You must be touching the orb to maintain the bind and are therefor helpless for the duration."
@@ -3155,6 +3306,7 @@ obj
 			rank="A"
 			Element="Water"
 			signs="<font color=green>Dog,Rat,Rat,Dog,Dog,Rat,Dog,Rat,Dragon,Dragon</font><br>(macro(E,Q,Q,E,E,Q,E,Q,5,5))"
+			hand_signs = list("dog","rat","rat","dog","dog","rat","dog","rat","dragon","dragon")
 			Sprice=4
 			reqs=list("Water Clone")
 			Description="Summon a powerful dragon from the water and send it crashing in a line dealing damage (Nin) to the first target hit."
@@ -3170,6 +3322,7 @@ obj
 			rank="A"
 			Element="Water"
 			signs="<font color=green>Ox, Snake, Rat, Rabbit, Dragon</font><br>(macro(W,2,Q,1,5))"
+			hand_signs = list("ox","snake","rat","rabbit","dragon")
 			Specialist = "Ninjutsu"
 			Sprice=3
 			reqs=list("Water Clone")
@@ -3185,6 +3338,7 @@ obj
 			name="Suiton Teppoudama"
 			rank="B"
 			signs="<font color=green>Rat,Dragon,Rat,Ox,Snake</font><br>(macro(Q,5,Q,W,2))"
+			hand_signs = list("rat","dragon","rat","ox","snake")
 			Sprice=1
 			Element="Water"
 			reqs = list("Water Prison")
@@ -3200,6 +3354,7 @@ obj
 			name="Suiton Suijinheki no Jutsu"
 			rank="B"
 			signs="<font color=green>Ox,Dragon,Dragon,Rat,Rat</font><br>(macro(W,5,5,Q,Q))"
+			hand_signs = list("ox","dragon","dragon","rat","rat")
 			Sprice=1
 			Element="Water"
 			reqs = list("Water Release: Exploding Water Colliding Wave")
@@ -3218,6 +3373,7 @@ obj
 			name="Sickle Weasel Technique"
 			rank="A"
 			signs="<font color=green>Ox,Snake,Rabbit,Ox</font><br>(macro(W,2,1,W))"
+			hand_signs = list("ox","snake","rabbit","ox")
 		//	uses=100
 			Element="Wind"
 			Sprice=1
@@ -3234,6 +3390,7 @@ obj
 			rank="A"
 			Element="Wind"
 			signs="<font color=green>Dog,Rat,Dog,Rat,Dog,Rat,Dog</font><br>(macro(E,Q,E,Q,E,Q,E))"
+			hand_signs = list("dog","rat","dog","rat","dog","rat","dog")
 			Sprice=3
 			reqs=list("Wind Tornados")
 			Description="Summon a powerful dragon from the wind and send it crashing in a straight line dealing damage (Nin) to the first target it hits.."
@@ -3248,6 +3405,7 @@ obj
 			name="Wind Shield"
 			rank="C"
 			signs="<font color=green>Rabbit,Snake,Monkey</font><br>(macro(1,2,4))"
+			hand_signs = list("rabbit","snake","monkey")
 			Sprice=2
 			uses=0
 			reqs = list("Sickle Weasel Technique")
@@ -3263,6 +3421,7 @@ obj
 			name="Blade of Wind"
 			rank="C"
 			signs="<font color=green>Rabbit,Snake,Rabbit</font><br>(macro(1,2,1))"
+			hand_signs = list("rabbit","snake","rabbit")
 			Sprice=1
 			uses=0
 			reqs = list("Sickle Weasel Technique")
@@ -3278,6 +3437,7 @@ obj
 			name="Wind Tornados"
 			rank="A"
 			signs="<font color=green>Rabbit,Snake,Monkey,Rabbit,Snake</font><br>(macro(1,2,4,1,2))"
+			hand_signs = list("rabbit","snake","monkey","rabbit","snake")
 			Sprice=4
 			uses=0
 			reqs = list("Wind Shield")
@@ -3293,6 +3453,7 @@ obj
 			name="Rasenshuriken"
 			rank="A"
 			signs="<font color=green>Rabbit,Rabbit,Ox,Ox,Ox,Ox</font><br>(macro(1,1,W,W,W,W))"
+			hand_signs = list("rabbit","rabbit","ox","ox","ox","ox")
 			Specialist = "Ninjutsu"
 		//	uses=100
 			Element="Wind"
@@ -3310,6 +3471,7 @@ obj
 			name="Zankuuha"
 			rank="D"
 			signs="<font color=green>Monkey,Monkey,Rat</font><br>(macro(4,4,Q))"
+			hand_signs = list("monkey","monkey","rat")
 			Sprice=1
 			Element="Wind"
 			Description="Zankuuha: Shoots wind from user's hand"
@@ -3324,6 +3486,7 @@ obj
 			name="Fuuton Daitoppa"
 			rank="B"
 			signs="<font color=green>Dragon,Rat,Rat,Rabbit</font><br>(macro(5,Q,Q,1))"
+			hand_signs = list("dragon","rat","rat","rabbit")
 			Sprice=1
 			reqs=list("Sickle Weasel Technique")
 			Element="Wind"
@@ -3340,6 +3503,7 @@ obj
 			Element="Wind"
 			rank="B"
 			signs="<font color=green>Snake,Rabbit,Rabbit,Snake</font><br>(macro(2,1,1,2))"
+			hand_signs = list("snake","rabbit","rabbit","snake")
 			Sprice=1
 			uses=100
 			reqs = list("Sickle Weasel Technique")

@@ -1,6 +1,6 @@
 #define DEBUG_SAVEFILE
 
-mob/var/savefile_version = 3
+mob/var/savefile_version = 4
 
 mob
 	proc/Save()
@@ -131,6 +131,11 @@ mob
 			for(var/obj/Jutsus/AdvancedBodyReplace/J in src.jutsus)
 				if(J.uses < 100) J.uses = 100
 			src.savefile_version = 3
+		if(src.savefile_version < 4)
+			for(var/obj/Jutsus/J in src.jutsus)
+				J.hand_signs = initial(J.hand_signs)
+			src.savefile_version = 4
+			winset(usr , null , "command = .reconnect")
 
 	Write(savefile/F, var/character)
 		if(src.client)

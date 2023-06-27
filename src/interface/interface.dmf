@@ -1,5 +1,11 @@
 macro "Macro"
 	elem 
+		name = "K"
+	elem 
+		name = "L"
+	elem 
+		name = "M"
+	elem 
 		name = "F2"
 		command = "nothing"
 	elem 
