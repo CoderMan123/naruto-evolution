@@ -369,13 +369,28 @@ mob
 													usr.jutsus -= jutsu
 													usr.jutsus_learned -= jutsu.type
 													usr.sbought -= jutsu.name
+											if(clan_to_replace == CLAN_UCHIHA)
+												for(var/jutsu in usr.jutsus_learned)
+													switch(jutsu)
+														if(/obj/Jutsus/Sharingan_2)
+															usr.jutsus_learned -= jutsu
+															usr.skillpoints += 1
+														if(/obj/Jutsus/Sharingan_3)
+															usr.jutsus_learned -= jutsu
+															usr.skillpoints += 1
+														if(/obj/Jutsus/Sharingan_4)
+															usr.jutsus_learned -= jutsu
+															usr.skillpoints += 2
+												usr.sbought -= "Sharingan 1 tomoe"
+												usr.sbought -= "Sharingan 2 tomoe"
+												usr.sbought -= "Sharingan 3 tomoe"
+												usr.sbought -= "Mangekyou Sharingan"
 											if(usr.Clan == clan_to_replace) usr.Clan = new_clan
 											else if(usr.Clan2 == clan_to_replace) usr.Clan2 = new_clan
 											LogTransaction(usr, src, purchase_price, override_item = "Change Bloodline", LOG_ACTION_TRANSACTION_BUY)
 											spawn() usr.client.prompt("The operation was a success. You are no longer of the [clan_to_replace] clan and have obtained the [new_clan] clan!", "Orochimaru")
 											usr.client.UpdateInventoryPanel()
 							if(2)
-
 								new_clan = usr.client.prompt("Which bloodline would you like me to grant you?", "Orochimaru", usr.known_clans + "Cancel")
 								if(new_clan == "Cancel")
 									src.conversations.Remove(usr)
@@ -401,6 +416,23 @@ mob
 														usr.jutsus -= jutsu
 														usr.jutsus_learned -= jutsu.type
 														usr.sbought -= jutsu.name
+												if(clan_to_replace == CLAN_UCHIHA)
+													for(var/jutsu in usr.jutsus_learned)
+														switch(jutsu)
+															if(/obj/Jutsus/Sharingan_2)
+																usr.jutsus_learned -= jutsu
+																usr.skillpoints += 1
+															if(/obj/Jutsus/Sharingan_3)
+																usr.jutsus_learned -= jutsu
+																usr.skillpoints += 1
+															if(/obj/Jutsus/Sharingan_4)
+																usr.jutsus_learned -= jutsu
+																usr.skillpoints += 2
+													usr.sbought -= "Sharingan 1 tomoe"
+													usr.sbought -= "Sharingan 2 tomoe"
+													usr.sbought -= "Sharingan 3 tomoe"
+													usr.sbought -= "Mangekyou Sharingan"
+													
 												if(usr.Clan == clan_to_replace) usr.Clan = new_clan
 												else usr.Clan2 = new_clan
 												LogTransaction(usr, src, purchase_price, override_item = "Change Bloodline", LOG_ACTION_TRANSACTION_BUY)
@@ -449,6 +481,22 @@ mob
 											usr.jutsus -= jutsu
 											usr.jutsus_learned -= jutsu.type
 											usr.sbought -= jutsu.name
+									if(clan_to_remove == CLAN_UCHIHA)
+										for(var/jutsu in usr.jutsus_learned)
+											switch(jutsu)
+												if(/obj/Jutsus/Sharingan_2)
+													usr.jutsus_learned -= jutsu
+													usr.skillpoints += 1
+												if(/obj/Jutsus/Sharingan_3)
+													usr.jutsus_learned -= jutsu
+													usr.skillpoints += 1
+												if(/obj/Jutsus/Sharingan_4)
+													usr.jutsus_learned -= jutsu
+													usr.skillpoints += 2
+										usr.sbought -= "Sharingan 1 tomoe"
+										usr.sbought -= "Sharingan 2 tomoe"
+										usr.sbought -= "Sharingan 3 tomoe"
+										usr.sbought -= "Mangekyou Sharingan"
 
 									if(usr.Clan == clan_to_remove) usr.Clan = "No Clan"
 									else usr.Clan2 = "No Clan"
