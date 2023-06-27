@@ -1,4 +1,10 @@
 obj
+	var
+		signs
+		rank
+		uses=0
+		IsGate = 0
+		
 	Jutsus
 		layer = 10000
 		var/give_to_guards = 0

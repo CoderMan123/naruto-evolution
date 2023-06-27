@@ -105,6 +105,15 @@ proc
 		OnTick()
 			..()
 
+	using_handseals
+		Ticker()
+			var/mob/m = src.mob
+			..()
+			if(!CheckState(m, new/state/using_handseals))
+				m.hand_seals_used = list()
+				m.client.images = 0
+				m.Target_ReAdd()
+
 	punching
 
 	throwing

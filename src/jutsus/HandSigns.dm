@@ -10,37 +10,7 @@ mob
 	//	UchihaJ=0
 		tmp
 			copy
-			first
-			second
-			third
-			fourth
-			fifth
-			sixth
-			seventh
-			eighth
-			nineth
-			tenth
-			eleventh
-			twelveth
-			rabbit=0
-			rat=0
-			dog=0
-			horse=0
-			dragon=0
-			monkey=0
-			ox=0
-			snake=0
-			HandSeals
-			SealCount
-			HandSigning
-			Spaced
-			SealCounting = 0
-obj
-	var
-		signs
-		rank
-		uses=0
-		IsGate = 0
+		
 //mob
 //	proc
 //		Quake_Effect(mob/M,duration,strength=1)
@@ -572,38 +542,3 @@ obj
 				
 
 
-obj
-	HSigns
-		icon='HandSigns.dmi'
-		dog
-			icon_state = "dog"
-			layer = 20
-			screen_loc = "17,20"
-		rat
-			icon_state = "rat"
-			layer = 20
-			screen_loc = "17,20"
-		rabbit
-			icon_state = "rabbit"
-			layer = 20
-			screen_loc = "17,20"
-		horse
-			icon_state = "horse"
-			layer = 20
-			screen_loc = "17,20"
-		ox
-			icon_state = "ox"
-			layer = 20
-			screen_loc = "17,20"
-		snake
-			icon_state = "snake"
-			layer = 20
-			screen_loc = "17,20"
-		monkey
-			icon_state = "monkey"
-			layer = 20
-			screen_loc = "17,20"
-		dragon
-			icon_state = "dragon"
-			layer = 20
-			screen_loc = "17,20"

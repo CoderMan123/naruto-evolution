@@ -1,6 +1,6 @@
 mob
-	var/hand_seals_used = list()
-
+	var
+		hand_seals_used = list()
 
 	proc
 		Activate_Handseals()
@@ -20,8 +20,6 @@ mob
 						for(var/n in jutsu.hand_signs)
 							jutsu_seals += "[n]"
 						if(jutsu_seals == hand_seals)
-							src << hand_seals + "(handseals)"
-							src << jutsu_seals + "([jutsu.name])"
 							spawn() src.doslot(jutsu.name)
 							if(genin_exam_participants.Find(src))
 								if(!genin_exam_practical_score[src]) genin_exam_practical_score[src] = 1
@@ -37,7 +35,6 @@ mob
 		Handseal_Pressed(Seal as text)
 			set instant = 1
 			set hidden = 1
-			src << Seal
 			if(!src.dead && !src.multisized && !CheckState(src, new/state/cant_attack) && !CheckState(src, new/state/swimming))
 				if(length(hand_seals_used) < 12)
 					src.hand_seals_used += "[Seal]"
@@ -51,6 +48,40 @@ mob
 						var/obj/HSign = image('HandSigns.dmi',usr,icon_state="[Seal]",layer=99)
 						HSign.pixel_y=98
 						usr<<HSign
-					//add timer that removes handseals after a duration
+					AddState(usr, new/state/using_handseals, 40)
 
-
+obj
+	HSigns
+		icon='HandSigns.dmi'
+		dog
+			icon_state = "dog"
+			layer = 20
+			screen_loc = "17,20"
+		rat
+			icon_state = "rat"
+			layer = 20
+			screen_loc = "17,20"
+		rabbit
+			icon_state = "rabbit"
+			layer = 20
+			screen_loc = "17,20"
+		horse
+			icon_state = "horse"
+			layer = 20
+			screen_loc = "17,20"
+		ox
+			icon_state = "ox"
+			layer = 20
+			screen_loc = "17,20"
+		snake
+			icon_state = "snake"
+			layer = 20
+			screen_loc = "17,20"
+		monkey
+			icon_state = "monkey"
+			layer = 20
+			screen_loc = "17,20"
+		dragon
+			icon_state = "dragon"
+			layer = 20
+			screen_loc = "17,20"
