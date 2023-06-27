@@ -360,7 +360,7 @@ mob
 
 
 						// Akatsuki Death
-						if(src != attacker && src.village == VILLAGE_AKATSUKI && zetsu_event_active)
+						if(src != attacker && src.village == VILLAGE_AKATSUKI && zetsu_event_active && !istype(src, /mob/npc))
 							var/squad/squad = attacker.GetSquad()
 							if(attacker.village == VILLAGE_LEAF || attacker.village == VILLAGE_SAND)
 								Lootdrop("AkatsukiClans", attacker, 5)
@@ -390,7 +390,7 @@ mob
 
 
 						// Villager Death
-						if(src != attacker && src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
+						if(src != attacker && src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND && !istype(src, /mob/npc))
 							var/squad/squad = attacker.GetSquad()
 							if(attacker.village == VILLAGE_AKATSUKI && zetsu_event_active || istype(attacker, /mob/npc/combat/white_zetsu))
 								vill_lives_left--
@@ -411,7 +411,7 @@ mob
 
 
 						// Missing-Nin Kill
-						if(src != attacker && attacker.village == VILLAGE_MISSING_NIN && zetsu_event_active)
+						if(src != attacker && attacker.village == VILLAGE_MISSING_NIN && zetsu_event_active && !istype(src, /mob/npc))
 							if(src.village == VILLAGE_AKATSUKI || src.village == VILLAGE_LEAF || src.village == VILLAGE_SAND)
 								if(src.village == VILLAGE_AKATSUKI)
 									akat_lives_left--
