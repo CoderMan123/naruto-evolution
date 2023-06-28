@@ -1,12 +1,11 @@
 [![Build](https://github.com/illusivebIair/naruto-evolution/actions/workflows/build.yml/badge.svg)](https://github.com/illusivebIair/naruto-evolution/actions/workflows/build.yml)
 [![Release](https://github.com/illusivebIair/naruto-evolution/actions/workflows/release.yml/badge.svg)](https://github.com/illusivebIair/naruto-evolution/actions/workflows/release.yml)
+[![License](https://img.shields.io/github/license/IllusiveBIair/naruto-evolution)](https://github.com/IllusiveBIair/naruto-evolution/blob/main/LICENSE.md)
 
 
 # Naruto Evolution
 
 A fan inspired online game based on the Naruto Universe.
-
-(Licensed under AGPL-3.0-or-later)
 
 ## Setup Development Environment
 
