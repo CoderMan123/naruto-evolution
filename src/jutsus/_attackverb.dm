@@ -212,7 +212,7 @@ mob
 					damage += (damage * 0.1) * attacker.bonesword
 					target.Bleed()
 				target.DealDamage(damage, attacker, "TaiOrange",0,0,1)
-				Bind(target, 0.5)
+				if(!target.dodge) Bind(target, 0.5)
 				if(loc.loc:Safe!=1) attacker.LevelStat("Taijutsu", 10*punchstatexp)
 
 		kick(var/mob/attacker , var/mob/target , var/damage , var/is_dodged, var/is_hit)
@@ -235,7 +235,7 @@ mob
 					target.dir = get_dir(target,attacker)
 					step_to(attacker,target,1)
 				target.DealDamage(damage, attacker, "TaiOrange",0,0,1)
-				Bind(target, 0.5)
+				if(!target.dodge) Bind(target, 0.5)
 				if(loc.loc:Safe!=1) attacker.LevelStat("Taijutsu", 10*punchstatexp)
 
 		sand_shield_attack()
