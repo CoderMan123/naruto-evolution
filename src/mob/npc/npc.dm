@@ -724,6 +724,7 @@ mob
 			usr.precisionexp = initial(usr.precisionexp)
 			usr.maxprecisionexp = initial(usr.maxprecisionexp)
 			usr.statpoints = initial(usr.statpoints)
+			usr.statpoints_spent = initial(usr.statpoints_spent)
 			usr.skillpoints = initial(usr.skillpoints)
 			usr.rank = RANK_ACADEMY_STUDENT
 			usr.last_hotspring_time = initial(usr.last_hotspring_time)
