@@ -346,6 +346,7 @@ mob
 		src.density=1
 		src.sight=0
 		src.invisibility=0
+		src.client.UpdateStatTotals()
 
 		if(!src.loc)
 			if(src.Tutorial==7) src.loc=src.MapLoadSpawn()
