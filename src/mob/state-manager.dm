@@ -220,6 +220,8 @@ proc
 			..()
 			walk(m, 0)
 			if(!CheckState(m, new/state/swimming))m.icon_state=""
+	
+	combo_cooldown
 
 	knockback_immune
 

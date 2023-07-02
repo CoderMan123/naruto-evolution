@@ -14,7 +14,7 @@ mob
 			var/is_hit
 			var/combo_total = 1
 
-			
+			if(!CheckState(src, new/state/combo_cooldown)) src.combo_pos = 1
 
 			if(src.Specialist == SPECIALIZATION_TAIJUTSU)
 				attack_speed = src.attkspeed - 0.1
@@ -128,13 +128,15 @@ mob
 					step(c_target,attacker.dir)
 					c_target.dir = get_dir(c_target,attacker)
 					step_to(attacker,c_target,1)
-			
+
 			if(combo_total <= attacker.combo_pos)
 				attacker.combo_pos = 1
 				AddState(attacker, new/state/punching, (attack_speed * 3))
 			else
 				attacker.combo_pos ++
-				AddState(attacker, new/state/punching, attack_speed)			
+				AddState(attacker, new/state/punching, attack_speed)
+
+			AddState(src, new/state/combo_cooldown, 20)
 
 			if(CheckState(attacker, new/state/sand_shield))
 				attacker.sand_shield_attack()
