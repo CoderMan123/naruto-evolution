@@ -2,6 +2,9 @@ mob
 	proc
 		Camellia_Dance()
 			for(var/obj/Jutsus/Camellia_Dance/J in src.jutsus)
+				if(src.fighting_style && src.fighting_style != "bone sword")
+					src << output("<font color=#C0C0C0><b>You can only have one fighting style active at once. You are currently using [src.fighting_style].","Action.Output")
+					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Agility",((J.maxcooltime*3/20)*jutsustatexp))
 					if(loc.loc:Safe!=1) src.LevelStat("Precision",((J.maxcooltime*3/20)*jutsustatexp))
@@ -10,11 +13,8 @@ mob
 							J.exp+=rand(2,5)
 							J.Levelup()
 					flick("jutsu",src)
-					var/mob/c_target=src.Target_Get(TARGET_MOB)
-					if(c_target)
-						step_towards(src, c_target)
-						src.dir = get_dir(src.loc, c_target.loc)
 					if(src.bonesword==0)
+						src.fighting_style = "bone sword"
 						src.bonesword = J.level
 						src.overlays+='Camellia.dmi'
 						src.overlays+=image('CamB.dmi',pixel_y=-32)
@@ -40,6 +40,7 @@ mob
 						src.overlays-=image('CamL.dmi',pixel_x=-32)
 						src.overlays-=image('CamR.dmi',pixel_x=32)
 						src.overlays-=image('CamT.dmi',pixel_y=32)
+						src.fighting_style = ""
 		Bone_Drill()
 			for(var/obj/Jutsus/Bone_Drill/J in src.jutsus)
 				if(src.PreJutsu(J))

@@ -1,10 +1,7 @@
 macro "Macro"
 	elem 
-		name = "K"
-	elem 
-		name = "L"
-	elem 
-		name = "M"
+		name = "K+REP"
+		command = "basic-attack"
 	elem 
 		name = "F2"
 		command = "nothing"

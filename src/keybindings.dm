@@ -110,7 +110,7 @@ client
 				return
 
 			else if(hotkey_basic_attack == input) 
-				src.mob.Basic_Attack()
+				src.mob.basic_attack()
 				if(input in keys_held) src.keybind_call(input)
 				return
 			

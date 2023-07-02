@@ -10,6 +10,7 @@ mob
 				src.Gates = null
 				src.GateTime = 0
 				src.healthregenmod=1
+				src.fighting_style = ""
 				ResetBase()
 				//src.icon ='WhiteMBase.dmi'
 				for(var/obj/Jutsus/EightGates/J in src.jutsus)
@@ -39,6 +40,9 @@ mob
 		// Check if gates can be used and pass the jutsu's level.
 		Gates()
 			for(var/obj/Jutsus/EightGates/J in src.jutsus)
+				if(src.fighting_style && src.fighting_style != "first gate" && src.fighting_style != "second gate" && src.fighting_style != "third gate" && src.fighting_style != "fourth gate" && src.fighting_style != "fifth gate")
+					src << output("<font color=#C0C0C0><b>You can only have one fighting style active at once. You are currently using [src.fighting_style].","Action.Output")
+					return
 				if(src.PreJutsu(J))
 					src.GatesIncrease(J.level)
 
@@ -110,6 +114,7 @@ mob
 					O2.layer=MOB_LAYER+1
 					O2.pixel_x=-34
 					O2.icon_state="smoke"
+					src.fighting_style = "first gate"
 					spawn(5)
 						if(O2)
 							del(O2)
@@ -123,6 +128,7 @@ mob
 					O2.pixel_x = -34
 					O2.layer = MOB_LAYER+1
 					O2.icon_state = "smoke2"
+					src.fighting_style = "second gate"
 					spawn(5)
 						if(O2)
 							del(O2)
@@ -134,6 +140,7 @@ mob
 					O2.pixel_x=-34
 					O2.icon = 'Dust.dmi'
 					O2.icon_state="smoke3"
+					src.fighting_style = "third gate"
 					spawn(5)
 						if(O2)
 							del(O2)
@@ -150,6 +157,7 @@ mob
 					O2.pixel_x = -34
 					O2.loc = loc
 					O2.icon_state = "smoke3"
+					src.fighting_style = "fourth gate"
 					spawn(5)
 						if(O2)
 							del(O2)
@@ -166,6 +174,7 @@ mob
 					O2.layer = MOB_LAYER+1
 					O2.loc = loc
 					O2.icon_state = "smokemax"
+					src.fighting_style = "fifth gate"
 					spawn(5)
 						if(O2)
 							del(O2)

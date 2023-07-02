@@ -2,13 +2,18 @@ mob
 	proc
 		Mystical_Palms()
 			for(var/obj/Jutsus/Mystical_Palms/J in src.jutsus)
+				if(src.fighting_style && src.fighting_style != "mystical palms")
+					src << output("<font color=#C0C0C0><b>You can only have one fighting style active at once. You are currently using [src.fighting_style].","Action.Output")
+					return
 				if(mystical_palms)
 					src<<output("You deactivate your mystical palms.","Action.Output")
 					src.mystical_palms=0
+					src.fighting_style = ""
 					return
 				if(src.PreJutsu(J))
 					if(loc.loc:Safe!=1) src.LevelStat("Ninjutsu",((J.maxcooltime*3/10)*jutsustatexp))
 					if(J.level<4) if(loc.loc:Safe!=1) J.exp+=jutsumastery*(J.maxcooltime/20); J.Levelup()
+					src.fighting_style = "mystical palms"
 					src.mystical_palms=1
 					src<<output("You activate mystical palms.","Action.Output")
 					while(src && mystical_palms && chakra>0)

@@ -10,11 +10,12 @@ mob
 			else
 				attack_speed = src.attkspeed + 0.05
 
+			
+
 			if(CheckState(src, new/state/knocked_down)) return 0
 
-			if(CheckState(src, new/state/cant_attack) || CheckState(src, new/state/punching))
+			if(CheckState(src, new/state/cant_attack) || CheckState(src, new/state/punching)) return
 
-				return
 			if(src.multisized==1)//multisizestuff
 				return
 
@@ -56,7 +57,7 @@ mob
 						if(loc.loc:Safe!=1) src.LevelStat("Agility",round(rand(4,11)*trainingexp))
 			if(src.likeaclone)
 				var/mob/Clones/SC=src.likeaclone
-				if(!CheckState(SC, new/state/cant_attack))
+				if(!CheckState(SC, new/state/cant_attack) && !CheckState(SC, new/state/punching))
 					if(!CheckState(SC, new/state/punching))
 						SC.attkspeed = src.attkspeed
 						AddState(SC, new/state/punching, SC.attkspeed)

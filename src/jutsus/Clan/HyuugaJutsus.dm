@@ -336,12 +336,16 @@ mob
 					RemoveState(src, f, STATE_REMOVE_REF)
 		Byakugan()
 			for(var/obj/Jutsus/Byakugan/J in src.jutsus)
+				if(src.fighting_style && src.fighting_style != "byakugan")
+					src << output("<font color=#C0C0C0><b>You can only have one fighting style active at once. You are currently using [src.fighting_style].","Action.Output")
+					return
 				if(src.byakugan)
 					for(var/image/i in client.images)if(i.name=="ByakuganCircle")del(i)
 					src.byakugan=0
 					src << output("<font color=#C0C0C0><b>You deactivate your Byakugan","Action.Output")
 					src.client.eye=src
 					src.client:perspective = EDGE_PERSPECTIVE
+					src.fighting_style = ""
 					return
 				if(!src.byakugan)
 					if(src.PreJutsu(J))
@@ -351,6 +355,7 @@ mob
 							if(loc.loc:Safe!=1) 
 								J.exp+=jutsumastery*(J.maxcooltime/20)
 								J.Levelup()
+						src.fighting_style = "byakugan"
 						flick("jutsuse",src)
 						view(src)<<output("<font color=#C0C0C0><b>[src] Says: Byakugan!","Action.Output")
 						var/obj/A = new/obj(usr.loc)

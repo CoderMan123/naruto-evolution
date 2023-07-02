@@ -346,7 +346,7 @@ mob
 							if(prob(10))
 								if(!CheckState(src, new/state/cant_move)) step_rand(src)
 							else if(!CheckState(src, new/state/cant_move)) walk_towards(src, c_target, src.movementspeed)
-							src.Basic_Attack()
+							src.basic_attack()
 							sleep(0.1)
 
 					proc/Retreat(var/dist)
