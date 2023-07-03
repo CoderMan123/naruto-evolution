@@ -160,6 +160,9 @@ mob
 					attacker.PlayAudio('LPunchHIt.ogg', output = AUDIO_HEARERS)
 					attacker.PlayAudio('Down_Nornal.wav', output = AUDIO_HEARERS)
 					attacker.gate_fx()
+				if(CheckState(src, new/state/Iron_Fists) && !CheckState(src, new/state/Iron_Fist_Punching_Right) && !CheckState(src, new/state/Iron_Fist_Grabbing_Right) && !CheckState(src, new/state/Iron_Fist_Grabbed_Right))
+					flick("trans", src.right_iron_fist)
+					AddState(src, new/state/Iron_Fist_Punching_Right, 3)
 			else
 				flick("punchl", attacker)
 				attacker.Hand = "right"
@@ -171,6 +174,9 @@ mob
 					attacker.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 					attacker.PlayAudio('Down_Nornal.wav', output = AUDIO_HEARERS)
 					attacker.gate_fx()
+				if(CheckState(src, new/state/Iron_Fists) && !CheckState(src, new/state/Iron_Fist_Punching_Left) && !CheckState(src, new/state/Iron_Fist_Grabbing_Left) && !CheckState(src, new/state/Iron_Fist_Grabbed_Left))
+					flick("trans", src.left_iron_fist)
+					AddState(src, new/state/Iron_Fist_Punching_Left, 3)
 			
 			var/byakugan_level
 			if(attacker.byakugan)
