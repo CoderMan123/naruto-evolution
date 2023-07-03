@@ -1,19 +1,24 @@
+
+mob
+	verb
+		View_Description(obj/Jutsus/J in usr.jutsus)
+			//set category = null
+			usr.client.prompt(J.Description, J.name)
 obj
 	var
 		signs
 		rank
 		uses=0
 		IsGate = 0
+	
+	
 		
 	Jutsus
 		layer = 10000
 		var/give_to_guards = 0
 		var/hand_signs = list()
 
-		verb
-			View_Description(obj/Jutsu/J in usr.jutsus)
-				//set category = null
-				usr.client.prompt(J.Description, J.name)
+		
 
 //NonClan
 		Chakra_Infusion_Training//chakrainfusionstuff
