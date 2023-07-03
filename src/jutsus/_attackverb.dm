@@ -166,7 +166,7 @@ mob
 			else
 				flick("punchl", attacker)
 				attacker.Hand = "right"
-				if(!is_dodged && is_hit && !attacker.byakugan && !attacker.mystical_palms && !attacker. && !attacker.Gates) attacker.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
+				if(!is_dodged && is_hit && !attacker.byakugan && !attacker.mystical_palms && !attacker.bonesword && !attacker.Gates) attacker.PlayAudio('KickHit.ogg', output = AUDIO_HEARERS)
 				else if(attacker.byakugan && is_hit) attacker.PlayAudio('SkillDam_ThrowSuriken3.wav', output = AUDIO_HEARERS)
 				else if(attacker.mystical_palms && is_hit) attacker.PlayAudio('SharpHit_Short.wav', output = AUDIO_HEARERS)
 				else if(attacker.bonesword && is_hit) attacker.PlayAudio('SharpHit_Short2.wav', output = AUDIO_HEARERS)
