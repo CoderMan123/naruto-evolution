@@ -133,8 +133,6 @@ proc/ChuninExamStart(var/minutes_till_start, var/minutes_till_forest,)
 			var/obj/O = new/obj/ChuuninExam/Scrolls/HeavenScroll
 			O.loc = m
 			count=0
-		m.loc = pick(block(locate(73,10,8),locate(198,74,8)))
-	
 	sleep(600*5)
 	world<<output("<b><center>The Second Part of the Chuunin exam is now over!</b></center>","Action.Output")
 	ChuuninExam="Tournament"

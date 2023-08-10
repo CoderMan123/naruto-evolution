@@ -682,7 +682,13 @@ mob
 						village = VILLAGE_SOUND
 						New()
 							..()
+							src.loc = pick(block(locate(73,10,8),locate(198,74,8)))
 							src.overlays += 'HeadBandSound.dmi'
+							spawn()
+								while(src)
+									sleep(10)
+									if(ChuuninExam != "Forest of Death")
+										del(src)			
 
 			white_zetsu
 				name = "White Zetsu"
