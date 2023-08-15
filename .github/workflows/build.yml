@@ -21,4 +21,4 @@ jobs:
           lfs: true
 
       - name: Build application
-        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} ghcr.io/douglasparker/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
+        run: docker run -v ${{ github.workspace }}:${{ github.workspace }} registry.douglasparker.dev/byond/byond:$BYOND_VERSION DreamMaker "${{ github.workspace }}/naruto-evolution.dme"
