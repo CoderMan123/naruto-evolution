@@ -310,7 +310,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("Z")
+					h.SetName("[usr.client.hotkey_hotslot1]")
 
 					usr.hotslot1 = src.name
 					usr.HotSlotSave["HotSlot1"] = "[src.icon_state]"
@@ -323,7 +323,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("X")
+					h.SetName("[usr.client.hotkey_hotslot2]")
 
 					usr.hotslot2 = src.name
 					usr.HotSlotSave["HotSlot2"] = "[src.icon_state]"
@@ -336,7 +336,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("C")
+					h.SetName("[usr.client.hotkey_hotslot3]")
 
 					usr.hotslot3 = src.name
 					usr.HotSlotSave["HotSlot3"] = "[src.icon_state]"
@@ -349,7 +349,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("V")
+					h.SetName("[usr.client.hotkey_hotslot4]")
 
 					usr.hotslot4 = src.name
 					usr.HotSlotSave["HotSlot4"] = "[src.icon_state]"
@@ -362,7 +362,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("B")
+					h.SetName("[usr.client.hotkey_hotslot5]")
 
 					usr.hotslot5 = src.name
 					usr.HotSlotSave["HotSlot5"] = "[src.icon_state]"
@@ -375,7 +375,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("N")
+					h.SetName("[usr.client.hotkey_hotslot6]")
 
 					usr.hotslot6 = src.name
 					usr.HotSlotSave["HotSlot6"] = "[src.icon_state]"
@@ -388,7 +388,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F7")
+					h.SetName("[usr.client.hotkey_hotslot7]")
 
 					usr.hotslot7 = src.name
 					usr.HotSlotSave["HotSlot7"] = "[src.icon_state]"
@@ -401,7 +401,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F8")
+					h.SetName("[usr.client.hotkey_hotslot8]")
 
 					usr.hotslot8 = src.name
 					usr.HotSlotSave["HotSlot8"] = "[src.icon_state]"
@@ -414,7 +414,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F9")
+					h.SetName("[usr.client.hotkey_hotslot9]")
 
 					usr.hotslot9 = src.name
 					usr.HotSlotSave["HotSlot9"] = "[src.icon_state]"
@@ -427,7 +427,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F10")
+					h.SetName("[usr.client.hotkey_hotslot10]")
 
 					usr.hotslot10 = src.name
 					usr.HotSlotSave["HotSlot10"] = "[src.icon_state]"
@@ -440,7 +440,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F11")
+					h.SetName("[usr.client.hotkey_hotslot11]")
 
 					usr.hotslot11 = src.name
 					usr.HotSlotSave["HotSlot11"] = "[src.icon_state]"
@@ -453,7 +453,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F12")
+					h.SetName("[usr.client.hotkey_hotslot12]")
 
 					usr.hotslot12 = src.name
 					usr.HotSlotSave["HotSlot12"] = "[src.icon_state]"
@@ -466,7 +466,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F1")
+					h.SetName("[usr.client.hotkey_hotslot13]")
 
 					usr.hotslot13 = src.name
 					usr.HotSlotSave["HotSlot13"] = "[src.icon_state]"
@@ -479,7 +479,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F2")
+					h.SetName("[usr.client.hotkey_hotslot14]")
 
 					usr.hotslot14 = src.name
 					usr.HotSlotSave["HotSlot14"] = "[src.icon_state]"
@@ -492,7 +492,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F3")
+					h.SetName("[usr.client.hotkey_hotslot15]")
 
 					usr.hotslot15 = src.name
 					usr.HotSlotSave["HotSlot15"] = "[src.icon_state]"
@@ -505,7 +505,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F4")
+					h.SetName("[usr.client.hotkey_hotslot16]")
 
 					usr.hotslot16 = src.name
 					usr.HotSlotSave["HotSlot16"] = "[src.icon_state]"
@@ -518,7 +518,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F5")
+					h.SetName("[usr.client.hotkey_hotslot17]")
 
 					usr.hotslot17 = src.name
 					usr.HotSlotSave["HotSlot17"] = "[src.icon_state]"
@@ -531,7 +531,7 @@ obj
 					var/obj/HotSlots/h = H
 					h.overlays = null
 					h.overlays += I
-					h.SetName("F6")
+					h.SetName("[usr.client.hotkey_hotslot18]")
 
 					usr.hotslot18 = src.name
 					usr.HotSlotSave["HotSlot18"] = "[src.icon_state]"
