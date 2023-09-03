@@ -10,7 +10,7 @@ mob
 	//	UchihaJ=0
 		tmp
 			copy
-		
+
 //mob
 //	proc
 //		Quake_Effect(mob/M,duration,strength=1)
@@ -118,9 +118,8 @@ obj
 								jutsu.owner=usr.ckey
 
 							else
-							/*	if(src.name=="Tsukuyomi"||src.name=="Amaterasu"||src.name=="Kamui"||src.name=="Susanoo"||src.name=="Eternal Mangekyou Sharingan")
-									usr.UchihaJ++*/
-								if(src.sharin<>0 && src.sharin<>1)
+								// If he is evolving his sharingan.
+								if(src.sharin >= 2)
 									var/obj/Jutsus/jutsu=new src.type
 									usr.jutsus_learned += jutsu.type
 									usr.sbought+=src.name
@@ -539,6 +538,6 @@ obj
 
 			else
 				usr<<output("<Font color=red>You need to use [src.name] [((80-round(src.maxcooltime/15))/handsealmastery)-src.uses] more times (You've used it [src.uses] times already).</Font>","Action.Output")
-				
+
 
 
