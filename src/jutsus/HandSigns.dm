@@ -135,7 +135,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot1"]="[src.icon_state]"
 												usr.hotslot1=src.name
-												h.SetName("Z")
+												h.SetName("[usr.client.hotkey_hotslot1]")
 										if(usr.HotSlotSave["HotSlot2"]==os)
 											for(var/obj/HotSlots/HotSlot2/H in usr.client.screen)
 												var/obj/h=H
@@ -143,7 +143,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot2"]="[src.icon_state]"
 												usr.hotslot2=src.name
-												h.SetName("X")
+												h.SetName("[usr.client.hotkey_hotslot2]")
 										if(usr.HotSlotSave["HotSlot3"]==os)
 											for(var/obj/HotSlots/HotSlot3/H in usr.client.screen)
 												var/obj/h=H
@@ -151,7 +151,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot3"]="[src.icon_state]"
 												usr.hotslot3=src.name
-												h.SetName("C")
+												h.SetName("[usr.client.hotkey_hotslot3]")
 										if(usr.HotSlotSave["HotSlot4"]==os)
 											for(var/obj/HotSlots/HotSlot4/H in usr.client.screen)
 												var/obj/h=H
@@ -159,7 +159,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot4"]="[src.icon_state]"
 												usr.hotslot4=src.name
-												h.SetName("V")
+												h.SetName("[usr.client.hotkey_hotslot4]")
 										if(usr.HotSlotSave["HotSlot5"]==os)
 											for(var/obj/HotSlots/HotSlot5/H in usr.client.screen)
 												var/obj/h=H
@@ -167,7 +167,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot5"]="[src.icon_state]"
 												usr.hotslot5=src.name
-												h.SetName("B")
+												h.SetName("[usr.client.hotkey_hotslot5]")
 										if(usr.HotSlotSave["HotSlot6"]==os)
 											for(var/obj/HotSlots/HotSlot6/H in usr.client.screen)
 												var/obj/h=H
@@ -175,7 +175,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot6"]="[src.icon_state]"
 												usr.hotslot6=src.name
-												h.SetName("N")
+												h.SetName("[usr.client.hotkey_hotslot6]")
 										if(usr.HotSlotSave["HotSlot7"]==os)
 											for(var/obj/HotSlots/HotSlot7/H in usr.client.screen)
 												var/obj/h=H
@@ -183,7 +183,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot7"]="[src.icon_state]"
 												usr.hotslot7=src.name
-												h.SetName("F7")
+												h.SetName("[usr.client.hotkey_hotslot7]")
 										if(usr.HotSlotSave["HotSlot8"]==os)
 											for(var/obj/HotSlots/HotSlot8/H in usr.client.screen)
 												var/obj/h=H
@@ -191,7 +191,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot8"]="[src.icon_state]"
 												usr.hotslot8=src.name
-												h.SetName("F8")
+												h.SetName("[usr.client.hotkey_hotslot8]")
 										if(usr.HotSlotSave["HotSlot9"]==os)
 											for(var/obj/HotSlots/HotSlot9/H in usr.client.screen)
 												var/obj/h=H
@@ -199,7 +199,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot9"]="[src.icon_state]"
 												usr.hotslot9=src.name
-												h.SetName("F9")
+												h.SetName("[usr.client.hotkey_hotslot9]")
 										if(usr.HotSlotSave["HotSlot10"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -207,7 +207,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot10"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.SetName("F10")
+												h.SetName("[usr.client.hotkey_hotslot10]")
 										if(usr.HotSlotSave["HotSlot11"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -215,7 +215,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot11"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.SetName("F11")
+												h.SetName("[usr.client.hotkey_hotslot11]")
 										if(usr.HotSlotSave["HotSlot12"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -223,7 +223,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot12"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.SetName("F12")
+												h.SetName("[usr.client.hotkey_hotslot12]")
 										if(usr.HotSlotSave["HotSlot13"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -231,7 +231,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot13"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.SetName("F1")
+												h.SetName("[usr.client.hotkey_hotslot13]")
 										if(usr.HotSlotSave["HotSlot14"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -239,7 +239,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot14"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.SetName("F2")
+												h.SetName("[usr.client.hotkey_hotslot14]")
 										if(usr.HotSlotSave["HotSlot15"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -247,7 +247,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot15"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.SetName("F3")
+												h.SetName("[usr.client.hotkey_hotslot15]")
 										if(usr.HotSlotSave["HotSlot16"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -255,7 +255,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot16"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.SetName("F4")
+												h.SetName("[usr.client.hotkey_hotslot16]")
 										if(usr.HotSlotSave["HotSlot17"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -263,7 +263,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot17"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.SetName("F5")
+												h.SetName("[usr.client.hotkey_hotslot17]")
 										if(usr.HotSlotSave["HotSlot18"]==os)
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
@@ -271,7 +271,7 @@ obj
 												h.overlays+=src
 												usr.HotSlotSave["HotSlot18"]="[src.icon_state]"
 												usr.hotslot10=src.name
-												h.SetName("F6")
+												h.SetName("[usr.client.hotkey_hotslot18]")
 
 										SH.level ++
 								else
