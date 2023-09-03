@@ -130,15 +130,15 @@ obj
 										SH.name = src.name
 
 										// Declare the new image in right position.
-										var/image/I = image(src, src.icon_state)
-										I.pixel_x = 12
-										I.pixel_y = -1
+										var/image/SHARINGAN_IMAGE = image(src, src.icon_state)
+										SHARINGAN_IMAGE.pixel_x = 12
+										SHARINGAN_IMAGE.pixel_y = -1
 
 										if(usr.HotSlotSave["HotSlot1"]==os)
 											for(var/obj/HotSlots/HotSlot1/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot1"]="[src.icon_state]"
 												usr.hotslot1=src.name
 												h.SetName("[usr.client.hotkey_hotslot1]")
@@ -146,7 +146,7 @@ obj
 											for(var/obj/HotSlots/HotSlot2/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot2"]="[src.icon_state]"
 												usr.hotslot2=src.name
 												h.SetName("[usr.client.hotkey_hotslot2]")
@@ -154,7 +154,7 @@ obj
 											for(var/obj/HotSlots/HotSlot3/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot3"]="[src.icon_state]"
 												usr.hotslot3=src.name
 												h.SetName("[usr.client.hotkey_hotslot3]")
@@ -162,7 +162,7 @@ obj
 											for(var/obj/HotSlots/HotSlot4/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot4"]="[src.icon_state]"
 												usr.hotslot4=src.name
 												h.SetName("[usr.client.hotkey_hotslot4]")
@@ -170,7 +170,7 @@ obj
 											for(var/obj/HotSlots/HotSlot5/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot5"]="[src.icon_state]"
 												usr.hotslot5=src.name
 												h.SetName("[usr.client.hotkey_hotslot5]")
@@ -178,7 +178,7 @@ obj
 											for(var/obj/HotSlots/HotSlot6/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot6"]="[src.icon_state]"
 												usr.hotslot6=src.name
 												h.SetName("[usr.client.hotkey_hotslot6]")
@@ -186,7 +186,7 @@ obj
 											for(var/obj/HotSlots/HotSlot7/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot7"]="[src.icon_state]"
 												usr.hotslot7=src.name
 												h.SetName("[usr.client.hotkey_hotslot7]")
@@ -194,7 +194,7 @@ obj
 											for(var/obj/HotSlots/HotSlot8/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot8"]="[src.icon_state]"
 												usr.hotslot8=src.name
 												h.SetName("[usr.client.hotkey_hotslot8]")
@@ -202,7 +202,7 @@ obj
 											for(var/obj/HotSlots/HotSlot9/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot9"]="[src.icon_state]"
 												usr.hotslot9=src.name
 												h.SetName("[usr.client.hotkey_hotslot9]")
@@ -210,7 +210,7 @@ obj
 											for(var/obj/HotSlots/HotSlot10/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot10"]="[src.icon_state]"
 												usr.hotslot10=src.name
 												h.SetName("[usr.client.hotkey_hotslot10]")
@@ -218,7 +218,7 @@ obj
 											for(var/obj/HotSlots/HotSlot11/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot11"]="[src.icon_state]"
 												usr.hotslot10=src.name
 												h.SetName("[usr.client.hotkey_hotslot11]")
@@ -226,7 +226,7 @@ obj
 											for(var/obj/HotSlots/HotSlot12/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot12"]="[src.icon_state]"
 												usr.hotslot10=src.name
 												h.SetName("[usr.client.hotkey_hotslot12]")
@@ -234,7 +234,7 @@ obj
 											for(var/obj/HotSlots/HotSlot13/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot13"]="[src.icon_state]"
 												usr.hotslot10=src.name
 												h.SetName("[usr.client.hotkey_hotslot13]")
@@ -242,7 +242,7 @@ obj
 											for(var/obj/HotSlots/HotSlot14/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot14"]="[src.icon_state]"
 												usr.hotslot10=src.name
 												h.SetName("[usr.client.hotkey_hotslot14]")
@@ -250,7 +250,7 @@ obj
 											for(var/obj/HotSlots/HotSlot15/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot15"]="[src.icon_state]"
 												usr.hotslot10=src.name
 												h.SetName("[usr.client.hotkey_hotslot15]")
@@ -258,7 +258,7 @@ obj
 											for(var/obj/HotSlots/HotSlot16/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot16"]="[src.icon_state]"
 												usr.hotslot10=src.name
 												h.SetName("[usr.client.hotkey_hotslot16]")
@@ -266,7 +266,7 @@ obj
 											for(var/obj/HotSlots/HotSlot17/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot17"]="[src.icon_state]"
 												usr.hotslot10=src.name
 												h.SetName("[usr.client.hotkey_hotslot17]")
@@ -274,7 +274,7 @@ obj
 											for(var/obj/HotSlots/HotSlot18/H in usr.client.screen)
 												var/obj/h=H
 												h.overlays=null
-												h.overlays+=I
+												h.overlays+=SHARINGAN_IMAGE
 												usr.HotSlotSave["HotSlot18"]="[src.icon_state]"
 												usr.hotslot10=src.name
 												h.SetName("[usr.client.hotkey_hotslot18]")
